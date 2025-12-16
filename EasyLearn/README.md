@@ -19,11 +19,26 @@
 
 | **Home Page (Dark Mode)** | **Course System** |
 |:---:|:---:|
-| ![Home Page](https://via.placeholder.com/600x350?text=Home+Page+Screenshot) | ![Course System](https://via.placeholder.com/600x350?text=Course+System+Screenshot) |
+| ![Home Page](<img width="1919" height="828" alt="Screenshot 2025-12-16 143817" src="https://github.com/user-attachments/assets/b815389a-2fea-46bf-9402-54e1da291f14" />
+) | ![Course System](<img width="1916" height="837" alt="Screenshot 2025-12-16 143847" src="https://github.com/user-attachments/assets/dd43001a-b008-423e-b762-3c3f68d5803e" />
+) |
 
-| **Tutorials Section** | **Mobile Responsiveness** |
+| **Browse Course Section (Dark mode)** | **Browse Course ** |
 |:---:|:---:|
-| ![Tutorials](https://via.placeholder.com/600x350?text=Tutorials+Screenshot) | ![Mobile View](https://via.placeholder.com/600x350?text=Mobile+View+Screenshot) |
+| ![Tutorials](<img width="1919" height="824" alt="Screenshot 2025-12-16 143931" src="https://github.com/user-attachments/assets/18f680e4-48ca-4f3e-8a2d-67cb5f313079" />
+) | 
+
+
+| **Tutorials Section** | **tutorials** |
+|:---:|:---:|
+| ![Tutorials](<img width="1919" height="837" alt="Screenshot 2025-12-16 143945" src="https://github.com/user-attachments/assets/de53f465-e7c8-4880-be29-f8838a17e3bc" />
+) | 
+
+
+| **About Section** | **About** |
+|:---:|:---:|
+| ![Tutorials](<img width="1919" height="832" alt="Screenshot 2025-12-16 144028" src="https://github.com/user-attachments/assets/cce5d7dd-aa5e-4252-b21e-c3de531d7666" />
+) | 
 
 ---
 
@@ -173,4 +188,5 @@ This project is licensed under the **MIT License** - see the LICENSE file for de
 
 ---
 *Built with ❤️ for the educational community.*
+
 

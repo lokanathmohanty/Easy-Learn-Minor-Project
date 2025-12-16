@@ -10,8 +10,8 @@
 ---
 
 ## 🔗 Live Demo
-🚀 **[View Live Site](https://easylearn-platform.netlify.app)**  
-*(Deploy to Netlify and update this link with your actual URL)*
+🚀 **[View Live Site](https://easy-learn-edu.netlify.app)**  
+ 
 
 ---
 
@@ -122,7 +122,7 @@ EasyLearn/
 ## 🚀 Installation & How to Run
 
 ### Option 1: Live View
-Simply visit the [Demo Link](#) to view the project in your browser.
+Simply visit the [Demo Link](https://easy-learn-edu.netlify.app) to view the project in your browser.
 
 ### Option 2: Run Locally
 1.  **Clone the repository**
@@ -167,9 +167,10 @@ This project is licensed under the **MIT License** - see the LICENSE file for de
 **Lokanath Mohanty**  
 *Full Stack Developer & Frontend Performance Enthusiast*
 
-- **GitHub**: [Profile](https://github.com/)
-- **LinkedIn**: [Profile](https://linkedin.com/)
-- **Email**: contact@example.com
+- **GitHub**: [Profile](https://github.com/lokanathmohanty/Easy-Learn-Minor-Project)
+- **LinkedIn**: [Profile](https://www.linkedin.com/in/lokanath-mohanty/)
+- **Email**: lokanathmohanty000@gmail.com 
 
 ---
 *Built with ❤️ for the educational community.*
+

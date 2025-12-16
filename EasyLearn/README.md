@@ -15,7 +15,6 @@
 
 ---
 
-## 🖼️ Screenshots
 ## 📌 Project Screenshots
 
 ### 🏠 Home & Course Pages
@@ -26,25 +25,28 @@
 
 ---
 
-### 📚 Browse Courses
+### 📚 Browse Courses & Tutorials Section
 
-| **Browse Course (Dark Mode)** | **Browse Course** |
+| **Browse Course (Dark Mode)** | **Tutorials Section** |
 |:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/18f680e4-48ca-4f3e-8a2d-67cb5f313079" width="500"/> | — |
+| <img src="https://github.com/user-attachments/assets/18f680e4-48ca-4f3e-8a2d-67cb5f313079" width="500"/> | — | 
+<img width="1919" height="837" alt="Screenshot 2025-12-16 143945" src="https://github.com/user-attachments/assets/deb71417-92b8-49b4-8850-75a2aa8eea31" />
 
 ---
 
-### 🎓 Tutorials Section
+### 🎓 About Section & Profile section
 
-| **Tutorials Section** | **Tutorials** |
+| **About Section** | **Profile Section** |
 |:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/de53f465-e7c8-4880-be29-f8838a17e3bc" width="500"/> | — |
+| <img width="1919" height="829" alt="Screenshot 2025-12-16 144000" src="https://github.com/user-attachments/assets/54e77e6d-5662-412a-92f6-9953117b14f8" />
+ | — |<img width="1919" height="832" alt="Screenshot 2025-12-16 144028" src="https://github.com/user-attachments/assets/0c2692c9-f9c0-46b7-9947-bbb271605c5f" />
+
 
 ---
 
-### ℹ️ About Page
+### ℹ️ DashBoard & Course-Player
 
-| **About Section** | **About** |
+| **DashBoard Section** | **Course-Player** |
 |:---:|:---:|
 | <img src="https://github.com/user-attachments/assets/cce5d7dd-aa5e-4252-b21e-c3de531d7666" width="500"/> | — |
 
@@ -195,6 +197,7 @@ This project is licensed under the **MIT License** - see the LICENSE file for de
 
 ---
 *Built with ❤️ for the educational community.*
+
 
 
 

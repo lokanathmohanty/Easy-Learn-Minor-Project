@@ -22,8 +22,8 @@
 
 | **Login & User Management Page** |
 |:---:|
-|  <img width="682" height="437" alt="Screenshot 2025-12-12 211815" src="https://github.com/user-attachments/assets/549a5edf-6b43-4a5c-b0dd-d86998d66f0f" />
- |
+| <img src="![WhatsApp Image 2025-12-16 at 3 13 34 PM](https://github.com/user-attachments/assets/018e3aba-45a3-4de4-be26-3dc61b7a6fa5)
+" width="900"/> |
 
 ---
 
@@ -55,8 +55,7 @@
 
 | **Dashboard Section** | **Course Player** |
 |:---:|:---:|
-| <img width="1919" height="828" alt="Screenshot 2025-12-16 144047" src="https://github.com/user-attachments/assets/c0b3ddee-4c8d-4f06-a74c-70cb2f39ab3c" />
- | <img src="https://github.com/user-attachments/assets/894c1c8e-2b24-4d11-b26f-fbcf5b0f12ef" width="500"/> |
+| <img width="1919" height="828" alt="Screenshot 2025-12-16 144047" src="https://github.com/user-attachments/assets/c0b3ddee-4c8d-4f06-a74c-70cb2f39ab3c" /> | <img src="https://github.com/user-attachments/assets/894c1c8e-2b24-4d11-b26f-fbcf5b0f12ef" width="500"/> |
 
 
 ---
@@ -209,6 +208,7 @@ This project is licensed under the **MIT License** - see the LICENSE file for de
 
 ---
 *Built with ❤️ for the educational community.*
+
 
 
 

@@ -16,30 +16,38 @@
 ---
 
 ## 🖼️ Screenshots
+## 📌 Project Screenshots
+
+### 🏠 Home & Course Pages
 
 | **Home Page (Dark Mode)** | **Course System** |
 |:---:|:---:|
-|<img width="1919" height="828" alt="Screenshot 2025-12-16 143817" src="https://github.com/user-attachments/assets/b815389a-2fea-46bf-9402-54e1da291f14" /> |
-<img width="1916" height="837" alt="Screenshot 2025-12-16 143847" src="https://github.com/user-attachments/assets/b64c131d-d1b2-46b8-b790-1e0429f15d54" /> |
+| <img src="https://github.com/user-attachments/assets/b815389a-2fea-46bf-9402-54e1da291f14" width="500"/> | <img src="https://github.com/user-attachments/assets/b64c131d-d1b2-46b8-b790-1e0429f15d54" width="500"/> |
 
-| **Browse Course Section (Dark mode)** | **Browse Course ** |
+---
+
+### 📚 Browse Courses
+
+| **Browse Course (Dark Mode)** | **Browse Course** |
 |:---:|:---:|
-| ![Tutorials](<img width="1919" height="824" alt="Screenshot 2025-12-16 143931" src="https://github.com/user-attachments/assets/18f680e4-48ca-4f3e-8a2d-67cb5f313079" />
-) | 
+| <img src="https://github.com/user-attachments/assets/18f680e4-48ca-4f3e-8a2d-67cb5f313079" width="500"/> | — |
 
+---
 
-| **Tutorials Section** | **tutorials** |
+### 🎓 Tutorials Section
+
+| **Tutorials Section** | **Tutorials** |
 |:---:|:---:|
-| ![Tutorials](<img width="1919" height="837" alt="Screenshot 2025-12-16 143945" src="https://github.com/user-attachments/assets/de53f465-e7c8-4880-be29-f8838a17e3bc" />
-) | 
+| <img src="https://github.com/user-attachments/assets/de53f465-e7c8-4880-be29-f8838a17e3bc" width="500"/> | — |
 
+---
+
+### ℹ️ About Page
 
 | **About Section** | **About** |
 |:---:|:---:|
-| ![Tutorials](<img width="1919" height="832" alt="Screenshot 2025-12-16 144028" src="https://github.com/user-attachments/assets/cce5d7dd-aa5e-4252-b21e-c3de531d7666" />
-) | 
+| <img src="https://github.com/user-attachments/assets/cce5d7dd-aa5e-4252-b21e-c3de531d7666" width="500"/> | — |
 
----
 
 ## 🛠️ Technologies Used
 
@@ -187,6 +195,7 @@ This project is licensed under the **MIT License** - see the LICENSE file for de
 
 ---
 *Built with ❤️ for the educational community.*
+
 
 
 

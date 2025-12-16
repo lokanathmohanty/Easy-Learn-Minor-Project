@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Optimizer - Easy Learn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tools-style.css">
+</head>
+
+<body>
+    <div class="tool-container">
+        <header class="tool-header">
+            <a href="/index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+            <h1><i class="fas fa-compress-arrows-alt"></i> Image Optimizer</h1>
+        </header>
+
+        <div class="tool-workspace" style="text-align: center;">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <input type="file" id="uploadInput" accept="image/jpeg, image/png" style="margin-bottom: 2rem;">
+
+                <div class="controls" style="justify-content: center;">
+                    <label>Quality: <span id="qualityVal">80%</span></label>
+                    <input type="range" id="quality" min="10" max="100" value="80" style="width: 200px;">
+                    <button class="btn" onclick="optimizeImage()">Optimize</button>
+                </div>
+
+                <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                    <div>
+                        <h3>Original</h3>
+                        <p id="origSize">0 KB</p>
+                        <img id="sourceUser" style="max-width: 300px; border-radius: 8px;">
+                    </div>
+                    <div>
+                        <h3>Optimized</h3>
+                        <p id="optSize" style="color: #00cec9; font-weight: bold;">0 KB</p>
+                        <img id="resultUser" style="max-width: 300px; border-radius: 8px;">
+                    </div>
+                </div>
+
+                <a id="downloadLink" class="btn"
+                    style="display: none; background: #2ecc71; margin-top: 2rem; display: inline-block;">Download
+                    Optimized Image</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const uploadInput = document.getElementById('uploadInput');
+        const sourceImg = document.getElementById('sourceUser');
+        const resultImg = document.getElementById('resultUser');
+        const qualityInput = document.getElementById('quality');
+        const qualityVal = document.getElementById('qualityVal');
+        const downloadLink = document.getElementById('downloadLink');
+
+        qualityInput.addEventListener('input', (e) => qualityVal.textContent = e.target.value + '%');
+
+        uploadInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('origSize').textContent = (file.size / 1024).toFixed(2) + ' KB';
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    sourceImg.src = event.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function optimizeImage() {
+            if (!sourceImg.src) return alert('Please upload an image first');
+
+            const canvas = document.createElement('canvas');
+            canvas.width = sourceImg.naturalWidth;
+            canvas.height = sourceImg.naturalHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(sourceImg, 0, 0);
+
+            const quality = qualityInput.value / 100;
+            const newDataUrl = canvas.toDataURL('image/jpeg', quality);
+
+            resultImg.src = newDataUrl;
+
+            // Calculate new size
+            const head = 'data:image/jpeg;base64,';
+            const size = Math.round((newDataUrl.length - head.length) * 3 / 4) / 1024;
+            document.getElementById('optSize').textContent = size.toFixed(2) + ' KB';
+
+            downloadLink.href = newDataUrl;
+            downloadLink.download = 'optimized-image.jpg';
+            downloadLink.style.display = 'inline-block';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Editor - Easy Learn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tools-style.css">
+    <style>
+        .editor-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .controls-panel {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+        }
+
+        .preview-panel {
+            flex: 2;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .preview-panel img {
+            max-width: 100%;
+            max-height: 600px;
+            border-radius: 8px;
+            transition: filter 0.3s;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tool-container">
+        <header class="tool-header">
+            <a href="/index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+            <h1><i class="fas fa-edit"></i> Image Editor</h1>
+        </header>
+
+        <div class="editor-container">
+            <div class="controls-panel">
+                <input type="file" id="imageInput" accept="image/*" style="margin-bottom: 2rem;">
+
+                <div class="filter-group">
+                    <label>Brightness <span>100%</span></label>
+                    <input type="range" id="brightness" min="0" max="200" value="100">
+                </div>
+                <div class="filter-group">
+                    <label>Contrast <span>100%</span></label>
+                    <input type="range" id="contrast" min="0" max="200" value="100">
+                </div>
+                <div class="filter-group">
+                    <label>Saturation <span>100%</span></label>
+                    <input type="range" id="saturate" min="0" max="200" value="100">
+                </div>
+                <div class="filter-group">
+                    <label>Sepia <span>0%</span></label>
+                    <input type="range" id="sepia" min="0" max="100" value="0">
+                </div>
+                <div class="filter-group">
+                    <label>Grayscale <span>0%</span></label>
+                    <input type="range" id="grayscale" min="0" max="100" value="0">
+                </div>
+                <div class="filter-group">
+                    <label>Blur <span>0px</span></label>
+                    <input type="range" id="blur" min="0" max="10" value="0">
+                </div>
+
+                <div class="controls">
+                    <button class="btn" onclick="resetFilters()" style="background: #e74c3c; width: 100%;">Reset
+                        All</button>
+                    <button class="btn" onclick="downloadImage()"
+                        style="background: #27ae60; width: 100%; margin-top: 1rem;">Download Result</button>
+                </div>
+            </div>
+
+            <div class="preview-panel">
+                <img id="previewImage" src="https://via.placeholder.com/600x400?text=Upload+Image+to+Edit"
+                    alt="Preview">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const previewImage = document.getElementById('previewImage');
+        const inputs = document.querySelectorAll('input[type="range"]');
+
+        imageInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    previewImage.src = event.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        inputs.forEach(input => {
+            input.addEventListener('input', updateFilters);
+        });
+
+        function updateFilters() {
+            const brightness = document.getElementById('brightness').value;
+            const contrast = document.getElementById('contrast').value;
+            const saturate = document.getElementById('saturate').value;
+            const sepia = document.getElementById('sepia').value;
+            const grayscale = document.getElementById('grayscale').value;
+            const blur = document.getElementById('blur').value;
+
+            // Update Labels
+            document.querySelector('#brightness').previousElementSibling.querySelector('span').innerText = brightness + '%';
+            document.querySelector('#contrast').previousElementSibling.querySelector('span').innerText = contrast + '%';
+
+            // Apply Filters
+            previewImage.style.filter = `
+                brightness(${brightness}%)
+                contrast(${contrast}%)
+                saturate(${saturate}%)
+                sepia(${sepia}%)
+                grayscale(${grayscale}%)
+                blur(${blur}px)
+            `;
+        }
+
+        function resetFilters() {
+            document.getElementById('brightness').value = 100;
+            document.getElementById('contrast').value = 100;
+            document.getElementById('saturate').value = 100;
+            document.getElementById('sepia').value = 0;
+            document.getElementById('grayscale').value = 0;
+            document.getElementById('blur').value = 0;
+            updateFilters();
+        }
+
+        function downloadImage() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = previewImage.naturalWidth;
+            canvas.height = previewImage.naturalHeight;
+
+            ctx.filter = previewImage.style.filter;
+            ctx.drawImage(previewImage, 0, 0, canvas.width, canvas.height);
+
+            const link = document.createElement('a');
+            link.download = 'edited-image.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+
+</html>

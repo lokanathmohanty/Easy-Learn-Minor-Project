@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="description"
+        content="Master in-demand skills with EasyLearn. Premium courses in coding, design, and more.">
+    <title>Easy Learn | Premium Education</title>
+    <link rel="icon" type="image/png" href="image/elearning.png" />
+
+    <!-- 🚀 STEP 1: Preconnect FIRST (DNS resolution happens ASAP) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://lottie.host">
+
+    <!-- 🚀 STEP 2: Enhanced Critical Inline CSS (PREVENTS FOUC) -->
+    <style>
+        :root {
+            --bg-color: #0f0f13;
+            --text-color: #ffffff;
+            --text-muted: #a0a0a0;
+            --primary-color: #6c5ce7;
+            --primary-hover: #5649c0;
+            --secondary-color: #00cec9;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --text-color: #2d3436;
+            --text-muted: #4a5568;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(100, 100, 100, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Critical Above-the-Fold Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 5%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8rem 5% 2rem;
+            padding-top: 120px;
+            /* Ensure content clears fixed navbar */
+            gap: 2rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Mobile responsiveness for critical elements */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            #home {
+                flex-direction: column;
+                padding: 6rem 1.5rem 2rem;
+                text-align: center;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+
+    <!-- 🚀 STEP 3: Inline Dark Mode Script (runs immediately, before any content) -->
+    <script>
+        (function () {
+            const t = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', t);
+            window.toggleDarkMode = function () {
+                const e = document.documentElement.getAttribute('data-theme'),
+                    n = 'light' === e ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', n);
+                localStorage.setItem('theme', n);
+                // Update icon
+                const btn = document.getElementById('theme-toggle');
+                if (btn) {
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.className = n === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            };
+            // Update icon on load
+            document.addEventListener('DOMContentLoaded', function () {
+                const btn = document.getElementById('theme-toggle');
+                if (btn) {
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            });
+        })();
+    </script>
+
+    <!-- 🚀 STEP 4: Preload ONLY Critical CSS -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="css/features.css" as="style">
+    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QGYyz_MVcBeNP4NjuGObqx1XmO1I4W61O4a0FQQ.woff2"
+        as="font" type="font/woff2" crossorigin>
+
+    <!-- 🚀 STEP 5: Load Critical CSS Synchronously (render-blocking by design) -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="css/animations.css">
+
+    <!-- 🚀 STEP 6: Google Fonts OPTIMIZED (font-display swap prevents FOIT) -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- 🚀 STEP 7: FontAwesome ASYNC (icons not critical for first paint) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+
+    <!-- 🚀 STEP 8: Toastr CSS ASYNC (notifications not critical) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" media="print"
+        onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    </noscript>
+
+    <!-- 🚀 STEP 9: Preload Lottie (will defer actual execution) -->
+    <link rel="preload" href="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" as="script">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar glass animate-fadeInDown">
+        <div class="nav-brand">
+            <!-- <div class="logo">Lumina.</div> -->
+            <div class="logo">Easy Learn</div>
+
+            <button class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="course-system.html" class="login-required" data-protected="true">Courses</a></li>
+            <li><a href="tutorials.html" class="login-required" data-protected="true">Tutorials</a></li>
+            <li><a href="about.html" class="login-required" data-protected="true">About</a></li>
+            <li class="dropdown-container">
+                <a href="#more" class="dropdown-trigger">More <i class="fas fa-chevron-down"></i></a>
+                <div class="mega-dropdown glass">
+                    <div class="dropdown-col">
+                        <h4>Technologies</h4>
+                        <a href="https://www.ibm.com/artificial-intelligence">AI, ML, & Data Science</a>
+                        <a href="https://www.python.org/">Python Technologies</a>
+                        <a href="https://www.w3schools.com/">Web Development Links</a>
+                    </div>
+                    <div class="dropdown-col">
+                        <h4>Core CS</h4>
+                        <a href="https://www.w3schools.com/">Computer Science Subjects</a>
+                        <a href="https://www.w3schools.com/">Databases</a>
+                        <a href="https://www.w3schools.com/">Programming Languages</a>
+                    </div>
+                    <div class="dropdown-col">
+                        <h4>Specialized</h4>
+                        <a href="https://www.w3schools.com/">DevOps</a>
+                        <a href="https://www.w3schools.com/">Cyber Security</a>
+                        <a href="https://www.w3schools.com/">Software Testing</a>
+                        <a href="https://www.w3schools.com/" class="view-all">All Categories</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <div class="nav-actions">
+            <button id="theme-toggle" class="icon-btn" title="Toggle Theme" onclick="window.toggleDarkMode()"><i
+                    class="fas fa-moon"></i></button>
+
+            <div id="user-menu-container" class="hidden">
+                <div class="user-profile-summary" id="user-profile-trigger">
+                    <img src="https://ui-avatars.com/api/?name=User&background=6c5ce7&color=fff" alt="Profile"
+                        class="profile-pic" id="nav-profile-pic">
+                </div>
+
+                <div class="dropdown-menu glass hidden" id="user-dropdown">
+                    <div class="user-header">
+                        <img src="https://ui-avatars.com/api/?name=User&background=6c5ce7&color=fff" alt="Profile"
+                            class="profile-pic-lg" id="menu-profile-pic">
+                        <div class="user-details">
+                            <span class="user-name" id="menu-user-name">User Name</span>
+                            <span class="user-id-label">ID: <span id="menu-user-id">...</span></span>
+                        </div>
+                    </div>
+                    <hr>
+                    <a href="profile.html" id="my-profile-btn"><i class="fas fa-id-card"></i> My Profile</a>
+                    <a href="dashboard.html"><i class="fas fa-columns"></i> Dashboard</a>
+                    <hr>
+                    <a href="#" id="logout-btn" class="logout-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+
+            <button id="login-btn-nav" class="btn-primary">Login</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section active-section">
+            <div class="hero-content animate-fadeInLeft">
+                <h1 class="animate-fadeInDown">Unlock Your <span class="gradient-text">Potential</span></h1>
+                <p class="animate-fadeInUp delay-1">Master the future with our premium courses. Learn coding, design,
+                    and more in an immersive
+                    environment.</p>
+                <div class="hero-buttons animate-fadeInUp delay-2">
+                    <button class="btn-primary btn-lg hover-lift" onclick="scrollToCourses()">
+                        <i class="fas fa-rocket"></i> Explore Courses
+                    </button>
+                    <button class="btn-secondary btn-lg hover-glow" id="hero-login-trigger">
+                        <i class="fas fa-sign-in-alt"></i> Get Started
+                    </button>
+                </div>
+            </div>
+            <div class="lottie-bg animate-fadeInRight">
+                <lottie-player src="https://lottie.host/beb1302f-7ebd-4093-a080-c0d67b45253a/amQn1njr4v.json"
+                    background="transparent" speed="0.5" style="width: 100%; height: 80%;" loop
+                    autoplay></lottie-player>
+            </div>
+
+        </section>
+
+        <!-- What We Provide Section -->
+        <section class="features-section">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <h2 class="gradient-text reveal">What We Provide</h2>
+                <p class="reveal delay-1" style="font-size: 1.2rem; color: var(--text-muted); margin-top: 1rem;">
+                    Everything you need to master
+                    new skills and accelerate your learning journey</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Feature 1: Top 60+ Courses -->
+                <div class="feature-card glass reveal hover-lift delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap icon-bounce"></i>
+                    </div>
+                    <h3>Top 60+ Courses</h3>
+                    <p>Level up your skills with no fees, no limits. Access premium content completely free.</p>
+                </div>
+
+                <!-- Feature 2: Free Tutorials -->
+                <div class="feature-card glass reveal hover-lift delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-reader icon-swing"></i>
+                    </div>
+                    <h3>Free Tutorials</h3>
+                    <p>Self-paced learning tutorials designed to help you master new technologies at your own pace.</p>
+                </div>
+
+                <!-- Feature 3: Lifetime Access -->
+                <div class="feature-card glass reveal hover-lift delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity icon-rotate"></i>
+                    </div>
+                    <h3>Lifetime Access</h3>
+                    <p>Master the skills that matter—anytime, anywhere. Learn on your schedule, forever.</p>
+                </div>
+
+                <!-- Feature 4: Download Free PDFs -->
+                <div class="feature-card glass reveal hover-lift delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Download Free PDFs</h3>
+                    <p>Download comprehensive PDFs and learn offline, anytime, anywhere you want.</p>
+                </div>
+
+                <!-- Feature 5: Earn Certificates -->
+                <div class="feature-card glass reveal hover-lift delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate icon-swing"></i>
+                    </div>
+                    <h3>Earn Certificates</h3>
+                    <p>Upgrade your profile with verified certificates upon course completion.</p>
+                </div>
+
+                <!-- Feature 6: Earn Points -->
+                <div class="feature-card glass reveal hover-lift delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy icon-heartbeat"></i>
+                    </div>
+                    <h3>Earn Points</h3>
+                    <p>Track progress, earn rewards, and celebrate success with our gamified learning system.</p>
+                </div>
+
+                <!-- Feature 7: Enroll -->
+                <div class="feature-card glass reveal hover-lift delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>Easy Enrollment</h3>
+                    <p>Enroll in trending courses for free with just one click. No hidden charges, ever.</p>
+                </div>
+
+                <!-- Feature 8: Self Learner -->
+                <div class="feature-card glass reveal hover-lift delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket icon-bounce"></i>
+                    </div>
+                    <h3>Self-Learner Friendly</h3>
+                    <p>Where self-learners become professionals. Build real-world skills independently.</p>
+                </div>
+            </div>
+
+            <!-- Platform Note -->
+            <div class="platform-note glass reveal hover-lift delay-2"
+                style="margin-top: 3rem; padding: 2rem; border-radius: 16px; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <i class="fas fa-info-circle icon-bounce"
+                    style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-color);">
+                    <strong>Note:</strong> Easy Learn is a platform that offers a wide range of services and products
+                    for beginners and professionals, helping millions of people every day to learn and master new
+                    skills.
+                </p>
+            </div>
+        </section>
+
+        <!-- Trusted by Companies Section -->
+        <section class="trusted-companies-section" style="overflow: hidden;"> <!-- overflow hidden for reveal -->
+            <div class="trusted-heading">
+                <h2 class="gradient-text reveal">Trusted by Leading Companies</h2>
+                <p class="reveal delay-1" style="color: var(--text-muted); margin-top: 0.5rem;">Join thousands of
+                    professionals from top
+                    organizations worldwide</p>
+            </div>
+
+            <div class="trusted-company-slider">
+                <div class="trusted-company-track">
+                    <!-- Logo Items (Original Set) -->
+                    <div class="trusted-company-item hover-lift">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #0056D2, #1E88E5);">
+                            <i class="fab fa-google icon-swing"></i>
+                        </div>
+                        <span>Google</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #000000, #2D2D2D);">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <span>Apple</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #00A4EF, #0078D4);">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <span>Microsoft</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #FF9900, #FF6B00);">
+                            <i class="fab fa-aws"></i>
+                        </div>
+                        <span>Amazon AWS</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #0A66C2, #004182);">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <span>LinkedIn</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #1F77F3, #0052CC);">
+                            <i class="fab fa-meta"></i>
+                        </div>
+                        <span>Meta</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #FF5757, #D32F2F);">
+                            <i class="fab fa-adobe"></i>
+                        </div>
+                        <span>Adobe</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #052A4E, #003D6B);">
+                            <i class="fab fa-ibm"></i>
+                        </div>
+                        <span>IBM</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #FF6154, #FD6F6F);">
+                            <i class="fab fa-airbnb"></i>
+                        </div>
+                        <span>Airbnb</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #2D8CFF, #0073CF);">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <span>Coursera</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #A435F0, #7B2CBF);">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <span>Udemy</span>
+                    </div>
+
+                    <!-- Duplicates for seamless infinite scroll -->
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #0056D2, #1E88E5);">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <span>Google</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #000000, #2D2D2D);">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <span>Apple</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #00A4EF, #0078D4);">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <span>Microsoft</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #FF9900, #FF6B00);">
+                            <i class="fab fa-aws"></i>
+                        </div>
+                        <span>Amazon AWS</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #0A66C2, #004182);">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <span>LinkedIn</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #1F77F3, #0052CC);">
+                            <i class="fab fa-meta"></i>
+                        </div>
+                        <span>Meta</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #FF5757, #D32F2F);">
+                            <i class="fab fa-adobe"></i>
+                        </div>
+                        <span>Adobe</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #052A4E, #003D6B);">
+                            <i class="fab fa-ibm"></i>
+                        </div>
+                        <span>IBM</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #FF6154, #FD6F6F);">
+                            <i class="fab fa-airbnb"></i>
+                        </div>
+                        <span>Airbnb</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #2D8CFF, #0073CF);">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <span>Coursera</span>
+                    </div>
+                    <div class="trusted-company-item">
+                        <div class="company-icon" style="background: linear-gradient(135deg, #A435F0, #7B2CBF);">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <span>Udemy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Online Compiler Section -->
+        <section class="compiler-section">
+            <div class="main-container glass reveal">
+                <!-- Code area -->
+                <div class="code-section animate-fadeInLeft delay-1">
+                    <div class="code-header">
+                        <div class="window-controls">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="filename">MyFirstJavaProgram.java</span>
+                    </div>
+                    <pre>
+<span class="kword">public class</span> <span class="classname">MyFirstJavaProgram</span> {
+  <span class="comment">/* This is my first java program.
+   * This will print 'Hello, World!' as the output
+   */</span>
+  <span class="kword">public static void</span> <span class="main">main</span>(<span class="type">String[] args)</span> {
+    <span class="sysout">System.out.println</span>(<span class="string">"Hello, World!"</span>); <span class="comment">// prints</span>
+  }
+}
+</pre>
+                </div>
+
+                <!-- Main content area -->
+                <div class="content-section animate-fadeInRight delay-1">
+                    <h1 class="animate-fadeInDown">Start Coding <span class="gradient-text">in Seconds</span></h1>
+                    <h3 class="reveal delay-1">Coding Ground For Developers</h3>
+                    <p class="desc reveal delay-2">
+                        Ignite your coding potential on Coding Ground – an immersive online
+                        platform for hands-on learning, collaboration, and skill
+                        development.
+                    </p>
+
+                    <a href="https://www.programiz.com/c-programming/online-compiler/" target="_blank"
+                        class="btn-primary main-compiler-btn hover-glow hover-lift reveal delay-3">
+                        <i class="fas fa-terminal icon-bounce"></i> Code, Edit, Run & Share
+                    </a>
+
+                    <div class="compiler-list">
+                        <a href="https://www.programiz.com/java-programming/online-compiler/" target="_blank"
+                            class="compiler-card hover-lift reveal delay-1">
+                            <i class="fab fa-java icon-bounce" style="color: #f89820;"></i>
+                            <span>Java</span>
+                        </a>
+                        <a href="https://www.programiz.com/python-programming/online-compiler/" target="_blank"
+                            class="compiler-card hover-lift reveal delay-2">
+                            <i class="fab fa-python icon-bounce" style="color: #3776ab;"></i>
+                            <span>Python</span>
+                        </a>
+                        <a href="https://www.programiz.com/cpp-programming/online-compiler/" target="_blank"
+                            class="compiler-card hover-lift reveal delay-3">
+                            <i class="fas fa-code icon-swing" style="color: #00599C;"></i>
+                            <span>C++</span>
+                        </a>
+                        <a href="https://www.programiz.com/html/online-compiler/" target="_blank"
+                            class="compiler-card hover-lift reveal delay-4">
+                            <i class="fab fa-html5 icon-bounce" style="color: #e34f26;"></i>
+                            <span>HTML</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Most Popular Tools Section -->
+        <section class="tools-section">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <h2 class="gradient-text reveal">Most Popular Tools</h2>
+                <p class="reveal delay-1" style="color: var(--text-muted); margin-top: 1rem;">Utilize the frequently
+                    used tools for your needs
+                </p>
+            </div>
+            <div class="tools-grid">
+                <!-- Tool Cards -->
+                <div class="tool-card glass reveal hover-lift delay-1" onclick="handleToolClick('QR Generator')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #000, #333);"><i
+                            class="fas fa-qrcode icon-bounce"></i></div>
+                    <h3>QR Code Generator</h3>
+                </div>
+                <div class="tool-card glass reveal hover-lift delay-2" onclick="handleToolClick('Image Optimizer')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53);"><i
+                            class="fas fa-compress-arrows-alt icon-rotate"></i></div>
+                    <h3>Image Optimizer</h3>
+                </div>
+                <div class="tool-card glass reveal hover-lift delay-3" onclick="handleToolClick('Image Editor')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);"><i
+                            class="fas fa-edit icon-swing"></i></div>
+                    <h3>Image Editor</h3>
+                </div>
+                <div class="tool-card glass reveal hover-lift delay-1" onclick="handleToolClick('Document Viewer')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);"><i
+                            class="fas fa-file-alt icon-bounce"></i></div>
+                    <h3>Document Viewer</h3>
+                </div>
+                <div class="tool-card glass reveal hover-lift delay-2" onclick="handleToolClick('Java Formatter')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);"><i
+                            class="fab fa-java icon-bounce"></i></div>
+                    <h3>Java Formatter</h3>
+                </div>
+                <div class="tool-card glass reveal hover-lift delay-3" onclick="handleToolClick('White Board')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #84fab0, #8fd3f4);"><i
+                            class="fas fa-chalkboard icon-swing"></i></div>
+                    <h3>White Board</h3>
+                </div>
+                <div class="tool-card glass reveal hover-lift delay-1" onclick="handleToolClick('JS Minifier')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #fa709a, #fee140);"><i
+                            class="fab fa-js icon-bounce"></i></div>
+                    <h3>Javascript Minifier</h3>
+                </div>
+                <div class="tool-card glass reveal hover-lift delay-2" onclick="handleToolClick('Python Formatter')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #30cfd0, #330867);"><i
+                            class="fab fa-python icon-rotate"></i></div>
+                    <h3>Python Formatter</h3>
+                </div>
+                <div class="tool-card glass reveal hover-lift delay-3" onclick="handleToolClick('C Formatter')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);"><i
+                            class="fas fa-copyright icon-swing"></i></div>
+                    <h3>C Formatter</h3>
+                </div>
+                <div class="tool-card glass reveal hover-lift delay-1" onclick="handleToolClick('HTML Formatter')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);"><i
+                            class="fab fa-html5 icon-bounce"></i></div>
+                    <h3>HTML Formatter</h3>
+                </div>
+                <div class="tool-card glass reveal hover-lift delay-2" onclick="handleToolClick('CSS Formatter')">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #fbc2eb, #a6c1ee);"><i
+                            class="fab fa-css3-alt icon-bounce"></i></div>
+                    <h3>CSS Formatter</h3>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-container">
+                <h2 class="gradient-text reveal">Our Global Impact</h2>
+                <div class="stats-grid">
+
+                    <div class="stat-card glass reveal hover-lift delay-1">
+                        <i class="fas fa-users icon-bounce"></i>
+                        <h3 data-count="15000">0</h3>
+                        <p>Happy Students</p>
+                    </div>
+
+                    <div class="stat-card glass reveal hover-lift delay-2">
+                        <i class="fas fa-book-reader icon-swing"></i>
+                        <h3 data-count="500">0</h3>
+                        <p>Premium Courses</p>
+                    </div>
+
+                    <div class="stat-card glass reveal hover-lift delay-3">
+                        <i class="fas fa-award icon-pulse"></i>
+                        <h3 data-count="1200">0</h3>
+                        <p>Certificates Earned</p>
+                    </div>
+
+                    <div class="stat-card glass reveal hover-lift delay-4">
+                        <i class="fas fa-globe-americas icon-rotate"></i>
+                        <h3 data-count="50">0</h3>
+                        <p>Countries Reached</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-column reveal delay-1">
+                <h3>Top Tutorials</h3>
+                <ul>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">Python Tutorial</a></li>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">Java Tutorial</a></li>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">C++ Tutorial</a></li>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">C Programming</a></li>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">C# Tutorial</a></li>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">PHP Tutorial</a></li>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">R Tutorial</a></li>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">HTML Tutorial</a></li>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">CSS Tutorial</a></li>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">JavaScript Tutorial</a>
+                    </li>
+                    <li><a href="turorialsfiles/tutorialcontent.html" class="login-required">SQL Tutorial</a></li>
+                </ul>
+            </div>
+            <div class="footer-column reveal delay-2">
+                <h3>Trending Technologies</h3>
+                <ul>
+                    <li>
+                        <a href="https://www.geeksforgeeks.org/cloud-computing/">Cloud Computing Tutorial</a>
+                    </li>
+                    <li>
+                        <a href="https://aws.amazon.com/getting-started/">Amazon Web Services Tutorial</a>
+                    </li>
+                    <li>
+                        <a href="https://learn.microsoft.com/en-us/azure/">Microsoft Azure Tutorial</a>
+                    </li>
+                    <li>
+                        <a href="https://www.geeksforgeeks.org/git-tutorials/">Git Tutorial</a>
+                    </li>
+                    <li>
+                        <a href="https://www.geeksforgeeks.org/ethical-hacking-tutorial/">Ethical Hacking Tutorial</a>
+                    </li>
+                    <li>
+                        <a href="https://www.geeksforgeeks.org/docker-tutorial/">Docker Tutorial</a>
+                    </li>
+                    <li>
+                        <a href="https://kubernetes.io/docs/tutorials/">Kubernetes Tutorial</a>
+                    </li>
+                    <li><a href="https://www.programiz.com/dsa">DSA Tutorial</a></li>
+                    <li>
+                        <a href="https://www.javatpoint.com/spring-boot-tutorial">Spring Boot Tutorial</a>
+                    </li>
+                    <li>
+                        <a href="https://www.geeksforgeeks.org/software-development-life-cycle-sdlc/">SDLC Tutorial</a>
+                    </li>
+                    <li>
+                        <a href="https://www.tutorialspoint.com/unix/index.htm">Unix Tutorial</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-column reveal delay-3">
+                <h3>Certifications</h3>
+                <ul>
+                    <li><a href="course-system.html" class="login-required">Business Analytics</a></li>
+                    <li><a href="course-system.html" class="login-required">Java & Spring Boot</a></li>
+                    <li><a href="course-system.html" class="login-required">Data Science</a></li>
+                    <li><a href="course-system.html" class="login-required">Cloud & DevOps</a></li>
+                    <li><a href="course-system.html" class="login-required">Adv. Business Analytics</a></li>
+                    <li><a href="course-system.html" class="login-required">AI & Machine Learning</a></li>
+                    <li><a href="course-system.html" class="login-required">DevOps Certification</a></li>
+                    <li><a href="course-system.html" class="login-required">Front-End Developer</a></li>
+                    <li><a href="course-system.html" class="login-required">AWS Certification</a></li>
+                    <li><a href="course-system.html" class="login-required">Python Certification</a></li>
+                </ul>
+            </div>
+            <div class="footer-column reveal delay-4">
+                <h3>Compilers & Editors</h3>
+                <ul>
+                    <li><a href="https://www.programiz.com/java-programming/online-compiler/" target="_blank">Online
+                            Java Compiler</a></li>
+                    <li><a href="https://www.programiz.com/python-programming/online-compiler/" target="_blank">Online
+                            Python Compiler</a></li>
+                    <li><a href="https://www.programiz.com/c-programming/online-compiler/" target="_blank">Online Go
+                            Compiler</a></li>
+                    <li><a href="https://www.programiz.com/c-programming/online-compiler/" target="_blank">Online C
+                            Compiler</a></li>
+                    <li><a href="https://www.programiz.com/cpp-programming/online-compiler/" target="_blank">Online C++
+                            Compiler</a></li>
+                    <li><a href="https://www.programiz.com/php/online-compiler/" target="_blank">Online PHP Compiler</a>
+                    </li>
+                    <li><a href="https://www.programiz.com/r/online-compiler/" target="_blank">Online R Compiler</a>
+                    </li>
+                    <li><a href="https://www.programiz.com/html/online-compiler/" target="_blank">Online HTML Editor</a>
+                    </li>
+                    <li><a href="https://www.programiz.com/javascript/online-compiler/" target="_blank">Online JS
+                            Compiler</a></li>
+                    <li><a href="https://www.programiz.com/sql/online-compiler/" target="_blank">Online SQL Editor</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-middle">
+            <div class="footer-links">
+                <a href="about.html" class="login-required">ABOUT US</a>
+                <a href="about.html" class="login-required">OUR TEAM</a>
+                <a href="index.html" class="login-required">CAREERS</a>
+                <a href="https://www.naukri.com/" target="_blank" class="login-required">JOBS</a>
+                <a href="about.html" class="login-required">CONTACT US</a>
+                <a href="about.html" class="login-required">TERMS OF USE</a>
+                <a href="https://www.privacypolicyonline.com/" target="_blank" class="login-required">PRIVACY POLICY</a>
+                <a href="https://www.privacypolicyonline.com/" target="_blank" class="login-required">REFUND POLICY</a>
+                <a href="https://www.privacypolicyonline.com/" target="_blank" class="login-required">COOKIES POLICY</a>
+                <a href="about.html" class="login-required">FAQ'S</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <div class="logo-text">Easy Learn</div>
+                <div class="app-badges">
+                    <button href="https://play.google.com/store/games?hl=en" target="_blank" class="btn-app"><i
+                            class="fab fa-google-play"></i> Google Play</button>
+                    <button href="https://www.apple.com/in/app-store/" target="_blank" class="btn-app"><i
+                            class="fab fa-apple"></i> App Store</button>
+                </div>
+            </div>
+            <div class="footer-info">
+                <p>Easy Learn is a leading Ed Tech company striving to provide the best learning material on technical
+                    and non-technical subjects.</p>
+                <p class="copyright">© 2025. All Rights Reserved. Created by LBHS department of CSE.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal-overlay hidden">
+        <div class="modal-content glass animate-scaleIn">
+            <button class="close-modal">&times;</button>
+
+            <!-- Login Form -->
+            <div id="login-form-container" class="auth-form-wrapper">
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Login to continue your journey</p>
+
+                <form id="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="login-email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="login-password" placeholder="Password" required>
+                    </div>
+                    <a href="#" class="forgot-password" id="show-forgot-password">Forgot Password?</a>
+                    <button type="submit" class="btn-primary full-width">Login</button>
+                </form>
+
+                <div class="divider"><span>OR</span></div>
+
+                <button id="google-login-btn" class="btn-google full-width">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+
+                <p class="auth-switch">Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form-container" class="auth-form-wrapper hidden">
+                <h2>Create Account</h2>
+                <p class="subtitle">Join Easy Learn today</p>
+
+                <form id="signup-form">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="signup-email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signup-password" placeholder="Password" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signup-confirm-password" placeholder="Confirm Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary full-width">Sign Up</button>
+                </form>
+
+                <div class="divider"><span>OR</span></div>
+
+                <button id="google-signup-btn" class="btn-google full-width">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+
+                <p class="auth-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
+            </div>
+
+            <!-- Forgot Password Form -->
+            <div id="forgot-form-container" class="auth-form-wrapper hidden">
+                <h2>Reset Password</h2>
+                <p class="subtitle">Enter your email to receive a reset link</p>
+
+                <form id="forgot-form">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="forgot-email" placeholder="Email" required>
+                    </div>
+                    <button type="submit" class="btn-primary full-width">Send Link</button>
+                </form>
+
+                <p class="auth-switch"><a href="#" id="back-to-login">Back to Login</a></p>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+    <!-- 🚀 OPTIMIZED SCRIPTS: All non-critical JS deferred -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+
+    <!-- EmailJS SDK (deferred) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+    <script>
+        // Initialize EmailJS when script loads
+        window.addEventListener('DOMContentLoaded', function () {
+            if (window.emailjs) {
+                emailjs.init('IKHWAcaCpeIZWF1eb');
+            }
+        });
+    </script>
+
+    <!-- html2canvas for certificate download (deferred) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+
+    <!-- Lottie Player (deferred, matches preload in head) -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
+
+    <!-- Main scripts -->
+    <script type="module" src="js/script.js"></script>
+    <script src="js/animations.js" defer></script>
+</body>
+
+</html>

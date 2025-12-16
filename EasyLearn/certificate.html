@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate | Easy Learn</title>
+    <link rel="icon" type="image/png" href="image/elearning.png" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/certificate.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar glass" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="nav-brand">
+            <div class="logo">Easy Learn</div>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="icon-btn" title="Toggle Theme"
+                onclick="window.toggleDarkMode && window.toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <a href="dashboard.html" class="btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <!-- Name Input Modal -->
+    <div id="nameModal" class="modal-overlay"
+        style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center;">
+        <div class="modal-content glass animate-scaleIn"
+            style="background: var(--glass-bg, rgba(30,30,40,0.95)); padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 450px; border: 1px solid var(--glass-border, rgba(255,255,255,0.1)); text-align: center;">
+            <div style="margin-bottom: 1.5rem;">
+                <i class="fas fa-certificate" style="font-size: 3rem; color: #6c5ce7; margin-bottom: 1rem;"></i>
+                <h2 style="color: var(--text-color, #fff); margin-bottom: 0.5rem;">🎉 Congratulations!</h2>
+                <p style="color: var(--text-muted, #a0a0a0); font-size: 0.95rem;">You've completed the course! Enter
+                    your name as you want it to appear on the certificate.</p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <label
+                    style="display: block; color: var(--text-muted, #a0a0a0); margin-bottom: 0.5rem; text-align: left;">Full
+                    Name *</label>
+                <input type="text" id="nameInput" placeholder="Enter your full name"
+                    style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 2px solid rgba(108,92,231,0.3); color: var(--text-color, #fff); border-radius: 10px; font-size: 1.1rem; outline: none; transition: border-color 0.3s;"
+                    onfocus="this.style.borderColor='#6c5ce7'" onblur="this.style.borderColor='rgba(108,92,231,0.3)'">
+                <p id="nameError" style="color: #ff6b6b; font-size: 0.85rem; margin-top: 0.5rem; display: none;">Please
+                    enter your name</p>
+            </div>
+
+            <button id="generateCertBtn" class="btn-primary hover-lift btn-ripple"
+                style="width: 100%; padding: 1rem; font-size: 1.1rem; border-radius: 10px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                <i class="fas fa-magic"></i> Generate My Certificate
+            </button>
+        </div>
+    </div>
+
+    <!-- Certificate Container -->
+    <div class="certificate-page">
+        <div class="certificate-controls animate-fadeInDown">
+            <div class="dropdown" style="position:relative; display:inline-block;">
+                <button id="download-btn" class="btn-primary hover-lift btn-ripple">
+                    <i class="fas fa-download"></i> Download
+                </button>
+                <div id="download-menu" class="dropdown-content glass"
+                    style="display:none; position:absolute; top:100%; left:0; min-width:160px; z-index:10; border-radius:8px; overflow:hidden; margin-top:0.5rem;">
+                    <button class="menu-item" id="download-png"
+                        style="width:100%; text-align:left; padding:10px; border:none; background:transparent; color:var(--text-color); cursor:pointer;"><i
+                            class="fas fa-image"></i> Download PNG</button>
+                    <button class="menu-item" id="download-pdf"
+                        style="width:100%; text-align:left; padding:10px; border:none; background:transparent; color:var(--text-color); cursor:pointer;"><i
+                            class="fas fa-file-pdf"></i> Download PDF</button>
+                </div>
+            </div>
+
+            <button id="print-btn" class="btn-secondary hover-lift btn-ripple" onclick="window.print()">
+                <i class="fas fa-print"></i> Print
+            </button>
+
+            <button id="verify-btn" class="btn-secondary hover-lift btn-ripple"
+                onclick="window.open('verify.html', '_blank')">
+                <i class="fas fa-check-circle" style="color: #00cec9;"></i> Verify
+            </button>
+
+            <button id="share-btn" class="btn-secondary hover-lift btn-ripple">
+                <i class="fas fa-share-alt"></i> Share
+            </button>
+
+            <button id="edit-name-btn" class="btn-secondary hover-lift btn-ripple" onclick="editCertificateName()">
+                <i class="fas fa-edit"></i> Edit Name
+            </button>
+        </div>
+
+        <!-- Certificate Design -->
+        <div id="certificate" class="certificate animate-scaleIn delay-1">
+            <div class="certificate-border">
+                <div class="certificate-content">
+                    <!-- Header -->
+                    <div class="cert-header">
+                        <div class="cert-logo">
+                            <div class="logo-circle icon-bounce">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                        </div>
+                        <h1 class="animate-fadeInDown delay-2">Easy Learn</h1>
+                        <p class="cert-subtitle animate-fadeInUp delay-3">Certificate of Completion</p>
+                    </div>
+
+                    <!-- Decorative Line -->
+                    <div class="decorative-line reveal"></div>
+
+                    <!-- Main Content -->
+                    <div class="cert-body">
+                        <p class="awarded-to animate-fadeInUp delay-3">This certificate is proudly presented to</p>
+                        <h2 class="recipient-name animate-fadeInUp delay-4" id="recipient-name">Student Name</h2>
+
+                        <p class="cert-text animate-fadeInUp delay-5">
+                            For successfully completing the course
+                        </p>
+
+                        <h3 class="course-name animate-fadeInUp delay-5" id="course-name">Course Name</h3>
+
+                        <p class="completion-text reveal">
+                            Demonstrating dedication, commitment, and mastery of the subject matter
+                        </p>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="cert-footer">
+                        <div class="footer-item reveal">
+                            <p class="signature-name"
+                                style="font-family: 'Brush Script MT', cursive; font-size: 1.4rem; color: #333; margin-bottom: 0.3rem;">
+                                Basudev Nayak</p>
+                            <div class="signature-line"></div>
+                            <p class="signature-label">Instructor</p>
+                        </div>
+
+                        <div class="footer-item center">
+                            <div class="seal icon-rotate">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <p class="cert-date reveal" id="cert-date">January 1, 2024</p>
+                        </div>
+
+                        <div class="footer-item reveal">
+                            <p class="signature-name"
+                                style="font-family: 'Brush Script MT', cursive; font-size: 1.4rem; color: #333; margin-bottom: 0.3rem;">
+                                Lokanath Mohanty</p>
+                            <div class="signature-line"></div>
+                            <p class="signature-label">Director</p>
+                        </div>
+                    </div>
+
+                    <!-- Certificate ID -->
+                    <div class="cert-footer-bottom"
+                        style="display: flex; justify-content: center; align-items: center; margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                        <div class="cert-id reveal" style="text-align: center;">
+                            <p>Certificate ID: <strong id="cert-id"
+                                    style="font-family: monospace; letter-spacing: 1px;">LUMINA-2024-XXXXX</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Congratulations Message -->
+        <div class="congrats-message animate-bounceIn delay-5 hover-glow">
+            <h2>🎉 Congratulations!</h2>
+            <p>You've successfully completed the course and earned your certificate!</p>
+            <div class="action-buttons">
+                <a href="courses.html" class="btn-secondary hover-lift btn-ripple">Explore More Courses</a>
+                <a href="dashboard.html" class="btn-primary hover-lift btn-ripple">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/animations.js"></script>
+    <script src="js/auth-guard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/courses-data.js"></script>
+    <script src="js/certificate.js"></script>
+</body>
+
+</html>

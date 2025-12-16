@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="description" content="JavaScript Quick Reference Guide - syntax, functions, arrays, and more.">
+    <title>JavaScript Quick Reference</title>
+    <link rel="icon" type="image/png" href="image/elearning.png" />
+
+    <!-- Preconnect for faster loading -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Critical Inline CSS - Prevents layout shift on mobile -->
+    <style>
+        :root {
+            --bg-color: #0f0f13;
+            --text-color: #ffffff;
+            --text-muted: #a0a0a0;
+            --primary-color: #6c5ce7;
+            --secondary-color: #00b894;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --text-color: #2d3436;
+            --text-muted: #4a5568;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(100, 100, 100, 0.2);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+    </style>
+
+    <!-- Dark Mode Script (runs before render) -->
+    <script src="js/dark-mode.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/jsreff.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="animate-fadeInDown">JavaScript Quick Reference (.JS)</header>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <nav id="sidebar">
+        <div class="sidebar-header" style="padding: 1.5rem 1.5rem 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="tutorials.html" class="back-link hover-lift"><i class="fas fa-arrow-left"></i> Back to
+                    Tutorials</a>
+                <button id="theme-toggle" class="icon-btn" title="Toggle Theme"
+                    onclick="window.toggleDarkMode && window.toggleDarkMode()"
+                    style="background: rgba(255,255,255,0.1); border: none; color: var(--text-color); padding: 0.5rem; border-radius: 8px; cursor: pointer;"><i
+                        class="fas fa-moon"></i></button>
+            </div>
+            <div class="search-box glass" style="margin-top: 1rem; position: relative;">
+                <i class="fas fa-search"
+                    style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                <input type="text" id="topicSearch" placeholder="Search topics..."
+                    style="width: 100%; padding: 8px 10px 8px 35px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: white; outline: none;">
+            </div>
+        </div>
+        <ul class="animate-fadeInLeft" id="sidebarList" style="margin-top: 1rem;">
+            <li><a href="#intro" class="hover-lift"><i class="fas fa-info-circle"></i> Introduction</a></li>
+            <li><a href="#syntax" class="hover-lift"><i class="fas fa-code"></i> Basic Syntax</a></li>
+            <li><a href="#variables" class="hover-lift"><i class="fas fa-box"></i> Variables</a></li>
+            <li><a href="#functions" class="hover-lift"><i class="fas fa-cogs"></i> Functions</a></li>
+            <li><a href="#arrays" class="hover-lift"><i class="fas fa-list"></i> Arrays</a></li>
+            <li><a href="#objects" class="hover-lift"><i class="fas fa-cube"></i> Objects</a></li>
+            <li><a href="#loops" class="hover-lift"><i class="fas fa-sync"></i> Loops</a></li>
+            <li><a href="#dom" class="hover-lift"><i class="fas fa-sitemap"></i> DOM Manipulation</a></li>
+            <li><a href="#events" class="hover-lift"><i class="fas fa-bolt"></i> Events</a></li>
+            <li><a href="#promises" class="hover-lift"><i class="fas fa-clock"></i> Promises</a></li>
+            <li><a href="#async-await" class="hover-lift"><i class="fas fa-hourglass-half"></i> Async/Await</a></li>
+            <li><a href="#destructuring" class="hover-lift"><i class="fas fa-expand-arrows-alt"></i> Destructuring</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main id="content">
+        <!-- ... Existing sections ... -->
+
+        <section id="intro" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-info-circle icon-bounce"></i> Introduction</h2>
+            <p class="animate-fadeInUp delay-1">JavaScript is a lightweight, interpreted programming language used to
+                create interactive effects within web browsers.</p>
+        </section>
+
+        <section id="syntax" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-code icon-rotate"></i> Basic Syntax</h2>
+            <pre class="hover-glow animate-fadeInUp delay-1"><code>// Example
+console.log("Hello World!");
+let x = 10;
+</code></pre>
+        </section>
+
+        <section id="variables" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-box icon-bounce"></i> Variables</h2>
+            <p class="animate-fadeInUp delay-1">JavaScript variables can be declared using <code>var</code>,
+                <code>let</code>, or <code>const</code>.
+            </p>
+            <pre class="hover-glow animate-fadeInUp delay-2"><code>let name = "John";
+const age = 25;
+var city = "New York";
+console.log(name, age, city);</code></pre>
+        </section>
+
+        <section id="functions" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-cogs icon-rotate"></i> Functions</h2>
+            <pre class="hover-glow animate-fadeInUp delay-1"><code>function greet(name) {
+  return "Hello " + name;
+}
+
+const sayHi = (name) => `Hi ${name}!`;
+console.log(greet("Alice"));
+console.log(sayHi("Bob"));</code></pre>
+        </section>
+
+        <section id="arrays" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-list icon-bounce"></i> Arrays</h2>
+            <pre class="hover-glow animate-fadeInUp delay-1"><code>const fruits = ["apple", "banana", "cherry"];
+fruits.push("mango");
+console.log(fruits[0]);
+console.log(fruits);</code></pre>
+        </section>
+
+        <section id="objects" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-cube icon-rotate"></i> Objects</h2>
+            <pre class="hover-glow animate-fadeInUp delay-1"><code>const person = {
+  name: "John",
+  age: 30,
+  greet() {
+    return "Hi, I'm " + this.name;
+  }
+};
+console.log(person.greet());</code></pre>
+        </section>
+
+        <section id="loops" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-sync icon-rotate"></i> Loops</h2>
+            <pre class="hover-glow animate-fadeInUp delay-1"><code>for (let i = 0; i < 3; i++) {
+  console.log("Loop " + i);
+}
+
+let n = 0;
+while (n < 2) {
+  console.log("While " + n);
+  n++;
+}</code></pre>
+        </section>
+
+        <section id="dom" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-sitemap icon-bounce"></i> DOM Manipulation</h2>
+            <pre class="hover-glow animate-fadeInUp delay-1"><code>// Note: This won't work in console log view, but works in browser
+// document.body.style.backgroundColor = "#1a1a1a";
+console.log("DOM Code Ready");</code></pre>
+        </section>
+
+        <section id="events" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-bolt icon-bounce"></i> Events</h2>
+            <pre class="hover-glow animate-fadeInUp delay-1"><code>// Event Listener Example
+console.log("Click events can be attached with addEventListener");</code></pre>
+        </section>
+
+        <section id="promises" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-clock icon-rotate"></i> Promises</h2>
+            <pre class="hover-glow animate-fadeInUp delay-1"><code>const fetchData = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("Data Loaded!"), 1000);
+});
+
+fetchData.then(data => console.log(data));</code></pre>
+        </section>
+
+        <section id="async-await" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-hourglass-half icon-bounce"></i> Async/Await</h2>
+            <p class="animate-fadeInUp delay-1">Async/Await makes working with promises easier and cleaner.</p>
+            <pre class="hover-glow animate-fadeInUp delay-1"><code>async function getData() {
+  return "Async Data Received";
+}
+
+getData().then(console.log);</code></pre>
+        </section>
+
+        <section id="destructuring" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-expand-arrows-alt icon-rotate"></i> Destructuring</h2>
+            <p class="animate-fadeInUp delay-1">Unpack values from arrays or properties from objects into distinct
+                variables.</p>
+            <pre class="hover-glow animate-fadeInUp delay-1"><code>// Array
+const [a, b] = [10, 20];
+console.log(a, b);
+
+// Object
+const { id, status } = { id: 1, status: 'Active' };
+console.log(status);</code></pre>
+        </section>
+    </main>
+
+    <!-- Run Code Output Modal -->
+    <div id="runModal" class="modal glass animate-fadeIn"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; justify-content:center; align-items:center;">
+        <div class="modal-content"
+            style="background:var(--bg-card); padding:2rem; border-radius:12px; width:90%; max-width:500px; border:1px solid var(--border-color);">
+            <h3 style="margin-bottom:1rem; color:var(--secondary-color);">Running Code...</h3>
+            <div id="consoleOutput"
+                style="background:#1e1e1e; padding:1rem; border-radius:6px; color:#d4d4d4; font-family:'Consolas',monospace; min-height:100px; margin-bottom:1rem; white-space:pre-wrap;">
+            </div>
+            <button id="closeModalBtn" class="intro-btn btn-ripple" style="width:100%;">Close</button>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn-ripple hover-lift"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="js/animations.js"></script>
+    <script src="js/jsreff.js"></script>
+</body>
+
+</html>

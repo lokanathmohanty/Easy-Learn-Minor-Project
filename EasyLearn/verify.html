@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Certificate | Easy Learn</title>
+    <link rel="icon" type="image/png" href="image/elearning.png" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/verify.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/dark-mode.js"></script>
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar glass animate-fadeInDown" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="nav-brand">
+            <div class="logo">Easy Learn</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="icon-btn" title="Toggle Theme"
+                onclick="window.toggleDarkMode && window.toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <a href="index.html" class="btn-secondary">Back to Home</a>
+        </div>
+    </nav>
+
+    <main class="verify-page" style="padding-top: 100px;">
+        <!-- Header Section -->
+        <section class="verify-header animate-fadeInUp">
+            <div class="verify-icon">
+                <i class="fas fa-shield-alt icon-bounce"></i>
+            </div>
+            <h1>Certificate Verification</h1>
+            <p>Verify the authenticity of an Easy Learn certificate by entering the unique Certificate ID.</p>
+        </section>
+
+        <!-- Verification Form -->
+        <section class="verify-form-container glass animate-fadeInUp delay-1">
+            <form id="verify-form" class="verify-form">
+                <div class="input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="cert-id-input" placeholder="Enter Certificate ID (e.g., LUMINA-2024-XXXXX)"
+                        required autocomplete="off">
+                </div>
+                <button type="submit" class="btn-primary hover-lift btn-ripple">
+                    Verify Certificate
+                </button>
+            </form>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loading" class="loading-container hidden">
+            <div class="spinner"></div>
+            <p>Validating Certificate...</p>
+        </div>
+
+        <!-- Result Container -->
+        <div id="verify-result" class="result-container hidden animate-scaleIn">
+            <!-- Content injected by JS -->
+        </div>
+
+        <!-- Sample Certificate Hint -->
+        <div class="sample-hint animate-fadeInUp delay-2">
+            <p><i class="fas fa-info-circle"></i> Don't have an ID? Try entering <strong>LUMINA-SAMPLE-123</strong></p>
+        </div>
+
+        <!-- Statistics -->
+        <section class="stats-dashboard reveal delay-3">
+            <div class="stat-card glass hover-lift">
+                <i class="fas fa-certificate"></i>
+                <h3 class="gradient-text">15,000+</h3>
+                <p>Certificates Issued</p>
+            </div>
+            <div class="stat-card glass hover-lift">
+                <i class="fas fa-user-check"></i>
+                <h3 class="gradient-text">100%</h3>
+                <p>Authenticity Guaranteed</p>
+            </div>
+            <div class="stat-card glass hover-lift">
+                <i class="fas fa-globe"></i>
+                <h3 class="gradient-text">50+</h3>
+                <p>Countries Recognized</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Easy Learn. All rights reserved.</p>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/verify.js"></script>
+</body>
+
+</html>

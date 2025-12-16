@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="description"
+        content="Browse our comprehensive course catalog. Master programming, design, and technology skills.">
+    <title>All Courses | Easy Learn</title>
+    <link rel="icon" type="image/png" href="image/elearning.png" />
+
+    <!-- Preconnect First -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://lottie.host">
+
+    <!-- Critical Inline CSS -->
+    <style>
+        :root {
+            --bg-color: #0f0f13;
+            --text-color: #ffffff;
+            --primary-color: #6c5ce7;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+
+    <!-- Inline Dark Mode Script -->
+    <script>
+        (function () {
+            const t = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', t);
+            window.toggleDarkMode = function () {
+                const e = document.documentElement.getAttribute('data-theme'),
+                    n = 'light' === e ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', n);
+                localStorage.setItem('theme', n);
+                const btn = document.getElementById('theme-toggle');
+                if (btn) {
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.className = n === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            };
+            document.addEventListener('DOMContentLoaded', function () {
+                const btn = document.getElementById('theme-toggle');
+                if (btn) {
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            });
+        })();
+    </script>
+
+    <!-- Load Critical CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/courses-page.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+</head>
+
+<body>
+    <!-- Lottie Background -->
+    <div class="lottie-bg">
+        <lottie-player src="https://lottie.host/beb1302f-7ebd-4093-a080-c0d67b45253a/amQn1njr4v.json"
+            background="transparent" speed="0.5" style="width: 100%; height: 100%;" loop autoplay>
+        </lottie-player>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass animate-fadeInDown" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="nav-brand">
+            <div class="logo">Easy Learn</div>
+            <button class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" class="hover-lift">Home</a></li>
+            <li><a href="courses.html" class="active hover-lift">Courses</a></li>
+            <li><a href="tutorials.html" class="hover-lift">Tutorials</a></li>
+            <li><a href="about.html" class="hover-lift">About</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="icon-btn" title="Toggle Theme"
+                onclick="window.toggleDarkMode && window.toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <a href="dashboard.html" class="btn-primary hover-lift btn-ripple">Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="courses-hero">
+        <div class="hero-content-center">
+            <h1 class="gradient-text animate-fadeInDown">Explore Our Courses</h1>
+            <p class="animate-fadeInUp delay-1">Master in-demand skills with our comprehensive course catalog</p>
+        </div>
+    </section>
+
+    <!-- Search & Filter Section -->
+    <section class="search-filter-section"
+        style="padding: 0 5% 2rem; max-width: 1400px; margin: 0 auto; display:flex; flex-wrap:wrap; gap:1rem; align-items:center; justify-content:space-between;">
+        <div class="search-box glass"
+            style="flex:1; min-width:300px; display:flex; align-items:center; padding:0 1rem; border-radius:30px; border:1px solid var(--border-color);">
+            <i class="fas fa-search" style="color:var(--text-muted);"></i>
+            <input type="text" id="courseSearch" placeholder="Search for courses..."
+                style="background:transparent; border:none; padding:1rem; width:100%; color:var(--text-color); outline:none;">
+        </div>
+
+        <div class="filter-group" style="display:flex; gap:0.5rem;">
+            <button class="filter-chip active" data-filter="all">All</button>
+            <button class="filter-chip" data-filter="beginner">Beginner</button>
+            <button class="filter-chip" data-filter="intermediate">Intermediate</button>
+            <button class="filter-chip" data-filter="advanced">Advanced</button>
+        </div>
+    </section>
+
+    <!-- Courses Grid -->
+    <section class="courses-section">
+        <div class="courses-container">
+            <div id="courses-grid" class="course-grid">
+                <!-- Courses will be rendered here by JavaScript -->
+            </div>
+            <div id="no-results" style="display:none; text-align:center; padding:3rem; color:var(--text-muted);">
+                <i class="fas fa-search fa-3x" style="margin-bottom:1rem; opacity:0.5;"></i>
+                <p>No courses found matching your criteria.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Details Modal -->
+    <div id="courseModal" class="modal glass animate-fadeIn"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; justify-content:center; align-items:center; padding:1rem;">
+        <div class="modal-content"
+            style="background:var(--bg-card); padding:2rem; border-radius:16px; width:100%; max-width:600px; border:1px solid var(--border-color); position:relative; max-height:90vh; overflow-y:auto;">
+            <button onclick="closeCourseModal()"
+                style="position:absolute; top:15px; right:15px; background:none; border:none; color:white; font-size:1.5rem; cursor:pointer; z-index:10;">&times;</button>
+
+            <div id="modalContent">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/animations.js"></script>
+    <script src="js/auth-check.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="js/courses-data.js"></script>
+    <script src="js/courses-page.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,458 @@
+/* Cracking Interviews Tutorial - Modern Dark Theme with Lottie Background */
+
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #00cec9;
+    --bg-dark: #0a0e27;
+    --bg-card: rgba(20, 27, 45, 0.95);
+    --text-color: #e8eaf6;
+    --text-muted: #a5b4c9;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --gradient-1: linear-gradient(135deg, #6c5ce7 0%, #00cec9 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-color);
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Lottie Background */
+.lottie-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+/* Header */
+header {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem 5%;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Navigation */
+.navin {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 1.5rem 5%;
+    background: rgba(20, 27, 45, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 90px;
+    z-index: 99;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.navin a {
+    padding: 0.7rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.navin a:hover {
+    background: rgba(108, 92, 231, 0.2);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    color: var(--secondary-color);
+}
+
+.navin a:active {
+    background: var(--gradient-1);
+    color: white;
+    border-color: transparent;
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem 5rem;
+}
+
+section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    /* Animation handled by JS/animations.css now */
+}
+
+section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+section h3 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+section p {
+    margin-bottom: 1.2rem;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+section ul,
+section ol {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+section li {
+    margin-bottom: 0.8rem;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+section li strong {
+    color: var(--secondary-color);
+}
+
+section em {
+    color: var(--primary-color);
+    font-style: italic;
+}
+
+/* Intro Section */
+.intro {
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, rgba(0, 206, 201, 0.1) 100%);
+    border: 2px solid var(--primary-color);
+}
+
+.intro h2 {
+    font-size: 2.5rem;
+}
+
+/* New Grid and Card Styles for Animations */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card h3 {
+    margin-top: 0;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-card p {
+    margin-bottom: 0;
+}
+
+/* Feature List Styles */
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-list li {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.icon-width {
+    width: 30px;
+    text-align: center;
+    margin-right: 15px;
+    color: var(--primary-color);
+}
+
+/* Timeline/Stage Styles */
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid var(--border-color);
+}
+
+.stage-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+.stage-card::before {
+    content: '';
+    position: absolute;
+    left: -2.6rem;
+    top: 2.5rem;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    border: 4px solid var(--bg-dark);
+}
+
+.stage-card h3 {
+    margin-top: 0;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.no-list {
+    list-style: none;
+    margin-left: 0;
+}
+
+.no-list li {
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.no-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+}
+
+/* Back to Top Button */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--gradient-1);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(108, 92, 231, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#backToTop:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 30px rgba(108, 92, 231, 0.7);
+}
+
+#backToTop:active {
+    transform: translateY(-2px) scale(0.95);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .navin {
+        top: 75px;
+        padding: 1rem 2%;
+    }
+
+    .navin a {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    main {
+        margin-top: 2rem;
+        padding: 0 1rem 3rem;
+    }
+
+    section {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    section h3 {
+        font-size: 1.3rem;
+    }
+
+    section p {
+        font-size: 1rem;
+    }
+
+    #backToTop {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-container {
+        padding-left: 1rem;
+        border-left: none;
+    }
+
+    .stage-card::before {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+        padding: 0.5rem;
+    }
+
+    .navin {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .navin a {
+        width: 100%;
+        text-align: center;
+    }
+
+    section {
+        padding: 1.5rem 1rem;
+    }
+
+    section h2 {
+        font-size: 1.5rem;
+    }
+
+    section ul,
+    section ol {
+        margin-left: 1.2rem;
+    }
+}
+
+/* Flashcard Styles */
+.flashcard-container {
+    perspective: 1000px;
+    height: 250px;
+    cursor: pointer;
+}
+
+.flashcard {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flashcard-container.flipped .flashcard {
+    transform: rotateY(180deg);
+}
+
+.flashcard .front,
+.flashcard .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    /* Fallback */
+}
+
+.flashcard .back {
+    transform: rotateY(180deg);
+    background: rgba(108, 92, 231, 0.1);
+    /* Differentiate back */
+    border-color: var(--primary-color);
+}
+
+.flashcard h3 {
+    margin: 0;
+    color: var(--text-color);
+}
+
+/* Simulator Styles */
+.simulator-container {
+    transition: all 0.3s ease;
+}
+
+.simulator-container:hover {
+    box-shadow: 0 0 20px rgba(0, 206, 201, 0.2);
+}

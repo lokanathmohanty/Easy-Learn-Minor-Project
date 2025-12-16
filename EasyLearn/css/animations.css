@@ -1,0 +1,699 @@
+/* 
+ * Educational Platform Animations & Transitions
+ * Easy Learn - Smooth, engaging animations for better UX
+ */
+
+/* ========================================
+   GLOBAL ANIMATIONS
+   ======================================== */
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+/* Remove transition for specific elements */
+.no-transition,
+.no-transition * {
+    transition: none !important;
+}
+
+/* ========================================
+   ENTRANCE ANIMATIONS
+   ======================================== */
+
+/* Fade In from bottom */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade In from top */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade In from left */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade In from right */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Bounce In */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* ========================================
+   EDUCATIONAL THEMED ANIMATIONS
+   ======================================== */
+
+/* Book Opening Animation */
+@keyframes bookOpen {
+    0% {
+        transform: perspective(1000px) rotateY(-30deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+/* Graduation Cap Float */
+@keyframes capFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+/* Pencil Write Animation */
+@keyframes pencilWrite {
+    0% {
+        transform: translateX(-20px) rotate(-10deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Light Bulb Glow */
+@keyframes bulbGlow {
+
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.4) drop-shadow(0 0 10px rgba(255, 220, 0, 0.6));
+    }
+}
+
+/* Star Twinkle */
+@keyframes starTwinkle {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+/* Progress Bar Fill */
+@keyframes progressFill {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: var(--progress-width, 100%);
+    }
+}
+
+/* Number Count Up */
+@keyframes countUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   HOVER EFFECTS
+   ======================================== */
+
+/* Lift on Hover */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Glow on Hover */
+.hover-glow {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(108, 92, 231, 0.6);
+    transform: scale(1.02);
+}
+
+/* Rotate on Hover */
+.hover-rotate {
+    transition: transform 0.3s ease;
+}
+
+.hover-rotate:hover {
+    transform: rotate(5deg) scale(1.05);
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* ========================================
+   LOADING ANIMATIONS
+   ======================================== */
+
+/* Spinner */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Pulse */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Skeleton Loading */
+@keyframes skeleton {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.05) 25%,
+            rgba(255, 255, 255, 0.15) 50%,
+            rgba(255, 255, 255, 0.05) 75%);
+    background-size: 200% 100%;
+    animation: skeleton 1.5s ease-in-out infinite;
+}
+
+/* ========================================
+   SCROLL ANIMATIONS
+   ======================================== */
+
+/* Reveal on Scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slide In on Scroll */
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-in-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-in-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ========================================
+   ICON ANIMATIONS
+   ======================================== */
+
+/* Bounce Icon */
+.icon-bounce {
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-15px);
+    }
+
+    60% {
+        transform: translateY(-7px);
+    }
+}
+
+/* Rotate Icon */
+.icon-rotate {
+    animation: iconRotate 3s linear infinite;
+}
+
+@keyframes iconRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Swing Icon */
+.icon-swing {
+    transform-origin: top center;
+    animation: iconSwing 2s ease-in-out infinite;
+}
+
+@keyframes iconSwing {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(15deg);
+    }
+
+    75% {
+        transform: rotate(-15deg);
+    }
+}
+
+/* Heartbeat Icon */
+.icon-heartbeat {
+    animation: iconHeartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes iconHeartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    10%,
+    30% {
+        transform: scale(1.1);
+    }
+
+    20%,
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* ========================================
+   BUTTON ANIMATIONS
+   ======================================== */
+
+/* Button Press */
+.btn-press:active {
+    transform: scale(0.95);
+}
+
+/* Button Ripple Effect */
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-ripple:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ========================================
+   CARD ANIMATIONS
+   ======================================== */
+
+/* Card Flip */
+.card-flip {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card-flip:hover {
+    transform: rotateY(180deg);
+}
+
+/* Card Expand */
+.card-expand {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-expand:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+/* ========================================
+   DELAY UTILITIES
+   ======================================== */
+
+.delay-1 {
+    animation-delay: 0.1s !important;
+}
+
+.delay-2 {
+    animation-delay: 0.2s !important;
+}
+
+.delay-3 {
+    animation-delay: 0.3s !important;
+}
+
+.delay-4 {
+    animation-delay: 0.4s !important;
+}
+
+.delay-5 {
+    animation-delay: 0.5s !important;
+}
+
+/* ========================================
+   ANIMATION CLASSES
+   ======================================== */
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fadeInDown {
+    animation: fadeInDown 0.6s ease-out forwards;
+}
+
+.animate-fadeInLeft {
+    animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+.animate-fadeInRight {
+    animation: fadeInRight 0.6s ease-out forwards;
+}
+
+.animate-scaleIn {
+    animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-bounceIn {
+    animation: bounceIn 0.8s ease-out forwards;
+}
+
+.animate-bookOpen {
+    animation: bookOpen 1s ease-out forwards;
+}
+
+/* ========================================
+   EDUCATIONAL SPECIFIC EFFECTS
+   ======================================== */
+
+/* Certificate Shine */
+@keyframes certificateShine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+.certificate-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.certificate-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    animation: certificateShine 3s infinite;
+}
+
+/* Study Progress Bar */
+@keyframes studyProgress {
+    from {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+
+    to {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+}
+
+.study-progress {
+    animation: studyProgress 1.5s ease-out forwards;
+}
+
+/* Quiz Check Animation */
+@keyframes checkmark {
+    0% {
+        stroke-dashoffset: 100;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.checkmark {
+    stroke-dasharray: 100;
+    animation: checkmark 0.5s ease-out forwards;
+}
+
+/* ========================================
+   RESPONSIVE ANIMATIONS
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Reduce animation complexity on mobile */
+    .hover-lift:hover {
+        transform: translateY(-3px);
+    }
+
+    .card-expand:hover {
+        transform: scale(1.02);
+    }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.transition-fast {
+    transition: all 0.15s ease !important;
+}
+
+.transition-normal {
+    transition: all 0.3s ease !important;
+}
+
+.transition-slow {
+    transition: all 0.6s ease !important;
+}
+
+.no-animation {
+    animation: none !important;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus States with Animation */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--primary-color, #6c5ce7);
+    outline-offset: 2px;
+    transition: outline-offset 0.2s ease;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+    outline: none;
+}

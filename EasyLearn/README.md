@@ -20,11 +20,14 @@
 
 ### 🔐 Login & User Management
 
+---
+
+### 🔐 Login & User Management
+
 | **Login & User Management Page** |
 |:---:|
-| [WhatsApp Image 2025-12-16 at 3 13 34 PM](https://github.com/user-attachments/assets/018e3aba-45a3-4de4-be26-3dc61b7a6fa5) |
+| <img src="https://github.com/user-attachments/assets/9d30f1e3-c40d-4336-875d-7908a0ab48aa" width="900"/>  |
 
----
 
 ### 🏠 Home & Course Pages
 
@@ -206,7 +209,8 @@ This project is licensed under the **MIT License** - see the LICENSE file for de
 - **Email**: lokanathmohanty000@gmail.com 
 
 ---
-*Built with ❤️ for the educational community.*
+*Built with @Basudev Nayak for the educational community.*
+
 
 
 

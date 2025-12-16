@@ -4,7 +4,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebas
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDyyOv23pgZau4NMap25ELNJeK2_q-hWQw",
+    apiKey: "YOUR API KEY IS HERE",
     authDomain: "my-auth-9ca91.firebaseapp.com",
     projectId: "my-auth-9ca91",
     storageBucket: "my-auth-9ca91.firebasestorage.app",
@@ -27,3 +27,4 @@ try {
 }
 
 export { app, auth, firebaseConfig };
+

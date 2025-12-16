@@ -20,7 +20,8 @@
 | **Home Page (Dark Mode)** | **Course System** |
 |:---:|:---:|
 | ![Home Page](<img width="1919" height="828" alt="Screenshot 2025-12-16 143817" src="https://github.com/user-attachments/assets/b815389a-2fea-46bf-9402-54e1da291f14" />
-) | ![Course System](<img width="1916" height="837" alt="Screenshot 2025-12-16 143847" src="https://github.com/user-attachments/assets/dd43001a-b008-423e-b762-3c3f68d5803e" />
+) | ![Course System](<img width="1916" height="837" alt="Screenshot 2025-12-16 143847" src="https://github.com/user-attachments/assets/b64c131d-d1b2-46b8-b790-1e0429f15d54" />
+
 ) |
 
 | **Browse Course Section (Dark mode)** | **Browse Course ** |
@@ -188,5 +189,6 @@ This project is licensed under the **MIT License** - see the LICENSE file for de
 
 ---
 *Built with ❤️ for the educational community.*
+
 
 

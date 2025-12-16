@@ -17,11 +17,6 @@
 
  ## 📌 Project Screenshots
 
-
-### 🔐 Login & User Management
-
----
-
 ### 🔐 Login & User Management
 
 | **Login & User Management Page** |
@@ -210,6 +205,7 @@ This project is licensed under the **MIT License** - see the LICENSE file for de
 
 ---
 *Built with @Basudev Nayak for the educational community.*
+
 
 
 

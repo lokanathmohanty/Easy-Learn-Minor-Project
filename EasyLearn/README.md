@@ -17,6 +17,14 @@
 
  ## 📌 Project Screenshots
 
+
+### 🔐 Login & User Management
+
+| **Login & User Management Page** |
+|:---:|
+|  <img width="682" height="437" alt="Screenshot 2025-12-12 211815" src="https://github.com/user-attachments/assets/549a5edf-6b43-4a5c-b0dd-d86998d66f0f" />
+ |
+
 ---
 
 ### 🏠 Home & Course Pages
@@ -47,17 +55,12 @@
 
 | **Dashboard Section** | **Course Player** |
 |:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/cce5d7dd-aa5e-4252-b21e-c3de531d7666" width="500"/> | <img src="https://github.com/user-attachments/assets/894c1c8e-2b24-4d11-b26f-fbcf5b0f12ef" width="500"/> |
+| <img width="1919" height="828" alt="Screenshot 2025-12-16 144047" src="https://github.com/user-attachments/assets/c0b3ddee-4c8d-4f06-a74c-70cb2f39ab3c" />
+ | <img src="https://github.com/user-attachments/assets/894c1c8e-2b24-4d11-b26f-fbcf5b0f12ef" width="500"/> |
 
 
 ---
 
-### 🔐 Login & User Management
-
-| **Login & User Management Page** |
-|:---:|
-|  <img width="342" height="337" alt="Screenshot 2025-12-12 211815" src="https://github.com/user-attachments/assets/549a5edf-6b43-4a5c-b0dd-d86998d66f0f" />
- |
 
 
 ## 🛠️ Technologies Used
@@ -206,6 +209,7 @@ This project is licensed under the **MIT License** - see the LICENSE file for de
 
 ---
 *Built with ❤️ for the educational community.*
+
 
 
 

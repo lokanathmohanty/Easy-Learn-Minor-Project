@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="description" content="Complete guide to cracking interviews - tips, types, and preparation strategies.">
+    <title>Cracking Interviews Tutorial</title>
+    <link rel="icon" type="image/png" href="image/elearning.png" />
+
+    <!-- Preconnect for faster loading -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://lottie.host">
+
+    <!-- Critical Inline CSS - Prevents layout shift on mobile -->
+    <style>
+        :root {
+            --bg-color: #0f0f13;
+            --text-color: #ffffff;
+            --text-muted: #a0a0a0;
+            --primary-color: #6c5ce7;
+            --secondary-color: #00b894;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --text-color: #2d3436;
+            --text-muted: #4a5568;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(100, 100, 100, 0.2);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .lottie-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.05;
+        }
+    </style>
+
+    <!-- Dark Mode Script (runs before render) -->
+    <script src="js/dark-mode.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/interview.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Lottie Background Animation -->
+    <div class="lottie-background animate-fadeIn">
+        <lottie-player src="https://lottie.host/beb1302f-7ebd-4093-a080-c0d67b45253a/amQn1njr4v.json"
+            background="transparent" speed="0.5" style="width: 100%; height: 100%;" loop autoplay>
+        </lottie-player>
+    </div>
+
+    <!-- Header -->
+    <header class="animate-fadeInDown">
+        <h1>Cracking Interviews Tutorial</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navin animate-fadeInDown delay-1">
+        <a href="#1html" class="hover-lift">Home</a>
+        <a href="#employers" class="hover-lift">What Employers Want</a>
+        <a href="#types" class="hover-lift">Types of Interviews</a>
+        <a href="#questions" class="hover-lift">Interview Questions</a>
+        <a href="#stages" class="hover-lift">Stages of Interviews</a>
+        <button id="theme-toggle" class="icon-btn" title="Toggle Theme"
+            onclick="window.toggleDarkMode && window.toggleDarkMode()"
+            style="background: rgba(255,255,255,0.1); border: none; color: var(--text-color, #fff); padding: 0.5rem 0.8rem; border-radius: 8px; cursor: pointer; margin-left: auto;"><i
+                class="fas fa-moon"></i></button>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="1html">
+        <section class="intro reveal">
+            <h2 class="animate-fadeInRight">Cracking Interviews - Home</h2>
+            <p class="animate-fadeInUp delay-1">
+                Welcome to the <strong>Cracking Interviews Tutorial</strong> — your complete guide to mastering
+                interviews of all types.
+                This tutorial helps you understand what employers seek, how to handle different interview formats, the
+                types of questions you'll face, and the stages of the interview process.
+            </p>
+        </section>
+
+        <!-- Progress Bar -->
+        <div id="scrollProgress"
+            style="position:fixed; top:0; left:0; height:4px; background:var(--secondary-color); z-index:1001; width:0%; transition: width 0.1s;">
+        </div>
+
+        <!-- Mock Interview Simulator -->
+        <section id="simulator" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-robot icon-bounce"></i> Mock Interview Simulator</h2>
+            <p>Test yourself with rapid-fire random questions. Click "Start" to receive a question and a 60-second
+                timer.</p>
+
+            <div class="simulator-container glass"
+                style="text-align:center; padding:2rem; border-radius:12px; border:1px solid var(--border-color);">
+                <div id="timerDisplay"
+                    style="font-size:3rem; font-weight:bold; color:var(--secondary-color); margin-bottom:1rem;">00:60
+                </div>
+                <div id="questionDisplay"
+                    style="font-size:1.5rem; margin-bottom:2rem; min-height:80px; display:flex; align-items:center; justify-content:center;">
+                    Click Start to Begin...</div>
+
+                <div class="sim-controls">
+                    <button id="startSimBtn" class="intro-btn btn-ripple"
+                        style="background:var(--secondary-color); border:none; color:#000;">Start New Question</button>
+                    <button id="revealHintBtn" class="intro-btn btn-ripple"
+                        style="background:transparent; border:1px solid var(--text-muted); display:none; margin-left:10px;">Show
+                        Hint</button>
+                </div>
+                <div id="hintDisplay" style="margin-top:1.5rem; color:var(--text-muted); display:none;"></div>
+            </div>
+        </section>
+
+        <!-- Flashcards for Quick Prep -->
+        <section id="flashcards" class="reveal">
+            <h2 class="animate-fadeInRight"><i class="fas fa-layer-group icon-rotate"></i> Quick Prep Flashcards</h2>
+            <p>Click a card to reveal the tip.</p>
+            <div class="card-grid">
+                <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard">
+                        <div class="front glass">
+                            <h3>Tell me about yourself</h3>
+                            <i class="fas fa-sync-alt" style="margin-top:1rem; opacity:0.5;"></i>
+                        </div>
+                        <div class="back glass">
+                            <p>Keep it professional. Use the "Present, Past, Future" formula. Current role -> Past
+                                experience -> Future goals.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard">
+                        <div class="front glass">
+                            <h3>Weakness?</h3>
+                            <i class="fas fa-sync-alt" style="margin-top:1rem; opacity:0.5;"></i>
+                        </div>
+                        <div class="back glass">
+                            <p>Choose a real weakness but explain how you are working to improve it. Never say "I work
+                                too hard".</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard">
+                        <div class="front glass">
+                            <h3>Why this company?</h3>
+                            <i class="fas fa-sync-alt" style="margin-top:1rem; opacity:0.5;"></i>
+                        </div>
+                        <div class="back glass">
+                            <p>Connect your personal values/goals with the company's mission. Show you did your
+                                research.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What Employers Want -->
+        <section id="employers" class="reveal">
+            <h2 class="animate-fadeInRight">What Employers Want</h2>
+            <p>
+                Employers evaluate candidates beyond academic qualifications. They focus on how well you fit the
+                company's culture, your problem-solving skills, and your ability to adapt to real-world challenges.
+            </p>
+            <ul class="feature-list">
+                <li class="hover-glow"><i class="fas fa-comments icon-width"></i><strong>Communication Skills:</strong>
+                    Clear, confident speaking and attentive listening.</li>
+                <li class="hover-glow"><i class="fas fa-users icon-width"></i><strong>Teamwork:</strong> Ability to
+                    collaborate and work effectively with others.</li>
+                <li class="hover-glow"><i class="fas fa-brain icon-width"></i><strong>Problem-Solving:</strong> Logical
+                    thinking, creativity, and persistence.</li>
+                <li class="hover-glow"><i class="fas fa-sync-alt icon-width"></i><strong>Adaptability:</strong>
+                    Flexibility in changing work environments.</li>
+                <li class="hover-glow"><i class="fas fa-smile icon-width"></i><strong>Positive Attitude:</strong>
+                    Enthusiasm and willingness to learn.</li>
+                <li class="hover-glow"><i class="fas fa-shield-alt icon-width"></i><strong>Integrity & Work
+                        Ethic:</strong> Reliability and professional behavior.</li>
+            </ul>
+        </section>
+
+        <!-- Types of Interviews -->
+        <section id="types" class="reveal">
+            <h2 class="animate-fadeInRight">Types of Interviews</h2>
+
+            <div class="card-grid">
+                <div class="info-card glass hover-lift">
+                    <h3><i class="fas fa-list-ol icon-bounce"></i> 1. Structured Interviews</h3>
+                    <p>Each candidate is asked the same set of questions in the same order. This ensures fairness and
+                        easier
+                        comparison between candidates.</p>
+                </div>
+
+                <div class="info-card glass hover-lift delay-1">
+                    <h3><i class="fas fa-comments icon-bounce"></i> 2. Unstructured Interviews</h3>
+                    <p>The interviewer follows a conversational approach, adapting questions based on your responses to
+                        gauge
+                        personality and spontaneity.</p>
+                </div>
+
+                <div class="info-card glass hover-lift delay-2">
+                    <h3><i class="fas fa-user icon-bounce"></i> 3. One-on-One Interviews</h3>
+                    <p>A direct interaction between you and the interviewer, focusing on your resume, skills, and fit
+                        for the
+                        position.</p>
+                </div>
+
+                <div class="info-card glass hover-lift">
+                    <h3><i class="fas fa-users-cog icon-bounce"></i> 4. Panel Interviews</h3>
+                    <p>Conducted by multiple interviewers who evaluate different aspects such as technical, behavioral,
+                        and
+                        cultural fit.</p>
+                </div>
+
+                <div class="info-card glass hover-lift delay-1">
+                    <h3><i class="fas fa-users icon-bounce"></i> 5. Group Interviews</h3>
+                    <p>Several candidates are interviewed simultaneously. This tests leadership, teamwork, and
+                        communication
+                        skills.</p>
+                </div>
+
+                <div class="info-card glass hover-lift delay-2">
+                    <h3><i class="fas fa-bolt icon-bounce"></i> 6. Stress Interviews</h3>
+                    <p>Used to assess how you perform under pressure. Interviewers may act impatient or ask tricky
+                        questions
+                        deliberately.</p>
+                </div>
+
+                <div class="info-card glass hover-lift">
+                    <h3><i class="fas fa-info-circle icon-bounce"></i> 7. Informational Interviews</h3>
+                    <p>Not a formal job interview but an opportunity to gather insights about a company or industry from
+                        professionals.</p>
+                </div>
+
+                <div class="info-card glass hover-lift delay-1">
+                    <h3><i class="fas fa-check-double icon-bounce"></i> 8. Competency-Based Interviews</h3>
+                    <p>Focus on specific skills or behaviors essential for the job. Questions often begin with "Tell me
+                        about a
+                        time when…"</p>
+                </div>
+
+                <div class="info-card glass hover-lift delay-2">
+                    <h3><i class="fas fa-tasks icon-bounce"></i> 9. Assessment Center Interviews</h3>
+                    <p>Includes group discussions, presentations, psychometric tests, and case studies to evaluate your
+                        overall
+                        potential.</p>
+                </div>
+
+                <div class="info-card glass hover-lift">
+                    <h3><i class="fas fa-phone-alt icon-bounce"></i> 10. Telephonic Interviews</h3>
+                    <p>Initial screening conducted over phone or video to assess communication and suitability before an
+                        in-person round.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interview Questions -->
+        <section id="questions" class="reveal">
+            <h2 class="animate-fadeInRight">Types of Interview Questions</h2>
+
+            <div class="card-grid">
+                <div class="info-card glass hover-lift">
+                    <h3><i class="fas fa-history icon-rotate"></i> 1. Behavioral Questions</h3>
+                    <p>These focus on your past behavior in work situations. Example: <em>"Describe a time when you
+                            resolved a
+                            conflict."</em></p>
+                </div>
+
+                <div class="info-card glass hover-lift delay-1">
+                    <h3><i class="fas fa-question icon-rotate"></i> 2. Traditional Questions</h3>
+                    <p>These are standard, direct questions like: <em>"Tell me about yourself"</em> or <em>"Why do you
+                            want to
+                            work here?"</em></p>
+                </div>
+
+                <div class="info-card glass hover-lift delay-2">
+                    <h3><i class="fas fa-briefcase icon-rotate"></i> 3. Case Questions</h3>
+                    <p>Common in consulting and management interviews, where you analyze a hypothetical business
+                        scenario and
+                        propose a solution.</p>
+                </div>
+
+                <div class="info-card glass hover-lift">
+                    <h3><i class="fas fa-theater-masks icon-rotate"></i> 4. Role-Play Questions</h3>
+                    <p>You're placed in a simulated situation to observe your problem-solving and communication
+                        approach.</p>
+                </div>
+
+                <div class="info-card glass hover-lift delay-1">
+                    <h3><i class="fas fa-laptop-code icon-rotate"></i> 5. Industry-Specific Questions</h3>
+                    <p>Technical or job-related questions relevant to your field, such as coding, marketing, or finance.
+                    </p>
+                </div>
+
+                <div class="info-card glass hover-lift delay-2">
+                    <h3><i class="fas fa-puzzle-piece icon-rotate"></i> 6. Brainteasers</h3>
+                    <p>Creative problem-solving questions like <em>"How many golf balls can fit in a bus?"</em> to
+                        assess
+                        logical thinking.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stages of Interviews -->
+        <section id="stages" class="reveal">
+            <h2 class="animate-fadeInRight">Stages of Interviews</h2>
+
+            <div class="timeline-container">
+                <div class="stage-card glass hover-lift">
+                    <h3><i class="fas fa-search icon-bounce"></i> 1. Pre-Interview</h3>
+                    <ul class="no-list">
+                        <li>Research the company and its culture.</li>
+                        <li>Prepare answers for common questions.</li>
+                        <li>Rehearse introducing yourself and summarizing your achievements.</li>
+                        <li>Dress professionally and arrive early.</li>
+                    </ul>
+                </div>
+
+                <div class="stage-card glass hover-lift delay-1">
+                    <h3><i class="fas fa-handshake icon-bounce"></i> 2. Interview</h3>
+                    <ul class="no-list">
+                        <li>Be confident and polite.</li>
+                        <li>Listen carefully and answer clearly.</li>
+                        <li>Highlight accomplishments using the STAR method (Situation, Task, Action, Result).</li>
+                    </ul>
+                </div>
+
+                <div class="stage-card glass hover-lift delay-2">
+                    <h3><i class="fas fa-user-tie icon-bounce"></i> 3. Body Language</h3>
+                    <ul class="no-list">
+                        <li>Maintain eye contact.</li>
+                        <li>Offer a firm handshake.</li>
+                        <li>Avoid crossing arms or appearing nervous.</li>
+                        <li>Smile and stay composed.</li>
+                    </ul>
+                </div>
+
+                <div class="stage-card glass hover-lift">
+                    <h3><i class="fas fa-exclamation-triangle icon-bounce"></i> 4. Avoidable Questions</h3>
+                    <ul class="no-list">
+                        <li>Never discuss salary expectations too early.</li>
+                        <li>Avoid criticizing former employers.</li>
+                        <li>Don't show overconfidence or desperation.</li>
+                    </ul>
+                </div>
+
+                <div class="stage-card glass hover-lift delay-1">
+                    <h3><i class="fas fa-envelope-open-text icon-bounce"></i> 5. Post-Interview</h3>
+                    <ul class="no-list">
+                        <li>Send a thank-you email within 24 hours.</li>
+                        <li>Reflect on your performance and areas for improvement.</li>
+                        <li>Stay patient while awaiting results.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="btn-ripple hover-lift"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <!-- Lottie Player Script -->
+    <script src="js/animations.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="js/interview.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Formatter - Easy Learn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tools-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify-html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</head>
+
+<body>
+    <div class="tool-container">
+        <header class="tool-header">
+            <a href="/index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+            <h1><i class="fab fa-html5"></i> HTML Formatter</h1>
+        </header>
+
+        <div class="tool-workspace">
+            <textarea id="input" placeholder="Paste your HTML here..."></textarea>
+            <div class="controls" style="justify-content: center; margin: 1rem 0;">
+                <button class="btn" onclick="formatHTML()">Beautify HTML</button>
+                <button class="btn" onclick="copyResult()" style="background: #27ae60;">Copy Result</button>
+            </div>
+            <textarea id="output" placeholder="Beautiful HTML will appear here..." readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        function formatHTML() {
+            const input = document.getElementById('input').value;
+            const output = html_beautify(input, {
+                "indent_size": 4,
+                "html": {
+                    "end_with_newline": true,
+                    "js": {
+                        "indent_size": 2
+                    },
+                    "css": {
+                        "indent_size": 2
+                    }
+                }
+            });
+            document.getElementById('output').value = output;
+        }
+
+        function copyResult() {
+            navigator.clipboard.writeText(document.getElementById('output').value);
+            toastr.success('Copied to clipboard!');
+        }
+    </script>
+</body>
+
+</html>

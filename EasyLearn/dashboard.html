@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Easy Learn</title>
+    <link rel="icon" type="image/png" href="image/elearning.png" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Auth Guard - MUST load first to protect page -->
+    <script src="js/auth-guard.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+    <!-- Lottie Background -->
+    <div class="lottie-bg">
+        <lottie-player src="https://lottie.host/0e7db04b-db89-432c-8b1f-4e9c94bfb7dc/A2KJ15BpTd.json"
+            background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay>
+        </lottie-player>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass animate-fadeInDown" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="nav-brand">
+            <div class="logo">Easy Learn</div>
+            <button class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" class="hover-lift">Home</a></li>
+            <li><a href="courses.html" class="hover-lift">Courses</a></li>
+            <li><a href="tutorials.html" class="hover-lift">Tutorials</a></li>
+            <li><a href="about.html" class="hover-lift">About</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="icon-btn" title="Toggle Theme"
+                onclick="window.toggleDarkMode && window.toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <a href="dashboard.html" class="btn-primary active hover-lift btn-ripple">Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard-section">
+        <div class="dashboard-container">
+            <!-- Welcome Header -->
+            <div class="dashboard-header">
+                <h1 class="animate-fadeInDown">Welcome back, <span id="user-name" class="gradient-text">Student</span>!
+                </h1>
+                <p class="animate-fadeInUp delay-1">Track your progress and continue learning</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid" id="stats-grid">
+                <!-- Stats will be rendered here -->
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-container animate-fadeInUp delay-1"
+                style="margin-bottom: 2rem; display: flex; gap: 1rem;">
+                <button class="filter-btn active hover-lift" onclick="filterCourses('all')">All</button>
+                <button class="filter-btn hover-lift" onclick="filterCourses('active')">In Progress</button>
+                <button class="filter-btn hover-lift" onclick="filterCourses('completed')">Completed</button>
+            </div>
+
+            <!-- Enrolled Courses -->
+            <div class="enrolled-section reveal">
+                <h2 class="animate-fadeInRight delay-2">Your Enrolled Courses</h2>
+                <div id="enrolled-courses-grid" class="enrolled-courses-grid">
+                    <!-- Enrolled courses will be rendered here -->
+                </div>
+            </div>
+
+            <!-- Recommended Courses -->
+            <div class="recommended-section reveal" style="margin-top: 4rem;">
+                <h2 class="animate-fadeInRight">Recommended For You</h2>
+                <div id="recommended-courses-grid" class="enrolled-courses-grid">
+                    <!-- Dynamic Recommendations -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/animations.js"></script>
+    <script src="js/auth-check.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="js/courses-data.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

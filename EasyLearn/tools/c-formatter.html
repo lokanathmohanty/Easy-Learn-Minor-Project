@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>C Formatter - Easy Learn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tools-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</head>
+
+<body>
+    <div class="tool-container">
+        <header class="tool-header">
+            <a href="/index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+            <h1><i class="fas fa-copyright"></i> C Formatter</h1>
+        </header>
+
+        <div class="tool-workspace">
+            <textarea id="input" placeholder="Paste your C/C++ code here..."></textarea>
+            <div class="controls" style="justify-content: center; margin: 1rem 0;">
+                <button class="btn" onclick="formatC()">Format Code</button>
+                <button class="btn" onclick="copyResult()" style="background: #27ae60;">Copy Result</button>
+                <button class="btn" onclick="clearAll()" style="background: #e74c3c;">Clear</button>
+            </div>
+            <textarea id="output" placeholder="Formatted code will appear here..." readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        function formatC() {
+            let code = document.getElementById('input').value;
+            let res = '';
+            let indent = 0;
+            // Basic handling for C styles
+            let lines = code.replace(/;/g, ';\n').replace(/{/g, '{\n').replace(/}/g, '\n}').split('\n');
+
+            lines.forEach(line => {
+                line = line.trim();
+                if (!line) return;
+
+                if (line.startsWith('}')) indent = Math.max(0, indent - 1);
+
+                res += '    '.repeat(indent) + line + '\n';
+
+                if (line.endsWith('{')) indent++;
+            });
+
+            document.getElementById('output').value = res;
+        }
+
+        function copyResult() {
+            navigator.clipboard.writeText(document.getElementById('output').value);
+            toastr.success('Copied to clipboard!');
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+        }
+    </script>
+</body>
+
+</html>

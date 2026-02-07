@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS Minifier - Easy Learn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tools-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/terser/dist/bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</head>
+
+<body>
+    <div class="tool-container">
+        <header class="tool-header">
+            <a href="/index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+            <h1><i class="fab fa-js"></i> Javascript Minifier</h1>
+        </header>
+
+        <div class="tool-workspace">
+            <textarea id="input" placeholder="Paste your Javascript code here..."></textarea>
+            <div class="controls" style="justify-content: center; margin: 1rem 0;">
+                <button class="btn" onclick="minifyJS()">Minify JS</button>
+                <button class="btn" onclick="copyResult()" style="background: #27ae60;">Copy Result</button>
+            </div>
+            <textarea id="output" placeholder="Minified code will appear here..." readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        async function minifyJS() {
+            const code = document.getElementById('input').value;
+            if (!code) return;
+
+            try {
+                // Check if Terser is loaded
+                if (typeof Terser !== 'undefined') {
+                    const result = await Terser.minify(code);
+                    document.getElementById('output').value = result.code;
+                } else {
+                    // Fallback to basic regex minification if CDN fails
+                    let minified = code
+                        .replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '$1') // Remove comments
+                        .replace(/\s+/g, ' ') // Collapse whitespace
+                        .replace(/\s*([\{,;])\s*/g, '$1'); // clean around markers
+
+                    document.getElementById('output').value = minified;
+                    alert("Note: Using basic minification (CDN failed).");
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Minification failed: ' + error.message);
+            }
+        }
+
+        function copyResult() {
+            navigator.clipboard.writeText(document.getElementById('output').value);
+            toastr.success('Copied to clipboard!');
+        }
+    </script>
+</body>
+
+</html>

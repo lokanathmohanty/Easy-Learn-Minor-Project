@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Viewer - Easy Learn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tools-style.css">
+</head>
+
+<body>
+    <div class="tool-container">
+        <header class="tool-header">
+            <a href="/index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+            <h1><i class="fas fa-file-alt"></i> Document Viewer</h1>
+        </header>
+
+        <div class="tool-workspace">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <input type="file" id="docInput" accept=".pdf, .txt" style="max-width: 400px;">
+                <p style="color: #aaa; margin-top: 0.5rem;">Supports PDF and Text files.</p>
+            </div>
+
+            <div id="viewer"
+                style="width: 100%; height: 800px; border: 1px solid #444; border-radius: 8px; background: #222; display: flex; justify-content: center; align-items: center; color: #666;">
+                Upload a document to view
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('docInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            const viewer = document.getElementById('viewer');
+
+            if (file) {
+                const url = URL.createObjectURL(file);
+
+                if (file.type === 'application/pdf') {
+                    viewer.innerHTML = `<embed src="${url}" type="application/pdf" width="100%" height="100%">`;
+                } else if (file.type === 'text/plain') {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        viewer.innerHTML = `<pre style="color: white; padding: 2rem; overflow: auto; text-align: left;">${e.target.result}</pre>`;
+                    }
+                    reader.readAsText(file);
+                } else {
+                    viewer.innerHTML = `<p style="color: red;">Unsupported file type. Please upload PDF or TXT.</p>`;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

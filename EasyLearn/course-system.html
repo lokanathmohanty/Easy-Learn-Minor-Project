@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="description" content="Interactive course learning system with progress tracking and certification.">
+    <title>Course Learning System | Easy Learn</title>
+    <link rel="icon" type="image/png" href="image/elearning.png" />
+
+    <!-- Preconnect First -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://lottie.host">
+
+    <!-- Preload font for faster rendering -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+        as="style">
+
+
+    <!-- Critical Inline CSS - Prevents layout shift on mobile -->
+    <style>
+        /* Critical CSS to prevent FOUC and layout shift */
+        :root {
+            --bg-color: #0f0f13;
+            --text-color: #ffffff;
+            --text-muted: #a0a0a0;
+            --primary-color: #6c5ce7;
+            --secondary-color: #00b894;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --text-color: #2d3436;
+            --text-muted: #4a5568;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(100, 100, 100, 0.2);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Prevent content jump before CSS loads */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            min-height: 60px;
+        }
+
+        /* Mobile-first base visibility */
+        .lottie-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.05;
+        }
+
+        /* Hero section critical styles to prevent layout shift */
+        .hero-section {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9rem 5% 4rem;
+        }
+    </style>
+
+    <!-- Auth Guard (runs first for protection) -->
+    <script src="js/auth-guard.js"></script>
+
+    <!-- Inline Dark Mode -->
+    <script>
+        (function () {
+            const t = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', t);
+            window.toggleDarkMode = function () {
+                const e = document.documentElement.getAttribute('data-theme'),
+                    n = 'light' === e ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', n);
+                localStorage.setItem('theme', n);
+                const btn = document.getElementById('theme-toggle');
+                if (btn) {
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.className = n === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            };
+            document.addEventListener('DOMContentLoaded', function () {
+                const btn = document.getElementById('theme-toggle');
+                if (btn) {
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            });
+        })();
+    </script>
+
+    <!-- Load CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/course-system.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Lottie Background Animation -->
+    <div class="lottie-bg">
+        <lottie-player src="https://lottie.host/beb1302f-7ebd-4093-a080-c0d67b45253a/amQn1njr4v.json"
+            background="transparent" speed="0.5" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="nav-brand">
+            <div class="logo">Easy Learn</div>
+            <button class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="course-system.html" class="active">Course System</a></li>
+            <li><a href="courses.html">Browse Courses</a></li>
+            <li><a href="tutorials.html">Tutorials</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="icon-btn" title="Toggle Theme"
+                onclick="window.toggleDarkMode && window.toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <button class="icon-btn hover-lift" onclick="toggleWishlist()" title="Wishlist">
+                <i class="fas fa-heart" style="color: #ff7675;"></i>
+                <span id="wishlist-count" class="badge-count">0</span>
+            </button>
+            <a href="dashboard.html" class="btn-primary">Dashboard</a>
+        </div>
+    </nav>
+
+
+
+
+
+    <!-- Wishlist Sidebar -->
+    <div id="wishlistSidebar" class="wishlist-sidebar">
+        <div class="wishlist-header">
+            <h3><i class="fas fa-heart"></i> Your Wishlist</h3>
+            <button onclick="toggleWishlist()" class="close-btn">&times;</button>
+        </div>
+        <div id="wishlistItems" class="wishlist-items">
+            <!-- Items go here -->
+        </div>
+    </div>
+    <div id="wishlistOverlay" class="wishlist-overlay" onclick="toggleWishlist()"></div>
+
+    <!-- Upcoming Courses Section -->
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content-wrapper">
+            <div class="hero-text">
+                <h1 class="gradient-text animate-fadeInDown">📺 Interactive Course Learning System</h1>
+                <p class="hero-subtitle animate-fadeInUp delay-1">Experience a complete, professional learning platform
+                    with progress tracking,
+                    video lessons, interactive quizzes, and automatic certificate generation</p>
+                <div class="hero-stats animate-fadeInUp delay-2">
+                    <div class="stat-item hover-lift">
+                        <i class="fas fa-graduation-cap icon-bounce"></i>
+                        <span class="count-up" data-count="10">10+ Courses</span>
+                    </div>
+                    <div class="stat-item hover-lift delay-1">
+                        <i class="fas fa-video icon-bounce"></i>
+                        <span>Video Lessons</span>
+                    </div>
+                    <div class="stat-item hover-lift delay-2">
+                        <i class="fas fa-trophy icon-bounce"></i>
+                        <span>Certificates</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Catalog Section (New Feature) -->
+    <section class="catalog-section" id="catalog">
+        <div class="course-sys-container">
+            <div class="section-header reveal">
+                <h2>Explore Our Courses</h2>
+                <p>Find the perfect course to upgrade your skills</p>
+            </div>
+
+            <!-- Search & Filters -->
+            <div class="catalog-controls glass animate-fadeInUp">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="sysSearch" placeholder="Search courses...">
+                </div>
+
+                <div class="filter-group">
+                    <select id="sysCategory" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="web">Web Development</option>
+                        <option value="data">Data Science & AI</option>
+                        <option value="cs">Computer Science</option>
+                        <option value="programming">Programming Languages</option>
+                    </select>
+
+                    <select id="sysLevel" class="filter-select">
+                        <option value="all">All Levels</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Course Grid -->
+            <div id="sysCourseGrid" class="sys-course-grid">
+                <!-- Javascript will populate this -->
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="workflow-section">
+        <div class="section-header reveal">
+            <h2>How Our Course System Works</h2>
+            <p>Complete learning experience from enrollment to certification</p>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="workflow-step reveal">
+            <div class="step-number animate-scaleIn">1</div>
+            <div class="step-content">
+                <div class="step-info slide-in-left">
+                    <h3><i class="fas fa-user-plus icon-rotate"></i> Enroll in a Course</h3>
+                    <ul class="feature-list">
+                        <li>Browse from 10+ industrial courses</li>
+                        <li>Click "Enroll Now" on any course card</li>
+                        <li>Instant enrollment with automatic progress tracking</li>
+                        <li>Redirected to your personalized dashboard</li>
+                    </ul>
+                    <a href="courses.html" class="btn-primary hover-lift btn-ripple">Browse Available Courses</a>
+                </div>
+                <div class="step-visual slide-in-right">
+                    <div class="demo-card glass hover-rotate">
+                        <div class="demo-card-header">
+                            <i class="fab fa-react fa-3x"></i>
+                        </div>
+                        <h4>React JS Professional</h4>
+                        <p>Master modern React development</p>
+                        <div class="demo-meta">
+                            <span><i class="fas fa-book"></i> 8 Modules</span>
+                            <span><i class="fas fa-clock"></i> 12 Hours</span>
+                        </div>
+                        <button class="btn-primary full-width">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="workflow-step reverse reveal">
+            <div class="step-number animate-scaleIn">2</div>
+            <div class="step-content">
+                <div class="step-visual slide-in-left">
+                    <div class="dashboard-demo glass hover-lift">
+                        <div class="demo-stats-grid">
+                            <div class="demo-stat-card hover-glow">
+                                <i class="fas fa-book"></i>
+                                <h3>3</h3>
+                                <p>Enrolled</p>
+                            </div>
+                            <div class="demo-stat-card hover-glow delay-1">
+                                <i class="fas fa-spinner"></i>
+                                <h3>2</h3>
+                                <p>In Progress</p>
+                            </div>
+                            <div class="demo-stat-card hover-glow delay-2">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>1</h3>
+                                <p>Completed</p>
+                            </div>
+                            <div class="demo-stat-card hover-glow delay-3">
+                                <i class="fas fa-award"></i>
+                                <h3>1</h3>
+                                <p>Certificates</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-info slide-in-right">
+                    <h3><i class="fas fa-chart-line icon-bounce"></i> Enhanced Dashboard</h3>
+                    <ul class="feature-list">
+                        <li>4 Beautiful stat cards showing your progress</li>
+                        <li>Visual progress indicators for each course</li>
+                        <li>Circular progress badges with % complete</li>
+                        <li>"Continue Learning" button to resume instantly</li>
+                        <li>Real-time updates based on your activity</li>
+                    </ul>
+                    <a href="dashboard.html" class="btn-secondary hover-lift btn-ripple">View Dashboard</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="workflow-step reveal">
+            <div class="step-number animate-scaleIn">3</div>
+            <div class="step-content">
+                <div class="step-info slide-in-left">
+                    <h3><i class="fas fa-play-circle icon-heartbeat"></i> Start/Continue Learning</h3>
+                    <ul class="feature-list">
+                        <li>Dedicated Course Player with clean interface</li>
+                        <li>Left sidebar showing all modules and lessons</li>
+                        <li>Main area with YouTube video or quiz</li>
+                        <li>Top progress bar tracking completion</li>
+                        <li>Previous/Next navigation buttons</li>
+                        <li>Auto-save: Resume exactly where you left off</li>
+                    </ul>
+                </div>
+                <div class="step-visual slide-in-right">
+                    <div class="player-demo glass hover-lift">
+                        <div class="demo-progress-bar">
+                            <div class="demo-progress" style="width: 45%;"></div>
+                            <span class="demo-progress-text">45% Complete</span>
+                        </div>
+                        <div class="demo-player-layout">
+                            <div class="demo-sidebar">
+                                <div class="demo-module">
+                                    <div class="demo-module-title">📚 Module 1</div>
+                                    <div class="demo-lesson active">▶ Lesson 1</div>
+                                    <div class="demo-lesson">✓ Lesson 2</div>
+                                </div>
+                            </div>
+                            <div class="demo-video">
+                                <i class="fab fa-youtube fa-4x"></i>
+                                <p>Video Lesson</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="workflow-step reverse reveal">
+            <div class="step-number animate-scaleIn">4</div>
+            <div class="step-content">
+                <div class="step-visual slide-in-left">
+                    <div class="video-demo glass hover-lift">
+                        <div class="demo-video-player">
+                            <i class="fas fa-video fa-3x"></i>
+                            <p>YouTube Video Embedded</p>
+                        </div>
+                        <button class="btn-primary full-width hover-lift btn-ripple">
+                            <i class="fas fa-check"></i> Mark as Complete
+                        </button>
+                    </div>
+                </div>
+                <div class="step-info slide-in-right">
+                    <h3><i class="fas fa-video icon-bounce"></i> Watch Video Lessons</h3>
+                    <ul class="feature-list">
+                        <li>YouTube videos embedded and fully playable</li>
+                        <li>Click "Mark as Complete" when finished</li>
+                        <li>Lesson gets ✓ checkmark in sidebar instantly</li>
+                        <li>Progress bar updates automatically</li>
+                        <li>Move to next lesson seamlessly</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="workflow-step reveal">
+            <div class="step-number animate-scaleIn">5</div>
+            <div class="step-content">
+                <div class="step-info slide-in-left">
+                    <h3><i class="fas fa-question-circle icon-sway"></i> Take Interactive Quizzes</h3>
+                    <ul class="feature-list">
+                        <li>Multiple choice questions with options</li>
+                        <li>Select answers and submit</li>
+                        <li>Instant results with your score</li>
+                        <li>Correct/incorrect highlighting</li>
+                        <li>Detailed explanations for each question</li>
+                        <li>Must score 60%+ to pass</li>
+                    </ul>
+                </div>
+                <div class="step-visual slide-in-right">
+                    <div class="quiz-demo glass hover-lift">
+                        <h4>Quiz: Module 1</h4>
+                        <div class="demo-question">
+                            <p><strong>Q1.</strong> What is React?</p>
+                            <div class="demo-options">
+                                <label class="demo-option correct hover-glow">
+                                    <input type="radio" name="q1" checked>
+                                    <span>✓ A JavaScript library</span>
+                                </label>
+                                <label class="demo-option hover-glow">
+                                    <input type="radio" name="q1">
+                                    <span>A programming language</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="demo-result animate-bounceIn">
+                            <i class="fas fa-trophy"></i>
+                            <span>Score: 80% - Passed!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="workflow-step reverse reveal">
+            <div class="step-number animate-scaleIn">6</div>
+            <div class="step-content">
+                <div class="step-visual slide-in-left">
+                    <div class="autosave-demo glass hover-lift">
+                        <i class="fas fa-cloud-upload-alt fa-4x icon-bounce"></i>
+                        <h4>Auto-Save Active</h4>
+                        <p>All progress saved to localStorage</p>
+                        <div class="demo-save-log">
+                            <div class="save-item reveal delay-1">✓ Lesson 1 completed</div>
+                            <div class="save-item reveal delay-2">✓ Quiz score saved</div>
+                            <div class="save-item reveal delay-3">✓ Progress: 45%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-info slide-in-right">
+                    <h3><i class="fas fa-save"></i> Progress Saves Automatically</h3>
+                    <ul class="feature-list">
+                        <li>Every action saves to localStorage instantly</li>
+                        <li>Progress tracked per user + course</li>
+                        <li>Leave and come back anytime</li>
+                        <li>Resume exactly where you stopped</li>
+                        <li>No data loss, completely offline-capable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="workflow-step reveal">
+            <div class="step-number animate-scaleIn">7</div>
+            <div class="step-content">
+                <div class="step-info slide-in-left">
+                    <h3><i class="fas fa-flag-checkered icon-bounce"></i> Course Completion</h3>
+                    <ul class="feature-list">
+                        <li>Finish all lessons + quizzes to reach 100%</li>
+                        <li>Certificate automatically generated</li>
+                        <li>Dashboard updates to show "Completed"</li>
+                        <li>Celebration animation on completion</li>
+                        <li>Ready to download your achievement</li>
+                    </ul>
+                </div>
+                <div class="step-visual slide-in-right">
+                    <div class="completion-demo glass hover-lift">
+                        <div class="demo-completion-badge animate-bounceIn">
+                            <i class="fas fa-trophy fa-3x"></i>
+                            <h4>Course Completed!</h4>
+                            <div class="demo-progress-circle">
+                                <span>100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 8 -->
+        <div class="workflow-step reverse reveal">
+            <div class="step-number animate-scaleIn">8</div>
+            <div class="step-content">
+                <div class="step-visual slide-in-left">
+                    <div class="certificate-demo glass hover-lift">
+                        <div class="demo-certificate certificate">
+                            <i class="fas fa-award fa-3x icon-rotate"></i>
+                            <h4>Certificate of Completion</h4>
+                            <p><strong>John Doe</strong></p>
+                            <p>React JS Professional</p>
+                            <p>Date: Dec 10, 2025</p>
+                            <p>ID: CERT-2025-1234</p>
+                        </div>
+                        <button class="btn-primary full-width hover-lift btn-ripple">
+                            <i class="fas fa-download"></i> Download Certificate
+                        </button>
+                    </div>
+                </div>
+                <div class="step-info slide-in-right">
+                    <h3><i class="fas fa-certificate icon-bounce"></i> View/Download Certificate</h3>
+                    <ul class="feature-list">
+                        <li>Click "View Certificate" from dashboard</li>
+                        <li>Personalized certificate with your name</li>
+                        <li>Course name and completion date</li>
+                        <li>Unique certificate ID for verification</li>
+                        <li>Download as PNG image</li>
+                        <li>Share on social media or LinkedIn</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Roadmap Section -->
+    <section class="roadmap-section">
+        <div class="container reveal">
+            <h2 class="section-title animate-fadeInDown">🚀 Your Path to <span class="highlight">Success</span></h2>
+            <p class="section-subtitle animate-fadeInUp delay-1">Follow this roadmap to master Full Stack Development
+            </p>
+
+            <div class="roadmap-container">
+                <div class="roadmap-item left hover-lift delay-1">
+                    <div class="roadmap-content glass">
+                        <h3>1. Fundamentals</h3>
+                        <p>HTML5, CSS3, JavaScript Basics</p>
+                        <span class="step-badge">Start Here</span>
+                    </div>
+                </div>
+                <div class="roadmap-item right hover-lift delay-2">
+                    <div class="roadmap-content glass">
+                        <h3>2. Frontend Mastery</h3>
+                        <p>React, Tailwind CSS, Redux</p>
+                    </div>
+                </div>
+                <div class="roadmap-item left hover-lift delay-3">
+                    <div class="roadmap-content glass">
+                        <h3>3. Backend Logic</h3>
+                        <p>Node.js, Express, Python</p>
+                    </div>
+                </div>
+                <div class="roadmap-item right hover-lift delay-4">
+                    <div class="roadmap-content glass">
+                        <h3>4. Database & Cloud</h3>
+                        <p>MongoDB, SQL, AWS/Firebase</p>
+                    </div>
+                </div>
+                <div class="roadmap-item center hover-lift delay-5">
+                    <div class="roadmap-content glass special">
+                        <h3>🏆 Full Stack Developer</h3>
+                        <p>Build real-world projects & get hired!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Registration Section -->
+    <section>
+        <div class="course-register-main-container reveal">
+            <div class="course-register-left-content slide-in-left">
+                <h1 class="animate-fadeInDown">
+                    Your Learning
+                    <span class="course-register-highlight">Journey Starts Here 🚀</span>
+                </h1>
+                <p class="course-register-subtitle animate-fadeInUp delay-1">
+                    Our courses are designed to give you a complete learning experience
+                    — from basics to advanced concepts. Each course includes structured
+                    lessons, practical projects, and real-world examples to help you
+                    succeed.
+                </p>
+
+                <div class="course-register-skills-block animate-fadeInUp delay-2">
+                    <p class="course-register-skills-title">
+                        Learn New Skills –
+                        <span class="course-register-green">100% FREE!</span>
+                    </p>
+                    <div class="course-register-features">
+                        <div class="course-register-feature-box hover-lift">Earn Certificates</div>
+                        <div class="course-register-feature-box hover-lift delay-1">Track Your Progress</div>
+                        <div class="course-register-feature-box hover-lift delay-2">
+                            Quizzes, Practice Problems & Projects
+                        </div>
+                        <div class="course-register-feature-box hover-lift delay-3">Be Industry-Ready</div>
+                        <div class="course-register-feature-box hover-lift delay-4">Lifetime Access</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-register-right-content slide-in-right">
+                <form id="form" class="course-register-form hover-glow">
+                    <label>Name*</label>
+                    <input type="text" name="name" placeholder="Enter your name" required />
+
+                    <label>Mobile no.*</label>
+                    <input type="tel" name="mobile" placeholder="Enter mobile number" required />
+
+                    <label>Email*</label>
+                    <input type="email" name="email" placeholder="Enter your email" required />
+
+                    <label>College Name*</label>
+                    <input type="text" name="collegename" placeholder="Enter college name" required />
+
+                    <label>Graduation Year*</label>
+                    <input type="text" name="graduationyear" placeholder="Enter graduation year" required />
+
+                    <label>Learning Goal*</label>
+                    <input type="text" name="goal" placeholder="What's your learning goal?" required />
+
+                    <button type="submit" class="hover-lift btn-ripple">Submit</button>
+                    <p id="msg"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Reminder Section -->
+    <section>
+        <div class="boxWrapperX reveal">
+            <h2 class="headingTitleX animate-fadeInDown">📚 Study Reminder</h2>
+
+            <label class="labelTextX">Reminder Interval</label>
+            <select id="selectIntervalX" class="fieldX hover-glow">
+                <option value="0">Disable Interval</option>
+                <option value="5">Every 5 Minutes</option>
+                <option value="15">Every 15 Minutes</option>
+                <option value="30">Every 30 Minutes</option>
+                <option value="60">Every 1 Hour</option>
+            </select>
+
+            <label class="labelTextX">Custom Date</label>
+            <input type="date" id="inputDateX" class="dateX hover-glow" />
+
+            <label class="labelTextX">Custom Time</label>
+            <input type="time" id="inputTimeX" class="timeX hover-glow" />
+
+            <button id="startReminderX" class="buttonX hover-lift btn-ripple">Start Reminder</button>
+
+            <div class="quoteDisplayX hover-lift" id="quoteBoxX">
+                💡 "Success is earned daily."
+            </div>
+
+            <div class="statusBoxX" id="statusTextX">
+                Select date & time to start.
+            </div>
+        </div>
+        <audio id="soundAlertX">
+            <source src="https://assets.mixkit.co/sfx/preview/mixkit-light-alarm-993.mp3" type="audio/mpeg" />
+        </audio>
+    </section>
+
+    <!-- Upcoming Courses Section -->
+    <section>
+        <div class="container reveal">
+            <h1 class="animate-fadeInDown">Upcoming <span class="highlight">Course</span></h1>
+            <div class="upcoming-course">
+                <!-- JavaScript Card -->
+                <div class="card js hover-lift">
+                    <div class="card-header">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/laptop.png" alt="JavaScript icon"
+                            class="icon-bounce" />
+                        <span class="brand">SKILL UP</span>
+                    </div>
+                    <h2>JavaScript</h2>
+                    <div class="card-footer">
+                        <button class="coming-soon notify-btn" data-course="JavaScript">
+                            <i class="fas fa-bell"></i> Notify Me
+                        </button>
+                    </div>
+                </div>
+                <!-- Cyber Security Card -->
+                <div class="card cyber hover-lift delay-1">
+                    <div class="card-header">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/lock.png" alt="Cyber Security icon"
+                            class="icon-bounce" />
+                        <span class="brand">SKILL UP</span>
+                    </div>
+                    <h2>Cyber Security</h2>
+                    <div class="card-footer">
+                        <button class="coming-soon notify-btn" data-course="Cyber Security">
+                            <i class="fas fa-bell"></i> Notify Me
+                        </button>
+                    </div>
+                </div>
+                <!-- System Design Card -->
+                <div class="card sd hover-lift delay-2">
+                    <div class="card-header">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/network.png" alt="System Design icon"
+                            class="icon-bounce" />
+                        <span class="brand">SKILL UP</span>
+                    </div>
+                    <h2>System Design</h2>
+                    <div class="card-footer">
+                        <button class="coming-soon notify-btn" data-course="System Design">
+                            <i class="fas fa-bell"></i> Notify Me
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container reveal">
+            <h2 class="section-title animate-fadeInDown">Frequently Asked <span class="highlight">Questions</span></h2>
+            <div class="faq-container">
+                <div class="faq-item glass hover-lift">
+                    <div class="faq-question">
+                        <h3>How do I claim my certificate?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once you complete 100% of the course modules and pass the final quiz with at least 60%, your
+                            certificate will be automatically generated. You can download it from your Dashboard or the
+                            Course Page.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass hover-lift delay-1">
+                    <div class="faq-question">
+                        <h3>Are the courses free?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We offer a wide range of free courses to help you start your journey. Premium courses
+                            with advanced projects and mentorship are also available.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass hover-lift delay-2">
+                    <div class="faq-question">
+                        <h3>Can I access course materials offline?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, video lessons require an internet connection. However, you can download source
+                            code, notes, and cheat sheets for offline use.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass hover-lift delay-3">
+                    <div class="faq-question">
+                        <h3>Is there a time limit to finish?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, all our courses come with lifetime access. You can learn at your own pace and revisit the
+                            material whenever you like.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Information Section -->
+    <section>
+        <div class="certificate-add-container reveal">
+            <div class="certificate-add-left-section slide-in-left">
+                <img src="assets/certificate-sample.png" alt="Sample Certificate"
+                    class="certificate-sample-img hover-lift certificate" />
+            </div>
+            <div class="certificate-add-right-section slide-in-right">
+                <h1 class="animate-fadeInDown">Earn valuable certifications</h1>
+                <p class="animate-fadeInUp delay-1">
+                    Earn credentials that show employers what you can do. Our platform
+                    offers certification exams at different skill levels, and you'll see
+                    your results right away. These industry-recognized certificates help
+                    you stand out and get ahead in your career.
+                </p>
+                <p class="certificate-add-bold animate-fadeInUp delay-2">
+                    Each of our certificate courses includes the exam.
+                </p>
+                <p class="animate-fadeInUp delay-3">
+                    When you enroll in one of our certificate courses, you'll receive
+                    all the materials and guidance you need to pass.
+                </p>
+                <div class="certificate-add-note animate-fadeInUp delay-4">
+                    <span>Note:</span> You have 3 attempts to pass each exam.
+                </div>
+
+                <a href="courses.html" class="certificate-add-btn hover-lift btn-ripple">
+                    Explore certificate courses
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section reveal">
+        <div class="cta-content">
+            <h2 class="animate-fadeInDown">Ready to Start Your Learning Journey?</h2>
+            <p class="animate-fadeInUp delay-1">Join thousands of learners mastering industrial skills</p>
+            <div class="cta-buttons animate-fadeInUp delay-2">
+                <a href="courses.html" class="btn-primary btn-lg hover-lift btn-ripple">
+                    <i class="fas fa-rocket"></i> Browse Courses
+                </a>
+                <a href="dashboard.html" class="btn-secondary btn-lg hover-lift btn-ripple">
+                    <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/animations.js"></script>
+    <script src="js/auth-check.js"></script>
+    <script src="js/courses-data.js"></script>
+    <script src="js/course-system.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</body>
+
+</html>

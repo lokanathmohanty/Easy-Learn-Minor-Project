@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Easy Learn</title>
+    <link rel="icon" type="image/png" href="image/elearning.png" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="js/dark-mode.js"></script>
+</head>
+
+<body>
+    <!-- Lottie Background Animation -->
+    <div class="lottie-bg animate-fadeIn">
+        <lottie-player src="https://lottie.host/beb1302f-7ebd-4093-a080-c0d67b45253a/amQn1njr4v.json"
+            background="transparent" speed="0.5" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass animate-fadeInDown" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="nav-brand">
+            <div class="logo">Easy Learn</div>
+            <button class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" class="hover-lift">Home</a></li>
+            <li><a href="courses.html" class="hover-lift">Courses</a></li>
+            <li><a href="dashboard.html" class="hover-lift">Dashboard</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="icon-btn" title="Toggle Theme"
+                onclick="window.toggleDarkMode && window.toggleDarkMode()"><i class="fas fa-moon"></i></button>
+            <button class="btn-secondary btn-ripple hover-lift" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+        </div>
+    </nav>
+
+    <!-- Profile Page -->
+    <div class="profile-page">
+        <!-- Profile Header Card -->
+        <div class="profile-header glass animate-fadeInUp">
+            <div class="profile-cover">
+                <div class="cover-gradient"></div>
+            </div>
+
+            <div class="profile-main">
+                <div class="profile-picture-container">
+                    <div class="profile-picture-wrapper">
+                        <img id="profile-picture" src="" alt="Profile" class="profile-picture">
+                        <div class="profile-picture-overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    <div class="online-badge">
+                        <i class="fas fa-circle icon-pulse"></i>
+                    </div>
+                </div>
+
+                <div class="profile-info">
+                    <h1 id="profile-name" class="animate-fadeInDown delay-1">Loading...</h1>
+                    <p id="profile-email" class="profile-email animate-fadeInUp delay-2">
+                        <i class="fas fa-envelope"></i> <span>Loading...</span>
+                    </p>
+                    <div class="profile-badges animate-fadeInUp delay-3">
+                        <span class="badge badge-student hover-lift"><i class="fas fa-graduation-cap icon-bounce"></i>
+                            Student</span>
+                        <span class="badge badge-verified hover-lift"><i class="fas fa-check-circle icon-rotate"></i>
+                            Verified</span>
+                    </div>
+                </div>
+
+                <div class="profile-actions animate-fadeInUp delay-3">
+                    <button class="btn-primary btn-ripple hover-lift" onclick="editProfile()">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                    <button class="btn-secondary btn-ripple hover-lift" onclick="shareProfile()">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="profile-content">
+            <!-- Left Column -->
+            <div class="profile-left">
+                <!-- About Card -->
+                <div class="profile-card glass reveal hover-lift">
+                    <h3 class="card-title">
+                        <i class="fas fa-user icon-bounce"></i> About Me
+                    </h3>
+                    <div class="about-content">
+                        <div class="info-item hover-glow">
+                            <div class="info-icon">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <div class="info-details">
+                                <label>User ID</label>
+                                <span id="user-id">Loading...</span>
+                            </div>
+                            <button class="copy-btn btn-ripple" onclick="copyToClipboard('user-id')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <div class="info-item hover-glow">
+                            <div class="info-icon">
+                                <i class="fas fa-fingerprint"></i>
+                            </div>
+                            <div class="info-details">
+                                <label>Account UID</label>
+                                <span id="user-uid">Loading...</span>
+                            </div>
+                            <button class="copy-btn btn-ripple" onclick="copyToClipboard('user-uid')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <div class="info-item hover-glow">
+                            <div class="info-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="info-details">
+                                <label>Member Since</label>
+                                <span id="member-since">Loading...</span>
+                            </div>
+                        </div>
+
+                        <div class="info-item hover-glow">
+                            <div class="info-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="info-details">
+                                <label>Last Login</label>
+                                <span id="last-login">Just now</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats Card -->
+                <div class="profile-card glass reveal hover-lift delay-1">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-bar icon-bounce"></i> Quick Stats
+                    </h3>
+                    <div class="stats-grid">
+                        <div class="stat-item hover-lift">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                                <i class="fas fa-book icon-rotate"></i>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-value count-up" id="enrolled-count">0</span>
+                                <span class="stat-label">Enrolled</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-item hover-lift">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                                <i class="fas fa-tasks icon-rotate"></i>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-value count-up" id="inprogress-count">0</span>
+                                <span class="stat-label">In Progress</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-item hover-lift">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                                <i class="fas fa-check-circle icon-rotate"></i>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-value count-up" id="completed-count">0</span>
+                                <span class="stat-label">Completed</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-item hover-lift">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                                <i class="fas fa-award icon-rotate"></i>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-value count-up" id="certificates-count">0</span>
+                                <span class="stat-label">Certificates</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="profile-right">
+                <!-- Activity Card -->
+                <div class="profile-card glass reveal hover-lift delay-2">
+                    <h3 class="card-title">
+                        <i class="fas fa-history icon-spin-slow"></i> Recent Activity
+                    </h3>
+                    <div class="activity-list" id="activity-list">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Achievements Card -->
+                <div class="profile-card glass reveal hover-lift delay-3">
+                    <h3 class="card-title">
+                        <i class="fas fa-trophy icon-bounce"></i> Achievements
+                    </h3>
+                    <div class="achievements-grid">
+                        <div class="achievement-item unlocked hover-lift">
+                            <div class="achievement-icon icon-bounce">🎯</div>
+                            <div class="achievement-name">First Course</div>
+                        </div>
+                        <div class="achievement-item unlocked hover-lift">
+                            <div class="achievement-icon icon-bounce">📚</div>
+                            <div class="achievement-name">Bookworm</div>
+                        </div>
+                        <div class="achievement-item locked">
+                            <div class="achievement-icon">🏆</div>
+                            <div class="achievement-name">Master</div>
+                        </div>
+                        <div class="achievement-item locked">
+                            <div class="achievement-icon">⭐</div>
+                            <div class="achievement-name">All Star</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Card -->
+                <div class="profile-card glass reveal hover-lift delay-4">
+                    <h3 class="card-title">
+                        <i class="fas fa-cog icon-rotate"></i> Settings
+                    </h3>
+                    <div class="settings-list">
+                        <button class="setting-item btn-ripple" onclick="window.location.href='dashboard.html'">
+                            <i class="fas fa-columns"></i>
+                            <span>Go to Dashboard</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="setting-item btn-ripple" onclick="changePassword()">
+                            <i class="fas fa-key"></i>
+                            <span>Change Password</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="setting-item btn-ripple" onclick="deleteAccount()">
+                            <i class="fas fa-trash-alt"></i>
+                            <span>Delete Account</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="setting-item logout-item btn-ripple" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal glass animate-fadeIn"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; justify-content:center; align-items:center;">
+        <div class="modal-content"
+            style="background:var(--bg-card); padding:2rem; border-radius:12px; width:90%; max-width:500px; border:1px solid var(--border-color); position:relative;">
+            <button onclick="closeEditModal()"
+                style="position:absolute; top:15px; right:15px; background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">&times;</button>
+            <h3 style="margin-bottom:1.5rem; color:var(--text-color);"><i class="fas fa-user-edit"></i> Edit Profile
+            </h3>
+
+            <div style="margin-bottom:1rem;">
+                <label style="display:block; color:var(--text-muted); margin-bottom:0.5rem;">Display Name</label>
+                <input type="text" id="editNameInput"
+                    style="width:100%; padding:0.8rem; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:white; border-radius:8px;">
+            </div>
+
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block; color:var(--text-muted); margin-bottom:0.5rem;">Profile Picture URL</label>
+                <input type="text" id="editPhotoInput" placeholder="https://..."
+                    style="width:100%; padding:0.8rem; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:white; border-radius:8px;">
+                <small style="color:var(--text-muted); font-size:0.8rem;">Paste a direct link to an image.</small>
+            </div>
+
+            <button id="saveProfileBtn" class="btn-primary"
+                style="width:100%; padding:0.8rem; border-radius:8px; display:flex; justify-content:center; align-items:center; gap:10px;">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth-guard.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="js/courses-data.js"></script>
+    <script type="module" src="js/profile.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+
+</html>

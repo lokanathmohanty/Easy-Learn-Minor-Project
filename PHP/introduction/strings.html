@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Strings: Fundamentals and Operations</h1>
+
+    <div class="content">
+      <p>
+        A **string** is a sequence of characters. In PHP, a string is an array of bytes, and a character is equivalent to a byte, limiting native support to a **256-character set** (no native Unicode). PHP supports four ways to represent strings: **single-quoted**, **double-quoted**, **Heredoc**, and **Nowdoc**.
+      </p>
+
+      <h2>Single-Quoted Strings (`'`)</h2>
+      <p>
+        Single-quoted strings are treated almost **literally**. They offer the fastest execution as the parser does minimal work.
+      </p>
+      <ul>
+        <li>
+          **Variable Expansion:** Variables (like `$x`) are **not expanded**; they are printed as literal text (e.g., `'Value of x = $x'` outputs `Value of x = $x`).
+        </li>
+        <li>
+          **Escaping:** Only two characters need escaping:
+          <ul>
+            <li>**`\'`** $\rightarrow$ A literal single quote.</li>
+            <li>**`\\`** $\rightarrow$ A literal backslash.</li>
+          </ul>
+        </li>
+        <li>
+          **Escape Sequences:** Sequences like `\n` or `\r` are treated as literal characters, not interpreted as newline or carriage return.
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Double-Quoted Strings (`"`)</h2>
+      <p>
+        Double-quoted strings are **preprocessed** by PHP, offering two key features not found in single-quoted strings:
+      </p>
+      <ul>
+        <li>
+          **Variable Interpolation:** Variable names are **expanded** and replaced with their string representations.
+          <div class="example">
+            <code>$price = 200; echo "Price = $price";</code> $\rightarrow$ `Price = 200`
+          </div>
+        </li>
+        <li>
+          **Special Escape Sequences:** Standard C-like escape sequences are interpreted:
+          <p>
+            `\n` (newline), `\r` (carriage return), `\t` (horizontal tab), `\\` (backslash), `\"` (double-quote), and `\$` (literal dollar sign).
+          </p>
+        </li>
+        <li>
+          **Character Escaping:** PHP allows escaping octal (prefix `\`) and hexadecimal (prefix `\x`) numbers to represent ASCII characters.
+          <div class="example">
+            <code>$str = "\x50\x48\x50";</code> $\rightarrow$ `PHP` (since 50 is the hex code for 'P', 48 for 'H')
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">String Operators and Functions</h2>
+
+      <h3>String Concatenation Operator (`.`)</h3>
+      <p>
+        The dot (`.`) is the concatenation operator used to join two or more strings together.
+      </p>
+      <div class="example">
+        <code>$s1="Hello"; $s2="World"; echo $s1 . " " . $s2;</code> $\rightarrow$ `Hello World`
+      </div>
+
+      <h3>`strlen()` Function (Get Length)</h3>
+      <p>
+        Returns the **length of a string** in bytes (which is the number of characters in a non-Unicode string).
+      </p>
+      <div class="example">
+        <code>echo strlen("Hello world!");</code> $\rightarrow$ `12`
+      </div>
+
+      <h3>`strpos()` Function (Find Position)</h3>
+      <p>
+        Searches for the first occurrence of a substring within a larger string.
+      </p>
+      <ul>
+        <li>Returns the **position** (index) of the first match, with the starting position being **0**.</li>
+        <li>Returns **`FALSE`** if no match is found.</li>
+      </ul>
+      <div class="example">
+        <code>echo strpos("Hello world!","world");</code> $\rightarrow$ `6` (since the space is at index 5, 'w' is at index 6)
+      </div>
+    </div>
+  </div>
+</div>

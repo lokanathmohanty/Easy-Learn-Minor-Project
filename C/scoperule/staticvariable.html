@@ -1,0 +1,114 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Static Variables in C</h1>
+    <div class="content">
+      <p>By default, a variable in C is of auto storage class. A static variable retains its value between multiple function calls and is initialized only once.</p>
+      <p>Static variables are useful when you need to preserve state across function invocations or restrict variable scope to a single file.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Features of Static Variables</h2>
+    <div class="content">
+      <ul>
+        <li>Allocated in static memory (not stack).</li>
+        <li>Initialized only once (default value is 0 if not explicitly set).</li>
+        <li>Retains value between function calls.</li>
+        <li>Scope is local to the function or file, but lifetime is entire program.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Declaring a Static Variable</h2>
+    <div class="content">
+      <p>Use the <code>static</code> keyword before the variable declaration. The syntax is:</p>
+      <p><code>static datatype variable = value;</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Basic Static Variable</h2>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    static int b = 8;
+    printf("Static variable value: %d\n", b);
+    return 0;
+}</code></pre>
+        <p>Output:</p>
+        <pre><code>Static variable value: 8</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Counter Without Static</h2>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+void counter() {
+    int x = 0;
+    x++;
+    printf("%d\n", x);
+}
+
+int main() {
+    counter();
+    counter();
+    counter();
+    return 0;
+}</code></pre>
+        <p>Output:</p>
+        <pre><code>1
+1
+1</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Counter With Static</h2>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+void counter() {
+    static int x = 0;
+    x++;
+    printf("%d\n", x);
+}
+
+int main() {
+    counter();
+    counter();
+    counter();
+    return 0;
+}</code></pre>
+        <p>Output:</p>
+        <pre><code>1
+2
+3</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Static vs Global Variables</h2>
+    <div class="content">
+      <p>Both static and global variables have static storage duration, but differ in scope:</p>
+      <ul>
+        <li><strong>Static variables</strong>: Limited to function or file.</li>
+        <li><strong>Global variables</strong>: Accessible throughout the program.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>

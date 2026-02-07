@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask Routing: Variable Rules and URL Converters 🔗</h1>
+        <div class="content">
+            <p>Flask allows you to build **dynamic URLs** by adding variable parts to the routing rule. These variables are placed within angle brackets (<code>&lt;variable-name&gt;</code>) in the <code>@app.route()</code> decorator and are automatically passed as **keyword arguments** to the associated view function.</p>
+
+            <h3>Basic Variable Example</h3>
+            <p>In the following code, the part <code>&lt;name&gt;</code> captures a string from the URL and passes it to the <code>hello_name</code> function:</p>
+            <p><code>@app.route('/hello/&lt;name&gt;')</code></p>
+            <p><code>def hello_name(name):</code></p>
+            <p><code>   return 'Hello %s!' % name</code></p>
+            <p>Visiting **<code>http://localhost:5000/hello/TutorialsPoint</code>** renders the output: **Hello TutorialsPoint!**</p>
+
+            <h2>URL Converters</h2>
+            <p>By default, variable parts are treated as strings, but you can explicitly specify the data type by using a **converter** in the format <code>&lt;converter:variable-name&gt;</code>. This ensures the variable is passed to the function in the correct Python type.</p>
+
+            <h3>Available Converters</h3>
+            <table>
+                <tr><th>Converter</th><th>Description</th><th>Example Usage in Route</th></tr>
+                <tr><td><code>string</code></td><td>(Default) Accepts any text without a slash.</td><td><code>&lt;string:username&gt;</code></td></tr>
+                <tr><td>**<code>int</code>**</td><td>Accepts **positive integer** values.</td><td><code>&lt;int:postID&gt;</code></td></tr>
+                <tr><td>**<code>float</code>**</td><td>Accepts **floating-point** values.</td><td><code>&lt;float:revNo&gt;</code></td></tr>
+                <tr><td>**<code>path</code>**</td><td>Accepts strings and includes **slashes** (<code>/</code>), useful for directory structures.</td><td><code>&lt;path:filepath&gt;</code></td></tr>
+            </table>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Canonical URLs and Trailing Slashes</h2>
+        <div class="content example">
+            <p>Flask's URL rules are based on **Werkzeug's routing module**, which ensures unique and well-formed URLs, following common conventions.</p>
+
+            <h3>Trailing Slash Behavior</h3>
+            <p>The use of a trailing slash (<code>/</code>) at the end of a route rule dictates its canonical (preferred) form and how it handles user input:</p>
+            <ul>
+                <li>**Rule with Trailing Slash (e.g., <code>/python/</code>):**
+                    <ul>
+                        <li>The URL **<code>/python</code>** will be **redirected** to the canonical URL **<code>/python/</code>**.</li>
+                        <li>Both **<code>/python</code>** and **<code>/python/</code>** will return the expected output.</li>
+                    </ul>
+                </li>
+                <li>**Rule without Trailing Slash (e.g., <code>/flask</code>):**
+                    <ul>
+                        <li>The URL **<code>/flask</code>** will return the expected output.</li>
+                        <li>Attempting to access **<code>/flask/</code>** (with a slash) will result in a **<code>404 Not Found</code>** error.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

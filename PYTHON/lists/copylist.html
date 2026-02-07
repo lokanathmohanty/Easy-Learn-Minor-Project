@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python - Copy Lists</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+      <h1 class="title">Python - Copy Lists</h1>
+      <div class="content">
+        <p>
+          Copying a list in Python refers to creating a new list with the same elements as the original list.
+          There are different methods for copying a list, including using slice notation, the <code>list()</code> function,
+          and using the <code>copy()</code> method.
+        </p>
+        <p>
+          Each method behaves differently in terms of whether it creates a shallow copy or a deep copy.
+        </p>
+
+        <h2>Shallow Copy on a Python List</h2>
+        <p>
+          A shallow copy creates a new object but the elements themselves are still references to the original objects.
+          Modifying mutable elements in the copied list will affect the original list as well.
+        </p>
+        <h3>Example of Shallow Copy</h3>
+        <pre>
+import copy
+# Original list
+original_list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+# Creating a shallow copy
+shallow_copied_list = copy.copy(original_list)
+# Modifying an element in the shallow copied list
+shallow_copied_list = 100
+# Printing both lists
+print("Original List:", original_list)
+print("Shallow Copied List:", shallow_copied_list)
+        </pre>
+        <h3>Output:</h3>
+        <pre>
+Original List: [[100, 2, 3], [4, 5, 6], [7, 8, 9]]
+Shallow Copied List: [[100, 2, 3], [4, 5, 6], [7, 8, 9]]
+        </pre>
+
+        <h2>Deep Copy on a Python List</h2>
+        <p>
+          A deep copy creates a completely new object, recursively copying all objects within the original.
+          Changes to the deep copied list will not affect the original list.
+        </p>
+        <h3>Example of Deep Copy</h3>
+        <pre>
+import copy
+# Original list
+original_list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+# Creating a deep copy
+deep_copied_list = copy.deepcopy(original_list)
+# Modifying an element in the deep copied list
+deep_copied_list = 100
+# Printing both lists
+print("Original List:", original_list)
+print("Deep Copied List:", deep_copied_list)
+        </pre>
+        <h3>Output:</h3>
+        <pre>
+Original List: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+Deep Copied List: [[100, 2, 3], [4, 5, 6], [7, 8, 9]]
+        </pre>
+
+        <h2>Copying List Using Slice Notation</h2>
+        <p>
+          Slice notation allows creating a sublist or a new copy of a list.
+          Modifications to the copied list will not affect the original.
+        </p>
+        <pre>
+# Original list
+original_list = [1, 2, 3, 4, 5]
+# Copying the list using slice notation
+copied_list = original_list[1:4]
+# Modifying the copied list
+copied_list = 100
+# Printing both lists
+print("Original List:", original_list)
+print("Copied List:", copied_list)
+        </pre>
+        <h3>Output:</h3>
+        <pre>
+Original List: [1, 2, 3, 4, 5]
+Copied List: [100, 3, 4]
+        </pre>
+
+        <h2>Copying List Using the list() Function</h2>
+        <p>
+          The <code>list()</code> function creates a new list. Passing an existing list as an argument will create a new list
+          with the same elements.
+        </p>
+        <pre>
+# Original list
+original_list = [1, 2, 3, 4, 5]
+# Copying the list using the list() constructor
+copied_list = list(original_list)
+# Printing both lists
+print("Original List:", original_list)
+print("Copied List:", copied_list)
+        </pre>
+        <h3>Output:</h3>
+        <pre>
+Original List: [1, 2, 3, 4, 5]
+Copied List: [1, 2, 3, 4, 5]
+        </pre>
+
+        <h2>Copying List Using the copy() Function</h2>
+        <p>
+          The <code>copy()</code> function from the <code>copy</code> module creates a shallow copy of a list.
+        </p>
+        <pre>
+import copy
+original_list = [1, 2, 3, 4, 5]
+# Copying the list using the copy() function
+copied_list = copy.copy(original_list)
+print("Copied List:", copied_list)
+        </pre>
+        <h3>Output:</h3>
+        <pre>
+Copied List: [1, 2, 3, 4, 5]
+        </pre>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

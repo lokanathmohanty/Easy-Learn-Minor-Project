@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Text Blocks (Java 15+)</h1>
+
+        <div class="content">
+            <h2>The Purpose of Text Blocks</h2>
+            <p><strong>Text Blocks</strong>, introduced as a standard feature in **Java 15**, provide a clean, simple way to represent **multi-line strings** in Java code. They are primarily intended for easily embedding code snippets, **JSON, XML, SQL, or HTML** without requiring cumbersome escape sequences, string concatenation, or explicit line terminators (like <code>\n</code> or <code>\r\n</code>).</p>
+
+            <h3>Text Block Syntax</h3>
+            <p>A text block is demarcated by three double-quote characters (<strong><code>"""</code></strong>), which must be followed immediately by a new line. The content is written as-is, and the block is closed by three double-quote characters on a separate line.</p>
+            <p><strong>Syntax:</strong></p>
+            <pre><code>String json = """
+{
+    "key": "value",
+    "id": 123
+}
+""";</code></pre>
+            <p>The key benefits are clarity and reduced clutter compared to the old way:</p>
+            <pre><code>// Old way: messy, error-prone, hard to read
+String json = "{\n" +
+              "    \"key\": \"value\",\n" +
+              "    \"id\": 123\n" +
+              "}";</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Text Blocks are Still <code>String</code> Objects</h2>
+            <p>Crucially, a text block is compiled into a regular **<code>java.lang.String</code>** object. This means:</p>
+            <ul>
+                <li>They can be compared using <code>equals()</code>.</li>
+                <li>They support all standard <code>String</code> methods (<code>length()</code>, <code>contains()</code>, <code>indexOf()</code>, etc.).</li>
+                <li>They support new, specialized methods designed to manage indentation and formatting.</li>
+            </ul>
+
+            <h3>Handling Incidental Whitespace (Indentation)</h3>
+            <p>The compiler is smart about handling the indentation necessary to align the text block in your Java code:</p>
+            <ul>
+                <li>The **incidental whitespace** (the shortest margin of white space from the left) is automatically stripped by the compiler to produce a clean string.</li>
+                <li>The **essential whitespace** (internal indentation) is preserved.</li>
+            </ul>
+
+            <h3>New String Methods for Text Blocks</h3>
+            <ul>
+                <li>
+                    <strong><code>String.stripIndent()</code>:</strong> Programmatically removes the incidental white space, matching the compiler's behavior.
+                </li>
+                <li>
+                    <strong><code>String.translateEscapes()</code>:</strong> Translates traditional escape sequences (like <code>\n</code> or <code>\t</code>) if they appear within the block.
+                </li>
+                <li>
+                    <strong><code>String.formatted(Object... args)</code>:</strong> A convenient way to format the text block content, similar to <code>String.format()</code>.
+                </li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Using <code>.formatted()</code> for Dynamic Content</h2>
+            <div class="content">
+                <p>This shows how to easily inject variables into a template-like text block using the <code>formatted()</code> method:</p>
+                <pre><code>public class APITester {
+    public static void main(String[] args) {
+        String template = """
+            &lt;user&gt;
+                &lt;name&gt;%s&lt;/name&gt;
+                &lt;role&gt;%s&lt;/role&gt;
+            &lt;/user&gt;
+            """.formatted("Robert", "Developer"); // Using String.formatted()
+
+        System.out.println(template);
+    }
+}</code></pre>
+                <p><strong>Output:</strong></p>
+                <pre><code>&lt;user&gt;
+    &lt;name&gt;Robert&lt;/name&gt;
+    &lt;role&gt;Developer&lt;/role&gt;
+&lt;/user&gt;</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

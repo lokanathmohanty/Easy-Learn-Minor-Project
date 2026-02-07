@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Closures</h1>
+
+    <div class="content">
+      <h2>What is a Closure?</h2>
+      <p>A <strong>closure</strong> in JavaScript is the combination of a function and its lexical environment. It allows an inner function to access variables from its parent function, even after the parent function has finished executing.</p>
+      <p>Closures are commonly used to create <strong>private variables</strong> and maintain state between function calls.</p>
+    </div>
+
+    <div class="content">
+      <h2>Prerequisites</h2>
+      <p>Before diving into closures, let’s review a few key concepts:</p>
+
+      <h3>1. Lexical Scoping</h3>
+      <p>Lexical scoping means that the scope of variables is determined by the structure of the code at compile time. Nested functions can access variables defined in their parent function.</p>
+
+      <h3>2. Nested Functions</h3>
+      <pre><code>
+function outer() {
+  console.log("The outer function is executed!");
+  function inner() {
+    console.log("The inner function is executed!");
+  }
+  inner();
+}
+outer();
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The outer function is executed!</li>
+        <li>The inner function is executed!</li>
+      </ul>
+
+      <h3>3. Returning Functions</h3>
+      <pre><code>
+function outer() {
+  console.log("The outer function is executed!");
+  return function inner() {
+    console.log("The inner function is executed!");
+  }
+}
+
+const func = outer();
+func();
+func();
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The outer function is executed!</li>
+        <li>The inner function is executed!</li>
+        <li>The inner function is executed!</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>A Counter Dilemma</h2>
+      <p>Without closures, we might use a global variable for a counter:</p>
+
+      <pre><code>
+var cnt = 100;
+
+function decrement() {
+  cnt = cnt - 1;
+  console.log("The value of cnt is: " + cnt);
+}
+
+decrement(); // 99
+decrement(); // 98
+decrement(); // 97
+      </code></pre>
+
+      <p>This works, but the problem is that <code>cnt</code> is a <strong>global variable</strong>. Any part of the program can change its value.</p>
+    </div>
+
+    <div class="content">
+      <h2>Closures to the Rescue</h2>
+      <p>We can solve this by using a closure to encapsulate <code>cnt</code> inside a function.</p>
+
+      <pre><code>
+function counter() {
+  let cnt = 100; 
+  return function decrement() {
+    cnt = cnt - 1;
+    console.log("The value of cnt is: " + cnt);
+  }
+}
+
+const func = counter(); 
+func(); // 99
+func(); // 98
+func(); // 97
+      </code></pre>
+
+      <p>Here, <code>counter()</code> has already finished execution, but the inner function still remembers and accesses <code>cnt</code>. That’s a closure!</p>
+    </div>
+
+    <div class="content">
+      <h2>Another Example</h2>
+      <pre><code>
+function name() {
+  let firstName = "John";
+  return function getFullName() {
+    return firstName + " Doe";
+  }
+}
+
+const fullName = name();
+console.log("The full name is " + fullName());
+      </code></pre>
+      <p><strong>Output:</strong> The full name is John Doe</p>
+    </div>
+
+    <div class="content">
+      <h2>Benefits of Closures</h2>
+      <ul>
+        <li><strong>Encapsulation:</strong> Closures allow data hiding by making variables private.</li>
+        <li><strong>Preserving State:</strong> Functions remember their environment, allowing state persistence across calls.</li>
+        <li><strong>Improved Memory Efficiency:</strong> Only necessary variables are retained, reducing global memory usage.</li>
+      </ul>
+    </div>
+  </div>
+</div>

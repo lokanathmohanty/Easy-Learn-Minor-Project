@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">For Loop in C</h1>
+    <div class="content">
+      <p>The <code>for</code> loop is an entry-controlled counted loop, often the preferred loop type in C. It combines initialization, test condition, and increment in one statement.</p>
+
+      <h2>Syntax</h2>
+      <pre>for (init; condition; increment){
+   statement(s);
+}</pre>
+
+      <h2>Control Flow</h2>
+      <p>The initialization step runs once, then the condition is checked. If true, the loop body executes, followed by the increment step. This repeats until the condition is false.</p>
+
+      <h2>Example: Basic for loop</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a;
+   for(a = 1; a <= 5; a++){
+      printf("a: %d\n", a);
+   }
+   return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>a: 1<br>a: 2<br>a: 3<br>a: 4<br>a: 5</p>
+
+      <h2>Example: Initialization Outside Loop</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 1;
+   for(; a <= 5; a++){
+      printf("a: %d\n", a);
+   }
+   return 0;
+}
+      </pre>
+      <p>Output is the same as above.</p>
+
+      <h2>Example: Increment Inside Loop</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a;
+   for(a = 1; a <= 5; ){
+      printf("a: %d\n", a);
+      a++;
+   }
+   return 0;
+}
+      </pre>
+      <p>Output is the same as above.</p>
+
+      <h2>Example: Omitted Condition with break</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a;
+   for(a = 1; ; a++){
+      printf("a: %d\n", a);
+      if(a == 5)
+         break;
+   }
+   return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>a: 1<br>a: 2<br>a: 3<br>a: 4<br>a: 5</p>
+
+      <h2>Example: Multiple Counters</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a, b;
+   for(a = 1, b = 1; a <= 5; a++, b++){
+      printf("a: %d b: %d a*b: %d\n", a, b, a*b);
+   }
+   return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>a: 1 b: 1 a*b: 1<br>a: 2 b: 2 a*b: 4<br>a: 3 b: 3 a*b: 9<br>a: 4 b: 4 a*b: 16<br>a: 5 b: 5 a*b: 25</p>
+
+      <h2>Example: Decrementing for Loop</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a;
+   for(a = 5; a >= 1; a--){
+      printf("a: %d\n", a);
+   }
+   return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>a: 5<br>a: 4<br>a: 3<br>a: 2<br>a: 1</p>
+
+      <h2>Example: Traversing an Array</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int i;
+   int arr[] = {10, 20, 30, 40, 50};
+   for(i = 0; i < 5; i++){
+      printf("a[%d]: %d\n", i, arr[i]);
+   }
+   return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>a[0]: 10<br>a[1]: 20<br>a[2]: 30<br>a[3]: 40<br>a[4]: 50</p>
+
+      <h2>Example: Sum and Average</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int i;
+   int arr[] = {10, 20, 30, 40, 50};
+   int sum = 0;
+   float avg;
+
+   for(i=0; i < 5; i++){
+      sum += arr[i];
+   }
+   avg = (float)sum / 5;
+   printf("Average = %f", avg);
+   return 0;
+}
+      </pre>
+      <p>Output:<br>Average = 30.000000</p>
+
+      <h2>Example: Factorial</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int i, x = 5;
+   int fact = 1;
+   for(i=1; i <= x; i++){
+      fact *= i;
+   }
+   printf("%d! = %d", x, fact);
+   return 0;
+}
+      </pre>
+      <p>Output:<br>5! = 120</p>
+    </div>
+  </div>
+</div>

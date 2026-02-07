@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Truthy and Falsy Values</h1>
+    <div class="content">
+      <h2>Truthy & Falsy Values</h2>
+      <p>
+        In JavaScript, every value has an inherent boolean "truthiness" or "falsiness." This determines whether the value is treated as <strong>true</strong> or <strong>false</strong> in conditional expressions and logical operations.
+      </p>
+      <ul>
+        <li><strong>Truthy Values:</strong> Values that evaluate to true when converted to a boolean. Examples include non-empty strings, non-zero numbers, arrays, objects, and functions.</li>
+        <li><strong>Falsy Values:</strong> Values that evaluate to false when converted to a boolean. Examples include <code>0</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>, <code>false</code>, and empty strings (<code>""</code>).</li>
+      </ul>
+
+      <h2>Example</h2>
+      <p>
+        Consider a scenario where we want to check if a user has an active subscription:
+      </p>
+      <pre><code>
+// old user without subscriptionDays
+const userOld = {
+   name: "Alisha",
+   email: "alisha@example.com"
+}; 
+ 
+// new user with active subscription
+const userNewWithSubscription = {
+   name: "Shital",
+   email: "shital@example.com",
+   subscriptionDays: 30
+}; 
+ 
+// new user with expired subscription
+const userNewWithoutSubscription = {
+   name: "Chetan",
+   email: "chetan@example.com",
+   subscriptionDays: 0
+}; 
+ 
+function displaySubscriptionStatus(user) {
+   if (user.subscriptionDays !== undefined) {
+      if (user.subscriptionDays > 0) {
+         console.log(`User has ${user.subscriptionDays} days of subscription left.`);
+      } else {
+         console.log("User's subscription has expired.");
+      }
+   } else {
+      console.log("User does not have a subscription.");
+   }
+} 
+
+displaySubscriptionStatus(userOld);
+displaySubscriptionStatus(userNewWithSubscription); 
+displaySubscriptionStatus(userNewWithoutSubscription);
+      </code></pre>
+
+      <h2>Output</h2>
+      <ul>
+        <li>User does not have a subscription.</li>
+        <li>User has 30 days of subscription left.</li>
+        <li>User's subscription has expired.</li>
+      </ul>
+
+      <h2>Truthy vs Falsy in JavaScript</h2>
+      <p>
+        Besides types, each value has an underlying boolean evaluation. Some values are always <strong>falsy</strong>, while everything else is considered <strong>truthy</strong>.
+      </p>
+
+      <h3>Always Falsy Values</h3>
+      <ul>
+        <li><code>false</code></li>
+        <li><code>0</code>, <code>-0</code>, <code>0n</code></li>
+        <li><code>''</code>, <code>""</code>, <code>``</code> (empty strings)</li>
+        <li><code>null</code></li>
+        <li><code>undefined</code></li>
+        <li><code>NaN</code></li>
+      </ul>
+
+      <h3>Examples of Truthy Values</h3>
+      <ul>
+        <li><code>'0'</code> (a string containing zero)</li>
+        <li><code>'false'</code> (a string containing text)</li>
+        <li><code>[]</code> (an empty array)</li>
+        <li><code>{}</code> (an empty object)</li>
+        <li><code>function(){}</code> (an empty function)</li>
+      </ul>
+
+      <h2>Dealing with Truthy and Falsy Values</h2>
+      <h3>Avoid Direct Comparisons</h3>
+      <pre><code>
+// Instead of
+if (x == false)
+
+// Use
+if (!x)
+      </code></pre>
+
+      <h3>Use Strict Equality (===)</h3>
+      <pre><code>
+// Instead of
+if (a == b)
+
+// Use
+if (a === b)
+      </code></pre>
+
+      <h3>Convert to Boolean Explicitly</h3>
+      <pre><code>
+if (Boolean(x) === Boolean(y))
+// or
+if (!!x === !!y)
+      </code></pre>
+
+      <h2>Filtering Truthy Values</h2>
+      <p>
+        You can use <code>Boolean</code> or <code>!!</code> to filter truthy values from an array:
+      </p>
+      <pre><code>
+const truthy_values = [false,0,``,'',"",null,undefined,NaN,'0','false',[],{},function() {}].filter(Boolean);
+
+console.log(truthy_values);
+      </code></pre>
+
+      <h2>Summary</h2>
+      <p>
+        Understanding truthy and falsy values in JavaScript is essential for writing reliable conditional statements. Pay attention to edge cases such as <code>[]</code> and <code>NaN</code>, which may cause unexpected results.
+      </p>
+    </div>
+  </div>
+</div>

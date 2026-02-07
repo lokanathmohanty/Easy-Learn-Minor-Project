@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Multi-Release JAR Files (Java 9+)</h1>
+
+        <div class="content">
+            <h2>What is a Multi-Release JAR (MRJAR)?</h2>
+            <p>The **Multi-Release JAR (MRJAR)** feature, introduced in **Java 9**, allows a single JAR file to contain different versions of the same classes or resources, each targeted at a specific major Java release (e.g., Java 9, 11, 17, etc.).</p>
+
+            <h3>Why MRJARs Were Introduced</h3>
+            <p>MRJARs solve the problem of third-party library and framework developers having to maintain **multiple separate source code bases** just to support both older and newer versions of the Java platform. It acts as a bridge, allowing libraries to:</p>
+            <ul>
+                <li>**Adopt New Features:** Utilize modern Java features (like interfaces with private methods or new APIs) for newer JREs.</li>
+                <li>**Maintain Backward Compatibility:** Ensure the library still functions correctly on older JREs (like Java 8) that don't support the new language features.</li>
+                <li>**Reduce Duplication:** Keep all versions of the code for a library consolidated in a single file, simplifying maintenance and distribution.</li>
+            </ul>
+
+            <h2>MRJAR Structure and Loading Mechanism</h2>
+            <p>An MRJAR has a specific directory structure that the Java Runtime Environment (JRE) uses to select the appropriate class files.</p>
+            
+            <h3>Key Components</h3>
+            <ul>
+                <li>**Root Directory (Base Version):** Contains the **least common denominator** version of the classes and resources (e.g., the Java 8 or Java 7 version). This is the version loaded by any JRE that does not support the MRJAR feature or is older than the oldest specified version.</li>
+                <li>**<code>MANIFEST.MF</code> Entry:** The file must contain the entry <code>Multi-Release: true</code> in its main section to signal to the JRE that it is an MRJAR.</li>
+                <li>**Versioned Directories:** Specific versions of classes are placed inside the <code>META-INF/versions/</code> subdirectory, using the major version number as the folder name.
+                    <p>Example structure:</p>
+                    <pre><code>jar root/
+   - Calculator.class  (Base JRE version)
+   META-INF/
+      - versions/
+         - 9/
+            - Calculator.class (Java 9 specific)
+         - 11/
+            - Calculator.class (Java 11 specific)</code></pre>
+                </li>
+            </ul>
+
+            <h3>Class Loading Logic</h3>
+            <p>When an MRJAR is executed, the JRE follows this logic:</p>
+            <ol>
+                <li>If the JRE **does not support** MRJARs (e.g., Java 8 or earlier), it **ignores** the <code>META-INF/versions/</code> directory and loads only the classes from the **root directory**.</li>
+                <li>If the JRE **supports** MRJARs (Java 9+), it determines its own version (e.g., Java 11).</li>
+                <li>It searches for the **highest versioned directory** that is less than or equal to its current JRE version (e.g., a Java 11 JRE would pick classes from the <code>9/</code> and <code>11/</code> folders over the root).</li>
+                <li>If a class is found in the specific version folder (e.g., <code>META-INF/versions/11/Calculator.class</code>), that version is loaded.</li>
+                <li>If a class is **not** found in the version folder, the JRE falls back and loads the class from the **root directory**.</li>
+            </ol>
+
+            <p class="example">**Important Constraint:** To ensure proper function, the **public interface** (method signatures, visibility) of all versioned classes must remain **identical** to the base class.</p>
+        </div>
+    </div>
+</div>

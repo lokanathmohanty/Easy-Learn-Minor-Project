@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Copy Arrays in Python</h1>
+    <div class="content">
+      <p>Copying an array in Python means creating a new array object with the same elements as the original. This can be done using the assignment operator or the <code>deepcopy()</code> function from the <code>copy</code> module.</p>
+      
+      <h2 class="title">Copy Arrays Using Assignment Operator</h2>
+      <p>Assigning one array to another with the <code>=</code> operator creates a new reference, not a copy. Both variables point to the same array object.</p>
+      <pre><code>import array as arr
+a = arr.array('i', [110, 220, 330, 440, 550])
+b = a
+print("Copied array:", b)
+print(id(a), id(b))
+
+a[2] = 10
+print(a, b)
+# Output:
+# Copied array: array('i', [110, 220, 330, 440, 550])
+# 134485392383792 134485392383792
+# array('i', [110, 220, 10, 440, 550]) array('i', [110, 220, 10, 440, 550])
+</code></pre>
+
+      <h2 class="title">Copy Arrays Using Deep Copy</h2>
+      <p><code>deepcopy()</code> creates a completely new array object, independent of the original.</p>
+      <pre><code>import array as arr
+import copy
+a = arr.array('i', [110, 220, 330, 440, 550])
+b = copy.deepcopy(a)
+print("Copied array:", b)
+print(id(a), id(b))
+
+a[2] = 10
+print(a, b)
+# Output:
+# Copied array: array('i', [110, 220, 330, 440, 550])
+# 2771967069936 2771967068976
+# array('i', [110, 220, 10, 440, 550]) array('i', [110, 220, 330, 440, 550])
+</code></pre>
+    </div>
+  </div>
+</div>

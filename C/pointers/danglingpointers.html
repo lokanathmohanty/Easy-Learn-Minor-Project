@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Dangling Pointers in C</h1>
+    <div class="content">
+      <h2>What Is a Dangling Pointer?</h2>
+      <p>A dangling pointer in C refers to a pointer that points to a memory location which is no longer valid or accessible (because it was freed or the original variable went out of scope). :contentReference[oaicite:0]{index=0}</p>
+
+      <h2>Why Dangling Pointers Occur</h2>
+      <ul>
+        <li><strong>De‑allocation of memory:</strong> You free memory that a pointer points to, but the pointer still holds the old address.</li>
+        <li><strong>Returning address of local (stack) variable:</strong> A function returns a pointer to a local variable that no longer exists after the function returns. :contentReference[oaicite:1]{index=1}</li>
+        <li><strong>Variable goes out of scope:</strong> A pointer refers to a variable declared in an inner block; when that block ends, the pointer becomes invalid. :contentReference[oaicite:2]{index=2}</li>
+      </ul>
+
+      <h2>Examples of Dangling Pointers</h2>
+      <h3 class="title">Example: After free()</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+  int *x = malloc(sizeof(int));
+  *x = 100;
+  printf("Before free: %d\n", *x);
+
+  free(x);
+  // x is now dangling
+  printf("After free: %d\n", *x);
+  return 0;
+}
+</code></pre>
+
+      <h3 class="title">Example: Returning Local Address</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int *fun() {
+  int a = 50;
+  return &a;  // dangerous: returns address of local
+}
+
+int main() {
+  int *p = fun();
+  printf("%d\n", *p);  // undefined behavior
+  return 0;
+}
+</code></pre>
+
+      <h3 class="title">Example: Out-of-scope Variable</h3>
+      <pre><code>#include &lt;stdio&gt;
+
+int main() {
+  int *ptr;
+  {
+    int a = 10;
+    ptr = &a;
+  }
+  // 'a' is out of scope now; ptr is dangling
+  printf("%d\n", *ptr);
+  return 0;
+}
+</code></pre>
+
+      <h2>How to Prevent Dangling Pointers</h2>
+      <ul>
+        <li>After freeing memory with <code>free()</code>, immediately set the pointer to <code>NULL</code>.</li>
+        <li>Avoid returning addresses of local (stack) variables—use dynamic allocation or static variables instead.</li>
+        <li>Be careful when keeping pointers to variables whose lifetime is shorter than the pointer’s usage.</li>
+        <li>Use safer wrapper macros or functions (e.g. <code>SAFE_FREE()</code>) that free and nullify in one step.</li>
+        <li>Use debugging tools like Valgrind or AddressSanitizer to detect use-after-free or dangling pointer errors. :contentReference[oaicite:3]{index=3}</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <p>Dangling pointers are a serious source of bugs in C programming because they lead to undefined behavior. By following proper memory management practices—such as setting pointers to <code>NULL</code> after freeing, not returning local addresses, and using analysis tools—you can reduce the risk of dangling pointers in your code.</p>
+    </div>
+  </div>
+</div>

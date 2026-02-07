@@ -1,0 +1,184 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Managing State using Flux</h1>
+      </div>
+
+      <div class="content">
+         <div class="navigation">
+            <a href="#">Previous</a> | <a href="#">Quiz</a> | <a href="#">Next</a>
+         </div>
+
+         <p>One of the important features in a front-end application is <strong>state management</strong>. React has its own state management technique at the component level, but one component’s state cannot be directly accessed by another, even in parent/child relationships. To solve this, third-party libraries like <em>Redux</em> and <em>MobX</em> are commonly used.</p>
+
+         <p><strong>Flux</strong> is another technique introduced by Facebook to manage application state effectively using a <em>unidirectional data flow</em>. Let’s explore Flux and how to use it.</p>
+
+         <h2>Managing State Using Flux</h2>
+         <p>Flux uses four distinct parts:</p>
+
+         <h3>Store</h3>
+         <ul>
+            <li>Holds all business data.</li>
+            <li>Updates itself with data from the dispatcher.</li>
+            <li>Emits change events to notify views when data changes.</li>
+         </ul>
+
+         <h3>Action</h3>
+         <p>Actions represent events with necessary data. A view creates an action and sends it to the dispatcher. Example:</p>
+         <pre><code>{
+   actionType: "add",
+   data: {
+      name: "Peter"
+   }
+}</code></pre>
+
+         <h3>Dispatcher</h3>
+         <p>Receives actions and forwards them to all registered stores for processing.</p>
+
+         <h3>View</h3>
+         <p>Creates actions based on user interactions, sends them to the dispatcher, and listens for store updates to re-render.</p>
+
+         <h2>Flux Workflow</h2>
+         <ol>
+            <li>User interacts with the view.</li>
+            <li>View creates and sends an action to the dispatcher.</li>
+            <li>Dispatcher forwards the action to registered stores.</li>
+            <li>Stores update their data and emit change events.</li>
+            <li>Views listening for changes update themselves with new data.</li>
+         </ol>
+
+         <h2>Applying Flux</h2>
+         <p>Steps to implement Flux in a React application:</p>
+
+         <h3>1. Setup Project</h3>
+         <pre><code>create-react-app myapp
+cd myapp
+npm start
+npm install flux --save</code></pre>
+
+         <h3>2. Create Dispatcher</h3>
+         <pre><code>// src/Flux/Dispatcher.js
+import { Dispatcher } from "flux";
+export default new Dispatcher();</code></pre>
+
+         <h3>3. Create Actions</h3>
+         <pre><code>// src/Flux/UserActions.js
+import dispatcher from "./Dispatcher";
+
+export const USER_ACTIONS = {
+   ADD: 'addUser'
+};
+
+export function addUser(userName) {
+   dispatcher.dispatch({
+      type: USER_ACTIONS.ADD,
+      value: { name: userName }
+   });
+}</code></pre>
+
+         <h3>4. Create Store</h3>
+         <pre><code>// src/Flux/UserStore.js
+import dispatcher from "./Dispatcher";
+import { EventEmitter } from "events";
+import * as UserActions from "./UserActions";
+
+class UserStore extends EventEmitter {
+   constructor() {
+      super();
+      this.users = [];
+   }
+   handleActions(action) {
+      switch (action.type) {
+         case UserActions.USER_ACTIONS.ADD:
+            this.users.push(action.value);
+            this.emit("storeUpdated");
+            break;
+         default:
+      }
+   }
+   getUsers() {
+      return this.users;
+   }
+}
+
+const userStore = new UserStore();
+dispatcher.register(userStore.handleActions.bind(userStore));
+export default userStore;</code></pre>
+
+         <h3>5. Create User Input Component</h3>
+         <pre><code>// src/Flux/UserInput.js
+import React from "react";
+import * as UserActions from "./UserActions";
+
+export default class UserInput extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = { username: '' };
+   }
+   onButtonClick = () => {
+      UserActions.addUser(this.state.username);
+   };
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;input name="username" 
+               onChange={(e) =&gt; this.setState({username: e.target.value})}/&gt;
+            &lt;button onClick={this.onButtonClick}&gt;Add user&lt;/button&gt;
+         &lt;/div&gt;
+      );
+   }
+}</code></pre>
+
+         <h3>6. Create User List Component</h3>
+         <pre><code>// src/Flux/UserList.js
+import React from "react";
+import UserStore from "./UserStore";
+
+export default class UserList extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = { users: UserStore.getUsers() };
+   }
+   componentDidMount() {
+      UserStore.on("storeUpdated", this.updateUserList);
+   }
+   componentWillUnmount() {
+      UserStore.removeListener("storeUpdated", this.updateUserList);
+   }
+   updateUserList = () => {
+      this.setState({ users: UserStore.getUsers() });
+   };
+   render() {
+      return (
+         &lt;ul&gt;
+            {this.state.users.map((u, idx) =&gt; &lt;li key={idx}&gt;{u.name}&lt;/li&gt;)}
+         &lt;/ul&gt;
+      );
+   }
+}</code></pre>
+
+         <h3>7. Update App.js</h3>
+         <pre><code>// src/App.js
+import './App.css'
+import UserInput from './Flux/UserInput';
+import UserList from './Flux/UserList';
+
+function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;UserInput /&gt;
+         &lt;UserList /&gt;
+      &lt;/div&gt;
+   );
+}
+export default App;</code></pre>
+
+         <h2>Summary</h2>
+         <p>Flux provides a predictable and structured way to manage state in React applications using unidirectional data flow. With actions, dispatcher, stores, and views, data consistency and UI synchronization become much easier to maintain.</p>
+
+         <div class="navigation">
+            <a href="#">Previous</a> | <a href="#">Quiz</a> | <a href="#">Next</a>
+         </div>
+      </div>
+   </div>
+</div>

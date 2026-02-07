@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Nested Loops</h1>
+        
+        <h2 class="title">Definition of Nested Loops</h2>
+        <div class="content">
+            <p>A **nested loop** in C# is a programming construct where one loop (the **inner loop**) is placed entirely inside the body of another loop (the **outer loop**). The inner loop executes all its iterations completely for every single iteration of the outer loop.</p>
+            <p>The flexibility of C# allows you to nest **any type of loop** inside any other type of loop (e.g., a `for` loop inside a `while` loop, or a `do...while` inside a `for` loop).</p>
+        </div>
+        
+        <h2 class="title">Execution Flow</h2>
+        <div class="content">
+            <p>To understand the execution, consider an outer loop running 3 times and an inner loop running 5 times:</p>
+            <ul>
+                <li>**Outer Loop** Iteration 1 starts.</li>
+                <li>&nbsp;&nbsp;**Inner Loop** runs 5 times (Iterations 1 through 5).</li>
+                <li>**Outer Loop** Iteration 2 starts.</li>
+                <li>&nbsp;&nbsp;**Inner Loop** runs 5 times (Iterations 1 through 5).</li>
+                <li>**Outer Loop** Iteration 3 starts.</li>
+                <li>&nbsp;&nbsp;**Inner Loop** runs 5 times (Iterations 1 through 5).</li>
+            </ul>
+            <p>The total number of executions for the inner loop body is $3 \times 5 = 15$ times.</p>
+        </div>
+        
+        <h2 class="title">Example: Prime Number Detection (Nested `for` Loops)</h2>
+        <div class="content example">
+            <p>Nested loops are often used to check complex conditions across a range of values. This classic example finds prime numbers from 2 to 100:</p>
+            <pre>
+using System;
+class Program {
+    static void Main(string[] args) {
+        int i, j;
+         
+        // Outer loop iterates through numbers 2 to 99
+        for (i = 2; i < 100; i++) {
+            
+            // Inner loop checks for factors (j) up to the square root of i
+            for (j = 2; j <= (i / j); j++)
+                if ((i % j) == 0) break; // Not prime, exit inner loop
+
+            // If the inner loop completed without finding a factor, it is prime
+            if (j > (i / j)) 
+               Console.WriteLine("{0} is prime", i);
+        }
+    }
+} 
+            </pre>
+            <p><strong>Output (Partial):</strong></p>
+            <p class="content">
+                2 is prime<br>
+                3 is prime<br>
+                5 is prime<br>
+                ...
+            </p>
+        </div>
+        
+        <h2 class="title">Syntax Examples</h2>
+        <div class="content">
+            <h3>Nested `while` Loop Syntax:</h3>
+            <pre>
+while(outer_condition) {
+   // Outer loop statements
+   while(inner_condition) {
+      // Inner loop statements
+   }
+   // Continue outer loop statements
+}
+            </pre>
+
+            <h3>Nested `do...while` Loop Syntax:</h3>
+            <pre>
+do {
+   // Outer loop statements
+   do {
+      // Inner loop statements
+   } while( inner_condition );
+} while( outer_condition );
+            </pre>
+        </div>
+    </div>
+</div>

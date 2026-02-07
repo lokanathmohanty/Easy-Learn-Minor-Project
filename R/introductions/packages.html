@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Packages</h1>
+    <div class="content">
+      <p>
+        R packages are collections of R functions, compiled code, and sample data stored under directories called "library" in the R environment. When R is installed, a set of default packages are installed and loaded automatically, while others must be installed and loaded explicitly when needed for specific tasks.
+      </p>
+
+      <h2 class="title">Check Available R Packages</h2>
+      <p>To get library locations containing R packages:</p>
+      <pre><code>.libPaths()</code></pre>
+      <p>Example output:</p>
+      <pre><code>[1] "/usr/local/lib/R/library"
+[2] "C:/Program Files/R/R-x.x.x/library"
+</code></pre>
+
+      <p>To list all installed packages:</p>
+      <pre><code>library()</code></pre>
+      <p>This outputs all installed packages in the default library paths.</p>
+
+      <p>To view all packages currently loaded in the environment:</p>
+      <pre><code>search()</code></pre>
+      <p>Example output snippet:</p>
+      <pre><code>[1] ".GlobalEnv"        "package:stats"     "package:graphics" 
+[4] "package:grDevices" "package:utils"     "package:datasets" 
+[7] "package:methods"   "Autoloads"         "package:base" 
+</code></pre>
+
+      <h2 class="title">Install a New Package</h2>
+      <p>
+        There are two ways to add new packages to R:
+      </p>
+      <ol>
+        <li>Directly install from CRAN:</li>
+      </ol>
+      <pre><code># Replace "PackageName" with the actual package name
+install.packages("PackageName")
+
+# Example installing "XML" package
+install.packages("XML")
+</code></pre>
+
+      <ol start="2">
+        <li>Manual installation from a downloaded package file:</li>
+      </ol>
+      <pre><code># Replace the file path with the actual file location
+install.packages("path/to/package.zip", repos = NULL, type = "source")
+
+# Example manual install of "XML"
+install.packages("E:/XML_3.98-1.3.zip", repos = NULL, type = "source")
+</code></pre>
+
+      <h2 class="title">Load Package to Current Environment</h2>
+      <p>Before using an installed package, it must be loaded:</p>
+      <pre><code># Load package from default library paths
+library("PackageName")
+
+# Load package from specific library path
+library("PackageName", lib.loc = "path/to/library")
+</code></pre>
+      <p>Example:</p>
+      <pre><code>library("XML")</code></pre>
+    </div>
+  </div>
+
+  
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Null Coalescing Operator (`??`)</h1>
+
+    <div class="content">
+      <p>
+        The **Null Coalescing Operator** (`??`), introduced in **PHP 7**, is a syntactic sugar operator that provides a concise alternative to using a ternary operator in conjunction with the **`isset()`** function. The term "coalescing" refers to uniting many things into one final value.
+      </p>
+
+      <h2>Function and Syntax</h2>
+      <p>
+        The `??` operator checks if its **first operand exists and is not `null`**. If it is, that first operand is returned; otherwise, the second operand is returned.
+      </p>
+      <div class="example">
+        <code>$Var = $operand1 **??** $operand2;</code>
+      </div>
+      <p>
+        This is functionally equivalent to the following ternary statement:
+      </p>
+      <div class="example">
+        <code>$Var = **isset($operand1)** ? $operand1 : $operand2;</code>
+      </div>
+
+      <h2>Ternary Operator (`? :`) vs. Null Coalescing (`??`)</h2>
+      <p>
+        Before PHP 7, checking for the existence of a variable (like a submitted form field) and providing a default value required verbose code:
+      </p>
+      <div class="example">
+        <p>
+          **Ternary/`isset()`:**<br>
+          <code>$username = **isset($_GET['name'])** ? **$_GET['name']** : 'Guest';</code>
+        </p>
+        <p>
+          **Null Coalescing (`??`):**<br>
+          <code>$username = **$_GET['name']** **??** 'Guest';</code>
+        </p>
+      </div>
+      <p>
+        The `??` operator automatically handles the existence and non-null check, significantly cleaning up the code.
+      </p>
+
+      <h2>Chaining the Null Coalescing Operator</h2>
+      <p>
+        A powerful feature of the `??` operator is chaining, which allows for checking multiple potential values in sequence until a non-null, existing value is found.
+      </p>
+      <div class="example">
+        <code>$username = $_GET['name'] **??** $_POST['name'] **??** 'Guest';</code>
+      </div>
+      <p>
+        In the chained example above, PHP will evaluate from left to right:
+        <ol>
+          <li>If `$_GET['name']` is set and not null, `$username` is set to its value.</li>
+          <li>**Else**, if `$_POST['name']` is set and not null, `$username` is set to its value.</li>
+          <li>**Else**, `$username` is set to the default value, `'Guest'`.</li>
+        </ol>
+      </p>
+    </div>
+  </div>
+</div>

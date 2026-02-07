@@ -1,0 +1,169 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Java - Exception Propagation</h1>
+
+  
+      <h2 class="subtitle">Exception Propagation</h2>
+      <p>
+        Exception propagation refers to movement of exception events from nested try blocks or nested method calls. A <code>try</code> block can be nested within another <code>try</code> block. Similarly, a method can call another method, where each method can either handle the exception independently or throw checked/unchecked exceptions.
+      </p>
+      <p>
+        Whenever an exception is raised within a nested try block or method, the exception is pushed to the stack. It then propagates from the child to the parent try block or from the child method to the parent method, and so on.
+      </p>
+
+      <h2 class="subtitle">Syntax - Nested Try Block</h2>
+      <pre><code>
+try { // parent try block
+   try {  // child try block
+   
+   }
+   catch(ExceptionType1 e1){  // child catch block
+   
+   }
+} catch (ExceptionType2 e1) { // parent catch block
+
+} 
+      </code></pre>
+
+      <h2 class="subtitle">Syntax - Nested Method Calls</h2>
+      <pre><code>
+method1() { // parent method 
+   try { // parent try block
+      method2();
+   } catch (ExceptionType2 e1) { // parent catch block
+   } 
+}
+
+method2() { // child method 
+   // code to throw Exception
+   // this exception will be handled by parent method
+} 
+      </code></pre>
+
+      <p>
+        The examples demonstrate two try/catch blocks and two methods, but any number can be used. If an exception occurs in the child code, it's first caught by the child catch block. If the exception does not match, it propagates to the parent catch block.
+      </p>
+      <p>
+        If the exception is not caught at any level, it continues up the call stack until it is either handled or the program terminates.
+      </p>
+
+      <h2 class="subtitle">Rules for Exception Propagation in Java</h2>
+      <ul>
+        <li>Child catch block should use specific exception types for better clarity.</li>
+        <li>Parent catch block can use more generic exception types.</li>
+        <li>There is no restriction on exception hierarchy between child and parent catch blocks.</li>
+        <li>If an exception is handled in the child catch block, another exception can be raised in the parent if needed.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Java Exception Propagation Example</h1>
+
+    <div class="content">
+      <p>
+        This example demonstrates exception propagation from a child method to a parent method. A divide-by-zero error occurs in the child method and is handled in the parent method.
+      </p>
+
+      <pre><code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+
+   public static void main(String args[]) {
+      int a = 3;
+      int b = 0;
+      try {
+         System.out.println("result:" + divide(a,b));
+      } catch(ArithmeticException e) {
+         System.out.println(e.getMessage());
+      }
+   }
+
+   private static int divide(int a, int b) {
+      return a / b;
+   }
+}
+      </code></pre>
+
+      <h2 class="subtitle">Output</h2>
+      <pre><code>
+/ by zero
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example 1: Exception Not Handled</h1>
+
+    <div class="content">
+      <p>
+        This example shows the exception being propagated to the JVM when not handled by the parent method.
+      </p>
+
+      <pre><code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+
+   public static void main(String args[]) {
+      int a = 3;
+      int b = 0;
+      System.out.println("result:" + divide(a,b));
+   }
+
+   private static int divide(int a, int b) {
+      return a / b;
+   }
+}
+      </code></pre>
+
+      <h2 class="subtitle">Output</h2>
+      <pre><code>
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+   at com.tutorialspoint.ExcepTest.divide(ExcepTest.java:12)
+   at com.tutorialspoint.ExcepTest.main(ExcepTest.java:8)
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example 2: Exception Handled in Child Method</h1>
+
+    <div class="content">
+      <p>
+        In this example, the exception is handled within the child method itself, so it does not propagate to the parent.
+      </p>
+
+      <pre><code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+
+   public static void main(String args[]) {
+      int a = 3;
+      int b = 0;
+      System.out.println("result:" + divide(a,b));
+   }
+
+   private static int divide(int a, int b) {
+      try {
+         return a / b;
+      } catch(ArithmeticException e) {
+         System.out.println(e.getMessage());
+      }
+      return 0;
+   }
+}
+      </code></pre>
+
+      <h2 class="subtitle">Output</h2>
+      <pre><code>
+/ by zero
+result:0
+      </code></pre>
+    </div>
+  </div>
+
+</div>

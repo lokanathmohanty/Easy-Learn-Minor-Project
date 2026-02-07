@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Nested Loops (Multi-level Iteration) 🔄🔄</h1>
+
+        <div class="content">
+            <p>A **nested loop** is a programming structure where one loop (the **inner loop**) is placed entirely inside the body of another loop (the **outer loop**). For every single iteration of the outer loop, the inner loop executes completely. This structure is essential for processing **multi-dimensional data** like matrices or grids.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Types and Execution Flow</h2>
+            <p>All C++ loop types (`for`, `while`, `do...while`) can be nested. The logic remains consistent: the inner loop finishes its cycle for each pass of the outer loop.</p>
+
+            <h3>Nested <code>for</code> Loops (Example)</h3>
+            <p>This is the most common form, used for predictable, fixed-count iterations:</p>
+            <pre class="example">
+for (int i = 1; i &lt;= 3; i++) { // Outer loop: runs 3 times
+    for (int j = 1; j &lt;= 2; j++) { // Inner loop: runs 2 times for each 'i'
+        cout &lt;&lt; "Outer: " &lt;&lt; i &lt;&lt; ", Inner: " &lt;&lt; j &lt;&lt; endl;
+    }
+}
+</pre>
+            <p>The total output of the innermost statement is $3 \times 2 = 6$ lines, demonstrating that the control variable $j$ iterates completely ($1, 2$) before $i$ increments ($1$ to $2$).</p>
+
+            <h3>Nested <code>while</code> and <code>do...while</code> Loops</h3>
+            <p>These follow the same logic. Nested <code>while</code> is often used when loop iterations are determined dynamically, and nested <code>do...while</code> guarantees that the inner block executes at least once per outer iteration.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Computational Complexity and Optimization</h2>
+
+            <h3>Computational Complexity (Big O Notation)</h3>
+            <p>Nested loops directly impact performance. If an outer loop runs $N$ times and an inner loop runs $M$ times, the total operations are proportional to $N \times M$.</p>
+            <ul>
+                <li>If $N \approx M$, the time complexity is typically $\text{O}(N^2)$ (for two levels of nesting), or $\text{O}(N^k)$ where $k$ is the depth.</li>
+                <li>This can lead to significant **scalability issues** on large datasets, as execution time increases exponentially with the input size.</li>
+            </ul>
+
+            <h3>Optimization Techniques</h3>
+            <p>To improve performance when using nested loops, consider these strategies:</p>
+            <ol>
+                <li>
+                    **Break Early:** Use the **<code>break</code>** statement to exit the inner loop immediately if a result is found or a condition is met, preventing redundant iterations (e.g., in the prime number checker).
+                </li>
+                <li>
+                    **Algorithmic Optimization:** Employ more efficient algorithms like **Divide and Conquer** or **Dynamic Programming** to reduce the problem's inherent time complexity from exponential or high polynomial order.
+                </li>
+                <li>
+                    **Efficient Data Structures:** Replace an inner loop used for searching ($\text{O}(N)$) with an efficient data structure like a **hash map** or **hash set** ($\text{O}(1)$ average time complexity for lookups).
+                </li>
+                <li>
+                    **Avoid Unnecessary Nesting:** Sometimes rearranging code or logic can eliminate the need for nesting altogether.
+                </li>
+                <li>
+                    **Parallelization:** If the inner and outer loop iterations are independent of each other, use multithreading or multiprocessing to compute sections in parallel.
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

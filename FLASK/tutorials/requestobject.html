@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask <code>request</code> Object Attributes 🌐</h1>
+        <div class="content">
+            <p>In Flask, data sent from a client's web page (like form submissions or URL parameters) is made available to the server as the **global <code>request</code> object**. To use this object in your view functions, you must explicitly import it from the Flask module:</p>
+            <p><code>from flask import request</code></p>
+            <p>The <code>request</code> object is crucial for handling incoming client data, providing access to various components of the HTTP request:</p>
+
+            <h2>Key Attributes of the <code>request</code> Object</h2>
+            <ul>
+                <li>**<code>request.form</code>:**
+                    <p>A dictionary-like object containing key-value pairs of data submitted via a **form** using the **<code>POST</code>** HTTP method. This is typically used for standard form fields.</p>
+                </li>
+                <li>**<code>request.args</code>:**
+                    <p>A dictionary-like object that holds the parsed contents of the **query string**, which is the part of the URL that follows the question mark (<code>?</code>). This is commonly used for data sent via the **<code>GET</code>** method.</p>
+                </li>
+                <li>**<code>request.cookies</code>:**
+                    <p>A dictionary-like object containing the names and values of all **cookies** sent by the client with the request.</p>
+                </li>
+                <li>**<code>request.files</code>:**
+                    <p>Contains data related to any **file uploads** included in the request (e.g., from an HTML <code>&lt;input type="file"&gt;</code>). This requires a <code>POST</code> request with <code>enctype="multipart/form-data"</code>.</p>
+                </li>
+                <li>**<code>request.method</code>:**
+                    <p>A string representing the **current HTTP method** used for the request (e.g., <code>'GET'</code>, <code>'POST'</code>, <code>'PUT'</code>, <code>'DELETE'</code>). This is used for conditional handling in view functions.</p>
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="title">Example: Using <code>request.args</code> and <code>request.form</code></h2>
+        <div class="content example">
+            <p><strong>Retrieving data from a POST form:</strong></p>
+            <p><code>username = request.form['username_field']</code></p>
+            <p><strong>Retrieving data from a GET query string:</strong></p>
+            <p><code>page_number = request.args.get('page')</code></p>
+        </div>
+    </div>
+</div>

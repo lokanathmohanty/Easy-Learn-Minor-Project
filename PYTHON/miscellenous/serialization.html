@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Serialization</h1>
+    </div>
+    <div class="content">
+      <p>Serialization is the process of converting an object into a format suitable for storage or transmission, which can later be reconstructed (deserialized) back into the original object.</p>
+      <p>It's useful for saving program state, data exchange, and caching.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Common Serialization Libraries</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>pickle:</strong> Python built-in for serializing arbitrary Python objects. Not secure against untrusted data.</li>
+        <li><strong>json:</strong> Human-readable, language-independent format. Limited to basic data types.</li>
+        <li><strong>yaml:</strong> Human-readable, supports complex structures. Requires external <code>pyyaml</code> package.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Pickle Module</h2>
+    </div>
+    <div class="content">
+      <h3>Serialization (Pickling)</h3>
+      <pre><code>import pickle
+
+data = {'name': 'Alice', 'age': 30, 'city': 'New York'}
+with open('data.pkl', 'wb') as f:
+    pickle.dump(data, f)
+print("File created!")</code></pre>
+
+      <h3>Deserialization (Unpickling)</h3>
+      <pre><code>import pickle
+
+with open('data.pkl', 'rb') as f:
+    data = pickle.load(f)
+print(data)</code></pre>
+      <p>Output: <code>{'name': 'Alice', 'age': 30, 'city': 'New York'}</code></p>
+
+      <h3>Protocols</h3>
+      <p>Pickle supports protocols 0 to 5 (introduced in Python 3.8). Higher protocols are more efficient.</p>
+      <p>Use <code>pickle.HIGHEST_PROTOCOL</code> to specify.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Pickler and Unpickler Classes</h2>
+    </div>
+    <div class="content">
+      <p>Advanced classes for controlling serialization/deserialization.</p>
+      <pre><code>from pickle import Pickler, Unpickler
+
+with open('data.bin', 'wb') as f:
+    Pickler(f).dump({'a': 1, 'b': 2})
+
+with open('data.bin', 'rb') as f:
+    obj = Unpickler(f).load()
+print(obj)</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Pickling Custom Classes</h2>
+    </div>
+    <div class="content">
+      <pre><code>import pickle
+
+class Person:
+    def __init__(self, name, age, city):
+        self.name = name
+        self.age = age
+        self.city = city
+
+person = Person('Alice', 30, 'New York')
+
+with open('person.pkl', 'wb') as f:
+    pickle.dump(person, f)
+
+with open('person.pkl', 'rb') as f:
+    person = pickle.load(f)
+print(person.name, person.age, person.city)</code></pre>
+      <p>Output: Alice 30 New York</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>JSON Serialization</h2>
+    </div>
+    <div class="content">
+      <h3>Serialization</h3>
+      <pre><code>import json
+
+data = {"name": "Alice", "age": 25, "city": "San Francisco"}
+json_string = json.dumps(data)
+print(json_string)</code></pre>
+      <p>Output: <code>{"name": "Alice", "age": 25, "city": "San Francisco"}</code></p>
+
+      <h3>Serialization to File</h3>
+      <pre><code>with open('data.json', 'w') as f:
+    json.dump(data, f)
+print("Success!")</code></pre>
+
+      <h3>Deserialization</h3>
+      <pre><code>with open('data.json', 'r') as f:
+    data = json.load(f)
+print(data)</code></pre>
+      <p>Output: <code>{'name': 'Alice', 'age': 25, 'city': 'San Francisco'}</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>YAML Serialization</h2>
+    </div>
+    <div class="content">
+      <p>YAML supports complex data and is human-readable. Requires <code>pyyaml</code> package.</p>
+      <pre><code>pip install pyyaml</code></pre>
+
+      <h3>Serialization</h3>
+      <pre><code>import yaml
+
+data = {"name": "Emily", "age": 35, "city": "Seattle"}
+with open('data.yaml', 'w') as f:
+    yaml.dump(data, f, default_flow_style=False)
+print("Success!")</code></pre>
+
+      <h3>Deserialization</h3>
+      <pre><code>with open('data.yaml', 'r') as f:
+    loaded_data = yaml.safe_load(f)
+print(loaded_data)</code></pre>
+      <p>Output: <code>{'age': 35, 'city': 'Seattle', 'name': 'Emily'}</code></p>
+    </div>
+  </div>
+</div>

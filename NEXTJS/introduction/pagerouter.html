@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Page Router Setup (Legacy) 📁</h1>
+        
+        <div class="content">
+            <h2 class="title">Introduction to the Page Router</h2>
+            <p>The **Page Router** is the routing system used in **Next.js versions before 13**. In this model, the structure of files within the **<span class="example">`/pages`</span>** directory automatically defines the application's routes. Each **React component** file inside <span class="example">`/pages`</span> becomes a distinct route.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Step 1 & 2: Setup and Basic Routing</h2>
+            
+            <h3 class="title">Project Creation</h3>
+            <p>When starting a new project with <span class="example">`npx create-next-app@latest`</span>, you must explicitly choose the **Page Router** setup when prompted.</p>
+            
+            <h3 class="title">File-System Routing</h3>
+            <p>The Page Router uses files, often named <span class="example">`index.tsx`</span>, inside folders to define routes:</p>
+            <ul>
+                <li><span class="example">`pages/index.tsx`</span> &rarr; **<span class="example">`/`</span>** (The Home Route)</li>
+                <li><span class="example">`pages/about.tsx`</span> &rarr; **<span class="example">`/about`</span>** (or <span class="example">`pages/about/index.tsx`</span>)</li>
+                <li><span class="example">`pages/contact/index.tsx`</span> &rarr; **<span class="example">`/contact`</span>**</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Step 3 & 4: Nested and Dynamic Routes</h2>
+            
+            <h3 class="title">Nested Routes</h3>
+            <p>To create nested routes, you create a directory inside <span class="example">`/pages`</span> and place an <span class="example">`index.tsx`</span> file inside it. For example, the <span class="example">`/about`</span> route is defined by <span class="example">`pages/about/index.tsx`</span> (or simply <span class="example">`pages/about.tsx`</span>).</p>
+            
+            <h3 class="title">Dynamic Routes</h3>
+            <p>To create a route that accepts a parameter, define the filename using **square brackets** (<span class="example">`[paramName].tsx`</span>). The parameter is accessed using the **<span class="example">`useRouter`</span>** hook from <span class="example">`next/router`</span>.</p>
+            <ul>
+                <li>**Route File:** <span class="example">`pages/users/[id].tsx`</span> &rarr; URL is <span class="example">`/users/123`</span>.</li>
+                <li>**Accessing Parameter:** The parameter is found in <span class="example">`router.query`</span>.</li>
+            </ul>
+            <pre>// Inside pages/users/[id].tsx
+import { useRouter } from 'next/router';
+
+export default function UserProfile() {
+  const router = useRouter();
+  const { id } = router.query; // Retrieves the dynamic 'id' value
+  return &lt;h1&gt;User Profile: {id}&lt;/h1&gt;;
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Step 5: API Routes</h2>
+            <p>**API Routes** (for creating backend endpoints) are defined inside the **<span class="example">`pages/api`</span>** directory. Any file within this folder becomes an API endpoint that handles incoming requests.</p>
+            <ul>
+                <li>**API File:** <span class="example">`pages/api/hello.js`</span> &rarr; Endpoint is **<span class="example">`/api/hello`</span>**.</li>
+            </ul>
+            <pre>// Inside pages/api/hello.js
+export default function handler(req, res) {
+  res.status(200).json({ message: 'Hello, Next.js API!' });
+}</pre>
+        </div>
+    </div>
+</div>

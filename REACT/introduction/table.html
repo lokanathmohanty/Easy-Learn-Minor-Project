@@ -1,0 +1,113 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Table</h1>
+      </div>
+
+    
+
+         <p>React provides table components through third-party UI libraries. One of the most popular is <strong>React Bootstrap</strong>, which ports almost all Bootstrap UI components into React, including tables.</p>
+
+         <h2>Table Component</h2>
+         <p>The <code>Table</code> component from <code>react-bootstrap</code> allows developers to create simple tables styled with Bootstrap. It supports table tags such as <code>thead</code>, <code>tbody</code>, and <code>tfoot</code>.</p>
+
+         <p>Props supported by the <code>Table</code> component include:</p>
+         <ul>
+            <li><code>bordered</code> − Adds border to all sides of the table and cells.</li>
+            <li><code>borderless</code> − Removes borders from all sides.</li>
+            <li><code>hover</code> − Enables hover state for rows.</li>
+            <li><code>responsive</code> − Makes the table scrollable on smaller devices (options: sm, md, lg, xl).</li>
+            <li><code>size</code> − Enables compact rendering (<code>sm</code>, <code>md</code>, etc.).</li>
+            <li><code>striped</code> − Adds zebra striping to rows or columns.</li>
+            <li><code>variant</code> − Enables dark mode when set to <code>dark</code>.</li>
+            <li><code>bsPrefix</code> − Custom prefix for CSS classes.</li>
+         </ul>
+
+         <h2>Applying Table Component</h2>
+         <p>Steps to use the Table component in a React app:</p>
+         <ol>
+            <li>Create a new React app: <code>create-react-app myapp</code></li>
+            <li>Install Bootstrap and React Bootstrap: <code>npm install --save bootstrap react-bootstrap</code></li>
+            <li>Create <code>SimpleTable.js</code> under <code>src/Components</code>.</li>
+         </ol>
+
+         <h3>SimpleTable.js</h3>
+         <pre><code>import { Table } from 'react-bootstrap';
+
+function SimpleTable() {
+   return (
+      &lt;Table striped bordered hover&gt;
+         &lt;thead&gt;
+            &lt;tr&gt;
+               &lt;th&gt;#&lt;/th&gt;
+               &lt;th&gt;Name&lt;/th&gt;
+               &lt;th&gt;Age&lt;/th&gt;
+               &lt;th&gt;Email&lt;/th&gt;
+            &lt;/tr&gt;
+         &lt;/thead&gt;
+         &lt;tbody&gt;
+            &lt;tr&gt;
+               &lt;td&gt;1&lt;/td&gt;
+               &lt;td&gt;John&lt;/td&gt;
+               &lt;td&gt;25&lt;/td&gt;
+               &lt;td&gt;john.example@tutorialspoint.com&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+               &lt;td&gt;2&lt;/td&gt;
+               &lt;td&gt;Peter&lt;/td&gt;
+               &lt;td&gt;15&lt;/td&gt;
+               &lt;td&gt;peter.example@tutorialspoint.com&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+               &lt;td&gt;3&lt;/td&gt;
+               &lt;td&gt;Olivia&lt;/td&gt;
+               &lt;td&gt;23&lt;/td&gt;
+               &lt;td&gt;olivia.example@tutorialspoint.com&lt;/td&gt;
+            &lt;/tr&gt;
+         &lt;/tbody&gt;
+      &lt;/Table&gt;
+   );
+}
+export default SimpleTable;</code></pre>
+
+         <p>Here we used:</p>
+         <ul>
+            <li><code>striped</code> for zebra striping.</li>
+            <li><code>bordered</code> for borders.</li>
+            <li><code>hover</code> for row hover state.</li>
+         </ul>
+
+         <h3>App.js</h3>
+         <pre><code>import './App.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import SimpleTable from './Components/SimpleTable'
+
+function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;SimpleTable /&gt;
+      &lt;/div&gt;
+   );
+}
+export default App;</code></pre>
+
+         <h2>Add Dark Variant and Column Striping</h2>
+         <p>You can extend the table with dark mode and column striping:</p>
+         <pre><code>&lt;Table bordered hover striped="columns" variant="dark"&gt;
+   ...
+&lt;/Table&gt;</code></pre>
+
+         <ul>
+            <li><code>striped="columns"</code> adds zebra striping to columns.</li>
+            <li><code>variant="dark"</code> enables dark mode for the table.</li>
+         </ul>
+
+         <h2>Summary</h2>
+         <p>React Bootstrap’s <code>Table</code> component provides all the necessary options to design intuitive and responsive tables with minimal effort.</p>
+
+         <div class="navigation">
+            <a href="#">Previous</a> | <a href="#">Quiz</a> | <a href="#">Next</a>
+         </div>
+      </div>
+   </div>
+</div>

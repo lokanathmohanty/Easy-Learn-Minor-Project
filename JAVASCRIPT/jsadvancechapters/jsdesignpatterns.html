@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Design Patterns</h1>
+
+    <div class="content">
+      <p>In JavaScript, design patterns are classes and communicating objects that are designed to deal with a general design problem in a specific setting. Generic, reusable solutions to typical issues that come up throughout software design and development are known as software design patterns.</p>
+      <p>They give developers a forum to discuss successful design concepts and function as best practices for resolving particular kinds of problems.</p>
+    </div>
+
+    <div class="content">
+      <h2>What are Design Patterns?</h2>
+      <p>A design pattern in software engineering is a generic, replicable fix for a typical problem in program design. The design is not complete enough to be coded right away. It is a description or model for problem-solving that can be used in various contexts.</p>
+    </div>
+
+    <div class="content">
+      <h2>Types of Software Design Patterns</h2>
+      <p>In JavaScript, there are primarily three categories of design patterns namely −</p>
+      <ul>
+        <li>Creational Design Patterns</li>
+        <li>Structural Design Patterns</li>
+        <li>Behavioral Design Patterns</li>
+      </ul>
+      <p>Let's discuss them one by one −</p>
+    </div>
+
+    <div class="content">
+      <h2>Creational Design Patterns in JavaScript</h2>
+      <p>In software development, creational design patterns are a subset of design patterns. They work on the object generation process, trying to make it more flexible and efficient. It maintains the independence of the system and the composition, representation, and creation of its objects.</p>
+    </div>
+
+    <div class="content">
+      <h2>Singleton Pattern</h2>
+      <p>The singleton design pattern makes sure a class has only one immutable instance. In simple terms, the singleton pattern is an object that cannot be changed or replicated. It is often useful when we want an immutable single point of truth for our application.</p>
+      <p>Suppose that we want to have a single object that has all of our application's configuration. We also want to make it prohibit to copy or modify that object.</p>
+      <p>Two ways to implement this pattern are using classes and object literals −</p>
+      <pre><code>
+const Settings = {
+  initialize: () => console.log('Application is now running'),
+  refresh: () => console.log('Application data has been refreshed'),
+}
+Object.freeze(Settings)
+Settings.initialize() 
+Settings.refresh() 
+Settings.version = "1.0" 
+console.log(Settings)
+      </code></pre>
+      <p>Output:</p>
+      <ul>
+        <li>Application is now running</li>
+        <li>Application data has been refreshed</li>
+        <li>{ initialize: [Function: initialize], refresh: [Function: refresh] }</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Factory Method Pattern</h2>
+      <p>The Factory method pattern provides an interface for creating objects that can be modified after they are generated. By combining the logic for building our objects in a single place, this reduces and enhances the organization of our code.</p>
+      <pre><code>
+class Creature {
+   constructor(name, message) {
+      this.name = name
+      this.message = message
+      this.type = "creature"
+   }
+   fly = () => console.log("Whoooosh!!")
+   speak = () => console.log(this.message)
+}
+const creature1 = new Creature("Zee", "Hello! I'm Zee from outer space!")
+console.log(creature1.name)
+      </code></pre>
+      <p>Output:</p>
+      <ul>
+        <li>Zee</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Abstract Factory Pattern</h2>
+      <p>Without knowing the precise types of linked objects, we can use the Abstract Factory design to generate groups of them. This is useful when we need to build unique objects that share only a few characteristics.</p>
+      <p>It works like this: a primary abstract factory connects with the client, or user. This abstract factory then uses some logic to invoke a specific factory to generate the actual object.</p>
+      <p>For example, we are able to develop a system for an automobile manufacturer that includes trucks, motorcycles, and cars. The Abstract Factory pattern, which handles several object types with a single primary factory, makes this easy for us to do.</p>
+      <pre><code>
+class Car {
+   constructor () {
+      this.type = "Car"
+      this.wheels = 4
+   }
+   startEngine = () => console.log("Vroom Vroom!")
+}
+class Truck {
+   constructor () {
+      this.type = "Truck"
+      this.wheels = 8
+   }
+   startEngine = () => console.log("Rumble Rumble!")
+}
+class Motorcycle {
+   constructor () {
+      this.type = "Motorcycle"
+      this.wheels = 2
+   }
+   startEngine = () => console.lo

@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Modify Strings</h1>
+    <div class="content">
+      <p>String modification refers to the process of changing the characters of a string. In Python, modifying a string actually means creating a <strong>new string</strong> that is a variation of the original one.</p>
+
+      <h2>Immutability of Strings</h2>
+      <p>A string in Python (an object of the <code>str</code> class) is <strong>immutable</strong>. This means once it is created in memory, it cannot be modified in place. Unlike a list, you cannot overwrite, insert, or append characters directly. To modify a string, we use certain methods or workarounds that return a new string, while the original remains unchanged.</p>
+
+      <h2>Workarounds to Modify Strings</h2>
+
+      <h3>1. Converting a String to a List</h3>
+      <p>Since both strings and lists are sequence types, we can cast a string into a list, modify the list, and then convert it back into a string using <code>join()</code>.</p>
+      <p><strong>Example:</strong></p>
+      <pre><code>s1 = "WORD"
+print("original string:", s1)
+l1 = list(s1)
+
+l1.insert(3, "L")
+print(l1)
+
+s1 = ''.join(l1)
+print("Modified string:", s1)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>original string: WORD
+['W', 'O', 'R', 'L', 'D']
+Modified string: WORLD</code></pre>
+
+      <h3>2. Using the Array Module</h3>
+      <p>The <code>array</code> module from Python’s standard library can construct an array of Unicode characters from a string. You can then insert or modify elements and convert it back to a string.</p>
+      <p><strong>Example:</strong></p>
+      <pre><code>import array as ar
+
+s1 = "WORD"
+print("original string:", s1)
+
+sar = ar.array('u', s1)
+sar.insert(3, "L")
+
+s1 = sar.tounicode()
+print("Modified string:", s1)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>original string: WORD
+Modified string: WORLD</code></pre>
+
+      <h3>3. Using the StringIO Class</h3>
+      <p>The <code>io</code> module provides the <code>StringIO</code> class, which creates an in-memory text stream. It behaves like a file object, allowing read/write operations. The <code>getvalue()</code> method retrieves the modified string.</p>
+      <p><strong>Example:</strong></p>
+      <pre><code>import io
+
+s1 = "WORD"
+print("original string:", s1)
+
+sio = io.StringIO(s1)
+sio.seek(3)
+sio.write("LD")
+s1 = sio.getvalue()
+
+print("Modified string:", s1)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>original string: WORD
+Modified string: WORLD</code></pre>
+    </div>
+  </div>
+</div>

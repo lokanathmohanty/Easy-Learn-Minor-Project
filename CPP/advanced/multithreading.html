@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Multithreading (POSIX Threads / Pthreads) 🚀</h1>
+
+        <div class="content">
+            <p>**Multithreading** is a form of multitasking that allows concurrent execution of different parts of the **same program**. Each concurrent part is called a **thread**, defining a separate path of execution.</p>
+            <p>Before C++11, C++ did not have built-in multithreading support, relying instead on OS-specific APIs like **POSIX Threads (Pthreads)** on Unix-like systems (Linux, macOS, etc.).</p>
+            <p>***Note:*** *Modern C++ (C++11 and later) uses the standard library class **`std::thread`**, which is generally preferred over Pthreads.*</p>
+
+            <hr>
+
+            <h2 class="title">Creating and Terminating Threads</h2>
+
+            <h3>Creating a Thread (<code>pthread_create</code>)</h3>
+            <p>The `pthread_create` routine spawns a new thread, making it executable. The thread executes the specified routine.</p>
+            <pre class="example">
+int pthread_create (
+   pthread_t *thread,         // Output: unique identifier for the new thread
+   const pthread_attr_t *attr, // Thread attributes (often NULL for default)
+   void *(*start_routine) (void *), // Function the thread will execute
+   void *arg                  // Single argument passed to the routine (as a void pointer)
+);
+</pre>
+
+            <h3>Terminating a Thread (<code>pthread_exit</code>)</h3>
+            <p>The `pthread_exit` routine is used for a thread to explicitly exit. If the `main()` function finishes, all other running threads are automatically terminated unless `main()` exits with `pthread_exit()` itself.</p>
+            <pre class="example">
+void pthread_exit (void *status);
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Passing Arguments to Threads</h2>
+
+        <div class="content">
+            <p>Since `pthread_create` can only pass a single `void*` argument, to pass multiple values, you must bundle them into a **structure** and pass a **pointer to that structure**.</p>
+            <pre class="example">
+struct thread_data {
+   int  thread_id;
+   char *message;
+};
+// ...
+// Inside main():
+struct thread_data td[NUM_THREADS];
+// ...
+rc = pthread_create(&threads[i], NULL, PrintHello, (void *)&td[i]); // Pass address of struct
+</pre>
+            <p>The thread routine must then cast the received `void*` back to the structure pointer to access the data.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Joining and Detaching Threads</h2>
+
+        <div class="content">
+            <p>Threads are created as either **joinable** or **detached**. Joinable threads must be explicitly joined (cleaned up), while detached threads clean up automatically.</p>
+            <ul>
+                <li>
+                    **Joining (<code>pthread_join</code>):** The calling thread is **blocked** until the specified thread terminates. This is necessary for synchronization and to retrieve the thread's exit status and resources.
+                    <pre class="example">
+int pthread_join (pthread_t threadid, void **status);
+</pre>
+                </li>
+                <li>
+                    **Detaching (<code>pthread_detach</code>):** A detached thread cannot be joined. It cleans up its resources automatically upon termination.
+                    <pre class="example">
+int pthread_detach (pthread_t threadid);
+</pre>
+                </li>
+            </ul>
+            <p>To ensure a thread is joinable (or detached) before creation, you must initialize and modify a thread **attribute object** (`pthread_attr_t`) and pass it to `pthread_create`.</p>
+        </div>
+    </div>
+</div>

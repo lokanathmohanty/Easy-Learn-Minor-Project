@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - While Loops</h1>
+    <div class="content">
+      <p>A <strong>while statement</strong> in JavaScript creates a loop that executes a block of code repeatedly, as long as the specified condition is true. The condition is evaluated before the execution of the block of code.</p>
+      <p>While writing a program, you may encounter a situation where you need to perform an action over and over again. In such situations, you would need to write loop statements to reduce the number of lines.</p>
+      <p>JavaScript supports all the necessary loops to ease the pressure of programming. In this chapter, we will discuss the while loop.</p>
+
+      <h2>Types of While Loops</h2>
+      <ul>
+        <li><strong>Entry-controlled loops</strong> − The loop checks whether the looping condition is valid first and then executes the loop statements.</li>
+        <li><strong>Exit-controlled loops</strong> − The loop enters into the body and executes the loop statements without checking the condition. After completing the iteration, it checks the condition.</li>
+      </ul>
+
+      <h2>JavaScript while Loop</h2>
+      <p>The most basic loop in JavaScript is the while loop. It is an entry-controlled loop. The loop executes repeatedly as long as the expression is true. Once the expression becomes false, the loop terminates.</p>
+
+      <h2>Syntax</h2>
+      <pre><code>while (expression) {
+   Statement(s) to be executed if expression is true
+}
+</code></pre>
+
+      <h2>Example</h2>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+    &lt;div id='output'&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        let output = document.getElementById("output");
+        var count = 0;
+        output.innerHTML = "Starting Loop &lt;br&gt;";
+        while (count &lt; 10) {
+            output.innerHTML += "Current Count : " + count + "&lt;br&gt;";
+            count++;
+        }
+        output.innerHTML += "Loop stopped!";
+    &lt;/script&gt;
+    &lt;p&gt; Set the variable to a different value and then try... &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Output</h2>
+      <p>Starting Loop</p>
+      <p>Current Count : 0</p>
+      <p>Current Count : 1</p>
+      <p>Current Count : 2</p>
+      <p>Current Count : 3</p>
+      <p>Current Count : 4</p>
+      <p>Current Count : 5</p>
+      <p>Current Count : 6</p>
+      <p>Current Count : 7</p>
+      <p>Current Count : 8</p>
+      <p>Current Count : 9</p>
+      <p>Loop stopped!</p>
+      <p>Set the variable to different value and then try...</p>
+
+      <h2>JavaScript do...while Loop</h2>
+      <p>The <strong>do...while loop</strong> is similar to the while loop except that the condition check happens at the end of the loop. This means that the loop will always be executed at least once, even if the condition is false.</p>
+
+      <h2>Syntax</h2>
+      <pre><code>do {
+   Statement(s) to be executed;
+} while (expression);
+</code></pre>
+      <p>Don't miss the semicolon used at the end of the do...while loop.</p>
+
+      <h2>Example</h2>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+    &lt;div id="output"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        let output = document.getElementById("output");
+        var count = 0;
+        output.innerHTML += "Starting Loop" + "&lt;br /&gt;";
+        do {
+            output.innerHTML += "Current Count : " + count + "&lt;br /&gt;";
+            count++;
+        }
+        while (count &lt; 5);
+        output.innerHTML += "Loop stopped!";
+    &lt;/script&gt;
+    &lt;p&gt;Set the variable to a different value and then try...&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Output</h2>
+      <p>Starting Loop</p>
+      <p>Current Count : 0</p>
+      <p>Current Count : 1</p>
+      <p>Current Count : 2</p>
+      <p>Current Count : 3</p>
+      <p>Current Count : 4</p>
+      <p>Loop Stopped!</p>
+      <p>Set the variable to different value and then try...</p>
+
+      <h2>JavaScript while vs. for Loops</h2>
+      <p>The JavaScript while loop is similar to the for loop with the first and third expressions omitted. A for loop is generally used when the number of iterations is fixed and known, but we use the while loop when the number of iterations is not known.</p>
+
+      <h2>Example: Using for loop</h2>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;p&gt; First five natural numbers:&lt;/p&gt;
+  &lt;div id="demo"&gt;&lt;/div&gt;
+  &lt;script&gt;  
+    const output = document.getElementById("demo");
+    for(let i = 1; i &lt;= 5; i++){
+      output.innerHTML += i + "&lt;br&gt;";
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Output</h2>
+      <p>First five natural numbers:</p>
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+      <p>4</p>
+      <p>5</p>
+
+      <h2>Example: for loop without initialization and iteration</h2>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;p&gt; First five natural numbers:&lt;/p&gt;
+  &lt;div id="demo"&gt;&lt;/div&gt;
+  &lt;script&gt;  
+    const output = document.getElementById("demo");
+    let i = 1;
+    for(; i &lt;= 5; ){
+      output.innerHTML += i + "&lt;br&gt;";
+      i++
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Example: Equivalent while loop</h2>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;p&gt; First five natural numbers:&lt;/p&gt;
+  &lt;div id="demo"&gt;&lt;/div&gt;
+  &lt;script&gt;  
+    const output = document.getElementById("demo");
+    let i = 1;
+    while(i &lt;= 5){
+      output.innerHTML += i + "&lt;br&gt;";
+      i++
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Output</h2>
+      <p>First five natural numbers:</p>
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+      <p>4</p>
+      <p>5</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Main Thread</h1>
+    </div>
+    <div class="content">
+      <p>The main thread is the initial thread that starts when the Python interpreter runs. It manages the program and creates additional threads. Every Python program has at least one thread: the main thread.</p>
+      <p>By default, the main thread is non-daemon and will exit when the main program's execution ends, but other threads will keep running until they finish.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Accessing the Main Thread</h2>
+    </div>
+    <div class="content">
+      <p>Python's <code>threading</code> module provides:</p>
+      <ul>
+        <li><code>threading.current_thread()</code>: Returns the current thread object.</li>
+        <li><code>threading.main_thread()</code>: Returns the main thread object.</li>
+      </ul>
+      <p><strong>Example:</strong></p>
+      <pre>
+import threading
+
+print('Main Thread:', threading.main_thread())
+print('Current Thread:', threading.current_thread())
+      </pre>
+      <p>Output example:</p>
+      <p>
+        Main Thread: &lt;_MainThread(MainThread, started 123456789)&gt;<br>
+        Current Thread: &lt;_MainThread(MainThread, started 123456789)&gt;
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Main Thread Behavior</h2>
+    </div>
+    <div class="content">
+      <p>The main thread continues to run until all non-daemon threads have finished or the script ends. Starting additional threads does not stop the main thread from running its code.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+import threading
+import time
+
+def worker():
+    for i in range(6):
+        print(f'{threading.current_thread().name} running {i}')
+        time.sleep(0.5)
+
+t = threading.Thread(target=worker)
+t.start()
+
+for i in range(3):
+    print(f'Main Thread running {i}')
+    time.sleep(0.5)
+
+print('Main Thread finished')
+      </pre>
+      <p>Possible output:</p>
+      <p>
+        Main Thread running 0<br>
+        Main Thread running 1<br>
+        Main Thread running 2<br>
+        Main Thread finished<br>
+        Thread-1 running 0<br>
+        Thread-1 running 1<br>
+        Thread-1 running 2<br>
+        Thread-1 running 3<br>
+        Thread-1 running 4<br>
+        Thread-1 running 5
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Main Thread Waiting for Other Threads</h2>
+    </div>
+    <div class="content">
+      <p>To ensure the main thread waits for other threads to complete before exiting, use the <code>join()</code> method on threads.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+from threading import Thread
+from time import sleep
+
+def worker_1():
+    print("Worker 1 started")
+    sleep(1)
+    print("Worker 1 done")
+
+def worker_2(t):
+    print("Worker 2 waiting for Worker 1")
+    t.join()
+    print("Worker 2 started")
+    sleep(1)
+    print("Worker 2 done")
+
+t1 = Thread(target=worker_1)
+t2 = Thread(target=worker_2, args=(t1,))
+
+t1.start()
+t2.start()
+
+for i in range(6):
+    print(f"Main thread working on task {i}")
+    sleep(0.6)
+
+t1.join()
+print("Main thread completed")
+      </pre>
+      <p>Output example:</p>
+      <p>
+        Worker 1 started<br>
+        Worker 2 waiting for Worker 1<br>
+        Main thread working on task 0<br>
+        Main thread working on task 1<br>
+        Worker 1 done<br>
+        Worker 2 started<br>
+        Main thread working on task 2<br>
+        Worker 2 done<br>
+        Main thread working on task 3<br>
+        Main thread working on task 4<br>
+        Main thread working on task 5<br>
+        Main thread completed
+      </p>
+    </div>
+  </div>
+</div>

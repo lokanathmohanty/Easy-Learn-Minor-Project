@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Global Objects</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Node.js provides global objects accessible throughout the application without requiring imports. They offer essential functionalities such as file handling, streams, process information, timers, and more.
+      </p>
+
+      <h2>Common Global Objects</h2>
+      <h3>global</h3>
+      <p>
+        The <code>global</code> object serves as the global namespace in Node.js, allowing access to built-in functions and objects.
+      </p>
+      <pre><code>global.x = "Welcome To, TutorialsPoint.";
+console.log(global.x);</code></pre>
+      <p>Output:</p>
+      <p><strong>Welcome To, TutorialsPoint.</strong></p>
+
+      <h3>console</h3>
+      <p>
+        The <code>console</code> object supports various methods for standard output and debugging:
+      </p>
+      <ul>
+        <li><code>console.log()</code>: Standard message output.</li>
+        <li><code>console.warn()</code>: Outputs warning messages.</li>
+        <li><code>console.error()</code>: Outputs error messages.</li>
+        <li><code>console.debug()</code>: For debugging purposes.</li>
+      </ul>
+      <pre><code>console.log("Hello");
+console.warn("Danger.!");
+console.error("SyntaxError");</code></pre>
+      <p>Output:</p>
+      <p><strong>Hello</strong><br/><strong>Danger.!</strong><br/><strong>SyntaxError</strong></p>
+
+      <h3>process</h3>
+      <p>
+        The <code>process</code> object provides detailed information and control over the running Node.js process.
+      </p>
+      <pre><code>console.log("Process ID:", process.pid);
+console.log("Node.js Version:", process.version);
+console.log("Command-line arguments:", process.argv);
+console.log("Process Uptime:", process.uptime(), "seconds");
+console.log("Current Working Directory:", process.cwd());
+console.log("Memory Usage:", process.memoryUsage());</code></pre>
+
+      <h3>__dirname and __filename</h3>
+      <p>
+        These variables provide the absolute directory path (<code>__dirname</code>) and the absolute file path (<code>__filename</code>) of the currently executing script.
+      </p>
+      <pre><code>console.log("Directory Name:", __dirname);
+console.log("File Name:", __filename);</code></pre>
+
+      <h3>Timers</h3>
+      <ul>
+        <li><strong>setTimeout:</strong> Executes code once after a delay. Can be canceled with <code>clearTimeout()</code>.</li>
+        <li><strong>setInterval:</strong> Executes code repeatedly at fixed intervals. Can be canceled with <code>clearInterval()</code>.</li>
+      </ul>
+      <pre><code>let x = setTimeout(() => {
+  console.log("Executed after 5 seconds");
+}, 5000);
+clearTimeout(x);
+
+let z = setInterval(() => {
+  console.log("Runs every 3 seconds");
+}, 3000);
+clearInterval(z);</code></pre>
+
+      <h3>Buffer</h3>
+      <p>
+        The <code>Buffer</code> class manages binary data directly, useful for streams, files, and network communication.
+      </p>
+      <pre><code>let x = Buffer.alloc(2);
+x.write("TP, TutorialsPoint");
+console.log(x.toString());</code></pre>
+      <p>Output:</p>
+      <p><strong>TP</strong></p>
+
+      <h2>Additional Global Objects</h2>
+      <table>
+        <thead>
+          <tr><th>Module Name</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><a href="https://www.tutorialspoint.com/nodejs/nodejs_console.htm">Console</a></td><td>For printing information on stdout and stderr.</td></tr>
+          <tr><td><a href="https://www.tutorialspoint.com/nodejs/nodejs_process.htm">Process</a></td><td>For information on the current process and related events.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

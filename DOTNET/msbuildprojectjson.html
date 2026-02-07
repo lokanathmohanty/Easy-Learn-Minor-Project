@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - MSBuild and Project File Differences</h1>
+
+        <div class="content">
+            <p>**MSBuild** is the official build platform for Microsoft and Visual Studio. While early **.NET Core** projects used the simpler **<code>project.json</code>** build system, the more complex needs of applications like **Universal Windows Platform (UWP)** required them to retain the traditional **<code>.csproj</code>** (MSBuild) build system.</p>
+            <p>This chapter illustrates the difference in file inclusion methods between the new (<code>project.json</code>) and old (<code>.csproj</code>/MSBuild) project systems.</p>
+        </div>
+
+        <h2 class="title">Project File Comparison</h2>
+        <div class="content">
+            <p>The type of project file present dictates the build system used:</p>
+            <ul>
+                <li class="content">
+                    **UWP Applications**: Use **<code>.csproj</code>** (MSBuild) and also include **<code>project.json</code>**. The **MSBuild** system is necessary because the <code>project.json</code> build system was not initially sufficient for UWP's requirements.
+                </li>
+                <li class="content">
+                    **.NET Core Console Apps (Older)**: Used **<code>project.json</code>** and **<code>.xproj</code>**.
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="title example">File Inclusion in MSBuild Projects (UWP)</h2>
+        <div class="content example">
+            <p>Unlike the **.NET Core Console App**, where dropping files into the root folder automatically included them, the **UWP (<code>.csproj</code>/MSBuild)** project requires explicit inclusion.</p>
+            <p>If you copy existing source files (e.g., <code>Student.cs</code> and <code>Course.cs</code>) into the project folder, the following manual steps are needed in Visual Studio:</p>
+            <ol>
+                <li class="content">
+                    **View Hidden Files**: Open the Solution Explorer and click the **Show All Files** icon. This reveals all files present in the physical project folder, including those not yet part of the project.
+                </li>
+                <li class="content">
+                    **Include in Project**: Select the new files (they will typically appear with a dashed icon). Right-click the selected files and choose **Include in Project**.
+                </li>
+            </ol>
+            <p>This difference highlights the greater control but reduced automation of the MSBuild-based system. It is anticipated that future SDK tools and Visual Studio versions may adopt the simpler, automatic file inclusion approach for <code>.csproj</code> files as well.</p>
+        </div>
+    </div>
+</div>

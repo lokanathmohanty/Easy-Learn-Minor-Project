@@ -1,0 +1,132 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - IndexedDB</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>The <strong>IndexedDB</strong> API is a new HTML5 concept that allows storing data inside the user’s browser. It is more powerful than Local Storage and is useful for applications that require large amounts of data to be stored. Such applications run more efficiently and load faster.</p>
+
+      <h2>Why Use IndexedDB?</h2>
+      <p>The W3C has announced that the Web SQL database is deprecated and should no longer be used. IndexedDB is the recommended alternative and is more effective than older storage technologies.</p>
+
+      <h2>Features of IndexedDB</h2>
+      <ul>
+        <li>Stores key–value pairs</li>
+        <li>Not a relational database</li>
+        <li>API is mostly asynchronous</li>
+        <li>No structured query language (SQL)</li>
+        <li>Access restricted to the same domain</li>
+      </ul>
+
+      <h2>Checking Browser Support</h2>
+      <pre><code>window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+
+window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+
+if (!window.indexedDB) {
+  window.alert("Your browser doesn't support a stable version of IndexedDB.");
+}
+</code></pre>
+
+      <h2>Opening an IndexedDB Database</h2>
+      <p>Before creating a database, let’s prepare some employee data:</p>
+      <pre><code>const employeeData = [
+  { id: "01", name: "Gopal K Varma", age: 35, email: "contact@tutorialspoint.com" },
+  { id: "02", name: "Prasad", age: 24, email: "prasad@tutorialspoint.com" }
+];
+</code></pre>
+
+      <h2>Adding Data</h2>
+      <pre><code>function add() {
+  var request = db.transaction(["employee"], "readwrite")
+    .objectStore("employee")
+    .add({ id: "01", name: "Prasad", age: 24, email: "prasad@tutorialspoint.com" });
+
+  request.onsuccess = function(event) {
+    alert("Prasad has been added to your database.");
+  };
+
+  request.onerror = function(event) {
+    alert("Unable to add data. Prasad already exists in your database!");
+  };
+}
+</code></pre>
+
+      <h2>Retrieving Data</h2>
+      <p>Using <code>get()</code>, we can retrieve stored data:</p>
+      <pre><code>function read() {
+  var transaction = db.transaction(["employee"]);
+  var objectStore = transaction.objectStore("employee");
+  var request = objectStore.get("00-03");
+
+  request.onerror = function(event) {
+    alert("Unable to retrieve data from database!");
+  };
+
+  request.onsuccess = function(event) {
+    if (request.result) {
+      alert("Name: " + request.result.name + 
+            ", Age: " + request.result.age + 
+            ", Email: " + request.result.email);
+    } else {
+      alert("Kenny couldn't be found in your database!");
+    }
+  };
+}
+</code></pre>
+
+      <h2>Reading All Data with Cursor</h2>
+      <pre><code>function readAll() {
+  var objectStore = db.transaction("employee").objectStore("employee");
+
+  objectStore.openCursor().onsuccess = function(event) {
+    var cursor = event.target.result;
+
+    if (cursor) {
+      alert("Name for id " + cursor.key + 
+            " is " + cursor.value.name + 
+            ", Age: " + cursor.value.age + 
+            ", Email: " + cursor.value.email);
+      cursor.continue();
+    } else {
+      alert("No more entries!");
+    }
+  };
+}
+</code></pre>
+
+      <h2>Removing Data</h2>
+      <pre><code>function remove() {
+  var request = db.transaction(["employee"], "readwrite")
+    .objectStore("employee")
+    .delete("02");
+
+  request.onsuccess = function(event) {
+    alert("Prasad's entry has been removed from your database.");
+  };
+}
+</code></pre>
+
+      <h2>HTML Example</h2>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;IndexedDB Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button onclick="read()"&gt;Read&lt;/button&gt;
+  &lt;button onclick="readAll()"&gt;Read All&lt;/button&gt;
+  &lt;button onclick="add()"&gt;Add Data&lt;/button&gt;
+  &lt;button onclick="remove()"&gt;Delete Data&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Complete Implementation</h2>
+      <p>The final implementation combines all the above code, initializing IndexedDB, adding, reading, and removing data using buttons for interaction.</p>
+
+    </div>
+  </div>
+</div>

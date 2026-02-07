@@ -1,0 +1,164 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Debugging</h1>
+
+    <div class="content">
+      <h2>What is Debugging?</h2>
+      <p>Debugging in JavaScript is a process of examining JavaScript code, finding errors, and fixing them. Errors may be logical, syntax, or runtime. An error in a program is called a bug, and the process of finding and fixing bugs is called debugging.</p>
+      <p>This section covers tools and techniques that can help with debugging tasks.</p>
+    </div>
+
+    <div class="content">
+      <h2>Use a JavaScript Debugger</h2>
+      <p>A debugger is a tool that lets programmers control script execution, examine values, and watch variables. Modern browsers include built-in debuggers in the developer tools console.</p>
+    </div>
+
+    <div class="content">
+      <h2>How to Open Console in the Browser?</h2>
+      <p>Below are steps for opening the console in different browsers:</p>
+
+      <h3>Open Console in Chrome</h3>
+      <ul>
+        <li>Windows/Linux: <code>Ctrl + Shift + I</code> or <code>Ctrl + Shift + J</code></li>
+        <li>macOS: <code>Cmd + Option + I</code> or <code>Cmd + Option + J</code></li>
+      </ul>
+      <p>Alternatively: Right-click → Inspect → Console tab.</p>
+
+      <h3>Open Console in Firefox</h3>
+      <ul>
+        <li>Windows/Linux: <code>Ctrl + Shift + I</code> or <code>Ctrl + Shift + J</code></li>
+        <li>macOS: <code>Cmd + Option + I</code> or <code>Cmd + Option + J</code></li>
+      </ul>
+      <p>Alternatively: Right-click → Inspect(Q) → Console tab.</p>
+
+      <h3>Open Console in Microsoft Edge</h3>
+      <p>Similar steps as Chrome. Right-click → Inspect → Console tab.</p>
+
+      <h3>Open Console in Safari</h3>
+      <p>Enable "Show Develop Menu" in Preferences → Advanced, then use Develop → Show Error Console.</p>
+
+      <h3>Open Console in Opera</h3>
+      <p>Use Menu → Developer → Developer Tools → Console.</p>
+    </div>
+
+    <div class="content">
+      <h2>Using the console.log() Method</h2>
+      <p>The <code>console.log()</code> method prints messages in the browser console. It can display values, objects, and expressions.</p>
+      <p>Syntax:</p>
+      <pre><code>console.log(val1, val2, ...);</code></pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Debugging Variable Types</h2>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;p&gt;Note: To see the result, open the console before running the code.&lt;/p&gt;
+   &lt;script&gt;
+      let num1 = "3";
+      let num2 = 2;
+      let sum = num1 + num2;
+      document.getElementById("output").innerHTML = "The sum is: " + sum;
+      console.log("typeof num1 is " + typeof num1);
+      console.log("typeof num2 is " + typeof num2);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><strong>Output:</strong> The sum is: 32</p>
+      <p>Console result:</p>
+      <ul>
+        <li>typeof num1 is string</li>
+        <li>typeof num2 is number</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Debugging Objects</h2>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="demo"&gt;&lt;/div&gt;
+   &lt;p&gt;Note: To see the result, open the console before running the code.&lt;/p&gt;
+   &lt;script&gt;
+      let output = document.getElementById("demo");
+      let person = {
+         name: "John",
+         age: 25,
+         city: "New York"
+      }
+      output.innerHTML = "The name of the person is: " + person.name + "&lt;br&gt;";
+      output.innerHTML += "The city of the person is: " + person.city + "&lt;br&gt;";
+      console.log(person);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><strong>Output:</strong> The name of the person is: John. The city of the person is: New York.</p>
+      <p>Console result: <code>{name: "John", age: 25, city: "New York"}</code></p>
+    </div>
+
+    <div class="content">
+      <h2>Using the debugger Keyword</h2>
+      <p>The <code>debugger</code> keyword pauses execution in the browser so you can inspect values before continuing.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Using debugger</h2>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="demo"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      const person = { name: "John", age: 25, city: "New York" };
+      debugger;
+      output.innerHTML = "The name of the person is: " + person.name + "&lt;br&gt;";
+      output.innerHTML += "The city of the person is: " + person.city;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Setting Breakpoints</h2>
+      <p>You can set breakpoints in the browser's Sources panel to pause execution on a specific line, similar to using <code>debugger</code>.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Breakpoints</h2>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;The resultant string after appending str2 to str1 is: &lt;/div&gt;
+   &lt;script&gt;
+      function test() {
+         let str1 = "Hi";
+         let str2 = "";
+         let res = str1.concat(str2);
+         document.getElementById("output").innerHTML += res;
+      }
+      test();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><strong>Output:</strong> The resultant string after appending str2 to str1 is: Hi</p>
+    </div>
+
+    <div class="content">
+      <h2>Useful Tips for Developers</h2>
+      <ul>
+        <li>Use comments to explain code logic.</li>
+        <li>Indent your code for readability.</li>
+        <li>Write modular functions for reusability.</li>
+        <li>Use consistent and descriptive variable/function names.</li>
+        <li>Test long scripts in smaller sections.</li>
+        <li>Be careful with quotation marks and equality operators.</li>
+        <li>Always declare variables explicitly.</li>
+      </ul>
+    </div>
+  </div>
+</div>

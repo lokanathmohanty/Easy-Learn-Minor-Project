@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Function Call by Value in C</h1>
+    
+    <div class="content">
+      <h2 class="title">Introduction</h2>
+      <p>In C language, a function can be called from any other function, including itself. There are two ways to call a function:</p>
+      <ul>
+        <li>Call by Value (default mechanism)</li>
+        <li>Call by Reference</li>
+      </ul>
+    </div>
+    
+    <div class="content">
+      <h2 class="title">Formal Arguments and Actual Arguments</h2>
+      <p><strong>Formal arguments:</strong> Variables defined in the function declaration/definition, acting as local variables inside the function.</p>
+      <p><strong>Actual arguments:</strong> The actual values or variables passed to the function when it is called.</p>
+      <p>Example of function declaration syntax:</p>
+      <pre><code>type function_name(type var1, type var2, ...)</code></pre>
+      <p>Here, <em>var1</em> and <em>var2</em> are formal arguments.</p>
+    </div>
+    
+    <div class="content">
+      <h2 class="title">How Call by Value Works</h2>
+      <p>The values of actual arguments are copied to the formal argument variables. Changes made inside the function do not affect the actual arguments.</p>
+    </div>
+    
+    <div class="content">
+      <h2 class="title">Example 1: Add Two Numbers Using Call by Value</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int add(int x, int y) {
+    int z = x + y;
+    return z;
+}
+
+int main() {
+    int a = 10, b = 20;
+    int c = add(a, b);
+    printf("Addition: %d", c);
+    return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Addition: 30</code></pre>
+    </div>
+    
+    <div class="content">
+      <h2 class="title">Memory Explanation</h2>
+      <p>Assume <code>a</code>, <code>b</code>, and <code>c</code> occupy memory locations 100, 200, and 300 respectively. When <code>add(a, b)</code> is called, values are copied into local variables <code>x</code> and <code>y</code> (say memory locations 1000 and 2000). The addition is stored in <code>z</code> (memory location 3000), and returned.</p>
+    </div>
+    
+    <div class="content">
+      <h2 class="title">Example 2: Swap Values Using Call by Value</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+/* function declaration */
+void swap(int x, int y);
+
+int main() {
+    int a = 100, b = 200;
+    printf("Before swap, value of a: %d\n", a);
+    printf("Before swap, value of b: %d\n", b);
+
+    swap(a, b);
+
+    printf("After swap, value of a: %d\n", a);
+    printf("After swap, value of b: %d\n", b);
+    return 0;
+}
+
+void swap(int x, int y) {
+    int temp = x;
+    x = y;
+    y = temp;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Before swap, value of a: 100
+Before swap, value of b: 200
+After swap, value of a: 100
+After swap, value of b: 200</code></pre>
+      <p>This shows that the swap inside the function does not affect the original variables because values are copied, not referenced.</p>
+    </div>
+    
+    <div class="content">
+      <h2 class="title">Summary</h2>
+      <ul>
+        <li>Call by Value passes copies of values to the function.</li>
+        <li>Changes inside the function do not affect the original variables.</li>
+        <li>It is simpler and avoids side effects but can be inefficient for large data.</li>
+        <li>To manipulate original variables, use Call by Reference instead.</li>
+      </ul>
+    </div>
+    
+    <div class="content">
+      <h2 class="title">Next Steps</h2>
+      <p>Explore <strong>Call by Reference</strong> in the next chapter to learn how to pass addresses to functions for direct manipulation of variables.</p>
+    </div>
+  </div>
+</div>

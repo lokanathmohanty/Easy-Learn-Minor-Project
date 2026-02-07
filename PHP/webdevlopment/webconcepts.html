@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Web Concepts and Dynamic Content</h1>
+        <div class="content">
+            <p>PHP is a **server-side scripting language** used to generate **dynamic webpages**. It operates on a Web server with an installed PHP module, communicating with the client browser via the **HTTP protocol**.</p>
+            
+            <h2 class="title">Adding Dynamic Content</h2>
+            <p>Dynamic content can be added on both the client and server side:</p>
+            <ul>
+                <li><strong>Client-Side:</strong> **JavaScript** runs in the browser, manipulating the HTML Document Object Model (DOM) to render dynamic content based on the client's environment (e.g., local time).</li>
+                <li><strong>Server-Side:</strong> **PHP** runs on the server, processing requests, interacting with databases, and generating the final HTML/data before sending it to the client (e.g., server time, user-specific data).</li>
+            </ul>
+
+            <h2 class="title">Core Web Application Capabilities with PHP</h2>
+            <p>PHP is instrumental in enabling essential web features:</p>
+            <ul>
+                <li>**Form Handling:** PHP intercepts and processes data submitted from HTML forms using methods like **HTTP GET** and **POST**.</li>
+                <li>**Database Interaction:** PHP interacts with databases (like MySQL) using extensions like `mysqli` or `PDO` to store, retrieve, and dynamically populate web pages.</li>
+                <li>**State Management:** It creates and manages **Sessions** (server-side tracking of user activity) and **Cookies** (client-side data storage) to maintain state across the stateless HTTP protocol.</li>
+                <li>**File Management:** It supports uploading files to the web server (images, documents, etc.).</li>
+                <li>**Security/Authentication:** It is used to implement login pages, check user credentials against a database, and manage user authentication.</li>
+            </ul>
+
+            <h2 class="title">Identifying Client Details</h2>
+            <p>PHP utilizes server environment variables to gather information about the client making the request. The **<code>$_SERVER['HTTP_USER_AGENT']</code>** variable is particularly useful as it contains a string identifying the user's browser, version, and operating system platform.</p>
+            
+            <h2 class="title">Browser Redirection</h2>
+            <p>PHP's **<code>header()</code>** function is used to send raw HTTP headers to the browser, which is commonly used to redirect the user to a different URL. The redirection must be done using the <code>Location:</code> header and must occur **before** any other output is sent to the browser.</p>
+            <pre><code>header("Location: http://www.example.com/new_page.php");
+exit(); // Essential to stop further script execution</code></pre>
+        </div>
+        
+        <h2 class="title">Example Session: Form Submission Basics</h2>
+        <div class="content example">
+            <p>This demonstrates a simple HTML form submission and how PHP processes the data using the **<code>$_POST</code>** superglobal array.</p>
+            
+            <pre><code>
+&lt;?php
+   // Check if form has been submitted
+   if( $_POST["name"] || $_POST["age"] ) {
+      echo "Welcome ". $_POST['name']. "&lt;br /&gt;";
+      echo "You are ". $_POST['age']. " years old.";
+      exit();
+   }
+?&gt;
+&lt;form action = "&lt;?php echo $_SERVER['PHP_SELF']; ?&gt;" method = "POST"&gt;
+   Name: &lt;input type = "text" name = "name" /&gt;
+   Age: &lt;input type = "text" name = "age" /&gt;
+   &lt;input type = "submit" /&gt;
+&lt;/form&gt;
+            </code></pre>
+            <p>The <code>action</code> attribute points back to the same script (using <code>$_SERVER['PHP_SELF']</code>) for processing, and the user's input is found in <code>$_POST['name']</code> and <code>$_POST['age']</code>.</p>
+        </div>
+    </div>
+</div>

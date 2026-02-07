@@ -1,0 +1,151 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Add Dictionary Items</h1>
+    <div class="content">
+      <p>
+        Adding dictionary items in Python means inserting new key-value pairs into an existing dictionary. Dictionaries are mutable, so their contents can be dynamically updated.
+      </p>
+      <p>Common ways to add items include using square brackets, <code>update()</code>, unpacking, union operators, <code>setdefault()</code>, and <code>collections.defaultdict()</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Add Item Using Square Brackets <code>[]</code></h2>
+    <div class="content">
+      <pre><code>
+marks = {"Savita": 67, "Imtiaz": 88, "Laxman": 91, "David": 49}
+print("Initial dictionary:", marks)
+
+marks["Kavya"] = 58    # Add new key-value pair
+print("Dictionary after new addition:", marks)
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        Initial dictionary: {'Savita': 67, 'Imtiaz': 88, 'Laxman': 91, 'David': 49}<br>
+        Dictionary after new addition: {'Savita': 67, 'Imtiaz': 88, 'Laxman': 91, 'David': 49, 'Kavya': 58}
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Add Multiple Items Using <code>update()</code> Method</h2>
+    <div class="content">
+      <pre><code>
+marks = {"Savita": 67, "Imtiaz": 88}
+print("Initial dictionary:", marks)
+
+marks.update({'Kavya': 58, 'Mohan': 98})    # Add multiple pairs
+print("Dictionary after new addition:", marks)
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        Initial dictionary: {'Savita': 67, 'Imtiaz': 88}<br>
+        Dictionary after new addition: {'Savita': 67, 'Imtiaz': 88, 'Kavya': 58, 'Mohan': 98}
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Add Items Using Unpacking Operator</h2>
+    <div class="content">
+      <pre><code>
+marks = {"Savita": 67, "Imtiaz": 88, "Laxman": 91, "David": 49}
+marks1 = {"Sharad": 51, "Mushtaq": 61, "Laxman": 89}
+
+newmarks = {**marks, **marks1}   # Combining dictionaries
+print("Marks after update:")
+print(newmarks)
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        Marks after update:<br>
+        {'Savita': 67, 'Imtiaz': 88, 'Laxman': 89, 'David': 49, 'Sharad': 51, 'Mushtaq': 61}
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Add Items Using Union Operator <code>|</code></h2>
+    <div class="content">
+      <pre><code>
+marks = {"Savita": 67, "Imtiaz": 88, "Laxman": 91, "David": 49}
+marks1 = {"Sharad": 51, "Mushtaq": 61, "Laxman": 89}
+
+newmarks = marks | marks1    # Merge dictionaries
+print("Marks after update:")
+print(newmarks)
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        Marks after update:<br>
+        {'Savita': 67, 'Imtiaz': 88, 'Laxman': 89, 'David': 49, 'Sharad': 51, 'Mushtaq': 61}
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Add Items Using <code>|=</code> Operator</h2>
+    <div class="content">
+      <pre><code>
+marks = {"Savita": 67, "Imtiaz": 88, "Laxman": 91, "David": 49}
+marks1 = {"Sharad": 51, "Mushtaq": 61, "Laxman": 89}
+
+marks |= marks1     # Update marks in-place
+print("Marks after update:")
+print(marks)
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        Marks after update:<br>
+        {'Savita': 67, 'Imtiaz': 88, 'Laxman': 89, 'David': 49, 'Sharad': 51, 'Mushtaq': 61}
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Add Item Using <code>setdefault()</code> Method</h2>
+    <div class="content">
+      <pre><code>
+student = {"name": "Alice", "age": 21}
+
+# Adds "major":"Computer Science" only if key is absent
+major = student.setdefault("major", "Computer Science")
+print(student)
+      </code></pre>
+      <p>Output:</p>
+      <p>{'name': 'Alice', 'age': 21, 'major': 'Computer Science'}</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Add Items Using <code>collections.defaultdict()</code> Method</h2>
+    <div class="content">
+      <pre><code>
+from collections import defaultdict
+
+# Default value 0 for missing keys
+d = defaultdict(int)
+d["a"] += 1
+print(d)
+
+# Default empty list for missing keys
+d = defaultdict(list)
+d["b"].append(1)
+print(d)
+
+# Using custom default factory function
+def default_value():
+    return "N/A"
+
+d = defaultdict(default_value)
+print(d["c"])
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        defaultdict(<class 'int'>, {'a': 1})<br>
+        defaultdict(<class 'list'>, {'b': [1]})<br>
+        N/A
+      </p>
+    </div>
+  </div>
+</div>

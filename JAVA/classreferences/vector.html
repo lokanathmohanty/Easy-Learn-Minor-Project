@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>Vector</code> Class Summary 🏗️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.Vector</code>** class is an implementation of the **<code>List</code>** interface that models a **dynamic array** (an array whose size can grow or shrink). It is a **legacy** class that was retrofitted into the Java Collections Framework (JCF) in Java 1.2.</p>
+
+            <h2 class="title">Key Characteristics and Differences from <code>ArrayList</code></h2>
+            <p>While similar to <code>ArrayList</code> in its underlying data structure, <code>Vector</code> has two crucial distinctions:</p>
+            <ul>
+                <li>
+                    <strong>Synchronization:</strong> **<code>Vector</code> is synchronized** (thread-safe). All its public methods are synchronized, ensuring that multiple threads can safely operate on a single <code>Vector</code> instance without external synchronization. This thread-safety, however, results in **slower performance** in single-threaded environments compared to the non-synchronized <code>ArrayList</code>.
+                </li>
+                <li>
+                    <strong>Legacy Methods:</strong> It contains numerous legacy methods (like <code>addElement()</code>, <code>elementAt()</code>, and <code>elements()</code>, which returns an **<code>Enumeration</code>**) that are not part of the standard JCF <code>List</code> interface.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Capacity Management</h2>
+        <p>A <code>Vector</code> manages its size using two properties:</p>
+        <ul class="example">
+            <li>
+                **Capacity:** The size of the internal array.
+            </li>
+            <li>
+                **Capacity Increment:** A value that determines how much the capacity increases when the vector becomes full. This can be controlled via the constructor:
+                <pre><code>// initialCapacity is 3, capacityIncrement is 2
+Vector v = new Vector(3, 2);</code></pre>
+                When the size reaches the capacity, the new capacity becomes $Capacity + CapacityIncrement$. If the increment is zero (the default), the capacity typically doubles.
+            </li>
+            <li>
+                **<code>int capacity()</code>:** Returns the size of the internal array.
+            </li>
+            <li>
+                **<code>void trimToSize()</code>:** Reduces the capacity of the vector to its current size to conserve memory.
+            </li>
+        </ul>
+
+        <hr>
+
+        <h2 class="title">Legacy Methods for Element Access and Iteration</h2>
+
+        <p>These methods pre-date the JCF and are generally considered obsolete, but are still present:</p>
+        <table>
+            <tr>
+                <th>Legacy Method</th>
+                <th>Modern <code>List</code> Equivalent</th>
+            </tr>
+            <tr>
+                <td><code>void addElement(E obj)</code></td>
+                <td><code>boolean add(E e)</code></td>
+            </tr>
+            <tr>
+                <td><code>E elementAt(int index)</code></td>
+                <td><code>E get(int index)</code></td>
+            </tr>
+            <tr>
+                <td><code>E firstElement()</code></td>
+                <td><code>E get(0)</code></td>
+            </tr>
+            <tr>
+                <td><code>Enumeration&lt;E&gt; elements()</code></td>
+                <td><code>Iterator&lt;E&gt; iterator()</code></td>
+            </tr>
+        </table>
+    </div>
+</div>

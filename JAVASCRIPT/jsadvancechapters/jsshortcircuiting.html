@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="session" data-session-id="js-short-circuiting">
+    <h1 class="title">JavaScript - Short-Circuiting</h1>
+
+    <div class="content">
+      <p>
+        In JavaScript, <strong>short-circuiting</strong> is a feature that checks conditions 
+        and stops as soon as it knows the result. It avoids evaluating the rest of the 
+        expression, preventing unnecessary operations.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Short-Circuiting with <code>&&</code> Operator</h2>
+      <p>
+        Short-circuit evaluation with the <code>&&</code> (AND) operator means if the first 
+        expression is <code>false</code>, the entire expression will be <code>false</code> 
+        and the rest will not be evaluated.
+      </p>
+      <pre>
+let x = 0 && "hello";        // x = 0, because 0 is falsy
+let y = true && "world";     // y = "world", first value is truthy
+let z = "hello" && "world";  // z = "world", both are truthy
+
+console.log(x);  // 0
+console.log(y);  // world
+console.log(z);  // world
+      </pre>
+      <p><strong>Output:</strong><br>0<br>world<br>world</p>
+    </div>
+
+    <div class="content">
+      <h2>Short-Circuiting with <code>||</code> Operator</h2>
+      <p>
+        Short-circuit evaluation with the <code>||</code> (OR) operator means if the first 
+        expression is <code>true</code>, the entire expression will be <code>true</code> 
+        and the rest will not be evaluated.
+      </p>
+      <pre>
+let x = 0 || "hello";        // x = "hello", 0 is falsy
+let y = true || "world";     // y = true, first value is truthy
+let z = "hello" || "world";  // z = "hello", first value is truthy
+
+console.log(x);  // hello
+console.log(y);  // true
+console.log(z);  // hello
+      </pre>
+      <p><strong>Output:</strong><br>hello<br>true<br>hello</p>
+    </div>
+
+    <div class="content">
+      <h2>Short-Circuiting in Assignments</h2>
+      <p>
+        Short-circuiting can also be used in assignments, making it easier to assign 
+        fallback values.
+      </p>
+      <pre>
+let x = 0;
+let y = 10;
+let z = x || y;  // z = 10, because x is falsy
+
+console.log(z);  // 10
+      </pre>
+      <p><strong>Output:</strong><br>10</p>
+    </div>
+
+    <div class="content">
+      <h2>Short-Circuiting in Function Calls</h2>
+      <p>
+        Short-circuiting is useful in function calls. For example, we can provide 
+        default values if an argument is falsy.
+      </p>
+      <pre>
+function greet(name) {
+   return name || "Guest";
+}
+
+let x = greet("John");  // "John" because name is truthy
+let y = greet("");      // "Guest" because name is falsy
+
+console.log(x);  // John
+console.log(y);  // Guest
+      </pre>
+      <p><strong>Output:</strong><br>John<br>Guest</p>
+    </div>
+
+     
+  </div>
+</div>

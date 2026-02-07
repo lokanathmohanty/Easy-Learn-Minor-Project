@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Constructors</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Object-Oriented Concepts</h1>
+            <h2 class="subtitle">Session: Java Constructors</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What are Java Constructors?</h2>
+                <p>Java **constructors** are special methods used to **initialize an object** immediately after it is created. They have the same name as their class and, unlike standard methods, **do not have an explicit return type** (not even <code>void</code>).</p>
+                <p>Constructors are typically used to assign initial values to **instance variables** or perform necessary setup procedures for a complete object.</p>
+            </div>
+
+            <div class="content rules">
+                <h2 class="subtitle">Rules for Creating Constructors</h2>
+                <ul>
+                    <li>The constructor's name **must** be the same as the class name.</li>
+                    <li>Constructors **must not** have a return type.</li>
+                    <li>Access modifiers (<code>public</code>, <code>private</code>, etc.) can be used to control visibility.</li>
+                    <li>**Constructor Overloading** (multiple constructors with different parameters) is allowed.</li>
+                </ul>
+            </div>
+
+            <div class="content default-constructor">
+                <h2 class="subtitle">The Default Constructor</h2>
+                <p>If you **do not** define any constructor in a class, Java automatically provides a **default constructor**. This default constructor initializes all member variables to their default values (e.g., <code>int</code> to 0, object references to <code>null</code>).</p>
+                <p>However, **once you define any constructor**, the Java-provided default constructor is no longer available.</p>
+            </div>
+
+            <div class="content types">
+                <h2 class="subtitle">Types of Java Constructors</h2>
+                <p>Java constructors are categorized primarily by the arguments they accept:</p>
+                <ol>
+                    <li>**No-Args Constructor:** A constructor explicitly defined by the user that accepts no arguments. It's often used to set explicit default values.</li>
+                    <li>**Parameterized Constructor:** A constructor that accepts one or more arguments to initialize the instance variables with specific values provided during object creation.</li>
+                </ol>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: No-Args vs. Parameterized Constructor</h2>
+                <p>This demonstrates how different constructors initialize the object's state:</p>
+                <pre><code>class Student {
+  String name;
+  int age;
+
+  // 1. No-args constructor (sets custom defaults)
+  Student() {
+    this.name = "Unknown";
+    this.age = 0;
+  }
+
+  // 2. Parameterized constructor
+  Student(String name, int age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Student std1 = new Student();           // Invokes No-Args
+    Student std2 = new Student("Paxton", 25); // Invokes Parameterized
+
+    // Output will show different initial states
+  }
+}</code></pre>
+            </div>
+
+            <div class="content overloading">
+                <h2 class="subtitle">Constructor Overloading</h2>
+                <p>**Constructor Overloading** is the process of having multiple constructors in a single class, provided each one has a unique parameter list (different number or type of arguments). This allows objects to be initialized in different ways.</p>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Constructor Overloading</h2>
+                <p>The <code>Student</code> class above demonstrates overloading by providing three constructors: one with no arguments, one with one argument (name), and one with two arguments (name and age).</p>
+                <pre><code>public class Main {
+  public static void main(String[] args) {
+    Student std1 = new Student();              // Uses no-args
+    Student std2 = new Student("Jordan");      // Uses 1-parameter
+    Student std3 = new Student("Paxton", 25);  // Uses 2-parameters
+    
+    // Each object is initialized differently based on the call.
+    // ... code to print details ...
+  }
+}</code></pre>
+                <p>Output highlights the different initialization paths:</p>
+                <pre><code>std1...
+Name : Unknown
+Age : 0
+std3...
+Name : Paxton
+Age : 25</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

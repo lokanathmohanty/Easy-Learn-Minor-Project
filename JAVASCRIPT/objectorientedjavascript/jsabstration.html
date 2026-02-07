@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Abstraction</h1>
+    
+    <div class="content">
+      <h2>Abstraction in JavaScript</h2>
+      <p>The abstraction in JavaScript can be achieved using the abstract class. In object-oriented programming, the abstraction concept allows you to hide the implementation details and expose features only to the users.</p>
+      <p>For example, you can execute the <code>Math</code> object methods in JavaScript by accessing the method using its name but cannot see how it is implemented. Similarly, array methods like <code>push()</code>, <code>pop()</code>, etc., can be executed without knowing their internal implementation.</p>
+      <p>So, abstraction makes code cleaner by exposing the required features and hiding the internal implementation details.</p>
+    </div>
+
+    <div class="content">
+      <h2>How to Achieve Abstraction in JavaScript?</h2>
+      <p>In most programming languages, you can achieve abstraction using the abstract class. The abstract class contains only method declaration but not implementation. Furthermore, you need to implement the methods declared in the abstract class into the child class. Also, you cannot create an instance of the abstract class.</p>
+      <p>JavaScript does not allow creating an abstract class like Java or C++ natively, but you can achieve the same functionality using the object constructor function.</p>
+    </div>
+
+    <div class="content">
+      <h2>Creating the Abstract Class</h2>
+      <p>In the example below, the <code>fruit()</code> function initializes the <code>name</code> property. When anyone creates an instance of <code>fruit()</code>, the constructor property becomes equal to <code>fruit</code>. To prevent creating an instance, we throw an error.</p>
+      <p>We also add the <code>getName()</code> method to the prototype. After that, creating an instance of <code>fruit()</code> will throw an error.</p>
+
+      <h3>Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      try {
+         function fruit() {
+            this.name = "Fruit";
+            if (this.constructor === fruit) {
+               throw new Error("You can't create the instance of the fruit.");
+            }
+         }
+         fruit.prototype.getName = function () {
+            return this.name;
+         }
+         const apple = new fruit();
+      } catch (error) {
+         document.getElementById("output").innerHTML = error;
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h3>Output</h3>
+      <p>Error: You can't create the instance of the fruit.</p>
+    </div>
+
+    <div class="content">
+      <h2>Extending the Abstract Class</h2>
+      <p>In this example, the <code>fruit()</code> constructor is similar to the above example. We implement the <code>Apple()</code> constructor, initializing the <code>name</code> property.</p>
+      <p>We then assign the prototype of <code>fruit()</code> to <code>Apple()</code> using the <code>Object.create()</code> method. This allows <code>Apple()</code> to inherit the properties and methods of <code>fruit</code>.</p>
+
+      <h3>Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;The name of the fruit is: &lt;/div&gt;
+   &lt;script&gt;
+      function fruit() {
+         this.name = "Fruit";
+         if (this.constructor === fruit) {
+            throw new Error("You can't create the instance of the fruit.");
+         }
+      }
+      fruit.prototype.getName = function () {
+         return this.name;
+      }
+      function Apple(fruitname) {
+         this.name = fruitname;
+      }
+      Apple.prototype = Object.create(fruit.prototype);
+      const apple = new Apple("Apple");
+      document.getElementById("output").innerHTML += apple.getName();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h3>Output</h3>
+      <p>The name of the fruit is: Apple</p>
+    </div>
+
+    <div class="content">
+      <h2>Conclusion</h2>
+      <p>The prototype implements the <code>getName()</code> method in the above code, so the implementation is hidden.</p>
+      <p>This way, you can use an object constructor to achieve abstraction in JavaScript.</p>
+    </div>
+
+  </div>
+</div>

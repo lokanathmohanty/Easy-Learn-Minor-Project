@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Constructor</h1>
+    <div class="content">
+      <p>
+        In JavaScript, the <code>constructor</code> method is used to set the initial values of a newly created object.  
+        In React class-based components, the <code>constructor()</code> serves the same purpose. It is mainly used for:
+      </p>
+      <ul>
+        <li>Initializing <strong>props</strong></li>
+        <li>Initializing <strong>state</strong></li>
+        <li>Binding <strong>event handlers</strong></li>
+      </ul>
+
+      <h2>1. Initialization of Props</h2>
+      <p>
+        Props must be initialized using <code>super(props)</code> inside the constructor.  
+        If not properly initialized, <code>this.props</code> may not work correctly.
+      </p>
+
+      <pre><code>class Welcome extends React.Component {
+   constructor(props) {
+      super(props);
+   }
+   render() {
+      return (
+         &lt;div&gt;&lt;h3&gt;Welcome {this.props.name}&lt;/h3&gt;&lt;/div&gt;
+      )
+   }
+}
+</code></pre>
+
+      <p>Usage:</p>
+      <pre><code>function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;Welcome name="John" /&gt;
+      &lt;/div&gt;
+   );
+}
+</code></pre>
+
+      <h2>2. Initialization of State</h2>
+      <p>
+        State can also be initialized inside the constructor using <code>this.state</code>.
+      </p>
+      <ul>
+        <li><code>this.state = { key: value }</code> → to initialize state</li>
+        <li><code>this.state.key</code> → to access state</li>
+        <li><code>this.setState()</code> → to update state</li>
+      </ul>
+
+      <pre><code>class Welcome extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         welcomeMessage: "Hello"
+      }
+   }
+   render() {
+      return (
+         &lt;div&gt;&lt;h3&gt;{this.state.welcomeMessage}, {this.props.name}&lt;/h3&gt;&lt;/div&gt;
+      )
+   }
+}
+</code></pre>
+
+      <p>Usage:</p>
+      <pre><code>function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;Welcome name="John" /&gt;
+      &lt;/div&gt;
+   );
+}
+</code></pre>
+
+      <h2>3. Event Binding</h2>
+      <p>
+        Event handlers must be bound to the component instance in the constructor to ensure
+        <code>this</code> works correctly inside them.
+      </p>
+
+      <pre><code>import React from "react";
+
+class Welcome extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         welcomeMessage: "Hello"
+      }
+      this.changeMessageHandler = this.changeMessageHandler.bind(this);
+   }
+
+   changeMessageHandler() {
+      this.setState(prevState => ({
+         welcomeMessage: prevState.welcomeMessage === "Hello" ? "Welcome" : "Hello"
+      }));
+   }
+
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;h3&gt;{this.state.welcomeMessage}, {this.props.name}&lt;/h3&gt;
+            &lt;button onClick={this.changeMessageHandler}&gt;Change welcome message&lt;/button&gt;
+         &lt;/div&gt;
+      );
+   }
+}
+export default Welcome;
+</code></pre>
+
+      <p>Usage:</p>
+      <pre><code>function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;Welcome name="John" /&gt;
+      &lt;/div&gt;
+   );
+}
+</code></pre>
+
+      <h2>Steps for Event Binding</h2>
+      <ul>
+        <li>Add a button with an <code>onClick</code> event</li>
+        <li>Set the event handler method as the <code>onClick</code> function</li>
+        <li>Bind the method inside the <code>constructor</code></li>
+        <li>Update state using <code>this.setState()</code></li>
+      </ul>
+
+      <h2>Summary</h2>
+      <p>
+        The <code>constructor()</code> in React class components is essential for setting up the component correctly.  
+        It ensures that props, state, and event handlers are properly initialized before the component renders.
+      </p>
+    </div>
+  </div>
+</div>

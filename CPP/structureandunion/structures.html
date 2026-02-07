@@ -1,0 +1,100 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">C++ Structures (<code>struct</code>) 🧱</h1>
+
+        <div class="content">
+            <p>A C++ **structure** (or **<code>struct</code>**) is a **user-defined data type** that allows you to group related variables of **different data types** under a single name. Structures are commonly used to represent a record or a composite entity.</p>
+
+            <h3>Defining a Structure</h3>
+            <p>You use the `struct` keyword to define a new data type with multiple members (variables) inside it.</p>
+            <pre class="example">
+struct [structure tag] {
+   member definition; // e.g., int id;
+   member definition; // e.g., char name[50];
+   ...
+} [optional variables]; 
+</pre>
+            <p>The **structure tag** (like `Books` in the example below) is the name of the new data type.</p>
+            <pre class="example">
+struct Books {
+   char  title[50];
+   char  author[50];
+   char  subject[100];
+   int   book_id;
+}; // Semicolon is mandatory!
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Accessing Structure Members</h2>
+            <p>To access the individual variables (members) within a structure, you use the **member access operator** (a period: **<code>.</code>**).</p>
+            <pre class="example">
+struct Books Book1; // Declare a variable of type Books
+
+// Accessing and setting members
+strcpy(Book1.title, "Learn C++");
+Book1.book_id = 6495407; 
+
+// Accessing and printing members
+cout << "Book title: " << Book1.title << endl;
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Structures with Functions and Pointers</h2>
+
+            <h3>Structures as Function Arguments</h3>
+            <p>Structures can be passed to functions just like any other variable. By default, they are passed **by value** (a copy is created), which can be inefficient for large structures.</p>
+            <pre class="example">
+// Function declaration: passes the structure by value (creates a copy)
+void printBook(struct Books book);
+
+// Call:
+printBook(Book1); 
+</pre>
+
+            <h3>Pointers to Structures</h3>
+            <p>To avoid copying large structures, or to allow the function to modify the original structure, you pass the structure's **address** (a pointer).</p>
+            <pre class="example">
+// Declaration of a pointer to a Books structure
+struct Books *struct_pointer;
+
+// Storing the address of Book1
+struct_pointer = &Book1; 
+</pre>
+            <p>To access members using a structure pointer, you must use the **structure dereference operator** (**<code>-&gt;</code>**), which is shorthand for `(*struct_pointer).member`.</p>
+            <pre class="example">
+// Accessing members using the pointer operator ->
+void printBook(struct Books *book_ptr) {
+   cout << "Title: " << book_ptr->title << endl;
+}
+
+// Call:
+printBook(&Book1); // Pass the address
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">The <code>typedef</code> Keyword</h2>
+            <p>The **<code>typedef</code>** keyword provides a convenient way to create an **alias** (a new name) for an existing data type. When used with structures, it allows you to define structure variables without repeatedly using the `struct` keyword.</p>
+            <pre class="example">
+typedef struct {
+   char  title[50];
+   int   book_id;
+} Books; // 'Books' is now an alias for the structure type
+
+int main() {
+   // No need to use 'struct Books'
+   Books Book1, Book2; 
+   // ...
+}
+</pre>
+        </div>
+    </div>
+</div>

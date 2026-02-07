@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Navigation and Linking 🔗</h1>
+        
+        <div class="content">
+            <h2 class="title">Client-Side Navigation with the `&lt;Link&gt;` Component</h2>
+            <p>The primary way to handle navigation between routes in Next.js is through the built-in **<span class="example">`&lt;Link&gt;`</span>** component, which extends the standard HTML <span class="example">`&lt;a&gt;`</span> tag. The <span class="example">`&lt;Link&gt;`</span> component provides client-side, smooth transitions between pages and handles prefetching for improved performance.</p>
+            
+            <h3 class="title">Basic Usage:</h3>
+            <p>You import <span class="example">`&lt;Link&gt;`</span> from <span class="example">`'next/link'`</span> and use the **<span class="example">`href`</span>** attribute to specify the destination route.</p>
+            <pre>// app/layout.tsx (Example in a shared layout)
+import Link from 'next/link'; 
+
+export default function RootLayout({ children }) {
+  return (
+    &lt;header&gt;
+        &lt;ul&gt; 
+            &lt;li&gt;&lt;Link href="/"&gt;Home&lt;/Link&gt;&lt;/li&gt; 
+            &lt;li&gt;&lt;Link href="/about"&gt;About Us&lt;/Link&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;main&gt;{children}&lt;/main&gt;
+    &lt;/header&gt;
+  );
+}</pre>
+            
+            <h3 class="title">Linking to Dynamic Paths:</h3>
+            <p>To link to dynamic routes (e.g., <span class="example">`/products/[id]`</span>), you use **template literals** (backticks) in the <span class="example">`href`</span> to embed the variable path segment.</p>
+            <pre>import Link from 'next/link'
+
+export default function Products() {
+    const productId = "Mac-Book-Pro";
+
+    return (
+        &lt;ul&gt;
+            &lt;li&gt;&lt;Link href="/products/IPhone"&gt;Iphone&lt;/Link&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;Link href={`/products/${productId}`}&gt;{productId}&lt;/Link&gt;&lt;/li&gt; &lt;!-- Dynamic link --&gt;
+        &lt;/ul&gt;
+    );
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Programmatic (Imperative) Navigation</h2>
+            <p>For scenarios where navigation must occur based on a dynamic condition, a form submission, or a button click, you must use **imperative routing** with the **<span class="example">`useRouter`</span>** hook.</p>
+            
+            <h3 class="title">Implementation:</h3>
+            <ul>
+                <li>The logic must be in a **Client Component** (marked with <span class="example">`"use client"`</span>).</li>
+                <li>Import <span class="example">`useRouter`</span> from **<span class="example">`next/navigation`</span>**.</li>
+                <li>Use methods like <span class="example">`router.push(path)`</span> to navigate.</li>
+            </ul>
+            
+            <h3 class="title">Example: Redirecting After User Action</h3>
+            <pre>"use client";
+import { useRouter } from "next/navigation";
+
+export default function ProductPage({ params }) {
+    const router = useRouter();
+
+    const handleClick = () =&gt; {
+        alert("Order Placed...");
+        
+        // Programmatic navigation to the home page (/)
+        router.push("/"); 
+    };
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Product {params.id}&lt;/h1&gt;
+            &lt;button onClick={handleClick}&gt;Order Item&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}</pre>
+        </div>
+    </div>
+</div>

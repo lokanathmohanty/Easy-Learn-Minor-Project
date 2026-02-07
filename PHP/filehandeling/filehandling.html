@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP File Handling (File I/O)</h1>
+
+    <div class="content">
+      <p>
+        **File Handling** in PHP refers to the functions used to perform persistent read and write operations on disk files. A file, when opened in PHP, is treated as a **stream**, which is a resource object for linear data transfer. This process is crucial for tasks like **logging, configuration management, and data persistence**.
+      </p>
+
+      <h2>The Four Fundamental Steps</h2>
+
+      <h3>1. Opening a File (`fopen()`) 🔓</h3>
+      <p>
+        The `fopen()` function establishes a connection to the file resource. It takes the file path and a **mode** as parameters and returns a file pointer resource or `FALSE` on failure.
+      </p>
+      <div class="example">
+        <p>
+          <code>$file = **fopen**("myfile.txt", "**r**");</code>
+        </p>
+        <p>
+          **Common Modes:**
+          <ul>
+            <li>**`r`**: Read only (starts at the beginning).</li>
+            <li>**`w`**: Write only (creates the file if it doesn't exist, **TRUNCATES** to zero length if it does).</li>
+            <li>**`a`**: Write only (appends to the end of the file; creates if it doesn't exist).</li>
+            <li>**`r+`**: Read and write (starts at the beginning).</li>
+            <li>**`w+`**: Read and write (TRUNCATES the file).</li>
+          </ul>
+        </p>
+      </div>
+
+      <h3>2. Reading Data (`fgets()` / `fread()`) 📖</h3>
+      <p>
+        Once the file is open, you can retrieve its contents using various functions:
+      </p>
+      <ul>
+        <li>**`fgets($file)`**: Reads a **single line** from the file pointer. Useful for processing text files line by line.</li>
+        <li>**`fread($file, $length)`**: Reads a specified number of **bytes** (or the entire file if the length is specified as the file size).</li>
+      </ul>
+
+      <h3>3. Writing Data (`fwrite()`) ✍️</h3>
+      <p>
+        The `fwrite()` function is used to write content to a file that has been opened in a write (`w`, `a`, `w+`, `a+`, etc.) mode.
+      </p>
+      <div class="example">
+        <p>
+          <code>$file = fopen("log.txt", "a");</code><br>
+          <code>**fwrite**($file, "Log entry: " . date('Y-m-d'));</code>
+        </p>
+      </div>
+
+      <h3>4. Closing a File (`fclose()`) 🛑</h3>
+      <p>
+        It is essential to use `fclose()` when you are finished with a file pointer. This frees up system resources and ensures that all buffered output is written to the file on disk, preventing data loss or resource leaks.
+      </p>
+      <div class="example">
+        <p>
+          <code>// ... operations ...</code><br>
+          <code>**fclose**($file);</code><br>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Error Handling and Stream Wrappers</h2>
+      <ul>
+        <li>
+          **Error Checking:** Always check the return value of `fopen()` to ensure the file was opened successfully (e.g., `if (!$file) { ... }`) before attempting to read or write.
+        </li>
+        <li>
+          **Stream Wrappers:** PHP handles various resource types (files, network sockets, data URLs) using **stream wrappers** (schemes). The default is the `file://` scheme, but others like `http://` and `ftp://` are also available and returned by the `stream_get_wrappers()` function.
+        </li>
+        <li>
+          **Standard Streams:** PHP also recognizes the standard I/O streams: **`php://stdin`** (keyboard input), **`php://stdout`** (screen output), and **`php://stderr`** (error output), represented by constants `STDIN`, `STDOUT`, and `STDERR`.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

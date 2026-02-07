@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>TreeSet</code> Class Summary 🌳🗂️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.TreeSet</code>** class is an implementation of the **<code>Set</code>** interface that guarantees elements are always stored and retrieved in **sorted (ascending)** order. It is backed internally by a **<code>TreeMap</code>**, which uses a **Red-Black Tree** structure to maintain this sorted order efficiently.</p>
+
+            <hr>
+
+            <h2 class="title">I. Core Characteristics and Ordering</h2>
+            <ul>
+                <li>
+                    <strong>Sorted Order:</strong> Elements are always arranged and iterated based on their sort order, not insertion order. This order is enforced either by the element's **natural ordering** or by a **<code>Comparator</code>** provided at construction.
+                </li>
+                <li>
+                    <strong>Uniqueness:</strong> Like all Sets, it does not permit duplicate elements. Uniqueness is determined by the sorting mechanism (i.e., if two elements compare as equal, only one is stored).
+                </li>
+                <li>
+                    <strong>Implementation:</strong> It is backed by a `TreeMap`. Elements added to the `TreeSet` become the **keys** of the internal map, and the values are dummy objects.
+                </li>
+                <li>
+                    <strong>Non-Synchronized:</strong> It is **not thread-safe**.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Performance and Requirements</h2>
+            <ul>
+                <li>
+                    **Time Complexity:** Basic operations like **<code>add()</code>**, **<code>remove()</code>**, and **<code>contains()</code>** run in **$O(\log n)$ (logarithmic time)**. This is slower than the constant time ($O(1)$) of a `HashSet`, but the trade-off is the guaranteed sorting.
+                </li>
+                <li>
+                    **Element Requirement:** Elements inserted into a `TreeSet` **must be mutually comparable**. They must either:
+                    <ol>
+                        <li>Implement the **<code>Comparable</code>** interface (for natural ordering).</li>
+                        <li>Have their ordering defined by a **<code>Comparator</code>** supplied to the `TreeSet` constructor.</li>
+                    </ol>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. NavigableSet Functionality</h2>
+            <p><code>TreeSet</code> implements the **<code>NavigableSet</code>** interface, which adds powerful methods for efficiently querying and navigating the sorted data:</p>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><code>E **first()**</code> / <code>E **last()**</code></td>
+                    <td>Returns the lowest/highest element.</td>
+                </tr>
+                <tr>
+                    <td><code>E **pollFirst()**</code> / <code>E **pollLast()**</code></td>
+                    <td>Retrieves and removes the lowest/highest element.</td>
+                </tr>
+                <tr>
+                    <td><code>E **floor(E e)**</code> / <code>E **ceiling(E e)**</code></td>
+                    <td>Returns the greatest element $\le e$ (floor) or the least element $\ge e$ (ceiling).</td>
+                </tr>
+                <tr>
+                    <td><code>SortedSet&lt;E&gt; **subSet(...)**</code></td>
+                    <td>Returns a view of a specific range of the set.</td>
+                </tr>
+                <tr>
+                    <td><code>Iterator&lt;E&gt; **descendingIterator()**</code></td>
+                    <td>Provides an iterator that traverses the set from highest to lowest element.</td>
+                </tr>
+            </table>
+
+            <div class="example">
+                <p>The example confirms that even though the elements were added in no particular order, the output (iteration) is sorted:</p>
+                <pre><code>// Insertion Order: 12, 13, 14, 15 (Already sorted in this case)
+
+// Output (TreeSet always guarantees sorted order):
+Tree set : [12, 13, 14, 15]</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

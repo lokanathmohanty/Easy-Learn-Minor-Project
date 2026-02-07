@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>HTML Classes - E-Learning Session</title>
+</head>
+<body>
+   <div class="container">
+      <div class="session">
+         <h1 class="title">HTML - Classes</h1>
+         <div class="content">
+            <p>
+               The class is an important keyword in HTML. It is an attribute that can be applied to one or more elements and is used to style and categorize elements based on common characteristics or purpose. Classes allows multiple elements to share the same styling rules. By assigning the same class to multiple elements, you can apply CSS styles or JavaScript functionality to all of them simultaneously. This promotes consistency in design and layout, making it easier to manage and update a website.
+            </p>
+            <p>
+               HTML class attribute is defined in the HTML code using the "class" keyword, and the styling is determined in CSS. This separation of content and style is a key principle in web design, facilitating the creation of visually appealing and organized web pages.
+            </p>
+
+            <h2>Syntax for Class</h2>
+            <p>
+               To create a CSS rule for HTML elements using class attribute in CSS write a (.) followed by the class name mentioned in HTML element, the we can define the CSS prpeties with curly braces in key: value; format like color: yellow;.
+            </p>
+            <p>
+               In this code, we've selected a class named "highlight" that changes the background color, text color, and font weight of the elements it's applied to.
+            </p>
+            <p>In HTML:</p>
+            <pre>
+&lt;element class="highlight"&gt;...&lt;/element&gt;
+            </pre>
+            <p>In CSS:</p>
+            <pre>
+/* CSS using class Attribute Selector */
+.highlight {
+   background-color: yellow;
+   color: black;
+   font-weight: bold;
+}
+            </pre>
+            <p>In JavaScript:</p>
+            <pre>
+document.getElementsByClassName('highlight')
+            </pre>
+
+            <h2>Using HTML Class Attribute</h2>
+            <p>
+               HTML classes are essential for styling and formatting web page elements consistently. They allow you to apply the same styles to multiple elements without repeating code, promoting maintainability and a cohesive design. The class attribute can be used on any HTML Elements(Except elements placed in head element). Here's how to use classes effectively with a practical example.
+            </p>
+
+            <h2>Define a Class for Styling</h2>
+            <p>
+               In the following example, we have create two element one is h1 and other is p, and we set class on them as well "header" &amp; "heightlight" but using the "heightlight" class in internal CSS to style our p element. You can use the "header" class in the similar way to style the h1 element.
+            </p>
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+   &lt;style&gt;
+      &lt;!-- CSS class attribute Selector Used --&gt;
+      .highlight {
+         background-color: yellow;
+         color: black;
+         padding: 5px;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+   &lt;!-- Using class attribute in both Element--&gt;
+   &lt;h1 class="header"&gt;Tutorialspoint&lt;/h1&gt;
+   &lt;p class="highlight"&gt;Simply Easy Learning&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+            </pre>
+
+            <h2>Multiple classes</h2>
+            <p>
+               We can apply multiple classes to a single element by separating class names with a space.
+            </p>
+            <p>
+               In the following example, the &lt;h1&gt; element has two classes applied "heading" and "content." This is achieved using a space to separate the class names within the class attribute.
+            </p>
+            <p>
+               Multiple classes can be applied to the same element to inherit styling from both classes. In this case, "heading" class provides a large font size and center alignment, while the "content" class provides a specific text color and line-height.
+            </p>
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;style&gt;
+        .heading {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+        }
+
+        .content {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;!-- Defined two Classes in h1 Element --&gt;
+    &lt;h1 class="heading content"&gt;
+        Welcome to Tutorialspoint
+    &lt;/h1&gt;
+    &lt;p class="content"&gt;
+        We make Tutorials - Simply Easy Learning
+    &lt;/p&gt;
+    &lt;button class="button"&gt;Click Me&lt;/button&gt; 
+&lt;/body&gt;
+
+&lt;/html&gt;
+            </pre>
+
+            <h2>Same class on Multiple Elements</h2>
+            <p>
+               The most important feature of classes is their reusability. You can apply the same class to multiple elements to maintain a consistent look throughout your website. Here in the following example we create 2 p elements(paragraphs). Both of these paragraphs will have the same highlighting because they share the "highlight" class.
+            </p>
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+   &lt;style&gt;
+      .highlight {
+         background-color: yellow;
+         color: black;
+         font-weight: bold;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+   &lt;p class="highlight"&gt;
+      To create a class, you need to define it within
+      your HTML document or link to an external CSS 
+      file that contains class definitions. Classes 
+      are defined using the "class" attribute.
+   &lt;/p&gt;
+   &lt;p class="highlight"&gt;
+      HTML classes are essential for styling and formatting
+      web page elements consistently. They allow you to apply
+      the same styles to multiple elements without repeating 
+      code, promoting maintainability and a cohesive design.
+   &lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+            </pre>
+
+            <h2>Using class Attribute through JavaScript</h2>
+            <p>
+               HTML classes are versatile and serve various purposes beyond styling.
+            </p>
+            <p>
+               The classes are frequently used to identify elements for JavaScript functions. For example, you can use a class to target specific elements, like buttons, and make them interactive through JavaScript. In the following code we have create a button which will trigger a function that will change the display property none to block of a p element. You will see a paragraph.
+            </p>
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+   &lt;script&gt;
+      function showContent() {
+         var element = document.getElementsByClassName('content')[0];
+         if (element.style.display === 'none') {
+            element.style.display = 'block';
+         } else {
+            element.style.display = 'none';
+         }
+      }
+   &lt;/script&gt;
+   &lt;style&gt;
+      .interactive-button {
+         background-color: #007bff;
+         color: #fff;
+         padding: 10px 20px;
+         border: none;
+         cursor: pointer;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+   &lt;button class="interactive-button" 
+           onclick="showContent()"&gt;Click Me&lt;/button&gt;
+   &lt;p class="content" style="display: none;"&gt;
+       This content can be toggled by clicking the button.
+   &lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+            </pre>
+
+            <h2>Things to Remember about Class</h2>
+            <ul>
+               <li>More than 1 class can be define on any HTML element.</li>
+               <li>Class are used by CSS and JavaScript both to select the element.</li>
+               <li>The class is case sensitive so be careful when you are using to select the element.</li>
+               <li>Multiple elements can have the same class as well.</li>
+               <li>In CSS we use .className and in JavaScript getElementsByClassName() method to select the class assigned HTML element.</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</body>
+</html>

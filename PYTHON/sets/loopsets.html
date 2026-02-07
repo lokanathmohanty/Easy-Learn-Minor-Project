@@ -1,0 +1,129 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Loop Through Set Items</h1>
+    <div class="content">
+      <p>
+        Looping through <a href="https://www.tutorialspoint.com/python/python_sets.htm" target="_blank" rel="noopener">set</a> items in Python means iterating over each element in a set to perform operations such as printing, filtering, or applying conditions.
+      </p>
+      <p>
+        Sets are unordered collections, so elements are accessed in an arbitrary order. The most common way to loop through set items is using a <code>for</code> loop.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Loop Through Set Items with For Loop</h2>
+    <div class="content">
+      <p>
+        A <code>for</code> loop is used to iterate over a set and access each element.
+      </p>
+      <pre>
+for item in set:
+   # Code block to execute
+      </pre>
+      <p>Example:</p>
+      <pre>
+my_set = {25, 12, 10, -21, 10, 100}
+
+for item in my_set:
+   print("Item:", item)
+      </pre>
+      <p>Output example (order may vary):<br/>
+      Item: 100<br/>
+      Item: 25<br/>
+      Item: 10<br/>
+      Item: -21<br/>
+      Item: 12
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Loop Through Set Items with While Loop</h2>
+    <div class="content">
+      <p>
+        You can loop through a set with a <code>while</code> loop by converting the set to an iterator and iterating manually.
+      </p>
+      <pre>
+my_set = {1, 2, 3, 4, 5}
+set_iterator = iter(my_set)
+
+while True:
+   try:
+      item = next(set_iterator)
+      print("Item:", item)
+   except StopIteration:
+      break
+      </pre>
+      <p>Output example:<br/>
+      Item: 1<br/>
+      Item: 2<br/>
+      Item: 3<br/>
+      Item: 4<br/>
+      Item: 5
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Iterate Using Set Comprehension</h2>
+    <div class="content">
+      <p>
+        Set comprehensions provide a concise syntax to create a set by iterating over an iterable and optionally filtering elements.
+      </p>
+      <pre>
+numbers = [1, 2, 3, 4, 5]
+squares_of_evens = {x**2 for x in numbers if x % 2 == 0}
+print(squares_of_evens)
+      </pre>
+      <p>Output:<br/>
+      <code>{16, 4}</code>
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Iterate Through a Set Using <code>enumerate()</code></h2>
+    <div class="content">
+      <p>
+        The <code>enumerate()</code> function adds an index to each element during iteration. Since sets are unordered, convert the set into a list first.
+      </p>
+      <pre>
+my_set = {1, 2, 3, 4, 5}
+set_list = list(my_set)
+
+for index, item in enumerate(set_list):
+   print("Index:", index, "Item:", item)
+      </pre>
+      <p>Output example:<br/>
+      Index: 0 Item: 1<br/>
+      Index: 1 Item: 2<br/>
+      Index: 2 Item: 3<br/>
+      Index: 3 Item: 4<br/>
+      Index: 4 Item: 5
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Loop Through Set Items with <code>add()</code> Method</h2>
+    <div class="content">
+      <p>
+        The <code>add()</code> method adds an element to a set. You can loop over a sequence and add elements to a set with this method.
+      </p>
+      <pre>
+my_set = set()
+
+for i in range(5):
+   my_set.add(i)
+
+print(my_set)
+      </pre>
+      <p>Output:<br/>
+      <code>{0, 1, 2, 3, 4}</code>
+      </p>
+    </div>
+  </div>
+
+</div>

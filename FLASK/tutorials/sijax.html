@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask-Sijax: Simplified AJAX Integration ✨</h1>
+        <div class="content">
+            <p>**Sijax** (Simple Ajax) is a **Python/jQuery library** designed to simplify the integration of **AJAX** (Asynchronous JavaScript and XML) functionality into a web application. The **Flask-Sijax** extension facilitates its use within the Flask framework.</p>
+
+            <h2>Installation and Configuration</h2>
+            <p>The extension is installed using pip: <code>pip install flask-sijax</code>.</p>
+            <p>Key configuration settings for Flask-Sijax include:</p>
+            <ul>
+                <li>**<code>SIJAX_STATIC_PATH</code>:** Specifies the filesystem path where Sijax JavaScript files (<code>sijax.js</code> and <code>json2.js</code>) are stored. The default is typically <code>static/js/sijax</code>.</li>
+                <li>**<code>SIJAX_JSON_URI</code>:** Specifies the URL path from which the browser should load the <code>json2.js</code> file. Sijax relies on **JSON** for data transfer between the browser and the server, and <code>json2.js</code> provides JSON support for older browsers that lack native implementation.</li>
+            </ul>
+
+            <h2>Handling Sijax Requests in Flask</h2>
+            <p>Sijax primarily uses **POST requests** for AJAX communication. Therefore, any view function intended to handle Sijax calls must be configured to accept POST requests.</p>
+            <ul>
+                <li>**Route Helper:** The special decorator **<code>@flask_sijax.route(app, '/url')</code>** is a helper that automatically configures the route to accept both <code>GET</code> and <code>POST</code> methods for Sijax requests.</li>
+                <li>**Detection:** Inside a view function, the global object **<code>g.sijax.is_sijax_request</code>** is used to determine if the incoming request is an AJAX call from Sijax.</li>
+            </ul>
+        </div>
+
+        <h2 class="title">Sijax Handler Functions</h2>
+        <div class="content example">
+            <p>Sijax functions are standard Python functions that are registered with the Sijax object. These functions are exposed for calling from the browser.</p>
+
+            <h3>The <code>obj_response</code> Parameter</h3>
+            <p>Every Sijax handler function automatically receives at least one parameter, conventionally named **<code>obj_response</code>**. This object is the server's primary mechanism for sending commands (like alerts, DOM manipulation, or function calls) back to the browser.</p>
+            <p>Example of a handler function:</p>
+            <p><code>def say_hi(obj_response):</code></p>
+            <p><code>   obj_response.alert('Hi there!')</code></p>
+
+            <h3>Processing the Request</h3>
+            <p>When a Sijax request is detected, the view function must perform three actions:</p>
+            <ol>
+                <li>**Register the Handler:** Use **<code>g.sijax.register_callback('function_name', handler_function)</code>** to map the client-side call name to the server-side Python function.</li>
+                <li>**Process the Request:** Call **<code>g.sijax.process_request()</code>**. This tells Sijax to execute the appropriate registered handler function and return the generated response back to the browser.</li>
+            </ol>
+            <p><code>if g.sijax.is_sijax_request:</code></p>
+            <p><code>   g.sijax.register_callback('say_hi', say_hi)</code></p>
+            <p><code>   return g.sijax.process_request()</code></p>
+        </div>
+    </div>
+</div>

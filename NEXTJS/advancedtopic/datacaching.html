@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Data Caching</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Data Cache?</h2>
+            <p><strong>Data Caching</strong> in Next.js is a mechanism that **persists the results of data fetches** across different incoming server requests and even across deployments. This is possible because Next.js enhances the native **<code>fetch</code> API** to allow server-side requests to specify their own persistent caching rules.</p>
+            
+            <h3>How Data Caching Works</h3>
+            <p>When a <code>fetch</code> request is made during rendering:</p>
+            <ul>
+                <li>If the request uses the <code>{ cache: 'force-cache' }</code> option, Next.js first checks the Data Cache for a matching cached response.
+                    <ul>
+                        <li>If found, the cached response is returned immediately.</li>
+                        <li>If not found, the request is made to the data source, the result is stored in the Data Cache, and the result is also memoized for the current render.</li>
+                    </ul>
+                </li>
+                <li>For uncached data (e.g., using <code>{ cache: 'no-store' }</code>), the result is always fetched directly from the data source and only memoized for the current render.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Revalidating Data Cache</h2>
+            <p>Cached data can become stale, so Next.js provides two primary methods for **revalidating** (clearing and updating) the Data Cache:</p>
+            
+            <h3>1. On-demand Revalidation</h3>
+            <p>This technique revalidates data based on a specific event, such as a user submitting a form, or data being updated in a Content Management System (CMS). This can be done using either a **tag-based** or **path-based** approach.</p>
+            
+            <p><strong>Example: Path-based Revalidation via Server Action</strong></p>
+            <p>The **<code>revalidatePath('/')</code>** function is used within a **Server Action** (<code>handleRevalidate</code>) to tell Next.js to clear the cache for the home page (<code>'/'</code>), forcing a fresh fetch on the next request.</p>
+            <pre class="example"><code>// app/lib/actions.ts (Server Action)
+async function handleRevalidate() {
+  'use server'
+  revalidatePath('/') // Clears the cache for the root path
+}
+
+// app/page.tsx
+export default async function Home() {
+  const data = await getData() 
+  
+  return (
+    &lt;main&gt;
+      ...
+      &lt;form action={handleRevalidate}&gt;
+        &lt;button type="submit"&gt;Fetch New Posts&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/main&gt;
+  )
+}</code></pre>
+
+            <h3>2. Time-based Revalidation</h3>
+            <p>This technique ensures that data is revalidated automatically after a specified time period, preventing data from becoming excessively stale. This is achieved by exporting a **<code>revalidate</code>** variable from the page or layout file.</p>
+            
+            <p><strong>Example: Revalidating Every 5 Seconds</strong></p>
+            <p>By exporting <code>const revalidate = 5</code>, the page output will be checked for revalidation every 5 seconds. If a request comes in after 5 seconds, the user is served the stale page while Next.js attempts to generate a fresh version in the background (Stale-While-Revalidate).</p>
+            <pre class="example"><code>// app/page.tsx
+export const revalidate = 5 // Revalidate the page at most every 5 seconds
+
+async function getData() {
+  // Data will be fetched and stored in Data Cache
+  return {
+    timestamp: new Date().toISOString(),
+    randomValue: Math.random(),
+    message: 'This page revalidates every 5 seconds'
+  }
+}
+
+export default async function Page() {
+  const data = await getData()
+  
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;5 Second Revalidation&lt;/h1&gt;
+      &lt;p&gt;Timestamp: {data.timestamp}&lt;/p&gt;
+      ...
+    &lt;/main&gt;
+  )
+}</code></pre>
+        </div>
+    </div>
+</div>

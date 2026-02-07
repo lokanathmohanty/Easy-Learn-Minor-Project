@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - ThreadGroup Class</h1>
+
+    <div class="content">
+      <h2 class="content-title">ThreadGroup Class</h2>
+      <p>The Java <code>ThreadGroup</code> class represents a set of threads. It can also include other thread groups, forming a tree structure. Each group (except the initial group) has a parent group.</p>
+
+      <h2 class="content-title">ThreadGroup Class Declaration</h2>
+      <pre><code>
+public class ThreadGroup
+   extends Object
+   implements Thread.UncaughtExceptionHandler
+      </code></pre>
+
+      <h2 class="content-title">Constructors</h2>
+      <ul>
+        <li><code>ThreadGroup(String name)</code> – Constructs a new thread group.</li>
+        <li><code>ThreadGroup(ThreadGroup parent, String name)</code> – Creates a new thread group with a parent.</li>
+      </ul>
+
+      <h2 class="content-title">Methods</h2>
+      <ul>
+        <li><code>int activeCount()</code> – Returns the number of active threads.</li>
+        <li><code>int activeGroupCount()</code> – Returns the number of active groups.</li>
+        <li><code>void checkAccess()</code> – Checks if the current thread can access this group.</li>
+        <li><code>void destroy()</code> – Destroys this thread group and all subgroups.</li>
+        <li><code>int enumerate(Thread[] list)</code> – Copies active threads into the array.</li>
+        <li><code>int enumerate(Thread[] list, boolean recurse)</code> – Copies active threads, with optional recursion.</li>
+        <li><code>int enumerate(ThreadGroup[] list)</code> – Copies active subgroups into the array.</li>
+        <li><code>int enumerate(ThreadGroup[] list, boolean recurse)</code> – Copies active subgroups, with optional recursion.</li>
+        <li><code>int getMaxPriority()</code> – Returns the group’s max priority.</li>
+        <li><code>String getName()</code> – Returns the group’s name.</li>
+        <li><code>ThreadGroup getParent()</code> – Returns the parent group.</li>
+        <li><code>void interrupt()</code> – Interrupts all threads in the group.</li>
+        <li><code>boolean isDaemon()</code> – Tests if the group is a daemon group.</li>
+        <li><code>boolean isDestroyed()</code> – Checks if the group is destroyed.</li>
+        <li><code>void list()</code> – Prints info about this group.</li>
+        <li><code>boolean parentOf(ThreadGroup g)</code> – Tests if this group is the parent or ancestor of another group.</li>
+        <li><code>void setDaemon(boolean daemon)</code> – Sets the daemon status.</li>
+        <li><code>void setMaxPriority(int pri)</code> – Sets the max priority for the group.</li>
+        <li><code>String toString()</code> – Returns a string representation.</li>
+        <li><code>void uncaughtException(Thread t, Throwable e)</code> – Called by JVM when a thread has an uncaught exception.</li>
+      </ul>
+
+      <h2 class="content-title">Inherited Methods</h2>
+      <p>This class inherits methods from <code>java.lang.Object</code>.</p>
+
+      <h2 class="example-title">Example: Using ThreadGroup in Java</h2>
+      <p>This example demonstrates creating a parent and child thread group and launching threads within them.</p>
+      <pre><code>
+public class ThreadGroupDemo implements Runnable {
+   public static void main(String[] args) {
+      ThreadGroupDemo tg = new ThreadGroupDemo();
+      tg.func();
+   }
+
+   public void func() {
+      try {
+         ThreadGroup pGroup = new ThreadGroup("Parent ThreadGroup");
+         ThreadGroup cGroup = new ThreadGroup(pGroup, "Child ThreadGroup");
+
+         Thread t1 = new Thread(pGroup, this);
+         System.out.println("Starting " + t1.getName() + "...");
+         t1.start();
+
+         Thread t2 = new Thread(cGroup, this);
+         System.out.println("Starting " + t2.getName() + "...");
+         t2.start();
+
+         System.out.println("Active threads in \"" + pGroup.getName() + 
+            "\" = " + pGroup.activeCount());
+
+         t1.join();
+         t2.join();
+      } catch (InterruptedException ex) {
+         System.out.println(ex.toString());
+      }
+   }
+
+   public void run() {
+      for (int i = 0; i < 1000; i++) {
+         i++;
+      }
+      System.out.println(Thread.currentThread().getName() + " finished executing.");
+   }
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Starting Thread-0...
+Starting Thread-1...
+Thread-0 finished executing.
+Active threads in "Parent ThreadGroup" = 1
+Thread-1 finished executing.
+      </code></pre>
+    </div>
+  </div>
+</div>

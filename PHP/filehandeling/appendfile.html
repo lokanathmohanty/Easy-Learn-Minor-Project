@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP File Appending</h1>
+
+    <div class="content">
+      <p>
+        **Appending** data to a file means adding new content to the **end** of an existing file without overwriting the original content. This is essential for tasks like maintaining **log files**, collecting sequential **user submissions**, or incremental **data gathering**.
+      </p>
+
+      <h2>The Recommended Method: Append Mode (`'a'`) ⭐</h2>
+      <p>
+        The simplest and safest way to append data is by using the **append mode (`'a'`)** when opening the file with `fopen()`. This mode automatically sets the file pointer to the end of the file before any write operation.
+      </p>
+      <ul>
+        <li>
+          If the file does not exist, `'a'` will create it.
+        </li>
+        <li>
+          If the file exists, all subsequent `fwrite()` calls will add data to the end.
+        </li>
+      </ul>
+      <div class="example">
+        <p>
+          <code>// Open file in append mode.</code><br>
+          <code>$fp = fopen("log.txt", "**a**");</code><br>
+          <br>
+          <code>// Data is automatically added to the end.</code><br>
+          <code>fwrite($fp, "\nNew log entry recorded.");</code><br>
+          <code>fclose($fp);</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Alternative: Manually Moving the File Pointer</h2>
+      <p>
+        If a file is opened in a read/write mode (like `'r+'` or `'w+'`), the file pointer initially sits at the beginning, meaning any immediate write will **overwrite** the file's start. To append, you must manually move the pointer to the end using the **`fseek()`** function.
+      </p>
+
+      <h3>Using `fseek()`</h3>
+      <p>
+        The `fseek()` function changes the file pointer's position. To move it to the end, you set the offset to `0` and the whence parameter to `SEEK_END`.
+      </p>
+      <div class="example">
+        <p>
+          <code>$fp = fopen("data.txt", "**r+**");</code><br>
+          <br>
+          <code>// Manually move pointer to the end of the file (0 bytes offset from the end)</code><br>
+          <code>**fseek**($fp, 0, **SEEK_END**);</code><br>
+          <br>
+          <code>// Now fwrite() will append the data.</code><br>
+          <code>fwrite($fp, "\nNew appended data.");</code><br>
+          <code>fclose($fp);</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Mode Comparison Summary</h2>
+      <table>
+        <tr>
+          <th>Mode</th>
+          <th>Initial Pointer</th>
+          <th>File Exists?</th>
+          <th>Write Location</th>
+        </tr>
+        <tr>
+          <td>**`w`**</td>
+          <td>Start</td>
+          <td>**Truncated** (content lost)</td>
+          <td>Start (Overwrites)</td>
+        </tr>
+        <tr>
+          <td>**`r+`**</td>
+          <td>Start</td>
+          <td>Must exist</td>
+          <td>Start (Overwrites)</td>
+        </tr>
+        <tr>
+          <td>**`a`**</td>
+          <td>End</td>
+          <td>Preserved</td>
+          <td>**End (Appends)**</td>
+        </tr>
+      </table>
+      <p>
+        When you need both read and append operations, use the **`a+`** mode. While you can use `fseek()` to read from anywhere in the file, every write operation will still automatically append to the end.
+      </p>
+    </div>
+  </div>
+</div>

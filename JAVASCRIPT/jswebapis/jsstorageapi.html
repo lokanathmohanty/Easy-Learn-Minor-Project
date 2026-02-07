@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Storage API</h1>
+    
+    <div class="content">
+      <h2>What is Web Storage API?</h2>
+      <p>The web storage API in JavaScript allows us to store the data in the user's local system or hard disk. Before the storage API, cookies were used to store the data in the browser.</p>
+      <p>Cookies have drawbacks such as sending data with every request and security issues. With storage API, data remains in the user's device.</p>
+      <p>JavaScript provides two storage objects:</p>
+      <ul>
+        <li><strong>localStorage</strong></li>
+        <li><strong>sessionStorage</strong></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>The Window localStorage Object</h2>
+      <p>The <code>localStorage</code> object stores data as key-value pairs in the browser with a maximum limit of 5 MB. Data never expires unless removed using <code>removeItem()</code> or <code>clear()</code>.</p>
+      
+      <h3>Syntax</h3>
+      <pre>
+localStorage.setItem(key, value); // Set item
+localStorage.getItem(key); // Get item
+      </pre>
+    </div>
+
+    <div class="example">
+      <h3>Example: Storing and Getting Data</h3>
+      <pre>
+&lt;button onclick="setItem()"&gt; Set Item &lt;/button&gt;
+&lt;button onclick="getItem()"&gt; Get Item &lt;/button&gt;
+&lt;p id="demo"&gt;&lt;/p&gt;
+
+&lt;script&gt;
+  const output = document.getElementById('demo');
+  function setItem() {
+    localStorage.setItem("fruit", "Apple");
+  }
+  function getItem() {
+    const fruitName = localStorage.getItem("fruit");
+    output.innerHTML = "The name of the fruit is: " + fruitName;
+  }
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="example">
+      <h3>Example: Storing Objects</h3>
+      <pre>
+localStorage.setItem("animal", JSON.stringify({ name: "Lion", color: "Yellow" }));
+      </pre>
+    </div>
+
+    <div class="example">
+      <h3>Example: Removing Items</h3>
+      <pre>
+localStorage.removeItem("name");
+localStorage.clear(); // Removes all items
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>The Window sessionStorage Object</h2>
+      <p>The <code>sessionStorage</code> object stores data in key-value pairs up to 5 MB. Unlike localStorage, the data is removed when the browser tab is closed.</p>
+      
+      <h3>Syntax</h3>
+      <pre>
+sessionStorage.setItem(key, value); // Set item
+sessionStorage.getItem(key); // Get item
+      </pre>
+    </div>
+
+    <div class="example">
+      <h3>Example: Using sessionStorage</h3>
+      <pre>
+sessionStorage.setItem("username", "tutorialspoint");
+const user = sessionStorage.getItem("username");
+      </pre>
+    </div>
+
+    <div class="example">
+      <h3>Example: Storing Images in sessionStorage</h3>
+      <pre>
+&lt;input type="file" id="image" accept="image/*" onchange="handleImageUpload()"&gt;
+&lt;button onclick="getImage()"&gt; Get Image &lt;/button&gt;
+
+&lt;script&gt;
+  function handleImageUpload() {
+    const file = document.getElementById('image').files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        sessionStorage.setItem('image', event.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  function getImage() {
+    const data = sessionStorage.getItem("image");
+    document.body.innerHTML += `&lt;img src="${data}" width="300"&gt;`;
+  }
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Cookie vs localStorage vs sessionStorage</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Cookie</th>
+            <th>localStorage</th>
+            <th>sessionStorage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Storage Limit</td>
+            <td>4 KB</td>
+            <td>5 MB</td>
+            <td>5 MB</td>
+          </tr>
+          <tr>
+            <td>Expiry</td>
+            <td>Has expiry date</td>
+            <td>Never expires</td>
+            <td>Expires on tab close</td>
+          </tr>
+          <tr>
+            <td>Accessibility</td>
+            <td>Client + Server</td>
+            <td>Client only</td>
+            <td>Client only</td>
+          </tr>
+          <tr>
+            <td>Security</td>
+            <td>Less secure</td>
+            <td>More secure</td>
+            <td>More secure</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content">
+      <h2>Storage Object Methods</h2>
+      <ul>
+        <li><code>key(n)</code> – Get name of nth key</li>
+        <li><code>length</code> – Number of stored items</li>
+        <li><code>getItem(key)</code> – Get value</li>
+        <li><code>setItem(key, value)</code> – Add/update value</li>
+        <li><code>removeItem(key)</code> – Remove specific item</li>
+        <li><code>clear()</code> – Remove all items</li>
+      </ul>
+    </div>
+
+  </div>
+</div>

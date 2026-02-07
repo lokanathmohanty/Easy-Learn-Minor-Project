@@ -1,0 +1,64 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">Java 14 - Major New Features Summary (Non-LTS Release)</h1>
+
+        <div class="content">
+            <h2>Overview of Java 14</h2>
+            <p>**Java 14**, released in **March 2020**, maintained the 6-month rapid release cycle and is a **non-LTS (Long-Term Support)** release. This version solidified language changes like **Switch Expressions** and introduced two major preview features: **Records** and **Pattern Matching for <code>instanceof</code>**, fundamentally simplifying class creation and conditional logic.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Language and Compiler Features</h2>
+
+            <h3>1. Switch Expressions (Standard) (JEP 361) ✨</h3>
+            <p>The enhanced <code>switch</code> feature, introduced in preview in Java 12 and 13, is now a **standard feature**. It can be used as an **expression** that returns a value, utilizing the **arrow (<code>-&gt;</code>)** syntax and the **<code>yield</code>** keyword (for returning values from a statement block), eliminating fall-through errors and <code>break</code> clutter.</p>
+
+            <h3>2. Records (First Preview) (JEP 359) 🆕</h3>
+            <p>A new kind of class, **<code>record</code>**, was introduced to simplify the creation of data-only classes. Records automatically generate boilerplate code (constructor, accessor methods, <code>equals()</code>, <code>hashCode()</code>, and <code>toString()</code>) based on the components declared in the header. They are immutable and intended for modeling data aggregates.</p>
+            <pre><code>// Concise way to define a data class
+public record Point(int x, int y) {}</code></pre>
+
+            <h3>3. Pattern Matching for <code>instanceof</code> (First Preview) (JEP 305)</h3>
+            <p>Enhances the <code>instanceof</code> operator. If the check succeeds, it also performs a type cast to a new, local, pattern variable, eliminating the need for boilerplate casting code.</p>
+            <pre><code>// Java 14+ Pattern Matching
+if (obj instanceof String s) {
+    // 's' is automatically cast to String and available here
+    System.out.println(s.length());
+}</code></pre>
+
+            <h3>4. Helpful <code>NullPointerException</code> Messages (JEP 358)</h3>
+            <p>The JVM is now more intelligent in analyzing the cause of a **<code>NullPointerException</code>**. The generated message is enhanced to describe precisely which variable was null, greatly simplifying debugging.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>JVM, GC, and API Changes</h2>
+
+            <h3>Garbage Collector Removals</h3>
+            <ul>
+                <li>
+                    <strong>CMS Garbage Collector Removed (JEP 363):</strong> The **Concurrent Mark Sweep (CMS)** garbage collector, deprecated since Java 9, was officially **removed** from the JDK. Users are encouraged to migrate to modern alternatives like G1 (now the default), ZGC, or Shenandoah.
+                </li>
+                <li>
+                    <strong>Pack200 Tools and API Removed (JEP 367):</strong> Tools for compressing and decompressing JAR files (<code>pack200</code> and <code>unpack200</code>) were removed, having been made obsolete by better compression formats.
+                </li>
+            </ul>
+
+            <h3>Other JVM Enhancements</h3>
+            <ul>
+                <li>
+                    <strong>JFR Event Streaming (JEP 349):</strong> Enabled **asynchronous subscription** to JFR (Java Flight Recorder) events, making it easier to monitor live application data without constant polling.
+                </li>
+                <li>
+                    <strong>Foreign-Memory Access API (First Incubator) (JEP 370):</strong> A new API to safely and efficiently access memory outside of the Java heap, paving the way for low-latency data structures and inter-process communication.
+                </li>
+                <li>
+                    <strong>NUMA-Aware G1 (JEP 345):</strong> The G1 garbage collector was enhanced to be aware of **Non-Uniform Memory Access (NUMA)** architectures, optimizing heap memory usage and allocation on such systems.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

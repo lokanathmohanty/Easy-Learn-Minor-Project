@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Regular Expressions (`Regex`)</h1>
+        
+        <h2 class="title">Fundamentals of Regular Expressions</h2>
+        <div class="content">
+            <p>A **Regular Expression (RegEx)** is a sequence of characters that defines a search **pattern**. The .NET Framework provides a dedicated engine via the **<code>System.Text.RegularExpressions</code>** namespace to perform pattern matching against input text.</p>
+            <p>RegEx is a powerful tool used for **Pattern Matching**, **Validation** (e.g., emails, phone numbers), **Replacement**, and **Extraction** of specific data from strings.</p>
+            
+            <h3>Required Namespace:</h3>
+            <pre>
+using System.Text.RegularExpressions;
+            </pre>
+        </div>
+        
+        <h2 class="title">The `Regex` Class and Key Methods</h2>
+        <div class="content">
+            <p>The **<code>Regex</code>** class represents a regular expression engine instance. It provides static and instance methods for working with patterns.</p>
+            
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>IsMatch(string input)</code></td>
+                    <td>Checks if the pattern finds **at least one match** in the input string, returning a <code>bool</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>Matches(string input)</code></td>
+                    <td>Searches and returns **all occurrences** of the pattern as a <code>MatchCollection</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>Replace(string input, string replacement)</code></td>
+                    <td>Replaces all matching substrings in the input with a specified replacement string.</td>
+                </tr>
+                <tr>
+                    <td><code>Split(string input)</code></td>
+                    <td>Splits the input string into an array of substrings based on the positions defined by the pattern.</td>
+                </tr>
+            </table>
+        </div>
+        
+        <h2 class="title">Basic RegEx Syntax Constructs</h2>
+        <div class="content">
+            <p>Patterns are built using a combination of literal characters and special constructs:</p>
+            
+            <table>
+                <tr>
+                    <th>Syntax</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><code>.</code></td>
+                    <td>Matches **any single character** (except newline).</td>
+                    <td><code>"h.t"</code> matches <code>"hat"</code>, <code>"hit"</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>\d</code></td>
+                    <td>**Any digit** (0-9). Equivalent to <code>[0-9]</code>.</td>
+                    <td><code>"abc\d\d"</code> matches <code>"abc12"</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>\w</code></td>
+                    <td>**Any word character** (letters, digits, or underscore).</td>
+                    <td><code>"\w+"</code> matches <code>"hello_world"</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>^</code></td>
+                    <td>**Start of the string** or line.</td>
+                    <td><code>"^Hello"</code> matches <code>"Hello"</code> only at the start.</td>
+                </tr>
+                <tr>
+                    <td><code>$</code></td>
+                    <td>**End of the string** or line.</td>
+                    <td><code>"World$"</code> matches <code>"World"</code> only at the end.</td>
+                </tr>
+                <tr>
+                    <td><code>*</code></td>
+                    <td>**Quantifier:** Zero or more occurrences of the preceding element.</td>
+                    <td><code>"A*"</code> matches <code>""</code>, <code>"A"</code>, <code>"AAA"</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>+</code></td>
+                    <td>**Quantifier:** One or more occurrences of the preceding element.</td>
+                    <td><code>"A+"</code> matches <code>"A"</code>, <code>"AA"</code>, but not <code>""</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>{n,m}</code></td>
+                    <td>**Quantifier:** Between <code>n</code> and <code>m</code> occurrences.</td>
+                    <td><code>"\d{2,4}"</code> matches 2, 3, or 4 digits.</td>
+                </tr>
+            </table>
+            
+            <p class="example"><strong>Note on String Literals:</strong> Since backslashes (`\`) are used both in C# string escape sequences and RegEx syntax, it is highly recommended to use **verbatim string literals** (prefixed with <code>@</code>) for patterns to avoid double-escaping. E.g., <code>@"\bS\S*"</code> instead of <code>"\\bS\\S*"</code>.</p>
+        </div>
+        
+        <h2 class="title">Example: Pattern Matching and Extraction</h2>
+        <div class="content example">
+            <p>This demonstrates using <code>\b</code> (word boundary) and <code>\S*</code> (zero or more non-whitespace characters) to extract specific words.</p>
+            <pre>
+string str = "A Thousand Splendid Suns";
+string expr = @"\bS\S*"; // Word starts with 'S'
+
+MatchCollection mc = Regex.Matches(str, expr);
+// Output will be:
+// Splendid
+// Suns
+            </pre>
+        </div>
+        
+        <h2 class="title">Example: String Replacement</h2>
+        <div class="content example">
+            <p>Replacing multiple consecutive whitespace characters with a single space.</p>
+            <pre>
+string input = "Hello   World   ";
+string pattern = @"\s+"; // Match one or more whitespace characters
+string replacement = " ";
+         
+string result = Regex.Replace(input, pattern, replacement);
+
+// Output: Original String: Hello   World   
+// Output: Replacement String: Hello World 
+            </pre>
+        </div>
+    </div>
+</div>

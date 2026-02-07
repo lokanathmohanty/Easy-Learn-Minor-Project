@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - The <code>String</code> Class</h1>
+
+        <div class="content">
+            <h2>The <code>String</code> Object in Java</h2>
+            <p>In Java, **Strings** are sequences of characters treated as **objects**. The Java platform provides the built-in **<code>String</code> class** (in <code>java.lang</code>) for creating and manipulating these sequences.</p>
+            
+            <h3>Key Concept: Immutability 🧱</h3>
+            <p>The most important characteristic of the <code>String</code> class is that its objects are **immutable**. Once a <code>String</code> object is created, its value cannot be changed. Any operation that appears to modify a string (like concatenation or replacement) actually creates and returns a **new <code>String</code> object**.</p>
+            <p>If frequent modifications to character sequences are necessary, the **<code>StringBuffer</code>** or **<code>StringBuilder</code>** classes should be used instead, as they represent mutable character sequences.</p>
+            
+            <h3>Creating Strings</h3>
+            <p>There are two primary ways to create a <code>String</code> object:</p>
+            <ol>
+                <li>
+                    <strong>Using a Literal:</strong> This is the most common and direct way. The compiler optimizes string literals by storing them in the **String Constant Pool** (a special area in the heap).
+                    <pre><code>String greeting = "Hello world!";</code></pre>
+                </li>
+                <li>
+                    <strong>Using the <code>new</code> keyword:</strong> This forces the creation of a new object in the standard heap memory, even if the same string literal already exists in the String Constant Pool.
+                    <pre><code>String helloString = new String(charArray);</code></pre>
+                </li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Common String Operations</h2>
+
+            <h3>1. Length and Character Access</h3>
+            <ul>
+                <li><strong><code>length()</code>:</strong> An accessor method that returns the number of characters in the string.</li>
+                <li><strong><code>charAt(int index)</code>:</strong> Returns the <code>char</code> value at the specified zero-based index.</li>
+            </ul>
+
+            <h3>2. Concatenating Strings</h3>
+            <p>Strings can be concatenated (joined) using two methods:</p>
+            <ul>
+                <li><strong>The <code>+</code> operator:</strong> The most common and simple way. It works not just with other strings, but also with other data types (which are implicitly converted to a string).
+                    <pre><code>"Hello, " + "world" + "!";</code></pre>
+                </li>
+                <li><strong>The <code>concat(String str)</code> method:</strong> Returns a new string that is the result of appending the specified string to the end of the original.</li>
+            </ul>
+
+            <h3>3. Comparison Methods</h3>
+            <ul>
+                <li><strong><code>equals(Object anObject)</code>:</strong> Compares the string's content to the specified object. **Always use <code>equals()</code> to compare content.**</li>
+                <li><strong><code>equalsIgnoreCase(String anotherString)</code>:</strong> Compares content while ignoring case differences.</li>
+                <li><strong><code>compareTo(String anotherString)</code>:</strong> Performs a **lexicographical** comparison (based on Unicode values) and returns an integer indicating if the string is less than, equal to, or greater than the argument.</li>
+            </ul>
+
+            <h3>4. Formatting Strings</h3>
+            <p>The static **<code>String.format()</code>** method allows you to create a reusable formatted string, similar to <code>System.out.printf()</code>, but returns a <code>String</code> object instead of printing directly.</p>
+            <pre><code>String fs = String.format("The value is %f", floatVar);</code></pre>
+        </div>
+    </div>
+</div>

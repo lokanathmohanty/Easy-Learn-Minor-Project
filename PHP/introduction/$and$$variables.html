@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Variables: Single (`$`) vs. Dynamic (`$$`)</h1>
+
+    <div class="content">
+      <p>
+        PHP is unique in its use of variables, which always begin with a **single dollar sign (`$`)**. The **double dollar sign (`$$`)** introduces a feature called **dynamic variables** or **variable variables**, where the value of one variable is used as the name of a second variable.
+      </p>
+
+      <h2>The `$ Variable` (Normal Variable)</h2>
+      <p>
+        A normal PHP variable, `$variable`, stores a value directly (e.g., number, string, array).
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;$name = "Akshita"; // The variable name is 'name'<br>&nbsp;&nbsp;&nbsp;echo $name; // Output: Akshita<br>?&gt;</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">The `$$ Variable` (Dynamic Variable)</h2>
+      <p>
+        A dynamic variable uses the **value** stored in the first variable as the **name** for the second variable.
+      </p>
+
+      <h3>How it Works:</h3>
+      <ol>
+        <li>
+          **`$a = 'good';`** $\rightarrow$ Creates a variable named `$a` with the string value `"good"`.
+        </li>
+        <li>
+          **`$$a = 'morning';`** $\rightarrow$ PHP reads `$$a` as `$($a)`. Since `$a`'s value is `"good"`, this statement is equivalent to declaring **`$good = 'morning';`**.
+        </li>
+      </ol>
+
+      <h3>Example: Dynamic Variable Usage</h3>
+      <div class="example">
+        <p>
+          <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;$x = "foo";<br>&nbsp;&nbsp;&nbsp;$$x = "bar"; // Equivalent to $foo = "bar";<br>&nbsp;&nbsp;&nbsp;echo 'Value of x = ' . $x . "\n";<br>&nbsp;&nbsp;&nbsp;echo 'Value of $$x = ' . $$x . "\n";<br>&nbsp;&nbsp;&nbsp;echo 'Value of foo = ' . $foo;<br>?&gt;</code>
+        </p>
+        <p class="content">
+          Output:<br>
+          Value of x = foo<br>
+          Value of $$x = bar<br>
+          Value of foo = bar
+        </p>
+      </div>
+
+      <h3>Multiple `$` Symbols</h3>
+      <p>
+        The use of the dollar sign is not restricted to two. Each preceding `$` resolves the value of the variable to its right as the name for the next variable.
+      </p>
+      <div class="example">
+        <p>
+          Given: `$Hello = "World";` and `$a = "Hello";`<br>
+          * `$a` $\rightarrow$ `"Hello"`
+          * `$$a` $\rightarrow$ `$($a)` $\rightarrow$ `$Hello` $\rightarrow$ `"World"`
+        </p>
+        <p class="content">
+          Output for a chain of variables:<br>
+          <code>$$$$$a= a</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Handling Ambiguity with Arrays</h2>
+      <p>
+        When using dynamic variables with arrays, curly braces (`{}`) must be used to clarify the parser's intent:
+      </p>
+      <ul>
+        <li>
+          **`${$a[1]}`:** Treats the element `$a[1]` as a normal string, and uses its **value** as the dynamic variable name.
+        </li>
+        <li>
+          **`${$a}[1]`:** Treats `$$a` as the dynamic variable name, and then accesses the **index `[1]`** of that resulting variable (which must be an array).
+        </li>
+      </ul>
+
+      <p>
+        **Important Restrictions:** This dynamic variable technique **cannot** be used with PHP's super-global arrays (e.g., `$_GET`, `$_POST`) within functions or class methods. Also, the special class variable `$this` cannot be referenced dynamically.
+      </p>
+    </div>
+  </div>
+</div>

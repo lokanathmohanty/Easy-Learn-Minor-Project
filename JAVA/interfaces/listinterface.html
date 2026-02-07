@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">List Interface in Java</h1>
+    
+    <div class="content">
+      <h2 class="title">Content</h2>
+      <p>The <code>List</code> interface extends the <code>Collection</code> interface and represents an ordered collection that stores elements in a sequence.</p>
+      <p>Elements in a list can be accessed or inserted by their zero-based index. Lists allow duplicate elements.</p>
+      <p>Some key methods defined by the <code>List</code> interface include:</p>
+      <ul>
+        <li><code>void add(int index, Object obj)</code> - Inserts an element at a specific position.</li>
+        <li><code>boolean addAll(int index, Collection c)</code> - Inserts all elements of a collection starting at a specified position.</li>
+        <li><code>Object get(int index)</code> - Retrieves the element at a specified index.</li>
+        <li><code>int indexOf(Object obj)</code> - Returns the first occurrence index of an element.</li>
+        <li><code>int lastIndexOf(Object obj)</code> - Returns the last occurrence index of an element.</li>
+        <li><code>Object remove(int index)</code> - Removes the element at the specified position.</li>
+        <li><code>Object set(int index, Object obj)</code> - Replaces the element at the specified position.</li>
+        <li><code>List subList(int start, int end)</code> - Returns a view of the portion of the list between start (inclusive) and end (exclusive).</li>
+      </ul>
+      <p>List implementations include <code>ArrayList</code> and <code>LinkedList</code>, each with different performance characteristics.</p>
+    </div>
+    
+    <div class="example">
+      <h2 class="title">Example</h2>
+      <p>The following Java example demonstrates common List interface operations:</p>
+      <pre><code>
+import java.util.*;
+
+public class Main {
+  public static void main(String[] args) {
+    List<Integer> list1 = new ArrayList<>();
+    List<Integer> list2 = new ArrayList<>();
+
+    list1.add(0, 10);
+    list1.add(1, 20);
+
+    System.out.println("list1 : " + list1);
+
+    list2.add(10);
+    list2.add(20);
+    list2.add(30);
+
+    list1.addAll(1, list2);
+
+    System.out.println("list2 : " + list2);
+
+    list1.remove(1);
+
+    System.out.println("list1 after removing an element: " + list1);
+
+    System.out.println("list1 using get() : " + list1.get(2));
+
+    list1.set(0, 50);
+
+    System.out.println("list1 : " + list1);
+  }
+}
+      </code></pre>
+    </div>
+  </div>
+</div>

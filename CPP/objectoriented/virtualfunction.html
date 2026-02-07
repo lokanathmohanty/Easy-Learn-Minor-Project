@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Virtual Function in C++ (Runtime Polymorphism) 🎯</h1>
+
+        <div class="content">
+            <p>A **virtual function** is a member function in a base class declared using the **<code>virtual</code>** keyword. Its purpose is to enable **runtime polymorphism** (also known as **dynamic binding** or **late binding**).</p>
+            <p>When a virtual function is called through a **base class pointer** or **reference**, the function executed is determined by the **actual type of the object** being pointed to, not the type of the pointer/reference.</p>
+
+            <h3>Syntax</h3>
+            <pre class="example">
+class BaseClassName {
+public:
+    virtual void func_name() {
+        // Base implementation
+    }
+};
+// Derived classes override the function:
+class Derived : public BaseClassName {
+public:
+    void func_name() override { 
+        // Derived implementation
+    }
+};
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">How Virtual Functions Enable Polymorphism</h2>
+
+        <div class="content">
+            <p>Virtual functions rely on two internal mechanisms:</p>
+            <ul>
+                <li>
+                    **VTable (Virtual Table):** The compiler creates a table of function pointers for every class that contains virtual functions. This table stores the correct memory addresses of the virtual functions for that class.
+                </li>
+                <li>
+                    **VPTR (Virtual Pointer):** Each object of a class with virtual functions contains a hidden pointer (vptr) that points to the VTable of its class.
+                </li>
+            </ul>
+            <p>At runtime, when a call like `shapePtr->draw()` is made, the program follows these steps:</p>
+            <ol>
+                <li>It looks at the `shapePtr` to find the object's hidden **VPTR**.</li>
+                <li>It follows the VPTR to find the correct **VTable** for the object's actual type (e.g., `Circle`).</li>
+                <li>It looks up the address of the `draw()` function in that VTable and executes the correct `Circle::draw()` method.</li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Key Rules for Using Virtual Functions</h2>
+
+        <div class="content">
+            <ul>
+                <li>
+                    **Access:** They must be accessed via a **base class pointer or reference** to trigger dynamic binding. Direct calls using an object instance will result in static (compile-time) binding.
+                </li>
+                <li>
+                    **Keyword:** The `virtual` keyword is required only in the **base class** declaration; it is optional (though recommended for clarity) in derived classes, where the `override` keyword is often used instead.
+                </li>
+                <li>
+                    **Virtual Destructor:** A base class with virtual functions **must** have a **virtual destructor** (`virtual ~Base() {}`) to ensure that when a derived class object is deleted via a base class pointer (`delete basePtr;`), the derived class's destructor is called first. Failure to do so leads to **memory leaks**.
+                </li>
+                <li>
+                    **Pure Virtual Functions:** A virtual function set to zero (`= 0`) is a **pure virtual function**. A class containing one or more pure virtual functions is an **abstract class** and cannot be instantiated.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python Interpreter and Its Modes</h1>
+    <div class="content">
+      <h2>Python Interpreter</h2>
+      <p>Python is an interpreter-based language. In Linux, the executable is usually installed in <code>/usr/bin/</code>. On Windows, it is found in the installation folder such as <code>C:\python311</code>.</p>
+      <p>The Python interpreter executes code one statement at a time. It first checks syntax, then generates intermediate byte code, and finally the Python Virtual Machine converts it into native binary for execution.</p>
+
+      <h2>Interactive Mode</h2>
+      <p>When launched without arguments, Python starts in interactive mode with a <code>>>></code> prompt, working on the REPL (Read, Evaluate, Print, Loop) principle.</p>
+
+      <pre>
+>>> price = 100
+>>> qty = 5
+>>> total = price * qty
+>>> total
+500
+>>> print("Total = ", total)
+Total = 500
+      </pre>
+
+      <p>Exit using <code>ctrl+D</code> (Linux), <code>ctrl+Z</code> (Windows), or <code>quit()</code>.</p>
+      <p>Advanced alternatives like IPython and bpython provide features such as auto-completion, syntax highlighting, and command history.</p>
+
+      <h2>Scripting Mode</h2>
+      <p>Python programs can be written in a text file with <code>.py</code> extension and executed with the Python command.</p>
+
+      <pre>
+# prog.py
+print("My first program")
+price = 100
+qty = 5
+total = price * qty
+print("Total = ", total)
+      </pre>
+
+      <p>Run the script:</p>
+      <pre>C:\> python prog.py</pre>
+      <p>Output:</p>
+      <pre>
+My first program
+Total = 500
+      </pre>
+
+      <p>If an error occurs, execution stops at that point, but earlier statements are still executed.</p>
+
+      <h2>Using Shebang in Linux</h2>
+      <p>Python scripts can be made self-executable in Linux with a shebang line:</p>
+
+      <pre>
+#! /usr/bin/python3.11
+
+print("My first program")
+price = 100
+qty = 5
+total = price * qty
+print("Total = ", total)
+      </pre>
+
+      <p>Mark the file executable:</p>
+      <pre>$ chmod +x prog.py</pre>
+      <p>Run directly:</p>
+      <pre>$ ./prog.py</pre>
+
+      <h2>Interactive Python - IPython</h2>
+      <p>IPython is an enhanced interactive Python shell with features like introspection, history, syntax highlighting, tab completion, and magic commands. It was created by Fernando Perez in 2001 and serves as the kernel for Jupyter Notebook.</p>
+
+      <p>Install IPython:</p>
+      <pre>pip3 install ipython</pre>
+
+      <p>Launch:</p>
+      <pre>C:\> ipython</pre>
+
+      <p>Example session:</p>
+      <pre>
+In [1]: price = 100
+In [2]: quantity = 5
+In [3]: total = price * quantity
+In [4]: total
+Out[4]: 500
+      </pre>
+
+      <h3>Key Features</h3>
+      <ul>
+        <li>Tab completion of variables, functions, and keywords</li>
+        <li>Object introspection with <code>?</code></li>
+        <li>History of commands stored and retrievable</li>
+        <li>Magic commands for environment control and OS tasks</li>
+      </ul>
+
+      <p>Example of introspection:</p>
+      <pre>
+In [5]: var = "Hello World"
+In [6]: var?
+Type: str
+String form: Hello World
+Length: 11
+Docstring:
+str(object='') -> str
+...
+      </pre>
+
+      <p>Example of magic command to run OS command:</p>
+      <pre>
+In [8]: !dir *.exe
+07-02-2023 16:55            103,192 python.exe
+07-02-2023 16:55            101,656 pythonw.exe
+      </pre>
+
+      <h3>Jupyter Notebook</h3>
+      <p>Jupyter Notebook is a web-based environment that uses IPython as its kernel for Python. It also supports other languages like R and Julia.</p>
+    </div>
+  </div>
+</div>

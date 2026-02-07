@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Keyboard Events</h1>
+    <div class="content">
+      <p>The keyboard events in JavaScript provide a way to interact with a web page or application based on the user's keyboard input. These events allow developers to capture and respond to various keyboard actions, such as key presses, key releases, and character inputs. The primary keyboard events in JavaScript include <strong>keydown</strong>, <strong>keypress</strong>, and <strong>keyup</strong>.</p>
+      
+      <h2>Common Keyboard Events</h2>
+      <ul>
+        <li><strong>Keydown Event</strong> − Triggered when a key on the keyboard is pressed down. It provides details such as the key code and modifier keys (Shift, Ctrl, Alt).</li>
+        <li><strong>Keypress Event</strong> − Triggered when a character key is typed. Non-character keys like Shift or Ctrl do not activate this event.</li>
+        <li><strong>Keyup Event</strong> − Triggered when a pressed key is released. Useful for tracking key releases and creating interactivity.</li>
+      </ul>
+      
+      <h2>Keyboard Event Properties</h2>
+      <p>Several properties are commonly used with keyboard events to gather information:</p>
+      <ul>
+        <li><code>event.key</code> − String representing the key value.</li>
+        <li><code>event.code</code> − String representing the physical key.</li>
+        <li><code>event.location</code> − Indicates the location of the key on the keyboard.</li>
+        <li><code>event.ctrlKey</code>, <code>event.shiftKey</code>, <code>event.altKey</code>, <code>event.metaKey</code> − Booleans for modifier keys.</li>
+        <li><code>event.repeat</code> − Indicates whether the event is a repeat.</li>
+        <li><code>event.isComposing</code> − Indicates if the event is part of composition.</li>
+        <li><code>event.which</code> − Deprecated, used for numeric key code.</li>
+        <li><code>event.getModifierState(keyArg)</code> − Returns whether a modifier key is pressed.</li>
+      </ul>
+      
+      <h2 class="title">Example: Keydown Event</h2>
+      <p>This example shows how to capture a key press using the <code>keydown</code> event.</p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;h3&gt;Press any key&lt;/h3&gt;
+   &lt;script&gt;
+      document.addEventListener('keydown', function (event) {
+         document.getElementById('output').innerHTML =
+         "Key pressed: " + event.key;
+      });
+   &lt;/script&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      
+      <h2 class="title">Example: Keypress Event</h2>
+      <p>This example captures a typed character using the <code>keypress</code> event.</p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;h3&gt;Type a character&lt;/h3&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      document.addEventListener('keypress', function (event) {
+         document.getElementById('output').innerHTML =
+         "Character pressed: " + event.key;
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      
+      <h2 class="title">Example: Keyup Event</h2>
+      <p>This example captures a key release using the <code>keyup</code> event.</p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;h3&gt;Press and Release a key&lt;/h3&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      document.addEventListener('keyup', function (event) {
+         document.getElementById('output').innerHTML =
+         "Key released: " + event.key;
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      
+      <h2>Difference Between Keydown and Keypress</h2>
+      <p><strong>Keydown</strong> fires when any key is pressed, including modifiers, and continues firing as long as the key is held down. <strong>Keypress</strong> fires only when a character key is pressed, providing the typed character but not modifiers.</p>
+      
+      <h2 class="title">Example: Without addEventListener</h2>
+      <p>Keyboard events can also be handled by directly assigning event handlers.</p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Enter some text: 
+      &lt;input onkeydown="handleKeyDown(event)" onkeyup="handleKeyUp(event)"&gt;
+   &lt;/div&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      function handleKeyDown(event) {
+         document.getElementById('output').innerHTML +=
+         "Key pressed: " + event.key + '&lt;br&gt;Key code: ' + event.keyCode + '&lt;br&gt;';
+      }
+      function handleKeyUp(event) {
+         document.getElementById('output').innerHTML +=
+         "Key released: " + event.key + '&lt;br&gt;&lt;br&gt;';
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+</div>

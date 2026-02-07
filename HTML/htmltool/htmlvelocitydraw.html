@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Velocity Draw</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>
+        Velocity Draw is a tool for creating and manipulating animations and visual graphics on a web page.
+        It exposes properties such as <em>opacity</em>, <em>size</em>, and <em>position</em> that control animation
+        behaviour. In this session learners will see how cursor position, opacity, and density influence the drawing output.
+      </p>
+
+      <h2>Tool Overview</h2>
+      <p>
+        The demo allows freehand drawing affected by velocity and density. Controls are provided to adjust
+        opacity and density interactively.
+      </p>
+
+      <h2>On-screen Controls & Status</h2>
+      <ul>
+        <li><strong>opacity</strong>: 25%</li>
+        <li><strong>density</strong>: 422</li>
+        <li><strong>point cache</strong>: 0</li>
+        <li><strong>pan</strong>: space + drag</li>
+        <li><strong>lock opacity</strong>: hold Shift</li>
+        <li><strong>clear cache</strong>: Ctrl + Del</li>
+        <li><strong>save</strong>: Ctrl + Shift + S</li>
+        <li><strong>velocity skewing</strong>: disabled</li>
+      </ul>
+
+      <h2>Interaction Tips</h2>
+      <ul>
+        <li>Drag the small control circle (left corner) up or down to change opacity and density.</li>
+        <li>Move the cursor faster to create longer, sparser strokes; move slowly for denser strokes.</li>
+        <li>Use <code>space + drag</code> to pan the canvas while drawing.</li>
+        <li>Hold <code>Shift</code> while drawing to lock the current opacity.</li>
+      </ul>
+
+      <h2>Accessibility & Shortcuts</h2>
+      <p>Keyboard shortcuts and modifier keys allow quick control without reaching for UI sliders:</p>
+      <ul>
+        <li><code>Ctrl + Del</code> — Clear the point cache.</li>
+        <li><code>Ctrl + Shift + S</code> — Save the current canvas state.</li>
+      </ul>
+
+      <h2>Example: Minimal Markup Structure</h2>
+      <p>Use this skeleton to embed a Velocity Draw canvas and controls (behaviour implemented via JavaScript):</p>
+      <pre><code>&lt;div class="velocity-draw-session"&gt;
+  &lt;div class="vd-toolbar"&gt;
+    &lt;button class="vd-btn" data-action="clear"&gt;Clear&lt;/button&gt;
+    &lt;button class="vd-btn" data-action="save"&gt;Save&lt;/button&gt;
+    &lt;div class="vd-control" data-control="opacity"&gt;Opacity: &lt;span class="vd-value"&gt;25%&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="vd-control" data-control="density"&gt;Density: &lt;span class="vd-value"&gt;422&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="vd-canvas-wrap"&gt;
+    &lt;canvas class="vd-canvas" width="800" height="600"&gt;&lt;/canvas&gt;
+  &lt;/div&gt;
+
+  &lt;div class="vd-help"&gt;
+    &lt;p&gt;Pan: space + drag · Lock opacity: shift · Clear cache: ctrl + del · Save: ctrl + shift + s&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+      <h2>Learning Activities</h2>
+      <ul>
+        <li>Experiment with different densities and observe how stroke appearance changes.</li>
+        <li>Toggle velocity skewing (if available) and compare results with skewing disabled.</li>
+        <li>Record and save a sequence of frames to study animation artifacts at different frame rates.</li>
+      </ul>
+
+      <h2>Further Notes</h2>
+      <p>
+        Implementations typically rely on the Canvas API and a small physics/velocity model to map cursor movement
+        into stroke width, spacing, and opacity. For teaching purposes, consider exposing the velocity-to-size mapping
+        as a visible graph so learners can correlate input speed with visual output.
+      </p>
+
+    </div>
+  </div>
+</div>

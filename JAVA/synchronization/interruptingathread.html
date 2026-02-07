@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Interrupting Thread</h1>
+    <div class="content">
+      <p>A thread can send an interrupt signal to JVM to interrupt by invoking <code>interrupt()</code> on the Thread object for the thread to be interrupted. This means interruption of a thread is caused by any other thread calling the <code>interrupt()</code> method.</p>
+      
+      <h2>Methods for Interrupting a Thread</h2>
+      <ul>
+        <li><code>void interrupt()</code> − Interrupts the thread.</li>
+        <li><code>static boolean interrupted()</code> − Tests whether the current thread has been interrupted.</li>
+        <li><code>boolean isInterrupted()</code> − Tests whether the thread has been interrupted.</li>
+      </ul>
+      
+      <h2>Example of Interrupting a Java Thread</h2>
+      <p>In this example, we're creating a Task object which implements the <code>Runnable</code> interface to act as a thread. Using the <code>start()</code> method, we start the thread, then immediately interrupt it using <code>interrupt()</code>. The thread prints messages and checks for interruption using <code>Thread.interrupted()</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example Code</h2>
+    <div class="content">
+      <pre>
+<code>package com.tutorialspoint;
+
+public class TestThread {
+   public static void main(String[] args) {
+      System.out.println("Thread main started");
+      final Task task = new Task();
+      final Thread thread = new Thread(task);
+      thread.start();
+      thread.interrupt(); // calling interrupt() method
+      System.out.println("Main Thread finished");
+   }
+}
+
+class Task implements Runnable {
+   @Override
+   public void run() {
+      for (int i = 0; i < 5; i++) {
+         System.out.println("[" + Thread.currentThread().getName() + "] Message " + i);
+         if(Thread.interrupted()) {
+            System.out.println("This thread was interruped by someone calling this Thread.interrupt()");
+            System.out.println("Cancelling task running in thread " + Thread.currentThread().getName());
+            System.out.println("After Thread.interrupted() call, JVM reset the interrupted value to: " + Thread.interrupted());
+            break;
+         }
+      }
+   }
+}</code>
+      </pre>
+    </div>
+  </div>
+</div>

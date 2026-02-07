@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Event Delegation</h1>
+    <div class="content">
+      <p>Event delegation in JavaScript is a technique that allows us to attach a single event listener to a parent element, and then use the event object to determine which child element triggered the event. This way, we can handle multiple events with a single event listener, and avoid adding too many event listeners to the DOM.</p>
+
+      <h2>Steps of Event Delegation</h2>
+      <ul>
+        <li><strong>Attach a Listener to a Common Ancestor</strong> – Attach a single event listener to a parent element, encapsulating the elements you wish to monitor; this is in lieu of attaching individual event listeners for each element. Use methods such as <code>addEventListener</code> for efficient implementation.</li>
+        <li><strong>Check the Target Element</strong> – Inspect the <code>event.target</code> property within the event handler to pinpoint the specific element that triggered it in its common ancestor. Common checks involve scrutinizing <code>tagName</code>, <code>classList</code>, or other target element properties.</li>
+        <li><strong>Perform the Desired Action</strong> – Based on the identified target element and any specified criteria, execute the desired action or functionality. This could involve modifying content, handling a button click, or performing any custom logic associated with the event.</li>
+      </ul>
+
+      <h2>Event Delegation Examples</h2>
+
+      <h3>Example: List Item Clicks</h3>
+      <p>In this example, we employ event delegation to adeptly manage clicks on a dynamically changing list of tutorials. The <code>&lt;ul&gt;</code> element serving as the shared ancestor for all list items has one solitary event listener attached to it.</p>
+      <p>Upon clicking a tutorial, an <code>&lt;li&gt;</code> identifies itself as the target via our event handler, enabling logging of that particular tutorial's content in the console.</p>
+
+      <h3>Example Code</h3>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;style&gt;
+      ul {list-style-type: none; padding: 0;}
+      li {margin: 5px; padding: 10px; border: 1px solid #ccc; cursor: pointer; max-width: 30%;}
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;ul id="myList"&gt;
+      &lt;li&gt;Tutorial 1&lt;/li&gt;
+      &lt;li&gt;Tutorial 2&lt;/li&gt;
+      &lt;li&gt;Tutorial 3&lt;/li&gt;
+      &lt;li&gt;Tutorial 4&lt;/li&gt;
+      &lt;li&gt;Tutorial 5&lt;/li&gt;
+   &lt;/ul&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("output");
+      const myList = document.getElementById("myList");
+      myList.addEventListener("click", function(event) {
+         if (event.target.tagName === "LI") {
+            output.innerHTML += "Tutorial clicked: " + event.target.textContent + "&lt;br&gt;";
+         }
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h3>Example: Form Control Changes</h3>
+      <p>Here, event delegation allows for monitoring and logging of changes in form control values. The <code>&lt;form&gt;</code> element acts as a common ancestor, while an input event listener captures alterations within input fields. The script checks the target element and logs the modified input's name and value.</p>
+
+      <h3>Example Code</h3>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;form id="myForm"&gt;
+      &lt;input type="text" name="username" placeholder="Username"&gt;
+      &lt;input type="password" name="password" placeholder="Password"&gt;
+      &lt;button type="button"&gt;Submit&lt;/button&gt;
+   &lt;/form&gt;
+   &lt;div id="message"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const messageElement = document.getElementById("message");
+      const myForm = document.getElementById("myForm");
+      myForm.addEventListener("input", function(event) {
+         if (event.target.nodeName === "INPUT") {
+            messageElement.innerHTML += "Input changed: " + event.target.name + " - New value: " + event.target.value + "&lt;br&gt;";
+         }
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <p>Event delegation is valuable in scenarios where a single event listener can efficiently manage interactions for multiple elements, reducing redundancy and improving performance. Common use cases include handling dynamic lists, form interactions, table actions, accordion or tabbed interfaces, tree structures, dropdown menus, multi-step wizards, carousels, and various interactive UI components.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,221 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Kaboom.js</h1>
+
+    <div class="content">
+      <p>
+        Kaboom.js makes it easy to create JavaScript games. You can add physics, detect collisions,
+        and use sprites in different scenes. Kaboom helps developers focus on creativity instead of
+        complex coding. Features like backgrounds, power-ups, and scoring can be added to enhance gameplay.
+      </p>
+
+      <h2>Getting Started with Kaboom</h2>
+      <p>
+        To initialize Kaboom, call the <code>kaboom()</code> function to set up the context:
+      </p>
+      <pre>
+kaboom({
+   global: true,
+});
+      </pre>
+      <p>
+        When building in your editor, include both your JS file and the Kaboom.js library in your HTML file:
+      </p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Simple Kaboom Game&lt;/title&gt;
+    &lt;script src="https://kaboomjs.com/lib/0.5.0/kaboom.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;script src="example.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>Create a Scene</h2>
+      <p>
+        A scene defines how the game will look, behave, and play out:
+      </p>
+      <pre>
+kaboom({
+   global: true,
+});
+
+scene("main", () => {
+   //...
+});
+
+start("main");
+      </pre>
+
+      <h2>Load Sprites and Create Player</h2>
+      <p>
+        Sprites are images used in your game. Use <code>loadSprite()</code> to load them and <code>add()</code> to display:
+      </p>
+      <pre>
+kaboom({
+  global: true,
+});
+
+loadRoot('https://i.imgur.com/');
+loadSprite('yeti', 'OqVwAm6.png');
+
+scene('main', () => {
+  const yeti = add([
+    sprite('yeti'),
+    pos(80, 80),
+    color(255, 188, 0),
+  ]);
+});
+
+start('main');
+      </pre>
+      <p>
+        This will display the yeti sprite in your game window.
+      </p>
+
+      <h2>Add Physics (Body and Ground)</h2>
+      <p>
+        The <code>body()</code> component gives your sprite gravity. Add a ground to stop the sprite from falling:
+      </p>
+      <pre>
+kaboom({
+  global: true,
+});
+
+loadRoot('https://i.imgur.com/');
+loadSprite('yeti', 'OqVwAm6.png');
+
+scene('main', () => {
+  const yeti = add([
+    sprite('yeti'),
+    pos(80, 80),
+    color(255, 188, 0),
+    body(),
+  ]);
+
+  // Add the ground
+  add([
+    rect(width(), 12),
+    pos(0, 280),
+    origin('topleft'),
+    solid(),
+  ]);
+});
+
+start('main');
+      </pre>
+
+      <h2>Kaboom Key Events</h2>
+      <p>
+        Add movement and jumping to your sprite with key events:
+      </p>
+      <pre>
+kaboom({
+  global: true,
+});
+
+loadRoot('https://i.imgur.com/');
+loadSprite('yeti', 'OqVwAm6.png');
+
+scene('main', () => {
+  const yeti = add([
+    sprite('yeti'),
+    pos(80, 80),
+    color(255, 188, 0),
+    body(),
+  ]);
+
+  add([
+    rect(width(), 12),
+    pos(0, 280),
+    origin('topleft'),
+    solid(),
+  ]);
+
+  // Controls
+  const JUMP_FORCE = 320;
+  const MOVE_SPEED = 120;
+
+  keyPress("space", () => {
+    yeti.jump(JUMP_FORCE);
+  });
+
+  keyDown("left", () => {
+    yeti.move(-MOVE_SPEED, 0);
+  });
+
+  keyDown("right", () => {
+    yeti.move(MOVE_SPEED, 0);
+  });
+});
+
+start('main');
+      </pre>
+
+      <h2>Add a Background Image</h2>
+      <p>
+        You can also add a background sprite to your game:
+      </p>
+      <pre>
+kaboom({
+   global: true,
+});
+
+loadSprite("yeti", "https://i.imgur.com/OqVwAm6.png");
+loadSprite("bg", "/Users/abc/Downloads/image.jpg");
+
+scene("main", () => {
+   // Add background
+   add([
+      sprite("bg"),
+      scale(width() / 240, height() / 240),
+      origin("topleft"),
+   ]);
+
+   const yeti = add([
+      sprite("yeti"),
+      pos(80, 80),
+      color(255, 188, 0),
+      body(),
+   ]);
+
+   add([
+      rect(width(), 12),
+      pos(0, 280),
+      origin("topleft"),
+      solid(),
+   ]);
+
+   const JUMP_FORCE = 320;
+   const MOVE_SPEED = 120;
+
+   keyPress("space", () => {
+      yeti.jump(JUMP_FORCE);
+   });
+
+   keyDown("left", () => {
+      yeti.move(-MOVE_SPEED, 0);
+   });
+
+   keyDown("right", () => {
+      yeti.move(MOVE_SPEED, 0);
+   });
+});
+
+start("main");
+      </pre>
+
+      <h2>Summary</h2>
+      <p>
+        Kaboom.js is a beginner-friendly library for building JavaScript games. You can
+        initialize contexts, create scenes, add sprites, apply physics, handle events, and
+        include backgrounds. With Kaboom, game development becomes easier and more fun.
+      </p>
+    </div>
+  </div>
+</div>

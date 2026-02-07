@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Power BI - DAX Aggregate Functions</title>
+</head>
+<body>
+
+  
+
+  <main>
+    <section>
+      <p>
+        In this chapter, we explore various DAX Aggregate functions in Power BI with examples. 
+        These functions return a single value from a column and can work with numeric, text, and Boolean values.
+      </p>
+      <p>
+        Start by loading your dataset, go to <strong>Table Tools</strong> → <strong>New Measure</strong> to write these expressions.
+      </p>
+    </section>
+
+    <section>
+      <h2>MIN Function</h2>
+      <p>Returns the smallest numeric value in a column.</p>
+      <pre><code>min_salary = MIN(Sheet1[Salary])</code></pre>
+    </section>
+
+    <section>
+      <h2>MINA Function</h2>
+      <p>Returns the smallest value including Boolean and text values.</p>
+      <pre><code>min_a = MINA(Sheet1[Name])</code></pre>
+    </section>
+
+    <section>
+      <h2>MINX Function</h2>
+      <p>Returns the smallest value over an expression evaluated across a table.</p>
+      <pre><code>min_x = MINX(Sheet1, Sheet1[Name])</code></pre>
+    </section>
+
+    <section>
+      <h2>MAX Function</h2>
+      <p>Returns the largest numeric value from a column.</p>
+      <pre><code>max_salary = MAX(Sheet1[Salary])</code></pre>
+    </section>
+
+    <section>
+      <h2>MAXA Function</h2>
+      <p>
+        Returns the largest value including Boolean and numeric values. 
+        <br>Note: <code>FALSE = 0</code>, <code>TRUE = 1</code>, <code>NULL</code> is ignored.
+      </p>
+      <pre><code>max_a = MAXA(Sheet1[Age])</code></pre>
+    </section>
+
+    <section>
+      <h2>MAXX Function</h2>
+      <p>Evaluates an expression over a table and returns the maximum value.</p>
+      <pre><code>max_x = MAXX(Sheet1, Sheet1[Name])</code></pre>
+    </section>
+
+    <section>
+      <h2>AVERAGE Function</h2>
+      <p>Returns the arithmetic mean of a column.</p>
+      <pre><code>aver = AVERAGE(Sheet1[Salary])</code></pre>
+    </section>
+
+    <section>
+      <h2>AVERAGEA Function</h2>
+      <p>
+        Returns the average including Boolean and text values.<br>
+        <strong>Notes:</strong>
+        <ul>
+          <li>Strings and NULL = 0</li>
+          <li>FALSE = 0, TRUE = 1</li>
+        </ul>
+      </p>
+      <pre><code>aver = AVERAGEA(Sheet1[Name])</code></pre>
+    </section>
+
+    <section>
+      <h2>AVERAGEX Function</h2>
+      <p>Calculates the average of an expression evaluated across a table.</p>
+      <pre><code>avg = AVERAGEX(Sheet1, Sheet1[Salary] + Sheet1[Incentive])</code></pre>
+    </section>
+
+    <section>
+      <h2>SUM Function</h2>
+      <p>Returns the sum of numeric values in a column.</p>
+      <pre><code>sum = SUM(Sheet1[Salary])</code></pre>
+    </section>
+
+    <section>
+      <h2>SUMX Function</h2>
+      <p>Returns the sum of an expression evaluated across a table.</p>
+      <pre><code>sum = SUMX(Sheet1, Sheet1[Salary] - Sheet1[Penality])</code></pre>
+    </section>
+
+    <section>
+      <h2>PRODUCT Function</h2>
+      <p>Returns the product (multiplication) of values in a column.</p>
+      <pre><code>pw = PRODUCT(Sheet1[Incentive])</code></pre>
+    </section>
+
+    <section>
+      <h2>PRODUCTX Function</h2>
+      <p>Returns the product of an expression evaluated across a table.</p>
+      <pre><code>
+product = PRODUCTX(
+  Student_details,
+  Student_details[Theory Marks] + Student_details[Practical Marks]
+)
+      </code></pre>
+    </section>
+  </main>
+
+  
+
+</body>
+</html>

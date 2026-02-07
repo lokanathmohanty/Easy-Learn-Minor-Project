@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Smart Pointers (Automatic Memory Management) 🧠</h1>
+
+        <div class="content">
+            <p>A **smart pointer** is a class template that wraps around a **raw pointer** to manage dynamically allocated memory automatically. They implement the **RAII (Resource Acquisition Is Initialization)** principle, ensuring that dynamically allocated memory is correctly deallocated when the smart pointer object goes out of scope.</p>
+            <p>Smart pointers solve common C++ memory problems:</p>
+            <ul>
+                <li>**Memory Leaks:** Automatically calls <code>delete</code> when the memory is no longer needed.</li>
+                <li>**Dangling Pointers:** Prevents pointers from pointing to deallocated memory by managing object lifespan.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Types of Smart Pointers (<code>&lt;memory&gt;</code>)</h2>
+            <p>The three modern smart pointers are <code>unique_ptr</code>, <code>shared_ptr</code>, and <code>weak_ptr</code>. (The older <code>auto_ptr</code> is deprecated and removed since C++17).</p>
+
+            <h3>1. <code>unique_ptr</code> (Exclusive Ownership) 🔒</h3>
+            <p>A <code>unique_ptr</code> is a smart pointer that maintains **exclusive ownership** of an object. It guarantees that only one pointer can point to the resource at a time.</p>
+            <ul>
+                <li>**No Copying:** You cannot copy a <code>unique_ptr</code>.</li>
+                <li>**Ownership Transfer:** Ownership can be **transferred** using <code>std::move()</code>. Once transferred, the original pointer becomes null.</li>
+                <li>**Use Case:** Use when you need a single, clear owner of an object, ensuring automatic cleanup upon scope exit.</li>
+            </ul>
+            <pre class="example">
+unique_ptr&lt;int&gt; ptr1 = make_unique&lt;int&gt;(200); // Owner 1
+unique_ptr&lt;int&gt; ptr2 = move(ptr1);             // Ownership transferred. ptr1 is now null.
+</pre>
+
+            <h3>2. <code>shared_ptr</code> (Shared Ownership) 🤝</h3>
+            <p>A <code>shared_ptr</code> allows **multiple pointers** to share ownership of the same object. It uses a **reference counter** to track the number of pointers pointing to the object.</p>
+            <ul>
+                <li>**Automatic Deletion:** The object is automatically deleted only when the reference count reaches zero.</li>
+                <li>**Use Case:** Use when multiple parts of your program need to maintain access to the same dynamically allocated object, and its lifetime should be managed jointly.</li>
+            </ul>
+            <pre class="example">
+shared_ptr&lt;int&gt; ptr1 = make_shared&lt;int&gt;(300);
+cout &lt;&lt; ptr1.use_count(); // Output: 1
+
+shared_ptr&lt;int&gt; ptr2 = ptr1;      // Copying increases the count
+cout &lt;&lt; ptr1.use_count(); // Output: 2
+</pre>
+
+            <h3>3. <code>weak_ptr</code> (Non-Owning Observation) 🔭</h3>
+            <p>A <code>weak_ptr</code> is a **non-owning** smart pointer that observes an object managed by a <code>shared_ptr</code>. It **does not affect the reference count**.</p>
+            <ul>
+                <li>**Purpose:** Primarily used to **break circular dependencies** that can occur between <code>shared_ptr</code> objects, which would otherwise prevent memory from being released.</li>
+                <li>**Access:** To safely access the observed object, you must first call the <code>.lock()</code> method, which returns a temporary <code>shared_ptr</code>. If the object has already been destroyed, <code>lock()</code> returns an empty <code>shared_ptr</code>.</li>
+            </ul>
+            <pre class="example">
+shared_ptr&lt;int&gt; owner = make_shared&lt;int&gt;(400);
+weak_ptr&lt;int&gt; observer = owner; // Does not increase count
+
+if (auto locked = observer.lock()) {
+    // locked is a valid, temporary shared_ptr
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Smart Pointers vs. Raw Pointers</h2>
+            <table>
+                <thead>
+                    <tr><th>Raw Pointer</th><th>Smart Pointer</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Stores a memory address.</td>
+                        <td>Stores a raw pointer but wraps it in a class template for management.</td>
+                    </tr>
+                    <tr>
+                        <td>Requires **manual** calls to <code>new</code> and <code>delete</code>.</td>
+                        <td>Uses RAII to manage allocation and **automatic** deallocation.</td>
+                    </tr>
+                    <tr>
+                        <td>High risk of memory leaks and dangling pointers.</td>
+                        <td>Eliminates memory leaks and dangling pointers.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

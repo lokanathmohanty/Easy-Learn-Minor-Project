@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Grouping Operator</h1>
+    <div class="content">
+      <p>
+        The grouping operator in JavaScript controls the precedence of the evaluation in expressions. 
+        It is denoted by parentheses <code>()</code>, and you can put the expression inside that to change the expression evaluation order. 
+        It helps to evaluate an expression with lower precedence before an expression with higher precedence.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>You can follow the syntax below to use the grouping operator:</p>
+      <p><code>( exp )</code></p>
+      <p>In the above syntax, the <code>exp</code> is an expression to change the precedence of evaluation.</p>
+
+      <p><code>
+        let res1 = 4 + 5 * 6; // 4 + 30<br>
+        let res2 = (4 + 5) * 6; // 9 * 6
+      </code></p>
+
+      <p>
+        The multiplication <code>(*)</code> operator in JavaScript has higher precedence than the addition <code>(+)</code> operator. 
+        So, in the first expression it multiplies <code>5</code> and <code>6</code> first, and then adds <code>4</code>.
+      </p>
+      <p>
+        In the second expression, we grouped <code>(4 + 5)</code> using the grouping operator, so it is evaluated first, then multiplied by <code>6</code>.
+      </p>
+
+      <h2>Example</h2>
+      <p><b>Example: Using grouping operator with arithmetic</b></p>
+      <p>Code:</p>
+      <p><code>
+        let res1 = 4 + 5 * 6;<br>
+        let res2 = (4 + 5) * 6;<br>
+        console.log(res1); // 34<br>
+        console.log(res2); // 54
+      </code></p>
+
+      <h2>Immediately Invoked Function Expressions (IIFEs)</h2>
+      <p>
+        To define an immediately invoked function in JavaScript, we use the grouping operator. 
+        The anonymous function definition is put inside the grouping operator. These are also called <b>self-executing functions</b>.
+      </p>
+
+      <p><code>(function () { return 5; })();</code></p>
+      <p>Here, the function definition is put inside the grouping operator and executes immediately.</p>
+
+      <h2>Example</h2>
+      <p><b>Example: Using grouping operator with IIFE</b></p>
+      <p>Code:</p>
+      <p><code>
+        let ans1 = 5 + 10 / (function () { return 5; })();<br>
+        let ans2 = (5 + 10) / (function () { return 5; })();<br>
+        console.log(ans1); // 7<br>
+        console.log(ans2); // 3
+      </code></p>
+
+      <h2>Grouping Operator with Logical Operators</h2>
+      <p>
+        The grouping operator in JavaScript can also be used to group expressions with logical operators. 
+        For example, the <code>&&</code> operator has a higher precedence than the <code>||</code> operator.
+      </p>
+
+      <p><code>false && false || true; // true</code></p>
+      <p>However, if we add parentheses:</p>
+      <p><code>false && (false || true); // false</code></p>
+
+      <h2>Example</h2>
+      <p><b>Example: Using grouping operator with logical operators</b></p>
+      <p>Code:</p>
+      <p><code>
+        let res1 = false && false || true;<br>
+        let res2 = false && (false || true);<br>
+        console.log(res1); // true<br>
+        console.log(res2); // false
+      </code></p>
+    </div>
+  </div>
+</div>

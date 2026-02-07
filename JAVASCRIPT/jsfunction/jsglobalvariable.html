@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Global Variables</h1>
+
+    <div class="content">
+      <p>Global variables in JavaScript are variables that are defined outside of any function or block. They are accessible from anywhere in the code. All scripts and functions can access global variables.</p>
+      <p>You can define global variables using the <code>var</code>, <code>let</code>, or <code>const</code> keywords. If you declare a variable without using any of these keywords, it automatically becomes a global variable.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">JavaScript Global Scope</h2>
+      <p>The global variables have global scope. A variable declared outside a function or block has global scope and is accessible in all other scopes.</p>
+      <p>In client-side JavaScript, the global scope is the web page where the code runs. A global variable declared with <code>var</code> belongs to the <code>window</code> object.</p>
+      <pre><code>var x = 10; // Global Scope
+let y = 20; // Global Scope
+const z = 30; // Global Scope
+</code></pre>
+      <p>Here, the variables <code>x</code>, <code>y</code>, and <code>z</code> are declared outside any function or block, so they have global scope.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Global Variable Examples</h2>
+
+      <h3 class="title">Example 1</h3>
+      <pre><code>&lt;script&gt;
+var x = 10;
+let y = 20;
+const z = 30;
+document.getElementById("output").innerHTML =
+   "x = " + x + "&lt;br&gt;" +
+   "y = " + y + "&lt;br&gt;" +
+   "z = " + z;
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>x = 10</li>
+        <li>y = 20</li>
+        <li>z = 30</li>
+      </ul>
+
+      <h3 class="title">Example 2</h3>
+      <pre><code>&lt;script&gt;
+var a = 10;
+let b = 20;
+function test() {
+   document.getElementById("demo").innerHTML += 
+      "a -&gt; Inside function = " + a + "&lt;br&gt;" +
+      "b -&gt; Inside function = " + b + "&lt;br&gt;";
+}
+test();
+document.getElementById("demo").innerHTML += 
+   "a -&gt; Outside function = " + a + "&lt;br&gt;" +
+   "b -&gt; Outside function = " + b + "&lt;br&gt;";
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>a → Inside function = 10</li>
+        <li>b → Inside function = 20</li>
+        <li>a → Outside function = 10</li>
+        <li>b → Outside function = 20</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Automatic Global Variables</h2>
+      <p>If you define a variable without <code>var</code>, <code>let</code>, or <code>const</code>, it automatically becomes global—even if defined inside a function.</p>
+
+      <h3 class="title">Example</h3>
+      <pre><code>&lt;script&gt;
+function test() {
+   a = 90; // no keyword used, becomes global
+   document.getElementById("demo").innerHTML += 
+      "a -&gt; Inside function = " + a + "&lt;br&gt;";
+}
+test();
+document.getElementById("demo").innerHTML += 
+   "a -&gt; Outside function = " + a + "&lt;br&gt;";
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>a → Inside function = 90</li>
+        <li>a → Outside function = 90</li>
+      </ul>
+
+      <p><strong>Note:</strong> Defining global variables inside functions or blocks is not good practice, as it may cause naming conflicts.</p>
+    </div>
+  </div>
+</div>

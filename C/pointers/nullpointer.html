@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">NULL Pointer in C</h1>
+    <div class="content">
+      <h2>What is a NULL Pointer?</h2>
+      <p>A NULL pointer in C is a pointer that does not point to any valid memory location. The macro <code>NULL</code> is defined in standard headers like <code>stdio.h</code>, <code>stddef.h</code>, and <code>stdlib.h</code>. :contentReference[oaicite:0]{index=0}</p>
+
+      <h2>Declare and Initialize a NULL Pointer</h2>
+      <p>You can declare and initialize a NULL pointer in two common ways:</p>
+      <pre><code>type *ptr = NULL;
+type *ptr = 0;</code></pre>
+
+      <h2>Example of a NULL Pointer</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int *p = NULL;  // initialize the pointer to NULL
+  printf("The value of pointer is %u", p);
+  return 0;
+}</code></pre>
+      <p>Output:</p>
+      <p>The value of pointer is 0.</p>
+
+      <h2>Applications of NULL Pointer</h2>
+      <ul>
+        <li>To initialize pointers when they don’t yet point to a valid address.</li>
+        <li>To pass NULL to function arguments when no address is to be passed.</li>
+        <li>To check if a pointer is valid before dereferencing it, preventing crashes.</li>
+        <li>Used in data structures (linked lists, trees) to signal the end or absence of a node.</li>
+      </ul>
+
+      <h2>Check Whether a Pointer is NULL</h2>
+      <p>Always verify a pointer is not NULL before dereferencing it:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int *ptr = NULL;  // null pointer
+
+  if (ptr == NULL) {
+    printf("Pointer is a NULL pointer");
+  } else {
+    printf("Value at pointer: %d", *ptr);
+  }
+  return 0;
+}</code></pre>
+      <p>Output:</p>
+      <p>Pointer is a NULL pointer</p>
+
+      <h2>Using NULL Pointer to Check Allocation</h2>
+      <p>Memory allocation functions like <code>malloc()</code> or <code>calloc()</code> return <code>NULL</code> when allocation fails. Use this to validate allocation success.</p>
+      <pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+int main() {
+  int *ptr = (int *)malloc(sizeof(int));
+
+  if (ptr == NULL) {
+    printf("Memory Allocation Failed");
+    exit(0);
+  } else {
+    printf("Memory Allocated successfully");
+  }
+  return 0;
+}</code></pre>
+
+      <h2>NULL File Pointer Example</h2>
+      <p>When working with files, always check if <code>fopen()</code> returned a NULL FILE pointer to detect errors opening the file:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  FILE *fp = fopen("file3.txt", "r");
+
+  if (fp == NULL) {
+    puts("Cannot open file");
+    return 0;
+  }
+
+  // proceed with reading file...
+  fclose(fp);
+  return 0;
+}</code></pre>
+
+      <h2>Summary</h2>
+      <p>Using <code>NULL</code> is a good defensive programming practice in C. Always initialize pointers to NULL when they don’t yet point to valid memory, check for NULL before dereferencing them, and handle NULL from functions (such as memory allocation) gracefully. Dereferencing a NULL pointer is undefined behavior and often causes a runtime crash (segmentation fault). :contentReference[oaicite:1]{index=1}</p>
+    </div>
+  </div>
+</div>

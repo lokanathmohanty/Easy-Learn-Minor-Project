@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Bit Fields in C</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        Bit fields in C allow you to specify the exact number of bits a variable should use within a struct or union, optimizing memory usage by restricting field sizes.
+      </p>
+      <h2>Bit Field Syntax</h2>
+      <p>
+        Declare a bit field by appending a colon and the number of bits after the member name:
+      </p>
+      <pre><code>
+struct {
+  unsigned int widthValidated : 1;
+  unsigned int heightValidated : 1;
+} status;
+      </code></pre>
+      <h2>Memory Usage</h2>
+      <p>
+        Although only 2 bits are used for the status fields, the entire structure occupies 4 bytes due to minimum storage sizes and alignment. Adding more bit fields up to the native word size fits into the same memory slot.
+      </p>
+      <h2>Example: Bit Fields vs Regular Fields</h2>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+struct {
+  unsigned int widthValidated;
+  unsigned int heightValidated;
+} status1;
+
+struct {
+  unsigned int widthValidated : 1;
+  unsigned int heightValidated : 1;
+} status2;
+
+int main() {
+  printf("Memory size occupied by status1: %d\n", sizeof(status1));
+  printf("Memory size occupied by status2: %d\n", sizeof(status2));
+  return 0;
+}
+      </code></pre>
+      <h2>Output</h2>
+      <p>
+        Typical output shows status1 occupying 8 bytes and status2 occupying 4 bytes, demonstrating memory efficiency of bit fields.
+      </p>
+      <h2>Bit Field Details</h2>
+      <ul>
+        <li><strong>type:</strong> int, unsigned int, or signed int</li>
+        <li><strong>member_name:</strong> name of the bit field</li>
+        <li><strong>width:</strong> number of bits, must not exceed the bit width of type</li>
+      </ul>
+      <h2>Example: Storing Small Values</h2>
+      <pre><code>
+struct {
+  unsigned int age : 3;
+} Age;
+
+int main() {
+  Age.age = 4;
+  printf("Sizeof(Age): %d\n", sizeof(Age));
+  printf("Age.age: %d\n", Age.age);
+
+  Age.age = 7;
+  printf("Age.age: %d\n", Age.age);
+
+  Age.age = 8;  // Overflow warning
+  printf("Age.age: %d\n", Age.age);
+
+  return 0;
+}
+      </code></pre>
+      <h2>Output Notes</h2>
+      <p>
+        Assigning values beyond 3 bits (max 7) results in overflow and unexpected zero values. Bit fields are ideal for memory-limited contexts or encoding multiple status flags into a single memory unit.
+      </p>
+    </div>
+  </div>
+</div>

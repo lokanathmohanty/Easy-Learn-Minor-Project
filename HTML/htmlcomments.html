@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Comments - HTML Tutorial</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #222;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: "Courier New", monospace;
+      margin: 20px 0;
+      position: relative;
+    }
+    pre::before {
+      content: "Code Editor";
+      display: block;
+      background: #333;
+      color: #fff;
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 8px 8px 0 0;
+      position: absolute;
+      top: -32px;
+      left: 0;
+    }
+    code {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    ul {
+      margin: 10px 0 20px 30px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main class="content">
+    <h1>HTML - Comments</h1>
+    <p>
+      HTML comments are non-executable lines of code that do not display on the webpage 
+      and are used to add notes or explanations. It is a good practice to add comments 
+      into your HTML code, especially in complex documents, to indicate sections of a document 
+      and any other notes for developers.
+    </p>
+    <p>
+      Comments are completely ignored by web browsers, so they don't affect how your page looks or works.  
+      They are placed between <code>&lt;!-- ... --&gt;</code> tags.
+    </p>
+
+    <h2>Example of HTML Comments</h2>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;!-- Document Header Starts --&gt;
+   &lt;title&gt;This is document title&lt;/title&gt;
+&lt;/head&gt;
+&lt;!-- Document Header Ends --&gt;
+&lt;body&gt;
+   &lt;p&gt;Document content goes here.....&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h2>Valid vs Invalid Comments</h2>
+    <p>
+      Comments in HTML have certain rules:
+    </p>
+    <ul>
+      <li>Comments do not support nesting (a comment cannot be inside another comment).</li>
+      <li>You can't have the sequence <code>--</code> inside a comment, except to close it.</li>
+      <li>No space is allowed in the opening <code>&lt;!--</code> tag.</li>
+    </ul>
+
+    <h3>Valid Comment Example:</h3>
+    <pre><code>&lt;!-- This is valid comment --&gt;</code></pre>
+
+    <h3>Invalid Comment Example:</h3>
+    <pre><code>&lt; !-- This is not a valid comment --&gt;</code></pre>
+
+    <h2>Multiline Comments</h2>
+    <p>You can span comments across multiple lines:</p>
+    <pre><code>&lt;!--
+   This is a multiline comment and it can
+   span through as many lines as you like.
+--&gt;</code></pre>
+
+    <h2>Conditional Comments</h2>
+    <p>
+      Conditional comments are specific to Internet Explorer (IE) and ignored by other browsers. 
+      They are useful when you want to target different IE versions.
+    </p>
+    <pre><code>&lt;!--[if IE 6]&gt;
+   Special instructions for IE 6 here
+&lt;![endif]--&gt;</code></pre>
+
+    <h2>Comments Using &lt;comment&gt; Tag</h2>
+    <p>
+      Some older browsers supported the <code>&lt;comment&gt;</code> tag, though it's not standard.
+    </p>
+    <pre><code>&lt;p&gt;This is &lt;comment&gt;not&lt;/comment&gt; Internet Explorer.&lt;/p&gt;</code></pre>
+
+    <h2>Commenting Script Code</h2>
+    <p>
+      In old browsers, it was recommended to wrap script code inside comments 
+      so that the page doesn't break if the browser didn't support JavaScript.
+    </p>
+    <pre><code>&lt;script&gt;
+   &lt;!-- document.write("Hello World!") --&gt;
+&lt;/script&gt;</code></pre>
+
+    <h2>Commenting Style Sheets</h2>
+    <p>
+      To comment inside CSS, use <code>/* ... */</code> syntax.
+    </p>
+    <pre><code>&lt;style&gt;
+/* commenting in stylesheet 
+.example {
+   border: 1px solid #4a7d49;
+} */
+&lt;/style&gt;</code></pre>
+  </main>
+</body>
+</html>

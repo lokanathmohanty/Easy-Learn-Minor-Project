@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">NumPy: Filtering Arrays</h1>
+    <div class="content">
+      <p>Filtering arrays involves selecting elements from an existing array based on certain conditions, resulting in a new array containing only the desired elements.</p>
+      <p>In NumPy, filtering is performed using boolean indexing, where a mask (array of True/False values) corresponds to elements being included (True) or excluded (False).</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Example: Boolean Indexing with Predefined Mask</h2>
+    <div class="content">
+      <p>Selecting elements based on a manually specified boolean mask:</p>
+      <pre>
+<code>import numpy as np
+arr = np.array([41, 42, 43, 44])
+mask = [True, False, True, False]
+filtered = arr[mask]
+print(filtered)  # Output: [41 43]
+</code>
+      </pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Example: Creating Filter with Condition</h2>
+    <div class="content">
+      <p>Generate a boolean mask by applying a condition directly on the array:</p>
+      <pre>
+<code>import numpy as np
+arr = np.array([41, 42, 43, 44])
+mask = arr > 42
+filtered = arr[mask]
+print(mask)     # Output: [False False  True  True]
+print(filtered) # Output: [43 44]
+</code>
+      </pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Example: Filtering Even Numbers</h2>
+    <div class="content">
+      <p>Selecting even numbers using condition-based boolean mask:</p>
+      <pre>
+<code>import numpy as np
+arr = np.array([1, 2, 3, 4, 5, 6])
+mask = (arr % 2 == 0)
+filtered = arr[mask]
+print(mask)     # Output: [False  True False  True False  True]
+print(filtered) # Output: [2 4 6]
+</code>
+      </pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Filtering Multidimensional Arrays</h2>
+    <div class="content">
+      <p>Boolean indexing can also be applied to multidimensional arrays along any axis, resulting in a flattened filtered array of selected elements.</p>
+      <p>Example: Filtering elements > 9 in a 2D array:</p>
+      <pre>
+<code>arr = np.array([[1, 7, 9], 
+                 [14, 19, 21], 
+                 [25, 29, 35]])
+mask = arr > 9
+filtered = arr[mask]
+print(filtered)  # Output: [14 19 21 25 29 35]
+</code>
+      </pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Modifying Elements with Boolean Indexing</h2>
+    <div class="content">
+      <p>You can use boolean masks not only to filter, but also to modify elements selectively.</p>
+      <p>Example: Set all even numbers to zero:</p>
+      <pre>
+<code>numbers = np.array([1, 2, 3, 4, 5, 6, 7])
+numbers[numbers % 2 == 0] = 0
+print(numbers)  # Output: [1 0 3 0 5 0 7]
+</code>
+      </pre>
+    </div>
+  </div>
+</div>

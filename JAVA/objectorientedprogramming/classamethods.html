@@ -1,0 +1,184 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Class Methods</h1>
+
+    <div class="content">
+      <p>Class methods in Java are functions declared inside a class that define behaviors or actions the class can perform. They can access or modify class attributes.</p>
+    </div>
+
+    <div class="content">
+      <h2>Creating (Declaring) Java Class Methods</h2>
+      <p><strong>Syntax:</strong></p>
+      <pre><code>public class ClassName {
+  modifier returnType methodName(Parameter List) {
+    // method body
+  }
+}</code></pre>
+
+      <ul>
+        <li><strong>modifier:</strong> (optional) access level (e.g., public)</li>
+        <li><strong>returnType:</strong> type of value the method returns</li>
+        <li><strong>methodName:</strong> name of the method</li>
+        <li><strong>Parameter List:</strong> optional list of input values</li>
+      </ul>
+
+      <p><strong>Example:</strong></p>
+      <pre><code>class Util {
+  public int minimum(int n1, int n2) {
+    if (n1 > n2)
+      return n2;
+    else
+      return n1;
+  }
+}</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Accessing Java Class Methods</h2>
+      <p>To access a public class method, create an object and use the dot <code>.</code> operator.</p>
+
+      <pre><code>object_name.method_name(parameters);</code></pre>
+
+      <p><strong>Example:</strong></p>
+      <pre><code>package com.tutorialspoint;
+
+class Util {
+  public int minimum(int n1, int n2) {
+    return (n1 > n2) ? n2 : n1;
+  }
+}
+
+public class Tester {
+  public static void main(String[] args) {
+    Util util = new Util();
+    int result = util.minimum(11, 6);
+    System.out.println("Minimum Value = " + result);
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Minimum Value = 6</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Using <code>this</code> Keyword in Class Methods</h2>
+      <p><code>this</code> is a reference to the current object. It is used to:</p>
+      <ul>
+        <li>Differentiate between local and instance variables</li>
+        <li>Invoke one constructor from another</li>
+      </ul>
+
+      <pre><code>class Student {
+  int age;
+  Student(int age) {
+    this.age = age;  // refers to instance variable
+  }
+}</code></pre>
+
+      <p><strong>Constructor Chaining:</strong></p>
+      <pre><code>class Student {
+  int age;
+  Student() {
+    this(20);  // calls the parameterized constructor
+  }
+  Student(int age) {
+    this.age = age;
+  }
+}</code></pre>
+    </div>
+
+    <div class="content">
+      <h3>Example: Full Program Using <code>this</code></h3>
+      <pre><code>package com.tutorialspoint;
+
+public class Tester {
+  int num = 10;
+
+  Tester() {
+    System.out.println("This is an example program on keyword this");
+  }
+
+  Tester(int num) {
+    this(); // call default constructor
+    this.num = num;
+  }
+
+  public void greet() {
+    System.out.println("Hi Welcome to Tutorialspoint");
+  }
+
+  public void print() {
+    int num = 20;
+    System.out.println("value of local variable num is : " + num);
+    System.out.println("value of instance variable num is : " + this.num);
+    this.greet();
+  }
+
+  public static void main(String[] args) {
+    Tester obj1 = new Tester();
+    obj1.print();
+
+    Tester obj2 = new Tester(30);
+    obj2.print();
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>This is an example program on keyword this</li>
+        <li>value of local variable num is : 20</li>
+        <li>value of instance variable num is : 10</li>
+        <li>Hi Welcome to Tutorialspoint</li>
+        <li>This is an example program on keyword this</li>
+        <li>value of local variable num is : 20</li>
+        <li>value of instance variable num is : 30</li>
+        <li>Hi Welcome to Tutorialspoint</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Public vs Static Class Methods</h2>
+      <ul>
+        <li><strong>Public Methods:</strong> Accessed through object instances</li>
+        <li><strong>Static Methods:</strong> Accessed directly via class, no object needed</li>
+      </ul>
+
+      <pre><code>public class Main {
+  static void fun1() {
+    System.out.println("fun1: This is a static method.");
+  }
+
+  public void fun2() {
+    System.out.println("fun2: This is a public method.");
+  }
+
+  public static void main(String[] args) {
+    fun1(); // static method call
+
+    Main obj = new Main();
+    obj.fun2(); // public method call
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>fun1: This is a static method.</li>
+        <li>fun2: This is a public method.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>The <code>finalize()</code> Method</h2>
+      <p>The <code>finalize()</code> method is called just before an object is garbage collected. It is useful for cleanup operations like closing files or releasing resources.</p>
+
+      <p><strong>Syntax:</strong></p>
+      <pre><code>protected void finalize() {
+  // cleanup code here
+}</code></pre>
+
+      <p><strong>Note:</strong> You cannot rely on <code>finalize()</code> to always be executed. If the program ends before GC runs, it won't be called.</p>
+    </div>
+  </div>
+</div>

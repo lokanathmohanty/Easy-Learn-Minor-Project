@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Reading File</h1>
+    <div class="content">
+      <p>Reading a file is a fundamental task in Java, and several classes and methods in the Java API make this process efficient and flexible. The three most common approaches are using <code>FileInputStream</code>, <code>FileReader</code>, and <code>Files.readAllLines()</code>. Each provides different capabilities for reading file data as bytes, characters, or a list of lines.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Reading File Using FileInputStream</h2>
+    <div class="content">
+      <p><code>FileInputStream</code> is used for reading file content as bytes. It is suitable for working with binary files or when low-level data access is necessary.</p>
+      <pre><code>InputStream f = new FileInputStream("C:/java/hello.txt");</code></pre>
+      <p>Alternatively, construct using a <code>File</code> object:</p>
+      <pre><code>File file = new File("C:/java/hello.txt");
+InputStream f = new FileInputStream(file);</code></pre>
+      <p><strong>Example:</strong></p>
+      <pre><code>byte bWrite[] = {65, 66, 67, 68, 69};
+OutputStream os = new FileOutputStream("test.txt");
+for(int x = 0; x < bWrite.length ; x++) {
+   os.write( bWrite[x] );
+}
+os.close();
+
+InputStream is = new FileInputStream("test.txt");
+int size = is.available();
+for(int i = 0; i < size; i++) {
+   System.out.print((char)is.read() + "  ");
+}
+is.close();</code></pre>
+      <p>This code writes bytes to <code>test.txt</code> and reads them back, displaying characters: A  B  C  D  E</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Reading File Using FileReader.read()</h2>
+    <div class="content">
+      <p><code>FileReader</code> reads files as character streams, making it suitable for text files.</p>
+      <pre><code>File file = new File("d://test//testFile1.txt");
+FileReader reader = new FileReader(file);
+int c;
+while ((c = reader.read()) != -1) {
+   char ch = (char) c;
+   System.out.print(ch);
+}
+reader.close();</code></pre>
+      <p>This example creates or opens a file, writes a string, and reads the content character by character.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Reading File Using Files.readAllLines()</h2>
+    <div class="content">
+      <p>The <code>Files.readAllLines()</code> method (Java NIO) reads all lines from a file into a <code>List&lt;String&gt;</code>, making it convenient for processing large text files or configuration files.</p>
+      <pre><code>List&lt;String&gt; content = Files.readAllLines(Paths.get("d://test/testFile3.txt"));</code></pre>
+      <p><strong>Example:</strong></p>
+      <pre><code>String data = "Test data";
+Files.write(Paths.get("d://test/testFile3.txt"), data.getBytes());
+List&lt;String&gt; content = Files.readAllLines(Paths.get("d://test/testFile3.txt"));
+System.out.println(content); // Output: [Test data]</code></pre>
+      <p>Working with multiple files or appending lines is also straightforward with this approach, as the content is managed as a list of strings.</p>
+    </div>
+  </div>
+</div>

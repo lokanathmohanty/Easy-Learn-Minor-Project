@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript — Function Parameters</h1>
+
+    <div class="content">
+      <h2 class="title">Function Parameters and Arguments</h2>
+      <p>
+        Function parameters in JavaScript are variables listed inside the parentheses
+        of a function definition. Function arguments are the values passed to the function
+        when it is called. A function can have multiple parameters separated by commas.
+      </p>
+      <p>
+        The number of arguments passed must match the number of parameters,
+        otherwise unexpected results may occur.
+      </p>
+      <pre>
+function functionName(parameter1, parameter2, parameter3) {
+  // statements
+}
+      </pre>
+      <p>
+        Example function call with arguments:
+      </p>
+      <pre>
+functionName(10, b, "Hello");
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Parameter Rules</h2>
+      <ul>
+        <li>JavaScript functions don't check the number of arguments.</li>
+        <li>No need to specify data types for parameters.</li>
+        <li>No type-checking is performed on arguments.</li>
+        <li>Arguments can be of any type: numbers, strings, objects, variables.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example: Function Parameters and Arguments</h2>
+      <pre>
+function mult(a, b, c) {
+  let res = a * b * c;
+  return res;
+}
+let ans = mult(2, 3, 4);
+document.getElementById("output").innerHTML =
+  "The multiplication of 2, 3, and 4 is " + ans;
+      </pre>
+      <p><strong>Output:</strong> The multiplication of 2, 3, and 4 is 24</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Argument Object</h2>
+      <p>
+        Every JavaScript function has an <code>arguments</code> object, which stores
+        all arguments in an array-like format. This allows access to arguments even
+        if they were not explicitly defined as parameters.
+      </p>
+      <pre>
+function merge() {
+  let final = "";
+  for (let p = 0; p < arguments.length; p++) {
+    final += arguments[p] + " ";
+  }
+  return final;
+}
+let ans = merge("Hi", "I", "am", "John!");
+document.getElementById("output").innerHTML =
+  "The merged string is: " + ans;
+      </pre>
+      <p><strong>Output:</strong> The merged string is: Hi I am John!</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Passing Arguments by Value</h2>
+      <p>
+        When passing arguments by value, the value is copied into the function’s
+        parameter. Changing the parameter does not affect the original argument.
+      </p>
+      <pre>
+function update(val1, val2) {
+  val1 = 20;
+  val2 = 30;
+}
+
+var val1 = "Hello";
+var val2 = "World";
+
+console.log("Before: val1 = " + val1 + ", val2 = " + val2);
+update(val1, val2);
+console.log("After: val1 = " + val1 + ", val2 = " + val2);
+      </pre>
+      <p>
+        <strong>Output:</strong><br>
+        Before calling the function: val1 = Hello, val2 = World<br>
+        After calling the function: val1 = Hello, val2 = World
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Passing Arguments by Reference</h2>
+      <p>
+        When passing objects as arguments, the function receives the reference
+        (memory address) of the object. Modifying the object inside the function
+        will also affect it outside the function.
+      </p>
+      <pre>
+function update(obj) {
+  obj.domain = "www.tutorialspoint.com";
+}
+
+var obj = { domain: "www.google.com" };
+
+console.log("Before: domain = " + obj.domain);
+update(obj);
+console.log("After: domain = " + obj.domain);
+      </pre>
+      <p>
+        <strong>Output:</strong><br>
+        Before calling the function: domain = www.google.com<br>
+        After calling the function: domain = www.tutorialspoint.com
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Key Points</h2>
+      <ul>
+        <li>Parameters are variables listed in function definitions.</li>
+        <li>Arguments are values passed when calling functions.</li>
+        <li>The <code>arguments</code> object holds all passed arguments.</li>
+        <li>Arguments can be passed by value (primitive types) or reference (objects).</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Practice Tasks</h2>
+      <ul>
+        <li>Create a function with 3 parameters and return their sum.</li>
+        <li>Use the <code>arguments</code> object to find the largest number passed.</li>
+        <li>Demonstrate passing by reference with an object that stores user details.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Summary</h2>
+      <p>
+        JavaScript functions can accept parameters and arguments of any type.
+        They can be handled via explicit parameters or the <code>arguments</code> object.
+        Primitive values are passed by value, while objects are passed by reference,
+        allowing modifications inside functions to persist outside them.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,304 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Initialization of Pointer Arrays in C</h1>
+
+   
+
+    <div class="content">
+      <p>A pointer is a variable that stores the address of another variable. The name of the pointer variable must be prefixed by the <code>*</code> symbol. Just as in the case of a normal variable, we can also declare an "array of pointers", where each subscript of the array holds the address of an array type.</p>
+
+      <h2>How to Initialize Array of Pointers in C?</h2>
+      <p>A pointer variable can be initialized at the time of declaration, by assigning it the address of an existing variable. The following snippet shows how you can initialize a pointer −</p>
+      <pre class="code">
+int x = 10;
+int *y = &amp;x;
+      </pre>
+
+      <p>By default, all the variables including the pointer variables belong to the "auto storage class". It means that a pointer variable will store an unpredictable, garbage, random memory address, which can lead to undefined behavior and potential risks to a program, such as segmentation fault errors. Hence, it should be initialized to <code>NULL</code> if we don’t have a specific value to store at the time of declaration.</p>
+      <pre class="code">
+int *ptr = NULL;
+      </pre>
+
+      <p>A "pointer array" stores the address in each element. The type of the array must match with the type of the target variable.</p>
+
+      <h3>Initialize Array of Pointers Using <code>static</code> Keyword</h3>
+      <p>You can also use the <code>static</code> keyword to initialize an array of pointers to store "0" in each subscript.</p>
+
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   static int *ptr[5];
+
+   for (int i = 0; i &lt; 5; i++){
+      printf("ptr[%d] = %d\n", i, ptr[i]); 
+   }
+   
+   return 0;
+}
+      </pre>
+
+      <h4>Output</h4>
+      <pre class="code">
+ptr[0]= 0
+ptr[1]= 0
+ptr[2]= 0
+ptr[3]= 0
+ptr[4]= 0
+      </pre>
+
+      <h3>Initialize Array of Integer Pointers</h3>
+      <p>Here, we declare an array of integer pointers and store the addresses of three integer variables.</p>
+
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   int a = 10, b = 20, c = 30;
+   int *ptr[3] = {&amp;a, &amp;b, &amp;c};
+
+   for (int i = 0; i &lt; 3; i++){
+      printf("ptr[%d]: address: %d value: %d\n", i, ptr[i], *ptr[i]);
+   }
+   
+   return 0;
+} 
+      </pre>
+
+      <h4>Output</h4>
+      <pre class="code">
+ptr[0]: address: 6422040 value: 10
+ptr[1]: address: 6422036 value: 20
+ptr[2]: address: 6422032 value: 30
+      </pre>
+
+      <h3>Initialize Array of Pointer by Direct Addresses</h3>
+      <p>We can store the address of each element of a normal array in the corresponding element of a pointer array.</p>
+
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   int arr[] = {10, 20, 30};
+   int *ptr[3] = {&amp;arr[0], &amp;arr[1], &amp;arr[2]};
+
+   for (int i = 0; i &lt; 3; i++){
+      printf("ptr[%d]: address: %d value: %d\n", i, ptr[i], *ptr[i]);
+   }
+   
+   return 0;
+}
+      </pre>
+
+      <h4>Output</h4>
+      <pre class="code">
+ptr[0]: address: 6422032 value: 10
+ptr[1]: address: 6422036 value: 20
+ptr[2]: address: 6422040 value: 30
+      </pre>
+
+      <h3>Traversing an Array with its Base Address</h3>
+      <p>When we obtain the base address of an array (in this case <code>&amp;arr[0]</code>), we can obtain the addresses of its subsequent elements, knowing that the pointer increments by the size of the data type.</p>
+      <p>Hence, just with the base address (the name of the array is the same as the address of the 0th element), we can traverse an array.</p>
+
+      <h4>Example 1</h4>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   int arr[] = {10, 20, 30};
+   int *ptr=arr;
+
+   for (int i = 0; i &lt; 3; i++){
+      printf("ptr[%d]: address: %d value: %d\n", i, ptr+i, *(ptr+i));
+   }
+   
+   return 0;
+}
+      </pre>
+
+      <h4>Output</h4>
+      <pre class="code">
+ptr[0]: address: 6422020 value: 10
+ptr[1]: address: 6422024 value: 20
+ptr[2]: address: 6422028 value: 30
+      </pre>
+
+      <h3>Example 2: Traversing a 2D Array using a Pointer Array</h3>
+      <p>In this example, we have a 2D array. The address of the 0th element of each row is stored in a pointer array. When traversing, the address stored in each element of the pointer array, that points to the 0th element of the corresponding row, each incremented to fetch the values in each row.</p>
+
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   // 2d array
+   int arr[3][4] = {
+      {1, 2, 3, 4},
+      {5, 6, 7, 8},
+   };
+
+   int ROWS = 2, COLS = 4;
+   int i, j;
+
+   // pointer
+   int (*ptr)[4] = arr;
+
+   // print the element of the array via pointer ptr
+   for (i = 0; i &lt; ROWS; i++) {
+      for (j = 0; j &lt; COLS; j++) {
+         printf("%d ", *(ptr[i]+j));
+      }
+      printf("\n");
+   }
+   
+   return 0;
+}
+      </pre>
+
+      <h4>Output</h4>
+      <pre class="code">
+1 2 3 4 
+5 6 7 8
+      </pre>
+
+      <h3>Example 3</h3>
+      <p>We don't really need a pointer array here, as we can use the name of this 2D array as its base pointer, and increment it row and column-wise to fetch the elements in the given 2D array −</p>
+
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   // 2d array
+   int arr[3][4] = {
+      {1, 2, 3, 4},
+      {5, 6, 7, 8},
+   };
+
+   int ROWS = 2, COLS = 4;
+   int i, j;
+
+   // pointer
+   int *ptr = arr;
+
+   // print the element of the array via pointer ptr
+   for (i = 0; i &lt; ROWS; i++){
+      for (j = 0; j &lt; COLS; j++){
+         printf("%d  ", *(ptr + i * COLS + j));
+      }
+      printf("\n");
+   }
+   
+   return 0;
+}
+      </pre>
+
+      <h4>Output</h4>
+      <pre class="code">
+1  2  3  4  
+5  6  7  8
+      </pre>
+
+      <h3>Initialize Array of Character Pointers (String)</h3>
+      <p>In C programming, a string is an array of <code>char</code> data type. Since the name of an array also represents the address of its 0th element, a string can be declared as −</p>
+      <pre class="code">
+char arr[] = "Hello";
+      </pre>
+      <p>Using the pointer notation, a string is assigned to a char pointer as −</p>
+      <pre class="code">
+char *arr = "Hello";
+      </pre>
+      <p>We can then declare an array of char pointers to store multiple strings as follows −</p>
+      <pre class="code">
+char *arr[3] = {"string1", "string2", "string3", ... };
+      </pre>
+
+      <h4>Example</h4>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   char *langs[10] = {
+      "PYTHON", "JAVASCRIPT", "PHP",
+      "NODE JS", "HTML", "KOTLIN", "C++",
+      "REACT JS", "RUST", "VBSCRIPT"
+   };
+
+   for(int i = 0; i &lt; 10; i++)
+      printf("%s\n", langs[i]);
+
+   return 0;
+}
+      </pre>
+
+      <h4>Output</h4>
+      <pre class="code">
+PYTHON
+JAVASCRIPT
+PHP
+NODE JS
+HTML
+KOTLIN
+C++
+REACT JS
+RUST
+VBSCRIPT
+      </pre>
+
+      <p>In this program, <code>langs</code> is a pointer to an array of 10 strings. Therefore, if <code>langs[0]</code> points to the address 5000, then <code>langs + 1</code> will point to the address 5004 which stores the pointer to the second string.</p>
+      <p>Hence, we can also use the following variation of the loop to print the array of strings −</p>
+      <pre class="code">
+for (int i = 0; i &lt; 10; i++){
+   printf("%s\n", *(langs + i));
+}
+      </pre>
+
+      <h3>Initialization of Dynamic Array of Pointers</h3>
+      <p>You can use the <code>malloc()</code> function to declare and initialize an array of pointers in a dynamic way.</p>
+
+      <h4>Example</h4>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(){
+
+   int *arr = (int *)malloc(sizeof(int) * 5); 
+
+   for(int i = 0; i &lt; 5; i++){
+      arr[i] = i;
+   }
+   for (int x = 0; x &lt; 5; x++){
+      printf("%d %d\n", x, arr[x]);
+   }
+   
+   return 0;
+}
+      </pre>
+
+      <h4>Output</h4>
+      <pre class="code">
+0 0
+1 1
+2 2
+3 3
+4 4
+      </pre>
+
+      <p>You can even ask for user input and assign the values to the elements in the pointer of arrays −</p>
+      <pre class="code">
+for(i = 0; i &lt; 5; i++){
+   scanf("%d", &amp;x);
+   arr[i] = x;
+}
+      </pre>
+    </div>
+ 
+  </div>
+</div>

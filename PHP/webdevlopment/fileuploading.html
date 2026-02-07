@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - File Uploading Process and Configuration</h1>
+
+        <div class="content">
+            <h2 class="title">Summary of File Upload Steps</h2>
+            <p>The file upload process in a PHP web application involves several key steps:</p>
+            <ol>
+                <li>The user submits an HTML form with the file chosen via a <strong>browse button</strong>.</li>
+                <li>The selected file is temporarily stored in a <strong>temporary directory</strong> on the server.</li>
+                <li>The PHP script specified in the form's <code>action</code> (the form handler) verifies the upload.</li>
+                <li>The PHP script uses the <code>move_uploaded_file()</code> function to copy the file from the temporary location to its <strong>final, intended directory</strong>.</li>
+                <li>The script provides a confirmation or error message to the user.</li>
+            </ol>
+
+            <h2 class="title">Required PHP Configuration ($\text{php.ini}$)</h2>
+            <p>To enable file uploads, several directives in the <strong><code>php.ini</code></strong> file must be configured. They are enabled by ensuring the leading semicolon (<code>;</code>) is removed and values are set appropriately. Crucially, both the temporary and final storage folders must have **write permissions**.</p>
+            <ul>
+                <li><code>file_uploads=On</code>: Enables HTTP file uploads.</li>
+                <li><code>upload_tmp_dir</code>: Specifies the temporary directory for uploaded files.</li>
+                <li><code>upload_max_filesize</code>: Sets the maximum allowed size for uploaded files (e.g., <code>40M</code>).</li>
+                <li><code>max_file_uploads</code>: Sets the maximum number of files that can be uploaded in a single request (e.g., <code>20</code>).</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: HTML Form and PHP Script Essentials</h2>
+
+            <h3>HTML Form Requirements</h3>
+            <p>The HTML form must use the <strong>POST</strong> method and include the <strong><code>enctype="multipart/form-data"</code></strong> attribute. The file input field uses <code>type="file"</code>.</p>
+            <pre>
+&lt;form method = "POST" action = "uploadfile.php" enctype="multipart/form-data"&gt;
+   &lt;label for="file"&gt;File name:&lt;/label&gt;
+   &lt;input type="file" name="uploadfile" /&gt;
+   &lt;input type="submit" name="submit" value="Upload" /&gt;
+&lt;/form&gt;</pre>
+
+            <h3>Processing with PHP (\$_FILES)</h3>
+            <p>The uploaded file data is accessed via the <strong><code>$_FILES</code></strong> superglobal array. Key attributes include <code>name</code>, <code>type</code>, <code>size</code>, and <code>tmp_name</code>. The <code>move_uploaded_file()</code> function is essential for security and moving the file to its final destination.</p>
+
+            <h3>Error Handling</h3>
+            <p>Handling upload errors is critical. The <code>$_FILES['uploadfile']['error']</code> key returns an integer code, which should be checked against predefined PHP constants (e.g., <code>UPLOAD_ERR_INI_SIZE</code>, <code>UPLOAD_ERR_NO_FILE</code>) using a <code>switch</code> statement to provide meaningful feedback to the user.</p>
+        </div>
+    </div>
+</div>

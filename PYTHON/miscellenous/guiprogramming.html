@@ -1,0 +1,227 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - GUI Programming</h1>
+    </div>
+    <div class="content">
+      <p>Python offers several GUI frameworks:</p>
+      <ul>
+        <li><b>Tkinter:</b> Standard Python interface to the Tk GUI toolkit.</li>
+        <li><b>wxPython:</b> Python bindings for wxWidgets (cross-platform).</li>
+        <li><b>PyQt:</b> Bindings for the Qt application framework.</li>
+        <li><b>PyGTK:</b> Python bindings for GTK.</li>
+        <li><b>PySimpleGUI:</b> Simplified GUI based on Tkinter, Qt, and wxPython.</li>
+        <li><b>Pygame:</b> Library targeted at game development (SDL wrapper).</li>
+        <li><b>Jython:</b> Python running on Java platform with access to Java libraries.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Tkinter Basics</h2>
+    </div>
+    <div class="content">
+      <p>Tkinter is Python’s built-in GUI library and provides many widgets:</p>
+      <ul>
+        <li>Buttons, Labels, Entries, Frames, Listboxes, Menus, Scrollbars, Text widgets, and more.</li>
+      </ul>
+      <p>Basic window creation:</p>
+      <pre><code>import tkinter as tk
+root = tk.Tk()
+root.mainloop()</code></pre>
+      <p>For complex apps, use OOP approach:</p>
+      <pre><code>class App(tk.Tk):
+    def __init__(self):
+        super().__init__()
+app = App()
+app.mainloop()</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Common Tkinter Widgets</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Widget</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Button</td><td>Clickable button.</td></tr>
+          <tr><td>Canvas</td><td>Draw shapes and graphics.</td></tr>
+          <tr><td>Checkbutton</td><td>Checkboxes for multiple selection.</td></tr>
+          <tr><td>Entry</td><td>Single-line text input.</td></tr>
+          <tr><td>Frame</td><td>Container to organize widgets.</td></tr>
+          <tr><td>Label</td><td>Text or image display.</td></tr>
+          <tr><td>Listbox</td><td>Select from a list.</td></tr>
+          <tr><td>Menubutton</td><td>Display menus.</td></tr>
+          <tr><td>Menu</td><td>Menu commands.</td></tr>
+          <tr><td>Message</td><td>Multi-line text display.</td></tr>
+          <tr><td>Radiobutton</td><td>Choose one option among many.</td></tr>
+          <tr><td>Scale</td><td>Slider control.</td></tr>
+          <tr><td>Scrollbar</td><td>Add scroll bars.</td></tr>
+          <tr><td>Text</td><td>Multi-line text input/output.</td></tr>
+          <tr><td>Toplevel</td><td>Additional window.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Geometry Managers</h2>
+      <p>Tkinter uses three geometry managers for layout:</p>
+      <ul>
+        <li><b>pack:</b> Organizes widgets in blocks.</li>
+        <li><b>grid:</b> Organizes widgets in a table format.</li>
+        <li><b>place:</b> Places widgets at specific positions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Dialogs and Color Chooser</h2>
+      <p>Modules provided include:</p>
+      <ul>
+        <li><b>simpledialog:</b> Prompts to get integer, float, or string input.</li>
+        <li><b>colorchooser:</b> Dialog for selecting colors.</li>
+        <li><b>filedialog:</b> Dialogs for open/save file and directory selection.</li>
+      </ul>
+      <pre><code>from tkinter import *
+from tkinter import simpledialog, colorchooser, filedialog
+
+root = Tk()
+def get_integer():
+    num = simpledialog.askinteger("Input", "Enter an integer")
+    print(num)
+
+def pick_color():
+    color = colorchooser.askcolor()
+    print(color)
+
+def open_file():
+    file = filedialog.askopenfile()
+    print(file)
+
+# Add buttons and mainloop here
+root.mainloop()</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Ttk Widgets</h2>
+      <p>The ttk module provides themed versions of Tk widgets with modern look-and-feel, and new widgets such as:</p>
+      <ul>
+        <li>Notebook (tabbed interface)</li>
+        <li>ProgressBar</li>
+        <li>Separator</li>
+        <li>Treeview</li>
+        <li>Combobox</li>
+        <li>Sizegrip</li>
+      </ul>
+      <p>To use ttk, import as:</p>
+      <pre><code>from tkinter import *
+from tkinter import ttk</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: ttk Combobox</h2>
+      <pre><code>from tkinter import *
+from tkinter import ttk
+
+root = Tk()
+langs = ["C", "C++", "Java", "Python", "PHP"]
+
+combo = ttk.Combobox(root, values=langs)
+combo.set("Pick an Option")
+combo.pack()
+
+root.mainloop()</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: ttk ProgressBar</h2>
+      <pre><code>import tkinter as tk
+from tkinter import ttk
+
+root = tk.Tk()
+
+def increment():
+    progress.step(20)
+
+def decrement():
+    progress.step(-20)
+
+def show_value():
+    print(progress["value"])
+
+progress = ttk.Progressbar(root, mode='determinate')
+progress.pack(padx=10, pady=10)
+
+tk.Button(root, text="Increase", command=increment).pack(side=tk.LEFT)
+tk.Button(root, text="Decrease", command=decrement).pack(side=tk.LEFT)
+tk.Button(root, text="Show", command=show_value).pack(side=tk.LEFT)
+
+root.mainloop()</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: ttk Notebook (Tabbed Interface)</h2>
+      <pre><code>import tkinter as tk
+from tkinter import ttk
+
+root = tk.Tk()
+notebook = ttk.Notebook(root)
+
+frame1 = ttk.Frame(notebook)
+ttk.Label(frame1, text="Page 1").pack(padx=20, pady=20)
+frame2 = ttk.Frame(notebook)
+ttk.Label(frame2, text="Page 2").pack(padx=20, pady=20)
+
+notebook.add(frame1, text="Tab 1")
+notebook.add(frame2, text="Tab 2")
+notebook.pack(expand=True, fill="both")
+
+root.mainloop()</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: ttk Treeview</h2>
+      <pre><code>import tkinter as tk
+from tkinter import ttk
+
+data = [
+    ("Bobby", 26, 20000),
+    ("Harish", 31, 23000),
+    ("Jaya", 18, 19000),
+    ("Mark", 22, 20500)
+]
+
+root = tk.Tk()
+columns = ("age", "salary")
+tree = ttk.Treeview(root, columns=columns, show="headings")
+
+tree.heading("age", text="Age")
+tree.heading("salary", text="Salary")
+
+for person in data:
+    tree.insert("", tk.END, values=person)
+
+tree.pack()
+root.mainloop()</code></pre>
+    </div>
+  </div>
+</div>

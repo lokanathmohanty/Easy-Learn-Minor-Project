@@ -1,0 +1,94 @@
+<div class="container">
+   <div class="session">
+      <h1 class="title">Custom HTML Video Player</h1>
+      <div class="content">
+         <p>
+            We can create a custom HTML video player using the <code>&lt;video&gt;</code> tag, along with CSS and JavaScript 
+            for enhanced features. HTML provides native video support without requiring Flash. 
+         </p>
+         <p>
+            In this tutorial, you will learn how to build a video player where users can upload and play local video files 
+            directly in the browser.
+         </p>
+         <p>
+            We also recommend reviewing the basics of embedding video in HTML to understand the <code>&lt;video&gt;</code> tag.
+         </p>
+      </div>
+   </div>
+
+   <div class="session">
+      <h2 class="title">Complete Code Example: Custom HTML Video Player</h2>
+      <div class="content">
+         <p>
+            The following example demonstrates how to create a simple custom video player that allows users to 
+            upload and play their local video file:
+         </p>
+         <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Custom Video Player&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;input type="file" accept="video/*"&gt;
+   &lt;br&gt;
+   &lt;video controls height="300" width="500"&gt;&lt;/video&gt;
+
+   &lt;script&gt;
+      (function localFileVideoPlayer() {
+         var handleFile = function(event) {
+            var file = this.files[0];
+            var url = window.URL || window.webkitURL;
+            var fileURL = url.createObjectURL(file);
+            var videoNode = document.querySelector('video');
+            videoNode.src = fileURL;
+         }
+         var inputNode = document.querySelector('input');
+         inputNode.addEventListener('change', handleFile, false);
+      })()
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+         </pre>
+      </div>
+   </div>
+
+   <div class="session">
+      <h2 class="title">Capture and Play Video Using Camera</h2>
+      <div class="content">
+         <p>
+            We can also capture video directly from the user’s camera using the Media Devices API. 
+            The following example demonstrates how to stream camera input into a video element and capture an image using a canvas:
+         </p>
+         <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Camera Capture&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;video id="vid" controls autoplay&gt;&lt;/video&gt;
+   &lt;canvas id="mytutorial" width="600" height="300"&gt;&lt;/canvas&gt;
+   &lt;button id="snapshot"&gt;Take Picture&lt;/button&gt;
+
+   &lt;script&gt;
+      const video = document.getElementById('vid');
+      const canvas = document.getElementById('mytutorial');
+      const context = canvas.getContext('2d');
+      const button = document.getElementById('snapshot');
+
+      button.addEventListener('click', () =&gt; {
+         context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      });
+
+      navigator.mediaDevices.getUserMedia({ video: true })
+         .then((stream) =&gt; {
+            video.srcObject = stream;
+         });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+         </pre>
+      </div>
+   </div>
+</div>

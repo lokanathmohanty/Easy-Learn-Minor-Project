@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="session" data-session-id="js-validate-urls">
+    <h1 class="title">JavaScript - Validate URLs</h1>
+
+    <div class="content">
+      <p>
+        In this chapter, we will learn how to validate URLs in JavaScript. 
+        Before that, let’s understand what a URL is.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>What is a URL?</h2>
+      <p>
+        A <strong>URL (Uniform Resource Locator)</strong> identifies web pages, images, videos, 
+        and other resources on the internet. It is essentially the website address 
+        that helps transfer files, send emails, and navigate the web.
+      </p>
+      <p>
+        URLs usually consist of a protocol (e.g., <code>http</code>, <code>https</code>), 
+        a domain name, and a top-level domain (e.g., <code>.com</code>, <code>.org</code>).
+      </p>
+      <p>
+        Since URLs are used in links and buttons to navigate, we must verify their validity before using them.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Validating URLs in JavaScript</h2>
+      <p>
+        There are multiple ways to validate URLs in JavaScript. Let’s first look at 
+        some rules that define a valid URL.
+      </p>
+      <h3>Rules to Validate URLs</h3>
+      <ul>
+        <li>URL must start with <code>http://</code>, <code>https://</code>, or <code>www.</code></li>
+        <li>URL must contain a valid domain name.</li>
+        <li>URL must include a top-level domain like <code>.com</code>, <code>.org</code>, <code>.net</code>, etc.</li>
+        <li>URL must not contain spaces.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Using Regular Expression</h2>
+      <p>
+        A <strong>regular expression</strong> describes a pattern of characters. 
+        We can use it to check whether a string follows the rules of a valid URL.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre>
+string.match(regExp);
+var pattern = new RegExp(regExp);
+pattern.test(string);
+      </pre>
+
+      <h3>Example</h3>
+      <pre>
+let url = "https://www.tutorialspoint.com";
+let pattern = new RegExp("^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$");
+
+if (pattern.test(url)) {
+   console.log("URL is valid");
+} else {
+   console.log("URL is not valid");
+}
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Using URL() Constructor</h2>
+      <p>
+        The built-in <code>URL()</code> constructor creates a new URL object. 
+        If the string is invalid, it throws a <code>TypeError</code>. 
+        We can also check the <code>protocol</code> property to confirm validity.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre>
+var url = new URL(urlStr);
+new URL(url, base);
+return url.protocol === 'http:' || url.protocol === 'https:';
+      </pre>
+
+      <h3>Example</h3>
+      <pre>
+try {
+   let url = new URL("https://www.tutorialspoint.com");
+   if (url.protocol === 'http:' || url.protocol === 'https:') {
+      console.log("URL is valid");
+   } else {
+      console.log("URL is not valid");
+   }
+} catch (e) {
+   console.log("URL is not valid");
+}
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Conclusion</h2>
+      <p>
+        We explored two methods to validate URLs:
+      </p>
+      <ul>
+        <li><strong>Regular Expression:</strong> Matches URL patterns.</li>
+        <li><strong>URL() Constructor:</strong> A simpler, built-in way to check validity.</li>
+      </ul>
+      <p>
+        Both methods are useful, and the choice depends on the project requirements.
+      </p>
+    </div>
+
+    
+  </div>
+</div>

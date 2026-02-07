@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Nested Dictionaries in Python</h1>
+    <div class="content">
+      <p>Nested dictionaries in Python are dictionaries that contain other dictionaries as their values, forming a hierarchical structure. They allow organizing complex, multi-level data.</p>
+
+      <h2 class="title">Creating a Nested Dictionary</h2>
+      <p>You can create nested dictionaries by assigning dictionaries as values for keys within an outer dictionary.</p>
+
+      <h2 class="title">Example: Direct Assignment</h2>
+      <pre><code># Define the outer dictionary
+nested_dict = {
+  "outer_key1": {"inner_key1": "value1", "inner_key2": "value2"},
+  "outer_key2": {"inner_key3": "value3", "inner_key4": "value4"}
+}
+print(nested_dict)
+</code></pre>
+
+      <h2 class="title">Example: Using a Loop</h2>
+      <pre><code># Initialize outer dictionary
+nested_dict = {}
+
+outer_keys = ["outer_key1", "outer_key2"]
+for key in outer_keys:
+  nested_dict[key] = {"inner_key1": "value1", "inner_key2": "value2"}
+
+print(nested_dict)
+</code></pre>
+
+      <h2 class="title">Adding Items to a Nested Dictionary</h2>
+      <pre><code># Initial nested dictionary
+students = {
+  "Alice": {"age": 21, "major": "Computer Science"},
+  "Bob": {"age": 20, "major": "Engineering"}
+}
+
+# Add to existing nested dictionary
+students["Alice"]["GPA"] = 3.8
+
+# Add a new nested dictionary
+students["Charlie"] = {"age": 22, "major": "Mathematics"}
+
+print(students)
+</code></pre>
+
+      <h2 class="title">Accessing Nested Dictionary Items</h2>
+      <p>Use chained square brackets or the <code>get()</code> method to safely access nested values.</p>
+
+      <h2 class="title">Example: Using Direct Indexing</h2>
+      <pre><code>alice_major = students["Alice"]["major"]
+print("Alice's major:", alice_major)
+
+bob_age = students["Bob"]["age"]
+print("Bob's age:", bob_age)
+</code></pre>
+
+      <h2 class="title">Example: Using <code>get()</code> Method</h2>
+      <pre><code>alice_major = students.get("Alice", {}).get("major", "Not Found")
+print("Alice's major:", alice_major)
+
+dave_major = students.get("Dave", {}).get("major", "Not Found")
+print("Dave's major:", dave_major)
+</code></pre>
+
+      <h2 class="title">Deleting a Nested Dictionary Item</h2>
+      <pre><code># Delete nested dictionary for Bob
+del students["Bob"]
+
+print(students)
+</code></pre>
+
+      <h2 class="title">Iterating Through a Nested Dictionary</h2>
+      <pre><code>for student, details in students.items():
+  print(f"Student: {student}")
+  for key, value in details.items():
+    print(f"  {key}: {value}")
+</code></pre>
+    </div>
+  </div>
+</div>

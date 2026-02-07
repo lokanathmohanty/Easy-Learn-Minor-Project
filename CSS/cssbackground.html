@@ -1,0 +1,229 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS Backgrounds</h1>
+    <div class="content">
+      <p>CSS backgrounds define the background colors and images of HTML elements. They allow you to use different colors, gradients, or images behind the content. In this chapter, we will learn about various CSS background properties, including how to set background colors, apply images, adjust their size and position, control repetition, and more.</p>
+
+      <h2>CSS Backgrounds Example</h2>
+      <p>The following section shows an example of setting color, image, and gradient for an HTML element.</p>
+      <ul>
+        <li>Background: None</li>
+        <li>Background: Color</li>
+        <li>Background: Gradient</li>
+        <li>Background: Image</li>
+      </ul>
+
+      <h2>CSS Background Shorthand Property</h2>
+      <p>The <code>background</code> shorthand property allows you to specify all background properties in a single declaration. The correct order when using the shorthand is:</p>
+      <ul>
+        <li>background-color</li>
+        <li>background-image</li>
+        <li>background-position</li>
+        <li>background-size (must be used with /)</li>
+        <li>background-repeat</li>
+        <li>background-origin</li>
+        <li>background-attachment</li>
+        <li>background-clip</li>
+      </ul>
+      <p><strong>Syntax:</strong></p>
+      <pre><code>background: bg-color bg-image bg-position bg-size bg-repeat bg-origin bg-clip bg-attachment | initial | inherit;</code></pre>
+      <p><strong>Example:</strong></p>
+      <pre><code>background: green url('image.jpg') top/20% no-repeat border-box content-box fixed;</code></pre>
+      <p>Note: If you include <code>background-size</code> it must follow <code>background-position</code> separated by <code>/</code> (e.g. <code>left/50%</code>).</p>
+
+      <h2>Setting Background Color</h2>
+      <p>You can set the background color for elements like <code>div</code>, <code>span</code>, <code>body</code>, <code>p</code> using <code>background-color</code>.</p>
+      <p><strong>Example (various color value formats):</strong></p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    body { background-color: lightgray; }
+    .firstDiv { background-color: rgb(255, 215, 0); }
+    .secondDiv { background-color: #f0f0f0; }
+    .thirdDiv { background-color: hsl(120, 100%, 75%); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;CSS Background Colors&lt;/h2&gt;
+  &lt;div class="firstDiv"&gt;Color: rgb(255, 215, 0)&lt;/div&gt;
+  &lt;div class="secondDiv"&gt;Color: #f0f0f0&lt;/div&gt;
+  &lt;div class="thirdDiv"&gt;Color: hsl(120, 100%, 75%)&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Setting Images in Background</h2>
+      <p>Use <code>background-image</code> to set one or more images. Multiple images are separated by commas.</p>
+      <p><strong>Example:</strong></p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    body { background-image: url('/css/images/logo.png'); height: 350px; }
+    div { background-color: rgba(255,255,255,0.7); padding: 20px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+    &lt;p&gt;This is an example of setting a background image using CSS&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Define Background Position</h2>
+      <p><code>background-position</code> sets the initial position of the background image. It is relative to <code>background-origin</code>.</p>
+      <p><strong>Example (position to the right):</strong></p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .position-right {
+      background-image: url('/css/images/logo.png');
+      background-position: right;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 300px;
+      border: 3px solid black;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="position-right"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Setting Background Size</h2>
+      <p><code>background-size</code> controls how the background image is scaled (e.g. <code>contain</code>, <code>cover</code>, explicit sizes).</p>
+      <p><strong>Example (contain):</strong></p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .size-contain {
+      background-image: url('/css/images/pink-flower.jpg');
+      background-size: contain;
+      width: 300px;
+      height: 300px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;CSS background-size property&lt;/h2&gt;
+  &lt;div class="size-contain"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Repeating Background Image</h2>
+      <p><code>background-repeat</code> controls repetition (e.g. <code>repeat</code>, <code>no-repeat</code>, <code>repeat-x</code>, <code>repeat-y</code>).</p>
+      <p><strong>Example (repeat):</strong></p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .repeat {
+      background-image: url('/css/images/logo.png');
+      background-repeat: repeat;
+      width: 800px;
+      height: 400px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;CSS background-repeat property&lt;/h2&gt;
+  &lt;div class="repeat"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Defining Background Origin</h2>
+      <p><code>background-origin</code> sets the origin area used to position the background: <code>border-box</code>, <code>padding-box</code>, or <code>content-box</code>.</p>
+      <p><strong>Example (content-box):</strong></p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    div {
+      border: 10px dashed rgb(13,7,190);
+      margin: 5px;
+      padding: 1cm;
+      display: inline-block;
+      background-image: url('/css/images/yellow-flower.jpg');
+      height: 200px;
+      width: 200px;
+      background-size: contain;
+    }
+    .content-box { background-origin: content-box; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="content-box"&gt;&lt;/div&gt;
+  &lt;p&gt;This image background starts from the content box of the div element.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Controlling Background Scrolling</h2>
+      <p><code>background-attachment</code> determines whether the background is fixed within the viewport (<code>fixed</code>) or scrolls with its container (<code>scroll</code>).</p>
+      <p><strong>Example (fixed):</strong></p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .fixed {
+      background-image: url('images/logo.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: left top;
+      background-size: 40% 30%;
+      width: 250px;
+      height: 500px;
+      padding: 5rem;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;CSS background-attachment Property&lt;/h2&gt;
+  &lt;div class="fixed"&gt;
+    &lt;p&gt;Lorem Ipsum sample text...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Controlling Background Display</h2>
+      <p><code>background-clip</code> specifies the painting area of the background: <code>border-box</code>, <code>padding-box</code>, or <code>content-box</code>.</p>
+      <p><strong>Example:</strong></p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    p { border: 10px dotted black; padding: 15px; background: green; color: white; }
+    .border-area { background-clip: border-box; }
+    .padding-area { background-clip: padding-box; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;CSS background-clip property&lt;/h2&gt;
+  &lt;p class="border-area"&gt;Background applied to the entire element.&lt;/p&gt;
+  &lt;p class="padding-area"&gt;Background applied to the content &amp; padding area.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>CSS Background Properties (Overview)</h2>
+      <ul>
+        <li><strong>background</strong> — shorthand for background-related properties.</li>
+        <li><strong>background-attachment</strong> — fixed or scrollable relative to viewport.</li>
+        <li><strong>background-clip</strong> — how far the background extends (border/padding/content).</li>
+        <li><strong>background-color</strong> — sets background color.</li>
+        <li><strong>background-image</strong> — sets one or more background images.</li>
+        <li><strong>background-origin</strong> — sets the origin area for positioning.</li>
+        <li><strong>background-position</strong> — sets initial position of each background image.</li>
+        <li><strong>background-position-x</strong> — horizontal position of the background image.</li>
+        <li><strong>background-position-y</strong> — vertical position of the background image.</li>
+        <li><strong>background-repeat</strong> — controls repetition of the background image.</li>
+        <li><strong>background-size</strong> — controls scaling of the background image.</li>
+        <li><strong>background-blend-mode</strong> — determines how background images blend with each other.</li>
+      </ul>
+
+      <p>That completes the CSS Backgrounds lesson. If you want, I can also provide a single-page code bundle (HTML examples only) for each demonstrated feature.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Arrays</h1>
+        
+        <h2 class="title">Introduction to Arrays</h2>
+        <div class="content">
+            <p>An **array** is a data structure that stores a **fixed-size sequential collection of elements of the same data type**. Arrays allow you to group related variables under a single name, accessing individual elements using an **index**.</p>
+            <ul>
+                <li>Arrays are stored at **contiguous memory locations**.</li>
+                <li>In C#, arrays are **reference types** (objects), even when they hold value types like integers.</li>
+                <li>Array indexing starts at **0** (the first element).</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Declaration and Initialization</h2>
+        <div class="content">
+            <h3>Declaration Syntax:</h3>
+            <p>Specify the data type, followed by square brackets, and the array name:</p>
+            <pre>
+datatype[] arrayName; 
+// Example: double[] balance;
+            </pre>
+            
+            <h3>Initialization (Memory Allocation):</h3>
+            <p>Since arrays are reference types, the <code>new</code> keyword is used to allocate memory based on the specified size.</p>
+            <pre>
+double[] balance = new double[10]; // Allocates memory for 10 doubles
+            </pre>
+            
+            <h3>Initialization with Values:</h3>
+            <p>You can initialize and assign values during declaration:</p>
+            <pre>
+// Declare size implicitly based on initializer list
+int[] marks = new int[] { 99, 98, 92, 97, 95 }; 
+
+// Simplest form of declaration and initialization
+double[] balance = { 2340.0, 4523.69, 3421.0 };
+            </pre>
+        </div>
+        
+        <h2 class="title">Accessing and Iterating Elements</h2>
+        <div class="content">
+            <h3>Accessing by Index:</h3>
+            <p>Access individual elements using the array name and the index enclosed in square brackets.</p>
+            <pre>
+// Accessing the element at index 9 (the 10th element)
+double salary = balance[9]; 
+            </pre>
+            
+            <h3>Iterating with `for` Loop:</h3>
+            <p>The `for` loop is commonly used when you need access to the index:</p>
+            <pre>
+for (int j = 0; j < n.Length; j++) {
+   Console.WriteLine("Element[{0}] = {1}", j, n[j]);
+}
+            </pre>
+            
+            <h3>Iterating with `foreach` Loop:</h3>
+            <p>The `foreach` loop provides a simpler, read-only iteration over all elements without manual index management:</p>
+            <pre>
+foreach (int value in n) {
+   Console.WriteLine("Value: {0}", value);
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Array Properties and Methods</h2>
+        <div class="content">
+            <h3>`Length` Property:</h3>
+            <p>Returns the total number of elements in the array (read-only).</p>
+            <pre>
+int[] numbers = { 10, 20, 30, 40, 50 };
+int length = numbers.Length; // length will be 5
+            </pre>
+            
+            <h3>Sorting an Array (`Array.Sort`):</h3>
+            <p>The static <code>Array.Sort()</code> method sorts array elements in **ascending** order in-place.</p>
+            <pre>
+int[] numbers = { 50, 20, 40, 10, 30 };
+Array.Sort(numbers); 
+// numbers is now: { 10, 20, 30, 40, 50 }
+            </pre>
+            
+            <h3>Descending Sort:</h3>
+            <p>Achieved by sorting first, then reversing the order.</p>
+            <pre>
+Array.Sort(numbers);
+Array.Reverse(numbers);
+// numbers is now: { 50, 40, 30, 20, 10 }
+            </pre>
+            
+            <h3>Copying an Array:</h3>
+            <p>Copying an array variable (e.g., <code>int[] score = marks;</code>) only copies the reference, meaning both variables point to the same memory. To create a true, independent copy:</p>
+            <ul>
+                <li><strong>`Array.Copy()`:</strong> Copies a range of elements to another array.</li>
+                <li><strong>`Array.Clone()`:</strong> Creates a shallow copy of the entire array.
+                    <pre>int[] clonedArray = (int[])sourceArray.Clone();</pre>
+                </li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Advanced Array Concepts</h2>
+        <div class="content">
+            <ul>
+                <li><strong>Multi-dimensional arrays:</strong> Arrays with more than one dimension, typically used for tables or grids (e.g., <code>int[,] matrix;</code>).</li>
+                <li><strong>Jagged arrays:</strong> Arrays of arrays, where the length of each inner array can be different (e.g., <code>int[][] jagged;</code>).</li>
+                <li><strong>Param arrays (`params` keyword):</strong> Used in method signatures to allow passing an unknown number of arguments as a single array.</li>
+            </ul>
+        </div>
+    </div>
+</div>

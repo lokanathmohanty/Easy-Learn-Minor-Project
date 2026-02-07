@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Testing With Playwright</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Playwright?</h2>
+            <p><strong>Playwright</strong> is a modern, open-source **End-to-End (E2E) testing framework** developed by Microsoft. It primarily focuses on high-level **browser automation** and provides a powerful API for testing complex, modern web applications.</p>
+            <ul>
+                <li class="example">It supports simultaneous testing across all major browser engines: **Chromium**, **Firefox**, and **WebKit**.</li>
+                <li class="example">It is known for its reliability and speed, offering features like auto-wait and cross-browser stability.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Setting Up Playwright in Next.js</h2>
+            
+            <h3>Option 1: Create a New Project with Playwright</h3>
+            <p>The simplest way to integrate is by using the Next.js official example template:</p>
+            <pre class="example"><code>npx create-next-app@latest --example with-playwright with-playwright-app</code></pre>
+            <p>This provides a pre-configured setup including <code>playwright.config.ts</code> and example tests.</p>
+            
+            <h3>Option 2: Manual Setup in an Existing Project</h3>
+            
+            <h4>Step 1: Install Playwright</h4>
+            <p>Use the initialization command in your existing Next.js project. This command installs Playwright and its browser dependencies:</p>
+            <pre class="example"><code>npm init playwright@latest</code></pre>
+            
+            <h4>Step 2: Update Scripts in <code>package.json</code></h4>
+            <p>Add scripts to easily run the E2E tests:</p>
+            <pre class="example"><code>// File: /package.json
+{
+  "scripts": {
+    // Command to run all E2E tests
+    "test:e2e": "playwright test", 
+    // Command to run tests with the interactive UI mode
+    "test:e2e:ui": "playwright test --ui" 
+  }
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title example">Creating a Playwright E2E Test (Navigation)</h2>
+            <p>Playwright tests are written asynchronously and use a <code>page</code> fixture (object) to interact with the browser. It's crucial that your Next.js application is running (e.g., via <code>npm run start</code> or <code>npm run dev</code>) before running the E2E tests.</p>
+            
+            <h3>The Test (<code>tests/home.spec.ts</code>)</h3>
+            <p>This test simulates a user clicking a navigation link and verifies the resulting URL and page content.</p>
+            <pre class="example"><code>// tests/home.spec.ts
+import { test, expect } from '@playwright/test'
+ 
+test('should navigate to the about page', async ({ page }) => {
+    // 1. Navigate to the base URL
+    await page.goto('http://localhost:3000/')
+    
+    // 2. Find the link containing the text 'About' and click it
+    await page.click('text=About')
+    
+    // 3. Assert that the current URL has changed to the expected path
+    await expect(page).toHaveURL('http://localhost:3000/about')
+    
+    // 4. Assert that the h1 element on the new page contains 'About'
+    // Playwright recommends using locators for reliability
+    await expect(page.locator('h1')).toContainText('About')
+})</code></pre>
+            
+            <h3>Running Tests</h3>
+            <p>Run your tests using the scripts defined in <code>package.json</code>:</p>
+            <pre class="example"><code># Runs all tests in headless mode by default
+npm run test:e2e
+
+# Opens the browser and interactive UI for debugging
+npm run test:e2e:ui
+
+# Runs tests only in the Chromium browser
+npx playwright test --project=chromium</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Generating a Web Report</h2>
+            <p>Playwright can generate a comprehensive, interactive HTML report of the test results, including test steps, screenshots, and videos, which is invaluable for debugging failed tests.</p>
+            <ol>
+                <li><strong>Generate the report:</strong> Run the tests with the HTML reporter flag.
+                <pre class="example"><code>npx playwright test --reporter=html</code></pre></li>
+                <li><strong>View the report:</strong> The report is saved to the <code>playwright-report</code> directory and can be viewed in your browser using this command:
+                <pre class="example"><code>npx playwright show-report</code></pre></li>
+            </ol>
+        </div>
+    </div>
+</div>

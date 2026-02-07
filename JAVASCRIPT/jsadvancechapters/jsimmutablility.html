@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Immutability</h1>
+
+    <div class="content">
+      <h2>Concept of Immutability</h2>
+      <p>
+        Immutable means something that cannot be changed. In programming, an immutable
+        value is one that cannot be modified once set. Instead of changing the original
+        value, we create a new one.
+      </p>
+      <p>
+        JavaScript has two categories of types:
+      </p>
+      <ul>
+        <li><strong>Primitive types:</strong> numbers, strings, booleans, null, undefined (immutable).</li>
+        <li><strong>Reference types:</strong> objects, arrays, functions (mutable).</li>
+      </ul>
+      <p>
+        For example, strings are immutable. If you assign a string to a new variable and
+        later change the original, the new variable will not be affected.
+      </p>
+
+      <h2>Why Use Immutability?</h2>
+      <ul>
+        <li><strong>Predictability:</strong> Data that does not change is easier to understand.</li>
+        <li><strong>Prevent bugs:</strong> Avoids unexpected mutations that can cause errors.</li>
+        <li><strong>Simple to share:</strong> Immutable data can be distributed safely across your application.</li>
+      </ul>
+
+      <h2>Examples of Immutability</h2>
+
+      <h3>Example 1: Strings are Immutable</h3>
+      <pre>
+// Create a string here
+let greeting = "Hello, world!";
+
+// This will not change the original string.
+greeting[0] = "h"; 
+
+console.log(greeting);
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+Hello, world!
+      </pre>
+      <p>
+        Strings cannot be edited in place. Attempting to change a character creates no effect.
+      </p>
+
+      <h3>Example 2: Arrays with Spread Operator</h3>
+      <pre>
+// Create an array
+let numbers = [1, 2, 3];
+
+// Create a new array with an extra number.
+let newNumbers = [...numbers, 4]; 
+
+console.log(numbers);
+console.log(newNumbers);
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+[1, 2, 3]
+[1, 2, 3, 4]
+      </pre>
+      <p>
+        Instead of changing the original array, a new one is created using the spread operator.
+      </p>
+
+      <h3>Example 3: Objects with Spread Operator</h3>
+      <pre>
+let person = { name: "Amit", age: 25 };
+
+// Create a new object with an updated age.
+let updatedPerson = { ...person, age: 26 };
+
+console.log(person);
+console.log(updatedPerson);
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+{ name: "Amit", age: 25 }
+{ name: "Amit", age: 26 }
+      </pre>
+      <p>
+        Objects are mutable by default, but immutability can be achieved by creating a
+        new object with the spread operator.
+      </p>
+
+      <h2>Importance of Immutability</h2>
+      <p>
+        Immutability plays a critical role in writing reliable, maintainable, and
+        predictable code:
+      </p>
+      <ul>
+        <li>
+          <strong>Consistency:</strong> Values remain constant, making state management easier.
+        </li>
+        <li>
+          <strong>Readability:</strong> Code is easier to understand and debug when values do not mutate unexpectedly.
+        </li>
+        <li>
+          <strong>Functional Programming:</strong> Encourages fewer side effects and
+          more predictable code, aligning with frameworks like Redux.
+        </li>
+      </ul>
+
+      <h2>Summary</h2>
+      <p>
+        Immutability ensures that once a value is set, it cannot be altered. Instead,
+        new values are created, which improves predictability, prevents bugs, and
+        aligns with best practices in state management and functional programming.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,233 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Block Synchronization</h1>
+
+    <div class="content">
+      <h2 class="content-title">Why Synchronization Is Needed</h2>
+      <p>When multiple threads try to access the same resource at the same time, it may lead to data inconsistency. For example, multiple threads writing to the same file might overwrite each other’s data. To prevent such issues, Java allows threads to be synchronized using monitors.</p>
+      <p>Each Java object has an associated monitor that a thread can lock or unlock. Only one thread can hold the lock at any moment.</p>
+
+      <h2 class="content-title">Block Synchronization in Java</h2>
+      <p>Java supports synchronization using the <code>synchronized</code> block. This lets you lock a specific block of code, not the entire method.</p>
+      <pre><code>synchronized(objectIdentifier) {
+   // Access shared variables and resources
+}</code></pre>
+
+      <h2 class="content-title">Multithreading Example Without Synchronization</h2>
+      <pre><code>package com.tutorialspoint;
+
+class PrintDemo {
+   public void printCount() {
+      try {
+         for (int i = 5; i > 0; i--) {
+            Thread.sleep(50);
+            System.out.println("Counter   ---   " + i);
+         }
+      } catch (Exception e) {
+         System.out.println("Thread  interrupted.");
+      }
+   }
+}
+
+class ThreadDemo extends Thread {
+   private Thread t;
+   private String threadName;
+   PrintDemo printDemo;
+
+   ThreadDemo(String name, PrintDemo pd) {
+      threadName = name;
+      printDemo = pd;
+   }
+
+   public void run() {
+      printDemo.printCount();
+      System.out.println("Thread " + threadName + " exiting.");
+   }
+
+   public void start() {
+      System.out.println("Starting " + threadName);
+      if (t == null) {
+         t = new Thread(this, threadName);
+         t.start();
+      }
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      PrintDemo printDemo = new PrintDemo();
+
+      ThreadDemo t1 = new ThreadDemo("Thread - 1", printDemo);
+      ThreadDemo t2 = new ThreadDemo("Thread - 2", printDemo);
+
+      t1.start();
+      t2.start();
+
+      try {
+         t1.join();
+         t2.join();
+      } catch (Exception e) {
+         System.out.println("Interrupted");
+      }
+   }
+}
+</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Starting Thread - 1 
+Starting Thread - 2 
+Counter   ---   5
+Counter   ---   5
+Counter   ---   4
+Counter   ---   4
+Counter   ---   3
+Counter   ---   3
+Counter   ---   2
+Counter   ---   2
+Counter   ---   1
+Counter   ---   1
+Thread Thread - 1  exiting.
+Thread Thread - 2  exiting.
+</code></pre>
+
+      <h2 class="content-title">Multithreading Example with Block Synchronization</h2>
+      <p>Now we use <code>synchronized</code> block to allow only one thread to access <code>printCount()</code> at a time.</p>
+
+      <pre><code>package com.tutorialspoint;
+
+class PrintDemo {
+   public void printCount() {
+      try {
+         for (int i = 5; i > 0; i--) {
+            Thread.sleep(50);
+            System.out.println("Counter   ---   " + i);
+         }
+      } catch (Exception e) {
+         System.out.println("Thread  interrupted.");
+      }
+   }
+}
+
+class ThreadDemo extends Thread {
+   private Thread t;
+   private String threadName;
+   PrintDemo printDemo;
+
+   ThreadDemo(String name, PrintDemo pd) {
+      threadName = name;
+      printDemo = pd;
+   }
+
+   public void run() {
+      synchronized (printDemo) {
+         printDemo.printCount();
+      }
+      System.out.println("Thread " + threadName + " exiting.");
+   }
+
+   public void start() {
+      System.out.println("Starting " + threadName);
+      if (t == null) {
+         t = new Thread(this, threadName);
+         t.start();
+      }
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      PrintDemo printDemo = new PrintDemo();
+
+      ThreadDemo t1 = new ThreadDemo("Thread - 1", printDemo);
+      ThreadDemo t2 = new ThreadDemo("Thread - 2", printDemo);
+
+      t1.start();
+      t2.start();
+
+      try {
+         t1.join();
+         t2.join();
+      } catch (Exception e) {
+         System.out.println("Interrupted");
+      }
+   }
+}
+</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Starting Thread - 1 
+Starting Thread - 2 
+Counter   ---   5
+Counter   ---   4
+Counter   ---   3
+Counter   ---   2
+Counter   ---   1
+Thread Thread - 1  exiting.
+Counter   ---   5
+Counter   ---   4
+Counter   ---   3
+Counter   ---   2
+Counter   ---   1
+Thread Thread - 2  exiting.
+</code></pre>
+
+      <h2 class="content-title">Multithreading Example with Method-Level Synchronization</h2>
+      <p>This time, we synchronize the entire <code>run()</code> method, locking the object for the duration of the method.</p>
+
+      <pre><code>package com.tutorialspoint;
+
+class PrintDemo extends Thread {
+   public void printCount() {
+      try {
+         for (int i = 5; i > 0; i--) {
+            Thread.sleep(50);
+            System.out.println("Counter --- " + i);
+         }
+      } catch (Exception e) {
+         System.out.println("Thread " + Thread.currentThread().getName() + " interrupted.");
+      }
+   }
+
+   public synchronized void run() {
+      printCount();
+      System.out.println("Thread " + Thread.currentThread().getName() + " exiting.");
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      PrintDemo printDemo = new PrintDemo();
+
+      Thread t1 = new Thread(printDemo);
+      Thread t2 = new Thread(printDemo);
+
+      t1.start();
+      t2.start();
+
+      try {
+         t1.join();
+         t2.join();
+      } catch (Exception e) {
+         System.out.println("Interrupted");
+      }
+   }
+}
+</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Counter --- 5
+Counter --- 4
+Counter --- 3
+Counter --- 2
+Counter --- 1
+Thread Thread-1 exiting.
+Counter --- 5
+Counter --- 4
+Counter --- 3
+Counter --- 2
+Counter --- 1
+Thread Thread-2 exiting.
+</code></pre>
+    </div>
+  </div>
+</div>

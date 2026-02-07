@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Regular Expressions (<code>java.util.regex</code>)</h1>
+
+        <div class="content">
+            <h2>Overview of Java Regular Expressions</h2>
+            <p>Java provides robust support for **Regular Expressions (Regex)** through the **<code>java.util.regex</code>** package. Regex is a specialized syntax for describing and matching patterns within strings. Java's implementation is similar to that of Perl.</p>
+
+            <h3>Core Regex Classes</h3>
+            <p>The <code>java.util.regex</code> package revolves around three main classes:</p>
+            <ul>
+                <li>
+                    <strong><code>Pattern</code> Class:</strong> Represents the **compiled form** of a regular expression. It provides the static <code>compile()</code> method to create a <code>Pattern</code> object from a regex string.
+                </li>
+                <li>
+                    <strong><code>Matcher</code> Class:</strong> The **engine** that performs match operations against an input string using a <code>Pattern</code> object. A <code>Matcher</code> object is obtained by invoking <code>matcher()</code> on a <code>Pattern</code> object.
+                </li>
+                <li>
+                    <strong><code>PatternSyntaxException</code>:</strong> An unchecked exception thrown when a regular expression pattern has a syntax error.
+                </li>
+            </ul>
+
+            <p class="example"><strong>Example Workflow:</strong></p>
+            <pre><code>String regex = "(.*)(\\d+)(.*)";
+Pattern p = Pattern.compile(regex); // 1. Compile the pattern
+Matcher m = p.matcher(inputString); // 2. Create the matcher engine
+if (m.find()) { // 3. Execute the operation
+    // ...
+}</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Key Regex Syntax and Metacharacters</h2>
+            <p>Regex uses a specialized syntax of metacharacters and quantifiers to define patterns:</p>
+
+            <h3>Quantifiers (Repetition)</h3>
+            <ul>
+                <li><strong><code>re*</code>:</strong> Matches 0 or more occurrences of <code>re</code>.</li>
+                <li><strong><code>re+</code>:</strong> Matches 1 or more occurrences of <code>re</code>.</li>
+                <li><strong><code>re?</code>:</strong> Matches 0 or 1 occurrence of <code>re</code>.</li>
+                <li><strong><code>re{n}</code>:</strong> Matches exactly $n$ occurrences.</li>
+            </ul>
+
+            <h3>Character Classes and Shorthands</h3>
+            <ul>
+                <li><strong><code>.</code>:</strong> Matches any single character except newline.</li>
+                <li><strong><code>[...]</code>:</strong> Matches any single character contained within the brackets.</li>
+                <li><strong><code>[^...]</code>:</strong> Matches any single character **not** contained within the brackets.</li>
+                <li><strong><code>\d</code> / <code>\D</code>:</strong> Matches digit / non-digit (Equivalent to <code>[0-9]</code> / <code>[^0-9]</code>).</li>
+                <li><strong><code>\w</code> / <code>\W</code>:</strong> Matches word / non-word character (alphanumeric plus underscore).</li>
+                <li><strong><code>\s</code> / <code>\S</code>:</strong> Matches whitespace / non-whitespace.</li>
+            </ul>
+
+            <h3>Boundaries and Grouping</h3>
+            <ul>
+                <li><strong><code>^</code> / <code>$</code>:</strong> Matches the beginning / end of a line.</li>
+                <li><strong><code>\b</code> / <code>\B</code>:</strong> Matches a word boundary / non-word boundary.</li>
+                <li><strong><code>(re)</code>:</strong> **Capturing Group.** Groups expressions and remembers the matched text (numbered 1 and up).</li>
+                <li><strong><code>(?:re)</code>:</strong> **Non-Capturing Group.** Groups expressions without remembering the matched text.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2><code>Matcher</code> Class Key Methods</h2>
+
+            <h3>Study Methods (Matching)</h3>
+            <p>These methods attempt to match the input sequence against the pattern:</p>
+            <ul>
+                <li><strong><code>find()</code>:</strong> Attempts to find the **next** subsequence of the input that matches the pattern. Returns <code>true</code> if found.</li>
+                <li><strong><code>matches()</code>:</strong> Attempts to match the **entire** region against the pattern. Returns <code>true</code> only if the whole input string matches.</li>
+                <li><strong><code>lookingAt()</code>:</strong> Attempts to match the input sequence, starting **at the beginning** of the region, against the pattern. It does not require the entire input to match.</li>
+            </ul>
+
+            <h3>Index Methods (Match Information)</h3>
+            <p>These methods are called after a successful match (e.g., after <code>find()</code> or <code>matches()</code>):</p>
+            <ul>
+                <li><strong><code>start()</code> / <code>end()</code>:</strong> Returns the start index / (end index + 1) of the match for the entire expression (group 0).</li>
+                <li><strong><code>start(int group)</code> / <code>end(int group)</code>:</strong> Returns the start index / (end index + 1) for the subsequence captured by the specified group.</li>
+                <li><strong><code>group(int group)</code>:</strong> Returns the actual matched text captured by the specified group.</li>
+            </ul>
+
+            <h3>Replacement Methods</h3>
+            <ul>
+                <li><strong><code>replaceAll(String replacement)</code>:</strong> Replaces **every** subsequence match with the given replacement string.</li>
+                <li><strong><code>replaceFirst(String replacement)</code>:</strong> Replaces **only the first** subsequence match.</li>
+                <li><strong><code>appendReplacement(StringBuffer sb, String replacement)</code> / <code>appendTail(StringBuffer sb)</code>:</strong> Methods used for implementing custom, complex replacement logic by incrementally building the result in a <code>StringBuffer</code>.</li>
+            </ul>
+        </div>
+    </div>
+</div>

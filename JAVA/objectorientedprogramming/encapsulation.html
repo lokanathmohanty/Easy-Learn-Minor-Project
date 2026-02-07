@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Encapsulation</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Object-Oriented Concepts</h1>
+            <h2 class="subtitle">Session: Encapsulation (Data Hiding)</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is Encapsulation?</h2>
+                <p>**Encapsulation** is one of the four foundational OOP concepts (along with Inheritance, Polymorphism, and Abstraction). It is the mechanism of **wrapping data (variables) and the code that acts on the data (methods) together as a single unit** (a class). This concept is also known as **data hiding**.</p>
+                <p>The goal is to restrict direct access to the data, ensuring that variables can only be manipulated through a class's controlled methods.</p>
+            </div>
+
+            <div class="content achieving">
+                <h2 class="subtitle">Achieving Encapsulation in Java</h2>
+                <p>Encapsulation is achieved by following two steps:</p>
+                <ol>
+                    <li>Declare the instance **variables** (fields) of a class as **`private`**. This hides them from other classes.</li>
+                    <li>Provide **`public` setter** methods (to modify/write) and **getter** methods (to view/read) to access the private variables indirectly.</li>
+                </ol>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Encapsulated Class (<code>EncapTest</code>)</h2>
+                <p>The variables are private, but public methods provide controlled access points (Getters and Setters):</p>
+                <pre><code>public class EncapTest {
+   private String name; // Private (Hidden)
+   private int age;     // Private (Hidden)
+
+   // Public Getter (Read access)
+   public String getName() {
+      return name;
+   }
+
+   // Public Setter (Write access, can include validation)
+   public void setAge(int newAge) {
+      // Logic control can be added here, e.g., if(newAge > 0)
+      age = newAge;
+   }
+}</code></pre>
+            </div>
+
+            <div class="content benefits">
+                <h2 class="subtitle">Key Benefits of Encapsulation</h2>
+                <ul>
+                    <li>**Data Hiding:** The class's internal state is protected from unauthorized access or modification by external classes.</li>
+                    <li>**Control:** The class maintains **total control** over what values are stored in its fields, as logic (like validation) can be implemented inside the setter methods.</li>
+                    <li>**Flexibility (Read/Write Control):** You can create classes that are **Read-Only** (by providing only getters) or **Write-Only** (by providing only setters), tailoring access as needed.</li>
+                    <li>**Maintainability:** Changes to the internal data structure of the class don't affect external code, as long as the public getter/setter method signatures remain the same.</li>
+                </ul>
+            </div>
+
+            <div class="content read-write">
+                <h2 class="subtitle">Access Control: Read-Only and Write-Only</h2>
+                <p>By selectively implementing accessors, a class can restrict interaction with its private fields:</p>
+                <ul>
+                    <li>**Read-Only Class:** Only **Getter** methods are provided (e.g., to view a person's age, but not change it after creation).</li>
+                    <li>**Write-Only Class:** Only **Setter** methods are provided (e.g., to set a password, but never read it back for security reasons).</li>
+                </ul>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

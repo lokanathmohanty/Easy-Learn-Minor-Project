@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">CSS RWD Images</h1>
+        <div class="content">
+            <p>In responsive web design, it is important to make sure images fit well on all screen sizes and resolutions. By using properties like <code>max-width</code> and <code>min-width</code>, images can automatically resize to fit different screens.</p>
+            <p>When an image is uploaded to a webpage, it will be displayed in its default width and height. We can change these dimensions in CSS so that the image fits according to available space in our layout.</p>
+            <p>For better adaptability, we should always use relative units for the width property such as percentage, instead of absolute values like pixels. Absolute values restrict the image from being responsive.</p>
+        </div>
+
+        <h2 class="title">Responsive Image Using width Property</h2>
+        <div class="content">
+            <p>To make an image scale according to screen size, we need to set <code>width</code> property of the image to 100% and <code>height</code> to auto.</p>
+            <p>This setup allows the image to scale with the screen size. However, on very large screens, the image may stretch beyond its natural width, making it appear distorted.</p>
+            <h3 class="title">Example</h3>
+            <div class="content">
+                <p>The image will cover 100% width of its parent container.</p>
+                <pre>
+img {
+    width: 100%;
+    height: auto;
+}
+                </pre>
+            </div>
+        </div>
+
+        <h2 class="title">Responsive Image Using max-width Property</h2>
+        <div class="content">
+            <p>On large screens, the image might stretch beyond its natural dimension. To prevent this, we can use <code>max-width</code> property instead of <code>width</code>.</p>
+            <p>By setting <code>max-width: 100%</code>, the image will scale down if necessary, but never scale up to be larger than its original size.</p>
+            <h3 class="title">Example</h3>
+            <div class="content">
+                <p>The image will scale according to the screen size but never exceed its natural size.</p>
+                <pre>
+img {
+    max-width: 100%;
+    height: auto;
+}
+                </pre>
+            </div>
+        </div>
+
+        <h2 class="title">CSS Image Gallery</h2>
+        <div class="content">
+            <p>A CSS Image Gallery is used to organize and display multiple images in a responsive and visually appealing format. CSS properties can control the layout, size, spacing, and more.</p>
+            <p>CSS Grid layout is the most commonly used layout system for designing image galleries.</p>
+            <h3 class="title">Example</h3>
+            <div class="content">
+                <p>The following snippet shows a grid-based image gallery:</p>
+                <pre>
+<div class="gallery">
+    <img src="image1.jpg" alt="Gallery Image 1">
+    <img src="image2.jpg" alt="Gallery Image 2">
+    <img src="image3.jpg" alt="Gallery Image 3">
+    <img src="image4.jpg" alt="Gallery Image 4">
+    <img src="image5.jpg" alt="Gallery Image 5">
+    <img src="image6.jpg" alt="Gallery Image 6">
+</div>
+                </pre>
+            </div>
+        </div>
+
+        <h2 class="title">Responsive Image Gallery</h2>
+        <div class="content">
+            <p>We can use CSS media queries to create a responsive image gallery that rearranges its content based on screen width.</p>
+            <ul>
+                <li><strong>Large screens:</strong> 4 columns layout</li>
+                <li><strong>Small screens:</strong> 1 column layout</li>
+            </ul>
+            <h3 class="title">Example</h3>
+            <div class="content">
+                <p>This gallery adjusts based on device screen size:</p>
+                <pre>
+<div class="gallery">
+    <img src="image1.jpg" alt="Gallery Image 1">
+    <img src="image2.jpg" alt="Gallery Image 2">
+    <img src="image3.jpg" alt="Gallery Image 3">
+    <img src="image4.jpg" alt="Gallery Image 4">
+    <img src="image5.jpg" alt="Gallery Image 5">
+    <img src="image6.jpg" alt="Gallery Image 6">
+</div>
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>

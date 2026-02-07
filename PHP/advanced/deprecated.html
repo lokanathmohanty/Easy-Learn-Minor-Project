@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Deprecated Features (PHP 7 and 8) 🧹</h1>
+
+        <div class="content">
+            <p>As PHP evolves, features that are deemed obsolete, insecure, or that hinder language development are marked as **deprecated**. Deprecated features generate warnings but are not immediately removed, giving developers time to update their code before the features are removed in a future major version.</p>
+
+            <hr>
+
+            <h2 class="title">Deprecated in PHP Version 7 (Examples)</h2>
+            <p>These features are either removed or emit a warning in PHP 7, and are likely removed in PHP 8+:</p>
+            
+            <ul>
+                <li><strong>PHP 4 Style Constructors:</strong> Methods with the same name as their class (e.g., $\text{class A \{ function A() \dots \}}$) are deprecated. Use the $\text{\_\_construct()}$ method instead.</li>
+                <li><strong>Static Calls to Non-static Methods:</strong> Calling an instance method statically (e.g., $\text{A::b()}$ where $\text{b()}$ is not declared $\text{static}$) is deprecated.</li>
+                <li><strong>$\text{ext/mcrypt}$:</strong> The entire $\text{mcrypt}$ extension has been deprecated in favor of **OpenSSL** due to lack of maintenance and security concerns.</li>
+                <li><strong>$\text{\_\_autoload()}$:</strong> Deprecated in favor of the more robust and chainable **$\text{spl\_autoload\_register()}$**.</li>
+                <li><strong>$\text{create\_function()}$:</strong> Deprecated due to security issues ($\text{eval()}$-like behavior). The preferred alternative is **anonymous functions** (closures).</li>
+                <li><strong>$\text{each()}$:</strong> Deprecated due to implementation issues with newer language changes.</li>
+                <li><strong>Case-Insensitive Constants:</strong> Passing $\text{true}$ as the third argument to $\text{define()}$ is deprecated. Constants should now be treated as case-sensitive.</li>
+                <li><strong>$\text{(real)}$ Cast and $\text{is\_real()}$ function:</strong> Deprecated. Use **$\text{(float)}$** cast and **$\text{is\_float()}$** function instead.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Deprecated in PHP Version 8 (Examples)</h2>
+            <p>These features generate a deprecation warning as of PHP 8.0.0 and indicate best practices for modern PHP development:</p>
+
+            <h3>Function and Parameter Changes:</h3>
+            <ul>
+                <li><strong>Optional Parameters Followed by Required Parameters:</strong> Defining a parameter with a default value ($\text{$a = []}$), followed by a parameter with no default ($\text{$b}$), is deprecated.
+                    <pre>// Deprecated
+function test($a = [], $b) {}
+// Recommended
+function test($a, $b) {}</pre></li>
+                <li><strong>$\text{Type $param = null}$}:</strong> While still allowed for backwards compatibility, using a $\text{null}$ default to make a type implicitly nullable is deprecated. Use the explicit **nullable type syntax** instead: $\text{function test(?A \$a, \$b) \{\}}$.</li>
+            </ul>
+
+            <h3>Class and Property Changes:</h3>
+            <ul>
+                <li><strong>Dynamic Properties:</strong> The creation of dynamic properties (properties not explicitly declared in the class definition) on classes is deprecated and will result in a fatal error in PHP 9. Use the $\text{\_\_get()/\_\_set()}$ magic methods or $\text{stdClass}$ if dynamic properties are required.</li>
+                <li><strong>Static Calls on Traits:</strong> Calling a static method or accessing a static property directly on a trait itself is deprecated. Access should only be done via the class that uses the trait.</li>
+            </ul>
+
+            <h3>Data Handling:</h3>
+            <ul>
+                <li><strong>Implicit Incompatible $\text{float}$ to $\text{int}$ Conversions:</strong> Implicit conversion of a floating-point number ($\text{float}$) to an integer ($\text{int}$) that causes a loss in precision is deprecated. Explicit casting ($\text{(int) \$float}$) should be used.</li>
+                <li><strong>Sorting Functions with Boolean Returns:</strong> Sort comparison functions (like those used in $\text{usort}$) that return $\text{true}$ or $\text{false}$ are deprecated. They must be replaced with implementations that return an integer value: $\text{< 0}$ (less than), $\text{0}$ (equal), or $\text{> 0}$ (greater than). The **spaceship operator ($\text{<=>}$)** is the recommended replacement.
+                    <pre>// Replace
+usort($array, fn($a, $b) => $a > $b);
+// With
+usort($array, fn($a, $b) => $a <=> $b);</pre></li>
+            </ul>
+
+            <h3>Date Functions:</h3>
+            <ul>
+                <li><strong>$\text{strftime()}$ and $\text{gmstrftime()}$:</strong> Deprecated. Use the **$\text{date()}$** function for locale-independent formatting or **$\text{IntlDateFormatter::format()}$** for locale-dependent formatting.</li>
+                <li><strong>$\text{date\_sunrise()}$ and $\text{date\_sunset()}$:</strong> Deprecated. Use **$\text{date\_sun\_info()}$** instead.</li>
+            </ul>
+        </div>
+    </div>
+</div>

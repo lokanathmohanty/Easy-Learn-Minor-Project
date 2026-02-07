@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Copy Sets</h1>
+    <div class="content">
+       
+      <p>
+        Different methods to copy a set in Python include using the <code>copy()</code> method, the <code>set()</code> function, or set comprehension.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Copy Sets Using the <code>copy()</code> Method</h2>
+    <div class="content">
+      <p>
+        The <code>copy()</code> method creates a shallow copy of a set object. It returns a new set but does not create copies of mutable objects inside the set.
+      </p>
+      <pre><code>
+lang1 = {"C", "C++", "Java", "Python"}
+print("lang1: ", lang1, "id(lang1): ", id(lang1))
+
+lang2 = lang1.copy()
+print("lang2: ", lang2, "id(lang2): ", id(lang2))
+
+lang1.add("PHP")
+print("After updating lang1")
+print("lang1: ", lang1, "id(lang1): ", id(lang1))
+print("lang2: ", lang2, "id(lang2): ", id(lang2))
+      </code></pre>
+      <p>Output:</p>
+      <p>{'Python', 'Java', 'C', 'C++'} id(lang1): 2451578196864<br>
+         {'Python', 'Java', 'C', 'C++'} id(lang2): 2451578197312<br>
+         After updating lang1<br>
+         {'Python', 'C', 'C++', 'PHP', 'Java'} id(lang1): 2451578196864<br>
+         {'Python', 'Java', 'C', 'C++'} id(lang2): 2451578197312</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Copy Sets Using the <code>set()</code> Function</h2>
+    <div class="content">
+      <p>
+        The <code>set()</code> function can create a new set from an iterable. Passing the original set to <code>set()</code> returns a copy where modifications to the copy do not affect the original.
+      </p>
+      <pre><code>
+original_set = {1, 2, 3, 4}
+copied_set = set(original_set)
+print("copied set:", copied_set)
+
+copied_set.add(5)
+print("copied set:", copied_set)
+print("original set:", original_set)
+      </code></pre>
+      <p>Output:</p>
+      <p>{1, 2, 3, 4}<br>
+         {1, 2, 3, 4, 5}<br>
+         {1, 2, 3, 4}</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Copy Sets Using Set Comprehension</h2>
+    <div class="content">
+      <p>
+        Set comprehension creates a new set by iterating over an original set. It offers a concise way to copy sets.
+      </p>
+      <pre><code>
+original_set = {1, 2, 3, 4, 5}
+copied_set = {x for x in original_set}
+print("Copied set:", copied_set)
+      </code></pre>
+      <p>Output:</p>
+      <p>{1, 2, 3, 4, 5}</p>
+    </div>
+  </div>
+</div>

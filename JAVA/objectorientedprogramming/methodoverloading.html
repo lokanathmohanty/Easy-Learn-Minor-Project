@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Method Overloading</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Polymorphism Concepts</h1>
+            <h2 class="subtitle">Session: Method Overloading (Compile-Time Polymorphism)</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is Method Overloading?</h2>
+                <p>**Method Overloading** is a feature in Java where a single class has two or more **methods** with the **same name** but **different parameters**. When the method is called, the compiler resolves which specific method body to use based on the arguments passed.</p>
+                <p>This mechanism is key to achieving **compile-time polymorphism** (or static binding), as the method call is determined at compile time.</p>
+            </div>
+
+            <div class="content advantage">
+                <h2 class="subtitle">Advantage and Rules</h2>
+                <p>The main advantage of method overloading is that it greatly **improves code readability** and **reduces code redundancy**. Developers can use one logical name (like `add`) for operations that perform the same function on different data inputs.</p>
+                <p>Method overloading is achieved by changing the method's **parameter list** in one of two ways:</p>
+                <ul>
+                    <li>**Different number of arguments.**</li>
+                    <li>**Different type of arguments.**</li>
+                </ul>
+            </div>
+
+            <div class="content invalid">
+                <h2 class="subtitle">What Cannot Be Overloaded</h2>
+                <p>A method **cannot** be successfully overloaded just by changing the return type or the access modifier. If two methods have the same name and the exact same parameter list, the compiler will report a duplicate method error, regardless of the return type or whether one is static and the other is not.</p>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Overloading by Number of Arguments</h2>
+                <p>The <code>add</code> method is overloaded to handle different quantities of input values:</p>
+                <pre><code>class Calculator {
+   // 1. Two arguments
+   public static int add(int a, int b){
+      return a + b;
+   }
+   // 2. Three arguments
+   public static int add(int a, int b, int c){
+      return a + b + c;
+   }
+}
+
+public class Tester {
+   public static void main(String args[]){
+      System.out.println(Calculator.add(20, 40));     // Calls (1), Output: 60
+      System.out.println(Calculator.add(40, 50, 60)); // Calls (2), Output: 150
+   }
+}</code></pre>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Overloading by Type of Arguments</h2>
+                <p>The <code>add</code> method is overloaded to handle different data types (integers and doubles):</p>
+                <pre><code>class Calculator {
+   // 1. Accepts two integers
+   public int add(int a, int b){
+      return a + b;
+   }
+   // 2. Accepts two doubles
+   public double add(double a, double b){
+      return a + b;
+   }
+}
+
+public class Tester {
+   public static void main(String args[]){
+      Calculator calculator = new Calculator();   
+      System.out.println(calculator.add(20, 40));   // Calls (1), Output: 60
+      System.out.println(calculator.add(20.0, 40.0)); // Calls (2), Output: 60.0
+   }
+}</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

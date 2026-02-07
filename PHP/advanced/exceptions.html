@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Exceptions and the $\text{Throwable}$ Interface</h1>
+
+        <div class="content">
+            <p>In PHP (especially since version 7), the traditional error reporting mechanism has largely been replaced by throwing **Error Exceptions**. This allows developers to use the structured exception handling keywords ($\text{try}$, $\text{catch}$, $\text{throw}$, and $\text{finally}$) for managing runtime errors as well as user-defined exceptions.</p>
+
+            <hr>
+
+            <h2 class="title">The $\text{Throwable}$ Interface (PHP 7+)</h2>
+            <p>The $\text{Throwable}$ interface is the **base type** for any object that can be thrown using the $\text{throw}$ statement. All PHP errors and exceptions are instances of classes that implement $\text{Throwable}$.</p>
+            <ul>
+                <li>The hierarchy includes two main branches: **$\text{Error}$** (for internal PHP errors) and **$\text{Exception}$** (for code exceptions).</li>
+                <li>A user-defined exception class **cannot** implement $\text{Throwable}$ directly; it must **extend the $\text{Exception}$ class**.</li>
+            </ul>
+
+            <h2 class="title">Uncaught Exceptions and $\text{set\_exception\_handler()}$</h2>
+            <p>When an exception is thrown:</p>
+            <ol>
+                <li>PHP looks for a matching $\text{catch}$ block in the current $\text{try}$ scope.</li>
+                <li>If no match is found, the exception "bubbles up" the call stack (unwinding previous function calls).</li>
+                <li>If the exception reaches the global scope without being caught, the script terminates with a fatal error, **unless** a default exception handler is set.</li>
+            </ol>
+
+            <h3>The $\text{set\_exception\_handler()}$ Function</h3>
+            <p>This function registers a default handler to catch any **uncaught exception** that reaches the global scope. Once the handler function is executed, the program execution will stop.</p>
+            <pre>set_exception_handler(?callable $callback): ?callable</pre>
+            <div class="example">
+                <p>The handler function must accept one parameter: the thrown $\text{Exception}$ object.</p>
+                <pre>function handler($ex) {
+   echo "Uncaught exception is: " , $ex->getMessage();
+}
+set_exception_handler('handler');
+throw new Exception('Not Found Exception');
+// Output: Uncaught exception is: Not Found Exception</pre>
+            </div>
+
+            <hr>
+
+            <h2 class="title">Standard PHP Library (SPL) Exceptions</h2>
+            <p>The SPL provides a set of predefined, specialized $\text{Exception}$ classes, which help categorize specific error types. Using these specific classes is better practice than just throwing the base $\text{Exception}$ class.</p>
+            
+            <table class="example">
+                <thead>
+                    <tr>
+                        <th>Exception Class</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$\text{LogicException}$</td>
+                        <td>Represents errors in the program **logic** (should be prevented by the developer).</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{InvalidArgumentException}$</td>
+                        <td>Thrown if an argument is not of the **expected type or value**.</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{BadFunctionCallException}$</td>
+                        <td>Thrown if a callback refers to an **undefined function** or method ($\text{BadMethodCallException}$).</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{RuntimeException}$</td>
+                        <td>Thrown if an error occurs that can **only be found at runtime** (e.g., file access issues).</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{OutOfBoundsException}$</td>
+                        <td>Thrown when an **illegal index** or key is requested (e.g., accessing an array index that doesn't exist).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2 class="title">User-Defined Exceptions</h2>
+            <p>You can create custom exception classes by **extending the base $\text{Exception}$ class**. This allows you to define specific exception types for your application logic and add custom helper methods (like the $\text{message()}$ method below).</p>
+            <pre>
+class myException extends Exception {
+   // Custom method to format the error output
+   function message() {
+      return "Error: ". $this->getMessage(). " in line no ". $this->getLine();
+   }
+}
+
+$num=125;
+try {
+   if ($num>100 || $num<0)
+   throw new myException("$num is invalid number");
+}
+catch (myException $m) {
+   echo $m->message(); // Calls the custom message method
+}</pre>
+        </div>
+    </div>
+</div>

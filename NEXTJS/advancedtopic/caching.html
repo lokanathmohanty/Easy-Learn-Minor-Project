@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Caching Mechanisms</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Caching?</h2>
+            <p><strong>Caching</strong> is a core optimization technique in web applications where data is stored either in server memory or on the client's browser. Its purpose is to allow for **quick access** to this data, which significantly reduces load times, improves overall performance, and minimizes server load. Next.js provides several sophisticated mechanisms for both server-side and client-side caching.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Caching Mechanisms in Next.js</h2>
+            <p>Next.js implements four distinct caching mechanisms, operating across the server and client to optimize data fetching and navigation:</p>
+            
+            <table>
+                <tr>
+                    <th>Mechanism</th>
+                    <th>Description</th>
+                    <th>Used On</th>
+                </tr>
+                <tr>
+                    <td><strong>Request Memoization</strong></td>
+                    <td>Re-uses the result of identical <code>fetch</code> or data requests within the **same React component render cycle** to prevent duplicate data fetching.</td>
+                    <td>Server</td>
+                </tr>
+                <tr>
+                    <td><strong>Data Cache</strong></td>
+                    <td>Stores the results of <code>fetch</code> requests on the server, persisting the data across multiple user requests and server renders. This is the **primary data caching layer**.</td>
+                    <td>Server</td>
+                </tr>
+                <tr>
+                    <td><strong>Full Route Cache</strong></td>
+                    <td>Caches the entire **HTML page output** (including the React Server Component Payload) on the server to be served quickly to the client.</td>
+                    <td>Server</td>
+                </tr>
+                <tr>
+                    <td><strong>Router Cache</strong></td>
+                    <td>Caches the entire page (the React Server Component Payload and rendered output) on the **client side** to enable instant back/forward navigation.</td>
+                    <td>Client</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Caching Behavior of Next.js Functions</h2>
+            
+            <h3>Caching in <code>fetch</code> Function (Data Cache Control)</h3>
+            <p>The standard browser <code>fetch</code> function is extended in Next.js to interact with the server-side **Data Cache**. By default, <code>fetch</code> behaves like <code>{ cache: 'no-store' }</code> (no caching).</p>
+            <ul>
+                <li class="example"><strong>Disable Caching (Default):</strong> <code>fetch(... , { cache: 'no-store' })</code></li>
+                <li class="example"><strong>Opt-in to Caching:</strong> <code>fetch(... , { cache: 'force-cache' })</code></li>
+                <li class="example"><strong>Revalidate Cache:</strong> <code>fetch(... , { next: { revalidate: 3600 }})</code> (Re-fetch at most every 1 hour)</li>
+            </ul>
+
+            <h3>Caching in <code>useRouter</code> Hook (Router Cache Control)</h3>
+            <p>The client-side <code>useRouter</code> hook provides methods to interact with the client-side **Router Cache**:</p>
+            <ul>
+                <li class="example"><strong><code>router.prefetch('/products')</code>:</strong> Manually prefetches the route and adds it to the Router Cache, resulting in faster subsequent navigation to that route.</li>
+                <li class="example"><strong><code>router.refresh()</code>:</strong> Clears the current route from the Router Cache and requests a fresh copy from the server. It **preserves React and browser state** during reconciliation, providing a smooth refresh experience.</li>
+            </ul>
+
+            <h3>Caching in <code>generateStaticParams</code> Function (Full Route Cache)</h3>
+            <p>The <code>generateStaticParams</code> function is used for dynamic routes to generate static paths at build time. The resulting static paths are then cached in the **Full Route Cache**. Additionally, paths that are not generated at build time are cached on the first user visit (at request time).</p>
+            
+            <h3>Caching in <code>&lt;Link&gt;</code> Component</h3>
+            <p>By default, the **<code>&lt;Link&gt;</code>** component automatically prefetches the target route segments from the Full Route Cache and adds the necessary payload to the **Router Cache**. This is a key feature for instant navigation.</p>
+            <pre class="example"><code>&lt;Link href="/products" prefetch={false}&gt; 
+  &lt;a&gt;Products&lt;/a&gt; 
+&lt;/Link&gt;</code></pre>
+            <p>Setting <code>prefetch={false}</code> disables this automatic prefetching, but the route will still be cached when the user eventually navigates to it.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title example">Example of Caching in Action</h2>
+            <p>This client component demonstrates forced caching for data fetching. When the data is fetched (using <code>cache: 'force-cache'</code>), the API response is stored in the server-side **Data Cache** and subsequently utilized by the **Router Cache** on the client. Upon subsequent page reloads or visits, the cached data allows for near-instant rendering.</p>
+            <pre class="example"><code>// app/page.tsx
+"use client"
+import { useEffect, useState } from 'react'
+
+export default function Page() {
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      // Data is requested to be cached in the Data Cache
+      let data = await fetch('https://jsonplaceholder.typicode.com/users', {
+        cache: 'force-cache'
+      }).then(res => res.json())
+
+      setData(data)
+    }
+
+    fetchData()
+  }, [])
+
+  return (
+    &lt;div&gt;
+        {/* Render data */}
+    &lt;/div&gt;
+  )
+}</code></pre>
+        </div>
+    </div>
+</div>

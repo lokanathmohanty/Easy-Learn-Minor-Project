@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">C - Data Types</h1>
+    <div class="content">
+
+      <p>Data types in C refer to an extensive system used for declaring variables or functions of different types. The type of a variable determines how much space it occupies in storage and how the bit pattern stored is interpreted.</p>
+
+      <p>C is a statically typed language. The name of the variable along with the type of data it intends to store must be explicitly declared before using it.</p>
+
+      <p>C is also a strongly typed language, which means that the automatic or implicit conversion of one data type to another is not allowed.</p>
+
+      <h2 class="title">Types of Data in C</h2>
+      <ul>
+        <li><strong>Basic Types</strong> – Integer and floating-point types.</li>
+        <li><strong>Enumerated Types</strong> – Used for variables with discrete integer values.</li>
+        <li><strong>Void Type</strong> – Used to specify absence of value.</li>
+        <li><strong>Derived Types</strong> – Includes pointers, arrays, structures, unions, and functions.</li>
+      </ul>
+
+      <h2 class="title">Integer Data Types in C</h2>
+      <p>The following table provides the storage sizes and ranges of standard integer types:</p>
+      <pre><code>
+Type               Storage Size      Value Range
+char               1 byte            -128 to 127 or 0 to 255
+unsigned char      1 byte            0 to 255
+signed char        1 byte            -128 to 127
+int                2 or 4 bytes      -32,768 to 2,147,483,647
+unsigned int       2 or 4 bytes      0 to 4,294,967,295
+short              2 bytes           -32,768 to 32,767
+unsigned short     2 bytes           0 to 65,535
+long               8 bytes           -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+unsigned long      8 bytes           0 to 18,446,744,073,709,551,615
+      </code></pre>
+
+      <h3 class="title">Example: Integer Type Limits</h3>
+      <pre><code>
+#include &lt;stdio.h&gt;
+#include &lt;limits.h&gt;
+
+int main() {
+   printf("CHAR_BIT    : %d\n", CHAR_BIT);
+   printf("CHAR_MAX    : %d\n", CHAR_MAX);
+   printf("CHAR_MIN    : %d\n", CHAR_MIN);
+   printf("INT_MAX     : %d\n", INT_MAX);
+   printf("INT_MIN     : %d\n", INT_MIN);
+   printf("LONG_MAX    : %ld\n", (long) LONG_MAX);
+   printf("LONG_MIN    : %ld\n", (long) LONG_MIN);
+   printf("SCHAR_MAX   : %d\n", SCHAR_MAX);
+   printf("SCHAR_MIN   : %d\n", SCHAR_MIN);
+   printf("SHRT_MAX    : %d\n", SHRT_MAX);
+   printf("SHRT_MIN    : %d\n", SHRT_MIN);
+   printf("UCHAR_MAX   : %d\n", UCHAR_MAX);
+   printf("UINT_MAX    : %u\n", UINT_MAX);
+   printf("ULONG_MAX   : %lu\n", ULONG_MAX);
+   printf("USHRT_MAX   : %d\n", USHRT_MAX);
+   return 0;
+}
+      </code></pre>
+
+      <h2 class="title">Floating-Point Data Types in C</h2>
+      <p>The table below shows standard floating-point types and their properties:</p>
+      <pre><code>
+Type         Storage Size     Value Range                      Precision
+float        4 bytes          1.2E-38 to 3.4E+38               6 decimal places
+double       8 bytes          2.3E-308 to 1.7E+308             15 decimal places
+long double  10 bytes         3.4E-4932 to 1.1E+4932           19 decimal places
+      </code></pre>
+
+      <h3 class="title">Example: Floating-Point Limits</h3>
+      <pre><code>
+#include &lt;stdio.h&gt;
+#include &lt;float.h&gt;
+
+int main() {
+   printf("Storage size for float: %zu\n", sizeof(float));
+   printf("FLT_MAX      : %g\n", FLT_MAX);
+   printf("FLT_MIN      : %g\n", FLT_MIN);
+   printf("-FLT_MAX     : %g\n", -FLT_MAX);
+   printf("-FLT_MIN     : %g\n", -FLT_MIN);
+   printf("DBL_MAX      : %g\n", DBL_MAX);
+   printf("DBL_MIN      : %g\n", DBL_MIN);
+   printf("-DBL_MAX     : %g\n", -DBL_MAX);
+   printf("Precision value: %d\n", FLT_DIG);
+   return 0;
+}
+      </code></pre>
+
+      <h2 class="title">Boolean Data Type in C</h2>
+      <p>Earlier versions of C did not have a Boolean type. The C99 standard introduced the <code>_Bool</code> type. Zero is considered <code>false</code>, and non-zero is considered <code>true</code>.</p>
+
+      <h2 class="title">User-defined Data Types</h2>
+      <h3 class="title">Struct Data Type</h3>
+      <p>Allows storage of values of different data types in one variable. Example:</p>
+      <pre><code>
+struct student {
+   char name[20];
+   int marks, age;
+};
+      </code></pre>
+
+      <h3 class="title">Union Data Type</h3>
+      <p>Similar to <code>struct</code>, but uses shared memory space. Only one member is used at a time.</p>
+      <pre><code>
+union ab {
+   int a;
+   float b;
+};
+      </code></pre>
+
+      <h2 class="title">Void Data Type</h2>
+      <ul>
+        <li><strong>Function returns as void:</strong> e.g. <code>void exit(int status);</code></li>
+        <li><strong>Function arguments as void:</strong> e.g. <code>int rand(void);</code></li>
+        <li><strong>Pointers to void:</strong> e.g. <code>void *malloc(size_t size);</code></li>
+      </ul>
+
+      <h2 class="title">Arrays in C</h2>
+      <p>An array is a collection of values of the same type stored in consecutive memory locations.</p>
+      <pre><code>
+int marks[5];
+int marks[] = {50, 56, 76, 67, 43};
+      </code></pre>
+      <p>C also supports multi-dimensional arrays.</p>
+
+      <h2 class="title">Pointers in C</h2>
+      <p>A pointer stores the memory address of another variable. The pointer type must match the type of the pointed variable.</p>
+      <pre><code>
+int x;
+int *y;
+y = &x;
+      </code></pre>
+      <p>Pointers are essential for dynamic memory, function arguments, and strings.</p>
+
+    </div>
+  </div>
+</div>

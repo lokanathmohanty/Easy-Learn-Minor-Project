@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - DOM Attribute (Attr)</h1>
+    <div class="content">
+      <p>The attribute interface in the Document Object Model (DOM) represents attributes of an element as an object. And, this object represents an HTML attribute, through which we can control the functionality of HTML elements.</p>
+      <p>The attributes of an element are stored in an array-like unordered collection called <strong>NamedNodeMap</strong>. You can access nodes of this array using its name or index. The indexing starts from 0.</p>
+      <p>For example, the <code>src</code> attribute of an <code>&lt;img&gt;</code> element defines the path to the image to be displayed.</p>
+      
+      <h2>HTML DOM Attribute name Property</h2>
+      <p>Click on the below image to get its attribute.</p>
+      
+      <h2 class="title">Example</h2>
+      <p>The code for the above example is given below:</p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;HTML DOM Attribute name Property&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h3&gt;HTML DOM Attribute name Property&lt;/h3&gt;
+    &lt;p&gt;Click on the below image to get its attribute&lt;/p&gt;
+    &lt;img id="demo" src="https://www.tutorialspoint.com/images/logo.png" alt="demo image" onclick="printAttribute()" /&gt;
+    &lt;input type="text" id="attribute-box" placeholder="Attribute of img tag..." readonly /&gt;
+
+    &lt;script&gt;
+        function printAttribute() {
+            const element = document.getElementById("demo");
+            let aName = element.attributes[0].name;
+            document.getElementById("attribute-box").value = aName;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      
+      <h2>HTML DOM Attribute Properties</h2>
+      <p>The following table contains a list of DOM Attribute properties:</p>
+      <ul>
+        <li><strong>value</strong> − This property is used to set or get the value of an attribute.</li>
+        <li><strong>specified</strong> − It checks whether the mentioned attribute is specified or not.</li>
+        <li><strong>name</strong> − It is used to get the name of the used attribute on an element.</li>
+        <li><strong>isId</strong> − This property determines whether an HTML attribute is an 'id' attribute or not.</li>
+      </ul>
+    </div>
+  </div>
+</div>

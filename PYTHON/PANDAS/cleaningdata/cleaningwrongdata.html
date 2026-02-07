@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="session">
+    
+    <h1 class="title">Pandas - Fixing Wrong Data</h1>
+    
+    <div class="content">
+      <p>Wrong data is not limited to empty cells or incorrect formats. It can simply be values that don’t make sense in the context of your dataset. For example, if a workout session shows a duration of <strong>450</strong> minutes while all others are between <strong>30 and 60</strong>, it’s likely an error.</p>
+
+      <p>When analyzing data, spotting outliers or inconsistencies like this is important, especially when you have an idea of what the data should generally look like.</p>
+
+      <p>There are a couple of common strategies to deal with such issues: <strong>replacing the wrong values</strong> or <strong>removing the affected rows</strong>.</p>
+    </div>
+
+    <h2 class="title">Example: Replacing a Specific Wrong Value</h2>
+    <div class="example">
+      <div class="content">
+        <p>In this example, we assume that the <code>Duration</code> value of 450 is a typo and should be 45 instead. We can manually replace the value using the row index.</p>
+
+        <pre><code>
+df.loc[7, 'Duration'] = 45
+        </code></pre>
+      </div>
+    </div>
+
+    <h2 class="title">Example: Replacing Values Based on a Rule</h2>
+    <div class="example">
+      <div class="content">
+        <p>For larger datasets, we can define rules to clean the data. For example, we might assume any workout longer than 120 minutes is invalid and set it to 120:</p>
+
+        <pre><code>
+for x in df.index:
+    if df.loc[x, "Duration"] > 120:
+        df.loc[x, "Duration"] = 120
+        </code></pre>
+      </div>
+    </div>
+
+    <h2 class="title">Example: Removing Rows with Wrong Data</h2>
+    <div class="example">
+      <div class="content">
+        <p>If you prefer to remove problematic data instead of replacing it, you can drop the rows that contain suspicious values. Here’s how to delete rows where <code>Duration</code> is greater than 120:</p>
+
+        <pre><code>
+for x in df.index:
+    if df.loc[x, "Duration"] > 120:
+        df.drop(x, inplace=True)
+        </code></pre>
+      </div>
+    </div>
+
+  </div>
+</div>

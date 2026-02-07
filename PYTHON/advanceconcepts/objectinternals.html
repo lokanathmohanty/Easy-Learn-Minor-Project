@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Object Internals</h1>
+    </div>
+    <div class="content">
+      <p>
+        Understanding Python's object internals gives insight into how Python manages and manipulates data. This includes the object's structure, identity, type, value, memory management, and attributes/methods.
+      </p>
+      <p>
+        Such knowledge is crucial for writing efficient code and debugging effectively.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Object Structure</h2>
+    </div>
+    <div class="content">
+      <p>
+        Every Python object consists of two main parts:
+      </p>
+      <ul>
+        <li><strong>Object Header:</strong> Contains essential information for the interpreter like reference count and type pointer.</li>
+        <li><strong>Object Data:</strong> Holds the actual data, differing per object type (e.g., numeric value for int, list references for lists).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Object Identity</h2>
+    </div>
+    <div class="content">
+      <p>
+        Object identity is a unique integer representing the object’s memory address and remains constant during its lifetime. Use <code>id()</code> to get this value.
+      </p>
+      <pre>
+a = "Tutorialspoint"
+print(id(a))  # Example of getting the id of a string object
+      </pre>
+      <p>Note: The memory address can change on each run.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Object Type</h2>
+    </div>
+    <div class="content">
+      <p>
+        The type defines what operations an object supports, accessed by the <code>type()</code> function.
+      </p>
+      <pre>
+a = "Tutorialspoint"
+print(type(a))
+      </pre>
+      <p>Output example:</p>
+      <pre>
+&lt;class 'str'&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Object Value</h2>
+    </div>
+    <div class="content">
+      <p>
+        The value represents the actual data held by an object, such as primitive values or complex data structures.
+      </p>
+      <pre>
+b = "Welcome to Tutorialspoint"
+print(b)
+      </pre>
+      <p>Output:</p>
+      <pre>
+Welcome to Tutorialspoint
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Memory Management</h2>
+    </div>
+    <div class="content">
+      <p>
+        Python manages memory using <strong>reference counting</strong> and <strong>garbage collection</strong>. Each object tracks how many references point to it; when none remain, the memory is freed.
+      </p>
+      <pre>
+import sys
+c = [1, 2, 3]
+print(sys.getrefcount(c))  # Shows the reference count
+      </pre>
+      <p>An example output could be:</p>
+      <pre>
+2
+      </pre>
+      <p>
+        The count is 2 because the argument to <code>getrefcount()</code> temporarily increases the count.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Attributes and Methods</h2>
+    </div>
+    <div class="content">
+      <p>
+        Python objects have attributes (data) and methods (functions) accessed via dot notation.
+      </p>
+      <pre>
+class MyClass:
+   def __init__(self, value):
+      self.value = value
+
+   def display(self):
+      print(self.value)
+
+obj = MyClass(10)
+obj.display()
+      </pre>
+      <p>Output:</p>
+      <pre>
+10
+      </pre>
+    </div>
+  </div>
+
+  
+  </div>
+</div>

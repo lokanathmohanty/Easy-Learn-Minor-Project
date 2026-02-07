@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Java - How to Use Comparable?</h1>
+
+    <div class="content">
+      <p>The <strong>Comparable</strong> interface allows Java Collections to sort custom objects. By implementing this interface, objects can define their natural ordering through the <code>compareTo()</code> method.</p>
+
+      <p>This is useful when you want custom objects to be sorted just like strings or wrapper classes using collection utility methods such as <code>Collections.sort()</code>.</p>
+
+      <h2 class="title">Comparable Interface Methods</h2>
+      <ul>
+        <li><strong>int compareTo(Object obj)</strong> – Compares the current object with the specified object. Returns:
+          <ul>
+            <li>0 if equal</li>
+            <li>Positive value if current object is greater</li>
+            <li>Negative value if current object is lesser</li>
+          </ul>
+        </li>
+        <li><strong>boolean equals(Object obj)</strong> – Tests equality between two comparator objects. Overriding this is optional.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Examples of Using Comparable</h2>
+
+    <div class="content">
+      <h3 class="title">Example 1: Sort Custom Objects by Name</h3>
+      <pre><code>class Dog implements Comparable&lt;Dog&gt; {
+  private String name;
+  private int age;
+
+  Dog(String n, int a) {
+    name = n;
+    age = a;
+  }
+
+  public int compareTo(Dog d) {
+    return this.name.compareTo(d.name);
+  }
+
+  public String toString() {
+    return this.name + "," + this.age;
+  }
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Sorted by name:
+[Lacy,2, Roger,10, Shaggy,3, Tammy,1, Tommy,4]</code></pre>
+
+      <h3 class="title">Example 2: Sort in Reverse Order Using Collections.reverseOrder()</h3>
+      <pre><code>Collections.sort(list, Collections.reverseOrder());
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Sorted by name in reverse order:
+[Tommy,4, Tammy,1, Shaggy,3, Roger,10, Lacy,2]</code></pre>
+
+      <h3 class="title">Example 3: Sort by Age</h3>
+      <pre><code>public int compareTo(Dog d) {
+  return this.age - d.age;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Sorted by age:
+[Tammy,1, Lacy,2, Shaggy,3, Tommy,4, Roger,10]</code></pre>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Parse S-expressions</h1>
+    <div class="content">
+      <p>
+        The Lisp programming language family is built around S-expressions. In this session, you will learn the steps 
+        of making a simple S-expression parser using JavaScript. This can form the basis for a Lisp parser.
+      </p>
+      <p>
+        Lisp is one of the easiest languages to implement, and creating a parser is the first step. 
+        While parser generators exist, it is simpler to write the parser manually.
+      </p>
+
+      <h2>What are S-expressions?</h2>
+      <p>
+        To define nested list data structures, we use S-expressions, which are commonly used in Lisp 
+        and other functional programming languages. An S-expression can either be an <em>atom</em> 
+        or a <em>sequence of S-expressions</em>.
+      </p>
+      <p>Example of an S-expression:</p>
+      <pre>(+ (second (list "xxx" 10)) 20)</pre>
+      <p>
+        This format represents data where atoms or lists are surrounded by parentheses, and atoms 
+        from other lists are separated by spaces.
+      </p>
+      <p>
+        Like JSON, S-expressions support different data types such as numbers, strings, and symbols. 
+        For example:
+      </p>
+      <pre>(1 . b)</pre>
+      <p>
+        Lists can also be represented as dotted pairs, which align with linked list structures:
+      </p>
+      <pre>(1 2 3 4)</pre>
+      <p>Equivalent dotted notation:</p>
+      <pre>(1 . (2 . (3 . (4 . Nil))))</pre>
+      <p>
+        Here, the special symbol <code>nil</code> represents the end of an empty list. 
+        This allows representing binary trees, although for simplicity, our parser avoids dotted notation.
+      </p>
+
+      <h2>What are the Uses of S-expressions?</h2>
+      <ul>
+        <li>Creating Lisp code that can also communicate data.</li>
+        <li>Used in the textual representation of WebAssembly.</li>
+        <li>Can be used instead of JSON for communication between server and browser.</li>
+      </ul>
+
+      <h2>Step-by-step S-expression Parser in JavaScript</h2>
+      <p>The parser is built with the following steps:</p>
+      <ul>
+        <li><strong>Tokenize the Input</strong>: Split the string into tokens (parentheses, numbers, symbols).</li>
+        <li><strong>Recursive Parsing</strong>: Build nested lists based on parentheses.</li>
+        <li><strong>Base Cases</strong>: Return numbers or symbols as atomic values.</li>
+      </ul>
+
+      <h2>Example</h2>
+      <p>The following code demonstrates a simple parser:</p>
+      <pre>
+// Function to tokenize the input string into S-expression tokens
+function tokenize(input) {
+   return input
+      .replace(/\(/g, ' ( ')    // Add spaces around '('
+      .replace(/\)/g, ' ) ')    // Add spaces around ')'
+      .trim()
+      .split(/\s+/);            // Split by whitespace
+}
+
+// Recursive function to parse tokens into an S-expression
+function parse(tokens) {
+   if (tokens.length === 0) {
+      throw new Error("Unexpected end of input");
+   }
+   let token = tokens.shift();  
+   if (token === '(') {        
+      let list = [];
+      while (tokens[0] !== ')') {   
+        list.push(parse(tokens)); 
+      }
+      tokens.shift();  // Remove ')'
+      return list;
+   } else if (token === ')') {
+      throw new Error("Unexpected ')'");
+   } else {
+      return atom(token);  
+   }
+}
+
+// Function to identify if a token is a number or symbol
+function atom(token) {
+   let number = Number(token);
+   if (!isNaN(number)) {
+      return number;  
+   } else {
+      return token;   
+   }
+}
+
+// Usage
+let input = "(+ 1 (* 2 3))";
+let tokens = tokenize(input);    
+let ast = parse(tokens);         
+console.log(ast);
+      </pre>
+
+      <h2>Output</h2>
+      <p>
+        If you run the above code with the given input, the output will be:
+      </p>
+      <pre>["+", 1, ["*", 2, 3]]</pre>
+    </div>
+  </div>
+</div>

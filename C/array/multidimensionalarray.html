@@ -1,0 +1,197 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Multi-dimensional Arrays in C</h1>
+    <div class="content">
+      <p>A one-dimensional array uses a single index. When arrays have more than one index, they are called multi-dimensional arrays. In C, you can declare two-dimensional or even higher-dimensional arrays by adding additional index brackets.</p>
+      <p>Multi-dimensional arrays are essentially arrays of arrays, allowing data to be stored in structured layouts like tables, matrices, or grids.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Declaration of Multidimensional Arrays</h2>
+    <div class="content">
+      <p>Syntax:</p>
+      <pre><code>type name[size1][size2]...[sizeN];</code></pre>
+      <p>Example (3D Array):</p>
+      <pre><code>int threedim[3][3][3];</code></pre>
+      <p>You can create arrays with as many dimensions as needed, though 2D and 3D are the most common in practice.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Two-dimensional Array in C</h2>
+    <div class="content">
+      <p>A 2D array is an array of 1D arrays. Think of it as a matrix with rows and columns.</p>
+      <p>Example Declaration and Initialization:</p>
+      <pre><code>int arr[3][5] = {
+   {1,2,3,4,5},
+   {10,20,30,40,50},
+   {5,10,15,20,25}
+};</code></pre>
+      <p>This forms a matrix:</p>
+      <pre><code>1    2    3    4    5
+10   20   30   40   50
+5    10   15   20   25</code></pre>
+      <p>The element at row index <code>1</code> and column index <code>2</code> is <code>30</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h3 class="title">Example: Print Elements of a 2D Array</h3>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+int main() {
+   int a[5][2] = { {0,0}, {1,2}, {2,4}, {3,6}, {4,8}};
+   int i, j;
+   for (i = 0; i < 5; i++) {
+      for (j = 0; j < 2; j++) {
+         printf("a[%d][%d] = %d\n", i, j, a[i][j]);
+      }
+   }
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>a[0][0] = 0
+a[0][1] = 0
+a[1][0] = 1
+a[1][1] = 2
+...
+a[4][1] = 8</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h3 class="title">Example: Print 2D Array as Matrix</h3>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int arr[3][5] = {
+      {1,2,3,4,5},
+      {10,20,30,40,50},
+      {5,10,15,20,25}
+   };
+   int i, j;
+   for (i = 0; i &lt; 3; i++) {
+      for (j = 0; j &lt; 5; j++) {
+         printf("%4d", arr[i][j]);
+      }
+      printf("\n");
+   }
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>   1   2   3   4   5
+  10  20  30  40  50
+   5  10  15  20  25</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Three-dimensional Array in C</h2>
+    <div class="content">
+      <p>A 3D array is an array of 2D arrays. Each element of a 3D array is accessed using three indices: <code>arr[depth][row][column]</code>.</p>
+      <p>Example scenario: student seating across 5 halls, each with 20 rows and 5 columns.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h3 class="title">Example: Print 3D Array</h3>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i, j, k;
+   int arr[3][3][3] = {
+      {
+         {11,12,13},
+         {14,15,16},
+         {17,18,19}
+      },
+      {
+         {21,22,23},
+         {24,25,26},
+         {27,28,29}
+      },
+      {
+         {31,32,33},
+         {34,35,36},
+         {37,38,39}
+      }
+   };
+
+   printf("Printing 3D Array Elements\n");
+   for(i=0; i&lt;3; i++) {
+      for(j=0; j&lt;3; j++) {
+         for(k=0; k&lt;3; k++) {
+            printf("%4d", arr[i][j][k]);
+         }
+         printf("\n");
+      }
+      printf("\n");
+   }
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>  11  12  13
+  14  15  16
+  17  18  19
+
+  21  22  23
+  24  25  26
+  27  28  29
+
+  31  32  33
+  34  35  36
+  37  38  39</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Row-wise Sum of a 2D Array</h2>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int arr[3][5] = {
+      {1, 2, 3, 4, 5},
+      {10, 20, 30, 40, 50},
+      {5, 10, 15, 20, 25}
+   };
+   int i, j, sum;
+
+   for (i = 0; i &lt; 3; i++) {
+      sum = 0;
+      for (j = 0; j &lt; 5; j++) {
+         sum += arr[i][j];
+      }
+      printf("Sum of row %d: %d\n", i, sum);
+   }
+
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Sum of row 0: 15
+Sum of row 1: 150
+Sum of row 2: 75</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Matrix Multiplication</h2>
+    <div class="content">
+      <p>Matrix multiplication is only valid when the number of columns in the first matrix equals the number of rows in the second. The result is a new matrix where each element is the dot product of a row from the first and a column from the second.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h3 class="title">Example: Multiply Two 2D Arrays (Matrices)</h3>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int mat1[3][3] = {
+      {2, 4, 1},
+      {2, 3, 9},
+      {3, 

@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Event Loop</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Though JavaScript is single-threaded, Node.js uses an event loop to perform asynchronous non-blocking I/O operations efficiently. It delegates operations to the system kernel which handles them in the background if supported by the OS.
+      </p>
+
+      <h2>Event Loop Initialization</h2>
+      <p>
+        The event loop starts when Node.js launches either by running a script or in REPL mode. It continually processes events in specific phases.
+      </p>
+
+      <h2>Phases of the Event Loop</h2>
+      <ul>
+        <li><strong>Timers Phase:</strong> Executes callbacks scheduled by <code>setTimeout()</code> and <code>setInterval()</code>.</li>
+        <li><strong>Pending Callbacks Phase:</strong> Executes I/O callbacks deferred to the next loop iteration.</li>
+        <li><strong>Poll Phase:</strong> Retrieves new I/O events and executes related callbacks.</li>
+        <li><strong>Check Phase:</strong> Executes callbacks scheduled by <code>setImmediate()</code> immediately after the poll phase.</li>
+        <li><strong>Close Callbacks Phase:</strong> Handles callbacks registered with 'close' events like closed sockets.</li>
+      </ul>
+
+      <h2>Supporting Libraries</h2>
+      <p>
+        The libuv library within Node.js runtime facilitates asynchronous operations support, leveraging native OS mechanisms. V8 engine executes JavaScript code, while libuv manages asynchronous tasks.
+      </p>
+
+      <h2>Event Loop Lifespan</h2>
+      <p>
+        Before each next cycle, Node.js checks whether asynchronous I/O or timers are pending. If none remain, the runtime shuts down cleanly.
+      </p>
+
+      <h2>Importance</h2>
+      <p>
+        Understanding the event loop is essential for building scalable Node.js applications, as it allows asynchronous programming by ensuring the main thread remains non-blocked.
+      </p>
+    </div>
+  </div>
+</div>

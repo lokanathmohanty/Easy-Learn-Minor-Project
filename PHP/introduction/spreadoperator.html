@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Spread Operator (`...`)</h1>
+
+    <div class="content">
+      <p>
+        The **Spread Operator** (`...`), introduced in **PHP 7.4**, is used to expand an iterable (like an array) into its individual elements. It significantly improves the readability and efficiency of code, especially when dealing with arrays and function arguments.
+      </p>
+
+      <h2>1. Expanding (Unpacking) Arrays</h2>
+      <p>
+        The primary use of the spread operator is to unpack the elements of one or more arrays directly into another array literal.
+      </p>
+      <div class="example">
+        <p>
+          <code>$arr1 = [4, 5];</code><br>
+          <code>$arr2 = [1, 2, 3, **...$arr1**];</code>
+        </p>
+        <p class="content">Output: `[1, 2, 3, 4, 5]`</p>
+      </div>
+
+      <h3>Multiple Usage and Efficiency</h3>
+      <p>
+        The operator can be used multiple times in a single expression. While it achieves the same result as `array_merge()` for indexed arrays, the spread operator is generally **more efficient** as it avoids the overhead of a function call.
+      </p>
+      <div class="example">
+        <p>
+          <code>$arrA = [1, 2]; $arrB = [3, 4];</code><br>
+          <code>$arrC = [**...$arrA**, 10, **...$arrB**];</code> $\rightarrow$ <code>[1, 2, 10, 3, 4]</code>
+        </p>
+      </div>
+      <p>
+        The spread operator also works seamlessly when unpacking the array returned directly by a function.
+      </p>
+
+      <h2>2. Named Arguments with Spreading (PHP 8.1+)</h2>
+      <p>
+        In functions, the spread operator can be used to unpack an indexed array into positional arguments. As of PHP 8.1, this can be combined with **Named Arguments**. When an array is spread, its elements fill the positional arguments, and any named arguments are applied afterward.
+      </p>
+      <div class="example">
+        <p>
+          <code>function myfunction($x, $y, $z=30) { /* ... */ }</code><br>
+          <code>myfunction(**...[10, 20]**, z: 50);</code>
+        </p>
+        <p>
+          The array `[10, 20]` is spread, setting `$x=10` and `$y=20`. The named argument `z: 50` overrides the default value of `$z`.
+        </p>
+        <p class="content">Output: `x = 10 y = 20 z = 50`</p>
+      </div>
+
+      <p class="content">
+        **Note:** When using the spread operator with associative arrays (arrays with string keys), only the values are spread, and the numeric keys are re-indexed. For merging associative arrays while preserving string keys, `array_merge()` or the `+` array union operator is still necessary.
+      </p>
+    </div>
+  </div>
+</div>

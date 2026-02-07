@@ -1,0 +1,195 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Break Statement in C</h1>
+
+    <div class="content">
+      <p>The <strong><code>break</code></strong> statement in C is used to <strong>terminate the execution of loops or switch-case blocks</strong>. It is a powerful control flow tool that immediately stops the current loop or switch block and transfers control to the next statement outside of it.</p>
+
+      <h2 class="title">Usage of <code>break</code> in C</h2>
+      <ul>
+        <li><strong>In switch-case:</strong> To exit a <code>case</code> block after executing its statements.</li>
+        <li><strong>In loops:</strong> To terminate a <code>for</code>, <code>while</code>, or <code>do-while</code> loop prematurely when a condition is met.</li>
+      </ul>
+
+      <h2 class="title">1. Break in While Loop</h2>
+      <p>The <code>break</code> statement is usually used inside an <code>if</code> condition. If not, it may cause the loop to terminate in the very first iteration.</p>
+
+      <h3>Example: Check if a Number is Prime</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main () {
+   int i = 2;
+   int x = 121;
+   printf("x: %d\n", x);
+
+   while (i < x/2) {
+      if (x % i == 0)
+         break;
+      i++;
+   }
+
+   if (i >= x/2)
+      printf("%d is prime", x);
+   else
+      printf("%d is not prime", x);
+
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>x: 121
+121 is not prime</code></pre>
+
+      <h2 class="title">2. Break in For Loop</h2>
+      <p>Sometimes, you may want to exit a <code>for</code> loop before it completes all iterations, usually based on a condition.</p>
+
+      <h3>Example: Print Characters Until a Vowel</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main () {
+   char string[] = "Rhythmic";
+   int len = strlen(string);
+   int i;
+
+   for (i = 0; i < len; i++) {
+      if (string[i] == 'a' || string[i] == 'e' || string[i] == 'i' ||
+          string[i] == 'o' || string[i] == 'u')
+         break;
+      printf("%c\n", string[i]);
+   }
+
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>R
+h
+y
+t
+h
+m</code></pre>
+
+      <h2 class="title">3. Break in Nested Loops</h2>
+      <p>If used inside a nested loop, <code>break</code> will only terminate the innermost loop where it's placed.</p>
+
+      <h3>Example: Prime Numbers from 1 to 30</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i, num, flag;
+   printf("The prime numbers in between the range 1 to 30:\n");
+
+   for (num = 2; num <= 30; num++) {
+      flag = 0;
+
+      for (i = 2; i <= num/2; i++) {
+         if (num % i == 0) {
+            flag++;
+            break;
+         }
+      }
+
+      if (flag == 0)
+         printf("%d is prime\n", num);
+   }
+
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>2 is prime
+3 is prime
+5 is prime
+7 is prime
+11 is prime
+13 is prime
+17 is prime
+19 is prime
+23 is prime
+29 is prime</code></pre>
+
+      <h2 class="title">4. Break in Infinite Loops</h2>
+      <p>You can deliberately create an infinite loop and use <code>break</code> to exit it when a condition is met.</p>
+
+      <h3>Example: Random Number Until Divisible by 5</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int main() {
+   int num;
+   printf("Program to get a random number from 1 to 100:\n");
+
+   srand(time(NULL));
+
+   for (;;) {
+      num = rand() % 100 + 1;
+      printf("%d\n", num);
+
+      if (num % 5 == 0)
+         break;
+   }
+}</code></pre>
+
+      <h4>Sample Output:</h4>
+      <pre><code>Program to get a random number from 1 to 100:
+6
+56
+42
+90</code></pre>
+
+      <h2 class="title">5. Break in Switch-Case</h2>
+      <p>In <code>switch</code> statements, <code>break</code> is essential to prevent fall-through from one <code>case</code> to another.</p>
+
+      <h3>Example: Greeting Based on Time Code</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   char ch = 'm';
+   printf("Time code: %c\n\n", ch);
+
+   switch(ch) {
+      case 'm':
+         printf("Good Morning\n");
+         break;
+      case 'a':
+         printf("Good Afternoon\n");
+         break;
+      case 'e':
+         printf("Good Evening\n");
+         break;
+      default:
+         printf("Hello\n");
+   }
+
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>Time code: m
+
+Good Morning</code></pre>
+
+      <p>If you remove the <code>break</code> statements, the output will fall through and execute all the remaining <code>case</code> blocks after the matched one.</p>
+
+      <h4>Output Without Break:</h4>
+      <pre><code>Time code: m
+
+Good Morning
+Good Afternoon
+Good Evening
+Hello</code></pre>
+
+      <h2 class="title">Key Takeaways</h2>
+      <ul>
+        <li><code>break</code> is used to exit loops and switch statements prematurely.</li>
+        <li>In loops, it stops the execution of the current loop only.</li>
+        <li>In nested loops, it only breaks the innermost loop.</li>
+        <li>In switch-case, it prevents fall-through to the next case.</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

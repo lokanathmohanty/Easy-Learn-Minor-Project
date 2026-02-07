@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Events: Publisher-Subscriber Mechanism 📢</h1>
+        
+        <div class="content">
+            <h2 class="title">What are Events?</h2>
+            <p>**Events** are used to signal occurrences or actions, such as user interactions (clicks, key presses) or system notifications (like a successful login or a temperature threshold being met). They are a mechanism for **inter-process communication** or, more commonly, **inter-object communication**.</p>
+            <p>Events in C# implement the **Publisher-Subscriber** design pattern:</p>
+            <ul>
+                <li>**Publisher:** The class that **declares** and **raises** (triggers) the event.</li>
+                <li>**Subscriber:** The class that contains the **event handler** method and **registers** to receive notifications when the event occurs.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Events and Delegates 🤝</h2>
+            <p>Events are fundamentally built on **delegates**. The delegate defines the signature of the method(s) that will be executed when the event is raised (the event handler).</p>
+            
+            <h3 class="title">Declaring an Event</h3>
+            <p>Declaring an event requires two steps:</p>
+            <ol>
+                <li><strong>Declare a Delegate:</strong> Defines the required method signature.</li>
+                <pre>public delegate void Notify(string message);</pre>
+                <li><strong>Declare the Event:</strong> Uses the **<span class="example">`event`</span>** keyword and the delegate type.</li>
+                <pre>public event Notify UserLoggedIn;</pre>
+            </ol>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Event Handling and Subscription</h2>
+            
+            <h3 class="title">1. Subscription</h3>
+            <p>The subscriber class registers an event handler method with the publisher's event using the **addition assignment operator <span class="example">`+=`</span>** (which internally utilizes delegate multicasting).</p>
+            <pre>// Subscribe to the event, adding DisplayMessage to the invocation list
+user.UserLoggedIn += DisplayMessage;</pre>
+            
+            <h3 class="title">2. Invocation (Raising the Event)</h3>
+            <p>The publisher class raises the event, typically from within a method. C# often uses the **null-conditional operator (<span class="example">`?.`</span>)** before <span class="example">`Invoke`</span> to ensure there are subscribers before attempting to call the delegate.</p>
+            <pre>// Trigger event, calling all subscribed methods
+UserLoggedIn?.Invoke($"Notification: {username} has logged in.");</pre>
+            
+            <h3 class="title">3. Multiple Handlers (Multicasting)</h3>
+            <p>Because events use delegates (which support multicasting), multiple event handler methods can subscribe to a single event. When the event is triggered, all subscribed handlers are executed sequentially in the order they were added.</p>
+            <pre>station.OnTemperatureAlert += DisplayDevice; // Handler 1
+station.OnTemperatureAlert += CoolingSystem; // Handler 2</pre>
+        </div>
+    </div>
+</div>

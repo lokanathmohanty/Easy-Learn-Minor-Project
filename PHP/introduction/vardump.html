@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Variable Handling: The `var_dump()` Function</h1>
+
+    <div class="content">
+      <p>
+        The **`var_dump()`** function is a key debugging tool in PHP used to display **structured information** about one or more expressions or variables. It shows the **data type** and **value** in detail.
+      </p>
+
+      <h2>Key Features and Syntax</h2>
+      <ul>
+        <li>
+          **Purpose:** To output detailed, human-readable information about a variable's structure, including its type, value, length (for strings), and recursive structure (for arrays and objects).
+        </li>
+        <li>
+          **Return Value:** It returns **nothing** (`void`); it simply prints the information directly to the output stream.
+        </li>
+        <li>
+          **Object/Array Handling:** It properly **indents** the output to show the recursive structure of arrays and objects, including the visibility of object properties (public, private, protected).
+        </li>
+        <li>
+          **Syntax:**
+          <div class="example">
+            <code>void var_dump ( mixed $value, mixed ...$values )</code>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Examples of `var_dump()` Output</h2>
+
+      <h3>1. Basic Types (Integer, Float, String)</h3>
+      <p>
+        For built-in scalar types, it shows the type name and value. For strings, it also shows the length.
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php $x = 10; var_dump($x); ?&gt;</code><br>
+          <code class="content">Output: int(10)</code>
+        </p>
+        <p>
+          <code>&lt;?php $x = "Hello World"; var_dump($x); ?&gt;</code><br>
+          <code class="content">Output: string(11) "Hello World"</code>
+        </p>
+      </div>
+
+      <h3>2. Arrays (Indexed and Associative)</h3>
+      <p>
+        It displays the array size and the detailed information for each element, including its index/key, type, and value.
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php $x = array("Hello", false, 99.99, array(10, 20)); var_dump($x); ?&gt;</code>
+        </p>
+        <p class="content">
+          <code>array(4) {</code><br>
+          <code>&nbsp;&nbsp;[0]=&gt;</code><br>
+          <code>&nbsp;&nbsp;string(5) "Hello"</code><br>
+          <code>&nbsp;&nbsp;[1]=&gt;</code><br>
+          <code>&nbsp;&nbsp;bool(false)</code><br>
+          <code>&nbsp;&nbsp;[3]=&gt;</code><br>
+          <code>&nbsp;&nbsp;array(2) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;[0]=&gt;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;int(10)</code><br>
+          <code>&nbsp;&nbsp;}</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <h3>3. Objects</h3>
+      <p>
+        It shows the object's class name, a unique object handle (`#1`), the number of properties, and detailed information about each property, including its access modifier (e.g., `private`).
+      </p>
+      <div class="example">
+        <p>
+          <code>// Assuming $p is an instance of class Point with private properties $x=4, $y=5</code><br>
+          <code>var_dump($p);</code>
+        </p>
+        <p class="content">
+          <code>object(Point)#1 (2) {</code><br>
+          <code>&nbsp;&nbsp;["x":"Point":private]=&gt;</code><br>
+          <code>&nbsp;&nbsp;int(4)</code><br>
+          <code>&nbsp;&nbsp;["y":"Point":private]=&gt;</code><br>
+          <code>&nbsp;&nbsp;int(5)</code><br>
+          <code>}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

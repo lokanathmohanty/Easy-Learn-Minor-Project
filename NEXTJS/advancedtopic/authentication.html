@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Authentication</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Authentication?</h2>
+            <p><strong>Authentication</strong> is the foundational process of verifying a user's identity to ensure they are who they claim to be. In web applications, this typically involves checking user-provided credentials (like a username and password) against stored information.</p>
+            <p>The core steps in the general authentication process are:</p>
+            <ol>
+                <li>Take user's credentials (e.g., via a login form).</li>
+                <li>Validate the format and content of the credentials.</li>
+                <li>Verify the credentials against the database or authentication service.</li>
+            </ol>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Authentication in Next.js</h2>
+            <p>Next.js authentication typically follows a three-step flow, leveraging **Server Actions** for secure and enhanced form handling.</p>
+            
+            <h3>Step 1: Create a Next.js Form</h3>
+            <p>Next.js uses a custom **<code>&lt;Form&gt;</code>** component that extends the native HTML form tag. This component integrates with Server Actions via the **<code>action</code>** prop and provides enhanced features like client-side navigation, prefetching of loading UI, and progressive enhancement.</p>
+            
+            <p><strong>Example Signup Form:</strong></p>
+            <pre class="example"><code>// app/ui/signup-form.tsx
+import { signup } from '@/app/actions/auth'
+
+export function SignupForm() {
+  return (
+    &lt;Form action={signup}&gt;
+      &lt;div&gt;
+        &lt;label htmlFor="email"&gt;Email&lt;/label&gt;
+        &lt;input id="email" name="email" type="email" placeholder="Email" /&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;label htmlFor="password"&gt;Password&lt;/label&gt;
+        &lt;input id="password" name="password" type="password" /&gt;
+      &lt;/div&gt;
+      &lt;button type="submit"&gt;Sign Up&lt;/button&gt;
+    &lt;/Form&gt;
+  )
+}</code></pre>
+
+            <h3>Step 2: Validate Form Fields on the Server</h3>
+            <p>Form field validation is crucial for ensuring data integrity and reducing server load. In Next.js, this is efficiently handled on the server side using **Server Actions** and schema validation libraries like **Zod** or **Yup**.</p>
+            
+            <p><strong>Example Zod Validation Schema:</strong></p>
+            <pre class="example"><code>// app/actions/auth.ts
+import { z } from 'zod'
+
+export const SignupFormSchema = z.object({
+  email: z.string().email({ message: 'Enter a valid email.' }).trim(),
+  password: z
+    .string()
+    .regex(/[a-zA-Z]/, { message: 'Contain at least one letter.' })
+    .regex(/[0-9]/, { message: 'Contain at least one number.' })
+    .regex(/[^a-zA-Z0-9]/, {
+      message: 'Contain at least one special character.',
+    })
+    .trim(),
+})</code></pre>
+            <p>The validation function (<code>signup</code>) should also define a type for managing server-side validation errors and messages:</p>
+            <pre class="example"><code>export type FormState =
+  | {
+      errors?: {
+        name?: string[]
+        email?: string[]
+        password?: string[]
+      }
+      message?: string
+    }
+  | undefined</code></pre>
+
+            <h3>Step 3: Check User Credentials and Create Session</h3>
+            <p>After successful validation, the Server Action proceeds to verify the credentials (for sign-in) or prepare the data (for sign-up). For sign-up, this involves security steps like **hashing the password** before storing it in the database and then creating the user's entry.</p>
+            <p>The final steps involve creating a user session (e.g., using a secure cookie or an external authentication library's API) and redirecting the user to a protected route.</p>
+            
+            <p><strong>Example User Creation Logic (within <code>signup</code> Server Action):</strong></p>
+            <pre class="example"><code>export async function signup(state: FormState, formData: FormData) {
+    // 1. Validate form fields (omitted for brevity)
+    // ...
+    
+    // 2. Prepare data (Hashing is crucial for security)
+    const { name, email, password } = validatedFields.data
+    const hashedPassword = await bcrypt.hash(password, 10)
+    
+    // 3. Insert user into database
+    const data = await db
+        .insert(users)
+        .values({
+        name,
+        email,
+        password: hashedPassword,
+        })
+        .returning({ id: users.id })
+    
+    const user = data[0]
+    
+    if (!user) {
+        return {
+        message: 'An error occurred while creating your account.',
+        }
+    }
+    
+    // 4. Create user session (e.g., set a secure cookie)
+    // 5. Redirect user to dashboard
+}</code></pre>
+        </div>
+    </div>
+</div>

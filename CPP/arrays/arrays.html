@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Arrays: Fixed-Size Data Collections 💾</h1>
+
+        <div class="content">
+            <p>A C++ **array** is a fundamental data structure used to store a fixed-size, sequential collection of elements of the **same data type**. All array elements occupy **contiguous memory locations**.</p>
+            <ul>
+                <li>The first element is at index **0** (the base index).</li>
+                <li>Elements are accessed using an **index** enclosed in square brackets <code>[]</code>.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Declaration and Initialization</h2>
+
+            <h3>Declaring Arrays</h3>
+            <p>You must specify the element type and the size (an integer constant greater than zero) at the time of declaration:</p>
+            <pre class="example">
+type arrayName [ arraySize ];
+
+// Example: A 10-element array of type double
+double balance[10]; 
+</pre>
+
+            <h3>Initializing Arrays</h3>
+            <p>Arrays can be initialized during declaration using an initializer list <code>{}</code>. If the size is omitted, the compiler automatically determines the size based on the number of initializers.</p>
+            <pre class="example">
+// Initializes a 5-element array explicitly
+double balance[5] = {1000.0, 2.0, 3.4, 17.0, 50.0};
+
+// Implicitly creates an array of size 5
+int numbers[] = {10, 20, 30, 40, 50}; 
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Accessing and Manipulating Elements</h2>
+
+            <h3>Accessing and Changing Elements</h3>
+            <p>An element is accessed or modified using the array name followed by its index in square brackets. Remember that the index range is from <code>0</code> to <code>arraySize - 1</code>.</p>
+            <pre class="example">
+int arr[] = {10, 20, 30, 40, 50}; // Index 2 holds 30
+
+// Accessing the element
+int value = arr[2]; // value is 30
+
+// Changing the element
+arr[2] = 108;       // The array element at index 2 is now 108
+</pre>
+
+            <h3>Getting Array Length (Static Arrays)</h3>
+            <p>For statically declared arrays, you can calculate the number of elements using the <code>sizeof()</code> operator:</p>
+            <pre class="example">
+int arr[] = {10, 20, 30, 40, 50};
+// Calculates total bytes of the array / bytes of a single element
+int arr_length = sizeof(arr) / sizeof(arr[0]); 
+// arr_length is 5
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Related Array Concepts</h2>
+            <ul>
+                <li>
+                    <strong>Multi-dimensional Arrays:</strong> C++ supports arrays with more than one dimension, such as the common two-dimensional array (e.g., <code>int table[3][4];</code>), which is useful for representing matrices or tables.
+                </li>
+                <li>
+                    <strong>Pointers to an Array:</strong> The array name itself, when used without an index, acts as a **pointer** to the first element (index 0) of the array.
+                </li>
+                <li>
+                    <strong>Passing Arrays to Functions:</strong> Arrays are typically passed to functions by passing the **pointer** to their first element. The size of the array must often be passed as a separate argument.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

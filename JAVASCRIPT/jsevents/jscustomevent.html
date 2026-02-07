@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Custom Events</h1>
+    <div class="content">
+      <p>
+        The custom events in JavaScript define and handle custom interactions or signals within an application. 
+        They establish a communication mechanism between various sections of your code: one part can notify others 
+        about specific occurrences or changes; thus enhancing the functionality of your program.
+      </p>
+      <p>
+        Typically, users utilize custom events in conjunction with the <strong>Event</strong> and 
+        <strong>CustomEvent</strong> interfaces. The following provides a detailed breakdown of their functionality:
+      </p>
+      <ul>
+        <li><strong>Custom Event:</strong> Defined using the <code>CustomEvent</code> constructor to facilitate communication.</li>
+        <li><strong>CustomEvent Constructor:</strong> Takes two parameters: event type (string) and an optional configuration object (e.g., <code>detail</code>).</li>
+        <li><strong>dispatchEvent Method:</strong> Dispatches a custom event on a DOM element.</li>
+        <li><strong>addEventListener Method:</strong> Attaches an event listener function to a specific event type.</li>
+        <li><strong>Event Types:</strong> Strings identifying the type of event, can be user-defined.</li>
+        <li><strong>Event Handling:</strong> Listening and responding to custom events with defined actions.</li>
+        <li><strong>Pub/Sub Pattern:</strong> Enables communication between application components without direct references.</li>
+        <li><strong>detail Property:</strong> Optional property in the configuration object to pass additional data.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Basic Custom Event</h2>
+    <div class="content">
+      <p>
+        In this example, we initiate a custom event named <code>myCustomEvent</code> and render an associated button. 
+        When the button is clicked, the custom event is dispatched, triggering an alert message.
+      </p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;button id="triggerBtn"&gt;Trigger Event&lt;/button&gt;
+  &lt;script&gt;
+    const customEvent = new Event('myCustomEvent');
+    document.getElementById('triggerBtn').addEventListener('click', function() {
+      document.dispatchEvent(customEvent);
+    });
+    document.addEventListener('myCustomEvent', function() {
+      alert('Custom event triggered!');
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Custom Event with Data</h2>
+    <div class="content">
+      <p>
+        This example demonstrates the <code>CustomEvent</code> interface with the <code>detail</code> property 
+        that passes additional data along with the event.
+      </p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;button id="triggerBtn"&gt;Trigger Custom Event&lt;/button&gt;
+  &lt;script&gt;
+    const eventData = { message: 'Hello from custom event!' };
+    const customEvent = new CustomEvent('myCustomEventWithData', { detail: eventData });
+    document.getElementById('triggerBtn').addEventListener('click', function() {
+      document.dispatchEvent(customEvent);
+    });
+    document.addEventListener('myCustomEventWithData', function(event) {
+      alert('Custom event triggered with data: ' + event.detail.message);
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Condition-based Event Dispatching</h2>
+    <div class="content">
+      <p>
+        In this example, the dispatching of a custom event depends on a condition. 
+        Based on the value of a variable, either <code>TutorialEvent</code> or <code>TutorialEvent2</code> is triggered.
+      </p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;script&gt;
+    var v = 'tutorialspoint';
+    const event = new Event("TutorialEvent");
+    const event2 = new Event("TutorialEvent2");
+
+    document.addEventListener('TutorialEvent', () =&gt; {
+      alert("Welcome to Tutorialspoint Event");
+    });
+    document.addEventListener('TutorialEvent2', () =&gt; {
+      alert("Welcome to Event 2");
+    });
+
+    if(v == 'tutorialspoint') {
+      document.dispatchEvent(event);
+    } else {
+      document.dispatchEvent(event2);
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <p>
+        To create and use custom events in JavaScript:
+      </p>
+      <ul>
+        <li>Create a custom event using <code>Event</code> or <code>CustomEvent</code>.</li>
+        <li>Add an event listener with <code>addEventListener</code>.</li>
+        <li>Dispatch the event using <code>dispatchEvent</code>.</li>
+      </ul>
+    </div>
+  </div>
+</div>

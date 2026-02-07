@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Generics</h1>
+    </div>
+    <div class="content">
+      <p>Generics in Python allow definition of functions and classes that operate on multiple types while maintaining type safety and promoting code reuse.</p>
+      <p>Introduced with type hints (PEP 484) in Python 3.5, generics add flexibility and correctness by specifying type parameters.</p>
+    </div>
+
+    <div class="title">
+      <h2>Defining a Generic Function</h2>
+    </div>
+    <div class="content">
+      <pre>
+from typing import List, TypeVar
+
+T = TypeVar('T')
+
+def reverse(items: List[T]) -> List[T]:
+    return items[::-1]
+      </pre>
+      <p>This function reverses a list of any type <code>T</code>. Type <code>T</code> is a placeholder replaced by the actual list element type when the function is used.</p>
+      <p>Example usage:</p>
+      <pre>
+numbers = [1, 2, 3, 4, 5]
+print(reverse(numbers))  # Output: [5, 4, 3, 2, 1]
+
+fruits = ['apple', 'banana', 'cherry']
+print(reverse(fruits))  # Output: ['cherry', 'banana', 'apple']
+      </pre>
+    </div>
+
+    <div class="title">
+      <h2>Defining a Generic Class</h2>
+    </div>
+    <div class="content">
+      <pre>
+from typing import TypeVar, Generic
+
+T = TypeVar('T')
+
+class Box(Generic[T]):
+    def __init__(self, item: T) -> None:
+        self.item = item
+
+    def get_item(self) -> T:
+        return self.item
+      </pre>
+      <p>Create instances specifying the type:</p>
+      <pre>
+box1 = Box[int](42)
+print(box1.get_item())  # Output: 42
+
+box2 = Box[str]("Hello")
+print(box2.get_item())  # Output: Hello
+      </pre>
+      <p>Type checking tools like mypy will verify type correctness based on these annotations.</p>
+    </div>
+
+    <div class="title">
+      <h2>Summary</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li>Generics enable writing reusable, type-safe code in Python.</li>
+        <li>Type variables (<code>TypeVar</code>) are placeholders for generic types.</li>
+        <li>Generic functions and classes can operate on any type specified by the user.</li>
+        <li>Type hints help static type checkers catch type errors before runtime.</li>
+      </ul>
+    </div>
+  </div>
+</div>

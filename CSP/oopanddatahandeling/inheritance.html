@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Inheritance</h1>
+        
+        <h2 class="title">Concept of Inheritance</h2>
+        <div class="content">
+            <p>**Inheritance** is a core principle of OOP that allows a new class (the **derived class** or **child class**) to acquire the members (fields and methods) of an existing class (the **base class** or **parent class**). This mechanism promotes **code reusability** and establishes an **IS-A** relationship (e.g., a <code>Rectangle</code> IS-A <code>Shape</code>).</p>
+            
+            <h3>Syntax for Derivation:</h3>
+            <p>A derived class is defined using a colon (`:`) followed by the name of the base class.</p>
+            <pre>
+// Base Class
+class Shape { /* ... members ... */ } 
+
+// Derived Class
+class Rectangle : Shape { 
+   // Rectangle inherits members from Shape
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Accessing Members in Inheritance</h2>
+        <div class="content">
+            <p>The visibility of base class members within the derived class is controlled by their **access specifiers**:</p>
+            <ul>
+                <li>**`public`:** Fully accessible by the derived class and by objects outside the class hierarchy.</li>
+                <li>**`protected`:** Accessible only within the base class and any derived class (the standard choice for members intended for inheritance).</li>
+                <li>**`private`:** Not accessible by the derived class.</li>
+            </ul>
+            
+            <h3>Example: Inheriting Protected Members</h3>
+            <pre>
+class Shape {
+    protected int width; // Accessible in Rectangle
+    public void setWidth(int w) { width = w; }
+}
+class Rectangle: Shape {
+    public int getArea() { 
+        return (width * height); // Direct access to protected members
+    }
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Initializing the Base Class (`base` Keyword)</h2>
+        <div class="content">
+            <p>The **`base` keyword** is used by a derived class to access members of its immediate parent class. Its most common use is to call a specific base class constructor.</p>
+            <p>Since the base class must be initialized before the derived class, the call to the base constructor must occur in the derived class's member initialization list.</p>
+            
+            <h3>Syntax for Base Constructor Initialization:</h3>
+            <pre>
+class Student : Person {
+   // Calls Person(name) constructor first
+   public Student(string name, int rollNo) : base(name) {
+       RollNo = rollNo;
+   }
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Types of Inheritance (C# Supported)</h2>
+        <div class="content">
+            <ol>
+                <li>**Single Inheritance:** A class inherits from one direct base class. (<code>Child : Parent</code>)</li>
+                <li>**Multi-Level Inheritance:** A chain of inheritance where a class inherits from a derived class. (<code>Child : Parent : Grandparent</code>)</li>
+                <li>**Hierarchical Inheritance:** Multiple derived classes inherit from a single base class. (<code>Car : Vehicle</code> and <code>Bike : Vehicle</code>)</li>
+            </ol>
+            <p><strong>C# does NOT support Multiple Inheritance of classes.</strong> A class can only inherit from one class.</p>
+        </div>
+        
+        <h2 class="title">Method Overriding and Keywords</h2>
+        <div class="content">
+            <p><strong>Method Overriding</strong> is the ability for a derived class to provide a specific implementation of a method that is already defined in its base class.</p>
+            <ul>
+                <li>**`virtual`:** Used in the **base class** method declaration to indicate that the method can be overridden by a derived class.</li>
+                <li>**`override`:** Used in the **derived class** method declaration to indicate that it is providing a new implementation for a virtual base class method.</li>
+            </ul>
+            <pre>
+class Animal {
+    public virtual void MakeSound() { /* ... */ } // Base: can be overridden
+}
+class Dog : Animal {
+    public override void MakeSound() { /* Dog specific implementation */ } // Derived: provides new implementation
+}
+            </pre>
+            
+            <h3>Preventing Inheritance (`sealed`)</h3>
+            <p>The **`sealed` keyword** can be applied to a class to prevent it from being inherited by any other class. This is used when you want to ensure no class can extend or modify its behavior.</p>
+            <pre>
+sealed class FinalClass { /* ... */ } 
+// class CannotDerive : FinalClass {} // This line causes a compiler error
+            </pre>
+        </div>
+    </div>
+</div>

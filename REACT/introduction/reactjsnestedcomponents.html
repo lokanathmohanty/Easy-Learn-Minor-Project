@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Nested Components</h1>
+    <div class="content">
+      <p>
+        A nested component in React is a component placed inside another component. 
+        This is not done through inheritance, but through <b>composition</b>. 
+        React components can be combined and nested to create larger, more structured components.
+      </p>
+      <p>
+        Proper nesting makes code more efficient and organized. 
+        However, if not done carefully, it may increase complexity and reduce efficiency.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">FormattedMoney Component</h2>
+    <div class="content">
+      <p>
+        The <code>FormattedMoney</code> component formats a number into two decimal places before rendering.
+      </p>
+      <ol>
+        <li>Create a file <code>FormattedMoney.js</code> in the <code>src/components</code> folder.</li>
+        <li>Extend <code>React.Component</code> and add a <code>format()</code> method.</li>
+        <li>Use <code>this.props.value</code> to render formatted output.</li>
+      </ol>
+    </div>
+
+    <div class="example">
+      <h3>Example: FormattedMoney.js</h3>
+      <pre>
+import React from 'react';
+
+class FormattedMoney extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  format(amount) {
+    return parseFloat(amount).toFixed(2);
+  }
+  render() {
+    return (
+      &lt;span&gt;{this.format(this.props.value)}&lt;/span&gt;
+    );
+  }
+}
+
+export default FormattedMoney;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">FormattedDate Component</h2>
+    <div class="content">
+      <p>
+        The <code>FormattedDate</code> component formats a date into a more readable string format (e.g., <i>10-OCT-2020</i>).
+      </p>
+      <ol>
+        <li>Create a file <code>FormattedDate.js</code> in the <code>src/components</code> folder.</li>
+        <li>Add a <code>format()</code> method to convert raw date strings.</li>
+        <li>Render the formatted date using <code>this.props.value</code>.</li>
+      </ol>
+    </div>
+
+    <div class="example">
+      <h3>Example: FormattedDate.js</h3>
+      <pre>
+import React from 'react';
+
+class FormattedDate extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  format(val) {
+    const months = [
+      "JAN", "FEB", "MAR", "APR", "MAY", "JUN", 
+      "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+    ];
+    let parsed_date = new Date(Date.parse(val));
+    let formatted_date =
+      parsed_date.getDate() + "-" +
+      months[parsed_date.getMonth()] + "-" +
+      parsed_date.getFullYear();
+    return formatted_date;
+  }
+  render() {
+    return (
+      &lt;span&gt;{this.format(this.props.value)}&lt;/span&gt;
+    );
+  }
+}
+
+export default FormattedDate;
+      </pre>
+    </div>
+  </div>
+</div>

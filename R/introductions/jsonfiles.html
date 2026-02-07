@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - JSON Files</h1>
+    <div class="content">
+      <p>
+        JSON (JavaScript Object Notation) files store data in a human-readable text format using key-value pairs. In R, JSON files can be read using the <code>rjson</code> package.
+      </p>
+
+      <h2 class="title">Install rjson Package</h2>
+      <pre><code>install.packages("rjson")</code></pre>
+
+      <h2 class="title">Input Data</h2>
+      <p>Create a JSON file by copying the following data into a text editor and saving it as <code>input.json</code>:</p>
+      <pre><code>{
+  "ID": ["1","2","3","4","5","6","7","8"],
+  "Name": ["Rick","Dan","Michelle","Ryan","Gary","Nina","Simon","Guru"],
+  "Salary": ["623.3","515.2","611","729","843.25","578","632.8","722.5"],
+  "StartDate": ["1/1/2012","9/23/2013","11/15/2014","5/11/2014","3/27/2015","5/21/2013","7/30/2013","6/17/2014"],
+  "Dept": ["IT","Operations","IT","HR","Finance","IT","Operations","Finance"]
+}
+</code></pre>
+
+      <h2 class="title">Read the JSON File</h2>
+      <pre><code># Load the rjson package
+library("rjson")
+
+# Parse the JSON file into R
+result &lt;- fromJSON(file = "input.json")
+
+# Print the result
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>$ID
+[1] "1" "2" "3" "4" "5" "6" "7" "8"
+
+$Name
+[1] "Rick" "Dan" "Michelle" "Ryan" "Gary" "Nina" "Simon" "Guru"
+
+$Salary
+[1] "623.3" "515.2" "611" "729" "843.25" "578" "632.8" "722.5"
+
+$StartDate
+[1] "1/1/2012" "9/23/2013" "11/15/2014" "5/11/2014" "3/27/2015" "5/21/2013" "7/30/2013" "6/17/2014"
+
+$Dept
+[1] "IT" "Operations" "IT" "HR" "Finance" "IT" "Operations" "Finance"
+</code></pre>
+
+      <h2 class="title">Convert JSON to Data Frame</h2>
+      <pre><code># Convert the JSON list to a data frame for analysis
+json_data_frame &lt;- as.data.frame(result)
+
+# Print the data frame
+print(json_data_frame)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  ID     Name   Salary StartDate      Dept
+1  1     Rick    623.3 2012-01-01       IT
+2  2      Dan    515.2 2013-09-23 Operations
+3  3 Michelle    611.0 2014-11-15       IT
+4  4     Ryan    729.0 2014-05-11       HR
+5 NA     Gary    843.3 2015-03-27   Finance
+6  6     Nina    578.0 2013-05-21       IT
+7  7    Simon    632.8 2013-07-30 Operations
+8  8     Guru    722.5 2014-06-17   Finance
+</code></pre>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

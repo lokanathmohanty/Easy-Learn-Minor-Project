@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Image Optimization</h1>
+        
+        <div class="content">
+            <h2 class="title">The Next.js <code>&lt;Image&gt;</code> Component</h2>
+            <p>The Next.js **<code>&lt;Image&gt;</code> component** is an extension of the standard HTML <code>&lt;img&gt;</code> tag designed to automatically optimize images for performance. By using this component, applications gain significant benefits in areas vital for Core Web Vitals:</p>
+            <ul>
+                <li class="example"><strong>Size Optimization:</strong> Automatically serves correctly sized images for different devices and uses modern, efficient formats like **WebP** and **AVIF**.</li>
+                <li class="example"><strong>Visual Stability:</strong> Automatically prevents **layout shift** (a major cause of poor user experience) while images are loading.</li>
+                <li class="example"><strong>Faster Page Loads:</strong> Implements native browser **lazy loading** by default, loading images only when they enter the viewport.</li>
+                <li class="example"><strong>Asset Flexibility:</strong> Supports on-demand image resizing for both local and remote assets.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Optimizing Local Images</h2>
+            <p><strong>Local images</strong> are stored directly within the Next.js application directory. When importing a local image, Next.js performs automatic optimizations at build time:</p>
+            <ul>
+                <li>It automatically determines the image's **intrinsic <code>width</code> and <code>height</code>** from the file.</li>
+                <li>These intrinsic values are used to calculate the aspect ratio, which is crucial for preventing layout shift.</li>
+                <li>It also automatically provides a **<code>blurDataURL</code>** for an optional low-quality placeholder (LQIP) while the image loads.</li>
+            </ul>
+            
+            <p><strong>Example: Local Image Import</strong></p>
+            <pre class="example"><code>import Image from 'next/image';
+import logo from './logo.png' // Automatic size detection
+
+export default function Page() {
+  return (
+    &lt;Image
+        src={logo} // src is the imported module
+        alt="Picture of the Logo"
+        // width, height, and blurDataURL are automatically handled
+    /&gt;
+  )
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Optimizing Remote Images</h2>
+            <p><strong>Remote images</strong> have a <code>src</code> property that is an external URL string. Since Next.js cannot access remote files during the build process, it cannot determine the intrinsic size automatically. Therefore, you **must manually specify the <code>width</code> and <code>height</code>** props.</p>
+            
+            <p>The specified dimensions infer the correct aspect ratio to prevent layout shift; they do not dictate the final rendered size (which is controlled by CSS).</p>
+            
+            <p><strong>Example: Remote Image Usage</strong></p>
+            <pre class="example"><code>import Image from 'next/image'
+
+export default function Page() {
+  return (
+    &lt;Image
+      src="https://www.tutorialspoint.com/css/images/logo.png"
+      alt="Picture of the Logo"
+      width={500}       // Manually specified
+      height={500}      // Manually specified
+    /&gt;
+  )
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Image Loading Priority</h2>
+            <p>The **<code>priority</code>** prop is used to prioritize the loading of images that are critical for the user's initial view, especially the **Largest Contentful Paint (LCP)** image. Setting <code>priority</code> does two things:</p>
+            <ol>
+                <li>It automatically sets <code>loading="eager"</code>.</li>
+                <li>It adds resource hints (like <code>&lt;link rel="preload"&gt;</code>) to the HTML header for immediate fetching.</li>
+            </ol>
+            
+            <p><strong>Example: Setting Priority</strong></p>
+            <pre class="example"><code>import Image from 'next/image';
+
+export default function Example() {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;First Priority (Loads instantaneously):&lt;/p&gt;
+      &lt;Image src="/next.svg" alt="Image" priority /&gt; 
+
+      &lt;p&gt;Second Priority (Default lazy loading):&lt;/p&gt;
+      &lt;Image src="/file.svg" alt="Image" /&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+            
+            <h2 class="title">Lazy Loading Images</h2>
+            <p>By default, all images in Next.js use **lazy loading** (<code>loading='lazy'</code>), meaning they are only loaded when they are near or visible in the viewport. This is a primary optimization for page speed.</p>
+            <p>To disable lazy loading for a non-priority image, you can explicitly set the **<code>loading</code>** prop to **<code>eager</code>**.</p>
+            
+            <p><strong>Example: Disabling Lazy Loading</strong></p>
+            <pre class="example"><code>import Image from 'next/image';
+
+export default function Example() {
+    return (
+    &lt;div&gt;
+        &lt;h1&gt;Lazy Loading (Default):&lt;/h1&gt;
+        &lt;Image src="/file.svg" alt="Example Image" /&gt;
+
+        &lt;h1&gt;Eager Loading (Disabled Lazy Loading):&lt;/h1&gt;   
+        &lt;Image src="/next.svg" alt="Example Image" loading='eager' /&gt;
+    &lt;/div&gt;
+    );
+}</code></pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Lambda Expressions (Anonymous Functions) 🛠️</h1>
+
+        <div class="content">
+            <p>A **Lambda Expression** is a powerful feature in Modern C++ (C++11 and later) that allows you to define an **anonymous function object** (a function without a name) **inline**. They are essential for functional programming tasks like callbacks, algorithms, and simplifying code.</p>
+
+            <h3>Core Syntax</h3>
+            <p>The lambda expression is structured into four main parts:</p>
+            <pre class="example">
+[ capture ] (parameters) -> return_type { function_body }
+</pre>
+            <ul>
+                <li>**<code>[ capture ]</code>**: Specifies how variables from the surrounding scope are accessed.</li>
+                <li>**<code>(parameters)</code>**: The input arguments for the lambda.</li>
+                <li>**<code>-> return_type</code>**: Explicitly defines the return type (optional if the compiler can deduce it).</li>
+                <li>**<code>{ body }</code>**: The logic of the function.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Capturing Variables</h2>
+            <p>The **capture clause** (`[]`) determines which variables from the outer scope the lambda can access and how (by value or by reference).</p>
+            <table>
+                <thead>
+                    <tr><th>Capture Clause</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>**<code>[x]</code>**</td><td>Capture variable `x` by **value** (read-only copy).</td></tr>
+                    <tr><td>**<code>[&amp;x]</code>**</td><td>Capture variable `x` by **reference** (read and modify the original).</td></tr>
+                    <tr><td>**<code>[=]</code>**</td><td>Capture **all** surrounding variables by **value**.</td></tr>
+                    <tr><td>**<code>[&amp;]</code>**</td><td>Capture **all** surrounding variables by **reference**.</td></tr>
+                    <tr><td>**<code>[=, &amp;x]</code>**</td><td>Mixed: Capture all by value, except `x` by reference.</td></tr>
+                    <tr><td>**<code>[&amp;, x]</code>**</td><td>Mixed: Capture all by reference, except `x` by value.</td></tr>
+                    <tr><td>**<code>[this]</code>**</td><td>Capture the `this` pointer by value, allowing access to class members inside a class method.</td></tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2 class="title">Return Type Deduction</h2>
+            <p>The compiler is often able to determine the return type automatically, which simplifies the syntax (Implicit Deduction):</p>
+            <pre class="example">
+// Implicit return type (compiler sees 'return a + b;' and deduces 'int')
+auto add = [](int a, int b) { return a + b; };
+
+// Explicit return type (required for complex types or multiple return paths)
+auto complex_op = [](double x) -> double { return x * 2.0; };
+</pre>
+
+            <hr>
+
+            <h2 class="title">Recursive Lambdas</h2>
+            <p>Since a lambda is anonymous, it cannot call itself directly by name. To make a lambda recursive, you must assign it to an **<code>std::function</code>** object, which provides the necessary named reference for the recursive call.</p>
+            <pre class="example">
+// std::function gives the lambda a name ('factorial') and type signature
+std::function&lt;int(int)&gt; factorial = [&amp;](int n) -> int {
+    if (n &lt;= 1) return 1;
+    return n * factorial(n - 1); // Uses the named std::function object
+};
+</pre>
+        </div>
+    </div>
+</div>

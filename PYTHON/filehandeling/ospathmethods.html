@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python os.path Methods Overview</h1>
+    <div class="content">
+      <p>The <code>os.path</code> module in Python provides many useful methods to manipulate and obtain information about file and directory paths. These methods help in path normalization, joining, existence checks, and more.</p>
+      <ul>
+        <li><strong>abspath(path)</strong>: Returns an absolute normalized version of the path.</li>
+        <li><strong>basename(path)</strong>: Returns the last component of a path.</li>
+        <li><strong>commonprefix(list)</strong>: Returns longest common prefix from a list of paths.</li>
+        <li><strong>dirname(path)</strong>: Returns the directory portion of the path.</li>
+        <li><strong>exists(path)</strong>: Checks if a path exists (False for broken symlinks).</li>
+        <li><strong>lexists(path)</strong>: Checks if a path exists (True even for broken symlinks).</li>
+        <li><strong>expanduser(path)</strong>: Expands <code>~</code> or <code>~user</code> to home directory.</li>
+        <li><strong>expandvars(path)</strong>: Expands environment variables in the path.</li>
+        <li><strong>getatime(path)</strong>: Returns last access time.</li>
+        <li><strong>getmtime(path)</strong>: Returns last modification time.</li>
+        <li><strong>getctime(path)</strong>: Returns creation time (platform dependent).</li>
+        <li><strong>getsize(path)</strong>: Returns file size in bytes.</li>
+        <li><strong>isabs(path)</strong>: Checks if path is absolute.</li>
+        <li><strong>isfile(path)</strong>: Checks if path is a file.</li>
+        <li><strong>isdir(path)</strong>: Checks if path is a directory.</li>
+        <li><strong>islink(path)</strong>: Checks if path is a symbolic link.</li>
+        <li><strong>ismount(path)</strong>: Checks if path is a mount point.</li>
+        <li><strong>join(path1, ...)</strong>: Joins multiple path components intelligently.</li>
+        <li><strong>normcase(path)</strong>: Normalizes case of the path.</li>
+        <li><strong>normpath(path)</strong>: Normalizes path by collapsing redundant separators.</li>
+        <li><strong>realpath(path)</strong>: Returns canonical path by resolving symbolic links.</li>
+        <li><strong>relpath(path, start)</strong>: Returns relative filepath to path from start.</li>
+        <li><strong>samefile(path1, path2)</strong>: Checks if two paths refer to the same file.</li>
+        <li><strong>sameopenfile(fp1, fp2)</strong>: Checks if two file descriptors refer to same open file.</li>
+        <li><strong>samestat(stat1, stat2)</strong>: Checks if two stat tuples refer to the same file.</li>
+        <li><strong>split(path)</strong>: Splits path into (head, tail) at last separator.</li>
+        <li><strong>splitdrive(path)</strong>: Splits path into (drive, tail) on Windows.</li>
+        <li><strong>splitext(path)</strong>: Splits path into (root, extension).</li>
+        <li><strong>walk(path, visit, arg)</strong>: Calls function for each directory in tree (deprecated in Python 3).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using os.path.join and os.path.exists</h2>
+    <div class="content">
+      <p>The following example joins directory and filename into a full path and checks if it exists:</p>
+      <p><code>
+        import os.path<br>
+        dir = "/home/user/docs"<br>
+        filename = "example.txt"<br>
+        full_path = os.path.join(dir, filename)<br>
+        if os.path.exists(full_path):<br>
+        &nbsp;&nbsp;print(f"File found at: {full_path}")<br>
+        else:<br>
+        &nbsp;&nbsp;print("File not found")<br>
+      </code></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP for C Developers: Similarities and Differences</h1>
+
+        <div class="content">
+            <p>For developers familiar with **C programming**, learning **PHP** is streamlined, as PHP's core syntax is heavily influenced by C. PHP can be thought of as an **interpreted C** that is natively designed for web applications and embedded directly within HTML.</p>
+
+            <h2 class="title">Similarities Between C and PHP 🤝</h2>
+            <p>The fundamental structure and flow control mechanisms in PHP will feel instantly familiar to C developers:</p>
+            <ul>
+                <li>**Syntax:** PHP is generally **blank insensitive** (like C) and statements are terminated with a **semicolon ($\text{;}$)**. Curly brackets ($\text{\{\}}$) are used to define code blocks (e.g., function bodies, control structures).</li>
+                <li>**Comments:** PHP supports C-style ($\text{/* */}$) and C++-style ($\text{//}$) comments, along with Perl/shell-script style ($\text{\#}$).</li>
+                <li>**Operators:** Most standard operators behave identically, including:
+                    <ul>
+                        <li>**Assignment:** $\text{=, +=, *=}$</li>
+                        <li>**Boolean:** $\text{\&\&, ||, !}$</li>
+                        <li>**Comparison:** $\text{<, >, ==, !=}$</li>
+                        <li>**Arithmetic:** $\text{+, -, *, /, \%}$</li>
+                    </ul>
+                </li>
+                <li>**Control Structures:** The basic flow control structures are the same: $\text{if, switch, while, for}$, all supporting $\text{break}$ and $\text{continue}$. (Note: PHP's $\text{switch}$ can use strings as case identifiers).</li>
+                <li>**Function Names:** Many common utility function names (e.g., $\text{strlen()}$) are mirrored from their C library counterparts.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Key Differences Between C and PHP ⚙️</h2>
+            <p>The main differences stem from PHP being a high-level, dynamically/weakly typed, interpreted language designed for rapid web development, contrasted with C's low-level, statically typed, compiled nature.</p>
+            
+            <table class="example">
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>C (Statically Typed, Compiled)</th>
+                        <th>PHP (Dynamically Typed, Interpreted)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**Variables**</td>
+                        <td>Must be declared with a specific type before use.</td>
+                        <td>Always prefixed with a **dollar sign ($\text{\$}$)**. No declaration or intrinsic type required.</td>
+                    </tr>
+                    <tr>
+                        <td>**Typing & Conversion**</td>
+                        <td>**Strongly Typed**. Types checked at compile time; explicit casting often required.</td>
+                        <td>**Weakly Typed**. Types checked at run-time; automatic type conversion occurs as needed (more permissive).</td>
+                    </tr>
+                    <tr>
+                        <td>**Numeric Types**</td>
+                        <td>Multiple types ($\text{char, short, int, long, float, double}$).</td>
+                        <td>Only two main types: **$\text{integer}$** (like C's $\text{long}$) and **$\text{double}$** ($\text{float}$ is synonymous). No separate $\text{char}$ type.</td>
+                    </tr>
+                    <tr>
+                        <td>**Arrays**</td>
+                        <td>Fixed-size collection of **similar** data types (e.g., $\text{int array[10]}$).</td>
+                        <td>**Associative Arrays** (Hashes). Can store items of **different** types; index can be a number or a string.</td>
+                    </tr>
+                    <tr>
+                        <td>**Pointers**</td>
+                        <td>A fundamental concept for direct memory access.</td>
+                        <td>**No Pointers**. However, it supports variable **references** and function names can be stored in variables.</td>
+                    </tr>
+                    <tr>
+                        <td>**Prototypes**</td>
+                        <td>Functions must be declared (prototyped) before they are used.</td>
+                        <td>**No Prototypes** needed; the definition just needs to be accessible in the current file or an included file.</td>
+                    </tr>
+                    <tr>
+                        <td>**Entry Point**</td>
+                        <td>Execution starts inside the mandatory **$\text{main()}$** function.</td>
+                        <td>**No $\text{main()}$**. Execution starts at the first statement of the script.</td>
+                    </tr>
+                    <tr>
+                        <td>**Memory**</td>
+                        <td>Manual memory management using $\text{malloc()}$ and $\text{free()}$ (or $\text{new/delete}$ in C++).</td>
+                        <td>**Garbage-Collected** (reference-counted). Memory is reclaimed automatically; no $\text{free()}$ or $\text{delete}$ needed in simple scripts.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Named Arguments (PHP 8.0+)</h1>
+
+    <div class="content">
+      <p>
+        **Named Arguments** is a feature introduced in **PHP 8.0** that allows arguments to be passed to a function based on the **parameter name** rather than their positional order. This makes function calls more flexible and self-documenting, especially when dealing with functions that have many optional parameters.
+      </p>
+
+      <h2>Syntax and Principle</h2>
+      <p>
+        To pass a named argument, you specify the parameter name (without the `$`) followed by a colon (`:`) and the value.
+      </p>
+      <div class="example">
+        <p>
+          **Definition:** <code>function myfunction($x, $y) { /* ... */ }</code><br>
+          **Named Call:** <code>myfunction(**x:10**, **y:20**);</code>
+        </p>
+      </div>
+
+      <h3>Order Independence</h3>
+      <p>
+        With named arguments, the order in which arguments are passed no longer matters, unlike traditional positional arguments.
+      </p>
+      <div class="example">
+        <p>
+          <code>myfunction(x:10, y:20);</code> $\rightarrow$ x = 10, y = 20<br>
+          <code>myfunction(y:20, x:10);</code> $\rightarrow$ x = 10, y = 20
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Advantages of Named Arguments</h2>
+      <ul>
+        <li>
+          **Self-Documenting Code:** The function call clearly indicates the purpose of each passed value.
+        </li>
+        <li>
+          **Skipping Defaults:** It allows skipping optional parameters that have default values, even if they are defined in the middle of the parameter list.
+        </li>
+        <li>
+          **Order Flexibility:** Arguments can be passed in any order.
+        </li>
+      </ul>
+
+      <h2>Combining Positional and Named Arguments</h2>
+      <p>
+        You can mix both types of arguments, but there is a strict rule: **positional arguments must always come before named arguments.**
+      </p>
+      <div class="example">
+        <p>
+          **Valid Combination:**
+          <code>function myfunction($x, $y, $z) { /* ... */ }</code><br>
+          <code>myfunction(**10**, z:20, y:30);</code> // 10 is positional for $x.
+        </p>
+        <p class="content">Output: x = 10 y = 30 z = 20</p>
+      </div>
+      <div class="example">
+        <p>
+          **Invalid Combination (Fatal Error):**
+          <code>myfunction(x:10, y:20, **30**);</code>
+        </p>
+        <p class="content">
+          $\rightarrow$ PHP Fatal error: Cannot use positional argument after named argument.
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Named Arguments and Array Unpacking (PHP 8.1+)</h2>
+      <p>
+        PHP 8.1.0 introduced the ability to use array unpacking (`...`) along with named arguments. Positional arguments can be unpacked from an array first, followed by specific named arguments.
+      </p>
+      <div class="example">
+        <p>
+          <code>function myfunction($x, $y, $z=30) { /* ... */ }</code><br>
+          <code>myfunction(**...[10, 20]**, z:30);</code>
+        </p>
+        <p class="content">Output: x = 10 y = 20 z = 30</p>
+      </div>
+    </div>
+  </div>
+</div>

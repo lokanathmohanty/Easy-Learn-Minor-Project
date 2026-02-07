@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Enhanced <code>@Deprecated</code> Annotation (Java 9+)</h1>
+
+        <div class="content">
+            <h2>The Purpose of <code>@Deprecated</code> ⚠️</h2>
+            <p>The **<code>@Deprecated</code>** annotation, originally introduced in Java 5, marks a program element (class, method, or field) that should no longer be used. Its use signals to developers that:</p>
+            <ul>
+                <li>The element may lead to errors or be incompatible in future versions.</li>
+                <li>It may be removed in a future release.</li>
+                <li>A better, more efficient alternative exists.</li>
+            </ul>
+            <p>The compiler generates a warning when a deprecated element is used, encouraging migration to the replacement.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Java 9 Enhancements to <code>@Deprecated</code></h2>
+            <p>In **Java 9**, the <code>@Deprecated</code> annotation gained two new attributes to provide developers with clearer, more specific instructions regarding the deprecated element's status and lifecycle:</p>
+
+            <h3>1. <code>forRemoval</code></h3>
+            <p>This attribute is a boolean that indicates whether the annotated element is subject to **removal in a future version**. This is a strong warning that developers must migrate their code.</p>
+            <ul>
+                <li><strong>Syntax:</strong> <code>@Deprecated(forRemoval=true)</code></li>
+                <li><strong>Default Value:</strong> <code>false</code></li>
+            </ul>
+            <p>When set to <code>true</code>, it explicitly signals that the element will eventually be completely removed from the JDK, often in the next major release.</p>
+
+            <h3>2. <code>since</code></h3>
+            <p>This attribute is a string that documents the **version in which the element became deprecated**. This helps developers understand the element's history and prioritize migration, especially when dealing with code from older Java versions.</p>
+            <ul>
+                <li><strong>Syntax:</strong> <code>@Deprecated(since="9")</code></li>
+                <li><strong>Default Value:</strong> The empty string <code>""</code></li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title example">Example Usage</h2>
+            <div class="content">
+                <p>The combination of these attributes provides a complete lifecycle context for maintenance:</p>
+                <pre><code>/**
+ * @deprecated The use of this method is discouraged. 
+ * Replaced by the new process() method.
+ * @since 15
+ * @deprecated(forRemoval=true, since="15")
+ */
+public static void oldMethod() { 
+    // ... 
+}</code></pre>
+                <p>In the example above, the Javadoc and the annotation clearly state that <code>oldMethod()</code> has been deprecated since Java 15 and is scheduled for definite removal in a future version.</p>
+            </div>
+        </div>
+    </div>
+</div>

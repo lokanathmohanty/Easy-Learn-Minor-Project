@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `foreach` Loop</h1>
+
+    <div class="content">
+      <p>
+        The **`foreach`** loop is a specialized control structure in PHP designed exclusively for **iterating over arrays** (and other iterable objects). It simplifies the process of stepping through every element in an array without manually managing a counter or index variable.
+      </p>
+
+      <h2>`foreach` Syntax Variations</h2>
+      <p>There are two primary forms of the `foreach` loop, catering to both indexed and associative arrays.</p>
+
+      <h3>1. Value-Only Syntax (Indexed Arrays)</h3>
+      <p>This syntax is primarily used when you only need to access the element's value and not its key/index.</p>
+      <div class="example">
+        <code>foreach (array as $value) { statements }</code>
+      </div>
+      <p>In each iteration, the value of the current array element is assigned to the `$value` variable.</p>
+
+      <h3>2. Key-Value Syntax (Associative Arrays)</h3>
+      <p>This is the general and most versatile syntax, used when you need to access both the key/index and the value of each element.</p>
+      <div class="example">
+        <code>foreach (array as $key => $value) { statements }</code>
+      </div>
+      <p>In each iteration, the current element's key is assigned to `$key` and its value to `$value`.</p>
+
+      <hr>
+
+      <h2>Practical Examples</h2>
+
+      <h3>Iterating an Indexed Array (Key-Value Syntax)</h3>
+      <p>Although indexed arrays use numerical indices, they can still be treated as key-value pairs where the index is the key.</p>
+      <div class="example">
+        <p>
+          <code>$arr = array(10, 20, 30);</code><br>
+          <code>foreach ($arr as $k => $v) { echo "Key: $k => Val: $v \n"; }</code>
+        </p>
+        <p class="content">Output: Key: 0 => Val: 10 \n Key: 1 => Val: 20 \n Key: 2 => Val: 30</p>
+      </div>
+
+      <h3>Iterating an Associative Array</h3>
+      <p>The key-value syntax is essential for accessing the meaningful string keys in an associative array.</p>
+      <div class="example">
+        <p>
+          <code>$capitals = array("UP" => "Lucknow", "Tamilnadu" => "Chennai");</code><br>
+          <code>foreach ($capitals as $state => $capital) { echo "Capital of $state is $capital \n"; }</code>
+        </p>
+        <p class="content">Output: Capital of UP is Lucknow \n Capital of Tamilnadu is Chennai</p>
+      </div>
+
+      <h3>Iterating a Multidimensional (2D) Array (Nested Loops)</h3>
+      <p>
+        To traverse an array of arrays, you use nested `foreach` loops. The outer loop iterates over the main array, and the inner loop iterates over the array contained within the current element.
+      </p>
+      <div class="example">
+        <p>
+          <code>$twoD = array( array(1, 2), array("a", "b") );</code><br>
+          <code>foreach ($twoD as $idx => $arr) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "Array no $idx \n";</code><br>
+          <code>&nbsp;&nbsp;&nbsp;foreach ($arr as $k => $v) { echo "$k => $v" . "\n"; }</code><br>
+          <code>}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

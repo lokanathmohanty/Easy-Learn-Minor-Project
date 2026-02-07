@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Date Validation</h1>
+    <div class="content">
+
+      <p>
+        In JavaScript, we often need to validate dates to ensure they are in the correct format, 
+        fall within the correct range, and are valid calendar dates.
+      </p>
+
+      <h2>Why Validate a Date?</h2>
+      <p>
+        When users enter dates in forms, they may input incorrect values. 
+        To prevent errors, we validate the date before processing it.
+      </p>
+
+      <h2>Ways to Validate a Date</h2>
+      <ul>
+        <li>Using <code>getTime()</code> method</li>
+        <li>Using <code>isFinite()</code> method</li>
+        <li>Using <code>Regular Expressions</code> to check date format</li>
+        <li>Using libraries like Moment.js (deprecated in modern apps)</li>
+      </ul>
+
+      <h2>1. Using <code>getTime()</code> Method</h2>
+      <p>
+        The <code>getTime()</code> method returns the number of milliseconds since 
+        January 1, 1970. If it returns <code>NaN</code>, the date is invalid.
+      </p>
+      <pre><code>
+function isValid(date) {
+  if (Object.prototype.toString.call(date) === "[object Date]") {
+    return !isNaN(date.getTime());
+  }
+  return false;
+}
+
+console.log(isValid(new Date("No date"))); // false
+console.log(isValid(new Date()));          // true
+      </code></pre>
+
+      <h2>2. Using <code>isFinite()</code> Method</h2>
+      <p>
+        This method checks if the date is an instance of <code>Date</code> 
+        and if the time value is finite.
+      </p>
+      <pre><code>
+function isValid(date) {
+  return date instanceof Date && isFinite(date);
+}
+
+console.log(isValid(new Date("No date"))); // false
+console.log(isValid(new Date()));          // true
+      </code></pre>
+
+      <h2>3. Validate Date Format using Regular Expressions</h2>
+      <p>
+        Regular expressions help ensure the date string follows a specific pattern, 
+        such as <code>YYYY-MM-DD</code>.
+      </p>
+      <pre><code>
+let reg = /^\d{4}-\d{2}-\d{2}$/;
+
+console.log(reg.test("2022-07-31")); // true
+console.log(reg.test("2022-07-32")); // true (but invalid calendar date)
+      </code></pre>
+      <p>
+        Note: Regex only checks format, not actual validity of the date.
+      </p>
+
+      <h2>Conclusion</h2>
+      <p>
+        JavaScript provides multiple ways to validate dates. 
+        Use <code>getTime()</code> or <code>isFinite()</code> for actual date validation, 
+        and regular expressions for format validation. 
+        For advanced needs, libraries like <code>date-fns</code> or <code>Luxon</code> 
+        are recommended instead of Moment.js.
+      </p>
+
+    </div>
+  </div>
+</div>

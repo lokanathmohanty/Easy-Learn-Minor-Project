@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Date Formats</h1>
+    <div class="content">
+      <p>JavaScript offers us a variety of date formats ranging from elementary locale-specific formatting all the way up to sophisticated customization options. Understanding the different date formats is a fundamental and essential aspect of web development, irrespective of whether you're building a dynamic web application, managing time sensitive data or simply displaying dates in a user-friendly manner.</p>
+
+      <p>Here, we are going to cover different date formats of JavaScript and implement them with a few examples to understand them better. Below is a table explaining all the different date formats used in JavaScript.</p>
+
+      <h2 class="title">Date Formats</h2>
+      <ul>
+        <li><strong>ISO Format (UTC):</strong> Example: <em>2024-01-29T12:34:56.789Z</em> — Standardized format with the year, month, day, and time components. The 'Z' indicates UTC.</li>
+        <li><strong>Locale Date and Time:</strong> Example: <em>1/29/2024, 12:34:56 PM</em> — Localized date & time based on the user's system/browser settings.</li>
+        <li><strong>Custom Date Format:</strong> Example: <em>Jan 29, 2024, 12:34:56 PM PST</em> — Developer-defined custom layout.</li>
+        <li><strong>Short Date Format:</strong> Example: <em>01/29/24</em> — Short month, day, and year (varies by locale).</li>
+        <li><strong>Long Date Format:</strong> Example: <em>January 29, 2024</em> — Full month name, day, and year.</li>
+        <li><strong>Short Time Format:</strong> Example: <em>12:34 PM</em> — Hours and minutes.</li>
+        <li><strong>Long Time Format:</strong> Example: <em>12:34:56 PM</em> — Hours, minutes, and seconds.</li>
+        <li><strong>UTC Date Format:</strong> Example: <em>Tue, 29 Jan 2024 12:34:56 GMT</em> — Coordinated Universal Time format.</li>
+        <li><strong>Epoch Timestamp:</strong> Example: <em>1643450096789</em> — Milliseconds since January 1, 1970.</li>
+        <li><strong>Relative Time:</strong> Example: <em>2 hours ago, 3 days ago</em> — Human-readable relative format.</li>
+      </ul>
+
+      <h2 class="title">Example 1: Displaying current date in different formats</h2>
+      <div class="content">
+        <p>This example dynamically generates and displays ISO format, locale date & time, custom format, short and long date formats, short and long time formats, UTC, epoch timestamp, and relative time.</p>
+        <h3 class="title">Example Code</h3>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;All Types of Date Formats&lt;/h2&gt;
+   &lt;script&gt;
+      const currentDate = new Date();
+      function appendFormattedDate(type, formatFunction) {
+         const formattedDate = formatFunction(currentDate);
+         const paragraph = document.createElement('p');
+         paragraph.innerText = `${type}: ${formattedDate}`;
+         document.body.appendChild(paragraph);
+      }
+      appendFormattedDate('ISO Format (UTC)', date =&gt; date.toISOString());
+      appendFormattedDate('Locale Date and Time', date =&gt; date.toLocaleString());
+      const options = { year: 'numeric', month: 'short', day: 'numeric',
+         hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' };
+      appendFormattedDate('Custom Date Format', date =&gt; date.toLocaleString('en-US', options));
+      appendFormattedDate('Short Date Format', date =&gt; date.toLocaleDateString());
+      appendFormattedDate('Long Date Format', date =&gt; date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }));
+      appendFormattedDate('Short Time Format', date =&gt; date.toLocaleTimeString());
+      appendFormattedDate('Long Time Format', date =&gt; date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+      appendFormattedDate('UTC Date Format', date =&gt; date.toUTCString());
+      appendFormattedDate('Epoch Timestamp', date =&gt; date.getTime());
+      const previousDate = new Date('2024-01-29T00:00:00Z');
+      const relativeTime = formatRelativeTime(previousDate, currentDate);
+      appendFormattedDate('Relative Time', () =&gt; relativeTime);
+      function formatRelativeTime(previousDate, currentDate) {
+         const elapsedMilliseconds = currentDate - previousDate;
+         const seconds = Math.floor(elapsedMilliseconds / 1000);
+         const minutes = Math.floor(seconds / 60);
+         const hours = Math.floor(minutes / 60);
+         if (seconds &lt; 60) return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
+         else if (minutes &lt; 60) return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+         else if (hours &lt; 24) return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+         else return 'More than a day ago';
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <h2 class="title">Example 2: Customized date formats</h2>
+      <div class="content">
+        <p>This example uses <code>Intl.DateTimeFormat</code> to display a custom format with weekday, month, day, and year.</p>
+        <h3 class="title">Example Code</h3>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Custom Date Format Example&lt;/h2&gt;
+   &lt;script&gt;
+      const currentDate = new Date();
+      function customDateFormat(date) {
+         const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+         return new Intl.DateTimeFormat('en-US', options).format(date);
+      }
+      function appendFormattedDate(type, formatFunction) {
+         const formattedDate = formatFunction(currentDate);
+         document.body.innerHTML += `&lt;p&gt;${type}: ${formattedDate}&lt;/p&gt;`;
+      }
+      appendFormattedDate('Custom Date Format', customDateFormat);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <h2 class="title">Example 3: Generating next 5 days dates</h2>
+      <div class="content">
+        <p>This example generates the next five days' dates and shows them in ISO format, locale-specific format, and custom format.</p>
+        <h3 class="title">Example Code</h3>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Future Dates Generator&lt;/h2&gt;
+   &lt;div id="futureDates"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      function generateFutureDates() {
+         const today = new Date();
+         const futureDatesDiv = document.getElementById('futureDates');
+         for (let i = 1; i &lt;= 5; i++) {
+            const futureDate = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
+            const isoFormat = futureDate.toISOString();
+            const localeFormat = futureDate.toLocaleString();
+            const customFormatOptions = { year: 'numeric', month: 'long', day: 'numeric',
+               hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' };
+            const customFormat = futureDate.toLocaleString('en-US', customFormatOptions);
+            futureDatesDiv.innerHTML += `
+            &lt;p&gt;&lt;strong&gt;Day ${i}:&lt;/strong&gt;&lt;/p&gt;
+            &lt;p&gt;ISO Format (UTC): ${isoFormat}&lt;/p&gt;
+            &lt;p&gt;Locale Date and Time: ${localeFormat}&lt;/p&gt;
+            &lt;p&gt;Custom Format: ${customFormat}&lt;/p&gt;
+            &lt;hr&gt;`;
+         }
+      }
+      generateFutureDates();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - SVG</h1>
+    <div class="content">
+      <p>HTML SVG (Scalable Vector Graphics) is used to define vector graphics in XML format that can be embedded into HTML pages. Unlike bitmap images, SVG retains its quality even when zoomed.</p>
+      <ul>
+        <li>SVG stands for Scalable Vector Graphics.</li>
+        <li>It is written in XML and allows drawing shapes, charts, and graphs.</li>
+        <li>Vector images do not lose quality on zoom.</li>
+        <li>SVG became a W3C Recommendation on 14 January 2003.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Bitmap vs Scalable Vector Graphics</h2>
+    <div class="content">
+      <p>PNG, GIF, and JPG are bitmap graphics, while SVG is vector graphics. Bitmap graphics are made of pixels, but vector graphics are defined by code, so they do not lose quality after zooming.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">How to Use SVG in HTML?</h2>
+    <div class="content">
+      <ul>
+        <li><strong>Using &lt;img&gt; tag</strong>: Embed SVG as an image file.</li>
+        <li><strong>Using &lt;svg&gt; tag</strong>: Write SVG code directly inside HTML.</li>
+      </ul>
+      <h3>Example: Using &lt;img&gt; Tag</h3>
+      <pre><code>&lt;img src="svg_file_name.svg" alt="Alternate Text"&gt;</code></pre>
+      <h3>Syntax: Using &lt;svg&gt; Tag</h3>
+      <pre><code>&lt;svg&gt;
+   &lt;!-- code to create graphics --&gt;
+&lt;/svg&gt;</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Predefined SVG Elements</h2>
+    <div class="content">
+      <ul>
+        <li><code>&lt;rect&gt;</code> - Rectangle</li>
+        <li><code>&lt;circle&gt;</code> - Circle</li>
+        <li><code>&lt;ellipse&gt;</code> - Ellipse</li>
+        <li><code>&lt;line&gt;</code> - Line</li>
+        <li><code>&lt;polyline&gt;</code> - Polyline</li>
+        <li><code>&lt;polygon&gt;</code> - Polygon</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Common Attributes</h2>
+    <div class="content">
+      <ul>
+        <li><strong>x, y</strong>: Top-left coordinates.</li>
+        <li><strong>width, height</strong>: Dimensions of rectangle or shape.</li>
+        <li><strong>rx, ry</strong>: Roundness of ellipse.</li>
+        <li><strong>style</strong>: Inline style.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Examples of Drawing Shapes</h2>
+    <div class="content">
+      <h3>Circle</h3>
+      <pre><code>&lt;svg height="500"&gt;
+   &lt;circle cx="50" cy="50" r="50" fill="red"&gt;&lt;/circle&gt;
+&lt;/svg&gt;</code></pre>
+
+      <h3>Rectangle</h3>
+      <pre><code>&lt;svg height="200"&gt;
+   &lt;rect width="300" height="100" fill="red"&gt;&lt;/rect&gt;
+&lt;/svg&gt;</code></pre>
+
+      <h3>Line</h3>
+      <pre><code>&lt;svg height="200"&gt;
+   &lt;line x1="0" y1="0" x2="200" y2="100" 
+         style="stroke:red;stroke-width:2"&gt;&lt;/line&gt;
+&lt;/svg&gt;</code></pre>
+
+      <h3>Ellipse</h3>
+      <pre><code>&lt;svg height="200"&gt;
+   &lt;ellipse cx="100" cy="50" rx="100" ry="50" fill="red"&gt;&lt;/ellipse&gt;
+&lt;/svg&gt;</code></pre>
+
+      <h3>Polygon</h3>
+      <pre><code>&lt;svg height="200"&gt;
+   &lt;polygon points="20,10 300,20 170,50 130,70" fill="red"&gt;&lt;/polygon&gt;
+&lt;/svg&gt;</code></pre>
+
+      <h3>Polyline</h3>
+      <pre><code>&lt;svg height="200"&gt;
+   &lt;polyline points="0,0 0,30 30,30 30,60 60,60" fill="red"&gt;&lt;/polyline&gt;
+&lt;/svg&gt;</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Applying Gradient</h2>
+    <div class="content">
+      <p>You can apply gradients using <code>&lt;linearGradient&gt;</code> or <code>&lt;radialGradient&gt;</code>.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;svg height="200"&gt;
+   &lt;defs&gt;
+      &lt;radialGradient id="gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%"&gt;
+         &lt;stop offset="0%" style="stop-color:rgb(200,200,200);" /&gt;
+         &lt;stop offset="100%" style="stop-color:rgb(0,0,255);" /&gt;
+      &lt;/radialGradient&gt;
+   &lt;/defs&gt;
+   &lt;ellipse cx="100" cy="50" rx="100" ry="50" style="fill:url(#gradient)"&gt;&lt;/ellipse&gt;
+&lt;/svg&gt;</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Drawing a Star</h2>
+    <div class="content">
+      <h3>Example</h3>
+      <pre><code>&lt;svg height="200"&gt;
+   &lt;polygon points="100,5 40,180 190,60 10,60 160,180" fill="red"&gt;&lt;/polygon&gt;
+&lt;/svg&gt;</code></pre>
+    </div>
+  </div>
+</div>

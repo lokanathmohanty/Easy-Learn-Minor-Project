@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - DOM Collections</h1>
+    <div class="content">
+      <p>The DOM (Document Object Model) collections are a way to group together related HTML elements. They are read-only and can be accessed using the properties of DOM objects such as the document object or a DOM node.</p>
+
+      <p>There are many different types of DOM collections, including:</p>
+      <ul>
+        <li>The <b>HTMLCollection</b> object is an array-like list of HTML elements.</li>
+        <li>The <b>NodeList</b> object is a list of nodes extracted from a document.</li>
+        <li>The <b>Form element collection</b> is used to set or return all &lt;input&gt; elements inside a form element.</li>
+        <li>The <b>HTML DOM forms collection</b> is used for returning all the form elements that are present inside the HTML document as a collection.</li>
+      </ul>
+
+      <p>DOM collections can be used to perform tasks such as:</p>
+      <ul>
+        <li>Traversing the DOM</li>
+        <li>Adding, removing, or modifying elements</li>
+        <li>Changing the style or content of elements</li>
+        <li>Responding to user events</li>
+      </ul>
+
+      <h2>The HTMLCollection Object</h2>
+      <p>An <b>HTMLCollection</b> object is an array-like data structure of HTML elements. When you use the <code>getElementByTagName()</code> method, it returns an HTMLCollection object.</p>
+      <p>You can traverse the HTML collection and access each HTML element through the index. However, unlike arrays, methods like <code>pop()</code> or <code>push()</code> cannot be used with HTML collections.</p>
+
+      <h2>Methods and Properties</h2>
+      <ul>
+        <li><code>getElementByTagName()</code> method</li>
+        <li><code>getElementByClassName()</code> method</li>
+        <li><code>children</code> property</li>
+      </ul>
+
+      <h2>Properties and Methods of DOM HTMLCollection Object</h2>
+      <ul>
+        <li><b>length</b> − To get a count of HTML elements in the collection.</li>
+        <li><b>item()</b> − To get elements from the specific index.</li>
+        <li><b>namedItem()</b> − To get the HTML element using its id from the given collection.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Traversing the Collection Elements</h2>
+    <div class="content">
+      <p>In the below code, we access all &lt;li&gt; elements using <code>getElementByTagName()</code>, which returns an HTMLCollection object.</p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;ul&gt;
+      &lt;li&gt; One &lt;/li&gt;
+      &lt;li&gt; Two &lt;/li&gt;
+      &lt;li&gt; Three &lt;/li&gt;
+   &lt;/ul&gt;
+
+   &lt;div id="output"&gt; &lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById('output');
+      let lists = document.getElementsByTagName('li');
+      for (let list of lists) {
+         output.innerHTML += "inner HTML - " + list.innerHTML + "&lt;br&gt;";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Getting the Length of the Collection</h2>
+    <div class="content">
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div class="text"&gt; JavaScript &lt;/div&gt;
+   &lt;div class="text"&gt; HTML &lt;/div&gt;
+   &lt;div class="text"&gt; CSS &lt;/div&gt;
+   &lt;div class="text"&gt; CPP &lt;/div&gt;
+   &lt;div id="output"&gt;The length of the collection is: &lt;/div&gt;
+   &lt;script&gt;
+      const divs = document.getElementsByClassName('text');
+      document.getElementById('output').innerHTML += " " + divs.length;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using the namedItem Method</h2>
+    <div class="content">
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div class="text" id="JavaScript"&gt; JavaScript &lt;/div&gt;
+   &lt;div class="text" id="PHP"&gt; PHP &lt;/div&gt;
+   &lt;div class="text" id="Python"&gt; Python &lt;/div&gt;
+   &lt;div class="text" id="Java"&gt; Java &lt;/div&gt;
+   &lt;div id="output"&gt;The Element having id equal to JavaScript is: &lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById('output');
+      const langs = document.getElementsByClassName('text');
+      output.innerHTML += langs.namedItem('JavaScript').innerHTML;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Collections of document Object and DOM Elements</h2>
+    <div class="content">
+      <p>The <code>document</code> object contains built-in collections to get elements from the document.</p>
+      <ul>
+        <li><b>document.links</b> − To get all &lt;a&gt; elements.</li>
+        <li><b>document.forms</b> − To get all &lt;form&gt; elements.</li>
+        <li><b>document.images</b> − To get all &lt;img&gt; elements.</li>
+        <li><b>document.scripts</b> − To get all &lt;script&gt; elements.</li>
+        <li><b>document.styleSheets</b> − To get all &lt;link&gt; and &lt;style&gt; elements.</li>
+        <li><b>element.children</b> − To get a collection of all children of an element.</li>
+        <li><b>element.attributes</b> − To get all attributes of an element.</li>
+        <li><b>element.options</b> − To get all &lt;option&gt; elements.</li>
+        <li><b>element.classList</b> − To get all class names of a DOM element.</li>
+      </ul>
+    </div>
+  </div>
+</div>

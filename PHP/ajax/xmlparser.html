@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - AJAX XML Parser using DOMDocument</h1>
+
+        <div class="content">
+            <h2 class="title">AJAX and Server-Side XML Parsing</h2>
+            <p>This session illustrates how to combine **AJAX** with **PHP** to dynamically fetch and parse data from an **XML document** stored on the server. The client makes an asynchronous request based on user selection, and the PHP script uses the built-in **$\text{DOMDocument}$** class to search the XML structure and return the specific course details.</p>
+
+            <h3 class="title">Client-Side Request ($\text{showCD()}$ Function)</h3>
+            <p>The client uses a simple HTML **$\text{select}$** element that triggers the $\text{showCD()}$ JavaScript function upon change ($\text{onchange}$).</p>
+            <ul>
+                <li>The function uses the **$\text{XMLHttpRequest}$** object to send a $\text{GET}$ request.</li>
+                <li>The selected course value is appended as the query parameter ($\text{q}$) to the server-side script: $\text{xmlhttp.open("GET","hello.php?q="+str,true)}$</li>
+                <li>When the response arrives ($\text{readyState} = 4$ and $\text{status} = 200$), the received text ($\text{xmlhttp.responseText}$) is injected into the $\text{\div id="txtHint"}$ element to update the page without a full reload.</li>
+            </ul>
+
+            <h3 class="title">XML Document Structure ($\text{test.xml}$)</h3>
+            <p>The XML file holds a catalog of courses, where each course is encapsulated within a $\text{<SUBJECT>}$ tag, and details like $\text{COURSE}$, $\text{COUNTRY}$, $\text{PRICE}$, etc., are children nodes.</p>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Server-Side PHP XML Parsing</h2>
+
+            <h3>PHP Parsing Logic ($\text{hello.php}$)</h3>
+            <p>The server script receives the course name via $\text{\$_GET["q"]}$ and uses the $\text{DOMDocument}$ class to perform the search and extraction:</p>
+            <ol>
+                <li><strong>Load XML:</strong> $\text{\$xmlDoc = new DOMDocument();}$ and $\text{\$xmlDoc->load("test.xml");}$ loads the document into a traversable structure.</li>
+                <li><strong>Find Course Nodes:</strong> $\text{\$x = \$xmlDoc->getElementsByTagName('COURSE');}$ fetches all nodes with the name $\text{COURSE}$.</li>
+                <li><strong>Iterate and Match:</strong> The script iterates through all $\text{COURSE}$ nodes. If a node's value ($\text{nodeValue}$) matches the requested course name ($\text{\$q}$), it finds the parent node ($\text{\$y = (\$x->item(\$i)->parentNode);}$), which is the entire $\text{<SUBJECT>}$ block.</li>
+                <li><strong>Extract Details:</strong> The script then iterates through the child nodes of the matched parent ($\text{\$y->childNodes}$) to extract and $\text{echo}$ the final details ($\text{nodeName}$ and $\text{nodeValue}$), formatted as HTML ($\text{<b>Name:</b> Value<br>}$), which is sent back as the AJAX response.</li>
+            </ol>
+            <pre>
+&lt;?php
+   $q = $_GET["q"];
+   $xmlDoc = new DOMDocument();
+   $xmlDoc->load("test.xml");
+   
+   $x = $xmlDoc->getElementsByTagName('COURSE');
+   
+   // Loop to find the matching COURSE node's parent (the SUBJECT block)
+   for ($i = 0; $i&lt;=$x->length-1; $i++) {
+      if ($x->item($i)->nodeType == 1) {
+         if ($x->item($i)->childNodes->item(0)->nodeValue == $q) {
+            $y = ($x->item($i)->parentNode); // Found the SUBJECT node
+            break;
+         }
+      }
+   }
+   
+   // Loop through the SUBJECT's children to extract and display details
+   $cd = ($y->childNodes);
+   for ($i = 0;$i&lt;$cd->length;$i++) {
+      if ($cd->item($i)->nodeType == 1) {
+         echo("&lt;b&gt;" . $cd->item($i)->nodeName . ":&lt;/b&gt; ");
+         echo($cd->item($i)->childNodes->item(0)->nodeValue);
+         echo("&lt;br&gt;");
+      }
+   }
+?&gt;</pre>
+        </div>
+    </div>
+</div>

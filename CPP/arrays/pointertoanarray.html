@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Pointer to an Array (Array Name Decay) ⭐</h1>
+
+        <div class="content">
+            <p>In C++, the **name of an array** acts as a **constant pointer** to its **first element** (index 0). This relationship between arrays and pointers is fundamental to C++ memory access and operation.</p>
+
+            <h3>Array Name as a Pointer</h3>
+            <p>When you declare an array like <code>double balance[50];</code>, the identifier <code>balance</code> is synonymous with the **address of the first element** (<code>&amp;balance[0]</code>).</p>
+            <pre class="example">
+double balance[10];
+double *p;
+
+// 'balance' decays to a pointer to the first element
+p = balance; 
+// p now holds the address of balance[0]
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Accessing Array Elements via Pointers</h2>
+            <p>Because the array name acts as a pointer, you can access any element using standard **pointer arithmetic** and the **dereference operator** (`*`).</p>
+
+            <h3>Pointer Arithmetic</h3>
+            <p>The expression <code>*(p + i)</code> is a legitimate and common way to access the element at index `i` of the array, and it is entirely equivalent to <code>balance[i]</code>.</p>
+            <ul>
+                <li><code>*(p + 0)</code> is equivalent to <code>balance[0]</code></li>
+                <li><code>*(p + 4)</code> is equivalent to <code>balance[4]</code></li>
+            </ul>
+
+            <p>The compiler automatically handles the memory address calculation: it adds $i \times (\text{size of data type})$ to the starting address `p` before dereferencing.</p>
+            <pre class="example">
+double balance[5] = {1000.0, 2.0, 3.4, 17.0, 50.0};
+double *p = balance; 
+
+// Accessing the element at index 2 (value 3.4)
+double value_ptr = *(p + 2); 
+double value_arr = balance[2]; 
+// Both expressions yield the same result.
+</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - useRef</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            React’s <code>useRef</code> hook allows direct access to DOM elements and persists values
+            across renders without triggering re-renders. It is the function component equivalent of
+            <code>createRef</code> used in class components.
+         </p>
+
+         <h2>Signature</h2>
+         <div class="code-block">
+<pre><code>const refObj = useRef(initialValue)
+const domElement = refObj.current
+</code></pre>
+         </div>
+
+         <h2>Example: Basic Usage</h2>
+         <div class="code-block">
+<pre><code>import { useRef } from "react"
+
+function Example() {
+   const inputRef = useRef(null)
+
+   return &lt;input ref={inputRef} /&gt;
+}
+</code></pre>
+         </div>
+
+         <h2>Example: Counter and Input</h2>
+         <div class="code-block">
+<pre><code>import { useState, useRef } from "react"
+
+function RefInput() {
+   const [count, setCount] = useState(0)
+   const inputRef = useRef(null)
+   const labelRef = useRef(null)
+
+   const handleClick = () =&gt; setCount(count + 1)
+   const handleChange = () =&gt; {
+      labelRef.current.innerText =
+         inputRef.current.value === "" ? "World" : inputRef.current.value
+   }
+
+   return (
+      &lt;div&gt;
+         &lt;div&gt;
+            Counter: {count}
+            &lt;button onClick={handleClick}&gt;+&lt;/button&gt;
+         &lt;/div&gt;
+         &lt;div&gt;
+            &lt;label&gt;Enter your name:&lt;/label&gt;
+            &lt;input type="text" ref={inputRef} onChange={handleChange} /&gt;
+            &lt;div&gt;Hello, &lt;span ref={labelRef}&gt;&lt;/span&gt;&lt;/div&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+   )
+}
+
+export default RefInput
+</code></pre>
+         </div>
+
+         <h2>Key Points</h2>
+         <ul>
+            <li><code>useRef</code> stores values that persist across renders.</li>
+            <li>Updating a ref does not trigger a re-render.</li>
+            <li>Refs are often used to directly interact with DOM elements.</li>
+         </ul>
+
+         <h2>Use Cases</h2>
+         <ul>
+            <li>Focusing or selecting an input element.</li>
+            <li>Playing or controlling audio/video with Media API.</li>
+            <li>Using Web Animation API for imperative animations.</li>
+            <li>Integrating with third-party libraries that require direct DOM access.</li>
+         </ul>
+
+         <h2>Summary</h2>
+         <p>
+            The <code>useRef</code> hook is essential when direct DOM access is required. It
+            complements React’s declarative approach by offering a way to work with DOM APIs,
+            animations, or third-party libraries seamlessly.
+         </p>
+      </div>
+   </div>
+</div>

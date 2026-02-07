@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>Properties</code> Class Summary ⚙️📝</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.Properties</code>** class is a specialized, concrete subclass of **<code>Hashtable</code>** used to represent a **persistent set of configuration properties**. It is optimized for storing, loading, and accessing configuration data, where both keys and values are defined as strings.</p>
+
+            <hr>
+
+            <h2 class="title">I. Core Characteristics and Purpose</h2>
+            <ul>
+                <li>
+                    <strong>String-Only:</strong> The key distinction is that all keys and corresponding values in a `Properties` object **must be strings** (though it inherits the generic signature <code>Hashtable&lt;Object, Object&gt;</code>, the specialized methods enforce strings).
+                </li>
+                <li>
+                    <strong>Persistence:</strong> It includes dedicated methods (`load`, `store`) for reading properties from and writing them to streams (either standard **`.properties` text files** or **XML files**).
+                </li>
+                <li>
+                    <strong>Defaults Support:</strong> It supports a hierarchy of properties via the `defaults` field. If a key is searched for in the main list and not found, the search automatically continues in the chain of default property lists.
+                </li>
+                <li>
+                    <strong>Thread-Safe:</strong> Since it extends the legacy **<code>Hashtable</code>**, `Properties` is inherently **thread-safe** (all core methods are synchronized).
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Essential I/O and Access Methods</h2>
+            <p>The primary value of the `Properties` class comes from its I/O and key-specific access methods:</p>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><code>String **getProperty**(String key)</code></td>
+                    <td>The standard retrieval method. Searches the primary list, and if not found, checks the default property list(s).</td>
+                </tr>
+                <tr>
+                    <td><code>Object **setProperty**(String key, String value)</code></td>
+                    <td>The standard insertion method, which is merely a synchronized call to the inherited <code>put(key, value)</code> from <code>Hashtable</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>void **load**(InputStream inStream)</code></td>
+                    <td>Reads properties from an input byte stream (for `.properties` files).</td>
+                </tr>
+                <tr>
+                    <td><code>void **store**(OutputStream out, String comments)</code></td>
+                    <td>Writes properties to an output byte stream in the standard `.properties` format.</td>
+                </tr>
+                <tr>
+                    <td><code>Set&lt;String&gt; **stringPropertyNames**()</code></td>
+                    <td>Returns a `Set` view of all keys (including defaults) guaranteed to be strings. **(Recommended over <code>propertyNames()</code>)**</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">III. Hierarchy and Defaults</h2>
+            <p>When you create a `Properties` object with defaults (e.g., `new Properties(defaultProps)`), retrieval follows a cascade:</p>
+            <ol>
+                <li>Check the primary `Properties` instance.</li>
+                <li>If the key is missing, check the immediate `defaults` property list.</li>
+                <li>If the key is still missing, check the defaults of the `defaults` list, and so on.</li>
+            </ol>
+
+            <div class="example">
+                <p>The example uses the legacy `Enumeration` to print the keys. Note that `Hashtable` (and thus `Properties`) is unordered, so the output order (`Width`, then `Height`) is not guaranteed to match the insertion order.</p>
+            </div>
+        </div>
+    </div>
+</div>

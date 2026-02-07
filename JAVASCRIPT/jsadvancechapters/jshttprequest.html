@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - HTTP Requests</h1>
+    <div class="content">
+
+      <p>
+        HTTP (Hypertext Transfer Protocol) is the foundation of communication on the web. 
+        HTTP requests allow us to interact with web servers by sending and receiving data. 
+        They can be used to fetch information, submit forms, upload files, and more.
+      </p>
+
+      <h2>HTTP Methods</h2>
+      <ul>
+        <li><strong>GET:</strong> Used to retrieve data from a server without sending additional information.</li>
+        <li><strong>POST:</strong> Used to send data to a server, often when submitting a form.</li>
+        <li><strong>PUT:</strong> Used to update existing data on a server.</li>
+        <li><strong>DELETE:</strong> Used to remove data from a server.</li>
+        <li><strong>PATCH:</strong> Used to update partial data, such as fixing a typo in stored information.</li>
+      </ul>
+
+      <h2>Ways to Make HTTP Requests in JavaScript</h2>
+      <p>
+        In JavaScript, there are two common ways to make HTTP requests:
+      </p>
+      <ul>
+        <li>Using <strong>XMLHttpRequest (XHR)</strong></li>
+        <li>Using <strong>Fetch API</strong></li>
+      </ul>
+
+      <h3>Using XMLHttpRequest (XHR)</h3>
+      <p>
+        <code>XMLHttpRequest</code> is a built-in browser object that provides a way to make HTTP requests. 
+        Although it is older, it is still supported in all browsers.
+      </p>
+
+      <pre><code>
+// Create a new XMLHttpRequest object
+var xhr = new XMLHttpRequest();
+
+// Configure it: GET-request for the URL
+xhr.open('GET', '/article/.../load', true);
+
+// Send the request over the network
+xhr.send();
+      </code></pre>
+
+      <h3>Using Fetch API</h3>
+      <p>
+        The <code>Fetch API</code> is a modern and simpler way to make HTTP requests. 
+        It returns promises, making it easier to handle asynchronous operations.
+      </p>
+
+      <pre><code>
+// Make a request using Fetch API
+fetch('/article/.../load')
+  .then(response =&gt; response.json())
+  .then(data =&gt; alert(data.title))
+  .catch(error =&gt; alert(error));
+      </code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        HTTP requests are essential for client-server communication in web applications. 
+        Developers can use different HTTP methods to fetch, update, delete, or send data. 
+        In JavaScript, requests can be made using both <code>XMLHttpRequest</code> and the modern 
+        <code>Fetch API</code>.
+      </p>
+
+    </div>
+  </div>
+</div>

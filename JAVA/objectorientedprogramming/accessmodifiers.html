@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Access Modifiers</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Security and Encapsulation</h1>
+            <h2 class="subtitle">Session: Understanding Java Access Modifiers</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">Introduction to Access Modifiers</h2>
+                <p>Java **access modifiers** define the **scope** (visibility) of classes, variables, methods, and constructors. They are essential for restricting and securing access to data, which is a core tenet of **encapsulation** in OOP.</p>
+                <p>There are four types of access modifiers:</p>
+                <ul>
+                    <li>**Default** (No modifier)</li>
+                    <li>**Private**</li>
+                    <li>**Protected**</li>
+                    <li>**Public**</li>
+                </ul>
+            </div>
+
+            <div class="content default">
+                <h2 class="subtitle">Default Access Modifier (Package-Private)</h2>
+                <p>When no explicit access modifier is declared, the component is assigned **default access**. This restricts visibility to the current package.</p>
+                <ul>
+                    <li><strong>Scope:</strong> Accessible by any other class within the **same package**.</li>
+                    <li><strong>Key Fact:</strong> Class members (fields/methods) without a modifier are package-private.</li>
+                </ul>
+            </div>
+
+            <div class="content private">
+                <h2 class="subtitle">Private Access Modifier</h2>
+                <p>The **private** modifier is the most restrictive access level. It is the primary mechanism for achieving encapsulation, ensuring data is hidden from the outside world.</p>
+                <ul>
+                    <li><strong>Scope:</strong> Accessible **only within the declared class itself**.</li>
+                    <li><strong>Restriction:</strong> Classes and interfaces **cannot** be declared private.</li>
+                    <li><strong>Access:</strong> Private variables can be accessed indirectly outside the class using public **getter/setter methods**.</li>
+                </ul>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Private Field with Public Accessors</h2>
+                <p>The private <code>format</code> variable is hidden, but public methods provide controlled access:</p>
+                <pre><code>public class Logger {
+   private String format; // Private variable
+
+   public String getFormat() { // Public getter method
+      return this.format;
+   }
+
+   public void setFormat(String format) { // Public setter method
+      this.format = format;
+   }
+}</code></pre>
+            </div>
+
+            <div class="content protected">
+                <h2 class="subtitle">Protected Access Modifier</h2>
+                <p>The **protected** modifier is primarily used for features that should be available to derived classes (subclasses) while remaining restricted to unrelated classes.</p>
+                <ul>
+                    <li><strong>Scope:</strong> Accessible within the **same package** **OR** by **subclasses** (in any package).</li>
+                    <li><strong>Inheritance Rule:</strong> A protected method in a superclass must be declared protected or public in the subclass (cannot be private).</li>
+                </ul>
+            </div>
+
+            <div class="content public">
+                <h2 class="subtitle">Public Access Modifier</h2>
+                <p>The **public** modifier provides the least restriction. A public member is accessible from anywhere in the Java environment.</p>
+                <ul>
+                    <li><strong>Scope:</strong> Accessible from **any other class**, in any package.</li>
+                    <li><strong>Requirement:</strong> If the public class is in a different package, it still needs to be explicitly imported.</li>
+                    <li><strong>Common Use:</strong> The application entry point, <code>main()</code> method, must be public.</li>
+                </ul>
+            </div>
+
+            <div class="content summary">
+                <h2 class="subtitle">Summary of Access Levels</h2>
+                <p>The following table summarizes accessibility across different scopes (from least restrictive to most restrictive):</p>
+                <ul>
+                    <li><strong>Public:</strong> $\rightarrow$ Class $\rightarrow$ Package $\rightarrow$ Subclass $\rightarrow$ World</li>
+                    <li><strong>Protected:</strong> $\rightarrow$ Class $\rightarrow$ Package $\rightarrow$ Subclass $\rightarrow$ $\textrm{NO}$ World</li>
+                    <li><strong>Default:</strong> $\rightarrow$ Class $\rightarrow$ Package $\rightarrow$ $\textrm{NO}$ Subclass $\rightarrow$ $\textrm{NO}$ World</li>
+                    <li><strong>Private:</strong> $\rightarrow$ Class $\rightarrow$ $\textrm{NO}$ Package $\rightarrow$ $\textrm{NO}$ Subclass $\rightarrow$ $\textrm{NO}$ World</li>
+                </ul>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

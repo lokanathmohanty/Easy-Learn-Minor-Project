@@ -1,0 +1,249 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Date and Time</h1>
+
+    <div class="content">
+      <p>Java provides the Date class available in java.util package, this class encapsulates the current date and time.</p>
+
+      <h2 class="title">Date Class Constructors</h2>
+      <p>The Date class supports two constructors as shown below:</p>
+      <ul>
+        <li><strong>Date()</strong>: Initializes the object with the current date and time.</li>
+        <li><strong>Date(long millisec)</strong>: Accepts milliseconds elapsed since midnight, January 1, 1970.</li>
+      </ul>
+
+      <h2 class="title">Date Class Methods</h2>
+      <ul>
+        <li><strong>boolean after(Date when)</strong>: Tests if this date is after the specified date.</li>
+        <li><strong>boolean before(Date when)</strong>: Tests if this date is before the specified date.</li>
+        <li><strong>Object clone()</strong>: Returns a copy of this object.</li>
+        <li><strong>int compareTo(Date anotherDate)</strong>: Compares two Dates for ordering.</li>
+        <li><strong>boolean equals(Object obj)</strong>: Compares two dates for equality.</li>
+        <li><strong>static Date from(Instant instant)</strong>: Obtains an instance of Date from an Instant object.</li>
+        <li><strong>long getTime()</strong>: Returns milliseconds since January 1, 1970 GMT.</li>
+        <li><strong>int hashCode()</strong>: Returns a hash code value for this object.</li>
+        <li><strong>void setTime(long time)</strong>: Sets this Date object to a given time in milliseconds.</li>
+        <li><strong>Instant toInstant()</strong>: Converts this Date object to an Instant.</li>
+        <li><strong>String toString()</strong>: Converts this Date object to a String.</li>
+      </ul>
+
+      <h2 class="title">Getting Current Date and Time</h2>
+      <p>This is a very easy method to get current date and time in Java using Date object and toString() method.</p>
+
+      <h2 class="title">Example</h2>
+      <pre class="content">
+import java.util.Date;
+public class DateDemo {
+   public static void main(String args[]) {
+      // Instantiate a Date object
+      Date date = new Date();
+      // display time and date using toString()
+      System.out.println(date.toString());
+   }
+}
+      </pre>
+      <p>This will produce the following output:</p>
+      <pre class="content">on May 04 09:51:52 CDT 2009</pre>
+
+      <h2 class="title">Date Comparison</h2>
+      <p>Three ways to compare two dates:</p>
+      <ul>
+        <li>Use getTime() to compare milliseconds.</li>
+        <li>Use before(), after(), and equals() methods.</li>
+        <li>Use compareTo() method.</li>
+      </ul>
+
+      <h2 class="title">Date Formatting Using SimpleDateFormat</h2>
+      <p>SimpleDateFormat formats and parses dates using user-defined patterns.</p>
+
+      <h2 class="title">Example</h2>
+      <pre class="content">
+import java.util.*;
+import java.text.*;
+
+public class DateDemo {
+   public static void main(String args[]) {
+      Date dNow = new Date();
+      SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+      System.out.println("Current Date: " + ft.format(dNow));
+   }
+}
+      </pre>
+      <p>This produces output like:</p>
+      <pre class="content">Current Date: Sun 2004.07.18 at 04:14:09 PM PDT</pre>
+
+      <h2 class="title">SimpleDateFormat Format Codes</h2>
+      <ul>
+        <li><strong>G</strong>: Era designator (e.g., AD)</li>
+        <li><strong>y</strong>: Year in four digits (e.g., 2001)</li>
+        <li><strong>M</strong>: Month in year (e.g., July or 07)</li>
+        <li><strong>d</strong>: Day in month (e.g., 10)</li>
+        <li><strong>h</strong>: Hour in A.M./P.M. (1~12)</li>
+        <li><strong>H</strong>: Hour in day (0~23)</li>
+        <li><strong>m</strong>: Minute in hour</li>
+        <li><strong>s</strong>: Second in minute</li>
+        <li><strong>S</strong>: Millisecond</li>
+        <li><strong>E</strong>: Day in week</li>
+        <li>... (and others)</li>
+      </ul>
+
+      <h2 class="title">Date Formatting Using printf</h2>
+      <p>Use printf method with formatting strings starting with 't' to format date and time.</p>
+
+      <h2 class="title">Example</h2>
+      <pre class="content">
+import java.util.Date;
+public class DateDemo {
+   public static void main(String args[]) {
+      Date date = new Date();
+      String str = String.format("Current Date/Time : %tc", date );
+      System.out.printf(str);
+   }
+}
+      </pre>
+      <p>Sample output:</p>
+      <pre class="content">Current Date/Time : Sat Dec 15 16:37:57 MST 2012</pre>
+
+      <h2 class="title">Date and Time Conversion Characters</h2>
+      <ul>
+        <li><strong>c</strong>: Complete date and time (Mon May 04 09:51:52 CDT 2009)</li>
+        <li><strong>F</strong>: ISO 8601 date (2004-02-09)</li>
+        <li><strong>D</strong>: U.S. formatted date (02/09/2004)</li>
+        <li><strong>T</strong>: 24-hour time (18:05:19)</li>
+        <li>... (and others)</li>
+      </ul>
+
+      <h2 class="title">Parsing Strings into Dates</h2>
+      <p>SimpleDateFormat's parse() method parses a string according to its format.</p>
+
+      <h2 class="title">Example</h2>
+      <pre class="content">
+import java.util.*;
+import java.text.*;
+
+public class DateDemo {
+   public static void main(String args[]) {
+      SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+      String input = args.length == 0 ? "1818-11-11" : args[0];
+
+      System.out.print(input + " Parses as ");
+      try {
+         Date t = ft.parse(input);
+         System.out.println(t);
+      } catch (ParseException e) {
+         System.out.println("Unparseable using " + ft);
+      }
+   }
+}
+      </pre>
+      <p>Sample output:</p>
+      <pre class="content">1818-11-11 Parses as Wed Nov 11 00:00:00 EST 1818</pre>
+
+      <h2 class="title">Sleeping for a While</h2>
+      <p>Thread.sleep() pauses execution for a specified time.</p>
+
+      <h2 class="title">Example</h2>
+      <pre class="content">
+import java.util.*;
+public class SleepDemo {
+   public static void main(String args[]) {
+      try {
+         System.out.println(new Date() + "\n");
+         Thread.sleep(5*60*10);
+         System.out.println(new Date() + "\n");
+      } catch (Exception e) {
+         System.out.println("Got an exception!");
+      }
+   }
+}
+      </pre>
+      <p>Sample output:</p>
+      <pre class="content">
+Sun May 03 18:04:41 GMT 2009
+Sun May 03 18:04:51 GMT 2009
+      </pre>
+
+      <h2 class="title">Measuring Elapsed Time</h2>
+      <p>Measure elapsed time using System.currentTimeMillis().</p>
+
+      <h2 class="title">Example</h2>
+      <pre class="content">
+import java.util.*;
+public class DiffDemo {
+   public static void main(String args[]) {
+      try {
+         long start = System.currentTimeMillis();
+         System.out.println(new Date() + "\n");
+         Thread.sleep(5*60*10);
+         System.out.println(new Date() + "\n");
+         long end = System.currentTimeMillis();
+         long diff = end - start;
+         System.out.println("Difference is : " + diff);
+      } catch (Exception e) {
+         System.out.println("Got an exception!");
+      }
+   }
+}
+      </pre>
+      <p>Sample output:</p>
+      <pre class="content">
+Sun May 03 18:16:51 GMT 2009
+Sun May 03 18:16:57 GMT 2009
+Difference is : 5993
+      </pre>
+
+      <h2 class="title">GregorianCalendar Class</h2>
+      <p>GregorianCalendar implements the Gregorian calendar. It offers multiple constructors and useful methods for date manipulation.</p>
+
+      <h2 class="title">Constructors</h2>
+      <ul>
+        <li><strong>GregorianCalendar()</strong>: Default calendar with current date/time.</li>
+        <li><strong>GregorianCalendar(int year, int month, int date)</strong>: Sets specific date.</li>
+        <li><strong>GregorianCalendar(int year, int month, int date, int hour, int minute)</strong>: Sets date and time.</li>
+        <li>... (other constructors)</li>
+      </ul>
+
+      <h2 class="title">Key Methods</h2>
+      <ul>
+        <li>add(int field, int amount): Add time to a field.</li>
+        <li>get(int field): Get value of a field.</li>
+        <li>isLeapYear(int year): Checks leap year.</li>
+        <li>set(int field, int value): Set time field.</li>
+        <li>toString(): Returns string representation.</li>
+        <li>... (others)</li>
+      </ul>
+
+      <h2 class="title">Example</h2>
+      <pre class="content">
+import java.util.*;
+public class GregorianCalendarDemo {
+   public static void main(String args[]) {
+      String months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", 
+         "Oct", "Nov", "Dec"};
+      int year;
+      GregorianCalendar gcalendar = new GregorianCalendar();
+      System.out.print("Date: ");
+      System.out.print(months[gcalendar.get(Calendar.MONTH)]);
+      System.out.print(" " + gcalendar.get(Calendar.DATE) + " ");
+      System.out.println(year = gcalendar.get(Calendar.YEAR));
+      System.out.print("Time: ");
+      System.out.print(gcalendar.get(Calendar.HOUR) + ":");
+      System.out.print(gcalendar.get(Calendar.MINUTE) + ":");
+      System.out.println(gcalendar.get(Calendar.SECOND));
+      if(gcalendar.isLeapYear(year)) {
+         System.out.println("The current year is a leap year");
+      } else {
+         System.out.println("The current year is not a leap year");
+      }
+   }
+}
+      </pre>
+      <p>Sample output:</p>
+      <pre class="content">
+Date: Apr 22 2009
+Time: 11:25:27
+The current year is not a leap year
+      </pre>
+    </div>
+  </div>
+</div>

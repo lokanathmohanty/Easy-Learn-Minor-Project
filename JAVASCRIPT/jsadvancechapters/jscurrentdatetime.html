@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Current Date/Time</h1>
+    <div class="content">
+      <p>
+        In JavaScript, we can use the <code>Date</code> object to work with dates and times. 
+        It provides multiple methods to get the current year, month, day, hours, minutes, and seconds.
+      </p>
+
+      <h2>Date Object</h2>
+      <p>
+        The simplest way to create a new date instance is:
+      </p>
+      <pre><code>var date = new Date();</code></pre>
+
+      <h2>Get Year, Month, and Day</h2>
+      <pre><code>
+var date = new Date();
+var year = date.getFullYear();
+var month = date.getMonth() + 1; // Months are 0-11
+var day = date.getDate();
+      </code></pre>
+
+      <h2>Get Hours, Minutes, and Seconds</h2>
+      <pre><code>
+var date = new Date();
+var hours = date.getHours();
+var minutes = date.getMinutes();
+var seconds = date.getSeconds();
+      </code></pre>
+
+      <h3>Example: Current Date and Time</h3>
+      <pre><code>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="demo"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    
+    document.getElementById('demo').innerHTML = 
+      'Current Date and Time: ' + day + '-' + month + '-' + year + 
+      ' ' + hours + ':' + minutes + ':' + seconds;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+
+      <h3>Sample Output</h3>
+      <pre><code>
+Current Date and Time: 15-12-2024 12:30:45
+      </code></pre>
+
+      <hr>
+
+      <h2>Using <code>toLocaleString()</code> Method</h2>
+      <p>
+        The <code>toLocaleString()</code> method provides localized date and time formatting. 
+        You can specify a locale and formatting options.
+      </p>
+
+      <h3>Basic Syntax</h3>
+      <pre><code>
+var date = new Date();
+var current_date_and_time = date.toLocaleString();
+var current_time = date.toLocaleTimeString();
+var current_date = date.toLocaleDateString();
+      </code></pre>
+
+      <h3>Example</h3>
+      <pre><code>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;script&gt;
+    var date = new Date();
+    var current_date_and_time = date.toLocaleString();
+    var current_time = date.toLocaleTimeString();
+    var current_date = date.toLocaleDateString();
+
+    document.write('Current Date and Time: ' + current_date_and_time + '&lt;br&gt;');
+    document.write('Current Time: ' + current_time + '&lt;br&gt;');
+    document.write('Current Date: ' + current_date + '&lt;br&gt;');
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+
+      <h3>Sample Output</h3>
+      <pre><code>
+Current Date and Time: 12/15/2024, 12:30:45 PM
+Current Time: 12:30:45 PM
+Current Date: 12/15/2024
+      </code></pre>
+
+      <h2>Working with Locales & Time Zones</h2>
+      <p>
+        You can format date and time for different regions using the <code>locale</code> and 
+        <code>options</code> parameters.
+      </p>
+
+      <pre><code>
+var date = new Date();
+var newYorkTime = date.toLocaleString('en-US', { timeZone: 'America/New_York' });
+var indiaTime = date.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+console.log("New York Time: " + newYorkTime);
+console.log("India Time: " + indiaTime);
+      </code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        JavaScript <code>Date</code> object and methods like <code>toLocaleString()</code> 
+        give developers flexibility to fetch and format date and time according to 
+        different regions and requirements.
+      </p>
+    </div>
+  </div>
+</div>

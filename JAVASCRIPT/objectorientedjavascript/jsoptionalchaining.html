@@ -1,0 +1,197 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Optional Chaining</h1>
+
+    <div class="content">
+      <p>
+        The optional chaining in JavaScript allows you to access nested properties and
+        methods of an object without checking if each property exists. This can help
+        to make your code more concise and easier to read.
+      </p>
+      <p>
+        The optional chaining operator (<code>?.</code>) is used to achieve optional
+        chaining in JavaScript. It is placed before the property or method that you
+        want to access. If the property or method does not exist, the expression will
+        evaluate to <code>undefined</code> instead of throwing an error.
+      </p>
+
+      <h2 class="subtitle">The Non-existing Property Problem</h2>
+      <p>
+        While working with objects in JavaScript, you may have objects with dynamic
+        properties. Some properties also contain nested objects. JavaScript can throw
+        an error if you try to access the nested property whose parent doesn't exist.
+      </p>
+
+      <pre>
+const parent = {
+    child: {
+        name: "Smith",
+    }
+}
+const name = parent.child.name;
+      </pre>
+
+      <p><strong>Error:</strong></p>
+      <pre>
+Uncaught TypeError: Cannot read properties of undefined
+      </pre>
+
+      <p>
+        To solve this problem, the <code>&amp;&amp;</code> operator was used before
+        ES11:
+      </p>
+
+      <pre>
+if (parent.child && parent.child.name) {
+   // access parent.child.name here
+}
+      </pre>
+
+      <p>
+        However, this becomes messy when accessing deeply nested properties. The
+        optional chaining operator (<code>?.</code>) solves this problem easily.
+      </p>
+
+      <h2 class="subtitle">What is Optional Chaining?</h2>
+      <p>
+        In JavaScript, the optional chaining operator (<code>?.</code>) was introduced
+        in ECMAScript 2020 (ES11). It provides a safe way to access object properties,
+        array elements, and even functions.
+      </p>
+
+      <h3 class="subtitle">Syntax</h3>
+      <pre>
+obj?.prop1?.nestedprop; // Accessing nested properties
+obj?.[expression]; // Accessing object property via expression
+array?.[index]; // Accessing array element
+funcName?.(); // Executing the function
+      </pre>
+
+      <h3 class="subtitle">Return Value</h3>
+      <p>
+        If a property does not exist, the optional chain returns
+        <code>undefined</code> without throwing any error.
+      </p>
+
+      <h3 class="subtitle">Example</h3>
+      <pre>
+const car = {
+   brand: "Audi",
+   model: "Q6",
+   info: {
+      price: 5000000,
+      color: "Black",
+   }
+}
+console.log(car.info?.price);   // 5000000
+console.log(car.engine?.gears); // undefined
+      </pre>
+
+      <p><strong>Output:</strong></p>
+      <pre>
+The price of the Audi Q6 is: 5000000
+Total gears in the Audi Q6 is: undefined
+      </pre>
+
+      <h2 class="subtitle">Optional Chaining with Function Calls</h2>
+      <pre>
+const car = {
+   getBrand() {
+      return "Audi";
+   },
+}
+console.log(car.getBrand?.()); // "Audi"
+console.log(car.getColor?.()); // undefined
+      </pre>
+
+      <p><strong>Output:</strong></p>
+      <pre>
+The brand of the car is: Audi
+The color of the car is: undefined
+      </pre>
+
+      <h2 class="subtitle">Optional Chaining with Expression</h2>
+      <pre>
+const animal = {
+   name: "Tiger",
+   info: {
+      legs: 4,
+      tail: 1,
+   }
+}
+console.log(animal.info?.["legs"]); // 4
+console.log(animal.specs?.["color"]); // undefined
+      </pre>
+
+      <p><strong>Output:</strong></p>
+      <pre>
+Total number of legs of the tiger is: 4
+The color of the tiger is: undefined
+      </pre>
+
+      <h2 class="subtitle">Optional Chaining with the "delete" Operator</h2>
+      <pre>
+const animal = {
+   name: "Tiger",
+   info: {
+      legs: 4,
+      tail: 1,
+   }
+}
+delete animal.info?.legs;
+delete animal.specs?.tail;
+console.log(animal);
+      </pre>
+
+      <p><strong>Output:</strong></p>
+      <pre>
+Updated object is: {"name":"Tiger","info":{"tail":1}}
+      </pre>
+
+      <h2 class="subtitle">Short-circuiting with Optional Chaining</h2>
+      <pre>
+const animal = {
+   name: "Tiger",
+   info: {
+      legs: {
+         first: 1.32,
+         second: 1.31,
+      },
+      tail: 1,
+   }
+}
+console.log(animal?.info?.legs?.first); // 1.32
+console.log(animal?.specs?.legs?.third); // undefined
+      </pre>
+
+      <p><strong>Output:</strong></p>
+      <pre>
+The size of the first leg is: 1.32
+The size of the third leg is: undefined
+      </pre>
+
+      <h2 class="subtitle">Nullish Coalescing Operator with Optional Chaining</h2>
+      <pre>
+const animal = {
+   name: "Tiger",
+   info: {
+      legs: 2,
+      tail: 1,
+   }
+}
+const color = animal?.spec?.color ?? "Red";
+console.log(color);
+      </pre>
+
+      <p><strong>Output:</strong></p>
+      <pre>
+The color of the animal is: Red
+      </pre>
+
+      <p>
+        In simple terms, you can use the optional chaining operator wherever you need
+        to access the properties of a dynamic object to avoid an error.
+      </p>
+    </div>
+  </div>
+</div>

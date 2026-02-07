@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">While Loop in C</h1>
+
+    <div class="content">
+
+      <p>In C, the <code>while</code> loop is one of the most commonly used loop constructs, along with <code>for</code> and <code>do-while</code>. It is known as an <strong>entry-verified loop</strong>, meaning the condition is checked before the loop body executes.</p>
+
+      <h2 class="title">Syntax of while Loop</h2>
+
+      <pre><code>while(expression){
+   statement(s);
+}</code></pre>
+
+      <p>The <code>while</code> keyword is followed by a boolean expression inside parentheses. If the expression evaluates to true, the block inside the curly brackets is executed.</p>
+
+      <h2 class="title">How while Loop Works in C?</h2>
+
+      <ul>
+        <li>The condition is evaluated <strong>before</strong> executing the loop body.</li>
+        <li>If the condition is <strong>true</strong>, the code block runs.</li>
+        <li>If <strong>false</strong>, the block is skipped, and control moves to the next statement.</li>
+        <li>This makes it possible for a <code>while</code> loop to run <strong>zero times</strong> if the condition fails initially.</li>
+      </ul>
+
+      <h2 class="title">Example: Print "Hello World" 5 Times</h2>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 1;
+
+   while(a &lt;= 5){
+      printf("Hello World \n");
+      a++;
+   }
+
+   printf("End of loop"); 
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>Hello World</li>
+        <li>Hello World</li>
+        <li>Hello World</li>
+        <li>Hello World</li>
+        <li>Hello World</li>
+        <li>End of loop</li>
+      </ul>
+
+      <p>Now, if we set <code>a = 10</code>, the output will simply be:</p>
+
+      <pre><code>End of loop</code></pre>
+
+      <p>This is because the condition <code>a &lt;= 5</code> is false before the loop starts.</p>
+
+      <h2 class="title">Using while as a Conditional Loop</h2>
+
+      <p>In this example, we use a while loop to print whether a number is even or odd. The loop continues until a negative number is entered.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   char choice = 'a';
+   int x = 0;
+
+   while(x &gt;= 0){
+      (x % 2 == 0) ? printf("%d is Even\n", x) : printf("%d is Odd\n", x);
+
+      printf("\nEnter a positive number: ");
+      scanf("%d", &x);
+   }
+
+   printf("\nEnd of loop");
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Sample Output</h3>
+      <pre><code>0 is Even
+
+Enter a positive number: 12
+12 is Even
+
+Enter a positive number: 25
+25 is Odd
+
+Enter a positive number: -1
+
+End of loop</code></pre>
+
+      <h2 class="title">Break and Continue with while Loop</h2>
+
+      <h3>Using <code>break</code> to Exit Early</h3>
+      <pre><code>while (expr){
+   ...
+   if (condition)
+      break;
+   ...
+}</code></pre>
+
+      <h3>Using <code>continue</code> to Skip to Next Iteration</h3>
+      <pre><code>while (expr){
+   ...
+   if (condition)
+      continue;
+   ...
+}</code></pre>
+
+      <h2 class="title">More Examples</h2>
+
+      <h3 class="title">Example: Print Lowercase Alphabets</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   char a = 'a';
+
+   while(a &lt;= 'z') {
+      printf("%c", a);
+      a++;
+   }
+
+   printf("\nEnd of loop"); 
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>abcdefghijklmnopqrstuvwxyz
+End of loop</code></pre>
+
+      <h3 class="title">Example: Equating Two Variables</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 10, b = 0;
+
+   while(a != b){
+      a--;
+      b++;
+      printf("a: %d b: %d\n", a, b);
+   }
+
+   printf("\nEnd of loop");
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>a: 9 b: 1
+a: 8 b: 2
+a: 7 b: 3
+a: 6 b: 4
+a: 5 b: 5
+
+End of loop</code></pre>
+
+      <h2 class="title">while vs. do-while Loops</h2>
+      <p>The <code>while</code> loop is an <strong>entry-controlled</strong> loop. If the condition is false at the beginning, the loop won’t run at all.</p>
+      <p>The <code>do-while</code> loop is an <strong>exit-controlled</strong> loop, which guarantees that the loop body runs at least once.</p>
+      <p>More on this is covered in the <a href="#">do-while chapter</a>.</p>
+
+    </div>
+  </div>
+</div>

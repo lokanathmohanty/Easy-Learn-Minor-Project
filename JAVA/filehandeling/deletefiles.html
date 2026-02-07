@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Delete File</h1>
+    <div class="content">
+      <p>Java offers a straightforward way to delete files using the <code>File.delete()</code> method from the <code>java.io.File</code> class. This method attempts to remove a file or an empty directory at the given path, returning <code>true</code> if deletion succeeds and <code>false</code> otherwise.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Deleting a File</h2>
+    <div class="content">
+      <p>To delete an existing file, first create a <code>File</code> object and then call <code>delete()</code> after checking that the file exists:</p>
+      <pre><code>File file = new File("C:/java/hello.txt");
+if(file.exists()) {
+   boolean success = file.delete();
+   if (success) {
+      System.out.println("The file has been successfully deleted.");
+   } else {
+      System.out.println("The file deletion failed.");
+   }
+} else {
+   System.out.println("The file is not present.");
+}</code></pre>
+      <p>This process ensures you don't try to delete a file that is missing, and checks the result.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Deleting a Non-Existent File</h2>
+    <div class="content">
+      <p>If you attempt to delete a file that does not exist, <code>delete()</code> returns <code>false</code>:</p>
+      <pre><code>File file = new File("test1.txt");
+boolean success = file.delete();
+
+if (success) {
+   System.out.println("The file has been successfully deleted.");
+} else {
+   System.out.println("The file deletion failed.");
+}</code></pre>
+      <p>The output will indicate failure if <code>test1.txt</code> is not found.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Deleting All Files in a Directory</h2>
+    <div class="content">
+      <p>You can recursively delete all files within a directory by listing its contents and deleting each file individually:</p>
+      <pre><code>public static void deleteFiles(File dirPath) {
+   File filesList[] = dirPath.listFiles();
+   for(File file : filesList) {
+      if(file.isFile()) {
+         file.delete();
+      } else {
+         deleteFiles(file);
+      }
+   }
+}
+
+File directory = new File("D:\\test");
+deleteFiles(directory);
+System.out.println("Files deleted.");</code></pre>
+      <p>This approach will remove all files (and also recurse into subdirectories) within the specified directory.</p>
+    </div>
+  </div>
+</div>

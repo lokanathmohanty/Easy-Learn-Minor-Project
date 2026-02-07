@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Constant Arrays</h1>
+
+    <div class="content">
+      <p>
+        A **Constant Array** in PHP is an array whose values, once defined, **cannot be altered** (modified, added to, or removed) during the script's execution. They are useful for storing fixed configuration values or immutable lists.
+      </p>
+      <p>
+        Constant arrays were introduced in PHP 5.6 and newer versions. Unlike regular variables, their identifiers **do not** start with the dollar sign (`$`).
+      </p>
+
+      <h2>Defining Constant Arrays</h2>
+      <p>Constant arrays can be declared using two methods:</p>
+
+      <hr>
+
+      <h3>1. Using the `const` Keyword (Global Scope)</h3>
+      <p>The `const` keyword is used to declare constants at the top level of a script or inside a class.</p>
+      <div class="example">
+        <p>
+          **Syntax:**
+          <code>const ARRAY_NAME = ["val1", "val2", "val3"];</code>
+        </p>
+        <p>
+          **Example:**
+          <code>const FRUITS = ["Watermelon", "Strawberries", "Pomegranate"];</code>
+        </p>
+        <p class="content">The `FRUITS` array is fixed and cannot be changed.</p>
+      </div>
+
+      <hr>
+
+      <h3>2. Using the `define()` Function (PHP 7+)</h3>
+      <p>The `define()` function allows for defining constants, including constant arrays, and can be used in the global scope.</p>
+      <div class="example">
+        <p>
+          **Syntax:**
+          <code>define('ARRAY_NAME', ["val1", "val2", "val3"]);</code>
+        </p>
+        <p>
+          **Example (Associative Array):**
+          <code>define ('CAPITALS', array(</code><br>
+          <code>&nbsp;&nbsp;&nbsp;"Maharashtra" => "Mumbai",</code><br>
+          <code>&nbsp;&nbsp;&nbsp;"Telangana" => "Hyderabad"</code><br>
+          <code>));</code>
+        </p>
+        <p class="content">Output: Array ( [Maharashtra] => Mumbai [Telangana] => Hyderabad )</p>
+      </div>
+
+      <hr>
+
+      <h2>Immutability (The Fatal Error)</h2>
+      <p>
+        Any attempt to change, add, or remove an element from a constant array will result in a fatal error, confirming its immutable nature.
+      </p>
+      <div class="example">
+        <p>
+          <code>const FRUITS = ["Apple", "Banana"];</code><br>
+          <code>FRUITS[1] = "Mango"; // Attempts to modify the element</code>
+        </p>
+        <p class="content">
+          $\rightarrow$ **PHP Fatal error:** Cannot use temporary expression in write context
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>ReactJS - Material UI</h1>
+    </div>
+
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        Material UI is one of the most popular React UI frameworks. 
+        It provides ready-to-use components following Google’s Material Design principles, 
+        helping developers build responsive and modern applications faster.
+      </p>
+
+      <h2>Installation</h2>
+      <p>Install Material UI core package using npm:</p>
+      <pre><code>npm install @material-ui/core</code></pre>
+
+      <p>Include Roboto fonts in your HTML file:</p>
+      <pre><code>&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" /&gt;</code></pre>
+
+      <p>To use Material Icons:</p>
+      <pre><code>&lt;link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /&gt;</code></pre>
+
+      <p>Install SVG icons package:</p>
+      <pre><code>npm install @material-ui/icons</code></pre>
+
+      <h2>Working Example</h2>
+      <p>We will recreate the Expense List application using Material UI components instead of plain HTML tables.</p>
+
+      <h3>Step 1 – Create Application</h3>
+      <p>Create a new React app:</p>
+      <pre><code>npx create-react-app react-materialui-app
+cd react-materialui-app</code></pre>
+
+      <h3>Step 2 – Install Dependencies</h3>
+      <p>Install Material UI Core and Icons:</p>
+      <pre><code>npm install @material-ui/core @material-ui/icons --save</code></pre>
+
+      <h3>Step 3 – Create Component</h3>
+      <p>Create <code>ExpenseEntryItemList.js</code> inside <code>src/components</code> folder:</p>
+      <pre><code>
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+class ExpenseEntryItemList extends React.Component {
+   render() {
+      const StyledTableCell = withStyles((theme) => ({
+         head: {
+            backgroundColor: theme.palette.common.black,
+            color: theme.palette.common.white,
+         },
+         body: {
+            fontSize: 14,
+         },
+      }))(TableCell);
+
+      const StyledTableRow = withStyles((theme) => ({
+         root: {
+            '&:nth-of-type(odd)': {
+               backgroundColor: theme.palette.action.hover,
+            },
+         },
+      }))(TableRow);
+
+      const lists = this.props.items.map((item) =&gt;
+         &lt;StyledTableRow key={item.id}&gt;
+            &lt;StyledTableCell component="th" scope="row"&gt;{item.name}&lt;/StyledTableCell&gt;
+            &lt;StyledTableCell align="right"&gt;{item.amount}&lt;/StyledTableCell&gt;
+            &lt;StyledTableCell align="right"&gt;{new Date(item.spendDate).toDateString()}&lt;/StyledTableCell&gt;
+            &lt;StyledTableCell align="right"&gt;{item.category}&lt;/StyledTableCell&gt;
+         &lt;/StyledTableRow&gt;
+      );
+
+      return (
+         &lt;TableContainer component={Paper}&gt;
+            &lt;Table aria-label="customized table"&gt;
+               &lt;TableHead&gt;
+                  &lt;TableRow&gt;
+                     &lt;StyledTableCell&gt;Title&lt;/StyledTableCell&gt;
+                     &lt;StyledTableCell align="right"&gt;Amount&lt;/StyledTableCell&gt;
+                     &lt;StyledTableCell align="right"&gt;Spend date&lt;/StyledTableCell&gt;
+                     &lt;StyledTableCell align="right"&gt;Category&lt;/StyledTableCell&gt;
+                  &lt;/TableRow&gt;
+               &lt;/TableHead&gt;
+               &lt;TableBody&gt;
+                  {lists}
+               &lt;/TableBody&gt;
+            &lt;/Table&gt;
+         &lt;/TableContainer&gt;
+      );
+   }
+}
+export default ExpenseEntryItemList;
+      </code></pre>
+
+      <h3>Step 4 – Update index.js</h3>
+      <p>Use the component in <code>index.js</code> with sample items:</p>
+      <pre><code>
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ExpenseEntryItemList from './components/ExpenseEntryItemList';
+
+const items = [
+   { id: 1, name: "Pizza", amount: 80, spendDate: "2020-10-10", category: "Food" },
+   { id: 2, name: "Cinema", amount: 210, spendDate: "2020-10-16", category: "Entertainment" },
+   { id: 3, name: "Java Programming Book", amount: 242, spendDate: "2020-10-15", category: "Academic" }
+];
+
+ReactDOM.render(
+   &lt;React.StrictMode&gt;
+      &lt;ExpenseEntryItemList items={items} /&gt;
+   &lt;/React.StrictMode&gt;,
+   document.getElementById('root')
+);
+      </code></pre>
+
+      <h3>Step 5 – Add Fonts and Icons</h3>
+      <p>Update <code>public/index.html</code>:</p>
+      <pre><code>
+&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" /&gt;
+&lt;link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /&gt;
+      </code></pre>
+
+      <h2>Run the Application</h2>
+      <p>Start the app with:</p>
+      <pre><code>npm start</code></pre>
+      <p>Open <a href="http://localhost:3000">http://localhost:3000</a> in the browser to see the Material UI styled expense table.</p>
+
+      <h2>Summary</h2>
+      <p>
+        Material UI provides rich, customizable components that follow Material Design. 
+        By using its Table, Paper, and styling utilities, you can create 
+        elegant UIs with minimal custom code.
+      </p>
+    </div>
+  </div>
+</div>

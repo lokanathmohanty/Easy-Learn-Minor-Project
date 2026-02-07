@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Arithmetic Operators Examples</h1>
+
+    <div class="content">
+      <p>
+        **Arithmetic Operators** in PHP are used to perform mathematical calculations on numeric operands (integers or floats).
+      </p>
+
+      <h2>Core Arithmetic Operators</h2>
+      <table>
+        <tr>
+          <th>Operator</th>
+          <th>Description</th>
+          <th>Example ($a=42, $b=20)</th>
+          <th>Result</th>
+        </tr>
+        <tr>
+          <td><code>+</code></td>
+          <td>Addition</td>
+          <td><code>$a + $b</code></td>
+          <td><code>62</code></td>
+        </tr>
+        <tr>
+          <td><code>-</code></td>
+          <td>Subtraction</td>
+          <td><code>$a - $b</code></td>
+          <td><code>22</code></td>
+        </tr>
+        <tr>
+          <td><code>*</code></td>
+          <td>Multiplication</td>
+          <td><code>$a * $b</code></td>
+          <td><code>840</code></td>
+        </tr>
+        <tr>
+          <td><code>/</code></td>
+          <td>Division</td>
+          <td><code>$a / $b</code></td>
+          <td><code>2.1</code> (Result is a float)</td>
+        </tr>
+        <tr>
+          <td><code>%</code></td>
+          <td>Modulus (Remainder)</td>
+          <td><code>$a % $b</code></td>
+          <td><code>2</code></td>
+        </tr>
+        <tr>
+          <td><code>**</code></td>
+          <td>Exponentiation (Power of)</td>
+          <td><code>2 ** 3</code></td>
+          <td><code>8</code></td>
+        </tr>
+      </table>
+
+      <hr>
+
+      <h2>Increment and Decrement Operators</h2>
+      <p>
+        The increment (`++`) and decrement (`--`) operators are used to increase or decrease a variable's value by one. Their placement (before or after the variable) determines when the operation takes effect in an expression.
+      </p>
+
+      <h3>Pre-Increment/Decrement (`++$a`, `--$a`)</h3>
+      <p>
+        The value is **changed first**, then the result is used in the expression.
+      </p>
+      <div class="example">
+        <p><code>$count = 10;</code></p>
+        <p><code>echo ++$count;</code> $\rightarrow$ <code>11</code> (<code>$count</code> is now 11)</p>
+      </div>
+
+      <h3>Post-Increment/Decrement (`$a++`, `$a--`)</h3>
+      <p>
+        The **original value is used first** in the expression, then the value is changed.
+      </p>
+      <div class="example">
+        <p><code>$count = 10;</code></p>
+        <p><code>echo $count++;</code> $\rightarrow$ <code>10</code> (<code>$count</code> is now 11)</p>
+        <p><code>echo $count;</code> $\rightarrow$ <code>11</code></p>
+      </div>
+
+      <hr>
+
+      <h2>Behavior with Data Types</h2>
+
+      <h3>Division (`/`) and Modulus (`%`)</h3>
+      <ul>
+        <li>
+          **Division** (`/`) always returns a **float** unless the result is exactly an integer (e.g., $4/2 = 2$). For integer division, use the `intdiv()` function.
+        </li>
+        <li>
+          **Modulus** (`%`) returns the remainder of integer division. The sign of the result is always the same as the **dividend** (the first operand).
+          <div class="example">
+            <code>-10 % 5</code> $\rightarrow$ <code>0</code> (Since -10 is a multiple of 5)<br>
+            <code>-10 % 3</code> $\rightarrow$ <code>-1</code>
+          </div>
+        </li>
+      </ul>
+
+      <h3>Floating-Point Arithmetic</h3>
+      <p>
+        Arithmetic operations on **float** numbers generally result in a float. Be aware of standard floating-point precision issues common across all programming languages.
+      </p>
+      <div class="example">
+        <code>5.5 + 2.2</code> $\rightarrow$ <code>7.7</code><br>
+        <code>5.5 / 2.2</code> $\rightarrow$ <code>2.5</code>
+      </div>
+    </div>
+  </div>
+</div>

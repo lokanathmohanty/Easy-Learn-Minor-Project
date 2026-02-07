@@ -1,0 +1,179 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Unary Operators in C</h1>
+    <div class="content">
+
+      <p>While most operators in C are binary (require two operands), there are several <strong>unary operators</strong> that operate on only one operand. Examples include <code>++</code>, <code>--</code>, <code>!</code>, <code>~</code>, etc.</p>
+
+      <h2 class="title">The Increment Operator (++)</h2>
+      <p>The increment operator <code>++</code> adds 1 to its operand. For example, <code>a++</code> is equivalent to <code>a = a + 1</code>.</p>
+      <p>It can be used as:</p>
+      <ul>
+        <li><code>prefix (++a)</code>: increments before use</li>
+        <li><code>postfix (a++)</code>: uses value, then increments</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code>b = a++; // assigns a to b, then increments a
+b = ++a; // increments a, then assigns it to b</code></pre>
+
+      <h2 class="title">The Decrement Operator (--)</h2>
+      <p>The decrement operator <code>--</code> subtracts 1 from its operand. <code>a--</code> is equivalent to <code>a = a - 1</code>.</p>
+      <p>It also has prefix and postfix forms:</p>
+      <pre><code>b = a--; // assigns a to b, then decrements a
+b = --a; // decrements a, then assigns it to b</code></pre>
+
+      <h2 class="title">The Unary "+" Operator</h2>
+      <p>The <code>+</code> operator can be used as a unary operator, though it has no visible effect. For example, <code>+5</code> is the same as <code>5</code>.</p>
+
+      <p>Example:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   char x = 'A';
+   char y = +x;
+
+   float a = 1.55;
+   float b = +a;
+
+   printf ("x: %c y: %c\n", x, y);
+   printf ("a: %f b: %f\n", a, b);
+
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>x: A y: A
+a: 1.550000 b: 1.550000</code></pre>
+
+      <h2 class="title">The Unary "−" Operator</h2>
+      <p>The unary minus operator <code>-</code> negates the value of its operand.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int x = 5;
+   int y = -x;
+
+   printf("x: %d y: %d\n", x, y);
+
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>x: 5 y: -5</code></pre>
+
+      <h2 class="title">The Address-of Operator (&)</h2>
+      <p>The <code>&</code> operator, when used as a unary operator, returns the memory address of a variable.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   char x = 'A';
+   printf ("Address of x: %p\n", &x);
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Address of x: 0x61fe1f</code></pre>
+      <p><strong>Note:</strong> The address may vary every time you run the program.</p>
+
+      <h2 class="title">The Dereference Operator (*)</h2>
+      <p>The <code>*</code> operator is used to access the value at a memory address (dereferencing a pointer).</p>
+
+      <h3>Example 1:</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int x = 10;
+   int *y = &x;
+
+   printf ("x: %d Address of x: %p\n", x, &x);
+   printf("Value at x with Dereference: %d\n", *y);
+
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>x: 10 Address of x: 0x61fe1f
+Value at x with Dereference: 10</code></pre>
+
+      <h3>Example 2: Modifying Value via Pointer</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int x = 10;
+   int *y = &x;
+
+   *y = 20;
+
+   printf("x: %d with Dereference: %d\n", x, *y);
+
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>x: 20 with Dereference: 20</code></pre>
+
+      <h2 class="title">The Logical NOT Operator (!)</h2>
+      <p>The logical NOT operator <code>!</code> inverts a Boolean value: true becomes false and vice versa.</p>
+
+      <h3>Example 1:</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 0;
+   int b = 20;
+
+   if (!(a && b)){
+      printf("Line 1 - Condition is true\n");
+   }
+
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Line 1 - Condition is true</code></pre>
+
+      <h3>Example 2:</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int i = 0;
+
+   while (!(i > 5)){
+      printf("i = %d\n", i);
+      i++;
+   }
+
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>i = 0
+i = 1
+i = 2
+i = 3
+i = 4
+i = 5</code></pre>
+
+      <h2 class="title">The 1's Complement Operator (~)</h2>
+      <p>The <code>~</code> operator flips all the bits in the binary representation of an integer (1's become 0's, and vice versa).</p>
+      <p>Example: If <code>a = 60</code> (binary: <code>0011 1100</code>), then <code>~a</code> becomes <code>1100 0011</code>, which is -61 in two's complement form.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 60;   // 0011 1100
+   int c = ~a;   // 1100 0011 (binary), -61 in decimal
+
+   printf("Value of c is %d \n", c);
+
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Value of c is -61</code></pre>
+
+    </div>
+  </div>
+</div>

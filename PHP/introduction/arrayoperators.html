@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Array Operators</h1>
+
+    <div class="content">
+      <p>
+        **Array Operators** in PHP are used for combining and comparing array data structures. They are unique in how they handle keys, especially when merging or checking for equality.
+      </p>
+
+      <h2>Array Operators Summary</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Symbol</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>**Union**</td>
+          <td><code>+</code></td>
+          <td>Combines two arrays. If keys conflict, the elements from the **left-hand array** are kept.</td>
+        </tr>
+        <tr>
+          <td>**Equality**</td>
+          <td><code>==</code></td>
+          <td>Returns `true` if arrays have the **same key-value pairs**. Order and data types are **ignored**.</td>
+        </tr>
+        <tr>
+          <td>**Identity**</td>
+          <td><code>===</code></td>
+          <td>Returns `true` if arrays have the **same key-value pairs**, in the **same order**, and with the **same data types**.</td>
+        </tr>
+        <tr>
+          <td>**Inequality**</td>
+          <td><code>!=</code> or <code>&lt;&gt;</code></td>
+          <td>Returns `true` if arrays are **not equal** (based on loose comparison, `==`).</td>
+        </tr>
+        <tr>
+          <td>**Non-identity**</td>
+          <td><code>!==</code></td>
+          <td>Returns `true` if arrays are **not identical** (based on strict comparison, `===`).</td>
+        </tr>
+      </table>
+
+      <hr>
+
+      <h2>Combining Arrays: The Union Operator (`+`)</h2>
+      <p>
+        The `+` operator performs a **Union**. It appends the elements of the right-hand array to the left-hand array, but it **does not overwrite** existing keys. If a key from the right array already exists in the left array, the left array's value for that key is preserved.
+      </p>
+      <div class="example">
+        <p>
+          <code>$arr1 = ["a" => 1, "b" => 2];</code><br>
+          <code>$arr2 = ["b" => 5, "c" => 3];</code><br>
+          <code>$arr3 = $arr1 + $arr2;</code> $\rightarrow$ <code>$arr3</code> is <code>["a" => 1, **"b" => 2**, "c" => 3]</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Comparing Arrays: Equality vs. Identity</h2>
+      <p>Understanding the difference between loose equality (`==`) and strict identity (`===`) is crucial in array comparisons.</p>
+
+      <h3>Equality (`==`) - Loose Comparison</h3>
+      <p>
+        Two arrays are equal if they contain the same key-value pairs. **Order of elements** and **data types** of values are **not checked**.
+      </p>
+      <div class="example">
+        <p>
+          <code>$arr1 = [0=>70, 2=>80, 1=>90];</code> (Indices are 0, 2, 1)<br>
+          <code>$arr2 = [70, 90, 80];</code> (Indices are 0, 1, 2)<br>
+          <code>$arr1 == $arr2</code> $\rightarrow$ <code>bool(false)</code> (Keys 1 and 2 don't match values, as key 1 in $arr1$ is 90 and key 1 in $arr2$ is 90). **Note:** The text example provided a conflicting result; for equality, both key and value must match, regardless of order.
+        </p>
+      </div>
+
+      <h3>Identity (`===`) - Strict Comparison</h3>
+      <p>
+        Two arrays are identical only if:
+        <ol>
+          <li>They have the **same key-value pairs**.</li>
+          <li>The pairs are in the **same order**.</li>
+          <li>The values and keys have the **same data types**.</li>
+        </ol>
+      </p>
+      <div class="example">
+        <p>
+          <code>$arrA = [1, 2]; $arrB = ["1", 2];</code><br>
+          <code>$arrA == $arrB</code> $\rightarrow$ <code>bool(true)</code> (Values coerced)<br>
+          <code>$arrA === $arrB</code> $\rightarrow$ <code>bool(false)</code> (Types differ)
+        </p>
+        <p>
+          <code>$arrC = [1=>10, 0=>20]; $arrD = [0=>20, 1=>10];</code><br>
+          <code>$arrC === $arrD</code> $\rightarrow$ <code>bool(false)</code> (**Order** is different)
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

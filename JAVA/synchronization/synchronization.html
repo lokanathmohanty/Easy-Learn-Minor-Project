@@ -1,0 +1,176 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Thread Synchronization</h1>
+
+    <div class="content">
+      <h2 class="content-title">Need of Thread Synchronization?</h2>
+      <p>When multiple threads try to access the same resource at the same time, unexpected results can occur. For example, two threads writing to the same file might overwrite or corrupt data. To avoid these concurrency issues, threads must be synchronized.</p>
+      <p>Java uses monitors to synchronize threads. Every object has a monitor associated with it. Only one thread can hold a lock on a monitor at any given time.</p>
+
+      <h2 class="content-title">Thread Synchronization in Java</h2>
+      <p>Java provides the <code>synchronized</code> block to help with thread synchronization:</p>
+      <pre><code>synchronized(objectidentifier) {
+   // Access shared variables and other shared resources
+}</code></pre>
+      <p>The objectidentifier is a reference to the object whose lock is used for synchronization.</p>
+
+      <h2 class="content-title">Multithreading Example without Thread Synchronization</h2>
+      <p>This program may produce different output every time it is run, depending on thread scheduling.</p>
+
+      <pre><code>
+class PrintDemo {
+   public void printCount() {
+      try {
+         for(int i = 5; i > 0; i--) {
+            System.out.println("Counter   ---   "  + i );
+         }
+      } catch (Exception e) {
+         System.out.println("Thread  interrupted.");
+      }
+   }
+}
+
+class ThreadDemo extends Thread {
+   private Thread t;
+   private String threadName;
+   PrintDemo  PD;
+
+   ThreadDemo(String name, PrintDemo pd) {
+      threadName = name;
+      PD = pd;
+   }
+   
+   public void run() {
+      PD.printCount();
+      System.out.println("Thread " + threadName + " exiting.");
+   }
+
+   public void start() {
+      System.out.println("Starting " + threadName);
+      if (t == null) {
+         t = new Thread(this, threadName);
+         t.start();
+      }
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      PrintDemo PD = new PrintDemo();
+
+      ThreadDemo T1 = new ThreadDemo("Thread - 1", PD);
+      ThreadDemo T2 = new ThreadDemo("Thread - 2", PD);
+
+      T1.start();
+      T2.start();
+
+      try {
+         T1.join();
+         T2.join();
+      } catch (Exception e) {
+         System.out.println("Interrupted");
+      }
+   }
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Starting Thread - 1
+Starting Thread - 2
+Counter   ---   5
+Counter   ---   4
+Counter   ---   3
+Counter   ---   5
+Counter   ---   2
+Counter   ---   1
+Counter   ---   4
+Thread Thread - 1 exiting.
+Counter   ---   3
+Counter   ---   2
+Counter   ---   1
+Thread Thread - 2 exiting.
+      </code></pre>
+
+      <h2 class="content-title">Multithreading Example with Thread Synchronization</h2>
+      <p>Now we use the <code>synchronized</code> block to ensure only one thread at a time accesses the printCount method.</p>
+
+      <pre><code>
+class PrintDemo {
+   public void printCount() {
+      try {
+         for(int i = 5; i > 0; i--) {
+            System.out.println("Counter   ---   "  + i );
+         }
+      } catch (Exception e) {
+         System.out.println("Thread  interrupted.");
+      }
+   }
+}
+
+class ThreadDemo extends Thread {
+   private Thread t;
+   private String threadName;
+   PrintDemo PD;
+
+   ThreadDemo(String name, PrintDemo pd) {
+      threadName = name;
+      PD = pd;
+   }
+   
+   public void run() {
+      synchronized(PD) {
+         PD.printCount();
+      }
+      System.out.println("Thread " + threadName + " exiting.");
+   }
+
+   public void start() {
+      System.out.println("Starting " + threadName);
+      if (t == null) {
+         t = new Thread(this, threadName);
+         t.start();
+      }
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      PrintDemo PD = new PrintDemo();
+
+      ThreadDemo T1 = new ThreadDemo("Thread - 1", PD);
+      ThreadDemo T2 = new ThreadDemo("Thread - 2", PD);
+
+      T1.start();
+      T2.start();
+
+      try {
+         T1.join();
+         T2.join();
+      } catch (Exception e) {
+         System.out.println("Interrupted");
+      }
+   }
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Starting Thread - 1
+Starting Thread - 2
+Counter   ---   5
+Counter   ---   4
+Counter   ---   3
+Counter   ---   2
+Counter   ---   1
+Thread Thread - 1 exiting.
+Counter   ---   5
+Counter   ---   4
+Counter   ---   3
+Counter   ---   2
+Counter   ---   1
+Thread Thread - 2 exiting.
+      </code></pre>
+    </div>
+  </div>
+</div>

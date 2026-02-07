@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - overscroll-behavior Property</h1>
+    <div class="content">
+      <p>
+        The <b>CSS overscroll-behavior</b> property is a shorthand property that controls what happens when a user scrolls beyond the boundary of a scrollable area. By default, when a scroll reaches its limit, the scrolling may continue on ancestor elements, a phenomenon called <b>scroll chaining</b>.
+      </p>
+      <p>
+        This property allows developers to control or prevent this chaining effect. It is especially useful in UI components such as modal dialogs, side panels, or embedded scrollable containers where unwanted scroll propagation can break the user experience.
+      </p>
+      <h2>Scroll Chaining Explained</h2>
+      <p>
+        Scroll chaining occurs when you scroll past the end of a child element, and the parent element starts scrolling. For example, imagine a modal box with a lot of text. Once you scroll to the bottom of the modal, if the modal uses the default behavior, the background page will start scrolling as well. This can be disruptive in some cases, so overscroll-behavior allows you to manage this behavior precisely.
+      </p>
+      <h2>Syntax</h2>
+      <p>
+        <b>overscroll-behavior = [ contain | auto | none ]{1,2}</b>
+      </p>
+      <ul>
+        <li><b>auto</b> − Default value. Normal scroll chaining occurs.</li>
+        <li><b>contain</b> − Scrolling is contained within the element, preventing scroll chaining to parent containers.</li>
+        <li><b>none</b> − Prevents both scroll chaining and default overflow behaviors such as bounce effects in some browsers.</li>
+      </ul>
+      <h2>Applies To</h2>
+      <p>
+        The overscroll-behavior property applies to all non-replaced block-level and inline-block elements. It does not apply when set directly on an <code>&lt;iframe&gt;</code>, but rather must be set inside its document (on <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code>).
+      </p>
+
+      <h2>Examples of overscroll-behavior Property</h2>
+
+      <h2>Example 1: overscroll-behavior: auto</h2>
+      <p>
+        In this example, the <b>auto</b> value is applied, which means the scroll chaining continues normally. Once the blue box reaches the scroll boundary, the parent container also begins scrolling.
+      </p>
+      <pre>
+div {
+  overflow: auto;
+  border: 2px solid black;
+}
+#box-1 {
+  background-color: lightblue;
+  overscroll-behavior: auto;
+}
+      </pre>
+      <p><b>Behavior:</b> When the inner content reaches the end, scrolling continues on the parent container.</p>
+
+      <h2>Example 2: overscroll-behavior: contain</h2>
+      <p>
+        Here, the <b>contain</b> value ensures that scrolling is limited to the element itself. The parent container will not scroll once the element has reached its scroll boundary.
+      </p>
+      <pre>
+#box-2 {
+  background-color: aliceblue;
+  overscroll-behavior: contain;
+}
+      </pre>
+      <p><b>Behavior:</b> Scrolls stop at the boundary of the element, preventing parent elements from scrolling.</p>
+
+      <h2>Example 3: overscroll-behavior with Two Values</h2>
+      <p>
+        You can specify two values: one for the horizontal axis (x) and one for the vertical axis (y). For example:
+      </p>
+      <pre>
+#box-3 {
+  overscroll-behavior: auto none;
+}
+      </pre>
+      <p>
+        In this case, horizontal scrolling is normal (<b>auto</b>), but vertical scrolling is blocked from chaining (<b>none</b>).
+      </p>
+
+      <h2>Associated Properties</h2>
+      <ul>
+        <li><b>overscroll-behavior-x</b> − Controls scroll behavior along the horizontal axis.</li>
+        <li><b>overscroll-behavior-y</b> − Controls scroll behavior along the vertical axis.</li>
+        <li><b>overscroll-behavior-block</b> − Controls scroll behavior in the block direction.</li>
+        <li><b>overscroll-behavior-inline</b> − Controls scroll behavior in the inline direction.</li>
+      </ul>
+
+      <h2>Practical Use Cases</h2>
+      <ul>
+        <li>Prevent background scrolling when using modal dialogs.</li>
+        <li>Avoid nested scrolling issues in sidebars or chat windows.</li>
+        <li>Improve user experience in mobile web apps where bounce effects are not desirable.</li>
+      </ul>
+
+      <h2>Browser Support</h2>
+      <p>
+        The <b>overscroll-behavior</b> property is supported by most modern browsers including Chrome, Edge, Firefox, Safari, and Opera.
+      </p>
+    </div>
+  </div>
+</div>

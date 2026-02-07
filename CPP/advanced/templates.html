@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Templates (Generic Programming) 🧬</h1>
+
+        <div class="content">
+            <p>**Templates** are the core of **generic programming** in C++. They allow you to write functions and classes (algorithms and data structures) that operate with different data types **without rewriting the same logic**. A template acts as a **blueprint** or formula for creating type-specific code instances at compile time.</p>
+            <p>The two keywords used to define a template are **<code>template</code>** and **<code>typename</code>** (or <code>class</code>, which are interchangeable in this context).</p>
+
+            <hr>
+
+            <h2 class="title">1. Function Templates</h2>
+
+            <p>A function template provides a single function definition that can be used with different data types.</p>
+            <h3>Syntax</h3>
+            <pre class="example">
+template &lt;typename T&gt; 
+T const&amp; Max (T const&amp; a, T const&amp; b) { 
+   return a &lt; b ? b:a; 
+}
+</pre>
+            <p>When the compiler sees `Max(i, j)` where `i` and `j` are `int`, it generates a specific `Max<int>` function. When it sees `Max(f1, f2)` where they are `double`, it generates `Max<double>`.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">2. Class Templates</h2>
+
+        <div class="content">
+            <p>Class templates define a blueprint for creating generic classes that work with any data type. Standard Library containers like `std::vector<T>` and `std::stack<T>` are implemented as class templates.</p>
+            <h3>Syntax</h3>
+            <pre class="example">
+template &lt;class T&gt; 
+class Stack { 
+private: 
+   std::vector&lt;T&gt; elems; // T is the generic type 
+public: 
+   void push(T const&amp;);
+   // ... other methods
+};
+
+// Instantiation:
+Stack&lt;int&gt; intStack;         // Creates Stack<int> class
+Stack&lt;std::string&gt; stringStack; // Creates Stack<std::string> class
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Template Argument Deduction</h2>
+
+        <div class="content">
+            <p>**Template Argument Deduction** is a feature that allows the compiler to automatically infer the data type (`T`) of the template arguments, saving you the need to specify them explicitly.</p>
+
+            <ul>
+                <li>
+                    **Function Template Deduction:** For function templates, the compiler deduces `T` based on the types of the arguments passed during the function call.
+                    <pre class="example">
+// Compiler deduces T as 'int'
+add(5, 3); 
+</pre>
+                </li>
+                <li>
+                    **Class Template Deduction (CTAD):** Since C++17, the compiler can also infer template parameters for class templates based on the arguments passed to the constructor.
+                    <pre class="example">
+template&lt;typename T&gt;
+class Holder {
+   public: Holder(T value);
+};
+
+// Compiler deduces T as 'double' from the constructor argument
+Holder h2(3.14); 
+</pre>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Benefits of Templates</h2>
+
+        <div class="content">
+            <ul>
+                <li>
+                    **Code Reusability:** Write one generic algorithm that works for all types, eliminating code duplication.
+                </li>
+                <li>
+                    **Reduced Maintenance:** Fixing a bug in the single template definition fixes it for all type instantiations.
+                </li>
+                <li>
+                    **Enhanced Performance:** Instantiation and type-specific optimization occur entirely at **compile time**, leading to zero runtime overhead.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

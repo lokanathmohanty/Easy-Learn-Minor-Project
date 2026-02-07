@@ -1,0 +1,288 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript — Switch Case</h1>
+
+    <div class="content">
+      <h2 class="title">Overview</h2>
+      <p>The <code>switch</code> statement in JavaScript is a conditional statement used to execute different blocks of code depending on the value of an expression. It provides a cleaner and often more efficient way than multiple <code>if...else if</code> statements when checking a single variable against multiple values.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Syntax</h2>
+      <pre>
+switch (expression) {
+  case value1:
+    // statements
+    break;
+  case value2:
+    // statements
+    break;
+  ...
+  default:
+    // statements
+}
+      </pre>
+      <ul>
+        <li><p><strong>case</strong>: Defines a block of code to run if the expression matches the case value.</p></li>
+        <li><p><strong>break</strong>: Terminates a case. If omitted, execution continues to the next case.</p></li>
+        <li><p><strong>default</strong>: Defines code that runs if no case matches. (Optional)</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Basic Switch</h2>
+      <p>Here, the <code>grade</code> variable is used in a <code>switch</code> statement:</p>
+      <pre>
+let grade = 'A';
+switch (grade) {
+  case 'A':
+    console.log("Good job");
+    break;
+  case 'B':
+    console.log("Passed");
+    break;
+  case 'C':
+    console.log("Failed");
+    break;
+  default:
+    console.log("Unknown grade");
+}
+      </pre>
+      <p><strong>Output:</strong> Good job</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Without break</h2>
+      <p>If you omit <code>break</code>, execution "falls through" into the next cases:</p>
+      <pre>
+let grade = 'A';
+switch (grade) {
+  case 'A':
+    console.log("Good job");
+  case 'B':
+    console.log("Passed");
+  case 'C':
+    console.log("Failed");
+  default:
+    console.log("Unknown grade");
+}
+      </pre>
+      <p><strong>Output:</strong> Good job, Passed, Failed, Unknown grade</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Common Code Blocks</h2>
+      <p>You can group multiple cases to run the same block of code:</p>
+      <pre>
+let grade = 'C';
+switch (grade) {
+  case 'A':
+  case 'B':
+    console.log("Passed");
+    break;
+  case 'C':
+  case 'D':
+    console.log("Failed!");
+    break;
+  default:
+    console.log("Unknown grade");
+}
+      </pre>
+      <p><strong>Output:</strong> Failed!</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Strict Comparison</h2>
+      <p>The <code>switch</code> statement uses <strong>strict equality (===)</strong>. Types must match exactly:</p>
+      <pre>
+let num = 10;
+switch (num) {
+  case '10':
+    console.log("10 Marks!");
+    break;
+  case '11':
+    console.log("11 Marks!");
+    break;
+  default:
+    console.log("Input is not a string!");
+}
+      </pre>
+      <p><strong>Output:</strong> Input is not a string!</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Key Points</h2>
+      <ul>
+        <li><p><code>switch</code> is ideal for multi-branch decisions based on one variable.</p></li>
+        <li><p><code>break</code> prevents fall-through into the next case.</p></li>
+        <li><p>Multiple cases can share the same block of code.</p></li>
+        <li><p>Comparison uses strict equality (<code>===</code>).</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Practice Tasks</h2>
+      <ul>
+        <li><p>Write a <code>switch</code> statement that prints the day of the week based on a number (1–7).</p></li>
+        <li><p>Modify the example to group weekdays and weekends into two cases.</p></li>
+        <li><p>Create a calculator using <code>switch</code> that performs <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code> based on an operator input.</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Summary</h2>
+      <p>The <code>switch</code> statement is a structured way to replace multiple <code>if...else if</code> checks on a single variable. With <code>break</code> and <code>default</code>, it provides flexible control flow and clean handling of multiple conditions.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Further Reading</h2>
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch">MDN — switch</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript — Switch Case</h1>
+
+    <div class="content">
+      <h2 class="title">Overview</h2>
+      <p>The <code>switch</code> statement in JavaScript is a conditional statement used to execute different blocks of code depending on the value of an expression. It provides a cleaner and often more efficient way than multiple <code>if...else if</code> statements when checking a single variable against multiple values.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Syntax</h2>
+      <pre>
+switch (expression) {
+  case value1:
+    // statements
+    break;
+  case value2:
+    // statements
+    break;
+  ...
+  default:
+    // statements
+}
+      </pre>
+      <ul>
+        <li><p><strong>case</strong>: Defines a block of code to run if the expression matches the case value.</p></li>
+        <li><p><strong>break</strong>: Terminates a case. If omitted, execution continues to the next case.</p></li>
+        <li><p><strong>default</strong>: Defines code that runs if no case matches. (Optional)</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Basic Switch</h2>
+      <p>Here, the <code>grade</code> variable is used in a <code>switch</code> statement:</p>
+      <pre>
+let grade = 'A';
+switch (grade) {
+  case 'A':
+    console.log("Good job");
+    break;
+  case 'B':
+    console.log("Passed");
+    break;
+  case 'C':
+    console.log("Failed");
+    break;
+  default:
+    console.log("Unknown grade");
+}
+      </pre>
+      <p><strong>Output:</strong> Good job</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Without break</h2>
+      <p>If you omit <code>break</code>, execution "falls through" into the next cases:</p>
+      <pre>
+let grade = 'A';
+switch (grade) {
+  case 'A':
+    console.log("Good job");
+  case 'B':
+    console.log("Passed");
+  case 'C':
+    console.log("Failed");
+  default:
+    console.log("Unknown grade");
+}
+      </pre>
+      <p><strong>Output:</strong> Good job, Passed, Failed, Unknown grade</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Common Code Blocks</h2>
+      <p>You can group multiple cases to run the same block of code:</p>
+      <pre>
+let grade = 'C';
+switch (grade) {
+  case 'A':
+  case 'B':
+    console.log("Passed");
+    break;
+  case 'C':
+  case 'D':
+    console.log("Failed!");
+    break;
+  default:
+    console.log("Unknown grade");
+}
+      </pre>
+      <p><strong>Output:</strong> Failed!</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Strict Comparison</h2>
+      <p>The <code>switch</code> statement uses <strong>strict equality (===)</strong>. Types must match exactly:</p>
+      <pre>
+let num = 10;
+switch (num) {
+  case '10':
+    console.log("10 Marks!");
+    break;
+  case '11':
+    console.log("11 Marks!");
+    break;
+  default:
+    console.log("Input is not a string!");
+}
+      </pre>
+      <p><strong>Output:</strong> Input is not a string!</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Key Points</h2>
+      <ul>
+        <li><p><code>switch</code> is ideal for multi-branch decisions based on one variable.</p></li>
+        <li><p><code>break</code> prevents fall-through into the next case.</p></li>
+        <li><p>Multiple cases can share the same block of code.</p></li>
+        <li><p>Comparison uses strict equality (<code>===</code>).</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Practice Tasks</h2>
+      <ul>
+        <li><p>Write a <code>switch</code> statement that prints the day of the week based on a number (1–7).</p></li>
+        <li><p>Modify the example to group weekdays and weekends into two cases.</p></li>
+        <li><p>Create a calculator using <code>switch</code> that performs <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code> based on an operator input.</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Summary</h2>
+      <p>The <code>switch</code> statement is a structured way to replace multiple <code>if...else if</code> checks on a single variable. With <code>break</code> and <code>default</code>, it provides flexible control flow and clean handling of multiple conditions.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Further Reading</h2>
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch">MDN — switch</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

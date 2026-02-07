@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Exception Handling with $\text{try, catch, throw, and finally}$</h1>
+
+        <div class="content">
+            <h2 class="title">Distinction between Errors and Exceptions</h2>
+            <p>In PHP, an **Error** is typically an unexpected, unrecoverable problem that often requires script termination (handled by $\text{die()}$ or a custom error handler). An **Exception**, however, refers to an unexpected but **recoverable** situation. Exceptions are designed to be caught and managed, allowing the program to continue execution after the issue is addressed.</p>
+            <p>PHP uses the keywords $\text{try}$, $\text{catch}$, $\text{throw}$, and $\text{finally}$ to implement a structured exception model.</p>
+
+            <hr>
+
+            <h2 class="title">The $\text{try-catch-throw-finally}$ Structure</h2>
+            
+            <table class="example">
+                <thead>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$\text{try}$</td>
+                        <td>Encloses the block of code that might **throw an exception**. If an exception occurs, execution immediately halts and jumps to the matching $\text{catch}$ block.</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{throw}$</td>
+                        <td>The command used to **trigger an exception**. It creates and throws an object of the $\text{Exception}$ class (or a class that extends it).</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{catch}$</td>
+                        <td>Follows the $\text{try}$ block and retrieves the thrown exception object, allowing the script to handle the error gracefully and continue.</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{finally}$</td>
+                        <td>An optional block whose code **always executes**, regardless of whether an exception was thrown or caught, and even if a $\text{return}$ statement is present in $\text{try}$ or $\text{catch}$.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Simple Example: Division by Zero</h3>
+            <p>The $\text{try}$ block checks for a zero denominator. If found, it uses $\text{throw new Exception()}$ to trigger the exception, which is then caught by the $\text{catch (Exception \$e)}$ block.</p>
+            <pre>
+&lt;?php
+   $x = 10;
+   $y = 0; 
+   try {
+      if ($y == 0) {
+         throw new Exception("Division by Zero");
+      }
+      $z = $x/$y;
+      echo "Division: $z";
+   }
+   catch (Exception $e) {
+      echo "Exception: " . $e->getMessage(); // Output: Exception: Division by Zero
+   }
+?&gt;</pre>
+
+            <hr>
+
+            <h2 class="title">The $\text{Exception}$ Class and Multiple Catch Blocks</h2>
+
+            <h3>The $\text{Exception}$ Class</h3>
+            <p>The base class for all user exceptions. Key methods for diagnosing the exception include:</p>
+            <ul>
+                <li>$\text{getMessage()}$: Returns the error message string.</li>
+                <li>$\text{getCode()}$: Returns the exception code (an integer).</li>
+                <li>$\text{getFile()}$: Returns the filename where the exception was thrown.</li>
+                <li>$\text{getLine()}$: Returns the line number where the exception was thrown.</li>
+            </ul>
+
+            <h3>Handling Different Exceptions</h3>
+            <p>You can use **multiple $\text{catch}$ blocks** to handle specific exception types (like built-in $\text{Error}$ subclasses or custom $\text{Exception}$ subclasses). PHP matches the thrown exception type with the closest matching $\text{catch}$ type in order.</p>
+            <pre>
+try {
+   // Code that might throw TypeError or DivisionByZeroError
+}
+catch (DivisionByZeroError $y) {
+   echo "Caught a specific division error.";
+}
+catch (TypeError $x) {
+   echo "Caught a specific type error.";
+}
+catch (Exception $ex) {
+   echo "Caught a general exception.";
+}	</pre>
+
+            <hr>
+
+            <h2 class="title">The $\text{finally}$ Block Behavior</h2>
+            <p>The $\text{finally}$ block is used for cleanup operations (like closing file handles or database connections) because it is guaranteed to execute, regardless of the $\text{try}$ or $\text{catch}$ block's outcome.</p>
+
+            <h3>$\text{finally}$ with $\text{return}$</h3>
+            <p>Crucially, if a $\text{return}$ statement is encountered within the $\text{try}$ or $\text{catch}$ blocks, the statements within the $\text{finally}$ block are executed **before** the program control returns to the calling function.</p>
+            <pre>
+function example() {
+   try {
+      return "Result"; // Return statement hit
+   } finally {
+      echo "Finally runs first! "; // Executes before the return
+   }
+}
+echo example(); // Output: Finally runs first! Result</pre>
+        </div>
+    </div>
+</div>

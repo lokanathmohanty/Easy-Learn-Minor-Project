@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Enumeration (<code>enum</code>) Types 🏷️</h1>
+
+        <div class="content">
+            <p>An **enumeration (<code>enum</code>)** is a **user-defined data type** that consists of a set of **named integral constants**. Enums improve code readability by providing meaningful names for a fixed set of values.</p>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Creating and Accessing Enumerations</h2>
+            <p>You use the <code>enum</code> keyword to declare an enumeration.</p>
+            <p><strong>Syntax:</strong></p>
+            <pre class="example">enum enumName {
+   Enumerator_Value1, // By default, 0
+   Enumerator_Value2, // By default, 1
+   // ...
+};</pre>
+            <p><strong>Underlying Values:</strong> By default, the first enumerator is assigned the integer value **0**, and each subsequent enumerator is incremented by 1. You can **explicitly assign** a value to an enumerator, and the sequence will continue from that new value.</p>
+            <p><strong>Example:</strong> In <code>enum Day { Sunday, Monday, Tuesday=10, Wednesday };</code>, the values are: Sunday=0, Monday=1, Tuesday=10, and Wednesday=11.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Types of C++ Enums</h2>
+            <p>C++ offers two main types of enums, differing primarily in their scope and type safety:</p>
+
+            <h3>1. Unscoped Enums (Traditional <code>enum</code>)</h3>
+            <ul>
+                <li><strong>Scope:</strong> Enumerator names are directly injected into the **enclosing scope** (global or local). This can lead to **name collisions**.</li>
+                <li><strong>Access:</strong> Enumerators are accessed directly (e.g., <code>RGB myColor = Red;</code>).</li>
+                <li><strong>Conversion:</strong> Allows **implicit conversion to integers** (e.g., <code>int value = myColor;</code>), which reduces type safety.</li>
+            </ul>
+
+            <h3>2. Scoped Enums (<code>enum class</code>) 🛡️</h3>
+            <p>Introduced in C++11, scoped enums provide improved type safety and organization.</p>
+            <ul>
+                <li><strong>Declaration:</strong> Uses <code>enum class enumName {...}</code>.</li>
+                <li><strong>Scope:</strong> Enumerator names are strictly **scoped within the enum type**. This avoids name conflicts.</li>
+                <li><strong>Access:</strong> You **must use the enum name** to access the enumerator (e.g., <code>Color myColor = Color::Red;</code>).</li>
+                <li><strong>Conversion:</strong> **No implicit conversion to integers**. Explicit casting (<code>static_cast&lt;int&gt;(myColor)</code>) is required, enhancing type safety.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Benefits and Use Cases</h2>
+            <p>Enums are powerful for:</p>
+            <ul>
+                <li><strong>Improved Readability:</strong> Using names like <code>LogLevel::Error</code> is clearer than using raw integers like <code>2</code>.</li>
+                <li><strong>State Management:</strong> Defining distinct, fixed states (e.g., <code>GameState::Playing</code>, <code>GameState::Paused</code>).</li>
+                <li><strong>Clean Function Interfaces:</strong> Using enums as function parameters ensures only valid, named options are passed.</li>
+                <li>**Switch Statements:** Enums integrate seamlessly with <code>switch</code> statements for defining logical branches based on state or command type.</li>
+            </ul>
+        </div>
+    </div>
+</div>

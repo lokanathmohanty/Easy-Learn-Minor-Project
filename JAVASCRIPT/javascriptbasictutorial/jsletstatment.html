@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - let Statement</h1>
+    <div class="content">
+      <h2>What is JavaScript let statement?</h2>
+      <p>The JavaScript <b>let</b> statement is used to declare a variable. With the let statement, we can declare a variable that is block-scoped. This means a variable declared with <b>let</b> is only accessible within the block of code in which it is defined.</p>
+      <p>The <b>let</b> keyword was introduced in the ES6 (2015) version of JavaScript. It is an alternative to the <b>var</b> keyword.</p>
+      <p>The main reason behind introducing the let keyword is to improve the scoping behaviors of variables and the safety of the code.</p>
+      
+      <h2>Variable Declaration with let statement</h2>
+      <p>Following is the syntax to declare a variable with let statement:</p>
+      <p><code>let var_name = value</code></p>
+      <p>Examples:</p>
+      <ul>
+        <li><code>let name = "John";</code></li>
+        <li><code>let age = 35;</code></li>
+        <li><code>let x = true;</code></li>
+      </ul>
+      <p>Using let statement we can declare a variable of any data type, e.g., numeric, string, boolean, etc.</p>
+      
+      <h2>JavaScript Block Scope vs. Function Scope</h2>
+      <p>The scope of the variable declared with the <b>let</b> keyword is block-scope. If you define the variable with the let keyword in the specific block, you can access the variable inside that block only. If you try to access the variable outside the block, it raises an error.</p>
+      <pre><code>{
+   let x = "John";
+}
+// here x can't be accessed
+</code></pre>
+      <p>The <b>var</b> keyword has function scope, meaning if you define the variable using var in any function block, you can access it throughout the function.</p>
+      <pre><code>function foo(){
+   if (true){
+      let x = 5;
+      var y = 10;
+   }
+   // here x can't be accessed while y is accessible
+}
+</code></pre>
+
+      <h2>Example</h2>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Variable declaration with let keyword&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;script&gt;
+      let x = 10;
+      var y = 20;
+      function test() {
+         let x = 50;
+         var y = 100;
+         document.write("x = " + x + ", y = " + y + "&lt;br/&gt;");
+      }
+      test();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Another Example</h2>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Variable declaration with let keyword&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;script&gt;
+      function test() {
+         let bool = true;
+         if (bool) {
+            let x = 30;
+            var y = 40;
+            document.write("x = " + x + ", y = " + y + "&lt;br/&gt;");
+         }
+         // x can't be accessible here
+         document.write("y = " + y + "&lt;br/&gt;");
+      }
+      test();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      <p>In this way, the let keyword is used to improve the scoping behaviors of the code.</p>
+
+      <h2>Redeclaring Variables in JavaScript</h2>
+      <p>You can't redeclare variables declared with the let keyword in the same block. However, you can declare variables with the same name in different blocks of the same function.</p>
+      <p>Example:</p>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Variable redeclaring&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;script&gt;
+      function test() {
+         if (1) {
+            let m = 70;
+            // let m = 80; // redeclaration with let keyword is not possible
+            var n = 80;
+            var n = 90; // redeclaration with var keyword is possible
+            document.write("m = " + m + ", n = " + n);
+         }
+      }
+      test();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Variable Hoisting</h2>
+      <p>The hoisting behavior of JavaScript moves the declaration of variables to the top of the code. The let keyword doesn't support hoisting, but the var keyword does.</p>
+      <p>Example:</p>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Variable hoisting&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;script&gt;
+      function test() {
+         // Hoisting is not supported by let keyword
+         // m = 100;
+         // document.write("m = " + m + "&lt;br/&gt;");
+         // let m;
+
+         n = 50;
+         document.write("n = " + n + "&lt;br/&gt;");
+         var n;
+      }
+      test();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      <p>You can uncomment the code using the let keyword and check the error in the console, as it doesn't support hoisting.</p>
+    </div>
+  </div>
+</div>

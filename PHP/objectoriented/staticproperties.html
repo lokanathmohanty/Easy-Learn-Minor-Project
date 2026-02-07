@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Static Properties</h1>
+        <div class="content">
+            <p>**Static properties** are variables that belong to the **class itself**, rather than being specific to any object instance of that class. This means all objects of the class share the *same single copy* of the static property.</p>
+            
+            <h2 class="title">Declaration and Access</h2>
+            <ul>
+                <li>A property is declared static using the **<code>static</code>** keyword, which can appear before or after the access modifier (e.g., <code>public static $var;</code>).</li>
+                <li>Static properties are **not accessible** via the object instance (<code>$obj-&gt;var</code> will result in a Notice).</li>
+                <li>They must be accessed using the **Scope Resolution Operator** (<code>::</code>) and the class name: <code>MyClass::$propertyName;</code></li>
+                <li>Type hints (e.g., <code>string</code>, <code>int</code>) can be used, but the type must follow the <code>static</code> keyword: <code>static private string $var1;</code></li>
+            </ul>
+
+            <h2 class="title">Accessing Static Properties Internally</h2>
+            <p>To manipulate or read a static property from within the class's methods, you use special keywords:</p>
+            
+            <h3 class="title">Using <code>self</code></h3>
+            <p>To refer to a static property within the **current class**, use the **<code>self</code>** keyword, followed by the scope resolution operator and the property name (prefixed with a dollar sign):</p>
+            <pre><code>self::$staticProperty;</code></pre>
+            
+            <h3 class="title">Using <code>parent</code></h3>
+            <p>In a derived class, to access a static property defined in the **parent class**, use the **<code>parent</code>** keyword:</p>
+            <pre><code>parent::$staticProperty;</code></pre>
+
+            <h2 class="title">Static Property vs. Constant</h2>
+            <p>The key difference is **mutability** (ability to change):</p>
+            <ul>
+                <li>**Constants** (<code>const</code>) are **immutable**; their value cannot change after declaration.</li>
+                <li>**Static Properties** (<code>static</code>) are **mutable**; their value can be changed during script execution, making them ideal for shared state like counters.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Using a Static Property as an Object Counter</h3>
+            <p>This example demonstrates how a static property (<code>$var1</code>) is shared across all objects of the class to maintain a running count of how many objects have been instantiated.</p>
+            
+            <pre><code>
+class myclass {
+   // Shared static property, initialized to 0
+   static int $var1 = 0; 
+
+   function __construct(){
+      // Increment the shared counter every time a new object is created
+      self::$var1++;
+      echo "object number ". self::$var1 . PHP_EOL;
+   }
+}
+
+// Creating multiple objects, all sharing the same $var1 counter
+$obj1 = new myclass;
+$obj2 = new myclass;
+
+// Accessing the static property outside the class
+echo "Total objects created: " . myclass::$var1 . PHP_EOL; 
+// Output: 
+// object number 1
+// object number 2
+// Total objects created: 2
+            </code></pre>
+        </div>
+    </div>
+</div>

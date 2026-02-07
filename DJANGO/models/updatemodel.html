@@ -1,0 +1,43 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">Django Model Updates and the Migration System 🔄</h1>
+        <div class="content">
+            <p>While the **ORM** methods like <code>create()</code>, <code>update()</code>, and <code>delete()</code> handle **data** operations on existing tables, the **Migration System** is responsible for propagating **structural changes** (adding, deleting, or altering fields/models) to the database schema. This mechanism ensures that the changes made to your Python models are correctly reflected in your database.</p>
+        </div>
+        <h2 class="example">The Django Migration System</h2>
+        <div class="content">
+            <p>The migration system is Django's way of dealing with database schema changes. Changes made to models in <code>models.py</code> are translated into Python migration files, which are then used to modify the underlying database.</p>
+            <h3>Migration Workflow Commands</h3>
+            <p>The core commands are executed using the <code>manage.py</code> script:</p>
+            <ul>
+                <li><strong><code>makemigrations [app_name]</code></strong>: Creates new migration scripts based on changes detected in the model definitions since the last migration.</li>
+                <li><strong><code>migrate [app_name] [migration_name]</code></strong>: Responsible for applying or unapplying (rolling back) migration scripts to the database. Running <code>python manage.py migrate</code> for the first time creates all necessary tables for <code>INSTALLED_APPS</code>.</li>
+                <li><strong><code>showmigrations</code></strong>: Lists all migration files for the project and indicates which ones have been applied (marked with an **<code>[X]</code>**).</li>
+                <li><strong><code>sqlmigrate [app_name] [migration_name]</code></strong>: Displays the raw SQL commands that a migration will run.</li>
+            </ul>
+            <h3>Applying Changes Example (Adding/Altering Fields)</h3>
+            <p>When you change a model's structure (e.g., dropping <code>eemail</code> and adding <code>salary</code> to the <code>Employee</code> model), the process involves:</p>
+            <ol>
+                <li>**Generate Script:** Run <code>makemigrations</code> to create a new script (e.g., <code>0003_...py</code>) that records the removal and addition of fields.
+                    <pre><code>D:\...myproject&gt; python manage.py makemigrations myapp
+Migrations for 'myapp':
+   myapp\migrations\0003_remove_employee_eemail_employee_salary.py
+      - Remove field eemail from employee
+      - Add field salary to employee</code></pre>
+                </li>
+                <li>**Apply Change:** Run <code>migrate</code> to execute the script and modify the table structure in the database.
+                    <pre><code>D:\...myproject&gt; python manage.py migrate
+...
+Running migrations:
+   Applying myapp.0003_remove_employee_eemail_employee_salary... OK</code></pre>
+                </li>
+            </ol>
+            <h3>Rolling Back Changes</h3>
+            <p>To undo recent structural changes and revert the database schema to a previous migration state, you run <code>migrate</code> specifying the target app and the **previous migration file name**.</p>
+            <p>To roll back the changes introduced by <code>0003_...py</code> and restore the state of <code>0002_employee.py</code>:</p>
+            <pre><code>$ python manage.py migrate myapp 0002_employee
+Unapplying myapp.0003_remove_employee_eemail_employee_salary... OK</code></pre>
+            <p>This "unapplies" the later migration, restoring the database table structure to its former definition.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP: Passing Functions (Callbacks)</h1>
+
+    <div class="content">
+      <p>
+        In PHP, a **function can be passed as an argument** to another function. The function being passed is known as a **callback function** or **callable**. The receiving function then invokes (calls) the callback internally to perform a specific action, promoting powerful, reusable, and modular code.
+      </p>
+
+      <h2>Mechanism and Syntax</h2>
+      <p>
+        A function is typically passed as a **string** containing its name. The receiving function will then execute the callback using its internal mechanism.
+      </p>
+
+      <h3>1. Built-in Functions that Accept Callbacks</h3>
+
+      <h4>`array_map()` (Mapping/Transformation)</h4>
+      <p>
+        This function applies a callback function to every element of one or more arrays and returns a new array containing the results.
+      </p>
+      <div class="example">
+        <p>
+          <code>function **square**($n) { return $n * $n; }</code><br>
+          <code>$arr = [1, 2, 3];</code><br>
+          <code>$squares = **array_map**('square', $arr);</code>
+        </p>
+        <p class="content">Output: [1, 4, 9]</p>
+      </div>
+
+      <h4>`call_user_func()` (Direct Call)</h4>
+      <p>
+        This function executes a given callback function, passing the remaining arguments to it.
+      </p>
+      <div class="example">
+        <p>
+          <code>echo **call_user_func**('square', 5);</code> // Calls `square(5)`
+        </p>
+        <p class="content">Output: 25</p>
+      </div>
+
+      <h4>`usort()` (Sorting)</h4>
+      <p>
+        This function sorts an array by comparing pairs of elements using a custom callback function (a comparison function that must return -1, 0, or 1).
+      </p>
+      <div class="example">
+        <p>
+          <code>usort($myArray, "mysort");</code> // `mysort` is the comparison function
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>2. Passing a Callback to a User-defined Function</h2>
+      <p>
+        You can define your own function to accept and call another function dynamically. This is achieved by treating the string argument containing the function name as a **variable function**.
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php</code><br>
+          <code>&nbsp;&nbsp;&nbsp;function **myfunction**($function, $number) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return **$function($number)**; // Invokes the function whose name is in $function</code><br>
+          <code>&nbsp;&nbsp;&nbsp;}</code><br>
+          <br>
+          <code>&nbsp;&nbsp;&nbsp;function cube($n) { return $n ** 3; }</code><br>
+          <br>
+          <code>&nbsp;&nbsp;&nbsp;$result = **myfunction**('cube', 5);</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo $result; // Output: 125</code><br>
+          <code>?&gt;</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

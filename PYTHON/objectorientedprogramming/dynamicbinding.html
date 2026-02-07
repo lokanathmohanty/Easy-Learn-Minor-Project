@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python Dynamic Binding</h1>
+    <div class="content">
+      <p>In object-oriented programming, dynamic binding is the process where method calls are resolved at runtime rather than compile time. It is closely tied to polymorphism and enables different objects to respond differently to the same method call.</p>
+      <p>Python's interpreter determines the actual method or attribute to invoke based on the object's type or class hierarchy dynamically during execution.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Dynamic Binding Example</h2>
+      <pre><code>class shape:
+    def draw(self):
+        print("draw method")
+
+class circle(shape):
+    def draw(self):
+        print("Draw a circle")
+
+class rectangle(shape):
+    def draw(self):
+        print("Draw a rectangle")
+
+shapes = [circle(), rectangle()]
+for shp in shapes:
+    shp.draw()
+
+# Output:
+# Draw a circle
+# Draw a rectangle
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Duck Typing Concept</h2>
+      <p>Duck typing focuses on an object's behavior rather than its actual type. If an object has the necessary methods or attributes, it can be used interchangeably—even if it is not of a specific class.</p>
+      <p>This promotes flexibility and extensibility in Python code.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Duck Typing Example</h2>
+      <pre><code>class circle:
+    def draw(self):
+        print("Draw a circle")
+
+class rectangle:
+    def draw(self):
+        print("Draw a rectangle")
+
+class area:
+    def area(self):
+        print("calculate area")
+
+def duck_function(obj):
+    obj.draw()
+
+objects = [circle(), rectangle(), area()]
+for obj in objects:
+    duck_function(obj)
+
+# Output:
+# Draw a circle
+# Draw a rectangle
+# Traceback: 'area' object has no attribute 'draw'
+</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Here, duck_function calls <code>draw()</code> on each object regardless of its class. If the method is absent, Python raises an AttributeError at runtime.</p>
+      <p>Dynamic binding and duck typing together enable powerful polymorphic behaviors in Python.</p>
+    </div>
+  </div>
+</div>

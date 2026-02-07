@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Conditional Operators</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>The conditional operator in JavaScript first evaluates an expression for a true or false value and then executes one of the two given statements depending upon the result of the evaluation. The conditional operator is also known as the ternary operator.</p>
+      <p>The JavaScript conditional (ternary) operator is the only operator that takes three operands: a condition followed by a question mark (?), then the first expression to be executed if the condition is truthy, followed by a colon (:), and finally the second expression to be executed if the condition is falsy.</p>
+      <p>There are six falsy values in JavaScript. These are:</p>
+      <ul>
+        <li>0 (zero)</li>
+        <li>false</li>
+        <li>empty string ('' or "")</li>
+        <li>null</li>
+        <li>undefined</li>
+        <li>NaN</li>
+      </ul>
+      <p>All other values are treated as truthy in JavaScript.</p>
+
+      <h2>Syntax</h2>
+      <p>The syntax of the conditional (ternary) operator in JavaScript is:</p>
+      <p><code>var variable = condition ? exp1 : exp2;</code></p>
+
+      <h2>Parameters</h2>
+      <ul>
+        <li><strong>condition</strong> − A conditional statement.</li>
+        <li><strong>exp1</strong> − Executed if the conditional statement evaluates truthy.</li>
+        <li><strong>exp2</strong> − Executed if the conditional statement evaluates falsy.</li>
+      </ul>
+      <p>If the value of the condition is any falsy value, the result will be <code>exp2</code>; otherwise, it will be <code>exp1</code>.</p>
+
+      <h2>Examples</h2>
+
+      <h3>Example 1: Basic Comparison</h3>
+      <p>In this example, we compare the values of <code>num1</code> and <code>num2</code> using the conditional operator.</p>
+      <pre><code>&lt;script&gt;
+var num1 = 90;
+var num2 = 67;
+var res = num1 &gt; num2 ? "num1 is greater than num2" : "num2 is greater than num1";
+document.getElementById("output").innerHTML = res;
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong> num1 is greater than num2</p>
+
+      <h3>Example 2: Assigning Object Properties</h3>
+      <p>Here, we assign a value to the object property conditionally using the ternary operator.</p>
+      <pre><code>&lt;script&gt;
+const year = 2004;
+const obj = {
+  name: "John",
+  age: year &lt; 2005 ? "adult" : "minor",
+  city: "New York"
+};
+document.getElementById("output").innerHTML = 
+  obj.name + " is " + obj.age + " and lives in " + obj.city;
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong> John is adult and lives in New York</p>
+
+      <h3>Example 3: Using Expressions</h3>
+      <p>We can also use expressions instead of values inside the ternary operator.</p>
+      <pre><code>&lt;script&gt;
+let operator = '-';
+let res = operator == '+' ? 10 + 20 : 10 - 20;
+document.getElementById("output").innerHTML = "The result is: " + res;
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong> The result is: -10</p>
+
+      <h3>Example 4: Handling Null Values</h3>
+      <p>The conditional operator can handle null values by setting a default value.</p>
+      <pre><code>&lt;script&gt;
+const greet = (user) =&gt; {
+  const name = user ? user.name : "stranger";
+  return `Hello, ${name}`;
+};
+document.getElementById("output").innerHTML =
+  greet({ name: "John" }) + "&lt;br&gt;" +
+  greet(null);
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Hello, John</li>
+        <li>Hello, stranger</li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      <p>The ternary or conditional operator allows you to shorten your code by replacing traditional if-else statements with a more concise expression.</p>
+    </div>
+  </div>
+</div>

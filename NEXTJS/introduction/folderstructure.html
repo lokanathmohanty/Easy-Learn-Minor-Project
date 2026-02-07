@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Folder Structure: File-Based Routing 📂</h1>
+        
+        <div class="content">
+            <h2 class="title">Routing System Overview 🗺️</h2>
+            <p>Next.js utilizes a **file-based routing system**, meaning the organization of files inside the designated routing folders (either <span class="example">`/app`</span> or <span class="example">`/pages`</span>) automatically determines the application's URLs.</p>
+            <p>The provided structure focuses on the **App Router** (<span class="example">`/app`</span> directory), which is the current recommended structure:</p>
+            <pre>nextjs-app-router/
+     app/
+        counter/
+           page.tsx  // &rarr; http://localhost:3000/counter
+        page.tsx     // &rarr; http://localhost:3000/ (Home Page)
+     public/ 
+     ...</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Top-Level Folders and Their Purpose</h2>
+            <ul>
+                <li><span class="example"><strong>/app</strong></span>: The **root folder for the App Router** (recommended). The file <span class="example">`page.tsx`</span> directly inside this folder serves as the application's home page (<span class="example">`/`</span>).</li>
+                <li><span class="example"><strong>/pages</strong></span>: (Optional/Legacy) The root folder for the older **Page Router**. <span class="example">`index.tsx`</span> serves the home page.</li>
+                <li><span class="example"><strong>/public</strong></span>: Contains **static assets** like images, fonts, and stylesheets. Files here are served directly from the root of the domain (e.g., <span class="example">`/image.png`</span>).</li>
+                <li><span class="example"><strong>/src</strong></span>: An **optional folder** used to separate application logic (source code) from configuration and top-level routing files, enhancing code organization.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Top-Level Configuration Files</h2>
+            <p>These files are located in the root directory and configure the Next.js application environment:</p>
+            <ul>
+                <li><span class="example"><strong>next.config.js</strong></span>: The main file for configuring Next.js features, like environment variables, headers, and image optimization settings.</li>
+                <li><span class="example"><strong>package.json</strong></span>: Defines project dependencies and executable scripts (<span class="example">`npm run dev`</span>, <span class="example">`npm run build`</span>).</li>
+                <li><span class="example"><strong>middleware.ts</strong></span>: Used to define **middleware logic** that runs before a request is completed, allowing for authentication or routing redirects.</li>
+                <li><span class="example"><strong>.env</strong></span> / <span class="example"><strong>.env.local</strong></span>: Used to define **environment variables** for the application (e.g., API keys). <span class="example">`.env.local`</span> is for local development and is typically ignored by Git.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Special Routing Files (App Router)</h2>
+            <p>These special files placed within a route folder (<span class="example">/app/</span>) control the UI and behavior of that route:</p>
+            <ul>
+                <li><span class="example"><strong>page.tsx</strong></span>: **The actual UI component** rendered for a specific route segment.</li>
+                <li><span class="example"><strong>layout.tsx</strong></span>: Defines the shared UI (e.g., navigation bar, header, footer) for a route and its child routes.</li>
+                <li><span class="example"><strong>route.ts</strong></span>: Used to define **API endpoints** (Route Handlers) within the Next.js application.</li>
+                <li><span class="example"><strong>loading.tsx</strong></span>: Renders a loading state (UI) while the content for a route segment is being fetched.</li>
+                <li><span class="example"><strong>error.tsx</strong></span>: Renders an error boundary UI to gracefully handle errors within a route segment.</li>
+                <li><span class="example"><strong>not-found.tsx</strong></span>: Renders a custom **404 page** when a requested route is not found.</li>
+            </ul>
+        </div>
+    </div>
+</div>a

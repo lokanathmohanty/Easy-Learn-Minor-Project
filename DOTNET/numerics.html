@@ -1,0 +1,142 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core Numerics: Primitive and Advanced Data Types</h1>
+
+        <div class="content">
+            <p>.NET Core provides support for **standard numeric primitives** (integral and floating-point) as well as several **advanced numeric types** in the <code>System.Numerics</code> namespace for large integers, complex math, and high-performance vector processing.</p>
+        </div>
+
+        <h2 class="title">Integral Types (Integers)</h2>
+        <div class="content">
+            <p>These are **value types** that support signed and unsigned integers ranging from one byte to eight bytes in length. All integral types support standard arithmetic, comparison, equality, and conversion operators. The <code>System.BitConverter</code> class can be used to work with individual bits.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="content">Type</th>
+                        <th class="content">Signed/Unsigned</th>
+                        <th class="content">Size (bytes)</th>
+                        <th class="content">Minimum Value</th>
+                        <th class="content">Maximum Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="content">**Byte**</td>
+                        <td class="content">Unsigned</td>
+                        <td class="content">1</td>
+                        <td class="content">0</td>
+                        <td class="content">255</td>
+                    </tr>
+                    <tr>
+                        <td class="content">**SByte**</td>
+                        <td class="content">Signed</td>
+                        <td class="content">1</td>
+                        <td class="content">-128</td>
+                        <td class="content">127</td>
+                    </tr>
+                    <tr>
+                        <td class="content">**Int16**</td>
+                        <td class="content">Signed</td>
+                        <td class="content">2</td>
+                        <td class="content">-32,768</td>
+                        <td class="content">32,767</td>
+                    </tr>
+                    <tr>
+                        <td class="content">**UInt16**</td>
+                        <td class="content">Unsigned</td>
+                        <td class="content">2</td>
+                        <td class="content">0</td>
+                        <td class="content">65,535</td>
+                    </tr>
+                    <tr>
+                        <td class="content">**Int32**</td>
+                        <td class="content">Signed</td>
+                        <td class="content">4</td>
+                        <td class="content">-2,147,483,648</td>
+                        <td class="content">2,147,483,647</td>
+                    </tr>
+                    <tr>
+                        <td class="content">**UInt32**</td>
+                        <td class="content">Unsigned</td>
+                        <td class="content">4</td>
+                        <td class="content">0</td>
+                        <td class="content">4,294,967,295</td>
+                    </tr>
+                    <tr>
+                        <td class="content">**Int64**</td>
+                        <td class="content">Signed</td>
+                        <td class="content">8</td>
+                        <td class="content">-9,223,372,036,854,775,808</td>
+                        <td class="content">9,223,372,036,854,775,807</td>
+                    </tr>
+                    <tr>
+                        <td class="content">**UInt64**</td>
+                        <td class="content">Unsigned</td>
+                        <td class="content">8</td>
+                        <td class="content">0</td>
+                        <td class="content">18,446,744,073,709,551,615</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="title">Floating-Point Types</h2>
+        <div class="content">
+            <p>.NET Core provides three primitive types for working with floating-point numbers. They support standard arithmetic and conversion operators. The <code>Decimal</code> type includes specialized methods (<code>Decimal.GetBits</code>) for bit-level operations.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="content">Type</th>
+                        <th class="content">Size (bytes)</th>
+                        <th class="content">Minimum Value</th>
+                        <th class="content">Maximum Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="content">**Single**</td>
+                        <td class="content">4</td>
+                        <td class="content">-3.402823e38</td>
+                        <td class="content">3.402823e38</td>
+                    </tr>
+                    <tr>
+                        <td class="content">**Double**</td>
+                        <td class="content">8</td>
+                        <td class="content">-1.79769313486232e308</td>
+                        <td class="content">1.79769313486232e308</td>
+                    </tr>
+                    <tr>
+                        <td class="content">**Decimal**</td>
+                        <td class="content">16</td>
+                        <td class="content">-79,228,162,514,264,337,593,543,950,335</td>
+                        <td class="content">79,228,162,514,264,337,593,543,950,335</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="title">Advanced Numeric Types in System.Numerics</h2>
+        <div class="content">
+            <p>The <code>System.Numerics</code> namespace introduces types for advanced mathematical and high-performance computing:</p>
+            <ul>
+                <li class="content">
+                    **System.Numerics.BigInteger**: An **immutable integral type** that can represent integers of **arbitrarily large size**, having no upper or lower bound in theory (limited only by memory). Its methods parallel those of standard integral types.
+                </li>
+                <li class="content">
+                    **System.Numerics.Complex**: A type used to represent **complex numbers**, consisting of a real number part and an imaginary number part. It supports a comprehensive set of arithmetic, algebraic, and trigonometric methods.
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="title">SIMD-Enabled Vector Types (Performance)</h2>
+        <div class="content">
+            <p>SIMD (**Single Instruction Multiple Data**) types are included for huge performance gains in mathematical, scientific, and graphics applications by enabling parallel operations at the hardware level. Key SIMD types include:</p>
+            <ul>
+                <li class="content">**Vectors (Single)**: <code>Vector2</code>, <code>Vector3</code>, and <code>Vector4</code> (2, 3, and 4-dimensional vectors of type <code>Single</code>).</li>
+                <li class="content">**Generic Vectors**: The <code>Vector&lt;T&gt;</code> structure, which can be a vector of any primitive numeric type (excluding <code>Decimal</code>).</li>
+                <li class="content">**Matrices**: <code>Matrix3x2</code> (3x2 matrix) and <code>Matrix4x4</code> (4x4 matrix).</li>
+                <li class="content">**3D Math**: <code>Plane</code> (three-dimensional plane) and <code>Quaternion</code> (vector used for 3D physical rotations).</li>
+            </ul>
+        </div>
+    </div>
+</div>

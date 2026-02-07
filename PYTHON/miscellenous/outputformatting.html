@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Output Formatting</h1>
+    </div>
+    <div class="content">
+      <p>Output formatting makes code output readable and user-friendly. Python offers multiple methods:</p>
+      <ul>
+        <li>String modulo operator (%)</li>
+        <li>format() method</li>
+        <li>F-strings (formatted string literals)</li>
+        <li>Template strings</li>
+      </ul>
+      <p>Advanced formatting includes text wrapping and pretty-printing with modules like <code>textwrap</code> and <code>pprint</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>String Modulo Operator (%)</h2>
+    </div>
+    <div class="content">
+      <pre><code>print("My name is %s and weight is %d kg!" % ('Zara', 21))</code></pre>
+      <p>Output: <code>My name is Zara and weight is 21 kg!</code></p>
+      <p>Supports placeholders like %d (integer), %f (float), %s (string).</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>format() Method</h2>
+    </div>
+    <div class="content">
+      <pre><code>name = "Rajesh"
+age = 23
+print("my name is {} and my age is {} years".format(name, age))
+print("my name is {name} and my age is {age} years".format(name="Rajesh", age=23))</code></pre>
+      <p>Output:</p>
+      <p>my name is Rajesh and my age is 23 years</p>
+      <p>More elegant than % operator, supports positional and keyword arguments.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>F-Strings (Formatted String Literals)</h2>
+    </div>
+    <div class="content">
+      <pre><code>name = 'Rajesh'
+age = 23
+fstring = f'My name is {name} and I am {age} years old'
+print(fstring)</code></pre>
+      <p>Output: <code>My name is Rajesh and I am 23 years old</code></p>
+      <p>Fast, readable, allows inline expressions, requires Python 3.6+</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Template Strings</h2>
+    </div>
+    <div class="content">
+      <pre><code>from string import Template
+
+temp_str = "My name is $name and I am $age years old"
+tempobj = Template(temp_str)
+ret = tempobj.substitute(name='Rajesh', age=23)
+print(ret)</code></pre>
+      <p>Output: <code>My name is Rajesh and I am 23 years old</code></p>
+      <p>Provides customizable and safe string substitution using <code>$</code> placeholders.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Text Wrapping with textwrap Module</h2>
+    </div>
+    <div class="content">
+      <pre><code>import textwrap
+text = '''Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation...'''
+wrapper = textwrap.TextWrapper(width=40)
+wrapped = wrapper.wrap(text=text)
+for line in wrapped:
+    print(line)
+</code></pre>
+      <p>Wraps text to specified width to make output more readable.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Pretty Printing with pprint Module</h2>
+    </div>
+    <div class="content">
+      <pre><code>import pprint
+students = {
+    "Dilip": ["English", "Maths", "Science"],
+    "Raju": {"English": 50, "Maths": 60, "Science": 70},
+    "Kalpana": (50, 60, 70)
+}
+pp = pprint.PrettyPrinter()
+print("normal print output")
+print(students)
+print("----")
+print("pprint output")
+pp.pprint(students)</code></pre>
+      <p>Pretty printer formats complex data structures in a readable way with indentation and sorting.</p>
+    </div>
+  </div>
+</div>

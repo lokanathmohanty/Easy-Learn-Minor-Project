@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js Web Module and Creating a Web Server</h1>
+    <div class="content">
+      <h2>What is a Web Server?</h2>
+      <p>The <code>http</code> module in Node.js enables data transfer over HTTP. Using <code>http.createServer()</code>, you can create an HTTP server instance that listens for requests on a specified host and port.</p>
+      <p>The web server handles HTTP requests from clients and returns web pages, usually HTML, along with related assets like images and scripts. Dynamic content can be served by interfacing with databases or application logic.</p>
+
+      <h2>Web Application Architecture</h2>
+      <ul>
+        <li><strong>Client:</strong> Browsers or apps making HTTP requests.</li>
+        <li><strong>Server:</strong> Web server managing client requests and responses.</li>
+        <li><strong>Business:</strong> Application server processing logic and data retrieval.</li>
+        <li><strong>Data:</strong> Databases or other data sources.</li>
+      </ul>
+
+      <h2>Creating a Simple Web Server</h2>
+      <pre><code>var http = require('http');
+var fs = require('fs');
+var url = require('url');
+
+http.createServer(function(request, response) {
+  var pathname = url.parse(request.url).pathname;
+
+  console.log("Request for " + pathname + " received.");
+
+  fs.readFile(pathname.substr(1), function(err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      response.writeHead(200, {'Content-Type': 'text/html'});
+      response.write(data.toString());
+    }
+    response.end();
+  });
+}).listen(5000);
+
+console.log('Server running at http://127.0.0.1:5000');
+</code></pre>
+
+      <p>Run the server and access pages like <code>http://localhost:5000/index.html</code> to view your HTML files served by this server.</p>
+
+      <h2>Creating a Web Client</h2>
+      <pre><code>var http = require('http');
+var fs = require('fs');
+var path = require('path');
+
+var options = {
+  host: 'localhost',
+  port: '5000',
+  path: path.join('/', process.argv[2])
+};
+
+var body = '';
+var callback = function(response) {
+  response.on('data', function(data) {
+    body += data;
+  });
+
+  response.on('end', function() {
+    console.log(body);
+    fs.writeFile(options.path.substr(1), body, function(err) {
+      if (err) console.log(err);
+      else console.log('Write operation complete.');
+    });
+  });
+};
+
+var req = http.request(options, callback);
+req.end();
+</code></pre>
+
+      <p>Run the client script with the file name as argument to download the file from the server:</p>
+      <pre><code>node client.js index.html</code></pre>
+
+      <p>This will save the requested file to the client's folder.</p>
+    </div>
+  </div>
+</div>

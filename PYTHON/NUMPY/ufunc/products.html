@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">NumPy Products</h1>
+    <div class="content">
+      <p>To find the product of the elements in an array, use the <code>prod()</code> function.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Product of Elements in an Array</h2>
+    <div class="content">
+      <p>Find the product of the elements of this array:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4])
+
+x = np.prod(arr)
+
+print(x)
+</code></pre>
+      <p>Returns: <strong>24</strong> because 1*2*3*4 = 24</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Product of Elements in Two Arrays</h2>
+    <div class="content">
+      <p>Find the product of the elements of two arrays:</p>
+      <pre><code>import numpy as np
+
+arr1 = np.array([1, 2, 3, 4])
+arr2 = np.array([5, 6, 7, 8])
+
+x = np.prod([arr1, arr2])
+
+print(x)
+</code></pre>
+      <p>Returns: <strong>40320</strong> because 1*2*3*4*5*6*7*8 = 40320</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Product Over an Axis</h2>
+    <div class="content">
+      <p>If you specify <code>axis=1</code>, NumPy will return the product of each array along that axis.</p>
+      <pre><code>import numpy as np
+
+arr1 = np.array([1, 2, 3, 4])
+arr2 = np.array([5, 6, 7, 8])
+
+newarr = np.prod([arr1, arr2], axis=1)
+
+print(newarr)
+</code></pre>
+      <p>Returns: <strong>[24 1680]</strong></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Cumulative Product</h2>
+    <div class="content">
+      <p>Cumulative product means taking the product partially.</p>
+      <p>Example: The partial product of [1, 2, 3, 4] is [1, 1*2, 1*2*3, 1*2*3*4] = [1, 2, 6, 24].</p>
+      <p>Perform partial product with the <code>cumprod()</code> function.</p>
+      <pre><code>import numpy as np
+
+arr = np.array([5, 6, 7, 8])
+
+newarr = np.cumprod(arr)
+
+print(newarr)
+</code></pre>
+      <p>Returns: <strong>[5 30 210 1680]</strong></p>
+    </div>
+  </div>
+</div>

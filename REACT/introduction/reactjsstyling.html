@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Styling</h1>
+    <div class="content">
+      <p>In general, React allows components to be styled using CSS classes through the <code>className</code> attribute. Since React JSX supports JavaScript expressions, several CSS methodologies can be used. Some of the top options are:</p>
+      <ul>
+        <li><strong>CSS stylesheet</strong> − Normal CSS styles along with <code>className</code>.</li>
+        <li><strong>Inline styling</strong> − CSS styles as JavaScript objects with camelCase properties.</li>
+        <li><strong>CSS Modules</strong> − Locally scoped CSS styles.</li>
+        <li><strong>Styled components</strong> − Component-level styles.</li>
+        <li><strong>Sass stylesheet</strong> − Supports Sass-based CSS styles compiled to normal CSS.</li>
+        <li><strong>Post-processing stylesheet</strong> − Supports post-processing styles compiled to normal CSS.</li>
+      </ul>
+      <p>Let us learn how to apply the three important methodologies to style React components:</p>
+      <ul>
+        <li>CSS Stylesheet</li>
+        <li>Inline Styling</li>
+        <li>CSS Modules</li>
+      </ul>
+
+      <h2>CSS Stylesheet</h2>
+      <p>CSS stylesheet is the most common and time-tested methodology. Simply create a CSS file for a component and define styles. Then, in the component, use <code>className</code> to apply the styles.</p>
+      <pre><code>/* ExpenseEntryItem.css */
+div.itemStyle { 
+   color: brown; 
+   font-size: 14px; 
+}
+</code></pre>
+      <pre><code>// ExpenseEntryItem.js
+import React from 'react';
+import './ExpenseEntryItem.css';
+
+class ExpenseEntryItem extends React.Component {
+   render() {
+      return (
+         &lt;div className="itemStyle"&gt;
+            &lt;div&gt;&lt;b&gt;Item:&lt;/b&gt; &lt;em&gt;Mango Juice&lt;/em&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;Amount:&lt;/b&gt; &lt;em&gt;30.00&lt;/em&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;Spend Date:&lt;/b&gt; &lt;em&gt;2020-10-10&lt;/em&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;Category:&lt;/b&gt; &lt;em&gt;Food&lt;/em&gt;&lt;/div&gt;
+         &lt;/div&gt;
+      );
+   }
+}
+export default ExpenseEntryItem;
+</code></pre>
+      <p><strong>Note:</strong> This approach is simple but can lead to conflicts in large projects.</p>
+
+      <h2>Inline Styling</h2>
+      <p>Inline styling is one of the safest ways to style React components. It defines styles as JavaScript objects using camelCase properties and applies them via the <code>style</code> attribute.</p>
+      <pre><code>// Inside ExpenseEntryItem.js
+itemStyle = {
+   color: 'brown', 
+   fontSize: '14px' 
+}
+
+render() {
+   return (
+      &lt;div style={ this.itemStyle }&gt;
+         &lt;div&gt;&lt;b&gt;Item:&lt;/b&gt; &lt;em&gt;Mango Juice&lt;/em&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;b&gt;Amount:&lt;/b&gt; &lt;em&gt;30.00&lt;/em&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;b&gt;Spend Date:&lt;/b&gt; &lt;em&gt;2020-10-10&lt;/em&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;b&gt;Category:&lt;/b&gt; &lt;em&gt;Food&lt;/em&gt;&lt;/div&gt;
+      &lt;/div&gt;
+   );
+}
+</code></pre>
+      <p>Inline styles can also be defined directly within the <code>style</code> attribute:</p>
+      <pre><code>&lt;div style={{ color: 'brown', fontSize: '14px' }}&gt;...&lt;/div&gt;</code></pre>
+
+      <h2>CSS Modules</h2>
+      <p>CSS Modules provide a safe and easy way to define component styles. They use normal CSS syntax but generate locally scoped class names to avoid conflicts.</p>
+      <pre><code>/* ExpenseEntryItem.module.css */
+div.itemStyle {
+   color: brown; 
+   font-size: 14px; 
+}
+</code></pre>
+      <p>File naming convention is important. Only files ending with <code>.module.css</code> are treated as CSS Modules.</p>
+      <pre><code>// ExpenseEntryItem.js
+import React from 'react';
+import styles from './ExpenseEntryItem.module.css';
+
+class ExpenseEntryItem extends React.Component {
+   render() {
+      return (
+         &lt;div className={styles.itemStyle}&gt;
+            &lt;div&gt;&lt;b&gt;Item:&lt;/b&gt; &lt;em&gt;Mango Juice&lt;/em&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;Amount:&lt;/b&gt; &lt;em&gt;30.00&lt;/em&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;Spend Date:&lt;/b&gt; &lt;em&gt;2020-10-10&lt;/em&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;Category:&lt;/b&gt; &lt;em&gt;Food&lt;/em&gt;&lt;/div&gt;
+         &lt;/div&gt;
+      );
+   }
+}
+export default ExpenseEntryItem;
+</code></pre>
+      <p>With CSS Modules, styles remain scoped to their components, preventing naming conflicts.</p>
+    </div>
+  </div>
+</div>

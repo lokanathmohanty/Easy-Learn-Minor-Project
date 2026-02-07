@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Creating and Running a Unit Testing Project (xUnit)</h1>
+
+        <div class="content">
+            <p>Unit testing is a critical practice for verifying the smallest testable parts (units) of an application work correctly in isolation. Since the Unit Test project template was not available in the Visual Studio UI for **.NET Core** at this stage, the project must be created using the **.NET Command Line Interface (CLI)**.</p>
+        </div>
+
+        <h2 class="title example">Creating the Test Project via CLI</h2>
+        <div class="content example">
+            <p>We use the **<code>dotnet new</code>** command with the **<code>xunittest</code>** template to create a new project that uses the popular **xUnit** testing framework:</p>
+            <ol>
+                <li class="content">Navigate to your solution folder, create a new <code>test</code> folder, and inside it, create a folder for the test project (e.g., <code>StringLibraryTests</code>).</li>
+                <li class="content">Execute the project creation command from within the new test folder:
+                    <pre><code>dotnet new -t xunittest</code></pre>
+                </li>
+            </ol>
+            <p>This command creates a new C# project containing two key files:</p>
+            <ul>
+                <li class="content"><strong><code>project.json</code></strong>: Defines the project metadata, dependencies (like **<code>xunit</code>** and the **<code>dotnet-test-xunit</code>** runner), and sets the <code>"testRunner"</code> to <code>"xunit"</code>.</li>
+                <li class="content"><strong><code>Tests.cs</code></strong>: Contains the default starter test class with a simple passing test.</li>
+            </ul>
+        </div>
+
+        <h3 class="title">Contents of Test.cs</h3>
+        <div class="content">
+            <p>The generated <code>Test.cs</code> file includes a basic test using the <code>[Fact]</code> attribute, which marks a method as a parameterless test case for the xUnit test runner:</p>
+            <pre><code>using System; 
+using Xunit; 
+namespace Tests { 
+   public class Tests { 
+      [Fact] 
+      public void Test1() { 
+         Assert.True(true); 
+      } 
+   } 
+}</code></pre>
+        </div>
+        
+        <h2 class="title">Restoring Dependencies and Running Tests</h2>
+        <div class="content">
+            <p>After creating the project, two additional CLI commands are necessary to prepare and execute the tests:</p>
+            <ol>
+                <li class="content">
+                    **Restore NuGet Packages**: The dependencies specified in <code>project.json</code> must be fetched from NuGet before the project can be built:
+                    <pre><code>dotnet restore</code></pre>
+                </li>
+                <li class="content">
+                    **Run the Tests**: The <code>dotnet test</code> command compiles the test project and executes the tests using the configured test runner:
+                    <pre><code>dotnet test</code></pre>
+                </li>
+            </ol>
+            <p>The command output confirms the compilation and provides a summary of the test run, which currently shows:</p>
+            <ul>
+                <li class="content"><strong>Tests Executed:</strong> 1</li>
+                <li class="content"><strong>Errors, Failed, Skipped:</strong> 0</li>
+            </ul>
+            <p>This confirms the unit testing environment is set up and functional. The next step is typically to add a project reference to the library under test (e.g., <code>StringLibrary</code>) and start writing meaningful tests.</p>
+        </div>
+    </div>
+</div>

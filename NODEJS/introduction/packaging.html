@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Packaging</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Large Node.js projects with many dependencies and assets require packaging for easy distribution and deployment across environments. Packaging bundles the code, dependencies, and assets into a single executable or deployable package.
+      </p>
+
+      <h2>Nexe Packaging Tool</h2>
+      <p>
+        Nexe is a CLI utility that compiles Node.js applications into single executable files, including all dependencies and assets.
+      </p>
+
+      <h3>Example Express App</h3>
+      <pre><code>var express = require('express');
+var app = express();
+var path = require('path');
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+app.use(express.static('public'));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+app.get('/process_get', function (req, res) {
+  response = {
+    first_name: req.query.first_name,
+    last_name: req.query.last_name
+  };
+  console.log(response);
+  res.end(JSON.stringify(response));
+});
+
+app.post("/process_post", );
+
+var server = app.listen(5000, function () {
+  console.log("Express App running at http://127.0.0.1:5000/");
+});
+</code></pre>
+
+      <p>The HTML form (index.html) uses POST to submit data:</p>
+      <pre><code>&lt;html&gt;
+  &lt;body&gt;
+    &lt;form action="/process_POST" method="POST"&gt;
+      First Name: &lt;input type="text" name="first_name"&gt;  &lt;br&gt;
+      Last Name: &lt;input type="text" name="last_name"&gt;  &lt;br&gt;
+      &lt;input type="submit" value="Submit"&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h3>Installing Nexe on Windows</h3>
+      <ul>
+        <li>Install globally using: <code>npm install nexe -g</code></li>
+        <li>Install NASM tool from <a href="https://www.nasm.us">www.nasm.us</a></li>
+        <li>Python version 3.7 to 3.11 required</li>
+        <li>Install Visual Studio 2022 Desktop Development with C++ workload</li>
+      </ul>
+
+      <h3>Building Executable</h3>
+      <p>Run this command from project directory:</p>
+      <pre><code>nexe index.js --build windows-x64-20.9.0 verbose</code></pre>
+      <p>
+        Compiles your Node.js app into self-contained <code>expressApp.exe</code>, including source, dependencies, and assets.
+      </p>
+
+      <h2>Other Packaging Tools</h2>
+
+      <h3>pkg Tool</h3>
+      <p>
+        CLI tool to create executables for Windows, macOS, and Linux from Node.js projects without requiring Node.js on target machines.
+      </p>
+      <pre><code>npm install -g pkg
+pkg myapp.js</code></pre>
+
+      <h3>JXCore</h3>
+      <p>
+        An open-source project to package and encrypt source files and assets into JX packages for deployment.
+      </p>
+      <pre><code>jx package index.js index
+// produces index.jxp and index.jx files
+jx index.jx command_line_arguments
+</code></pre>
+    </div>
+  </div>
+</div>

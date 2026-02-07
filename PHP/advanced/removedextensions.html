@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Removed Extensions and SAPIs (PHP 7 and 8) 🗑️</h1>
+
+        <div class="content">
+            <p>PHP versions 7 and 8 saw the removal of numerous obsolete or unmaintained **extensions** (C/C++ libraries loaded into the interpreter) and **SAPIs** (Server-side Application Programming Interfaces). This ongoing process aims to modernize PHP, improve security, and reduce maintenance overhead.</p>
+
+            <hr>
+
+            <h2 class="title">Removed Extensions (PHP 7 and 8+)</h2>
+
+            <h3>Removed in PHP 7:</h3>
+            <p>These extensions were replaced by superior alternatives, primarily in the domain of data access and regular expressions:</p>
+            <ul>
+                <li>$\text{ereg}$: Replaced by the **$\text{preg}$** extension (using $\text{PCRE}$ - Perl Compatible Regular Expressions).</li>
+                <li>$\text{mssql}$: Replaced by $\text{pdo\_mssql}$ (using the standardized $\text{PDO}$ layer).</li>
+                <li>$\text{mysql}$: Replaced by $\text{mysqli}$ and $\text{PDO\_MySQL}$.</li>
+                <li>$\text{sybase\_ct}$: Replaced by $\text{pdo\_sybase}$.</li>
+            </ul>
+
+            <h3>Removed in PHP 8+:</h3>
+            <p>These removals focused on security, maintenance, and deprecation of old technologies:</p>
+            <ul>
+                <li>$\text{Mcrypt}$: Removed due to security vulnerabilities and lack of maintenance. Replaced by the robust **OpenSSL** extension for encryption.</li>
+                <li>$\text{Ming}$: Used for generating Flash content, which is obsolete.</li>
+                <li>$\text{MDB2}$: Used for MDB database files; removed due to lack of maintenance.</li>
+                <li>$\text{SNMP}$ and $\text{Tidy}$ (HTML validation): Removed due to lack of maintenance and/or replacement with other modern libraries.</li>
+                <li>$\text{cURL}$ (Removed in PHP 8.1): Removed because it was no longer maintained. (Note: The core functionality is typically supported via other means or is updated in later PHP 8 releases).</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Removed SAPIs (Server-side Application Programming Interfaces)</h2>
+            <p>**SAPI** is the interface that allows PHP to communicate with a web server (like Apache or IIS) or run in a command-line environment. These interfaces were removed because they corresponded to outdated or discontinued web servers and deployment environments.</p>
+
+            <p>Examples of Removed SAPIs (PHP 7+):</p>
+            <ul>
+                <li>**Old Web Server Modules:** $\text{aolserver}$, $\text{apache\_hooks}$, $\text{thttpd}$, $\text{roxen}$, $\text{pwsapi}$, $\text{nsapi}$, etc.</li>
+                <li>**Legacy Deployment Interfaces:** $\text{cgi}$, $\text{cgi-fcgi}$, $\text{fastcgi}$ (older versions).</li>
+                <li>**Windows Server Interfaces:** $\text{isapi}$.</li>
+            </ul>
+        </div>
+    </div>
+</div>

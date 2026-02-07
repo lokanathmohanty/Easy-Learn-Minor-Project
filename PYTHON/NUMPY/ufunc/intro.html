@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">NumPy ufuncs</h1>
+    <div class="content">
+      <h2>What are ufuncs?</h2>
+      <p>ufuncs stands for "Universal Functions" and they are NumPy functions that operate on the ndarray object.</p>
+
+      <h2>Why use ufuncs?</h2>
+      <p>ufuncs are used to implement vectorization in NumPy which is way faster than iterating over elements.</p>
+      <p>They also provide broadcasting and additional methods like reduce, accumulate etc. that are very helpful for computation.</p>
+      <p>ufuncs also take additional arguments, like:</p>
+      <ul>
+        <li><strong>where</strong> — boolean array or condition defining where the operations should take place.</li>
+        <li><strong>dtype</strong> — defining the return type of elements.</li>
+        <li><strong>out</strong> — output array where the return value should be copied.</li>
+      </ul>
+
+      <h2>What is Vectorization?</h2>
+      <p>Converting iterative statements into a vector based operation is called vectorization.</p>
+      <p>It is faster as modern CPUs are optimized for such operations.</p>
+
+      <h2>Add the Elements of Two Lists</h2>
+      <p>list 1: [1, 2, 3, 4]</p>
+      <p>list 2: [4, 5, 6, 7]</p>
+      <p>One way of doing it is to iterate over both of the lists and then sum each element.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Adding Lists Without ufunc</h1>
+    <div class="content">
+      <pre><code>x = [1, 2, 3, 4]
+y = [4, 5, 6, 7]
+z = []
+
+for i, j in zip(x, y):
+  z.append(i + j)
+print(z)
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Adding Lists Using NumPy ufunc</h1>
+    <div class="content">
+      <pre><code>import numpy as np
+
+x = [1, 2, 3, 4]
+y = [4, 5, 6, 7]
+z = np.add(x, y)
+
+print(z)
+</code></pre>
+    </div>
+  </div>
+</div>

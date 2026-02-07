@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Units</h1>
+    <div class="content">
+      <p>CSS Units define the measurement system used to specify the values. CSS offers a number of different units for expressing length and measurement. CSS unit is used to specify the property size for a page element or its content.</p>
+      <p>There are a number of ways to specify and measure length in CSS. It is used to specify margins, padding, font size, width, height, border, etc.</p>
+      <p>For example - <code>font-size: 50px;</code>, here number 50 has a suffix px i.e., pixel, it is a CSS measurement unit.</p>
+      <p>There should be no whitespace between the number and the unit. The unit can be left out when the value is 0.</p>
+
+      <h2 class="title">Length Units</h2>
+      <p>Length units can be categorized into two types:</p>
+      <ul>
+        <li>Absolute units: Fixed unit lengths that does not depend on screen width.</li>
+        <li>Relative units: Responsive unit lengths that changes according to screen width.</li>
+      </ul>
+
+      <h2 class="title">Absolute Length Units</h2>
+      <p>These units are categorized as fixed-length units, which means that lengths specified with absolute units maintain an exact, unchanged size on the screen.</p>
+      <p>These units prove to be very effective when the browser has comprehensive information about the properties of the screen, the printer being used, or other appropriate user agents.</p>
+      <ul>
+        <li>Height: 2px</li>
+        <li>Height: 2cm</li>
+        <li>Height: 2in</li>
+        <li>Height: 2pt</li>
+      </ul>
+
+      <p>The following are examples of absolute units:</p>
+      <ul>
+        <li><b>mm</b>: millimeters, 1mm = 1/10th of 1cm. Example: <code>font-size: 10mm;</code></li>
+        <li><b>cm</b>: centimeters, 1cm = 37.8px = 25.2/64in. Example: <code>font-size: 5cm;</code></li>
+        <li><b>Q</b>: quarter-millimeters, 1Q = 1/40th of 1cm. Example: <code>font-size: 5Q;</code></li>
+        <li><b>in</b>: inches, 1in = 2.54cm = 96px. Example: <code>font-size: 1in;</code></li>
+        <li><b>pt</b>: points, 1pt = 1/72 of 1in. Example: <code>font-size: 20pt;</code></li>
+        <li><b>pc</b>: picas, 1pc = 1/6th of 1in. Example: <code>width: 6pc;</code></li>
+        <li><b>px</b>: pixels, 1px = 1/96th of 1in. Example: <code>font-size: 15px;</code></li>
+      </ul>
+
+      <p>Absolute units are useful for non-responsive projects, but less effective for responsive websites.</p>
+
+      <h2 class="title">Example (Absolute Units)</h2>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;style&gt;
+        .unit-mm { font-size: 5mm; }
+        .unit-cm { font-size: 1cm; }
+        .unit-inch { font-size: 0.5in; }
+        .unit-quarter { font-size: 40Q; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 class="unit-mm"&gt;Font size 5mm&lt;/h1&gt;
+    &lt;h1 class="unit-cm"&gt;Font size 1cm&lt;/h1&gt;
+    &lt;h1 class="unit-inch"&gt;Font size 0.5inch&lt;/h1&gt;
+    &lt;h1 class="unit-quarter"&gt;Font size 40Q&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2 class="title">Relative Length Units</h2>
+      <p>Relative length units are measured in relation to other elements or viewport of the screen. They are useful for responsive websites because they adapt based on window size or parent elements.</p>
+      <ul>
+        <li>Height: 3em</li>
+        <li>Height: 3ex</li>
+        <li>Height: 3lh</li>
+        <li>Height: 3vh</li>
+      </ul>
+
+      <p>Common relative units:</p>
+      <ul>
+        <li><b>em</b>: relative to font-size of element. Example: <code>font-size: 4em;</code></li>
+        <li><b>ex</b>: relative to x-height of font. Example: <code>font-size: 4ex;</code></li>
+        <li><b>ch</b>: relative to width of "0". Example: <code>font-size: 4ch;</code></li>
+        <li><b>rem</b>: relative to root font-size. Example: <code>font-size: 2rem;</code></li>
+        <li><b>lh</b>: relative to line height of element. Example: <code>font-size: 4lh;</code></li>
+        <li><b>rlh</b>: relative to root line height. Example: <code>font-size: 4rlh;</code></li>
+        <li><b>vh</b>: 1% of viewport height. Example: <code>font-size: 4vh;</code></li>
+        <li><b>vw</b>: 1% of viewport width. Example: <code>width: 4vw;</code></li>
+        <li><b>vmin</b>: 1% of smaller viewport dimension. Example: <code>width: 4vmin;</code></li>
+        <li><b>vmax</b>: 1% of larger viewport dimension. Example: <code>width: 4vmax;</code></li>
+        <li><b>vb</b>: 1% of initial containing block (block axis). Example: <code>font-size: 4vb;</code></li>
+        <li><b>vi</b>: 1% of initial containing block (inline axis). Example: <code>font-size: 4vi;</code></li>
+        <li><b>svw/svh</b>: 1% of smaller viewport width/height. Example: <code>width: 40svw; height: 40svh;</code></li>
+        <li><b>lvw/lvh</b>: 1% of larger viewport width/height. Example: <code>width: 40lvw; height: 40lvh;</code></li>
+        <li><b>dvw/dvh</b>: 1% of dynamic viewport width/height. Example: <code>width: 40dvw; height: 40dvh;</code></li>
+      </ul>
+
+      <h2 class="title">Example (Relative Units)</h2>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;style&gt;
+        .unit-em { font-size: 2em; }
+        .unit-rem { font-size: 1.5rem; }
+        .unit-vw { font-size: 5vw; }
+        .unit-vh { font-size: 5vh; }
+        .unit-percent { font-size: 150%; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 class="unit-em"&gt;Font size 2em&lt;/h1&gt;
+    &lt;h1 class="unit-rem"&gt;Font size 1.5rem&lt;/h1&gt;
+    &lt;h1 class="unit-vw"&gt;Font size 5vw&lt;/h1&gt;
+    &lt;h1 class="unit-vh"&gt;Font size 5vh&lt;/h1&gt;
+    &lt;h1 class="unit-percent"&gt;Font size 150%&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </div>
+  </div>
+</div>

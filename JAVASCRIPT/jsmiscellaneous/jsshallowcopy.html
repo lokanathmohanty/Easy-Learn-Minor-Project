@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Shallow Copy</h1>
+    <div class="content">
+      <h2>Shallow Copy</h2>
+      <p>In JavaScript, a shallow copy is a duplication of an array or object that replicates its top-level elements, but not its nested structures. When creating a shallow copy of an array, common methods include using the spread operator (<code>[...]</code>), <code>Array.from()</code>, or the <code>slice()</code> method.</p>
+      <p>For objects, the spread operator (<code>{...}</code>) and <code>Object.assign()</code> are commonly used. While the top-level elements are duplicated, any nested objects or arrays retain their references in the shallow copy.</p>
+      <p>This means modifications to nested structures in the copied version affect the original and vice versa. For deep cloning, where nested structures are duplicated, techniques like <code>structuredClone()</code> or libraries such as lodash's <code>_.cloneDeep</code> are required.</p>
+
+      <h2>Deep Copy vs. Shallow Copy</h2>
+      <p>Two methods exist for duplicating objects or arrays:</p>
+      <ul>
+        <li><strong>Deep copy</strong> creates an entirely independent duplicate including nested structures.</li>
+        <li><strong>Shallow copy</strong> only replicates top-level elements, while references to nested objects remain linked.</li>
+      </ul>
+      <p>While deep copying guarantees complete independence, shallow copying is faster and more memory-efficient. Task requirements dictate the choice.</p>
+
+      <h2>Examples</h2>
+
+      <h3>Example 1: Shallow copy using Object.assign()</h3>
+      <p>In this example, we create a shallow copy of an object using <code>Object.assign()</code>.</p>
+
+      <h3>Example 2: Shallow copy using spread operator</h3>
+      <p>This example demonstrates creating a shallow copy of an array using the spread operator (<code>...</code>).</p>
+
+      <h3>Example 3: Shallow copy of object with array</h3>
+      <p>Here, we combine <code>Object.assign()</code> and <code>Array.prototype.slice()</code> to shallow copy an object containing an array.</p>
+
+      <h3>Example 4: Shallow Copy with Nested Objects</h3>
+      <p>We demonstrate copying an object with nested properties using <code>JSON.stringify()</code> and <code>JSON.parse()</code>. This results in a deep copy rather than a true shallow copy.</p>
+
+      <h3>Example 5: Shallow copy impact of modification</h3>
+      <p>This example shows how modifying a top-level property in a shallow copy does not affect the original object.</p>
+
+      <h2>Importance of Shallow Copy</h2>
+      <p>Shallow copying helps preserve the original data structure while managing memory efficiently. It is useful for:</p>
+      <ul>
+        <li>Non-destructive operations (e.g., array sorting).</li>
+        <li>Implementing undo/redo functionalities.</li>
+        <li>Handling isolated modifications while maintaining data integrity.</li>
+      </ul>
+      <p>Understanding shallow copying empowers developers to choose between performance and independence in practical applications.</p>
+    </div>
+  </div>
+</div>

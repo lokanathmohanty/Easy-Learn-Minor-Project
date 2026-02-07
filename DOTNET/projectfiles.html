@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Project Files and Automatic Inclusion</h1>
+
+        <div class="content">
+            <p>This session explains a key difference between **.NET Core** and the traditional .NET Framework regarding how source files are included in a project. .NET Core simplifies the process through its project file structure (originally <code>project.json</code>) by **automatically including** files dropped into the project's root directory.</p>
+        </div>
+
+        <h2 class="title example">Example: Implementing and Adding Source Files</h2>
+        <div class="content example">
+            <p>Consider the following two class files that define data models:</p>
+
+            <h3>Student.cs Implementation</h3>
+            <pre><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks; 
+  
+namespace FirstApp { 
+   public class Student { 
+      public int ID { get; set; } 
+      public string LastName { get; set; } 
+      public string FirstMidName { get; set; } 
+      public DateTime EnrollmentDate { get; set; } 
+   } 
+}</code></pre>
+
+            <h3>Course.cs Implementation</h3>
+            <pre><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks; 
+  
+namespace FirstApp { 
+   public class Course { 
+      public int CourseID { get; set; } 
+      public string Title { get; set; } 
+      public int Credits { get; set; } 
+   } 
+}</code></pre>
+        </div>
+        
+        <h2 class="title">Process for Including Files in .NET Core</h2>
+        <div class="content">
+            <p>In the traditional **.NET Framework**, files needed to be manually referenced in the Visual Studio Solution Explorer (often by dragging and dropping to create a reference in the <code>.csproj</code> file).</p>
+            <p>The **.NET Core** approach (using <code>project.json</code> or the modern <code>.csproj</code> format that adopted this style) simplifies this significantly:</p>
+            <ol>
+                <li class="content">**Save Files**: Save the new files (e.g., <code>Student.cs</code> and <code>Course.cs</code>) into the **root source folder** of your project (e.g., the <code>FirstApp</code> directory).</li>
+                <li class="content">**Visual Studio Prompt**: Visual Studio will detect the external changes and prompt you to reload the project.</li>
+                <li class="content">**Reload**: Click **Yes to All** to reload the project.</li>
+            </ol>
+            <p>Once reloaded, the files will be **automatically included** in your project and visible in the Solution Explorer, without any manual referencing required. This automatic inclusion is a major benefit of the modern .NET Core project system.</p>
+        </div>
+    </div>
+</div>

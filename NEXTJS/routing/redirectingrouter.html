@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Redirecting Routes ➡️</h1>
+        
+        <div class="content">
+            <h2 class="title">Overview of Redirection Methods</h2>
+            <p>**Redirecting** is essential for guiding users from broken, incorrect, or unauthorized URLs to the correct destination. Next.js offers various methods for handling redirects, depending on where the logic needs to execute: at the **server edge**, the **server (build time)**, or the **client side**.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Purpose / Used At</th>
+                        <th>Execution Environment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`redirects()`</span> in <span class="example">`next.config.js`</span></td>
+                        <td>Static, permanent redirects (e.g., fixing typos)</td>
+                        <td>Server (Build Time/Edge)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`useRouter`</span> hook</td>
+                        <td>Programmatic client-side navigation/redirects</td>
+                        <td>Client Component</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`NextResponse.redirect`</span> (Middleware)</td>
+                        <td>Conditional logic (e.g., authentication checks)</td>
+                        <td>Server (Edge)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">1. Static Redirecting (next.config.js)</h2>
+            <p>This method is used for defining a list of known redirects, often for fixing old or broken links. The redirects are handled at the server edge, making them highly efficient.</p>
+            <pre>// ./next.config.ts (Example: Redirecting /abouttt to /about)
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+    async redirects() {
+        return [
+          {
+            source: "/abouttt",
+            destination: "/about",
+            permanent: true, // true for 301 (SEO-friendly), false for 302
+          }
+        ];
+      },
+};</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">2. Conditional Redirecting (Middleware)</h2>
+            <p>Middleware executes code before a request is completed, allowing you to intercept and redirect requests based on custom server-side logic (e.g., checking a user's session or authentication status).</p>
+            <pre>// file: middleware.ts (Example: Protecting /dashboard routes)
+import { NextResponse, NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  const isAuthenticated = false; // Replace with actual logic
+ 
+  // Redirect to login if user is not authenticated
+  if (!isAuthenticated) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+ 
+  return NextResponse.next();
+}
+ 
+export const config = {
+  // Only run middleware on requests matching /dashboard or its sub-paths
+  matcher: '/dashboard/:path*',
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">3. Client-Side Redirecting (`useRouter` Hook)</h2>
+            <p>The <span class="example">`useRouter`</span> hook is used for imperative navigation and redirects that are triggered by a client-side action (e.g., button click, form submission success). This must be used inside a **Client Component**.</p>
+            <pre>"use client"; 
+import { useRouter } from "next/navigation";
+
+export default function ProductPage({ params }) {
+    const router = useRouter();
+
+    const handleClick = () =&gt; {
+        alert("Order Placed...");
+        // Use router.push() to navigate to the home page (which is a redirect)
+        router.push("/"); 
+    };
+    
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Product {params.id}&lt;/h1&gt;
+            &lt;button onClick={handleClick}&gt;Order Item&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}</pre>
+        </div>
+    </div>
+</div>

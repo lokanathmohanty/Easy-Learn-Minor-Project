@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Testing With Cypress</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Cypress?</h2>
+            <p><strong>Cypress</strong> is a powerful, modern **JavaScript testing framework** designed for end-to-end (E2E) testing and component testing. It operates directly within the browser, allowing it to execute tests in the environment where the code actually runs.</p>
+            <ul>
+                <li class="example">It is used to simulate realistic **user interactions** (navigation, clicks, form submissions) in your Next.js application.</li>
+                <li class="example">It helps verify complex user flows, test linking, check that components render correctly, and ensure API routes function properly from the client perspective.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Setting Up Cypress in Next.js</h2>
+            
+            <h3>Option 1: Create a New Project with Cypress</h3>
+            <p>Start a new Next.js project with a pre-configured Cypress setup using this command:</p>
+            <pre class="example"><code>npx create-next-app@latest --example with-cypress with-cypress-app</code></pre>
+            
+            <h3>Option 2: Manual Setup in an Existing Project</h3>
+            <p>For an existing project, follow these steps:</p>
+            
+            <h4>Step 1: Install Cypress</h4>
+            <p>Install Cypress as a development dependency:</p>
+            <pre class="example"><code>npm install -D cypress</code></pre>
+            
+            <h4>Step 2: Update Scripts in <code>package.json</code></h4>
+            <p>Add a script to easily open the Cypress Test Runner:</p>
+            <pre class="example"><code>// File: /package.json
+{
+    "scripts": {
+      "cypress:open": "cypress open",
+      // ... other scripts ...
+    }
+}</code></pre>
+            
+            <h4>Step 3: Run Cypress to Configure</h4>
+            <p>Run the command to launch the Cypress testing suite for the first time:</p>
+            <pre class="example"><code>npm run cypress:open</code></pre>
+            <p>Cypress will guide you through setting up either **E2E Testing** or **Component Testing**, automatically creating the necessary configuration file (<code>cypress.config.js</code>) and the <code>cypress</code> folder structure.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title example">Writing E2E Tests with Cypress (Navigation Example)</h2>
+            <p>Cypress E2E tests are written using JavaScript and reside in the <code>cypress/e2e</code> (or <code>cypress/integration</code>) folder. The tests use the global <code>cy</code> object to interact with and assert against the application's behavior.</p>
+            
+            <h3>The Scenario: Testing Page Navigation</h3>
+            <p>This test verifies that clicking the "About" link on the Home page successfully navigates the user to the About page.</p>
+            
+            <h3>The Test File (<code>/cypress/e2e/navigation.cy.js</code>)</h3>
+            <pre class="example"><code>describe('Navigation', () => {
+    it('should navigate from Home to the About page', () => {
+      // 1. Start from the Next.js index page
+      cy.visit('http://localhost:3000/')
+   
+      // 2. Find the link with 'about' in its href and click it
+      cy.get('a[href*="about"]').click()
+   
+      // 3. Assert that the URL has changed to include "/about"
+      cy.url().should('include', '/about')
+   
+      // 4. Assert that the content of the new page is correct
+      cy.get('h1').contains('About')
+    })
+})</code></pre>
+            
+            <h3>Running the Test</h3>
+            <p>Since Cypress simulates a real user accessing your application, the **Next.js server must be running**.</p>
+            <ol>
+                <li><strong>Build and Start Server:</strong> Run your application in production mode for the most accurate testing environment (in one terminal window):
+                <pre><code>npm run build &amp;&amp; npm run start</code></pre></li>
+                <li><strong>Run Cypress:</strong> In a **separate terminal window**, open the Cypress Test Runner:
+                <pre><code>npm run cypress:open</code></pre></li>
+                <li>Select the E2E test suite and click on the test file to execute the navigation simulation in the browser.</li>
+            </ol>
+        </div>
+    </div>
+</div>

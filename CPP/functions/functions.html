@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Functions (Modular Programming) 🧩</h1>
+
+        <div class="content">
+            <p>A **function** is a self-contained block of statements designed to perform a specific, well-defined task. Every C++ program starts execution in the required **<code>main()</code>** function, which can then call other functions. Breaking code into functions promotes reusability, modularity, and better organization.</p>
+            <p>A function is defined by two main parts: the **Declaration** (what the function looks like) and the **Definition** (what the function does).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Defining a Function (The Body)</h2>
+            <p>The **function definition** provides the actual instructions the function executes. It includes a header and a body:</p>
+            <pre class="example">
+return_type function_name( parameter list ) {
+   // body of the function (statements)
+}
+</pre>
+            <ul>
+                <li>
+                    **Return Type:** The data type of the value the function sends back to the caller (e.g., `int`, `double`, `string`). If the function returns nothing, the type is **<code>void</code>**.
+                </li>
+                <li>
+                    **Function Name:** The unique identifier for the function.
+                </li>
+                <li>
+                    **Parameters (Formal Parameters):** Placeholders that receive values (arguments) when the function is called. They define the type, order, and number of inputs.
+                </li>
+                <li>
+                    **Function Body:** The block of statements enclosed in braces `{}` that performs the task.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Function Declaration (The Signature)</h2>
+            <p>A **function declaration** (or prototype) informs the compiler about the function's existence, its name, its return type, and its parameter types. This allows the function to be called before its full definition appears in the code.</p>
+            <pre class="example">
+return_type function_name( parameter list ); // Note the semicolon
+</pre>
+            <p>For the function `int max(int num1, int num2)`, a valid declaration is:</p>
+            <pre class="example">int max(int, int); // Parameter names are optional in the declaration</pre>
+            <p>A declaration is necessary when functions are defined in separate files or when the definition appears *after* the first call to that function (e.g., `main()` calls a function defined below it).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Calling a Function</h2>
+            <p>To execute a function, you **call** (or invoke) it by using its name and providing the necessary arguments. Program control transfers to the called function and returns when the function executes a `return` statement or reaches its closing brace.</p>
+            <pre class="example">
+int a = 100;
+int b = 200;
+int ret = max(a, b); // Calling the max() function
+// Program control returns here.
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Function Arguments and Passing Methods</h2>
+
+            <h3>Passing Methods</h3>
+            <p>The way arguments are passed determines whether the function can modify the original variable:</p>
+            <table>
+                <thead>
+                    <tr><th>Call Type</th><th>Mechanism</th><th>Effect on Original Argument</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**Call by Value (Default)**</td>
+                        <td>Copies the argument's **value** to the formal parameter.</td>
+                        <td>**None.** Changes inside the function are isolated.</td>
+                    </tr>
+                    <tr>
+                        <td>**Call by Pointer**</td>
+                        <td>Copies the argument's **address** (pointer) to the formal parameter.</td>
+                        <td>**Yes.** Changes made via the address affect the original data.</td>
+                    </tr>
+                    <tr>
+                        <td>**Call by Reference**</td>
+                        <td>Copies the argument's **reference** (alias) to the formal parameter.</td>
+                        <td>**Yes.** Changes made affect the original variable (most common in modern C++).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Default Parameter Values</h3>
+            <p>You can provide **default values** for parameters (starting from the rightmost parameter). These values are used if the corresponding argument is omitted in the function call.</p>
+            <pre class="example">
+// Function definition: b defaults to 20
+int sum(int a, int b = 20) { ... } 
+
+// Call 1: value of 200 is used for b (Result: 300)
+result = sum(100, 200);
+
+// Call 2: default value of 20 is used for b (Result: 120)
+result = sum(100);
+</pre>
+        </div>
+    </div>
+</div>

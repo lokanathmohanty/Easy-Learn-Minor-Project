@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Exponential Distribution</h1>
+    <div class="content">
+      <p>The <strong>Exponential Distribution</strong> is used to describe the time until the next event occurs, such as failure or success.</p>
+      <h2>Parameters:</h2>
+      <ul>
+        <li><strong>scale</strong> — The inverse of the rate parameter (similar to <code>lam</code> in the Poisson distribution). Defaults to 1.0.</li>
+        <li><strong>size</strong> — The shape of the returned array.</li>
+      </ul>
+      <p>The exponential distribution is often used to model waiting times between independent events that happen at a constant average rate.</p>
+      <h2>Relation Between Poisson and Exponential Distributions</h2>
+      <p>The Poisson distribution models the number of occurrences of an event in a fixed time period, while the exponential distribution models the time between these events.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Generating Exponential Distribution Samples</h1>
+    <div class="content">
+      <p>Generate a 2x3 sample from an exponential distribution with a scale parameter of 2.0:</p>
+      <pre><code>from numpy import random
+
+x = random.exponential(scale=2, size=(2, 3))
+
+print(x)
+</code></pre>
+      <h2>Visualization of Exponential Distribution</h2>
+      <p>Visualize 1000 samples using Seaborn's KDE plot:</p>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.displot(random.exponential(size=1000), kind="kde")
+
+plt.show()
+</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="session">
+    <div class="navigation">
+      <a href="#" class="prev">Previous</a>
+      <a href="#" class="quiz">Quiz</a>
+      <a href="#" class="next">Next</a>
+    </div>
+
+    <h1 class="title">JavaScript - ECMAScript 2019</h1>
+
+    <div class="content">
+      <p>
+        The ECMAScript 2019 standard was released in 2019. Important additions to this update include 
+        <code>Array.flat()</code> and <code>Array.flatMap()</code>, offering concise array manipulation methods. 
+        The <code>Object.fromEntries()</code> method simplifies object creation from key-value pairs. 
+        These improvements in ECMAScript 2019 aimed to enhance code conciseness and functionality. 
+        This chapter will discuss all the newly added features in ECMAScript 2019.
+      </p>
+
+      <h2>New Features Added in ECMAScript 2019</h2>
+      <ul>
+        <li>Array.flat()</li>
+        <li>Array.flatMap()</li>
+        <li>Revised Array.sort()</li>
+        <li>Object.fromEntries()</li>
+        <li>Optional catch binding</li>
+        <li>Revised JSON.stringify()</li>
+        <li>Revised Function.toString()</li>
+        <li>Separator symbols allowed in string literals</li>
+        <li>String.trimEnd()</li>
+        <li>String.trimStart()</li>
+      </ul>
+
+      <h2>JavaScript Array flat() Method</h2>
+      <p>
+        The ECMAScript 2019 introduced <code>Array.flat()</code> to the arrays. The 
+        <code>flat()</code> method is used to flatten the array by removing the nested array 
+        and adding its elements to the original array.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+const arr = [1, [10, 20], 30, [40, [50], 60], 70];
+console.log(arr.flat());
+      </code></pre>
+      <p><strong>Output:</strong> 1,10,20,30,40,50,60,70</p>
+
+      <h2>JavaScript Array flatMap()</h2>
+      <p>
+        The <code>flatMap()</code> method maps each element and then flattens the result 
+        into a new array.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+const arr = [2, 4, 6, 8];
+const updated = arr.flatMap((ele) => [ele * 2, ele * 3]);
+console.log(updated);
+      </code></pre>
+      <p><strong>Output:</strong> 4,6,8,12,12,18,16,24</p>
+
+      <h2>Revised Array.sort()</h2>
+      <p>
+        In ECMAScript 2019, the <code>sort()</code> method became stable, meaning it now 
+        preserves the original order of equal elements.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+const watches = [
+  { brand: "Titan", price: 1000 },
+  { brand: "Casio", price: 1000 },
+  { brand: "Titan", price: 2000 },
+  { brand: "Titan", price: 3000 }
+];
+watches.sort((a, b) => a.brand.localeCompare(b.brand));
+console.log(watches);
+      </code></pre>
+
+      <h2>JavaScript Object.fromEntries()</h2>
+      <p>
+        The <code>Object.fromEntries()</code> method allows you to create an object from a 
+        two-dimensional array of key-value pairs.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+const entries = [["Apple", 20], ["Banana", 40], ["Watermelon", 30]];
+const fruits = Object.fromEntries(entries);
+console.log(fruits);
+      </code></pre>
+      <p><strong>Output:</strong> {"Apple":20,"Banana":40,"Watermelon":30}</p>
+
+      <h2>Optional catch binding</h2>
+      <p>
+        After ECMAScript 2019, you can omit the error parameter in a 
+        <code>catch</code> block if it is not needed.
+      </p>
+
+      <h2>Revised JSON.stringify()</h2>
+      <p>
+        Now <code>JSON.stringify()</code> correctly handles Unicode characters.
+      </p>
+
+      <h2>Revised Function.toString()</h2>
+      <p>
+        The <code>toString()</code> method now returns the function including whitespace, 
+        comments, and exact syntax.
+      </p>
+
+      <h2>Separator symbols in string literals</h2>
+      <p>
+        ECMAScript 2019 allows <code>\u2028</code> and <code>\u2029</code> in string literals 
+        to represent line and paragraph separators.
+      </p>
+
+      <h2>JavaScript String.trimEnd()</h2>
+      <p>
+        The <code>trimEnd()</code> method removes whitespace from the end of a string.
+      </p>
+
+      <h2>JavaScript String.trimStart()</h2>
+      <p>
+        The <code>trimStart()</code> method removes whitespace from the beginning of a string.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>How to Use Comparator in Java</h1>
+    </div>
+    <div class="content">
+      <p>The Comparator interface in Java (part of <code>java.util</code>) defines how objects of user-defined classes are ordered, especially useful for sorting in collections like <code>TreeSet</code> and <code>TreeMap</code>. You implement the <code>compare()</code> method to specify custom sorting logic. The Comparator interface is especially helpful for sorting objects using different criteria or in reverse order.</p>
+      <ul>
+        <li><strong>compare(T o1, T o2):</strong> Compares two objects for order and returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.</li>
+        <li><strong>equals(Object obj):</strong> Checks equality of the current comparator and another object (overriding is optional and rarely needed).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Using Comparator to Sort</h2>
+    </div>
+    <div class="content">
+      <p>This example demonstrates sorting a list of custom <code>Dog</code> objects first by name (using <code>Comparable</code>), then by age (using <code>Comparator</code>), and then by name in reverse order:</p>
+      <pre><code>import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+class Dog implements Comparator&lt;Dog&gt;, Comparable&lt;Dog&gt; {
+    private String name;
+    private int age;
+    Dog() { }
+    Dog(String n, int a) { name = n; age = a; }
+    public String getDogName() { return name; }
+    public int getDogAge() { return age; }
+
+    // Comparable - sort by name
+    public int compareTo(Dog d) {
+        return (this.name).compareTo(d.name);
+    }
+    // Comparator - sort by age
+    public int compare(Dog d, Dog d1) {
+        return d.age - d1.age;
+    }
+    @Override
+    public String toString() { return this.name + "," + this.age; }
+}
+
+public class ComparatorDemo {
+    public static void main(String args[]) {
+        List&lt;Dog&gt; list = new ArrayList&lt;&gt;();
+        list.add(new Dog("Shaggy", 3));
+        list.add(new Dog("Lacy", 2));
+        list.add(new Dog("Roger", 10));
+        list.add(new Dog("Tommy", 4));
+        list.add(new Dog("Tammy", 1));
+
+        Collections.sort(list); // sort by name
+        System.out.println("Sorted by name:");
+        System.out.print(list);
+
+        Collections.sort(list, new Dog()); // sort by age
+        System.out.println("\nSorted by age:");
+        System.out.print(list);
+
+        Collections.sort(list, Collections.reverseOrder()); // sort by name in reverse
+        System.out.println("\nSorted by name in reverse order:");
+        System.out.print(list);
+    }
+}
+</code></pre>
+      <p>Output:</p>
+      <pre><code>
+Sorted by name:
+[Lacy,2, Roger,10, Shaggy,3, Tammy,1, Tommy,4]
+
+Sorted by age:
+[Tammy,1, Lacy,2, Shaggy,3, Tommy,4, Roger,10]
+
+Sorted by name in reverse order:
+[Tommy,4, Tammy,1, Shaggy,3, Roger,10, Lacy,2]
+</code></pre>
+      <ul>
+        <li><a href="https://www.tutorialspoint.com/java/java_using_iterator.htm">Previous: How to Use Iterator</a></li>
+        <li><a href="https://www.tutorialspoint.com/java/quiz_on_java_using_comparator.htm">Quiz: Java Comparator Example</a></li>
+        <li><a href="https://www.tutorialspoint.com/java/java-using-comparable.htm">Next: How to Use Comparable</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

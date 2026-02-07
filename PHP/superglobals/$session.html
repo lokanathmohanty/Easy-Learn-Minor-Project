@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Sessions and the `$_SESSION` Superglobal</h1>
+
+    <div class="content">
+      <p>
+        A **Session** in PHP is a mechanism to make data persistently available across multiple pages during a single user visit (a "session"). Because the HTTP protocol is **stateless**, sessions overcome this limitation by storing data server-side and linking it to the user via a unique **Session ID**. The primary interface for this data is the **`$_SESSION`** superglobal associative array.
+      </p>
+
+      <h2>How to Use PHP Sessions</h2>
+      
+      <h3>1. Start or Resume the Session 🚀</h3>
+      <p>
+        The **`session_start()`** function is mandatory and must be called at the very beginning of every script that intends to use `$_SESSION`. This function either creates a new session file on the server or resumes the existing one using the user's Session ID (usually sent via a cookie).
+      </p>
+      <div class="example">
+        <code>&lt;?php</code><br>
+        <code>&nbsp;&nbsp;&nbsp;**session_start();**</code><br>
+        <code>&nbsp;&nbsp;&nbsp;// All code below can now access $_SESSION</code><br>
+        <code>?&gt;</code>
+      </div>
+
+      <hr>
+
+      <h3>2. Create and Access Session Variables</h3>
+      <p>
+        Session data is stored as key-value pairs in the `$_SESSION` array, similar to any other associative array. This data is stored in a temporary file on the server.
+      </p>
+      <div class="example">
+        <p>
+          **Create/Set:**<br>
+          <code>$_SESSION['UserID'] = $user_id;</code><br>
+          <code>$_SESSION['CartCount'] = 5;</code>
+        </p>
+        <p>
+          **Read/Use (on any subsequent page):**<br>
+          <code>echo "Welcome back, User ID: " . **$_SESSION['UserID']**;</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h3>3. Delete Session Variables</h3>
+      <p>
+        You have two options for clearing session data:
+      </p>
+      <ul>
+        <li>
+          **Remove Specific Variable:** Use **`unset()`** to remove a single variable from the array.
+          <div class="example">
+            <code>unset($_SESSION['UserID']);</code>
+          </div>
+        </li>
+        <li>
+          **Destroy the Entire Session:** Use **`session_destroy()`** to destroy all data registered to the current session and remove the session file from the server.
+          <div class="example">
+            <code>session_destroy();</code>
+          </div>
+        </li>
+      </ul>
+      <p>
+        *Note: The session ends when the user's connection terminates, the session times out, or when `session_destroy()` is manually called.*
+      </p>
+    </div>
+  </div>
+</div>

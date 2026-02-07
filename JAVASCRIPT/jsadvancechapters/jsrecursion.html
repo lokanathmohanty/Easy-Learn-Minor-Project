@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Recursion</h1>
+    <div class="content">
+      <p>
+        Recursion is a programming technique where a function calls itself. It is useful when solving problems that can be broken down into smaller, similar subproblems. 
+      </p>
+
+      <h2>What is Recursion?</h2>
+      <p>
+        The word recursion comes from "recurring," meaning happening again and again. A recursive function calls itself with a modified input until it reaches a stopping point called the <strong>base condition</strong>.
+      </p>
+      <p>
+        For example, when calculating the factorial of a number, the function calls itself by decreasing the input step by step until it reaches 1, which acts as the base condition.
+      </p>
+
+      <h2>How Recursion Works?</h2>
+      <p>
+        Recursion follows the principle of <strong>divide and conquer</strong>. The function divides the problem into smaller chunks and continues solving until the base condition is met, after which the recursive calls stop and results are returned back up the chain.
+      </p>
+
+      <h2>Example of Recursion: Factorial</h2>
+      <p>
+        The factorial of a positive integer <code>n</code> is defined as:
+      </p>
+      <p>
+        <code>n! = 1 × 2 × 3 × ... × n</code>
+      </p>
+      <ul>
+        <li>Factorial of <code>0</code> is <code>1</code>.</li>
+        <li>Factorial of negative numbers does not exist.</li>
+      </ul>
+
+      <h3>Example Code</h3>
+      <pre><code>
+// Recursive function to find factorial
+function fact(n) {
+   // base condition
+   if (n === 0) {
+      return 1;
+   } else {
+      return n * fact(n - 1);
+   }
+}
+
+const num = 6;
+if (num &gt;= 0) {
+   let result = fact(num);
+   console.log(`The factorial of ${num} is ${result}`);
+}
+      </code></pre>
+
+      <h3>Output</h3>
+      <pre><code>
+The factorial of 6 is 720
+      </code></pre>
+
+      <h2>Explanation</h2>
+      <p>
+        Let’s break down the recursive process for <code>fact(6)</code>:
+      </p>
+      <ul>
+        <li><code>fact(6) → 6 × fact(5)</code></li>
+        <li><code>fact(5) → 5 × fact(4)</code></li>
+        <li><code>fact(4) → 4 × fact(3)</code></li>
+        <li><code>fact(3) → 3 × fact(2)</code></li>
+        <li><code>fact(2) → 2 × fact(1)</code></li>
+        <li><code>fact(1) → 1 × fact(0)</code></li>
+        <li><code>fact(0) → 1</code> (base condition)</li>
+      </ul>
+      <p>
+        Multiplying all results together gives <code>720</code>.
+      </p>
+
+      <h2>Advantages of Recursion</h2>
+      <ul>
+        <li>Simplifies code for problems like factorial, Fibonacci, and tree traversal.</li>
+        <li>Makes code more readable for divide-and-conquer algorithms.</li>
+      </ul>
+
+      <h2>Disadvantages of Recursion</h2>
+      <ul>
+        <li>Consumes more memory due to repeated function calls in the call stack.</li>
+        <li>May cause stack overflow if the base condition is missing or incorrect.</li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      <p>
+        Recursion is a powerful tool in JavaScript. By understanding how to define a base condition and break down problems into smaller subproblems, developers can solve complex tasks elegantly. However, recursion must be used carefully to avoid performance issues.
+      </p>
+    </div>
+  </div>
+</div>

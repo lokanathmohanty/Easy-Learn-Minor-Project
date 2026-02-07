@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Power Query Editor - Merge Queries (Part 1)</h1>
+    <div class="content">
+      <h2>Right Outer Join</h2>
+      <p>
+        When two tables need to be merged based on a common column, a right outer join extracts all records from the second table, along with matching records from the first table. This is opposite to the left outer join.
+      </p>
+
+      <h2>Example Scenario</h2>
+      <p>
+        Suppose two tables exist: <strong>Employee</strong> (with columns Employee ID, Name, Designation, Salary, Age) and <strong>Department</strong> (with Employee ID and Department). A right outer join combines these tables showing all department entries and matching employee details.
+      </p>
+
+      <h2>Steps to Perform Right Outer Join in Power BI Desktop</h2>
+      <ol>
+        <li>Open Power BI Desktop, click the Home tab, select Get Data, and load the Employee and Department Excel workbooks separately.</li>
+        <li>Select the relevant sheet and load each table into Power BI.</li>
+        <li>Click Home &gt; Transform Data to open Power Query Editor.</li>
+        <li>Choose Combine &gt; Merge Queries &gt; Merge Queries.</li>
+        <li>In the Merge dialog, select the common column Employee ID in both tables.</li>
+        <li>Under Join Kind, select "Right Outer (all from second, matching from first)".</li>
+        <li>Click OK to execute the join and view the combined table.</li>
+      </ol>
+
+      <h2>Left Anti Join and Right Anti Join</h2>
+      <p>
+        The left anti join retrieves unmatched records from the first table, and the right anti join retrieves unmatched records from the second table.
+      </p>
+
+      <h2>Example to Retrieve Unmatched Records</h2>
+      <ol>
+        <li>Load the two tables into Power BI Desktop as before.</li>
+        <li>Open Power Query Editor.</li>
+        <li>Choose Merge Queries; select Employee ID columns from both tables.</li>
+        <li>Select "Left Anti (rows only in first)" to get unmatched records from the first table, or "Right Anti (rows only in second)" to get unmatched records from the second table.</li>
+        <li>Click OK to see results with unmatched rows displayed (null for missing department if applicable).</li>
+      </ol>
+    </div>
+  </div>
+</div>

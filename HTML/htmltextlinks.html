@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Text Links</h1>
+    <div class="content">
+      <h2>HTML Links</h2>
+      <p>HTML Links (Hyperlinks) are words or buttons having a link to another page that take the user to that linked page when clicked.</p>
+
+      <h2>HTML Hyperlinks</h2>
+      <p>A hyperlink is a specific type of link that allows users to navigate from one web page or resource to another by clicking on it. You can create hyperlinks using text or images available on a webpage. A hyperlink is created using the HTML Anchor Tag (&lt;/a&gt;).</p>
+
+      <h2>The Anchor (&lt;a&gt;) Tag</h2>
+      <p>An anchor tag, or &lt;a&gt; tag, is a basic element that creates hyperlinks between two pages. Anything which is written between the opening &lt;a&gt; and the closing &lt;/a&gt; tags become clickable and when someone clicks on it, the linked page will be opened.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>&lt;a href="URL" target="_target_type"&gt;Link Text&lt;/a&gt;</code></pre>
+      <p>Read more about creating URLs, we recommend to read this chapter: Understanding URL</p>
+
+      <h2>Creating Hyperlinks (Linking Webpages/Documents)</h2>
+      <p>You can link other webpages or documents by creating the hyperlinking to specific words, images, or any HTML element.</p>
+      <p>As discussed above, you can create hyperlinks by using the HTML &lt;a&gt; tag with the href attribute. The href attribute specifies the page/document to be linked.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>&lt;a href="URL" ... attributes-list&gt;Link Text&lt;/a&gt;</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Hyperlink Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;p&gt;Click following link&lt;/p&gt;
+   &lt;a href="https://www.tutorialspoint.com/" target="_self"&gt;Tutorials Point&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      <p>On executing the above example, a link will be displayed. You can click on the link generated to reach to the home page of Tutorials Point.</p>
+
+      <h2>The "target" Attribute</h2>
+      <p>The target attribute specifies the location where linked document is opened. Following are the possible values of target attribute:</p>
+
+      <table>
+        <tr><th>S.No.</th><th>Option &amp; Description</th></tr>
+        <tr><td>1</td><td><b>_blank</b><br>Opens the linked document in a new window or tab.</td></tr>
+        <tr><td>2</td><td><b>_self</b><br>Opens the linked document in the same frame.</td></tr>
+        <tr><td>3</td><td><b>_parent</b><br>Opens the linked document in the parent frame.</td></tr>
+        <tr><td>4</td><td><b>_top</b><br>Opens the linked document in the full body of the window.</td></tr>
+        <tr><td>5</td><td><b>targetframe</b><br>Opens the linked document in a named targetframe.</td></tr>
+      </table>
+
+      <h3>Example</h3>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Hyperlink Example&lt;/title&gt;
+   &lt;base href="https://www.tutorialspoint.com/"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;p&gt;Click any of the following links&lt;/p&gt;
+   &lt;a href="/html/index.htm" target="_blank"&gt;Opens in New&lt;/a&gt; | 
+   &lt;a href="/html/index.htm" target="_self"&gt;Opens in Self&lt;/a&gt; | 
+   &lt;a href="/html/index.htm" target="_parent"&gt;Opens in Parent&lt;/a&gt; | 
+   &lt;a href="/html/index.htm" target="_top"&gt;Opens in Body&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Use of Base Path in Hyperlinks</h2>
+      <p>When you link HTML documents related to the same website, it is not required to give a complete URL for every link. You can get rid of it if you use &lt;base&gt; tag in your HTML document header. This tag is used to give a base path for all the links. So your browser will concatenate given relative path to this base path and will make a complete URL.</p>
+
+      <h3>Example</h3>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Hyperlink Example&lt;/title&gt;
+   &lt;base href="https://www.tutorialspoint.com/"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;p&gt;Click following link&lt;/p&gt;
+   &lt;a href="/html/index.htm" target="_blank"&gt;HTML Tutorial&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Linking to a Page Section</h2>
+      <p>Linking to a section on the same page allows users to navigate directly to that section. You can create a link in the same to a specific section by using the href attribute with a #id value, where the #id targets an element on the page with a corresponding id attribute.</p>
+
+      <h3>Example</h3>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;style&gt;
+        div { height: 900px; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h2&gt;Ed-Tech&lt;/h2&gt;
+   &lt;div&gt; 
+      &lt;p&gt;Tutorialspoint: Simply Easy Learning&lt;/p&gt;
+      &lt;a href="#about"&gt;Know More&lt;/a&gt;
+   &lt;/div&gt;
+   &lt;h2 id="about"&gt;Section 2&lt;/h2&gt;
+   &lt;div&gt; 
+      &lt;p&gt;Tutorials Point is an online learning platform
+      providing free tutorials, paid premium courses,
+      and eBooks. Learn the latest technologies and 
+      programming languages SQL, MySQL, Python, C, 
+      C++, Java, Python, PHP, Machine Learning, data
+      science, AI, Prompt Engineering and more.&lt;/p&gt;
+   &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Styling Hyperlinks (Setting Link Color)</h2>
+      <p>You can set colors of your links, active links and visited links using link, alink and vlink attributes of &lt;body&gt; tag.</p>
+
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Hyperlink Example&lt;/title&gt;
+   &lt;base href="https://www.tutorialspoint.com/"&gt;
+&lt;/head&gt;
+&lt;body alink="#54A250" link="#040404" vlink="#F40633"&gt;
+   &lt;p&gt;Click following link&lt;/p&gt;
+   &lt;a href="/html/index.htm" target="_blank"&gt;HTML Tutorial&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Downloadable Links</h2>
+      <p>HTML allows you to create downloadable links where you can create links to make your PDF, DOC, or ZIP files downloadable. To create any link downloadable, you can use the download attribute with the &lt;a&gt; tag and specify the downloadable file path in the href attribute.</p>
+
+      <h3>Example</h3>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Downloadable Link Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;a href="/html/src/sample.txt" download&gt;Download File&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h3>Custom File Name</h3>
+      <p>You can also specify the filename for the downloaded file. To give a custom filename the file, you need to provide it to the download attribute.</p>
+      <pre><code>&lt;a href="/html/src/sample.txt" download="custom-report.txt"&gt;Download File&lt;/a&gt;</code></pre>
+
+      <h3>File Download Dialog Box</h3>
+      <p>You can also allow HTML to open a file download dialog box before starting the download so that the user can select the location to download the file. You can do it by using an HTTP header in your HTTP response.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>#!/usr/bin/perl
+# Additional HTTP Header
+print "Content-Type:application/octet-stream; name=\"FileName\"\r\n";
+print "Content-Disposition: attachment; filename=\"FileName\"\r\n\n";
+# Open the target file and list down its content as follows
+open( FILE, "&lt;FileName" );
+while(read(FILE, $buffer, 100)){
+   print("$buffer");
+}
+</code></pre>
+      <p><b>Note:</b> For more detail on PERL CGI programs, go through tutorial PERL and CGI.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Simple Login Example with Session Management</h1>
+
+        <div class="content">
+            <h2 class="title">Authentication Overview</h2>
+            <p>This example demonstrates a basic **user authentication** system in PHP. It uses an HTML form to collect credentials ($\text{username}$ and $\text{password}$) via the $\text{POST}$ method. The server-side PHP script checks these credentials against a hardcoded associative array of users and, upon success, initiates a user session for tracking the logged-in state.</p>
+
+            <h3 class="title">Key Components</h3>
+            <ul>
+                <li>**Session Management:** The script begins with $\text{session\_start()}$ to enable sessions for maintaining the login state across pages.</li>
+                <li>**User Data:** A hardcoded associative array ($\text{\$users}$) is used to simulate a user database for credential verification (e.g., $\text{['user'=>"test", "manager"=>"secret"]}$).</li>
+                <li>**Self-Posting Form:** The form action is set to $\text{htmlspecialchars(\$_SERVER['PHP\_SELF'])}$ to submit the data back to the same script for processing.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">PHP Authentication Logic ($\text{Login.php}$)</h2>
+            <p>The PHP script handles form submission, validation, and session creation.</p>
+            <pre>
+&lt;?php
+   ob_start();
+   session_start();
+   $msg = '';
+   $users = ['user'=&gt;"test", "manager"=&gt;"secret", "guest"=&gt;"abc123"];
+
+   if (isset($_POST['login']) &amp;&amp; !empty($_POST['username']) &amp;&amp; !empty($_POST['password'])) {
+      $user=$_POST['username'];                  
+      
+      // 1. Check if username exists in the $users array
+      if (array_key_exists($user, $users)){
+         
+         // 2. If username exists, check if the password matches
+         if ($users[$_POST['username']]==$_POST['password']){
+            // Success: Set session variables to indicate login state
+            $_SESSION['valid'] = true;
+            $_SESSION['timeout'] = time();
+            $_SESSION['username'] = $_POST['username'];
+            $msg = "You have entered correct username and password";
+         } else {
+            $msg = "You have entered wrong Password"; 
+         }
+      } else {
+         $msg = "You have entered wrong user name";
+      }
+   }
+?&gt;</pre>
+            <p>The appropriate message ($\text{\$msg}$) is echoed back to the user within the $\text{HTML}$ page.</p>
+
+            <hr>
+
+            <h2 class="title">Logout Mechanism ($\text{Logout.php}$)</h2>
+            <p>To end the session and log the user out, the $\text{Logout.php}$ script clears the specific session variables and redirects the user back to the login page.</p>
+            <pre>
+&lt;?php
+   session_start();
+   // Remove specific session variables related to login
+   unset($_SESSION["username"]);
+   unset($_SESSION["password"]); // Note: 'password' is not set in login, but often cleared
+   unset($_SESSION["valid"]); // Crucial to unset the validation flag
+   
+   echo '&lt;h4&gt;You have cleaned session&lt;/h4&gt;';
+   // Redirects to login.php after a 2-second delay
+   header('Refresh: 2; URL = login.php');
+?&gt;</pre>
+        </div>
+    </div>
+</div>

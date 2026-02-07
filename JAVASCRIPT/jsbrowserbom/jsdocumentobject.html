@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript - Document Object</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+
+      <h1 class="title">JavaScript - Document Object</h1>
+
+      <div class="content">
+        <h2 class="title">Introduction</h2>
+        <p>
+          The <code>document</code> object is a JavaScript object that provides access to all 
+          elements of an HTML document. When the HTML document is loaded in the web browser, 
+          it creates a document object. It is the root of the HTML document.
+        </p>
+        <p>
+          The document object contains various properties and methods you can use to get details 
+          about HTML elements and customize them. It is a property of the <code>window</code> object 
+          and can be accessed using <code>window.document</code> or directly as <code>document</code>.
+        </p>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Document Object Properties</h2>
+        <ul>
+          <li><code>document.title</code> − Gets or sets the title of the document.</li>
+          <li><code>document.URL</code> − Returns the URL of the document.</li>
+          <li><code>document.body</code> − Returns the &lt;body&gt; element.</li>
+          <li><code>document.head</code> − Returns the &lt;head&gt; element.</li>
+          <li><code>document.documentElement</code> − Returns the &lt;html&gt; element.</li>
+          <li><code>document.doctype</code> − Returns the Document Type Declaration.</li>
+        </ul>
+      </div>
+
+      <div class="example">
+        <h2 class="title">Example: Accessing the Document Title</h2>
+        <pre>
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt; JavaScript - DOM Object &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;The title of the document is: &lt;/div&gt;
+   &lt;script&gt;
+      document.getElementById("output").innerHTML += document.title;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+        <p><strong>Output:</strong> The title of the document is: JavaScript - DOM Object</p>
+      </div>
+
+      <div class="example">
+        <h2 class="title">Example: Accessing the Document URL</h2>
+        <pre>
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt; JavaScript - DOM Object &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;The URL of the document is: &lt;/div&gt;
+   &lt;script&gt;
+      document.getElementById("output").innerHTML += document.URL;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+        <p><strong>Output:</strong> The URL of the document is: https://www.example.com</p>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Document Object Methods</h2>
+        <ul>
+          <li><code>getElementById(id)</code> − Returns the element with the specified ID.</li>
+          <li><code>getElementsByClassName(className)</code> − Returns a collection of elements by class name.</li>
+          <li><code>getElementsByTagName(tagName)</code> − Returns a collection of elements by tag name.</li>
+          <li><code>createElement(tagName)</code> − Creates a new HTML element.</li>
+          <li><code>createTextNode(text)</code> − Creates a new text node.</li>
+          <li><code>appendChild(node)</code> − Appends a node as the last child of a node.</li>
+          <li><code>removeChild(node)</code> − Removes a child node from the DOM.</li>
+          <li><code>setAttribute(name, value)</code> − Sets an attribute on the specified element.</li>
+          <li><code>getAttribute(name)</code> − Returns the value of an attribute.</li>
+        </ul>
+      </div>
+
+      <div class="example">
+        <h2 class="title">Example: Accessing HTML Element by ID</h2>
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="result"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      document.getElementById("result").innerHTML += 
+      "Hello User! You have accessed the DIV element using its id.";
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+        <p><strong>Output:</strong> Hello User! You have accessed the DIV element using its id.</p>
+      </div>
+
+      <div class="example">
+        <h2 class="title">Example: Adding an Event to the Document</h2>
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="result"&gt;
+       &lt;h2&gt; Mouseover Event &lt;/h2&gt;
+       &lt;p&gt; Hover over here to change background color &lt;/p&gt;
+   &lt;/div&gt;
+   &lt;script&gt;
+      document.addEventListener('mouseover', function () {
+         document.getElementById("result").innerHTML = "Mouseover event occurred.";
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+        <p><strong>Output:</strong> Mouseover event occurred.</p>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Document Object Properties List</h2>
+        <p>Here are some additional properties of the document object:</p>
+        <ul>
+          <li><code>document.activeElement</code> – Returns the currently focused element.</li>
+          <li><code>document.baseURI</code> – Returns the base URI of the document.</li>
+          <li><code>document.cookie</code> – Gets the cookies related to the document.</li>
+          <li><code>document.forms</code> – Returns all &lt;form&gt; elements.</li>
+          <li><code>document.images</code> – Returns all &lt;img&gt; elements.</li>
+          <li><code>document.lastModified</code> – Returns the last modified date/time.</li>
+          <li><code>document.readyState</code> – Returns the current state of the document.</li>
+          <li><code>document.scripts</code> – Returns all &lt;script&gt; elements.</li>
+          <li><code>document.title</code> – Gets/sets the title of the document.</li>
+          <li><code>document.URL</code> – Returns the full URL of the document.</li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Document Object Methods List</h2>
+        <p>Here are some more commonly used methods:</p>
+        <ul>
+          <li><code>addEventListener()</code> – Adds an event listener to the document.</li>
+          <li><code>createComment()</code> – Creates a new comment node.</li>
+          <li><code>createDocumentFragment()</code> – Creates a lightweight container for DOM nodes.</li>
+          <li><code>elementFromPoint(x, y)</code> – Returns the top element at given coordinates.</li>
+          <li><code>querySelector()</code> – Returns the first element matching a CSS selector.</li>
+          <li><code>querySelectorAll()</code> – Returns all elements matching a CSS selector.</li>
+          <li><code>removeEventListener()</code> – Removes an event listener.</li>
+          <li><code>write()</code> – Writes text or HTML into the document.</li>
+          <li><code>writeln()</code> – Writes text/HTML with a newline.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

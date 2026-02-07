@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Metaprogramming with Metaclasses</h1>
+    </div>
+    <div class="content">
+      <p>
+        Metaprogramming in Python refers to writing code that can manipulate or have awareness of itself. Metaclasses, the "classes of classes," are a core tool enabling metaprogramming by customizing class creation and behavior. This allows dynamic code generation, reflection, and more flexible program designs.
+      </p>
+      <p>
+        Techniques such as decorators and metaclasses empower Python's metaprogramming capabilities, enabling advanced runtime modifications.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Defining Metaclasses with <code>__prepare__()</code></h2>
+    </div>
+    <div class="content">
+      <p>
+        The <code>__prepare__()</code> classmethod allows customizing the namespace where a class body executes, before any class code runs. This can initialize the class namespace with custom attributes or methods.
+      </p>
+      <pre>
+class MyMetaClass(type):
+   @classmethod
+   def __prepare__(cls, name, bases, **kwargs):
+      print(f'Preparing namespace for {name}')
+      custom_namespace = super().__prepare__(name, bases, **kwargs)
+      custom_namespace['CONSTANT_VALUE'] = 100  
+      return custom_namespace
+
+class MyClass(metaclass=MyMetaClass):
+   def __init__(self, value):
+      self.value = value
+    
+   def display(self):
+       print(f"Value: {self.value}, Constant: {self.__class__.CONSTANT_VALUE}")
+
+obj = MyClass(42)
+obj.display()
+      </pre>
+      <p>Output example:</p>
+      <pre>
+Preparing namespace for MyClass
+Value: 42, Constant: 100
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Dynamic Code Generation with Metaclasses</h2>
+    </div>
+    <div class="content">
+      <p>
+        Metaclasses enable adding or modifying class attributes and methods at runtime, supporting dynamic code generation.
+      </p>
+      <pre>
+class MyMeta(type):
+   def __new__(cls, name, bases, attrs):
+      print(f"Defining class: {name}") 
+      attrs['dynamic_attribute'] = 'Added dynamically'
+      def dynamic_method(self):
+         return f"This is a dynamically added method for {name}"
+      attrs['dynamic_method'] = dynamic_method
+      return super().__new__(cls, name, bases, attrs)
+
+class MyClass(metaclass=MyMeta):
+   pass
+
+obj = MyClass()
+print(obj.dynamic_attribute)       
+print(obj.dynamic_method())
+      </pre>
+      <p>Output example:</p>
+      <pre>
+Defining class: MyClass
+Added dynamically
+This is a dynamically added method for MyClass
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Reflection and Metaprogramming</h2>
+    </div>
+    <div class="content">
+      <p>
+        Reflection allows introspection and modification of classes at runtime. Metaclasses can inspect class attributes during creation and print or modify them dynamically.
+      </p>
+      <pre>
+class MyMeta(type):
+   def __new__(cls, name, bases, dct):
+      print(f"Class attributes for {name}: {dct}")
+      return super().__new__(cls, name, bases, dct)
+
+class MyClass(metaclass=MyMeta):
+   data = "example"
+      </pre>
+      <p>Output example:</p>
+      <pre>
+Class attributes for MyClass: {'__module__': '__main__', '__qualname__': 'MyClass', 'data': 'example'}
+      </pre>
+    </div>
+  </div>
+
+  
+    </div>
+  </div>
+</div>

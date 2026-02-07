@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Pointers in C</h1>
+    
+    <div class="content">
+      <h2 class="title">What is a Pointer in C?</h2>
+      <p>
+        C pointer is the derived data type that is used to store the address of another variable and can also be used to access and manipulate the variable's data stored at that location. The pointers are considered as derived data types.
+      </p>
+      <p>
+        With pointers, you can access and modify the data located in the memory, pass the data efficiently between the functions, and create dynamic data structures like linked lists, trees, and graphs.
+      </p>
+
+      <h2 class="title">Pointer Declaration</h2>
+      <p>
+        To declare a pointer, use the dereferencing operator (*) followed by the data type.
+      </p>
+      <p><strong>Syntax:</strong></p>
+      <p>type *var-name;</p>
+      <p>
+        Here, <code>type</code> is the pointer's base type; it must be a valid C data type and <code>var-name</code> is the name of the pointer variable. The asterisk (*) used to declare a pointer is the same asterisk used for multiplication. However, in this statement the asterisk is being used to designate a variable as a pointer.
+      </p>
+
+      <h2 class="title">Pointer Initialization</h2>
+      <p>
+        After declaring a pointer variable, you need to initialize it with the address of another variable using the address of (&) operator. This process is known as referencing a pointer.
+      </p>
+      <p><strong>Syntax:</strong></p>
+      <p>pointer_variable = &variable;</p>
+      <p>Example:</p>
+      <p>
+        <code>int x = 10;<br>
+        int *ptr = &x;</code>
+      </p>
+
+      <h2 class="title">Referencing and Dereferencing Pointers</h2>
+      <p>
+        A pointer references a location in memory. Obtaining the value stored at that location is known as dereferencing the pointer.
+      </p>
+      <ul>
+        <li><strong>& Operator:</strong> Also known as the "Address-of operator", used for referencing (taking the address of a variable).</li>
+        <li><strong>* Operator:</strong> Also known as the "dereference operator", used to get the value stored at the address pointed to by the pointer.</li>
+      </ul>
+
+      <h2 class="title">Size of a Pointer Variable</h2>
+      <p>
+        The memory size occupied by a pointer variable does not depend on the type of the variable it is pointing to. The size depends on the system architecture.
+      </p>
+
+      <h2 class="title">Pointer to Pointer</h2>
+      <p>
+        You may have a pointer variable that stores the address of another pointer itself. This is called a pointer to pointer.
+      </p>
+
+      <h2 class="title">NULL Pointers</h2>
+      <p>
+        It is a good practice to assign a NULL value to a pointer variable if you do not have an exact address to assign. A pointer assigned NULL is called a null pointer.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example: Using Pointers in C</h2>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int var = 20;
+    int *ip;
+
+    ip = &var;
+
+    printf("Address of var variable: %p\n", &var);
+    printf("Address stored in ip variable: %p\n", ip);
+    printf("Value of *ip variable: %d\n", *ip);
+
+    return 0;
+}
+</code>
+      </pre>
+
+      <h2 class="title">Example: Pointer to Pointer</h2>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int var = 10;
+    int *intptr = &var;
+    int **ptrptr = &intptr;
+
+    printf("var: %d\n", var);
+    printf("Value at intptr: %d\n", *intptr);
+    printf("Value at ptrptr: %d\n", **ptrptr);
+
+    return 0;
+}
+</code>
+      </pre>
+
+      <h2 class="title">Example: NULL Pointer</h2>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int *ptr = NULL;
+
+    printf("The value of ptr is : %p\n", ptr);
+
+    return 0;
+}
+</code>
+      </pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Nested Structures in C</h1>
+
+    <div class="content">
+      <h2 class="title">What is a Nested Structure?</h2>
+      <p>A nested structure in C is a structure that contains another structure as one of its members. This allows composite data representation.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Nested Structure Declaration</h2>
+      <p>A nested structure can be declared by including a struct type as a member of another struct type.</p>
+      <p>Syntax:</p>
+      <p><code>struct struct1 {<br>
+        &nbsp;&nbsp;type var1;<br>
+        &nbsp;&nbsp;type var2;<br>
+        &nbsp;&nbsp;struct struct2 strvar;<br>
+      };</code></p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Inline Nested Structure</h2>
+      <p>Defining a nested structure inline within the outer struct:</p>
+      <pre><code>struct employee {
+  char name[10];
+  float salary;
+  struct dob {
+    int d, m, y;
+  } d1;
+};</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Accessing Nested Structure Members</h2>
+      <p>Use the dot operator (.) for each level to access members of nested structs.</p>
+      <p>Example syntax:</p>
+      <p><code>outer_struct_var.inner_struct_var.member_name;</code></p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Accessing Members</h2>
+      <pre><code>printf("Date of Birth: %d-%d-%d\n", e1.d1.d, e1.d1.m, e1.d1.y);</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Pointer to Nested Structure</h2>
+      <p>Use the arrow operator (->) to access nested struct members via a pointer.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Pointer Access</h2>
+      <pre><code>struct employee *ptr = &e1;
+printf("Date of Birth: %d-%d-%d\n", ptr->d1.d, ptr->d1.m, ptr->d1.y);</code></pre>
+    </div>
+  </div>
+</div>

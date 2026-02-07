@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: GET and POST Methods</h1>
+        <div class="content">
+            <p>PHP handles client data submitted via web forms using the HTTP **GET** and **POST** request methods. These methods populate specific **superglobal arrays** in PHP, allowing server-side scripts to access user input.</p>
+            
+            <h2 class="title">The GET Method</h2>
+            <p>The GET method sends encoded data appended to the page request URL as a **query string**. The data is visible in the browser's address bar.</p>
+            
+            <ul>
+                <li><strong>Access in PHP:</strong> Data is accessed via the **<code>$_GET</code>** associative array.</li>
+                <li><strong>Visibility:</strong> Data is exposed in the URL (e.g., <code>page.php?name=value</code>).</li>
+                <li><strong>Restrictions:</strong> Limited data size (typically under 2048 characters) and cannot be used for binary data.</li>
+                <li><strong>Use Case:</strong> Suitable for non-sensitive data, search queries, or bookmarkable links. **Never use for passwords.**</li>
+            </ul>
+
+            <h2 class="title">The POST Method</h2>
+            <p>The POST method transfers data via **HTTP headers** in the request body, making the data invisible in the URL. It is the standard method for sending form data.</p>
+            
+            <ul>
+                <li><strong>Access in PHP:</strong> Data is accessed via the **<code>$_POST</code>** associative array.</li>
+                <li><strong>Restrictions:</strong> No practical limit on data size (though server configuration, like <code>post_max_size</code> in `php.ini`, imposes one).</li>
+                <li><strong>Capability:</strong> Can send both ASCII and **binary data** (e.g., file uploads).</li>
+                <li><strong>Use Case:</strong> Mandatory for sensitive data (passwords, payment info) and when submitting large amounts of data or files.</li>
+            </ul>
+
+            <h2 class="title">The <code>$_REQUEST</code> Superglobal</h2>
+            <p>The **<code>$_REQUEST</code>** superglobal is an associative array that contains the contents of <code>$_GET</code>, <code>$_POST</code>, and <code>$_COOKIE</code>. While convenient, it is generally recommended to use <code>$_GET</code> or <code>$_POST</code> directly to explicitly know where the data originated, improving code clarity and security.</p>
+
+            <h3 class="title">File Uploads with POST</h3>
+            <p>To upload files, the form's <code>method</code> must be **<code>POST</code>** and its **<code>enctype</code>** attribute must be set to **<code>multipart/form-data</code>**. File details are accessed via the separate **<code>$_FILES</code>** superglobal array.</p>
+        </div>
+        
+        <h2 class="title">Example Session: Accessing POST Data</h2>
+        <div class="content example">
+            <p>This example demonstrates how the HTML form's <code>method="POST"</code> populates the PHP <code>$_POST</code> array.</p>
+            
+            <pre><code>
+&lt;!-- HTML Form (e.g., hello.html) --&gt;
+&lt;form action="hello.php" method="POST"&gt;
+   First Name: &lt;input type="text" name="first_name"/&gt; &lt;br/&gt;
+   Age: &lt;input type="text" name="age" /&gt;
+   &lt;input type="submit" value="Submit" /&gt;
+&lt;/form&gt;
+
+&lt;?php
+   // PHP Script (e.g., hello.php)
+   if( isset($_POST["first_name"]) || isset($_POST["age"]) ) {
+      $name = htmlspecialchars($_POST['first_name']);
+      $age = htmlspecialchars($_POST['age']);
+      
+      echo "Welcome ". $name. "&lt;br /&gt;";
+      echo "You are ". $age. " years old.";
+   }
+?&gt;
+            </code></pre>
+        </div>
+    </div>
+</div>

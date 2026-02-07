@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Nullish Coalescing Operator</h1>
+    <div class="content">
+      <h2>Nullish Coalescing Operator</h2>
+      <p>
+        The Nullish Coalescing operator in JavaScript is represented by two question marks (??). It takes two operands and returns the first operand if it is not <code>null</code> or <code>undefined</code>. Otherwise, it returns the second operand. It is a logical operator introduced in ES2020.
+      </p>
+      <p>
+        In many cases, we can have the null or empty values stored in the variables, which can change the behavior of the code or generate errors. So, we can use the Nullish Coalescing operator to use the default values when a variable contains null or undefined values.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>
+        <code>op1 ?? op2</code>
+      </p>
+      <p>
+        The nullish coalescing operator (??) returns the second operand (op2) if the first operand (op1) is null or undefined. Otherwise, it returns the first operand (op1).
+      </p>
+      <p>The above syntax is similar to the below code:</p>
+      <p>
+        <code>
+        let res;<br>
+        if (op1 != null || op1 != undefined) {<br>
+        &nbsp;&nbsp;res = op1;<br>
+        } else {<br>
+        &nbsp;&nbsp;res = op2;<br>
+        }
+        </code>
+      </p>
+
+      <h2>Examples</h2>
+
+      <h3>Example: Handling null or undefined</h3>
+      <p>In the example below, the value of <code>x</code> is null. Since it is null, <code>y</code> gets assigned the second operand (5).</p>
+      <p><strong>Output:</strong> The value of y is: 5</p>
+
+      <h3>Example: Handling null or undefined in Arrays</h3>
+      <p>
+        Here, if <code>arr</code> is null or undefined, an empty array will be assigned to <code>arr1</code>.
+      </p>
+      <p><strong>Output:</strong> The value of arr1 is: 65,2,56,2,3,12</p>
+
+      <h3>Example: Accessing Object Properties</h3>
+      <p>
+        If a property is missing from an object, we can assign a default value using <code>??</code>.
+      </p>
+      <p><strong>Output:</strong> The product is Mobile of the brand Apple</p>
+
+      <h2>Short-Circuiting</h2>
+      <p>
+        Like Logical AND (&&) and OR (||) operators, the Nullish Coalescing operator doesn't evaluate the right-hand operand if the left-hand operand is neither null nor undefined.
+      </p>
+
+      <h2>Using ?? with && or ||</h2>
+      <p>
+        When we use the ?? operator with logical AND or OR operators, we should use parentheses to explicitly specify the precedence.
+      </p>
+      <p>
+        <code>
+        let x = 5 || 7 ?? 9; // Syntax Error <br>
+        let x = (5 || 7) ?? 9; // works
+        </code>
+      </p>
+
+      <h3>Example: Using ?? with || and &&</h3>
+      <p>
+        <strong>Output:</strong><br>
+        The value of x is : 5 <br>
+        The value of y is : 7
+      </p>
+    </div>
+  </div>
+</div>

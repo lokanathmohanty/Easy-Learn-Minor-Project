@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">JavaScript - DOM DOMTokenList</h1>
+        <div class="content">
+            <p>The <strong>DOMTokenList</strong> is an interface in DOM (Document Object Model) which represents a set of space-separated tokens (classes). Generally, it is used for managing the classes in HTML elements.</p>
+            <p>It may look like an array, but it is not. Similar to an array, you can loop through a DOMTokenList and access its tokens by index. However, you cannot use array methods such as <code>push()</code>, <code>pop()</code>, or <code>join()</code> on a DOMTokenList.</p>
+            <p>You can retrieve individual tokens using their numerical index in the DOMTokenList. For example, <code>element.classList[0]</code> would give you the first-class name of an element.</p>
+            <p>The DOMTokenList can contain a list of values (tokens), and it is often used with <code>classList</code> for managing classes dynamically.</p>
+            <h2 class="title">Interactive Example</h2>
+            <p>Click on the below buttons to see the changes...</p>
+            <ul>
+                <li>If you click the "Add" button, the <code>add()</code> method will be called, and the class <code>tp</code> will be added to "tutorials".</li>
+                <li>If you click the "Remove" button, the <code>remove()</code> method will be called to remove the added class.</li>
+                <li>If you click the "Toggle" button, the <code>toggle()</code> method will be called, which will add and remove the class alternately.</li>
+            </ul>
+            <h2 class="title">JavaScript DOMTokenList Methods</h2>
+            <ul>
+                <li><strong>add()</strong> − Adds one or more tokens specified in the parameter to the DOMTokenList.</li>
+                <li><strong>contains()</strong> − Checks whether the list contains the specified token, and returns a boolean value.</li>
+                <li><strong>entries()</strong> − Returns an iterator to go through all key/value pairs.</li>
+                <li><strong>forEach()</strong> − Calls the callback function once for each value in the list.</li>
+                <li><strong>item()</strong> − Returns a token specified by the index.</li>
+                <li><strong>keys()</strong> − Returns an iterator through all keys contained in the token list.</li>
+                <li><strong>remove()</strong> − Removes one or more tokens specified in the parameter.</li>
+                <li><strong>replace()</strong> − Replaces an existing token with a new token.</li>
+                <li><strong>supports()</strong> − Checks if a token is supported in DOMTokenList.</li>
+                <li><strong>toggle()</strong> − Dynamically adds or removes a token from an element’s class attribute.</li>
+                <li><strong>values()</strong> − Returns an iterator to go through all values in the token list.</li>
+            </ul>
+            <h2 class="title">JavaScript DOMTokenList Properties</h2>
+            <ul>
+                <li><strong>length</strong> − Returns the number of tokens in a token list.</li>
+                <li><strong>value</strong> − Returns the DOMTokenList serialized as a string.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="session">
+        <h1 class="title">Example: DOMTokenList Length Property</h1>
+        <div class="content">
+            <p>The following example demonstrates the usage of the DOMTokenList <code>length</code> property.</p>
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;body&gt;
+    &lt;p&gt;DOMTokenList Example&lt;/p&gt;
+    &lt;div id="myList" class="tp1 tp2 tp3"&gt;
+        I'm inside div.
+    &lt;/div&gt;
+    &lt;span id="result"&gt;&lt;/span&gt;
+    &lt;script&gt;
+        let list = document.getElementById("myList").classList;
+        document.getElementById('result').innerHTML = 
+            "DOMTokenList length (number of classes) is : " + list.length;
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+            <p>The above program returns the length of the DOMTokenList (or number of classes).</p>
+        </div>
+    </div>
+</div>

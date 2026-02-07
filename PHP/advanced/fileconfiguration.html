@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP.INI File Configuration</h1>
+
+        <div class="content">
+            <h2 class="title">The Role of $\text{php.ini}$</h2>
+            <p>The **$\text{php.ini}$** file is the central configuration file for PHP. It controls the **performance** and sets various **parameters (directives)** that govern PHP's behavior, its extensions, and its interaction with the web server (like Apache) and databases (like MySQL).</p>
+            <ul>
+                <li><strong>Location:</strong> In a standard XAMPP installation, it is found in $\text{c:\xampp\php\php.ini}$.</li>
+                <li><strong>Verification:</strong> The $\text{phpinfo()}$ function displays the current settings and the exact path to the $\text{Loaded Configuration File}$.</li>
+                <li><strong>Directives:</strong> Configuration lines are called directives and are **case sensitive**. They follow the format $\text{directive = value}$. A semicolon ($\text{;}$) at the start of a line indicates a **comment**; removing it activates the directive.</li>
+            </ul>
+
+            <h2 class="title">Development vs. Production INI Files</h2>
+            <p>PHP distributions often include two primary template files to differentiate between environments:</p>
+            <ul>
+                <li><strong>$\text{php.ini-development}$:</strong> Used during the coding and testing phase. It is highly **verbose** regarding error reporting, helping developers trace bugs.</li>
+                <li><strong>$\text{php.ini-production}$:</strong> Used when the application is deployed live. It is designed to **suppress most error messages** from being displayed to end-users, enhancing security and user experience.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Key $\text{php.ini}$ Directives</h2>
+
+            <h3>Error Reporting and Execution</h3>
+            <ul>
+                <li>$\text{error\_reporting = E\_ALL & ~E\_NOTICE}$: Sets the level of errors reported. Development servers should use a high level ($\text{E\_ALL}$), while production often uses a lesser value.</li>
+                <li>$\text{max\_execution\_time = 30}$: Defines the maximum time (in seconds) a script is allowed to run before it's terminated.</li>
+                <li>$\text{error\_prepend\_string}$: Allows adding a string (e.g., HTML/CSS for formatting) before every error message.</li>
+            </ul>
+
+            <h3>Security and Functions</h3>
+            <ul>
+                <li>$\text{disable\_functions}$: Lists specific PHP functions that should be disabled for security reasons (e.g., filesystem, system, or network functions).</li>
+                <li>$\text{safe\_mode = Off}$: An older security mechanism (now deprecated) that restricts file and environment access, most relevant for $\text{CGI}$ use.</li>
+            </ul>
+
+            <h3>Variables and Data Handling (Deprecated Directives)</h3>
+            <p>While many of these settings are now deprecated, they show how PHP once managed input variables:</p>
+            <ul>
+                <li>$\text{register\_globals = Off}$: **Deprecated** since PHP 4.2. When $\text{On}$, input variables ($\text{GET}$, $\text{POST}$, $\text{COOKIE}$) were automatically registered as global variables. It is highly recommended to use **superglobal arrays** ($\text{\$_GET}$, $\text{\$_POST}$) instead.</li>
+                <li>$\text{magic\_quotes\_gpc = On}$: **Deprecated** since PHP 5.3. When $\text{On}$, it automatically escaped quotes in incoming $\text{GET}$, $\text{POST}$, and $\text{COOKIE}$ data.</li>
+                <li>$\text{variables\_order = EGPCS}$: Sets the order in which superglobals are populated ($\text{Environment}$, $\text{GET}$, $\text{POST}$, $\text{COOKIE}$, $\text{SERVER}$). The rightmost value overwrites preceding ones with the same name.</li>
+            </ul>
+
+            <h3>Paths, Files, and Includes</h3>
+            <ul>
+                <li>$\text{include\_path}$: Specifies the directories where PHP will look for files referenced by $\text{include}$ or $\text{require}$ statements.</li>
+                <li>$\text{file\_uploads = On/Off}$: Must be set to $\text{On}$ to enable file uploads via PHP scripts.</li>
+                <li>$\text{auto\_prepend\_file}$: Specifies a file that PHP automatically includes at the **beginning** of every PHP script executed.</li>
+                <li>$\text{auto\_append\_file}$: Specifies a file that PHP automatically includes at the **end** of every PHP script executed.</li>
+            </ul>
+
+            <h3>Database Defaults</h3>
+            <p>Directives exist to set default connection parameters for MySQL, which are used if no host, username, or password is provided explicitly in a connection function (e.g., $\text{mysql\_default\_host}$).</p>
+        </div>
+    </div>
+</div>

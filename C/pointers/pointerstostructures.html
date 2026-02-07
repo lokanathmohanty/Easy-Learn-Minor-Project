@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Pointers to Structures in C</h1>
+
+    
+
+      <p>If you have defined a derived data type using the keyword <code>struct</code>, then you can declare a variable of this type. Hence, you can also declare a pointer variable to store its address. A pointer to struct is thus a variable that refers to a struct variable.</p>
+
+      <h2>Syntax: Defining and Declaring a Structure</h2>
+      <p>This is how you will define a new derived data type using the <code>struct</code> keyword −</p>
+      <pre class="code">
+struct type {
+   type var1;
+   type var2;
+   type var3;
+   ...
+   ...
+};
+      </pre>
+      <p>You can then declare a variable of this derived data type as following −</p>
+      <pre class="code">
+struct type var;
+      </pre>
+      <p>You can then declare a pointer variable and store the address of <code>var</code>. To declare a variable as a pointer, it must be prefixed by <code>*</code>; and to obtain the address of a variable, we use the <code>&amp;</code> operator.</p>
+      <pre class="code">
+struct type *ptr = &amp;var;
+      </pre>
+
+      <h2>Accessing the Elements of a Structure</h2>
+      <p>To access the elements of a structure with pointer, we use a special operator called the indirection operator (<code>-></code>).</p>
+
+      <p>Here, we define a user-defined struct type called <code>book</code>. We declare a book variable and a pointer.</p>
+      <pre class="code">
+struct book{
+   char title[10];
+   double price;
+   int pages;
+};
+struct book b1 = {"Learn C", 675.50, 325};
+struct book *strptr;
+      </pre>
+      <p>To store the address, use the <code>&amp;</code> operator.</p>
+      <pre class="code">
+strptr = &amp;b1;
+      </pre>
+
+      <h2>Using the Indirection Operator</h2>
+      <p>In C programming, we use the indirection operator (<code>-></code>) with struct pointers. It is also called the "struct dereference operator". It helps to access the elements of a struct variable to which the pointer references to.</p>
+      <p>To access an individual element in a struct, the indirection operator is used as follows −</p>
+      <pre class="code">
+strptr -&gt; title;
+strptr -&gt; price;
+strptr -&gt; pages;
+      </pre>
+      <p>The struct pointer uses the indirection operator or the dereference operator to fetch the values of the struct elements of a struct variable. The dot operator (<code>.</code>) is used to fetch the values with reference to the struct variable. Hence,</p>
+      <ul>
+        <li><code>b1.title</code> is the same as <code>strptr -&gt; title</code></li>
+        <li><code>b1.price</code> is the same as <code>strptr -&gt; price</code></li>
+        <li><code>b1.pages</code> is the same as <code>strptr -&gt; pages</code></li>
+      </ul>
+
+      <h2>Example: Pointers to Structures</h2>
+      <p>The following program shows the usage of pointers to structures. In this example, <code>strptr</code> is a pointer to the variable <code>struct book b1</code>. Hence, <code>strptr->title</code> returns the title, similar to <code>b1.title</code> does.</p>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+struct book{
+   char title[10];
+   double price;
+   int pages;
+};
+
+int main(){
+   struct book b1 = {"Learn C", 675.50, 325};
+   struct book *strptr;
+   strptr = &amp;b1;
+
+   printf("Title: %s\n", strptr -&gt; title);
+   printf("Price: %lf\n", strptr -&gt; price);
+   printf("No of Pages: %d\n", strptr -&gt; pages);
+
+   return 0;
+}
+      </pre>
+
+      <h2>Output</h2>
+      <pre class="code">
+Title: Learn C
+Price: 675.500000
+No of Pages: 325
+      </pre>
+
+      <h2>Points to Note</h2>
+      <ul>
+        <li>The dot operator (<code>.</code>) is used to access the struct elements via the struct variable.</li>
+        <li>To access the elements via its pointer, we must use the indirection operator (<code>-></code>).</li>
+      </ul>
+
+      <h2>Example</h2>
+      <p>Let's consider another example to understand how pointers to structures actually work. Here, we will use the keyword <code>struct</code> to define a new derived data type called <code>person</code> and then we will declare a variable of its type and a pointer.</p>
+      <p>The user is asked to input the name, age and weight of the person. The values are stored in the structure elements by accessing them with the indirection operator.</p>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+struct person{
+   char *name;
+   int age;
+   float weight;
+};
+
+int main(){
+   struct person *personPtr, person1;
+
+   strcpy(person1.name, "Meena");
+   person1.age = 40;
+   person1.weight = 60;
+
+   personPtr = &amp;person1;
+
+   printf("Displaying the Data: \n");
+   printf("Name: %s\n", personPtr -&gt; name);
+   printf("Age: %d\n", personPtr -&gt; age);
+   printf("Weight: %f", personPtr -&gt; weight);
+
+   return 0;
+}
+      </pre>
+
+      <h2>Output</h2>
+      <pre class="code">
+Displaying the Data:
+Name: Meena
+Age: 40
+Weight: 60.000000
+      </pre>
+
+      <p>C allows you to declare an "array of struct" as well as an "array of pointers". Here, each element in the struct pointer array is a reference to a struct variable.</p>
+      <p>A struct variable is like a normal variable of primary type, in the sense that you can have an array of struct, you can pass the struct variable to a function, as well as return a struct from a function.</p>
+      <p><strong>Note:</strong> You need to prefix "struct type" to the name of the variable or pointer at the time of declaration. However, you can avoid it by creating a shorthand notation using the <code>typedef</code> keyword.</p>
+
+      <h2>Why Do We Need Pointers to Structures?</h2>
+      <p>Pointers to structures are very important because you can use them to create complex and dynamic data structures such as linked lists, trees, graphs, etc. Such data structures use self-referential structs, where we define a struct type having one of its elements as a pointer to the same type.</p>
+
+      <p>An example of a self-referential structure with a pointer to an element of its own type is defined as follows −</p>
+      <pre class="code">
+struct mystruct{
+   int a;
+   struct mystruct *b;
+};
+      </pre>
+
+      <p>We shall learn about self-referential structures in the next chapter.</p>
+
+       
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Pandas - Data Correlations</h1>
+
+    <div class="content">
+      <p>One of the powerful features of the Pandas module is the <code>corr()</code> method, which is used to calculate the correlation (relationship) between numerical columns in a dataset.</p>
+
+      <p>The correlation value ranges from <strong>-1</strong> to <strong>1</strong>:</p>
+      <ul>
+        <li><strong>1</strong>: Perfect positive correlation</li>
+        <li><strong>0</strong>: No correlation</li>
+        <li><strong>-1</strong>: Perfect negative correlation</li>
+      </ul>
+
+      <p>The examples on this page use a CSV file named <code>data.csv</code>.</p>
+    </div>
+
+    <h2 class="title">Example: Finding Relationships</h2>
+    <div class="example">
+      <div class="content">
+        <p>Calculate the correlation between numeric columns using:</p>
+        <pre><code>
+import pandas as pd
+
+df = pd.read_csv("data.csv")
+print(df.corr())
+        </code></pre>
+
+        <p>Sample result:</p>
+        <pre><code>
+             Duration     Pulse  Maxpulse  Calories
+Duration  1.000000 -0.155408  0.009403  0.922721
+Pulse    -0.155408  1.000000  0.786535  0.025120
+Maxpulse  0.009403  0.786535  1.000000  0.203814
+Calories  0.922721  0.025120  0.203814  1.000000
+        </code></pre>
+
+        <p><strong>Note:</strong> The <code>corr()</code> method ignores non-numeric columns like "Date".</p>
+      </div>
+    </div>
+
+    <h2 class="title">Result Explained</h2>
+    <div class="content">
+      <p>The resulting table shows the correlation between all numeric columns. Here's how to interpret the values:</p>
+
+      <ul>
+        <li><strong>1.0</strong> → Perfect correlation (a column compared to itself)</li>
+        <li><strong>0.9</strong> → Very strong positive correlation</li>
+        <li><strong>0.2</strong> → Weak correlation</li>
+        <li><strong>-0.9</strong> → Very strong negative correlation</li>
+      </ul>
+
+      <p>What is considered a "good" correlation depends on the context, but typically a value of <strong>at least ±0.6</strong> is seen as a strong correlation.</p>
+    </div>
+
+    <h2 class="title">Examples of Correlation</h2>
+    <div class="content">
+      <ul>
+        <li><strong>Perfect Correlation:</strong> "Duration" and "Duration" have a correlation of <code>1.000000</code>.</li>
+        <li><strong>Good Correlation:</strong> "Duration" and "Calories" have a correlation of <code>0.922721</code>. This suggests that longer workouts burn more calories.</li>
+        <li><strong>Poor Correlation:</strong> "Duration" and "Maxpulse" have a correlation of <code>0.009403</code>, meaning no meaningful relationship between workout length and max pulse.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PowerShell: Brackets</h1>
+    <div class="content">
+      <p>PowerShell uses three types of brackets, each with specific roles in scripting:</p>
+      <ul>
+        <li><strong>Parenthesis Brackets ()</strong></li>
+        <li><strong>Braces Brackets {}</strong></li>
+        <li><strong>Square Brackets []</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Parenthesis Brackets ()</h2>
+    <div class="content">
+      <p>Used to:</p>
+      <ul>
+        <li>Pass arguments to functions or cmdlets.</li>
+        <li>Enclose multiple instructions.</li>
+        <li>Resolve ambiguity in expressions.</li>
+        <li>Create arrays.</li>
+      </ul>
+      <p><strong>Example:</strong></p>
+      <pre><code>$array = @("item1", "item2", "item3")
+foreach ($element in $array) { $element }
+# Outputs: item1, item2, item3</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Braces Brackets {}</h2>
+    <div class="content">
+      <p>Used to:</p>
+      <ul>
+        <li>Enclose statements or script blocks.</li>
+        <li>Group commands within control statements.</li>
+      </ul>
+      <p><strong>Example:</strong></p>
+      <pre><code>$x = 10
+if ($x -le 20) {
+  Write-Host "This is if statement"
+}
+# Output: This is if statement.</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Square Brackets []</h2>
+    <div class="content">
+      <p>Used to:</p>
+      <ul>
+        <li>Access array elements by index.</li>
+        <li>Access hashtable values by key.</li>
+        <li>Filter using regular expressions or character classes.</li>
+      </ul>
+      <p><strong>Example:</strong></p>
+      <pre><code>$array = @("item1", "item2", "item3")
+for ($i = 0; $i -lt $array.Length; $i++) {
+  $array[$i]
+}
+# Outputs: item1, item2, item3
+
+Get-Process [r-s]*
+# Lists processes starting with letter 'r' or 's'</code></pre>
+    </div>
+  </div>
+</div>

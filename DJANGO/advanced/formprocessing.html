@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Form Processing and Validation 📝</h1>
+        <div class="content">
+            <p>Creating forms in Django is similar to creating models: you define a class that inherits from a base Django form class, and the class attributes become the form fields. This system handles rendering, data cleaning, and validation.</p>
+
+            <h3>Defining a Form (<code>forms.py</code>)</h3>
+            <p>Forms inherit from <code>forms.Form</code> (for standard forms) or <code>forms.ModelForm</code> (for forms linked directly to a database model).</p>
+            <ul>
+                <li>Fields are defined using classes like <code>forms.CharField</code>.</li>
+                <li>Widgets are used to control how a field is rendered in HTML (e.g., <code>forms.PasswordInput()</code> hides the input).</li>
+            </ul>
+            <pre><code>from django import forms
+
+class LoginForm(forms.Form):
+   user = forms.CharField(max_length = 100)
+   password = forms.CharField(widget = forms.PasswordInput())</code></pre>
+
+            <h2>Form Handling in a View</h2>
+            <p>A typical Django view handles form submission by checking the HTTP request method (GET or POST).</p>
+            <ol>
+                <li>**GET Request:** If the request method is **GET**, the view creates an empty form instance and renders the template containing the form.</li>
+                <li>**POST Request:** If the request method is **POST**, the view binds the submitted data (from <code>request.POST</code>) to a form instance.</li>
+            </ol>
+            <pre><code>def login(request):
+   if request.method == "POST":
+      # 1. Bind submitted data to the form
+      MyLoginForm = LoginForm(request.POST) 
+      
+      # 2. Validate the form
+      if MyLoginForm.is_valid():
+         # 3. Access clean data
+         username = MyLoginForm.cleaned_data['username'] 
+   else:
+      # GET request: create an empty form
+      MyLoginForm = LoginForm() 
+		
+   return render(request, 'loggedin.html', {"username" : username})</code></pre>
+
+            <h3>Key Concepts in Form Processing</h3>
+            <ul>
+                <li>**<code>request.method</code>**: An attribute of the request object used to determine if the request is a GET (initial load) or POST (form submission).</li>
+                <li>**<code>LoginForm(request.POST)</code>**: Binds the submitted data to the form, creating a "bound" instance.</li>
+                <li>**<code>is_valid()</code>**: Executes all validation checks on the bound form. If successful, the method returns <code>True</code> and cleans the data.</li>
+                <li>**<code>cleaned_data</code>**: A dictionary containing the submitted data after it has been successfully validated and converted to the appropriate Python type. You must check <code>is_valid()</code> before accessing this.</li>
+                <li>**<code>{% csrf_token %}</code>**: A template tag required inside any POST form in Django to protect against **Cross-site Request Forgery (CSRF)** attacks.</li>
+            </ul>
+
+            <h2>Custom Form Validation</h2>
+            <p>Beyond Django's automatic checks (like required fields or valid email format), you can define custom validation methods within your form class.</p>
+            <p>To validate a specific field (e.g., <code>username</code>), define a method named **<code>clean_&lt;field_name&gt;</code>**.</p>
+            <pre><code>from django import forms
+from myapp.models import Dreamreal
+
+class LoginForm(forms.Form):
+   # ... fields defined here ...
+
+   def clean_username(self):
+      username = self.cleaned_data.get("username")
+      dbuser = Dreamreal.objects.filter(name = username)
+      
+      if not dbuser.exists(): # Check if user exists in the DB
+         # Raise an error if validation fails
+         raise forms.ValidationError("User does not exist in our db!")
+      return username # Return the cleaned value if validation succeeds</code></pre>
+            <p>If the custom validation fails, the method should raise a **<code>forms.ValidationError</code>**. If it succeeds, it must return the cleaned value for that field.</p>
+        </div>
+    </div>
+</div>

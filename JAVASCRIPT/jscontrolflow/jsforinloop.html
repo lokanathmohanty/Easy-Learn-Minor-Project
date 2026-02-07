@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript for...in Loop — E-Learning Session</h1>
+
+    <div class="content">
+      <h2 class="title">Overview</h2>
+      <p>The <code>for...in</code> loop is used to iterate over an object's enumerable properties (keys). It assigns each property name to a loop variable and runs until all properties are visited. Although arrays and strings are objects and can be traversed with <code>for...in</code>, it is generally not recommended for arrays; use <code>for...of</code> or traditional <code>for</code> loops instead.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Syntax</h2>
+      <p>for (variableName in object) { statement or block to execute }</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Parameters</h2>
+      <ul>
+        <li><p><strong>variableName</strong> — receives the property name (key) on each iteration.</p></li>
+        <li><p><strong>in</strong> — JavaScript 'in' operator used by this loop.</p></li>
+        <li><p><strong>object</strong> — the object whose properties are being traversed.</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Important Notes</h2>
+      <ul>
+        <li><p>The loop iterates over enumerable properties — inherited enumerable properties are included unless filtered (for example with <code>hasOwnProperty</code>).</p></li>
+        <li><p>Property order is not guaranteed for plain objects in older engines; do not rely on insertion order for critical logic.</p></li>
+        <li><p>Prefer <code>for...of</code> or index-based loops for arrays to avoid unexpected keys and performance issues.</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Examples</h2>
+
+      <div class="content">
+        <h2 class="title">Iterate through object properties</h2>
+        <p>Example object traversal:</p>
+        <p>let car = { brand: "OD", model: "Q7", color: "Black" }</p>
+        <p>for (key in car) { /* use key and car[key] */ }</p>
+        <p>Output lines (key -> value):</p>
+        <ul>
+          <li><p>brand -> OD</p></li>
+          <li><p>model -> Q7</p></li>
+          <li><p>color -> Black</p></li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Iterating over a string</h2>
+        <p>Strings are array-like objects; indices are keys:</p>
+        <p>let str = "Hello"</p>
+        <p>for (key in str) { /* str[key] is the character */ }</p>
+        <p>Output (index -> character):</p>
+        <ul>
+          <li><p>0 -> H</p></li>
+          <li><p>1 -> e</p></li>
+          <li><p>2 -> l</p></li>
+          <li><p>3 -> l</p></li>
+          <li><p>4 -> o</p></li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Iterating over an array</h2>
+        <p>Arrays are objects too, but using <code>for...in</code> can enumerate unexpected keys and is less efficient:</p>
+        <p>let arr = ["Hi", "Hello", 900]</p>
+        <p>for (key in arr) { /* arr[key] */ }</p>
+        <p>Output (index -> value):</p>
+        <ul>
+          <li><p>0 -> Hi</p></li>
+          <li><p>1 -> Hello</p></li>
+          <li><p>2 -> 900</p></li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Update object property values</h2>
+        <p>You can modify values while iterating:</p>
+        <p>for (key in car) { car[key] = null }</p>
+        <p>Resulting object: {"brand":null,"model":null,"color":null}</p>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Iterating built-in objects (example: navigator)</h2>
+        <p>Enumerating properties of browser objects can reveal many keys; be cautious and avoid relying on a specific set of properties.</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Common Pitfalls</h2>
+      <ul>
+        <li><p>Using <code>for...in</code> for arrays can include inherited properties and non-numeric keys.</p></li>
+        <li><p>Modifying the object structure while iterating may produce unexpected behavior.</p></li>
+        <li><p>Relying on property order across environments is unsafe for critical logic.</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Practice Tasks</h2>
+      <ul>
+        <li><p>Write a loop that prints only an object's own properties (use <code>hasOwnProperty</code> inside the loop).</p></li>
+        <li><p>Given an array with extra prototype properties added, demonstrate why <code>for...in</code> can be problematic.</p></li>
+        <li><p>Create a function that sets all object values to a default while preserving keys.</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Summary</h2>
+      <p><code>for...in</code> is designed for enumerating object property names. Use it when you need keys from objects, but prefer other iteration patterns for arrays and when property order or performance matters.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Further Reading</h2>
+      <ul>
+        <li><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in">MDN: for...in</a></p></li>
+      </ul>
+    </div>
+
+  </div>
+</div>

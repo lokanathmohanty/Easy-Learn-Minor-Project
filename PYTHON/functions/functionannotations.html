@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Function Annotations</h1>
+    <div class="content">
+      <p>
+        Function annotations in Python allow adding explanatory metadata about function arguments 
+        and return types. They are ignored by the interpreter during execution but useful for 
+        <strong>IDEs</strong> and static type checkers (e.g., <code>mypy</code>).
+      </p>
+      <p>
+        Unlike docstrings, annotations stay tied to the function signature and help maintain 
+        up-to-date documentation even when the prototype changes (PEP 3107).
+      </p>
+
+      <h2>Example: Simple Annotations</h2>
+      <pre><code>def myfunction(a: int, b: int):
+    c = a + b
+    return c
+
+print(myfunction(10, 20))
+print(myfunction("Hello ", "Python"))</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>30
+Hello Python</code></pre>
+
+      <h2>Function Annotations with Return Type</h2>
+      <p>
+        You can also annotate the <strong>return type</strong> using <code>-&gt;</code>.
+      </p>
+      <pre><code>def myfunction(a: int, b: int) -> int:
+    c = a + b
+    return c
+
+print(myfunction(56, 88))
+print(myfunction.__annotations__)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>144
+{'a': &lt;class 'int'&gt;, 'b': &lt;class 'int'&gt;, 'return': &lt;class 'int'&gt;}</code></pre>
+
+      <h2>Annotations with Expressions</h2>
+      <p>
+        Instead of types, you may use any valid Python expression as annotation metadata.
+      </p>
+      <pre><code>def total(x: "marks in Physics", y: "marks in Chemistry"):
+    return x + y
+
+print(total(86, 88))
+print(total.__annotations__)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>174
+{'x': 'marks in Physics', 'y': 'marks in Chemistry'}</code></pre>
+
+      <h2>Annotations with Default Arguments</h2>
+      <p>
+        Annotations can be combined with default values.  
+        Default arguments must appear after required ones.
+      </p>
+      <pre><code>def myfunction(a: "physics", b: "Maths" = 20) -> int:
+    c = a + b
+    return c
+
+print(myfunction(10))
+print(myfunction.__annotations__)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>30
+{'a': 'physics', 'b': 'Maths', 'return': &lt;class 'int'&gt;}</code></pre>
+
+      <h2>Annotations for Arbitrary Arguments</h2>
+      <p>
+        You can annotate <code>*args</code> and <code>**kwargs</code> as well.
+      </p>
+      <pre><code>def myfunction(*args: "arbitrary args", **kwargs: "arbitrary keyword args") -> int:
+    pass
+
+print(myfunction.__annotations__)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>{'args': 'arbitrary args', 'kwargs': 'arbitrary keyword args', 'return': &lt;class 'int'&gt;}</code></pre>
+
+      <h2>Multiple Annotations per Argument</h2>
+      <p>
+        You can provide multiple annotations using a dictionary as metadata.
+      </p>
+      <pre><code>def division(
+    num: dict(type=float, msg="numerator"),
+    den: dict(type=float, msg="denominator")
+) -> float:
+    return num / den
+
+print(division.__annotations__)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>{'num': {'type': &lt;class 'float'&gt;, 'msg': 'numerator'}, 
+ 'den': {'type': &lt;class 'float'&gt;, 'msg': 'denominator'}, 
+ 'return': &lt;class 'float'&gt;}</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Diamond Operator with Anonymous Inner Classes (Java 9+)</h1>
+
+        <div class="content">
+            <h2>The Diamond Operator and Generics</h2>
+            <p>The **diamond operator (`&lt;&gt;`)** was introduced in **Java 7** to simplify the syntax when creating instances of generic classes. It allows the compiler to infer the type arguments from the context (the left-hand side of the assignment).</p>
+
+            <p class="example">**Java 7+ Syntax (Standard Class):**</p>
+            <p><code>List&lt;String&gt; listOfStrings = new ArrayList&lt;&gt;();</code></p>
+            <p>Prior to Java 7, the type argument had to be explicitly repeated on the right-hand side (e.g., <code>new ArrayList&lt;String&gt;()</code>).</p>
+
+            <h2>Extension in Java 9: Anonymous Inner Classes</h2>
+            <p>Before **Java 9**, the diamond operator could **not** be used when instantiating an **anonymous inner class** if the generic type arguments were omitted. The compiler required the explicit type on the right-hand side.</p>
+
+            <h3>The Improvement in Java 9</h3>
+            <p>In **Java 9**, this restriction was removed. The compiler is now capable of inferring the type arguments for generic anonymous inner classes from the context, allowing the use of the diamond operator.</p>
+
+            <p>This change was made to simplify code, improve readability, and ensure consistency across all uses of generic class instantiation.</p>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Syntax Comparison</h2>
+            <div class="content">
+                <h3>Before Java 9 (Required Explicit Type)</h3>
+                <p>The type argument (`&lt;Integer&gt;`) must be explicitly present on the right-hand side.</p>
+                <pre><code>Handler&lt;Integer&gt; intHandler = new Handler&lt;Integer&gt;(1) {
+    @Override
+    public void handle() { ... }
+};</code></pre>
+
+                <h3>Java 9 Onwards (Diamond Operator Allowed)</h3>
+                <p>The type argument is omitted, and the diamond operator (`&lt;&gt;`) is used. The compiler infers that the type must be `Integer` from the left-hand side (`Handler&lt;Integer&gt;`).</p>
+                <pre><code>Handler&lt;Integer&gt; intHandler = new Handler&lt;&gt;(1) {
+    @Override
+    public void handle() { ... }
+};</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

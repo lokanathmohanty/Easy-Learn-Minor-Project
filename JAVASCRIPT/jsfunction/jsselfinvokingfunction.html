@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Self-Invoking Functions</h1>
+
+    <div class="content">
+      <p>
+        Self-invoking functions are JavaScript functions that execute 
+        immediately as they are defined. To define a self-invoking function, 
+        you enclose an anonymous function in parentheses followed by another 
+        set of parentheses. These are also called 
+        <strong>immediately invoked function expressions (IIFE)</strong>.
+      </p>
+    </div>
+
+    <h2 class="title">Syntax</h2>
+    <div class="content">
+      <pre><code>
+(function () {
+  // function body
+})();
+      </code></pre>
+
+      <p>
+        Alternative syntax:
+      </p>
+      <pre><code>
+(function () {
+  // function body
+}());
+      </code></pre>
+    </div>
+
+    <h2 class="title">Example: Basic Self-Invoking Function</h2>
+    <div class="content">
+      <pre><code>
+(function () {
+  document.getElementById("output").innerHTML = 
+    "Self-invoked function is executed!";
+}());
+      </code></pre>
+      <div class="output">
+        <p>Self-invoked function is executed!</p>
+      </div>
+    </div>
+
+    <h2 class="title">Self-Invoking Functions with Parameters</h2>
+    <div class="content">
+      <pre><code>
+(function (name) {
+  document.getElementById("demo").innerHTML = `Welcome to ${name}`;
+})("Tutorials Point !");
+      </code></pre>
+      <div class="output">
+        <p>Welcome to Tutorials Point !</p>
+      </div>
+    </div>
+
+    <h2 class="title">Private Scope of Self-Invoking Functions</h2>
+    <div class="content">
+      <p>
+        Variables and code inside a self-invoking function remain in 
+        a private scope and do not pollute the global scope. This prevents 
+        naming conflicts and keeps code isolated.
+      </p>
+      <pre><code>
+let a = 10;
+(function () {
+  console.log("Entering to the function");
+  var a = 20;
+  console.log("The value of a is " + a);
+  console.log("Exiting to the function");
+}());
+console.log("The value outside the function is " + a);
+      </code></pre>
+      <div class="output">
+        <p>Entering to the function</p>
+        <p>The value of a is 20</p>
+        <p>Exiting to the function</p>
+        <p>The value of the outside the function is 10</p>
+      </div>
+    </div>
+
+    <h2 class="title">Example: Accessing Variables Globally</h2>
+    <div class="content">
+      <pre><code>
+(function () {
+  var string = "JavaScript";
+  window.string = string;
+})();
+console.log("The value of the string variable is: " + string);
+      </code></pre>
+      <div class="output">
+        <p>The value of the string variable is: JavaScript</p>
+      </div>
+    </div>
+
+    <h2 class="title">Benefits of Using Self-Invoking Functions</h2>
+    <div class="content">
+      <ul>
+        <li><strong>Avoiding the global scope</strong> − Prevents naming conflicts by isolating variables and functions.</li>
+        <li><strong>Initialization</strong> − Can be used for one-time setup or initialization of variables.</li>
+        <li><strong>Code privacy</strong> − Code remains hidden and inaccessible from other parts of the program.</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Dynamic Routing 🔗</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Dynamic Routing?</h2>
+            <p>**Dynamic Routing** is a powerful mechanism that allows you to create **flexible and reusable URLs** (routes) where part of the path is variable, based on data like a user ID, a product slug, or a post title. This is essential for applications that serve content from a database, such as blog posts or e-commerce product pages, where you cannot define every possible URL statically.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Implementing Standard Dynamic Routes</h2>
+            
+            <p>In Next.js (using the App Router), dynamic routes are created by naming a folder segment using **square brackets** (<span class="example">`[paramName]`</span>) within the routing directory.</p>
+            
+            <h3 class="title">Route Definition:</h3>
+            <ul>
+                <li>**File Structure:** <span class="example">`app/products/[id]/page.tsx`</span></li>
+                <li>**Matches Paths:** <span class="example">`/products/1`</span>, <span class="example">`/products/laptop`</span>, etc.</li>
+            </ul>
+            
+            <h3 class="title">Accessing Parameters:</h3>
+            <p>The parameter is available in the component via the **<span class="example">`params`</span>** prop (for Server Components) or the **<span class="example">`useParams()`</span>** hook (for Client Components, as shown below).</p>
+            <pre>// app/products/[id]/page.tsx (Client Component Example)
+"use client"
+import { useParams } from 'next/navigation';
+
+export default function ProductPage() {
+  const { id } = useParams(); // 'id' matches the folder name '[id]'
+  return (&lt;h1&gt;Product {id}&lt;/h1&gt;);
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Catch-All Routes ([...slug])</h2>
+            
+            <p>**Catch-All Routes** are a special type of dynamic route that matches all subsequent segments of a URL path. This is useful for complex nested paths, like documentation pages or categorized content.</p>
+            
+            <h3 class="title">Implementation:</h3>
+            <p>To implement a catch-all route, the dynamic folder name must start with **three dots** (<span class="example">`[...slug]`</span>).</p>
+            <ul>
+                <li>**File Structure:** <span class="example">`app/products/[...slug]/page.tsx`</span></li>
+                <li>**Matches Paths:** <span class="example">`/products/a`</span>, <span class="example">`/products/a/b`</span>, <span class="example">`/products/a/b/c`</span>, etc.</li>
+            <li>**Parameter Output:** The value returned is an **array of strings**, where each string is a segment of the path.</li>
+            </ul>
+            <pre>// Accessing the array of segments in the params prop
+export default function ProductPage({ params }: { params: { slug: string[] } }) {
+  // If URL is /products/electronics/laptop, params.slug is ['electronics', 'laptop']
+  const matchedSegments = params.slug?.join(' / ');
+  
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Product Page&lt;/h1&gt;
+      &lt;p&gt;Matched Segments: {matchedSegments || 'None'}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</pre>
+        </div>
+    </div>
+</div>

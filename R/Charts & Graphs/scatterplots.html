@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Scatterplots</h1>
+    <div class="content">
+      <p>
+        Scatterplots display points on the Cartesian plane, visually showing the relationship between two variables. Each point's position is determined by paired values on horizontal (x) and vertical (y) axes. Scatterplots help identify correlations and patterns.
+      </p>
+
+      <h2 class="title">Basic Syntax</h2>
+      <pre><code>plot(x, y, main, xlab, ylab, xlim, ylim, axes)</code></pre>
+      <ul>
+        <li><strong>x</strong>: Values for horizontal axis</li>
+        <li><strong>y</strong>: Values for vertical axis</li>
+        <li><strong>main</strong>: Title of the plot</li>
+        <li><strong>xlab</strong>: Label for x axis</li>
+        <li><strong>ylab</strong>: Label for y axis</li>
+        <li><strong>xlim</strong>: Limits for x axis values</li>
+        <li><strong>ylim</strong>: Limits for y axis values</li>
+        <li><strong>axes</strong>: Logical indicating if axes are drawn</li>
+      </ul>
+
+      <h2 class="title">Example: Create Basic Scatterplot</h2>
+      <pre><code># Extract weight and mpg from mtcars
+input &lt;- mtcars[, c('wt', 'mpg')]
+print(head(input))
+
+# Create image file
+png(file = "scatterplot.png")
+
+# Plot scatterplot with axis limits and labels
+plot(x = input$wt, y = input$mpg,
+     xlab = "Weight",
+     ylab = "Mileage",
+     xlim = c(2.5, 5),
+     ylim = c(15, 30),
+     main = "Weight vs Mileage")
+
+# Save file
+dev.off()
+</code></pre>
+
+      <h2 class="title">Scatterplot Matrices</h2>
+      <p>To visualize relationships between multiple variables simultaneously, use the <code>pairs()</code> function to create scatterplot matrices.</p>
+      <pre><code># Create image file
+png(file = "scatterplot_matrices.png")
+
+# Plot scatterplot matrix for 4 variables
+pairs(~wt + mpg + disp + cyl, data = mtcars,
+      main = "Scatterplot Matrix")
+
+# Save file
+dev.off()
+</code></pre>
+
+      <p>
+        These examples demonstrate how to create individual scatterplots as well as matrices for deeper multivariate analysis.
+      </p>
+    </div>
+  </div>
+ 
+    </div>
+  </div>
+</div>

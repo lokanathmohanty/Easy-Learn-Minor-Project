@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java Try with Resources</h1>
+    <div class="content">
+      <p>The try-with-resources statement in Java is designed for automatic resource management. It ensures that resources such as files, streams, and connections are properly closed after their use, reducing the risk of resource leaks.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Syntax Overview</h2>
+    <div class="content">
+      <p>In try-with-resources, each resource is declared within the parentheses of the try statement. These resources are automatically closed at the end of the block by the Java runtime.</p>
+      <pre><code>try (ResourceType resource = new ResourceType()) {
+    // use resource
+} catch (ExceptionType e) {
+    // exception handling
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Reading From a File</h2>
+    <div class="content">
+      <pre><code>import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class TryWithResourcesExample {
+    public static void main(String[] args) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("sample.txt"))) {
+            String line = reader.readLine();
+            System.out.println("File content: " + line);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}</code></pre>
+      <p>This code demonstrates reading from a file using try-with-resources, ensuring the <code>BufferedReader</code> is always closed properly.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Multiple Resources Example</h2>
+    <div class="content">
+      <pre><code>import java.io.*;
+
+public class CopyFileExample {
+    public static void main(String[] args) {
+        try (
+            FileReader in = new FileReader("input.txt");
+            FileWriter out = new FileWriter("output.txt")
+        ) {
+            int c;
+            while ((c = in.read()) != -1) {
+                out.write(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+      <p>When multiple resources are declared, each one is closed in reverse order after the try block completes or if an exception occurs.</p>
+    </div>
+  </div>
+</div>

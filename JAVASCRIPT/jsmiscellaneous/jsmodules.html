@@ -1,0 +1,148 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Modules</h1>
+    <div class="content">
+      <h2>What is a Module?</h2>
+      <p>
+        A module in JavaScript is a single file containing JavaScript code. Rather than adding the code for the whole application in a single file, we can break down the code and create separate files for the code having the same functionalities.
+      </p>
+      <p>
+        In short, the module contains the code to perform a specific task. It can contain variables, functions, classes, etc. As applications grow larger, organizing code into modules helps improve manageability and maintainability.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+export function func_name(parameters) {
+   // function code
+}
+
+import { func_name } from './filename.js';
+      </pre>
+      <p>
+        The <code>export</code> keyword is used to export a function, class, or variable from a module, and the <code>import</code> keyword is used to import it into another file.
+      </p>
+
+      <h2>Example: Exporting a Function</h2>
+      <p><b>File: mul.js</b></p>
+      <pre>
+// exporting mul() function
+export function mul(a, b) {
+   return a * b;
+}
+      </pre>
+      <p><b>File: test.html</b></p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;JavaScript - Modules&lt;/div&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+
+   &lt;script type="module"&gt;
+      import { mul } from './mul.js';
+      document.getElementById('output').innerHTML = 
+         "The multiplication of 2 and 3 is " + mul(2, 3);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b></p>
+      <ul>
+        <li>JavaScript - Modules</li>
+        <li>The multiplication of 2 and 3 is 6</li>
+      </ul>
+
+      <h2>Export Multiple Objects from a Single Module</h2>
+      <p><b>File: math.js</b></p>
+      <pre>
+// exporting mul() function
+export function mul(a, b) {
+   return a * b;
+}
+// exporting sum() function
+export function sum(a, b) {
+   return a + b;
+}
+// exporting PI constant
+export let PI = Math.PI;
+      </pre>
+      <p><b>File: test.html</b></p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Exporting Multiple Objects from a Single Module&lt;/div&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+
+   &lt;script type="module"&gt;
+      import { mul, sum, PI } from './math.js';
+      document.getElementById('output').innerHTML =
+         "The multiplication of 2 and 3 is " + mul(2, 3) + 
+         "&lt;br&gt;The addition of 2 and 3 is " + sum(2, 3) + 
+         "&lt;br&gt;The value of PI is " + PI;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>Default Exports</h2>
+      <p>
+        The <code>default</code> keyword allows you to define a default export in a module. If you import something not explicitly exported, the default export is used.
+      </p>
+      <p><b>File: test.js</b></p>
+      <pre>
+const v1 = "Version 1";
+// default export
+export default v1;
+// other export
+export const v2 = "Version 2";
+      </pre>
+      <p><b>File: test.html</b></p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Default Export&lt;/div&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+
+   &lt;script type="module"&gt;
+      // v3 is not defined, so it imports default (v1)
+      import v3, { v2 } from './test.js';
+
+      document.getElementById('output').innerHTML =
+         "The value of v3 is: " + v3 + "&lt;br&gt;" +
+         "The value of v2 is: " + v2;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b></p>
+      <ul>
+        <li>The value of v3 is: Version 1</li>
+        <li>The value of v2 is: Version 2</li>
+      </ul>
+
+      <h2>Rename Import and Export</h2>
+      <p>
+        To avoid conflicts, we can rename functions, variables, or classes when exporting or importing them using the <code>as</code> keyword.
+      </p>
+
+      <h3>Syntax to Rename Exports</h3>
+      <pre>
+export {
+   func1 as N1,
+   func2 as N2
+};
+// import in another file
+import { N1, N2 } from './module.js';
+      </pre>
+
+      <h3>Syntax to Rename Imports</h3>
+      <pre>
+export {
+   func1,
+   func2
+};
+// import in another file
+import { func1 as N1, func2 as N2 } from './module.js';
+      </pre>
+    </div>
+  </div>
+</div>

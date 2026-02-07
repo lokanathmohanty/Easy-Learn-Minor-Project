@@ -1,0 +1,217 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Enumeration (or enum) in C</h1>
+    <div class="content">
+      <p>C enumeration (enum) is an enumerated data type that consists of a group of integral constants. Enums are useful when you want to assign user-defined names to integral constants. The <code>enum</code> keyword is used to define enums.</p>
+
+      <h2 class="title">Defining and Declaring an Enum Type</h2>
+      <p>To declare and define an enumeration (enum) data type, use the <code>enum</code> keyword followed by the enum name and assign all values inside the curly braces.</p>
+
+      <h3 class="title">Syntax</h3>
+      <p>This is the syntax you would use to define an enum type −</p>
+      <pre><code>enum enum_name { const1, const2, ... };</code></pre>
+
+      <h3 class="title">Enum Variable Declaration</h3>
+      <p>After declaring an enumeration type, you can also declare its variable to access enumeration members (constants). To declare an enum variable, write the <code>enum</code> keyword followed by the enum name and then the variable name.</p>
+      <pre><code>enum enum_name var;</code></pre>
+
+      <h2 class="title">Example</h2>
+      <p>Let us define an enum type named <code>myenum</code>:</p>
+      <pre><code>enum myenum { val1, val2, val3, val4 };</code></pre>
+      <p>Identifier values are unsigned integers starting from 0 by default: <code>val1 = 0</code>, <code>val2 = 1</code>, and so on.</p>
+      <p>Declare a variable of type <code>myenum</code> as:</p>
+      <pre><code>enum myenum var;</code></pre>
+
+      <h2 class="title">Change Enum Constants Values</h2>
+      <p>You can assign any integer value to any constant in the enum. By default, the first constant is 0, the second is 1, etc., but you can override this.</p>
+
+      <h3 class="title">Example</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+enum status_codes { OKAY = 1, CANCEL = 0, ALERT = 2 };
+
+int main() {
+   printf("OKAY = %d\n", OKAY);
+   printf("CANCEL = %d\n", CANCEL);
+   printf("ALERT = %d\n", ALERT);
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <pre><code>OKAY = 1
+CANCEL = 0
+ALERT = 2</code></pre>
+
+      <h2 class="title">Enum in Switch Statements</h2>
+      <p>Enums can be used with <code>switch</code> statements, since enums represent integral values.</p>
+
+      <h3 class="title">Example</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+enum colors { VIOLET, INDIGO, BLUE, GREEN, YELLOW, ORANGE, RED };
+
+int main() {
+   enum colors color = YELLOW;
+   switch (color) {
+      case BLUE:
+         printf("Blue color");
+         break;
+      case GREEN:
+         printf("Green color");
+         break;
+      case RED:
+         printf("Red color");
+         break;
+      default:
+         printf("Color other than RGB");
+   }
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <pre><code>Color other than RGB</code></pre>
+
+      <h2 class="title">Examples of Enumeration (enum) Type</h2>
+
+      <h3 class="title">Example 1: Enum Constants Get Incrementing Integer Values</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+enum myenum { val1, val2, val3, val4 };
+
+int main() {
+   enum myenum var;
+   var = val2;
+   printf("var = %d", var);
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>var = 1</code></pre>
+
+      <h3 class="title">Example 2: Enumerating the Weekdays</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   enum weekdays { Sun, Mon, Tue, Wed, Thu, Fri, Sat };
+   printf("Monday = %d\n", Mon);
+   printf("Thursday = %d\n", Thu);
+   printf("Sunday = %d\n", Sun);
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Monday = 1
+Thursday = 4
+Sunday = 0</code></pre>
+
+      <h3 class="title">Example 3: Declaring a Variable of Enum Type</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+enum weekdays { Sun, Mon, Tue, Wed, Thu, Fri, Sat };
+
+int main() {
+   enum weekdays day;
+   day = Wed;
+   printf("Day number of Wed is = %d", day);
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Day number of Wed is = 3</code></pre>
+
+      <h3 class="title">Example 4: Enum Values By Default Start from "0"</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+enum months { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec };
+
+int main() {
+   for (int i = Jan; i <= Dec; i++)
+      printf("Month No: %d\n", i);
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Month No: 0
+Month No: 1
+Month No: 2
+Month No: 3
+Month No: 4
+Month No: 5
+Month No: 6
+Month No: 7
+Month No: 8
+Month No: 9
+Month No: 10
+Month No: 11</code></pre>
+
+      <h3 class="title">Example 5: Starting an Enum from 1</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+enum months { Jan = 1, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec };
+
+int main() {
+   for (int i = Jan; i <= Dec; i++)
+      printf("Month No: %d\n", i);
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Month No: 1
+Month No: 2
+Month No: 3
+Month No: 4
+Month No: 5
+Month No: 6
+Month No: 7
+Month No: 8
+Month No: 9
+Month No: 10
+Month No: 11
+Month No: 12</code></pre>
+
+      <h3 class="title">Example 6: Enumerating HTTP Status Codes</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+enum status {
+   OK = 200,
+   BadRequest = 400,
+   Unauthorized = 401,
+   Forbidden = 403,
+   NotFound = 404,
+   InternalServerError = 500,
+};
+
+int main() {
+   enum status code = InternalServerError;
+   if (code == 500)
+      printf("Internal Server Error has been encountered");
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Internal Server Error has been encountered</code></pre>
+
+      <h3 class="title">Example 7: Assigning a Fixed Number to Enum Constants</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+enum myenum { a, b = 5, c, d, e = 10, f };
+
+int main() {
+   printf("a: %d\n", a);
+   printf("b: %d\n", b);
+   printf("c: %d\n", c);
+   printf("d: %d\n", d);
+   printf("e: %d\n", e);
+   printf("f: %d\n", f);
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>a: 0
+b: 5
+c: 6
+d: 7
+e: 10
+f: 11</code></pre>
+
+      <h2 class="title">Applications of Enums</h2>
+      <ul>
+        <li>To store constant values such as weekdays, months, directions, colors, etc.</li>
+        <li>Used for flags, status codes, and similar scenarios.</li>
+        <li>Used in <code>switch-case</code> statements to represent named integral constants.</li>
+      </ul>
+    </div>
+  </div>
+</div>

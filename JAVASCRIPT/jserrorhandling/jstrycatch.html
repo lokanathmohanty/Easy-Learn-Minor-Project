@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - try...catch Statement</h1>
+
+    <div class="content">
+      <p>The <code>try...catch</code> statement in JavaScript is used to handle runtime errors (exceptions). It allows developers to write safer code by catching unexpected issues at runtime.</p>
+      <p>The <code>try</code> block contains the code that may throw an error, and the <code>catch</code> block handles the error if it occurs.</p>
+    </div>
+
+    <div class="content">
+      <h2>Syntax</h2>
+      <pre>
+try {
+   // JavaScript code
+} catch(error) {
+   // Handle error
+}
+      </pre>
+      <p>The <code>error</code> object is optional and contains useful information like the <code>name</code> and <code>message</code> of the error.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Basic try...catch</h2>
+      <pre>
+&lt;script&gt;
+   const output = document.getElementById("demo");
+   try {
+      let num = num1;
+   } catch (err) {
+      output.innerHTML += "The error name is: " + err.name + "&lt;br&gt;";
+      output.innerHTML += "The error message is: " + err.message + ".&lt;br&gt;";
+   }
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Execution Flow</h2>
+      <pre>
+&lt;script&gt;
+   const output = document.getElementById("demo");
+   try {
+      output.innerHTML += "In the start of try block &lt;br&gt;";
+      welcome();
+      output.innerHTML += "In the end of try block &lt;br&gt;";
+   } catch (err) {
+      output.innerHTML += "In the catch block &lt;br&gt;";
+      output.innerHTML += "The error name is: " + err.name + "&lt;br&gt;";
+      output.innerHTML += "The error message is: " + err.message + ".&lt;br&gt;";
+   }
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>try...catch...finally Statement</h2>
+      <p>The <code>finally</code> block executes code after the <code>try</code> and <code>catch</code> blocks, regardless of whether an error occurred.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: try...catch...finally</h2>
+      <pre>
+&lt;script&gt;
+   try {
+      let a = b;
+   } catch (e) {
+      document.getElementById("output").innerHTML = e;
+   } finally {
+      document.getElementById("output").innerHTML += "&lt;br&gt;Finally block always executes";
+   }
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Throwing Errors</h2>
+      <p>You can manually throw errors using the <code>throw</code> statement. This is useful for custom validations and error handling.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Throw Custom Error</h2>
+      <pre>
+&lt;script&gt;
+   try {
+      throw new Error("Custom error");
+   } catch (e) {
+      console.log(e.name + " : " + e.message);
+   }
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Advanced Error Handling</h2>
+      <ul>
+        <li><strong>Nesting Try Blocks</strong> − Inner <code>try</code> can pass errors to outer <code>catch</code>.</li>
+        <li><strong>Rethrowing Errors</strong> − Re-throw an error from a <code>catch</code> block if not handled.</li>
+        <li><strong>Conditional Catch</strong> − Use <code>instanceof</code> to handle different error types.</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Nested try-catch</h2>
+      <pre>
+&lt;script&gt;
+   try {
+      try {
+         throw Error("Error in the inner try block");
+      } finally {
+         console.log("Inside the inner finally block.");
+      }
+   } catch (e) {
+      console.log("Inside the outer catch block.");
+      console.log("Error: " + e.message);
+   }
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Error Handling with Promises</h2>
+      <p>Errors in promises are handled with the <code>.catch()</code> method rather than try-catch.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Promise Rejection</h2>
+      <pre>
+&lt;script&gt;
+   let promise = new Promise((resolve, reject) =&gt; {
+      setTimeout(() =&gt; reject("The promise is rejected!"), 1000);
+   });
+
+   promise
+      .then((result) =&gt; console.log(result))
+      .catch((error) =&gt; console.log(error));
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Types of JavaScript Errors</h2>
+      <ul>
+        <li><strong>RangeError</strong> − A value is out of range.</li>
+        <li><strong>ReferenceError</strong> − Using undefined variables/functions.</li>
+        <li><strong>TypeError</strong> − Invalid type usage.</li>
+        <li><strong>URIError</strong> − Invalid URI usage.</li>
+      </ul>
+    </div>
+  </div>
+</div>

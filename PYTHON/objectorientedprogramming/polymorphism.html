@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python Polymorphism</h1>
+    <div class="content">
+      <p>Polymorphism in Python refers to the ability of a function or method to take many forms depending on the context. It enables methods with the same name to behave differently based on the objects that invoke them.</p>
+      <p>Polymorphism is easily implemented in Python due to its dynamic typing. Common forms include duck typing, operator overloading, method overriding, and method overloading.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Duck Typing</h2>
+      <p>Duck typing in Python focuses on the presence of methods rather than the object’s type. If an object behaves like a duck (has the required methods), it can be used interchangeably with other duck-like objects.</p>
+    </div>
+    <div class="example">
+      <h2 class="title">Duck Typing Example</h2>
+      <pre><code>class Duck:
+    def sound(self):
+        return "Quack, quack!"
+
+class AnotherBird:
+    def sound(self):
+        return "I'm similar to a duck!"
+
+def makeSound(obj):
+    print(obj.sound())
+
+duck = Duck()
+bird = AnotherBird()
+
+makeSound(duck)   # Quack, quack!
+makeSound(bird)   # I'm similar to a duck!</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Method Overriding</h2>
+      <p>Method overriding occurs when a child class provides a specific implementation of a method already defined in the parent class, enabling polymorphic method behavior.</p>
+    </div>
+    <div class="example">
+      <h2 class="title">Method Overriding Example</h2>
+      <pre><code>from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def draw(self):
+        pass
+
+class Circle(Shape):
+    def draw(self):
+        print("Draw a circle")
+
+class Rectangle(Shape):
+    def draw(self):
+        print("Draw a rectangle")
+
+shapes = [Circle(), Rectangle()]
+for shape in shapes:
+    shape.draw()
+
+# Output:
+# Draw a circle
+# Draw a rectangle</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Operator Overloading</h2>
+      <p>Operator overloading lets you define how operators behave with instances of your classes by defining special methods.</p>
+    </div>
+    <div class="example">
+      <h2 class="title">Operator Overloading Example</h2>
+      <pre><code>class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __str__(self):
+        return f"Vector ({self.x}, {self.y})"
+
+v1 = Vector(2, 10)
+v2 = Vector(5, -2)
+print(v1 + v2)  # Vector (7, 8)</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Method Overloading</h2>
+      <p>Python does not support traditional method overloading, but similar behavior can be achieved using variable-length arguments or default arguments.</p>
+    </div>
+    <div class="example">
+      <h2 class="title">Method Overloading Example</h2>
+      <pre><code>def add(*args):
+    return sum(args)
+
+print(add(10, 25))       # 35
+print(add(10, 25, 35))   # 70</code></pre>
+    </div>
+  </div>
+</div>

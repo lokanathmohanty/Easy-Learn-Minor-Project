@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Starting a Thread</h1>
+    </div>
+    <div class="content">
+      <p>In Python, starting a thread is done by calling the <code>start()</code> method of the <code>Thread</code> class from the <code>threading</code> module. This method initializes the thread’s environment, schedules it to run, and automatically calls the <code>run()</code> method on the new thread.</p>
+      <p>The main thread continues executing after starting child threads concurrently. Calling <code>start()</code> more than once on the same thread object raises a <code>RuntimeError</code>.</p>
+      <p><strong>Syntax:</strong></p>
+      <pre>threading.Thread.start()</pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Starting a Thread</h2>
+    </div>
+    <div class="content">
+      <pre>
+from threading import Thread
+from time import sleep
+
+def my_function(arg):
+   for i in range(arg):
+      print("child Thread running", i)
+      sleep(0.5)
+
+thread = Thread(target=my_function, args=(10,))
+thread.start()
+
+print("thread finished...exiting")
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        child Thread running 0<br>
+        thread finished...exiting<br>
+        child Thread running 1<br>
+        child Thread running 2<br>
+        child Thread running 3<br>
+        child Thread running 4<br>
+        child Thread running 5<br>
+        child Thread running 6<br>
+        child Thread running 7<br>
+        child Thread running 8<br>
+        child Thread running 9
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Thread Start Behavior</h2>
+    </div>
+    <div class="content">
+      <p>This example demonstrates that if <code>start()</code> is not called on a thread, it remains inactive and does not run.</p>
+      <pre>
+import threading
+import time
+
+class MyThread(threading.Thread):
+   def __init__(self, threadID, name, counter):
+      threading.Thread.__init__(self)
+      self.threadID = threadID
+      self.name = name
+      self.counter = counter
+
+   def run(self):
+      print("Starting " + self.name)
+      print_time(self.name, self.counter)
+      print("Exiting " + self.name)
+
+def print_time(threadName, counter):
+   while counter:
+      time.sleep(1)
+      print("%s: %s" % (threadName, time.ctime(time.time())))
+      counter -= 1
+
+# Create new threads
+thread1 = MyThread(1, "Thread-1", 1)
+thread2 = MyThread(2, "Thread-2", 2)
+thread3 = MyThread(3, "Thread-3", 3)
+
+# Start selected threads
+thread1.start()
+thread3.start()
+
+print("Exiting Main Thread")
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        Starting Thread-1<br>
+        Starting Thread-3<br>
+        Exiting Main Thread<br>
+        Thread-1: Mon Jun 24 18:24:59 2024<br>
+        Exiting Thread-1<br>
+        Thread-3: Mon Jun 24 18:24:59 2024<br>
+        Thread-3: Mon Jun 24 18:25:00 2024<br>
+        Thread-3: Mon Jun 24 18:25:01 2024<br>
+        Exiting Thread-3
+      </p>
+    </div>
+  </div>
+</div>

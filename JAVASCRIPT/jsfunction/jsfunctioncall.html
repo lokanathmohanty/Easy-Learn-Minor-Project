@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Function call() Method</h1>
+
+    <div class="content">
+      <p>The <strong>Function call()</strong> method allows us to invoke a function with a specific value for <code>this</code> and arguments provided individually.</p>
+      <p>When a normal function is called, the value of <code>this</code> inside the function is the object that the function was accessed on. By using <code>call()</code>, we can manipulate the <code>this</code> value and assign an arbitrary object as its context.</p>
+      <p>In other words, we can call an existing function as a method of an object without attaching it as a property.</p>
+      <p>Every function in JavaScript is a <strong>Function object</strong>. The Function object provides properties and methods such as <code>call()</code>, <code>apply()</code>, and <code>bind()</code> that are shared by all functions.</p>
+    </div>
+
+    <div class="content">
+      <h2>Syntax</h2>
+      <p><code>funcName.call(thisArg, arg1, arg2, ... argN);</code></p>
+      <ul>
+        <li><strong>funcName</strong> − The name of the function to invoke.</li>
+        <li><strong>thisArg</strong> − The context object whose properties or methods can be accessed using <code>this</code>.</li>
+        <li><strong>arg1, arg2, ... argN</strong> − Optional arguments passed individually.</li>
+      </ul>
+      <p>By default, the function context is the global object (<code>window</code> in browsers).</p>
+      <p><strong>Return value:</strong> The result returned by the function.</p>
+    </div>
+
+    <div class="content">
+      <h2>Examples</h2>
+
+      <h3>Function call() method without specifying arguments</h3>
+      <pre><code>
+function test() {
+  return "The function is invoked!";
+}
+test();
+test.call();
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The function is invoked!</li>
+        <li>The function is invoked!</li>
+      </ul>
+
+      <h3>Function call() method with <code>this</code> argument only</h3>
+      <pre><code>
+function printMessage() {
+  return "The age of the " + this.name + " is " + this.age;
+}
+
+const person1 = { name: "John Doe", age: 22 };
+const person2 = { name: "Jane Doe", age: 40 };
+
+printMessage.call(person1);
+printMessage.call(person2);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The age of the John Doe is 22</li>
+        <li>The age of the Jane Doe is 40</li>
+      </ul>
+
+      <h3>Function call() method with multiple arguments</h3>
+      <pre><code>
+function printSum(p1, p2) {
+  return this.num1 + this.num2 + p1 + p2;
+}
+
+const nums = { num1: 5, num2: 10 };
+
+printSum.call(nums, 40, 32);
+      </code></pre>
+      <p><strong>Output:</strong> Total sum is 87</p>
+
+      <h3>Using a method of a different object</h3>
+      <pre><code>
+const student = {
+  getAge: function() {
+    return this.age;
+  }
+};
+
+const student1 = { name: "John", age: 22 };
+const student2 = { name: "Doe", age: 18 };
+
+student.getAge.call(student1);
+student.getAge.call(student2);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>22</li>
+        <li>18</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <p>The <code>call()</code> and <code>apply()</code> methods are similar, with the key difference being:</p>
+      <ul>
+        <li><code>call()</code> accepts arguments individually.</li>
+        <li><code>apply()</code> accepts arguments as an array.</li>
+      </ul>
+      <p>Let’s explore the <strong>Function apply() method</strong> in the next chapter.</p>
+    </div>
+  </div>
+</div>

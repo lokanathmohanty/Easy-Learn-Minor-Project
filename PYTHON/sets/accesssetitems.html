@@ -1,0 +1,57 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">Python - Access Set Items</h1>
+    <div class="content">
+      <p>The primary way to access set items is by traversing the set using a loop, such as a <b>for loop</b>. By iterating over the set, you can access each element one by one and perform operations on them as needed.</p>
+      <p>In Python, sets are unordered collections of unique elements, and unlike sequences (such as lists or tuples), sets do not have a positional index for their elements. This means that you cannot access individual elements of a set directly by specifying an index.</p>
+      <p>Additionally, sets do not have keys associated with their elements, as dictionaries do. Therefore, to access the elements of a set we need to use <b>for loop</b> (or <b>List Comprehension</b>).</p>
+
+      <h2>Access Set Items Using For Loop</h2>
+      <p>A <code>for</code> loop in Python is a control flow statement used for iterating over a sequence and executing a block of code for each element.</p>
+      <pre><code>langs = {"C", "C++", "Java", "Python"}
+for lang in langs:
+   print(lang)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>Python
+C
+C++
+Java</code></pre>
+
+      <h2>Access Set Items Using List Comprehension</h2>
+      <p>We can use list comprehension to access set items by iterating over each element.</p>
+      <pre><code>my_set = {1, 2, 3, 4, 5}
+accessed_items = [item for item in my_set]
+print(accessed_items)</code></pre>
+      <p><b>Output:</b> [1, 2, 3, 4, 5]</p>
+
+      <h2>Access Subset From a Set</h2>
+      <p>A subset is a set that contains only elements that are also contained in another set. Python allows checking subsets using <code>issubset()</code> or generating subsets using combinations.</p>
+      <pre><code>import itertools
+
+original_set = {1, 2, 3, 4}
+
+# Check subset
+is_subset = {1, 2}.issubset(original_set)
+print("{1, 2} is a subset of the original set:", is_subset)
+
+# Generate subsets with 2 elements
+subsets_with_two_elements = [set(subset) for subset in itertools.combinations(original_set, 2)]
+print("Subsets with two elements:", subsets_with_two_elements)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>{1, 2} is a subset of the original set: True
+Subsets with two elements: [{1, 2}, {1, 3}, {1, 4}, {2, 3}, {2, 4}, {3, 4}]</code></pre>
+
+      <h2>Checking if Set Item Exists</h2>
+      <p>You can check whether a certain item is available in the set using the membership operators <code>in</code> and <code>not in</code>.</p>
+      <pre><code>langs = {"C", "C++", "Java", "Python"}
+
+if "Java" in langs:
+    print("Java is present in the set.")
+if "SQL" not in langs:
+    print("SQL is not present in the set.")</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>Java is present in the set.
+SQL is not present in the set.</code></pre>
+    </div>
+  </div>
+</div>

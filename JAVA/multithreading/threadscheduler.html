@@ -1,0 +1,144 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Scheduling Threads</h1>
+
+    
+      <p>Java is a multi-threaded programming language which means we can develop multi-threaded programs using Java. A multi-threaded program contains two or more parts that can run concurrently, each handling a different task at the same time. This makes optimal use of available resources, especially on computers with multiple CPUs.</p>
+
+      <p>Multitasking means multiple processes share common processing resources like a CPU. Multi-threading extends this idea by subdividing operations within a single application into individual threads that can run in parallel. The OS allocates processing time among applications and their threads.</p>
+
+      <p>Multi-threading enables multiple activities to proceed concurrently within the same program.</p>
+
+      <h2>ScheduledExecutorService Interface</h2>
+      <p>Java provides the <code>java.util.concurrent.ScheduledExecutorService</code> interface, a subinterface of <code>ExecutorService</code>, supporting future and/or periodic execution of tasks or threads.</p>
+
+      <h3>Key Methods</h3>
+      <ul>
+        <li><code>&lt;V&gt; ScheduledFuture&lt;V&gt; schedule(Callable&lt;V&gt; callable, long delay, TimeUnit unit)</code>: Schedules a task to execute after a delay.</li>
+        <li><code>ScheduledFuture&lt;?&gt; schedule(Runnable command, long delay, TimeUnit unit)</code>: Schedules a one-time action after a delay.</li>
+        <li><code>ScheduledFuture&lt;?&gt; scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit)</code>: Schedules periodic execution starting after an initial delay, then repeatedly at fixed intervals.</li>
+        <li><code>ScheduledFuture&lt;?&gt; scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit)</code>: Schedules periodic execution starting after an initial delay, with a fixed delay between the end of one execution and the start of the next.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example 1: scheduleAtFixedRate() and schedule()</h2>
+    <div class="content">
+      <p>This example schedules a task to run every 2 seconds after an initial delay of 2 seconds, stopping after 10 seconds.</p>
+
+      <pre><code>package com.tutorialspoint;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+   public static void main(final String[] arguments) throws InterruptedException {
+      final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+      final ScheduledFuture&lt;?&gt; beepHandler = 
+         scheduler.scheduleAtFixedRate(new BeepTask(), 2, 2, TimeUnit.SECONDS);
+
+      scheduler.schedule(new Runnable() {
+         @Override
+         public void run() {
+            beepHandler.cancel(true);
+            scheduler.shutdown();			
+         }
+      }, 10, TimeUnit.SECONDS);
+   }
+
+   static class BeepTask implements Runnable {
+      public void run() {
+         System.out.println("beep");      
+      }
+   }
+}</code></pre>
+
+      <h3>Output</h3>
+      <p>beep<br>beep<br>beep<br>beep<br>beep</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example 2: scheduleWithFixedDelay() and schedule()</h2>
+    <div class="content">
+      <p>This example schedules a task to run with a fixed delay of 2 seconds between executions, after an initial delay of 2 seconds, stopping after 10 seconds.</p>
+
+      <pre><code>package com.tutorialspoint;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+   public static void main(final String[] arguments) throws InterruptedException {
+      final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+      final ScheduledFuture&lt;?&gt; beepHandler = 
+         scheduler.scheduleWithFixedDelay(new BeepTask(), 2, 2, TimeUnit.SECONDS);
+
+      scheduler.schedule(new Runnable() {
+         @Override
+         public void run() {
+            beepHandler.cancel(true);
+            scheduler.shutdown();			
+         }
+      }, 10, TimeUnit.SECONDS);
+   }
+
+   static class BeepTask implements Runnable {
+      public void run() {
+         System.out.println("beep");      
+      }
+   }
+}</code></pre>
+
+      <h3>Output</h3>
+      <p>beep<br>beep<br>beep<br>beep</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example 3: schedule() for One-Time Execution</h2>
+    <div class="content">
+      <p>This example schedules a one-time task to run after a 2-second delay.</p>
+
+      <pre><code>package com.tutorialspoint;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+public class TestThread {
+   public static void main(final String[] arguments) throws InterruptedException {
+      final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+      final ScheduledFuture&lt;?&gt; beepHandler = 
+         scheduler.schedule(new BeepTask(), 2, TimeUnit.SECONDS);
+
+      scheduler.schedule(new Runnable() {
+         @Override
+         public void run() {
+            beepHandler.cancel(true);
+            scheduler.shutdown();			
+         }
+      }, 10, TimeUnit.SECONDS);
+   }
+
+   static class BeepTask implements Runnable {
+      public void run() {
+         System.out.println("beep");      
+      }
+   }
+}</code></pre>
+
+      <h3>Output</h3>
+      <p>beep</p>
+    </div>
+  </div>
+</div>

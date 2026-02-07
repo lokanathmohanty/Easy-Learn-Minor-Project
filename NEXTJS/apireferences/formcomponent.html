@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js `&lt;Form&gt;` Component (App Router) 📝</h1>
+        
+        <div class="content">
+            <h2 class="title">Overview and Purpose</h2>
+            <p>The **`<Form>` component** is an enhanced element in the Next.js **App Router** that wraps the standard HTML `<form>`. It provides advanced features for handling form submissions, particularly those involving **URL search parameters** or **Server Actions**. Its main benefits are: client-side navigation on submission, prefetching the target route, and providing progressive enhancement for form handling.</p>
+            
+            <h3 class="title">Basic Syntax</h3>
+            <pre>import Form from 'next/form' // Note: Ensure this import is correct based on your Next.js version (usually imported from 'next/experimental/form-actions' or similar experimental path if not natively exposed)
+
+export default function Page() {
+  return (
+    &lt;Form action="/submit-page"&gt; 
+        &lt;!-- Form Elements --&gt;
+        &lt;input type="text" name="name" /&gt;
+        &lt;button type="submit"&gt;Submit&lt;/button&gt;
+    &lt;/Form&gt;
+  )}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Key Props and Behavior</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`action`</span></td>
+                        <td>`string` or `function`</td>
+                        <td>The URL to **navigate** to, or the **Server Action** function to execute upon submission. If a string, form data is encoded as URL search parameters (GET method).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`replace`</span></td>
+                        <td>`boolean`</td>
+                        <td>If `true`, the new submission URL **replaces** the current history entry, preventing the user from navigating back to the form page. (Valid when `action` is a string/URL).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`scroll`</span></td>
+                        <td>`boolean`</td>
+                        <td>If `false`, it **prevents the page from scrolling to the top** after a successful form submission and client-side navigation.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`prefetch`</span></td>
+                        <td>`boolean`</td>
+                        <td>If `true`, the target submission route is **prefetched** when the form comes into the viewport, making the subsequent navigation nearly instantaneous. (Valid when `action` is a string/URL).</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3 class="title">Example: Using `action` for Navigation</h3>
+            <p>Submitting this form navigates to the `/form-submission` route with the form data appended as query parameters (e.g., `/form-submission?name=...`).</p>
+            <pre>&lt;Form action="/form-submission" &gt; 
+    &lt;input type="text" name="name" /&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/Form&gt;</pre>
+            
+            <h3 class="title">Example: Preventing History Back with `replace`</h3>
+            <p>Using <span class="example">`replace`</span> set to `true` ensures that the browser history stack is overwritten, effectively preventing the "back" button from returning to the form page after submission.</p>
+            <pre>&lt;Form action="/form-submission" replace&gt;
+    ...
+&lt;/Form&gt;</pre>
+        </div>
+    </div>
+</div>

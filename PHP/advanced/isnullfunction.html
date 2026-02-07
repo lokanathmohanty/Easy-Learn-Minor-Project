@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Variable Handling: $\text{is\_null()}$ Function</h1>
+
+        <div class="content">
+            <p>The $\text{is\_null()}$ function is a core PHP variable handling function used to explicitly check if a variable's value is **$\text{NULL}$**. It is a simple, yet valuable tool for input validation and preventing errors caused by missing values.</p>
+
+            <hr>
+
+            <h2 class="title">Syntax and Parameters</h2>
+            <p>The function accepts a single parameter and returns a boolean value.</p>
+            <pre>bool is_null ( mixed $value )</pre>
+            <ul>
+                <li><strong>$\text{\$value}$ (mixed):</strong> The variable whose value you want to check.</li>
+                <li><strong>Return Value:</strong> Returns **$\text{TRUE}$** if the variable is $\text{NULL}$, and **$\text{FALSE}$** otherwise.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">When $\text{is\_null()}$ Returns $\text{TRUE}$</h2>
+            <p>The $\text{is\_null()}$ function returns $\text{TRUE}$ in the following scenarios:</p>
+            <ol>
+                <li>When a variable is explicitly assigned the value $\text{NULL}$.</li>
+                <li>When a variable has been defined but subsequently had its value removed using the $\text{unset()}$ function.</li>
+                <li>When attempting to check a variable that has **not been declared or defined** (in PHP, an undeclared variable is treated as $\text{NULL}$ when checked with $\text{is\_null()}$). This helps provide safe execution of code.</li>
+            </ol>
+
+            <h3>Example 1: Explicit $\text{NULL}$ Assignment</h3>
+            <p>Checking a variable that was specifically set to $\text{null}$:</p>
+            <pre>&lt;?php
+   // Assigning null value
+   $var = null; 
+   if (is_null($var)) {
+      echo "Variable is null"; // Output: Variable is null
+   }
+?&gt;</pre>
+
+            <h3>Example 2: Checking an Undefined Variable</h3>
+            <p>Checking a variable that was never declared (this is where $\text{is\_null()}$ provides safety):</p>
+            <pre>&lt;?php
+   // $undefinedVar has not been declared
+   if (is_null($undefinedVar)) {
+      echo "Variable is null"; // Output: Variable is null
+   }
+?&gt;</pre>
+        </div>
+    </div>
+</div>

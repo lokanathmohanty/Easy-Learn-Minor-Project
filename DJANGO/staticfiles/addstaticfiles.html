@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Adding and Serving Static Files 🖼️</h1>
+        <div class="content">
+            <p><strong>Static files</strong> are the resources a web application needs to render a complete web page, separate from dynamic data. These typically include **images**, **JavaScript code** (JS), and **Cascading Style Sheets** (CSS).</p>
+        </div>
+        <h2 class="example">The Staticfiles App and Configuration</h2>
+        <div class="content">
+            <p>Django manages static files using the **<code>django.contrib.staticfiles</code>** app, which is installed by default in <code>INSTALLED_APPS</code>. This app automatically searches for static assets in a specific location:</p>
+            <ul>
+                <li>**Storage Location:** Django looks for static files within a folder named **<code>static</code>** inside each application's package folder (e.g., <code>myapp/static/</code>).</li>
+                <li>**Settings:** The **<code>STATIC_URL</code>** parameter in <code>settings.py</code> must be correctly configured. By default, it is often set to <code>'static/'</code>:
+                    <pre><code>STATIC_URL = 'static/'</code></pre>
+                </li>
+            </ul>
+
+            <h3>Usage in Templates (<code>.html</code> files)</h3>
+            <p>To use static files in a Django template, you must follow two steps:</p>
+            <ol>
+                <li>**Load the Tag:** Use the **<code>{% load static %}</code>** template tag at the top of the HTML file.</li>
+                <li>**Reference the File:** Use the **<code>{% static 'file_path' %}</code>** tag to generate the correct, absolute URL path to the file. The path is relative to the app's <code>static/</code> folder.</li>
+            </ol>
+
+            <p><strong>Example for an Image (<code>django.png</code>):</strong></p>
+            <pre><code>&lt;html&gt;&lt;body&gt;
+   {% load static %}
+   &lt;img src="{% static 'django.png' %}" alt="My image"&gt;
+&lt;/body&gt;&lt;/html&gt;</code></pre>
+
+            <p><strong>Example for CSS File (<code>style.css</code>):</strong></p>
+            <pre><code>&lt;link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"&gt;</code></pre>
+
+            <p><strong>Example for JavaScript File (<code>script.js</code>):</strong></p>
+            <pre><code>&lt;head&gt;
+   {% load static %}
+   &lt;script src = "{% static 'script.js' %}"&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+        </div>
+    </div>
+</div>

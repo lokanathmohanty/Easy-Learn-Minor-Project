@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django URL Mapping and Dispatching 🗺️</h1>
+        <div class="content">
+            <p>Django's **URL mapping** is the process by which the framework finds the correct **view function** to handle an incoming web request. This is managed primarily through the **<code>urlpatterns</code>** list defined in your project's or application's **<code>urls.py</code>** file.</p>
+
+            <h2>Basic URL Mapping Structure</h2>
+            <p>The core of URL mapping is the <code>url()</code> function, which takes three main elements:</p>
+            <pre><code>url(regex_pattern, python_path_to_view, name)</code></pre>
+            <ol>
+                <li>**The Pattern (<code>regex_pattern</code>):** A **regular expression (regexp)** that matches the URL requested by the user. Django processes patterns sequentially.</li>
+                <li>**The Python Path to the View:** The fully qualified path (e.g., <code>'myapp.views.hello'</code>) or a direct reference to the view function that should be executed.</li>
+                <li>**The Name (<code>name</code>):** An optional, but recommended, name for the URL pattern (e.g., <code>name='hello'</code>). This is essential for **URL reversing**, allowing you to refer to the URL in templates or code without hardcoding the path.</li>
+            </ol>
+            <p>Example of a mapping in the project <code>urls.py</code>:</p>
+            <pre><code>urlpatterns = patterns('',
+   # Maps /hello/ to the 'hello' function in myapp/views.py
+   url(r'^hello/', 'myapp.views.hello', name = 'hello'),
+)</code></pre>
+
+            <hr>
+
+            <h2>Organizing URLs (Best Practice)</h2>
+            <p>To keep applications reusable and the project structure clean, the best practice is to define URLs within the application itself (<code>myapp/urls.py</code>) and then **include** that file in the main project's <code>urls.py</code>.</p>
+            <ul>
+                <li>**Step 1: Create <code>myapp/urls.py</code>:**
+                    <pre><code>urlpatterns = patterns('myapp.views',
+   url(r'^hello/', 'hello', name = 'hello'),
+   # ...
+)</code></pre>
+                    <p>Note: We use the first element of <code>patterns</code> to define the common Python path prefix (<code>'myapp.views'</code>), simplifying the subsequent view paths.</p>
+                </li>
+                <li>**Step 2: Include in <code>myproject/urls.py</code>:**
+                    <pre><code>urlpatterns = patterns('',
+   url(r'^myapp/', include('myapp.urls')),
+   # ...
+)</code></pre>
+                    <p>Now, the view mapped to <code>/hello/</code> is accessed via the full path **<code>/myapp/hello/</code>**, providing a cleaner structure.</p>
+            </ul>
+
+            <hr>
+
+            <h2>Sending Parameters to Views</h2>
+            <p>Parameters are passed from the URL to the view function by using **regular expressions to capture parts of the URL**.</p>
+            <ul>
+                <li>
+                    **Positional Parameters (Order-Dependent):**
+                    <p>Captured groups in the regex (parentheses <code>()</code>) are passed to the view function as positional arguments, based on the order they appear in the pattern.</p>
+                    <pre><code>url(r'^articles/(\d{2})/(\d{4})', 'viewArticles', name = 'articles'),</code></pre>
+                    <p>For the URL <code>/articles/12/2006/</code>, Django calls the view as <code>viewArticles(request, '12', '2006')</code>. **The order of <code>month</code> and <code>year</code> in the view function signature must match the regex order.**</p>
+                </li>
+                <li>
+                    **Named Parameters (Order-Independent):**
+                    <p>Using named capturing groups (<code>?P&lt;name&gt;...</code>) is the preferred way to pass parameters, as it makes the mapping order-independent and clearer.</p>
+                    <pre><code>url(r'^articles/(?P&lt;month&gt;\d{2})/(?P&lt;year&gt;\d{4})', 'viewArticles', name = 'articles'),</code></pre>
+                    <p>Django calls the view using keyword arguments: <code>viewArticles(request, month='12', year='2006')</code>, matching the parameter names in the view function's signature.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

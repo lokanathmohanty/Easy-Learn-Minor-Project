@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>ArrayDeque</code> Class Summary ↔️💨</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.ArrayDeque</code>** class is the preferred, high-performance implementation of the **<code>Deque</code>** (Double-Ended Queue) interface. It is implemented using a resizable array and is optimized for insertions and deletions at **both the front and the back**.</p>
+
+            <h2 class="title">I. Core Characteristics and Performance</h2>
+            <p><code>ArrayDeque</code> offers efficient, dynamically growing storage, making it the modern replacement for the legacy <code>Stack</code> and often a high-performance alternative to <code>LinkedList</code> for pure Queue/Stack use cases.</p>
+            <ul>
+                <li>
+                    **Double-Ended:** It implements the <code>Deque</code> interface, supporting element insertion and removal at both ends: head (first) and tail (last).
+                </li>
+                <li>
+                    **Resizable Array:** It is array-backed, but the array automatically resizes as needed (no capacity restrictions).
+                </li>
+                <li>
+                    **High Performance:** It is **generally faster** than both the synchronized **<code>Stack</code>** and the node-traversing **<code>LinkedList</code>** for LIFO (stack) and FIFO (queue) operations.
+                </li>
+                <li>
+                    **Non-Synchronized:** It is **not thread-safe**. External synchronization is required for concurrent access.
+                </li>
+                <li>
+                    **Null Prohibition:** **Null elements are explicitly prohibited** in an `ArrayDeque`.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Dual Role as Queue and Stack</h2>
+            <p>Because it's a Deque, <code>ArrayDeque</code> can efficiently be used as both a Queue (FIFO) and a Stack (LIFO).</p>
+            <table>
+                <tr>
+                    <th>Role</th>
+                    <th>Mechanism</th>
+                    <th>Primary Methods (Constant Time $O(1)$)</th>
+                </tr>
+                <tr>
+                    <td><strong>Queue (FIFO)</strong></td>
+                    <td>Elements added to the tail, removed from the head.</td>
+                    <td><code>offerLast(E e)</code> / <code>pollFirst()</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Stack (LIFO)</strong></td>
+                    <td>Elements added to the head, removed from the head.</td>
+                    <td><code>push(E e)</code> / <code>pop()</code></td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">III. Essential Deque Methods (Insertion/Removal)</h2>
+            <p>The methods ensure consistent access to both ends of the queue. Methods starting with `add` or `remove` throw an exception on failure, while methods starting with `offer` or `poll` return a boolean or null.</p>
+            <ul>
+                <li>
+                    **Head Operations (First Element):**
+                    <ul>
+                        <li>**Insert:** <code>addFirst(E e)</code>, <code>offerFirst(E e)</code>, <code>push(E e)</code></li>
+                        <li>**Remove:** <code>removeFirst()</code>, <code>pollFirst()</code>, <code>pop()</code></li>
+                    </ul>
+                </li>
+                <li>
+                    **Tail Operations (Last Element):**
+                    <ul>
+                        <li>**Insert:** <code>addLast(E e)</code>, <code>offerLast(E e)</code></li>
+                        <li>**Remove:** <code>removeLast()</code>, <code>pollLast()</code></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="example">
+                <p>The example demonstrates the symmetrical use of the Deque at both ends:</p>
+                <pre><code>// Add to head and tail
+objDeque.addFirst(15);
+objDeque.addLast(28); // Deque is now: [15, 28]
+
+// Remove from head and tail
+int ele1 = objDeque.removeFirst(); // 15
+int ele2 = objDeque.removeLast();  // 28</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

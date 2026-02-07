@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - continue Statement</h1>
+
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>The <code>continue</code> statement can be used in any loop control structure to skip the current iteration and jump to the next one. In a <code>for</code> loop, it immediately transfers control to the update statement, while in a <code>while</code> or <code>do-while</code> loop, it jumps directly to the Boolean expression for the next iteration.</p>
+    </div>
+
+    <div class="content">
+      <h2>Syntax of continue Statement</h2>
+      <pre><code>continue;</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Using continue with while Loop</h2>
+      <p>This example shows how <code>continue</code> skips the number 15 while printing values from 10 to 20:</p>
+      <pre><code>public class Test {
+   public static void main(String args[]) {
+      int x = 10;
+      while(x < 20) {
+         x++;
+         if(x == 15){
+            continue;		 
+         }   
+         System.out.print("value of x : " + x );
+         System.out.print("\n");
+      }
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>value of x : 11</li>
+        <li>value of x : 12</li>
+        <li>value of x : 13</li>
+        <li>value of x : 14</li>
+        <li>value of x : 16</li>
+        <li>value of x : 17</li>
+        <li>value of x : 18</li>
+        <li>value of x : 19</li>
+        <li>value of x : 20</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Using continue with for Loop</h2>
+      <p>This example skips the value 30 from an array:</p>
+      <pre><code>public class Test {
+   public static void main(String args[]) {
+      int [] numbers = {10, 20, 30, 40, 50};
+
+      for(int index = 0; index < numbers.length; index++) {
+         if(numbers[index] == 30){
+            continue;
+         }
+         System.out.print("value of item : " + numbers[index] );         
+         System.out.print("\n");
+      }
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>value of item : 10</li>
+        <li>value of item : 20</li>
+        <li>value of item : 40</li>
+        <li>value of item : 50</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Using continue with do-while Loop</h2>
+      <p>This example shows how the number 15 is skipped in a <code>do-while</code> loop:</p>
+      <pre><code>public class Test {
+   public static void main(String args[]) {
+      int x = 10;
+
+      do {
+         x++;
+         if(x == 15){
+            continue;		 
+         }   
+         System.out.print("value of x : " + x );
+         System.out.print("\n");
+      } while( x < 20 );
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>value of x : 11</li>
+        <li>value of x : 12</li>
+        <li>value of x : 13</li>
+        <li>value of x : 14</li>
+        <li>value of x : 16</li>
+        <li>value of x : 17</li>
+        <li>value of x : 18</li>
+        <li>value of x : 19</li>
+        <li>value of x : 20</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Use Cases of continue Statement</h2>
+
+      <h3>1. Skipping Specific Values in a Loop</h3>
+      <p>Example: Skipping even numbers in a for loop.</p>
+      <pre><code>for (int i = 1; i <= 10; i++) {
+    if (i % 2 == 0) {
+        continue;
+    }
+    System.out.println(i);
+}</code></pre>
+
+      <h3>2. Ignoring Specific Input in User Input Loops</h3>
+      <p>Example: Skipping negative numbers entered by the user.</p>
+      <pre><code>Scanner scanner = new Scanner(System.in);
+for (int i = 0; i < 5; i++) {
+    System.out.print("Enter a positive number: ");
+    int num = scanner.nextInt();
+
+    if (num < 0) {
+        System.out.println("Negative numbers are not allowed, skipping...");
+        continue;
+    }
+
+    System.out.println("You entered: " + num);
+}</code></pre>
+
+      <h3>3. Skipping Iteration in Nested Loops</h3>
+      <p>Example: Skip when row index equals column index in a nested loop.</p>
+      <pre><code>for (int i = 1; i <= 3; i++) {
+    for (int j = 1; j <= 3; j++) {
+        if (i == j) {
+            continue;
+        }
+        System.out.println("i: " + i + ", j: " + j);
+    }
+}</code></pre>
+
+      <h3>4. Skipping Blank Lines While Processing Files</h3>
+      <p>Example: Skip empty lines from a file.</p>
+      <pre><code>BufferedReader reader = new BufferedReader(new FileReader("data.txt"));
+String line;
+while ((line = reader.readLine()) != null) {
+    if (line.trim().isEmpty()) {
+        continue;
+    }
+    System.out.println(line);
+}
+reader.close();</code></pre>
+
+      <h3>5. Filtering Specific Characters in a String</h3>
+      <p>Example: Skipping vowels when processing a string.</p>
+      <pre><code>String str = "hello world";
+for (char ch : str.toCharArray()) {
+    if ("aeiou".indexOf(ch) != -1) {
+        continue;
+    }
+    System.out.print(ch);
+}</code></pre>
+    </div>
+  </div>
+</div>

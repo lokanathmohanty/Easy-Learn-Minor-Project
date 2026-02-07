@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Insertion Sort Algorithm</h1>
+    <div class="content">
+
+      <p>
+        The <strong>Insertion Sort</strong> is a simple sorting algorithm that works similarly to how we sort playing cards in our hands. 
+        The array is divided into two parts: a <em>sorted part</em> and an <em>unsorted part</em>. 
+        Elements from the unsorted part are picked and inserted at their correct position in the sorted part.
+      </p>
+
+      <p>
+        This algorithm is simple to implement and efficient for small datasets or datasets that are already partly sorted.
+      </p>
+
+      <h2>Example</h2>
+      <p>Consider the input and output below:</p>
+      <pre><code>Input:  [24, 22, 26, 10, 12]  
+Output: [10, 12, 22, 24, 26]</code></pre>
+
+      <h2>How Insertion Sort Works?</h2>
+      <h3>First Pass</h3>
+      <p>
+        Compare the first two elements <code>24</code> and <code>22</code>.  
+        Since <code>22</code> is smaller, swap them. Now the sub-array <code>[22, 24]</code> is sorted.
+      </p>
+
+      <h3>Second Pass</h3>
+      <p>
+        Compare <code>24</code> and <code>26</code>.  
+        They are in order, so no swapping is needed. The sorted sub-array is <code>[22, 24, 26]</code>.
+      </p>
+
+      <h3>Third Pass</h3>
+      <p>
+        Next element is <code>10</code>. Compare it with <code>26</code>, <code>24</code>, and <code>22</code>.  
+        After multiple swaps, <code>10</code> moves to the beginning. Sorted sub-array is <code>[10, 22, 24, 26]</code>.
+      </p>
+
+      <h3>Fourth Pass</h3>
+      <p>
+        Next element is <code>12</code>. Compare it with <code>26</code>, <code>24</code>, and <code>22</code>.  
+        After shifting, <code>12</code> takes its correct place. Final array is <code>[10, 12, 22, 24, 26]</code>.
+      </p>
+
+      <h2>Algorithm</h2>
+      <ol>
+        <li>If it is the first element, it is already sorted.</li>
+        <li>Pick the next element.</li>
+        <li>Compare it with all elements in the sorted sub-list.</li>
+        <li>Shift all the larger elements in the sorted sub-list by one position.</li>
+        <li>Insert the value at the correct position.</li>
+        <li>Repeat until the list is sorted.</li>
+      </ol>
+
+      <h2>JavaScript Implementation</h2>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Insertion Sort Algorithm&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p id="demo"&gt;&lt;/p&gt;
+    &lt;script&gt;
+      function insertionSort(arr) {
+        let n = arr.length;
+        for (let i = 1; i &lt; n; i++) {
+          let current = arr[i];
+          let j = i - 1;
+          while ((j &gt; -1) &amp;&amp; (current &lt; arr[j])) {
+            arr[j + 1] = arr[j];
+            j--;
+          }
+          arr[j + 1] = current;
+        }
+        return arr;
+      }
+
+      let arr = [24, 22, 26, 10, 12];
+      document.getElementById("demo").innerHTML = insertionSort(arr);
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Output</h2>
+      <pre><code>[10, 12, 22, 24, 26]</code></pre>
+
+      <p>
+        The array is successfully sorted using the <strong>Insertion Sort Algorithm</strong>.
+      </p>
+
+    </div>
+  </div>
+</div>

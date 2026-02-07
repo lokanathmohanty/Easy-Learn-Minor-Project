@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>Date</code> Class Summary (Legacy) 📅</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.Date</code>** class represents a specific **instant in time**, measured with **millisecond precision**. This class is part of the original Java date/time framework and is now largely considered **legacy**. For new development in Java 8 and later, the classes in the **<code>java.time</code>** package (like <code>Instant</code>, <code>LocalDateTime</code>, etc.) are the preferred, more robust replacements.</p>
+
+            <h2 class="title">I. Core Representation: The Epoch 🕰️</h2>
+            <ul>
+                <li>
+                    <strong>Instant in Time:</strong> A <code>Date</code> object internally stores the time as a single `long` value.
+                </li>
+                <li>
+                    **Epoch:** This `long` value represents the number of **milliseconds** that have elapsed since **January 1, 1970, 00:00:00 GMT** (Coordinated Universal Time), which is known as "the epoch."
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Constructors and Time Access</h2>
+            <p>The primary ways to create and access the underlying time are simple:</p>
+            <ul class="example">
+                <li>
+                    <strong><code>Date()</code>:</strong> Creates a <code>Date</code> object representing the **current time** at the moment the object is allocated.
+                </li>
+                <li>
+                    <strong><code>Date(long date)</code>:</strong> Creates a <code>Date</code> object representing the time exactly <code>date</code> milliseconds after the epoch.
+                </li>
+                <li>
+                    <strong><code>long getTime()</code>:</strong> Returns the number of milliseconds since the epoch represented by this object.
+                </li>
+                <li>
+                    <strong><code>void setTime(long time)</code>:</strong> Updates the internal millisecond value to set a new point in time.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Comparison and Modern Interoperability</h2>
+            <p>The <code>Date</code> class provides methods for direct comparison and conversion to modern time objects:</p>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>boolean after(Date when)</code></td>
+                    <td>Tests if this date occurs strictly after the specified date.</td>
+                </tr>
+                <tr>
+                    <td><code>boolean before(Date when)</code></td>
+                    <td>Tests if this date occurs strictly before the specified date.</td>
+                </tr>
+                <tr>
+                    <td><code>int compareTo(Date anotherDate)</code></td>
+                    <td>Compares two dates for order (returns a negative integer, zero, or a positive integer).</td>
+                </tr>
+                <tr>
+                    <td><code>Instant toInstant()</code></td>
+                    <td>**Modern Interoperability:** Converts this legacy <code>Date</code> object into a Java 8 **<code>java.time.Instant</code>** object, which also represents a point in time.</td>
+                </tr>
+                <tr>
+                    <td><code>static Date from(Instant instant)</code></td>
+                    <td>**Modern Interoperability:** Creates a legacy <code>Date</code> object from a modern <code>Instant</code> object.</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">Example: Current Time Retrieval</h2>
+            <p>The provided example uses the modern `Instant` class to get the current time, then immediately converts it to a legacy `Date` object using the static `Date.from()` method:</p>
+            <div class="example">
+                <pre><code>// Get the current instant (point in time)
+Instant currentInstant = Instant.now();
+
+// Convert the Instant to a legacy Date object
+Date date = Date.from(currentInstant); 
+
+System.out.println("Date: " + date.toString());</code></pre>
+                <p>The output string (e.g., `Mon Apr 01 10:20:08 IST 2024`) is the default, locale-dependent representation provided by the overridden `toString()` method.</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">SortedMap Interface in Java</h1>
+    
+    <div class="content">
+      <p>The <strong>SortedMap</strong> interface extends <code>Map</code> and ensures that entries are maintained in ascending key order.</p>
+      
+      <p>It supports methods like:</p>
+      <ul>
+        <li><code>comparator()</code> - Returns the comparator used or null for natural ordering.</li>
+        <li><code>firstKey()</code> - Returns the first key in the map.</li>
+        <li><code>lastKey()</code> - Returns the last key in the map.</li>
+        <li><code>headMap(end)</code> - Returns a map with keys less than <code>end</code>.</li>
+        <li><code>tailMap(start)</code> - Returns a map with keys greater than or equal to <code>start</code>.</li>
+        <li><code>subMap(start, end)</code> - Returns a map with keys from <code>start</code> (inclusive) to <code>end</code> (exclusive).</li>
+      </ul>
+
+      <p>The <code>TreeMap</code> class implements this interface, automatically sorting keys upon insertion.</p>
+    </div>
+
+    <h2 class="title">Example 1: Iterating Through a SortedMap</h2>
+    
+    <div class="content">
+      <p>This example demonstrates how to add entries to a <code>SortedMap</code> and iterate through them in sorted order:</p>
+      
+      <pre>
+<code>SortedMap<String, Double> map = new TreeMap<>();
+map.put("Zara", 3434.34);
+map.put("Mahnaz", 123.22);
+map.put("Ayan", 1378.00);
+
+for (Map.Entry<String, Double> entry : map.entrySet()) {
+    System.out.println(entry.getKey() + ": " + entry.getValue());
+}</code>
+      </pre>
+    </div>
+  </div>
+</div>

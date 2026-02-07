@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Different Methods for Inserting Data (CRUD: Create) 💾</h1>
+        <div class="content">
+            <p>Django's **Object-Relational Mapper (ORM)** allows data manipulation (CRUD operations) using Python objects, abstracting away the underlying SQL. Here are the three main ways to insert (create) new data records for a given model (e.g., the <code>Dreamreal</code> model):</p>
+
+            <h2>1. Direct ORM Methods (Shell or View)</h2>
+            <p>This is the programmatic approach, used for scripting or directly within a view function. It bypasses form validation layers.</p>
+            <h3>A. Model Instance and <code>.save()</code></h3>
+            <p>You instantiate the model class, set its attributes, and then call the <code>.save()</code> method. This executes an <code>INSERT</code> query in the database.</p>
+            <pre><code>>>> from myapp.models import Dreamreal
+>>> obj = Dreamreal(website="www.polo.com", name="sorex", ...)
+>>> obj.save()</code></pre>
+            <h3>B. Model Manager <code>.create()</code></h3>
+            <p>A shortcut that instantiates, sets attributes, and saves the object in a single line. This is often preferred for simple insertions.</p>
+            <pre><code>>>> obj = Dreamreal.objects.create(
+... website="www.polo.com", name="sorex", ...)</code></pre>
+
+            <hr>
+
+            <h2>2. Handling Data from a Manual HTML Form</h2>
+            <p>This method involves defining a view function (e.g., <code>addnew</code>) that handles both the display of the blank form and the submission of data.</p>
+            <ul>
+                <li>**GET Request:** The view checks the request method. If it's a **GET**, it simply renders the blank HTML template (<code>myform.html</code>).</li>
+                <li>**POST Request:** If it's a **POST**, the view manually retrieves data from <code>request.POST</code>, creates a model instance using the extracted data, and calls <code>.save()</code>.</li>
+            </ul>
+            <pre><code>def addnew(request):
+   if request.method == "POST":
+      ws = request.POST['website']
+      # ... retrieve other fields ...
+      obj = Dreamreal(website=ws, ...)
+      obj.save()
+      return HttpResponse("<h2>Record Added Successfully</h2>")
+   return render(request, "myform.html")</code></pre>
+            <p>*(The HTML form must include <code>{% csrf_token %}</code> for security.)*</p>
+
+            <hr>
+
+            <h2>3. Using Django Forms (ModelForm)</h2>
+            <p>This is the standard, secure, and most recommended method, as it leverages Django's built-in validation.</p>
+            <ul>
+                <li>**Define <code>ModelForm</code>:** Create a <code>DreamrealForm</code> class in <code>forms.py</code> that inherits from <code>forms.ModelForm</code> and links to the <code>Dreamreal</code> model.</li>
+                <li>**In View:**
+                    <ol>
+                        <li>On **POST**, the view binds the form to the POST data: <code>form = DreamrealForm(request.POST)</code>.</li>
+                        <li>It calls **<code>form.is_valid()</code>** to validate the data.</li>
+                        <li>If valid, it calls **<code>form.save()</code>**, which handles the creation and persistence of the new model object automatically.</li>
+                    </ol>
+            </ul>
+            <pre><code>def addnew(request):
+   if request.method == 'POST':
+      form = DreamrealForm(request.POST)
+      if form.is_valid():
+         form.save() # Saves the valid data to the model
+         return HttpResponse("<h2>Book added successfully</h2>")
+
+   context={'form' : DreamrealForm}
+   return render(request, "myform.html", context)</code></pre>
+
+            <hr>
+
+            <h2>4. Using Generic Class-Based Views (<code>CreateView</code>)</h2>
+            <p>For even faster development, Django provides **Generic Views** that handle common tasks without defining extensive logic in <code>views.py</code>. The <code>CreateView</code> is specialized for object creation.</p>
+            <pre><code>from django.views.generic import CreateView
+
+class DRCreateView(CreateView):
+   model = Dreamreal
+   fields = "__all__"
+   template_name = 'myform.html'
+   success_url = '../success/' # Redirect on successful save</code></pre>
+            <p>This class automatically handles form rendering (GET), data binding/validation (POST), saving, and redirection. It is registered in <code>urls.py</code> using <code>DRCreateView.as_view()</code>.</p>
+        </div>
+    </div>
+</div>

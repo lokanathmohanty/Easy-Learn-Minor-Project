@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - min-inline-size Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS min-inline-size</strong> property sets the minimum inline size of an element. 
+        The direction of the inline is determined by the <strong>writing-mode</strong> property. 
+        If the content fits well within the inline size of the element, this property has no effect.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>
+        <code>min-inline-size: auto | length | percentage | initial | inherit;</code>
+      </p>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>auto</strong> – No width limit is set with this value. This is the default.</li>
+        <li><strong>length</strong> – Sets the min-inline-size of the element using length units (e.g. px, em, rem).</li>
+        <li><strong>percentage</strong> – Sets the min-inline-size of the element relative to the size of its containing element.</li>
+        <li><strong>initial</strong> – Sets the property to its default value.</li>
+        <li><strong>inherit</strong> – Inherits the property value from the parent element.</li>
+      </ul>
+
+      <h2>Min Inline Size Property with Auto Value</h2>
+      <p>
+        To not set any specific limit on the inline-size of an element, we use the <code>auto</code> value. 
+        The size of the element will depend on the length of the content.
+      </p>
+
+      <h2>Example</h2>
+      <pre>
+.container {
+   min-inline-size: auto;
+   display: inline-block;
+}
+      </pre>
+
+      <h2>Min Inline Size Property with Length Values</h2>
+      <p>
+        To set the inline size of an element, we can specify the size using length units (e.g. px, em, rem). 
+        If the content is greater than the size of the element, the element will grow to accommodate it.
+      </p>
+
+      <h2>Example</h2>
+      <pre>
+.container {
+   min-inline-size: 400px;
+}
+
+.container {
+   min-inline-size: 30em;
+}
+      </pre>
+
+      <h2>Min Inline Size Property with Percentage Values</h2>
+      <p>
+        We can also use percentage values relative to the size of the containing element. 
+        This ensures the inline size grows proportionally.
+      </p>
+
+      <h2>Example</h2>
+      <pre>
+.container {
+   min-inline-size: 50%;
+}
+
+.container {
+   min-inline-size: 75%;
+}
+      </pre>
+
+      <h2>Min Inline Size Property with Writing Mode</h2>
+      <p>
+        The property can be used in combination with <code>writing-mode</code>, 
+        which defines the inline direction. 
+        In <strong>horizontal mode</strong>, the inline size grows from left to right, 
+        and in <strong>vertical mode</strong>, it grows from top to bottom.
+      </p>
+
+      <h2>Example</h2>
+      <pre>
+.container {
+   min-inline-size: 55%;
+   writing-mode: horizontal-lr;
+}
+
+.container {
+   min-inline-size: 55%;
+   writing-mode: vertical-lr;
+}
+      </pre>
+
+      <h2>Supported Browsers</h2>
+      <ul>
+        <li>Chrome: 57.0+</li>
+        <li>Edge: 79.0+</li>
+        <li>Firefox: 41.0+</li>
+        <li>Safari: 12.1+</li>
+        <li>Opera: 44.0+</li>
+      </ul>
+    </div>
+  </div>
+</div>

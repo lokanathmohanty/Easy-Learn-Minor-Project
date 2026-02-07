@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Returning an Array from C++ Functions ⬆️</h1>
+
+        <div class="content">
+            <p>C++ **does not allow** a function to return an entire array **by value**. Instead, a function must return a **pointer** to the array's first element. This is achieved by declaring the function's return type as a pointer (`type *`).</p>
+            <pre class="example">
+// Function returns a pointer to an integer
+int * myFunction();
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Key Rule: Using <code>static</code> or Dynamic Allocation</h2>
+            <p>A crucial rule in C++ is to **never return the address of a local variable** declared on the stack, as that memory is deallocated when the function exits, leading to a "dangling pointer" (undefined behavior).</p>
+
+            <p>To safely return a pointer to an array created inside a function, the array must have a lifespan that extends beyond the function's execution. This is commonly achieved using one of two methods:</p>
+            <ol>
+                <li>
+                    <strong>Using the <code>static</code> keyword:</strong> Declaring the local array as `static` ensures it is allocated in the data segment, meaning its memory persists for the entire program duration.
+                </li>
+                <li>
+                    <strong>Using Dynamic Memory Allocation:</strong> Allocating the array on the heap using `new`. In this case, the **caller becomes responsible** for freeing the memory using `delete[]` to prevent memory leaks.
+                </li>
+            </ol>
+
+            <h3>Example: Returning a <code>static</code> Array</h3>
+            <p>The following example uses the `static` keyword to ensure the array `r` remains valid after `getRandom()` returns, allowing the `main` function to safely access the returned pointer.</p>
+            <pre class="example">
+int * getRandom() {
+   // Array is declared static, so its memory persists.
+   static int r[10]; 
+
+   // ... Code to populate r with random numbers ...
+
+   return r; // Returns a pointer to the start of the static array
+}
+
+int main () {
+   int *p;
+   p = getRandom(); // p receives the address of the static array r
+   
+   // The array elements can be safely accessed via the pointer p
+   for ( int i = 0; i &lt; 10; i++ ) {
+      cout &lt;&lt; "*(p + " &lt;&lt; i &lt;&lt; ") : " &lt;&lt; *(p + i) &lt;&lt; endl;
+   }
+   return 0;
+}
+</pre>
+        </div>
+    </div>
+</div>

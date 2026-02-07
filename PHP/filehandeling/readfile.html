@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP File Reading Functions</h1>
+
+    <div class="content">
+      <p>
+        **File Reading** is the process of extracting data from a file on the server for use within a PHP program. PHP provides several built-in functions to perform this operation, often utilizing a file pointer (handle) obtained from `fopen()`.
+      </p>
+
+      <h2>Methods for Reading Files</h2>
+
+      <hr>
+
+      <h3>1. Reading the Entire File into a String: `file_get_contents()` 📝</h3>
+      <p>
+        This is the simplest way to read a file. It reads the entire content of a file directly into a single string. It handles opening, reading, and closing the file automatically, making it ideal for smaller files like configuration settings.
+      </p>
+      <div class="example">
+        <p>
+          <code>$content = **file_get_contents**('myfile.txt');</code><br>
+          <code>if ($content !== false) { /* use $content */ }</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h3>2. Reading Line by Line: `fgets()` 📏</h3>
+      <p>
+        The `fgets()` function reads a single line from an already opened file pointer (`$stream`). The read operation stops at a newline character, a specified length, or the End Of File (EOF). It is often used within a `while` loop that checks for EOF using **`feof()`**.
+      </p>
+      <div class="example">
+        <p>
+          <code>$file = fopen("hello.txt", "r");</code><br>
+          <code>while( ! feof($file) ) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo **fgets**($file) . "&lt;br&gt;";</code><br>
+          <code>}</code><br>
+          <code>fclose($file);</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h3>3. Reading Character by Character: `fgetc()` 🔍</h3>
+      <p>
+        The `fgetc()` function reads and returns a **single character** from the current position of the file pointer. It is the most granular reading method.
+      </p>
+      <div class="example">
+        <p>
+          <code>$file = fopen("hello.txt", "r");</code><br>
+          <code>$char = **fgetc**($file); // Reads the first character</code><br>
+          <code>fclose($file);</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h3>4. Reading a Specified Number of Bytes: `fread()` 📦</h3>
+      <p>
+        The `fread()` function reads a specified number of bytes (`$length`) from the file pointer. This function is **binary-safe**, making it suitable for reading non-text files like images or archives (when opened in binary mode, e.g., `rb`).
+      </p>
+      <div class="example">
+        <p>
+          <code>$filename = "welcome.png";</code><br>
+          <code>$file = fopen($filename, "rb"); // Open in binary read mode</code><br>
+          <code>$data = **fread**($file, **filesize($filename)**); // Reads all bytes</code><br>
+          <code>fclose($file);</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h3>5. Reading and Parsing Formatted Data: `fscanf()` ⚙️</h3>
+      <p>
+        The `fscanf()` function reads a line from the file stream and attempts to **parse** its contents according to a specified format string (similar to C's `sscanf`). It's useful for structured files where data fields are separated by delimiters.
+      </p>
+      <div class="example">
+        <p>
+          // Reads name (%s), email (%s), and salary (%d) separated by tabs (\t)<br>
+          <code>while ($data = **fscanf**($fp, "%s\t%s\t%s\t%d\n")) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;list ($name, $email, $post, $salary) = $data;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;// ... process data ...</code><br>
+          <code>}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

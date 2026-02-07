@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js ESLint Configuration 🛠️</h1>
+        
+        <div class="content">
+            <h2 class="title">What is ESLint?</h2>
+            <p>**ESLint** is a powerful **static code analysis tool** for JavaScript (and TypeScript). It quickly examines your code without executing it, identifying and reporting issues related to code quality, style violations, potential security problems, and adherence to specific coding standards.</p>
+            <p>Next.js includes the custom **<span class="example">`eslint-plugin-next`</span>** plugin bundled in its base configuration to help developers catch common framework-specific issues in Next.js applications.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Configuring ESLint in Next.js</h2>
+            
+            <h3 class="title">Step 1: Installation</h3>
+            <p>You install the core ESLint library and the official Next.js configuration package.</p>
+            <pre>// Using npm
+npm install eslint eslint-config-next --save-dev</pre>
+            
+            <h3 class="title">Step 2: Configuration File (`.eslintrc.json`)</h3>
+            <p>Create a configuration file to tell ESLint which ruleset to extend. The recommended setting is **<span class="example">`next/core-web-vitals`</span>**, which includes rules focused on optimizing for modern web performance metrics.</p>
+            <pre>// File: .eslintrc.json
+{
+    "extends": "next/core-web-vitals"
+}</pre>
+            <p>You should also ensure your <span class="example">`package.json`</span> references this configuration:</p>
+            <pre>"eslintConfig": {
+    "extends": "next"
+}</pre>
+            
+            <h3 class="title">Step 3: Creating the Lint Command</h3>
+            <p>Define a script in <span class="example">`package.json`</span> to easily run the linting process using the built-in Next.js command:</p>
+            <pre>// File: package.json
+"scripts": {
+    "lint": "next lint"
+}</pre>
+            <p>To run, execute: <span class="example">`npm run lint`</span>.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Customizing Linting Behavior</h2>
+            
+            <h3 class="title">1. Limiting Directories for Production Builds</h3>
+            <p>By default, Next.js checks common directories (e.g., <span class="example">`pages/`</span>, <span class="example">`app/`</span>, <span class="example">`components/`</span>). You can specify which directories should be linted during the **production build** (<span class="example">`next build`</span>) using the <span class="example">`dirs`</span> option in <span class="example">`next.config.js`</span>.</p>
+            <pre>// File: next.config.ts
+module.exports = {
+    eslint: {
+      dirs: ['pages', 'utils'], // Only checks these directories during 'next build'
+    },
+};</pre>
+            
+            <h3 class="title">2. Disabling Linting During Production Builds</h3>
+            <p>To ensure a production build succeeds even if ESLint errors are present, you can disable linting during the build process entirely. This is generally discouraged unless you run linting checks as a separate step in your CI/CD pipeline.</p>
+            <pre>// File: next.config.ts
+const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true, // &larr; Build will complete despite ESLint errors
+  },
+};
+export default nextConfig;</pre>
+            
+            <h3 class="title">3. Disabling the Cache</h3>
+            <p>For better performance, Next.js caches ESLint results in the <span class="example">`.next/cache`</span> directory. If you are using advanced ESLint rules that depend on files outside the one currently being processed, you may need to disable the cache:</p>
+            <pre>next lint --no-cache</pre>
+        </div>
+    </div>
+</div>

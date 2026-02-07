@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP for PERL Developers: Key Similarities and Differences</h1>
+
+        <div class="content">
+            <p>For developers coming from **PERL** (Practical Extraction and Reporting Language), transitioning to **PHP** (Hypertext Preprocessor) is straightforward. Both are high-level, **dynamically typed scripting languages** with strong roots in C syntax. Understanding their commonalities and specific differences is key to quickly leveraging PHP for server-side web development.</p>
+
+            <hr>
+
+            <h2 class="title">Similarities Between PERL and PHP 🤝</h2>
+            <ul>
+                <li><strong>Scripting Nature:</strong> Both are interpreted scripting languages; they do not require compilation into native standalone executables before runtime.</li>
+                <li><strong>Syntax Core:</strong> Both share a basic syntax inherited from C. Code is **whitespace-insensitive**, and statements are terminated with a **semicolon ($\text{;}$)**.</li>
+                <li><strong>Code Blocks:</strong> Multiple statements are grouped into blocks using **curly braces ($\text{\{\}}$)**.</li>
+                <li><strong>Variable Prefixes:</strong> All variables in PHP, like **scalar variables in PERL**, are prefixed with a **dollar sign ($\text{\$}$)**.</li>
+                <li><strong>Dynamic Typing:</strong> Neither language requires the type of a variable to be declared beforehand. A single variable can hold a number, a string, or any other data type interchangeably.</li>
+                <li><strong>String Interpretation:</strong> Both PHP and PERL perform **variable interpolation** (interpretation) within **double-quoted strings** ($\text{"string with \$variable"}$), but not typically in single-quoted strings ($\text{'literal string'}$).</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Key Differences Between PERL and PHP ⚙️</h2>
+            
+            <table class="example">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>PERL</th>
+                        <th>PHP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**Primary Use**</td>
+                        <td>General-purpose language, historically strong in CGI scripting, text processing, and system administration.</td>
+                        <td>Primarily used as a **server-side scripting language embedded within HTML** for dynamic web page generation.</td>
+                    </tr>
+                    <tr>
+                        <td>**Embedding**</td>
+                        <td>Static HTML must often be explicitly output using $\text{print}$ or $\text{heredoc}$.</td>
+                        <td>Allows large blocks of **static HTML to be written outside** the $\text{<?php ... ?>}$ code blocks.</td>
+                    </tr>
+                    <tr>
+                        <td>**Variable Types**</td>
+                        <td>Uses prefixes to denote variable type: $\text{\$scalar}$, $\text{@array}$, $\text{\%hash}$.</td>
+                        <td>Has **only one variable prefix ($\text{\$}$)**. Any data type (scalar or compound) is stored in a $\text{\$variable}$.</td>
+                    </tr>
+                    <tr>
+                        <td>**Arrays/Hashes**</td>
+                        <td>Distinction between $\text{array}$ ($\text{@}$) and $\text{hash}$ ($\text{\%}$).</td>
+                        <td>Uses a **single $\text{array}$ datatype** that handles both **indexed arrays** (like $\text{array}$) and **associative arrays** (like $\text{hash}$).</td>
+                    </tr>
+                    <tr>
+                        <td>**Function Arguments**</td>
+                        <td>Subroutines often access arguments from the implicit $\text{@\_}$ array; formal arguments in the definition are optional.</td>
+                        <td>Function definitions typically require an explicit list of **formal arguments**, similar to C or Java.</td>
+                    </tr>
+                    <tr>
+                        <td>**Variable Scope**</td>
+                        <td>Top-level variables are **global by default** (visible inside subroutines). Requires $\text{my}$ for local scope.</td>
+                        <td>Variables defined inside function definitions are **local by default**. Requires the $\text{global}$ keyword to access top-level variables.</td>
+                    </tr>
+                    <tr>
+                        <td>**Control Flow**</td>
+                        <td>Uses $\text{next}$ (like $\text{continue}$) and $\text{last}$ (like $\text{break}$) in loops.</td>
+                        <td>Uses C-like control keywords: **$\text{break}$ and $\text{continue}$**.</td>
+                    </tr>
+                    <tr>
+                        <td>**Conditional Keywords**</td>
+                        <td>Uses $\text{elsif}$.</td>
+                        <td>Uses **$\text{elseif}$** (or $\text{else if}$).</td>
+                    </tr>
+                    <tr>
+                        <td>**Modules**</td>
+                        <td>Has a dedicated module system with $\text{use}$ and $\text{require}$.</td>
+                        <td>**No dedicated module system**; code files are included using $\text{include}$ or $\text{require}$.</td>
+                    </tr>
+                    <tr>
+                        <td>**Regular Expressions**</td>
+                        <td>Has built-in syntax (e.g., $\text{/pattern/g}$) and dedicated operators.</td>
+                        <td>Uses a set of **Perl-Compatible Regular Expression (PCRE)** functions (e.g., $\text{preg\_match()}$) instead of built-in syntax.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Virtual Environment</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>Python virtual environments create a virtual installation of Python inside a project directory. This allows installing and managing packages separately for each project without affecting other environments.</p>
+
+      <h2>What is Virtual Environment in Python?</h2>
+      <p>A virtual environment is:</p>
+      <ul>
+        <li>Considered disposable.</li>
+        <li>Contains a specific Python interpreter, libraries, and binaries.</li>
+        <li>Usually located in a directory named <code>venv</code> or <code>.venv</code>.</li>
+        <li>Not movable or copyable.</li>
+      </ul>
+      <p>Virtual environments avoid conflicts when different projects require different versions of the same library. Each environment has its own isolated Python interpreter and modules.</p>
+
+      <h2>Creating Virtual Environments with venv</h2>
+      <p>The <code>venv</code> module is included in the standard Python distribution. Example:</p>
+      <pre>
+C:\Users\Acer>md \pythonapp
+C:\Users\Acer>cd \pythonapp
+C:\pythonapp>python -m venv myvenv
+      </pre>
+      <p>This creates a <code>myvenv</code> folder with the following structure:</p>
+      <pre>
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+      </pre>
+
+      <h2>Scripts Folder</h2>
+      <p>The <code>Scripts</code> folder contains activation utilities, pip, and a local copy of Python:</p>
+      <ul>
+        <li>activate, activate.bat, Activate.ps1</li>
+        <li>deactivate.bat</li>
+        <li>pip.exe, pip3.exe</li>
+        <li>python.exe, pythonw.exe</li>
+      </ul>
+
+      <h2>Activating Virtual Environment</h2>
+      <p>Run the activate script:</p>
+      <pre>
+C:\pythonapp>myvenv\scripts\activate
+(myvenv) C:\pythonapp>
+      </pre>
+      <p>The environment name appears in parentheses. You can now run Python within this environment.</p>
+
+      <h2>Checking Virtual Environment</h2>
+      <p>To verify, check <code>sys.path</code> inside Python:</p>
+      <pre>
+>>> import sys
+>>> sys.path
+['', 'C:\\Python310\\lib', 'C:\\pythonapp\\myvenv', 
+'C:\\pythonapp\\myvenv\\lib\\site-packages']
+      </pre>
+      <p>Installed packages are limited to this environment only.</p>
+
+      <h2>Deactivating Virtual Environment</h2>
+      <p>To exit the environment, run:</p>
+      <pre>
+(myvenv) C:\pythonapp>deactivate
+      </pre>
+    </div>
+  </div>
+</div>

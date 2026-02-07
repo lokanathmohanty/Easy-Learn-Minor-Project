@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Encapsulation and Access Specifiers</h1>
+        
+        <h2 class="title">Understanding Encapsulation</h2>
+        <div class="content">
+            <p><strong>Encapsulation</strong> is one of the core principles of Object-Oriented Programming (OOP). It is the process of **bundling data (fields) and the methods (functions) that operate on that data** into a single unit (a class).</p>
+            <p>The primary goal of encapsulation is to **prevent direct external access** to the internal implementation details of an object, thereby protecting the data from accidental corruption. It allows the programmer to enforce a desired level of **abstraction**.</p>
+        </div>
+        
+        <h2 class="title">Access Specifiers in C#</h2>
+        <div class="content">
+            <p>Encapsulation is primarily implemented using **access specifiers**, which define the **scope and visibility** of a class member (field, method, property, etc.).</p>
+            
+            <table>
+                <tr>
+                    <th>Specifier</th>
+                    <th>Visibility Scope</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>public</code></td>
+                    <td>Anywhere</td>
+                    <td>Accessible from **any code** in the same assembly or another assembly. No restriction.</td>
+                </tr>
+                <tr>
+                    <td><code>private</code></td>
+                    <td>Only within the **same class**</td>
+                    <td>The strictest level; members are hidden from derived classes and outside code. (Default for class members).</td>
+                </tr>
+                <tr>
+                    <td><code>protected</code></td>
+                    <td>Same class and **derived classes**</td>
+                    <td>Accessible within the defining class and any class that inherits from it, even in a different assembly.</td>
+                </tr>
+                <tr>
+                    <td><code>internal</code></td>
+                    <td>Only within the **same assembly**</td>
+                    <td>Accessible from any code within the current project/assembly, but hidden from other assemblies.</td>
+                </tr>
+                <tr>
+                    <td><code>protected internal</code></td>
+                    <td>Same assembly **OR** derived classes in any assembly</td>
+                    <td>Accessible by code in the same assembly **OR** by derived classes defined in other assemblies.</td>
+                </tr>
+            </table>
+        </div>
+        
+        <h2 class="title">Implementation: Private Fields and Public Properties</h2>
+        <div class="content">
+            <p>The best practice for encapsulation in C# involves making fields **`private`** and providing controlled access via **`public` properties** or methods. This hides the data while allowing logic to validate or transform the data during access.</p>
+            
+            <h3>Example: Encapsulation with Properties (Get/Set)</h3>
+            <p>The private field <code>salary</code> is protected, and the public <code>Salary</code> property ensures the value meets the minimum requirement before being assigned.</p>
+            <pre>
+class Employee {
+    private double salary;  // Private field (data is hidden)
+
+    public double Salary { // Public property (controlled access)
+        get { 
+            return salary; 
+        }
+        set {
+            if (value >= 3000) { // Validation logic
+                salary = value;
+            } else {
+                Console.WriteLine("Salary must be at least 3000.");
+            }
+        }
+    }
+}
+            </pre>
+            
+            <h3>Execution Demonstration:</h3>
+            <pre>
+Employee emp = new Employee();
+emp.Salary = 5000;  // Valid: salary is set to 5000
+emp.Salary = 2000;  // Invalid: Prints error, salary remains 5000
+Console.WriteLine("Employee Salary: " + emp.Salary); // Output: 5000
+            </pre>
+        </div>
+    </div>
+</div>

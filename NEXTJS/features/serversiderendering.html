@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Server-Side Rendering (SSR) 🖥️</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Server-Side Rendering (SSR)?</h2>
+            <p>**Server-Side Rendering (SSR)** is a performance technique in Next.js where the full **HTML page is generated on the server for *every* request**. This means that when a user requests a URL, the server:</p>
+            <ol>
+                <li>Receives the request.</li>
+                <li>Fetches all necessary dynamic data (e.g., from an API or database).</li>
+                <li>Renders the complete, data-filled HTML page.</li>
+                <li>Sends this fully formed HTML directly to the user's browser.</li>
+            </ol>
+            <p>This process results in faster initial page loads and improved visibility for **Search Engine Optimization (SEO)**, as search engine crawlers receive ready-to-use content.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Implementing SSR</h2>
+            
+            <h3 class="title">Page Router (Legacy) Implementation: `getServerSideProps`</h3>
+            <p>In the older **Page Router** system, SSR is explicitly implemented by exporting the asynchronous function **<span class="example">`getServerSideProps()`</span>** from a page file. This function runs on the server every time the page is requested.</p>
+            <pre>export async function getServerSideProps() {
+    // Data is fetched on *each* request
+    const response = await fetch('https://link/to/api');
+    const data = await response.json();
+
+    // The data is passed as props to the component
+    return { props: { data } }; 
+}</pre>
+            
+            <h3 class="title">App Router Implementation (Current)</h3>
+            <p>In the new **App Router**, a default **Server Component** performs SSR by simply using <span class="example">`await fetch(...)`</span> directly inside the component function. This achieves the same per-request fetching and rendering behavior as <span class="example">`getServerSideProps`</span>.</p>
+            <pre>export default async function SSRPage() {
+    const response = await fetch('https://link/to/api', { cache: 'no-store' }); 
+    const data = await response.json();
+    
+    return (
+        &lt;h1&gt;Server-Side Rendered Data&lt;/h1&gt;
+        // ... display data ...
+    );
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">SSR vs. Client-Side Rendering (CSR)</h2>
+            <p>The difference lies in *where* and *when* the HTML is generated and populated with data:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Server-Side Rendering (SSR)</th>
+                        <th>Client-Side Rendering (CSR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**Where HTML is Rendered**</td>
+                        <td>Server (on every request)</td>
+                        <td>Browser (after initial HTML load)</td>
+                    </tr>
+                    <tr>
+                        <td>**Initial Content Speed**</td>
+                        <td>**Very Fast** (User sees content instantly)</td>
+                        <td>**Slower** (User sees a blank/loading screen first)</td>
+                    </tr>
+                    <tr>
+                        <td>**Data Freshness**</td>
+                        <td>Always **Up-to-date** on page load</td>
+                        <td>Up-to-date after JavaScript fetches data</td>
+                    </tr>
+                    <tr>
+                        <td>**SEO Performance**</td>
+                        <td>**Excellent** (Content is fully present)</td>
+                        <td>Poor/Moderate (Crawlers may struggle with content)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>CSR requires the user's browser to download, parse, and execute the JavaScript bundle before it can fetch data and render the final UI, often showing a **loading state** (<span class="example">`Loading...`</span>) until the data is ready.</p>
+        </div>
+    </div>
+</div>

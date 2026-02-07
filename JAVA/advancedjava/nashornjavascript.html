@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Nashorn JavaScript Engine</h1>
+
+        <div class="content">
+            <h2>Introduction to Nashorn (Java 8)</h2>
+            <p><strong>Nashorn</strong> is a high-performance **JavaScript engine** that was introduced in **Java 8** to replace the older Rhino engine. It is significantly faster (2 to 10 times) than its predecessor due to its ability to directly compile JavaScript code into **Java bytecode** in memory and by leveraging the dynamic features introduced in Java 7.</p>
+            <p>The Nashorn engine facilitates seamless interoperability between Java and JavaScript, allowing developers to:</p>
+            <ul>
+                <li>Execute standalone JavaScript files and snippets using command-line tools.</li>
+                <li>Embed JavaScript logic within Java applications.</li>
+                <li>Call Java methods and use Java objects directly from JavaScript code, and vice versa.</li>
+            </ul>
+
+            <hr>
+
+            <h2>Executing JavaScript via Command Line: <code>jjs</code></h2>
+            <p>Java 8 introduced the **<code>jjs</code>** command-line tool specifically for the Nashorn engine. <code>jjs</code> is a versatile tool used to interpret and execute JavaScript code.</p>
+
+            <h3>Interactive Session</h3>
+            <p>By typing <code>jjs</code> and pressing Enter, users can enter an interactive session to execute JavaScript code snippets directly. The session is closed by typing <code>quit()</code>.</p>
+
+            <h3>Executing a File</h3>
+            <p>The <code>jjs</code> tool can execute a JavaScript file directly, interpreting all statements and functions within it.</p>
+            <p class="example"><strong>Command:</strong> <code>jjs sample.js</code></p>
+
+            <h3>Passing Arguments</h3>
+            <p>Arguments passed to the <code>jjs</code> command after <code>--</code> are stored in a special JavaScript construct called **<code>arguments</code>** and can be accessed within the script.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Interoperability: Java and JavaScript</h2>
+
+            <h3>Calling JavaScript from Java</h3>
+            <p>The Java API for executing script code remains the same as its predecessor, utilizing the **Scripting API** (<code>javax.script</code> package):</p>
+            <ul>
+                <li>The **<code>ScriptEngineManager</code>** is used to locate and load the Nashorn engine instance using the name <code>"nashorn"</code>.</li>
+                <li>The loaded **<code>ScriptEngine</code>**'s **<code>eval(String script)</code>** method executes the JavaScript code snippet.</li>
+                <li>Java variables can be passed into the JavaScript code, and results from JavaScript expressions can be cast back to Java types.</li>
+            </ul>
+
+            <h3>Calling Java from JavaScript</h3>
+            <p>Within a Nashorn environment (like <code>jjs</code> or embedded code), Java classes can be accessed and utilized just like native JavaScript objects:</p>
+            <ul>
+                <li>The **<code>Java.type('fully.qualified.ClassName')</code>** function is used to load a specific Java class (e.g., <code>java.math.BigDecimal</code>).</li>
+                <li>Once loaded, the JavaScript code can instantiate the Java class (<code>new BigDecimal(...)</code>) and call its static and instance methods.</li>
+                <li>This capability allows complex or specialized Java library functions to be easily integrated into JavaScript logic.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Calling Java from JavaScript</h2>
+            <div class="content">
+                <p>Using the <code>Java.type</code> function to import and use the <code>java.math.BigDecimal</code> class to perform precise arithmetic:</p>
+                <pre><code>// In sample.js
+// Load the specific Java class
+var BigDecimal = Java.type('java.math.BigDecimal');
+
+function calculate(amount, percentage) {
+   // Use BigDecimal methods (multiply, divide, etc.)
+   var result = new BigDecimal(amount)
+      .multiply(new BigDecimal(percentage))
+      .divide(new BigDecimal("100"), 2, BigDecimal.ROUND_HALF_EVEN);
+   
+   return result.toPlainString();
+}
+
+var result = calculate(568000000000000000023, 13.9);
+print(result);</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

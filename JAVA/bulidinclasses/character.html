@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Character Class</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Wrapper Classes and Characters</h1>
+            <h2 class="subtitle">Session: The Character Class</h2>
+        </header>
+
+        <section class="content introduction">
+            <h2 class="subtitle">The Java Character Class</h2>
+            <p>The **<code>java.lang.Character</code>** class is the wrapper class for the primitive data type **<code>char</code>**. Like other wrapper classes, it enables a primitive character to be treated as an **object**, which is necessary for working with Java Collections and utility methods.</p>
+            <p>The class is declared as **<code>public final class Character</code>** and implements `Serializable` and `Comparable<Character>`. It provides a comprehensive set of **static methods** for character manipulation, classification, and Unicode handling.</p>
+        </section>
+
+        <hr>
+
+        <section class="content character-utility">
+            <h2 class="subtitle">Core Utility Methods</h2>
+            <p>The most commonly used features of the `Character` class are its static methods for checking and manipulating characters. These methods are crucial for input validation, parsing, and text processing.</p>
+            <h3>Classification Methods:</h3>
+            <ul>
+                <li><code>**static boolean isLetter(char ch)**</code>: Checks if a character is a letter.</li>
+                <li><code>**static boolean isDigit(char ch)**</code>: Checks if a character is a digit ('0' through '9').</li>
+                <li><code>**static boolean isLetterOrDigit(char ch)**</code>: Checks if the character is a letter or a digit.</li>
+                <li><code>**static boolean isUpperCase(char ch)**</code> / <code>**isLowerCase(char ch)**</code>: Checks the case of the character.</li>
+                <li><code>**static boolean isWhitespace(char ch)**</code>: Checks if the character is Java whitespace (includes space, tab, newline, etc.).</li>
+            </ul>
+            <h3>Conversion Methods:</h3>
+            <ul>
+                <li><code>**static char toUpperCase(char ch)**</code>: Converts the character to uppercase.</li>
+                <li><code>**static char toLowerCase(char ch)**</code>: Converts the character to lowercase.</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section class="content unicode-handling">
+            <h2 class="subtitle">Unicode and Escape Sequences</h2>
+
+            <h3>Unicode Support</h3>
+            <p>The `Character` class provides extensive support for **Unicode**, including handling supplementary characters (those requiring more than 16 bits) using **surrogate pairs** (a high surrogate followed by a low surrogate).</p>
+            <ul>
+                <li>**Code Point Methods:** Methods like <code>codePointAt()</code> and <code>charCount()</code> help manage characters that may be represented by two `char` values. The constant fields like <code>MAX_CODE_POINT</code> and <code>MIN_HIGH_SURROGATE</code> define the boundaries for Unicode characters and UTF-16 encoding.</li>
+            </ul>
+
+            <h3>Escape Sequences</h3>
+            <p>Escape sequences are characters preceded by a **backslash (`\`)** that have special meaning to the compiler, allowing control characters or reserved symbols to be embedded in strings and character literals.</p>
+            <table class="example">
+                <thead>
+                    <tr>
+                        <th>Sequence</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>\n</code></td><td>Newline (Line Feed)</td></tr>
+                    <tr><td><code>\t</code></td><td>Tab</td></tr>
+                    <tr><td><code>\"</code></td><td>Double quote</td></tr>
+                    <tr><td><code>\\</code></td><td>Backslash</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+</body>
+</html>

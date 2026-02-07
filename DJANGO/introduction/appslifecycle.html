@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django Application Life Cycle: Creation and Registration 📦</h1>
+        <div class="content">
+            <p>In Django, a **project** is a collection of one or more independent **applications** (or "apps"). An application is a self-contained module with a specific objective (e.g., a contact form, a blog) that can be easily reused in different projects.</p>
+
+            <h2>Creating an Application</h2>
+            <p>An application is created within the main project directory (the folder containing <code>manage.py</code>) using the <code>manage.py</code> utility:</p>
+            <pre><code>$ python manage.py startapp myapp</code></pre>
+            <p>This command creates a new folder named <code>myapp</code> with the following default application structure:</p>
+            <pre><code>myapp/
+   __init__.py
+   admin.py
+   models.py
+   tests.py
+   views.py</code></pre>
+
+            <hr>
+
+            <h2>Application Structure</h2>
+            <p>Each file in the application folder serves a specific purpose tied to the MVT pattern:</p>
+            <ul>
+                <li>**<code>__init__.py</code>:** A standard Python file that marks the directory as a Python package.</li>
+                <li>**<code>models.py</code>:** This is the **Model** component of the MVT pattern. It defines the application's data structure and handles interaction with the database via Django's ORM.</li>
+                <li>**<code>views.py</code>:** This is the **View** component. It contains the business logic, handles HTTP requests, interacts with the models, and prepares the data to be sent to a template.</li>
+                <li>**<code>admin.py</code>:** Used to register your models with the Django administration site, allowing you to easily view, create, update, and delete application data.</li>
+                <li>**<code>tests.py</code>:** Reserved for defining unit tests to ensure the application's functionality works correctly.</li>
+            </ul>
+
+            <hr>
+
+            <h2>Registering the Application</h2>
+            <p>After creating the application, the Django project must be informed that the application exists and should be loaded. This is done by adding the application's name to the **<code>INSTALLED_APPS</code>** setting in the project's **<code>settings.py</code>** file:</p>
+            <pre><code>INSTALLED_APPS = (
+   'django.contrib.admin',
+   # ... (other default apps)
+   'django.contrib.staticfiles',
+   'myapp',  &lt;-- Your new application
+)</code></pre>
+            <p>Once registered, the Django framework includes the application in the overall project environment.</p>
+        </div>
+    </div>
+</div>

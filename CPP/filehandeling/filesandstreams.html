@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Files and Streams (FStream Library) 📂✍️</h1>
+
+        <div class="content">
+            <p>C++ uses the **<code>&lt;fstream&gt;</code>** standard library to handle file input/output operations. This library defines stream classes that link a program to physical files on disk, allowing information to be read from or written to them.</p>
+
+            <h3>Core File Stream Data Types</h3>
+            <p>These classes manage the connection between your program and the file:</p>
+            <ul>
+                <li>**<code>ofstream</code>**: **Output file stream** (used for **writing** to a file).</li>
+                <li>**<code>ifstream</code>**: **Input file stream** (used for **reading** from a file).</li>
+                <li>**<code>fstream</code>**: General **file stream** (capabilities for both **reading and writing**).</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">File Operations: Opening and Closing</h2>
+
+        <div class="content">
+            <h3>Opening a File (<code>open()</code>)</h3>
+            <p>Before any I/O operation, a file object must be linked to a file using the <code>open()</code> member function, which specifies the file name and the operating mode:</p>
+            <pre class="example">
+void open(const char *filename, ios::openmode mode);
+</pre>
+            <h4>Common Mode Flags (using <code>ios::openmode</code>)</h4>
+            <table>
+                <thead>
+                    <tr><th>Mode Flag</th><th>Description</th><th>Usage Example</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>**<code>ios::out</code>**</td><td>Open for writing.</td><td><code>ofstream file; file.open("data.txt", ios::out);</code></td></tr>
+                    <tr><td>**<code>ios::in</code>**</td><td>Open for reading.</td><td><code>ifstream file; file.open("data.txt", ios::in);</code></td></tr>
+                    <tr><td>**<code>ios::app</code>**</td><td>Append mode. Output is added to the end.</td><td><code>ios::out | ios::app</code></td></tr>
+                    <tr><td>**<code>ios::trunc</code>**</td><td>Truncate file content (erase everything) if it exists.</td><td>Used with <code>ios::out</code> by default.</td></tr>
+                    <tr><td>**Combine Modes**</td><td>Use the bitwise OR operator (<code>|</code>).</td><td><code>fstream file.open("rw.dat", ios::out | ios::in);</code></td></tr>
+                </tbody>
+            </table>
+
+            <h3>Closing a File (<code>close()</code>)</h3>
+            <p>It's best practice to explicitly close the file stream when done, releasing system resources:</p>
+            <pre class="example">
+outfile.close();
+infile.close();
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Reading and Writing Data</h2>
+
+        <div class="content">
+            <p>I/O operations on file streams mirror standard I/O (<code>cin</code> and <code>cout</code>) but use the stream object instead.</p>
+
+            <ul>
+                <li>
+                    **Writing to a File:** Use the **stream insertion operator** (<code>&lt;&lt;</code>) with an <code>ofstream</code> or <code>fstream</code> object.
+                    <pre class="example">
+outfile &lt;&lt; data &lt;&lt; endl; // Writes 'data' to the file
+</pre>
+                </li>
+                <li>
+                    **Reading from a File:** Use the **stream extraction operator** (<code>&gt;&gt;</code>) with an <code>ifstream</code> or <code>fstream</code> object.
+                    <pre class="example">
+infile &gt;&gt; data; // Reads data from the file into the variable
+</pre>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">File Position Pointers</h2>
+
+        <div class="content">
+            <p>File streams maintain internal pointers to track the current position for reading and writing. These can be manually repositioned:</p>
+            <ul>
+                <li>**<code>seekg()</code>**: Sets the position of the **get** (read) pointer (for <code>istream</code>/<code>ifstream</code>).</li>
+                <li>**<code>seekp()</code>**: Sets the position of the **put** (write) pointer (for <code>ostream</code>/<code>ofstream</code>).</li>
+            </ul>
+            <p>These functions take an offset (long integer) and an optional direction constant:</p>
+            <pre class="example">
+// Position the read pointer 10 bytes from the start (ios::beg)
+fileObject.seekg( 10 ); 
+
+// Position the write pointer 5 bytes back from the current position
+fileObject.seekp( -5, ios::cur ); 
+
+// Position the read pointer at the very end of the file
+fileObject.seekg( 0, ios::end );
+</pre>
+        </div>
+    </div>
+</div>

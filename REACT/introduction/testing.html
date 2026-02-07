@@ -1,0 +1,95 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Testing</h1>
+      </div>
+
+      
+
+         <p>Testing ensures that the functionality in a React application works according to business logic and coding specifications. React recommends using the <strong>React Testing Library</strong> for testing components and <strong>Jest</strong> as the test runner. React Testing Library allows testing components in isolation.</p>
+
+         <h2>Installing Testing Libraries</h2>
+         <pre><code>npm install --save @testing-library/react @testing-library/jest-dom</code></pre>
+
+         <h2>Create React App</h2>
+         <p><em>Create React App</em> comes with React Testing Library and Jest pre-configured. Running tests is as simple as:</p>
+         <pre><code>cd /go/to/react/application
+npm test</code></pre>
+
+         <p>Once executed, Jest runs in watch mode and provides usage options:</p>
+         <pre><code>No tests found related to files changed since last commit.
+Press `a` to run all tests, or run Jest with `--watchAll`.
+
+Watch Usage
+   Press a to run all tests.
+   Press f to run only failed tests.
+   Press q to quit watch mode.
+   Press p to filter by a filename regex pattern.
+   Press t to filter by a test name regex pattern.
+   Press Enter to trigger a test run.
+</code></pre>
+
+         <p>Sample test results:</p>
+         <pre><code>Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        4.312 s, estimated 12 s
+Ran all test suites.</code></pre>
+
+         <h2>Testing in a Custom Application</h2>
+         <p>Let’s create a custom React application using Rollup bundler and test it with React Testing Library and Jest.</p>
+
+         <h3>1. Setup Project</h3>
+         <pre><code>cd /go/to/react-test-app
+npm install --save @testing-library/react @testing-library/jest-dom</code></pre>
+
+         <h3>2. Create Test File</h3>
+         <p>Create <code>HelloWorld.test.js</code> under <code>src/components</code> folder.</p>
+
+         <h3>3. Import Dependencies</h3>
+         <pre><code>import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import HelloWorld from './HelloWorld';</code></pre>
+
+         <h3>4. Write a Test</h3>
+         <pre><code>test('test scenario 1', () => {
+   render(&lt;HelloWorld /&gt;);
+   const element = screen.getByText(/Hello World/i);
+   expect(element).toBeInTheDocument();
+});</code></pre>
+
+         <h3>5. Complete Test File</h3>
+         <pre><code>import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import HelloWorld from './HelloWorld';
+
+test('test scenario 1', () => {
+   render(&lt;HelloWorld /&gt;);
+   const element = screen.getByText(/Hello World/i);
+   expect(element).toBeInTheDocument();
+});</code></pre>
+
+         <h3>6. Install Jest (if not already)</h3>
+         <pre><code>npm install jest -g</code></pre>
+
+         <h3>7. Run Tests</h3>
+         <pre><code>jest</code></pre>
+
+         <p>Expected output:</p>
+         <pre><code>PASS  src/components/HelloWorld.test.js
+   test scenario 1 (29 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        5.148 s
+Ran all test suites.</code></pre>
+
+         <div class="navigation">
+            <a href="#">Previous</a> | <a href="#">Quiz</a> | <a href="#">Next</a>
+         </div>
+      </div>
+   </div>
+</div>

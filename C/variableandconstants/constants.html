@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Constants in C</h1>
+    <div class="content">
+      <p>A constant in C is a named storage location whose value cannot be modified after initialization, unlike a variable which can change during program execution.</p>
+      <p>Constants are useful to represent fixed values that are used repeatedly and should not change, such as mathematical constants like PI.</p>
+      
+      <h2 class="title">Ways to Define Constants</h2>
+      <p>You can define constants in C by:</p>
+      <ul>
+        <li>Using the <code>const</code> keyword</li>
+        <li>Using the <code>#define</code> preprocessor directive</li>
+      </ul>
+      
+      <h2 class="title">Using the <code>const</code> Keyword</h2>
+      <p>To declare a constant variable, prefix the declaration with <code>const</code>. The variable is initialized at declaration and any modification afterward is prohibited.</p>
+      
+      <pre class="code-block">
+&lt;code&gt;
+const float PI = 3.14159265;
+
+int main() {
+    float radius = 5;
+    float area = PI * radius * radius;
+    printf("Area: %f\n", area);
+    // PI = 3.14; // Error: cannot modify const variable
+    return 0;
+}
+&lt;/code&gt;
+      </pre>
+      
+      <h2 class="title">Using the <code>#define</code> Directive</h2>
+      <p>The <code>#define</code> directive creates symbolic constants handled by the preprocessor at compile time, without requiring a specific data type.</p>
+      
+      <pre class="code-block">
+&lt;code&gt;
+#define LENGTH 10
+#define WIDTH 5
+#define NEWLINE '\n'
+
+int main() {
+    int area = LENGTH * WIDTH;
+    printf("Length: %d Width: %d%cArea: %d\n", LENGTH, WIDTH, NEWLINE, area);
+    return 0;
+}
+&lt;/code&gt;
+      </pre>
+      
+      <h2 class="title">Notes and Considerations</h2>
+      <ul>
+        <li>Constants declared with <code>const</code> are type-safe and checked by the compiler, whereas <code>#define</code> constants are simple text replacements.</li>
+        <li>Attempting to modify a <code>const</code> variable results in a compile-time error.</li>
+        <li>Constants are usually named in uppercase by convention for clarity, though this is not mandatory.</li>
+        <li>Using pointers, it is possible (though unsafe and not recommended) to modify <code>const</code> variables, but not those defined by <code>#define</code>.</li>
+      </ul>
+    </div>
+  </div>
+</div>

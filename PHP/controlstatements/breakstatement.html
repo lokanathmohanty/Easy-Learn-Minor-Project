@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `break` Statement</h1>
+
+    <div class="content">
+      <p>
+        The **`break`** statement is a **loop control statement** that provides a way to **immediately terminate** the execution of the current `for`, `foreach`, `while`, or `do...while` loop (or `switch` statement). When `break` is executed, program flow is abandoned for the remaining iterations and control passes to the statement immediately following the loop construct.
+      </p>
+
+      <h2>Basic Usage and Flow</h2>
+      <p>
+        The `break` statement is almost always used conditionally (e.g., inside an `if` block) to exit a loop early when a specific condition is met, preventing the loop from running its intended full course.
+      </p>
+      <div class="example">
+        <code>
+          while (true) {<br>
+          &nbsp;&nbsp;&nbsp;if (condition_is_met) {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**break;** // Exit the loop immediately<br>
+          &nbsp;&nbsp;&nbsp;}<br>
+          &nbsp;&nbsp;&nbsp;// remaining loop code<br>
+          }
+        </code>
+      </div>
+
+      <h3>Example: Early Termination in a `do...while` Loop</h3>
+      <p>
+        The loop below is intended to run until `$num` is greater than 5, but the `break` statement forces it to exit when `$num` reaches 3.
+      </p>
+      <div class="example">
+        <p>
+          <code>$num = 1;</code><br>
+          <code>do { echo "Value: $num \n"; if ($num == 3){ **break;** } $num++; } while ($num &lt;= 5);</code>
+        </p>
+        <p class="content">Output: Value: 1 \n Value: 2 \n Value: 3</p>
+      </div>
+
+      <hr>
+
+      <h2>Breaking Out of Nested Loops (Numeric Argument)</h2>
+      <p>
+        By default, `break` only terminates the **immediate** enclosing loop (level 1). You can use an optional numeric argument to specify how many nested enclosing structures to break out of.
+      </p>
+      <div class="example">
+        <code>break [level];</code>
+      </div>
+      <ul>
+        <li>
+          **`break 1;`**: Breaks out of the immediate loop (default behavior).
+        </li>
+        <li>
+          **`break 2;`**: Breaks out of the current loop AND the loop one level outside of it.
+        </li>
+      </ul>
+
+      <h3>Example: Using `break 2`</h3>
+      <p>
+        In three nested loops (`for > while > do-while`), executing `break 2` inside the innermost `do-while` loop exits the `do-while` **and** the enclosing `while` loop, transferring control directly to the outer `for` loop.
+      </p>
+    </div>
+  </div>
+</div>

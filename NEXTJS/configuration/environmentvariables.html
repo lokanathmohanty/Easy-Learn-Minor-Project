@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Environment Variables 🔒</h1>
+        
+        <div class="content">
+            <h2 class="title">What are Environment Variables?</h2>
+            <p>**Environment variables** are key-value pairs used to store configuration data, such as **API keys**, **database connection strings**, and other secrets, outside of your source code. Next.js has built-in support for automatically loading these variables from **<span class="example">`.env`</span>** files into the standard Node.js **<span class="example">`process.env`</span>** object.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Loading and Priority of .env Files</h2>
+            <p>Next.js loads variables from specific files in your project root, with a defined priority (highest to lowest):</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Purpose</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`.env.local`</span></td>
+                        <td>Local, sensitive secrets. **NEVER commit to git** (add to <span class="example">`.gitignore`</span>).</td>
+                        <td>Highest (Overrides all others)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`.env.development`</span></td>
+                        <td>Variables specific to the development environment.</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`.env.production`</span></td>
+                        <td>Variables specific to the production environment.</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`.env`</span></td>
+                        <td>Common project environment variables.</td>
+                        <td>Lowest</td>
+                    </tr>
+                </tbody>
+            </table>
+            <pre>// Example file: /.env
+API_KEY=djcjcwj-wcdkjcnw</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Accessing Environment Variables</h2>
+            
+            <h3 class="title">1. Server-Side Access (Default)</h3>
+            <p>All variables loaded from <span class="example">`.env`</span> files are available in the **server environment** (e.g., API Routes, Middleware, Server Components). This is the intended use for sensitive information.</p>
+            <pre>// Accessing API_KEY in server-side logic (e.g., Middleware)
+const secretKey = process.env.API_KEY;
+
+if (clientKey !== secretKey) {
+  return res.status(401).json({ message: 'Unauthorized' });
+}</pre>
+            
+            <h3 class="title">2. Client-Side Access (Publicly Exposed)</h3>
+            <p>For **security reasons**, environment variables are **not exposed** to the client (browser) by default. To expose a variable to the client side for general-purpose, non-sensitive data (like an analytics ID), you must prefix it with **<span class="example">`NEXT_PUBLIC_`</span>**.</p>
+            
+            <pre>// File: /.env.local
+API_KEY=SECRET_SERVER_ONLY_KEY
+NEXT_PUBLIC_ANALYTICS_ID=123 &larr; PUBLICLY EXPOSED</pre>
+            <pre>// Client Component (e.g., page.tsx)
+"use client"
+export default function Home() {
+    return (
+        &lt;div&gt;
+            &lt;p&gt;API Key: {process.env.API_KEY}&lt;/p&gt; &lt;!-- WILL BE UNDEFINED --&gt;
+            &lt;p&gt;Analytics ID: {process.env.NEXT_PUBLIC_ANALYTICS_ID}&lt;/p&gt; &lt;!-- WILL BE 123 --&gt;
+        &lt;/div&gt;
+    );
+}</pre>
+        </div>
+    </div>
+</div>

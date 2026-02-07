@@ -1,0 +1,291 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Table Colgroup</h1>
+    <div class="content">
+      <h2>HTML Table Colgroup</h2>
+      <p>In HTML, the &lt;colgroup&gt; element is used to define a group of columns in a table. It allows you to apply properties to multiple columns simultaneously, providing a more efficient way to style or format columns.</p>
+
+      <h2>The &lt;colgroup&gt; Tag</h2>
+      <p>The &lt;colgroup&gt; is often used in conjunction with the &lt;col&gt; element, where each &lt;col&gt; tag represents an individual column within the group. This grouping enhances readability and simplifies the application of styles or attributes to specific columns in a table.</p>
+
+      <h3>Syntax</h3>
+      <pre>
+&lt;table&gt;
+  &lt;colgroup&gt;
+    &lt;col span="value" style="width: ...;"&gt;
+    &lt;col style="..."&gt;
+    &lt;!-- More &lt;col&gt; elements... --&gt;
+  &lt;/colgroup&gt;
+  &lt;!-- Other table elements such as &lt;thead&gt;, &lt;tbody&gt;, ... --&gt;
+&lt;/table&gt;
+      </pre>
+
+      <h2>Using &lt;colgroup&gt; Tag in HTML Table</h2>
+      <p>Using &lt;colgroup&gt; in HTML involves the following steps −</p>
+      <ol>
+        <li><strong>Insert &lt;colgroup&gt; Tag</strong><br>
+        Place the &lt;colgroup&gt; tag within the &lt;table&gt; element, usually inside the &lt;thead&gt; (table head) or &lt;tbody&gt; (table body) section.</li>
+      </ol>
+
+      <pre>
+&lt;table&gt;
+  &lt;colgroup&gt;
+    &lt;!-- Column definitions --&gt;
+  &lt;/colgroup&gt;
+  &lt;thead&gt;
+    &lt;!-- Table headers --&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;!-- Table rows --&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+      </pre>
+
+      <ol start="2">
+        <li><strong>Define Columns</strong><br>
+        Inside the &lt;colgroup&gt; tag, use one or more &lt;col&gt; tags to represent each column. Specify attributes or styles for the columns within these &lt;col&gt; tags.</li>
+      </ol>
+
+      <pre>
+&lt;table&gt;
+  &lt;colgroup&gt;
+    &lt;col&gt;
+    &lt;col&gt;
+    &lt;col&gt;
+  &lt;/colgroup&gt;
+  &lt;!-- Table content --&gt;
+&lt;/table&gt;
+      </pre>
+
+      <ol start="3">
+        <li><strong>Apply Attributes or Styles</strong><br>
+        Define attributes or styles for the columns by adding attributes such as <code>span</code>, <code>width</code>, <code>style</code>, or <code>class</code> to the &lt;col&gt; tags.</li>
+      </ol>
+
+      <pre>
+&lt;table&gt;
+  &lt;colgroup&gt;
+    &lt;col style="background-color: lightgrey;" span="2"&gt; &lt;!-- First two columns --&gt;
+    &lt;col style="background-color: lightblue;"&gt; &lt;!-- Third column --&gt;
+  &lt;/colgroup&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Column 1&lt;/th&gt;
+      &lt;th&gt;Column 2&lt;/th&gt;
+      &lt;th&gt;Column 3&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Data 1&lt;/td&gt;
+      &lt;td&gt;Data 2&lt;/td&gt;
+      &lt;td&gt;Data 3&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+      </pre>
+
+      <h2>Example of HTML Table Colgroup</h2>
+      <p>In this example, the &lt;colgroup&gt; tag defines two columns with different widths, and the styles are applied to the columns using the &lt;col&gt; tags. The second row in the table is highlighted using a CSS class.</p>
+
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;table border=1&gt;
+      &lt;colgroup&gt;
+         &lt;col style="width: 30%;"&gt;
+         &lt;col style="width: 70%;"&gt;
+      &lt;/colgroup&gt;
+      &lt;thead&gt;
+         &lt;tr&gt;
+            &lt;th&gt;Column 1&lt;/th&gt;
+            &lt;th&gt;Column 2&lt;/th&gt;
+         &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+         &lt;tr&gt;
+            &lt;td&gt;Row 1, Col 1&lt;/td&gt;
+            &lt;td&gt;Row 1, Col 2&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr class="highlight"&gt;
+            &lt;td&gt;Row 2, Col 1&lt;/td&gt;
+            &lt;td&gt;Row 2, Col 2&lt;/td&gt;
+         &lt;/tr&gt;
+      &lt;/tbody&gt;
+   &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>CSS Properties for &lt;colgroup&gt; Tag</h2>
+      <p>In HTML, the &lt;colgroup&gt; element allows some specific CSS properties to enhance the presentation of table columns. The legal CSS properties that can be used within a &lt;colgroup&gt; are as follows −</p>
+      <ul>
+        <li><strong>width Property</strong> − This property sets the width of the columns within the &lt;colgroup&gt;. It allows you to define the relative or absolute width of each column.</li>
+        <li><strong>visibility Property</strong> − The visibility property can be used to control the visibility of columns within the &lt;colgroup&gt;. You can set it to "hidden" to make a column invisible.</li>
+        <li><strong>Background Properties</strong> − Background properties, such as background-color, can be applied to add background styling to the columns. This can enhance the visual appeal of the table.</li>
+        <li><strong>Border Properties</strong> − Border properties, like border-color and border-width, enable the customization of borders around the columns. This is useful for creating well-defined visual boundaries.</li>
+      </ul>
+      <p>Attempting to apply other CSS properties will have no impact on the styling of the table columns. Therefore, when styling tables with &lt;colgroup&gt;, focus on the available properties to achieve the desired layout and appearance.</p>
+
+      <h3>Example</h3>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+   &lt;meta charset="UTF-8"&gt;
+   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+   &lt;style&gt;
+      table {
+         width: 100%;
+         border-collapse: collapse;
+      }
+      colgroup {
+         width: 20%;
+         background-color: #f0f0f0;
+         visibility: visible;
+         border: 2px solid #3498db;
+      }
+      col {
+         background-color: #ecf0f1;
+         border: 1px solid #bdc3c7;
+      }
+      td, th {
+         border: 1px solid #dddddd;
+         text-align: left;
+         padding: 8px;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;table&gt;
+      &lt;colgroup&gt;
+         &lt;col&gt;
+         &lt;col style="width: 30%;"&gt;
+         &lt;col&gt;
+      &lt;/colgroup&gt;
+      &lt;thead&gt;
+         &lt;tr&gt;
+            &lt;th&gt;Header 1&lt;/th&gt;
+            &lt;th&gt;Header 2&lt;/th&gt;
+            &lt;th&gt;Header 3&lt;/th&gt;
+         &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+         &lt;tr&gt;
+            &lt;td&gt;Data 1&lt;/td&gt;
+            &lt;td&gt;Data 2&lt;/td&gt;
+            &lt;td&gt;Data 3&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+            &lt;td&gt;Data 4&lt;/td&gt;
+            &lt;td&gt;Data 5&lt;/td&gt;
+            &lt;td&gt;Data 6&lt;/td&gt;
+         &lt;/tr&gt;
+      &lt;/tbody&gt;
+   &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>Multiple Col Elements</h2>
+      <p>Certainly! The &lt;colgroup&gt; element in HTML allows you to group a set of columns in a table and apply styles to them collectively. Within &lt;colgroup&gt;, you can use multiple &lt;col&gt; elements to define different styles for individual columns.</p>
+
+      <h3>Example</h3>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+   &lt;meta charset="UTF-8"&gt;
+   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+   &lt;style&gt;
+      col {
+         background-color: #ecf0f1;
+         border: 1px solid #bdc3c7;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;table border=5&gt;
+      &lt;colgroup&gt;
+         &lt;col style="width: 20%;"&gt;
+         &lt;col style="width: 30%;"&gt;
+         &lt;col style="width: 50%;"&gt;
+      &lt;/colgroup&gt;
+      &lt;thead&gt;
+         &lt;tr&gt;
+            &lt;th&gt;Header 1&lt;/th&gt;
+            &lt;th&gt;Header 2&lt;/th&gt;
+            &lt;th&gt;Header 3&lt;/th&gt;
+         &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+         &lt;tr&gt;
+            &lt;td&gt;Data 1&lt;/td&gt;
+            &lt;td&gt;Data 2&lt;/td&gt;
+            &lt;td&gt;Data 3&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+            &lt;td&gt;Data 4&lt;/td&gt;
+            &lt;td&gt;Data 5&lt;/td&gt;
+            &lt;td&gt;Data 6&lt;/td&gt;
+         &lt;/tr&gt;
+      &lt;/tbody&gt;
+   &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p>The &lt;colgroup&gt; contains three &lt;col&gt; elements, each with a specific 'width' style, defining the width of individual columns.</p>
+
+      <h2>Empty Column groups</h2>
+      <p>In HTML, a &lt;colgroup&gt; element can be used to define a group of columns in a table. An empty &lt;colgroup&gt; can be employed to provide a structural placeholder for potential styling or later use. While it doesn't contain explicit &lt;col&gt; elements, it can still influence the overall structure of the table.</p>
+
+      <h3>Example</h3>
+      <p>Here's a simple example demonstrating the use of an empty &lt;colgroup&gt;. In here, the &lt;colgroup&gt; is empty but serves as a placeholder for potential styling. The entire &lt;colgroup&gt; is styled with a background color and a border. The &lt;col&gt; elements are not explicitly used, but their styling can be defined within &lt;colgroup&gt; for future use or consistency in the structure.</p>
+
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+   &lt;meta charset="UTF-8"&gt;
+   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+   &lt;style&gt;
+      colgroup {
+         background-color: #f0f0f0;
+         border: 2px solid #3498db;
+      }
+      col {
+         background-color: #ecf0f1;
+         border: 1px solid #bdc3c7;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;table border=3&gt;
+      &lt;colgroup&gt;&lt;/colgroup&gt;
+      &lt;thead&gt;
+         &lt;tr&gt;
+            &lt;th&gt;Header 1&lt;/th&gt;
+            &lt;th&gt;Header 2&lt;/th&gt;
+            &lt;th&gt;Header 3&lt;/th&gt;
+         &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+         &lt;tr&gt;
+            &lt;td&gt;Data 1&lt;/td&gt;
+            &lt;td&gt;Data 2&lt;/td&gt;
+            &lt;td&gt;Data 3&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;tr&gt;
+            &lt;td&gt;Data 4&lt;/td&gt;
+            &lt;td&gt;Data 5&lt;/td&gt;
+            &lt;td&gt;Data 6&lt;/td&gt;
+         &lt;/tr&gt;
+      &lt;/tbody&gt;
+   &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+</div>

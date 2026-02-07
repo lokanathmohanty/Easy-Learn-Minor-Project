@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Overriding</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Inheritance and Polymorphism</h1>
+            <h2 class="subtitle">Session: Method Overriding</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is Method Overriding?</h2>
+                <p>**Method Overriding** is the ability for a **subclass** to provide a specific implementation for a method that is already defined in its **superclass**. It is a fundamental technique for achieving **run-time polymorphism**.</p>
+                <p>The primary benefit of overriding is to allow a subclass to define a behavior that is specific to its own type, implementing the parent class method based on its unique requirements.</p>
+            </div>
+
+            <div class="content method-signature">
+                <h2 class="subtitle">The Overriding Rule: Same Signature</h2>
+                <p>For a method to correctly override a superclass method, the declaration signature in the subclass must be the same as the superclass method, including:</p>
+                <ul>
+                    <li>**Method Name** must be identical.</li>
+                    <li>**Parameter List** must be identical (same number, type, and order).</li>
+                    <li>**Return Type** must be the same or a compatible subtype (covariant return types).</li>
+                </ul>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Overriding <code>move()</code></h2>
+                <p>The <code>Dog</code> class overrides the <code>move()</code> method inherited from <code>Animal</code> to provide dog-specific movement.</p>
+                <pre><code>class Animal {
+   public void move() {
+      System.out.println("Animals can move");
+   }
+}
+
+class Dog extends Animal {
+   public void move() { // Overriding the method
+      System.out.println("Dogs can walk and run");
+   }
+}
+
+public class TestDog {
+   public static void main(String args[]) {
+      Animal b = new Dog(); // Polymorphism: Parent reference, Child object
+      b.move(); // **Runs the Dog's move() method at runtime**
+   }
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>Dogs can walk and run</code></pre>
+            </div>
+
+            <div class="content rules">
+                <h2 class="subtitle">Key Rules for Overriding</h2>
+                <ul>
+                    <li>**Access Level:** The access level cannot be **more restrictive** than the overridden method (e.g., a `public` parent method cannot be overridden as `private`).</li>
+                    <li>**<code>final</code> Methods:** A method declared `final` **cannot** be overridden.</li>
+                    <li>**<code>static</code> Methods:** A method declared `static` **cannot** be overridden (it can be re-declared, which is called method hiding).</li>
+                    <li>**Constructors:** Constructors **cannot** be overridden as they do not have the same name in the inheritance chain.</li>
+                    <li>**Exceptions:** The overriding method can throw narrower or fewer checked exceptions, but cannot throw new or broader checked exceptions.</li>
+                </ul>
+            </div>
+
+            <div class="content super-keyword">
+                <h2 class="subtitle">Using <code>super</code> to Call the Parent Method</h2>
+                <p>The **<code>super</code>** keyword is used within the overriding subclass method to explicitly invoke the version of the method defined in the superclass, allowing the subclass to extend, rather than completely replace, the parent's logic.</p>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Using <code>super.move()</code></h2>
+                <pre><code>class Dog extends Animal {
+   public void move() {
+      super.move(); // Calls the Animal's move() method first
+      System.out.println("Dogs can walk and run");
+   }
+}</code></pre>
+                <p>Output using the above code:</p>
+                <pre><code>Animals can move
+Dogs can walk and run</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

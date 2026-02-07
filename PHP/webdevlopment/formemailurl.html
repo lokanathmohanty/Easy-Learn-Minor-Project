@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Form Email/URL Validation</h1>
+        <div class="content">
+            <p>Validating that user input adheres to the strict format of an email address or a URL is a crucial part of server-side form handling. PHP provides two primary methods for this: using **Regular Expressions (Regex)** or the dedicated **<code>filter_var()</code>** function.</p>
+            
+            <h2 class="title">Validation with <code>filter_var()</code> (Recommended)</h2>
+            <p>The **<code>filter_var()</code>** function is the simplest and most robust way to validate common data types like emails and URLs, as it uses PHP's standardized, pre-compiled validation rules.</p>
+            
+            <pre><code>filter_var(mixed $value, int $filter, array|int $options = 0): mixed</code></pre>
+            
+            <ul>
+                <li><strong>For Email Validation:</strong> Use the filter constant **<code>FILTER_VALIDATE_EMAIL</code>**. It returns the email string if valid, or <code>FALSE</code> if the format is incorrect.</li>
+                <li><strong>For URL Validation:</strong> Use the filter constant **<code>FILTER_VALIDATE_URL</code>**. It returns the URL string if valid, or <code>FALSE</code> if the format is incorrect.</li>
+            </ul>
+
+            <h3 class="title">Validation with Regular Expressions (Regex)</h3>
+            <p>The **<code>preg_match()</code>** function can be used to compare the input string against a complex Regular Expression pattern that defines the valid structure of an email or URL. While powerful, writing and maintaining correct regular expressions for these complex formats is difficult and error-prone. The <code>filter_var()</code> approach is generally preferred.</p>
+
+            <h2 class="title">Security Considerations</h2>
+            <p>Validation ensures the *format* is correct. However, always use **<code>htmlspecialchars()</code>** when displaying the validated email/URL back to the user to prevent XSS (Cross-Site Scripting) vulnerabilities, even after passing validation.</p>
+        </div>
+        
+        <h2 class="title">Example Session: Using <code>filter_var()</code></h2>
+        <p>This example demonstrates how to validate both an email and a URL submitted via a POST request using the built-in filtering constants.</p>
+        <div class="content example">
+            <pre><code>
+&lt;?php
+   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $email = $_POST['email'];
+      $url = $_POST['url'];
+
+      // --- Email Validation ---
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+         echo "Error: Invalid email format. Please re-enter.\n"; 
+      } else {
+         echo "Email is valid: " . htmlspecialchars($email) . "\n";
+      }
+
+      // --- URL Validation ---
+      if (!filter_var($url, FILTER_VALIDATE_URL)) {
+         echo "Error: Invalid URL format. Please re-enter.\n"; 
+      } else {
+         echo "URL is valid: " . htmlspecialchars($url) . "\n";
+      }
+   }
+?&gt;
+
+&lt;!-- Basic Form Structure for testing --&gt;
+&lt;form action="&lt;?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?&gt;" method="POST"&gt;
+   &lt;p&gt;&lt;label for="email"&gt;Enter your email:&lt;/label&gt;
+   &lt;input type="text" id="email" name="email"&gt;&lt;/p&gt;
+   &lt;p&gt;&lt;label for="URL"&gt;Enter your website:&lt;/label&gt;
+   &lt;input type = "text" id="URL" name="url"&gt;&lt;/p&gt;
+   &lt;input type="submit"&gt;
+&lt;/form&gt;
+            </code></pre>
+        </div>
+    </div>
+</div>

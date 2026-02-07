@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Deleting Data (CRUD: Delete) 🗑️</h1>
+        <div class="content">
+            <p>The Django ORM allows you to delete one or more database rows by invoking the **<code>.delete()</code>** method on a model instance or a QuerySet. This operation is automatically reflected in the mapped database table.</p>
+
+            <hr>
+
+            <h2>1. Direct ORM Methods (Shell or View)</h2>
+            <p>The <code>.delete()</code> method can be applied to a single instance or a collection of instances (a QuerySet) for bulk deletion.</p>
+
+            <h3>A. Deleting a Single Object</h3>
+            <p>Retrieve the specific object using the model manager's <code>.get()</code> method (usually by primary key) and then call <code>.delete()</code> on the instance:</p>
+            <pre><code>>>> from myapp.models import Dreamreal
+>>> row = Dreamreal.objects.get(pk = 1)
+>>> row.delete() # Deletes a single row from the DB</code></pre>
+
+            <h3>B. Bulk Deletion (QuerySet)</h3>
+            <p>Use a filtering method (like <code>.filter()</code>) to create a QuerySet containing the objects you want to delete, and then call <code>.delete()</code> on the entire set:</p>
+            <pre><code>>>> rows = Dreamreal.objects.filter(name__startswith = 'a')
+>>> rows.delete() # Deletes all rows matching the filter criteria</code></pre>
+
+            <div class="example">
+                <p><strong>Note on Related Objects:</strong> By default, Django's **<code>ForeignKey</code>** fields emulate the SQL constraint **<code>ON DELETE CASCADE</code>**. This means that when an object is deleted, any objects with a foreign key pointing to it will also be automatically deleted.</p>
+            </div>
+
+            <hr>
+
+            <h2>2. Deleting via Function-Based Views (Confirmation Required)</h2>
+            <p>For operations as permanent as deletion, it is best practice to ask for user confirmation, typically handled by a view that processes both GET (show confirmation form) and POST (perform deletion).</p>
+
+            <h3>A. View Function and URL Mapping</h3>
+            <p>The view function receives the object's primary key (`pk`) via the URL path and handles the request:</p>
+            <pre><code># In views.py
+def delete(request, pk):
+   obj = Dreamreal.objects.get(pk=pk) 
+   if request.method == "POST":
+      obj.delete() # Deletes the object if form is submitted
+      return HttpResponse("Deleted successfully")
+   
+   # GET: Render the confirmation form
+   context = {"pk": pk}
+   return render(request, "myform.html", context)
+
+# In urls.py
+urlpatterns += [path("delete/<int:pk>", views.delete, name='delete')]</code></pre>
+
+            <h3>B. Confirmation Template (<code>myform.html</code>)</h3>
+            <p>The template sends a POST request back to the same URL upon confirmation:</p>
+            <pre><code>&lt;form action="../delete/{{ pk }}" method="post"&gt;
+   {% csrf_token %}
+   &lt;h2&gt;The record with primary {{ pk }} will be deleted. Are you sure?&lt;/h2&gt;
+   &lt;input type="submit" value="delete"&gt;
+   &lt;a href = "../cancel"&gt;&lt;input type="button" value="Cancel" /&gt;&lt;/a&gt;
+&lt;/form&gt;</code></pre>
+
+            <hr>
+
+            <h2>3. Using Generic Class-Based Views (<code>DeleteView</code>)</h2>
+            <p>The **<code>DeleteView</code>** generic class is the fastest way to implement the delete functionality with confirmation, as it handles the object retrieval, confirmation form rendering, and the delete operation automatically.</p>
+            <pre><code>from django.views.generic.edit import DeleteView 
+
+class DRDeleteView(DeleteView):  
+   model = Dreamreal  
+   template_name = "myform.html" # Renders the confirmation form
+   success_url = "../success/" # URL to redirect to after successful deletion</code></pre>
+            <p>When the view is accessed (e.g., via <code>/myapp/deleteview/2</code>), it renders the specified template. Upon POST submission, it deletes the object and redirects to the <code>success_url</code>.</p>
+        </div>
+    </div>
+</div>

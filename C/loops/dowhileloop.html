@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Do-While Loop in C</h1>
+
+    <div class="content">
+
+      <p>The <strong>do-while</strong> loop is one of the most frequently used types of loops in C. It differs from the <code>while</code> loop in that it is an <strong>exit-controlled loop</strong>, meaning the condition is checked after the loop executes.</p>
+
+      <h2 class="title">Syntax of do-while Loop</h2>
+      <pre><code>do {
+   statement(s);
+} while(condition);</code></pre>
+
+      <h2 class="title">How do-while Loop Works?</h2>
+      <p>The program control enters the <code>do</code> block and executes it unconditionally once. After the block ends, the condition in the <code>while</code> statement is evaluated:</p>
+      <ul>
+        <li>If the condition is <strong>true</strong>, the loop repeats.</li>
+        <li>If the condition is <strong>false</strong>, the loop ends.</li>
+      </ul>
+      <p>Note: There is a <strong>semicolon</strong> at the end of the <code>while</code> statement.</p>
+
+      <h3 class="title">Flowchart</h3>
+      <p><em>(Flowchart not rendered in HTML. Imagine a loop where the condition is checked at the end of the block.)</em></p>
+
+      <h2 class="title">Example: Simple do-while Loop</h2>
+      <p>This example prints "Hello World" five times.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int a = 1;
+
+   do {
+      printf("Hello World\n");
+      a++;
+   } while(a &lt;= 5);
+
+   printf("End of loop");
+
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>Hello World</li>
+        <li>Hello World</li>
+        <li>Hello World</li>
+        <li>Hello World</li>
+        <li>Hello World</li>
+        <li>End of loop</li>
+      </ul>
+
+      <p>Now, if we initialize <code>a</code> to <code>10</code>, the loop still runs once before stopping:</p>
+
+      <h3 class="title">Modified Output (a = 10)</h3>
+      <ul>
+        <li>Hello World</li>
+        <li>End of loop</li>
+      </ul>
+
+      <p>This proves that a <code>do-while</code> loop runs at least once, regardless of the condition.</p>
+
+      <h2 class="title">Difference Between while and do-while Loops</h2>
+
+      <p>While both loops are similar, here are their differences:</p>
+
+      <ul>
+        <li><strong>Syntactic:</strong> <code>do-while</code> starts with <code>do</code> and ends with <code>while(condition);</code></li>
+        <li><strong>Execution:</strong> <code>do-while</code> checks condition <em>after</em> executing, ensuring at least one run.</li>
+        <li><strong>Semicolon:</strong> Required at the end of the <code>while</code> in <code>do-while</code>.</li>
+      </ul>
+
+      <h2 class="title">Example: Comparing while and do-while Loops</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int a = 0, b = 0;
+
+   printf("Output of while loop:\n");
+   while(a &lt; 5) {
+      a++;
+      printf("a: %d\n", a);
+   }
+
+   printf("Output of do-while loop:\n");
+   do {
+      b++;
+      printf("b: %d\n", b);
+   } while(b &lt; 5);
+
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Initial Output (a = 0, b = 0)</h3>
+      <ul>
+        <li><strong>While loop:</strong> a: 1, 2, 3, 4, 5</li>
+        <li><strong>Do-while loop:</strong> b: 1, 2, 3, 4, 5</li>
+      </ul>
+
+      <h3 class="title">When a = 3, b = 3</h3>
+      <ul>
+        <li><strong>While loop:</strong> a: 4, 5</li>
+        <li><strong>Do-while loop:</strong> b: 4, 5</li>
+      </ul>
+
+      <h3 class="title">When a = 10, b = 10</h3>
+      <ul>
+        <li><strong>While loop:</strong> (no output)</li>
+        <li><strong>Do-while loop:</strong> b: 11</li>
+      </ul>
+
+      <p>This demonstrates that the <code>while</code> loop skips execution if the condition is false initially, while <code>do-while</code> executes once regardless.</p>
+
+      <h2 class="title">Use Cases</h2>
+      <ul>
+        <li>Use <code>while</code> when condition must be true before any execution.</li>
+        <li>Use <code>do-while</code> when the loop must execute at least once.</li>
+      </ul>
+
+      <p><code>do-while</code> loops can also include <code>break</code> and <code>continue</code> statements to control flow.</p>
+
+    </div>
+  </div>
+</div>

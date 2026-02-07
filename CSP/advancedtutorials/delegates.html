@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Delegates: Method References 🔗</h1>
+        
+        <div class="content">
+            <h2 class="title">What is a Delegate?</h2>
+            <p>A **delegate** is a **reference type** variable that holds the reference (or address) of a **method**. They are essentially C#'s version of function pointers, but they are object-oriented, type-safe, and secure.</p>
+            <p>Delegates are crucial for:</p>
+            <ul>
+                <li>**Implementing Events:** The foundation of event handling in C#.</li>
+                <li>**Call-back Methods:** Allowing a method to be passed as an argument to another method, which can then execute (call back) the referenced method.</li>
+                <li>**Generic Programming:** Using built-in delegates like <span class="example">`Action`</span> and <span class="example">`Func`</span>.</li>
+            </ul>
+            <p>All delegates implicitly derive from the **<span class="example">`System.Delegate`</span>** class.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Declaring and Instantiating Delegates</h2>
+            
+            <h3 class="title">Declaration (Defining the Signature)</h3>
+            <p>A delegate declaration defines the signature (return type and parameter list) of the methods it can reference.</p>
+            <pre>delegate &lt;return type&gt; &lt;delegate-name&gt; &lt;parameter list&gt;</pre>
+            <p>Example: <span class="example">`delegate int NumberChanger(int n);`</span></p>
+            
+            <h3 class="title">Instantiation (Referencing a Method)</h3>
+            <p>A delegate object is created using the **<span class="example">`new`</span>** keyword and associating it with a specific method that matches the delegate's signature.</p>
+            <pre>// Method must match signature: int (int)
+NumberChanger nc1 = new NumberChanger(AddNum); 
+
+// The delegate object can be invoked like the method itself
+nc1(25);</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Multicast Delegates (Invocation List)</h2>
+            <p>Delegate objects can be combined using the **<span class="example">`+`</span>** operator and removed using the **<span class="example">`-`</span>** operator. This creates an **invocation list** of multiple methods that will be called sequentially when the delegate is invoked. This is called **multicasting**.</p>
+            <pre>NumberChanger nc;
+NumberChanger nc1 = new NumberChanger(AddNum);
+NumberChanger nc2 = new NumberChanger(MultNum);
+         
+nc = nc1; // nc now references AddNum
+nc += nc2; // nc now references both AddNum AND MultNum
+         
+nc(5); // Both AddNum(5) and MultNum(5) are called</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Built-in Generic Delegates</h2>
+            <p>C# provides generic delegates in the **<span class="example">`System`</span>** namespace that cover most common method signatures, making custom delegate declarations often unnecessary.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Delegate</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`Action&lt;T...&gt;`</span></td>
+                        <td>References a method that **returns <span class="example">`void`</span>** (takes 0 to 16 input parameters).</td>
+                        <td><span class="example">`Action&lt;string&gt; greet = name => Console.WriteLine(name);`</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`Func&lt;T..., TResult&gt;`</span></td>
+                        <td>References a method that **returns a value** of type <span class="example">`TResult`</span> (takes 0 to 16 input parameters <span class="example">`T...`</span>).</td>
+                        <td><span class="example">`Func&lt;int, int, int&gt; add = (a, b) => a + b;`</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`Predicate&lt;T&gt;`</span></td>
+                        <td>References a method that **returns a <span class="example">`bool`</span>** and takes exactly **one** input parameter of type <span class="example">`T`</span>.</td>
+                        <td><span class="example">`Predicate&lt;int&gt; isEven = n => n % 2 == 0;`</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

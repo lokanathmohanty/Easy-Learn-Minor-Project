@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="session">
+
+    <div class="title">
+      <h1>Logistic Distribution</h1>
+    </div>
+
+    <div class="content">
+      <h2>Logistic Distribution</h2>
+      <p>Logistic Distribution is used to describe growth.</p>
+      <p>It is used extensively in machine learning, such as in logistic regression, neural networks, etc.</p>
+
+      <h3>Parameters:</h3>
+      <ul>
+        <li><strong>loc</strong> - mean, where the peak is. Default is 0.</li>
+        <li><strong>scale</strong> - standard deviation, controlling the flatness of the distribution. Default is 1.</li>
+        <li><strong>size</strong> - shape of the returned array.</li>
+      </ul>
+
+      <h3>Example: Draw 2x3 samples from a logistic distribution with mean 1 and stddev 2.0</h3>
+      <pre><code>from numpy import random
+
+x = random.logistic(loc=1, scale=2, size=(2, 3))
+
+print(x)</code></pre>
+
+      <h3>Visualization of Logistic Distribution</h3>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.displot(random.logistic(size=1000), kind="kde")
+
+plt.show()</code></pre>
+
+      <h3>Difference Between Logistic and Normal Distribution</h3>
+      <p>Both distributions are near identical, but the logistic distribution has heavier tails. This means it assigns more probability to events further from the mean.</p>
+      <p>For higher values of <code>scale</code> (standard deviation), normal and logistic distributions look very similar except at the peak.</p>
+
+      <h3>Example Comparison</h3>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = {
+  "normal": random.normal(scale=2, size=1000),
+  "logistic": random.logistic(size=1000)
+}
+
+sns.displot(data, kind="kde")
+
+plt.show()</code></pre>
+
+    </div>
+  </div>
+</div>

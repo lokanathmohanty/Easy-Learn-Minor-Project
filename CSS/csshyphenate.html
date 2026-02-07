@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - hyphenate-character Property</h1>
+    <div class="content">
+      <p>The <code>hyphenate-character</code> property in CSS specifies the character that should be used when a word is broken at a hyphenation point. This property works together with the <code>hyphens</code> property, which enables or disables hyphenation in text. By default, browsers use a standard hyphen (<code>-</code>) or another language-specific symbol, but with <code>hyphenate-character</code> you can override it and provide your own character.</p>
+
+      <h2>Syntax</h2>
+      <pre><code>hyphenate-character: auto | string | initial | inherit;</code></pre>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>auto</strong> → The browser automatically selects a suitable character based on language and typography conventions. Default.</li>
+        <li><strong>string</strong> → A user-defined character or symbol is used instead of the default hyphen.</li>
+        <li><strong>initial</strong> → Resets the property to its default value (<code>auto</code>).</li>
+        <li><strong>inherit</strong> → Inherits the value from its parent element.</li>
+      </ul>
+
+      <h2>Example 1: Using <code>auto</code></h2>
+      <p>The browser decides which character to use (usually a normal hyphen).</p>
+      <pre><code>div {
+  width: 80px;
+  border: 2px solid blue;
+  hyphens: auto;
+  hyphenate-character: auto;
+}</code></pre>
+
+      <h2>Example 2: Using <code>string</code> values</h2>
+      <p>You can specify different characters, such as <code>=</code>, <code>*</code>, or <code>%</code>, for hyphenation breaks.</p>
+      <pre><code>.box1 {
+  hyphenate-character: "=";
+}
+
+.box2 {
+  hyphenate-character: "*";
+}
+
+.box3 {
+  hyphenate-character: "%";
+}</code></pre>
+
+      <h2>Example 3: Using <code>inherit</code></h2>
+      <p>The child element inherits the hyphenation character from its parent.</p>
+      <pre><code>.parent {
+  hyphenate-character: "*";
+}
+
+.child {
+  hyphenate-character: inherit;
+}</code></pre>
+
+      <h2>Example 4: Using <code>initial</code></h2>
+      <p>This resets the property back to the browser default (<code>auto</code>).</p>
+      <pre><code>.text {
+  hyphenate-character: initial;
+}</code></pre>
+
+      <h2>Real-World Example: Customizing Text Flow</h2>
+      <p>Imagine you have a narrow column layout where long words must break gracefully. Instead of the default hyphen, you might want to use a middle dot (<code>·</code>) or a tilde (<code>~</code>) for visual style.</p>
+      <pre><code>.article {
+  width: 120px;
+  hyphens: auto;
+  hyphenate-character: "·";
+  border: 1px solid black;
+}</code></pre>
+
+      <h2>Supported Browsers</h2>
+      <ul>
+        <li>Chrome → 106.0+</li>
+        <li>Edge → 106.0+</li>
+        <li>Firefox → 98.0+</li>
+        <li>Safari → 17.0+</li>
+        <li>Opera → 92.0+</li>
+      </ul>
+
+      <h2>Practical Use Cases</h2>
+      <ul>
+        <li>Design-heavy websites where default hyphenation symbols might not match the branding.</li>
+        <li>Educational platforms demonstrating hyphenation rules with custom symbols.</li>
+        <li>Localization and typography in languages where alternative hyphenation characters are preferred.</li>
+        <li>Stylistic emphasis in articles, blogs, or print-style layouts.</li>
+      </ul>
+    </div>
+  </div>
+</div>

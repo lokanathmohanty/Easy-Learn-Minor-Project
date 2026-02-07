@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Creating a Xamarin.Forms Project and Referencing a Private NuGet Feed</h1>
+
+        <div class="content">
+            <p>This chapter introduces **Xamarin.Forms**, a framework for creating cross-platform user interfaces, and details the steps to set up a new project and configure it to consume the NuGet package published to a private feed in the previous chapter.  </p>
+            <p><strong>Xamarin.Forms</strong> is a cross-platform, natively backed UI toolkit that abstracts user interfaces, allowing code to be shared across **Android**, **iOS**, **Windows**, and **Windows Phone**. The UI is rendered using the native controls of the target platform, maintaining the appropriate look and feel for each OS.</p>
+        </div>
+
+        <h2 class="title">Visual Studio Setup for Xamarin.Forms</h2>
+        <div class="content">
+            <p>To enable Xamarin development in Visual Studio 2015, you must modify your installation:</p>
+            <ol>
+                <li class="content">Run the Visual Studio 2015 setup and select the **Modify** option.</li>
+                <li class="content">Ensure the **Cross-Platform Mobile Development** option is selected and install the necessary components.</li>
+                <li class="content">After installation, check for updates by going to **Tools &rarr; Options &rarr; Xamarin &rarr; Other** and clicking **Check Now**. Download and install any available updates.</li>
+            </ol>
+        </div>
+
+        <h2 class="title example">Creating the Xamarin.Forms Project</h2>
+        <div class="content example">
+            <p>A new Xamarin.Forms solution includes a shared Portable Class Library (PCL) project and platform-specific projects for each target (Android, iOS, etc.).</p>
+            <ol>
+                <li class="content">In Visual Studio, select **File &rarr; New &rarr; Project**.</li>
+                <li class="content">In the left pane, choose the **Visual C# &rarr; Cross-Platform** template.</li>
+                <li class="content">In the middle pane, select the **Blank Xaml App (Xamarin.Forms Portable)** template.</li>
+                <li class="content">Enter a name for the solution and click **OK**.</li>
+                <li class="content">Select the target and minimum versions for the supported platforms (e.g., UWP, Android).</li>
+            </ol>
+            <p>The resulting solution will contain a **PCL library** at the top, which holds the shared C# and XAML code (like <code>App.xaml</code> and <code>MainPage.xaml</code>) that will run on all target platforms.</p>
+        </div>
+
+        <h2 class="title">Adding the Private NuGet Feed Source</h2>
+        <div class="content">
+            <p>Before installing the custom package, the private NuGet feed must be added to Visual Studio's list of package sources:</p>
+            <ol>
+                <li class="content">Open the **Manage NuGet Packages** dialog for the shared PCL project.</li>
+                <li class="content">Click the **Settings icon** (wheel) next to the "Package source" dropdown list.</li>
+                <li class="content">Click the **plus (+) button** to add a new source.</li>
+                <li class="content">Provide a **Name** (e.g., <code>PrivateSource</code>) and the **Source Path** (e.g., <code>D:\PrivateNugetPackages</code>).</li>
+                <li class="content">Click **OK** to save the new package source.</li>
+            </ol>
+        </div>
+
+        <h2 class="title">Installing the StringLibrary Package</h2>
+        <div class="content">
+            <p>With the private source configured, you can now attempt to install your shared library:</p>
+            <ol>
+                <li class="content">In the NuGet Package Manager's **Browse** tab, select the **PrivateSource** from the **Package source** dropdown list.</li>
+                <li class="content">Search for and select the **StringLibrary** NuGet package.</li>
+                <li class="content">Click **Install** and proceed through the installation prompts.</li>
+            </ol>
+            <p><strong>⚠️ Note:</strong> At this stage, the installation will likely fail with a compatibility error, specifically related to the PCL library using **Profile 259**. This indicates a mismatch between the library's target framework and the package's requirements, a common issue that must be fixed before proceeding.</p>
+        </div>
+    </div>
+</div>

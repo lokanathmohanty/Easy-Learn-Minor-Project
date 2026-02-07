@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Compilation Process in C</h1>
+    <div class="content">
+      <p>C is a compiled language, which means the source code you write must be transformed into machine code that the computer's CPU can execute directly. This transformation is performed by a compiler and involves multiple stages.</p>
+      <p>Common C compilers include GCC, Clang, and MSVC, each translating C code into platform-specific executables.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Stages of the Compilation Process</h2>
+    <div class="content">
+      <ul>
+        <li><strong>Preprocessing:</strong> The compiler handles directives like <code>#include</code> and <code>#define</code>. It expands macros, includes header files, and removes comments. The output is an expanded source file with an ".i" extension.</li>
+        <li><strong>Compilation:</strong> The preprocessed file is translated into assembly language, producing a ".s" file.</li>
+        <li><strong>Assembly:</strong> The assembler converts the assembly code into machine code, creating an object file with a ".o" extension.</li>
+        <li><strong>Linking:</strong> The linker combines object files and libraries to produce the final executable program.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Hello World Program</h2>
+    <div class="content">
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   /* my first program in C */
+   printf("Hello World! \n");
+   return 0;
+}
+</code></pre>
+      <p>Compile and build this program using GCC with the following commands:</p>
+      <pre><code>gcc -c hello.c -o hello.o
+gcc -o hello.exe hello.o</code></pre>
+      <p>After building, run the program:</p>
+      <pre><code>./hello.exe    (Windows)
+./hello.out    (Linux)</code></pre>
+      <p>Output:</p>
+      <p><strong>Hello World!</strong></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Common Compilation Commands</h2>
+    <div class="content">
+      <ul>
+        <li><code>gcc -E main.c</code>: Stops after preprocessing, outputs <code>main.i</code>.</li>
+        <li><code>gcc -S main.c</code>: Stops after compilation, outputs assembly <code>main.s</code>.</li>
+        <li><code>gcc -c main.c</code>: Stops after assembly, outputs object file <code>main.o</code>.</li>
+        <li><code>gcc main.c -o executable</code>: Full build, produces executable named <code>executable</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Notes</h2>
+    <div class="content">
+      <p>&bull; Machine code is platform-specific; executables built on one OS may not run on another.</p>
+      <p>&bull; Errors in the source code will stop compilation and show error messages.</p>
+      <p>&bull; IDEs like CodeBlocks can automate compiling and running C programs conveniently.</p>
+    </div>
+  </div>
+</div>

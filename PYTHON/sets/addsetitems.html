@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Add Set Items</h1>
+    <div class="content">
+    
+      <p>
+        Items can be added using methods like <code>add()</code>, <code>update()</code>, set union (<code>|</code>), or set comprehension.
+      </p>
+      <h2 class="title">Add Set Items Using <code>add()</code> Method</h2>
+      <p>The <code>add()</code> method adds a single element to the set if it is not already present.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using <code>add()</code> Method</h2>
+    <div class="content">
+      <pre>
+language = set()
+language.add("C")
+language.add("C++")
+language.add("Java")
+language.add("Python")
+
+print("Updated Set:", language)
+      </pre>
+      <p>Output example: <code>{'Python', 'Java', 'C++', 'C'}</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Add Set Items Using <code>update()</code> Method</h2>
+    <div class="content">
+      <p>
+        The <code>update()</code> method adds multiple elements from an iterable (list, tuple, set, string) to the set.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using <code>update()</code> Method</h2>
+    <div class="content">
+      <pre>
+my_set = {1, 2, 3}
+my_set.update([4])
+print("Updated Set:", my_set)
+
+lang1 = {"C", "C++", "Java", "Python"}
+lang2 = {"PHP", "C#", "Perl"}
+lang1.update(lang2)
+print(lang1)
+
+set1 = set("Hello")
+set1.update("World")
+print(set1)
+      </pre>
+      <p>
+        Output examples:<br />
+        <code>{1, 2, 3, 4}</code><br />
+        <code>{'Python', 'C++', 'C#', 'C', 'Java', 'PHP', 'Perl'}</code><br />
+        <code>{'H', 'r', 'o', 'd', 'W', 'l', 'e'}</code>
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Add Set Items Using Union Operator (<code>|</code>)</h2>
+    <div class="content">
+      <p>
+        Use the union operator <code>|</code> or the <code>union()</code> method to combine sets, resulting in a new set with all unique elements.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using Union</h2>
+    <div class="content">
+      <pre>
+lang1 = {"C", "C++", "Java", "Python"}
+lang2 = {"PHP", "C#", "Perl"}
+lang3 = {"SQL", "C#"}
+
+combined_set1 = lang1.union(lang2)
+combined_set2 = lang2 | lang3
+
+print("Combined Set1:", combined_set1)
+print("Combined Set2:", combined_set2)
+      </pre>
+      <p>Example Output:<br />
+      <code>{'C#', 'Perl', 'C++', 'Java', 'PHP', 'Python', 'C'}</code><br />
+      <code>{'C#', 'Perl', 'PHP', 'SQL'}</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Add Set Items Using Set Comprehension</h2>
+    <div class="content">
+      <p>
+        Set comprehensions create a new set by applying an expression to each item in an iterable.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using Set Comprehension</h2>
+    <div class="content">
+      <pre>
+numbers = [1, 2, 3, 4, 5]
+squares_set = {num ** 2 for num in numbers}
+print("Squares Set:", squares_set)
+      </pre>
+      <p>Output example: <code>{1, 4, 9, 16, 25}</code></p>
+    </div>
+  </div>
+</div>

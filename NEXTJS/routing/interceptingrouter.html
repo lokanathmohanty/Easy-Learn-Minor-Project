@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Intercepting Routes 🖼️</h1>
+        
+        <div class="content">
+            <h2 class="title">What are Intercepting Routes?</h2>
+            <p>**Intercepting Routes** are a feature in the Next.js App Router (v13+) that allows you to load a route's content (UI) within the context of the **current layout**, without fully navigating away from the parent page. This is primarily used to create seamless **overlay experiences**, such as displaying a **modal** or a pop-up, while the original page remains visible in the background.</p>
+            
+            <h3 class="title">Example Use Case: Photo Gallery</h3>
+            <p>On a gallery page (<span class="example">`/gallery`</span>) with thumbnails, clicking a thumbnail navigates to the image's URL (e.g., <span class="example">`/gallery/123`</span>). If the navigation is intercepted, the full image will appear in a modal *over* the gallery, but if the user navigates directly to <span class="example">`/gallery/123`</span>, they see the full image on a separate, dedicated page.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">How Intercepting Routes Work</h2>
+            
+            <p>Intercepting routes rely on a special file naming convention that tells Next.js to render a different UI when navigating *from* a specific parent route.</p>
+            
+            <h3 class="title">Route Naming Convention (App Router):</h3>
+            <p>The syntax uses parentheses and dots to indicate the segment level being intercepted:</p>
+            <ul>
+                <li><span class="example">`(.)[segment]`</span>: Intercepts a route at the **same level** of the current segment. (e.g., from <span class="example">`/gallery`</span> to <span class="example">`/gallery/[id]`</span>)</li>
+                <li><span class="example">`(..)[segment]`</span>: Intercepts a route **one level above**.</li>
+                <li><span class="example">`(..)(..)[segment]`</span>: Intercepts a route **two levels above**.</li>
+                <li><span class="example">`(...)segment`</span>: Intercepts a route from the **root** <span class="example">`/app`</span> directory.</li>
+            </ul>
+            
+            <h3 class="title">The Overlay Experience:</h3>
+            <p>When an interception occurs, the UI defined in the special file (e.g., <span class="example">`app/gallery/(.)[id]/page.js`</span>) is rendered instead of the dedicated route file (<span class="example">`app/gallery/[id]/page.js`</span>). The intercepted content is often styled to be a modal using CSS.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Implementation Example Structure</h2>
+            
+            <p>Consider the structure for the photo gallery:</p>
+            <pre>app/
+  gallery/
+    page.js           // Base Gallery UI (e.g., /gallery)
+    [id]/
+      page.js         // Dedicated Full Photo Page
+    (.)[id]/
+      page.js         // &larr; INTERCEPTED ROUTE (Modal UI)</pre>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>User Action</th>
+                        <th>URL</th>
+                        <th>File Rendered</th>
+                        <th>Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Direct URL access</td>
+                        <td><span class="example">`/gallery/123`</span></td>
+                        <td><span class="example">`gallery/[id]/page.js`</span></td>
+                        <td>Full page load of the photo.</td>
+                    </tr>
+                    <tr>
+                        <td>Clicking a link from <span class="example">`/gallery`</span></td>
+                        <td><span class="example">`/gallery/123`</span></td>
+                        <td><span class="example">`gallery/(.)[id]/page.js`</span></td>
+                        <td>Photo is displayed as a modal over the gallery page.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

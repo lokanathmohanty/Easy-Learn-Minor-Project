@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Pointer to C++ Classes ➡️📦</h1>
+
+        <div class="content">
+            <p>A **pointer to a C++ class** works exactly like a pointer to a C structure: it is a variable that stores the **memory address** of an object (an instance of the class).</p>
+
+            <h3>Declaration and Assignment</h3>
+            <p>To declare a pointer to a class, you use the class name followed by the dereference operator (`*`). You assign the address of an object using the **address-of operator** (`&amp;`).</p>
+            <pre class="example">
+Box Box1(3.3, 1.2, 1.5); // Object declaration
+Box *ptrBox;             // Declare pointer to a Box class
+
+ptrBox = &amp;Box1;        // Save the address of Box1 in ptrBox
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Accessing Members with a Pointer</h2>
+            <p>To access the members (data or functions) of an object via a pointer to that object, you use the **member access operator** (or **arrow operator**): **<code>-&gt;</code>**.</p>
+            <p>The expression `ptrBox->Volume()` is shorthand for `(*ptrBox).Volume()`, which first dereferences the pointer to get the object, and then calls the member function.</p>
+            <pre class="example">
+// Accessing the Volume() method using the arrow operator
+cout &lt;&lt; "Volume of Box1: " &lt;&lt; ptrBox-&gt;Volume() &lt;&lt; endl; 
+</pre>
+            <p>Pointers are essential for working with polymorphism, linked data structures, and dynamic memory allocation in C++.</p>
+        </div>
+    </div>
+</div>

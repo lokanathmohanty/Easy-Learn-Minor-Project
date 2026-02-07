@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Humanize Package</h1>
+    </div>
+    <div class="content">
+      <p>
+        The Humanize package in Python is designed to convert numerical values, dates, times, and file sizes into human-readable formats, enhancing readability and user friendliness.
+      </p>
+      <p>
+        It helps bridge the gap between raw data and human understanding by making data interpretation intuitive and quick.
+      </p>
+      <p><strong>Installation:</strong></p>
+      <pre>pip install humanize</pre>
+      <p>Verify installation:</p>
+      <pre>import humanize</pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Number Utilities</h2>
+    </div>
+    <div class="content">
+      <p>Enhance number readability with utilities like integer formatting, word representation, ordinals, and fractional units.</p>
+      <pre>
+import humanize
+print(humanize.intcomma(123456))       # 123,456
+print(humanize.intword(12345678908545944))  # 12.3 quadrillion
+print(humanize.ordinal(3))             # 3rd
+print(humanize.apnumber(9))            # nine
+print(humanize.fractional(0.5))        # 1/2
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>File Size Utilities</h2>
+    </div>
+    <div class="content">
+      <p>Convert raw byte values into more understandable file size formats.</p>
+      <pre>
+import humanize
+
+file_size = 123456789
+print(f"File size: {humanize.naturalsize(file_size)}")           # 123.5 MB (decimal)
+print(f"File size (binary): {humanize.naturalsize(file_size, binary=True)}")  # 117.7 MiB
+print(f"File size (GNU): {humanize.naturalsize(file_size, gnu=True)}")       # 117.7M
+print(f"File size (custom format): {humanize.naturalsize(file_size, format='%.2f')}")  # 123.46 MB
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Date Time Utilities</h2>
+    </div>
+    <div class="content">
+      <p>Make dates and times more readable with relative and natural formats.</p>
+      <pre>
+import humanize
+from datetime import datetime, timedelta
+
+past_date = datetime.now() - timedelta(days=2)
+print(humanize.naturaltime(past_date))       # 2 days ago
+
+some_date = datetime(2022, 7, 8)
+print(humanize.naturaldate(some_date))       # Jul 08 2022
+
+today = datetime.now()
+tomorrow = today + timedelta(days=1)
+print(humanize.naturalday(today))             # today
+print(humanize.naturalday(tomorrow))          # tomorrow
+      </pre>
+      <p>Precise delta:</p>
+      <pre>
+duration = timedelta(days=2, hours=3, minutes=30)
+print(humanize.precisedelta(duration))       # 2 days, 3 hours and 30 minutes
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Duration Utilities</h2>
+    </div>
+    <div class="content">
+      <p>Convert duration intervals to natural language strings.</p>
+      <pre>
+from datetime import timedelta
+import humanize
+
+delta1 = timedelta(days=3, hours=5)
+print(f"Time duration: {humanize.naturaldelta(delta1)} from now")  # 3 days from now
+
+delta2 = timedelta(hours=5)
+print(f"Future duration: in {humanize.naturaldelta(delta2)}")     # in 5 hours
+
+delta3 = timedelta(days=1, hours=3)
+print(f"Past duration: {humanize.naturaldelta(delta3)} ago")      # a day ago
+      </pre>
+    </div>
+  </div>
+
+  
+    </div>
+  </div>
+</div>

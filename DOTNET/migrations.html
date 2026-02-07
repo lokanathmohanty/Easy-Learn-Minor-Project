@@ -1,0 +1,70 @@
+<div class="container">
+<div class="session">
+<div class="title">
+<h1>.NET Core - Migrations (<code>project.json</code> to <code>*.csproj</code>)</h1>
+ 
+</div>
+<div class="content">
+<p>This chapter focuses on migrating an older .NET Core project that uses the **<code>project.json</code>** build system to the newer **MSBuild (<code>*.csproj</code>)** system, which is required by the **.NET Core 2.0 preview 1 tooling** and later versions.</p>
+
+<h2>The Need for Migration</h2>
+<p>Projects created with older tooling (e.g., **.NET Core 1.0 preview 2**) use the **<code>project.json</code>** file for configuration and dependencies. Since **.NET Core 2.0** no longer supports this system, attempting to build an old project with the new command-line utility will result in an error:</p>
+<div class="example">
+<div class="title"><h2>Build Error (Pre-Migration)</h2></div>
+<div class="content">
+<p>Attempting to run <code>dotnet build</code> on a <code>project.json</code>-based project with .NET Core 2.0 tooling fails because the build system is unrecognized.</p>
+</div>
+</div>
+<p>To ensure compatibility and successful builds, the project must be migrated.</p>
+
+<h2>Running the Migration Command</h2>
+<p>The .NET Core CLI provides a dedicated command for this transition. First, confirm the command's availability:</p>
+<div class="example">
+<div class="title"><h2>Checking Available Commands</h2></div>
+<div class="content">
+<pre><code>dotnet help</code></pre>
+<p>The output shows the **<code>migrate</code>** command, which converts a <code>project.json</code>-based project to an MSBuild-based project.</p>
+</div>
+</div>
+
+<p>Execute the following command in the project root directory:</p>
+<div class="example">
+<div class="title"><h2>Migration Command</h2></div>
+<div class="content">
+<pre><code>dotnet migrate</code></pre>
+</div>
+</div>
+<p>The utility provides a summary confirming that the project has been migrated successfully.</p>
+
+<h2>Post-Migration Structure</h2>
+<p>After migration, the project directory structure changes:</p>
+<ul>
+<li>The new **<code>*.csproj</code>** file (e.g., **<code>console.csproj</code>**) is created in the project root.</li>
+<li>The original **<code>project.json</code>** file is moved to a **backup folder** to preserve the old configuration.</li>
+</ul>
+<p>The new structure can be verified using <code>tree /f</code>, showing the presence of the new <code>*.csproj</code> file.</p>
+
+<h2>Restoring and Building the Migrated Project</h2>
+<p>The project can now be treated as a standard MSBuild project.</p>
+
+<h3>1. Restoring Packages</h3>
+<p>The new <code>*.csproj</code> file is used to define dependencies, which must be restored:</p>
+<div class="example">
+<div class="title"><h2>Restoring Packages</h2></div>
+<div class="content">
+<pre><code>dotnet restore</code></pre>
+<p>The MSBuild system successfully restores all necessary NuGet packages.</p>
+</div>
+</div>
+
+<h3>2. Building the Project</h3>
+<p>The project can now be built successfully using the .NET Core 2.0 tooling:</p>
+<div class="example">
+<div class="title"><h2>Building the Project</h2></div>
+<div class="content">
+<pre><code>dotnet build</code></pre>
+<p>The project builds successfully, generating the compiled assembly (e.g., **<code>console.dll</code>**) in the appropriate output folder (e.g., <code>..\bin\Debug\netcoreapp1.0</code>).</p>
+</div>
+</div>
+</div>
+</div>

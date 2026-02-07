@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Queue Interface in Java</h1>
+    
+    <div class="content">
+      <h2 class="title">Content</h2>
+      <p>The <code>Queue</code> interface, part of <code>java.util</code>, extends the <code>Collection</code> interface and represents a collection designed for holding elements prior to processing.</p>
+      <p>Queues follow the FIFO (First In First Out) principle: elements added first are removed first.</p>
+      <p>Key methods in the <code>Queue</code> interface include:</p>
+      <ul>
+        <li><code>boolean add(E e)</code> - Inserts an element, throwing an exception if the queue is full.</li>
+        <li><code>E element()</code> - Retrieves, but does not remove, the head of the queue.</li>
+        <li><code>boolean offer(E e)</code> - Inserts an element, returning false if no space is available.</li>
+        <li><code>E peek()</code> - Retrieves, but does not remove, the head, or returns null if empty.</li>
+        <li><code>E poll()</code> - Retrieves and removes the head, or returns null if empty.</li>
+        <li><code>E remove()</code> - Retrieves and removes the head, throwing an exception if empty.</li>
+      </ul>
+      <p>Common classes implementing <code>Queue</code> are <code>LinkedList</code>, <code>ArrayDeque</code>, and <code>PriorityQueue</code>.</p>
+      <p>Interfaces extending <code>Queue</code> include <code>Deque</code>, <code>BlockingQueue</code>, and <code>BlockingDeque</code>.</p>
+    </div>
+    
+    <div class="example">
+      <h2 class="title">Example</h2>
+      <p>This example uses a <code>LinkedList</code> to demonstrate queue operations:</p>
+      <pre><code>
+package com.tutorialspoint;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class QueueDemo {
+   public static void main(String[] args) {
+      Queue&lt;Integer&gt; q = new LinkedList&lt;&gt;();
+      q.add(6);
+      q.add(1);
+      q.add(8);
+      q.add(4);
+      q.add(7);
+      System.out.println("The queue is: " + q);
+      int num1 = q.remove();
+      System.out.println("The element deleted from the head is: " + num1);
+      System.out.println("The queue after deletion is: " + q);
+      int head = q.peek();
+      System.out.println("The head of the queue is: " + head);
+      int size = q.size();
+      System.out.println("The size of the queue is: " + size);
+   }
+}
+      </code></pre>
+    </div>
+  </div>
+</div>

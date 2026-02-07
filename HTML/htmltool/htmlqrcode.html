@@ -1,0 +1,62 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">HTML - QR Code</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>
+        A <strong>QR Code</strong> (Quick Response Code) is a type of 2D matrix barcode.
+        It consists of black squares arranged on a white background. 
+        QR codes can store many types of information, including:
+      </p>
+      <ul>
+        <li>Phone numbers</li>
+        <li>Website URLs</li>
+        <li>Plain text (up to 4000 characters)</li>
+      </ul>
+
+      <h2>Usage</h2>
+      <p>
+        QR codes are widely used in mobile payments, product labels, authentication systems,
+        and easy URL sharing. When scanned with a smartphone or QR scanner, the code reveals
+        the encoded information instantly.
+      </p>
+
+      <h2>QR Code Generator Tool</h2>
+      <p>
+        The QR Generator below lets you input any text or URL, and it will automatically generate 
+        a QR code for it.
+      </p>
+
+      <div class="qr-generator">
+        <label for="qr-input">Enter text or URL:</label><br>
+        <input type="text" id="qr-input" class="qr-input" placeholder="Type something...">
+        <div id="qr-output" class="qr-output"></div>
+      </div>
+
+      <h2>Example Code</h2>
+      <pre><code>&lt;!-- HTML QR Code Example --&gt;
+&lt;div class="qr-generator"&gt;
+  &lt;input type="text" id="qr-input" placeholder="Enter text or URL"&gt;
+  &lt;div id="qr-output"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const input = document.getElementById('qr-input');
+  const output = document.getElementById('qr-output');
+  let qr = new QRCode(output, { text: "https://www.tutorialspoint.com", width: 128, height: 128 });
+
+  input.addEventListener('input', function() {
+    output.innerHTML = "";
+    qr = new QRCode(output, { text: input.value, width: 128, height: 128 });
+  });
+&lt;/script&gt;
+</code></pre>
+
+      <h2>Demo Text</h2>
+      <p>Example: <code>Tutorialspoint.com</code></p>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ <code>switch</code> Statement 📋</h1>
+
+        <div class="content">
+            <p>The **<code>switch</code> statement** is a control structure that allows a program to test a variable or expression for equality against a list of constant values. It provides a cleaner and often more efficient alternative to long chains of <code>if...else if</code> statements when checking a single variable against multiple, distinct values.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Syntax and Rules</h2>
+            <p>The flow of control starts with the <code>switch</code> expression, which is compared sequentially to each <code>case</code> value:</p>
+            <pre class="example">
+switch (expression) {
+   case constant-1:
+      // Code to execute if expression == constant-1
+      break; // Stops execution and exits the switch block
+   case constant-2:
+   case constant-3:
+      // Code to execute if expression == constant-2 OR constant-3
+      // ...
+   default: // Optional: Executes if no case matches
+      // Code for all other values
+}
+</pre>
+
+            <ul>
+                <li>
+                    **Expression Type:** The <code>expression</code> must evaluate to an **integral type** (like <code>int</code>, <code>char</code>, <code>enum</code>), but not floating-point types (<code>float</code>, <code>double</code>).
+                </li>
+                <li>
+                    **Case Value:** Each <code>constant-expression</code> must be a **literal constant** or a constant expression (e.g., <code>5</code>, <code>'A'</code>, or <code>MAX_VALUE</code>) and must match the data type of the <code>switch</code> expression.
+                </li>
+                <li>
+                    **<code>break</code>:** The <code>break</code> statement is crucial. If omitted, the code flow will **fall through** and continue executing the statements in the next <code>case</code> block until a <code>break</code> or the end of the <code>switch</code> is reached.
+                </li>
+                <li>
+                    **<code>default</code>:** This is an optional case. If present, its statements execute when the <code>switch</code> expression does not match any of the preceding <code>case</code> values. It typically appears at the end and does not require a <code>break</code>.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Example Analysis (<code>grade</code> = 'D')</h2>
+            <p>The program checks the value of the <code>char</code> variable <code>grade</code> ('D') against the defined cases:</p>
+            <pre class="example">
+char grade = 'D';
+
+switch(grade) {
+   // Cases 'A', 'B', 'C' are skipped.
+   case 'D' : // Match found!
+      cout << "You passed" << endl;
+      break; // Exit switch block
+   // Remaining cases are skipped due to break.
+   default :
+      // ...
+}
+cout << "Your grade is " << grade << endl;
+</pre>
+            <p>The output is:</p>
+            <pre class="example">
+You passed
+Your grade is D
+</pre>
+            <p>Note how cases 'B' and 'C' are grouped: since 'B' has no <code>break</code>, execution would fall through to 'C' (which *does* have a break), allowing the same code to run for multiple conditions.</p>
+        </div>
+    </div>
+</div>

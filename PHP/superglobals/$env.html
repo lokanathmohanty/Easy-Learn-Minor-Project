@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `$_ENV` Superglobal and Environment Variables</h1>
+
+    <div class="content">
+      <p>
+        The **`$_ENV`** is a **superglobal associative array** that holds all **environment variables** available to the current PHP script. Environment variables are values (like system paths, user information, or configuration settings) provided by the operating system shell or the web server under which the PHP parser is running.
+      </p>
+
+      <h2>Key Features and Accessibility</h2>
+      <ul>
+        <li>
+          **Superglobal:** `$_ENV` is accessible in all scopes (including functions and classes) without explicit declaration.
+        </li>
+        <li>
+          **Source:** Most variables are inherited from the operating system shell or the web server (including CGI variables). The contents vary significantly across platforms (Windows, Linux, etc.) and server configurations.
+        </li>
+        <li>
+          **Access:** You retrieve a variable's value using its name as a key: <code>echo $_ENV['Path'];</code>
+        </li>
+      </ul>
+
+      <hr>
+
+      <h2>Configuration Caveat (Important) ⚠️</h2>
+      <p>
+        The availability of variables in the `$_ENV` array depends on the **`variables_order`** directive in your `php.ini` file. If the letter **`E`** (for Environment) is not included in this setting, the `$_ENV` array will be empty.
+      </p>
+      <div class="example">
+        <p>
+          To ensure `$_ENV` is populated, set:<br>
+          <code>variables_order = "**E**GPCS"</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Related Functions for Environment Variables</h2>
+
+      <h3>1. `getenv()` (Get Environment Variable)</h3>
+      <p>
+        This function is the standard, reliable way to retrieve environment variables and is often preferred over using `$_ENV` due to the `variables_order` dependency.
+      </p>
+      <ul>
+        <li>**Get Specific Variable:** <code>getenv("PATH")</code></li>
+        <li>**Get All Variables:** Called without arguments, it returns an array of all environment variables.</li>
+      </ul>
+
+      <h3>2. `putenv()` (Set Environment Variable)</h3>
+      <p>
+        This function allows you to set or change the value of an environment variable for the duration of the **current request only**.
+      </p>
+      <div class="example">
+        <p>
+          <code>putenv("PHP_TEMPUSER=GUEST");</code><br>
+          <code>echo getenv("PHP_TEMPUSER"); // Output: GUEST</code>
+        </p>
+      </div>
+      <p>
+        *Note: Changing certain sensitive variables is restricted, often controlled by the `safe_mode_protected_env_vars` directive in `php.ini`.*
+      </p>
+    </div>
+  </div>
+</div>

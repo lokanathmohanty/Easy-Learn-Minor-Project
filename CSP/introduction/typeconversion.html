@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Type Conversion (Type Casting)</h1>
+        
+        <h2 class="title">Forms of Type Conversion</h2>
+        <div class="content">
+            <p><strong>Type conversion</strong>, or **Type Casting**, is the process of converting data from one type to another. In C#, this process occurs in two primary forms:</p>
+            
+            <h3>1. Implicit Type Conversion (Automatic)</h3>
+            <p>These conversions are performed automatically by the C# compiler because they are **type-safe** and there is **no risk of data loss**. This usually happens when converting from a **smaller-sized type to a larger-sized type** (e.g., <code>int</code> to <code>double</code>, or a derived class to a base class).</p>
+            
+            <h3>2. Explicit Type Conversion (Manual)</h3>
+            <p>These conversions must be done explicitly by the user using a **cast operator** (e.g., <code>(int)</code>). This is required when converting between types where there is a **risk of data loss** or incompatibility (e.g., <code>double</code> to <code>int</code>).</p>
+        </div>
+        
+        <h2 class="title">Conversion Methods (Example)</h2>
+        <div class="content example">
+            <p>C# provides dedicated methods for robust explicit conversion, especially when dealing with strings and user input.</p>
+            
+            <h3>Using the Cast Operator (Explicit)</h3>
+            <pre>
+double d = 5673.74; 
+int i;
+
+// Cast operator: (int)
+i = (int)d; // Result: 5673 (decimal part truncated)
+            </pre>
+            
+            <h3>Using the <code>Convert</code> Class</h3>
+            <p>The <code>Convert</code> class provides methods like <code>Convert.ToInt32()</code> for explicit, defined conversions.</p>
+            <pre>
+string str = "123";
+int num = Convert.ToInt32(str); // Result: 123
+            </pre>
+
+            <h3>Using <code>Parse()</code> and <code>TryParse()</code></h3>
+            <ul>
+                <li><strong><code>Parse()</code>:</strong> Converts a string representation of a number to its respective type (e.g., <code>int.Parse(str)</code>). Throws an exception if the string is invalid.</li>
+                <li><strong><code>TryParse()</code>:</strong> The **safest** way to convert a string. It returns a **boolean** (success/failure) and uses an **<code>out</code>** parameter to store the result, thus avoiding exceptions for invalid input.</li>
+            </ul>
+            <pre>
+// TryParse() example
+string str = "789";
+if (int.TryParse(str, out int result)) 
+{
+    // Conversion succeeded
+} 
+            </pre>
+        </div>
+        
+        <h2 class="title">Built-in Conversion Methods</h2>
+        <div class="content">
+            <p>The <code>Convert</code> class provides numerous methods, usually named <code>To[TypeName]</code>, to handle various conversions:</p>
+            <ul>
+                <li><code>ToBoolean</code>: Converts a type to a boolean value.</li>
+                <li><code>ToByte</code>, <code>ToInt16</code>, <code>ToInt32</code>, <code>ToInt64</code>: Convert a type to a specific integer size.</li>
+                <li><code>ToDecimal</code>, <code>ToDouble</code>, <code>ToSingle</code>: Convert to different floating-point types.</li>
+                <li><code>ToString</code>: Converts any type to its string representation (e.g., <code>i.ToString()</code>).</li>
+                <li><code>ToDateTime</code>: Converts appropriate types to date-time structures.</li>
+            </ul>
+        </div>
+    </div>
+</div>

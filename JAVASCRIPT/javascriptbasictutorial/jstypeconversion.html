@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Type Conversions</h1>
+
+    <div class="content">
+      <p>Type Conversions in JavaScript refer to the automatic or explicit process of converting data from one data type to another. These conversions are essential for JavaScript to perform operations and comparisons effectively, as JavaScript is a weakly typed language.</p>
+
+      <p>There are two types of type conversion in JavaScript:</p>
+      <ul>
+        <li>Implicit Type Conversion (Coercion)</li>
+        <li>Explicit Type Conversion</li>
+      </ul>
+
+      <h2>Implicit Type Conversion</h2>
+      <p>When type conversion is done automatically by JavaScript, it is called <strong>implicit type conversion</strong>. For example, when using the <code>+</code> operator with a string and a number, JavaScript converts the number to a string and concatenates.</p>
+
+      <h3>Converting to String (Implicit)</h3>
+      <pre><code>"100" + 24;      // "10024"
+"100" + false;   // "100false"
+"100" + null;    // "100null"
+"100" + undefined; // "100undefined"</code></pre>
+
+      <h3>Converting to Number (Implicit)</h3>
+      <pre><code>'100' / 50;     // 2
+'100' - '50';   // 50
+'100' * true;   // 100
+'100' - false;  // 100
+'tp' / 50;      // NaN</code></pre>
+
+      <h3>Converting to Boolean (Implicit)</h3>
+      <pre><code>!!0;       // false
+!!1;       // true
+!!"";      // false
+!!"Hello"; // true</code></pre>
+
+      <h3>Null to Number (Implicit)</h3>
+      <pre><code>100 + null; // 100
+100 * null; // 0</code></pre>
+
+      <h3>Undefined with Number/Boolean (Implicit)</h3>
+      <pre><code>100 + undefined;   // NaN
+false * undefined; // NaN</code></pre>
+
+      <h2>Explicit Type Conversion</h2>
+      <p>When a programmer manually converts values between types using built-in functions or methods, it is called <strong>explicit type conversion</strong>.</p>
+
+      <h3>Converting to String (Explicit)</h3>
+      <pre><code>String(100);   // "100"
+String(null);  // "null"
+String(true);  // "true"
+
+const num = 100;
+num.toString(); // "100"</code></pre>
+
+      <h3>Converting to Number (Explicit)</h3>
+      <pre><code>Number("200");     // 200
+Number("1000e-2"); // 10
+Number(false);     // 0
+Number(null);      // 0
+Number(undefined); // NaN
++"200";            // 200
+
+parseInt("42");    // 42
+parseFloat("3.14");// 3.14</code></pre>
+
+      <h3>Converting to Boolean (Explicit)</h3>
+      <pre><code>Boolean(100);  // true
+Boolean(0);    // false
+Boolean("");   // false
+Boolean("Hi"); // true
+Boolean(null); // false</code></pre>
+
+      <h3>Converting Date to String/Number</h3>
+      <pre><code>let date = new Date();
+
+Number(date);      // Numeric timestamp
+date.getTime();    // Numeric timestamp
+
+String(date);      // String date
+date.toString();   // String date</code></pre>
+
+      <h2>Conversion Table</h2>
+      <p>The following table summarizes how JavaScript converts values to string, number, and boolean explicitly:</p>
+
+      <table class="conversion-table">
+        <tr>
+          <th>Value</th>
+          <th>String Conversion</th>
+          <th>Number Conversion</th>
+          <th>Boolean Conversion</th>
+        </tr>
+        <tr><td>0</td><td>"0"</td><td>0</td><td>false</td></tr>
+        <tr><td>1</td><td>"1"</td><td>1</td><td>true</td></tr>
+        <tr><td>"1"</td><td>"1"</td><td>1</td><td>true</td></tr>
+        <tr><td>"0"</td><td>"0"</td><td>0</td><td>true</td></tr>
+        <tr><td>""</td><td>""</td><td>0</td><td>false</td></tr>
+        <tr><td>"Hello"</td><td>"Hello"</td><td>NaN</td><td>true</td></tr>
+        <tr><td>true</td><td>"true"</td><td>1</td><td>true</td></tr>
+        <tr><td>false</td><td>"false"</td><td>0</td><td>false</td></tr>
+        <tr><td>null</td><td>"null"</td><td>0</td><td>false</td></tr>
+        <tr><td>undefined</td><td>"undefined"</td><td>NaN</td><td>false</td></tr>
+        <tr><td>[50]</td><td>"50"</td><td>50</td><td>true</td></tr>
+        <tr><td>[50, 100]</td><td>"50,100"</td><td>NaN</td><td>true</td></tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Response Helpers (Pages Router) ⚙️</h1>
+        
+        <div class="content">
+            <h2 class="title">What are Response Helpers?</h2>
+            <p>**Response Helpers** are convenient methods available on the **Server Response Object (<span class="example">`res`</span>)** within Next.js API Routes (Pages Router). They streamline the process of sending an HTTP response by automatically setting necessary headers, status codes, and formatting (like JSON), eliminating the need to do so manually.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Primary Response Helper Methods</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`res.send(body)`</span></td>
+                        <td>Sends a **text** response body. The argument is typically a string.</td>
+                        <td><span class="example">`res.send("Hello, Next.js!")`</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`res.status(code)`</span></td>
+                        <td>Sets the **HTTP status code** (e.g., 200, 404, 500). This method can be chained with other helpers.</td>
+                        <td><span class="example">`res.status(200).send("Success!")`</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`res.json(object)`</span></td>
+                        <td>Sends a **JSON** response. It automatically sets the <span class="example">`Content-Type: application/json`</span> header.</td>
+                        <td><span class="example">`res.json({ message: "Hello!" })`</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`res.redirect(url)`</span></td>
+                        <td>Redirects the client to a new URL using a 302 Found status code.</td>
+                        <td><span class="example">`res.redirect("/about")`</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Example: Using Helpers to Handle Methods</h2>
+            <p>This API Route uses status and send/json helpers to handle different request methods concisely:</p>
+            <pre>// /pages/api/action.ts
+export default function handler(req, res) {
+    const { method } = req;
+
+    if (method === "GET") {
+        // Send JSON response with 200 OK status
+        res.status(200).json({ message: "GET request received." });
+    } else if (method === "POST") {
+        // Send text response with 201 Created status
+        res.status(201).send("POST request received.");
+    } else {
+        // Send 405 Method Not Allowed status and end the response
+        res.status(405).end(); 
+    }
+}</pre>
+        </div>
+    </div>
+</div>

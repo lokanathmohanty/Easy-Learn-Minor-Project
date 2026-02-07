@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Access Modifiers</h1>
+    <div class="content">
+      <p>In Python, access modifiers are used to restrict access to class members (variables and methods) from outside the class. The three types of access modifiers in Python are:</p>
+      <ul>
+        <li><strong>Public:</strong> Members accessible from anywhere.</li>
+        <li><strong>Protected:</strong> Members accessible within the class and derived classes.</li>
+        <li><strong>Private:</strong> Members accessible only within the class.</li>
+      </ul>
+
+      <p>Unlike languages like C++ or Java, Python doesn’t enforce strict access modifiers but follows naming conventions:</p>
+      <ul>
+        <li>Public: no underscore prefix.</li>
+        <li>Protected: single underscore prefix, e.g., <code>_salary</code>.</li>
+        <li>Private: double underscore prefix, e.g., <code>__age</code>.</li>
+      </ul>
+
+      <h2 class="title">Example: Access Modifiers</h2>
+      <pre><code>class Employee:
+    def __init__(self, name, age, salary):
+        self.name = name          # public
+        self.__age = age          # private
+        self._salary = salary     # protected
+
+    def displayEmployee(self):
+        print("Name: ", self.name, ", Age: ", self.__age, ", Salary: ", self._salary)
+
+emp = Employee("Bhavana", 24, 10000)
+
+print(emp.name)        # Works, public
+print(emp._salary)     # Works, protected (convention)
+print(emp.__age)       # Raises AttributeError, private</code></pre>
+
+      <p><em>Output:</em></p>
+      <pre><code>Bhavana
+10000
+AttributeError: 'Employee' object has no attribute '__age'</code></pre>
+
+      <h2 class="title">Name Mangling for Private Members</h2>
+      <p>Python internally changes (mangles) the name of private members by prefixing their names with <code>_ClassName</code>. For example, <code>__age</code> becomes <code>_Employee__age</code>, allowing access if needed (though discouraged).</p>
+      <pre><code>print(emp._Employee__age)  # Access private attribute via mangled name</code></pre>
+
+      <h2 class="title">Property Object and Encapsulation</h2>
+      <p>Python provides the <code>property()</code> function to create managed attributes, supporting getter, setter, and deleter methods to enforce encapsulation.</p>
+
+      <h3 class="title">Using Getter and Setter Methods</h3>
+      <pre><code>class Employee:
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+
+    def get_name(self):
+        return self.__name
+
+    def set_name(self, value):
+        self.__name = value
+
+    def get_age(self):
+        return self.__age
+
+    def set_age(self, value):
+        self.__age = value
+
+    name = property(get_name, set_name, "Name property")
+    age = property(get_age, set_age, "Age property")
+
+emp = Employee("Bhavana", 24)
+print(emp.name, emp.age)    # Access via property
+
+emp.name = "Archana"         # Set via property
+emp.age = 23
+print(emp.name, emp.age)</code></pre>
+
+      <p><em>Output:</em></p>
+      <pre><code>Bhavana 24
+Archana 23</code></pre>
+    </div>
+  </div>
+</div>

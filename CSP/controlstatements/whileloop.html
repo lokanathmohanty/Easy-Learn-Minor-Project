@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# `while` Loop</h1>
+        
+        <h2 class="title">Introduction to the `while` Loop</h2>
+        <div class="content">
+            <p>The **`while` loop** is a fundamental control flow statement in C# that allows a block of code to be executed **repeatedly as long as a specified Boolean condition remains <code>true</code>**. It is best suited for scenarios where the **number of iterations is not known** ahead of time.</p>
+            
+            <p>A key characteristic is that it is a **pre-test loop**: the condition is evaluated **before** the loop body executes. If the condition is initially <code>false</code>, the loop body will **never run**.</p>
+        </div>
+        
+        <h2 class="title">Syntax and Components</h2>
+        <div class="content">
+            <h3>Syntax:</h3>
+            <pre>
+while(condition) {
+   statement(s);
+}
+            </pre>
+            
+            <h3>Three Main Parts:</h3>
+            <ul>
+                <li><strong>Initialization:</strong> Declaring and setting the initial value of the loop control variable (must be done **before** the loop).</li>
+                <li><strong>Condition:</strong> The Boolean expression that is tested before each iteration. The loop runs as long as this is <code>true</code>.</li>
+                <li><strong>Update (Increment/Decrement):</strong> A statement **inside the loop body** that changes the loop control variable, moving it closer to satisfying the termination condition. **Failing to include the update creates an infinite loop.**</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Example: Simple Iteration (10 to 20)</h2>
+        <div class="content example">
+            <p>This demonstrates the standard structure, with initialization before the loop and the update inside the loop body:</p>
+            <pre>
+using System;
+class Program {
+    static void Main(string[] args) {
+        /* Initialization */
+        int a = 10;
+
+        /* Condition: Loop runs while a <= 20 */
+        while (a <= 20) {
+            Console.WriteLine("value of a: {0}", a);
+            /* Update */
+            a++; 
+        }
+    }
+} 
+            </pre>
+            <p><strong>Output:</strong> Values 10 through 20 are printed.</p>
+        </div>
+        
+        <h2 class="title">Common Use Cases</h2>
+        <div class="content">
+            <p>The `while` loop is highly effective for tasks where the stopping point is dynamic:</p>
+            <ul>
+                <li>**Input Validation:** Looping until a user enters a valid or correctly formatted piece of data (e.g., a positive number).</li>
+                <li>**File Processing:** Reading data line by line from a file stream (or network socket) until the **End-of-File** (EOF) condition is reached.</li>
+                <li>**Algorithmic Tasks:** Reversing a number, counting digits, or calculating sums where the condition is based on the evolving state of the variable (e.g., <code>while (num != 0)</code>).</li>
+                <li>**Continuous Tasks:** Running background threads or simulation tasks until an external flag or system condition changes.</li>
+            </ul>
+        </div>
+    </div>
+</div>

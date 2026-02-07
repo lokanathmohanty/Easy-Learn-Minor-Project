@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Identifiers in C</h1>
+    <div class="content">
+      <p>Identifiers are user-defined names used to identify variables, constants, functions, arrays, and other programming elements. They help programmers refer to memory locations by name rather than by numeric address.</p>
+
+      <h2 class="title">Rules for Naming Identifiers</h2>
+      <ul>
+        <li>Identifiers must start with an alphabet (A-Z or a-z) or an underscore (_).</li>
+        <li>Subsequent characters can be alphabets, digits (0-9), or underscores.</li>
+        <li>Keywords (reserved words) cannot be used as identifiers.</li>
+        <li>Identifiers are case-sensitive (e.g., <code>age</code> and <code>Age</code> are different).</li>
+        <li>Identifiers cannot contain special characters or spaces.</li>
+        <li>An identifier can only be used once within the same scope.</li>
+      </ul>
+
+      <h2 class="title">Valid and Invalid Identifiers</h2>
+      <p><strong>Valid:</strong> age, Age, AGE, average_age, __temp, address1, phone_no_personal, _my_name</p>
+      <p><strong>Invalid:</strong> Average-age, my name, $age, #phone, 1mg, phy+maths</p>
+
+      <h2 class="title">Examples</h2>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   int marks = 50;
+   float marks = 65.50;  // Error: duplicate identifier with different type
+   printf("%d %f", marks, marks);
+   return 0;
+}
+      </code></pre>
+      <p>This code produces a compilation error because <code>marks</code> is declared twice with different types.</p>
+
+      <h2 class="title">Scope of Identifiers</h2>
+      <p><strong>Global Identifiers:</strong> Declared outside all functions; accessible throughout the program.</p>
+      <pre><code>
+int marks = 100;  // Global identifier
+
+int main() {
+   printf("The value of marks is %d\n", marks);
+}
+      </code></pre>
+      <p><strong>Local Identifiers:</strong> Declared within functions; accessible only within that function.</p>
+      <pre><code>
+int main() {
+   int marks = 100;  // Local identifier
+   printf("The value of marks is %d\n", marks);
+}
+      </code></pre>
+
+      <h2 class="title">Types of Identifiers</h2>
+      <ul>
+        <li>Variable identifiers</li>
+        <li>Function identifiers</li>
+        <li>User-defined type identifiers (e.g., <code>struct</code>)</li>
+        <li>Typedef identifiers</li>
+        <li>Label identifiers (used with <code>goto</code>)</li>
+        <li>Enum identifiers</li>
+      </ul>
+
+      <h2 class="title">Examples of Different Identifier Types</h2>
+      <pre><code>
+// Variable identifier
+int marks1 = 50, marks2 = 60;
+float avg = (float)(marks1 + marks2) / 2;
+
+// Function identifier
+int average(int marks1, int marks2) {
+   return (marks1 + marks2) / 2;
+}
+
+// User-defined type identifier
+struct student {
+   int rollno;
+   char *name;
+   int m1, m2, m3;
+   float percent;
+};
+struct student s1 = {1, "Raju", 50, 60, 70, 60.00};
+
+// Typedef identifier
+typedef struct student STUDENT;
+STUDENT s1 = {1, "Raju", 50, 60, 70, 60.00};
+
+// Label identifier
+int x = 0;
+begin:
+x++;
+if (x >= 10)
+  goto end;
+printf("%d\n", x);
+goto begin;
+end:
+
+// Enum identifier
+enum week { Mon=10, Tue, Wed, Thur, Fri=10, Sat=16, Sun };
+printf("Value of enum week: %d\n", Mon);
+      </code></pre>
+    </div>
+  </div>
+</div>

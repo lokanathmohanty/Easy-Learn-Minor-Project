@@ -1,0 +1,163 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">C# Quick Guide & Cheat Sheet</h1>
+
+    <div class="content">
+      <h2>I. Basic Structure & Entry Point</h2>
+      <p>The core structure of a C# console application:</p>
+      <div class="example">
+        <pre>
+using System; // Imports the System namespace
+
+namespace MyApp
+{
+    class Program
+    {
+        // Entry point for all C# applications
+        static void Main(string[] args)
+        {
+            /* Code execution starts here */
+            Console.WriteLine("Hello World"); // Output to console
+            Console.ReadKey();               // Waits for a key press (VS.NET only)
+        }
+    }
+}</pre>
+      </div>
+      <p><strong>Case Sensitivity:</strong> C# is **case sensitive**. All statements must end with a semicolon (<code>;</code>).</p>
+      <p><strong>Comments:</strong></p>
+      <ul>
+        <li><code>// Single-line comment</code></li>
+        <li><code>/* Multi-line comment */</code></li>
+      </ul>
+    </div>
+
+    <h2 class="title">II. Data Types</h2>
+    <div class="content">
+      <p>C# is strongly typed. Data types are categorized as Value Types (stored on the stack) and Reference Types (stored on the heap).</p>
+
+      <h3>Value Types (Basic)</h3>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Represents</th>
+            <th>Size</th>
+            <th>Example Literal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>int</code></td>
+            <td>32-bit signed integer</td>
+            <td>4 bytes</td>
+            <td><code>100</code></td>
+          </tr>
+          <tr>
+            <td><code>bool</code></td>
+            <td>Boolean value (True/False)</td>
+            <td>1 bit</td>
+            <td><code>true</code>, <code>false</code></td>
+          </tr>
+          <tr>
+            <td><code>char</code></td>
+            <td>16-bit Unicode character</td>
+            <td>2 bytes</td>
+            <td><code>'A'</code></td>
+          </tr>
+          <tr>
+            <td><code>float</code></td>
+            <td>32-bit floating point</td>
+            <td>4 bytes</td>
+            <td><code>10.5f</code> (requires <code>f</code>)</td>
+          </tr>
+          <tr>
+            <td><code>double</code></td>
+            <td>64-bit floating point</td>
+            <td>8 bytes</td>
+            <td><code>10.5</code> (default)</td>
+          </tr>
+          <tr>
+            <td><code>decimal</code></td>
+            <td>128-bit precise decimal (for money)</td>
+            <td>16 bytes</td>
+            <td><code>10.5m</code> (requires <code>m</code>)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Reference Types (Basic)</h3>
+      <ul>
+        <li>**<code>string</code>**: Sequence of Unicode characters. Alias for <code>System.String</code>. <br>Example: <code>string name = "Planetary Science";</code></li>
+        <li>**<code>object</code>**: The ultimate base class for all types. <br>Example: <code>object obj = 100;</code> (This is **boxing**.)</li>
+        <li>**<code>dynamic</code>**: Type checking takes place at run-time, bypassing compile-time checks.</li>
+      </ul>
+
+      <h3>Variable Declaration</h3>
+      <p>Variables must be declared before use. The **<code>var</code>** keyword can be used for implicitly typed local variables (type inferred by the compiler).</p>
+      <div class="example">
+        <pre>
+int age = 25;
+const double Pi = 3.14159; // Constant (value cannot change)
+var message = "Hello";    // Compiler knows 'message' is a string
+</pre>
+      </div>
+    </div>
+
+    <h2 class="title">III. Control Flow (Conditionals & Loops)</h2>
+    <div class="content">
+      <h3>Conditional Statements</h3>
+      <div class="example">
+        <pre>
+// IF-ELSE IF-ELSE
+if (score >= 90) {
+    Console.WriteLine("A");
+} else if (score >= 80) {
+    Console.WriteLine("B");
+} else {
+    Console.WriteLine("C");
+}
+
+// SWITCH STATEMENT
+switch (day) {
+    case 1:
+        Console.WriteLine("Monday");
+        break; // Required to exit the switch block
+    case 7:
+        Console.WriteLine("Sunday");
+        break;
+    default:
+        Console.WriteLine("Other");
+        break;
+}</pre>
+      </div>
+
+      <h3>Loops (Iteration)</h3>
+      <div class="example">
+        <pre>
+// FOR Loop (Known number of iterations)
+for (int i = 0; i &lt; 5; i++) {
+    Console.Write(i + " "); // Output: 0 1 2 3 4
+}
+
+// FOREACH Loop (Iterating collections/arrays)
+int[] numbers = {10, 20, 30};
+foreach (int num in numbers) {
+    Console.WriteLine(num);
+}
+
+// WHILE Loop (Condition checked before each iteration)
+int j = 0;
+while (j &lt; 3) {
+    Console.WriteLine(j);
+    j++;
+}
+
+// DO-WHILE Loop (Executes code block at least once)
+do {
+    // ...
+} while (condition);
+</pre>
+      </div>
+    </div>
+  </div>
+</div>q

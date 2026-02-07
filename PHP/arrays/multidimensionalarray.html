@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Multidimensional Arrays</h1>
+
+    <div class="content">
+      <p>
+        A **Multidimensional Array** is an array where each element contains another array. This structure is used to store complex data like tables, matrices, or hierarchical data structures. A 2D array is the most common form, often representing data in rows and columns.
+      </p>
+
+      <h2>Syntax and Structure</h2>
+      <p>Multidimensional arrays can be a mix of indexed and associative arrays at different levels (dimensions).</p>
+
+      <h3>2D Indexed Array (Array of Arrays)</h3>
+      <p>The outer array and all inner arrays use numerical indices.</p>
+      <div class="example">
+        <p>
+          <code>$arr = [</code><br>
+          <code>&nbsp;&nbsp;&nbsp;[1, 2, 3], // Row 0</code><br>
+          <code>&nbsp;&nbsp;&nbsp;[4, 5, 6]  // Row 1</code><br>
+          <code>];</code>
+        </p>
+      </div>
+
+      <h3>2D Associative Array (Dictionary of Dictionaries)</h3>
+      <p>The outer array uses string keys (e.g., "row1"), and the inner arrays also use string keys (e.g., "key11").</p>
+      <div class="example">
+        <p>
+          <code>$arr = [</code><br>
+          <code>&nbsp;&nbsp;&nbsp;"row1" => ["key11" => "val11"],</code><br>
+          <code>&nbsp;&nbsp;&nbsp;"row2" => ["key21" => "val21"]</code><br>
+          <code>];</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Accessing Elements</h2>
+      <p>Elements are accessed by chaining the keys/indices, one for each dimension.</p>
+
+      <h3>Indexed 2D Access</h3>
+      <div class="example">
+        <p>
+          <code>$tbl = [[1, 2, 3], [10, 20, 30]];</code><br>
+          <code>$tbl[1][2]</code> $\rightarrow$ Gets the element in the second row (index **1**), third column (index **2**), which is **30**.
+        </p>
+        <p class="content">Output: Value at [2], [2] :300</p>
+      </div>
+
+      <h3>Associative 2D Access</h3>
+      <div class="example">
+        <p>
+          <code>$tbl["row2"]["key22"]</code> $\rightarrow$ Gets the value associated with "key22" inside the array keyed by "row2".
+        </p>
+        <p class="content">Output: value at row2 - key22 is val22</p>
+      </div>
+
+      <hr>
+
+      <h2>Traversing Multidimensional Arrays</h2>
+
+      <h3>1. Nested `foreach` Loops (Standard for 2D)</h3>
+      <p>You need one nested `foreach` loop for each dimension. For a 2D array, the outer loop iterates over the rows, and the inner loop iterates over the elements (columns) within each row.</p>
+      <div class="example">
+        <p>
+          **Indexed 2D Traversal:**<br>
+          <code>foreach ($tbl as $row) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;foreach ($row as $elem) { echo $elem; }</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <h3>2. Recursive Traversal (For N-Dimensional Arrays)</h3>
+      <p>
+        For arrays with an unknown or high number of dimensions (3D, 4D, etc.), a **recursive function** is the most flexible solution. The function checks if an element is itself an array using **`is_array($v)`**. If it is, the function calls itself; otherwise, it processes the scalar value.
+      </p>
+      <div class="example">
+        <p>
+          <code>function showarray($arr){</code><br>
+          <code>&nbsp;&nbsp;&nbsp;foreach ($arr as $k=>$v){</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (is_array($v)){</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showarray($v); // Recurse</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "$k => $v "; // Print scalar</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code><br>
+          <code>&nbsp;&nbsp;&nbsp;}</code><br>
+          <code>}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

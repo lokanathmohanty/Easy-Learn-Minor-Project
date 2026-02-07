@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Interfaces</h1>
+        <div class="content">
+            <p>An **interface** in PHP serves as a **template** or a contract for classes. It defines a set of methods (along with their arguments and return types) that a class must implement.</p>
+            
+            <h2 class="title">Defining and Using Interfaces</h2>
+            <ul>
+                <li>An interface is defined using the **<code>interface</code>** keyword.</li>
+                <li>Interface methods **cannot have a body** (no functionality is defined).</li>
+                <li>A class uses the **<code>implements</code>** keyword to adopt an interface (e.g., <code>class MyClass implements MyInterface</code>).</li>
+                <li>The implementing class **must** provide a concrete, public implementation for **all** methods declared in the interface.</li>
+                <li>All methods declared in an interface **must be public**.</li>
+                <li>Interfaces can define **constants** (e.g., <code>const TYPE = "Value";</code>).</li>
+            </ul>
+
+            <h2 class="title">Interfaces and Inheritance</h2>
+            <p>PHP does not support extending multiple classes (multiple inheritance of state), but it **does** support implementing multiple interfaces. This is a powerful feature for establishing contracts across disparate classes.</p>
+            <p>A class can both **extend** a parent class and **implement** one or more interfaces simultaneously:</p>
+            <p><code>class ChildClass extends ParentClass implements InterfaceA, InterfaceB {...}</code></p>
+            
+            <h2 class="title">Interface vs. Abstract Class</h2>
+            <p>While similar, interfaces and abstract classes differ:</p>
+            <ul>
+                <li>**Methods:** An interface can only have abstract methods (no bodies). An abstract class can have both abstract and normal (concrete) methods.</li>
+                <li>**Properties:** An abstract class can have properties (public, private, protected). An interface cannot declare properties, only constants.</li>
+                <li>**Keywords:** Abstract classes are <code>extended</code>; interfaces are <code>implemented</code>.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">The Shape Contract</h3>
+            <p>The <code>shape</code> interface mandates that any class representing a geometric shape must have a public <code>area()</code> method that returns a float. This enforces a consistent method signature across all shapes, regardless of how the area is calculated.</p>
+            
+            <pre><code>
+interface shape {
+   // Defines a contract: every implementing class must have this method.
+   public function area(): float; 
+}
+
+class circle implements shape {
+   // Must implement area() with the exact signature.
+   public function area(): float {
+      return pow($this->radius, 2) * pi();
+   }
+   // ... other methods and properties
+}
+
+class square implements shape {
+   // Must implement area() with the exact signature.
+   public function area(): float {
+      return pow($this->side, 2);
+   }
+   // ... other methods and properties
+}
+
+// Both circle and square objects can be treated interchangeably
+// when calling the area() method because they adhere to the 'shape' contract.
+            </code></pre>
+        </div>
+    </div>
+</div>

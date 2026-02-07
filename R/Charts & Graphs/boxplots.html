@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Boxplots</h1>
+    <div class="content">
+      <p>
+        Boxplots show the distribution of data by dividing it into quartiles. They display the minimum, maximum, median, first quartile, and third quartile, and can compare distributions across different data sets by drawing multiple boxplots.
+      </p>
+
+      <h2 class="title">Basic Syntax</h2>
+      <pre><code>boxplot(x, data, notch, varwidth, names, main)</code></pre>
+      <ul>
+        <li><strong>x</strong>: Vector or formula (e.g., mpg ~ cyl)</li>
+        <li><strong>data</strong>: Data frame containing values</li>
+        <li><strong>notch</strong>: TRUE to draw notches indicating median confidence</li>
+        <li><strong>varwidth</strong>: TRUE to vary box width by sample size</li>
+        <li><strong>names</strong>: Group labels for boxplots</li>
+        <li><strong>main</strong>: Title of the plot</li>
+      </ul>
+
+      <h2 class="title">Basic Boxplot Example</h2>
+      <pre><code># Use mtcars data for mpg and cyl columns
+input &lt;- mtcars[, c('mpg', 'cyl')]
+print(head(input))
+
+# Save png chart file
+png(file = "boxplot.png")
+boxplot(mpg ~ cyl, data = mtcars, xlab = "Number of Cylinders", ylab = "Miles Per Gallon", main = "Mileage Data")
+dev.off()
+</code></pre>
+
+      <h2 class="title">Boxplot with Notch and Custom Colors</h2>
+      <pre><code>png(file = "boxplot_with_notch.png")
+boxplot(mpg ~ cyl, data = mtcars,
+  xlab = "Number of Cylinders",
+  ylab = "Miles Per Gallon",
+  main = "Mileage Data",
+  notch = TRUE,
+  varwidth = TRUE,
+  col = c("green", "yellow", "purple"),
+  names = c("High", "Medium", "Low")
+)
+dev.off()
+</code></pre>
+      <p>
+        These scripts create and save boxplots comparing mileage against cylinder numbers, including visual features like notches, variable widths, and custom colors.
+      </p>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

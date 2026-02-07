@@ -1,0 +1,89 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">C - Internal and External Linkage</h1>
+    <div class="content">
+      <p>In C, linkage is a concept that explains whether or not names or identifiers can refer to the same entity throughout the entire program or a single translation unit. It may sound similar to program scope but it is not so. To understand this concept better, let us dig deeper into the compilation process.</p>
+
+      <h2 class="title">What is a Translation Unit?</h2>
+      <p>A translation unit is a file that has source code, header files, and other dependencies. All of these sources are grouped together to form a single translation unit which can then be used by the compiler to produce one single executable object.</p>
+
+      <h2 class="title">What is Linkage?</h2>
+      <p>Assume there is a C program with many source code files. Each source file is compiled sequentially. In the compilation process, the last stage is linking, where multiple machine code files are used to produce an executable object code. It is handled by a program called linker.</p>
+      <p>Linkage is a property that describes how variables should be linked by the linker.</p>
+
+      <h2 class="title">Variable Linkage in C</h2>
+      <p>In C, the linkage can control whether a variable can be used only in the file where it is declared or it can also be used in other files of the program.</p>
+      <p>Linkage tells us if a variable's name is limited to one file or can be shared across multiple files, helping us manage how variables are connected in a program.</p>
+
+      <h2 class="title">Types of Linkage in C</h2>
+      <ul>
+        <li>Internal Linkage</li>
+        <li>External Linkage</li>
+      </ul>
+
+      <h2 class="title">Internal Linkage</h2>
+      <p>Internal linkage refers to everything only in the scope of a translation unit. An identifier that implements internal linkage is not accessible outside the translation unit in which it is declared.</p>
+      <p>Internal Linkage is implemented using the <code>static</code> keyword, and its value is stored in RAM.</p>
+
+      <h3 class="title">Example: Internal Linkage</h3>
+      <p>File: <strong>items.c</strong></p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+// Variable with internal linkage
+static int items = 10;
+      </code></pre>
+
+      <p>File: <strong>display.c</strong> (same translation unit)</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+#include "items.c"
+
+int main(){
+   printf("total item is: %d", items);
+   return 0;
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>
+total item is: 10
+      </code></pre>
+
+      <h2 class="title">External Linkage</h2>
+      <p>An identifier implementing external linkage exists beyond a particular translation unit and is accessible throughout the entire program. It is the default linkage for global variables and functions.</p>
+      <p>The <code>extern</code> keyword is used to declare an external variable in a different translation unit.</p>
+
+      <h3 class="title">Example: External Linkage</h3>
+      <p>File: <strong>items.c</strong></p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+// Global variable with external linkage
+int items = 10;
+      </code></pre>
+
+      <p>File: <strong>display.c</strong></p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+// Tells the compiler that the variable
+// has external linkage
+extern int items;
+
+int main(){
+   printf("total item is: %d", items);
+   return 0;
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>
+total item is: 10
+      </code></pre>
+
+      <h2 class="title">Conclusion</h2>
+      <p>Linkage in C defines whether variables and functions can be accessed only within a single file or across multiple files of a program. By using internal linkage (<code>static</code>) and external linkage (<code>extern</code>), we can control the scope and accessibility of identifiers. It ensures better program structure and modularity.</p>
+    </div>
+  </div>
+</div>

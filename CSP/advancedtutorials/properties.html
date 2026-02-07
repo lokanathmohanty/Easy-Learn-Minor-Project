@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Properties: Get and Set Accessors</h1>
+        
+        <div class="content">
+            <h2 class="title">What are Properties? 🗝️</h2>
+            <p>**Properties** are named members of classes, structures, and interfaces that act as an extension of **fields** (member variables). They are accessed using the same syntax as fields, but they contain **accessors** (<span class="example">`get`</span> and <span class="example">`set`</span>) which contain executable logic.</p>
+            <p>Properties provide a controlled and flexible way to read, write, or compute the values of underlying **private fields** (often called the *backing store* or *backing field*), adhering to the principle of **encapsulation**.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Accessors: <span class="example">`get`</span> and <span class="example">`set`</span></h2>
+            <p>The core of a property is its accessors. A property can have a <span class="example">`get`</span> accessor, a <span class="example">`set`</span> accessor, or both.</p>
+            
+            <h3 class="title">The <span class="example">`get`</span> Accessor (Reading)</h3>
+            <ul>
+                <li>It is used to **read** the property's value.</li>
+                <li>It executes when the property is read (e.g., <span class="example">`Console.WriteLine(s.Age)`</span>).</li>
+                <li>It must end with a <span class="example">`return`</span> statement, returning a value of the property's type.</li>
+            </ul>
+            
+            <h3 class="title">The <span class="example">`set`</span> Accessor (Writing)</h3>
+            <ul>
+                <li>It is used to **write** or modify the property's value.</li>
+                <li>It executes when the property is assigned a new value (e.g., <span class="example">`s.Age = 10`</span>).</li>
+                <li>The new value being assigned is implicitly available via the contextual keyword **<span class="example">`value`</span>**.</li>
+            </ul>
+            
+            <h3 class="title">Example of Full Property Implementation</h3>
+            <pre>// Declares an Age property that controls access to the private 'age' field
+public int Age { 
+   get {
+      return age; // Reads the private backing field
+   }
+   set {
+      age = value; // Writes to the private backing field, where 'value' is the assigned input
+   }
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Property Variations</h2>
+            
+            <h3 class="title">Auto-Implemented Property (Automatic Property) ✨</h3>
+            <p>When no extra logic (like validation) is needed in the accessors, you can use a concise syntax. The compiler automatically creates a hidden, private backing field for you.</p>
+            <pre>// Auto-implemented properties: The compiler generates the private backing field.
+public string Name { get; set; }
+public int Age { get; set; }</pre>
+
+            <h3 class="title">Read-Only and Write-Only Properties</h3>
+            <p>Properties can enforce controlled access by omitting an accessor:</p>
+            <ul>
+                <li>**Read-Only:** Only has a <span class="example">`get`</span> accessor (or a private <span class="example">`set`</span> accessor), meaning its value can only be read from outside the class.</li>
+                <li>**Write-Only:** Only has a <span class="example">`set`</span> accessor, meaning its value can only be written to, but not directly read (useful for secure setting of data like passwords).</li>
+            </ul>
+            
+            <h3 class="title">Property Validation (The Power of <span class="example">`set`</span>)</h3>
+            <p>A key advantage of properties is the ability to include validation logic inside the <span class="example">`set`</span> accessor, preventing assignment of invalid values.</p>
+            <pre>public int Age {
+   get { return age; }
+   set {
+      if (value < 18) // Validation Check
+         throw new ArgumentException("Minimum age is 18.");
+      age = value; // Only assign if valid
+   }
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Abstract Properties (In Abstract Classes)</h2>
+            <p>An **abstract property** is declared within an <span class="example">`abstract`</span> class (or interface). It does not provide an implementation for the accessors; it only acts as a **contract**, forcing derived concrete classes to provide the full implementation using the **<span class="example">`override`</span>** keyword.</p>
+            <pre>// Abstract class declaration
+public abstract class Person {
+   public abstract string Name {
+      get; // No implementation here
+      set; // No implementation here
+   }
+}</pre>
+            <pre>// Derived class implementation
+public class Student : Person {
+   private string name = "N.A";
+   public override string Name {
+      get { return name; }
+      set { name = value; }
+   }
+}</pre>
+        </div>
+    </div>
+</div>

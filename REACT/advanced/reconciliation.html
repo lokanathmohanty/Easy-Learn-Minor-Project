@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Reconciliation</h1>
+
+    <div class="content">
+      <p>
+        Reconciliation is the internal process React uses to update the DOM efficiently. 
+        React first creates a virtual DOM and compares it with the previous virtual DOM 
+        using a <b>diffing algorithm</b>. Only the necessary parts of the actual DOM are updated, 
+        leading to better performance.
+      </p>
+      <p>
+        While the diffing algorithm works internally in React, understanding its basics 
+        helps developers write optimized applications.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Diffing Algorithm</h2>
+      <p>React applies several strategies to compare and update DOM elements:</p>
+
+      <h3>1. Elements of different type</h3>
+      <p>
+        If an element changes its type (e.g., from <code>&lt;div&gt;</code> to 
+        <code>&lt;p&gt;</code>), React replaces the entire subtree.
+      </p>
+      <pre><code>&lt;!-- Before --&gt;
+&lt;div&gt;
+   &lt;Content /&gt;
+&lt;/div&gt;
+
+&lt;!-- After --&gt;
+&lt;p&gt;
+   &lt;Content /&gt;
+&lt;/p&gt;</code></pre>
+
+      <h3>2. Elements of same type (attributes)</h3>
+      <p>
+        If the type is the same, React only updates changed attributes.
+      </p>
+      <pre><code>&lt;!-- Before --&gt;
+&lt;div className="someClass"&gt;
+   &lt;Content /&gt;
+&lt;/div&gt;
+
+&lt;!-- After --&gt;
+&lt;div className="someOtherClass"&gt;
+   &lt;Content /&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>3. Elements of same type (style changes)</h3>
+      <p>
+        If only style properties differ, React updates just those properties.
+      </p>
+      <pre><code>&lt;!-- Before --&gt;
+&lt;div style={{fontFamily: 'Arial'}}&gt;
+   &lt;p&gt; ... &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- After --&gt;
+&lt;div style={{color: 'red', fontFamily: 'Arial'}}&gt;
+   &lt;p&gt; ... &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>4. Component elements of same type</h3>
+      <p>
+        If React encounters the same component type, it triggers 
+        lifecycle methods (like <code>componentWillUpdate</code>) 
+        and re-renders the component with new props or state.
+      </p>
+
+      <h3>5. Collection of child elements</h3>
+      <p>
+        When React compares lists, it checks elements in order. If the first child changes, 
+        React may re-render the entire list.
+      </p>
+      <pre><code>&lt;!-- Before --&gt;
+&lt;ul&gt;
+   &lt;li&gt;Peter&lt;/li&gt;
+   &lt;li&gt;Olivia&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- After --&gt;
+&lt;ul&gt;
+   &lt;li&gt;John&lt;/li&gt;
+   &lt;li&gt;Peter&lt;/li&gt;
+   &lt;li&gt;Olivia&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+      <p>
+        To solve this, React uses the <code>key</code> attribute to uniquely identify elements.
+      </p>
+      <pre><code>&lt;!-- Before --&gt;
+&lt;ul&gt;
+   &lt;li key="1"&gt;Peter&lt;/li&gt;
+   &lt;li key="2"&gt;Olivia&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- After --&gt;
+&lt;ul&gt;
+   &lt;li key="3"&gt;John&lt;/li&gt;
+   &lt;li key="1"&gt;Peter&lt;/li&gt;
+   &lt;li key="2"&gt;Olivia&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Summary</h2>
+      <ul>
+        <li>React uses a virtual DOM and diffing algorithm to minimize DOM updates.</li>
+        <li>Elements with different types replace entire subtrees.</li>
+        <li>Same type elements only update changed attributes or styles.</li>
+        <li>Keys help React optimize updates in lists of children.</li>
+        <li>Understanding reconciliation helps developers write more efficient React apps.</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Nested Routing 📂➡️📄</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Nested Routing?</h2>
+            <p>**Nested routing** is the technique of defining routes that are structured hierarchically—routes existing *within* other routes. This structure mirrors the organization of your application's UI, where sections of the interface are contained within larger layouts.</p>
+            
+            <h3 class="title">Key Benefits:</h3>
+            <ul>
+                <li>**Hierarchical Structure:** The URL path directly reflects the organization of your content, making navigation logical.</li>
+                <li>**Code Reusability:** Facilitates the sharing of parent layout components (like a common sidebar or navigation) across all child routes.</li>
+                <li>**Seamless Experience:** Allows for smooth transitions between related pages without unnecessary page reloads, enhancing the user experience.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Implementing Nested Routing in Next.js (App Router)</h2>
+            <p>In Next.js, nested routing is achieved through the **file-system structure** inside the **<span class="example">`/app`</span>** directory. Every time you create a folder within an existing route folder, you create a new nested route segment.</p>
+            
+            <h3 class="title">How Folder Structure Maps to Routes:</h3>
+            <p>A route is defined by the hierarchy of folders leading to a **<span class="example">`page.jsx`</span>** (or <span class="example">`page.tsx`</span>) file.</p>
+            <pre>app/
+ products/ 
+     page.jsx            // Route: /products
+     electronics/ 
+         page.jsx        // Route: /products/electronics</pre>
+            
+            <h3 class="title">Creating a Simple Nested Page Example:</h3>
+            <p>To create the route <span class="example">`/about`</span>, you simply create an <span class="example">`about`</span> folder inside the <span class="example">`/app`</span> directory and place the page component file within it.</p>
+            
+            <ul>
+                <li>**File Path:** <span class="example">`app/about/page.js`</span></li>
+                <li>**URL Path:** <span class="example">`http://localhost:3000/about`</span></li>
+            </ul>
+            <pre>// app/about/page.js file
+export default function About() {
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;About Us&lt;/h1&gt;
+            &lt;p&gt;Welcome to the about page!&lt;/p&gt;
+        &lt;/div&gt;
+    );
+}</pre>
+        </div>
+    </div>
+</div>

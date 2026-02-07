@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js API Middlewares (Pages Router) 🛡️</h1>
+        
+        <div class="content">
+            <h2 class="title">What are API Middlewares?</h2>
+            <p>**API Middlewares** are **reusable functions** that execute *before* the main logic of a Next.js API Route (Pages Router). They are designed to **pre-process** the incoming request, inspect or modify data, validate input, and handle common concerns like authentication or logging, ensuring that the main API handler only receives validated and authorized requests.</p>
+            
+            <h3 class="title">Key Roles:</h3>
+            <ul>
+                <li>**Authentication/Authorization:** Checking for valid tokens or API keys.</li>
+                <li>**Input Validation:** Ensuring request bodies or query parameters meet requirements.</li>
+                <li>**Logging & Rate Limiting:** Recording requests or blocking excessive traffic.</li>
+                <li>**Centralization:** Reduces code duplication across multiple API files.</li>
+                <li>**Early Termination:** Can stop the request processing immediately (e.g., sending a `401 Unauthorized` response) without ever calling the main handler.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Creating an Authentication Middleware Function</h2>
+            <p>An API middleware function typically takes the primary API handler function as an argument and returns a new function that executes the middleware logic before conditionally calling the original handler.</p>
+            
+            <h3 class="title">Example: API Key Checker</h3>
+            <p>This middleware checks if a valid <span class="example">`API_KEY`</span> is present in the request headers or query parameters. If validation fails, it terminates the request immediately with a **401 Unauthorized** status.</p>
+            <pre>// File: middlewares/authMiddleware.js
+export default function authMiddleware(handler) {
+    // Returns the enhanced request handler function
+    return (req, res) => {
+      const headerApiKey = req.headers.apikey;
+      const queryApiKey = req.query.apiKey;
+      const validApiKey = process.env.API_KEY; // Fetched from .env
+
+      // Check for missing or invalid key
+      if ( (!headerApiKey && !queryApiKey) || 
+           (headerApiKey !== validApiKey && 
+            queryApiKey !== validApiKey) ) {
+        
+        // Terminate early if unauthorized
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
+      
+      // If authorized, pass the request to the original API handler
+      return handler(req, res);
+    };
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Using the Middleware in an API Route</h2>
+            <p>To apply the middleware, you simply wrap the API Route's default export function with the middleware function.</p>
+            <pre>// File: pages/api/hello.js
+import authMiddleware from '../../middlewares/authMiddleware';
+
+// The authMiddleware function wraps and protects the main handler
+export default authMiddleware(function handler(req, res) {
+    // This code only runs if the authMiddleware successfully passes the request
+    res.status(200).json({ message: 'Hello, Next.js API!' });
+});</pre>
+            <p>When a client calls <span class="example">`/api/hello`</span>:</p>
+            <ol>
+                <li>The **`authMiddleware`** runs first.</li>
+                <li>If the API key is missing or invalid, it returns a 401 response.</li>
+                <li>If the API key is valid, the original **`handler`** function is called, returning the "Hello" message.</li>
+            </ol>
+        </div>
+    </div>
+</div>

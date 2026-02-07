@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Rest Parameter</h1>
+    <div class="content">
+
+      <h2>Rest Parameter</h2>
+      <p>The rest parameter in JavaScript allows a function to accept a variable number of arguments as an array. When the number of arguments is not fixed, you can use the rest parameters.</p>
+
+      <p>The rest parameter is represented with three dots (<code>...</code>) followed by a parameter name. This parameter name is the array that contains all the remaining arguments.</p>
+
+      <h2>Rest Parameter Syntax</h2>
+      <pre><code>function functionName(para1, para2, ...theArgs) {
+   // function body
+}
+</code></pre>
+      <p>Here, <b>para1</b> and <b>para2</b> are ordinary parameters while <b>theArgs</b> is a rest parameter. The rest parameter collects the remaining arguments and assigns them to an array.</p>
+
+      <p><b>Important Rules:</b></p>
+      <ul>
+        <li>The rest parameter should always be the last parameter in the function definition.</li>
+        <li>A function can have only one rest parameter.</li>
+      </ul>
+
+      <h2>Example: Variable Length Parameter List</h2>
+      <pre><code>&lt;script&gt;
+function sum(...nums) {
+  let totalSum = 0;
+  for (let num of nums) {
+    totalSum += num;
+  }
+  return totalSum;
+}
+console.log(sum(10, 20, 30, 40)); // 100
+console.log(sum(10, 20));         // 30
+console.log(sum());               // 0
+&lt;/script&gt;
+</code></pre>
+
+      <h2>Example: Finding the Maximum Number</h2>
+      <p>The rest parameter simplifies the process of finding the maximum number among a set of given numbers.</p>
+      <pre><code>&lt;script&gt;
+function getMax(...args) {
+  return Math.max(...args);
+}
+console.log(getMax(10, 20, 30, 40)); // 40
+console.log(getMax(10, 20, 30));     // 30
+&lt;/script&gt;
+</code></pre>
+
+      <h2>Spread Operator and Rest Parameters</h2>
+      <p>The spread operator (<code>...</code>) is closely related to rest parameters. While the rest parameter collects function arguments into an array, the spread operator spreads array elements into individual arguments.</p>
+
+      <pre><code>&lt;script&gt;
+function multiply(a, b, c) {
+  return a * b * c;
+}
+const numbers = [2, 3, 4];
+console.log(multiply(...numbers)); // 24
+&lt;/script&gt;
+</code></pre>
+
+      <h2>Rest Parameter vs. Arguments Object</h2>
+      <p>Both can handle variable-length parameter lists, but rest parameters are more concise and modern.</p>
+
+      <h3>Using Rest Parameters</h3>
+      <pre><code>&lt;script&gt;
+function sum(...numbers) {
+  return numbers.reduce((total, num) =&gt; total + num, 0);
+}
+console.log(sum(1, 2, 3, 4, 5)); // 15
+&lt;/script&gt;
+</code></pre>
+
+      <h3>Using Arguments Object</h3>
+      <pre><code>&lt;script&gt;
+function sum() {
+  const argsArray = Array.from(arguments);
+  return argsArray.reduce((total, num) =&gt; total + num, 0);
+}
+console.log(sum(1, 2, 3, 4, 5)); // 15
+&lt;/script&gt;
+</code></pre>
+
+      <h2>Destructuring with Rest Parameter</h2>
+      <p>The destructuring assignment can be used with rest parameters to extract values from the array of arguments.</p>
+      <pre><code>&lt;script&gt;
+function getFirstTwo(...numbers) {
+  const [first, second] = numbers;
+  return `First: ${first}, Second: ${second}`;
+}
+console.log(getFirstTwo(1, 2, 3, 4, 5));
+// Output: First: 1, Second: 2
+&lt;/script&gt;
+</code></pre>
+
+    </div>
+  </div>
+</div>

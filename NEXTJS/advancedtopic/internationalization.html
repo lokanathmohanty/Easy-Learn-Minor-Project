@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Internationalization (i18n)</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Internationalization?</h2>
+            <p><strong>Internationalization (i18n)</strong> is a built-in Next.js feature that enables the creation of **multi-language websites**. It manages content and **routing** based on the user's language preference (locale). By setting it up, Next.js automatically handles routes like <code>/en/about</code> and <code>/es/about</code> for the same page component.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Features of Internationalization</h2>
+            <p>The key features provided by Next.js i18n include:</p>
+            <ul>
+                <li><strong>Automatic Locale Detection:</strong> Next.js detects the user's preferred language from their browser settings and sets the appropriate locale.</li>
+                <li><strong>Locale-Aware Routing:</strong> It handles routing such that different locale-prefixed URLs (e.g., <code>/en/page</code> and <code>/es/page</code>) are served by the same underlying page component.</li>
+                <li><strong>Default Locale:</strong> A fallback locale can be defined in <code>next.config.js</code> to be used when the user's locale is not supported.</li>
+                <li><strong>Multiple Supported Locales:</strong> Supports defining a wide range of locales (e.g., <code>en</code>, <code>es</code>, <code>fr</code>).</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Setup Internationalization</h2>
+            
+            <h3>Step 1: Modify Next.js Config File</h3>
+            <p>To enable the feature, the **<code>i18n</code>** object must be added to <code>next.config.js</code>, defining the supported languages (<code>locales</code>) and the primary language (<code>defaultLocale</code>).</p>
+            <pre class="example"><code>// next.config.js
+
+module.exports = {
+  i18n: {
+    locales: ['en', 'es', 'fr'], // Supported languages
+    defaultLocale: 'en',         // Default language
+  },
+};</code></pre>
+            
+            <h3>Step 2: Routing and Linking</h3>
+            <p>The Next.js **<code>&lt;Link&gt;</code>** component is used for navigation. You can specify a target locale using the **<code>locale</code>** attribute when linking to a page.</p>
+            <pre class="example"><code>import Link from 'next/link';
+export default function HomePage() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Welcome&lt;/h1&gt;
+      &lt;Link href="/about" locale="es"&gt;
+        Go to About in Spanish
+      &lt;/Link&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+            <h3>Step 3: Setup Translation Strategies</h3>
+            <p>Next.js handles routing but **does not include a content translation system**. External libraries must be integrated to manage translation strings, keys, and loading translation files. Examples include **<code>next-i18next</code>** or **<code>next-translate</code>**.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Locale Strategies</h2>
+            <p>Next.js offers two primary methods for handling locales in URLs:</p>
+            
+            <h3>Sub-path Routing</h3>
+            <p>The locale information is included as a prefix in the URL path.</p>
+            <ul>
+                <li class="example"><strong>Example URL:</strong> <code>https://example.com/fr/blog</code></li>
+                <li class="example">The default locale (e.g., <code>en-US</code>) is typically served without the locale prefix (e.g., <code>/blog</code>).</li>
+            </ul>
+            <pre class="example"><code>// Example Configuration
+module.exports = {
+  i18n: {
+    locales: ['en-US', 'fr', 'nl-NL'],
+    defaultLocale: 'en-US',
+  },
+}</code></pre>
+            
+            <h3>Domain Routing</h3>
+            <p>The locale is determined by the domain name itself, allowing for different language versions on entirely separate domains.</p>
+            <ul>
+                <li class="example"><strong>Example URL:</strong> <code>https://example.fr/about</code></li>
+                <li class="example">A single domain can also host multiple locales via sub-paths if configured (e.g., <code>example.nl/nl-BE/blog</code>).</li>
+            </ul>
+            <pre class="example"><code>// Example Configuration (Snippet)
+i18n: {
+  locales: ['en-US', 'fr', 'nl-NL', 'nl-BE'],
+  defaultLocale: 'en-US',
+  domains: [
+    { domain: 'example.com', defaultLocale: 'en-US' },
+    { domain: 'example.fr', defaultLocale: 'fr' },
+    // ...
+  ],
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Automatic Locale Detection</h2>
+            <p>When a user visits for the first time, Next.js detects their locale from browser settings. If a supported locale other than the default is found, the user is **automatically redirected** to the corresponding locale-prefixed path or domain.</p>
+            
+            <p>To **disable** this automatic redirection feature, you can set the **<code>localeDetection</code>** option to <code>false</code> in <code>next.config.js</code>:</p>
+            <pre class="example"><code>// next.config.js
+module.exports = {
+  i18n: {
+    localeDetection: false,
+  },
+}</code></pre>
+        </div>
+    </div>
+</div>

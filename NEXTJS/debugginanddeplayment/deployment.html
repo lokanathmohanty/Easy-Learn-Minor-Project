@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Deployment</h1>
+        
+        <div class="content">
+            <h2 class="title">Creating a Production Build 🛠️</h2>
+            <p>Before deploying a Next.js application to any platform, you must create a production-optimized build. This process optimizes the application for best performance, minifies files, and prepares assets for serving.</p>
+            <pre class="example"><code>npm run build</code></pre>
+            <p>This command generates the necessary output, typically in a <code>.next</code> folder (or <code>out</code> for static exports), compiling and minifying HTML, CSS, and JavaScript using the Next.js Compiler.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Deployment to Vercel (Recommended) 🚀</h2>
+            <p>Vercel, the company that developed and maintains Next.js, is the simplest and most performant platform for deployment. It requires zero configuration and provides a global CDN, automatic HTTPS, and instant scaling.</p>
+            
+            <h3>Deployment Steps (using GitHub):</h3>
+            <ol>
+                <li>Ensure your Next.js project is pushed to a **GitHub repository**.</li>
+                <li>Go to **Vercel.com** and sign in with your GitHub account.</li>
+                <li>Click **"Import Project"** and select your GitHub repository. Vercel automatically detects it as a Next.js project.</li>
+                <li>Click **"Deploy"**. Vercel handles the entire process: cloning, dependency installation, building, and deployment to their global CDN.</li>
+            </ol>
+            <p>Vercel automatically sets up continuous deployment, triggering a new build and deployment on every <code>git push</code> to your main branch.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Deployment to GitHub Pages (Static Export)</h2>
+            <p>GitHub Pages is suitable for hosting static websites. To deploy a Next.js application here, you must use the **Static Export** feature, which generates plain HTML/CSS/JS files (disabling dynamic features like SSR and API Routes).</p>
+            
+            <h3>Configuration for Static Export:</h3>
+            <p>You must configure Next.js to output static files (<code>output: "export"</code>), specify the repository name as the base path (<code>basePath</code>), and unoptimize images since the default Next.js Image Optimization service won't run on static hosts.</p>
+            <pre class="example"><code>// next.config.js
+const nextConfig = {
+    basePath: "/testing-app", // Name of your GitHub repository
+    output: "export", // Enables static export mode
+    images: {
+        unoptimized: true // Disable Image Optimization
+    },
+};</code></pre>
+            
+            <h3>Automated Deployment via GitHub Actions:</h3>
+            <p>Deployment is managed through a GitHub Actions workflow (typically defined in <code>.github/workflows/deploy.yml</code>). This workflow:</p>
+            <ol>
+                <li>Checks out the code and installs dependencies.</li>
+                <li>Runs <code>npm run build</code> (which executes the static export via the configured <code>output: "export"</code>).</li>
+                <li>Uploads the static content from the **<code>./out</code>** directory as a deployment artifact.</li>
+                <li>Deploys the artifact to GitHub Pages.</li>
+            </ol>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Next.js Self-Hosting Options 🏠</h2>
+            <p>Self-hosting gives you complete control over the environment and resources. It supports dynamic features (SSR, API Routes).</p>
+            
+            <ul>
+                <li class="example">
+                    <strong>Node.js Server:</strong> After running <code>npm run build</code>, you can host the application on a custom server running a Node.js environment. The application is served using the command <code>next start</code>. This provides full dynamic rendering capabilities.
+                </li>
+                <li class="example">
+                    <strong>Docker Container:</strong> Next.js can be containerized using Docker. This ensures a consistent, portable environment and simplifies scaling across different machines or cloud providers (e.g., AWS, Azure).
+                </li>
+                <li class="example">
+                    <strong>Static Export:</strong> (As used for GitHub Pages) If your site does not require a backend server, you can generate a static version (HTML, CSS, JS) that can be served by any simple web server (like Nginx or Apache).
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

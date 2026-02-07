@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Dereferencing (The Indirection Operator <code>*</code>) 🎯</h1>
+
+        <div class="content">
+            <p>**Dereferencing** is the process of accessing or modifying the **value** stored at the memory address held by a **pointer**. It is the inverse operation of taking a variable's address with `&amp;`.</p>
+            <p>The **dereference operator**, denoted by the asterisk (**<code>*</code>**), is also known as the **indirection operator**.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">How Dereferencing Works</h2>
+            <p>The `*` operator performs two main functions on a pointer:</p>
+
+            <h3>1. Reading a Value</h3>
+            <p>It accesses the value stored at the pointer's address, allowing you to read it.</p>
+            <pre class="example">
+int* ptr = &amp;number;
+int value = *ptr; // Reads the value at the address held by ptr
+</pre>
+
+            <h3>2. Modifying a Value</h3>
+            <p>It accesses the memory location itself, allowing you to assign a new value to the original variable.</p>
+            <pre class="example">
+int* ptr = &amp;number;
+*ptr = 100; // Modifies the value of 'number' to 100
+</pre>
+
+            <h3>Example: Reading and Modifying</h3>
+            <pre class="example">
+int number = 42;      
+int* ptr = &amp;number;   
+
+cout &lt;&lt; "Original: " &lt;&lt; *ptr &lt;&lt; endl;  // Output: 42
+
+*ptr = 100; // Changes 'number' via the pointer
+
+cout &lt;&lt; "Modified: " &lt;&lt; number &lt;&lt; endl; // Output: 100
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Dereferencing vs. References</h2>
+            <p>Both pointers (with dereferencing) and references allow indirect access to a variable, but they function differently:</p>
+
+            <table>
+                <thead>
+                    <tr><th>Feature</th><th>Dereferencing (<code>*</code>)</th><th>Reference (<code>&amp;</code> in declaration)</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Purpose</strong></td>
+                        <td>Accessing the **value** stored at a pointer's **address**.</td>
+                        <td>Creating a permanent **alias** (another name) for an existing variable.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Usage Symbol</strong></td>
+                        <td>**<code>*</code>** (used in an expression)</td>
+                        <td>No special symbol needed after declaration.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reassignment</strong></td>
+                        <td>Pointers can be reassigned to point to different variables.</td>
+                        <td>References **cannot** be reassigned after initialization.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nullability</strong></td>
+                        <td>Pointers can be set to **<code>nullptr</code>**.</td>
+                        <td>References **must** be initialized and cannot be null.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - JSON</h1>
+    <div class="content">
+      <h2>What is JSON?</h2>
+      <p>JSON (JavaScript Object Notation) is a text-based data format used to represent objects and data structures. It is language-independent and is often used to exchange data between a server and a web application or between different applications.</p>
+
+      <h2>JSON Features</h2>
+      <ul>
+        <li>Language-independent data storage format</li>
+        <li>Can represent objects and data structures</li>
+        <li>Can be exchanged between different programming languages</li>
+        <li>Supports nested objects</li>
+        <li>Can contain multiple data types</li>
+      </ul>
+
+      <h2>JSON Syntax</h2>
+      <p>JSON data is represented as key-value pairs inside curly braces. Keys are always written in double quotes.</p>
+      <pre><code>{
+   "key1": value1,
+   "key2": value2
+}</code></pre>
+      <p>Values can be of the following data types:</p>
+      <ul>
+        <li><strong>String</strong> − Characters enclosed in double quotes</li>
+        <li><strong>Number</strong> − Integers or floating-point numbers</li>
+        <li><strong>Boolean</strong> − <code>true</code> or <code>false</code></li>
+        <li><strong>Array</strong> − Ordered list of values</li>
+        <li><strong>Object</strong> − Unordered collection of key-value pairs</li>
+        <li><strong>null</strong> − Represents no value</li>
+      </ul>
+
+      <h2>JSON Data</h2>
+      <p>JSON data example:</p>
+      <pre><code>"name":"John Doe"</code></pre>
+      <p>Difference: JSON keys must always be in double quotes, but JavaScript object properties do not require quotes.</p>
+
+      <h2>JSON Objects</h2>
+      <pre><code>{"name": "John Doe", "age": 30, "isStudent": false}</code></pre>
+      <p>In JavaScript, this can be parsed into a variable:</p>
+      <pre><code>let person = {"name": "John Doe", "age": 30, "isStudent": false};</code></pre>
+
+      <h2>JSON Arrays</h2>
+      <pre><code>[
+   {
+      "name": "John Doe",
+      "age": 30,
+      "occupation": "Software Engineer"
+   },
+   {
+      "name": "Jane Doe",
+      "age": 25,
+      "occupation": "Doctor"
+   }
+]</code></pre>
+      <p>This is a JSON array containing two JSON objects.</p>
+
+      <h2>Accessing JSON Data</h2>
+      <p>We can access JSON data using dot or bracket notation.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Accessing JSON data&lt;/div&gt;
+   &lt;div id="demo"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const person = {
+         "name": "John Doe",
+         "age": 30,
+         "occupation": "Software Engineer"
+      }
+      document.getElementById("demo").innerHTML = 
+      "Name: " + person.name + "&lt;br&gt;" +
+      "Age: " + person["age"] + "&lt;br&gt;" +
+      "Occupation: " + person.occupation;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Accessing JSON data<br>Name: John Doe<br>Age: 30<br>Occupation: Software Engineer</p>
+
+      <h2>JSON Methods</h2>
+      <ul>
+        <li><strong>JSON.parse()</strong> − Converts JSON string into a JavaScript object.</li>
+        <li><strong>JSON.stringify()</strong> − Converts a JavaScript object into a JSON string.</li>
+      </ul>
+
+      <h2>JSON vs. JavaScript Object</h2>
+      <ul>
+        <li>JSON is language-independent; JavaScript objects work only in JS.</li>
+        <li>JSON cannot contain functions; JavaScript objects can.</li>
+        <li>JSON keys must be in double quotes; JavaScript object keys do not require quotes.</li>
+      </ul>
+
+      <h2>Converting JSON String to JavaScript Object</h2>
+      <pre><code>let jsonString = '{"name": "John Doe", "age": 30, "isStudent": false}';
+const jsonObject = JSON.parse(jsonString);</code></pre>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Converting JSON string to JavaScript object&lt;/div&gt;
+   &lt;div id="demo"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      let jsonString = '{"name": "John Doe", "age": 30, "isStudent": false}';
+      const jsonObject = JSON.parse(jsonString);
+      document.getElementById("demo").innerHTML = jsonObject.name;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> John Doe</p>
+
+      <h2>Converting JavaScript Object to JSON</h2>
+      <pre><code>const person = { name: "John Doe", age: 30, isStudent: false };
+const jsonString = JSON.stringify(person);</code></pre>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Converting JavaScript object to JSON string&lt;/div&gt;
+   &lt;div id="demo"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const person = {
+         name: "John Doe",
+         age: 30,
+         isStudent: false
+      };
+      const jsonString = JSON.stringify(person);
+      document.getElementById("demo").innerHTML = jsonString;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> {"name":"John Doe","age":30,"isStudent":false}</p>
+    </div>
+  </div>
+</div>

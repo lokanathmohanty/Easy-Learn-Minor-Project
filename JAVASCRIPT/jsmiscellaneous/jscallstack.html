@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Call Stack</h1>
+    <div class="content">
+      <p>The JavaScript engine uses the call stack to manage the execution context. It is a key mechanism by which JavaScript keeps track of function calls in a program. Although the call stack works internally, understanding it is important for grasping how JavaScript executes functions.</p>
+      <p>The call stack follows the <strong>LIFO (Last In, First Out)</strong> principle. The last function added to the stack executes first, and once completed, it is removed from the stack.</p>
+
+      <h2>How JavaScript Call Stack Works?</h2>
+      <p>When JavaScript code is executed:</p>
+      <ul>
+        <li>The global execution context is added to the stack.</li>
+        <li>When a function is called, it is pushed onto the call stack.</li>
+        <li>If a nested function is invoked, it is added on top of the stack.</li>
+        <li>Once a function finishes execution, it is popped from the stack, and execution continues with the next item.</li>
+        <li>When the call stack is empty, the script finishes running.</li>
+      </ul>
+
+      <h3>Example 1: Basic Function Calls</h3>
+      <pre><code>function two() {
+  console.log("this is function two");
+}
+
+function one() {
+  two();
+  console.log("This is function one");
+}
+
+one();</code></pre>
+
+      <p>The execution order would be:</p>
+      <ol>
+        <li>The stack is empty initially.</li>
+        <li><code>one()</code> is pushed onto the stack → [one()].</li>
+        <li><code>one()</code> calls <code>two()</code> → [two(), one()].</li>
+        <li><code>two()</code> executes and is popped → [one()].</li>
+        <li><code>one()</code> finishes execution and is popped → [].</li>
+      </ol>
+
+      <h3>Example 2: Demonstration with Output</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt; JavaScript - Call stack &lt;/h2&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("output");
+      function two() {
+          output.innerHTML += "two &lt;br&gt;";
+      }
+      function one() {
+          two();
+          output.innerHTML += "one &lt;br&gt;";
+      }
+      one();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>JavaScript Call Stack Overflow</h2>
+      <p>When the size of the call stack exceeds its defined limit, a <strong>stack overflow</strong> occurs. This typically happens with recursive functions that do not have a proper base case.</p>
+
+      <h3>Example: Infinite Recursion</h3>
+      <pre><code>function fib() {
+   fib();  // no exit condition
+}
+fib();</code></pre>
+      <p>The above code will cause a <code>RangeError: Maximum call stack size exceeded</code> error.</p>
+
+      <h2>Key Point</h2>
+      <p>JavaScript is a <strong>single-threaded language</strong>. It has only one call stack and executes code line by line from top to bottom. This means it can process only one function at a time.</p>
+    </div>
+  </div>
+</div>

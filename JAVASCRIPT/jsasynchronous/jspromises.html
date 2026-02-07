@@ -1,0 +1,115 @@
+  <h2>What is a Promise?</h2>
+  <p>
+    A Promise is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+    Promises make async code easier to read and manage compared with deeply nested callbacks.
+  </p>
+
+  <h2>Producing a Promise</h2>
+  <p>
+    Create a promise with the Promise constructor. The executor receives two functions: resolve and reject.
+  </p>
+  <p>Syntax:</p>
+  <p>let promise = new Promise(function(resolve, reject) { /* producing code */ });</p>
+
+  <p>Example (producing):</p>
+  <p>let promise = new Promise(function(resolve, reject) {</p>
+  <p>  if (someCondition) resolve('success value');</p>
+  <p>  else reject(new Error('failure reason'));</p>
+  <p>});</p>
+
+  <h2>States of a Promise</h2>
+  <ul>
+    <li>Pending — initial state, neither fulfilled nor rejected.</li>
+    <li>Fulfilled — operation completed successfully; promise has a value.</li>
+    <li>Rejected — operation failed; promise has a reason (error).</li>
+    <li>Settled — either fulfilled or rejected.</li>
+  </ul>
+
+  <h2>Consuming Promises</h2>
+  <p>
+    Use instance methods to consume promises: then(), catch(), finally().
+  </p>
+
+  <h3>then()</h3>
+  <p>
+    Attach handlers for fulfilled and optionally rejected cases.
+  </p>
+  <p>Syntax:</p>
+  <p>promise.then(onFulfilled, onRejected);</p>
+  <p>Example:</p>
+  <p>const num = 10;</p>
+  <p>const p = new Promise((resolve, reject) =&gt; {</p>
+  <p>  if (num === 10) resolve('Number is 10');</p>
+  <p>  else reject('Number is not 10');</p>
+  <p>});</p>
+  <p>p.then(function(message) { /* handle success */ }, function(err) { /* handle error */ });</p>
+
+  <h3>catch()</h3>
+  <p>
+    Handle rejections; typically chained after then().
+  </p>
+  <p>Syntax:</p>
+  <p>promise.then(onFulfilled).catch(onRejected);</p>
+  <p>Example:</p>
+  <p>const p = new Promise((resolve, reject) =&gt; reject('fail'));</p>
+  <p>p.then(msg =&gt; console.log(msg)).catch(err =&gt; console.log('Caught:', err));</p>
+
+  <h3>finally()</h3>
+  <p>
+    Runs a callback when the promise is settled (fulfilled or rejected). Useful for cleanup tasks.
+  </p>
+  <p>Syntax:</p>
+  <p>promise.then(onFulfilled).catch(onRejected).finally(() =&gt; { /* always runs */ });</p>
+
+  <h2>Examples</h2>
+
+  <p>Basic resolve / consume example:</p>
+  <p>let promise1 = new Promise((resolve, reject) =&gt; {</p>
+  <p>  if (10 === 10) resolve('The value is 10');</p>
+  <p>  else reject('Not 10');</p>
+  <p>});</p>
+  <p>promise1.then(msg =&gt; console.log(msg), err =&gt; console.log(err));</p>
+
+  <p>Delayed rejection example:</p>
+  <p>let promise2 = new Promise((resolve, reject) =&gt; {</p>
+  <p>  setTimeout(() =&gt; reject('timed out'), 2000);</p>
+  <p>});</p>
+  <p>console.log('Waiting...');</p>
+  <p>promise2.then(msg =&gt; console.log(msg)).catch(err =&gt; console.log('Error:', err));</p>
+
+  <p>finally() example:</p>
+  <p>let p = Promise.resolve('ok');</p>
+  <p>p.then(msg =&gt; console.log('then:', msg))</p>
+  <p> .catch(err =&gt; console.log('catch:', err))</p>
+  <p> .finally(() =&gt; console.log('clean up / always run'));</p>
+
+  <h2>Promise Static Methods (overview)</h2>
+  <ul>
+    <li>Promise.all(iterable) — fulfills when all input promises fulfill; rejects on first rejection.</li>
+    <li>Promise.allSettled(iterable) — waits until all have settled and returns their outcomes.</li>
+    <li>Promise.any(iterable) — fulfills when any promise fulfills; rejects if all reject.</li>
+    <li>Promise.race(iterable) — settles as soon as any promise settles (fulfill or reject).</li>
+    <li>Promise.resolve(value) — returns a resolved promise for the value.</li>
+    <li>Promise.reject(reason) — returns a rejected promise for the reason.</li>
+  </ul>
+
+  <h2>Best Practices</h2>
+  <ul>
+    <li>Avoid passing two callbacks to then(); prefer then(...).catch(...) for readability.</li>
+    <li>Use finally for cleanup (UI hide loader, closing resources).</li>
+    <li>Prefer Promise.allSettled or Promise.any when combining many independent operations with mixed outcomes.</li>
+    <li>Convert callback-based APIs to promises (wrapping) for consistent async flow and easier composition.</li>
+  </ul>
+
+  <h2>Reference Summary</h2>
+  <ul>
+    <li>Constructor: <span>Promise()</span></li>
+    <li>Instance methods: <span>then(), catch(), finally()</span></li>
+    <li>Static methods: <span>all(), allSettled(), any(), race(), resolve(), reject()</span></li>
+  </ul>
+
+  <p>
+    For deeper patterns (chaining, error propagation, composing parallel tasks) explore Promises with examples using Promise.all, Promise.race, and async/await (which builds on Promises).
+  </p>
+
+</div>

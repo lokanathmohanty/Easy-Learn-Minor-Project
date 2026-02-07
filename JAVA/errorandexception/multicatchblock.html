@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Multiple Catch Blocks in Java</h1>
+    <div class="content">
+      <h2>What are Multiple Catch Blocks?</h2>
+      <p>
+        Multiple catch blocks in Java allow a single try block to handle different types of exceptions separately, enhancing error handling by processing specific exceptions in relevant catch blocks.
+      </p>
+      <h2>Syntax</h2>
+      <pre><code>try {
+   // Protected code
+} catch (ExceptionType1 e1) {
+   // Handle ExceptionType1
+} catch (ExceptionType2 e2) {
+   // Handle ExceptionType2
+} catch (ExceptionType3 e3) {
+   // Handle ExceptionType3
+}</code></pre>
+      <h2>Important Points</h2>
+      <ul>
+        <li>Only one exception is caught and handled at a time.</li>
+        <li>Catch blocks must be ordered from most specific exception type to most general to avoid compile-time errors.</li>
+      </ul>
+      <h2>Example 1: Multiple Catch Blocks</h2>
+      <pre><code>package com.tutorialspoint;
+
+public class ExcepTest {
+   public static void main(String args[]) {
+      try {
+         int a[] = new int[2];
+         int b = 0;
+         int c = 1 / b; // ArithmeticException here
+         System.out.println("Access element three :" + a[3]);
+      }
+      catch (ArrayIndexOutOfBoundsException e) {
+         System.out.println("ArrayIndexOutOfBoundsException thrown  :" + e);
+      }
+      catch (Exception e) {
+         System.out.println("Exception thrown  :" + e);
+      }
+      System.out.println("Out of the block");
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Exception thrown  :java.lang.ArithmeticException: / by zero<br>Out of the block</p>
+      <h2>Example 2: Ordered Multiple Catch Blocks</h2>
+      <pre><code>package com.tutorialspoint;
+
+public class ExcepTest {
+   public static void main(String args[]) {
+      try {
+         int a[] = new int[2];
+         int b = 0;
+         int c = 1 / b; // ArithmeticException
+         System.out.println("Access element three :" + a[3]);
+      }
+      catch (ArithmeticException e) {
+         System.out.println("ArithmeticException thrown  :" + e);
+      }
+      catch (ArrayIndexOutOfBoundsException e) {
+         System.out.println("ArrayIndexOutOfBoundsException thrown  :" + e);
+      }
+      catch (Exception e) {
+         System.out.println("Exception thrown  :" + e);
+      }
+      System.out.println("Out of the block");
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>ArithmeticException thrown  :java.lang.ArithmeticException: / by zero<br>Out of the block</p>
+      <h2>Example 3: Multi-catch Block (Java 7+)</h2>
+      <p>Catch multiple exception types in a single block using pipe <code>|</code>:</p>
+      <pre><code>package com.tutorialspoint;
+
+public class ExcepTest {
+   public static void main(String args[]) {
+      try {
+         int a[] = new int[2];
+         int b = 0;
+         int c = 1 / b;
+         System.out.println("Access element three :" + a[3]);
+      }
+      catch (ArrayIndexOutOfBoundsException | ArithmeticException e) {
+         System.out.println("Exception thrown  :" + e);
+      }
+      System.out.println("Out of the block");
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Exception thrown  :java.lang.ArithmeticException: / by zero<br>Out of the block</p>
+    </div>
+  </div>
+</div>

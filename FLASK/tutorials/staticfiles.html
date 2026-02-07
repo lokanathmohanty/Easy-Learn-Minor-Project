@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask Static Files: Serving Assets in Development 📦</h1>
+        <div class="content">
+            <p>Web applications require **static files** (like **CSS** files, **JavaScript** files, or **images**) to properly display a web page. In a production environment, the web server typically handles serving these assets. However, during **development**, Flask is configured to serve them automatically.</p>
+
+            <h2>Static File Location and URL</h2>
+            <ul>
+                <li>**Location:** Static files must be stored in a dedicated directory named **<code>static</code>**, which should be placed next to your main Flask application module or package.</li>
+                <li>**URL Endpoint:** The files are made available on the application at the special URL endpoint **<code>/static</code>**.</li>
+            </ul>
+
+            <h2>Generating Static File URLs with <code>url_for()</code></h2>
+            <p>To link to a static file in your HTML templates, you use the **<code>url_for()</code>** function with a special endpoint name:</p>
+            <ul>
+                <li>The first argument is the special endpoint name: **<code>'static'</code>**.</li>
+                <li>The second argument is a keyword argument, **<code>filename</code>**, which specifies the path to the file relative to the <code>static</code> folder (e.g., <code>'hello.js'</code>).</li>
+            </ul>
+        </div>
+
+        <h2 class="title">Example: Linking a JavaScript File</h2>
+        <div class="content example">
+            <p>This example demonstrates how to link a JavaScript file named **<code>hello.js</code>** to an HTML template, <code>index.html</code>, so that the script runs when a button is clicked.</p>
+
+            <h3>The Link in <code>index.html</code></h3>
+            <p>The **<code>url_for()</code>** function dynamically generates the correct path to the script in the <code>&lt;head&gt;</code> tag:</p>
+            <p><code>&lt;script type = "text/javascript"</code></p>
+            <p><code>   src = "{{ url_for('static', filename = 'hello.js') }}" &gt;&lt;/script&gt;</code></p>
+            <p>The resulting <code>src</code> attribute might look something like <code>/static/hello.js</code>.</p>
+
+            <h3>The JavaScript File (<code>static/hello.js</code>)</h3>
+            <p>This file contains the function called by the button's <code>onclick</code> event:</p>
+            <p><code>function sayHello() {</code></p>
+            <p><code>   alert("Hello World")</code></p>
+            <p><code>}</code></p>
+            <p>This setup ensures that all static assets are correctly served during development and can be easily managed by the web server in production.</p>
+        </div>
+    </div>
+</div>

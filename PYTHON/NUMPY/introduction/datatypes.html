@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+
+    <div class="title">
+      <h1>NumPy Data Types</h1>
+      <h2>Data Types in Python</h2>
+    </div>
+
+    <div class="content">
+      <p>By default, Python has the following data types:</p>
+      <ul>
+        <li><strong>strings</strong> – text data, written in quotes. Example: <code>"ABCD"</code></li>
+        <li><strong>integer</strong> – whole numbers. Example: <code>-1</code>, <code>42</code></li>
+        <li><strong>float</strong> – real numbers. Example: <code>3.14</code>, <code>42.0</code></li>
+        <li><strong>boolean</strong> – <code>True</code> or <code>False</code></li>
+        <li><strong>complex</strong> – complex numbers. Example: <code>1.0 + 2.0j</code></li>
+      </ul>
+    </div>
+
+    <div class="title">
+      <h2>Data Types in NumPy</h2>
+    </div>
+
+    <div class="content">
+      <p>NumPy provides additional data types and represents them using single-character codes:</p>
+      <ul>
+        <li><code>i</code> - integer</li>
+        <li><code>b</code> - boolean</li>
+        <li><code>u</code> - unsigned integer</li>
+        <li><code>f</code> - float</li>
+        <li><code>c</code> - complex float</li>
+        <li><code>m</code> - timedelta</li>
+        <li><code>M</code> - datetime</li>
+        <li><code>O</code> - object</li>
+        <li><code>S</code> - string</li>
+        <li><code>U</code> - unicode string</li>
+        <li><code>V</code> - void (raw memory)</li>
+      </ul>
+    </div>
+
+    <div class="title">
+      <h2>Checking the Data Type of an Array</h2>
+    </div>
+
+    <div class="content">
+      <p>You can check the data type of a NumPy array using the <code>dtype</code> attribute.</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4])
+print(arr.dtype)</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Example with string values:</p>
+      <pre><code>import numpy as np
+
+arr = np.array(['apple', 'banana', 'cherry'])
+print(arr.dtype)</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>Creating Arrays With a Defined Data Type</h2>
+    </div>
+
+    <div class="content">
+      <p>Use the <code>dtype</code> argument to define the expected data type:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4], dtype='S')
+print(arr)
+print(arr.dtype)</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Define the size of the data type (e.g. 4-byte integer):</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4], dtype='i4')
+print(arr)
+print(arr.dtype)</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>What if a Value Cannot Be Converted?</h2>
+    </div>
+
+    <div class="content">
+      <p>If an element cannot be converted to the specified type, NumPy will raise a <code>ValueError</code>.</p>
+      <p>For example, trying to convert the string <code>'a'</code> to an integer will cause an error:</p>
+      <pre><code>import numpy as np
+
+arr = np.array(['a', '2', '3'], dtype='i')</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>Converting Data Type on Existing Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>Use the <code>astype()</code> method to convert the data type of an existing array. This returns a new array.</p>
+      <p>Example using a string type code:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1.1, 2.1, 3.1])
+newarr = arr.astype('i')
+
+print(newarr)
+print(newarr.dtype)</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Example using Python’s built-in type <code>int</code>:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1.1, 2.1, 3.1])
+newarr = arr.astype(int)
+
+print(newarr)
+print(newarr.dtype)</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Convert integer array to boolean:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 0, 3])
+newarr = arr.astype(bool)
+
+print(newarr)
+print(newarr.dtype)</code></pre>
+    </div>
+
+  </div>
+</div>

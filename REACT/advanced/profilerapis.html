@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Profiler API</h1>
+
+    <div class="content">
+      <p>
+        Profiling is an important technique to collect and show the time taken for a specific function 
+        to execute in the live environment. Profiling is normally used to find performance bottlenecks 
+        in an application. React provides two options to profile a React application:
+      </p>
+
+      <ul>
+        <li>Profiler Component</li>
+        <li>Profiler DevTools</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Profiler Component</h2>
+      <p>
+        The React Profiler component is used to record profiling information of a React component. 
+        It can be used anywhere in the element tree and allows multiple and nested profilers.
+      </p>
+
+      <h3>Signature of the Profiler Component</h3>
+      <p>The Profiler component requires two props:</p>
+      <ul>
+        <li><strong>id</strong> – Identifier for the Profiler component</li>
+        <li><strong>onRender</strong> – Callback function executed during each render phase</li>
+      </ul>
+
+      <p>The callback function signature is as follows:</p>
+      <pre>
+function onRenderCallback(
+   id,
+   phase,
+   actualDuration,
+   baseDuration,
+   startTime,
+   commitTime,
+   interactions
+){
+   // Do anything with the profiler information
+}
+      </pre>
+
+      <p>Example implementation to log profiling data:</p>
+      <pre>
+const logProfilerData = (id, phase, actualTime, baseTime, startTime, commitTime) => {
+   console.log(`${id}'s ${phase} phase:`);
+   console.log(`Actual time: ${actualTime}`);
+   console.log(`Base time: ${baseTime}`);
+   console.log(`Start time: ${startTime}`);
+   console.log(`Commit time: ${commitTime}`);
+};
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Applying Profiler</h2>
+      <p>Steps to apply Profiler in a React application:</p>
+      <ul>
+        <li>Create a new React application and start it</li>
+        <li>Remove default CSS classes in <code>App.css</code></li>
+        <li>Create a simple <code>Hello</code> component</li>
+      </ul>
+
+      <p>Example <code>Hello</code> component:</p>
+      <pre>
+import React from "react";
+class Hello extends React.Component {
+   render() {
+      return (
+         <div>Hello, {this.props.name}</div>
+      );
+   }
+}
+export default Hello;
+      </pre>
+
+      <p>Use Profiler in the <code>App</code> component:</p>
+      <pre>
+import './App.css'
+import React, { Profiler } from 'react';
+import Hello from './Components/Hello'
+
+const logProfilerData = (id, phase, actualTime, baseTime, startTime, commitTime) => {
+   console.log(`${id}'s ${phase} phase:`);
+   console.log(`Actual time: ${actualTime}`);
+   console.log(`Base time: ${baseTime}`);
+   console.log(`Start time: ${startTime}`);
+   console.log(`Commit time: ${commitTime}`);
+};
+
+function App() {
+   return (
+      <div className="container">
+         <Profiler id="helloWorld" onRender={logProfilerData}>
+            <Hello name="World" />
+         </Profiler>
+      </div>
+   );
+}
+export default App;
+      </pre>
+
+      <p>
+        The application will render the <code>Hello</code> component and log profiling 
+        data in the console, such as mount and update phase timings.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Profiler React DevTools</h2>
+      <p>
+        React DevTools provides a dedicated Profiler tab to visualize performance. 
+        Some features include:
+      </p>
+      <ul>
+        <li>Browsing commits</li>
+        <li>Filtering commits</li>
+        <li>Flame chart</li>
+        <li>Ranked chart</li>
+        <li>Component chart</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Conclusion</h2>
+      <p>
+        The React Profiler component and Profiler DevTools are powerful tools for profiling 
+        and optimizing React applications.
+      </p>
+    </div>
+  </div>
+</div>

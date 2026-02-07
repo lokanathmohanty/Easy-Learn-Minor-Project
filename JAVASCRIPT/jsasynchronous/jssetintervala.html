@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - setInterval() Method</h1>
+
+    <div class="content">
+      <p>The <code>setInterval()</code> method in JavaScript is used to execute a function repeatedly at a specific interval. Unlike <code>setTimeout()</code>, which runs only once, <code>setInterval()</code> keeps executing until it is stopped using <code>clearInterval()</code>.</p>
+      
+      <h2>Syntax</h2>
+      <pre><code>setInterval(callback, interval, arg1, arg2, ..., argN);</code></pre>
+
+      <ul>
+        <li><strong>callback</strong> − Function to be executed repeatedly.</li>
+        <li><strong>interval</strong> − Time interval in milliseconds between each execution.</li>
+        <li><strong>arg1, arg2, ...</strong> − Optional parameters passed to the callback.</li>
+      </ul>
+
+      <p><strong>Return Value:</strong> A numeric ID which can be used with <code>clearInterval()</code> to stop the execution.</p>
+
+      <h2>Example 1: Basic setInterval() Timer</h2>
+      <pre><code>&lt;button onclick="startTimer()"&gt;Start Timer&lt;/button&gt;
+&lt;div id="output"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  let output = document.getElementById('output');
+  let seconds = 0;
+
+  function startTimer() {
+    setInterval(timer, 1000); // Executes every 1 second
+  }
+
+  function timer() {
+    seconds++;
+    output.innerHTML += "Total seconds: " + seconds + "&lt;br&gt;";
+  }
+&lt;/script&gt;</code></pre>
+
+      <h2>Example 2: Using Arrow Function</h2>
+      <pre><code>&lt;button onclick="startTimer()"&gt;Start Timer&lt;/button&gt;
+&lt;div id="output"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  let output = document.getElementById('output');
+  let seconds = 0;
+
+  function startTimer() {
+    setInterval(() =&gt; {
+      seconds++;
+      output.innerHTML += "Total seconds: " + seconds + "&lt;br&gt;";
+    }, 1000);
+  }
+&lt;/script&gt;</code></pre>
+
+      <h2>Example 3: Passing Extra Arguments</h2>
+      <pre><code>&lt;button onclick="startTimer()"&gt;Start Date Timer&lt;/button&gt;
+&lt;div id="output"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  let output = document.getElementById('output');
+
+  function startTimer() {
+    let message = "The date and time is: ";
+    setInterval(printDate, 1000, message);
+  }
+
+  function printDate(message) {
+    let date = new Date();
+    output.innerHTML += message + date + "&lt;br&gt;";
+  }
+&lt;/script&gt;</code></pre>
+
+      <h2>Stopping Execution with clearInterval()</h2>
+      <p>The <code>clearInterval()</code> method stops execution by taking the interval ID returned by <code>setInterval()</code>.</p>
+
+      <pre><code>&lt;div id="output"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  let output = document.getElementById('output');
+  let number = 10;
+
+  let id = setInterval(() =&gt; {
+    if (number === 50) {
+      clearInterval(id);
+      output.innerHTML += "The timer stopped.&lt;br&gt;";
+    }
+    output.innerHTML += "Number: " + number + "&lt;br&gt;";
+    number += 10;
+  }, 1000);
+&lt;/script&gt;</code></pre>
+
+      <h2>Real-Life Use Cases</h2>
+      <ul>
+        <li>Refreshing date/time display</li>
+        <li>Slideshows</li>
+        <li>Animations</li>
+        <li>Live clocks</li>
+        <li>Updating live scores or weather</li>
+        <li>Running background tasks (cron-like)</li>
+      </ul>
+
+      <h2>Example 4: Flipping Colors</h2>
+      <pre><code>&lt;div id="square" class="red"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  setInterval(() =&gt; {
+    let square = document.getElementById('square');
+    if (square.classList.contains('red')) {
+      square.classList.remove('red');
+      square.classList.add('green');
+    } else {
+      square.classList.remove('green');
+      square.classList.add('red');
+    }
+  }, 1000);
+&lt;/script&gt;</code></pre>
+
+      <h2>Example 5: Moving Animation</h2>
+      <pre><code>&lt;div id="parent"&gt;
+  &lt;div id="child"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  let child = document.getElementById('child');
+  let left = 0;
+
+  setInterval(() =&gt; {
+    if (left &lt; 450) {
+      left += 5;
+      child.style.left = left + 'px';
+    }
+  }, 50);
+&lt;/script&gt;</code></pre>
+    </div>
+  </div>
+</div>

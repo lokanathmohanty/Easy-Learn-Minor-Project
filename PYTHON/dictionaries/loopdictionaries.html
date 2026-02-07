@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Dictionary Loops</title>
+</head>
+<body>
+    <div class="container">
+        <div class="session">
+            <h1 class="title">Python - Loop Dictionaries</h1>
+            
+            <div class="content">
+                <h2>Overview</h2>
+                <p>Looping through dictionaries in Python refers to iterating over key-value pairs within the dictionary and performing operations on each pair. This allows you to access both keys and their corresponding values.</p>
+                
+                <p>There are several methods for looping through dictionaries:</p>
+                <ul>
+                    <li>Using a for loop</li>
+                    <li>Using dict.items() method</li>
+                    <li>Using dict.keys() method</li>
+                    <li>Using dict.values() method</li>
+                </ul>
+
+                <h2>Method 1: Basic For Loop</h2>
+                <p>A for loop iterates over the keys of the dictionary by default. You can access the corresponding values using dictionary indexing.</p>
+                
+                <p><strong>Example - Iterating over Keys:</strong></p>
+                <pre><code>student = {"name": "Alice", "age": 21, "major": "Computer Science"}
+for key in student:
+    print(key, student[key])</code></pre>
+                
+                <p><strong>Output:</strong></p>
+                <pre><code>name Alice
+age 21
+major Computer Science</code></pre>
+
+                <h2>Method 2: Using dict.items()</h2>
+                <p>The dict.items() method returns a view object that displays key-value pairs in the dictionary. This method provides direct access to both keys and values simultaneously.</p>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code>student = {"name": "Alice", "age": 21, "major": "Computer Science"}
+for key, value in student.items():
+    print(key, value)</code></pre>
+                
+                <p><strong>Output:</strong></p>
+                <pre><code>name Alice
+age 21
+major Computer Science</code></pre>
+
+                <h2>Method 3: Using dict.keys()</h2>
+                <p>The dict.keys() method returns a view object containing all the keys in the dictionary. This method is useful when you only need to iterate over the keys.</p>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code>student = {"name": "Alice", "age": 21, "major": "Computer Science"}
+for key in student.keys():
+    print(key)</code></pre>
+                
+                <p><strong>Output:</strong></p>
+                <pre><code>name
+age
+major</code></pre>
+
+                <h2>Method 4: Using dict.values()</h2>
+                <p>The dict.values() method returns a view object containing all the values in the dictionary. This method is useful when you only need to iterate over the values.</p>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code>student = {"name": "Alice", "age": 21, "major": "Computer Science"}
+for value in student.values():
+    print(value)</code></pre>
+                
+                <p><strong>Output:</strong></p>
+                <pre><code>Alice
+21
+Computer Science</code></pre>
+
+                <h2>Practical Applications</h2>
+                <p>Dictionary looping is commonly used for:</p>
+                <ul>
+                    <li>Data processing and transformation</li>
+                    <li>Filtering dictionary contents based on conditions</li>
+                    <li>Creating new dictionaries with modified data</li>
+                    <li>Searching for specific keys or values</li>
+                    <li>Counting or aggregating dictionary elements</li>
+                </ul>
+
+                <h2>Best Practices</h2>
+                <ul>
+                    <li>Use dict.items() when you need both keys and values</li>
+                    <li>Use dict.keys() when you only need keys</li>
+                    <li>Use dict.values() when you only need values</li>
+                    <li>Basic for loop is equivalent to dict.keys() but more concise</li>
+                    <li>Choose the method that best fits your specific use case for cleaner, more readable code</li>
+                </ul>
+
+                <h2>Key Points</h2>
+                <p>Remember that all dictionary methods return view objects, which provide a dynamic view of the dictionary's contents. This means changes to the original dictionary will be reflected in the view objects.</p>
+                
+                <p>Dictionary iteration order is guaranteed to be insertion order in Python 3.7 and later versions, making your loops predictable and consistent.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

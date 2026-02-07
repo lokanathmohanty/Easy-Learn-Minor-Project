@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Local Storage</h1>
+
+    <div class="content">
+      <p>
+        This chapter will show you how to use JavaScript's <code>localStorage</code> to save data for several browser sessions. 
+        We will demonstrate how to use this method using the <code>Window.localStorage</code> property, as well as go over the principles of web storage in JavaScript.
+      </p>
+
+      <h2>What is localStorage in JavaScript?</h2>
+      <p>
+        The <code>localStorage</code> feature allows JavaScript apps and websites to save key-value pairs in a web browser with no expiration date. 
+        This means that the stored data remains even if the user closes the browser or restarts the computer.
+      </p>
+      <p>
+        <code>localStorage</code> is a window object property, so it can interact with and manipulate the browser window.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre><code>
+myStorage = window.localStorage;
+      </code></pre>
+
+      <h2>What is Window.localStorage?</h2>
+      <p>
+        The <code>localStorage</code> method is accessible via the <code>Window.localStorage</code> property. 
+        It is a read-only property that returns a reference to a local storage object which is intended to store data that can only be accessed by the origin that created it.
+      </p>
+
+      <h2>When to use localStorage</h2>
+      <p>
+        You can use <code>localStorage</code> to store small amounts of data such as:
+      </p>
+      <ul>
+        <li>User preferences like language or theme</li>
+        <li>Form data, so it is not lost when closing the browser</li>
+        <li>Session data, to keep users logged in after closing/reopening the browser</li>
+        <li>Data cache for frequently used values</li>
+      </ul>
+
+      <h2>How does localStorage work?</h2>
+      <ul>
+        <li><code>setItem()</code>: Adds a key and value to localStorage</li>
+        <li><code>getItem()</code>: Retrieves items from localStorage</li>
+        <li><code>removeItem()</code>: Removes an item from localStorage</li>
+        <li><code>clear()</code>: Erases all data from localStorage</li>
+        <li><code>key()</code>: Returns a key name by its index</li>
+      </ul>
+
+      <h2>Usage of setItem() Method</h2>
+      <pre><code>
+localStorage.setItem('name', 'Ankit Sharma');
+      </code></pre>
+      <p>
+        Since localStorage can only store strings, objects and arrays must be converted using <code>JSON.stringify()</code>:
+      </p>
+      <pre><code>
+const userArr = ["Ankit", 25];
+localStorage.setItem('user', JSON.stringify(userArr));
+      </code></pre>
+
+      <h2>Usage of getItem() Method</h2>
+      <pre><code>
+localStorage.getItem('name'); // "Ankit Sharma"
+
+const userData = JSON.parse(localStorage.getItem('user'));
+console.log(userData); // ["Ankit", 25]
+      </code></pre>
+
+      <h2>Usage of removeItem() Method</h2>
+      <pre><code>
+localStorage.removeItem('name');
+      </code></pre>
+
+      <h2>Usage of clear() Method</h2>
+      <pre><code>
+localStorage.clear();
+      </code></pre>
+
+      <h2>Usage of key() Method</h2>
+      <pre><code>
+localStorage.key(index);
+      </code></pre>
+
+      <h2>Advantages of LocalStorage</h2>
+      <ul>
+        <li>Saved data never expires</li>
+        <li>Data is available offline</li>
+        <li>More secure and controlled than cookies</li>
+        <li>Greater storage capacity (up to 5MB vs. cookies’ 4KB)</li>
+      </ul>
+
+      <h2>Disadvantages of LocalStorage</h2>
+      <ul>
+        <li>Operations are synchronous and may slow performance with large datasets</li>
+        <li>Not secure for sensitive data (accessible to anyone using the device)</li>
+        <li>Can only store strings (other types must be stringified)</li>
+        <li>Storing too much data may slow applications</li>
+      </ul>
+    </div>
+  </div>
+</div>

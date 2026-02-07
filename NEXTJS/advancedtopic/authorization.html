@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Authorization</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Authorization?</h2>
+            <p><strong>Authorization</strong> is the critical process that occurs <strong>after a user is authenticated (logged in)</strong>. It determines what actions the verified user is **permitted to perform** and what resources (pages, routes, API endpoints) they are **allowed to access** within the application.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Types of Authorization Checks</h2>
+            <p>Next.js applications commonly employ two types of authorization checks based on speed and security requirements:</p>
+            
+            <ul>
+                <li class="example">
+                    <strong>Optimistic Authorization:</strong>
+                    <p>The check is performed quickly using **session data stored in the cookie** (stateless session). These checks are generally used for:</p>
+                    <ul>
+                        <li>Showing or hiding UI elements (e.g., an "Admin" button).</li>
+                        <li>Client-side redirects based on basic roles or permissions.</li>
+                    </ul>
+                </li>
+                <li class="example">
+                    <strong>Secure Authorization:</strong>
+                    <p>The check is performed using a **token or session ID verified against the database** (database session). These checks are used for:</p>
+                    <ul>
+                        <li>Authorizing access to critical **API endpoints**.</li>
+                        <li>Validating complex user actions (e.g., deletion, financial transaction).</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Implementation Steps</h2>
+            <p>To implement a robust authorization system, developers should follow these steps:</p>
+            <ol>
+                <li>Create a **Data Access Layer (DAL)** to centralize authorization logic.</li>
+                <li>Utilize **Data Transfer Objects (DTOs)** to limit exposed data.</li>
+                <li>Use **Middleware** for optional optimistic checks (e.g., route protection).</li>
+            </ol>
+            
+            <h3>Step 1: Create a Data Access Layer (DAL)</h3>
+            <p>The DAL centralizes all database operations and authorization checks. It must contain logic to verify the user's session token/cookie on the server for secure access control.</p>
+            
+            <p><strong>Example: Verifying Session and Redirecting (Secure Check)</strong></p>
+            <p>This server-side function decrypts the session cookie and redirects the user if the session is invalid or missing, ensuring unauthorized users cannot proceed.</p>
+            <pre class="example"><code>// app/lib/auth.ts
+import 'server-only'
+import { cookies } from 'next/headers'
+import { decrypt } from '@/app/lib/session'
+import { redirect } from 'next/navigation'
+import { cache } from 'react'
+
+export const verifySession = cache(async () => {
+    const cookie = (await cookies()).get('session')?.value
+    const session = await decrypt(cookie)
+    
+    if (!session?.userId) {
+        // If session is invalid, securely redirect to login
+        redirect('/login') 
+    }
+    
+    // Return key authorization data
+    return { isAuth: true, userId: session.userId }
+})</code></pre>
+
+            <h3>Step 2: Use Data Transfer Objects (DTOs)</h3>
+            <p>DTOs are objects used to transfer data between the client and server. They help **minimize the data sent to the client** by only including necessary user information, improving performance and security by preventing over-exposure of sensitive database fields.</p>
+            
+            <p><strong>Example User DTO:</strong></p>
+            <pre class="example"><code>// app/lib/definitions.ts
+export type User = {
+    id: number
+    name: string
+    email: string
+}</code></pre>
+        </div>
+    </div>
+</div>

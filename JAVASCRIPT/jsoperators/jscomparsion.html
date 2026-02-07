@@ -1,0 +1,176 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Comparison Operators</h1>
+
+    <div class="content">
+      <p>
+        The comparison operators in JavaScript compare two variables or values and return a boolean value (<code>true</code> or <code>false</code>) based on the comparison result. They are used in logical expressions to test equality or relational conditions.
+      </p>
+      <p>
+        All comparison operators are binary operators because they perform operations on two operands, which can be numbers, strings, booleans, or objects.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Operators Overview</h2>
+      <ul>
+        <li><code>==</code> → Equal</li>
+        <li><code>!=</code> → Not Equal</li>
+        <li><code>===</code> → Strict Equality (value + type)</li>
+        <li><code>!==</code> → Strict Inequality (value + type)</li>
+        <li><code>&gt;</code> → Greater Than</li>
+        <li><code>&lt;</code> → Less Than</li>
+        <li><code>&gt;=</code> → Greater Than or Equal To</li>
+        <li><code>&lt;=</code> → Less Than or Equal To</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>How Comparison is Done</h2>
+      <p>If both operands are of the same type, values are compared directly. If not, JavaScript performs <em>type coercion</em> before comparing.</p>
+      <ul>
+        <li>Numeric strings → converted to numbers.</li>
+        <li>Non-numeric strings → converted to <code>NaN</code>.</li>
+        <li>Empty strings → converted to <code>0</code>.</li>
+      </ul>
+      <p>Strict operators (<code>===</code>, <code>!==</code>) do not perform type coercion.</p>
+    </div>
+
+    <div class="content">
+      <h2>Falsy Values</h2>
+      <p>These are treated as <code>false</code> in comparisons:</p>
+      <ul>
+        <li><code>0</code></li>
+        <li><code>false</code></li>
+        <li><code>""</code> (empty string)</li>
+        <li><code>null</code></li>
+        <li><code>undefined</code></li>
+        <li><code>NaN</code></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Equality (<code>==</code>) Operator</h2>
+      <p>Checks if values are equal, with type conversion if needed.</p>
+      <div class="example">
+        <pre><code>
+const a = 10, b = 20;
+a == 10;      // true
+a == b;       // false
+"Hello" == "Hello"; // true
+5 == '5';     // true
+0 == false;   // true
+0 == '';      // true
+        </code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Inequality (<code>!=</code>) Operator</h2>
+      <p>Checks if values are not equal, with type conversion if needed.</p>
+      <div class="example">
+        <pre><code>
+10 != 10;   // false
+10 != 20;   // true
+"Hello" != "Hello"; // false
+10 != '10'; // false
+0 != false; // false
+        </code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Strict Equality (<code>===</code>) Operator</h2>
+      <p>Checks if values and types are strictly equal (no type conversion).</p>
+      <div class="example">
+        <pre><code>
+10 === 10;      // true
+10 === 20;      // false
+'Hello' === 'Hello'; // true
+10 === '10';    // false
+0 === false;    // false
+        </code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Strict Inequality (<code>!==</code>) Operator</h2>
+      <p>Checks if values or types are different (no type conversion).</p>
+      <div class="example">
+        <pre><code>
+10 !== 10;   // false
+10 !== 20;   // true
+'Hello' !== 'Hello'; // false
+10 !== '10'; // true
+0 !== false; // true
+        </code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Greater Than (<code>&gt;</code>) Operator</h2>
+      <p>Returns <code>true</code> if left operand is greater than right.</p>
+      <div class="example">
+        <pre><code>
+20 > 10;     // true
+10 > 10;     // false
+"ab" > "aa"; // true
+10 > '5';    // true
+        </code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Greater Than or Equal To (<code>&gt;=</code>)</h2>
+      <p>Returns <code>true</code> if left operand is greater than or equal to right.</p>
+      <div class="example">
+        <pre><code>
+10 >= 5;    // true
+5 >= 5;     // true
+"ab" >= "aa"; // true
+10 >= '5';  // true
+        </code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Less Than (<code>&lt;</code>) Operator</h2>
+      <p>Returns <code>true</code> if left operand is less than right.</p>
+      <div class="example">
+        <pre><code>
+10 < 20;     // true
+5 < 5;       // false
+"ab" < "aa"; // true
+10 < '5';    // false
+        </code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Less Than or Equal To (<code>&lt;=</code>)</h2>
+      <p>Returns <code>true</code> if left operand is less than or equal to right.</p>
+      <div class="example">
+        <pre><code>
+10 <= 20;    // true
+5 <= 5;      // true
+"ab" <= "aa"; // false
+10 <= '5';   // false
+        </code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Comparing <code>null</code>, <code>undefined</code>, and <code>NaN</code></h2>
+      <div class="example">
+        <pre><code>
+0 == null;       // false
+0 == undefined;  // false
+0 == NaN;        // false
+null == undefined;  // true
+null === undefined; // false
+NaN == NaN;      // false
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</div>

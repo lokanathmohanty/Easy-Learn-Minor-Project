@@ -1,0 +1,177 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Variable Scope</h1>
+    <div class="content">
+      <p>
+        The scope of a variable in Python is defined as the specific area or region where the variable is accessible.  
+        It depends on where and how the variable is defined. In Python, a variable can have either a 
+        <strong>global</strong> or a <strong>local</strong> scope.
+      </p>
+
+      <h2>Types of Scope for Variables in Python</h2>
+      <ul>
+        <li><strong>Local Variables</strong></li>
+        <li><strong>Global Variables</strong></li>
+        <li><strong>Nonlocal Variables</strong></li>
+      </ul>
+
+      <h2>Local Variables</h2>
+      <p>
+        A local variable is defined within a function or block of code.  
+        It can only be accessed inside that function, and attempting to access it outside results in an error.  
+        Multiple local variables can exist with the same name in different functions.
+      </p>
+      <pre><code>def myfunction():
+    a = 10
+    b = 20
+    print("variable a:", a)
+    print("variable b:", b)
+    return a+b
+
+print(myfunction())</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>variable a: 10
+variable b: 20
+30</code></pre>
+
+      <h2>Global Variables</h2>
+      <p>
+        A global variable is defined outside of any function and can be accessed anywhere in the program.
+      </p>
+      <pre><code># global variables
+name = 'TutorialsPoint'
+marks = 50
+def myfunction():
+    print("name:", name)
+    print("marks:", marks)
+
+myfunction()</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>name: TutorialsPoint
+marks: 50</code></pre>
+
+      <h2>Nonlocal Variables</h2>
+      <p>
+        Nonlocal variables are used in nested functions.  
+        They are neither local nor global, but allow modification of variables in the enclosing function.
+      </p>
+      <pre><code>def yourfunction():
+    a = 5
+    b = 6
+    def myfunction():
+        nonlocal a, b
+        a = 10
+        b = 20
+        print("variable a:", a)
+        print("variable b:", b)
+        return a+b
+    print(myfunction())
+
+yourfunction()</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>variable a: 10
+variable b: 20
+30</code></pre>
+
+      <h2>Namespace and Scope of Python Variables</h2>
+      <p>
+        A <strong>namespace</strong> is a collection of identifiers (variables, functions, classes, etc.).  
+        Python uses namespaces to manage variable scope and avoid naming conflicts.
+      </p>
+      <ul>
+        <li><strong>Built-in namespace</strong>: contains built-in functions and exceptions, loaded when the interpreter starts.</li>
+        <li><strong>Global namespace</strong>: contains names defined in the main program.</li>
+        <li><strong>Local namespace</strong>: contains names defined inside a function, valid until the function ends.</li>
+      </ul>
+
+      <h2>Python globals() Function</h2>
+      <p><code>globals()</code> returns a dictionary of symbols in the global namespace.</p>
+      <pre><code>>>> globals()
+{'__name__': '__main__', '__doc__': None, '__package__': None, ...}</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>name = 'TutorialsPoint'
+marks = 50
+result = True
+def myfunction():
+    a = 10
+    b = 20
+    return a+b
+
+print(globals())</code></pre>
+
+      <h2>Python locals() Function</h2>
+      <p><code>locals()</code> returns a dictionary of variables in the local namespace of a function.</p>
+      <pre><code>name = 'TutorialsPoint'
+marks = 50
+result = True
+def myfunction():
+    a = 10
+    b = 20
+    c = a+b
+    print("globals():", globals())
+    print("locals():", locals())
+    return c
+
+myfunction()</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>globals(): {... 'name': 'TutorialsPoint', 'marks': 50, 'result': True, 'myfunction': <function ...>}
+locals(): {'a': 10, 'b': 20, 'c': 30}</code></pre>
+
+      <h2>Namespace Conflict in Python</h2>
+      <p>
+        If a variable with the same name exists in both global and local scope, Python prioritizes the local variable.
+      </p>
+
+      <h3>Example 1</h3>
+      <pre><code>marks = 50 # global
+def myfunction():
+    marks = 70 # local
+    print(marks)
+
+myfunction()
+print(marks)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>70
+50</code></pre>
+
+      <h3>Example 2</h3>
+      <p>Trying to modify a global variable inside a function without <code>global</code> keyword causes an error.</p>
+      <pre><code>marks = 50
+def myfunction():
+    marks = marks + 20
+    print(marks)
+
+myfunction()</code></pre>
+      <p><strong>Error:</strong></p>
+      <pre><code>UnboundLocalError: cannot access local variable 'marks' where it is not associated with a value</code></pre>
+
+      <h3>Example 3</h3>
+      <p>To modify global variables, use <code>globals()</code> or the <code>global</code> keyword.</p>
+      <pre><code>var1 = 50
+var2 = 60
+def myfunction():
+    globals()['var1'] = globals()['var1'] + 10
+    global var2
+    var2 = var2 + 20
+
+myfunction()
+print("var1:", var1, "var2:", var2)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>var1: 60 var2: 80</code></pre>
+
+      <h3>Example 4</h3>
+      <p>Accessing a local variable outside its scope causes a <code>NameError</code>.</p>
+      <pre><code>var1 = 50
+var2 = 60
+def myfunction(x, y):
+    total = x + y
+    print("Total is a local variable:", total)
+
+myfunction(var1, var2)
+print(total) # ❌ NameError</code></pre>
+      <p><strong>Error:</strong></p>
+      <pre><code>NameError: name 'total' is not defined</code></pre>
+    </div>
+  </div>
+</div>

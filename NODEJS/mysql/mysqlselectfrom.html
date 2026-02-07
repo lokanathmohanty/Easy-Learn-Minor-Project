@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MySQL Select From</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Retrieving data from a MySQL database is one of the most common operations. The <code>SELECT</code> statement is used to fetch data, with optional clauses like <code>WHERE</code>, <code>ORDER BY</code>, and others. When executed in Node.js, it returns an array of objects, which can be JSON-ified for processing.
+      </p>
+
+      <h2>MySQL SELECT Syntax</h2>
+      <pre><code>SELECT field1, field2, ... FROM table_name
+-- or --
+SELECT * FROM table_name;</code></pre>
+      <p>The <code>*</code> selects all columns.</p>
+
+      <h2>Example: Basic SELECT in Node.js</h2>
+      <pre><code>var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "mypassword",
+  database: "mydb"
+});
+
+var qry = `SELECT name, salary FROM employee;`;
+
+con.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(qry, function (err, results) {
+    if (err) throw err;
+    console.log(results);
+  });
+  con.end();
+});</code></pre>
+      <p>Sample output:</p>
+      <pre><code>[ RowDataPacket { name: 'Ravi', salary: 25000 },
+RowDataPacket { name: 'Anil', salary: 30000 },
+RowDataPacket { name: 'Meena', salary: 27000 } ]</code></pre>
+
+      <h2>Returning JSON String</h2>
+      <p>Use <code>JSON.stringify()</code> to convert result objects into strings:</p>
+      <pre><code>con.query(qry, function (err, results) {
+  if (err) throw err;
+  console.log(JSON.stringify(results));
+});</code></pre>
+      <p>Result:</p>
+      <pre><code>[{"name":"Ravi","salary":25000},{"name":"Anil","salary":30000},{"name":"Meena","salary":27000}]</code></pre>
+
+      <h2>Fetching All Rows and Columns</h2>
+      <pre><code>con.query("SELECT * FROM employee;", function (err, results) {
+  if (err) throw err;
+  results.forEach((row) => {
+    console.log(`ID: ${row['id']}, NAME: ${row['name']}, AGE: ${row['age']}, SALARY: ${row['salary']}`);
+  });
+});</code></pre>
+      <p>Sample output:</p>
+      <pre><code>ID: 1, NAME: Ravi, AGE: 25, SALARY: 25000
+ID: 2, NAME: Anil, AGE: 26, SALARY: 30000
+ID: 3, NAME: Meena, AGE: 26, SALARY: 27000</code></pre>
+
+      <h2>Computed Columns with Aliases</h2>
+      <p>Calculate derived data like taxes and name aliases:</p>
+      <pre><code>con.query("SELECT name, salary, salary*0.05 as tax FROM employee;", function (err, results) {
+  if (err) throw err;
+  console.log(JSON.stringify(results));
+});</code></pre>
+      <p>Sample output:</p>
+      <pre><code>[{"name":"Ravi","salary":25000,"tax":1250},
+{"name":"Anil","salary":30000,"tax":1500},
+{"name":"Meena","salary":27000,"tax":1350}]</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - PCL Troubleshooting: Fixing NuGet Compatibility Errors</h1>
+
+        <div class="content">
+            <p>This chapter addresses the **NuGet package installation error** encountered when attempting to add the <code>StringLibrary</code> to the **Xamarin.Forms PCL** project. The core issue is a compatibility mismatch between the library's required **.NET Standard version** and the PCL project's **Targeted Frameworks** (specifically, **Windows Phone Silverlight 8**).</p>
+        </div>
+
+        <h2 class="title">Understanding and Fixing the PCL Profile Mismatch</h2>
+        <div class="content">
+            <p>The error occurs because the Xamarin.Forms PCL project defaults to a profile (often **Profile 259**) that limits its compatibility to **.NET Standard 1.0**. Since our <code>StringLibrary</code> was built targeting **.NET Standard 1.3** (as indicated by the dependencies), the platforms must be adjusted to allow for a higher compatible profile.</p>
+
+            <h3>Steps to Retarget the PCL Profile:</h3>
+            <ol>
+                <li class="content">
+                    **Uninstall Xamarin.Forms**: To safely modify the PCL targets without conflict, first uninstall the main package by running the following command in the Package Manager Console:
+                    <pre><code>PM &gt; Uninstall-Package Xamarin.Forms</code></pre>
+                </li>
+                <li class="content">
+                    **Change Targets**: Right-click on the PCL library project (e.g., <code>[ProjectName].Portable</code>) and select **Properties**. Click the **Change** button under the "Target frameworks" section.
+                </li>
+                <li class="content">
+                    **Remove Incompatible Platform**: **Uncheck** the box next to **Windows Phone Silverlight 8**.
+                    <p><em>(Windows Phone Silverlight 8 only supports **.NET Standard 1.0**; removing it allows the PCL to target a higher profile.)</em></p>
+                </li>
+                <li class="content">
+                    **Verify New Profile**: After clicking OK, the PCL project should be retargeted to a profile (such as **Profile 111**) that supports **.NET Standard 1.1** or higher, making it compatible with our **.NET Standard 1.3** library. You can confirm this by temporarily unloading the project and inspecting the <code>.csproj</code> file.
+                </li>
+            </ol>
+        </div>
+
+        <h2 class="title">Reinstalling the StringLibrary Package</h2>
+        <div class="content">
+            <p>With the PCL project retargeted, the custom library can now be installed:</p>
+            <ol>
+                <li class="content">Open the **Manage NuGet Packages** dialog for the PCL library.</li>
+                <li class="content">Select your **PrivateSource** from the Package source dropdown.</li>
+                <li class="content">Find and select the **StringLibrary** package.</li>
+                <li class="content">Before clicking Install, select **Ignore Dependencies** from the **Dependency behavior** dropdown (as an extra measure to bypass potential dependency conflicts).</li>
+                <li class="content">Click **Install**.</li>
+            </ol>
+            <p>The **StringLibrary** package is successfully installed, and its reference should now appear under the PCL project's References node.</p>
+        </div>
+
+        <h2 class="title">Reinstalling Xamarin.Forms</h2>
+        <div class="content">
+            <p>Since Xamarin.Forms was uninstalled in the first step, it must be reinstalled to restore the cross-platform UI functionality:</p>
+            <ul>
+                <li class="content">Use the NuGet Package Manager or Package Manager Console to reinstall the **Xamarin.Forms** package. It is recommended to install the **same version** that was previously used (or the latest stable version).</li>
+            </ul>
+            <p>The Xamarin.Forms PCL project is now fully configured and ready to use the functionality provided by your custom **StringLibrary** in your cross-platform application.</p>
+        </div>
+    </div>
+</div>

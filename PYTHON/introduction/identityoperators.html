@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Identity Operators</h1>
+    <div class="content">
+      <p>Python identity operators are used to compare whether two objects share the same memory location. They check if two variables refer to the exact same object, not just if their values are equal.</p>
+      <p>There are two identity operators in Python:</p>
+      <ul>
+        <li><strong>is</strong> Operator</li>
+        <li><strong>is not</strong> Operator</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Python <code>is</code> Operator</h2>
+    <div class="content">
+      <p>The <code>is</code> operator evaluates to <code>True</code> if both operands share the same memory location. The memory location can be checked using the <code>id()</code> function.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+a = [1, 2, 3, 4, 5]
+b = [1, 2, 3, 4, 5]
+c = a
+
+print(a is c)
+print(a is b)
+
+print("id(a) : ", id(a))
+print("id(b) : ", id(b))
+print("id(c) : ", id(c))
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+True
+False
+id(a) :  140114091859456
+id(b) :  140114091906944
+id(c) :  140114091859456
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Python <code>is not</code> Operator</h2>
+    <div class="content">
+      <p>The <code>is not</code> operator evaluates to <code>True</code> if both operands do not share the same memory location.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+a = [1, 2, 3, 4, 5]
+b = [1, 2, 3, 4, 5]
+c = a
+
+print(a is not c)
+print(a is not b)
+
+print("id(a) : ", id(a))
+print("id(b) : ", id(b))
+print("id(c) : ", id(c))
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+False
+True
+id(a) :  140559927442176
+id(b) :  140559925598080
+id(c) :  140559927442176
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Examples with Explanations</h2>
+    <div class="content">
+      <h3>Example 1</h3>
+      <pre>
+a = "TutorialsPoint"
+b = a
+print("id(a), id(b):", id(a), id(b))
+print("a is b:", a is b)
+print("b is not a:", b is not a)
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+id(a), id(b): 2739311598832 2739311598832
+a is b: True
+b is not a: False
+      </pre>
+
+      <h3>Example 2</h3>
+      <p>When comparing two lists with identical elements but stored in different memory locations:</p>
+      <pre>
+a = [1, 2, 3]
+b = [1, 2, 3]
+print("id(a), id(b):", id(a), id(b))
+print("a is b:", a is b)
+print("b is not a:", b is not a)
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+id(a), id(b): 1552612704640 1552567805568
+a is b: False
+b is not a: True
+      </pre>
+
+      <h3>Example 3</h3>
+      <p>Even though the lists themselves are stored at different locations, their elements may still share the same memory addresses:</p>
+      <pre>
+print(id(a[0]), id(a[1]), id(a[2]))
+print(id(b[0]), id(b[1]), id(b[2]))
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+140734682034984 140734682035016 140734682035048
+140734682034984 140734682035016 140734682035048
+      </pre>
+      <p>Thus, <code>a is b</code> returns <code>False</code> even though both contain the same values.</p>
+    </div>
+  </div>
+</div>

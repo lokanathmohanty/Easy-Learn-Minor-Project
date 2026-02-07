@@ -1,0 +1,153 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - PropTypes</h1>
+    <div class="content">
+      <p>JavaScript is a dynamically typed language, meaning variable types are not declared explicitly. Instead, the type is inferred at runtime. While this speeds up development, it can cause unexpected issues when variables receive values of incorrect types.</p>
+      <pre>
+var num = 'John' // The type of `num` is string
+var num = 10     // The type of `num` is number
+      </pre>
+      <p>For example:</p>
+      <pre>
+var num = 10
+var name = 'John'
+var result = num + name // throws error during runtime
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">React and Types</h2>
+    <div class="content">
+      <p>In React, components often receive props. If props have incorrect types, they may cause unexpected behavior. Consider the following <code>Sum</code> component:</p>
+      <pre>
+import React from 'react'
+class Sum extends React.Component {
+   render() {
+      return &lt;p&gt;The sum of {this.props.num1} and {this.props.num2}
+      is {parseInt(this.props.num1) + parseInt(this.props.num2)}&lt;/p&gt;
+   }
+}
+export default Sum
+      </pre>
+      <p>When provided correct numeric props, it works. However, if props are strings, the result will be <code>NaN</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using Sum Component</h2>
+    <div class="content">
+      <pre>
+import Sum from "./components/PropTypes/Sum";
+
+function App() {
+   var num1 = 10
+   var num2 = 200
+   var name1 = "John"
+   var name2 = "Peter"
+
+   return (
+      &lt;div&gt;
+         &lt;Sum num1={num1} num2={num2} /&gt;
+         &lt;Sum num1={name1} num2={name2} /&gt;
+      &lt;/div&gt;
+   );
+}
+
+export default App;
+      </pre>
+      <p>The second usage causes issues because strings are passed instead of numbers.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">PropTypes</h2>
+    <div class="content">
+      <p>The <strong>prop-types</strong> package helps validate prop types in React components. It ensures that props are passed with the correct type during development.</p>
+      <p>Installation:</p>
+      <pre>
+npm i prop-types --save
+      </pre>
+      <p>Example usage:</p>
+      <pre>
+import React from 'react'
+import PropTypes from 'prop-types'
+
+class Sum extends React.Component {
+   render() {
+      return &lt;p&gt;The sum of {this.props.num1} and {this.props.num2}
+      is {parseInt(this.props.num1) + parseInt(this.props.num2)}&lt;/p&gt;
+   }
+}
+
+Sum.propTypes = {
+   num1: PropTypes.number,
+   num2: PropTypes.number
+}
+
+export default Sum
+      </pre>
+      <p>This will throw warnings in the console during development if the wrong types are passed.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Available Validators</h2>
+    <div class="content">
+      <ul>
+        <li><code>PropTypes.array</code></li>
+        <li><code>PropTypes.bigint</code></li>
+        <li><code>PropTypes.bool</code></li>
+        <li><code>PropTypes.func</code></li>
+        <li><code>PropTypes.number</code></li>
+        <li><code>PropTypes.object</code></li>
+        <li><code>PropTypes.string</code></li>
+        <li><code>PropTypes.symbol</code></li>
+        <li><code>PropTypes.node</code> - Anything renderable</li>
+        <li><code>PropTypes.element</code> - React component</li>
+        <li><code>PropTypes.elementType</code> - Type of React component</li>
+        <li><code>PropTypes.instanceOf(Class)</code></li>
+        <li><code>PropTypes.oneOf(['A', 'B'])</code></li>
+        <li><code>PropTypes.oneOfType([PropTypes.number, PropTypes.string])</code></li>
+        <li><code>PropTypes.arrayOf(PropTypes.number)</code></li>
+        <li><code>PropTypes.objectOf(PropTypes.string)</code></li>
+        <li><code>PropTypes.func.isRequired</code></li>
+        <li><code>PropTypes.any.isRequired</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Custom Validators</h2>
+    <div class="content">
+      <p>You can also create custom validators. For example, validating an email prop:</p>
+      <pre>
+Sum.propTypes = {
+   num1: PropTypes.number,
+   num2: PropTypes.number,
+   email: function(myProps, myPropName, myComponentName) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(myProps[myPropName])) {
+         return new Error(
+            'Invalid prop value `' + myProps[myPropName] + '` supplied to ' +
+            '`' + myComponentName + '/' + myPropName + '`. Validation failed.'
+         );
+      }
+   }
+}
+      </pre>
+      <p>Here:</p>
+      <ul>
+        <li><code>myProps</code> → all props of the component</li>
+        <li><code>myPropName</code> → the current property being validated</li>
+        <li><code>myComponentName</code> → the name of the component</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <p><strong>PropTypes</strong> provides runtime type checking for React props during development. It helps catch bugs early without impacting performance in production. React developers can use built-in validators or create custom validators for specific requirements.</p>
+    </div>
+  </div>
+</div>

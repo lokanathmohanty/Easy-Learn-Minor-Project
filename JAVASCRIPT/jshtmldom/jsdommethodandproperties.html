@@ -1,0 +1,128 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - DOM Methods &amp; Properties</h1>
+
+    <div class="content">
+      <p>
+        In JavaScript, DOM methods are used to perform a particular action on HTML elements. 
+        The DOM represents an HTML document as a logical tree where each node contains objects. 
+        DOM methods allow programmatic access to this tree to change document structure, style, or content.
+      </p>
+
+      <p>
+        For example, you can use DOM methods to access HTML elements by id, attribute, tag name, or class name, 
+        add events to the document, or dynamically insert and remove elements.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>General syntax for executing a DOM method:</p>
+      <pre>
+window.document.methodName();
+OR
+document.methodName();
+      </pre>
+
+      <h2>Common DOM Methods</h2>
+
+      <h3>document.getElementById()</h3>
+      <p>
+        This method retrieves an element by its id attribute.
+      </p>
+      <pre>
+const ele = document.getElementById("id");
+      </pre>
+
+      <h4>Example</h4>
+      <pre>
+&lt;button onclick="accessEle()"&gt;Access output and write&lt;/button&gt;
+&lt;p id="output"&gt;&lt;/p&gt;
+
+&lt;script&gt;
+  function accessEle() {
+    document.getElementById("output").innerHTML = 
+      "Hello User! You have just clicked the button!";
+  }
+&lt;/script&gt;
+      </pre>
+
+      <h3>document.addEventListener()</h3>
+      <p>
+        Adds an event listener to the document or element.
+      </p>
+      <pre>
+document.addEventListener('mouseover', function () {
+  // Perform action
+});
+      </pre>
+
+      <h4>Example</h4>
+      <pre>
+&lt;h3&gt;JavaScript document.addEventListener() Method&lt;/h3&gt;
+&lt;p&gt;Hover over here to change background color&lt;/p&gt;
+
+&lt;script&gt;
+  document.addEventListener('mouseover', function () {
+    document.body.style.backgroundColor = 'red';
+  });
+&lt;/script&gt;
+      </pre>
+
+      <h3>document.write()</h3>
+      <p>
+        The <code>document.write()</code> method writes HTML directly into the document. 
+        It replaces existing content if executed after the page loads.
+      </p>
+      <pre>
+document.write("&lt;p&gt;Hello Users!&lt;/p&gt;");
+      </pre>
+
+      <h4>Example</h4>
+      <pre>
+&lt;button onclick="writeText()"&gt;Add HTML&lt;/button&gt;
+
+&lt;script&gt;
+  function writeText() {
+    document.write("&lt;p&gt;Text written using document.write() method.&lt;/p&gt;");
+  }
+&lt;/script&gt;
+      </pre>
+
+      <h2>List of DOM Methods</h2>
+      <p>
+        Some commonly used DOM methods include:
+      </p>
+      <ul>
+        <li><code>setAttribute()</code> – Define or modify attributes of an element.</li>
+        <li><code>querySelector()</code> – Select the first element matching a CSS selector.</li>
+        <li><code>querySelectorAll()</code> – Select all elements matching a CSS selector.</li>
+        <li><code>remove()</code> – Remove an element from the DOM.</li>
+        <li><code>appendChild()</code> – Add a new child node to an element.</li>
+        <li><code>createElement()</code> – Create a new HTML element.</li>
+        <li><code>addEventListener()</code> – Attach an event listener to an element.</li>
+        <li><code>getElementsByClassName()</code> – Access elements by class name.</li>
+        <li><code>getElementsByTagName()</code> – Access elements by tag name.</li>
+      </ul>
+
+      <h2>List of DOM Properties</h2>
+      <p>
+        DOM properties provide information about elements or allow updates to them.
+      </p>
+      <ul>
+        <li><code>innerHTML</code> – Get or set the HTML inside an element.</li>
+        <li><code>innerText</code> – Get or set the visible text of an element.</li>
+        <li><code>style</code> – Access inline styles of an element.</li>
+        <li><code>id</code> – Access or modify the element’s ID.</li>
+        <li><code>classList</code> – Access classes applied to an element.</li>
+        <li><code>parentElement</code> – Access an element’s parent in the DOM tree.</li>
+        <li><code>children</code> – Retrieve child elements of a node.</li>
+        <li><code>checked</code> – Check or uncheck form inputs.</li>
+        <li><code>value</code> – Get or set the value of form fields.</li>
+        <li><code>href</code> – Access or update links (<code>&lt;a&gt;</code>).</li>
+      </ul>
+
+      <p>
+        These methods and properties together allow JavaScript to fully interact with and manipulate HTML documents.
+      </p>
+    </div>
+  </div>
+</div>

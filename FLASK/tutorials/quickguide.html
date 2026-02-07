@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask Quick Guide: Overview and Environment Setup 🐍</h1>
+        <div class="content">
+            <h2>Flask Overview</h2>
+            <p>**Flask** is a **micro web application framework** written in Python, developed by **Armin Ronacher** and the Pocco group. As a framework, it provides a collection of libraries and modules that handle low-level details (like protocols and thread management), allowing developers to focus on application logic.</p>
+            <p>Flask is based on two core components, both Pocco projects:</p>
+            <ul>
+                <li>**Werkzeug:** A **WSGI** (Web Server Gateway Interface) toolkit that implements request and response objects. WSGI is the standard universal interface between Python web applications and web servers.</li>
+                <li>**Jinja2:** A powerful and popular **templating engine** used to render dynamic HTML pages by combining templates with data sources.</li>
+            </ul>
+            <p>Flask is classified as "micro" because it keeps the core simple and does not include built-in abstraction layers for components like database handling or form validation; these functionalities are added via **extensions**.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Flask Environment Setup</h2>
+        <p>While Flask works with Python 3.3+, it's best practice to use a **virtual environment** for development to manage dependencies and avoid compatibility issues.</p>
+        <div class="content example">
+            <h3>1. Install <code>virtualenv</code></h3>
+            <p><code>pip install virtualenv</code> (Requires administrator privileges)</p>
+
+            <h3>2. Create and Activate the Environment</h3>
+            <p>A virtual environment (e.g., named <code>venv</code>) is created within your project directory and then activated:</p>
+            <ul>
+                <li>**Create:** <code>virtualenv venv</code></li>
+                <li>**Activate (Linux/OS X):** <code>venv/bin/activate</code></li>
+                <li>**Activate (Windows):** <code>venv\scripts\activate</code></li>
+            </ul>
+
+            <h3>3. Install Flask</h3>
+            <p>Once the environment is active, install Flask:</p>
+            <p><code>pip install Flask</code></p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">A Minimal Flask Application (Hello.py)</h2>
+        <div class="content example">
+            <p>A basic Flask application demonstrates the essential components:</p>
+            <pre><code>from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+   return 'Hello World'
+
+if __name__ == '__main__':
+   app.run()</code></pre>
+
+            <h3>Key Concepts:</h3>
+            <ul>
+                <li>**Flask Object:** <code>app = Flask(__name__)</code> creates the **WSGI application instance**. The argument <code>__name__</code> is the name of the current module.</li>
+                <li>**Routing:** The **<code>@app.route(rule, options)</code>** decorator binds a **URL rule** (e.g., <code>'/'</code> for the home page) to an **associated function** (<code>hello_world()</code>).</li>
+                <li>**Running the App:** The **<code>app.run()</code>** method starts the local development server.</li>
+            </ul>
+
+            <h3><code>app.run()</code> Parameters (Optional):</h3>
+            <ul>
+                <li>**<code>host</code>:** Defaults to <code>127.0.0.1</code> (localhost). Set to **<code>0.0.0.0</code>** to make the server accessible externally.</li>
+                <li>**<code>port</code>:** Defaults to **<code>5000</code>**.</li>
+                <li>**<code>debug</code>:** Defaults to <code>False</code>. If set to **<code>True</code>**, it provides debug information (like an interactive debugger) and enables the reloader.</li>
+            </ul>
+        </div>
+    </div>
+</div>

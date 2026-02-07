@@ -1,0 +1,145 @@
+<div class="content">
+  <h2>Overview</h2>
+  <p>CSS colors are used to set the foreground (text), background, borders, shadows and many decorative effects. Colors can be expressed in multiple formats — keywords, hex, rgb/rgba, hsl/hsla, functions, and special keywords such as <em>currentcolor</em>. Understanding these formats helps you pick the right representation for readability, accessibility and performance.</p>
+</div>
+
+<div class="session">
+  <div class="title">
+    <h2>Common Color Formats</h2>
+  </div>
+  <div class="content">
+    <ul>
+      <li><strong>Keyword</strong> — named colors such as <em>red</em>, <em>blue</em>, <em>aqua</em>.</li>
+      <li><strong>Hexadecimal</strong> — 6-digit hex: <em>#RRGGBB</em> (example: <em>#FF0000</em>).</li>
+      <li><strong>Short hex</strong> — 3-digit shorthand: <em>#RGB</em> (example: <em>#F00</em> → <em>#FF0000</em>).</li>
+      <li><strong>RGB</strong> — <em>rgb(r, g, b)</em> where values are 0–255 or percentages.</li>
+      <li><strong>RGBA</strong> — <em>rgba(r, g, b, a)</em> with alpha 0–1 for transparency.</li>
+      <li><strong>HSL</strong> — <em>hsl(h, s%, l%)</em> uses hue (0–360), saturation and lightness.</li>
+      <li><strong>HSLA</strong> — <em>hsla(h, s%, l%, a)</em> with alpha transparency.</li>
+      <li><strong>currentcolor</strong> — keyword referring to the element's current <em>color</em> value, usable in borders and shadows.</li>
+      <li><strong>System colors</strong> — OS/browser defined tokens (older usage).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="session">
+  <div class="title">
+    <h2>Why choose one format over another?</h2>
+  </div>
+  <div class="content">
+    <ul>
+      <li><strong>Keywords</strong> are readable and quick for common colors, but limited in variety.</li>
+      <li><strong>Hex</strong> is compact and widely supported; great for static palettes.</li>
+      <li><strong>RGB/RGBA</strong> allow precise channel control and alpha transparency.</li>
+      <li><strong>HSL/HSLA</strong> are easier to reason about when adjusting hue, saturation or lightness programmatically.</li>
+      <li><strong>currentcolor</strong> makes components inherit color for consistent theming.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="session">
+  <div class="title">
+    <h2>Examples (CSS written as escaped text for clarity)</h2>
+  </div>
+  <div class="content">
+    <h2>1. Keyword</h2>
+    <p>Example CSS (text):</p>
+    <p>p { color: red; background-color: aqua; }</p>
+
+    <h2>2. Hexadecimal</h2>
+    <p>Example CSS (text):</p>
+    <p>div { background-color: #00FF00; }</p>
+
+    <h2>3. Short Hex</h2>
+    <p>Example CSS (text):</p>
+    <p>div { background-color: #00F; /* equivalent to #0000FF */ }</p>
+
+    <h2>4. RGB</h2>
+    <p>Example CSS (text):</p>
+    <p>div { background-color: rgb(255, 0, 255); }</p>
+
+    <h2>5. RGBA (with transparency)</h2>
+    <p>Example CSS (text):</p>
+    <p>div { background-color: rgba(255, 0, 255, 0.2); }</p>
+
+    <h2>6. HSL</h2>
+    <p>Example CSS (text):</p>
+    <p>div { background-color: hsl(120, 100%, 50%); /* pure green */ }</p>
+
+    <h2>7. HSLA</h2>
+    <p>Example CSS (text):</p>
+    <p>div { background-color: hsla(355, 70%, 50%, 0.4); }</p>
+
+    <h2>8. currentcolor</h2>
+    <p>Example CSS (text):</p>
+    <p>h2 { color: red; } h2::after { border-left: 4px solid currentcolor; }</p>
+  </div>
+</div>
+
+<div class="session">
+  <div class="title">
+    <h2>Practical Patterns and Tips</h2>
+  </div>
+  <div class="content">
+    <ul>
+      <li><strong>Theme variables:</strong> use CSS custom properties to centralize palette: <em>--primary</em>, <em>--accent</em>, etc., then use <em>color: var(--primary)</em>.</li>
+      <li><strong>Contrast & accessibility:</strong> ensure text and background color combinations pass contrast checks (WCAG) for readability.</li>
+      <li><strong>Alpha overlays:</strong> use rgba/hsla for overlays and subtle tints.</li>
+      <li><strong>Programmatic adjustments:</strong> prefer HSL when you need systematic lightening/darkening via saturation/lightness edits.</li>
+      <li><strong>Consistent component colors:</strong> use <em>currentcolor</em> inside components so borders/shadows follow the component text color automatically.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="session">
+  <div class="title">
+    <h2>Browser Support and Notes</h2>
+  </div>
+  <div class="content">
+    <ul>
+      <li>All modern browsers support hex, rgb(a) and hsl(a).</li>
+      <li>Keywords are widely supported but limited to the predefined list.</li>
+      <li>Use fallbacks if you rely on newer color formats in older target environments.</li>
+      <li>System colors and legacy color keywords are rarely required today.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="session">
+  <div class="title">
+    <h2>Large Example: Using Variables and Formats (as text)</h2>
+  </div>
+  <div class="content">
+    <p>Below is a multi-line example shown as plain text so you can paste it into your stylesheet. It uses variables, hex, rgba and currentcolor patterns.</p>
+    <p>/* CSS example (text) */</p>
+    <p>:root { --primary: #1a73e8; --muted: rgba(0,0,0,0.6); }</p>
+    <p>.btn { color: var(--primary); border: 2px solid currentcolor; }</p>
+    <p>.card { background: hsl(210, 40%, 98%); box-shadow: 0 4px 8px rgba(0,0,0,0.08); }</p>
+    <p>.overlay { background: rgba(0, 0, 0, 0.5); }</p>
+  </div>
+</div>
+
+<div class="session">
+  <div class="title">
+    <h2>Cheatsheet: When to Use Which Format</h2>
+  </div>
+  <div class="content">
+    <ul>
+      <li><strong>Hex</strong> — simple palettes, copy/paste from design tools.</li>
+      <li><strong>RGB(A)</strong> — precise channel control, alpha transparency.</li>
+      <li><strong>HSL(A)</strong> — easy programmatic hue/saturation/lightness adjustments.</li>
+      <li><strong>Keywords</strong> — semantic quick use for common colors.</li>
+      <li><strong>currentcolor</strong> — build components that adapt to text color.</li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="session">
+  <div class="title">
+    <h2>Summary</h2>
+  </div>
+  <div class="content">
+    <p>CSS provides many ways to express color. Choose the format that best matches your needs: hex for static palettes, rgba/hsla for transparency, hsl for programmatic tweaks, and currentcolor for adaptive components. Always check accessibility and keep a consistent design token strategy for maintainable color systems.</p>
+  </div>
+</div>

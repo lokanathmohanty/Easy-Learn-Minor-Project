@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Create Database</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        MongoDB is a document-oriented NoSQL database where data is stored in JSON-like documents. Collections group documents, and multiple collections exist in a database.
+      </p>
+
+      <h2>MongoDB Editions</h2>
+      <ul>
+        <li><strong>Community Edition:</strong> Free, self-managed, available for Windows, Linux, macOS.</li>
+        <li><strong>Enterprise Edition:</strong> Commercial, subscription-based with advanced features.</li>
+        <li><strong>Atlas:</strong> Cloud-based fully managed MongoDB service supporting AWS, Azure, GCP.</li>
+      </ul>
+
+      <h2>Connection Strings</h2>
+      <p>MongoDB connection strings vary:</p>
+      <ul>
+        <li><strong>Standard:</strong> mongodb://[username:password@]host[:port]/[defaultdb]</li>
+        <li><strong>SRV:</strong> mongodb+srv://[username:password@]host/[defaultdb] (used by Atlas)</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code>const uri = "mongodb://localhost:27017";</code></pre>
+
+      <h2>List Databases using Node.js</h2>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+   const uri = "mongodb://localhost:27017";
+   const client = new MongoClient(uri);
+
+   try {
+      await client.connect();
+
+      const databasesList = await client.db().admin().listDatabases();
+
+      console.log("Databases:");
+      databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+   } catch (e) {
+      console.error(e);
+   } finally {
+      await client.close();
+   }
+}
+
+main().catch(console.error);</code></pre>
+
+      <p>Sample Output:</p>
+      <pre><code>Databases:
+ - admin
+ - config
+ - local
+ - myProject
+ - mydb</code></pre>
+
+      <h2>Create a New Database</h2>
+      <p>Use <code>db()</code> method of the MongoClient instance to get a database instance.</p>
+      <pre><code>const db = client.db("mydatabase");
+console.log("Database instance created");
+console.log(db);</code></pre>
+
+      <p><strong>Note:</strong> The database is not physically created until at least one collection and one document exist.</p>
+
+      <h2>Complete Example</h2>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+   const uri = "mongodb://localhost:27017";
+   const client = new MongoClient(uri);
+
+   try {
+      await client.connect();
+
+      const db = client.db("mydatabase");
+      console.log("Database instance created");
+      console.log(db);
+   } catch (e) {
+      console.error(e);
+   } finally {
+      await client.close();
+   }
+}
+
+main().catch(console.error);</code></pre>
+    </div>
+  </div>
+</div>

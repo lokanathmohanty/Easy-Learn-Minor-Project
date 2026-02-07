@@ -1,0 +1,260 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Data Structures</h1>
+    <div class="content">
+      <p>
+        Data Structures are programming constructs used to store and organize data efficiently. 
+        With proper use of data structures, we can write effective programs for performing different operations.
+        JavaScript provides several built-in data structures that serve various use cases.
+      </p>
+
+      <h2>Data Structures in JavaScript</h2>
+      <p>Common data structures available in JavaScript include:</p>
+      <ul>
+        <li>Array</li>
+        <li>Object</li>
+        <li>Map</li>
+        <li>Set</li>
+        <li>WeakMap</li>
+        <li>WeakSet</li>
+        <li>Stack</li>
+        <li>Queue</li>
+        <li>Linked List</li>
+      </ul>
+
+      <h2>Arrays</h2>
+      <p>
+        An array is the most commonly used data structure in JavaScript.
+        It can store multiple values, even of different types such as numbers, strings, booleans, objects, or other arrays.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+var arr = [1, 'John', true, {name: 'John', age: 25}, [1, 2, 3]];
+console.log(arr);
+      </code></pre>
+      <h3>Output</h3>
+      <pre><code>
+1, John, true, [object Object], 1, 2, 3
+      </code></pre>
+
+      <h2>Objects</h2>
+      <p>
+        Objects store data as key-value pairs. Keys are strings, and values can be of any data type, 
+        including nested objects.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+var obj = {
+   name: 'John',
+   age: 25,
+   isMarried: true,
+   address: { city: 'New York', country: 'USA' }
+};
+console.log(obj);
+      </code></pre>
+      <h3>Output</h3>
+      <pre><code>
+{"name":"John","age":25,"isMarried":true,"address":{"city":"New York","country":"USA"}}
+      </code></pre>
+
+      <h2>Map</h2>
+      <p>
+        A Map stores data as key-value pairs. Unlike objects, keys in a Map can be of any type and maintain insertion order.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+var map = new Map();
+map.set('name', 'John');
+map.set('age', 25);
+map.set('isMarried', true);
+map.set('address', {city: 'New York', country: 'USA'});
+map.forEach((value, key) => console.log(key + " : " + value));
+      </code></pre>
+      <h3>Output</h3>
+      <pre><code>
+name : John
+age : 25
+isMarried : true
+address : {"city":"New York","country":"USA"}
+      </code></pre>
+
+      <h2>Set</h2>
+      <p>
+        A Set stores unique values, meaning no duplicates are allowed.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+var set = new Set();
+set.add(1);
+set.add('John');
+set.add(true);
+set.forEach(value => console.log(value));
+      </code></pre>
+      <h3>Output</h3>
+      <pre><code>
+1
+John
+true
+      </code></pre>
+
+      <h2>WeakMap</h2>
+      <p>
+        A WeakMap is similar to a Map, but its keys are weakly held. If there are no other references to the key, 
+        it will be garbage-collected.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+var weakMap = new WeakMap();
+var key = {name: 'John'};
+weakMap.set(key, 25);
+console.log(weakMap.get(key));
+      </code></pre>
+      <h3>Output</h3>
+      <pre><code>
+25
+      </code></pre>
+
+      <h2>WeakSet</h2>
+      <p>
+        A WeakSet is similar to a Set, but only stores objects and allows garbage collection 
+        if the objects are no longer referenced elsewhere.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+var weakSet = new WeakSet();
+var obj = {name: 'John'};
+weakSet.add(obj);
+console.log(weakSet.has(obj));
+      </code></pre>
+      <h3>Output</h3>
+      <pre><code>
+true
+      </code></pre>
+
+      <h2>Stack</h2>
+      <p>
+        A Stack follows the LIFO (Last In First Out) principle. The last inserted element is the first to be removed.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+class Stack {
+   constructor() {
+      this.items = [];
+   }
+   push(element) {
+      this.items.push(element);
+   }
+   pop() {
+      if (this.items.length === 0) return 'Underflow';
+      return this.items.pop();
+   }
+}
+var stack = new Stack();
+stack.push(1);
+stack.push(2);
+stack.push(3);
+console.log(stack.pop()); 
+console.log(stack.pop()); 
+console.log(stack.pop()); 
+      </code></pre>
+      <h3>Output</h3>
+      <pre><code>
+3
+2
+1
+      </code></pre>
+
+      <h2>Queue</h2>
+      <p>
+        A Queue follows the FIFO (First In First Out) principle. The first inserted element is the first to be removed.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+class Queue {
+   constructor() {
+      this.items = [];
+   }
+   enqueue(element) {
+      this.items.push(element);
+   }
+   dequeue() {
+      if (this.items.length === 0) return 'Underflow';
+      return this.items.shift();
+   }
+}
+var queue = new Queue();
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+console.log(queue.dequeue()); 
+console.log(queue.dequeue()); 
+console.log(queue.dequeue()); 
+      </code></pre>
+      <h3>Output</h3>
+      <pre><code>
+1
+2
+3
+      </code></pre>
+
+      <h2>Linked List</h2>
+      <p>
+        A Linked List stores elements as nodes. Each node contains data and a reference (pointer) to the next node.
+      </p>
+      <h3>Example</h3>
+      <pre><code>
+class Node {
+   constructor(element) {
+      this.element = element;
+      this.next = null;
+   }
+}
+class LinkedList {
+   constructor() {
+      this.head = null;
+      this.size = 0;
+   }
+   add(element) {
+      var node = new Node(element);
+      var current;
+      if (this.head === null) {
+         this.head = node;
+      } else {
+         current = this.head;
+         while (current.next) {
+            current = current.next;
+         }
+         current.next = node;
+      }
+      this.size++;
+   }
+   printList() {
+      var current = this.head;
+      var str = '';
+      while (current) {
+         str += current.element + ' ';
+         current = current.next;
+      }
+      console.log(str);
+   }
+}
+var linkedList = new LinkedList();
+linkedList.add(1);
+linkedList.add(2);
+linkedList.add(3);
+linkedList.printList();
+      </code></pre>
+      <h3>Output</h3>
+      <pre><code>
+1 2 3
+      </code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        JavaScript offers a wide variety of data structures that can be used depending on the problem. 
+        Arrays and objects are the most commonly used, but for performance and efficiency, 
+        structures like Maps, Sets, Stacks, Queues, and Linked Lists provide powerful alternatives.
+      </p>
+    </div>
+  </div>
+</div>

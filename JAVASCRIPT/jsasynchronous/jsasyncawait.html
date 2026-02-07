@@ -1,0 +1,161 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Async/Await</h1>
+    <div class="content">
+
+      <p>
+        The JavaScript functions defined with the <code>async</code> / <code>await</code> keywords can perform the same task as promises with fewer lines of code, and it makes the code readable.
+        Since the promise syntax can be complex, async/await was introduced.
+      </p>
+
+      <p>
+        To use async/await, we define an <code>async</code> function first. An async function always returns a promise. The <code>await</code> keyword is used inside an async function and makes JavaScript wait for the promise to resolve before continuing the function.
+      </p>
+
+      <h2>The JavaScript <code>async</code> Keyword</h2>
+      <p>
+        A function defined with <code>async</code> is asynchronous and always returns a promise.
+        If you return a value directly, it is wrapped in a resolved promise.
+      </p>
+
+      <h3>Syntax</h3>
+      <p><code>async function func_name(parameters) { /* function body */ }</code></p>
+
+      <h3>Example</h3>
+      <p><code>async function printMessage() { return "Hello World"; }</code></p>
+      <p>Equivalent to:</p>
+      <p><code>function printMessage() { return Promise.resolve("Hello World"); }</code></p>
+
+      <h3>Consuming the Promise</h3>
+      <p>
+        You can consume the returned promise with <code>then()</code> and <code>catch()</code>.
+      </p>
+      <p><strong>Example:</strong></p>
+      <pre>
+async function getText() {
+  return "Text from the getText() function.";
+}
+getText().then((text) => {
+  document.getElementById('output').innerHTML = text;
+}).catch((err) => {
+  document.getElementById('output').innerHTML = JSON.stringify(err);
+});
+      </pre>
+
+      <h2>The JavaScript <code>await</code> Keyword</h2>
+      <p>
+        The <code>await</code> keyword can only be used inside an async function. It pauses execution until the promise settles.
+      </p>
+
+      <h3>Syntax</h3>
+      <p><code>async function func_name(parameters) { await promise; }</code></p>
+
+      <h3>Example</h3>
+      <pre>
+async function solvePromise() {
+  const promise = new Promise((resolve) => {
+    resolve('Promise is solved');
+  });
+  const result = await promise;
+  document.getElementById('output').innerHTML += result;
+}
+solvePromise();
+      </pre>
+
+      <h3>Example (Waiting for Timeout)</h3>
+      <pre>
+async function solvePromise() {
+  const promise = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve('The promise is solved after 2 seconds');
+    }, 2000);
+  });
+  const result = await promise;
+  document.getElementById('output').innerHTML += result;
+}
+solvePromise();
+      </pre>
+
+      <h2>Error Handling with Async/Await</h2>
+      <p>
+        Instead of <code>then()</code> and <code>catch()</code>, you can use <code>try...catch</code> blocks with async functions.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre>
+try {
+  const result = await promise;
+  // handle success
+} catch (err) {
+  // handle error
+}
+      </pre>
+
+      <h3>Example</h3>
+      <pre>
+async function solvePromise() {
+  const promise = new Promise((_, reject) => {
+    reject("The promise is rejected");
+  });
+  try {
+    const result = await promise;
+    console.log("Result:", result);
+  } catch (err) {
+    console.log("Error:", err);
+  }
+}
+solvePromise();
+      </pre>
+
+      <h2>Async Class Methods</h2>
+      <p>
+        Async methods can also be defined inside classes.
+      </p>
+
+      <h3>Syntax</h3>
+      <p><code>async method_name() { return await promise; }</code></p>
+
+      <h3>Example</h3>
+      <pre>
+class Animal {
+  async getAnimalName() {
+    return await "Lion";
+  }
+}
+const lionObj = new Animal();
+lionObj.getAnimalName().then((data) => {
+  console.log("The animal name is:", data);
+});
+      </pre>
+
+      <h2>Real-time Example of Async/Await</h2>
+      <p>
+        Async/await is commonly used with APIs and data fetching.
+      </p>
+
+      <h3>Example</h3>
+      <pre>
+async function getData() {
+  try {
+    let response = await fetch('https://api.github.com/users');
+    let data = await response.json();
+    console.log("login:", data[0].login);
+    console.log("id:", data[0].id);
+  } catch (err) {
+    console.log("Error:", err);
+  }
+}
+      </pre>
+
+      <h2>Benefits of Async/Await</h2>
+      <ul>
+        <li>Increases code readability.</li>
+        <li>Reduces complexity compared to promises and callbacks.</li>
+        <li>Handles multiple promises easily.</li>
+        <li>Makes debugging simpler.</li>
+        <li>Replaces traditional callbacks for asynchronous code.</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

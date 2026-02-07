@@ -1,0 +1,139 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Functions</h1>
+    <div class="content">
+      <p>
+        A <strong>Python function</strong> is a block of organized, reusable code that performs a single, related action. 
+        Functions help in modular programming and code reuse.
+      </p>
+
+      <h2>Types of Functions</h2>
+      <ul>
+        <li><b>Built-in functions</b> – Already available in Python (e.g., <code>print()</code>, <code>len()</code>, <code>sum()</code>).</li>
+        <li><b>Functions in built-in modules</b> – Provided by standard libraries, must be <code>import</code>ed.</li>
+        <li><b>User-defined functions</b> – Written by the programmer.</li>
+      </ul>
+
+      <h2>Defining a Function</h2>
+      <pre><code>def function_name(parameters):
+    "optional docstring"
+    function_body
+    return [expression]</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>def greetings():
+    "This is docstring of greetings function"
+    print("Hello World")
+    return
+
+greetings()</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Hello World</code></pre>
+
+      <h2>Calling a Function</h2>
+      <pre><code>def printme(str):
+    "This prints a passed string"
+    print(str)
+
+printme("I'm first call to user-defined function!")
+printme("Again second call")</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>I'm first call to user-defined function!
+Again second call</code></pre>
+
+      <h2>Pass by Reference vs Value</h2>
+      <p>
+        Python passes <strong>references to objects</strong>. Whether changes reflect outside depends on mutability:
+      </p>
+      <ul>
+        <li><b>Immutable</b> (numbers, strings, tuples): function creates new objects → original unchanged.</li>
+        <li><b>Mutable</b> (lists, dicts): modifications inside function affect the original object.</li>
+      </ul>
+
+      <h3>Example with Immutable</h3>
+      <pre><code>def testfunction(arg):
+    print("ID inside:", id(arg))
+    arg = arg + 1
+    print("new object:", arg, id(arg))
+
+var = 10
+print("ID before:", id(var))
+testfunction(var)
+print("value after:", var)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>ID before: 140719550297160
+ID inside: 140719550297160
+new object: 11 140719550297192
+value after: 10</code></pre>
+
+      <h3>Example with Mutable</h3>
+      <pre><code>def testfunction(arg):
+    arg.append(100)
+
+var = [10, 20, 30]
+testfunction(var)
+print("list after:", var)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>list after: [10, 20, 30, 100]</code></pre>
+
+      <h2>Function Arguments</h2>
+      <ul>
+        <li><b>Positional</b> – must be passed in correct order.</li>
+        <li><b>Keyword</b> – specify with name.</li>
+        <li><b>Default</b> – parameters with default values.</li>
+        <li><b>Positional-only</b> (after <code>/</code>).</li>
+        <li><b>Keyword-only</b> (after <code>*</code>).</li>
+        <li><b>Variable-length</b> – <code>*args</code> and <code>**kwargs</code>.</li>
+      </ul>
+
+      <h3>Example: Keyword Argument</h3>
+      <pre><code>def printinfo(name, age):
+    print("Name:", name)
+    print("Age:", age)
+
+printinfo(age=50, name="Miki")</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Name: Miki
+Age: 50</code></pre>
+
+      <h2>Return Statement</h2>
+      <pre><code>def add(x, y):
+    return x + y
+
+result = add(10, 20)
+print("Sum:", result)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Sum: 30</code></pre>
+
+      <h2>Lambda (Anonymous) Functions</h2>
+      <pre><code>sum = lambda a, b: a + b
+print(sum(10, 20))
+print(sum(20, 20))</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>30
+40</code></pre>
+
+      <h2>Scope of Variables</h2>
+      <pre><code>total = 0  # global
+
+def sum(a, b):
+    total = a + b  # local
+    print("Inside function total:", total)
+    return total
+
+sum(10, 20)
+print("Outside function total:", total)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Inside function total: 30
+Outside function total: 0</code></pre>
+    </div>
+  </div>
+</div>

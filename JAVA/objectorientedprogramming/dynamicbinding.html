@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Dynamic Binding</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Binding Mechanisms</h1>
+            <h2 class="subtitle">Session: Dynamic Binding (Run-Time Polymorphism)</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is Dynamic Binding?</h2>
+                <p>**Binding** is the mechanism that links a **method call** to its actual **method implementation**. **Dynamic Binding** (also known as **Run-Time Polymorphism** or **Late Binding**) is the process where this linking is resolved during the program's execution (at runtime), not at compile time.</p>
+                <p>Dynamic binding is a key concept that enables **Method Overriding** to work correctly in Java.</p>
+            </div>
+
+            <div class="content characteristics">
+                <h2 class="subtitle">Characteristics of Dynamic Binding</h2>
+                <ul>
+                    <li>**Linking Time:** Resolution occurs at **Run Time**.</li>
+                    <li>**Resolution Mechanism:** It uses the actual **object type** (instance on the heap), not the reference variable type, to determine which method to call.</li>
+                    <li>**Example:** **Method Overriding** is the primary example.</li>
+                    <li>**Methods Involved:** Overridden methods are effectively **virtual methods** that utilize dynamic binding.</li>
+                </ul>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Dynamic Binding in Action</h2>
+                <p>When the `move()` method is called on the reference `b`, the Java Virtual Machine (JVM) checks the actual object type (`Dog`), not the reference type (`Animal`), leading to the execution of the overridden method.</p>
+                <pre><code>class Animal {
+   public void move() { ... } // Parent method
+}
+
+class Dog extends Animal {
+   public void move() { ... } // Overridden child method
+}
+
+public class Tester {
+   public static void main(String args[]) {
+      // Animal reference points to a Dog object (Dynamic Binding)
+      Animal b = new Dog();
+      
+      // At compile time: Check is made on Animal type.
+      // At run time: JVM invokes the Dog's move() method.
+      b.move(); 
+   }
+}</code></pre>
+                <p>Output shows the runtime decision:</p>
+                <pre><code>Dogs can walk and run</code></pre>
+            </div>
+
+            <div class="content super-keyword">
+                <h2 class="subtitle">Combining Dynamic Binding with <code>super</code></h2>
+                <p>The **<code>super</code>** keyword allows the overridden method in the subclass to execute the original implementation in the superclass, even while the method call itself is resolved dynamically.</p>
+                <pre><code>class Dog extends Animal {
+   public void move() {
+      super.move();   // Invokes the super class method explicitly
+      System.out.println("Dogs can walk and run");
+   }
+}
+
+// Calling b.move() still uses dynamic binding to find Dog.move(), 
+// but Dog.move() then calls Animal.move() internally.</code></pre>
+                <p>Combined Output:</p>
+                <pre><code>Animals can move
+Dogs can walk and run</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

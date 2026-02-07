@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Pandas - Removing Duplicates</h1>
+
+    <div class="content">
+      <p>Duplicate rows are records that appear more than once in a dataset. These duplicates can lead to incorrect analysis or inflated results.</p>
+
+      <p>In the dataset below, we can observe that row 11 and row 12 contain the exact same values:</p>
+
+      <pre><code>
+  11  60  '2020/12/12'  100  120  250.7
+  12  60  '2020/12/12'  100  120  250.7
+      </code></pre>
+
+      <p>To find duplicates, we can use the <code>duplicated()</code> method, which returns a Boolean Series where duplicate rows are marked as <code>True</code>.</p>
+    </div>
+
+    <h2 class="title">Example: Discovering Duplicates</h2>
+    <div class="example">
+      <div class="content">
+        <p>This example prints whether each row in the DataFrame is a duplicate:</p>
+
+        <pre><code>
+print(df.duplicated())
+        </code></pre>
+
+        <p>Rows marked as <code>True</code> are duplicates of previous rows.</p>
+      </div>
+    </div>
+
+    <h2 class="title">Example: Removing Duplicates</h2>
+    <div class="example">
+      <div class="content">
+        <p>To remove all duplicate rows from the DataFrame, use the <code>drop_duplicates()</code> method.</p>
+
+        <pre><code>
+df.drop_duplicates(inplace=True)
+        </code></pre>
+
+        <p>Using <code>inplace=True</code> ensures that the changes are made directly to the existing DataFrame without needing to assign the result to a new variable.</p>
+      </div>
+    </div>
+
+  </div>
+</div>

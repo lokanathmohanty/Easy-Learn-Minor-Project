@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - The WeakSet Object</h1>
+
+    <div class="content">
+      <p>The JavaScript <strong>WeakSet</strong> object is a collection of objects. It is similar to the <strong>Set</strong> object, but with key differences:</p>
+      <ul>
+        <li><strong>WeakSet</strong> contains only objects, while <strong>Set</strong> can contain any data type.</li>
+        <li>Objects in a WeakSet are held <em>weakly</em>, meaning they can be garbage collected if no other references exist.</li>
+      </ul>
+      <p>WeakSets are useful for keeping track of objects without preventing them from being garbage collected, such as DOM nodes.</p>
+    </div>
+
+    <div class="content">
+      <h2>Syntax</h2>
+      <p>To define a WeakSet:</p>
+      <pre><code>const weakSet = new WeakSet([iterable]);</code></pre>
+      <p><strong>Parameters:</strong></p>
+      <ul>
+        <li><strong>iterable</strong> − Optional. An iterable object whose elements are added to the WeakSet.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>WeakSet Properties</h2>
+      <ul>
+        <li><strong>constructor</strong> − Returns the WeakSet constructor function.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>WeakSet Methods</h2>
+      <ul>
+        <li><strong>add()</strong> − Insert an object into the WeakSet.</li>
+        <li><strong>delete()</strong> − Delete a single object from the WeakSet.</li>
+        <li><strong>has()</strong> − Check whether a particular object exists in the WeakSet.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Examples</h2>
+
+      <h3>Example: Similar Objects with WeakSet</h3>
+      <pre><code>
+const obj1 = {};
+const obj2 = {};
+const weak_set = new WeakSet([obj1, obj2]);
+
+console.log(weak_set.has(obj1)); // true
+console.log(weak_set.has(obj2)); // true
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The weak_set contains the obj1 object!</li>
+        <li>The weak_set contains the obj2 object!</li>
+      </ul>
+
+      <h3>Example: Add Object in WeakSet</h3>
+      <pre><code>
+const weak_set = new WeakSet();
+const car = { brand: "Audi", model: "Q5" };
+weak_set.add(car);
+
+console.log(weak_set.has(car)); // true
+      </code></pre>
+      <p><strong>Output:</strong> The car object is added successfully to the weak_set.</p>
+
+      <h3>Example: Delete Object from WeakSet</h3>
+      <pre><code>
+const car = { brand: "Audi", model: "Q5" };
+const carWeakSet = new WeakSet([car]);
+const flag = carWeakSet.delete(car);
+
+console.log(flag); // true
+      </code></pre>
+      <p><strong>Output:</strong> The car object is deleted successfully from the carWeakSet? true</p>
+    </div>
+
+    <div class="content">
+      <p><strong>Note:</strong> WeakSet is not iterable, so you cannot traverse through its elements.</p>
+    </div>
+  </div>
+</div>

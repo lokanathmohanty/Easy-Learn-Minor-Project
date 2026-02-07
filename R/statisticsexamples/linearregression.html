@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Linear Regression</h1>
+    <div class="content">
+      <p>
+        Linear regression models the relationship between two variables by fitting a straight line. One variable is the predictor (independent), and the other is the response (dependent). It assumes a linear relation expressed as \( y = a x + b \), where \(a\) and \(b\) are coefficients.
+      </p>
+
+      <h2 class="title">Steps for Linear Regression</h2>
+      <ol>
+        <li>Gather observed values of predictor and response variables.</li>
+        <li>Create a regression model using <code>lm()</code> in R.</li>
+        <li>Extract coefficients to form the mathematical equation.</li>
+        <li>Summarize the model to understand prediction errors (residuals).</li>
+        <li>Use <code>predict()</code> to predict values for new data.</li>
+      </ol>
+
+      <h2 class="title">Input Data</h2>
+      <pre><code># Predictor (height)
+x &lt;- c(151, 174, 138, 186, 128, 136, 179, 163, 152, 131)
+# Response (weight)
+y &lt;- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48)
+</code></pre>
+
+      <h2 class="title">Create Regression Model</h2>
+      <pre><code>relation &lt;- lm(y ~ x)
+print(relation)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>Call:
+lm(formula = y ~ x)
+
+Coefficients:
+(Intercept)            x  
+   -38.4551          0.6746
+</code></pre>
+
+      <h2 class="title">Summary of the Model</h2>
+      <pre><code>summary(relation)
+</code></pre>
+      <p>Example output:</p>
+      <pre><code>Call:
+lm(formula = y ~ x)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-6.3002  -1.6629   0.0412   1.8944   3.9775 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -38.45509    8.04901  -4.778  0.00139 ** 
+x             0.67461    0.05191  12.997 1.16e-06 ***
+---
+Residual standard error: 3.253 on 8 degrees of freedom
+Multiple R-squared:  0.9548, Adjusted R-squared:  0.9491 
+F-statistic: 168.9 on 1 and 8 DF,  p-value: 1.164e-06
+</code></pre>
+
+      <h2 class="title">Predict New Value</h2>
+      <pre><code># Predict weight for height = 170
+a &lt;- data.frame(x = 170)
+result &lt;- predict(relation, a)
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>       1 
+76.22869 
+</code></pre>
+
+      <h2 class="title">Visualize Regression</h2>
+      <pre><code>png(file = "linearregression.png")
+
+plot(y, x, col = "blue", main = "Height & Weight Regression",
+  abline(lm(x ~ y)), cex = 1.3, pch = 16,
+  xlab = "Weight in Kg", ylab = "Height in cm")
+
+dev.off()
+</code></pre>
+
+      <p>
+        This code creates and saves a scatterplot showing height vs weight with the fitted regression line.
+      </p>
+    </div>
+  </div>
+  
+  </div>
+</div>

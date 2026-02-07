@@ -1,0 +1,209 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Preprocessors in C</h1>
+
+    <div class="content">
+      <p>The C Preprocessor is not a part of the compiler, but is a separate step in the compilation process. In simple terms, a C Preprocessor is just a text substitution tool and it instructs the compiler to do the required pre-processing before the actual compilation. We'll refer to the C Preprocessor as CPP.</p>
+
+      <p>In C programming, preprocessing is the first step in the compilation of a C code. It occurs before the tokenization step. One of the important functions of a preprocessor is to include the header files that contain the library functions used in the program. The preprocessor in C also defines the constants and expands the macros.</p>
+
+      <p>The preprocessor statements in C are called directives. A preprocessor section of the program always appears at the top of the C code. Each preprocessor statement starts with the hash (#) symbol.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Preprocessor Directives in C</h2>
+
+    <div class="content">
+      <table>
+        <thead>
+          <tr>
+            <th>Directive</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>#define</td><td>Substitutes a preprocessor macro.</td></tr>
+          <tr><td>#include</td><td>Inserts a particular header from another file.</td></tr>
+          <tr><td>#undef</td><td>Undefines a preprocessor macro.</td></tr>
+          <tr><td>#ifdef</td><td>Returns true if this macro is defined.</td></tr>
+          <tr><td>#ifndef</td><td>Returns true if this macro is not defined.</td></tr>
+          <tr><td>#if</td><td>Tests if a compile time condition is true.</td></tr>
+          <tr><td>#else</td><td>The alternative for #if.</td></tr>
+          <tr><td>#elif</td><td>#else and #if in one statement.</td></tr>
+          <tr><td>#endif</td><td>Ends preprocessor conditional.</td></tr>
+          <tr><td>#error</td><td>Prints error message on stderr.</td></tr>
+          <tr><td>#pragma</td><td>Issues special commands to the compiler, using a standardized method.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="title">Examples of Preprocessor Directives</h3>
+
+      <pre><code>#define MAX_ARRAY_LENGTH 20</code></pre>
+      <p>Replaces all instances of <code>MAX_ARRAY_LENGTH</code> with 20 to improve readability.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include "myheader.h"</code></pre>
+      <p>Includes the system header <code>stdio.h</code> and the local header <code>myheader.h</code>.</p>
+
+      <pre><code>#undef FILE_SIZE
+#define FILE_SIZE 42</code></pre>
+      <p>Undefines <code>FILE_SIZE</code> and redefines it as 42.</p>
+
+      <pre><code>#ifndef MESSAGE
+#define MESSAGE "You wish!"
+#endif</code></pre>
+      <p>Defines <code>MESSAGE</code> only if it isn't already defined.</p>
+
+      <pre><code>#ifdef DEBUG
+/* Your debugging statements here */
+#endif</code></pre>
+      <p>This block runs only if <code>DEBUG</code> is defined (e.g., by passing <code>-DDEBUG</code> flag during compilation).</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Predefined Macros in C</h2>
+
+    <div class="content">
+      <table>
+        <thead>
+          <tr>
+            <th>Macro</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>__DATE__</td><td>The current date as a character literal in "MMM DD YYYY" format.</td></tr>
+          <tr><td>__TIME__</td><td>The current time as a character literal in "HH:MM:SS" format.</td></tr>
+          <tr><td>__FILE__</td><td>This contains the current filename as a string literal.</td></tr>
+          <tr><td>__LINE__</td><td>This contains the current line number as a decimal constant.</td></tr>
+          <tr><td>__STDC__</td><td>Defined as 1 when the compiler complies with the ANSI standard.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="title">Example</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   printf("File: %s\n", __FILE__);
+   printf("Date: %s\n", __DATE__);
+   printf("Time: %s\n", __TIME__);
+   printf("Line: %d\n", __LINE__);
+   printf("ANSI: %d\n", __STDC__);
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>File: main.c
+Date: Mar 6 2024
+Time: 13:32:30
+Line: 8
+ANSI: 1</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Preprocessor Operators</h2>
+
+    <div class="content">
+      <h3 class="title">Macro Continuation (\) Operator</h3>
+      <p>Used to continue a macro definition on the next line.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#define message_for(a, b)  \
+   printf(#a " and " #b ": We love you!\n")
+
+int main() {
+   message_for(Ram, Raju);
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>Ram and Raju: We love you!</code></pre>
+
+      <h3 class="title">Stringize (#) Operator</h3>
+      <p>Converts macro parameters into string constants.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#define message_for(a, b)  \
+   printf(#a " and " #b ": We love you!\n")
+
+int main() {
+   message_for(Carole, Debra);
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>Carole and Debra: We love you!</code></pre>
+
+      <h3 class="title">Token Pasting (##) Operator</h3>
+      <p>Joins two tokens into one in a macro.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#define tokenpaster(n) printf("token" #n " = %d", token##n)
+
+int main() {
+   int token34 = 40;
+   tokenpaster(34);
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>token34 = 40</code></pre>
+
+      <h3 class="title">defined() Operator</h3>
+      <p>Checks if a macro is defined, useful in conditional compilation.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#if !defined(MESSAGE)
+#define MESSAGE "You wish!"
+#endif
+
+int main() {
+   printf("Here is the message: %s\n", MESSAGE);
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>Here is the message: You wish!</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Parameterized Macros in C</h2>
+
+    <div class="content">
+      <p>Parameterized macros simulate functions with macro arguments.</p>
+
+      <p>Example of function to square a number:</p>
+
+      <pre><code>int square(int x) {
+   return x * x;
+}</code></pre>
+
+      <p>Equivalent macro:</p>
+
+      <pre><code>#define square(x) ((x) * (x))</code></pre>
+
+      <p>Macro arguments must immediately follow the macro name with no space.</p>
+
+      <h3 class="title">Example</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#define MAX(x,y) ((x) > (y) ? (x) : (y))
+
+int main() {
+   printf("Max between 20 and 10 is %d\n", MAX(10, 20));
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>Max between 20 and 10 is 20</code></pre>
+    </div>
+  </div>
+</div>

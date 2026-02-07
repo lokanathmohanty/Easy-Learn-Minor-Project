@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Data Type Modifiers and Type Qualifiers</h1>
+
+        <div class="content">
+            <p>C++ uses **data type modifiers** and **type qualifiers** to alter the base meaning of a variable's data type, making it more specific for various programming situations.</p>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Data Type Modifiers 📏</h2>
+            <p>Modifiers are keywords that change the amount of memory allocated or the range of values a type can hold. They can precede the <code>char</code>, <code>int</code>, and <code>double</code> base types:</p>
+            <ul>
+                <li><strong><code>signed</code>:</strong> Applied to integer and character types. It indicates that the variable can hold **both positive and negative** values (this is the default for <code>int</code> and <code>char</code> on most systems).</li>
+                <li><strong><code>unsigned</code>:</strong> Applied to integer and character types. It restricts the variable to hold **only non-negative** (zero and positive) values, effectively doubling the positive range.</li>
+                <li><strong><code>long</code>:</strong> Applied to <code>int</code> and <code>double</code>. It increases the size and range of the base type (e.g., <code>long int</code> is often 8 bytes; <code>long double</code> offers higher precision).</li>
+                <li><strong><code>short</code>:</strong> Applied to <code>int</code>. It reduces the size and range of the base type (e.g., <code>short int</code> is typically 2 bytes).</li>
+            </ul>
+            <p><strong>Shorthand Notation:</strong> For integer types, you can omit <code>int</code>. For example, <code>unsigned x;</code> is equivalent to <code>unsigned int x;</code>, and <code>long</code> is shorthand for <code>long int</code>.</p>
+        </div>
+
+        <div class="example">
+            <h2 class="title example">Signed vs. Unsigned Interpretation</h2>
+            <p>The difference between <code>signed</code> and <code>unsigned</code> is in how the compiler interprets the stored bits. For example, when a positive value that exceeds the maximum capacity of a <code>signed short int</code> is assigned from an <code>unsigned short int</code>, it results in an overflow, causing the number to wrap around and be interpreted as a negative value.</p>
+            <pre class="example">
+unsigned short int j = 50000;
+short int i = j; // Data loss/reinterpretation occurs
+// Output: -15536 50000
+</pre>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Type Qualifiers 🛡️</h2>
+            <p>Type qualifiers provide additional information to the compiler about how a variable's value might be accessed or modified, often affecting optimization and safety.</p>
+            <ol>
+                <li>
+                    <strong><code>const</code>:</strong> Declares an object as a constant. Its value **cannot be changed** by the program during execution after initialization. The compiler enforces this constraint.
+                </li>
+                <li>
+                    <strong><code>volatile</code>:</strong> Instructs the compiler that the variable's value may be changed in ways **not explicitly detectable** by the program's code (e.g., by an external hardware event or another concurrently running thread). This prevents the compiler from applying certain optimizations (like caching the value in a register) that might assume the variable's value is stable.
+                </li>
+                <li>
+                    <strong><code>restrict</code>:</strong> (Note: This is a type qualifier from C99, though some C++ compilers support it). When applied to a pointer, it tells the compiler that the pointer is the **only initial means** of accessing the object it points to. This knowledge allows the compiler to perform more aggressive memory access optimizations.
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Web Data</h1>
+    <div class="content">
+      <p>
+        Many websites provide data for public consumption in formats like CSV, TXT, and XML. Using R, it is possible to programmatically extract such data by scraping websites. Common R packages for web scraping and data extraction include <code>RCurl</code>, <code>XML</code>, and <code>stringr</code>. These packages help connect to URLs, identify file links, and download files locally.
+      </p>
+
+      <h2 class="title">Install Required R Packages</h2>
+      <pre><code>install.packages("RCurl")
+install.packages("XML")
+install.packages("stringr")
+install.packages("plyr")
+</code></pre>
+
+      <h2 class="title">Example: Download Weather Data Files</h2>
+      <pre><code># Read the URL containing weather data files
+url &lt;- "http://www.geos.ed.ac.uk/~weather/jcmb_ws/"
+
+# Gather all the links present on the webpage
+links &lt;- getHTMLLinks(url)
+
+# Identify the links pointing to JCMB 2015 files
+filenames &lt;- links[str_detect(links, "JCMB_2015")]
+
+# Store the filenames as a list
+filenames_list &lt;- as.list(filenames)
+
+# Define a function to download files from the URL using the list of filenames
+downloadcsv &lt;- function(mainurl, filename) {
+  filedetails &lt;- str_c(mainurl, filename)
+  download.file(filedetails, filename)
+}
+
+# Download all the JCMB 2015 files by applying the function over the filenames list
+l_ply(filenames, downloadcsv, mainurl = "http://www.geos.ed.ac.uk/~weather/jcmb_ws/")
+</code></pre>
+
+      <h2 class="title">Verify File Download</h2>
+      <p>After running the above code, the following files will be located in the current R working directory:</p>
+      <ul>
+        <li>JCMB_2015.csv</li>
+        <li>JCMB_2015_Apr.csv</li>
+        <li>JCMB_2015_Feb.csv</li>
+        <li>JCMB_2015_Jan.csv</li>
+        <li>JCMB_2015_Mar.csv</li>
+      </ul>
+    </div>
+  </div>
+
+ 
+    </div>
+  </div>
+</div>

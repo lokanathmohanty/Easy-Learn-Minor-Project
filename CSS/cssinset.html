@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS inset Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS inset property</strong> is a shorthand property used to control the
+        positioning of an element relative to its containing block. It combines the
+        properties <code>top</code>, <code>right</code>, <code>bottom</code>, and
+        <code>left</code> into a single declaration. In order for <code>inset</code> to
+        take effect, the element must have its <code>position</code> property set
+        (e.g., <code>absolute</code>, <code>relative</code>, or <code>fixed</code>).
+      </p>
+
+      <h2>Syntax</h2>
+      <p>
+        <code>inset: auto | length | percentage | initial | inherit;</code>
+      </p>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>auto</strong> – Lets the browser calculate the positioning automatically, often used for default alignment.</li>
+        <li><strong>length</strong> – Defines the inset distance using units like <code>px</code>, <code>em</code>, or <code>rem</code>. Negative values are allowed.</li>
+        <li><strong>percentage</strong> – Sets the inset as a percentage relative to the size of the containing block.</li>
+        <li><strong>initial</strong> – Resets the inset property to its default value.</li>
+        <li><strong>inherit</strong> – Inherits the inset value from its parent element.</li>
+      </ul>
+
+      <h2>Detailed Explanation</h2>
+      <p>
+        The <code>inset</code> property can accept one to four values, and each behaves differently:
+      </p>
+      <ul>
+        <li><strong>One value:</strong> Applied equally to all four sides.</li>
+        <li><strong>Two values:</strong> First applies to top and bottom, second applies to left and right.</li>
+        <li><strong>Three values:</strong> First applies to top, second applies to left and right, third applies to bottom.</li>
+        <li><strong>Four values:</strong> Applied individually to top, right, bottom, and left.</li>
+      </ul>
+
+      <h2>Examples of CSS inset Property</h2>
+
+      <h2>1. Inset Property with Auto Value</h2>
+      <p>
+        Using <code>auto</code>, the browser decides the element's position automatically.
+        This is helpful when you want the default alignment based on the containing block.
+      </p>
+      <pre>
+.container {
+  position: relative;
+  width: 300px;
+  height: 150px;
+  border: 2px solid black;
+}
+.text {
+  position: absolute;
+  inset: auto;
+}
+      </pre>
+      <p>
+        In this example, the element is placed using the browser's default rules because
+        <code>inset: auto;</code> does not enforce a custom distance.
+      </p>
+
+      <h2>2. Inset Property with Length Values</h2>
+      <p>
+        Length values let you explicitly control the element’s distance from each edge.
+      </p>
+      <pre>
+.box {
+  position: absolute;
+  inset: 20px 40px 30px 10px;
+}
+      </pre>
+      <p>
+        This means:
+      </p>
+      <ul>
+        <li>Top: 20px</li>
+        <li>Right: 40px</li>
+        <li>Bottom: 30px</li>
+        <li>Left: 10px</li>
+      </ul>
+
+      <h2>3. Inset Property with Percentage Values</h2>
+      <p>
+        Percentage values are relative to the dimensions of the parent container.
+      </p>
+      <pre>
+.element {
+  position: absolute;
+  inset: 10% 15% 20% 5%;
+}
+      </pre>
+      <p>
+        Here the element is offset:
+      </p>
+      <ul>
+        <li>Top: 10% of parent’s height</li>
+        <li>Right: 15% of parent’s width</li>
+        <li>Bottom: 20% of parent’s height</li>
+        <li>Left: 5% of parent’s width</li>
+      </ul>
+
+      <h2>4. Inset Property with Mixed Values</h2>
+      <p>
+        You can mix units such as pixels and percentages for flexible layouts.
+      </p>
+      <pre>
+.card {
+  position: absolute;
+  inset: 25px 10% 15px 35%;
+}
+      </pre>
+      <p>
+        Meaning:
+      </p>
+      <ul>
+        <li>Top: 25px</li>
+        <li>Right: 10% of parent’s width</li>
+        <li>Bottom: 15px</li>
+        <li>Left: 35% of parent’s width</li>
+      </ul>
+
+      <h2>Browser Support</h2>
+      <p>
+        The <code>inset</code> property is supported in modern browsers:
+      </p>
+      <ul>
+        <li>Chrome: 88+</li>
+        <li>Edge: 88+</li>
+        <li>Firefox: 66+</li>
+        <li>Safari: 14.1+</li>
+        <li>Opera: 73+</li>
+      </ul>
+
+      <h2>Practical Example</h2>
+      <p>
+        Imagine you want to center a modal box inside a container. You can use
+        <code>inset</code> with equal values to achieve that easily.
+      </p>
+      <pre>
+.modal {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 200px;
+  height: 100px;
+}
+      </pre>
+      <p>
+        Here the modal is centered because all edges are set to <code>0</code> and
+        margins are automatically balanced.
+      </p>
+    </div>
+  </div>
+</div>

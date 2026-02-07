@@ -1,0 +1,174 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Introduction to ES6</h1>
+    <div class="content">
+
+      <div class="section">
+        <h2>Overview</h2>
+        <p>
+          ES6, or ECMAScript 2015, is the 6th version of the ECMAScript programming language. 
+          It is the standardization of JavaScript, released in 2015, and brought many improvements 
+          such as new syntax, keywords, and advanced features for better development practices.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>New Features in ES6</h2>
+
+        <h3>1. The <code>let</code> Keyword</h3>
+        <p>
+          The <code>let</code> variables are mutable and block-scoped. 
+          It prevents variable leakage outside of the intended scope.
+        </p>
+        <pre><code>let n = 10;
+{
+    let n = 2; // Block-scoped variable
+    console.log(n);
+}
+console.log(n);
+</code></pre>
+        <p><strong>Output:</strong></p>
+        <ul>
+          <li>2</li>
+          <li>10</li>
+        </ul>
+
+        <h3>2. The <code>const</code> Keyword</h3>
+        <p>
+          <code>const</code> is used to declare variables with a constant value. 
+          Once assigned, it cannot be reassigned.
+        </p>
+        <pre><code>const PI = 3.14159;
+PI = 3; // Error: Assignment to constant variable
+</code></pre>
+
+        <h3>3. Arrow Functions</h3>
+        <p>
+          Arrow functions provide a shorter syntax for writing functions and 
+          automatically bind <code>this</code> to the surrounding context.
+        </p>
+        <pre><code>// Traditional function
+function add(a, b) { return a + b; }
+
+// Arrow function
+const add = (a, b) => a + b;
+</code></pre>
+
+        <h3>4. Destructuring Assignment</h3>
+        <p>
+          Destructuring allows breaking complex structures like objects or arrays into simpler parts.
+        </p>
+        <p><strong>Object Destructuring</strong></p>
+        <pre><code>const obj = { name: "Raj", age: 25 };
+const { name, age } = obj;
+console.log(name, age);
+</code></pre>
+        <p><strong>Output:</strong> Raj 25</p>
+
+        <p><strong>Array Destructuring</strong></p>
+        <pre><code>const a = ["red", "blue", "green"];
+const [first, second] = a;
+console.log(first, second);
+</code></pre>
+        <p><strong>Output:</strong> red blue</p>
+
+        <h3>5. The Spread (<code>...</code>) Operator</h3>
+        <p>
+          Expands arrays or objects into individual elements or properties.
+        </p>
+        <pre><code>const n1 = [1, 2, 3];
+const n2 = [...n1, 4, 5];
+console.log(n2);
+</code></pre>
+        <p><strong>Output:</strong> [1, 2, 3, 4, 5]</p>
+
+        <h3>6. The <code>for/of</code> Loop</h3>
+        <p>Iterates over arrays, strings, Maps, and Sets.</p>
+        <pre><code>const a = ["apple", "banana", "cherry"];
+for (const fruit of a) {
+    console.log(fruit);
+}
+</code></pre>
+        <p><strong>Output:</strong> apple, banana, cherry</p>
+
+        <h3>7. Maps and Sets</h3>
+        <p><strong>Map:</strong> Stores key-value pairs.</p>
+        <pre><code>const map = new Map();
+map.set("a", 1);
+map.set("b", 2);
+console.log(map.get("a"));
+</code></pre>
+        <p><strong>Output:</strong> 1</p>
+
+        <p><strong>Set:</strong> Stores unique values.</p>
+        <pre><code>const set = new Set([1, 2, 3, 3]);
+console.log(set);
+</code></pre>
+        <p><strong>Output:</strong> Set(3) {1, 2, 3}</p>
+
+        <h3>8. Classes</h3>
+        <pre><code>class Animal {
+    speak() { console.log("The animal makes a sound"); }
+}
+
+const dog = new Animal();
+dog.speak();
+</code></pre>
+        <p><strong>Output:</strong> The animal makes a sound</p>
+
+        <h3>9. Promises</h3>
+        <p>Simplifies asynchronous handling with <code>.then</code> and <code>.catch</code>.</p>
+        <pre><code>const fetch = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve("Data fetched"), 2000);
+    });
+};
+
+fetch().then(data => console.log(data));
+</code></pre>
+
+        <h3>10. Default Parameters</h3>
+        <p>Functions can have default values for parameters.</p>
+        <pre><code>function greet(name = "Guest") {
+    return `Hello, ${name}!`;
+}
+console.log(greet());
+</code></pre>
+        <p><strong>Output:</strong> Hello, Guest!</p>
+
+      </div>
+
+      <div class="section">
+        <h2>Additional Enhancements</h2>
+        <ul>
+          <li><code>includes()</code>, <code>startsWith()</code>, <code>endsWith()</code></li>
+          <li><code>find()</code>, <code>findIndex()</code>, <code>from()</code></li>
+          <li>Template Literals</li>
+          <li>Modules (<code>import</code>, <code>export</code>)</li>
+          <li>Rest Parameters (<code>...args</code>)</li>
+          <li>Generators and Iterators</li>
+          <li>Binary (0b) and Octal (0o) Literals</li>
+          <li>Enhanced Object Literals</li>
+          <li>WeakMap and WeakSet</li>
+          <li>Proxy and Reflect</li>
+          <li><code>Symbol</code> primitive type</li>
+          <li>Block-scoped Functions</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Browser Support</h2>
+        <p>ES6 is fully supported in all modern browsers since June 2017:</p>
+        <ul>
+          <li>Chrome 51 (May 2016)</li>
+          <li>Edge 15 (Apr 2017)</li>
+          <li>Firefox 54 (Jun 2017)</li>
+          <li>Safari 10 (Sep 2016)</li>
+          <li>Opera 38 (Jun 2016)</li>
+        </ul>
+        <p><strong>Note:</strong> ES6 is not supported in Internet Explorer.</p>
+      </div>
+
+    </div>
+  </div>
+</div>

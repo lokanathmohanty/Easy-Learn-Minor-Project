@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `$GLOBALS` Superglobal Array</h1>
+
+    <div class="content">
+      <p>
+        The **`$GLOBALS`** is a **superglobal** associative array that provides access to **all globally defined variables** from anywhere in a PHP script, regardless of the current scope (including inside functions and methods). It acts as a reference to the global symbol table.
+      </p>
+      <ul>
+        <li>
+          **Keys:** The names of the global variables (without the dollar sign, `$`).
+        </li>
+        <li>
+          **Values:** The current values of the corresponding global variables.
+        </li>
+      </ul>
+
+      <h2>Access and Modification</h2>
+
+      <h3>Accessing Global Variables</h3>
+      <p>
+        You can retrieve the value of any global variable by using its name as a key in the `$GLOBALS` array. This is especially useful for accessing global variables inside functions where they are normally unavailable.
+      </p>
+      <div class="example">
+        <p>
+          <code>$var1 = "Hello World"; // Global variable</code><br>
+          <br>
+          <code>function myfunction() {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$var1 = "Hello PHP"; // Local variable</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo **$GLOBALS['var1']** . "\n"; // Accesses the Global value</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo $var1; // Accesses the Local value</code><br>
+          <code>}</code>
+        </p>
+        <p class="content">
+          Output:<br>
+          Hello World<br>
+          Hello PHP
+        </p>
+      </div>
+
+      <h3>Updating Global Variables from Functions</h3>
+      <p>
+        You can directly modify the value of a global variable from inside any function by assigning a new value to its entry in the `$GLOBALS` array.
+      </p>
+      <div class="example">
+        <p>
+          <code>$counter = 0;</code><br>
+          <br>
+          <code>function incrementCounter() {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;**$GLOBALS['counter']++;** // Direct modification of global variable</code><br>
+          <code>}</code><br>
+          <code>incrementCounter();</code><br>
+          <code>echo $counter; // Output: 1</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Handling Arrays and Nested Functions</h2>
+      <p>
+        The `$GLOBALS` array works seamlessly with complex data types, such as arrays, and retains its accessibility across nested function calls.
+      </p>
+      
+      <h3>Storing and Modifying Arrays</h3>
+      <p>
+        You can manipulate global arrays directly through `$GLOBALS`, for instance, by adding new elements to them.
+      </p>
+      <div class="example">
+        <p>
+          <code>$var = array("Apple");</code><br>
+          <code>function addFruit($fruit) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;**$GLOBALS['var'][] = $fruit;**</code><br>
+          <code>}</code><br>
+          <code>addFruit("Orange");</code><br>
+          <code>// $var is now ["Apple", "Orange"]</code>
+        </p>
+      </div>
+      
+      <h3>Accessibility in Nested Functions</h3>
+      <p>
+        Since `$GLOBALS` is a superglobal, it is available without any extra declaration inside all nested functions.
+      </p>
+      
+      <hr>
+      
+      <h2>Note on Copying `$GLOBALS` (PHP 8.1.0+)</h2>
+      <p>
+        As of **PHP 8.1.0**, if you attempt to assign `$GLOBALS` to another variable (e.g., `$globals = $GLOBALS;`), the new variable (`$globals`) is a **read-only copy** of the global symbol table. Modifying elements in this copy **will not** change the actual global variables, reinforcing explicit access via `$GLOBALS['key']`.
+      </p>
+    </div>
+  </div>
+</div>

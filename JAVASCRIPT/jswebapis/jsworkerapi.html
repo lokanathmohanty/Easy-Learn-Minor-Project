@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Worker API</h1>
+    <div class="content">
+      <h2>Web Worker API</h2>
+      <p>The worker API is a web API that allows us to run JavaScript code in the background thread. Whenever the web page loads in the browser, it becomes interactive after every &lt;script&gt; tag loads in the browser. Web workers allow users to interact with the web page without loading the whole JavaScript code in the browser. It increases the response time of the web page.</p>
+
+      <h2>Create a Web Worker File</h2>
+      <p>To create a web worker, you need to write a script in the external file, which you need to execute in a different file. The filename should have a '.js' extension.</p>
+      <p>Example code:</p>
+      <pre>
+function counter() {
+    postMessage(data); // To send data to the main thread
+    setTimeout("counter()", 1000);
+}
+counter();
+      </pre>
+
+      <h2>Check for Web Worker Support</h2>
+      <p>You should check that your browser supports the web worker or not before creating the web worker. You can use the typeof operator to check for this.</p>
+      <pre>
+if (typeof(Worker) !== "undefined") {
+    //"Web worker is supported by your browser!";
+} else {
+    //"Web worker is not supported by your browser!";
+}
+      </pre>
+
+      <h2>Create a Web Worker Object</h2>
+      <p>After creating the external JavaScript file, you need to create a new Worker object by passing the path of the external JavaScript file as an argument.</p>
+      <pre>
+const workerObj = new Worker("testWorker.js");
+
+workerObj.onmessage = function(e) {
+  // Use the event.data
+};
+      </pre>
+
+      <h2>Terminate the Execution of the Web Worker</h2>
+      <p>When you start the execution of the web worker script, it continues the execution until you terminate it. You can use the terminate() method.</p>
+      <pre>
+workerObj.terminate();
+      </pre>
+
+      <h2>Example: Complete Program of Web Worker</h2>
+      <p><strong>Filename:</strong> index.html</p>
+      <pre>
+<html>
+<body>
+<button onclick="startWorker()"> Start Counter </button>
+<button onclick="stopWorker()"> Stop Counter </button>
+<div id="output"></div>
+<script>
+   let output = document.getElementById('output');
+   let workerObj;
+   function startWorker() {
+      if (typeof (Worker) !== "undefined") {
+         if (typeof workerObj === "undefined") {
+            workerObj = new Worker("app.js");
+            workerObj.onmessage = function (event) {
+               output.innerHTML += "Event data is: " + event.data + "<br>";
+            };
+         }
+      } else {
+         output.innerHTML += "Web worker is not supported by your browser.";
+      }
+   }
+   function stopWorker() {
+      if (typeof workerObj !== "undefined") {
+         workerObj.terminate();
+         workerObj = undefined;
+      }
+   }
+</script>
+</body>
+</html>
+      </pre>
+
+      <p><strong>Filename:</strong> app.js</p>
+      <pre>
+var i = 0;
+function timedCount() {
+   i = i + 1;
+   postMessage(i);
+   setTimeout("timedCount()",500);
+}
+timedCount();
+      </pre>
+
+      <h2>Output</h2>
+      <p>To run the above code, you need to make sure that the index.html and app.js file is on the live web server or localhost. Also, make sure to add the correct path for the app.js file in the Worker object.</p>
+
+      <h2>Web Worker Use Cases</h2>
+      <ul>
+        <li>When you need to execute large or complex mathematical scripts</li>
+        <li>In HTML games</li>
+        <li>If you want to improve website performance</li>
+        <li>In parallel downloads</li>
+        <li>For background data synchronization</li>
+        <li>In machine learning</li>
+        <li>For generating reports</li>
+        <li>To process audio and videos</li>
+      </ul>
+
+      <h2>Web Workers and the DOM</h2>
+      <p>As you need to define the scripts for the web workers in the external file, you can't use these objects:</p>
+      <ul>
+        <li>window</li>
+        <li>document</li>
+        <li>parent</li>
+      </ul>
+      <p>But you can use:</p>
+      <ul>
+        <li>location</li>
+        <li>navigator</li>
+        <li>Application Cache</li>
+        <li>importScripts()</li>
+        <li>XMLHttpRequest</li>
+      </ul>
+    </div>
+  </div>
+</div>

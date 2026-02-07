@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - min-block-size Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS min-block-size</strong> property sets the minimum block size of an element. 
+        The block direction is determined by the <code>writing-mode</code> property. 
+        If the content already fits within the block, this property has no effect.
+      </p>
+
+      <h2>Syntax</h2>
+      <p><code>min-block-size: auto | length | percentage | initial | inherit;</code></p>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>auto</strong> – No minimum block size limit is set. This is the default value.</li>
+        <li><strong>length</strong> – Sets the minimum block size using length units (px, em, rem, etc.).</li>
+        <li><strong>percentage</strong> – Sets the minimum block size relative to the containing element.</li>
+        <li><strong>initial</strong> – Resets the property to its default value.</li>
+        <li><strong>inherit</strong> – Inherits the value from the parent element.</li>
+      </ul>
+
+      <h2>Examples of CSS min-block-size Property</h2>
+      <p>The following examples demonstrate different values for the <code>min-block-size</code> property.</p>
+
+      <h2>Example 1: Using Auto Value</h2>
+      <p>When set to <code>auto</code>, the element's block size depends entirely on its content.</p>
+      <h2>Code Example</h2>
+      <pre>
+.container {
+  min-block-size: auto;
+}
+      </pre>
+
+      <h2>Example 2: Using Length Values</h2>
+      <p>Here, we set a minimum block size using fixed units like <code>px</code> and <code>em</code>. 
+      If content exceeds the value, the element grows to accommodate it.</p>
+      <h2>Code Example</h2>
+      <pre>
+.container {
+  min-block-size: 90px;
+}
+
+.container {
+  min-block-size: 4.5em;
+}
+      </pre>
+
+      <h2>Example 3: Using Percentage Values</h2>
+      <p>Here, the minimum block size is set relative to the containing element.</p>
+      <h2>Code Example</h2>
+      <pre>
+.outer-container {
+  height: 100px;
+}
+
+.container {
+  min-block-size: 58%;
+}
+
+.container {
+  min-block-size: 75%;
+}
+      </pre>
+
+      <h2>Example 4: With Writing Mode</h2>
+      <p>
+        When used with the <code>writing-mode</code> property, the <code>min-block-size</code> adapts 
+        to different block flow directions.
+      </p>
+      <h2>Code Example</h2>
+      <pre>
+.outer-container {
+  height: 150px;
+}
+
+.container {
+  min-block-size: 40%;
+}
+
+.horizontal {
+  writing-mode: horizontal-lr;
+}
+
+.vertical {
+  writing-mode: vertical-rl;
+}
+      </pre>
+
+      <h2>Supported Browsers</h2>
+      <ul>
+        <li>Chrome – 57.0+</li>
+        <li>Edge – 79.0+</li>
+        <li>Firefox – 41.0+</li>
+        <li>Safari – 12.1+</li>
+        <li>Opera – 44.0+</li>
+      </ul>
+    </div>
+  </div>
+</div>

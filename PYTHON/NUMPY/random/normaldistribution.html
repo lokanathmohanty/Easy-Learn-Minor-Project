@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="session">
+
+    <div class="title">
+      <h1>Normal (Gaussian) Distribution</h1>
+    </div>
+
+    <div class="content">
+      <h2>Normal Distribution</h2>
+      <p>The Normal Distribution is one of the most important distributions.</p>
+      <p>It is also called the Gaussian Distribution after the German mathematician Carl Friedrich Gauss.</p>
+      <p>It fits the probability distribution of many events, e.g., IQ Scores, Heartbeat, etc.</p>
+
+      <h3>Using <code>random.normal()</code> to get a Normal Data Distribution</h3>
+      <p>This method has three parameters:</p>
+      <ul>
+        <li><strong>loc</strong> - (Mean) where the peak of the bell exists.</li>
+        <li><strong>scale</strong> - (Standard Deviation) how flat the graph distribution should be.</li>
+        <li><strong>size</strong> - The shape of the returned array.</li>
+      </ul>
+
+      <h3>Example: Generate a random normal distribution of size 2x3</h3>
+      <pre><code>from numpy import random
+
+x = random.normal(size=(2, 3))
+
+print(x)</code></pre>
+
+      <h3>Example: Generate a random normal distribution of size 2x3 with mean 1 and standard deviation 2</h3>
+      <pre><code>from numpy import random
+
+x = random.normal(loc=1, scale=2, size=(2, 3))
+
+print(x)</code></pre>
+
+      <h3>Visualization of Normal Distribution</h3>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.displot(random.normal(size=1000), kind="kde")
+
+plt.show()</code></pre>
+
+      <p><strong>Note:</strong> The curve of a Normal Distribution is also known as the Bell Curve because of its bell-shaped appearance.</p>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS :root Selector</h1>
+    <div class="content">
+      <p>
+        The <code>:root</code> selector in CSS is a pseudo-class that matches the root element of a document tree. 
+        In an HTML document, <code>:root</code> refers to the <code>&lt;html&gt;</code> element itself. 
+        Functionally, it is similar to using the <code>html</code> selector, but <code>:root</code> has higher specificity.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+/* Selects the root element (&lt;html&gt;) of the document */
+:root {
+    /* CSS variable declarations or properties */
+}
+      </pre>
+
+      <h2>Declaring Global CSS Variables</h2>
+      <p>
+        One of the main purposes of the <code>:root</code> selector is to declare 
+        <strong>CSS custom properties (variables)</strong>. 
+        These variables can then be accessed globally throughout the stylesheet.
+      </p>
+      <p><strong>Example:</strong></p>
+      <pre>
+:root {
+   --main-color: blue;
+   --secondary-color: white;
+}
+
+body {
+   background-color: var(--main-color);
+}
+
+h1 {
+   color: var(--secondary-color);
+}
+      </pre>
+      <pre>
+&lt;h1&gt;Welcome to CSS Root Example&lt;/h1&gt;
+&lt;p&gt;
+   This is an example of using CSS root to define and use 
+   custom CSS variables.
+&lt;/p&gt;
+      </pre>
+
+      <h2>Why Use :root?</h2>
+      <ul>
+        <li>It allows defining CSS variables at the global scope.</li>
+        <li>Variables declared in <code>:root</code> can be reused across the entire stylesheet.</li>
+        <li>Improves maintainability and reduces repetition in styling.</li>
+      </ul>
+
+      <h2>Supported Browsers</h2>
+      <p>The <code>:root</code> selector is well supported across modern browsers:</p>
+      <ul>
+        <li><strong>Chrome:</strong> 4.0+</li>
+        <li><strong>Edge:</strong> 9.0+</li>
+        <li><strong>Firefox:</strong> 3.5+</li>
+        <li><strong>Safari:</strong> 3.2+</li>
+        <li><strong>Opera:</strong> 9.6+</li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      <p>
+        The <code>:root</code> selector is an effective way to define global variables and apply consistent styling across a project. 
+        It makes managing color schemes, font sizes, and reusable values much easier.
+      </p>
+    </div>
+  </div>
+</div>

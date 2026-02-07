@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Inheritance</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Object-Oriented Concepts</h1>
+            <h2 class="subtitle">Session: Understanding Inheritance</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is Java Inheritance?</h2>
+                <p>**Inheritance** is a core OOP concept where one class acquires the properties (methods and attributes) of another class. This makes information manageable in a hierarchical order, promoting **code reusability** and **extensibility**.</p>
+                <ul>
+                    <li>The inheriting class is the **subclass** (or derived/child class).</li>
+                    <li>The class being inherited from is the **superclass** (or base/parent class).</li>
+                </ul>
+                <p>Inheritance is implemented using the **<code>extends</code>** keyword in Java.</p>
+            </div>
+
+            <div class="content implementation">
+                <h2 class="subtitle">Implementing Inheritance with <code>extends</code></h2>
+                <p>The <code>extends</code> keyword signals that the subclass will inherit all accessible members (excluding constructors) from the superclass.</p>
+                <p>Syntax:</p>
+                <pre><code>class Super {
+   // base class members
+}
+class Sub extends Super {
+   // derived class members (and inherited members)
+}</code></pre>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Subclass Extending Superclass</h2>
+                <p>The <code>My_Calculation</code> class extends <code>Calculation</code> to reuse the <code>addition()</code> and <code>Subtraction()</code> methods and add its own <code>multiplication()</code> method.</p>
+                <pre><code>class Calculation {
+   public void addition(int x, int y) { ... }
+   public void Subtraction(int x, int y) { ... }
+}
+
+public class My_Calculation extends Calculation {
+   public void multiplication(int x, int y) { ... }
+   
+   public static void main(String args[]) {
+      My_Calculation demo = new My_Calculation();
+      demo.addition(20, 10); // Inherited
+      demo.multiplication(20, 10); // Own method
+   }
+}</code></pre>
+                <p>Output shows inherited and own methods are callable:</p>
+                <pre><code>The sum of the given numbers:30
+The difference between the given numbers:10
+The product of the given numbers:200</code></pre>
+            </div>
+
+            <div class="content super-keyword">
+                <h2 class="subtitle">The <code>super</code> Keyword</h2>
+                <p>The <code>super</code> keyword is used to access members of the immediate superclass, especially when there is a naming conflict (shadowing) or when invoking a superclass constructor.</p>
+                <ul>
+                    <li>**Differentiate Members:** Use <code>super.variable</code> or <code>super.method()</code> to call the superclass version.</li>
+                    <li>**Invoke Constructor:** Use <code>super(values)</code> as the first statement in the subclass constructor to call a parameterized superclass constructor.</li>
+                </ul>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Using <code>super</code> to Call Superclass Method</h2>
+                <pre><code>class Super_class {
+   int num = 20;
+   public void display() { ... }
+}
+
+public class Sub_class extends Super_class {
+   int num = 10;
+   public void display() { ... } // Overrides superclass method
+
+   public void my_method() {
+      display();       // Calls subclass display()
+      super.display(); // Calls superclass display()
+      System.out.println(super.num); // Accesses superclass num
+   }
+}</code></pre>
+            </div>
+
+            <div class="content types">
+                <h2 class="subtitle">Types of Inheritance in Java</h2>
+                <p>Java directly supports three types of inheritance using classes. Java **does not support Multiple Inheritance** (a class extending more than one class), but this is achieved through Interfaces.</p>
+                <ol>
+                    <li>**Single Inheritance:** One superclass is inherited by one subclass.</li>
+                    <li>**Multilevel Inheritance:** A chain where Class C extends Class B, and Class B extends Class A.</li>
+                    <li>**Hierarchical Inheritance:** One superclass is inherited by multiple different subclasses (Class B extends A, and Class C also extends A).</li>
+                </ol>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

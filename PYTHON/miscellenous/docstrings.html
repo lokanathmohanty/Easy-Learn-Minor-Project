@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Docstrings in Python</h1>
+    </div>
+    <div class="content">
+      <p>In Python, docstrings are used to document modules, classes, functions, and methods. They are enclosed within triple quotes (<code>""" """</code>) and can span multiple lines.</p>
+      <p>Docstrings provide a convenient way to associate documentation with Python code and are accessible via the <code>__doc__</code> attribute.</p>
+      <h2>Types of Docstrings</h2>
+      <ul>
+        <li><b>Single-Line Docstrings:</b> Brief descriptions fitting on one line, ending with a period.</li>
+        <li><b>Multi-Line Docstrings:</b> Detailed explanations including parameters, return values, and more.</li>
+        <li><b>Module Docstrings:</b> Located at the top of the module, providing an overview.</li>
+        <li><b>Class Docstrings:</b> Describe purpose and usage of classes and their methods.</li>
+      </ul>
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Be clear and concise.</li>
+        <li>Use proper grammar and spelling.</li>
+        <li>Follow consistent formatting conventions (Google, NumPy, or Sphinx styles).</li>
+        <li>Include examples wherever helpful.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example</h2>
+    </div>
+    <div class="content">
+      <p>Below are examples of different docstring styles.</p>
+      <h3>Google Style</h3>
+      <pre><code>def divide(dividend, divisor):
+    """
+    Divide two numbers and return the result.
+
+    Args:
+        dividend (float): The number to be divided.
+        divisor (float): The number to divide by.
+
+    Returns:
+        float: The result of the division.
+
+    Raises:
+        ValueError: If divisor is zero.
+    """
+    if divisor == 0:
+        raise ValueError("Cannot divide by zero")
+    return dividend / divisor
+</code></pre>
+
+      <h3>NumPy/SciPy Style</h3>
+      <pre><code>def fibonacci(n):
+    """
+    Compute the nth Fibonacci number.
+
+    Parameters
+    ----------
+    n : int
+        The index of the Fibonacci number to compute.
+
+    Returns
+    -------
+    int
+        The nth Fibonacci number.
+
+    Examples
+    --------
+    >>> fibonacci(0)
+    0
+    >>> fibonacci(5)
+    5
+    >>> fibonacci(10)
+    55
+    """
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+</code></pre>
+
+      <h3>Sphinx Style (reStructuredText)</h3>
+      <pre><code>def divide(dividend, divisor):
+    """
+    Divide two numbers and return the result.
+
+    :param float dividend: The number to be divided.
+    :param float divisor: The number to divide by.
+    :return: The result of the division.
+    :rtype: float
+    :raises ValueError: If divisor is zero.
+    """
+    if divisor == 0:
+        raise ValueError("Cannot divide by zero")
+    return dividend / divisor
+</code></pre>
+    </div>
+  </div>
+</div>

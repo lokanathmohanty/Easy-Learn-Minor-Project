@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS Cheat Sheet</h1>
+    <div class="content">
+      <p>A handy reference for ReactJS covering core concepts, syntax, and commonly used hooks and APIs.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Basic Setup</h2>
+    <div class="content">
+      <ul>
+        <li><code>npx create-react-app myapp</code> − Create a new React app.</li>
+        <li><code>npm start</code> − Run the app locally.</li>
+        <li><code>npm build</code> − Build the app for production.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">JSX</h2>
+    <div class="content">
+      <ul>
+        <li>Embed expressions: <code>{expression}</code></li>
+        <li>Attributes: <code>className</code> instead of <code>class</code></li>
+        <li>Fragments: <code>&lt;&gt; &lt;/&gt;</code></li>
+      </ul>
+      <pre>
+const element = &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Components</h2>
+    <div class="content">
+      <pre>
+function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}
+      </pre>
+      <pre>
+class Welcome extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+  }
+}
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Props & State</h2>
+    <div class="content">
+      <ul>
+        <li><strong>Props</strong> − Immutable data passed from parent to child.</li>
+        <li><strong>State</strong> − Mutable data managed inside a component.</li>
+      </ul>
+      <pre>
+const [count, setCount] = useState(0);
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Common Hooks</h2>
+    <div class="content">
+      <ul>
+        <li><code>useState()</code> − Manage component state.</li>
+        <li><code>useEffect()</code> − Side effects (API calls, subscriptions).</li>
+        <li><code>useContext()</code> − Consume context values.</li>
+        <li><code>useRef()</code> − Access DOM elements or store mutable values.</li>
+        <li><code>useReducer()</code> − Alternative to manage complex state.</li>
+        <li><code>useMemo()</code> − Memoize values for performance.</li>
+        <li><code>useCallback()</code> − Memoize functions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Events</h2>
+    <div class="content">
+      <pre>
+function Button() {
+  function handleClick() {
+    alert("Clicked!");
+  }
+  return &lt;button onClick={handleClick}&gt;Click&lt;/button&gt;;
+}
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Conditional Rendering</h2>
+    <div class="content">
+      <pre>
+{isLoggedIn ? &lt;Dashboard /&gt; : &lt;Login /&gt;}
+      </pre>
+      <pre>
+{messages.length > 0 && &lt;h2&gt;You have messages&lt;/h2&gt;}
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Lists</h2>
+    <div class="content">
+      <pre>
+const numbers = [1, 2, 3];
+const listItems = numbers.map(n =&gt; &lt;li key={n}&gt;{n}&lt;/li&gt;);
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Context API</h2>
+    <div class="content">
+      <pre>
+const MyContext = React.createContext();
+function App() {
+  return (
+    &lt;MyContext.Provider value="Hello"&gt;
+      &lt;Child /&gt;
+    &lt;/MyContext.Provider&gt;
+  );
+}
+function Child() {
+  const value = useContext(MyContext);
+  return &lt;p&gt;{value}&lt;/p&gt;;
+}
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">React Router (v6)</h2>
+    <div class="content">
+      <pre>
+import { BrowserRout

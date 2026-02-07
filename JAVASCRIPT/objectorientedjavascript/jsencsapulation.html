@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript - Encapsulation</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+
+      <h1 class="title">JavaScript - Encapsulation</h1>
+
+      <div class="content">
+        <h2>What is Encapsulation?</h2>
+        <p>
+          Encapsulation in JavaScript is a way to keep the related properties and methods 
+          under a single namespace by bundling them. It can be a function, a class or an object. 
+          In JavaScript, encapsulation can be implemented using closures, classes, and getters and setters.
+        </p>
+        <p>
+          Encapsulation is a fundamental concept in Object-oriented programming languages, 
+          along with inheritance and polymorphism. JavaScript is an object-oriented programming language.
+        </p>
+        <p>
+          It is used to hide the data from the outside world and give access to required data 
+          only to improve the integrity and security of the data.
+        </p>
+      </div>
+
+      <div class="content">
+        <h2>What is the need for encapsulation?</h2>
+        <p>
+          Let's discuss the need for encapsulation in JavaScript via the following example.
+        </p>
+        <pre><code>const car = {
+   Brand: "Honda city",
+   model: "sx",
+   year: 2016,
+}</code></pre>
+        <p>
+          Anyone can access the properties of the car object:
+        </p>
+        <pre><code>car.Brand</code></pre>
+        <p>
+          Also, anyone can change the value of any property:
+        </p>
+        <pre><code>car.Brand = true;</code></pre>
+        <p>
+          Here, the value of the Brand property is changed to a boolean. 
+          To secure original data and provide limited access, encapsulation is required.
+        </p>
+      </div>
+
+      <div class="content">
+        <h2>Different Ways to Achieve Encapsulation in JavaScript</h2>
+        <ul>
+          <li>Using function closures</li>
+          <li>Using ES6 classes</li>
+          <li>Using getters and setters</li>
+        </ul>
+        <p>We will learn each approach one by one.</p>
+      </div>
+
+      <div class="content">
+        <h2>Encapsulation Using Function Closures</h2>
+        <p>
+          A closure allows the inner function to access variables defined in the outer function 
+          even after the outer function has executed. These variables cannot be accessed outside 
+          their scope but can be accessed using the inner function.
+        </p>
+        <pre><code>function shoppingCart() {
+  const cartItems = [];
+  function add(item) {
+    cartItems.push(item);
+  }
+  function remove(itemName) {
+    const index = cartItems.findIndex(item => item.name === itemName);
+    if (index !== -1) {
+      cartItems.splice(index, 1);
+    }
+  }
+  return { add, remove };
+}
+</code></pre>
+        <p>
+          In this way, no one can directly access or modify the <code>cartItems[]</code> array.
+        </p>
+      </div>
+
+      <div class="content">
+        <h2>Encapsulation Using ES6 Classes and Private Variables</h2>
+        <p>
+          In JavaScript, classes and private fields can be used to achieve encapsulation. 
+          Private variables are defined using the <code>#</code> symbol.
+        </p>
+        <pre><code>class Car {
+  #brand = "TATA";
+  #name = "Nexon";
+  #milage = 16;
+
+  getMilage() {
+    return this.#milage;
+  }
+  setMilage(milage) {
+    this.#milage = milage;
+  }
+}
+
+let carobj = new Car();
+console.log(carobj.getMilage()); // 16
+carobj.setMilage(20);
+console.log(carobj.getMilage()); // 20
+// carobj.#milage; // Error
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Encapsulation Using Getters and Setters</h2>
+        <p>
+          JavaScript getters and setters are defined using <code>get</code> and <code>set</code> 
+          keywords to access or update private properties.
+        </p>
+        <pre><code>class User {
+  #username = "Bob";
+  #password = "12345678";
+  #isLoggedIn = false;
+
+  get username() {
+    return this.#username;
+  }
+  set username(user) {
+    this.#username = user;
+  }
+}
+
+const user = new User();
+console.log(user.username); // Bob
+user.username = "Alice";
+console.log(user.username); // Alice
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Benefits of Encapsulation in JavaScript</h2>
+        <ul>
+          <li>
+            <strong>Data protection</strong> – Control access to class data by making them private. 
+            Validate data while updating to prevent invalid states.
+          </li>
+          <li>
+            <strong>Code reusability</strong> – Classes act as templates for objects and can be reused.
+          </li>
+          <li>
+            <strong>Code maintenance</strong> – Encapsulation improves maintainability, 
+            as objects remain independent.
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

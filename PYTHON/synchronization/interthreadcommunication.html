@@ -1,0 +1,161 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Inter-Thread Communication</h1>
+    </div>
+    <div class="content">
+      <p>In Python, threads can communicate and synchronize using shared data and synchronization primitives like Event and Condition objects from the <code>threading</code> module.</p>
+    </div>
+
+    <div class="title">
+      <h2>Using Event Object</h2>
+    </div>
+    <div class="content">
+      <p>An Event object manages a flag, allowing threads to wait for and notify about changes. The flag is initially false and can be set or cleared by threads.</p>
+      <p>Key methods: <code>set()</code>, <code>clear()</code>, <code>wait()</code>, <code>is_set()</code>.</p>
+      <pre>
+from threading import Event, Thread
+import time
+
+terminate = False
+
+def signal_state():
+    global terminate
+    while not terminate:
+        time.sleep(0.5)
+        print('Traffic Police: GREEN light')
+        event.set()
+        time.sleep(1)
+        print('Traffic Police: RED light')
+        event.clear()
+
+def traffic_flow():
+    global terminate
+    num = 0
+    while num < 10 and not terminate:
+        print('Waiting for GREEN light')
+        event.wait()
+        print('GREEN light - vehicles moving')
+        while event.is_set() and not terminate:
+            num += 1
+            print('Vehicle No:', num, 'Crossing')
+            time.sleep(1)
+        print('RED light - vehicles stopped')
+
+event = Event()
+t1 = Thread(target=signal_state)
+t2 = Thread(target=traffic_flow)
+
+t1.start()
+t2.start()
+
+time.sleep(5)
+terminate = True
+
+t1.join()
+t2.join()
+print('Exiting')
+      </pre>
+      <p>Output:</p>
+      <p>
+        Waiting for GREEN light<br>
+        Traffic Police: GREEN light<br>
+        GREEN light - vehicles moving<br>
+        Vehicle No: 1 Crossing<br>
+        Traffic Police: RED light<br>
+        RED light - vehicles stopped<br>
+        Waiting for GREEN light<br>
+        ...
+      </p>
+    </div>
+
+    <div class="title">
+      <h2>Using Condition Object</h2>
+    </div>
+    <div class="content">
+      <p>Condition object allows threads to wait for a condition and notify others upon changes. It is used with an underlying lock.</p>
+      <pre>
+from threading import Condition, Thread
+import time
+
+c = Condition()
+
+def thread_a():
+    print('Thread A started')
+    with c:
+        print('Thread A waiting')
+        c.wait()
+        print('Thread A notified')
+
+def thread_b():
+    print('Thread B started')
+    with c:
+        time.sleep(2)
+        print('Thread B notifying')
+        c.notify()
+
+Thread(target=thread_a).start()
+Thread(target=thread_b).start()
+      </pre>
+      <p>Output:</p>
+      <p>
+        Thread A started<br>
+        Thread A waiting<br>
+        Thread B started<br>
+        Thread B notifying<br>
+        Thread A notified<br>
+      </p>
+    </div>
+
+    <div class="title">
+      <h2>Producer-Consumer with Condition</h2>
+    </div>
+    <div class="content">
+      <p>Example where one thread produces data and signals the consumer thread to consume it using Condition.</p>
+      <pre>
+from threading import Condition, Thread
+import time
+import random
+
+numbers = []
+
+def producer(c):
+    for _ in range(5):
+        with c:
+            num = random.randint(1, 10)
+            numbers.append(num)
+            print('Produced:', num)
+            c.notify()
+        time.sleep(0.3)
+
+def consumer(c):
+    for _ in range(5):
+        with c:
+            while not numbers:
+                c.wait()
+            num = numbers.pop()
+            print('Consumed:', num)
+        time.sleep(0.3)
+
+cond = Condition()
+t1 = Thread(target=producer, args=(cond,))
+t2 = Thread(target=consumer, args=(cond,))
+
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+
+print('Done')
+      </pre>
+      <p>Output:</p>
+      <p>
+        Produced: 3<br>
+        Consumed: 3<br>
+        Produced: 7<br>
+        Consumed: 7<br>
+        ...
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Testing With Jest</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Jest?</h2>
+            <p><strong>Jest</strong> is a popular, feature-rich **JavaScript testing framework** developed by Facebook. It is widely adopted in the React ecosystem, making it a natural choice for testing Next.js applications. Jest provides built-in tools for:</p>
+            <ul>
+                <li class="example">**Code Coverage** reporting.</li>
+                <li class="example">**Snapshot Testing** for UI components.</li>
+                <li class="example">Powerful **Mocking** capabilities for external dependencies (like API calls).</li>
+            </ul>
+            <p>Jest allows developers to write tests that simulate user interactions (e.g., button clicks) and verify that components render and behave as expected.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Setting Up Jest in a Next.js Application</h2>
+            
+            <h3>Option 1: Create a New Project with Jest</h3>
+            <p>The easiest way to start is by initializing a new Next.js project with a pre-configured Jest setup:</p>
+            <pre class="example"><code>npx create-next-app@latest --example with-jest</code></pre>
+            <p>This command creates a project that includes necessary dependencies, configuration files (<code>jest.config.js</code>, <code>jest.setup.js</code>), and example test files.</p>
+            
+            <h3>Option 2: Manual Setup in an Existing Project</h3>
+            <p>To set up Jest in an existing project, follow these steps:</p>
+            
+            <h4>Step 1: Install Dependencies</h4>
+            <p>Install Jest and the React Testing Library helpers, which provide utilities for testing React components:</p>
+            <pre class="example"><code>npm install --save-dev jest @testing-library/react @testing-library/jest-dom</code></pre>
+            
+            <h4>Step 2: Create Jest Configuration (<code>jest.config.js</code>)</h4>
+            <p>Create a configuration file in the project root to set up the testing environment and ignore non-test directories:</p>
+            <pre class="example"><code>// File - /jest.config.js
+module.exports = {
+    testPathIgnorePatterns: [ "&lt;rootDir&gt;/.next/", "&lt;rootDir&gt;/node_modules/"],
+    setupFilesAfterEnv: ["&lt;rootDir&gt;/jest.setup.js"],
+    testEnvironment: "jsdom",
+};</code></pre>
+            
+            <h4>Step 3: Add Scripts to <code>package.json</code></h4>
+            <p>Add scripts to easily run tests from the command line:</p>
+            <pre class="example"><code>// File - /package.json
+{
+    "scripts": {
+      "test": "jest",
+      "test:watch": "jest --watch"
+    }
+}</code></pre>
+            
+            <h4>Step 4: Create Test Directory</h4>
+            <p>Create a directory named **<code>__tests__</code>** in the root where all test files (ending with <code>.test.tsx</code> or <code>.test.jsx</code>) will be stored.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title example">Writing Component Tests with Jest and RTL</h2>
+            <p>This example demonstrates how to test a simple Next.js component to verify both its initial rendering and its response to user interaction.</p>
+            
+            <h3>The Component (<code>app/Home/page.tsx</code>)</h3>
+            <p>A simple component that displays text and a button that triggers an alert.</p>
+            <pre class="example"><code>export default function Home() {
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Welcome to Next.js&lt;/h1&gt;
+            &lt;button onClick={() =&gt; alert('Hello!')}&gt;
+                Click Me
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+            
+            <h3>The Test File (<code>/__tests__/Home.test.tsx</code>)</h3>
+            <p>The test uses **<code>render</code>** to simulate the component mounting, **<code>screen.getByText</code>** to find elements based on user-visible text, and **<code>fireEvent.click</code>** to simulate a click.</p>
+            <pre class="example"><code>import { render, screen, fireEvent } from '@testing-library/react';
+import Home from '@/pages/index';
+
+describe('Home Page', () =&gt; {
+    // Test 1: Renders the expected static text
+    it('renders welcome message', () =&gt; {
+        render(&lt;Home /&gt;);
+        expect(screen.getByText('Welcome to Next.js')).toBeInTheDocument();
+    });
+
+    // Test 2: Handles the button click event
+    it('handles button click', () =&gt; {
+        render(&lt;Home /&gt;);
+        // Mock the window.alert function to track calls
+        const alertMock = jest.spyOn(window, 'alert').mockImplementation();
+        
+        fireEvent.click(screen.getByText('Click Me'));
+        
+        // Assert that the alert function was called with the correct message
+        expect(alertMock).toHaveBeenCalledWith('Hello!');
+        
+        alertMock.mockRestore(); // Clean up the mock
+    });
+});</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Running the Tests</h2>
+            <p>To execute the tests, use the script defined in your <code>package.json</code>:</p>
+            <pre class="example"><code>npm test</code></pre>
+        </div>
+    </div>
+</div>

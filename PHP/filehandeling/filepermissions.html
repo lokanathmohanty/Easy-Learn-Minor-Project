@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP - File Permissions</h1>
+
+    <div class="content">
+      <p>
+        File **permissions** are central to the Unix/Linux file system, determining who can access a file and how (read, write, or execute). In PHP, you can programmatically manage these permissions using functions that mirror the Linux terminal commands like <code>chmod</code>, <code>chown</code>, and <code>chgrp</code>.
+      </p>
+
+      <h2>The Permissions String</h2>
+      <p>
+        Permissions are displayed using a 10-character string (e.g., <code>-rwxr-xr-x</code>) where the characters define access for three types of users: **User (Owner)**, **Group**, and **Other (World)**.
+      </p>
+      <ul>
+        <li>**Position 1:** Indicates the file type (<code>d</code> for directory, <code>-</code> for file).</li>
+        <li>**Positions 2-4 (User):** Read (<code>r</code>), Write (<code>w</code>), Execute (<code>x</code>) permissions for the file **owner**.</li>
+        <li>**Positions 5-7 (Group):** Read, Write, Execute permissions for the **group**.</li>
+        <li>**Positions 8-10 (Other):** Read, Write, Execute permissions for **everyone else**.</li>
+      </ul>
+
+      <h2>Octal Representation of Permissions</h2>
+      <p>
+        The PHP <code>chmod()</code> function requires permissions to be specified as an **octal number**, which is a combination of the following values:
+      </p>
+      <table border="1">
+        <tr>
+          <th>Value</th>
+          <th>Permission</th>
+          <th>Binary (rwx)</th>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Read (r)</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Write (w)</td>
+          <td>010</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Execute (x)</td>
+          <td>001</td>
+        </tr>
+      </table>
+      <p>
+        Each digit in the 4-digit octal number (e.g., <code>0755</code>) is the sum of the permissions for a specific user class (Owner, Group, Other).
+      </p>
+      <ul>
+        <li><strong><code>7</code> (Full Permissions)</strong> = 4 (Read) + 2 (Write) + 1 (Execute)</li>
+        <li><strong><code>5</code> (Read & Execute)</strong> = 4 (Read) + 0 (Write) + 1 (Execute)</li>
+        <li><strong><code>0</code> (No Permissions)</strong> = 0 + 0 + 0</li>
+      </ul>
+    </div>
+
+    <h2 class="title">The chmod() Function</h2>
+    <div class="content">
+      <p>
+        The <code>chmod()</code> function changes the file mode (permissions) and is effective primarily on Linux/Unix systems.
+      </p>
+      <pre><code>chmod(string $filename, int $permissions): bool</code></pre>
+      <p>
+        The <code>$permissions</code> parameter is a four-digit octal number (the first digit is often <code>0</code>, followed by digits for Owner, Group, and Other).
+      </p>
+    </div>
+
+    <h2 class="title">Example: Using chmod()</h2>
+    <div class="content example">
+      <p>
+        Examples of setting permissions on <code>sample.txt</code>:
+      </p>
+      <ul>
+        <li><code>chmod("/PhpProject/sample.txt", 0600)</code>: Read and Write for owner, nothing for everybody else (<code>-rw-------</code>).</li>
+        <li><code>chmod("/PhpProject/sample.txt", 0644)</code>: Read and Write for owner, Read for everybody else (<code>-rw-r--r--</code>).</li>
+        <li><code>chmod("/PhpProject/sample.txt", 0755)</code>: Everything for owner, Read and Execute for everybody else (<code>-rwxr-xr-x</code>).</li>
+      </ul>
+      <pre><code>&lt;?php
+
+   // Everything for owner (7), read and execute for group/other (5)
+   chmod("/PhpProject/sample.txt", 0755);
+
+   // Read and write for owner (6), read for owner's group (4), nothing for others (0)
+   chmod("/PhpProject/sample.txt", 0640);
+?&gt;</code></pre>
+    </div>
+
+    <h2 class="title">The chown() and chgrp() Functions</h2>
+    <div class="content">
+      <p>
+        These functions change the ownership of a file; they typically require superuser (root) privileges to execute.
+      </p>
+      <h3><code>chown()</code> (Change Owner)</h3>
+      <p>
+        Attempts to change the **owner** of the file to a new user.
+      </p>
+      <pre><code>chown(string $filename, string|int $user): bool</code></pre>
+
+      <h3><code>chgrp()</code> (Change Group)</h3>
+      <p>
+        Attempts to change the **group** of the file. A non-superuser may change the group only to a group they are a member of.
+      </p>
+      <pre><code>chgrp(string $filename, string|int $group): bool</code></pre>
+    </div>
+
+    <h2 class="title">Example: Using chgrp()</h2>
+    <div class="content example">
+      <p>
+        This example changes the group of <code>sample.txt</code> to <code>"admin"</code> and then retrieves the new group ID.
+      </p>
+      <pre><code>&lt;?php
+   $filename = "/PhpProject/sample.txt";
+   
+   // Attempt to change the file's group
+   chgrp($filename, "admin");
+   
+   // Clear stat cache to ensure filegroup() returns the new value
+   clearstatcache();
+   
+   // Output the new group information (actual output depends on system configuration)
+   printf("File group ID after chgrp: %d\n", filegroup($filename));
+?&gt;</code></pre>
+    </div>
+  </div>
+</div>

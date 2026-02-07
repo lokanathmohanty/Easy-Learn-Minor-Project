@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Errors & Exceptions Handling</h1>
+
+    <div class="content">
+      <p>Error handling in JavaScript is a process to detect and handle errors that occur during program execution. Errors can be syntax, runtime, or logical errors. Runtime errors are also known as exceptions.</p>
+
+      <p>Effective error handling ensures robust, reliable, and user-friendly applications.</p>
+    </div>
+
+    <div class="content">
+      <h2>What is an Error?</h2>
+      <p>An error is an event that prevents a program from continuing normally. Types include:</p>
+      <ul>
+        <li><strong>Syntax Errors</strong> − Occur when JavaScript code has invalid syntax.</li>
+        <li><strong>Runtime Errors (Exceptions)</strong> − Happen during execution due to invalid operations.</li>
+        <li><strong>Logical Errors</strong> − Result from mistakes in program logic.</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Syntax Error</h2>
+      <pre>
+&lt;script&gt;
+   window.print();
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Runtime Error</h2>
+      <pre>
+&lt;script&gt;
+   window.printme();
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Error Handling Mechanisms</h2>
+      <ul>
+        <li>try...catch...finally statements</li>
+        <li>throw statements</li>
+        <li>onerror event handler</li>
+        <li>Custom Errors</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: try...catch...finally</h2>
+      <pre>
+&lt;script&gt;
+   try {
+      var a = 100;
+      alert(myFunc(a));
+   } 
+   catch (e) {
+      alert(e);
+   } 
+   finally {
+      alert("Finally block will always execute!");
+   }
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: throw Statement</h2>
+      <pre>
+&lt;script&gt;
+   function myFunc() {
+      var a = 100;
+      var b = 0;
+
+      try {
+         if ( b == 0 ) {
+            throw("Divide by zero error.");
+         } else {
+            var c = a / b;
+         }
+      }
+      catch ( e ) {
+         alert("Error: " + e );
+      }
+   }
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: onerror Event Handler</h2>
+      <pre>
+&lt;script&gt;
+   const output = document.getElementById("demo");
+   window.onerror = function (msg, url, line) {
+      output.innerHTML = "Error: " + msg + "&lt;br&gt;";
+      output.innerHTML += "URL: " + url + "&lt;br&gt;";
+      output.innerHTML += "Line: " + line + "&lt;br&gt;";
+   }
+&lt;/script&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Error Object</h2>
+      <p>When errors occur, JavaScript throws an <code>Error</code> object that contains information about the error.</p>
+      <ul>
+        <li><strong>name</strong> − Sets or gets the error name.</li>
+        <li><strong>message</strong> − Sets or gets the error message.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Types of JavaScript Errors</h2>
+      <ul>
+        <li>Error</li>
+        <li>SyntaxError</li>
+        <li>ReferenceError</li>
+        <li>TypeError</li>
+        <li>RangeError</li>
+        <li>URIError</li>
+        <li>EvalError (deprecated)</li>
+        <li>AggregateError</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Custom Errors</h2>
+      <pre>
+const customError = new Error("Custom error message");
+customError.name = "CustomError";
+      </pre>
+    </div>
+  </div>
+</div>

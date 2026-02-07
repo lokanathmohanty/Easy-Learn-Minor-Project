@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MySQL Create Database</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Multiple databases (schemas) can be created on a MySQL server. This example demonstrates how to create a database using Node.js with the MySQL driver.
+      </p>
+
+      <h2>MySQL Query Syntax</h2>
+      <pre><code>CREATE DATABASE IF NOT EXISTS database_name;</code></pre>
+      <p>This creates the database only if it does not already exist.</p>
+
+      <h2>Example: Create Database with Node.js</h2>
+      <pre><code>var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "mypassword"
+});
+
+con.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected!");
+  
+  // Create database named 'mydb'
+  con.query("CREATE DATABASE IF NOT EXISTS mydb;", function (err, result) {
+    if (err) throw err;
+    console.log("Created database successfully");
+  });
+  
+  // Show all databases
+  con.query("SHOW DATABASES;", function (err, result) {
+    if (err) throw err;
+    console.log("Showing databases\n");
+    for (var i = 0; i < result.length; i++) {
+      console.log(JSON.stringify(result[i]));
+    }
+  });
+  
+  con.end();
+});
+</code></pre>
+
+      <h2>Output Example</h2>
+      <pre><code>Connected!
+Created database successfully
+Showing databases
+
+{"Database":"information_schema"}
+{"Database":"mydb"}
+{"Database":"mysql"}
+{"Database":"performance_schema"}
+{"Database":"sakila"}
+{"Database":"sys"}
+{"Database":"world"}
+</code></pre>
+
+      <p>
+        This example shows how to connect to MySQL server, create a database if it doesn't exist, and list all existing databases.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP $\text{IntlChar}$ Class (Unicode Utilities)</h1>
+
+        <div class="content">
+            <p>The $\text{IntlChar}$ class, introduced in PHP 7, provides static methods and constants for accessing detailed information about **Unicode characters**. It offers utility functions that adhere to the behavior of the underlying **ICU (International Components for Unicode)** library. To use it, the $\text{Intl}$ extension must be enabled in the $\text{php.ini}$ file.</p>
+
+            <hr>
+
+            <h2 class="title">Character Information and Properties</h2>
+
+            <h3>$\text{IntlChar::charAge()}$</h3>
+            <p>Retrieves the **Unicode version** (or "age") when the given code point was first assigned a character. The result is an array representing the version number.</p>
+            <pre>
+&lt;?php
+   // Checks the age of SNOWMAN code point (\u{2603})
+   var_dump(IntlChar::charAge("\u{2603}")); 
+   // Output: array(4) { [0]=> int(1) [1]=> int(1) ... } (Unicode version 1.1)
+?&gt;</pre>
+
+            <h3>$\text{IntlChar::charName()}$ and $\text{IntlChar::charFromName()}$</h3>
+            <p>These functions facilitate lookup between a character and its official Unicode name.</p>
+            <ul>
+                <li>$\text{IntlChar::charName(codepoint)}$: Retrieves the official **name** of a Unicode character.
+                    <pre>var_dump(IntlChar::charName("\u{2603}")); // Output: string(7) "SNOWMAN"</pre>
+                </li>
+                <li>$\text{IntlChar::charFromName(name)}$: Finds a Unicode character by its official name and returns its **code point value** (integer).
+                    <pre>var_dump(IntlChar::charFromName("SNOWMAN")); // Output: int(9731)</pre>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Character Classification (is...)</h2>
+            <p>The $\text{IntlChar}$ class offers numerous $\text{is...}$ methods to determine a character's general category property, providing much more accurate classification than simple ASCII checks.</p>
+            <ul>
+                <li>$\text{IntlChar::isalpha(codepoint)}$: Checks if the code point is a **letter character** (general category "L").
+                    <pre>var_dump(IntlChar::isalpha("A")); // bool(true)</pre>
+                </li>
+                <li>$\text{IntlChar::islower(codepoint)}$: Checks if the code point is a **lowercase letter** (general category "Ll").
+                    <pre>var_dump(IntlChar::islower("a")); // bool(true)</pre>
+                </li>
+                <li>**Similar Methods:** $\text{isdigit()}$, $\text{isalnum()}$, $\text{isblank()}$, $\text{isupper()}$, $\text{istitle()}$, $\text{iswhitespace()}$, etc.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Case Mapping</h2>
+
+            <h3>$\text{IntlChar::toupper()}$</h3>
+            <p>Maps the given character to its **uppercase equivalent**. If no uppercase equivalent exists, the character itself is returned.</p>
+            <pre>
+&lt;?php
+   var_dump(IntlChar::toupper("a")); // Output: string(1) "A"
+?&gt;</pre>
+            <p>Similarly, there are $\text{IntlChar::tolower()}$ and $\text{IntlChar::totitle()}$ methods for other case conversions.</p>
+        </div>
+    </div>
+</div>

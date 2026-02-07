@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Function Pointers in C</h1>
+    <div class="content">
+      <h2>What is a Function Pointer?</h2>
+      <p>A function pointer in C is a variable that stores the address of a function. This allows functions to be passed as arguments, returned from other functions, and stored in arrays, enabling dynamic function calls and callbacks.</p>
+
+      <h2>Declaring a Function Pointer</h2>
+      <p>To declare a function pointer, specify the return type, followed by an asterisk, the pointer name, and the parameter types:</p>
+      <pre><code>return_type (*pointer_name)(parameter_types);</code></pre>
+
+      <h2>Example: Calling a Function via Pointer</h2>
+      <p>Consider the following simple function and its pointer usage:</p>
+      <pre><code>void hello() {
+  printf("Hello World");
+}
+
+int main() {
+  void (*ptr)() = hello;
+  (*ptr)();
+  return 0;
+}</code></pre>
+      <p>This program defines a function <code>hello</code> and calls it using a function pointer <code>ptr</code>.</p>
+
+      <h2>Function Pointer with Arguments</h2>
+      <p>Function pointers can also point to functions with parameters:</p>
+      <pre><code>int add(int a, int b) {
+  return a + b;
+}
+
+int main() {
+  int (*ptr)(int, int) = add;
+  int result = (*ptr)(3, 4);
+  printf("Result: %d", result);
+  return 0;
+}</code></pre>
+      <p>This example demonstrates how to declare a function pointer <code>ptr</code> that points to the <code>add</code> function and uses it to compute the sum of 3 and 4.</p>
+
+      <h2>Pointer to Function with Pointer Arguments</h2>
+      <p>Function pointers can also point to functions that take pointer arguments:</p>
+      <pre><code>void swap(int *a, int *b) {
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
+
+int main() {
+  void (*ptr)(int*, int*) = swap;
+  int x = 10, y = 20;
+  (*ptr)(&x, &y);
+  printf("x: %d, y: %d", x, y);
+  return 0;
+}</code></pre>
+      <p>This program defines a <code>swap</code> function that swaps the values of two integers using their pointers and calls it via a function pointer <code>ptr</code>.</p>
+
+      <h2>Array of Function Pointers</h2>
+      <p>Function pointers can be stored in arrays, allowing dynamic function selection:</p>
+      <pre><code>float add(int a, int b) { return a + b; }
+float subtract(int a, int b) { return a - b; }
+float multiply(int a, int b) { return a * b; }
+float divide(int a, int b) { return a / b; }
+
+int main() {
+  float (*operations[])(int, int) = {add, subtract, multiply, divide};
+  int a = 15, b = 5;
+  int choice = 3; // multiplication
+  printf("Result: %.2f", (*operations[choice - 1])(a, b));
+  return 0;
+}</code></pre>
+      <p>This example demonstrates how to use an array of function pointers <code>operations</code> to select and perform different arithmetic operations based on user input.</p>
+
+      <h2>Applications of Function Pointers</h2>
+      <ul>
+        <li><strong>Callback Functions:</strong> Passing functions as arguments to other functions to customize behavior.</li>
+        <li><strong>Dynamic Function Calls:</strong> Selecting functions at runtime based on conditions.</li>
+        <li><strong>Implementing Interfaces:</strong> Using function pointers in structures to emulate object-oriented behavior.</li>
+        <li><strong>Event Handling:</strong> Registering functions to handle specific events or signals.</li>
+      </ul>
+
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Ensure the function pointer matches the signature of the target function.</li>
+        <li>Use typedefs to simplify complex function pointer declarations.</li>
+        <li>Be cautious when using function pointers in embedded systems or safety-critical applications, as they can complicate static analysis and debugging.</li>
+      </ul>
+    </div>
+  </div>
+</div>

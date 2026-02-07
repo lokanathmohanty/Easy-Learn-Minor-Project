@@ -1,0 +1,219 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Create a Component Using Properties</h1>
+    <div class="content">
+      <p>
+        React is a flexible library, but it strictly follows one rule: 
+        if a component is defined as a function or class, it must act like a 
+        <strong>pure function</strong> with respect to its properties. 
+        A pure function does not change its inputs and always produces the same output.
+      </p>
+      <p>
+        In short, <strong>props are read-only</strong>. When we need to handle dynamic changes, 
+        we use <strong>state</strong>. The state allows components to update in response 
+        to user actions, network responses, and more.
+      </p>
+
+      <h2>How to Create a Component Using Properties</h2>
+      <p>
+        Let us create a component using properties with an <code>ExpenseEntryItem</code> example.
+      </p>
+      <ul>
+        <li>Step 1 − Open the <code>expense-manager</code> project.</li>
+        <li>Step 2 − Modify the <code>ExpenseEntryItem</code> component to accept props.</li>
+      </ul>
+
+      <pre><code>// ExpenseEntryItem.jsx
+import React from 'react'
+import './ExpenseEntryItem.css';
+import styles from './ExpenseEntryItem.module.css'
+
+class ExpenseEntryItem extends React.Component {
+   constructor(props) {
+      super(props);
+   }
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;div&gt;&lt;b&gt;Item:&lt;/b&gt; &lt;em&gt;{this.props.name}&lt;/em&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;Amount:&lt;/b&gt; &lt;em&gt;{this.props.amount}&lt;/em&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;Spend Date:&lt;/b&gt; 
+               &lt;em&gt;{this.props.spendDate.toString()}&lt;/em&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;Category:&lt;/b&gt; &lt;em&gt;{this.props.category}&lt;/em&gt;&lt;/div&gt;
+         &lt;/div&gt;
+      );
+   }
+}
+export default ExpenseEntryItem;
+</code></pre>
+
+      <p><em>Each prop has a type:</em></p>
+      <ul>
+        <li><code>name</code> – String</li>
+        <li><code>amount</code> – Number</li>
+        <li><code>spendDate</code> – Date</li>
+        <li><code>category</code> – String</li>
+      </ul>
+
+      <h2>Using the Component</h2>
+      <pre><code>// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ExpenseEntryItem from './components/ExpenseEntryItem'
+
+const name = "Grape Juice"
+const amount = 30.00
+const spendDate = new Date("2020-10-10")
+const category = "Food"
+
+ReactDOM.render(
+   &lt;React.StrictMode&gt;
+      &lt;ExpenseEntryItem
+         name={name}
+         amount={amount}
+         spendDate={spendDate}
+         category={category} /&gt;
+   &lt;/React.StrictMode&gt;,
+   document.getElementById('root')
+);
+</code></pre>
+      <p>
+        Start the application with <code>npm start</code> and open 
+        <code>http://localhost:3000</code> in your browser.
+      </p>
+
+      <h2>CDN Example</h2>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;meta charset="UTF-8" /&gt;
+      &lt;title&gt;React based application&lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+      &lt;div id="react-app"&gt;&lt;/div&gt;
+      
+      &lt;script src="https://unpkg.com/react@17/umd/react.development.js"&gt;&lt;/script&gt;
+      &lt;script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"&gt;&lt;/script&gt;
+      &lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;
+      &lt;script type="text/babel"&gt;
+         class ExpenseEntryItem extends React.Component {
+            constructor(props) {
+               super(props);
+            }
+            render() {
+               return (
+                  &lt;div&gt;
+                     &lt;div&gt;&lt;b&gt;Item:&lt;/b&gt; &lt;em&gt;{this.props.name}&lt;/em&gt;&lt;/div&gt;
+                     &lt;div&gt;&lt;b&gt;Amount:&lt;/b&gt; &lt;em&gt;{this.props.amount}&lt;/em&gt;&lt;/div&gt;
+                     &lt;div&gt;&lt;b&gt;Spend Date:&lt;/b&gt; &lt;em&gt;{this.props.spendDate.toString()}&lt;/em&gt;&lt;/div&gt;
+                     &lt;div&gt;&lt;b&gt;Category:&lt;/b&gt; &lt;em&gt;{this.props.category}&lt;/em&gt;&lt;/div&gt;
+                  &lt;/div&gt;
+               );
+            }
+         }
+
+         const name = "Grape Juice"
+         const amount = 30.00
+         const spendDate = new Date("2020-10-10")
+         const category = "Food"
+
+         ReactDOM.render(
+            &lt;ExpenseEntryItem 
+               name={name} 
+               amount={amount} 
+               spendDate={spendDate} 
+               category={category} /&gt;,
+            document.getElementById('react-app')
+         );
+      &lt;/script&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Objects as Properties</h2>
+      <p>
+        We can also pass a full JavaScript object as a prop instead of multiple separate props.
+      </p>
+      <pre><code>// ExpenseEntryItem.jsx
+render() {
+   return (
+      &lt;div&gt;
+         &lt;div&gt;&lt;b&gt;Item:&lt;/b&gt; &lt;em&gt;{this.props.item.name}&lt;/em&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;b&gt;Amount:&lt;/b&gt; &lt;em&gt;{this.props.item.amount}&lt;/em&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;b&gt;Spend Date:&lt;/b&gt; &lt;em&gt;{this.props.item.spendDate.toString()}&lt;/em&gt;&lt;/div&gt;
+         &lt;div&gt;&lt;b&gt;Category:&lt;/b&gt; &lt;em&gt;{this.props.item.category}&lt;/em&gt;&lt;/div&gt;
+      &lt;/div&gt;
+   );
+}
+</code></pre>
+
+      <pre><code>// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ExpenseEntryItem from './components/ExpenseEntryItem'
+
+const item = {
+   id: 1,
+   name : "Grape Juice",
+   amount : 30.5,
+   spendDate: new Date("2020-10-10"),
+   category: "Food"
+}
+
+ReactDOM.render(
+   &lt;React.StrictMode&gt;
+      &lt;ExpenseEntryItem item={item} /&gt;
+   &lt;/React.StrictMode&gt;,
+   document.getElementById('root')
+);
+</code></pre>
+
+      <h2>CDN Example with Object Props</h2>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;meta charset="UTF-8" /&gt;
+      &lt;title&gt;React based application&lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+      &lt;div id="react-app"&gt;&lt;/div&gt;
+      
+      &lt;script src="https://unpkg.com/react@17/umd/react.development.js"&gt;&lt;/script&gt;
+      &lt;script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"&gt;&lt;/script&gt;
+      &lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;
+      &lt;script type="text/babel"&gt;
+         class ExpenseEntryItem extends React.Component {
+            constructor(props) {
+               super(props);
+            }
+            render() {
+               return (
+                  &lt;div&gt;
+                     &lt;div&gt;&lt;b&gt;Item:&lt;/b&gt; &lt;em&gt;{this.props.item.name}&lt;/em&gt;&lt;/div&gt;
+                     &lt;div&gt;&lt;b&gt;Amount:&lt;/b&gt; &lt;em&gt;{this.props.item.amount}&lt;/em&gt;&lt;/div&gt;
+                     &lt;div&gt;&lt;b&gt;Spend Date:&lt;/b&gt; &lt;em&gt;{this.props.item.spendDate.toString()}&lt;/em&gt;&lt;/div&gt;
+                     &lt;div&gt;&lt;b&gt;Category:&lt;/b&gt; &lt;em&gt;{this.props.item.category}&lt;/em&gt;&lt;/div&gt;
+                  &lt;/div&gt;
+               );
+            }
+         }
+
+         const item = {
+            id: 1,
+            name : "Grape Juice",
+            amount : 30.5,
+            spendDate: new Date("2020-10-10"),
+            category: "Food"
+         }
+
+         ReactDOM.render(
+            &lt;ExpenseEntryItem item={item} /&gt;,
+            document.getElementById('react-app')
+         );
+      &lt;/script&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </div>
+  </div>
+</div>

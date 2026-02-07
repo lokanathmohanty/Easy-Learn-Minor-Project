@@ -1,0 +1,51 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Metapackages and Application References</h1>
+
+        <div class="content">
+            <p>This chapter explores the concept of **metapackages** in .NET Core and how the core framework references differ between a **Console App** (using the newer project system) and a **UWP App** (which retains the older <code>.csproj</code>/MSBuild system).</p>
+        </div>
+
+        <h2 class="title">Comparing Application References</h2>
+        <div class="content">
+            <ul>
+                <li class="content">
+                    <strong>.NET Core Console Application:</strong> References the **<code>.NETCoreApp</code>** framework. This uses the new project style, allowing you to easily drill down into the underlying packages within the Solution Explorer.
+                </li>
+                <li class="content">
+                    <strong>UWP Application:</strong> Due to using the <code>.csproj</code> build system, references revert to the old style. It targets the framework through the **<code>Microsoft.NETCore.UniversalWindowsPlatform</code>** NuGet package.
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="title example">Understanding Metapackages</h2>
+        <div class="content example">
+            <p>Both <strong><code>Microsoft.NETCore.App</code></strong> (for Console/general .NET Core) and <strong><code>Microsoft.NETCore.UniversalWindowsPlatform</code></strong> (for UWP) are considered **metapackages**.</p>
+            <ul>
+                <li class="content">
+                    A **metapackage** is a **NuGet package that does not contain code**; instead, it exists solely to define a group of other, individual NuGet packages (dependencies).
+                </li>
+                <li class="content">
+                    This structure simplifies development by allowing developers to reference a single package that pulls in all the necessary foundational libraries for a specific platform or app type (e.g., console, web, or UWP).
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="title">Inspecting Metapackage Contents</h2>
+        <div class="content">
+            <p>While the Console App's <code>Microsoft.NETCore.App</code> dependencies can often be viewed directly in Solution Explorer, the UWP metapackage contents must be inspected using external tools like **NuGet Package Explorer**.</p>
+            <p>By comparing the contents of these two metapackages, you can see that:</p>
+            <ul>
+                <li class="content">
+                    Each metapackage is composed of a **different set of underlying packages** tailored to the specific application environment.
+                </li>
+                <li class="content">
+                    The **.NET Core framework** itself is currently a **subset** of the older .NET Framework class libraries but is continually expanding toward feature parity.
+                </li>
+                <li class="content">
+                    **UWP** is built on top of .NET Core, offering a **superset of APIs** specifically available for Windows Store (Windows 10) development. This results in an overall increase in the APIs available to developers.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

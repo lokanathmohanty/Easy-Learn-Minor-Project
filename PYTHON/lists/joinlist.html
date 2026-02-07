@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python - Join Lists</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+      <h1 class="title">Python - Join Lists</h1>
+      <div class="content">
+        <p>
+          Joining lists in Python refers to combining the elements of multiple lists into a single list. This can be achieved using various methods, such as concatenation, list comprehension, or using built-in functions like <code>extend()</code> or the <code>+</code> operator.
+        </p>
+        <p>
+          Joining lists does not modify the original lists but creates a new list containing the combined elements.
+        </p>
+        
+        <h2>Joining Lists Using Concatenation Operator</h2>
+        <p>
+          The concatenation operator <code>+</code> joins lists and creates a new list with all elements from both lists.
+        </p>
+        <div class="example">
+          <h3 class="title">Example: Using + Operator</h3>
+          <pre>
+# Two lists to be joined
+L1 = [10, 20, 30, 40]
+L2 = ['one', 'two', 'three', 'four']
+# Joining the lists
+joined_list = L1 + L2
+print("Joined List:", joined_list)
+          </pre>
+          <h4>Output:</h4>
+          <pre>
+Joined List: [10, 20, 30, 40, 'one', 'two', 'three', 'four']
+          </pre>
+        </div>
+        
+        <h2>Joining Lists Using List Comprehension</h2>
+        <p>
+          List comprehension can join lists by iterating over multiple lists and combining their elements into a new list.
+        </p>
+        <div class="example">
+          <h3 class="title">Example: List Comprehension</h3>
+          <pre>
+L1 = [36, 24, 3]
+L2 = [84, 5, 81]
+# Joining using list comprehension
+joined_list = [item for sublist in [L1, L2] for item in sublist]
+print("Joined List:", joined_list)
+          </pre>
+          <h4>Output:</h4>
+          <pre>
+Joined List: [36, 24, 3, 84, 5, 81]
+          </pre>
+        </div>
+        
+        <h2>Joining Lists Using append() Function</h2>
+        <p>
+          The <code>append()</code> function adds a single element to the end of a list. By iterating over a second list and appending each element, two lists can be joined.
+        </p>
+        <div class="example">
+          <h3 class="title">Example: Using append()</h3>
+          <pre>
+list1 = ['Fruit', 'Number', 'Animal']
+list2 = ['Apple', 5, 'Dog']
+for element in list2:
+    list1.append(element)
+print("Joined List:", list1)
+          </pre>
+          <h4>Output:</h4>
+          <pre>
+Joined List: ['Fruit', 'Number', 'Animal', 'Apple', 5, 'Dog']
+          </pre>
+        </div>
+        
+        <h2>Joining Lists Using extend() Function</h2>
+        <p>
+          The <code>extend()</code> function appends all elements of another list (or iterable) to the end of the current list.
+        </p>
+        <div class="example">
+          <h3 class="title">Example: Using extend()</h3>
+          <pre>
+list1 = [10, 15, 20]
+list2 = [25, 30, 35]
+list1.extend(list2)
+print("Extended List:", list1)
+          </pre>
+          <h4>Output:</h4>
+          <pre>
+Extended List: [10, 15, 20, 25, 30, 35]
+          </pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

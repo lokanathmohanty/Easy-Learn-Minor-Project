@@ -1,0 +1,78 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">Java Default Methods in Interfaces (Java 8+)</h1>
+
+        <div class="content">
+            <h2>The Need for Default Methods</h2>
+            <p><strong>Default methods</strong>, also known as Defender Methods or Virtual Extension Methods, were introduced in **Java 8**. Their primary purpose is to provide **backward compatibility** when extending existing interfaces, particularly in the Java Collections Framework.</p>
+            <p>Prior to Java 8, adding a new method to an interface (like <code>forEach</code> to the <code>Collection</code> interface) would have broken every single existing implementation of that interface. Default methods solve this by allowing the interface to provide a **concrete, non-abstract implementation** for a method.</p>
+            <p>This allows new methods to be added to an interface without forcing all implementing classes to immediately provide an implementation.</p>
+
+            <h3>Syntax</h3>
+            <p>A default method is defined using the **<code>default</code>** keyword and must include a method body (implementation).</p>
+            <pre><code>public interface MyInterface {
+   // Abstract method (must be implemented by classes)
+   void abstractMethod();
+
+   // Default method (implementation is provided)
+   default void defaultMethod() {
+      System.out.println("Default implementation is here.");
+   }
+}</code></pre>
+
+            <h3>Rules for Default Methods</h3>
+            <ul>
+                <li>The implementing class inherits the default implementation.</li>
+                <li>The implementing class **can** override the default method, treating it like any other instance method.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Resolving Multiple Inheritance Ambiguity</h2>
+            <p>Java does not support multiple inheritance of classes, but default methods introduce a form of **multiple inheritance of behavior** from interfaces, which can lead to ambiguity if a class implements two interfaces with the same default method signature.</p>
+
+            <h3>Ambiguity Resolution Rules</h3>
+            <p>When a class implements two interfaces that both define a default method with the same signature, the compiler requires the ambiguity to be resolved in one of two ways:</p>
+
+            <h4>1. Overriding with a Class Implementation</h4>
+            <p>The implementing class overrides the conflicting method, providing its own implementation. This is the simplest way to resolve the conflict, as the class's method implementation takes precedence over both interface default methods.</p>
+            <pre><code>class Car implements Vehicle, FourWheeler {
+   // Class implementation takes highest precedence
+   public void print() { 
+      System.out.println("I am a four wheeler car vehicle!");
+   }
+}</code></pre>
+
+            <h4>2. Calling a Specific Interface's Default Method</h4>
+            <p>The implementing class overrides the method but chooses to delegate the call to the default implementation of one of the interfaces using the **<code>InterfaceName.super.methodName()</code>** syntax.</p>
+            <pre><code>class Car implements Vehicle, FourWheeler {
+   public void print() {
+      // Explicitly calls the default method from the FourWheeler interface
+      FourWheeler.super.print();
+   }
+}</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Static Methods in Interfaces (Java 8+)</h2>
+            <p>In addition to default methods, Java 8 also allowed interfaces to contain **static methods** with implementations.</p>
+            <ul>
+                <li>**Purpose:** Static methods in interfaces are typically used as **utility functions** or helper methods related to the interface itself.</li>
+                <li>**Access:** Unlike default methods, which can be called on an implementing class instance, static interface methods must be called directly on the interface itself: **<code>InterfaceName.staticMethod()</code>**.</li>
+                <li>**Inheritance:** Static interface methods are **not inherited** by implementing classes or sub-interfaces.</li>
+            </ul>
+            <pre><code>public interface Vehicle {
+   static void blowHorn() {
+      System.out.println("Blowing horn!!!");
+   }
+}
+
+// Accessing the static method
+Vehicle.blowHorn();</code></pre>
+        </div>
+    </div>
+</div>

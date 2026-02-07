@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Namespaces</h1>
+        <div class="content">
+            <p>**Namespaces** provide a way to logically group related PHP code (classes, functions, constants) under a unique name. This mechanism prevents naming conflicts when combining code from different sources, especially in large applications or when using third-party libraries.</p>
+            
+            <h2 class="title">Defining and Accessing Namespaces</h2>
+            <ul>
+                <li>A namespace is defined using the **<code>namespace</code>** keyword, which must be the **very first statement** in a PHP file (except for the opening <code>&lt;?php</code> tag and the optional <code>declare</code> directive).</li>
+                <li>To define a namespace: <code>namespace MyVendor\MyApp;</code></li>
+                <li>To access an item within a namespace, you must use its **Fully Qualified Name (FQN)**, which is the namespace followed by the item name, separated by the Scope Resolution Operator (<code>\</code>): <code>MyVendor\MyApp\MyClass::method();</code></li>
+                <li>The built-in constant **<code>__NAMESPACE__</code>** holds the name of the current namespace.</li>
+            </ul>
+
+            <h3 class="title">Types of Namespace References</h3>
+            <p>The way an item is referenced determines how PHP resolves its location:</p>
+            <ul>
+                <li>**Unqualified Name:** No separator (e.g., <code>hello()</code>). PHP first looks in the **current namespace**, then in the global namespace.</li>
+                <li>**Qualified Name:** Contains a separator but doesn't start with one (e.g., <code>SubSpace\hello()</code>). PHP prepends the **current namespace** to the name.</li>
+                <li>**Fully Qualified Name (FQN):** Starts with a separator (e.g., <code>\MyVendor\hello()</code>). PHP resolves the name from the **global namespace** root.</li>
+            </ul>
+
+            <h2 class="title">The <code>use</code> Keyword (Importing)</h2>
+            <p>The **<code>use</code>** keyword imports an external namespace, class, or function into the current file, allowing it to be referenced with an unqualified or shortened name (an **alias**).</p>
+            <ul>
+                <li>**Importing a Class:** <code>use MyVendor\MyApp\MyClass;</code> allows you to use just <code>new MyClass();</code>.</li>
+                <li>**Aliasing:** You can assign a short alias to a long namespace or class name using the **<code>as</code>** keyword: <code>use MyVendor\ExtraLongName as ShortName;</code></li>
+            </ul>
+
+            <h3 class="title">Advantages of Namespaces</h3>
+            <ol>
+                <li>**Conflict Avoidance:** Prevents name collisions when using libraries or large codebases.</li>
+                <li>**Readability:** The <code>use</code> keyword allows for shorter, cleaner code by aliasing long names.</li>
+                <li>**Organization:** Groups related code logically.</li>
+            </ol>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Using Namespaces and Aliasing</h3>
+            <p>This example shows how two functions with the same name (<code>calculate()</code>) can coexist in different namespaces and how aliasing simplifies access.</p>
+            
+            <pre><code>
+// file: Calculator.php
+namespace Math\Financial {
+   function calculate() { return "Tax calculation result."; }
+}
+namespace Math\Geometry {
+   function calculate() { return "Area calculation result."; }
+}
+
+// file: main.php
+namespace App {
+   // Import and alias the function from the Math\Financial namespace
+   use function Math\Financial\calculate as calculateTax; 
+   
+   echo calculateTax();           // Calls Math\Financial\calculate()
+   echo PHP_EOL;
+   
+   // Accessing the second function using its FQN
+   echo \Math\Geometry\calculate(); // Calls Math\Geometry\calculate()
+}
+// Output: 
+// Tax calculation result.
+// Area calculation result.
+            </code></pre>
+        </div>
+    </div>
+</div>

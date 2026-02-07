@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Daemon Thread</h1>
+
+    <div class="content">
+      <h2 class="content-title">Daemon Thread in Java</h2>
+      <p>A Daemon thread is created to support the user threads. It generally works in the background and terminates once all other user threads have finished. An example of a daemon thread is the garbage collector.</p>
+
+      <h2 class="content-title">Characteristics of a Daemon Thread</h2>
+      <ul>
+        <li>A daemon thread has low priority.</li>
+        <li>It serves user threads and is not meant to perform critical tasks.</li>
+        <li>The JVM terminates daemon threads once all user threads are finished.</li>
+        <li>A daemon thread cannot block JVM termination.</li>
+      </ul>
+
+      <h2 class="content-title">Thread Methods for Daemon Threads</h2>
+      <ul>
+        <li><code>setDaemon(boolean)</code>: Marks the thread as daemon or user thread.</li>
+        <li><code>isDaemon()</code>: Checks if the thread is a daemon thread.</li>
+      </ul>
+
+      <h2 class="example-title">Example: Default Thread Type</h2>
+      <p>This example shows three user threads. None are marked as daemon threads.</p>
+      <pre>
+<code>
+class ThreadDemo extends Thread {
+   public void run() {
+      System.out.println("Thread " + Thread.currentThread().getName() +
+         ", is Daemon: " + Thread.currentThread().isDaemon());
+   }
+}
+
+public class TestThread {
+   public static void main(String[] args) {
+      ThreadDemo thread1 = new ThreadDemo();
+      ThreadDemo thread2 = new ThreadDemo();
+      ThreadDemo thread3 = new ThreadDemo();
+      thread1.start();
+      thread2.start();
+      thread3.start();
+   }
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+<code>
+Thread Thread-1, is Daemon: false
+Thread Thread-0, is Daemon: false
+Thread Thread-2, is Daemon: false
+</code>
+      </pre>
+
+      <h2 class="example-title">Example 1: One Daemon Thread</h2>
+      <p>In this example, <code>thread3</code> is set as a daemon thread before it starts.</p>
+      <pre>
+<code>
+class ThreadDemo extends Thread {
+   public void run() {
+      System.out.println("Thread " + Thread.currentThread().getName() +
+         ", is Daemon: " + Thread.currentThread().isDaemon());
+   }
+}
+
+public class TestThread {
+   public static void main(String[] args) {
+      ThreadDemo thread1 = new ThreadDemo();
+      ThreadDemo thread2 = new ThreadDemo();
+      ThreadDemo thread3 = new ThreadDemo();
+      thread3.setDaemon(true);
+      thread1.start();
+      thread2.start();
+      thread3.start();
+   }
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+<code>
+Thread Thread-1, is Daemon: false
+Thread Thread-2, is Daemon: true
+Thread Thread-0, is Daemon: false
+</code>
+      </pre>
+
+      <h2 class="example-title">Example 2: Error When Setting Daemon After Start</h2>
+      <p>This example tries to set a thread as daemon after it has started. This causes a runtime exception.</p>
+      <pre>
+<code>
+class ThreadDemo extends Thread {
+   public void run() {
+      System.out.println("Thread " + Thread.currentThread().getName() +
+         ", is Daemon: " + Thread.currentThread().isDaemon());
+   }
+}
+
+public class TestThread {
+   public static void main(String[] args) {
+      ThreadDemo thread1 = new ThreadDemo();
+      ThreadDemo thread2 = new ThreadDemo();
+      ThreadDemo thread3 = new ThreadDemo();
+      thread1.start();
+      thread2.start();
+      thread3.start();
+      thread3.setDaemon(true); // Error!
+   }
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+<code>
+Thread Thread-1, is Daemon: false
+Thread Thread-2, is Daemon: false
+Thread Thread-0, is Daemon: false
+Exception in thread "main" java.lang.IllegalThreadStateException
+</code>
+      </pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Optimizing Performance</h1>
+
+    <div class="content">
+      <p>
+        React performs many optimizations automatically, but developers can apply additional
+        techniques to improve application responsiveness and reduce resource usage. This session
+        covers common strategies and an applied example using windowing for large lists.
+      </p>
+
+      <h2 class="title">Techniques of Performance Optimization</h2>
+      <div class="content">
+        <ul>
+          <li>Use production build instead of development mode for deployed apps.</li>
+          <li>
+            Load libraries from a CDN in their production builds when appropriate.
+            <ul>
+              <li>
+                Example CDN references:
+                <a href="https://unpkg.com/react@18/umd/react.production.min.js">react.production.min.js</a>
+                and
+                <a href="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js">react-dom.production.min.js</a>
+              </li>
+            </ul>
+          </li>
+          <li>Bundle optimizations: use build tools (Create React App, Rollup, Brunch) with terser/minification.</li>
+          <li>Profile with React DevTools Profiler to find render hotspots before optimizing.</li>
+          <li>Windowing / virtualization: render only the visible portion of large lists.</li>
+          <li>Avoid unnecessary reconciliation by preventing unnecessary renders.</li>
+          <li>Use PureComponent or memoization for components that render identical output for identical inputs.</li>
+        </ul>
+      </div>
+
+      <h2 class="title">Production Builds</h2>
+      <div class="content">
+        <p>
+          Development builds include debug helpers and warnings which slow runtime performance.
+          Create a production build before deploying. Example commands:
+        </p>
+        <ul>
+          <li>Create React App: run the build command to produce an optimized bundle.</li>
+          <li>Bundlers: enable terser/minification and commonjs/replace plugins for Rollup or similar tooling.</li>
+        </ul>
+      </div>
+
+      <h2 class="title">Avoiding Unnecessary Reconciliation</h2>
+      <div class="content">
+        <p>
+          React compares previous and next element trees (reconciliation) to apply updates. You can
+          reduce work by skipping renders when nothing meaningful changed.
+        </p>
+        <ul>
+          <li>
+            <strong>shouldComponentUpdate</strong>: a class component hook that can return false to skip rendering.
+          </li>
+          <li>
+            <strong>PureComponent</strong> (or React.memo for function components): performs a shallow comparison
+            of props and state and skips renders when unchanged.
+          </li>
+          <li>
+            For reference-type props (arrays/objects), prefer immutable updates so shallow comparisons detect changes.
+            Do not mutate existing objects if you expect PureComponent / memo to detect updates.
+          </li>
+        </ul>
+      </div>
+
+      <h2 class="title">Windowing Technique (Virtualization)</h2>
+      <div class="content">
+        <p>
+          For very large lists, rendering all items can be expensive. Windowing renders only the items visible
+          in the viewport (plus a small buffer), drastically reducing DOM nodes and improving scrolling performance.
+        </p>
+        <ul>
+          <li>Use libraries such as <a href="https://github.com/bvaughn/react-window">react-window</a> or react-virtualized.</li>
+          <li>Choose a fixed-size or variable-size list component depending on item heights.</li>
+          <li>Provide an item renderer that receives index and style and returns the list item element.</li>
+        </ul>
+      </div>
+
+      <h2 class="title">Example: Applying Windowing Technique</h2>
+      <div class="content">
+        <p>
+          This example outlines steps to virtualize a large user list using react-window.
+        </p>
+        <ul>
+          <li>Create a new React app (for example with Create React App).</li>
+          <li>Install react-window as a dependency.</li>
+          <li>Add a users.json data file containing many user entries in the public folder.</li>
+          <li>
+            Create a list component that:
+            <ul>
+              <li>Fetches the users.json data on mount.</li>
+              <li>Renders a FixedSizeList (or suitable component) from react-window.</li>
+              <li>Passes the fetched data as itemData and configures itemCount and itemSize.</li>
+              <li>Implements the item renderer to return an <code>&lt;li&gt;</code>-style element for each visible index.</li>
+            </ul>
+          </li>
+          <li>Render the virtualized list inside the app root. The component will only mount DOM nodes for visible rows.</li>
+        </ul>
+      </div>
+
+      <h2 class="title">Summary</h2>
+      <div class="content">
+        <p>
+          Start by profiling and applying changes where the app spends the most time. Use production builds,
+          avoid unnecessary renders, prefer pure/memoized components for stable props, and apply windowing
+          for very large lists to achieve the best perceived and actual performance.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

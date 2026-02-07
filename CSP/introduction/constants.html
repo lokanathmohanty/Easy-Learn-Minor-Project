@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Constants and Literals</h1>
+        
+        <h2 class="title">Constants and Literals Overview</h2>
+        <div class="content">
+            <p><strong>Constants</strong> refer to fixed values that the program cannot alter during execution. These fixed values are also known as **Literals**.</p>
+            <p>Constants are defined using the <code>const</code> keyword. Their values must be set during definition and cannot be modified later. They are accessed just like regular variables.</p>
+            <p><strong>Syntax for defining a constant:</strong></p>
+            <pre>const &lt;data_type&gt; &lt;constant_name&gt; = value;</pre>
+        </div>
+        
+        <h2 class="title">Types of Literals</h2>
+        <div class="content">
+            <h3>Integer Literals</h3>
+            <p>Can be decimal (no prefix) or hexadecimal (prefix <code>0x</code> or <code>0X</code>). They can also have suffixes for type:</p>
+            <ul>
+                <li><code>U</code> or <code>u</code> for **unsigned**.</li>
+                <li><code>L</code> or <code>l</code> for **long**.</li>
+            </ul>
+            <p>Examples: <code>212</code> (decimal), <code>215u</code> (unsigned), <code>0xFeeL</code> (hexadecimal long).</p>
+            
+            <h3>Floating-point Literals</h3>
+            <p>Can be represented in decimal form (must include a decimal point or exponent) or exponential form (using <code>e</code> or <code>E</code>).</p>
+            <p>Examples: <code>3.14159</code>, <code>314159E-5F</code> (the <code>F</code> suffix indicates <code>float</code> type).</p>
+            
+            <h3>Character Constants</h3>
+            <p>Enclosed in **single quotes** (e.g., <code>'x'</code>). Can be a plain character, an **escape sequence** (like <code>\n</code> for newline or <code>\t</code> for tab), or a universal character.</p>
+            
+            <h3>String Literals</h3>
+            <p>Enclosed in **double quotes** (<code>"hello, dear"</code>) or with the **verbatim string literal** prefix <code>@"..."</code>. Verbatim strings treat backslashes literally, making them ideal for file paths (e.g., <code>@"C:\path\to\file"</code>).</p>
+        </div>
+        
+        <h2 class="title">Code Example: Class Constants</h2>
+        <div class="content example">
+            <p>Constants declared inside a class are implicitly **static**, belonging to the class rather than an instance. They are accessed using the class name.</p>
+            <p><strong>Access Syntax:</strong> <code>class_name.constant_name</code></p>
+            <pre>
+class MathConstants
+{
+    public const double Pi = 3.14159;
+    public const int SpeedOfLight = 299792458;
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Value of Pi: " + MathConstants.Pi);
+    }
+}
+            </pre>
+        </div>
+    </div>
+</div>

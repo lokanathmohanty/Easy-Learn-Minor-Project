@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - ECMAScript 2017</h1>
+    <div class="content">
+
+      <div class="section">
+        <h2>Overview</h2>
+        <p>
+          The ECMAScript 2017 version of JavaScript was released in 2017. 
+          This version introduced several new features. One of the most notable 
+          is the <strong>async/await</strong> syntax, which allows writing 
+          asynchronous operations in a synchronous style. 
+          It also introduced shared memory and atomics, enhancing support for concurrent programming.
+        </p>
+        <p><strong>New features include:</strong></p>
+        <ul>
+          <li><code>padStart()</code> and <code>padEnd()</code> methods</li>
+          <li><code>Object.entries()</code> method</li>
+          <li><code>Object.values()</code> method</li>
+          <li><code>async</code> and <code>await</code></li>
+          <li><code>Object.getOwnPropertyDescriptors()</code> method</li>
+          <li>Shared Memory and Atomics</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>String Padding: <code>padStart()</code> and <code>padEnd()</code></h2>
+        <p>
+          These methods allow adding padding to a string at the beginning 
+          or the end until the desired length is achieved.
+        </p>
+        <h3>Example</h3>
+        <pre><code>let base = "TutorialsPoint";
+let start_updated = base.padStart(18, "@");
+let end_updated = base.padEnd(18, "*");
+
+console.log(start_updated); // @@@@TutorialsPoint
+console.log(end_updated);   // TutorialsPoint****
+</code></pre>
+      </div>
+
+      <div class="section">
+        <h2>The <code>Object.entries()</code> Method</h2>
+        <p>
+          Returns an array of a given object's own enumerable string-keyed property [key, value] pairs.
+        </p>
+        <h3>Example</h3>
+        <pre><code>const employee = {
+  Company: "TutorialsPoint",
+  Ex_company: "TCS",
+  Experience: 4,
+};
+
+for (let pair of Object.entries(employee)) {
+  console.log(pair);
+}
+</code></pre>
+        <p><strong>Output:</strong></p>
+        <pre><code>["Company","TutorialsPoint"]
+["Ex_company","TCS"]
+["Experience",4]
+</code></pre>
+      </div>
+
+      <div class="section">
+        <h2>The <code>Object.values()</code> Method</h2>
+        <p>
+          Returns an array of the object's own enumerable property values.
+        </p>
+        <h3>Example</h3>
+        <pre><code>const wall = {
+  color: "blue",
+  size: "15x12",
+  paintBrand: "Asian paints"
+};
+
+console.log(Object.values(wall));
+</code></pre>
+        <p><strong>Output:</strong> <code>["blue","15x12","Asian paints"]</code></p>
+      </div>
+
+      <div class="section">
+        <h2>Async and Await</h2>
+        <p>
+          The <code>async</code> keyword is used to define asynchronous functions, 
+          and the <code>await</code> keyword pauses execution until a promise resolves.
+        </p>
+        <h3>Example</h3>
+        <pre><code>async function printMessage() {
+  let getData = new Promise((res) => {
+    setTimeout(() => { res("Promise resolved !!"); }, 500);
+  });
+  console.log(await getData);
+}
+
+printMessage();
+</code></pre>
+        <p><strong>Output:</strong> <code>Promise resolved !!</code></p>
+      </div>
+
+      <div class="section">
+        <h2>The <code>Object.getOwnPropertyDescriptors()</code> Method</h2>
+        <p>
+          Returns all property descriptors for an object, including metadata such as 
+          <code>writable</code>, <code>enumerable</code>, <code>configurable</code>, and <code>value</code>.
+        </p>
+        <h3>Example</h3>
+        <pre><code>const wall = {
+  color: "blue",
+  thickness: 10,
+};
+
+console.log(Object.getOwnPropertyDescriptors(wall));
+</code></pre>
+        <p><strong>Output:</strong></p>
+        <pre><code>{
+  color: { value: "blue", writable: true, enumerable: true, configurable: true },
+  thickness: { value: 10, writable: true, enumerable: true, configurable: true }
+}
+</code></pre>
+      </div>
+
+      <div class="section">
+        <h2>Shared Memory and Atomics</h2>
+        <p>
+          Shared memory allows multiple threads to share a memory space, enabling efficient 
+          communication. JavaScript is single-threaded, but with Web Workers and 
+          <code>SharedArrayBuffer</code>, memory can be shared, and atomic operations can be performed.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>

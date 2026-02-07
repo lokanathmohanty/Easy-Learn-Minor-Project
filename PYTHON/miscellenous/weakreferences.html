@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Weak References</h1>
+    </div>
+    <div class="content">
+      <p>
+        Python uses reference counting for garbage collection. When the reference count of an object drops to zero, the memory is reclaimed. A weak reference allows referring to an object without preventing its garbage collection.
+      </p>
+      <p>
+        Weak references are useful for caches and breaking circular references.
+      </p>
+      <p>
+        Python provides the <code>weakref</code> module to create and manage weak references.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Creating and Using Weak References</h2>
+    </div>
+    <div class="content">
+      <pre><code>import weakref
+
+class Myclass:
+    def __del__(self):
+        print('(Deleting {})'.format(self))
+
+obj = Myclass()
+r = weakref.ref(obj)
+
+print('object:', obj)
+print('reference:', r)
+print('call r():', r())
+
+print('deleting obj')
+del obj
+
+print('r():', r())  # Returns None after object is deleted
+</code></pre>
+      <p>Output illustrates deletion and weakref behavior.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Callback on Object Deletion</h2>
+    </div>
+    <div class="content">
+      <p>
+        You can register a callback function that is called when the referenced object is garbage collected.
+      </p>
+      <pre><code>import weakref
+
+class Myclass:
+    def __del__(self):
+        print('(Deleting {})'.format(self))
+
+def mycallback(ref):
+    print('calling ({})'.format(ref))
+
+obj = Myclass()
+r = weakref.ref(obj, mycallback)
+
+print('object:', obj)
+print('reference:', r)
+print('call r():', r())
+
+print('deleting obj')
+del obj
+
+print('r():', r())  # None since object is deleted
+</code></pre>
+      <p>The callback prints a message when the object is deleted.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Finalizing Objects with weakref.finalize</h2>
+    </div>
+    <div class="content">
+      <p>
+        The <code>weakref.finalize</code> class lets you specify cleanup actions for objects when garbage collected.
+      </p>
+      <pre><code>import weakref
+
+class Myclass:
+    def __del__(self):
+        print('(Deleting {})'.format(self))
+
+def finalizer(*args):
+    print('Finalizer called with args: {!r}'.format(args))
+
+obj = Myclass()
+r = weakref.finalize(obj, finalizer, "Call to finalizer")
+
+print('object:', obj)
+print('reference:', r)
+print('call r():', r())
+
+print('deleting obj')
+del obj
+
+print('r():', r())  # None after finalizer is called
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>WeakKeyDictionary and WeakValueDictionary</h2>
+    </div>
+    <div class="content">
+      <p>
+        <code>WeakKeyDictionary</code> holds weak references to keys, automatically removing entries when keys are no longer referenced.
+      </p>
+      <pre><code>import weakref
+
+class Person:
+    def __init__(self, person_id, name, age):
+        self.person_id = person_id
+        self.name = name
+        self.age = age
+    def __repr__(self):
+        return "{} : {} : {}".format(self.person_id, self.name, self.age)
+
+p1 = Person(101, "Jeevan", 30)
+p2 = Person(102, "Ramanna", 35)
+p3 = Person(103, "Simran", 28)
+
+weak_dict = weakref.WeakKeyDictionary({p1: p1.name, p2: p2.name, p3: p3.name})
+print("Weak Key Dictionary:", weak_dict.data)
+print("Keys:", [key().name for key in weak_dict.keyrefs()])
+
+del p1
+print("Keys after deleting p1:", [key().name for key in weak_dict.keyrefs()])
+
+p4 = Person(104, "Partho", 32)
+weak_dict.update({p4: p4.name})
+print("Keys after adding p4:", [key().name for key in weak_dict.keyrefs()])
+</code></pre>
+
+      <p>
+        <code>WeakValueDictionary</code> holds weak references to values, automatically removing entries when values are no longer referenced.
+      </p>
+      <pre><code>import weakref
+
+p1 = Person(101, "Jeevan", 30)
+p2 = Person(102, "Ramanna", 35)
+p3 = Person(103, "Simran", 28)
+
+weak_value_dict = weakref.WeakValueDictionary({p1.name: p1, p2.name: p2, p3.name: p3})
+print("Weak Value Dictionary:", weak_value_dict.data)
+print("Values:", [value().name for value in weak_value_dict.valuerefs()])
+
+del p1
+print("Values after deleting p1:", [value().name for value in weak_value_dict.valuerefs()])
+
+p4 = Person(104, "Partho", 32)
+weak_value_dict.update({p4.name: p4})
+print("Values after adding p4:", [value().name for value in weak_value_dict.valuerefs()])
+</code></pre>
+    </div>
+  </div>
+</div>

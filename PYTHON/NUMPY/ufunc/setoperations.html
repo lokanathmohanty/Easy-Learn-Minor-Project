@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">NumPy Set Operations</h1>
+    <div class="content">
+      <p>A set in mathematics is a collection of unique elements.</p>
+      <p>Sets are used for operations involving frequent intersection, union, and difference operations.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Create Sets in NumPy</h2>
+    <div class="content">
+      <p>We can use NumPy's <code>unique()</code> method to find unique elements from any array. Remember that set arrays should only be 1-D arrays.</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 1, 1, 2, 3, 4, 5, 5, 6, 7])
+
+x = np.unique(arr)
+
+print(x)</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Finding Union</h2>
+    <div class="content">
+      <p>To find the unique values of two arrays, use the <code>union1d()</code> method.</p>
+      <pre><code>import numpy as np
+
+arr1 = np.array([1, 2, 3, 4])
+arr2 = np.array([3, 4, 5, 6])
+
+newarr = np.union1d(arr1, arr2)
+
+print(newarr)</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Finding Intersection</h2>
+    <div class="content">
+      <p>To find only the values present in both arrays, use the <code>intersect1d()</code> method.</p>
+      <p><strong>Note:</strong> The <code>intersect1d()</code> method takes an optional argument <code>assume_unique</code>. Setting it to <code>True</code> can speed up computation when dealing with sets.</p>
+      <pre><code>import numpy as np
+
+arr1 = np.array([1, 2, 3, 4])
+arr2 = np.array([3, 4, 5, 6])
+
+newarr = np.intersect1d(arr1, arr2, assume_unique=True)
+
+print(newarr)</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Finding Difference</h2>
+    <div class="content">
+      <p>To find values in the first set that are NOT present in the second set, use the <code>setdiff1d()</code> method.</p>
+      <p><strong>Note:</strong> The <code>setdiff1d()</code> method also takes the optional <code>assume_unique</code> argument for speed optimization.</p>
+      <pre><code>import numpy as np
+
+set1 = np.array([1, 2, 3, 4])
+set2 = np.array([3, 4, 5, 6])
+
+newarr = np.setdiff1d(set1, set2, assume_unique=True)
+
+print(newarr)</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Finding Symmetric Difference</h2>
+    <div class="content">
+      <p>To find values that are NOT present in BOTH sets, use the <code>setxor1d()</code> method.</p>
+      <p><strong>Note:</strong> The <code>setxor1d()</code> method takes the optional <code>assume_unique</code> argument for faster computation.</p>
+      <pre><code>import numpy as np
+
+set1 = np.array([1, 2, 3, 4])
+set2 = np.array([3, 4, 5, 6])
+
+newarr = np.setxor1d(set1, set2, assume_unique=True)
+
+print(newarr)</code></pre>
+    </div>
+  </div>
+</div>

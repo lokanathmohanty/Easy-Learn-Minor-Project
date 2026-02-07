@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Type Casting in C</h1>
+    <div class="content">
+      <p>Type casting in C is the process of converting a variable from one data type to another. It can be performed implicitly by the compiler or explicitly by the programmer to manage type compatibility during expressions and calculations.</p>
+      <p>Implicit conversions happen automatically according to the C language's type promotion rules, while explicit conversions require the use of the cast operator.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Implicit Type Casting</h2>
+    <div class="content">
+      <ul>
+        <li>Smaller data types like <code>char</code> and <code>short</code> are promoted to <code>int</code> before arithmetic operations.</li>
+        <li>If one operand is <code>long</code>, the expression is promoted to <code>long</code>.</li>
+        <li>If one operand is <code>float</code>, the expression is promoted to <code>float</code>.</li>
+        <li>If any operand is <code>double</code>, the expression is promoted to <code>double</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Implicit Type Casting</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int i = 17;
+  char c = 'c'; // ASCII 99
+  
+  int sum = i + c;
+
+  printf("Value of sum: %d\n", sum);
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+Value of sum: 116
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Explicit Type Casting</h2>
+    <div class="content">
+      <p>When converting between incompatible types or narrowing conversions (e.g., from floating point to integer), the cast operator <code>(type)</code> is used to explicitly specify the desired type.</p>
+      <p>Syntax:</p>
+      <p><code>(desired_type) expression</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Explicit Type Casting</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int total = 17, count = 5;
+  double mean;
+
+  mean = (double) total / count;
+  printf("Mean value: %f\n", mean);
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+Mean value: 3.400000
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Additional Points</h2>
+    <div class="content">
+      <ul>
+        <li>Casting impacts operation results and prevents unintended truncation.</li>
+        <li>Type casting is critical for clear, maintainable, and reliable code.</li>
+        <li>Implicit conversions follow strict rules to maintain promotion hierarchy during calculations.</li>
+        <li>Library functions like <code>atoi()</code> and <code>itoa()</code> also facilitate type conversion.</li>
+      </ul>
+    </div>
+  </div>
+</div>

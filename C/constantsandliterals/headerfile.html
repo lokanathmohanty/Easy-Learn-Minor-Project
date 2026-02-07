@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Header Files in C</h1>
+    <div class="content">
+      <p>The <code>#include</code> preprocessor directive is used to make the definitions of functions, constants and macros etc. from one file, usually called a header file, available for use in another C code. A header file has ".h" extension from which you can include the forward declarations of one or more predefined functions, constants, macros etc. The provision of header files in C facilitates a modular design of the program.</p>
+
+      <h2>System Header Files</h2>
+      <p>The C compiler software is bundled with many pre-compiled header files called system header files. A well-known example is <code>stdio.h</code>, included in almost every C program.</p>
+      <p>These header files contain utility functions often called library functions, like <code>printf()</code> and <code>scanf()</code> for IO operations.</p>
+
+      <p>The preprocessor statements that load one or more header files are always at the beginning of the C code.</p>
+
+      <h2>Syntax to Include Header Files in C</h2>
+      <p>A header file is loaded with the <code>#include</code> directive, using either:</p>
+      <ul>
+        <li><code>#include &lt;filename.h&gt;</code> for system/default directory header files.</li>
+        <li><code>#include "filename.h"</code> for user-defined or non-standard header files in the same directory as the source file.</li>
+      </ul>
+
+      <h2>Standard Header Files in C</h2>
+      <p>A typical C compiler includes several pre-compiled header files with predefined standard library functions.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Header Files</th>
+            <th>Description</th>
+            <th>Functions/Macros/Variables</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>stdio.h</td><td>Input/Output functions</td><td>scanf(), printf(), fopen(), FILE</td></tr>
+          <tr><td>stdlib.h</td><td>General utility functions</td><td>atoi(), atof(), malloc()</td></tr>
+          <tr><td>math.h</td><td>Mathematics functions</td><td>sin(), cos(), pow(), sqrt()</td></tr>
+          <tr><td>string.h</td><td>String functions</td><td>strcpy(), strlen(), strcat()</td></tr>
+          <tr><td>ctype.h</td><td>Character handling functions</td><td>isalpha(), isupper(), ispunct()</td></tr>
+          <tr><td>time.h</td><td>Date and time functions</td><td>asctime(), gmtime(), mktime()</td></tr>
+          <tr><td>float.h</td><td>Limits of float types</td><td>FLT_ROUNDS, FLT_RADIX</td></tr>
+          <tr><td>limits.h</td><td>Size of basic types</td><td>CHAR_BIT, CHAR_MIN, CHAR_MAX</td></tr>
+          <tr><td>wctype.h</td><td>Wide character type functions</td><td>iswalpha(), iswctype(), iswupper()</td></tr>
+        </tbody>
+      </table>
+
+      <h2>User-defined Header Files</h2>
+      <p>Functions/macros/variables of similar nature can be grouped into user-defined header files and included like standard headers. These files are usually in the same directory as the source code.</p>
+      <p>Header guards prevent multiple inclusions of the same file, avoiding compilation errors.</p>
+
+      <h2>Computed Includes</h2>
+      <p>Sometimes conditional inclusion of header files is necessary depending on the system or configuration, achieved with conditional directives or macros for header names.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using Standard Header Files</h2>
+    <div class="content">
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;math.h&gt;
+
+int main() {
+   char s1[20] = "53875";
+   char s2[10] = "Hello";
+   char s3[10] = "World";
+
+   int res;
+   res = pow(8, 4);
+   printf("Using math.h, The value is : %d\n", res);
+
+   long int a = atol(s1);
+   printf("Using stdlib.h, the string to long int: %d\n", a);
+
+   strcpy(s2, s3);
+   printf("Using string.h, the strings s2 and s3: %s\t%s\n", s2, s3);
+
+   return 0;
+}
+</code>
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: User-defined Header File</h2>
+    <div class="content">
+      <pre>
+<code>
+// myheader.h
+#ifndef MYHEADER_H
+#define MYHEADER_H
+
+void sayHello();
+int add(int a, int b);
+double area(double radius);
+int length(char *x);
+
+#endif
+</code>
+      </pre>
+
+      <pre>
+<code>
+// myheader.c
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;math.h&gt;
+
+#define PI 3.142
+
+void sayHello(){
+   printf("Hello World\n");
+}
+
+int add(int a, int b){
+   return a + b;
+}
+
+double area(double radius){
+   return PI * pow(radius, 2);
+}
+
+int length(char *x){
+   return strlen(x);
+}
+</code>
+      </pre>
+
+      <pre>
+<code>
+// main.c
+#include &lt;stdio.h&gt;
+#include "myheader.h"
+
+int main() {
+   int p = 10, q = 20;
+   double x = 5.25;
+
+   sayHello();
+   printf("sum of %d and %d is %d\n", p, q, add(p,q));
+   printf("Radius: %lf Area: %lf", x, area(x));
+
+   return 0;
+}
+</code>
+      </pre>
+    </div>
+  </div>
+</div>

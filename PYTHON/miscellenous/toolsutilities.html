@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Tools/Utilities</h1>
+    </div>
+    <div class="content">
+      <p>
+        The Python standard library comes with a number of modules that can be used both as modules and as command-line utilities. These tools help with debugging, profiling, disassembling, and checking code formatting.
+      </p>
+
+      <h2>The dis Module</h2>
+      <p>
+        The <strong>dis</strong> module is the Python disassembler. It converts byte codes into a human-readable format.
+        You can run the disassembler from the command line, or as a module in your code.
+      </p>
+
+      <p><strong>Example:</strong></p>
+      <pre>
+import dis
+def sum():
+   vara = 10
+   varb = 20
+
+   sum = vara + varb
+   print("vara + varb = %d" % sum)
+
+# Call dis function for the function.
+dis.dis(sum)
+      </pre>
+
+      <p><strong>Output:</strong></p>
+      <pre>
+  3           0 LOAD_CONST               1 (10)
+              2 STORE_FAST               0 (vara)
+
+  4           4 LOAD_CONST               2 (20)
+              6 STORE_FAST               1 (varb)
+
+  6           8 LOAD_FAST                0 (vara)
+             10 LOAD_FAST                1 (varb)
+             12 BINARY_ADD
+             14 STORE_FAST               2 (sum)
+
+  7          16 LOAD_GLOBAL              0 (print)
+             18 LOAD_CONST               3 ('vara + varb = %d')
+             20 LOAD_FAST                2 (sum)
+             22 BINARY_MODULO
+             24 CALL_FUNCTION            1
+             26 POP_TOP
+             28 LOAD_CONST               0 (None)
+             30 RETURN_VALUE
+      </pre>
+
+      <h2>The pdb Module</h2>
+      <p>
+        The <strong>pdb</strong> module is the standard Python debugger. It is based on the bdb debugger framework.
+        You can step through code line by line and inspect values at runtime.
+      </p>
+
+      <p><strong>Example:</strong></p>
+      <pre>
+$pdb.py sum.py
+> /test/sum.py(3)<module>()
+-> import dis
+(Pdb) n
+> /test/sum.py(5)<module>()
+-> def sum():
+(Pdb) n
+>/test/sum.py(14)<module>()
+-> dis.dis(sum)
+(Pdb) n
+...
+      </pre>
+
+      <h2>The profile Module</h2>
+      <p>
+        The <strong>profile</strong> module is the standard Python profiler. It measures performance and reports how much time each function takes.
+      </p>
+
+      <p><strong>Example:</strong></p>
+      <pre>
+vara = 10
+varb = 20
+sum = vara + varb
+print("vara + varb = %d" % sum)
+      </pre>
+
+      <p>Run profiler:</p>
+      <pre>
+$cProfile.py sum.py
+vara + varb = 30
+   4 function calls in 0.000 CPU seconds
+   Ordered by: standard name
+ncalls   tottime  percall  cumtime  percall filename:lineno
+ 1       0.000    0.000    0.000    0.000 <string>:1(<module>)
+ 1       0.000    0.000    0.000    0.000 sum.py:3(<module>)
+...
+      </pre>
+
+      <h2>The tabnanny Module</h2>
+      <p>
+        The <strong>tabnanny</strong> module checks Python source files for ambiguous indentation. If a file mixes tabs and spaces inconsistently, it reports an error.
+      </p>
+
+      <p><strong>Example:</strong></p>
+      <pre>
+vara = 10
+varb = 20
+
+sum = vara + varb
+print("vara + varb = %d" % sum)
+      </pre>
+
+      <p>Run tabnanny:</p>
+      <pre>
+$tabnanny.py -v sum.py
+'sum.py': Clean bill of health.
+      </pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">C# - Data Types (Continued)</h1>
+
+    <div class="content">
+      <h2>String Type</h2>
+      <p>The **String Type** allows you to assign any string value to a variable. The string is an alias for the <code>System.String</code> class. It is derived from <code>object</code> type. The value of a string type can be assigned using string literals in two forms:</p>
+      <ul>
+        <li>**Quoted form:** The strings are enclosed in double quotes (<code>" "</code>).</li>
+        <li>**@ quoted form (verbatim strings):** The strings are prefixed with <code>@</code>, allowing escape characters (like <code>\n</code> or <code>\t</code>) to be ignored and multi-line strings to be easily created.</li>
+      </ul>
+      <p>For example:</p>
+      <pre>string str = "C# is a powerful language.";</pre>
+      <pre>string path = @"C:\Windows\System32";</pre>
+      <p>Strings are **immutable**, meaning once a string object is created, its content cannot be changed. Any operation that appears to modify a string actually creates a new string object.</p>
+    </div>
+
+    <h2 class="title">Pointer Type</h2>
+    <div class="content example">
+      <p>Pointer types hold the memory address of another type. They are similar to pointers in C or C++. However, pointer access is restricted and requires the use of the **<code>unsafe</code>** modifier.</p>
+      <ul>
+        <li>Pointer types are only available in code blocks marked with the <code>unsafe</code> keyword.</li>
+        <li>They are primarily used for interoperability with unmanaged code or performance-critical areas.</li>
+        <li>A pointer is declared using the asterisk (<code>*</code>) symbol, such as <code>int* p</code>.</li>
+      </ul>
+      <p>The use of pointers bypasses the Common Language Runtime (CLR)'s garbage collection, which is why it is considered "unsafe" and must be explicitly enabled.</p>
+      <p><strong>Syntax Example:</strong></p>
+      <pre>
+class TestPointer {
+   unsafe static void Main(string[] args) {
+      int var = 20;
+      int* p = &amp;var; // p now holds the address of var
+   }
+}</pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Operators Precedence and Evaluation Order 🪜</h1>
+
+        <div class="content">
+            <p>**Operator precedence** determines the order in which operators are evaluated in a single expression. Operators with a **higher precedence** are performed before those with a lower precedence.</p>
+            <p><strong>Associativity</strong> (Left-to-Right or Right-to-Left) determines the order of evaluation when operators have the same precedence (e.g., in <code>A + B - C</code>, the evaluation goes left-to-right).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Precedence Rules Summary</h2>
+            <p>Operators are evaluated in descending order of precedence (top to bottom):</p>
+            <ul>
+                <li><strong>Highest Precedence:</strong> Scope (<code>::</code>), Postfix/Unary (<code>++</code>, <code>--</code>, <code>()</code>, <code>.</code>, <code>-&gt;</code>, <code>sizeof</code>, Unary <code>!</code>, <code>~</code>, <code>+</code>, <code>-</code>).</li>
+                <li><strong>Multiplicative:</strong> <code>*</code>, <code>/</code>, <code>%</code> (Left-to-Right).</li>
+                <li><strong>Additive:</strong> <code>+</code>, <code>-</code> (Left-to-Right).</li>
+                <li><strong>Relational and Equality:</strong> <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code> (Left-to-Right).</li>
+                <li><strong>Logical:</strong> <code>&amp;&amp;</code>, <code>||</code> (Left-to-Right).</li>
+                <li><strong>Conditional:</strong> <code>?:</code> (Right-to-Left).</li>
+                <li><strong>Lowest Precedence:</strong> Assignment (<code>=</code>, <code>+=</code>, etc., Right-to-Left) and Comma (<code>,</code>).</li>
+            </ul>
+            <p>To explicitly override precedence, use **parentheses (<code>()</code>)**, which are the highest precedence group.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Example Walkthrough (a=20, b=10, c=15, d=5)</h2>
+
+            <h3>Case 1: <code>e = (a + b) * c / d;</code></h3>
+            <ol>
+                <li>**Parentheses:** <code>(a + b)</code> is evaluated first: $20 + 10 = 30$. Expression becomes: <code>e = 30 * c / d;</code></li>
+                <li>**Multiplication/Division:** These have the same precedence, so they are evaluated Left-to-Right.
+                    <ul>
+                        <li>$30 * 15 = 450$. Expression becomes: <code>e = 450 / d;</code></li>
+                        <li>$450 / 5 = 90$.</li>
+                    </ul>
+                </li>
+            </ol>
+            <pre class="example">Value of (a + b) * c / d is :90</pre>
+
+            <h3>Case 2: <code>e = ((a + b) * c) / d;</code> and <code>e = (a + b) * (c / d);</code></h3>
+            <p>These two expressions yield the same result (90), showing how parentheses group the elements differently but lead to the same mathematical outcome.</p>
+            <ul>
+                <li><code>((a + b) * c) / d</code>: $((30) * 15) / 5 \rightarrow 450 / 5 = 90$</li>
+                <li><code>(a + b) * (c / d)</code>: $(30) * (3) \rightarrow 90$</li>
+            </ul>
+            <pre class="example">Value of ((a + b) * c) / d is  :90
+Value of (a + b) * (c / d) is  :90</pre>
+
+            <h3>Case 3: <code>e = a + (b * c) / d;</code></h3>
+            <ol>
+                <li>**Parentheses:** <code>(b * c)</code> is evaluated first: $10 * 15 = 150$. Expression becomes: <code>e = a + 150 / d;</code></li>
+                <li>**Multiplication/Division** (Higher Precedence): $150 / 5 = 30$. Expression becomes: <code>e = a + 30;</code></li>
+                <li>**Addition:** $20 + 30 = 50$.</li>
+            </ol>
+            <pre class="example">Value of a + (b * c) / d is  :50</pre>
+        </div>
+    </div>
+</div>

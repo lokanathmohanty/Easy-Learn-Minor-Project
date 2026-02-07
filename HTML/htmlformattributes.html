@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Form Attributes</h1>
+    <div class="content">
+
+      <p>In HTML, each element has its own attributes that are used to define the characteristics of that particular HTML element and are placed inside the element's opening tag. The <code>&lt;form&gt;</code> element also has attributes that provide different functionalities like redirection on other web pages and auto-completion of text.</p>
+
+      <h2>Form Attributes</h2>
+      <p>HTML form attributes provide different functionalities, such as redirection to other web pages, auto-completion of text, specifying data validation rules, controlling the behavior of form submissions, etc.</p>
+
+      <p>Following is a list of the most frequently used form attributes −</p>
+      <ul>
+        <li>action</li>
+        <li>method</li>
+        <li>target</li>
+        <li>autocomplete</li>
+        <li>enctype</li>
+        <li>novalidate</li>
+      </ul>
+
+      <h2>The action Attribute</h2>
+      <p>The action attribute of the <code>&lt;form&gt;</code> element transmits the user's input to a backend script for processing. A form is of no use unless it processes the information provided by the user. Therefore, it is important to pass the URL of a program to the action attribute. Note that the <code>formaction</code> attribute can override the value of the action attribute.</p>
+
+      <h3>Example</h3>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;meta charset="utf-8"&gt;
+   &lt;title&gt; The action Attribute &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;form action="https://www.tutorialspoint.com"&gt;
+      Name: &lt;input type="text" name="your_name" required /&gt;
+      &lt;br&gt;&lt;br&gt;
+      Email: &lt;input type="email" name="mail" required /&gt;
+      &lt;br&gt;&lt;br&gt;
+      &lt;input type="submit"&gt;
+   &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>The method Attribute</h2>
+      <p>The method attribute determines which HTTP method should be used by the browser while uploading the form information. The most commonly used methods are as follows:</p>
+
+      <table>
+        <tr><th>S.No</th><th>Values &amp; Description</th></tr>
+        <tr><td>1</td><td><b>GET</b><br>It is the default method for form submission. If not specified, the form will use the GET method to send data.</td></tr>
+        <tr><td>2</td><td><b>POST</b><br>It is used to send form data inside HTTP request body. It is safer than GET method.<br><br>Not recommended for sending sensitive information via GET because it exposes data in the URL.</td></tr>
+      </table>
+
+      <h3>Example</h3>
+      <pre><code>&lt;form action="https://www.tutorialspoint.com" method="post"&gt;
+   Name: &lt;input type="text" name="your_name" required /&gt;
+   &lt;br&gt;&lt;br&gt;
+   Email: &lt;input type="email" name="mail" required /&gt;
+   &lt;br&gt;&lt;br&gt;
+   &lt;input type="submit"&gt;
+&lt;/form&gt;
+</code></pre>
+
+      <h2>The target Attribute</h2>
+      <p>The target attribute determines the target window or frame where the result of the script will be displayed after submitting the form. The default target is the current window. The target attribute accepts the following values:</p>
+
+      <table>
+        <tr><th>S.No.</th><th>Values &amp; Description</th></tr>
+        <tr><td>1</td><td><b>_self</b> — Opens response in the same frame.</td></tr>
+        <tr><td>2</td><td><b>_blank</b> — Opens response in a new window or tab.</td></tr>
+        <tr><td>3</td><td><b>_parent</b> — Opens response in the parent frame.</td></tr>
+        <tr><td>4</td><td><b>_top</b> — Opens response in the full body of window.</td></tr>
+        <tr><td>5</td><td><b>framename</b> — Opens response in the named iframe.</td></tr>
+      </table>
+
+      <h3>Example</h3>
+      <pre><code>&lt;form action="https://www.tutorialspoint.com" target="_self"&gt;
+   Name: &lt;input type="text" name="your_name" required /&gt;
+   &lt;br&gt;&lt;br&gt;
+   Email: &lt;input type="email" name="mail" required /&gt;
+   &lt;br&gt;&lt;br&gt;
+   &lt;input type="submit"&gt;
+&lt;/form&gt;
+</code></pre>
+
+      <h2>The novalidate Attribute</h2>
+      <p>The <code>novalidate</code> is a Boolean attribute that indicates the form does not need validation. Validation refers to verifying user input against predefined conditions. If present, validation is skipped and the form submits without checks.</p>
+
+      <h3>Example</h3>
+      <pre><code>&lt;form action="https://www.tutorialspoint.com" target="_blank" autocomplete="off" method="get" novalidate&gt;
+   Name: &lt;input type="text" name="your_name" required /&gt;
+   &lt;br&gt;&lt;br&gt;
+   Email: &lt;input type="email" name="mail" required /&gt;
+   &lt;br&gt;&lt;br&gt;
+   &lt;input type="submit"&gt;
+&lt;/form&gt;
+</code></pre>
+
+      <h2>The autocomplete Attribute</h2>
+      <p>The autocomplete attribute predicts and suggests the subsequent input based on initial characters entered. It has two states:</p>
+
+      <table>
+        <tr><th>S.No.</th><th>Values &amp; Description</th></tr>
+        <tr><td>1</td><td><b>on</b> — Enables autocomplete (default).</td></tr>
+        <tr><td>2</td><td><b>off</b> — Disables autocomplete.</td></tr>
+      </table>
+
+      <h3>Instance</h3>
+      <pre><code>&lt;form action="https://www.tutorialspoint.com" target="_blank" autocomplete="off" method="get"&gt;
+</code></pre>
+
+      <h2>The enctype Attribute</h2>
+      <p>The <code>enctype</code> attribute specifies how the browser encodes form data before sending it to the server. Possible values are:</p>
+
+      <table>
+        <tr><th>S.No.</th><th>Values &amp; Description</th></tr>
+        <tr><td>1</td><td><b>application/x-www-form-urlencoded</b><br>Default encoding used for simple form submissions.</td></tr>
+        <tr><td>2</td><td><b>multipart/form-data</b><br>Used when uploading binary files (images, docs, etc.).</td></tr>
+        <tr><td>3</td><td><b>text/plain</b><br>Encodes spaces as <code>+</code> symbol.</td></tr>
+      </table>
+
+      <h3>Instance</h3>
+      <pre><code>&lt;form action="https://www.tutorialspoint.com" target="_blank" autocomplete="off" method="get" enctype="text/plain"&gt;
+</code></pre>
+
+    </div>
+  </div>
+</div>

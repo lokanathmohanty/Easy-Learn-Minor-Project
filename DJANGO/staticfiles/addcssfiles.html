@@ -1,0 +1,43 @@
+
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Adding CSS Files as Static Assets 🎨</h1>
+        <div class="content">
+            <p>CSS (Cascading Style Sheets) is the language used to specify the presentation and styling of an HTML document. In Django, CSS files are treated as **static assets** and managed by the <code>django.contrib.staticfiles</code> application.</p>
+            <p>To include a CSS file in a template, it must be stored in the **<code>static</code> folder** inside your app's package directory.</p>
+        </div>
+        <h2 class="example">Steps to Include CSS in a Template</h2>
+        <div class="content">
+            <p>To ensure Django can correctly locate and serve the CSS file (e.g., <code>style.css</code>) within your HTML template, use the following two steps:</p>
+
+            <h3>1. Load the Static Template Tag</h3>
+            <p>Add the <code>{% load static %}</code> tag at the beginning of your HTML template to enable Django's static file functionality:</p>
+            <pre><code>{% load static %}</code></pre>
+
+            <h3>2. Link the CSS File</h3>
+            <p>Use the **<code>{% static 'file_path' %}</code>** template tag within the <code>href</code> attribute of the <code>&lt;link&gt;</code> tag. This dynamically generates the correct path to the static asset.</p>
+            <pre><code>&lt;link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"&gt;</code></pre>
+
+            <h3>Application Example (<code>cities.html</code>)</h3>
+            <p>The following template loads the CSS file in the <code>&lt;head&gt;</code> section and then iterates through a list of cities passed from the view to display them in an unordered list:</p>
+            <pre><code>&lt;html&gt;&lt;head&gt;
+   {% load static %}
+   &lt;link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"&gt;
+&lt;/head&gt;&lt;body&gt;
+   &lt;h2&gt;List of Cities&lt;/h2&gt;
+   &lt;ul&gt;
+      {% for city in cities %}
+         &lt;li&gt;{{ city }} &lt;/li&gt;
+      {% endfor %}
+   &lt;/ul&gt;
+&lt;/body&gt;&lt;/html&gt;</code></pre>
+
+            <h3>View and Styling</h3>
+            <p>The view simply fetches the data and renders the template:</p>
+            <pre><code>def index(request):
+   cities = ['Mumbai', 'New Delhi', 'Kolkata', 'Bengaluru', 'Chennai', 'Hyderabad']
+   return render(request, "cities.html", {"cities":cities})</code></pre>
+            <p>The **<code>style.css</code>** file placed in the static folder contains the actual styling rules that are then applied to the rendered page (e.g., setting the background color, font sizes, and text color).</p>
+        </div>
+    </div>
+</div>

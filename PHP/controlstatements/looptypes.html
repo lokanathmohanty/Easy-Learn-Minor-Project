@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Loop Types and Control Statements</h1>
+
+    <div class="content">
+      <p>
+        **Loops** are essential programming constructs that allow a block of code to be executed repeatedly, reducing code redundancy and optimizing programs for repetitive tasks like displaying data or processing collections. PHP supports four main loop types.
+      </p>
+
+      <h2>Types of Loops in PHP</h2>
+      <table>
+        <tr>
+          <th>Loop Type</th>
+          <th>Purpose</th>
+          <th>Key Characteristic</th>
+        </tr>
+        <tr>
+          <td>**`for` Loop**</td>
+          <td>Fixed Iterations</td>
+          <td>Runs a specified, predetermined number of times.</td>
+        </tr>
+        <tr>
+          <td>**`foreach` Loop**</td>
+          <td>Array/Iterable Iteration</td>
+          <td>Runs once for each element in an array or object.</td>
+        </tr>
+        <tr>
+          <td>**`while` Loop**</td>
+          <td>Condition-Controlled (Entry-Controlled)</td>
+          <td>Repeats code **as long as** the condition is true. The condition is checked **before** the first execution.</td>
+        </tr>
+        <tr>
+          <td>**`do-while` Loop**</td>
+          <td>Condition-Controlled (Exit-Controlled)</td>
+          <td>Executes the code block **at least once**, then repeats as long as the condition is true (checked at the end).</td>
+        </tr>
+      </table>
+
+      <hr>
+
+      <h2>Detailed Loop Syntax and Examples</h2>
+
+      <h3>1. `for` Loop</h3>
+      <div class="example">
+        <code>for (initialization; condition; increment) { code to be executed; }</code>
+        <p>
+          The loop runs as long as the `condition` is `true`. The `increment` is executed after each iteration.
+        </p>
+        <p>Example: Calculate cumulative sums over 5 iterations.</p>
+        <p class="content">Output: At the end of the loop a = 50 and b = 25</p>
+      </div>
+
+      <h3>2. `foreach` Loop</h3>
+      <div class="example">
+        <code>foreach (array as $value) { code to be executed; }</code>
+        <p>
+          Easily iterates over array elements. In each pass, the current element's value is copied into `$value`.
+        </p>
+        <p>Example: Print each value from an array of `[1, 2, 3, 4, 5]`.</p>
+        <p class="content">Output: Value is 1 \n Value is 2 \n ...</p>
+      </div>
+
+      <h3>3. `while` Loop</h3>
+      <div class="example">
+        <code>while (condition) { code to be executed; }</code>
+        <p>
+          The condition is checked at the start of every iteration. If it's initially `false`, the code block is never executed.
+        </p>
+        <p>Example: Loop continues as long as `$i < 10`.</p>
+        <p class="content">Output: Loop stopped at i = 10 and num = 40</p>
+      </div>
+
+      <h3>4. `do-while` Loop</h3>
+      <div class="example">
+        <code>do { code to be executed; } while (condition);</code>
+        <p>
+          Guarantees execution of the code block **at least once**, because the `while` condition is only checked at the end of the first iteration.
+        </p>
+        <p>Example: The loop body runs once, then the condition `$i < 10` is checked.</p>
+        <p class="content">Output: Loop stopped at i = 10</p>
+      </div>
+
+      <hr>
+
+      <h2>Loop Control Statements</h2>
+      <p>
+        These statements give fine-grained control over the loop execution flow.
+      </p>
+
+      <h3>`break` Statement</h3>
+      <p>
+        The **`break`** keyword immediately terminates the execution of the current loop (or `switch` statement). Program control moves to the statement immediately following the loop.
+      </p>
+      <div class="example">
+        <p>Example: `while` loop terminates when `$i` reaches 3, even though the condition is `$i < 10`.</p>
+        <p class="content">Output: Loop stopped at i = 3</p>
+      </div>
+
+      <h3>`continue` Statement</h3>
+      <p>
+        The **`continue`** keyword halts the current iteration of the loop. It skips the remaining code within the loop's body for that iteration and moves immediately to the next iteration.
+      </p>
+      <div class="example">
+        <p>Example: The value `3` is skipped, and the loop moves to the next value (`4`).</p>
+        <p class="content">Output: Value is 1 \n Value is 2 \n Value is 4 \n Value is 5</p>
+      </div>
+    </div>
+  </div>
+</div>

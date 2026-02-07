@@ -1,0 +1,107 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Forwarding Refs</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            <b>Refs</b> allow direct manipulation of DOM elements, bypassing state updates. 
+            However, when a ref needs to be applied to a React component and passed down 
+            to a deeper DOM element, we use <b>Forwarding Refs</b>. 
+            This enables parent components to access and control child DOM nodes directly.
+         </p>
+
+         <h2>Signature of forwardRef()</h2>
+         <div class="code-block">
+<pre><code>const NewComponent = React.forwardRef((props, ref) => {
+   // return JSX and attach the ref
+});
+</code></pre>
+         </div>
+
+         <p>
+            Example of forwarding a ref:
+         </p>
+         <div class="code-block">
+<pre><code>const MyInput = React.forwardRef((props, ref) =&gt; (
+   &lt;input type="text" ref={ref} value={props.value} /&gt;
+));
+
+const myRef = React.createRef();
+
+&lt;MyInput ref={myRef} value="Hi" /&gt;
+</code></pre>
+         </div>
+
+         <ul>
+            <li><code>MyInput</code> receives the ref from the parent and attaches it to <code>&lt;input&gt;</code>.</li>
+            <li><code>myRef</code> is created in the parent using <code>React.createRef()</code>.</li>
+            <li><code>myRef.current</code> points directly to the underlying DOM input element.</li>
+         </ul>
+
+         <h2>Applying Forwarding Ref in a Component</h2>
+         <p>Create a new React app and add the following component:</p>
+
+         <h3>SimpleForwardRef.js</h3>
+         <div class="code-block">
+<pre><code>import React from "react";
+
+const SimpleForwardRef = React.forwardRef((props, ref) =&gt; (
+   &lt;input type="text" ref={ref} value={props.value} /&gt;
+));
+
+export default SimpleForwardRef;
+</code></pre>
+         </div>
+
+         <ul>
+            <li>Uses <code>forwardRef</code> to pass ref down to the input element.</li>
+            <li>Input element receives the ref via <code>ref</code> prop.</li>
+         </ul>
+
+         <h3>App.js</h3>
+         <div class="code-block">
+<pre><code>import './App.css'
+import React, { useEffect } from 'react';
+import SimpleForwardRef from './Components/SimpleForwardRef';
+
+function App() {
+   const myRef = React.createRef();
+
+   useEffect(() =&gt; {
+      setTimeout(() =&gt; {
+         myRef.current.value = "Hello";
+      }, 5000);
+   });
+
+   return (
+      &lt;div className="container"&gt;
+         &lt;div style={{ padding: "10px" }}&gt;
+            &lt;SimpleForwardRef ref={myRef} value="Hi" /&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+   );
+}
+
+export default App;
+</code></pre>
+         </div>
+
+         <ul>
+            <li><code>myRef</code> is created in the App component.</li>
+            <li><code>myRef</code> is passed into <code>SimpleForwardRef</code>.</li>
+            <li><code>useEffect</code> changes the input value from <code>Hi</code> to <code>Hello</code> after 5 seconds.</li>
+         </ul>
+
+         <h2>Summary</h2>
+         <p>
+            <b>Forwarding Refs</b> extends React’s ref mechanism, 
+            allowing DOM elements deep in the component tree to be 
+            accessed and manipulated directly. This is useful for forms, 
+            animations, or integrating with third-party libraries that 
+            require direct DOM access.
+         </p>
+      </div>
+   </div>
+</div>

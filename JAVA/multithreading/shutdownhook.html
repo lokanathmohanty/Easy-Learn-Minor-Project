@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - JVM Shutdown Hook</h1>
+
+    <div class="content">
+      <h2 class="content-title">JVM Shutdown</h2>
+      <p>The JVM can shut down in two ways:</p>
+      <ul>
+        <li><strong>Controlled process:</strong> When <code>System.exit()</code> is called, <kbd>CTRL+C</kbd> is pressed, or the last non-daemon thread finishes.</li>
+        <li><strong>Abrupt manner:</strong> When the JVM receives a kill signal, <code>Runtime.getRuntime().halt()</code> is called, or there is an OS panic.</li>
+      </ul>
+
+      <h2 class="content-title">JVM Shutdown Hook</h2>
+      <p>A shutdown hook is a thread that is registered to run when the JVM is shutting down. These hooks are started when the shutdown begins and run concurrently. Daemon threads continue running during shutdown, and if <code>System.exit()</code> was used, non-daemon threads may run too.</p>
+
+      <h2 class="content-title">addShutdownHook(Thread hook) Method</h2>
+      <p>The <code>addShutdownHook</code> method registers a shutdown hook thread.</p>
+      <pre><code>public void addShutdownHook(Thread hook)</code></pre>
+      <p><strong>Parameter:</strong> <code>hook</code> – An initialized but unstarted thread.</p>
+      <p><strong>Exceptions:</strong></p>
+      <ul>
+        <li><code>IllegalArgumentException</code> – If the hook is already registered or running.</li>
+        <li><code>IllegalStateException</code> – If the JVM is already shutting down.</li>
+        <li><code>SecurityException</code> – If the security manager denies shutdown hook registration.</li>
+      </ul>
+
+      <h2 class="example-title">Example: Using a Shutdown Hook with Thread</h2>
+      <pre><code>
+class CustomThread extends Thread {
+   public void run() {
+      System.out.println("JVM is shutting down.");
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) throws InterruptedException {
+      try {
+         Runtime.getRuntime().addShutdownHook(new CustomThread());
+         System.out.println("Program is starting...");
+         System.out.println("Waiting for 3 seconds...");
+         Thread.sleep(3000);
+         System.out.println("Program is closing...");
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Program is starting...
+Waiting for 3 seconds...
+Program is closing...
+JVM is shutting down.
+      </code></pre>
+
+      <h2 class="example-title">Example 1: Shutdown Hook with Runnable</h2>
+      <pre><code>
+class CustomThread implements Runnable {
+   public void run() {
+      System.out.println("JVM is shutting down.");
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) throws InterruptedException {
+      try {
+         Runtime.getRuntime().addShutdownHook(new Thread(new CustomThread()));
+         System.out.println("Program is starting...");
+         System.out.println("Waiting for 3 seconds...");
+         Thread.sleep(3000);
+         System.out.println("Program is closing...");
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Program is starting...
+Waiting for 3 seconds...
+Program is closing...
+JVM is shutting down.
+      </code></pre>
+
+      <h2 class="example-title">Example 2: Removing a Shutdown Hook</h2>
+      <pre><code>
+class CustomThread implements Runnable {
+   public void run() {
+      System.out.println("JVM is shutting down.");
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) throws InterruptedException {
+      try {
+         Thread hook = new Thread(new CustomThread());
+         Runtime.getRuntime().addShutdownHook(hook);
+         System.out.println("Program is starting...");
+         System.out.println("Waiting for 3 seconds...");
+         Thread.sleep(3000);
+         System.out.println("Program is closing...");
+         Runtime.getRuntime().removeShutdownHook(hook);
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Program is starting...
+Waiting for 3 seconds...
+Program is closing...
+      </code></pre>
+    </div>
+  </div>
+</div>

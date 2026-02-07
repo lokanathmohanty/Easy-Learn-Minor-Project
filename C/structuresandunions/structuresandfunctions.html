@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Structures and Functions in C</h1>
+    
+    <div class="content">
+      <p>In C programming, <code>struct</code> is a derived data type. Just as we can pass arguments of primary data types, a variable of <code>struct</code> data type can also be passed to a function. You can also pass structures using call by value and call by reference methods. A function in C may also return a <code>struct</code> data type.</p>
+      
+      <p>Read this chapter to understand the following concepts −</p>
+      
+      <ul>
+        <li>How to pass elements of struct type</li>
+        <li>How to pass a struct variable</li>
+        <li>How to return struct from a function</li>
+        <li>How to return a struct pointer</li>
+      </ul>
+      
+      <p>Let's start with the first one and learn how to pass elements of struct type.</p>
+      
+      <h2 class="title">How to Pass Struct Elements</h2>
+      <p>A derived type is a combination of one or more elements of any of the primary types as well as another derived type. It is possible to pass elements to a function, either by value or by reference.</p>
+    </div>
+    
+    <div class="example">
+      <h2 class="title">Example</h2>
+      <p>In the following example, we have a derived type called "rectangle" with two elements. We have a struct variable "r" with the elements "r.len" and "r.brd" and they are passed to a function. The <code>area()</code> function then computes the area of the rectangle.</p>
+      
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+struct rectangle {
+  float len, brd;
+};
+
+int area(float, float);
+
+int main() {
+  struct rectangle r;
+  r.len = 10.50; r.brd = 20.5;
+  area(r.len, r.brd);
+  
+  return 0;
+}
+
+int area(float a, float b) {
+  double area = (double)(a * b);
+  printf("Length: %f \nBreadth: %f \nArea: %lf\n", a, b, area);
+  return 0;
+}
+      </code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Records (Java 16+)</h1>
+
+        <div class="content">
+            <h2>Purpose of Java Records</h2>
+            <p><strong>Records</strong> are a concise and syntactical way to create **immutable data classes** (or **Data Transfer Objects/POJOs**) in Java, introduced as a standard feature in **Java 16**. Their primary goal is to drastically reduce the boilerplate code required for classes whose main purpose is to simply hold data.</p>
+            <p>Traditional data classes often required 50+ lines of repetitive code, including private fields, a parameterized constructor, public getter methods, and custom implementations of <code>equals()</code>, <code>hashCode()</code>, and <code>toString()</code>.</p>
+            <p>A Java Record automatically generates this required boilerplate code from its declaration.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Features of Java Records</h2>
+            <p>A record declaration specifies its **component list** (the fields), and the compiler automatically generates the following:</p>
+            <ul>
+                <li><strong>Fields:</strong> A private, final field for each component in the list (ensuring immutability).</li>
+                <li><strong>Canonical Constructor:</strong> A public constructor whose signature matches the component list, which initializes the fields.</li>
+                <li><strong>Accessors (Getters):</strong> A public accessor method for each component, named identically to the field (e.g., <code>id()</code>, not <code>getId()</code>).</li>
+                <li><strong>Built-in Methods:</strong> Sensible implementations of **<code>equals()</code>**, **<code>hashCode()</code>**, and **<code>toString()</code>**, based on all components.</li>
+            </ul>
+
+            <h3>Record Declaration Syntax</h3>
+            <pre><code>record Student(int id, String name, String className) {}</code></pre>
+
+            <h3>Immutability and Constraints</h3>
+            <ul>
+                <li>The components of a Record are implicitly **<code>final</code>**, enforcing immutability.</li>
+                <li>Records implicitly extend the <code>java.lang.Record</code> class.</li>
+                <li>Records are implicitly **<code>final</code>** and cannot be extended by other classes, but they can **implement interfaces**.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title example">Example: Conciseness Comparison</h2>
+            <div class="content">
+                <p>A traditional data class requiring a full suite of boilerplate methods is replaced by a single line when using a Record:</p>
+                <pre><code>// Traditional Class (50+ lines)
+class Student {
+   private final int id;
+   private final String name;
+   // ... constructor, getters, equals, hashCode, toString ...
+}
+
+// Equivalent Record (1 line)
+record Student(int id, String name, String className) {}
+
+// Usage (Accessors use the component name)
+Student student1 = new Student(1, "Mahesh", "XII");
+System.out.println(student1.name()); 
+System.out.println(student1.toString()); // Auto-generated output
+</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Customizing Records</h2>
+            <p>While the goal is brevity, you can customize a Record's behavior:</p>
+            <ul>
+                <li>
+                    <strong>Custom Canonical Constructor (Compact Form):</strong> You can define a constructor without parameters or parentheses, primarily used for validation or normalization of component values.
+                    <pre><code>record Range(int min, int max) {
+   // Compact canonical constructor for validation
+   public Range {
+      if (min > max) {
+         throw new IllegalArgumentException("Min cannot be greater than max.");
+      }
+   }
+}</code></pre>
+                </li>
+                <li>
+                    <strong>Overriding Methods:</strong> You can override any of the auto-generated methods (like <code>toString()</code>) to provide custom behavior.
+                    <pre><code>record Student(int id, String name, String className) {
+   @Override
+   public String toString() {
+      return "Id: " + id + ", Name: " + name; // Custom implementation
+   }
+}</code></pre>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

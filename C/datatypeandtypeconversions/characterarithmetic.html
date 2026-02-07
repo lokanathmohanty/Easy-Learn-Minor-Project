@@ -1,0 +1,149 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">C - Character Arithmetic</h1>
+    <div class="content">
+
+      <p>In C, character arithmetic means performing arithmetic operations like addition, subtraction, multiplication, and division on characters. Characters in C are stored as numbers using the ASCII system.</p>
+
+      <p>The ASCII system represents each character, digit, or symbol using numbers. For example, 'A' is stored as 65, 'B' as 66, 'a' as 97, and so on.</p>
+
+      <h2 class="title">Character Arithmetic Operations</h2>
+      <p>To perform arithmetic operations on a character, we should know that a character takes 1 byte of memory. A signed char has a range from -128 to 127, and an unsigned char has a range from 0 to 255.</p>
+
+      <h3 class="title">Checking Character Values</h3>
+      <p>Let's first see a character and its ASCII value. In the below example, we print the character 'A' using <code>%c</code> and its ASCII value using <code>%d</code>.</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+int main() {
+    char ch = 'A';
+    printf("Character: %c\n", ch);
+    printf("ASCII Value: %d\n", ch);
+    return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+Character: A
+ASCII Value: 65
+      </code></pre>
+
+      <h3 class="title">Adding Two Characters</h3>
+      <p>We can add characters just like numbers because each character is stored as a number.</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    char a = 'A';
+    char b = 'B';
+
+    printf("a = %c\n", a);
+    printf("b = %c\n", b);
+    printf("a + b = %c\n", a + b);
+    printf("a + b (as number) = %d\n", a + b);
+    return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+a = A
+b = B
+a + b = Ã¢
+a + b (as number) = 131
+      </code></pre>
+      <p>Explanation: ASCII value of 'A' is 65 and 'B' is 66, so adding them gives 131. The character with ASCII 131 is displayed as Ã¢.</p>
+
+      <h3 class="title">Shifting and Subtracting Characters</h3>
+      <p>We can shift a character forward or backward by adding or subtracting a number. For example, 'A' + 1 gives 'B' and 'C' - 1 gives 'B'. We can also find the difference between characters using subtraction, like 'C' - 'A', which gives 2.</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    char c1 = 'A' + 1; 
+    char c2 = 'C' - 1; 
+    int diff = 'C' - 'A';
+
+    printf("A + 1 = %c\n", c1);
+    printf("C - 1 = %c\n", c2);
+    printf("C - A = %d\n", diff);
+    return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+A + 1 = B
+C - 1 = B
+C - A = 2
+      </code></pre>
+
+      <h3 class="title">Comparing Two Characters</h3>
+      <p>We can compare characters directly using comparison operators like <code>&lt;</code>, <code>&gt;</code>, <code>==</code>, etc. For example:</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+int main() {
+    if ('a' &lt; 'z') {
+        printf("'a' comes before 'z'\n");
+    }
+    return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+'a' comes before 'z'
+      </code></pre>
+
+      <h3 class="title">Increment and Decrement Operators on Characters</h3>
+      <p>Characters in C can be incremented (<code>++</code>) or decremented (<code>--</code>) like numbers.</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    char ch = 'A';
+    printf("Original character: %c\n", ch);
+
+    ch++; // Increment
+    printf("After increment: %c\n", ch);
+
+    ch--; // Decrement
+    printf("After decrement: %c\n", ch);
+    return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+Original character: A
+After increment: B
+After decrement: A
+      </code></pre>
+
+      <h3 class="title">Converting to Uppercase and Lowercase</h3>
+      <p>In ASCII, the difference between uppercase and lowercase letters is 32. To convert uppercase to lowercase, add 32. To convert lowercase to uppercase, subtract 32.</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    char upper = 'M';
+    char lower = upper + 32; // Uppercase to lowercase
+
+    char small = 'm';
+    char capital = small - 32; // Lowercase to uppercase
+
+    printf("Original Uppercase: %c\n", upper);
+    printf("Converted to Lowercase: %c\n", lower);
+    printf("Original Lowercase: %c\n", small);
+    printf("Converted to Uppercase: %c\n", capital);
+    return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+Original Uppercase: M
+Converted to Lowercase: m
+Original Lowercase: m
+Converted to Uppercase: M
+      </code></pre>
+
+      <p>In this chapter, we covered how to perform different types of arithmetic operations on characters in C. This is possible because characters are stored as numbers internally, allowing addition, subtraction, comparison, and other operations.</p>
+
+    </div>
+  </div>
+</div>

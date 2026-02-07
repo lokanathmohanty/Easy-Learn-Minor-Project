@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Remove List Items</h1>
+    <div class="content">
+      <p>Removing list items in Python implies deleting elements from an existing list. Lists are ordered collections of items, and sometimes you need to remove certain elements from them based on specific criteria or indices. When we remove list items, we are reducing the size of the list or eliminating specific elements.</p>
+
+      <p>We can remove list items in Python using various methods such as <code>remove()</code>, <code>pop()</code> and <code>clear()</code>. Additionally, we can use the <code>del</code> statement to remove items at a specific index. Let us explore through all these methods in this tutorial.</p>
+
+      <h2>Remove List Item Using remove() Method</h2>
+      <p>The <code>remove()</code> method in Python is used to remove the first occurrence of a specified item from a list.</p>
+      <p>We can remove list items using the <code>remove()</code> method by specifying the value we want to remove within the parentheses, like <code>my_list.remove(value)</code>, which deletes the first occurrence of value from <code>my_list</code>.</p>
+
+      <h3>Example</h3>
+      <pre><code>list1 = ["Rohan", "Physics", 21, 69.75]
+print ("Original list: ", list1)
+
+list1.remove("Physics")
+print ("List after removing: ", list1)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Original list: ['Rohan', 'Physics', 21, 69.75]
+List after removing: ['Rohan', 21, 69.75]</code></pre>
+
+      <h2>Remove List Item Using pop() Method</h2>
+      <p>The <code>pop()</code> method in Python is used to remove and return the last element from a list if no index is specified, or remove and return the element at a specified index, altering the original list.</p>
+      <p>We can remove list items using the <code>pop()</code> method by calling it without any arguments <code>my_list.pop()</code>, which removes and returns the last item from <code>my_list</code>, or by providing the index of the item we want to remove <code>my_list.pop(index)</code>, which removes and returns the item at that index.</p>
+
+      <h3>Example</h3>
+      <pre><code>list2 = [25.50, True, -55, 1+2j]
+print ("Original list: ", list2)
+list2.pop(2)
+print ("List after popping: ", list2)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Original list: [25.5, True, -55, (1+2j)]
+List after popping: [25.5, True, (1+2j)]</code></pre>
+
+      <h2>Remove List Item Using clear() Method</h2>
+      <p>The <code>clear()</code> method in Python is used to remove all elements from a list, leaving it empty.</p>
+      <p>We can remove all list items using the <code>clear()</code> method by calling it on the list object like <code>my_list.clear()</code>, which empties <code>my_list</code>, leaving it with no elements.</p>
+
+      <h3>Example</h3>
+      <pre><code>my_list = [1, 2, 3, 4, 5]
+
+# Clearing the list
+my_list.clear()
+print("Cleared list:", my_list)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Cleared list: []</code></pre>
+
+      <h2>Remove List Item Using del Keyword</h2>
+      <p>The <code>del</code> keyword in Python is used to delete an element either at a specific index or a slice of indices from memory.</p>
+      <p>We can remove list items using the <code>del</code> keyword by specifying the index or slice of the items we want to delete, like <code>del my_list[index]</code> to delete a single item or <code>del my_list[start:stop]</code> to delete a range of items.</p>
+
+      <h3>Example 1</h3>
+      <pre><code>list1 = ["a", "b", "c", "d"]
+print ("Original list: ", list1)
+del list1[2]
+print ("List after deleting: ", list1)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Original list: ['a', 'b', 'c', 'd']
+List after deleting: ['a', 'b', 'd']</code></pre>
+
+      <h3>Example 2</h3>
+      <pre><code>list2 = [25.50, True, -55, 1+2j]
+print ("List before deleting: ", list2)
+del list2[0:2]
+print ("List after deleting: ", list2)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>List before deleting: [25.5, True, -55, (1+2j)]
+List after deleting: [-55, (1+2j)]</code></pre>
+    </div>
+  </div>
+</div>

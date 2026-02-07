@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - typeof Operator</h1>
+    <div class="content">
+      <h2>The typeof Operator</h2>
+      <p>
+        The <code>typeof</code> operator in JavaScript is a unary operator used to get the data type of a particular variable.
+        It returns a string value indicating the data type of its operand. JavaScript contains primitive and non-primitive data types.
+      </p>
+      <p>
+        There are seven primitive data types in JavaScript: <code>number</code>, <code>string</code>, <code>boolean</code>,
+        <code>undefined</code>, <code>null</code>, <code>symbol</code>, and <code>bigint</code>. There is also a composite data type called
+        <code>object</code>, which includes objects, arrays, and dates.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre><code>typeof (operand);
+typeof operand;</code></pre>
+
+      <h2>Parameter</h2>
+      <p>
+        <strong>operand</strong> − It can be a value, variable, or expression representing the object or primitive.
+      </p>
+
+      <h2>Return Value</h2>
+      <p>It returns a string value representing the data type of the operand.</p>
+
+      <h2>Datatypes Returned by typeof Operator</h2>
+      <ul>
+        <li>Number → "number"</li>
+        <li>String → "string"</li>
+        <li>Boolean → "boolean"</li>
+        <li>Object → "object"</li>
+        <li>Function → "function"</li>
+        <li>Undefined → "undefined"</li>
+        <li>Null → "object"</li>
+        <li>Symbol → "symbol"</li>
+        <li>Bigint → "bigint"</li>
+      </ul>
+
+      <h2>Examples</h2>
+
+      <h3>Checking Number Type</h3>
+      <pre><code>typeof 10; // "number"
+typeof -10; // "number"
+typeof 0; // "number"
+typeof 10.20; // "number"
+typeof Infinity; // "number"
+typeof NaN; // "number"</code></pre>
+      <p>Example:</p>
+      <pre><code>&lt;script&gt;
+  let num = 42;
+  document.getElementById("output").innerHTML = typeof num;
+&lt;/script&gt;</code></pre>
+
+      <h3>Checking String Type</h3>
+      <pre><code>typeof "Hello"; // "string"
+typeof ""; // "string"
+typeof String(10); // "string"</code></pre>
+
+      <h3>Checking Boolean Type</h3>
+      <pre><code>typeof true; // "boolean"
+typeof false; // "boolean"</code></pre>
+
+      <h3>Checking Symbol Type</h3>
+      <pre><code>typeof Symbol(); // "symbol"
+typeof Symbol("id"); // "symbol"</code></pre>
+
+      <h3>Checking Undefined and Null</h3>
+      <pre><code>typeof undefined; // "undefined"
+typeof null; // "object"</code></pre>
+
+      <h3>Checking Object Type</h3>
+      <pre><code>typeof {age: 23}; // "object"
+typeof [1,2,3]; // "object"
+typeof new Date(); // "object"</code></pre>
+
+      <h3>Checking Function Type</h3>
+      <pre><code>const myFunc = function(){};
+typeof myFunc; // "function"
+
+class MyClass {}
+typeof MyClass; // "function"</code></pre>
+
+      <h3>Checking BigInt Type</h3>
+      <pre><code>typeof 100n; // "bigint"</code></pre>
+
+      <h2>Real-Time Example</h2>
+      <p>
+        Developers often use <code>typeof</code> to check API responses. For example, if an API sometimes returns a single string
+        and other times an array of strings, <code>typeof</code> helps handle both cases.
+      </p>
+      <pre><code>&lt;script&gt;
+  const response = ["Hello", "World"];
+
+  if (typeof response === "string") {
+    document.write("Response: " + response);
+  } else {
+    document.write("Response values: ");
+    for (let val of response) {
+      document.write(val + " ");
+    }
+  }
+&lt;/script&gt;</code></pre>
+
+      <h2>Arrays and typeof Operator</h2>
+      <p>
+        Arrays return <code>"object"</code> when using <code>typeof</code>. To check if a value is an array,
+        use <code>Array.isArray()</code>.
+      </p>
+      <pre><code>let numbers = [1, 2, 3];
+Array.isArray(numbers); // true</code></pre>
+    </div>
+  </div>
+</div>

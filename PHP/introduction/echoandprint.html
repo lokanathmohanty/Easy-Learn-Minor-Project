@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP: The `echo` and `print` Output Statements</h1>
+
+    <div class="content">
+      <p>
+        **`echo`** and **`print`** are the primary language constructs (not functions) used in PHP to display output in the browser or console. They are used to display text, numbers, variables, and HTML content. Using parentheses is optional for both.
+      </p>
+
+      <h2>What is `echo`?</h2>
+      <p>
+        **`echo`** is a language construct that displays data. Its key features are:
+      </p>
+      <ul>
+        <li>**Return Value:** It does **not** return a value (`void`).</li>
+        <li>**Arguments:** It can accept **multiple expressions** (strings) separated by commas, making it slightly faster.</li>
+        <li>**Speed:** Generally considered **faster** than `print`.</li>
+      </ul>
+
+      <h3>Example: Multiple Arguments</h3>
+      <div class="example">
+        <p>
+          <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;echo 'Hello ', 'how ', 'are ', 'you?', "\n"; // Multiple arguments allowed<br>&nbsp;&nbsp;&nbsp;echo 'Hello ' . 'how ' . 'are ' . 'you?' . "\n"; // Single concatenated argument<br>?&gt;</code>
+        </p>
+        <p class="content">Output:<br>Hello how are you?<br>Hello how are you?</p>
+      </div>
+    </div>
+    
+    <div class="content">
+      <h2>What is `print`?</h2>
+      <p>
+        **`print`** is a language construct that displays data, similar to `echo`. Its key features are:
+      </p>
+      <ul>
+        <li>**Return Value:** It **always returns `1`**, making it suitable for use within expressions.</li>
+        <li>**Arguments:** It accepts **only a single argument**.</li>
+        <li>**Speed:** Generally considered **slower** than `echo`.</li>
+      </ul>
+
+      <h3>Example: Basic Usage</h3>
+      <div class="example">
+        <p>
+          <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;$name = "Rajesh";<br>&nbsp;&nbsp;&nbsp;print "Hello " . $name . " How are you?\n";<br>?&gt;</code>
+        </p>
+        <p class="content">Output:<br>Hello Rajesh How are you?</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">String Output Behavior and Variable Interpolation</h2>
+      <p>
+        Both can output single-line or multi-line strings, but they differ in how they handle variables inside the string:
+      </p>
+      <ul>
+        <li>
+          **Double-Quoted String (`"`):** Variables are **interpolated** (the variable's value is printed).
+          <div class="example">
+            <code>echo "Hello $name How are you?";</code> $\rightarrow$ `Hello Rahul How are you?`
+          </div>
+        </li>
+        <li>
+          **Single-Quoted String (`'`):** Variables are treated as **plain text** (the variable name is printed).
+          <div class="example">
+            <code>echo 'Hello $name How are you?';</code> $\rightarrow$ `Hello $name How are you?`
+          </div>
+        </li>
+      </ul>
+      <p>
+        To output variables within single-quoted strings, you must use the **concatenation operator** (`.`).
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Echo vs. Print: Key Differences</h2>
+      <p>
+        | Feature | `echo` | `print` |
+        | :--- | :--- | :--- |
+        | **Speed** | Faster | Slower |
+        | **Return Value** | No (void) | Yes (always 1) |
+        | **Multiple Arguments** | Yes (comma-separated) | No (single argument only) |
+      </p>
+
+      <h3>When to Use Each</h3>
+      <ul>
+        <li>
+          **Use `echo`** in most general cases for simple text display, as it's faster and more flexible with multiple outputs.
+        </li>
+        <li>
+          **Use `print`** when you specifically require a return value (e.g., in a complex expression or a conditional statement) because it reliably returns `1`.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

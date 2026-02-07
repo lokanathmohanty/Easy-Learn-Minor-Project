@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Testing With Vitest</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Vitest?</h2>
+            <p><strong>Vitest</strong> is a modern, fast, and feature-rich **JavaScript testing framework** built on top of **Vite**, the popular build tool. It is often preferred for its speed and native support for modern web standards, making it an excellent choice for testing Next.js applications.</p>
+            <ul>
+                <li class="example">It supports various testing types, including **unit tests**, **integration tests**, and basic **end-to-end** scenarios.</li>
+                <li class="example">Key features include a **watch mode** for real-time feedback, **snapshot testing**, and **code coverage** reporting.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Setting Up Vitest in Next.js</h2>
+            
+            <h3>Installation and Dependencies</h3>
+            <p>In your existing Next.js project, install Vitest and the necessary testing libraries:</p>
+            <pre class="example"><code>// Install Vitest, JSDOM (for browser environment simulation), and React Testing Library
+npm install --save-dev vitest jsdom @testing-library/react @testing-library/jest-dom</code></pre>
+            
+            <h3>Configuration (<code>vitest.config.ts</code>)</h3>
+            <p>Create a configuration file in the project root to define the testing environment:</p>
+            <pre class="example"><code>// File - /vitest.config.ts
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+    test: {
+        // Use 'jsdom' to simulate a browser environment for testing components
+        environment: 'jsdom',
+        // Enable globals (like 'describe', 'it', 'expect') without explicit import
+        globals: true,
+        // Path to setup file for global configurations/polyfills
+        setupFiles: './vitest.setup.ts',
+    },
+})</code></pre>
+            
+            <h3>Scripts in <code>package.json</code></h3>
+            <p>Add scripts to run Vitest efficiently:</p>
+            <pre class="example"><code>// File - /package.json
+{
+    "scripts": {
+        "test": "vitest", // Runs tests in watch mode by default
+        "test:ui": "vitest --ui", // Runs tests with a visual interface
+        "coverage": "vitest run --coverage" // Generates code coverage report
+    }
+}</code></pre>
+            
+            <h3>Test File Location</h3>
+            <p>Store your test files in a **<code>__tests__</code>** directory (or use files ending in <code>.test.tsx</code>/<code>.test.jsx</code>) in the root or component folders.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title example">Writing Component Tests with Vitest and RTL</h2>
+            <p>Vitest syntax is highly compatible with Jest, allowing the use of familiar testing utilities like <code>describe</code>, <code>it</code>, and <code>expect</code>, in conjunction with the React Testing Library (RTL).</p>
+            
+            <h3>The Component (<code>app/Home/page.tsx</code>)</h3>
+            <pre class="example"><code>export default function Home() {
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Welcome to Next.js&lt;/h1&gt;
+            &lt;button onClick={() =&gt; alert('Hello!')}&gt;
+                Click Me
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+            
+            <h3>The Test File (<code>/__tests__/Home.test.tsx</code>)</h3>
+            <p>The test uses RTL functions like **<code>render</code>** and **<code>screen</code>** for user-centric testing, and Vitest's **<code>vi.spyOn</code>** for mocking browser functions.</p>
+            <pre class="example"><code>import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+// Assuming '@/pages/index' maps to the Home component
+import Home from '@/pages/index'; 
+
+describe('Home Page', () =&gt; {
+    // Test 1: Verifies the content is rendered
+    it('renders welcome message', () =&gt; {
+        render(&lt;Home /&gt;);
+        // Assert that the text is present in the document
+        expect(screen.getByText('Welcome to Next.js')).toBeDefined(); 
+    });
+
+    // Test 2: Verifies component behavior on click
+    it('handles button click', () =&gt; {
+        render(&lt;Home /&gt;);
+        // Use vi.spyOn to mock and monitor the window.alert function
+        const alertSpy = vi.spyOn(window, 'alert');
+        
+        // Simulate a click on the button
+        fireEvent.click(screen.getByText('Click Me'));
+        
+        // Assert the alert function was called with the correct argument
+        expect(alertSpy).toHaveBeenCalledWith('Hello!');
+        
+        alertSpy.mockRestore(); // Restore the original function
+    });
+});</code></pre>
+            
+            <h3>Running the Tests</h3>
+            <p>Execute your tests using the command defined in <code>package.json</code>:</p>
+            <pre class="example"><code>npm test</code></pre>
+        </div>
+    </div>
+</div>

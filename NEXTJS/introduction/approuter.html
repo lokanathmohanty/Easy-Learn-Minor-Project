@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js App Router Setup and Usage 🛣️</h1>
+        
+        <div class="content">
+            <h2 class="title">Introduction to the App Router</h2>
+            <p>Starting with Next.js version 13, the **App Router** is the recommended system for defining application routes. It utilizes the file structure within the **<span class="example">`/app`</span>** directory, where every folder containing a special file (like <span class="example">`page.tsx`</span>) automatically becomes a route.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Step 1 & 2: Project Setup and Understanding Basic Routes</h2>
+            
+            <h3 class="title">Project Creation</h3>
+            <p>When creating a new Next.js project, select the App Router option:</p>
+            <pre>npx create-next-app@latest</pre>
+            
+            <h3 class="title">File-System Routing</h3>
+            <p>In the App Router, a route is defined by creating a folder and placing a **<span class="example">`page.tsx`</span>** file inside it. The file structure maps directly to the URL path:</p>
+            <ul>
+                <li><span class="example">`app/page.tsx`</span> &rarr; **<span class="example">`/`</span>** (The default Home Route)</li>
+                <li><span class="example">`app/about/page.tsx`</span> &rarr; **<span class="example">`/about`</span>**</li>
+                <li><span class="example">`app/contact/page.tsx`</span> &rarr; **<span class="example">`/contact`</span>**</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Step 3: Setup Nested Routes</h2>
+            <p>Nested routing is achieved by creating **folders within folders** inside the <span class="example">`/app`</span> directory. For example, to create the <span class="example">`/about`</span> route, you create an <span class="example">`about`</span> folder and add <span class="example">`page.tsx`</span> inside it.</p>
+            <pre>// File: app/about/page.tsx 
+export default function About() {
+    return (&lt;div&gt;&lt;h1&gt;About Us&lt;/h1&gt;&lt;/div&gt;);
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Step 4: Setup Dynamic Routes</h2>
+            <p>Dynamic routes are routes that accept parameters (variables) in the URL. This is done by enclosing the folder name in **square brackets** (<span class="example">`[paramName]`</span>).</p>
+            <ul>
+                <li>**Route:** <span class="example">`app/products/[id]/page.tsx`</span> &rarr; URL will be <span class="example">`/products/123`</span>.</li>
+                <li>**Accessing the Parameter:** The parameter is accessed using the **<span class="example">`useParams()`</span>** hook (when using Client Components) or the <span class="example">`params`</span> prop (when using Server Components).</li>
+            </ul>
+            <pre>// Example: app/products/[id]/page.tsx
+"use client"
+import { useParams } from 'next/navigation';
+
+export default function ProductPage() {
+  const { id } = useParams(); // Retrieves '123' if URL is /products/123
+  return (&lt;h1&gt;Product {id}&lt;/h1&gt;);
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Step 5: API Routes (Route Handlers)</h2>
+            <p>In the App Router, API endpoints are created using **Route Handlers**, which are files named **<span class="example">`route.ts`</span>** (or <span class="example">`route.js`</span>) inside a route folder (e.g., <span class="example">`app/api/hello/route.ts`</span>). They handle specific HTTP methods (<span class="example">`GET`</span>, <span class="example">`POST`</span>, etc.).</p>
+            <ul>
+                <li>**Path:** <span class="example">`app/api/hello/route.ts`</span> &rarr; Endpoint will be **<span class="example">`/api/hello`</span>**.</li>
+            </ul>
+            <pre>// Example: app/api/hello/route.js
+export async function GET(request) {
+  return Response.json({ message: 'Hello, Next.js API!' });
+}</pre>
+        </div>
+    </div>
+</div>

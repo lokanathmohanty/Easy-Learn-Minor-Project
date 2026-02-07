@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Asynchronous JavaScript and XML (AJAX) 🌐</h1>
+        <div class="content">
+            <p>AJAX is a technology that allows web applications to send and retrieve data from a server asynchronously (in the background) without interfering with the display and behavior of the existing page. This greatly enhances the end-user experience by reducing full page loads.</p>
+
+            <h3>Two Ways to Use AJAX in Django:</h3>
+            <ol>
+                <li>**Direct Use:** Manually implement AJAX using a JavaScript library like **jQuery** or Axios to handle the client-side requests, and then write a standard Django function-based view to handle the request and return JSON/HTML data.</li>
+                <li>**Django Frameworks:** Use specialized Django packages like **<code>django-dajax</code>** (now largely obsolete, but featured in the source text) which abstracts much of the JavaScript code, allowing the developer to write asynchronous presentation logic almost entirely in Python.</li>
+            </ol>
+
+            <h2>Using the Django-Dajax Framework (Conceptual Example)</h2>
+            <p>The <code>django-dajax</code> framework simplifies the AJAX workflow by linking Python functions directly to client-side calls.</p>
+
+            <h3>Setup and Configuration (<code>settings.py</code>)</h3>
+            <p>After installing <code>django-dajax</code> and its dependency <code>django-dajaxice</code>, both must be added to <code>INSTALLED_APPS</code>, and specific configuration options for static files and template processors must be set to ensure Dajax can find its necessary JavaScript files and function mappings:</p>
+            <pre><code>INSTALLED_APPS += ('dajaxice', 'dajax')
+
+STATICFILES_FINDERS = (
+   # ... default finders ...
+   'dajaxice.finders.DajaxiceFinder',
+)
+DAJAXICE_MEDIA_PREFIX = 'dajaxice'</code></pre>
+
+            <h3>Defining the AJAX Function (<code>ajax.py</code>)</h3>
+            <p>The server-side logic that runs asynchronously is defined in a separate <code>ajax.py</code> file within the app. The **<code>@dajaxice_register</code>** decorator exposes the Python function to be called from the client side.</p>
+            <pre><code>from dajax.core import Dajax
+from dajaxice.utils import deserialize_form
+from myapp.form import DreamrealForm
+
+@dajaxice_register
+def send_form(request, form):
+   dajax = Dajax()
+   form = DreamrealForm(deserialize_form(form))
+   
+   if form.is_valid():
+      # Server-side logic to save the data...
+      dr.save()
+      
+      # Client-side command: Show an alert popup
+      dajax.alert("Dreamreal Entry %s was successfully saved." % 
+         form.cleaned_data.get('name'))
+   else:
+      # Client-side command: Add an 'error' CSS class to fields
+      for error in form.errors:
+         dajax.add_css_class('#id_%s' % error, 'error')
+			
+   return dajax.json() # Return JSON response containing client commands</code></pre>
+
+            <h3>Client-Side Template (<code>dreamreal.html</code>)</h3>
+            <p>The template must load the necessary JavaScript files (jQuery and Dajax's core file). The form submission is tied to a JavaScript function that uses the Dajaxice utility to call the corresponding Python function:</p>
+            <pre><code>&lt;!-- Load tags and Dajax/jQuery scripts --&gt;
+{% load static %}{% load dajaxice_templatetags %}
+&lt;script src = "path/to/jquery.js"&gt;&lt;/script&gt;
+&lt;script src = "path/to/dajax.core.js"&gt;&lt;/script&gt;
+{% dajaxice_js_import %}
+
+&lt;script&gt;
+   function send_form(){
+      // Call the Python function, passing the serialized form data
+      Dajaxice.myapp.send_form(Dajax.process,{'form':$('#my_form').serialize(true)});
+   }
+&lt;/script&gt;
+
+&lt;form id = "my_form" ... &gt;
+   {{ form.as_p }}
+   &lt;input type = "button" value = "Send" onclick = "send_form();"&gt; &lt;!-- Triggers AJAX function --&gt;
+&lt;/form&gt;</code></pre>
+            <p>The Dajax framework handles packaging the client-side request and interpreting the Python function's <code>dajax.json()</code> output to execute JavaScript commands in the browser.</p>
+        </div>
+    </div>
+</div>

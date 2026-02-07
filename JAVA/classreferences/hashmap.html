@@ -1,0 +1,89 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>HashMap</code> Class Summary 🗺️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.HashMap</code>** class is the foundational, **hash table-based implementation** of the **<code>Map</code>** interface. It stores data in **key-value pairs** and is designed for high-speed retrieval and insertion operations.</p>
+
+            <h2 class="title">I. Core Characteristics and Performance</h2>
+            <p><code>HashMap</code> is optimized for quick lookups, but its iteration order is non-deterministic:</p>
+            <ul>
+                <li>
+                    <strong>Hashing:</strong> It uses the `hashCode()` and `equals()` methods of the key objects for storage and retrieval. Access, insertion, and deletion operations (like <code>get()</code> and <code>put()</code>) are typically **constant time ($O(1)$)**, assuming a good hash function and minimal collisions.
+                </li>
+                <li>
+                    <strong>Unordered:</strong> **No guarantees are made about iteration order.** The order of elements is determined by the hash codes and internal structure, and it may change over time or across different Java versions. (Use **<code>LinkedHashMap</code>** for insertion order or **<code>TreeMap</code>** for sorted order).
+                </li>
+                <li>
+                    <strong>Nulls Permitted:</strong> It permits **one null key** and **multiple null values**.
+                </li>
+                <li>
+                    <strong>Non-Synchronized:</strong> It is **not thread-safe**. For concurrent use, the **<code>ConcurrentHashMap</code>** class should be used.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Capacity Parameters</h2>
+            <p>The performance of a <code>HashMap</code> relies heavily on two adjustable parameters, which can be set via constructors:</p>
+            <ul>
+                <li>
+                    <strong>Initial Capacity (Default: 16):</strong> The initial number of buckets (storage locations) in the hash table. Setting this too low increases the frequency of resizing (rehashing).
+                </li>
+                <li>
+                    <strong>Load Factor (Default: 0.75):</strong> A threshold that dictates when the map should resize. When the number of entries exceeds (Capacity * Load Factor), the internal array is resized (typically doubled), and all elements are rehashed. A lower load factor reduces collisions but increases memory overhead.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Key Map Operations</h2>
+            <p>The following methods are fundamental for map usage:</p>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Action</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td><code>V put(K key, V value)</code></td>
+                    <td>Associates value with the key. If the key already exists, the old value is replaced and returned.</td>
+                    <td>Primary insertion method.</td>
+                </tr>
+                <tr>
+                    <td><code>V get(Object key)</code></td>
+                    <td>Returns the value mapped to the key, or `null` if the key is not found.</td>
+                    <td>Primary retrieval method ($O(1)$).</td>
+                </tr>
+                <tr>
+                    <td><code>V remove(Object key)</code></td>
+                    <td>Removes the mapping for the key and returns the associated value.</td>
+                    <td>Primary deletion method.</td>
+                </tr>
+                <tr>
+                    <td><code>Set&lt;K&gt; keySet()</code></td>
+                    <td>Returns a `Set` view of the keys.</td>
+                    <td>Used for iterating over keys.</td>
+                </tr>
+                <tr>
+                    <td><code>Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</code></td>
+                    <td>Returns a `Set` view of the key-value pairs (`Map.Entry` objects).</td>
+                    <td>Used for efficient iteration over both keys and values (as shown in the example).</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">IV. Java 8 Default Methods</h2>
+            <p><code>HashMap</code> provides implementations for functional methods introduced in Java 8 to simplify common map patterns:</p>
+            <ul>
+                <li>
+                    <strong><code>V computeIfAbsent(...)</code>:</strong> Computes a value and adds it only if the key is missing or mapped to null.
+                </li>
+                <li>
+                    <strong><code>V merge(...)</code>:</strong> Combines a new value with an existing value for a key using a provided function, or inserts the new value if the key is absent.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

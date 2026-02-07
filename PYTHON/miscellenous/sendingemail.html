@@ -1,0 +1,218 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Sending Email in Python</h1>
+    </div>
+    <div class="content">
+      <p>Python provides libraries like <code>smtplib</code> and <code>email</code> to send emails. The <code>smtplib</code> module defines an SMTP client session object used to send mail via an SMTP or ESMTP server. SMTP (Simple Mail Transfer Protocol) is the standard protocol for sending emails over the Internet.</p>
+      <p>To send an email, you typically connect to an SMTP server, authenticate, compose the message, send it, and then close the connection.</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="title">
+      <h2>Create SMTP Object</h2>
+    </div>
+    <div class="content">
+      <p>Use <code>smtplib.SMTP()</code> to create an SMTP client session object:</p>
+      <pre><code>import smtplib
+smtpObj = smtplib.SMTP('smtp.example.com', 25)</code></pre>
+      <p><strong>Parameters:</strong></p>
+      <ul>
+        <li><b>host:</b> SMTP server hostname (e.g., smtp.gmail.com)</li>
+        <li><b>port:</b> Port number (default is 25)</li>
+        <li><b>local_hostname:</b> Optional, hostname of the local machine.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Sending a Simple Email</h2>
+    </div>
+    <div class="content">
+      <pre><code>import smtplib
+
+smtpObj = smtplib.SMTP('smtp.example.com', 25)
+smtpObj.ehlo()
+smtpObj.starttls()
+smtpObj.login('username', 'password')
+
+from_address = 'your_email@example.com'
+to_address = 'recipient@example.com'
+message = """\
+Subject: Test Email
+
+This is a test email message.
+"""
+
+smtpObj.sendmail(from_address, to_address, message)
+smtpObj.quit()</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>SMTP Debugging Server</h2>
+    </div>
+    <div class="content">
+      <p>Python's <code>smtpd</code> module allows setting up a local debugging SMTP server that prints emails to console instead of sending. It's useful for testing email functionality.</p>
+      <p>Start the debug server in terminal:</p>
+      <pre><code>python -m smtpd -c DebuggingServer -n localhost:1025</code></pre>
+      <p>Send emails to this server for debugging.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Send Dummy Email with Debugging Server</h2>
+    </div>
+    <div class="content">
+      <pre><code>import smtplib
+
+def prompt(prompt):
+   return input(prompt).strip()
+
+fromaddr = prompt("From: ")
+toaddrs = prompt("To: ").split()
+print("Enter message, end with ^D (Unix) or ^Z (Windows):")
+
+msg = ("From: %s\r\nTo: %s\r\n\r\n" % (fromaddr, ", ".join(toaddrs)))
+while True:
+   try:
+      line = input()
+   except EOFError:
+      break
+   if not line:
+      break
+   msg += line
+
+server = smtplib.SMTP('localhost', 1025)
+server.set_debuglevel(1)
+server.sendmail(fromaddr, toaddrs, msg)
+server.quit()</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Sending HTML Email</h2>
+    </div>
+    <div class="content">
+      <p>Use <code>email.mime</code> modules to create multipart HTML email content.</p>
+      <pre><code>import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+sender = 'from@fromdomain.com'
+receivers = ['to@todomain.com']
+
+msg = MIMEMultipart('alternative')
+msg['From'] = 'From Person <from@fromdomain.com>'
+msg['To'] = 'To Person <to@todomain.com>'
+msg['Subject'] = 'SMTP HTML e-mail test'
+
+html = """\
+<html>
+  <body>
+    <p>This is an e-mail message in <b>HTML format</b></p>
+  </body>
+</html>
+"""
+
+part2 = MIMEText(html, 'html')
+msg.attach(part2)
+
+try:
+   smtpObj = smtplib.SMTP('localhost')
+   smtpObj.sendmail(sender, receivers, msg.as_string())
+   print("Successfully sent email")
+except smtplib.SMTPException as e:
+   print(f"Error: unable to send email. {e}")</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Sending Attachments via Email</h2>
+    </div>
+    <div class="content">
+      <p>Use MIME multipart with <code>multipart/mixed</code> content type to send attachments.</p>
+      <pre><code>import smtplib
+import base64
+
+filename = "/tmp/test.txt"
+fo = open(filename, "rb")
+filecontent = fo.read()
+encodedcontent = base64.b64encode(filecontent)
+
+sender = 'webmaster@tutorialpoint.com'
+receiver = 'amrood.admin@gmail.com'
+
+marker = "AUNIQUEMARKER"
+
+body = "This is a test email to send an attachment."
+
+part1 = f"""From: From Person <me@fromdomain.net>
+To: To Person <amrood.admin@gmail.com>
+Subject: Sending Attachment
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary={marker}
+--{marker}
+"""
+
+part2 = f"""Content-Type: text/plain
+Content-Transfer-Encoding:8bit
+
+{body}
+--{marker}
+"""
+
+part3 = f"""Content-Type: multipart/mixed; name="{filename}"
+Content-Transfer-Encoding:base64
+Content-Disposition: attachment; filename={filename}
+
+{encodedcontent}
+--{marker}--
+"""
+
+message = part1 + part2 + part3
+
+try:
+   smtpObj = smtplib.SMTP('localhost')
+   smtpObj.sendmail(sender, receiver, message)
+   print("Successfully sent email")
+except Exception:
+   print("Error: unable to send email")</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Sending Email Using Gmail SMTP</h2>
+    </div>
+    <div class="content">
+      <p>Use Gmail SMTP server with TLS encryption to send emails.</p>
+      <pre><code>import smtplib
+
+content = "Hello World"
+mail = smtplib.SMTP('smtp.gmail.com', 587)
+mail.ehlo()
+mail.starttls()
+
+sender = 'your_email@gmail.com'
+password = 'your_password'
+
+mail.login(sender, password)
+
+recipient = 'recipient_email@example.com'
+subject = 'Test Email'
+header = f'To: {recipient}\nFrom: {sender}\nSubject: {subject}\n'
+content = header + content
+
+mail.sendmail(sender, recipient, content)
+mail.quit()</code></pre>
+      <p><strong>Note:</strong> For this to work, allow "less secure apps" access in your Google account settings.</p>
+    </div>
+  </div>
+</div>

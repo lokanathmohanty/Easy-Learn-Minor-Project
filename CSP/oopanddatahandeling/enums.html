@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Enums (Enumerations)</h1>
+        
+        <h2 class="title">What is an Enumeration?</h2>
+        <div class="content">
+            <p>An **enumeration (enum)** is a **special value type** that defines a set of **named integer constants**. It provides a way to assign meaningful names to integral values, making code easier to read and maintain by limiting variables to a discrete, known set of values.</p>
+            <p>Enums are ideal for representing related, mutually exclusive values such as days of the week, error codes, directions, or states.</p>
+        </div>
+        
+        <h2 class="title">Declaring and Using Enums</h2>
+        <div class="content">
+            <h3>Declaration Syntax:</h3>
+            <p>An enumerated type is declared using the **`enum`** keyword.</p>
+            <pre>
+enum &lt;enum_name&gt; {
+   enumeration list 
+};
+            </pre>
+            
+            <h3>Default Values:</h3>
+            <p>By default, the underlying type of an enum is **`int`**. The first member is assigned the value **0**, and each subsequent member is incremented by 1.</p>
+            <pre>
+enum Days { Sun, Mon, Tue, Wed, Thu, Fri, Sat }; 
+// Sun = 0, Mon = 1, Tue = 2, and so on.
+            </pre>
+            <p>You can explicitly cast an enum member to its integer value:</p>
+            <pre>
+int WeekdayStart = (int)Days.Mon; // WeekdayStart is 1
+            </pre>
+            
+            <h3>Specifying Custom Values:</h3>
+            <p>You can assign explicit, custom integer values to enum members, which is common for status or error codes:</p>
+            <pre>
+enum StatusCode {
+   Success = 200,
+   NotFound = 404,
+   ServerError = 500
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Advanced Enum Usage</h2>
+        <div class="content">
+            <h3>1. Enums with `switch` Statements</h3>
+            <p>Enums naturally integrate with `switch` statements, improving readability by using constants instead of hard-coded integers:</p>
+            <pre>
+Weekday today = Weekday.Wednesday;
+
+switch (today) {
+    case Weekday.Wednesday:
+        Console.WriteLine("It's Wednesday.");
+        break;
+    // ... other cases
+}
+            </pre>
+            
+            <h3>2. Enum Flags for Combined Values</h3>
+            <p>The **`[Flags]`** attribute allows an enum to represent a combination of values, typically for permissions or settings. Each value should be a power of 2 (1, 2, 4, 8, etc.) to allow for bitwise combination using the OR operator (`|`).</p>
+            <pre>
+[Flags]
+enum Permissions {
+    None = 0,
+    Read = 1,    // 001
+    Write = 2,   // 010
+    Execute = 4, // 100
+}
+
+Permissions userPermissions = Permissions.Read | Permissions.Write;
+// userPermissions now holds the combined value (3)
+            </pre>
+            
+            <h3>3. Parsing Enums (String to Enum)</h3>
+            <p>The static **`Enum.Parse()`** method is used to convert a string representation back into an enum value:</p>
+            <pre>
+enum OrderStatus { Pending = 0, Processing = 1 }
+
+string input = "Processing";
+OrderStatus status = (OrderStatus)Enum.Parse(typeof(OrderStatus), input);
+// status is now OrderStatus.Processing
+            </pre>
+        </div>
+    </div>
+</div>

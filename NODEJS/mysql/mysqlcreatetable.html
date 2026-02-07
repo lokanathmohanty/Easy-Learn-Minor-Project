@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MySQL Create Table</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        In a relational database, a table represents an entity with attributes, and each row is an instance of that entity. Creating a table in MySQL involves defining columns, data types, and constraints.
+      </p>
+
+      <h2>MySQL CREATE TABLE Syntax</h2>
+      <pre><code>CREATE TABLE [IF NOT EXISTS] table_name (
+   column1 datatype constraints,
+   column2 datatype constraints
+) ENGINE=storage_engine;</code></pre>
+      <p>
+        Supports various data types like INT, FLOAT, VARCHAR, TEXT, DATE, TIME, etc., and constraints such as PRIMARY KEY, NOT NULL, AUTO_INCREMENT.
+      </p>
+
+      <h2>Example: Creating Employee Table</h2>
+      <pre><code>USE mydb;
+
+CREATE TABLE IF NOT EXISTS employee (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   name VARCHAR(20) NOT NULL,
+   age INT,
+   salary FLOAT
+);
+</code></pre>
+      <p>
+        List tables in the database:
+      </p>
+      <pre><code>SHOW TABLES;</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>+----------------+
+| Tables_in_mydb  |
++----------------+
+| employee       |
++----------------+</code></pre>
+
+      <h2>Creating Table with Node.js</h2>
+      <p>
+        Use the <code>mysql</code> module and execute the CREATE TABLE SQL command with <code>query()</code>.
+      </p>
+      <pre><code>var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "mypassword",
+  database: "mydb"
+});
+
+var createTableQuery = `CREATE TABLE IF NOT EXISTS employee (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   name VARCHAR(20) NOT NULL,
+   age INT,
+   salary FLOAT
+);`;
+
+con.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected!");
+
+  con.query(createTableQuery, function (err, result) {
+    if (err) throw err;
+    console.log("Created table successfully");
+  });
+
+  con.query("SHOW TABLES;", function (err, result) {
+    if (err) throw err;
+    console.log("Showing tables\n");
+    for (var i = 0; i < result.length; i++) {
+      console.log(JSON.stringify(result[i]));
+    }
+  });
+  con.end();
+});
+</code></pre>
+      <p>
+        After executing, the table <translate>employee</translate> will be created in the <translate>mydb</translate> database, and listing tables confirms its creation.
+      </p>
+
+      <h2>Describe Table Structure</h2>
+      <p>
+        Use the <code>DESC employee;</code> command to view columns, data types, constraints, and default values.
+      </p>
+      <pre><code>con.query("DESC employee;", function (err, result) {
+  if (err) throw err;
+  console.log(JSON.stringify(result));
+});</code></pre>
+      <p>
+        Sample output shows fields: <translate:id</translate> as an integer, primary key, auto-increment, and other columns with types and constraints.
+      </p>
+    </div>
+  </div>
+</div>

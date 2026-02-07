@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Variable Arguments (Variadic Functions)</h1>
+
+    <div class="content">
+      <p>
+        A **Variable Argument** list, or **Variadic Function**, in PHP is a function capable of accepting a dynamic, **variable number of arguments**. This functionality can be implemented using the **splat operator (`...`)** (PHP 5.6+) or older built-in functions.
+      </p>
+
+      <h2>1. Using the Splat Operator (`...`) - Recommended</h2>
+      <p>
+        The most modern and recommended way is to prepend the parameter name with the **three dots (`...`)** operator. This automatically collects all the passed arguments into a single **indexed array**.
+      </p>
+
+      <h3>Syntax and Example</h3>
+      <div class="example">
+        <p>
+          **Syntax:**<br>
+          <code>function myfunction(**...$arg**) { /* $arg is an array */ }</code>
+        </p>
+        <p>
+          **Example: Calculating Average**<br>
+          <code>function myfunction(**...$numbers**) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$avg = array_sum($numbers) / count($numbers);</code><br>
+          <code>&nbsp;&nbsp;&nbsp;return $avg;</code><br>
+          <code>}</code><br>
+          <code>myfunction(5, 12, 9, 23, 8);</code> $\rightarrow$ **11.4**
+        </p>
+      </div>
+
+      <h3>Combining Positional and Variable Arguments</h3>
+      <p>
+        The variable argument must be the **last** parameter in the function definition. Any arguments passed before it are treated as normal **positional arguments**.
+      </p>
+      <div class="example">
+        <p>
+          <code>function myfunction($x, **...$numbers**) { /* ... */ }</code><br>
+          <code>myfunction(**5**, 12, 9, 23, 8, 41);</code>
+        </p>
+        <p class="content">
+          Here, $x$ gets the value 5, and $numbers$ is an array: [12, 9, 23, 8, 41].
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>2. Using Built-in Functions (Legacy)</h2>
+      <p>
+        Prior to PHP 5.6, the following built-in functions were used to manually access the argument list. They are still available but less clean than the `...` operator.
+      </p>
+      <table>
+        <tr>
+          <th>Function</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>**`func_num_args()`**</td>
+          <td>Returns the total number of arguments passed to the function.</td>
+        </tr>
+        <tr>
+          <td>**`func_get_arg($index)`**</td>
+          <td>Returns the value of a single argument at the specified zero-based index.</td>
+        </tr>
+        <tr>
+          <td>**`func_get_args()`**</td>
+          <td>Returns an **indexed array** containing all the arguments passed to the function.</td>
+        </tr>
+      </table>
+
+      <h3>Example using `func_get_args()`</h3>
+      <div class="example">
+        <p>
+          <code>function myfunction() {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$sum = 0;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;foreach (func_get_args() as $n) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sum += $n;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;}</code><br>
+          <code>&nbsp;&nbsp;&nbsp;return $sum;</code><br>
+          <code>}</code><br>
+          <code>echo myfunction(5, 12, 9, 23, 8, 41);</code> $\rightarrow$ **98**
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

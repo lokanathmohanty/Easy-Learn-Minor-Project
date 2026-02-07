@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Data Encapsulation in C++ 🛡️📦</h1>
+
+        <div class="content">
+            <p>**Encapsulation** is an Object-Oriented Programming (OOP) concept that involves **bundling data (member variables)** and the **functions (methods)** that operate on that data into a single unit, which is the **class**.</p>
+            <p>This mechanism serves two primary purposes:</p>
+            <ol>
+                <li>**Binding:** Grouping related data and behavior together.</li>
+                <li>**Protection (Data Hiding):** Shielding the data from outside interference and misuse.</li>
+            </ol>
+
+            <hr>
+
+            <h2 class="title">Encapsulation vs. Data Hiding vs. Abstraction</h2>
+            <ul>
+                <li>**Encapsulation** is the act of bundling the data and methods into a class.</li>
+                <li>**Data Hiding** is the result of making data members **private** within the class, restricting direct external access.</li>
+                <li>**Data Abstraction** is the concept of exposing only the necessary **interface** (public methods) while hiding the complexity of the implementation (private data).</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Achieving Encapsulation with Access Specifiers</h2>
+            <p>C++ uses **access specifiers** (`private`, `protected`, `public`) within a class to enforce encapsulation:</p>
+            <ul>
+                <li>
+                    **Private Members:** These members (data or functions) can **only be accessed** by other members of the same class. This is how **data hiding** is achieved.
+                    <pre class="example">
+private:
+   double length; // Hidden data, accessible only by Box methods
+</pre>
+                </li>
+                <li>
+                    **Public Members:** These members serve as the **interface** for the class. They are accessible from outside the class and are the controlled mechanism by which external code can interact with the hidden private data.
+                    <pre class="example">
+public:
+   // Public method (interface) to safely read hidden data
+   double getVolume(void) { 
+      return length * breadth * height; 
+   }
+</pre>
+                </li>
+            </ul>
+
+            <h2 class="title">Design Strategy</h2>
+            <p>The core principle of strong encapsulation is to make class members **private by default**. You should only expose them publicly if absolutely necessary, typically through controlled public methods (known as **Getters** and **Setters**) that can validate input and ensure the object's state remains valid.</p>
+        </div>
+    </div>
+</div>

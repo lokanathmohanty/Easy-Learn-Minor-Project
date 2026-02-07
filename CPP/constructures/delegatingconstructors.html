@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Delegating Constructors (Code Reusability) 🔁</h1>
+
+        <div class="content">
+            <p>**Delegating constructors** (available since C++11) allow one constructor in a class to call, or **delegate** to, another constructor within the **same class**. This feature significantly simplifies constructor implementation by reducing repetitive initialization code, adhering to the **DRY (Don't Repeat Yourself)** principle.</p>
+            <p>Instead of duplicating common setup logic across multiple constructors, you define one **Primary Constructor** that handles the complete initialization, and other constructors simply call that primary one.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Syntax and Rules</h2>
+
+        <div class="content">
+            <h3>Syntax</h3>
+            <p>Delegation is performed in the **initializer list** of the delegating constructor.</p>
+            <pre class="example">
+class Example {
+   public:
+      // Primary Constructor (handles the heavy lifting)
+      Example(int value) : data(value) { /* ... */ }
+
+      // Delegating Constructor (calls the primary constructor)
+      Example() : **Example(0)** {} 
+      
+   private:
+      int data;
+};
+</pre>
+
+            <h3>Key Rules</h3>
+            <ul>
+                <li>A constructor can only delegate to **one** other constructor.</li>
+                <li>Delegation must occur only within the **same class**.</li>
+                <li>**Circular delegation** (where two constructors delegate to each other) is illegal and results in a compile-time error.</li>
+            </ul>
+
+            <p>The **Student** example clearly demonstrates this:</p>
+            <pre class="example">
+// Primary: Student(name, age, grade)
+// Delegates: Student(name, age) calls Student(name, age, 0.0)
+// Delegates: Student(name) calls Student(name, 18, 0.0)
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Advantages</h2>
+
+        <div class="content">
+            <p>Delegation offers several benefits for class maintenance:</p>
+            <ul>
+                <li>**Centralized Initialization:** All essential setup logic is contained within the primary constructor, making the code easier to read and verify.</li>
+                <li>**Reduced Redundancy:** Code duplication is eliminated, ensuring that a critical piece of logic is written only once.</li>
+                <li>**Easier Maintenance:** If you need to change how an object is initialized (e.g., adding a new member), you only have to modify the single primary constructor.</li>
+            </ul>
+        </div>
+    </div>
+</div>

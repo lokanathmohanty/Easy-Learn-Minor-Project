@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Custom Exceptions</h1>
+    </div>
+    <div class="content">
+      <p>
+        Python custom exceptions are user-defined error classes that extend the base <code>Exception</code> class. They allow developers to define and handle specific error conditions unique to their application, improving code clarity and debugging by indicating error types and origins.
+      </p>
+      <p>
+        By creating custom exceptions, developers can control program flow when particular errors occur, taking actions like logging, retrying, or graceful shutdown. Custom exceptions can also carry additional context by overriding the <code>__init__</code> method and storing extra data as instance attributes.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Why Use Custom Exceptions?</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>Specificity:</strong> Represent unique error conditions.</li>
+        <li><strong>Clarity:</strong> Make error nature clear in the code.</li>
+        <li><strong>Granularity:</strong> Allow precise error handling.</li>
+        <li><strong>Consistency:</strong> Help maintain uniform error-handling strategy.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Creating Custom Exceptions</h2>
+    </div>
+    <div class="content">
+      <p>Defining a custom exception involves subclassing Python's built-in <code>Exception</code> class (or its subclasses) and optionally overriding the constructor to include a custom message or attributes.</p>
+      <pre>
+class CustomError(Exception):
+   def __init__(self, message):
+      super().__init__(message)
+      self.message = message
+      </pre>
+      <p>This example <code>CustomError</code> class takes an error message upon initialization.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Raising and Handling Custom Exceptions</h2>
+    </div>
+    <div class="content">
+      <p>Use the <code>raise</code> statement to trigger the custom exception, and handle it in a <code>try-except</code> block.</p>
+      <pre>
+def process_data(data):
+   if not data:
+      raise CustomError("Empty data provided")
+   # Processing logic here
+
+try:
+   process_data([])
+except CustomError as e:
+   print(f"Custom Error occurred: {e.message}")
+      </pre>
+      <p>This lets you catch your specific errors and respond accordingly.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example of Custom Exception</h2>
+    </div>
+    <div class="content">
+      <pre>
+# Define a custom exception
+class CustomError(Exception):
+   def __init__(self, message):
+      self.message = message
+      super().__init__(self.message)
+
+# Function that raises the custom exception
+def check_value(value):
+   if value < 0:
+      raise CustomError("Value cannot be negative!")
+   else:
+      return f"Value is {value}"
+
+# Using the function with exception handling
+try:
+   result = check_value(-5)
+   print(result)
+except CustomError as e:
+   print(f"Caught an exception: {e.message}")
+      </pre>
+      <p>Output on execution:</p>
+      <pre>
+Caught an exception: Value cannot be negative!
+      </pre>
+    </div>
+  </div>
+ 
+    </div>
+  </div>
+</div>

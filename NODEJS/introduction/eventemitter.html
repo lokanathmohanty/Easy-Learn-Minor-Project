@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Event Emitter</h1>
+    <div class="content">
+      <p>
+        Node.js API is built on an event-driven architecture. Its core events module provides the <code>EventEmitter</code> class which allows creating and handling custom events. Objects emitting events, such as <code>net.Server</code> or <code>fs.ReadStream</code>, are instances of <code>EventEmitter</code>.
+      </p>
+
+      <h2>Using EventEmitter</h2>
+      <p>To use, first import the events module and create an instance of <code>EventEmitter</code>:</p>
+      <pre><code>var events = require('events');
+var eventEmitter = new events.EventEmitter();
+</code></pre>
+
+      <h2>Important EventEmitter Events</h2>
+      <table>
+        <thead>
+          <tr><th>Event</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>newListener</td><td>Emitted when a new listener is added.</td></tr>
+          <tr><td>removeListener</td><td>Emitted when a listener is removed.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Commonly Used Methods</h2>
+      <ul>
+        <li><code>addListener(event, listener)</code>: Add a listener to the end of the listeners array.</li>
+        <li><code>on(event, listener)</code>: Alias for addListener.</li>
+        <li><code>once(event, listener)</code>: Adds a one-time listener.</li>
+        <li><code>removeListener(event, listener)</code>: Removes specified listener.</li>
+        <li><code>removeAllListeners([event])</code>: Removes all listeners of specified event or all events.</li>
+        <li><code>listeners(event)</code>: Returns array of listeners for event.</li>
+        <li><code>emit(event, [...args])</code>: Executes all listeners in order, passing arguments.</li>
+      </ul>
+
+      <h2>Example</h2>
+      <pre><code>var events = require('events');
+var eventEmitter = new events.EventEmitter();
+
+var listener1 = function() {
+  console.log('listener1 executed.');
+};
+
+var listener2 = function() {
+  console.log('listener2 executed.');
+};
+
+eventEmitter.addListener('connection', listener1);
+eventEmitter.on('connection', listener2);
+
+eventEmitter.emit('connection');
+
+eventEmitter.removeListener('connection', listener1);
+console.log('listener1 will not listen now.');
+
+eventEmitter.emit('connection');
+
+console.log('Number of listeners:', eventEmitter.listenerCount('connection'));
+</code></pre>
+
+      <h2>Output</h2>
+      <p>
+        listener1 executed.<br/>
+        listener2 executed.<br/>
+        listener1 will not listen now.<br/>
+        listener2 executed.<br/>
+        Number of listeners: 1
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Miscellaneous Operators in C</h1>
+    <div class="content">
+      <p>C includes several other important operators besides the main categories like arithmetic, logical, and assignment. These include the address-of operator (&), dereference operator (*), sizeof, conditional (ternary) operator (?:), member access operator (.), and struct pointer operator (->).</p>
+
+      <h2>sizeof Operator</h2>
+      <p>This compile-time unary operator returns the size in bytes of a data type or variable. It varies by machine architecture.</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 16;
+   printf("Size of variable a : %d\n", sizeof(a));
+   printf("Size of int data type : %d\n", sizeof(int));
+   printf("Size of char data type : %d\n", sizeof(char));
+   printf("Size of float data type : %d\n", sizeof(float));
+   printf("Size of double data type : %d\n", sizeof(double));   
+   return 0;
+}
+      </pre>
+      <p>Output example:</p>
+      <p>Size of variable a: 4<br>Size of int data type: 4<br>Size of char data type: 1<br>Size of float data type: 4<br>Size of double data type: 8</p>
+
+      <h2>Address-of Operator (&)</h2>
+      <p>Returns the memory address of a variable, which can be assigned to a pointer.</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int var = 100;
+   printf("var: %d address: %d", var, &var);
+   return 0;
+}
+      </pre>
+
+      <h2>Dereference Operator (*)</h2>
+      <p>Declares pointers and accesses the value stored in the address they point to. Pointer and variable types must match.</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   float var1 = 10.55;
+   float *floatptr = &var1;
+
+   printf("var1: %f\naddress of var1: %d\n\nfloatptr: %d\naddress of floatptr: %d", var1, &var1, floatptr, &floatptr);
+
+   printf("Value at floatptr: %f", *floatptr);
+   return 0;
+}
+      </pre>
+
+      <h2>Ternary Operator (?:)</h2>
+      <p>A conditional operator with three operands, condenses if-else conditions.</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 10;
+   (a % 2 == 0) ? printf("%d is Even\n", a) : printf("%d is Odd\n", a);
+   return 0;
+}
+      </pre>
+
+      <h2>Member Access Operator (.)</h2>
+      <p>Used to access members of a struct or union variable.</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+struct book {
+   char title[10];
+   double price;
+   int pages;
+};
+
+int main(){
+   struct book b1 = {"Learn C", 675.50, 325};
+   printf("Title: %s\n", b1.title);
+   printf("Price: %lf\n", b1.price);
+   printf("No of Pages: %d\n", b1.pages);
+   return 0;
+}
+      </pre>
+
+      <h2>Indirection Operator (->)</h2>
+      <p>Used to access members of a struct through a pointer.</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+struct book {
+   char title[10];
+   double price;
+   int pages;
+};
+
+int main(){
+   struct book b1 = {"Learn C", 675.50, 325};
+   struct book *strptr = &b1;
+   printf("Title: %s\n", strptr->title);
+   printf("Price: %lf\n", strptr->price);
+   printf("No of Pages: %d\n", strptr->pages);
+   return 0;
+}
+      </pre>
+    </div>
+  </div>
+</div>

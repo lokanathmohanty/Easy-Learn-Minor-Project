@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Session Configuration Options ($\ge$ PHP 7)</h1>
+
+        <div class="content">
+            <h2 class="title">Overriding Configuration with $\text{session\_start()}$</h2>
+            <p>From PHP 7 onwards, the **$\text{session\_start()}$** function accepts an associative array of options to override the default settings defined in the **$\text{php.ini}$** file's $\text{[session]}$ section. When using this array, the keys must **not** include the "$\text{session.}$" prefix.</p>
+            <p>This method provides a clean, per-script way to configure session behavior, as demonstrated by setting the cache control and read/close behavior:</p>
+            <pre>
+&lt;?php
+   session_start([
+      'cache_limiter' => 'private',
+      'read_and_close' => true,
+   ]);
+?&gt;</pre>
+
+            <h2 class="title">Key Configurable Session Options</h2>
+            <p>The following are some important session directives that can be configured either via $\text{php.ini}$, $\text{ini\_set()}$, or the $\text{session\_start()}$ options array:</p>
+            <ul>
+                <li>
+                    <h3>$\text{session\_name}$</h3>
+                    <p>Specifies the name of the session, which is also used as the cookie name (default is **$\text{PHPSESSID}$**). It should only contain alphanumeric characters.</p>
+                </li>
+                <li>
+                    <h3>$\text{session.cookie\_lifetime}$</h3>
+                    <p>Defines the duration, in seconds, the session cookie will last on the client's browser. A value of **$\text{0}$** (the default) means the cookie expires when the browser is closed.</p>
+                </li>
+                <li>
+                    <h3>$\text{session.cache\_limiter}$</h3>
+                    <p>Controls the HTTP cache control headers sent with session pages, governing how the browser should cache the content. Common values include **$\text{nocache}$** (default), $\text{private}$, and $\text{public}$.</p>
+                </li>
+                <li>
+                    <h3>$\text{session.sid\_length}$</h3>
+                    <p>Allows setting the length of the unique Session ID string, which ranges from $\text{22}$ to $\text{256}$ characters (default is $\text{32}$). Longer IDs can enhance security against brute-force attacks.</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Using $\text{ini\_set()}$ for Configuration</h2>
+            <p>Before PHP 7, or as an alternative to the $\text{session\_start()}$ options array, $\text{ini\_set()}$ is used to change these directives at runtime:</p>
+            <pre>
+&lt;?php
+   // Set cookie to last for 1 hour (3600 seconds)
+   ini_set('session.cookie_lifetime', 3600);
+
+   // Increase session ID length for better security
+   ini_set('session.sid_length', 64);
+
+   // Start the session with the new settings
+   session_start();
+?&gt;</pre>
+            <p>Other important options include $\text{session.save\_handler}$ (defaults to $\text{files}$) and $\text{session.lazy\_write}$ (defaults to $\text{1}$, only rewriting session data if changes occurred).</p>
+        </div>
+    </div>
+</div>

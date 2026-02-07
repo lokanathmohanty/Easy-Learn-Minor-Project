@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java 16 - Major New Features Summary (Non-LTS Release)</h1>
+
+        <div class="content">
+            <h2>Overview of Java 16</h2>
+            <p>**Java 16**, released in **March 2021**, maintained the 6-month rapid release cycle and is a **non-LTS (Long-Term Support)** release. This version was significant for graduating several key language preview features to **standard status**, providing major stability to the platform, and introducing powerful low-level APIs.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Language Features Standardized ✨</h2>
+            <p>Java 16 permanently integrated major language features that had previously been in preview:</p>
+            <ul>
+                <li>
+                    <strong>Records (JEP 395):</strong> The concise syntax for creating immutable data classes is now a **standard feature**. Records automatically generate the constructor, accessors, <code>equals()</code>, <code>hashCode()</code>, and <code>toString()</code> methods.
+                </li>
+                <li>
+                    <strong>Pattern Matching for <code>instanceof</code> (JEP 394):</strong> The enhancement to the <code>instanceof</code> operator that automatically casts the object to a new, local pattern variable upon a successful check is now a **standard feature**.
+                </li>
+            </ul>
+
+            <h3>Other Language & Tooling Updates</h3>
+            <ul>
+                <li>
+                    <strong>Sealed Classes (Second Preview) (JEP 397):</strong> Continued its preview phase with minor enhancements. This feature allows a class or interface to explicitly declare which classes are permitted to extend or implement it.
+                </li>
+                <li>
+                    <strong>Packaging Tool (<code>jpackage</code>) (JEP 392):</strong> The tool for packaging self-contained Java applications (including a private JRE) into native installation formats (like <code>.msi</code>, <code>.dmg</code>, <code>.deb</code>) is now a **standard feature**.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>JVM, Concurrency, and Low-Level APIs</h2>
+
+            <h3>Advanced APIs (Incubator)</h3>
+            <p>Java 16 introduced new, low-level APIs intended to improve performance and native interoperability:</p>
+            <ul>
+                <li>
+                    <strong>Vector API (Incubator) (JEP 338):</strong> Provides an API for performing vector computations that compile down to optimal vector instructions on supported CPU architectures (SIMD). This can lead to dramatic performance improvements in relevant mathematical and processing tasks.
+                </li>
+                <li>
+                    <strong>Foreign Linker API (Incubator) (JEP 389):</strong> A replacement for the complex and brittle JNI (Java Native Interface), allowing Java programs to naturally and efficiently call native libraries (C/C++) and vice versa.
+                </li>
+                <li>
+                    <strong>Foreign-Memory Access API (Third Incubator) (JEP 393):</strong> Continued development of the API for safe access to foreign memory (outside the Java heap).
+                </li>
+            </ul>
+
+            <h3>Platform and Performance</h3>
+            <ul>
+                <li>
+                    <strong>Strongly Encapsulate JDK Internals by Default (JEP 396):</strong> A crucial security update. The default access mode for the illegal access command-line option (<code>--illegal-access</code>) was switched from <code>permit</code> to **<code>deny</code>**, meaning reflection access to internal JDK APIs is now blocked by default, improving modularity and security.
+                </li>
+                <li>
+                    <strong>ZGC: Concurrent Thread-Stack Processing (JEP 376):</strong> The Z Garbage Collector was improved by moving its thread-stack processing from the JVM's stop-the-world **safepoints** into a concurrent phase, further **reducing GC pause times**.
+                </li>
+                <li>
+                    <strong>Elastic Metaspace (JEP 387):</strong> Improved the management of class-metadata memory (Metaspace) by enabling the HotSpot VM to quickly return unused Metaspace memory to the operating system, reducing the memory footprint.
+                </li>
+                <li>
+                    <strong>New Ports (JEP 386 & 388):</strong> Official JDK builds were added for **Alpine Linux** (using musl libc) and **Windows/AArch64** (ARM server/laptops).
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

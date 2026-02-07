@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP - Constructor and Destructor</h1>
+
+    <div class="content">
+      <p>
+        In PHP, the **Constructor** and **Destructor** are special methods used for object lifecycle management. The constructor initializes a new object upon creation, while the destructor automatically runs when an object is no longer referenced and is about to be destroyed.
+      </p>
+
+      <h2>The __construct() Function (Constructor)</h2>
+      <p>
+        The <code>__construct()</code> method is automatically called immediately after an object is created with the <code>new</code> operator. Its main purpose is to **initialize** the object's properties.
+      </p>
+      <pre><code>__construct(mixed ...$values = ""): void</code></pre>
+      <ul>
+        <li>
+          It is **not mandatory** to define a constructor.
+        </li>
+        <li>
+          It accepts any number of arguments (for initialization).
+        </li>
+        <li>
+          It does **not** return a value (<code>void</code>).
+        </li>
+      </ul>
+
+      <h3>Default Constructor Example</h3>
+      <p>
+        A simple constructor initializes properties with fixed values.
+      </p>
+      <pre><code>&lt;?php
+   class Book {
+      var $title;
+      var $price;
+      
+      function __construct(){
+         $this->title = "PHP Fundamentals";
+         $this->price = 275;
+      }
+      // ... getTitle() and getPrice() methods
+   }
+
+   $b1 = new Book; // __construct() is automatically called
+   // Output: Title: PHP Fundamentals, Price: 275
+?&gt;</code></pre>
+
+      <h3>Parameterized Constructor</h3>
+      <p>
+        To initialize objects with unique values, the constructor should accept parameters.
+      </p>
+      <pre><code>function __construct($param1, $param2) {
+   $this->title = $param1;
+   $this->price = $param2;
+}
+
+// Initialization with parameters
+$b1 = new Book("PHP Programming", 450);</code></pre>
+
+      <h3>Simulating Constructor Overloading</h3>
+      <p>
+        PHP does not support method overloading (multiple constructors with the same name but different arguments). This is typically overcome by providing **default values** for constructor arguments.
+      </p>
+      <pre><code>function __construct($param1="PHP Basics", $param2=380) {
+   $this->title = $param1;
+   $this->price = $param2;
+}
+
+// Will use default values
+$b1 = new Book(); 
+
+// Will use passed values
+$b2 = new Book("Advanced PHP", 500);</code></pre>
+    </div>
+
+    <h2 class="title">The __destruct() Function (Destructor)</h2>
+    <div class="content">
+      <p>
+        The <code>__destruct()</code> method is automatically called when an object is about to be destroyed. This happens when the object goes **out of scope** or when its last reference is explicitly removed (e.g., set to <code>null</code>). It is typically used for cleanup operations, like closing database connections or releasing resources.
+      </p>
+      <pre><code>__destruct(): void</code></pre>
+      <ul>
+        <li>
+          It takes **no parameters**.
+        </li>
+        <li>
+          It does **not** return a value (<code>void</code>).
+        </li>
+      </ul>
+      <h3 class="title">Example: Using __destruct()</h3>
+      <div class="example">
+        <pre><code>&lt;?php
+   class ResourceHandler {
+      function __destruct() {
+         echo "Object destroyed and resources released.\n";
+      }
+   }
+   
+   $obj = new ResourceHandler;
+   // When the script ends (or $obj is set to null), __destruct() is called.
+?&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+</div>

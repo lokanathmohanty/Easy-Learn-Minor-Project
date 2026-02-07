@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Boolean (`bool`) Data Type</h1>
+
+    <div class="content">
+      <p>
+        The **Boolean (`bool`)** data type is a fundamental type in PHP that represents a truth value. A Boolean variable can only hold one of two possible values: **`true`** or **`false`**. These values are case-insensitive (e.g., `TRUE`, `True`, and `true` are all the same). Boolean values are essential for controlling code flow using **conditional statements** and **loops**.
+      </p>
+
+      <h2>Declaration and Usage</h2>
+      <p>
+        A Boolean variable is declared by simply assigning it the value `true` or `false`. Logical operations and comparisons return Boolean values.
+      </p>
+      <div class="example">
+        <p>
+          <code>// Declaration</code><br>
+          <code>$is_valid = true;</code><br>
+          <code>$is_error = FALSE;</code>
+        </p>
+        <p>
+          <code>// Logical operation returns bool(true)</code><br>
+          <code>var_dump ($gender == "Male");</code>
+        </p>
+      </div>
+      <p>
+        The primary use is in control flow:
+      </p>
+      <div class="example">
+        <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;$is_sunny = true;<br>&nbsp;&nbsp;&nbsp;if ($is_sunny) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "It is a sunny day!";<br>&nbsp;&nbsp;&nbsp;}<br>?&gt;</code>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Boolean Conversion (Truthiness)</h2>
+      <p>
+        When a value of another type is used in a logical context (like an `if` statement or with the **`(bool)` casting operator**), PHP automatically converts it to a Boolean based on a simple set of rules. This is part of **type juggling**.
+      </p>
+
+      <h3>Values that evaluate to **`false`** (Falsy values):</h3>
+      <ul>
+        <li>The Boolean `false` itself.</li>
+        <li>The integer `0`.</li>
+        <li>The floating-point number `0.0` or `-0.0`.</li>
+        <li>The empty string `""`.</li>
+        <li>The string `"0"`.</li>
+        <li>An empty array (`array()`).</li>
+        <li>The special type `NULL`.</li>
+      </ul>
+      <p>
+        **All other values** are considered **`true`** (Truthy). This includes non-zero numbers, non-empty strings (even `"False"`), and non-empty arrays/objects.
+      </p>
+      <div class="example">
+        <p>
+          <code>var_dump((bool)10);</code> $\rightarrow$ `bool(true)`<br>
+          <code>var_dump((bool)"Hello");</code> $\rightarrow$ `bool(true)`<br>
+          <code>var_dump((bool)0);</code> $\rightarrow$ `bool(false)`<br>
+          <code>var_dump((bool)"");</code> $\rightarrow$ `bool(false)`
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Boolean Operators and Comparison</h2>
+      <p>
+        Logical operators are used to combine or manipulate Boolean values:
+      </p>
+      <ul>
+        <li>**AND:** `&&` or `and` (Both sides must be true)</li>
+        <li>**OR:** `||` or `or` (At least one side must be true)</li>
+        <li>**NOT:** `!` (Reverses the truth value)</li>
+      </ul>
+
+      <h3>Strict vs. Loose Comparison</h3>
+      <p>
+        When dealing with Booleans, the comparison operator used is crucial due to type juggling:
+      </p>
+      <ul>
+        <li>
+          **Loose Comparison (`==`):** Only checks the **value**, allowing type juggling. For example, `true == 1` is `true`.
+          <div class="example">
+            <code>var_dump(true == 1);</code> $\rightarrow$ `bool(true)`
+          </div>
+        </li>
+        <li>
+          **Strict Comparison (`===`):** Checks both the **value** AND the **data type**. This is safer and prevents type juggling. For example, `true === 1` is `false`.
+          <div class="example">
+            <code>var_dump(true === 1);</code> $\rightarrow$ `bool(false)`
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

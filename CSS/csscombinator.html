@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Combinators</h1>
+    <div class="content">
+      <p>
+        CSS combinators are used to specify the relationship between selectors so that styling can be applied based on the position and hierarchy of elements in an HTML structure. 
+        They are especially useful for targeting elements depending on whether they are children, descendants, or siblings of another element.
+      </p>
+      <p>
+        For example, using a combinator, you can style a <code>&lt;p&gt;</code> element that is placed immediately after a <code>&lt;div&gt;</code> element.
+      </p>
+
+      <h2>Types of Combinators</h2>
+      <ul>
+        <li>Descendant Combinator (<code>whitespace</code>)</li>
+        <li>Child Combinator (<code>&gt;</code>)</li>
+        <li>Adjacent Sibling Combinator (<code>+</code>)</li>
+        <li>General Sibling Combinator (<code>~</code>)</li>
+      </ul>
+
+      <h2>CSS Descendant Combinator</h2>
+      <p>
+        The descendant combinator is represented by a single space. It selects elements that are nested within another element, no matter how deep the nesting goes.
+      </p>
+      <p><strong>Syntax:</strong></p>
+      <pre>
+div p {
+   /* CSS styles for all p elements inside div */
+}
+      </pre>
+      <p><strong>Example:</strong></p>
+      <pre>
+.parent p {
+   color: red;
+   font-weight: bold;
+}
+      </pre>
+      <pre>
+&lt;div class="parent"&gt;
+   &lt;h3&gt;This is h3 inside parent&lt;/h3&gt;
+   &lt;p&gt;Paragraph inside parent&lt;/p&gt;
+   &lt;p&gt;Another paragraph inside parent&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+   &lt;p&gt;Paragraph outside parent&lt;/p&gt;
+&lt;/div&gt;
+      </pre>
+
+      <h2>CSS Child Combinator</h2>
+      <p>
+        The child combinator (<code>&gt;</code>) selects only the direct children of a specified element. It will not select deeper nested elements.
+      </p>
+      <p><strong>Syntax:</strong></p>
+      <pre>
+div > p {
+   /* CSS styles for all direct p children of div */
+}
+      </pre>
+      <p><strong>Example:</strong></p>
+      <pre>
+.parent > p {
+   color: blue;
+   font-weight: bold;
+}
+      </pre>
+      <pre>
+&lt;div class="parent"&gt;
+   &lt;h3&gt;Heading inside parent&lt;/h3&gt;
+   &lt;p&gt;Direct child paragraph&lt;/p&gt;
+   &lt;div&gt;
+      &lt;p&gt;Nested paragraph (not selected)&lt;/p&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+      </pre>
+
+      <h2>CSS Adjacent Sibling Combinator</h2>
+      <p>
+        The adjacent sibling combinator (<code>+</code>) selects an element that is immediately preceded by a specified element. 
+        Only the first sibling that comes directly after is selected.
+      </p>
+      <p><strong>Syntax:</strong></p>
+      <pre>
+h3 + p {
+   /* CSS styles for the p element immediately after h3 */
+}
+      </pre>
+      <p><strong>Example:</strong></p>
+      <pre>
+h3 + p {
+   color: purple;
+   font-style: italic;
+}
+      </pre>
+      <pre>
+&lt;h3&gt;Heading&lt;/h3&gt;
+&lt;p&gt;Paragraph immediately after h3 (styled)&lt;/p&gt;
+&lt;p&gt;Second paragraph (not styled)&lt;/p&gt;
+      </pre>
+
+      <h2>CSS General Sibling Combinator</h2>
+      <p>
+        The general sibling combinator (<code>~</code>) selects all siblings of a specified element that appear after it. 
+        Unlike the adjacent sibling combinator, it applies to multiple following elements.
+      </p>
+      <p><strong>Syntax:</strong></p>
+      <pre>
+h3 ~ p {
+   /* CSS styles for all p elements after h3 */
+}
+      </pre>
+      <p><strong>Example:</strong></p>
+      <pre>
+h3 ~ p {
+   color: darkorange;
+   text-decoration: underline;
+}
+      </pre>
+      <pre>
+&lt;p&gt;Paragraph before h3 (not styled)&lt;/p&gt;
+&lt;h3&gt;Heading&lt;/h3&gt;
+&lt;p&gt;Paragraph after h3 (styled)&lt;/p&gt;
+&lt;p&gt;Another paragraph after h3 (styled)&lt;/p&gt;
+      </pre>
+
+      <h2>Combining Multiple Combinators</h2>
+      <p>
+        CSS also allows combining multiple combinators to create complex rules. 
+        For example, you can target a <code>&lt;p&gt;</code> that is a direct child of a <code>&lt;div&gt;</code> and also immediately follows an <code>&lt;h3&gt;</code>.
+      </p>
+      <p><strong>Syntax:</strong></p>
+      <pre>
+div > h3 + p {
+   /* CSS styles for p directly inside div and immediately after h3 */
+}
+      </pre>
+      <p><strong>Example:</strong></p>
+      <pre>
+ul > li + a {
+   color: red;
+   text-decoration: underline;
+}
+ul > li > a {
+   color: blue;
+   text-decoration: none;
+}
+      </pre>
+      <pre>
+&lt;nav&gt;
+   &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;&lt;/li&gt;
+      &lt;a href="#"&gt;Contact&lt;/a&gt;
+   &lt;/ul&gt;
+&lt;/nav&gt;
+      </pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        CSS combinators add precision and flexibility when styling elements based on their structural relationship. 
+        Whether it's nested elements, direct children, or siblings, combinators help developers apply styles without adding extra classes or IDs.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP File Deletion and Renaming</h1>
+
+    <div class="content">
+      <p>
+        In PHP, managing files often requires the ability to remove them from the server's file system. PHP uses the **`unlink()`** function for file deletion, and the **`rename()`** function for renaming or moving files.
+      </p>
+
+      <h2>Deleting Files with `unlink()` 🗑️</h2>
+      <p>
+        PHP does not have a `delete()` function; instead, it uses the Unix-like **`unlink()`** function to remove a specified file from the filesystem.
+      </p>
+      <div class="example">
+        <p>
+          **Syntax:**<br>
+          <code>unlink(string $filename): bool</code>
+        </p>
+        <p>
+          **Example with Check:**<br>
+          <code>$file = "temp_data.log";</code><br>
+          <code>if (file_exists($file)) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;if (**unlink**($file)) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "File was deleted successfully.";</code><br>
+          <code>&nbsp;&nbsp;&nbsp;} else {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Error: Could not delete the file.";</code><br>
+          <code>&nbsp;&nbsp;&nbsp;}</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <p>
+        **Note on Symlinks:** The `unlink()` function can be used to delete a symbolic link (shortcut). Deleting a symlink **does not** delete the original target file, leaving it intact.
+      </p>
+
+      <hr>
+
+      <h2>Renaming and Moving Files with `rename()` ✍️➡️📦</h2>
+      <p>
+        The **`rename()`** function is used to change the name of a file or directory. Critically, it can also be used to **move** a file from one directory to another by simply changing the target path.
+      </p>
+      <div class="example">
+        <p>
+          **Syntax:**<br>
+          <code>rename(string $from, string $to): bool</code>
+        </p>
+        <p>
+          **1. Renaming:**<br>
+          <code>**rename**("old.txt", "new.txt");</code>
+        </p>
+        <p>
+          **2. Moving/Relocating:**<br>
+          <code>**rename**("upload/temp.jpg", "archive/final.jpg");</code>
+        </p>
+      </div>
+      <p>
+        **Overwrite Rule:** If the target file (`$to`) already exists, `rename()` will **overwrite** the existing file without warning if it's a file.
+      </p>
+    </div>
+  </div>
+</div>

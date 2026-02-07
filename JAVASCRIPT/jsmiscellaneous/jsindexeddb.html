@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - IndexedDB</h1>
+    <div class="content">
+      <h2>What is IndexedDB?</h2>
+      <p>IndexedDB is a low-level JavaScript API for storing and retrieving large amounts of structured data, including files and blobs. It allows web applications to locally store, query, and modify data on the user's device. IndexedDB is useful for applications handling large datasets, working offline, and providing responsive user experiences with local caching.</p>
+
+      <h2>Key Concepts and Features</h2>
+      <ul>
+        <li><strong>Asynchronous API</strong> − Uses event-driven programming to avoid blocking the main thread.</li>
+        <li><strong>Database</strong> − A container for object stores, used for organizing and retrieving data.</li>
+        <li><strong>Object Store</strong> − Similar to a table in relational databases, storing collections of JavaScript objects and supporting CRUD operations.</li>
+        <li><strong>Index</strong> − Provides faster querying and sorting based on specific fields.</li>
+        <li><strong>Transactions</strong> − Ensures consistency and integrity by grouping multiple operations into a single unit that either succeeds or fails together.</li>
+      </ul>
+
+      <h2>Why use IndexedDB?</h2>
+      <p>IndexedDB is ideal for client-side storage because:</p>
+      <ul>
+        <li>It prevents main-thread blocking with its asynchronous nature.</li>
+        <li>It supports transactions to maintain data integrity.</li>
+        <li>It handles large volumes of structured data locally.</li>
+        <li>It improves offline functionality by reducing server communication.</li>
+        <li>It supports flexible key structures, indexing, and schema upgrades.</li>
+      </ul>
+
+      <h2>CRUD Operations</h2>
+
+      <h3>Create / Insert</h3>
+      <pre><code>const request = objectStore.add(data);
+request.onsuccess = () => {
+  // Handle success
+};
+request.onerror = () => {
+  // Handle error
+};</code></pre>
+
+      <h3>Read (Retrieve)</h3>
+      <p><strong>Using get()</strong></p>
+      <p>Retrieves a single record based on a known key.</p>
+      <p><strong>Using openCursor()</strong></p>
+      <pre><code>const request = objectStore.openCursor();
+request.onsuccess = (event) => {
+  const cursor = event.target.result;
+  if (cursor) {
+    const data = cursor.value;
+    // Process data
+    cursor.continue();
+  }
+};
+request.onerror = () => {
+  // Handle error
+};</code></pre>
+
+      <h3>Update</h3>
+      <p>The <code>put()</code> method updates a record if it exists, or adds it if it doesn’t.</p>
+      <pre><code>const request = objectStore.put(data);</code></pre>
+
+      <h3>Delete</h3>
+      <p>The <code>delete()</code> method removes a record by key.</p>
+      <pre><code>const request = objectStore.delete(key);</code></pre>
+
+      <h2>Implementation Example</h2>
+      <p>The following example demonstrates IndexedDB CRUD operations with a table interface. It allows creating, updating, and deleting records. A form is displayed when creating new data, and updates are done via prompts.</p>
+
+      <h3>Example: IndexedDB CRUD Operations</h3>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;IndexedDB CRUD&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;IndexedDB CRUD Operations&lt;/h2&gt;
+  &lt;button onclick="showCreateForm()"&gt;Create Data&lt;/button&gt;
+  &lt;div id="createForm" style="display:none;"&gt;
+    &lt;h3&gt;Create Data&lt;/h3&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" id="name"&gt;&lt;br&gt;&lt;br&gt;
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="email"&gt;&lt;br&gt;
+    &lt;button onclick="createData()"&gt;Save&lt;/button&gt;
+    &lt;button onclick="cancelCreate()"&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;table id="data-table"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;ID&lt;/th&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+        &lt;th&gt;Email&lt;/th&gt;
+        &lt;th&gt;Actions&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;&lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;script&gt;
+    const dbName = "myDatabase";
+    let db;
+    const request = indexedDB.open(dbName, 1);
+
+    request.onupgradeneeded = (event) =&gt; {
+      db = event.target.result;
+      const store = db.createObjectStore("myObjectStore", { keyPath: "id", autoIncrement: true });
+      store.createIndex("name", "name", { unique: false });
+      store.createIndex("email", "email", { unique: true });
+    };
+
+    request.onsuccess = (event) =&gt; {
+      db = event.target.result;
+      showData();
+    };
+
+    function showData() {
+      const transaction = db.transaction(["myObjectStore"], "readonly");
+      const store = transaction.objectStore("myObjectStore");
+      const tableBody = document.querySelector("#data-table tbody");
+      tableBody.innerHTML = "";
+      const request = store.openCursor();
+      request.onsuccess = (event) =&gt; {
+        const cursor = event.target.result;
+        if (cursor) {
+          const row = tableBody.insertRow();
+          row.insertCell(0).textContent = cursor.value.id;
+          row.insertCell(1).textContent = cursor.value.name;
+          row.insertCell(2).textContent = cursor.value.email;
+          const actionsCell = row.insertCell(3);
+          actionsCell.innerHTML = `
+            &lt;button onclick="showUpdateForm(${cursor.value.id})"&gt;Update&lt;/button&gt;
+            &lt;button onclick="deleteData(${cursor.value.id})"&gt;Delete&lt;/button&gt;
+          `;
+          cursor.continue();
+        }
+      };
+    }
+
+    function createData() {
+      const transaction = db.transaction(["myObjectStore"], "readwrite");
+      const store = transaction.objectStore("myObjectStore");
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const newData = { name, email };
+      const request = store.add(newData);
+      request.onsuccess = () =&gt; {
+        showData();
+        cancelCreate();
+        alert("Data added successfully");
+      };
+    }
+
+    function showCreateForm() {
+      document.getElementById("createForm").style.display = "block";
+    }
+
+    function cancelCreate() {
+      document.getElementById("createForm").style.display = "none";
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+    }
+
+    function showUpdateForm(id) {
+      const transaction = db.transaction(["myObjectStore"], "readwrite");
+      const store = transaction.objectStore("myObjectStore");
+      const request = store.get(id);
+      request.onsuccess = (event) =&gt; {
+        const data = event.target.result;
+        if (data) {
+          const name = prompt("Update Name:", data.name);
+          const email = prompt("Update Email:", data.email);
+          if (name !== null &amp;&amp; email !== null) {
+            data.name = name;
+            data.email = email;
+            const updateRequest = store.put(data);
+            updateRequest.onsuccess = () =&gt; {
+              showData();
+              alert("Updated data for " + data.name);
+            };
+          }
+        }
+      };
+    }
+
+    function deleteData(id) {
+      const transaction = db.transaction(["myObjectStore"], "readwrite");
+      const store = transaction.objectStore("myObjectStore");
+      const request = store.delete(id);
+      request.onsuccess = () =&gt; {
+        showData();
+        alert("Deleted data for id " + id);
+      };
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <p><strong>Try running the above program</strong>. You’ll see an interface to create, update, and delete data. The data is displayed in tabular format after each operation.</p>
+    </div>
+  </div>
+</div>

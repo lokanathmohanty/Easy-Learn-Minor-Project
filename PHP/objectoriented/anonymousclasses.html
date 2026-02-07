@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Anonymous Classes</h1>
+        <div class="content">
+            <p>**Anonymous Classes** (introduced in PHP 7.0) are classes that are instantiated and defined simultaneously, and they do not have a programmer-declared name. They are designed for **one-time use** when you need a simple, single-use object without the overhead of defining a full, named class.</p>
+            
+            <h2 class="title">Creating an Anonymous Class</h2>
+            <p>An anonymous class is created using the <code>new class()</code> syntax, where the entire class body immediately follows:</p>
+            <pre><code>$obj = new class() {
+   // properties and methods
+};</code></pre>
+
+            <h3 class="title">Key Features and Usage</h3>
+            <ul>
+                <li><strong>One-Time Use:</strong> Ideal for simple, disposable objects, such as mocks for testing or implementing an interface for a single service call.</li>
+                <li>**Functionality:** They are functionally identical to named classes; they can have constructors, properties, methods, and access modifiers.</li>
+                <li>**OOP Support:** An anonymous class can **extend** a named class, **implement** an interface, or **use** a trait.</li>
+                <li>**Internal Name:** While they lack a declared name, the PHP parser assigns them an internal name (e.g., <code>class@anonymous...</code>), which can be retrieved using <code>get_class($obj)</code>.</li>
+            </ul>
+
+            <h3 class="title">Dependencies</h3>
+            <p>Dependencies (such as objects or services) must be passed to the anonymous class via its **constructor** to be available internally, just like a named class.</p>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Anonymous Class Extending a Parent</h3>
+            <p>This example shows an anonymous class extending <code>myclass</code> to reuse the <code>hello()</code> method while adding its own constructor and methods.</p>
+            
+            <pre><code>
+class myclass {
+   public function hello() {
+      echo "Base: Hello World!" . PHP_EOL;
+   }
+}
+
+// Anonymous class is instantiated and extends 'myclass'
+$obj = new class("Neena") extends myclass {
+   private string $nm;
+   
+   function __construct($x) {
+      $this->nm = $x;
+   }
+   
+   public function greeting() {
+      // Calls method from the parent class
+      parent::hello(); 
+      echo "Welcome " . $this->nm . "!" . PHP_EOL;
+   }
+};
+
+$obj->greeting();
+// Output:
+// Base: Hello World!
+// Welcome Neena!
+            </code></pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Regular Expressions and RegExp Object</h1>
+
+    <div class="content">
+      <p>A regular expression (RegExp) in JavaScript is an object that describes a pattern of characters. It can contain alphabetical, numeric, and special characters. The JavaScript <code>RegExp</code> class represents regular expressions, and both <code>String</code> and <code>RegExp</code> define methods that use them for pattern matching and search-and-replace operations.</p>
+
+      <p>There are two ways to construct a regular expression in JavaScript:</p>
+      <ul>
+        <li>Using the <code>RegExp()</code> constructor</li>
+        <li>Using a regular expression literal</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <pre><code>var pattern = new RegExp(pattern, attributes);
+var pattern = /pattern/attributes;</code></pre>
+
+      <h2>Parameters</h2>
+      <ul>
+        <li><strong>pattern</strong> − A string that specifies the pattern or another regular expression.</li>
+        <li><strong>attributes</strong> − An optional string containing <code>g</code>, <code>i</code>, or <code>m</code>.</li>
+      </ul>
+
+      <h2>Modifiers</h2>
+      <ul>
+        <li><code>i</code> − Case-insensitive match</li>
+        <li><code>m</code> − Multi-line match</li>
+        <li><code>g</code> − Global match (find all matches)</li>
+      </ul>
+
+      <h2>Brackets</h2>
+      <ul>
+        <li><code>[...]</code> − Any one character inside brackets</li>
+        <li><code>[^...]</code> − Any one character not inside brackets</li>
+        <li><code>[0-9]</code> − Matches digits 0 through 9</li>
+        <li><code>[a-z]</code> − Matches lowercase a–z</li>
+        <li><code>[A-Z]</code> − Matches uppercase A–Z</li>
+        <li><code>[a-Z]</code> − Matches any character from a to Z</li>
+      </ul>
+
+      <h2>Quantifiers</h2>
+      <ul>
+        <li><code>p+</code> − One or more occurrences</li>
+        <li><code>p*</code> − Zero or more occurrences</li>
+        <li><code>p?</code> − Zero or one occurrence</li>
+        <li><code>p{N}</code> − Exactly N occurrences</li>
+        <li><code>^p</code> − Matches if string starts with p</li>
+        <li><code>p$</code> − Matches if string ends with p</li>
+      </ul>
+
+      <h2>Examples</h2>
+      <ul>
+        <li><code>[^a-zA-Z]</code> − Matches any string not containing a–z or A–Z</li>
+        <li><code>p.p</code> − Matches "p" followed by any character, then another "p"</li>
+        <li><code>^.{2}$</code> − Matches any string with exactly two characters</li>
+        <li><code>&lt;b&gt;(.*)&lt;/b&gt;</code> − Matches content inside bold tags</li>
+      </ul>
+
+      <h2>Literal Characters</h2>
+      <ul>
+        <li><code>\n</code> − Newline</li>
+        <li><code>\t</code> − Tab</li>
+        <li><code>\r</code> − Carriage return</li>
+        <li><code>\uxxxx</code> − Unicode character</li>
+      </ul>
+
+      <h2>Metacharacters</h2>
+      <ul>
+        <li><code>.</code> − Any single character</li>
+        <li><code>\d</code> − Digit (0–9)</li>
+        <li><code>\D</code> − Non-digit</li>
+        <li><code>\w</code> − Word character</li>
+        <li><code>\W</code> − Non-word character</li>
+        <li><code>\s</code> − Whitespace</li>
+        <li><code>\S</code> − Non-whitespace</li>
+      </ul>
+
+      <h2>Example: search() vs RegExp</h2>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const output = document.getElementById("output");
+    let pattern = /tutorialspoint/i;
+    let str = "Welcome to TuTorialsPoint!";
+    let res = str.search("tutorialspoint");
+    output.innerHTML += "Search using string: " + res + "&lt;br&gt;";
+    res = str.search(pattern);
+    output.innerHTML += "Search using regex: " + res;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Example: replace()</h2>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    let pattern = /\d+/g;
+    let str = "10, 20, 30, 40, 50";
+    let res = str.replace(pattern, "100");
+    document.getElementById("output").innerHTML = "Result: " + res;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Example: Email Validation</h2>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const pattern = new RegExp('^[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]{2,3}$');
+    document.getElementById("output").innerHTML = 
+      "abcd@gmail.com valid? " + pattern.test("abcd@gmail.com") + "&lt;br&gt;" +
+      "abcdgmail.com valid? " + pattern.test("abcdgmail.com");
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>RegExp Properties</h2>
+      <ul>
+        <li><strong>constructor</strong> − Function that creates an object’s prototype</li>
+        <li><strong>global</strong> − True if "g" flag is set</li>
+        <li><strong>ignoreCase</strong> − True if "i" flag is set</li>
+        <li><strong>lastIndex</strong> − Index where next match starts</li>
+        <li><strong>multiline</strong> − True if "m" flag is set</li>
+        <li><strong>source</strong> − The text of the pattern</li>
+      </ul>
+
+      <h2>RegExp Methods</h2>
+      <ul>
+        <li><code>exec()</code> − Executes a search</li>
+        <li><code>test()</code> − Tests for a match</li>
+        <li><code>toSource()</code> − Returns object literal form</li>
+        <li><code>toString()</code> − Returns string representation</li>
+      </ul>
+    </div>
+  </div>
+</div>

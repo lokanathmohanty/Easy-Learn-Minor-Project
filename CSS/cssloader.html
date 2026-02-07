@@ -1,0 +1,118 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">CSS - Loaders</h1>
+        <div class="content">
+            <p>CSS loaders are animated effects that visually represent the loading process of a webpage or a resource. They are widely used to improve user experience by showing users that something is happening in the background while content is being fetched or processed.</p>
+
+            <h2>Why Use CSS Loaders?</h2>
+            <ul>
+                <li>They reassure users that a process is ongoing.</li>
+                <li>They reduce perceived waiting time by keeping users engaged.</li>
+                <li>They can be implemented without JavaScript using only CSS animations.</li>
+                <li>They make modern web applications look professional and responsive.</li>
+            </ul>
+
+            <h2>How to Create a CSS Loader?</h2>
+            <p>To create a CSS loader, follow these steps:</p>
+            <ul>
+                <li><strong>Create the HTML Structure:</strong> Use an outer container div and an inner element for the loader animation.</li>
+                <li><strong>Style the Loader Container:</strong> Define width, height, and alignment for centering.</li>
+                <li><strong>Style the Loader Element:</strong> Define shape (circle, dots, bars, etc.) using CSS properties.</li>
+                <li><strong>Add Animation:</strong> Use <code>@keyframes</code> to animate transformations like rotation, scaling, or opacity changes.</li>
+                <li><strong>Enhance with Effects:</strong> Use gradients, multiple elements, and delays for more complex loaders.</li>
+            </ul>
+
+            <h2>Basic CSS Loader Example</h2>
+            <p>This example creates a simple circular spinning loader.</p>
+            <ul>
+                <li>
+<code>
+&lt;!DOCTYPE html&gt;<br>
+&lt;html&gt;<br>
+&lt;head&gt;<br>
+   &lt;style&gt;<br>
+      .loader {<br>
+         border: 8px solid #eee; /* Light gray background */<br>
+         border-top: 8px solid green; /* Top border with color */<br>
+         border-radius: 50%;<br>
+         width: 60px;<br>
+         height: 60px;<br>
+         animation: spin 2s linear infinite;<br>
+      }<br><br>
+      @keyframes spin {<br>
+         0% { transform: rotate(0deg); }<br>
+         100% { transform: rotate(360deg); }<br>
+      }<br>
+   &lt;/style&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+   &lt;div class="loader"&gt;&lt;/div&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+</code>
+                </li>
+            </ul>
+
+            <h2>Pulsing Dots Loader</h2>
+            <p>The pulsing dots loader uses multiple elements with delayed animations to create a moving effect. It is often seen in messaging apps or booting screens.</p>
+            <ul>
+                <li>
+<code>
+&lt;div class="pulsing-dots-loader"&gt;<br>
+   &lt;div&gt;&lt;/div&gt;<br>
+   &lt;div&gt;&lt;/div&gt;<br>
+   &lt;div&gt;&lt;/div&gt;<br>
+   &lt;div&gt;&lt;/div&gt;<br>
+   &lt;div&gt;&lt;/div&gt;<br>
+   &lt;div&gt;&lt;/div&gt;<br>
+&lt;/div&gt;<br>
+</code>
+                </li>
+            </ul>
+            <p>Each dot is animated with different delays using <code>:nth-child()</code> to achieve the wave-like pulsing effect.</p>
+
+            <h2>Different Types of Spinning Loaders</h2>
+            <p>By combining different border properties, you can create loaders with multiple spinners:</p>
+            <ul>
+                <li>Two spinners: using <code>border-top</code> and <code>border-bottom</code>.</li>
+                <li>Three spinners: adding <code>border-right</code>.</li>
+                <li>Four spinners: defining all four borders with different colors.</li>
+            </ul>
+
+            <h2>CSS Loader with Gradient</h2>
+            <p>Gradients can be applied to loaders to achieve colorful and modern loading effects. With <code>linear-gradient</code> or <code>conic-gradient</code>, developers can create smooth transitions between colors.</p>
+            <ul>
+                <li>
+<code>
+&lt;div class="loader-gradient"&gt;&lt;/div&gt;
+</code>
+                </li>
+            </ul>
+
+            <h2>Best Practices</h2>
+            <ul>
+                <li>Keep loaders simple and lightweight to avoid adding to loading time.</li>
+                <li>Use meaningful loaders that match your website’s theme.</li>
+                <li>Do not overuse loaders; only show them when necessary.</li>
+                <li>Always test loaders on multiple browsers for compatibility.</li>
+            </ul>
+
+            <h2>Practice Task</h2>
+            <p>Create the following loaders as an exercise:</p>
+            <ul>
+                <li>A circular spinner with different colors on each border.</li>
+                <li>A three-dot bouncing loader.</li>
+                <li>A gradient-based loader that rotates continuously.</li>
+            </ul>
+
+            <h2>Real-World Usage</h2>
+            <p>CSS loaders are widely used in modern websites and apps. For example:</p>
+            <ul>
+                <li>Content-heavy applications (social media feeds, dashboards).</li>
+                <li>While submitting forms or logging in.</li>
+                <li>On image-heavy websites while images are loading.</li>
+                <li>During AJAX calls when data is being fetched.</li>
+            </ul>
+        </div>
+    </div>
+</div>

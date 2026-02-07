@@ -1,0 +1,107 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Creating a Universal Windows Platform (UWP) App</h1>
+
+        <div class="content">
+            <p>This chapter discusses the process of creating a **Universal Windows Platform (UWP)** application, also known as a Windows 10 UWP application, using **.NET Core** and **Visual Studio 2015**.</p>
+            <p>UWP applications are designed to run on all Windows 10 devices (and future versions) and require the following to run and develop locally:</p>
+            <ul>
+                <li class="content">**Windows 10** for smooth local execution (though development on Windows 8 might allow running on an Emulator).</li>
+                <li class="content">The **Windows 10 SDK** (Software Development Kit).</li>
+            </ul>
+        </div>
+
+        <h2 class="title">Installing UWP Development Tools (VS 2015 Modification)</h2>
+        <div class="content">
+            <p>To enable UWP project templates and functionality in Visual Studio 2015, you must modify your installation to include the necessary tools:</p>
+            <ol>
+                <li class="content">Open the Visual Studio 2015 setup program and choose the **Modify** option.</li>
+                <li class="content">On the Select Features page, scroll down and check the option for **Universal Windows App Development Tools**.</li>
+                <li class="content">Ensure the different versions of the SDK and the latest update on Tools are selected, and proceed to installation.</li>
+                <li class="content">Click the **Install** button to begin the modification.</li>
+                <li class="content">Once finished, you may be required to restart your system.</li>
+            </ol>
+        </div>
+
+        <h2 class="title">Creating the UWP Project</h2>
+        <div class="content">
+            <p>Follow these steps to create a new UWP application project:</p>
+            <ol>
+                <li class="content">Launch **Visual Studio 2015**.</li>
+                <li class="content">Click **File &rarr; New &rarr; Project**.</li>
+                <li class="content">In the New Project dialog, select the **Universal** template from the tree view under **Templates &rarr; Visual C# &rarr; Windows**.</li>
+                <li class="content">From the center pane, select the **Blank App (Universal Windows)** template.</li>
+                <li class="content">Name the project <strong>UWPFirstApp</strong> and click **OK**.</li>
+                <li class="content">In the next dialog, accept the default **Target version** and **Minimum version** settings, and click **OK** to create the project.</li>
+            </ol>
+            <p>This creates a single project capable of targeting all Windows 10 devices, illustrating the simplification of multi-targeting inherent in UWP and .NET Core.</p>
+        </div>
+
+        <h2 class="title example">Implementing the Application UI (MainPage.xaml)</h2>
+        <div class="content example">
+            <p>To implement a simple UI with input and output fields, open <strong>MainPage.xaml</strong> and add the following XAML code:</p>
+            <pre><code>&lt;Page 
+   x:Class = "UWPFirstApp.MainPage" 
+   xmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+   xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml" 
+   xmlns:local = "using:UWPFirstApp" 
+   xmlns:d = "http://schemas.microsoft.com/expression/blend/2008" 
+   xmlns:mc = "http://schemas.openxmlformats.org/markup-compatibility/2006" 
+   mc:Ignorable = "d"&gt;  
+   
+   &lt;Grid Background = "{ThemeResource ApplicationPageBackgroundThemeBrush}"&gt; 
+      &lt;StackPanel HorizontalAlignment = "Center"&gt; 
+         &lt;TextBlock Text = "Hello, world!"  
+            Margin = "20" 
+            Width = "200" 
+            HorizontalAlignment = "Left"/&gt; 
+         &lt;TextBlock Text = "Write your name." 
+            Margin = "20" 
+            Width = "200" 
+            HorizontalAlignment = "Left"/&gt; 
+         &lt;TextBox x:Name = "txtbox"  
+            Width = "280" 
+            Margin = "20" 
+            HorizontalAlignment = "Left"/&gt; 
+         &lt;Button x:Name = "button" Content = "Click Me" 
+            Margin = "20" 
+            Click = "button_Click"/&gt; 
+         &lt;TextBlock x:Name = "txtblock"  
+            HorizontalAlignment = "Left" 
+            Margin = "20"/&gt; 
+      &lt;/StackPanel&gt; 
+   &lt;/Grid&gt; 
+&lt;/Page&gt;</code></pre>
+
+            <h3>Implementing the Button Click Event (MainPage.xaml.cs)</h3>
+            <p>Next, implement the logic for the <code>button_Click</code> event in the code-behind file (typically <strong>MainPage.xaml.cs</strong>). Note: The namespace in the provided example is <code>UWPHellowWorld</code>, which should align with your project's generated namespace.</p>
+            <pre><code>using System; 
+// ... other usings ...
+using Windows.UI.Xaml.Controls; 
+// ... other usings ...
+
+namespace UWPHellowWorld 
+{ 
+   /// &lt;summary&gt; 
+   /// An empty page that can be used on its own or navigated to within a Frame. 
+   /// &lt;/summary&gt; 
+   public sealed partial class MainPage : Page 
+   { 
+      public MainPage() 
+      { 
+         this.InitializeComponent(); 
+      }  
+      
+      private void button_Click(object sender, RoutedEventArgs e) 
+      { 
+         if (txtbox.Text != "") 
+            txtblock.Text = "Hello: " + txtbox.Text; 
+         else 
+            txtblock.Text = "You have not write your name"; 
+      } 
+   } 
+}</code></pre>
+            <p>After running the application (e.g., on the Local Machine target), you will see the UWP window. When you type a name into the text box and press the **Click Me** button, the text below the button will update with the greeting.</p>
+        </div>
+    </div>
+</div>

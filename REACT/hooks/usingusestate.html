@@ -1,0 +1,212 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Using useState</h1>
+      </div>
+
+      
+
+         <p>
+            <code>useState</code> is a basic React hook that allows a function component 
+            to maintain its own state and re-render when the state changes.
+         </p>
+
+         <h2>Syntax</h2>
+         <div class="code-block">
+<pre><code>const [state, setState] = useState(initialValue)</code></pre>
+         </div>
+
+         <ul>
+            <li><strong>initialValue</strong> − Initial value of the state (number, string, array, or object).</li>
+            <li><strong>state</strong> − Variable representing the current state value.</li>
+            <li><strong>setState</strong> − Function to update the state.</li>
+         </ul>
+
+         <h3>setState Function</h3>
+         <div class="code-block">
+<pre><code>setState(valueToBeUpdated)</code></pre>
+         </div>
+
+         <p>Example:</p>
+         <div class="code-block">
+<pre><code>// initialize
+const [name, setName] = useState('John')
+
+// update
+setName('Peter')
+</code></pre>
+         </div>
+
+         <h2>Features of useState</h2>
+         <ul>
+            <li>
+               <strong>Function Parameter</strong> − Accepts a function to compute the initial state (runs only once).
+               <div class="code-block">
+<pre><code>const [val, setVal] = useState(() =&gt; {
+   let initialValue = null
+   // expensive calculation here
+   return initialValue
+})</code></pre>
+               </div>
+            </li>
+            <li>
+               <strong>Verifies Previous Values</strong> − Only re-renders if state changes.
+               <div class="code-block">
+<pre><code>setName('John') // renders
+setName('John') // no re-render (same value)</code></pre>
+               </div>
+            </li>
+            <li>
+               <strong>Batched Updates</strong> − React batches multiple state updates internally.  
+               Use <code>flushSync</code> for immediate updates.
+               <div class="code-block">
+<pre><code>flushSync(() =&gt; setName('Peter'))</code></pre>
+               </div>
+            </li>
+         </ul>
+
+         <h2>Applying useState</h2>
+         <p>Let’s create a login form with <code>username</code> and <code>password</code> state variables.</p>
+
+         <h3>LoginForm Component</h3>
+         <div class="code-block">
+<pre><code>import { useState } from 'react';
+
+export default function LoginForm() {
+   const [username, setUsername] = useState('')
+   const [password, setPassword] = useState('')
+
+   let isEmpty = (val) =&gt; !val
+
+   let validate = (e) =&gt; {
+      e.preventDefault()
+      if(!isEmpty(username) &amp;&amp; !isEmpty(password)) {
+         alert(JSON.stringify({ username, password }))
+      } else {
+         alert("Please enter username / password")
+      }
+   }
+
+   return (
+      &lt;div&gt;
+         &lt;form name="loginForm"&gt;
+            &lt;label htmlFor="username"&gt;Username: &lt;/label&gt;
+            &lt;input 
+               id="username" 
+               name="username" 
+               type="text"
+               value={username}
+               onChange={(e) =&gt; setUsername(e.target.value)} /&gt;
+            &lt;br /&gt;
+
+            &lt;label htmlFor="password"&gt;Password: &lt;/label&gt;
+            &lt;input 
+               id="password" 
+               name="password" 
+               type="password"
+               value={password}
+               onChange={(e) =&gt; setPassword(e.target.value)} /&gt;
+            &lt;br /&gt;
+
+            &lt;button type="submit" onClick={(e) =&gt; validate(e)}&gt;Submit&lt;/button&gt;
+         &lt;/form&gt;
+      &lt;/div&gt;
+   )
+}
+</code></pre>
+         </div>
+
+         <h3>App Component</h3>
+         <div class="code-block">
+<pre><code>import './App.css';
+import LoginForm from './components/LoginForm';
+
+function App() {
+   return (
+      &lt;LoginForm /&gt;
+   );
+}
+
+export default App;
+</code></pre>
+         </div>
+
+         <h2>Object as State</h2>
+         <p>
+            Unlike class components, hooks replace the entire state object on update. 
+            Use the spread operator to preserve other fields.
+         </p>
+
+         <div class="code-block">
+<pre><code>// state as object
+const [data, setData] = useState({
+   username: 'John',
+   password: 'secret'
+})
+
+// ❌ wrong - overwrites password
+setData({ username: 'Peter' })
+
+// ✅ correct - preserve password
+setData({ ...data, username: 'Peter' })
+</code></pre>
+         </div>
+
+         <h3>LoginFormObject Component</h3>
+         <div class="code-block">
+<pre><code>import { useState } from 'react';
+
+export default function LoginFormObject() {
+   const [data, setData] = useState({})
+
+   let isEmpty = (val) =&gt; !val
+
+   let validate = (e) =&gt; {
+      e.preventDefault()
+      if(!isEmpty(data.username) &amp;&amp; !isEmpty(data.password)) {
+         alert(JSON.stringify(data))
+      } else {
+         alert("Please enter username / password")
+      }
+   }
+
+   return (
+      &lt;div&gt;
+         &lt;form name="loginForm"&gt;
+            &lt;label htmlFor="username"&gt;Username: &lt;/label&gt;
+            &lt;input 
+               id="username" 
+               name="username" 
+               type="text"
+               value={data.username}
+               onChange={(e) =&gt; setData({ ...data, username: e.target.value })} /&gt;
+            &lt;br /&gt;
+
+            &lt;label htmlFor="password"&gt;Password: &lt;/label&gt;
+            &lt;input 
+               id="password" 
+               name="password" 
+               type="password"
+               value={data.password}
+               onChange={(e) =&gt; setData({ ...data, password: e.target.value })} /&gt;
+            &lt;br /&gt;
+
+            &lt;button type="submit" onClick={(e) =&gt; validate(e)}&gt;Submit&lt;/button&gt;
+         &lt;/form&gt;
+      &lt;/div&gt;
+   )
+}
+</code></pre>
+         </div>
+
+         <h2>Summary</h2>
+         <p>
+            The <code>useState</code> hook makes it easy to manage state in function components.  
+            It works with simple values or complex objects and allows multiple state variables.  
+            Updates are batched internally, making state management efficient in React.
+         </p>
+
+          
+      </div>
+   </div>
+</div>

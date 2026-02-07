@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Pie Charts</h1>
+    <div class="content">
+      <p>
+        R provides several libraries to create charts and graphs. A pie chart represents data as slices of a circle, with each slice corresponding to a category or value. The <code>pie()</code> function in R creates pie charts with options for adding labels, titles, colors, and legends.
+      </p>
+
+      <h2 class="title">Basic Syntax</h2>
+      <pre><code>pie(x, labels, radius, main, col, clockwise)</code></pre>
+      <ul>
+        <li><strong>x</strong>: Vector of numeric values for slices</li>
+        <li><strong>labels</strong>: Descriptions for each slice</li>
+        <li><strong>radius</strong>: Radius of the pie chart (between -1 and +1)</li>
+        <li><strong>main</strong>: Title of the chart</li>
+        <li><strong>col</strong>: Color palette for slices</li>
+        <li><strong>clockwise</strong>: Draw slices clockwise/anticlockwise</li>
+      </ul>
+
+      <h2 class="title">Simple Pie Chart Example</h2>
+      <pre><code># Create data and labels
+x &lt;- c(21, 62, 10, 53)
+labels &lt;- c("London", "New York", "Singapore", "Mumbai")
+
+# Save file
+png(file = "city.png")
+
+# Create pie chart
+pie(x, labels)
+
+# Save file
+dev.off()
+</code></pre>
+
+      <h2 class="title">Pie Chart with Title and Colors</h2>
+      <pre><code>x &lt;- c(21, 62, 10, 53)
+labels &lt;- c("London", "New York", "Singapore", "Mumbai")
+
+png(file = "city_title_colours.jpg")
+pie(x, labels, main = "City pie chart", col = rainbow(length(x)))
+dev.off()
+</code></pre>
+
+      <h2 class="title">Slice Percentages and Chart Legend</h2>
+      <pre><code>x &lt;- c(21, 62, 10, 53)
+labels &lt;- c("London", "New York", "Singapore", "Mumbai")
+piepercent &lt;- round(100*x/sum(x), 1)
+
+png(file = "city_percentage_legends.jpg")
+pie(x, labels = piepercent, main = "City pie chart", col = rainbow(length(x)))
+legend("topright", c("London","New York","Singapore","Mumbai"), cex = 0.8, fill = rainbow(length(x)))
+dev.off()
+</code></pre>
+
+      <h2 class="title">3D Pie Chart</h2>
+      <pre><code># Load package
+library(plotrix)
+
+# Data and labels
+x &lt;- c(21, 62, 10, 53)
+lbl &lt;- c("London","New York","Singapore","Mumbai")
+
+png(file = "3d_pie_chart.jpg")
+pie3D(x, labels = lbl, explode = 0.1, main = "Pie Chart of Countries")
+dev.off()
+</code></pre>
+      <p>
+        These R scripts will create and save pie charts with various features, including color palettes, legends, and 3D effects.
+      </p>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

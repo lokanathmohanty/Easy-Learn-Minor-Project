@@ -1,0 +1,200 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Booleans in C</h1>
+    <div class="content">
+      <p>The ANSI C standard originally did not have a built-in Boolean type. The Boolean type represents a value that can be one of two states: <code>true</code> or <code>false</code>. Though older C versions lacked this type, booleans can be implemented using enums or macros, and modern C (C99 and later) introduced the <code>bool</code> type in <code>stdbool.h</code>.</p>
+      
+      <h2 class="title">Implementing Boolean Using <code>enum</code></h2>
+      <p>Enumerations allow defining meaningful constants for true and false assigned to 1 and 0.</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Example 1: Boolean with enum</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  enum bool {false, true};
+  enum bool x = true;
+  enum bool y = false;
+  
+  printf("%d\n", x);
+  printf("%d\n", y);
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+1
+0
+      </code></pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Example 2: Typedef for Boolean</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  typedef enum {false, true} BOOL;
+  
+  BOOL x = true;
+  BOOL y = false;
+  
+  printf("%d\n", x);
+  printf("%d\n", y);
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+1
+0
+      </code></pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Boolean with Decisions and Loops</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  typedef enum {false, true} BOOL;
+  int i = 0;
+  
+  while(true) {
+    i++;
+    printf("%d\n", i);
+    if(i >= 5)
+      break;
+  }
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+1
+2
+3
+4
+5
+      </code></pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Boolean with <code>#define</code></h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+#define FALSE 0
+#define TRUE 1
+
+int main() {
+  printf("False: %d \nTrue: %d", FALSE, TRUE);
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+False: 0 
+True: 1
+      </code></pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Boolean with <code>stdbool.h</code> (C99 and later)</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+#include &lt;stdbool.h&gt;
+
+int main() {
+  bool a = true;
+  bool b = false;
+  
+  printf("True: %d\n", a);
+  printf("False: %d\n", b);
+  
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+True: 1
+False: 0
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Boolean in Logical Expressions</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+#include &lt;stdbool.h&gt;
+
+int main() {
+  bool x = 10 > 5;
+  bool y = 40 > 50;
+  
+  if(x)
+    printf("x is True\n");
+  else
+    printf("x is False\n");
+  
+  if(y)
+    printf("Result: Pass\n");
+  else
+    printf("Result: Fail\n");
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+x is True
+Result: Fail
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Boolean with While Loop</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(void) {
+  bool loop = true;
+  int i = 0;
+  
+  while(loop) {
+    i++;
+    printf("i: %d\n", i);
+    if(i >= 5)
+      loop = false;
+  }
+  
+  printf("Loop stopped!\n");
+  return EXIT_SUCCESS;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+i: 1
+i: 2
+i: 3
+i: 4
+i: 5
+Loop stopped!
+      </code></pre>
+    </div>
+  </div>
+</div>

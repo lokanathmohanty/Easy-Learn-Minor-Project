@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>LinkedHashMap</code> Class Summary 🔗🗺️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.LinkedHashMap</code>** class is a hash table and **doubly-linked list** implementation of the **<code>Map</code>** interface. It extends <code>HashMap</code>, retaining its fast $O(1)$ performance for fundamental operations but adding a key feature: **predictable iteration order**.</p>
+
+            <hr>
+
+            <h2 class="title">I. Key Feature: Predictable Ordering</h2>
+            <p>Unlike a regular <code>HashMap</code>, which makes no guarantees about the order of its elements, <code>LinkedHashMap</code> maintains a linked list running through its entries. This structure ensures that when iterating over the map (using <code>keySet()</code>, <code>entrySet()</code>, or <code>values()</code>), the elements are returned in a defined sequence.</p>
+            <ul>
+                <li>
+                    <strong>Insertion Order (Default):</strong> The elements are returned in the order in which they were first inserted into the map. This is the default behavior.
+                </li>
+                <li>
+                    <strong>Access Order (Optional):</strong> The elements are returned in the order of their last access, from least-recently accessed to most-recently accessed. This mode is enabled by passing `true` to the <code>accessOrder</code> parameter in the special constructor: <code>LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder)</code>.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Use Case: Implementing LRU Caches</h2>
+            <p>The **access order** feature makes <code>LinkedHashMap</code> the ideal class for easily implementing a basic **Least Recently Used (LRU) Cache**. In an LRU cache, the least-recently accessed element is the first one to be evicted when the cache limit is reached. Since access-ordered <code>LinkedHashMap</code> always puts the recently accessed element at the tail, the head always contains the LRU element.</p>
+
+            <hr>
+
+            <h2 class="title">III. Performance and Structure</h2>
+            <ul>
+                <li>
+                    **Time Complexity:** Basic operations (`get()`, `put()`, `remove()`) remain **$O(1)$ (constant time)**, inherited from <code>HashMap</code>, because the core structure is still a hash table.
+                </li>
+                <li>
+                    **Iteration Cost:** Iterating over a <code>LinkedHashMap</code> is typically less expensive than a standard <code>HashMap</code> because the iteration only follows the linked list structure, avoiding the need to traverse the entire underlying array buckets (many of which might be empty).
+                </li>
+                <li>
+                    **Inheritance:** It is a **subclass of <code>HashMap</code>**, inheriting all its methods and capacity management features (initial capacity, load factor).
+                </li>
+                <li>
+                    **Nulls:** Like <code>HashMap</code>, it **permits null keys and null values**.
+                </li>
+            </ul>
+
+            <div class="example">
+                <p>The example demonstrates **Insertion Order** preservation:</p>
+                <pre><code>// Insertion order: 1, 2, 3
+newmap.put(1, 1);
+newmap.put(2, 2);
+newmap.put(3, 3); 
+
+// Output (Iteration Order) is the same as Insertion Order
+Initial map elements: {1=1, 2=2, 3=3}</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

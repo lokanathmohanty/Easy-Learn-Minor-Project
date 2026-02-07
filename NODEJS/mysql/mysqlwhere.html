@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MySQL WHERE Clause</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        The <code>WHERE</code> clause in MySQL is used to filter records based on specified conditions during SELECT, UPDATE, or DELETE operations. Complex conditions can be created using logical operators like AND, OR, and NOT.
+      </p>
+
+      <h2>Basic WHERE Syntax</h2>
+      <pre><code>SELECT select_list
+FROM table_name
+WHERE search_condition;</code></pre>
+      <p>The <code>search_condition</code> can combine multiple expressions using logical operators.</p>
+
+      <h2>Comparison Operators</h2>
+      <ul>
+        <li>= (equal)</li>
+        <li>!= (not equal)</li>
+        <li>&gt; (greater than)</li>
+        <li>&lt; (less than)</li>
+        <li>&gt;= (greater than or equal)</li>
+        <li>&lt;= (less than or equal)</li>
+        <li>BETWEEN (range)</li>
+        <li>LIKE (pattern matching)</li>
+        <li>IN (multiple values)</li>
+      </ul>
+
+      <h2>Example: Simple WHERE Condition</h2>
+      <pre><code>var mysql = require('mysql');
+var con = mysql.createConnection({
+   host: "localhost",
+   user: "root",
+   password: "mypassword",
+   database: "mydb"
+});
+var qry = `SELECT name,salary FROM employee WHERE salary > 25000;`;
+
+con.connect(function (err) {
+   if (err) throw err;
+   console.log("Connected!");
+   con.query(qry, function (err, results) {
+      if (err) throw err;
+      console.log(results);
+   });
+   con.end();
+});</code></pre>
+
+      <p>Output example:</p>
+      <pre><code>[
+  { name: 'Anil', salary: 30000 },
+  { name: 'Meena', salary: 27000 }
+]</code></pre>
+
+      <h2>Example: Complex WHERE with AND</h2>
+      <pre><code>var qry = `SELECT name,salary FROM employee WHERE salary > 25000 AND salary &lt; 30000;`;</code></pre>
+
+      <h2>Example: BETWEEN Clause</h2>
+      <pre><code>var qry = `SELECT name,salary FROM employee WHERE salary BETWEEN 27000 AND 30000;`;</code></pre>
+
+      <h2>Example: LIKE Clause - Pattern Matching</h2>
+      <pre><code>var qry = `SELECT name,salary FROM employee WHERE name LIKE '%n%';`;</code></pre>
+
+      <h2>Example: IN Clause - Match Multiple Values</h2>
+      <pre><code>var qry = `SELECT name,salary FROM employee WHERE name IN ('Anil', 'Tina', 'Ravi');`;</code></pre>
+
+      <p>These queries refine data retrieval by matching conditions to get filtered results.</p>
+    </div>
+  </div>
+</div>

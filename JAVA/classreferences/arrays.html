@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>Arrays</code> Class Summary 🛠️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.Arrays</code>** class is a static utility class that contains a vast collection of static methods for efficiently **manipulating**, **searching**, **sorting**, and **comparing** both primitive type arrays and object arrays.</p>
+
+            <h2 class="title">I. Core Utility Functions</h2>
+            <p>These methods are the backbone of array management in Java:</p>
+            <ul>
+                <li>
+                    <strong>Sorting (<code>sort()</code> / <code>parallelSort()</code>):</strong> Sorts the array into ascending order. <code>parallelSort()</code> uses the Fork/Join framework to leverage multiple processors for large arrays, making it faster than <code>sort()</code> in those scenarios.
+                </li>
+                <li>
+                    <strong>Searching (<code>binarySearch()</code>):</strong> Searches a sorted array for a specified value. **Crucially, the array must be sorted first** for this method to work correctly; otherwise, the result is undefined.
+                </li>
+                <li>
+                    <strong>Comparison (<code>equals()</code> / <code>compare()</code> / <code>mismatch()</code>):</strong>
+                    <ul>
+                        <li><code>equals()</code>: Checks if two arrays contain the same elements in the same order.</li>
+                        <li><code>deepEquals()</code>: Performs a deep comparison for nested arrays (arrays of arrays).</li>
+                        <li><code>compare()</code>: Compares two arrays lexicographically (like dictionary order).</li>
+                        <li><code>mismatch()</code>: Finds the index of the first differing element between two arrays.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Filling (<code>fill()</code>):</strong> Assigns a specified value to every element in the array.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Copying and Array-to-Collection Conversion</h2>
+            <p>The <code>Arrays</code> class provides methods to create copies and bridge the gap between arrays and the Collections Framework:</p>
+            <ul>
+                <li>
+                    <strong><code>copyOf()</code> / <code>copyOfRange()</code>:</strong> Creates a **new array** by copying all or a portion of the original array. This is the preferred way to resize or safely copy an array.
+                </li>
+                <li>
+                    <strong><code>&lt;T&gt; List&lt;T&gt; asList(T... a)</code>:</strong> Returns a **fixed-size <code>List</code>** backed by the specified array.
+                    <p class="example"><strong>Note:</strong> Since the returned list is backed by the original array, modifying an element in the list **will modify the array**, and vice-versa. Attempting to add or remove elements (which would change the size) will throw an <code>UnsupportedOperationException</code>.</p>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Streaming and Functional Programming</h2>
+            <p>The <code>Arrays</code> class includes methods that integrate arrays with modern Java 8+ features:</p>
+            <ul>
+                <li>
+                    <strong><code>stream(...)</code>:</strong> Returns a sequential **<code>Stream</code>** (or specialized primitive streams like <code>IntStream</code>) using the array as its source, enabling functional operations like filtering and mapping.
+                </li>
+                <li>
+                    <strong><code>setAll()</code> / <code>parallelSetAll()</code>:</strong> Fills all elements of an array using a **generator function** (lambda expression), calculating each element's value based on its index.
+                </li>
+                <li>
+                    <strong><code>parallelPrefix()</code>:</strong> Applies a given function cumulatively to the elements of the array in parallel.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

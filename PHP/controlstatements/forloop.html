@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `for` Loop</h1>
+
+    <div class="content">
+      <p>
+        The **`for`** statement is a fundamental control flow construct in PHP used to execute a statement or block of statements a **specified number of times**. It is ideal when the number of iterations is known before the loop begins.
+      </p>
+
+      <h2>`for` Loop Syntax and Components</h2>
+      <p>The `for` loop is defined by three expressions separated by semicolons, followed by the loop body:</p>
+      <div class="example">
+        <code>for (expr1; expr2; expr3) { code to be executed; }</code>
+      </div>
+
+      <ol>
+        <li>
+          **`expr1` (Initialization):** Executed **once** at the very start of the loop. Typically used to initialize the loop counter (e.g., `$i = 1`).
+        </li>
+        <li>
+          **`expr2` (Condition):** Evaluated at the **beginning** of *each* iteration. If it evaluates to `true`, the loop continues; if `false`, the loop terminates.
+        </li>
+        <li>
+          **`expr3` (Increment/Decrement):** Executed at the **end** of *each* iteration. Typically used to update the counter variable (e.g., `$i++` or `$i--`).
+        </li>
+      </ol>
+
+      <hr>
+
+      <h2>Basic `for` Loop Examples</h2>
+
+      <h3>Simple Incrementing Loop</h3>
+      <p>This loop runs 10 times, incrementing `$i` from 1 to 10.</p>
+      <div class="example">
+        <p>
+          <code>for ($i=1; $i&lt;=10; $i++) { echo "Iteration No: $i \n"; }</code>
+        </p>
+        <p class="content">Output (Partial): Iteration No: 1 ... Iteration No: 10</p>
+      </div>
+
+      <h3>Decrementing Loop</h3>
+      <p>The loop counter is initialized to a large value and decremented until the condition fails.</p>
+      <div class="example">
+        <p>
+          <code>for ($i=10; $i&gt;=1; $i--) { echo "Iteration No: $i \n"; }</code>
+        </p>
+        <p class="content">Output: Iteration No: 10 ... Iteration No: 1</p>
+      </div>
+
+      <h3>Alternative Syntax (`for: endfor;`)</h3>
+      <p>
+        Similar to `if/else`, the `for` loop supports an alternative syntax using a colon (`:`) to open the block and the `endfor;` keyword to close it.
+      </p>
+      <div class="example">
+        <code>for ($i=1; $i&lt;=10; $i++): echo "Iteration No: $i \n"; endfor;</code>
+      </div>
+
+      <hr>
+
+      <h2>Iterating Over Arrays and Strings</h2>
+
+      <h3>Iterating Indexed Arrays</h3>
+      <p>The `for` loop is the traditional method for accessing indexed array elements by their numerical position, often using the `count()` function to determine the loop limit.</p>
+      <div class="example">
+        <p>
+          <code>$numbers = array(10, 20, 30, 40, 50);</code><br>
+          <code>for ($i=0; $i&lt;count($numbers); $i++) { echo "numbers[$i] = $numbers[$i] \n"; }</code>
+        </p>
+        <p class="content">Output: numbers[0] = 10 ...</p>
+      </div>
+
+      <h3>Iterating Strings</h3>
+      <p>A PHP string can be treated as an array of characters, allowing the `for` loop and `strlen()` to iterate through its characters.</p>
+      <div class="example">
+        <p>
+          <code>$str = "Hello";</code><br>
+          <code>for ($i=0; $i&lt;strlen($str); $i++) { echo "$str[$i]"; }</code> $\rightarrow$ H e l l o
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Nested `for` Loops</h2>
+      <p>
+        When one `for` loop is placed inside another, they are **nested**. The inner loop completes all its iterations for every single iteration of the outer loop. This is commonly used for grid, table, or pattern generation.
+      </p>
+      <div class="example">
+        <p>
+          <code>for ($i=1; $i&lt;=2; $i++) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;for ($j=1; $j&lt;=2; $j++) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "i= $i j= $j \n";</code><br>
+          <code>&nbsp;&nbsp;&nbsp;}</code><br>
+          <code>}</code>
+        </p>
+        <p class="content">Output: i= 1 j= 1 \n i= 1 j= 2 \n i= 2 j= 1 \n i= 2 j= 2</p>
+      </div>
+    </div>
+  </div>
+</div>

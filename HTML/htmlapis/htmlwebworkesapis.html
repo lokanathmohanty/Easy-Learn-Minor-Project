@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Web Workers API</h1>
+    <div class="content">
+      <p>
+        The HTML Web Workers API is a JavaScript feature that allows computationally intensive tasks to run in the background on a separate thread, without blocking the user interface.
+      </p>
+
+      <h2>What Are Web Workers?</h2>
+      <p>
+        Web Workers enable long tasks to execute without freezing the page. They run as background scripts and cannot access the <code>window</code> or DOM directly. Although they don’t block the UI, they still consume CPU cycles.
+      </p>
+
+      <h2>Need of Web Workers</h2>
+      <p>
+        JavaScript runs in a single-threaded environment, meaning multiple tasks cannot run simultaneously. In cases of heavy computation or large API data processing, the browser may hang. Web Workers solve this by offloading heavy tasks to background threads.
+      </p>
+
+      <h2 class="title">Example: Without Web Workers</h2>
+      <pre>
+&lt;script&gt;
+function bigLoop() {
+  for (var i = 0; i &lt;= 10000000000; i++) {
+    var j = i;
+  }
+  alert("Completed " + j + " iterations");
+}
+function sayHello() {
+  alert("Hello sir....");
+}
+&lt;/script&gt;
+      </pre>
+
+      <h2>How Web Workers Work?</h2>
+      <p>
+        A Web Worker is created using the <code>Worker()</code> constructor with the URL of a JavaScript file. Communication happens with <code>postMessage()</code> from the worker, and the main script receives messages via <code>onmessage</code>.
+      </p>
+
+      <h2 class="title">Example: With Web Worker</h2>
+      <pre>
+&lt;script&gt;
+var worker = new Worker('bigLoop.js');
+worker.onmessage = function(event) {
+  alert("Completed " + event.data + " iterations");
+};
+function sayHello() {
+  alert("Hello sir....");
+}
+&lt;/script&gt;
+      </pre>
+
+      <p><strong>bigLoop.js</strong></p>
+      <pre>
+for (var i = 0; i &lt;= 1000000000; i++) {
+  var j = i;
+}
+postMessage(j);
+      </pre>
+
+      <h2>Stopping Web Workers</h2>
+      <p>
+        Use <code>worker.terminate()</code> to stop a running worker. Terminated workers cannot be restarted; you must create a new one.
+      </p>
+
+      <h2>Handling Web Worker Errors</h2>
+      <p>
+        Errors can be handled using <code>worker.onerror</code> on the main thread.
+      </p>
+
+      <h2 class="title">Example: Error Handling</h2>
+      <pre>
+worker.onerror = function(event) {
+  console.error("Error in web worker: " + event.message, event);
+  alert("Error occurred in the web worker.");
+  event.preventDefault();
+};
+      </pre>
+
+      <h2>Checking for Browser Support</h2>
+      <p>
+        Browser support can be detected using Modernizr:
+      </p>
+
+      <h2 class="title">Example: Detect Support</h2>
+      <pre>
+if (Modernizr.webworkers) {
+  alert("You have web workers support.");
+} else {
+  alert("You do not have web workers support.");
+}
+      </pre>
+    </div>
+  </div>
+</div>

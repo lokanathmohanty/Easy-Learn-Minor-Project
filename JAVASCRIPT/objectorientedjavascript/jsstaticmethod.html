@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Static Methods</h1>
+    <div class="content">
+      <h2>What are Static Methods?</h2>
+      <p>
+        A static method in JavaScript is defined using the <code>static</code> keyword followed by the method name. 
+        You can execute the static method by taking the class name as a reference rather than an instance of the class.
+      </p>
+      <p>
+        The main benefit of the static method is that it can be used to create a utility function that doesn't require 
+        the instance of the class for execution. For example, a <code>Math</code> object contains various static methods, 
+        which we can invoke directly through the <code>Math</code> class.
+      </p>
+      <p>
+        Also, you can use static methods to add all related methods under a single namespace. 
+        Furthermore, static methods give better performance than the regular class methods due to memory optimization.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>In the following syntax, we define a static method called <code>getSize()</code> in the class <code>Table</code>:</p>
+      <pre>
+class Table {
+  static getSize() { // Static method
+    return "10 x 10";
+  }
+}
+Table.getSize(); // Static method invocation
+      </pre>
+      <p>
+        In the above syntax, <code>getSize()</code> is a static method. 
+        We used the class name to execute the <code>getSize()</code> method.
+      </p>
+
+      <h2>Examples</h2>
+      <h3>Example: Static Method</h3>
+      <p>
+        In the example below, <code>printSize()</code> is a static method, and <code>getColor()</code> is a regular method in the <code>Table</code> class. 
+        The <code>printSize()</code> method is invoked using the class name, and the <code>getColor()</code> method is executed using the class instance.
+      </p>
+      <p>So, the class can contain both static and non-static methods.</p>
+      <pre>
+class Table {
+  static printSize() {
+    return "The size of the table is: 20 x 20";
+  }
+  getColor() {
+    return "Black";
+  }
+}
+
+Table.printSize(); // Static method execution
+const tableObj = new Table();
+tableObj.getColor(); // Regular method execution
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The size of the table is: 20 x 20</li>
+        <li>The color of the table is: Black</li>
+      </ul>
+
+      <h3>Example: Multiple Static Methods</h3>
+      <p>
+        In the below code, the <code>Table</code> class contains the <code>printSize()</code> and <code>getColor()</code> static methods. 
+        Both methods are executed by taking the class name as a reference.
+      </p>
+      <pre>
+class Table {
+  static printSize() {
+    return "The size of the table is 20 x 20";
+  }
+  static getColor() {
+    return "The color of the table is Pink";
+  }
+}
+
+Table.printSize();
+Table.getColor();
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The size of the table is 20 x 20</li>
+        <li>The color of the table is Pink</li>
+      </ul>
+
+      <h3>Example: Static Methods with the Same Name</h3>
+      <p>
+        A single class can contain multiple static methods with the same name. 
+        When you execute the static method with the same name, it executes the last method.
+      </p>
+      <pre>
+class Table {
+  static printSize() {
+    return "The size of the table is: 20 x 20";
+  }
+  static printSize() {
+    return "The size of the table is: 30 x 30";
+  }
+}
+
+Table.printSize();
+      </pre>
+      <p><strong>Output:</strong> The size of the table is: 30 x 30</p>
+
+      <h3>Example: Static Method Execution in the Constructor</h3>
+      <p>
+        You can also execute the static method of the class in the constructor using 
+        <code>this.constructor</code> followed by the static method name.
+      </p>
+      <p>
+        In the example below, the <code>Num</code> class contains the <code>getSqrt()</code> static method. 
+        It is executed in the constructor and stored in the <code>sqrt</code> property.
+      </p>
+      <pre>
+class Num {
+  constructor(a) {
+    this.sqrt = this.constructor.getSqrt(a);
+  }
+  static getSqrt(a) {
+    return a * a;
+  }
+}
+const num1 = new Num(10);
+num1.sqrt; // 100
+      </pre>
+      <p><strong>Output:</strong> The square root of 10 is: 100</p>
+
+      <h3>Example: Static Method Execution in Non-Static Method</h3>
+      <p>
+        You can also execute the static method inside a non-static method using the class name as a reference.
+      </p>
+      <pre>
+class Num {
+  static getSqr(a) {
+    return a * a;
+  }
+  printSqr(a) {
+    return "The square of " + a + " is: " + Num.getSqr(a);
+  }
+}
+const num1 = new Num();
+num1.printSqr(6); // The square of 6 is: 36
+      </pre>
+      <p><strong>Output:</strong> The square of 6 is: 36</p>
+    </div>
+  </div>
+</div>

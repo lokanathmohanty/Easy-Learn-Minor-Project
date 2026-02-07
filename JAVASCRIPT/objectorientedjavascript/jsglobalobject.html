@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Global Object</h1>
+
+    <div class="content">
+      <h2>Global Objects in JavaScript</h2>
+      <p>
+        The JavaScript global object allows you to access the variables, functions, objects, etc., defined in the global scope and available everywhere in the code.
+      </p>
+      <p>
+        In the browser, a global object is named <code>window</code>, and in Node.js, the global object is named <code>global</code>. However, the global object could have different names in different run-time environments.
+      </p>
+      <p>
+        The <code>globalThis</code> has been introduced in ECMAScript 2020, which works with most browsers and runtime environments as a global object.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre><code>var a = 10;
+let b = window.a; // Accessing the global variable in the browser</code></pre>
+      <p>
+        In the above syntax, variable <code>a</code> is a global variable, as it is defined in the global scope using the <code>var</code> keyword.
+      </p>
+
+      <h2>Examples</h2>
+
+      <h3>Accessing global variables through the global object</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;The company name is: &lt;/div&gt;
+   &lt;script&gt;
+      var name = "Tutorialspoint";
+      let company = window.name;
+      document.getElementById("output").innerHTML += company;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> The company name is: Tutorialspoint</p>
+
+      <h3>Accessing the global function through the global object</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="output"&gt;&lt;/p&gt;
+   &lt;script&gt;
+      function sum(a, b) {
+         return a + b;
+      }
+        
+      const obj = {
+         num1: 10,
+         num2: 20,
+         sum: window.sum(10, 20),
+      }
+        
+      document.getElementById("output").innerHTML += "The object is: " + JSON.stringify(obj);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> The object is: {"num1":10,"num2":20,"sum":30}</p>
+
+      <h3>Making variable globally accessible from the function scope</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      function sum(a, b) {
+         window.addition = a + b;
+      }
+      sum(20, 30);
+      document.getElementById("output").innerHTML = "The sum is: " + window.addition;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> The sum is: 50</p>
+
+      <h3>Accessing pre-defined methods of the global object</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="output"&gt;&lt;/p&gt;
+   &lt;script&gt;
+      let isNumer = window.isNaN("Hello");
+      document.getElementById("output").innerHTML = "Is hello not a number? " + isNumer;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> Is hello not a number? true</p>
+
+      <h2>Using the JavaScript Global Object for Polyfills</h2>
+      <p>
+        You can use the JavaScript global object to check whether your browser supports a particular feature. You can show a related message if the user's browser does not support a particular feature.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="output"&gt;&lt;/p&gt;
+   &lt;script&gt;
+      const output = document.getElementById("output");
+      if (window.Promise) {
+         output.innerHTML += "Your browser supports promises";
+      } else {
+         output.innerHTML += "Your browser doesn't support promises";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> Your browser supports promises</p>
+
+      <p>
+        The JavaScript global object only stores the truly global variables. You shouldn't store variables in the global object that are not global, otherwise, it can create conflicts in your project.
+      </p>
+    </div>
+  </div>
+</div>

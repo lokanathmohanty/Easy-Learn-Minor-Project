@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Operator Precedence and Associativity</h1>
+        
+        <h2 class="title">Understanding Operator Precedence</h2>
+        <div class="content">
+            <p><strong>Operator Precedence</strong> determines the **grouping of terms** in an expression, which directly affects the order in which operations are evaluated. Operators with a **higher precedence** are always evaluated before operators with a lower precedence.</p>
+            
+            <p>For example, in the expression <code>x = 7 + 3 * 2</code>, multiplication (<code>*</code>) has higher precedence than addition (<code>+</code>), so <code>(3 * 2)</code> is calculated first, resulting in $7 + 6 = 13$.</p>
+            
+            <h3>Key Precedence Levels:</h3>
+            <ul>
+                <li><strong>Highest:</strong> Parentheses (<code>()</code>), Indexing (<code>[]</code>), Member Access (<code>.</code>)</li>
+                <li><strong>High:</strong> Unary Operators (<code>++</code>, <code>--</code>, <code>!</code>)</li>
+                <li><strong>Medium:</strong> Multiplicative (<code>*</code>, <code>/</code>, <code>%</code>)</li>
+                <li><strong>Lower Medium:</strong> Additive (<code>+</code>, <code>-</code>)</li>
+                <li><strong>Low:</strong> Relational/Equality (<code>&lt;</code>, <code>&gt;</code>, <code>==</code>, <code>!=</code>)</li>
+                <li><strong>Lowest:</strong> Assignment (<code>=</code>, <code>+=</code>, <code>-=</code>, etc.) and Comma (<code>,</code>)</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Operator Associativity</h2>
+        <div class="content">
+            <p><strong>Associativity</strong> defines the execution order when an expression contains **multiple operators of the same precedence**.</p>
+            
+            <ul>
+                <li><strong>Left to Right:</strong> Operations are grouped from the left. Most arithmetic, relational, and logical operators (e.g., <code>*</code>, <code>/</code>, <code>+</code>, <code>-</code>) are left-associative. Example: <code>a - b + c</code> is evaluated as <code>(a - b) + c</code>.</li>
+                <li><strong>Right to Left:</strong> Operations are grouped from the right. Unary, assignment (<code>=</code>, <code>+=</code>), and the conditional (<code>? :</code>) operators are right-associative. Example: <code>a = b = c</code> is evaluated as <code>a = (b = c)</code>.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Example: Using Parentheses to Control Order</h2>
+        <div class="content example">
+            <p>Parentheses **override** default operator precedence, ensuring the enclosed expression is evaluated first.</p>
+            
+            <h3>Default Precedence:</h3>
+            <pre>
+int result = 10 + 5 * 2; // (5 * 2) is done first.
+Console.WriteLine("Result: " + result); // Output: 20
+            </pre>
+            
+            <h3>Overriding with Parentheses:</h3>
+            <pre>
+int result = (10 + 5) * 2; // (10 + 5) is done first.
+Console.WriteLine("Result: " + result); // Output: 30
+            </pre>
+            
+            <h3>Assignment Associativity:</h3>
+            <pre>
+int a, b, c;
+a = b = c = 10; // Evaluated as a = (b = (c = 10)); Right-to-Left
+
+Console.WriteLine("a: 10, b: 10, c: 10");
+            </pre>
+        </div>
+    </div>
+</div>

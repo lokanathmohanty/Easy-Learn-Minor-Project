@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Join</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        MongoDB, being a NoSQL database, does not support direct JOIN operations as in relational databases. However, similar functionality is achievable in Node.js using the <code>aggregate()</code> method with the <code>$lookup</code> stage.
+      </p>
+      
+      <h2>$lookup Stage Syntax</h2>
+      <pre><code>{
+  $lookup: {
+    from: &lt;collection to join&gt;,
+    localField: &lt;field in current collection&gt;,
+    foreignField: &lt;field in foreign collection&gt;,
+    as: &lt;output array field&gt;
+  }
+}</code></pre>
+      <p>This performs a left outer join on the specified collections and adds matching documents as an array in the output field.</p>
+      
+      <h2>Example: Joining 'orders' and 'inventory' Collections</h2>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+  const uri = "mongodb://localhost:27017/";
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+    await joinDocs(client, "mydb", "orders", "inventory");
+  } finally {
+    await client.close();
+  }
+}
+
+async function joinDocs(client, dbname, col1, col2) {
+  const result = await client.db(dbname).collection(col1).aggregate([
+    {
+      $lookup: {
+        from: col2,
+        localField: "prodId",
+        foreignField: "prodId",
+        as: "orderdetails"
+      }
+    }
+  ]).toArray();
+  
+  result.forEach(doc => console.log(JSON.stringify(doc)));
+}
+
+main().catch(console.error);</code></pre>
+      
+      <h2>Sample Output</h2>
+      <pre><code>{
+  "_id": "...",
+  "orderId": 201,
+  "custid": 301,
+  "prodId": 100,
+  "numPurchased": 20,
+  "orderdetails": [
+    {
+      "_id": "...",
+      "prodId": 100,
+      "price": 20,
+      "quantity": 125
+    }
+  ]
+}
+{
+  "_id": "...",
+  "orderId": 202,
+  "custid": 302,
+  "prodId": 101,
+  "numPurchased": 10,
+  "orderdetails": [
+    {
+      "_id": "...",
+      "prodId": 101,
+      "price": 10,
+      "quantity": 234
+    }
+  ]
+}
+// ...more joined documents
+</code></pre>
+    </div>
+  </div>
+</div>

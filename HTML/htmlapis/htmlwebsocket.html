@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - WebSockets</h1>
+    <div class="content">
+      <p>
+        WebSockets is a next-generation bidirectional communication technology for web applications that operates over a single socket. 
+        Both client and server can send data to each other independently and simultaneously.
+      </p>
+      <p>
+        After establishing a WebSocket connection, data is sent from browser to server using the <code>send()</code> method, and data is received from server to browser using the <code>onmessage</code> event handler.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+var Socket = new WebSocket(url, [protocol]);
+      </pre>
+      <p>
+        The first argument specifies the URL to connect to. The optional second argument specifies a sub-protocol that the server must support for the connection to succeed.
+      </p>
+
+      <h2>Attributes of WebSocket</h2>
+      <ul>
+        <li>
+          <strong>Socket.readyState</strong> – Represents the state of the connection (0 = not established, 1 = open, 2 = closing, 3 = closed).
+        </li>
+        <li>
+          <strong>Socket.bufferedAmount</strong> – Number of bytes of UTF-8 text queued for transmission using <code>send()</code>.
+        </li>
+      </ul>
+
+      <h2>WebSocket Events</h2>
+      <ul>
+        <li><strong>open</strong> – <code>Socket.onopen</code> fires when connection is established.</li>
+        <li><strong>message</strong> – <code>Socket.onmessage</code> fires when client receives data.</li>
+        <li><strong>error</strong> – <code>Socket.onerror</code> fires when a communication error occurs.</li>
+        <li><strong>close</strong> – <code>Socket.onclose</code> fires when connection is closed.</li>
+      </ul>
+
+      <h2>WebSocket Methods</h2>
+      <ul>
+        <li><strong>Socket.send(data)</strong> – Sends data through the connection.</li>
+        <li><strong>Socket.close()</strong> – Terminates an existing connection.</li>
+      </ul>
+
+      <h2>Setting Up the WebSocket Server with Python</h2>
+      <ol>
+        <li>Install Python from <a href="https://www.python.org" target="_blank">Python.org</a>.</li>
+        <li>Install WebSocket library:<br><code>pip install websockets</code></li>
+        <li>Create a server file <strong>server.py</strong>:
+          <pre>
+import asyncio
+import websockets
+
+async def echo(websocket, path):
+    async for message in websocket:
+        print(f"Received message: {message}")
+        await websocket.send(f"Server: You said \"{message}\"")
+
+start_server = websockets.serve(echo, "localhost", 8080)
+
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_forever()
+          </pre>
+        </li>
+        <li>Run the server:<br><code>python server.py</code></li>
+      </ol>
+
+      <h2 class="title">Example: HTML Client</h2>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;title&gt;WebSocket Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;WebSocket Client&lt;/h1&gt;
+  &lt;input type="text" id="messageInput" placeholder="Type a message..." /&gt;
+  &lt;button id="sendButton"&gt;Send&lt;/button&gt;
+  &lt;div id="messages"&gt;&lt;/div&gt;
+
+  &lt;script&gt;
+    const socket = new WebSocket('ws://localhost:8080');
+
+    socket.addEventListener('open', () =&gt; {
+      console.log('Connected to server');
+    });
+
+    socket.addEventListener('message', (event) =&gt; {
+      const messageDiv = document.createElement('div');
+      messageDiv.textContent = event.data;
+      document.getElementById('messages').appendChild(messageDiv);
+    });
+
+    document.getElementById('sendButton').addEventListener('click', () =&gt; {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value;
+      socket.send(message);
+      messageInput.value = '';
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Console</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        The console module in Node.js provides an easy way to output messages to standard output and error streams. It is widely used for debugging, logging, performance monitoring, and development feedback.
+      </p>
+
+      <h2>Why Use Console in Node.js?</h2>
+      <ul>
+        <li><strong>Debugging:</strong> Tracks errors and helps debug code efficiently.</li>
+        <li><strong>Logging:</strong> Records application events, warnings, and errors.</li>
+        <li><strong>Performance Monitoring:</strong> Analyzes execution time and resource usage.</li>
+        <li><strong>Development & Testing:</strong> Provides immediate feedback during code testing.</li>
+      </ul>
+
+      <h2>Basic Console Methods</h2>
+      <p>Commonly used methods help log messages and warnings effectively:</p>
+      <dl>
+        <dt>console.log()</dt>
+        <dd>Outputs standard messages.</dd>
+        <dt>console.error()</dt>
+        <dd>Outputs error messages to standard error stream separately.</dd>
+        <dt>console.warn()</dt>
+        <dd>Outputs warning messages indicating potential but non-critical issues.</dd>
+        <dt>console.info()</dt>
+        <dd>Outputs informational messages similar to log but often used for status updates.</dd>
+      </dl>
+
+      <h3>Examples</h3>
+      <pre><code>console.log("WELCOME");
+console.error("An unexpected error occurred!");
+console.warn("It is warning.!, Please check the Application.");
+console.info("It is running on port 1212");</code></pre>
+
+      <h3>Output</h3>
+      <p>
+        WELCOME<br/>
+        An unexpected error occurred!<br/>
+        It is warning.!, Please check the Application.<br/>
+        It is running on port 1212
+      </p>
+
+      <h2>Advanced Console Methods</h2>
+      <p>Advanced methods provide structured logging and debugging helpful for large-scale applications:</p>
+
+      <h3>console.table()</h3>
+      <p>Displays tabular data for arrays or objects:</p>
+      <pre><code>const A = [
+  {id:1, name:"BMW"},
+  {id:2, name:"CIAZ"}
+];
+console.table(A);</code></pre>
+      <p>Output:</p>
+      <pre><code>| (index) | id |  name  |
+|---------|----|--------|
+|    0    | 1  | "BMW"  |
+|    1    | 2  | "CIAZ" |</code></pre>
+
+      <h3>console.time() and console.timeEnd()</h3>
+      <p>Measures time taken to execute code blocks:</p>
+      <pre><code>console.time("Loop Execution Time");
+for (let x=0; x<250; x++){
+  // loop contents
+}
+console.timeEnd("Loop Execution Time");</code></pre>
+      <p>Output example:</p>
+      <pre><code>Loop Execution Time: 17.078s</code></pre>
+    </div>
+  </div>
+</div>

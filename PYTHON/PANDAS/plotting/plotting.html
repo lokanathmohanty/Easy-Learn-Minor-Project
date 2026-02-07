@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Pandas - Plotting</h1>
+
+    <div class="content">
+      <p>Pandas uses the <code>plot()</code> method to create various types of plots and diagrams. To display the plots, we use <code>pyplot</code>, a submodule of the Matplotlib library.</p>
+
+      <p>To learn more about Matplotlib, refer to the Matplotlib tutorial.</p>
+    </div>
+
+    <h2 class="title">Example: Basic Plot</h2>
+    <div class="example">
+      <div class="content">
+        <p>Import <code>pyplot</code> from <code>matplotlib</code> and plot the entire DataFrame:</p>
+        <pre><code>
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('data.csv')
+df.plot()
+
+plt.show()
+        </code></pre>
+      </div>
+    </div>
+
+    <h2 class="title">Scatter Plot</h2>
+    <div class="content">
+      <p>A scatter plot visualizes the relationship between two variables using dots.</p>
+      <p>Set <code>kind='scatter'</code> and specify the <code>x</code> and <code>y</code> axis:</p>
+    </div>
+
+    <h3 class="title">Example: Duration vs. Calories</h3>
+    <div class="example">
+      <div class="content">
+        <pre><code>
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('data.csv')
+
+df.plot(kind='scatter', x='Duration', y='Calories')
+
+plt.show()
+        </code></pre>
+        <p>This scatter plot shows a strong positive correlation between Duration and Calories. This matches the correlation coefficient of 0.92 found earlier.</p>
+      </div>
+    </div>
+
+    <h3 class="title">Example: Duration vs. Maxpulse</h3>
+    <div class="example">
+      <div class="content">
+        <pre><code>
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('data.csv')
+
+df.plot(kind='scatter', x='Duration', y='Maxpulse')
+
+plt.show()
+        </code></pre>
+        <p>This scatter plot demonstrates a weak or no correlation between Duration and Maxpulse (correlation coefficient: 0.009).</p>
+      </div>
+    </div>
+
+    <h2 class="title">Histogram</h2>
+    <div class="content">
+      <p>A histogram is used to visualize the frequency of values in a single column. Use <code>kind='hist'</code> for this plot type.</p>
+    </div>
+
+    <h3 class="title">Example: Duration Histogram</h3>
+    <div class="example">
+      <div class="content">
+        <pre><code>
+df["Duration"].plot(kind='hist')
+plt.show()
+        </code></pre>
+        <p>This histogram shows how often different workout durations occur. For example, many workouts fall in the 50–60 minute range.</p>
+      </div>
+    </div>
+
+    <h2 class="title">Exercise</h2>
+    <div class="content">
+      <p><strong>Question:</strong> Which of the following is a Scatter Plot?</p>
+      <!-- Placeholder for interactive options if needed -->
+    </div>
+
+  </div>
+</div>

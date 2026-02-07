@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Use Component</h1>
+    <div class="content">
+      <p>
+        A React component represents a small chunk of user interface in a webpage. 
+        Its primary job is to render the UI and update it whenever its internal state changes. 
+        Additionally, it manages the events related to its UI. 
+      </p>
+      <p>
+        In this chapter, we will use our newly created <code>FormattedMoney</code> and 
+        <code>FormattedDate</code> components inside the <code>ExpenseEntryItem</code> component.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using Components in ExpenseEntryItem</h2>
+    <div class="content">
+      <ol>
+        <li>Open <code>ExpenseEntryItem.js</code> in your editor.</li>
+        <li>Import <code>FormattedMoney</code> and <code>FormattedDate</code>.</li>
+        <li>
+          Update the <code>render()</code> method to include these components, 
+          passing values through <code>props</code>.
+        </li>
+      </ol>
+    </div>
+
+    <div class="example">
+      <h3>Example: ExpenseEntryItem.js</h3>
+      <pre>
+import React from 'react'
+import FormattedMoney from './FormattedMoney'
+import FormattedDate from './FormattedDate'
+
+class ExpenseEntryItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;div&gt;&lt;b&gt;Item:&lt;/b&gt; &lt;em&gt;{this.props.item.name}&lt;/em&gt;&lt;/div&gt;
+        &lt;div&gt;&lt;b&gt;Amount:&lt;/b&gt; 
+          &lt;em&gt;
+            &lt;FormattedMoney value={this.props.item.amount} /&gt;
+          &lt;/em&gt;
+        &lt;/div&gt;
+        &lt;div&gt;&lt;b&gt;Spend Date:&lt;/b&gt; 
+          &lt;em&gt;
+            &lt;FormattedDate value={this.props.item.spendDate} /&gt;
+          &lt;/em&gt;
+        &lt;/div&gt;
+        &lt;div&gt;&lt;b&gt;Category:&lt;/b&gt; 
+          &lt;em&gt;{this.props.item.category}&lt;/em&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default ExpenseEntryItem;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using ExpenseEntryItem in index.js</h2>
+    <div class="content">
+      <p>
+        Now, let us pass an <code>item</code> object to the 
+        <code>ExpenseEntryItem</code> component from <code>index.js</code>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example: index.js</h3>
+      <pre>
+const item = {
+  id: 1, 
+  name : "Grape Juice", 
+  amount : 30.5, 
+  spendDate: new Date("2020-10-10"), 
+  category: "Food" 
+}
+
+ReactDOM.render(
+  &lt;React.StrictMode&gt;
+    &lt;ExpenseEntryItem item={item} /&gt;
+  &lt;/React.StrictMode&gt;,
+  document.getElementById('root')
+);
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Output</h2>
+    <div class="content">
+      <p>When you run the application with <code>npm start</code>, open the browser and go to:</p>
+      <p><code>http://localhost:3000</code></p>
+      <p>The rendered result will look like:</p>
+      <ul>
+        <li><b>Item:</b> Grape Juice</li>
+        <li><b>Amount:</b> 30.50</li>
+        <li><b>Spend Date:</b> 10-OCT-2020</li>
+        <li><b>Category:</b> Food</li>
+      </ul>
+    </div>
+  </div>
+</div>

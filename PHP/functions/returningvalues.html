@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Function Return Values</h1>
+
+    <div class="content">
+      <p>
+        The **`return`** statement is used in a PHP function to send a value back to the code that called it and to transfer the program control back to the calling environment. The function's execution stops immediately upon encountering the first `return` statement.
+      </p>
+
+      <h2>Key Rules for Returning Values</h2>
+      <ol>
+        <li>
+          **Returns One Value:** A PHP function can technically only return **one value** (an expression). Attempting to return multiple values separated by a comma (e.g., `return $a, $b;`) will result in a fatal `Parse error`.
+        </li>
+        <li>
+          **Any Data Type:** The returned value can be any data type, including scalar variables (int, string, bool), arrays, or objects.
+        </li>
+        <li>
+          **`return;` (Returning `NULL`):** A `return` keyword without an expression (or just allowing the function to end) returns the value `NULL`.
+        </li>
+      </ol>
+
+      <h3>Example: Returning a Scalar Value</h3>
+      <p>The returned value can be stored in a variable or used directly in an expression or output statement.</p>
+      <div class="example">
+        <p>
+          <code>&lt;?php</code><br>
+          <code>&nbsp;&nbsp;&nbsp;function addition($first, $second) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $first + $second;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;}</code><br>
+          <br>
+          <code>&nbsp;&nbsp;&nbsp;$z = addition(10, 20); // Value 30 is stored in $z</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "Addition: $z"; // Output: Addition: 30</code><br>
+          <code>?&gt;</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Conditional Return Statements</h2>
+      <p>
+        A function may contain multiple `return` statements within conditional blocks (`if`/`else`). The flow will only hit one of them, and the function will exit immediately.
+      </p>
+      <div class="example">
+        <p>
+          <code>function raiseto($x, $i) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;if ($i == 2) { return $x**2; } // Exits here if true</code><br>
+          <code>&nbsp;&nbsp;&nbsp;elseif ($i == 3) { return $x**3; } // Exits here if true</code><br>
+          <code>}</code><br>
+        </p>
+        <p class="content">
+          Calling `raiseto(7, 3)` returns 343 and stops.
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Returning Multiple Values (Using an Array)</h2>
+      <p>
+        To effectively return multiple values, the function must package them into a single data structure, such as an **indexed** or **associative array**, and return that array. The calling code then unpacks the required values from the array.
+      </p>
+      <div class="example">
+        <p>
+          <code>function raiseto($x){</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$sqr = $x**2;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$cub = $x**3;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;return **["sqr" => $sqr, "cub" => $cub]**; // Returns one associative array</code><br>
+          <code>}</code><br>
+          <br>
+          <code>$val = raiseto(5);</code><br>
+          <code>echo "Square: " . $val["sqr"]; // Output: Square: 25</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

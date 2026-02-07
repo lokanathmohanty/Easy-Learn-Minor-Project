@@ -1,0 +1,163 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Automation Tutorial</h1>
+    </div>
+    <div class="content">
+      <p>
+        Automation with Python involves using programming techniques to perform tasks automatically without human intervention. Python offers numerous libraries for automating repetitive tasks such as scheduling, web scraping, GUI automation, and testing.
+      </p>
+      <p>Key automation libraries include:</p>
+      <ul>
+        <li><strong>unittest:</strong> Unit testing framework.</li>
+        <li><strong>Selenium:</strong> Web automation for browsers.</li>
+        <li><strong>Beautiful Soup:</strong> HTML and XML parsing for web scraping.</li>
+        <li><strong>pandas:</strong> Data manipulation and analysis.</li>
+        <li><strong>requests:</strong> HTTP requests handling.</li>
+        <li><strong>PyAutoGUI:</strong> GUI automation for mouse and keyboard actions.</li>
+      </ul>
+      <p>
+        This tutorial covers scheduling with the <code>schedule</code> module, web scraping with Beautiful Soup, and GUI automation with PyAutoGUI.
+      </p>
+      <p>
+        Ensure required packages are installed:<br>
+        <code>pip install schedule beautifulsoup4 pyautogui</code>
+      </p>
+    </div>
+  </div>
+  <div class="session">
+    <div class="title">
+      <h2>Scheduling Tasks with schedule Module</h2>
+    </div>
+    <div class="content">
+      <pre>
+import schedule
+import time
+
+def alarm():
+    print("Time to restart the server")
+
+def job():
+    print("Starting daily tasks")
+
+def meet():
+    print("Weekly standup meeting")
+
+schedule.every(5).seconds.do(alarm)  # Runs every 5 seconds
+schedule.every().day.at("10:30").do(job)  # Runs daily at 10:30 AM
+schedule.every().monday.at("12:15").do(meet)  # Runs Mondays at 12:15 PM
+
+while True:
+    schedule.run_pending()
+    time.sleep(0.5)
+      </pre>
+      <p>Output (partial):</p>
+      <pre>
+Time to restart the server
+Time to restart the server
+Time to restart the server
+...
+      </pre>
+    </div>
+  </div>
+  <div class="session">
+    <div class="title">
+      <h2>Web Scraping with Beautiful Soup</h2>
+    </div>
+    <div class="content">
+      <pre>
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+import re
+
+html = urlopen("https://www.tutorialspoint.com/python/index.htm")
+content = html.read()
+soup = BeautifulSoup(content, "html.parser")
+
+for a in soup.findAll('a', href=True):
+    if re.findall('python', a['href']):
+        print("Python URL:", a['href'])
+      </pre>
+      <p>Output (partial):</p>
+      <pre>
+Python URL: /machine_learning_with_python/index.htm
+Python URL: /python_pandas/index.htm
+Python URL: /python/index.htm
+...
+      </pre>
+    </div>
+  </div>
+  <div class="session">
+    <div class="title">
+      <h2>Automating Mouse Movements with PyAutoGUI</h2>
+    </div>
+    <div class="content">
+      <pre>
+import pyautogui
+
+for i in range(5):
+    pyautogui.moveTo(300, 100, duration=0.25)
+    pyautogui.move(300, 0, duration=0.25)
+    pyautogui.move(0, 300, duration=0.25)
+    pyautogui.move(-300, 0, duration=0.25)
+    pyautogui.move(0, -300, duration=0.25)
+      </pre>
+      <p>Output:</p>
+      <pre>
+Mouse moves in a square pattern multiple times.
+      </pre>
+    </div>
+  </div>
+  <div class="session">
+    <div class="title">
+      <h2>Automated Unit Testing with unittest Module</h2>
+    </div>
+    <div class="content">
+      <pre>
+import unittest
+
+class TestingStringMethods(unittest.TestCase):
+
+    def test_string_equality(self):
+        self.assertEqual('ttp' * 5, 'ttpttpttpttpttp')
+
+    def test_string_case(self):
+        self.assertEqual('Tutorialspoint'.upper(), 'TUTORIALSPOINT')
+
+    def test_is_string_upper(self):
+        self.assertTrue('TUTORIALSPOINT'.isupper())
+        self.assertFalse('TUTORIALSpoint'.isupper())
+
+    def test_string_startswith(self):
+        self.assertTrue('tutorialspoint'.startswith('putor'))
+        self.assertFalse('tutorialspoint'.startswith('point'))
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
+      </pre>
+      <p>Sample output:</p>
+      <pre>
+test_is_string_upper (__main__.TestingStringMethods) ... ok
+test_string_case (__main__.TestingStringMethods) ... ok
+test_string_equality (__main__.TestingStringMethods) ... ok
+test_string_startswith (__main__.TestingStringMethods) ... FAIL
+
+======================================================================
+FAIL: test_string_startswith (__main__.TestingStringMethods)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main.py", line 23, in test_string_startswith
+    self.assertTrue('tutorialspoint'.startswith('putor'))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+FAILED (failures=1)
+      </pre>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

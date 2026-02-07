@@ -1,0 +1,128 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Performance</h1>
+    <div class="content">
+      <p>JavaScript plays a crucial role in the functionality of modern websites. If JavaScript fails, websites may not work as intended. Optimizing JavaScript directly impacts user experience, engagement, business success, and even SEO rankings. Faster, more responsive JavaScript leads to higher conversion rates, reduced server costs, and a competitive advantage, especially in mobile and Progressive Web App contexts.</p>
+
+      <h2>Optimizing DOM Manipulation</h2>
+      <p>DOM manipulation is often costly because every element in the DOM is represented as a node. Minimizing direct manipulations significantly improves performance.</p>
+      <p><strong>Naive Code Example:</strong></p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;ul id="itemList"&gt;&lt;/ul&gt;
+   &lt;script&gt;
+      const itemList = document.getElementById('itemList');
+      // Inefficient DOM manipulation
+      for (let i = 0; i &lt; 1000; i++) {
+         itemList.innerHTML += `&lt;li&gt;Item ${i}&lt;/li&gt;`;
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <p><strong>Optimized Code Example:</strong></p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;ul id="itemList"&gt;&lt;/ul&gt;
+   &lt;script&gt;
+      // Efficient DOM manipulation using document fragment
+      const itemList = document.getElementById('itemList');
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i &lt; 1000; i++) {
+         const listItem = document.createElement('li');
+         listItem.textContent = `Item ${i}`;
+         fragment.appendChild(listItem);
+      }
+      itemList.appendChild(fragment);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Asynchronous Operations with Promises</h2>
+      <p>Asynchronous programming prevents blocking the main thread, keeping the UI responsive. Promises help manage tasks like data fetching without freezing the interface.</p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Asynchronous Operations with Promises&lt;/h2&gt;
+   &lt;div id="dataContainer"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      // Fetch data asynchronously
+      function fetchData() {
+         return new Promise((resolve, reject) =&gt; {
+            setTimeout(() =&gt; {
+               const data = { message: 'Hello, world!' };
+               resolve(data);
+            }, 1000);
+         });
+      }
+
+      // Usage of the fetchData function
+      fetchData()
+         .then(data =&gt; {
+            document.getElementById('dataContainer').textContent = data.message;
+         })
+         .catch(error =&gt; {
+            alert('Error fetching data:' + error);
+         });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Deferred JavaScript Loading</h2>
+      <p>By default, scripts block HTML rendering. Using the <code>defer</code> attribute delays execution until the HTML is parsed, improving load times. The <code>async</code> attribute is another option, though it doesn’t guarantee execution order.</p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p&gt;Deferred JavaScript Loading&lt;/p&gt;
+   &lt;script defer src="https://code.jquery.com/jquery-3.6.4.min.js"&gt;&lt;/script&gt;
+   &lt;div id="loadingMessage"&gt;JavaScript is loading...&lt;/div&gt;
+   &lt;script&gt;
+      document.addEventListener('DOMContentLoaded', function() {
+         document.getElementById('loadingMessage').textContent = 'JavaScript has finished loading!';
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Avoiding Global Variables</h2>
+      <p>Global variables increase memory usage and may cause conflicts. Encapsulation helps reduce scope and improve performance.</p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Avoiding Global Variables&lt;/h2&gt;
+   &lt;div id="result"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      var resultElement = document.getElementById('result');
+      // Inefficient global variable
+      var globalVar = 10;
+      function addNumbers(x, y) {
+         return globalVar + x + y;
+      }
+      resultElement.innerHTML += "Using global variable, the sum is " + addNumbers(51, 7) + "&lt;br&gt;";
+
+      // Encapsulation to avoid global variable
+      (function () {
+         var localVar = 10;
+         function addNumbers(x, y) {
+            return localVar + x + y;
+         }
+         resultElement.innerHTML += "Using encapsulation, the sum is " + addNumbers(51, 7);
+      })();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Conclusion</h2>
+      <p>Performance optimization in JavaScript enhances user experience and efficiency. It is vital across industries like ecommerce, social media, news, education, finance, gaming, healthcare, and collaboration tools. Key practices include:</p>
+      <ul>
+        <li>Minimizing DOM manipulations.</li>
+        <li>Using asynchronous operations for responsiveness.</li>
+        <li>Deferring or asynchronously loading scripts.</li>
+        <li>Encapsulating code to avoid global variables.</li>
+        <li>General optimizations like efficient branching, memory management, and concurrency.</li>
+      </ul>
+    </div>
+  </div>
+</div>

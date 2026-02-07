@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Deleting Cookies</h1>
+
+    <div class="content">
+      <p>
+        In order to delete cookies with JavaScript, we can set the <code>expires</code> date to a past date.
+        We can also delete a cookie using the <code>max-age</code> attribute. Additionally, cookies can be
+        deleted explicitly from the browser.
+      </p>
+
+      <p>
+        Deleting cookies with JavaScript removes small bits of data that websites store on a user's computer.
+        Cookies are used to track a user's browsing activity and preferences.
+      </p>
+
+      <p>
+        It is important to note that deleting cookies can have unintended consequences. For example, if you
+        delete a cookie that is used to authenticate you to a website, you will be logged out. You should only
+        delete cookies if you are sure you want to do so.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="subtitle">Different Ways to Delete the Cookies</h2>
+      <ul>
+        <li>Set the past expiry date using the <code>expires</code> attribute.</li>
+        <li>Use the <code>max-age</code> attribute.</li>
+        <li>Delete cookies explicitly from the browser.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="subtitle">Delete Cookies using <code>expires</code> Attribute</h2>
+      <p>
+        When you set a past expiry date as the value of the <code>expires</code> attribute, the browser
+        automatically deletes the cookie.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre><code>document.cookie = "data1=test1;expires=Tue, 22 Aug 2023 12:00:00 UTC;";</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;  
+  &lt;button onclick="setCookies()"&gt; Set Cookie &lt;/button&gt;
+  &lt;button onclick="deleteCookies()"&gt; Delete Cookie &lt;/button&gt;
+  &lt;button onclick="readCookies()"&gt; Read Cookies &lt;/button&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+
+  &lt;script&gt;
+    let output = document.getElementById("output");
+    function setCookies() {
+      document.cookie = "data1=test1;";
+      document.cookie = "data2=test2;";
+    }
+    function deleteCookies() {
+      document.cookie = "data1=test1;expires=Tue, 22 Aug 2023 12:00:00 UTC;";
+      document.cookie = "data2=test2;expires=Mon, 22 Aug 2050 12:00:00 UTC;";
+    }
+    function readCookies() {
+      const allCookies = document.cookie.split("; ");
+      output.innerHTML = "The cookie is : &lt;br&gt;";
+      for (const cookie of allCookies) {
+        const [key, value] = cookie.split("=");
+        if (key == "data1" || key == "data2") {
+          output.innerHTML += `${key} : ${decodeURIComponent(value)} &lt;br&gt;`;
+        }
+      }
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="subtitle">Delete Cookies using <code>max-age</code> Attribute</h2>
+      <p>
+        The browser automatically deletes the cookie when you assign <code>0</code> or a negative value to the
+        <code>max-age</code> attribute.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre><code>document.cookie = "user1=sam;max-age=-60;";</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;    
+  &lt;button onclick="setCookies()"&gt; Set Cookie &lt;/button&gt;
+  &lt;button onclick="deleteCookies()"&gt; Delete Cookie &lt;/button&gt;
+  &lt;button onclick="readCookies()"&gt; Read Cookies &lt;/button&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+
+  &lt;script&gt;
+    let output = document.getElementById("output");
+    function setCookies() {
+      document.cookie = "user1=sam;";
+      document.cookie = "user2=virat;";
+    }
+    function deleteCookies() {
+      document.cookie = "user1=sam;max-age=-60;";
+      document.cookie = "user2=virat;max-age=5000;";
+    }
+    function readCookies() {
+      const allCookies = document.cookie.split("; ");
+      output.innerHTML = "The cookie is : &lt;br&gt;";
+      for (const cookie of allCookies) {
+        const [key, value] = cookie.split("=");
+        if (key == "user1" || key == "user2") {
+          output.innerHTML += `${key} : ${decodeURIComponent(value)} &lt;br&gt;`;
+        }
+      }
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="subtitle">Delete Cookies Explicitly from the Browser</h2>
+      <p>You can manually delete cookies from the browser by following the steps below.</p>
+      <ol>
+        <li>In your browser, click the three vertical dots (menu) at the top right corner.</li>
+        <li>Hover over <strong>History</strong> and click on <strong>History</strong>.</li>
+        <li>Click on the <strong>Clear browsing data</strong> tab.</li>
+        <li>
+          Check the <em>cookies and other site data</em> checkbox, then click the <strong>Clear data</strong>
+          button.
+        </li>
+      </ol>
+      <p>
+        Note: The exact steps may vary depending on which browser you are using.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - NPM (Node Package Manager)</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        NPM is the default package manager for Node.js. It helps manage JavaScript packages, libraries, and dependencies efficiently in Node.js projects. NPM is installed automatically alongside Node.js.
+      </p>
+
+      <h2>Checking NPM Version</h2>
+      <pre><code>npm -v</code></pre>
+      <p>This command shows the installed version of NPM, for example: <code>10.9.2</code></p>
+
+      <h2>Installing a Package Locally</h2>
+      <p>Local packages are installed inside the <code>node_modules</code> directory of the project and recorded in <code>package.json</code>. This ensures each project maintains its own dependencies and avoids conflicts.</p>
+      <pre><code>npm install express</code></pre>
+      <p>To install a specific package version use:</p>
+      <pre><code>npm install &lt;package-name&gt;@&lt;version&gt;</code></pre>
+      <p>Example:</p>
+      <pre><code>npm install express@4.17.1</code></pre>
+
+      <h2>Benefits of Local Installation</h2>
+      <ul>
+        <li>Version control: Keeps dependency versions consistent across environments.</li>
+        <li>Security: Avoids unexpected changes from globally installed packages.</li>
+      </ul>
+
+      <h2>Package Installation Flags</h2>
+      <ul>
+        <li><code>--save-dev</code>: Installs package as a development dependency (e.g., testing tools).</li>
+        <li><code>--save-exact</code>: Locks the exact version of the package in <code>package.json</code>.</li>
+        <li><code>--no-save</code>: Installs the package without adding it to <code>package.json</code>.</li>
+      </ul>
+
+      <h2>Installing a Package Globally</h2>
+      <p>Global packages can be accessed anywhere on your system, useful for CLI tools.</p>
+      <pre><code>npm install -g &lt;package-name&gt;</code></pre>
+      <p>Example:</p>
+      <pre><code>npm install -g nodemon</code></pre>
+
+      <h2>Benefits of Global Installation</h2>
+      <ul>
+        <li>Useful for command-line tools like <code>nodemon</code>, <code>typescript</code>, and <code>eslint</code>.</li>
+        <li>Provides system-wide access without project-level installs.</li>
+        <li>Streamlines development workflow.</li>
+      </ul>
+
+      <h2>Managing Global Packages</h2>
+      <p>Check outdated global packages:</p>
+      <pre><code>npm outdated -g</code></pre>
+      <p>Update a global package:</p>
+      <pre><code>npm update -g &lt;package-name&gt;</code></pre>
+
+      <h2>Managing Dependencies</h2>
+      <p>View locally installed packages:</p>
+      <pre><code>npm list</code></pre>
+      <p>View globally installed packages:</p>
+      <pre><code>npm list -g --depth=0</code></pre>
+
+      <h2>Checking Package Versions</h2>
+      <p>Check the latest available version of a package:</p>
+      <pre><code>npm show &lt;package-name&gt; version</code></pre>
+      <p>Check all available versions:</p>
+      <pre><code>npm show &lt;package-name&gt; versions</code></pre>
+
+      <h2>Removing a Package</h2>
+      <p>Uninstall a package locally:</p>
+      <pre><code>npm uninstall &lt;package-name&gt;</code></pre>
+      <p>Uninstall a package globally:</p>
+      <pre><code>npm uninstall -g &lt;package-name&gt;</code></pre>
+    </div>
+  </div>
+</div>

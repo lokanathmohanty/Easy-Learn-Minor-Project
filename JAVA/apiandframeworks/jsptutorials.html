@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Server Pages (JSP) Summary 📄💻</h1>
+
+        <div class="content">
+            <p><strong>Java Server Pages (JSP)</strong> is a server-side programming technology that simplifies the process of creating **dynamic web content** by allowing developers to embed Java code directly into HTML, XML, or other document types.</p>
+
+            <hr>
+
+            <h2 class="title">I. Core Role and Relationship with Servlets</h2>
+            <p>JSP is built directly on top of the **Java Servlets API** and is designed to address the complexity of writing presentation code (HTML markup) directly in Java code (using `out.println()` statements in a Servlet).</p>
+            <ul>
+                <li>
+                    **Simplified Presentation:** JSP's primary goal is to provide a **view layer** where the static HTML structure dominates, and the dynamic content is inserted using special tags and scriptlets.
+                </li>
+                <li>
+                    **The Translation Phase:** The key to JSP performance is its compilation process:
+                    <ol>
+                        <li>The JSP file (`.jsp`) is requested for the first time.</li>
+                        <li>The Servlet Container **translates** the JSP into a standard Java **Servlet** source file.</li>
+                        <li>The Servlet is **compiled** into a class file (`.class`).</li>
+                        <li>The compiled Servlet is executed to handle the request.</li>
+                    </ol>
+                    The compilation only happens once, making subsequent requests very fast.
+                </li>
+                <li>
+                    **Enterprise Access:** Like Servlets, JSPs have access to the entire **Java EE** ecosystem, including JDBC, JNDI, and EJBs.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Advantages over Alternatives</h2>
+            <p>JSP is superior to many older technologies for creating dynamic web pages:</p>
+            <ul>
+                <li>
+                    **vs. Pure Servlets:** It is far more convenient to write regular HTML and embed small pieces of Java code than to generate all HTML using `response.getWriter().println()` calls. JSP acts as the **View** layer, while Servlets handle the **Controller/Business Logic** (Model-View-Controller or MVC).
+                </li>
+                <li>
+                    **vs. CGI/Perl:** Performance is significantly better because JSPs are **compiled** once, whereas CGI typically requires the server to load an interpreter and script for every request.
+                </li>
+                <li>
+                    **vs. ASP (Microsoft):** JSP is **platform-portable** (can run on Linux, Windows, etc., with any web server/container), and its dynamic logic is written in the powerful Java language.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. JSP Scripting Elements</h2>
+            <p>JSP provides three main ways to embed Java logic into the markup:</p>
+            <ol>
+                <li>
+                    **Scriptlets (`<% Java code %>`):** Used for embedding arbitrary Java code (like conditional statements, loops, or method calls). *Example: `<% if (user.isLoggedIn()) { %>`*
+                </li>
+                <li>
+                    **Expressions (`<%= Java expression %>`):** Used to evaluate a Java expression and output the result directly into the page content. This is a shorthand for `out.println()`. *Example: `<%= request.getRemoteAddr() %>`*
+                </li>
+                <li>
+                    **Declarations (`<%! Java declaration %>`):** Used to declare instance variables or methods that will be part of the translated Servlet class.
+                </li>
+            </ol>
+            <p>JSP also provides **Standard Actions (`<jsp:forward>`, `<jsp:include>`)** and the **JSTL (JSP Standard Tag Library)** to perform common tasks without using Java scriptlets.</p>
+
+            <div class="example">
+                <p>The "Hello World" example demonstrates the use of a **JSP Expression** to output the dynamic IP address and a **JSP Scriptlet** containing the `out.println()` call for custom output, all embedded within standard HTML markup.</p>
+            </div>
+        </div>
+    </div>
+</div>

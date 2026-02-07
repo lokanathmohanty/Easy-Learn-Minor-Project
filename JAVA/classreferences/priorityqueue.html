@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>PriorityQueue</code> Class Summary 🥇</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.PriorityQueue</code>** class implements the **<code>Queue</code>** interface and provides an **unbounded priority queue** based on a **priority heap** (specifically, a min-heap by default). It ensures that the element at the head of the queue is the one with the highest priority according to the defined ordering.</p>
+
+            <h2 class="title">I. Ordering and Priority</h2>
+            <p>Elements in a <code>PriorityQueue</code> are not ordered based on insertion time (like a standard FIFO queue) but based on their priority, determined by one of two mechanisms:</p>
+            <ul>
+                <li>
+                    **Natural Ordering (Default):** The elements must implement the **<code>Comparable</code>** interface. By default, it uses a **min-heap**, meaning the smallest element (lowest value) is considered the highest priority and is at the head.
+                </li>
+                <li>
+                    **Custom Ordering:** An external **<code>Comparator</code>** can be provided during construction to define a custom priority scheme, which can establish a max-heap or any other ordering.
+                </li>
+            </ul>
+            <p class="example"><strong>Note:</strong> The iteration order (when using an iterator or `forEach`) is **not guaranteed** to be the priority order; it simply traverses the heap structure. Only the retrieval operations (`poll()`, `peek()`) access the highest-priority element.</p>
+
+            <hr>
+
+            <h2 class="title">II. Restrictions and Null Policy</h2>
+            <ul>
+                <li>
+                    **No Null Elements:** A `PriorityQueue` **does not permit `null` elements**.
+                </li>
+                <li>
+                    **Comparable Elements:** If relying on natural ordering, all inserted elements must be mutually comparable.
+                </li>
+                <li>
+                    **Unbounded:** The queue can grow dynamically; its initial capacity (default 11) is just a starting point.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Essential Queue Operations</h2>
+            <p>While <code>PriorityQueue</code> inherits many <code>Collection</code> methods, the critical methods for queue management are:</p>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Action</th>
+                    <th>Time Complexity (Typical)</th>
+                </tr>
+                <tr>
+                    <td><code>boolean offer(E e)</code> / <code>boolean add(E e)</code></td>
+                    <td>Inserts the element into the queue and maintains the heap property.</td>
+                    <td>$O(\log n)$</td>
+                </tr>
+                <tr>
+                    <td><code>E peek()</code></td>
+                    <td>Retrieves (but **does not remove**) the element at the head (highest priority).</td>
+                    <td>$O(1)$</td>
+                </tr>
+                <tr>
+                    <td><code>E poll()</code></td>
+                    <td>Retrieves and **removes** the element at the head.</td>
+                    <td>$O(\log n)$</td>
+                </tr>
+                <tr>
+                    <td><code>E remove(Object o)</code></td>
+                    <td>Removes a single instance of a specified element. This is generally inefficient.</td>
+                    <td>$O(n)$</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">Example: Priority Ordering vs. Iteration Order</h2>
+            <p>In the example, the `Integer` elements are added (e.g., 20, 30, 15, 22, 11). Since `Integer` uses natural ordering (min-heap), the highest priority element is the smallest number (11).</p>
+            <div class="example">
+                <p>When iterating with `for (Integer number : queue)`, the output order is **not sorted** (e.g., 11, 20, 15, 30, 30, 22, 20), because the iterator traverses the underlying heap structure, which only guarantees the root (11) is smallest, not that all nodes are in total order.</p>
+                <p>To retrieve elements in priority order, you must use a loop with **<code>poll()</code>**:</p>
+                <pre><code>while (!queue.isEmpty()) {
+    System.out.print(queue.poll() + " ");
+} 
+// Output: 11 15 20 20 22 30 30 </code></pre>
+            </div>
+        </div>
+    </div>
+</div>

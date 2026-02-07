@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Array of Pointers in C</h1>
+    <div class="content">
+      <p>Just like an integer array holds a collection of integer variables, an array of pointers holds variables of pointer type. Each element in an array of pointers is a pointer pointing to another address.</p>
+      
+      <p>The name of an array can be used as a pointer because it holds the address of the first element of the array. If we store the address of an array in another pointer, it is possible to manipulate the array using pointer arithmetic.</p>
+      
+      <h2 class="title">Create an Array of Pointers</h2>
+      <p>To create an array of pointers in C, declare an array of pointers similar to a normal pointer declaration. Use the data type, followed by an asterisk (*), then the variable name with a subscript ([]), which specifies the array size.</p>
+      
+      <p>Each element in the array of pointers contains the address of a specific type.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Creating an Array of Pointers</h2>
+    <div class="content">
+      <p>This example declares three integer variables and an array of pointers to access and print their values.</p>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int var1 = 1;
+  int var2 = 2;
+  int var3 = 3;
+
+  int *ptr[3];
+
+  ptr[0] = &var1;
+  ptr[1] = &var2;
+  ptr[2] = &var3;
+
+  for (int i = 0; i &lt; 3; i++) {
+    printf("Value at ptr[%d] = %d\n", i, *ptr[i]);
+  }
+
+  return 0;
+}
+</code>
+      </pre>
+      <p>Output:</p>
+      <p>Value at ptr[0] = 1<br>
+      Value at ptr[1] = 2<br>
+      Value at ptr[2] = 3</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">An Array of Pointers to Integers</h2>
+    <div class="content">
+      <p>Declaration example:</p>
+      <p><code>int *ptr[MAX];</code></p>
+      <p>This declares <code>ptr</code> as an array of <code>MAX</code> integer pointers, where each element holds a pointer to an int value.</p>
+      
+      <p>Example code:</p>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+const int MAX = 3;
+
+int main() {
+  int var[] = {10, 100, 200};
+  int i, *ptr[MAX];
+
+  for (i = 0; i &lt; MAX; i++) {
+    ptr[i] = &var[i];
+  }
+
+  for (i = 0; i &lt; MAX; i++) {
+    printf("Value of var[%d] = %d\n", i, *ptr[i]);
+  }
+
+  return 0;
+}
+</code>
+      </pre>
+      <p>Output:</p>
+      <p>Value of var[0] = 10<br>
+      Value of var[1] = 100<br>
+      Value of var[2] = 200</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">An Array of Pointers to Characters</h2>
+    <div class="content">
+      <p>You can use an array of pointers to characters to store a list of strings:</p>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+const int MAX = 4;
+
+int main() {
+  char *names[] = {
+    "Zara Ali",
+    "Hina Ali",
+    "Nuha Ali",
+    "Sara Ali"
+  };
+
+  for (int i = 0; i &lt; MAX; i++) {
+    printf("Value of names[%d] = %s\n", i, names[i]);
+  }
+
+  return 0;
+}
+</code>
+      </pre>
+      <p>Output:</p>
+      <p>Value of names[0] = Zara Ali<br>
+      Value of names[1] = Hina Ali<br>
+      Value of names[2] = Nuha Ali<br>
+      Value of names[3] = Sara Ali</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">An Array of Pointers to Structures</h2>
+    <div class="content">
+      <p>This example demonstrates managing a list of structures using an array of pointers.</p>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+typedef struct {
+  char title[50];
+  float price;
+} Book;
+
+const int MAX = 3;
+
+int main() {
+  Book *book[MAX];
+
+  for (int i = 0; i &lt; MAX; i++) {
+    book[i] = malloc(sizeof(Book));
+    snprintf(book[i]-&gt;title, 50, "Book %d", i + 1);
+    book[i]-&gt;price = 100 + i;
+  }
+
+  for (int i = 0; i &lt; MAX; i++) {
+    printf("Title: %s, Price: %.2f\n", book[i]-&gt;title, book[i]-&gt;price);
+  }
+
+  for (int i = 0; i &lt; MAX; i++) {
+    free(book[i]);
+  }
+
+  return 0;
+}
+</code>
+      </pre>
+      <p>Output:</p>
+      <p>Title: Book 1, Price: 100.00<br>
+      Title: Book 2, Price: 101.00<br>
+      Title: Book 3, Price: 102.00</p>
+    </div>
+  </div>
+</div>

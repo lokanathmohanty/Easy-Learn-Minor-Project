@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Page Redirection</h1>
+    <div class="content">
+
+      <h2>What is Page Redirection?</h2>
+      <p>Page redirection occurs when you click a URL to reach a page <b>X</b> but internally you are directed to another page <b>Y</b>. This concept is different from JavaScript page refresh.</p>
+
+      <p><b>Reasons for page redirection:</b></p>
+      <ul>
+        <li>You move from one domain to another but want visitors from the old domain redirected automatically.</li>
+        <li>You serve different pages based on browser versions, device type, or country.</li>
+        <li>You want to keep search engine traffic when switching domains.</li>
+      </ul>
+
+      <h2>How Page Redirection Works?</h2>
+      <p>There are different ways to implement page redirection using JavaScript. Below are some examples:</p>
+
+      <h3>Example 1: Simple Redirection</h3>
+      <p>Redirect visitors to another page when they click a button.</p>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Page Redirection Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Click the following button, you will be redirected to home page.&lt;/p&gt;
+  &lt;form&gt;
+    &lt;input type="button" value="Redirect Me" onclick="Redirect();" /&gt;
+  &lt;/form&gt;
+  &lt;script type="text/javascript"&gt;
+    function Redirect() {
+      window.location = "https://www.tutorialspoint.com";
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h3>Example 2: Redirection with Delay</h3>
+      <p>Show a message to users before redirecting them after a short delay using <code>setTimeout()</code>.</p>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Page Redirection Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;You will be redirected to main page in 10 sec.&lt;/p&gt;
+  &lt;script&gt;
+    function redirect() {
+      window.location = "https://www.tutorialspoint.com";
+    }
+    setTimeout('redirect()', 10000);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      <p><b>Output:</b> You will be redirected to tutorialspoint.com main page in 10 seconds!</p>
+
+      <h3>Example 3: Browser-Based Redirection</h3>
+      <p>Redirect visitors based on their browser type.</p>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Browser Redirect&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;script type="text/javascript"&gt;
+    var browsername = navigator.appName;
+    if (browsername == "Netscape") {
+      window.location = "https://www.tutorialspoint.com/javascript/index.htm";
+    } else if (browsername == "Microsoft Internet Explorer") {
+      window.location = "https://www.tutorialspoint.com/articles/category/Javascript";
+    } else {
+      window.location = "https://www.tutorialspoint.com/";
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+    </div>
+  </div>
+</div>

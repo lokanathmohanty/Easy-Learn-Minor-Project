@@ -1,0 +1,218 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Graph Algorithms</h1>
+    <div class="content">
+
+      <p>
+        A graph is a data structure consisting of <strong>nodes (vertices)</strong> and <strong>edges</strong>.  
+        Nodes represent entities, and edges represent the connections between them. Graphs are non-linear data structures.
+      </p>
+
+      <p>
+        Graph algorithms in JavaScript are used to traverse graphs, find shortest paths, detect connectivity, and more.
+      </p>
+
+      <h2>Types of Graph</h2>
+      <ul>
+        <li><strong>Directed Graph (Digraph)</strong>: Edges have a direction (→).</li>
+        <li><strong>Undirected Graph</strong>: Edges do not have any direction.</li>
+        <li><strong>Weighted Graph</strong>: Edges have weights (costs, distances, etc.).</li>
+        <li><strong>Unweighted Graph</strong>: Edges do not carry any weight.</li>
+      </ul>
+
+      <h2>Graph Representation</h2>
+      <ul>
+        <li><strong>Adjacency Matrix</strong>: A 2D array where <code>1</code> indicates an edge exists, <code>0</code> means no edge.</li>
+        <li><strong>Adjacency List</strong>: An array of lists, where each list stores neighbors of a vertex.</li>
+      </ul>
+
+      <h2>Graph Algorithms</h2>
+      <p>Some commonly used graph algorithms include:</p>
+      <ul>
+        <li>Breadth First Search (BFS)</li>
+        <li>Depth First Search (DFS)</li>
+        <li>Topological Sorting</li>
+      </ul>
+
+      <!-- BFS Section -->
+      <h2>Breadth First Search (BFS)</h2>
+      <p>
+        BFS traverses the graph level by level. It starts from the root node, explores all neighbors, 
+        then moves to the next level. It uses a <strong>queue</strong>.
+      </p>
+
+      <h3>Algorithm Steps</h3>
+      <ul>
+        <li>Create a queue and enqueue the root node.</li>
+        <li>Create a visited array and mark the root node as visited.</li>
+        <li>While the queue is not empty:
+          <ul>
+            <li>Dequeue a node and process it.</li>
+            <li>Enqueue all unvisited neighbors.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Implementation</h3>
+      <pre><code>function BFS(graph, root) {
+   let visited = [];
+   let queue = [];
+   queue.push(root);
+
+   while (queue.length > 0) {
+      let node = queue.shift();
+
+      if (!visited[node]) {
+         console.log(node);
+         visited[node] = true;
+      }
+
+      const neighbours = graph[node] || [];
+      for (let i = 0; i &lt; neighbours.length; i++) {
+         let neighbour = neighbours[i];
+         if (!visited[neighbour]) {
+            queue.push(neighbour);
+         }
+      }
+   }
+}
+
+let graph = [[1, 2], [3, 4], [5], [6], [6], [7], [8], []];
+BFS(graph, 0);</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>0
+2
+5
+7
+1
+4
+6
+8
+3</code></pre>
+
+      <!-- DFS Section -->
+      <h2>Depth First Search (DFS)</h2>
+      <p>
+        DFS explores as far as possible along each branch before backtracking. 
+        It uses a <strong>stack</strong> (or recursion).
+      </p>
+
+      <h3>Algorithm Steps</h3>
+      <ul>
+        <li>Create a stack and push the root node.</li>
+        <li>Create a visited array and mark the root node as visited.</li>
+        <li>While the stack is not empty:
+          <ul>
+            <li>Pop a node and process it.</li>
+            <li>Push all unvisited neighbors onto the stack.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Implementation</h3>
+      <pre><code>function DFS(graph, root) {
+   let visited = [];
+   let stack = [];
+   stack.push(root);
+
+   while (stack.length &gt; 0) {
+      let node = stack.pop();
+      if (!visited[node]) {
+         console.log(node);
+         visited[node] = true;
+      }
+
+      const neighbours = graph[node] || [];
+      for (let i = 0; i &lt; neighbours.length; i++) {
+         let neighbour = neighbours[i];
+         if (!visited[neighbour]) {
+            stack.push(neighbour);
+         }
+      }
+   }
+}
+
+let graph = [[1, 2], [3, 4], [5], [6], [6], [7], [8], []];
+DFS(graph, 0);</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>0
+2
+5
+7
+1
+4
+6
+8
+3</code></pre>
+
+      <!-- Topological Sorting Section -->
+      <h2>Topological Sorting</h2>
+      <p>
+        Topological Sorting arranges the vertices in a directed acyclic graph (DAG) so that 
+        for every edge <code>u → v</code>, vertex <code>u</code> appears before <code>v</code>.
+      </p>
+
+      <h3>Algorithm Steps</h3>
+      <ul>
+        <li>Mark all vertices as not visited.</li>
+        <li>Perform a DFS on each unvisited node.</li>
+        <li>After visiting all neighbors of a node, push it to a stack.</li>
+        <li>At the end, pop all elements from the stack to get the ordering.</li>
+      </ul>
+
+      <h3>Implementation</h3>
+      <pre><code>function topologicalSort(graph) {
+   let visited = [];
+   let stack = [];
+   for (let i = 0; i &lt; graph.length; i++) {
+      if (!visited[i]) {
+         topologicalSortUtil(graph, i, visited, stack);
+      }
+   }
+   while (stack.length &gt; 0) {
+      console.log(stack.pop());
+   }
+}
+
+function topologicalSortUtil(graph, node, visited, stack) {
+   visited[node] = true;
+   const neighbours = graph[node] || [];
+   for (let i = 0; i &lt; neighbours.length; i++) {
+      let neighbour = neighbours[i];
+      if (!visited[neighbour]) {
+         topologicalSortUtil(graph, neighbour, visited, stack);
+      }
+   }
+   stack.push(node);
+}
+
+let graph = [
+   [1, 2],
+   [3],
+   [3, 4],
+   [],
+   [5],
+   []
+];
+topologicalSort(graph);</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>5
+4
+3
+2
+1
+0</code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        Graph algorithms are powerful tools for solving real-world problems like shortest paths, 
+        connectivity, scheduling, and network analysis. JavaScript provides flexibility to 
+        implement BFS, DFS, Topological Sorting, and more using arrays and objects.
+      </p>
+
+    </div>
+  </div>
+</div>

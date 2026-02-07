@@ -1,0 +1,214 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS !important Rule</h1>
+    <div class="content">
+      <p>
+        CSS <code>!important</code> rule is used to add more priority to a property than normal. In this tutorial we will learn <code>!important</code> rule and how to use it in CSS. Following is syntax of important rule.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+selector {
+   property: value !important; 
+}
+      </pre>
+
+      <h2>Table of Contents</h2>
+      <ul>
+        <li>What is CSS !important Rule?</li>
+        <li>Specificity in CSS</li>
+        <li>CSS !important Rule Example</li>
+        <li>CSS !important and Specificity</li>
+        <li>Override Inline Styles</li>
+        <li>Multiple Important Keyword</li>
+        <li>Custom Properties !important</li>
+        <li>Shorthand Properties !important</li>
+      </ul>
+
+      <h2>What is CSS !important Rule?</h2>
+      <p>
+        An exclamation mark (<code>!</code>) followed by the word <code>important</code> (without space) tells the browser to prioritize that value for the property above all other declaration.
+      </p>
+      <p>
+        The <code>!important</code> rule will be applied regardless of specificity of property. We will discuss specificity later in this tutorial.  
+      </p>
+      <p>
+        If multiple selectors use <code>!important</code> keyword for a property, then the selector with high specificity will be considered to be applied.
+      </p>
+
+      <h2>Specificity in CSS</h2>
+      <p>
+        Specificity in CSS determines which styles are applied to an element when multiple rules could apply. For example, inline styles have highest priority, then id selector, then class selectors and then element selector.
+      </p>
+      <pre>
+/* Element selector Styles */
+p {
+  color: black;
+}
+
+/* Override the above style, Class have higher specificity */
+p.special {
+  color: blue;
+}
+
+/* Using !important to force an override */
+p {
+  color: red !important;
+}
+      </pre>
+      <p>
+        The above declaration makes the text color of paragraph as red. The style of element selector is overridden by class selector, which then again overridden by important keyword.
+      </p>
+      <p>
+        Keep in mind that while <code>!important</code> can be handy in specific cases, it's best to use it only when truly needed.  
+      </p>
+      <p>
+        Using <code>!important</code> too frequently can make your code harder to manage and debug. It's a good practice to rely on proper CSS specificity and structure to prevent the excessive use of <code>!important</code>.
+      </p>
+
+      <h2>CSS !important Rule Example</h2>
+      <p>The following example demonstrates the use of <code>!important</code>.</p>
+      <h3>Example</h3>
+      <pre>
+&lt;style&gt;
+    /* Element Selector Styles */
+    p {
+        color: black;
+        font-weight: bold;
+    }
+
+    /* Using !important to force a color override */
+    p {
+        color: red !important;
+    }
+&lt;/style&gt;
+
+&lt;body&gt;
+    &lt;p&gt;This paragraph will be red.&lt;/p&gt;
+&lt;/body&gt;
+      </pre>
+
+      <h2>CSS !important and Specificity</h2>
+      <p>
+        According to CSS specificity inline styles have highest priority, then id selector, then class selectors and then element selector. Which means the style written by element selectors can be overridden by class selectors, id selector and inline style respectively.
+      </p>
+      <p>
+        Following example uses multiple selectors to apply color property to a paragraph but the element selector property having <code>!important</code> keyword is applied to paragraph.
+      </p>
+      <h3>Example</h3>
+      <pre>
+&lt;style&gt;
+    p {
+        color: black;
+        font-weight: bold;
+    }
+
+    .special {
+        color: blue;
+    }
+
+    #unique {
+        color: darkgreen;
+    }
+
+    p {
+        color: red !important;
+    }
+&lt;/style&gt;
+
+&lt;body&gt;
+    &lt;p id="unique" class="special"&gt;This paragraph will be red.&lt;/p&gt;
+&lt;/body&gt;
+      </pre>
+
+      <h2>Override Inline Styles</h2>
+      <p>
+        Inline style has most priority over any selector in CSS. But <code>!important</code> keyword can override inline CSS also.
+      </p>
+      <h3>Example</h3>
+      <pre>
+&lt;style&gt;
+    p {
+        color: black !important; 
+        font-weight: bold;
+    }
+&lt;/style&gt;
+
+&lt;body&gt;
+    &lt;p style="color:red"&gt;Paragraph is black.&lt;/p&gt;
+&lt;/body&gt;
+      </pre>
+
+      <h2>Multiple Important Keyword</h2>
+      <p>
+        When we apply multiple <code>!important</code> keywords for a property in CSS using multiple selectors, the property which is inside the selector with high specificity is applied.
+      </p>
+      <h3>Example</h3>
+      <pre>
+&lt;style&gt;
+    p {
+        color: black !important;
+    }
+
+    .special {
+        color: blue !important;
+    }
+
+    #unique {
+        color: darkgreen !important;
+    }
+
+    p {
+        color: red !important;
+    }
+&lt;/style&gt;
+
+&lt;body&gt;
+    &lt;p id="unique" class="special"&gt;This paragraph will be darkgreen.&lt;/p&gt;
+&lt;/body&gt;
+      </pre>
+
+      <h2>CSS !important for Custom Properties</h2>
+      <p>
+        When you add <code>!important</code> to a custom property, it means that this value is really important. The <code>!important</code> flag is not passed as part of the custom property value to the <code>var()</code> function.
+      </p>
+      <h3>Example</h3>
+      <pre>
+&lt;style&gt;
+    :root {
+        --primary-color: blue !important;
+        --primary-color: red;
+    }
+
+    .box {
+        background-color: var(--primary-color);
+        width: 200px;
+        height: 200px;
+    }
+&lt;/style&gt;
+
+&lt;body&gt;
+    &lt;div class="box"&gt;&lt;/div&gt;
+    &lt;p&gt;Primary Color variable is Blue&lt;/p&gt;
+&lt;/body&gt;
+      </pre>
+
+      <h2>CSS !important on Shorthand Properties</h2>
+      <p>
+        When you use <code>!important</code> with a shorthand property, it also applies importance to all its individual properties. 
+      </p>
+      <h3>Example</h3>
+      <pre>
+&lt;style&gt;
+    p {
+        font: 15px Arial, sans-serif !important;
+    }
+&lt;/style&gt;
+
+&lt;body&gt;
+    &lt;p style="font-size:100px;"&gt;The font will follow CSS declaration.&lt;/p&gt;
+&lt;/body&gt;
+      </pre>
+    </div>
+  </div>
+</div>

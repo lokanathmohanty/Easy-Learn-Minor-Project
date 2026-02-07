@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP The "use" Statement: Multiple Purposes</h1>
+
+        <div class="content">
+            <p>The $\text{use}$ keyword in PHP serves three distinct, essential functions related to scope management and code organization: **Aliasing**, **Traits**, and **Closures**.</p>
+
+            <hr>
+
+            <h2 class="title">1. Aliasing (Namespaces) 🏷️</h2>
+            <p>The $\text{use}$ statement imports external, fully qualified names (from a namespace) into the current scope, often providing a simpler alias. This prevents the need to type the full namespace path every time you reference a class, function, or constant.</p>
+            <ul>
+                <li>**Class/Alias:** $\text{use My\namespace\myclass as Another;}$</li>
+                <li>**Grouped Use Declarations (PHP 7+):** Allows importing multiple items from the same namespace in a single statement.
+                    <pre>use some\namespace\{ClassA, ClassB, ClassC as C};</pre></li>
+                <li>**Functions and Constants:** Can be imported separately using $\text{use function}$ and $\text{use const}$.
+                    <pre>use function some\namespace\{fn_a};</pre></li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">2. Traits (Code Reusability) 🧩</h2>
+            <p>A **Trait** groups functionality intended to be reused across multiple classes. The $\text{use}$ keyword is placed **inside a class definition** to insert all the methods and properties of the trait into that class.</p>
+            <pre>
+&lt;?php
+   trait mytrait {
+      public function hello() {
+         echo "Hello World from " . __TRAIT__;
+      }
+   }
+
+   class myclass {
+      use mytrait; // The trait's methods are now part of myclass
+   }
+
+   $obj = new myclass();
+   $obj->hello(); // Output: Hello World from mytrait
+?&gt;</pre>
+
+            <hr>
+
+            <h2 class="title">3. Closures (Variable Inheritance) 🎁</h2>
+            <p>In the context of an anonymous function (a closure), the $\text{use}$ keyword allows the closure to **inherit** variables from the scope in which it was declared. Without $\text{use}$, the closure cannot access variables defined outside its body.</p>
+            <pre>
+&lt;?php
+   $maxmarks = 300;
+   $percent = function ($marks) use ($maxmarks) { // Inherits $maxmarks
+      return $marks * 100 / $maxmarks;
+   };
+   $m = 250;
+   echo "marks=$m percentage=" . $percent($m); // Output: marks=250 percentage=83.333333333333
+?&gt;</pre>
+            <p>Note that variables inherited this way are bound **by value** at the time the closure is created, unless they are passed by reference using the ampersand ($\text{\&}$) symbol ($\text{use (\&variable)}$).</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Files mismatch() Method</h1>
+    <div class="content">
+      <p>The <code>mismatch()</code> method is available in the <code>Files</code> class from Java 12 onwards. It provides an easy way to compare two files.</p>
+
+      <h2 class="title">Syntax</h2>
+      <p>The syntax of the <code>Files.mismatch()</code> method is:</p>
+      <p><code>public static long mismatch(Path path, Path path2) throws IOException</code></p>
+      
+      <p><strong>Return Value:</strong> Returns the position of the first mismatch or <code>-1L</code> if there is no mismatch.</p>
+
+      <h2 class="title">How it works</h2>
+      <ul>
+        <li>Returns <code>-1L</code> if files are identical.</li>
+        <li>Returns the position of the first mismatch if the files differ in size or byte content.</li>
+        <li>Files are considered identical if:
+          <ul>
+            <li>Both paths point to the same file.</li>
+            <li>Both paths are the same but the file does not exist.</li>
+            <li>Files are the same size and every byte matches.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h2 class="title">Parameters</h2>
+      <ul>
+        <li><code>path</code> − the path to the first file</li>
+        <li><code>path2</code> − the path to the second file</li>
+      </ul>
+
+      <h2 class="title">Exceptions</h2>
+      <ul>
+        <li><code>IOException</code> − if an I/O error occurs.</li>
+        <li><code>SecurityException</code> − if read access to files is denied.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: No Mismatch in Files</h2>
+    <div class="content">
+      <p>This example creates two temporary text files with the same content and uses <code>Files.mismatch()</code> to confirm they are identical.</p>
+      <pre><code>import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class APITester {
+   public static void main(String[] args) throws IOException {
+      Path path1 = Files.createTempFile("file1", ".txt");
+      Path path2 = Files.createTempFile("file2", ".txt");
+
+      Files.writeString(path1, "tutorialspoint");
+      Files.writeString(path2, "tutorialspoint");
+
+      long mismatch = Files.mismatch(path1, path2);
+
+      if (mismatch > 1L) {
+         System.out.println("Mismatch occurred in file1 and file2 at : " + mismatch);
+      } else {
+         System.out.println("Files matched");
+      }
+
+      path1.toFile().deleteOnExit();
+      path2.toFile().deleteOnExit();
+   }
+}</code></pre>
+      <p><strong>Output:</strong> Files matched</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Mismatch Identification in Files</h2>
+    <div class="content">
+      <p>This example creates two temporary text files with different content. The method returns the position of the first mismatch.</p>
+      <pre><code>import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class APITester {
+   public static void main(String[] args) throws IOException {
+      Path path1 = Files.createTempFile("file1", ".txt");
+      Path path2 = Files.createTempFile("file2", ".txt");
+
+      Files.writeString(path1, "tutorialspoint");
+      Files.writeString(path2, "tutorialspoint Java 12");
+
+      long mismatch = Files.mismatch(path1, path2);
+
+      if (mismatch > 1L) {
+         System.out.println("Mismatch occurred in file1 and file2 at : " + mismatch);
+      } else {
+         System.out.println("Files matched");
+      }
+
+      path1.toFile().deleteOnExit();
+      path2.toFile().deleteOnExit();
+   }
+}</code></pre>
+      <p><strong>Output:</strong> Mismatch occurred in file1 and file2 at : 1</p>
+    </div>
+  </div>
+</div>

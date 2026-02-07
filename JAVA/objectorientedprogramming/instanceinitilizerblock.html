@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Initializer Block</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Object Initialization</h1>
+            <h2 class="subtitle">Session: Instance Initializer Block</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is an Instance Initializer Block?</h2>
+                <p>An **Instance Initializer Block** is a block of code (enclosed in curly braces <code>{}</code>) that is declared directly inside a class, outside any method or constructor. It is primarily used to **initialize instance data members**.</p>
+                <p>An initializer block is executed **once for every object** created from the class, making it useful for setting initial values for instance variables.</p>
+            </div>
+
+            <div class="content characteristics">
+                <h2 class="subtitle">Execution and Characteristics</h2>
+                <p>The Instance Initializer Block is executed automatically during object creation, but its order relative to constructors is strict:</p>
+                <ul>
+                    <li>It is called immediately after the object is created.</li>
+                    <li>It is called **before** any constructor of the object is invoked.</li>
+                    <li>In an inheritance hierarchy, it is executed after the **superclass constructor** but before the subclass constructor.</li>
+                    <li>It is often used to hold common initialization logic shared by multiple constructors.</li>
+                </ul>
+            </div>
+
+            <div class="content order">
+                <h2 class="subtitle">Order of Execution: Initializer Block vs. Constructor</h2>
+                <p>When an object is created, the steps follow a precise order, demonstrating that the initializer block runs before the constructor.</p>
+                <pre><code>public class Tester {
+   // Instance Initializer Block
+   {
+      System.out.println("1. Inside instance initializer block");
+   }
+   
+   Tester(){
+      System.out.println("2. Inside constructor");
+   }
+   
+   public static void main(String[] arguments) {
+      Tester test = new Tester();
+   }
+}</code></pre>
+                <p>Output proves the execution order:</p>
+                <pre><code>1. Inside instance initializer block
+2. Inside constructor</code></pre>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Initializer Block and Inheritance Order</h2>
+                <p>In the case of inheritance, the instance initializer block of the subclass is guaranteed to execute *after* the superclass constructor, ensuring all inherited members are initialized first.</p>
+                <pre><code>class SuperTester {
+   SuperTester(){
+      System.out.println("1. Inside super constructor");
+   }
+}
+
+public class Tester extends SuperTester {
+   {
+      System.out.println("2. Inside instance initializer block");
+   }
+   Tester(){
+      System.out.println("3. Inside child constructor");
+   }
+}</code></pre>
+                <p>Output (The initializer block is called in step 2, between the parent and child constructors):</p>
+                <pre><code>1. Inside super constructor
+2. Inside instance initializer block
+3. Inside child constructor</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

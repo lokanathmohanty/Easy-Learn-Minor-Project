@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Numbers</h1>
+    <div class="content">
+      <p>Python provides built-in support to store and process numeric data. Numbers are widely used in almost every Python application. Python supports multiple number types and offers many functions for mathematical operations.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Number Types in Python</h2>
+    <div class="content">
+      <ul>
+        <li><strong>int</strong> – Integer numbers</li>
+        <li><strong>float</strong> – Floating point numbers</li>
+        <li><strong>complex</strong> – Complex numbers</li>
+        <li><strong>bool</strong> – Boolean values (subclass of int: <code>True=1</code>, <code>False=0</code>)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Integers</h2>
+    <div class="content">
+      <p>Integers are whole numbers without a fractional part. Examples: <code>1234</code>, <code>-55</code>, <code>0</code>.</p>
+      <p>They can be created using literals, expressions, or the <code>int()</code> function.</p>
+      <pre>
+a = 10
+b = 20
+c = a + b
+print("a:", a, "type:", type(a))
+print("c:", c, "type:", type(c))
+      </pre>
+      <p>Output:</p>
+      <pre>
+a: 10 type: &lt;class 'int'&gt;
+c: 30 type: &lt;class 'int'&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Binary, Octal, and Hexadecimal</h2>
+    <div class="content">
+      <h3>Binary</h3>
+      <pre>
+a = 0b101
+print("a:", a, "type:", type(a))
+
+b = int("0b101011", 2)
+print("b:", b, "type:", type(b))
+      </pre>
+
+      <h3>Octal</h3>
+      <pre>
+a = 0O107
+print(a, type(a))   # Output: 71 &lt;class 'int'&gt;
+
+b = int("20", 8)
+print(b, type(b))   # Output: 16 &lt;class 'int'&gt;
+      </pre>
+
+      <h3>Hexadecimal</h3>
+      <pre>
+a = 0XA2
+print(a, type(a))   # Output: 162 &lt;class 'int'&gt;
+
+num_string = "A1"
+number = int(num_string, 16)
+print("Hexadecimal:", num_string, "Integer:", number)
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Floating Point Numbers</h2>
+    <div class="content">
+      <p>Floats have integer and fractional parts separated by a decimal point. They can also be written in scientific notation.</p>
+      <pre>
+a = 9.99
+b = -0.999
+c = 1.23E3
+print(a, b, c)
+      </pre>
+      <p>Output:</p>
+      <pre>
+9.99 -0.999 1230.0
+      </pre>
+      <p>Floats can also represent <code>inf</code> (infinity) and <code>nan</code> (Not a Number).</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Complex Numbers</h2>
+    <div class="content">
+      <p>A complex number is represented as <code>x+yj</code>, where <code>x</code> is real and <code>y</code> is imaginary part.</p>
+      <pre>
+a = 5+6j
+print(a, type(a))
+
+b = complex(5.3, 6)
+print(b, type(b))
+      </pre>
+      <p>Attributes and methods:</p>
+      <pre>
+a = 5+6j
+print("Real part:", a.real)
+print("Imag part:", a.imag)
+print("Conjugate:", a.conjugate())
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Type Conversion</h2>
+    <div class="content">
+      <ul>
+        <li><code>int(x)</code> → Convert to integer</li>
+        <li><code>float(x)</code> → Convert to float</li>
+        <li><code>complex(x)</code> → Complex with real part <code>x</code></li>
+        <li><code>complex(x, y)</code> → Complex with real part <code>x</code> and imaginary part <code>y</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Math Module Functions</h2>
+    <div class="content">
+      <p>Python’s <code>math</code> module provides many functions:</p>
+      <ul>
+        <li><strong>Theoretic Functions:</strong> <code>ceil()</code>, <code>floor()</code>, <code>factorial()</code>, <code>gcd()</code>, <code>isqrt()</code>, etc.</li>
+        <li><strong>Power &amp; Log:</strong> <code>pow()</code>, <code>sqrt()</code>, <code>log()</code>, <code>log10()</code>, <code>exp()</code></li>
+        <li><strong>Trigonometric:</strong> <code>sin()</code>, <code>cos()</code>, <code>tan()</code>, <code>asin()</code>, <code>acos()</code>, <code>atan()</code></li>
+        <li><strong>Conversions:</strong> <code>degrees()</code>, <code>radians()</code></li>
+        <li><strong>Constants:</strong> <code>math.pi</code>, <code>math.e</code>, <code>math.tau</code>, <code>math.inf</code>, <code>math.nan</code></li>
+        <li><strong>Hyperbolic:</strong> <code>sinh()</code>, <code>cosh()</code>, <code>tanh()</code>, <code>asinh()</code>, etc.</li>
+        <li><strong>Special:</strong> <code>gamma()</code>, <code>lgamma()</code>, <code>erf()</code>, <code>erfc()</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Random Numbers</h2>
+    <div class="content">
+      <p>The <code>random</code> module provides random number generation functions:</p>
+      <ul>
+        <li><code>random()</code> → Random float in [0,1)</li>
+        <li><code>randrange(start, stop, step)</code> → Random number from range</li>
+        <li><code>choice(seq)</code> → Random item from sequence</li>
+        <li><code>shuffle(seq)</code> → Shuffle sequence</li>
+        <li><code>uniform(a, b)</code> → Random float between a and b</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Built-in Mathematical Functions</h2>
+    <div class="content">
+      <ul>
+        <li><code>abs(x)</code> → Absolute value</li>
+        <li><code>max(iterable)</code> → Maximum value</li>
+        <li><code>min(iterable)</code> → Minimum value</li>
+        <li><code>pow(x, y)</code> → x raised to y</li>
+        <li><code>round(x, n)</code> → Round to n digits</li>
+        <li><code>sum(iterable)</code> → Sum of elements</li>
+      </ul>
+    </div>
+  </div>
+</div>

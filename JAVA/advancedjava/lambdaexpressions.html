@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Java - Lambda Expressions</h1>
+
+    <div class="content">
+      <p>Lambda expressions were introduced in Java 8 and are a major feature that simplifies functional programming. A lambda expression provides a clear and concise way to implement a <strong>functional interface</strong> — an interface with a single abstract method.</p>
+
+      <p>Lambdas remove boilerplate code and make programs more readable. They can infer parameter types and may omit return statements and even braces in simple cases.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Lambda Expression Syntax</h2>
+      <p><code>parameter -&gt; expression body</code></p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Characteristics of Java Lambda Expressions</h2>
+      <ul>
+        <li><strong>Optional type declaration:</strong> Compiler infers the parameter types.</li>
+        <li><strong>Optional parentheses:</strong> Not needed for single parameters.</li>
+        <li><strong>Optional braces:</strong> Not required for single-statement bodies.</li>
+        <li><strong>Optional return keyword:</strong> Inferred if body contains a single expression.</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Basic Math Operations with Lambda</h3>
+      <pre><code>MathOperation addition = (int a, int b) -&gt; a + b;
+MathOperation subtraction = (a, b) -&gt; a - b;
+MathOperation multiplication = (int a, int b) -&gt; { return a * b; };
+MathOperation division = (int a, int b) -&gt; a / b;
+
+System.out.println("10 + 5 = " + operate(10, 5, addition));
+System.out.println("10 - 5 = " + operate(10, 5, subtraction));
+System.out.println("10 x 5 = " + operate(10, 5, multiplication));
+System.out.println("10 / 5 = " + operate(10, 5, division));</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>10 + 5 = 15
+10 - 5 = 5
+10 x 5 = 50
+10 / 5 = 2</code></pre>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Lambda with GreetingService</h3>
+      <pre><code>GreetingService greetService1 = message -&gt; System.out.println("Hello " + message);
+GreetingService greetService2 = (message) -&gt; System.out.println("Hello " + message);
+
+greetService1.sayMessage("Mahesh");
+greetService2.sayMessage("Suresh");</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Hello Mahesh
+Hello Suresh</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Using Constants in Lambda</h2>
+      <p>Lambdas can access <code>final</code> or effectively final variables. Reassigning such variables causes a compilation error.</p>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Constant in Lambda</h3>
+      <pre><code>final static String salutation = "Hello! ";
+GreetingService greetService1 = message -&gt; System.out.println(salutation + message);
+
+greetService1.sayMessage("Mahesh");</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Hello! Mahesh</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Lambda in Java Collections</h2>
+      <p>Lambda expressions are commonly used in collections — for iteration, filtering, and sorting. Java 8 added many new methods to the Collection API that support lambdas.</p>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Lambda with forEach and removeIf</h3>
+      <pre><code>List&lt;String&gt; list = new ArrayList&lt;&gt;();
+list.add("java");
+list.add("html");
+list.add("python");
+
+list.forEach(i -&gt; System.out.println(i));
+
+List&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
+numbers.add(1);
+numbers.add(2);
+numbers.add(3);
+numbers.add(4);
+numbers.add(5);
+numbers.add(6);
+numbers.add(7);
+numbers.add(8);
+
+System.out.println(numbers);
+numbers.removeIf(n -&gt; n % 2 != 0);
+System.out.println(numbers);</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>java
+html
+python
+[1, 2, 3, 4, 5, 6, 7, 8]
+[2, 4, 6, 8]</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Conclusion</h2>
+      <p>Lambda expressions simplify code by removing the need for anonymous classes and boilerplate. They improve readability and enable functional-style operations, especially in collections.</p>
+    </div>
+
+  </div>
+</div>

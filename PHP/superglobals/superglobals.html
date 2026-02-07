@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Sessions and the `$_SESSION` Superglobal</h1>
+
+    <div class="content">
+      <p>
+        In PHP, a **Session** is a mechanism for making data persistently accessible across multiple pages during a single user visit to a website. The primary tool for managing this data is the **`$_SESSION`** superglobal variable.
+      </p>
+
+      <h2>What is `$_SESSION`?</h2>
+      <p>
+        **`$_SESSION`** is an **associative superglobal array** that holds all registered session variables for the current user's session. It allows data (like user ID, preferences, or shopping cart contents) to be maintained and retrieved as the user navigates from one script to another.
+      </p>
+
+      <h3>How Sessions Work:</h3>
+      <ol>
+        <li>
+          The server starts a session and generates a **unique Session ID** (e.g., stored in a cookie on the user's browser).
+        </li>
+        <li>
+          The server creates a temporary file on the server to store the session data, associated with that unique ID.
+        </li>
+        <li>
+          All data stored in the `$_SESSION` array is written to this server-side file and is available until the session is terminated.
+        </li>
+      </ol>
+
+      <hr>
+
+      <h2>Managing Sessions</h2>
+
+      <h3>Starting a Session</h3>
+      <p>
+        The **`session_start()`** function must be called at the very beginning of every script that intends to use or manipulate session data. It either creates a new session or resumes the existing one using the session ID.
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php</code><br>
+          <code>&nbsp;&nbsp;&nbsp;**session_start();**</code><br>
+          <code>&nbsp;&nbsp;&nbsp;// All code below can now use $_SESSION</code><br>
+          <code>?&gt;</code>
+        </p>
+      </div>
+
+      <h3>Creating and Reading Variables</h3>
+      <p>
+        Session variables are stored as key-value pairs in the `$_SESSION` array, just like any other associative array.
+      </p>
+      <div class="example">
+        <p>
+          **Create/Set:** <code>$_SESSION['UserID'] = $_POST['ID'];</code><br>
+          **Read:** <code>echo $_SESSION['Name'];</code>
+        </p>
+      </div>
+
+      <h3>Deleting Session Data</h3>
+      <p>
+        You can remove individual variables or terminate the entire session:
+      </p>
+      <ul>
+        <li>
+          **Remove Specific Variable:** Use **`unset()`** on the array key.
+          <div class="example">
+            <code>unset($_SESSION['UserID']);</code>
+          </div>
+        </li>
+        <li>
+          **Destroy All Data/Session:** Use **`session_destroy()`**. This function removes the session file from the server.
+          <div class="example">
+            <code>session_destroy();</code>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

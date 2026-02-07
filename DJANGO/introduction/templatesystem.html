@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django Template System (DTL) 🎨</h1>
+        <div class="content">
+            <p>Django's **Template System** is the **presentation layer** of the MVT architecture, enabling a clear separation of concerns: **Python logic** goes in **Views** (<code>views.py</code>), and **HTML markup** goes in **Templates**.</p>
+
+            <h2>The <code>render</code> Function</h2>
+            <p>The <code>render()</code> function is the bridge that links the View logic to the Template output. It takes three essential parameters:</p>
+            <ol>
+                <li>**<code>request</code>:** The initial <code>HttpRequest</code> object.</li>
+                <li>**Path to the Template:** The template file path (relative to the <code>TEMPLATE_DIRS</code> setting).</li>
+                <li>**Dictionary of Parameters (Context):** A dictionary containing the variables and data (known as the **context**) that the template needs to display. (Using <code>locals()</code> is a shortcut to pass all local variables).</li>
+            </ol>
+
+            <hr>
+
+            <h2>Django Template Language (DTL)</h2>
+            <p>DTL uses a simple mini-language syntax distinguished by special delimiters:</p>
+
+            <h3>1. Displaying Variables <code>{{ variable }}</code></h3>
+            <p>Variables are placeholders enclosed in double curly braces. Django replaces them with the corresponding value from the context dictionary supplied by the view.</p>
+            <p>If a variable is an object (not a string), Django calls its <code>__str__</code> method to display it. You can access object attributes or dictionary keys using a dot (e.g., <code>{{ today.year }}</code>).</p>
+
+            <h3>2. Filters <code>{{ variable|filter:argument }}</code></h3>
+            <p>Filters are used to **modify variables at display time** without altering the underlying data. They are applied using the pipe symbol (<code>|</code>).</p>
+            <ul>
+                <li><code>{{ string|lower }}</code>: Converts the string to lowercase.</li>
+                <li><code>{{ string|truncatewords:80 }}</code>: Displays only the first 80 words of the string.</li>
+                <li><code>{{ string|escape|linebreaks }}</code>: Applies multiple filters: first escapes unsafe characters, then converts line breaks into <code>&lt;br&gt;</code> or <code>&lt;p&gt;</code> tags.</li>
+            </ul>
+
+            <h3>3. Tags <code>{% tag %}</code></h3>
+            <p>Tags provide procedural logic, enabling complex operations like loops, conditionals, and template inheritance. They are enclosed in curly braces and percent signs.</p>
+            <h4>Conditional Logic (<code>{% if %}</code>)</h4>
+            <p>Supports `if`, `elif`, and `else` statements, similar to Python, for conditionally rendering content:</p>
+            <pre><code>{% if today.day == 1 %}
+    the first day of month.
+{% elif today.day == 30 %}
+    the last day of month.
+{% else %}
+    I don't know.
+{%endif%}</code></pre>
+            <h4>Looping (<code>{% for %}</code>)</h4>
+            <p>Allows iteration over lists or other iterable data passed from the view:</p>
+            <pre><code>{% for day in days_of_week %}
+    &lt;p&gt;{{ day }}&lt;/p&gt;
+{% endfor %}</code></pre>
+            <h4>Template Inheritance (<code>{% extends %}</code> and <code>{% block %}</code>)</h4>
+            <p>This is Django's mechanism for code reuse and maintaining a consistent site structure:</p>
+            <ul>
+                <li>**<code>{% block name %}...{% endblock %}</code>** (in the base template, e.g., <code>main_template.html</code>): Defines "holes" or regions that child templates can fill.</li>
+                <li>**<code>{% extends "base.html" %}</code>** (in the child template, e.g., <code>hello.html</code>): Specifies the parent template to inherit from.</li>
+                <li>**Child Template Block:** To fill a block, the child template uses the same block tag name (e.g., <code>{% block title %}My Page{% endblock %}</code>). Any content in the child block will override the content in the parent block.</li>
+            </ul>
+            <h4>Comment Tag</h4>
+            <p>Used to add notes within the template that **will not appear in the rendered HTML source code** (unlike HTML comments): <code>{% comment %} This note is only for developers. {% endcomment %}</code></p>
+        </div>
+    </div>
+</div>

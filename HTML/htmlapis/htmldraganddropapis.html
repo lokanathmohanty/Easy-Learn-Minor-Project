@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Drag and Drop API</h1>
+    <div class="content">
+      <p>The Drag and Drop (DnD) API provides native support for dragging elements with the mouse and dropping them into targets. This makes it easier to copy, reorder, or delete items without complex JavaScript or external libraries.</p>
+      <p>Most modern browsers support the HTML5 Drag and Drop API, including Chrome, Firefox, and Safari.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating a Draggable Element</h2>
+    <div class="content">
+      <p>To make an element draggable, set the <code>draggable</code> attribute to <code>true</code>:</p>
+      <p><code>&lt;div draggable="true"&gt; ... &lt;/div&gt;</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Drag and Drop Events</h2>
+    <div class="content">
+      <ul>
+        <li><code>dragstart</code> – Fires when the user starts dragging an element.</li>
+        <li><code>dragenter</code> – Fires when the mouse enters a valid drop target.</li>
+        <li><code>dragover</code> – Fires repeatedly as the element is dragged over a drop target.</li>
+        <li><code>dragleave</code> – Fires when the mouse leaves a drop target.</li>
+        <li><code>drag</code> – Fires continuously while dragging.</li>
+        <li><code>drop</code> – Fires when the element is dropped.</li>
+        <li><code>dragend</code> – Fires when the drag operation is finished.</li>
+      </ul>
+      <p>Note: Only drag events fire during a drag operation, not regular mouse events.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The DataTransfer Object</h2>
+    <div class="content">
+      <p>The <code>dataTransfer</code> object is used to hold data about the drag-and-drop operation. It can set, retrieve, and clear data:</p>
+      <ul>
+        <li><code>dataTransfer.setData(format, data)</code> – Stores data in a given format.</li>
+        <li><code>dataTransfer.getData(format)</code> – Retrieves stored data.</li>
+        <li><code>dataTransfer.clearData()</code> – Clears stored data.</li>
+        <li><code>dataTransfer.dropEffect</code> – Defines the type of drop (copy, move, link, none).</li>
+        <li><code>dataTransfer.effectAllowed</code> – Defines allowed drag operations.</li>
+        <li><code>dataTransfer.files</code> – Accesses files being dragged.</li>
+        <li><code>dataTransfer.setDragImage()</code> – Sets a custom drag image.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Drag and Drop Process</h2>
+    <div class="content">
+      <p>The process of drag and drop typically includes:</p>
+      <ul>
+        <li>Make an element draggable with <code>draggable="true"</code>.</li>
+        <li>Use <code>dragstart</code> to store the data being dragged.</li>
+        <li>Set listeners for <code>dragenter</code>, <code>dragover</code>, and <code>drop</code> on the drop target.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example – Making an Object Draggable</h2>
+    <div class="content">
+      <p>This example shows how to drag a purple box:</p>
+      <p>
+        <code>
+          &lt;div id="boxA" draggable="true" ondragstart="return dragStart(event)"&gt;Drag Me&lt;/div&gt;<br><br>
+          function dragStart(ev) {<br>
+&nbsp;&nbsp;ev.dataTransfer.effectAllowed = 'move';<br>
+&nbsp;&nbsp;ev.dataTransfer.setData("Text", ev.target.id);<br>
+&nbsp;&nbsp;return true;<br>
+          }
+        </code>
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example – Dropping the Object</h2>
+    <div class="content">
+      <p>This example shows dropping the purple box into the pink box:</p>
+      <p>
+        <code>
+          &lt;div id="boxB" ondragenter="return dragEnter(event)" <br>
+&nbsp;&nbsp;ondragover="return dragOver(event)" <br>
+&nbsp;&nbsp;ondrop="return dragDrop(event)"&gt;Drop Here&lt;/div&gt;<br><br>
+
+          function dragEnter(ev) {<br>
+&nbsp;&nbsp;ev.preventDefault();<br>
+&nbsp;&nbsp;return true;<br>
+          }<br><br>
+
+          function dragOver(ev) {<br>
+&nbsp;&nbsp;return false;<br>
+          }<br><br>
+
+          function dragDrop(ev) {<br>
+&nbsp;&nbsp;var src = ev.dataTransfer.getData("Text");<br>
+&nbsp;&nbsp;ev.target.appendChild(document.getElementById(src));<br>
+&nbsp;&nbsp;ev.stopPropagation();<br>
+&nbsp;&nbsp;return false;<br>
+          }
+        </code>
+      </p>
+    </div>
+  </div>
+</div>

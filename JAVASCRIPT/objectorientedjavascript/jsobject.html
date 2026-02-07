@@ -1,0 +1,267 @@
+<div class="content">
+  <p><strong>Session Goals:</strong> Understand what JavaScript objects are, how to create them, work with properties and methods, traverse and transform them, and apply best practices used in modern applications.</p>
+  <ul>
+    <li>Define objects and distinguish them from primitive values.</li>
+    <li>Create objects using multiple patterns (literal, constructor function, <span>Object.create()</span>, classes).</li>
+    <li>Read, write, delete, and enumerate properties safely.</li>
+    <li>Use prototypes and understand delegation.</li>
+    <li>Apply common utility methods from <span>Object</span>.</li>
+    <li>Avoid common pitfalls and adopt robust patterns.</li>
+  </ul>
+</div>
+
+<h2 class="title">1) What Is an Object?</h2>
+<div class="content">
+  <p>An object is a non-primitive value that stores data as <em>key–value pairs</em>. Keys (also called property names) are strings or symbols; values can be any type, including functions (methods). Objects are unordered collections.</p>
+  <ul>
+    <li>Keys → property names (string or symbol)</li>
+    <li>Values → any JS value (number, string, array, object, function, etc.)</li>
+    <li>Methods → properties whose values are functions and can use <span>this</span></li>
+  </ul>
+</div>
+
+<h2 class="title">2) Creating Objects — Patterns</h2>
+<div class="content">
+  <ul>
+    <li><strong>Object Literal:</strong> Use curly braces to define keys and values directly.</li>
+    <li><strong><span>new Object()</span>:</strong> Rarely needed in modern code; creates an empty object.</li>
+    <li><strong>Constructor Function + <span>new</span>:</strong> Functions that initialize instances via <span>this</span>.</li>
+    <li><strong><span>Object.create(proto)</span>:</strong> Creates a new object with the specified prototype.</li>
+    <li><strong>ES6 Class:</strong> Syntactic sugar over prototypes for defining constructors and methods.</li>
+  </ul>
+</div>
+
+<h2 class="title">Examples — Creating Objects</h2>
+<div class="content">
+  <ul>
+    <li>Literal: <span>{ title: "Perl", author: "Mohtashim", pages: 355 }</span></li>
+    <li>Constructor Function: <span>function Book(t,a){ this.title=t; this.author=a; }</span> then <span>new Book("Perl","Mohtashim")</span></li>
+    <li>Object.create: <span>Object.create(null)</span> (no prototype) or <span>Object.create(proto)</span> (delegation).</li>
+    <li>Class: <span>class Book { constructor(t,a){ this.title=t; this.author=a; } }</span> then <span>new Book("Perl","Mohtashim")</span></li>
+  </ul>
+</div>
+
+<h2 class="title">3) Reading & Writing Properties</h2>
+<div class="content">
+  <ul>
+    <li><strong>Dot notation:</strong> <span>obj.key</span> (simple identifiers only).</li>
+    <li><strong>Bracket notation:</strong> <span>obj["key-name"]</span> (computed or special characters).</li>
+    <li><strong>Create/Update:</strong> <span>obj.price = 100</span></li>
+    <li><strong>Delete:</strong> <span>delete obj.price</span></li>
+    <li><strong>Check own property:</strong> <span>Object.hasOwn(obj,"key")</span> or <span>obj.hasOwnProperty("key")</span></li>
+  </ul>
+</div>
+
+<h2 class="title">Examples — Reading & Writing</h2>
+<div class="content">
+  <ul>
+    <li>Get document title: <span>var t = document.title</span></li>
+    <li>Add method then call it: <span>obj.say = function(){ return "hi"; }</span> then <span>obj.say()</span></li>
+    <li>Dynamic key: <span>const k = "full-name"; obj[k] = "Ada Lovelace"</span></li>
+  </ul>
+</div>
+
+<h2 class="title">4) Methods, <span>this</span>, and Binding</h2>
+<div class="content">
+  <p>When a function is invoked as a method (<span>obj.fn()</span>), <span>this</span> refers to the object before the dot (in non-strict mode rules aside). Arrow functions capture <span>this</span> from the surrounding scope and are not suitable as methods when you rely on dynamic <span>this</span>.</p>
+  <ul>
+    <li>Method form: <span>const user = { name:"Ada", greet(){ return "Hello " + this.name; } }</span></li>
+    <li>Avoid arrow for methods needing dynamic <span>this</span>.</li>
+    <li>Use <span>Function.prototype.bind</span> to fix <span>this</span> when passing methods as callbacks.</li>
+  </ul>
+</div>
+
+<h2 class="title">5) Enumerating Properties</h2>
+<div class="content">
+  <ul>
+    <li><span>Object.keys(obj)</span> → array of own enumerable keys.</li>
+    <li><span>Object.values(obj)</span> → array of own enumerable values.</li>
+    <li><span>Object.entries(obj)</span> → array of [key, value] pairs.</li>
+    <li><span>for...in</span> loops over enumerable keys, including inherited. Filter with <span>Object.hasOwn</span>.</li>
+  </ul>
+</div>
+
+<h2 class="title">Examples — Enumeration</h2>
+<div class="content">
+  <ul>
+    <li>Map values: <span>Object.values(stats).map(n =&gt; n * 2)</span></li>
+    <li>Entries to object: <span>Object.fromEntries([["a",1],["b",2]])</span></li>
+  </ul>
+</div>
+
+<h2 class="title">6) Prototypes & Delegation</h2>
+<div class="content">
+  <p>Every object has an internal link to another object called its <em>prototype</em> (except those created with <span>Object.create(null)</span>). When you access a property not found on the object, JavaScript looks up the prototype chain.</p>
+  <ul>
+    <li>Set prototype (rarely needed): <span>Object.setPrototypeOf(obj, proto)</span></li>
+    <li>Get prototype: <span>Object.getPrototypeOf(obj)</span></li>
+    <li>Check relation: <span>proto.isPrototypeOf(obj)</span></li>
+  </ul>
+</div>
+
+<h2 class="title">Examples — Prototypes</h2>
+<div class="content">
+  <ul>
+    <li>Delegating object: <span>const child = Object.create(parent)</span> then <span>child.missing</span> resolves via <span>parent</span>.</li>
+    <li>Class methods live on <span>ClassName.prototype</span>, shared by instances.</li>
+  </ul>
+</div>
+
+<h2 class="title">7) Built-in (Native) Objects</h2>
+<div class="content">
+  <ul>
+    <li>Number, String, Boolean</li>
+    <li>Array, Date, RegExp</li>
+    <li>Math (namespace-like object)</li>
+    <li>Symbol</li>
+    <li>Set, WeakSet</li>
+    <li>Map, WeakMap</li>
+    <li>TypedArray (Int8Array, Uint8Array, etc.)</li>
+    <li>Reflect</li>
+  </ul>
+</div>
+
+<h2 class="title">8) Useful <span>Object</span> Utilities</h2>
+<div class="content">
+  <ul>
+    <li><span>Object.assign(target, ...sources)</span> — shallow copy / merge.</li>
+    <li><span>Object.freeze(obj)</span> — make object immutable (shallow).</li>
+    <li><span>Object.seal(obj)</span> — disallow add/remove but allow modify existing (unless read-only descriptors).</li>
+    <li><span>Object.preventExtensions(obj)</span> — disallow adding new properties.</li>
+    <li><span>Object.getOwnPropertyNames(obj)</span>, <span>Object.getOwnPropertySymbols(obj)</span> — introspection.</li>
+    <li><span>Object.getOwnPropertyDescriptor(obj, key)</span> — read descriptors.</li>
+    <li><span>Object.fromEntries(iterable)</span> — build objects from pairs.</li>
+    <li><span>Object.hasOwn(obj, key)</span> — safe own-property check.</li>
+  </ul>
+</div>
+
+<h2 class="title">Examples — Utility Patterns</h2>
+<div class="content">
+  <ul>
+    <li>Shallow clone: <span>const clone = Object.assign({}, obj)</span></li>
+    <li>Pairs to object: <span>Object.fromEntries([["id",1],["name","Ada"]])</span></li>
+    <li>Freeze config: <span>const cfg = Object.freeze({ retries: 3 })</span></li>
+  </ul>
+</div>
+
+<h2 class="title">9) Copying: Shallow vs Deep</h2>
+<div class="content">
+  <ul>
+    <li><strong>Shallow copy</strong> duplicates only the top level; nested objects are shared references.</li>
+    <li><strong>Deep copy</strong> duplicates nested structures; use libraries or structured cloning when needed.</li>
+    <li>Structured clone (where available): <span>structuredClone(obj)</span></li>
+  </ul>
+</div>
+
+<h2 class="title">Examples — Copying</h2>
+<div class="content">
+  <ul>
+    <li>Shallow: <span>const copy = { ...original }</span></li>
+    <li>Deep (built-in): <span>const deep = structuredClone(original)</span></li>
+  </ul>
+</div>
+
+<h2 class="title">10) Modern Syntax with Objects</h2>
+<div class="content">
+  <ul>
+    <li><strong>Property shorthand:</strong> <span>const user = { name, age }</span></li>
+    <li><strong>Method shorthand:</strong> <span>const obj = { greet(){ return "hi"; } }</span></li>
+    <li><strong>Computed keys:</strong> <span>const k = "id-"+n; const o = { [k]: 42 }</span></li>
+    <li><strong>Destructuring:</strong> <span>const { x, y: alias = 0 } = point</span></li>
+    <li><strong>Optional chaining:</strong> <span>user.profile?.avatar?.url</span></li>
+    <li><strong>Nullish coalescing:</strong> <span>value ?? defaultValue</span></li>
+  </ul>
+</div>
+
+<h2 class="title">Examples — Modern Syntax</h2>
+<div class="content">
+  <ul>
+    <li>Safe access: <span>config.db?.host ?? "localhost"</span></li>
+    <li>Destructure with defaults: <span>const { retries = 3 } = options</span></li>
+  </ul>
+</div>
+
+<h2 class="title">11) JSON vs JavaScript Objects</h2>
+<div class="content">
+  <ul>
+    <li>JSON is a data format (text) with strict rules; object literals are executable JS expressions.</li>
+    <li>JSON keys and string values must use double quotes.</li>
+    <li>Functions, <span>undefined</span>, and <span>Symbol</span> are not valid in JSON.</li>
+  </ul>
+</div>
+
+<h2 class="title">Examples — JSON</h2>
+<div class="content">
+  <ul>
+    <li>Parse: <span>const data = JSON.parse(text)</span></li>
+    <li>Stringify: <span>const text = JSON.stringify(obj)</span></li>
+  </ul>
+</div>
+
+<h2 class="title">12) Immutability & Safety</h2>
+<div class="content">
+  <ul>
+    <li>Prefer pure functions that return new objects instead of mutating inputs.</li>
+    <li>Freeze critical configuration objects.</li>
+    <li>Validate external data before merging into objects.</li>
+  </ul>
+</div>
+
+<h2 class="title">13) Common Pitfalls</h2>
+<div class="content">
+  <ul>
+    <li>Using arrow functions for methods that rely on <span>this</span>.</li>
+    <li>Assuming property order; objects are unordered (iteration order is defined but should not be relied upon for semantics).</li>
+    <li>Using <span>for...in</span> without filtering own properties.</li>
+    <li>Accidentally sharing nested references after a shallow copy.</li>
+    <li>Mutating frozen or sealed objects (silently fails in non-strict mode, throws in strict mode).</li>
+  </ul>
+</div>
+
+<h2 class="title">14) Practice — Guided Exercises</h2>
+<div class="content">
+  <ul>
+    <li>Create a <span>Book</span> object with keys <span>title</span>, <span>author</span>, and a method <span>summary()</span> that returns a string.</li>
+    <li>Write a function that safely reads <span>user.profile.avatar</span> using optional chaining and returns a fallback URL.</li>
+    <li>Implement a shallow clone utility using <span>Object.assign</span> and show how a nested object remains shared.</li>
+    <li>Build a prototype chain with <span>Object.create</span> and demonstrate delegation.</li>
+  </ul>
+</div>
+
+<h2 class="title">15) Knowledge Check</h2>
+<div class="content">
+  <ul>
+    <li>When would you choose <span>Object.create(null)</span> over <span>{}</span>?</li>
+    <li>How does method shorthand differ from assigning a function to a property?</li>
+    <li>What are the trade-offs between shallow and deep copies?</li>
+    <li>Why can optional chaining improve robustness when accessing nested data?</li>
+    <li>What is the role of prototypes in property lookup?</li>
+  </ul>
+</div>
+
+<h2 class="title">16) Quick Reference</h2>
+<div class="content">
+  <ul>
+    <li>Create literal: <span>{ key: value }</span></li>
+    <li>Access: <span>obj.key</span> or <span>obj["key"]</span></li>
+    <li>Existence (own): <span>Object.hasOwn(obj,"key")</span></li>
+    <li>Enumerate: <span>Object.keys</span> / <span>Object.values</span> / <span>Object.entries</span></li>
+    <li>Clone (shallow): <span>{ ...obj }</span> or <span>Object.assign({}, obj)</span></li>
+    <li>Freeze: <span>Object.freeze(obj)</span></li>
+    <li>From entries: <span>Object.fromEntries(pairs)</span></li>
+  </ul>
+</div>
+
+<h2 class="title">Further Reading</h2>
+<div class="content">
+  <ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects">MDN — Working with Objects</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">MDN — Object Reference</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">MDN — Prototypes</a></li>
+  </ul>
+</div>
+
+<h2 class="title">Summary</h2>
+<div class="content">
+  <p>Objects are the foundational data structure in JavaScript. Mastering creation patterns, property access, enumeration, prototypes, and modern utilities enables you to model complex data and behavior clearly and safely.</p>
+</div>

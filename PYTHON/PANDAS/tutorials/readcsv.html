@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Pandas Read CSV</h1>
+    <div class="content">
+      <h2>Read CSV Files</h2>
+      <p>A simple way to store big data sets is to use CSV files (comma separated files).</p>
+      <p>CSV files contain plain text and is a well known format that can be read by everyone including Pandas.</p>
+      <p>In our examples we will be using a CSV file called 'data.csv'.</p>
+      <p><a href="data.csv" target="_blank" rel="noopener">Download data.csv</a> or <a href="data.csv" target="_blank" rel="noopener">Open data.csv</a></p>
+
+      <h3>Example</h3>
+      <p>Load the CSV into a DataFrame:</p>
+      <pre>
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+print(df.to_string())
+      </pre>
+      <p><strong>Tip:</strong> use <code>to_string()</code> to print the entire DataFrame.</p>
+
+      <h3>Example</h3>
+      <p>If you have a large DataFrame with many rows, Pandas will only return the first 5 rows, and the last 5 rows:</p>
+      <pre>
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+print(df)
+      </pre>
+
+      <h2>max_rows</h2>
+      <p>The number of rows returned is defined in Pandas option settings.</p>
+      <p>You can check your system's maximum rows with the <code>pd.options.display.max_rows</code> statement.</p>
+
+      <h3>Example</h3>
+      <p>Check the number of maximum returned rows:</p>
+      <pre>
+import pandas as pd
+
+print(pd.options.display.max_rows)
+      </pre>
+      <p>In my system the number is 60, which means that if the DataFrame contains more than 60 rows, the <code>print(df)</code> statement will return only the headers and the first and last 5 rows.</p>
+
+      <h3>Example</h3>
+      <p>Increase the maximum number of rows to display the entire DataFrame:</p>
+      <pre>
+import pandas as pd
+
+pd.options.display.max_rows = 9999
+
+df = pd.read_csv('data.csv')
+
+print(df)
+      </pre>
+    </div>
+  </div>
+</div>

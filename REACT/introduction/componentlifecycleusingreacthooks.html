@@ -1,0 +1,173 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>ReactJS - Component Life Cycle Using React Hooks</h1>
+    </div>
+
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        React Hooks provides a special Hook, <code>useEffect()</code>, to execute 
+        certain functionality during the life cycle of the component. 
+        <code>useEffect()</code> combines <code>componentDidMount</code>, 
+        <code>componentDidUpdate</code>, and <code>componentWillUnmount</code> 
+        into a single API.
+      </p>
+
+      <h2>useEffect API</h2>
+      <pre><code>
+useEffect(
+   &lt;executeFn&gt;, 
+   &lt;values&gt;
+);
+      </code></pre>
+      <ul>
+        <li><strong>executeFn</strong> − Function to execute when an effect occurs, with an optional return function for cleanup.</li>
+        <li><strong>values</strong> − Array of values the effect depends on. The function executes only when these values change.</li>
+      </ul>
+
+      <h2>Adding useEffect in Clock App</h2>
+      <p>Steps to update the <code>react-clock-hook-app</code> using <code>useEffect</code>:</p>
+      <ul>
+        <li>Open <code>src/components/Clock.js</code>.</li>
+        <li>Import <code>useEffect</code> along with <code>useState</code>.</li>
+        <li>Use <code>useEffect</code> to set an interval and return a cleanup function to clear it.</li>
+      </ul>
+
+      <pre><code>
+import React, { useState, useEffect } from 'react';
+
+function Clock() {
+   const [currentDateTime, setCurrentDateTime] = useState(new Date());
+
+   useEffect(() =&gt; {
+      let setTime = () =&gt; {
+         console.log("setTime is called");
+         setCurrentDateTime(new Date());
+      }
+      let interval = setInterval(setTime, 1000);
+      return () =&gt; clearInterval(interval);
+   }, []);
+
+   return (
+      &lt;div&gt;
+         &lt;p&gt;The current time is {currentDateTime.toString()}&lt;/p&gt;
+      &lt;/div&gt;
+   );
+}
+export default Clock;
+      </code></pre>
+
+      <h2>Removing Clock After 5 Seconds</h2>
+      <p>Edit <code>index.js</code> to remove the Clock from the DOM using <code>setTimeout</code>:</p>
+      <pre><code>
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Clock from './components/Clock';
+
+ReactDOM.render(
+   &lt;React.StrictMode&gt;
+      &lt;Clock /&gt;
+   &lt;/React.StrictMode&gt;,
+   document.getElementById('root')
+);
+
+setTimeout(() =&gt; {
+   ReactDOM.render(
+      &lt;React.StrictMode&gt;
+         &lt;div&gt;&lt;p&gt;Clock is removed from the DOM.&lt;/p&gt;&lt;/div&gt;
+      &lt;/React.StrictMode&gt;,
+      document.getElementById('root')
+   );
+}, 5000);
+      </code></pre>
+      <p>
+        The clock will run for 5 seconds and then be removed from the DOM. 
+        The cleanup function ensures <code>clearInterval()</code> is called properly.
+      </p>
+
+      <h2>React Children Property (Containment)</h2>
+      <p>
+        React allows arbitrary children user interface content to be included inside a component. 
+        This is accessed via <code>props.children</code>. Adding children inside the component 
+        is called <strong>containment</strong>.
+      </p>
+      <p>
+        Example: A <code>RichTextMessage</code> component can render whatever children are passed to it.
+      </p>
+
+      <h3>RichTextMessage Component</h3>
+      <pre><code>
+import React from 'react';
+
+class RichTextMessage extends React.Component {
+   constructor(props) {
+      super(props);
+   }
+   render() {
+      return (
+         &lt;div&gt;{this.props.children}&lt;/div&gt;
+      )
+   }
+}
+export default RichTextMessage;
+      </code></pre>
+
+      <h2>Using RichTextMessage</h2>
+      <pre><code>
+import React from 'react';
+import ReactDOM from 'react-dom';
+import RichTextMessage from './components/RichTextMessage';
+
+ReactDOM.render(
+   &lt;React.StrictMode&gt;
+      &lt;RichTextMessage&gt;
+         &lt;h1&gt;Containment is really a cool feature.&lt;/h1&gt;
+      &lt;/RichTextMessage&gt;
+   &lt;/React.StrictMode&gt;,
+   document.getElementById('root')
+);
+      </code></pre>
+
+      <h2>Browser Output</h2>
+      <pre><code>
+&lt;div id="root"&gt;
+   &lt;div&gt;
+      &lt;div&gt;
+         &lt;h1&gt;Containment is really a cool feature.&lt;/h1&gt;
+      &lt;/div&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+      </code></pre>
+
+      <h2>Updating Children</h2>
+      <p>Change the child property in <code>index.js</code>:</p>
+      <pre><code>
+ReactDOM.render(
+   &lt;React.StrictMode&gt;
+      &lt;RichTextMessage&gt;
+         &lt;h1&gt;Containment is really an excellent feature.&lt;/h1&gt;
+      &lt;/RichTextMessage&gt;
+   &lt;/React.StrictMode&gt;,
+   document.getElementById('root')
+);
+      </code></pre>
+
+      <h2>Updated Browser Output</h2>
+      <pre><code>
+&lt;div id="root"&gt;
+   &lt;div&gt;
+      &lt;div&gt;
+         &lt;h1&gt;Containment is really an excellent feature.&lt;/h1&gt;
+      &lt;/div&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+      </code></pre>
+
+      <p>
+        In short, containment is an excellent feature to pass arbitrary user interface 
+        content into a component dynamically.
+      </p>
+    </div>
+  </div>
+</div>

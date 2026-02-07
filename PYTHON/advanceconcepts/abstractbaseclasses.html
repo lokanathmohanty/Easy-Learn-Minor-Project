@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Abstract Base Classes</h1>
+    </div>
+    <div class="content">
+      <p>
+        An Abstract Base Class (ABC) in Python is a class that cannot be instantiated directly and is intended to be subclassed. ABCs serve as blueprints for other classes by providing a common interface that all subclasses must implement. 
+      </p>
+      <p>
+        They play a fundamental role in <a href="https://www.tutorialspoint.com/python/python_oops_concepts.htm">object-oriented programming in Python</a> by enforcing a consistent API across related classes.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Purpose of Abstract Base Classes</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>Defining a Standard Interface:</strong> Ensures derived classes implement certain methods.</li>
+        <li><strong>Enforcing Implementation:</strong> Raises errors if abstract methods are not implemented.</li>
+        <li><strong>Providing a Template:</strong> Useful for large projects by reducing inconsistency and errors.</li>
+        <li><strong>Facilitating Polymorphism:</strong> Allows operations across classes that follow the same interface.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Defining an Abstract Class</h2>
+    </div>
+    <div class="content">
+      <pre>
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+   @abstractmethod
+   def area(self):
+      pass
+
+   @abstractmethod
+   def perimeter(self):
+      pass
+      </pre>
+      <p>
+        Here, <code>Shape</code> acts as an abstract base class requiring subclasses to define <code>area()</code> and <code>perimeter()</code>.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Enforcing Implementation</h2>
+    </div>
+    <div class="content">
+      <pre>
+class Rectangle(Shape):
+   def __init__(self, width, height):
+      self.width = width
+      self.height = height
+
+   def area(self):
+      return self.width * self.height
+
+   def perimeter(self):
+      return 2 * (self.width + self.height)
+      </pre>
+      <p>
+        A subclass like <code>Rectangle</code> must implement both the abstract methods. Otherwise, Python raises a <code>TypeError</code>.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Key Components</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>ABC Class:</strong> Base for creating abstract classes.</li>
+        <li><strong>@abstractmethod Decorator:</strong> Marks methods as abstract.</li>
+        <li><strong>ABCMeta:</strong> Metaclass that keeps track of abstract methods.</li>
+        <li><strong>Concrete Methods:</strong> Optional methods with default implementations.</li>
+        <li><strong>Instantiation Restrictions:</strong> Cannot create objects of ABCs with unimplemented methods.</li>
+        <li><strong>Subclass Verification:</strong> Use <code>issubclass()</code> and <code>isinstance()</code> for type checks.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Polymorphism with ABCs</h2>
+    </div>
+    <div class="content">
+      <pre>
+class Circle(Shape):
+   def __init__(self, radius):
+      self.radius = radius
+
+   def area(self):
+      import math
+      return math.pi * self.radius ** 2
+
+   def perimeter(self):
+      import math
+      return 2 * math.pi * self.radius
+
+def print_shape_info(shape):
+   print(shape.description())
+   print(f"Area: {shape.area()}")
+   print(f"Perimeter: {shape.perimeter()}")
+
+shapes = [Rectangle(5, 10), Circle(7)]
+for shape in shapes:
+   print_shape_info(shape)
+      </pre>
+      <p>
+        This demonstrates polymorphism: both <code>Rectangle</code> and <code>Circle</code> share the same interface defined by <code>Shape</code>.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Output Illustration</h2>
+    </div>
+    <div class="content">
+      <p>
+        When running the above, valid subclasses display their areas and perimeters. 
+        Attempting to instantiate <code>IncompleteShape</code> results in:
+      </p>
+      <pre>
+Can't instantiate abstract class IncompleteShape 
+with abstract methods area, perimeter
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="content">
+      <p>
+        [Previous](https://www.tutorialspoint.com/python/python_guis.htm) | 
+        [Quiz](https://www.tutorialspoint.com/python/quiz_on_python_abstract_base_classes.htm) | 
+        [Next](https://www.tutorialspoint.com/python/python_custom_exceptions.htm)
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Local Variables</h1>
+
+    <div class="content">
+      <p>
+        A **Local Variable** in PHP is a variable declared and defined **inside a function**. It has a restricted **local scope**, meaning it can only be accessed and modified within the boundaries of that specific function.
+      </p>
+      <p>
+        Think of local variables as **private notes**; only the function that "wrote" them can read them. They are completely separate from variables outside the function, even if they share the same name.
+      </p>
+
+      <h2>How Local Variables Work</h2>
+      <ul>
+        <li>
+          **Creation:** Local variables are created when the function is called.
+        </li>
+        <li>
+          **Existence:** They exist only for the duration of the function's execution.
+        </li>
+        <li>
+          **Destruction:** Once the function finishes running, the local variables are deleted by PHP, freeing up memory.
+        </li>
+      </ul>
+
+      <h3>Demonstration of Scope Isolation</h3>
+      <p>
+        The following example clearly shows that the global variable `$x` and the local variable `$x` inside the function are two distinct entities.
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$x = 4; // Global $x</code><br>
+          <br>
+          <code>&nbsp;&nbsp;&nbsp;function assignx () {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$x = 0; // Local $x: a separate variable</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print "\$x inside function is $x. \n";</code><br>
+          <code>&nbsp;&nbsp;&nbsp;}</code><br>
+          <br>
+          <code>&nbsp;&nbsp;&nbsp;assignx();</code><br>
+          <code>&nbsp;&nbsp;&nbsp;print "\$x outside of function is $x. \n";</code><br>
+          <code>?&gt;</code>
+        </p>
+        <p class="content">
+          Output:<br>
+          $x inside function is 0. <br>
+          $x outside of function is 4.
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Benefits of Using Local Variables</h2>
+      <ul>
+        <li>
+          **Avoid Conflict:** Different functions can use the exact same variable names (e.g., `$i` in a loop, `$temp`) without any risk of interfering with each other's data or global variables.
+        </li>
+        <li>
+          **Security/Encapsulation:** They protect data by keeping it private within the function, ensuring that the function's internal state cannot be accidentally changed from the outside.
+        </li>
+        <li>
+          **Memory Efficiency:** By being automatically destroyed after the function completes, local variables ensure efficient memory management.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

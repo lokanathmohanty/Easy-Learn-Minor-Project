@@ -1,0 +1,100 @@
+<div class="container">
+   <div class="session">
+      <h1 class="title">CSS - Quotes</h1>
+      <div class="content">
+         <p>
+            The <strong>CSS quotes</strong> property allows the browser to render quotation marks around text content. It is usually used in combination with pseudo-elements <code>::before</code> and <code>::after</code> along with the <code>content</code> property. 
+            Using this property, you can define how open and close quotation marks appear for different levels of nested quotations.
+         </p>
+
+         <h2>Syntax</h2>
+         <p><code>quotes: none | auto | &lt;string&gt;+ | initial;</code></p>
+
+         <h2>Possible Values</h2>
+         <ul>
+            <li><strong>none</strong> − No quotation marks are generated when <code>open-quote</code> and <code>close-quote</code> are used.</li>
+            <li><strong>auto</strong> − Browser automatically decides appropriate quotes depending on the language (<code>lang</code> attribute).</li>
+            <li><strong>string,string,+</strong> − One or more pairs of strings are used to represent quotation marks. The first pair is used for outermost quotes, the second pair for nested quotes, and so on.</li>
+            <li><strong>initial</strong> − Resets the quotes property to its default (user agent defined) value.</li>
+         </ul>
+
+         <h2>Quotation Characters</h2>
+         <p>Some common quotation entities:</p>
+         <ul>
+            <li><code>&quot;</code> (double quotes) → <code>\0022</code></li>
+            <li><code>&#39;</code> (single quote) → <code>\0027</code></li>
+            <li>&lt; and &gt; (single angle quotes) → <code>\2039</code>, <code>\203A</code></li>
+            <li>&laquo; and &raquo; (double angle quotes) → <code>\00AB</code>, <code>\00BB</code></li>
+            <li>‘ ’ (curly single quotes) → <code>\2018</code>, <code>\2019</code></li>
+            <li>“ ” (curly double quotes) → <code>\201C</code>, <code>\201D</code></li>
+         </ul>
+
+         <h2>Examples</h2>
+
+         <h2>1. quotes: none</h2>
+         <p>This removes quotation marks completely:</p>
+         <pre>
+p {
+   quotes: none;
+}
+p::before {
+   content: open-quote;
+}
+p::after {
+   content: close-quote;
+}
+         </pre>
+         <p><q style="quotes:none">This text has no quotes rendered.</q></p>
+
+         <h2>2. quotes with string values</h2>
+         <p>We can define different quotation marks for different nesting levels:</p>
+         <pre>
+#quote1 { quotes: '«' '»'; }
+#quote2 { quotes: '[' ']'; }
+#quote3 { quotes: "<<" ">>" "<" ">"; }
+         </pre>
+         <p><q id="quote1">Outer level <q id="quote2">Inner level</q>.</q></p>
+         <p><q id="quote3">Multi-level <q id="quote3">Nested <q id="quote3">Quotes</q></q>.</q></p>
+
+         <h2>3. quotes: initial</h2>
+         <p>Restores browser default quotes:</p>
+         <pre>
+q {
+   quotes: initial;
+}
+         </pre>
+         <p><q>Browser decides default quotation style.</q></p>
+
+         <h2>4. quotes: auto</h2>
+         <p>Automatically sets quotation marks based on language:</p>
+         <pre>
+q {
+   quotes: auto;
+}
+         </pre>
+         <p><q lang="en">English quotation.</q></p>
+         <p><q lang="fr">Citation française.</q></p>
+         <p><q lang="de">Deutsches Zitat.</q></p>
+
+         <h2>5. Using :lang pseudo-class</h2>
+         <p>Different quotes for different languages:</p>
+         <pre>
+:lang(en) {
+   quotes: '"' '"' "<<" ">>";
+}
+:lang(fr) {
+   quotes: '\2039' '\203A';
+}
+         </pre>
+         <p><q lang="en">English <q lang="en">nested</q> example.</q></p>
+         <p><q lang="fr">Exemple français.</q></p>
+
+         <h2>Key Takeaways</h2>
+         <ul>
+            <li>The <code>quotes</code> property works best with <code>q</code> elements or pseudo-elements using <code>open-quote</code> and <code>close-quote</code>.</li>
+            <li>It provides great flexibility for localization and custom styles.</li>
+            <li>Different languages may have different default quotation marks, so <code>auto</code> and <code>:lang</code> selectors are very useful.</li>
+         </ul>
+      </div>
+   </div>
+</div>

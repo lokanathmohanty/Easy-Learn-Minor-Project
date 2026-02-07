@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Introduction to AJAX</h1>
+
+        <div class="content">
+            <h2 class="title">What is AJAX?</h2>
+            <p><strong>AJAX</strong> stands for **A**synchronous **J**avaScript **A**nd **X**ML. It is a client-side technique that allows a web page to be updated **asynchronously**—meaning parts of the page can be updated without requiring a full page reload. This process uses an "AJAX engine" to make background server calls, resulting in a faster, more dynamic, and responsive user experience.</p>
+
+            <h3 class="title">AJAX and PHP Interaction</h3>
+            <p>In a PHP application using AJAX:</p>
+            <ul>
+                <li>The **client-side JavaScript** (the AJAX engine) sends an asynchronous request to the server.</li>
+                <li>The **server-side PHP script** processes the request, generates dynamic content, and retrieves/manipulates data.</li>
+                <li>PHP returns a response, typically formatted as **JSON** or **XML**.</li>
+                <li>The JavaScript receives the response, parses the data, and updates the necessary portion of the HTML page using the **DOM**.</li>
+            </ul>
+
+            <h3 class="title">Technologies Powering AJAX</h3>
+            <p>AJAX is not a single technology but a group of existing, browser-native technologies working together:</p>
+            <ul>
+                <li><strong>JavaScript:</strong> Used to create client-side functionality and manage the asynchronous request/response.</li>
+                <li><strong>$\text{XMLHttpRequest}$ ($\text{XHR}$):</strong> The key browser $\text{API}$ used to perform the asynchronous $\text{HTTP}$ data exchange with the server.</li>
+                <li><strong>XML/JSON:</strong> Used as the standard formats for exchanging data between the server and client.</li>
+                <li><strong>HTML/CSS/DOM:</strong> Used for the page markup, styling, and dynamically altering the content/layout.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Using $\text{XMLHttpRequest}$ (XHR)</h2>
+
+            <h3>Client-Side JavaScript $(\text{XHR})$</h3>
+            <p>The $\text{XHR}$ object is the foundation for making requests without reloading. The $\text{open()}$ method sets up the request ($\text{GET}$, $\text{POST}$, $\text{URL}$), and $\text{send()}$ transmits it. The $\text{onload}$ event handles the server's response.</p>
+            <pre>
+// Create XHR object
+var xhr = new XMLHttpRequest();
+// Configure request: GET to test.php
+xhr.open("GET", "test.php?name=World");
+xhr.send();
+
+xhr.onload = function() {
+   // Check for success (HTTP status 200)
+   if (xhr.status === 200) {
+      // Parse the JSON response
+      var responseData = JSON.parse(xhr.responseText);
+      // Example responseData: {message: "Hello, World!"}
+   } else {   
+      // Handle server error
+   }
+};</pre>
+
+            <h3>Server-Side PHP Response</h3>
+            <p>The PHP script processes the $\text{GET}$ data ($\text{\$_GET}$), creates a structured response (like a $\text{stdClass}$ object), sets the $\text{Content-Type}$ header, and encodes the data as $\text{JSON}$ before sending it back.</p>
+            <pre>
+&lt;?php
+   // Get the request data (e.g., ?name=World)
+   $name = $_GET["name"];
+   
+   // Create a response object.
+   $response = new stdClass();
+   $response->message = "Hello, $name!";
+   
+   // Send JSON response
+   header("Content-Type: application/json");
+   echo json_encode($response);
+?&gt;</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Sharing Libraries as NuGet Packages</h1>
+
+        <div class="content">
+            <p>To share a library for use in other projects, it must be packaged into a **NuGet package** (a <code>.nupkg</code> file). NuGet is the package manager for .NET, and the resulting package can be published to a public feed (nuget.org) or a private feed.</p>
+        </div>
+
+        <h2 class="title">Creating the NuGet Package (dotnet pack)</h2>
+        <div class="content">
+            <p>The **.NET Core CLI** (Command Line Interface) is used to generate the NuGet package file from the library project:</p>
+            <ol>
+                <li class="content">Open the command prompt and navigate to the folder containing the library's **<code>project.json</code>** file.</li>
+                <li class="content">Execute the **<code>dotnet pack</code>** command:
+                    <pre><code>dotnet pack</code></pre>
+                </li>
+                <li class="content">The command compiles the library and produces the NuGet package files in the **<code>bin\Debug</code>** folder.</li>
+                <li class="content">Two package files are generated:
+                    <ul>
+                        <li class="content">**<code>StringLibrary.1.0.0.nupkg</code>**: Contains the compiled library (<code>StringLibrary.dll</code>) and package metadata/dependencies.</li>
+                        <li class="content">**<code>StringLibrary.1.0.0.symbols.nupkg</code>**: Contains source files (<code>.cs</code> files) and program database files (<code>.pdb</code>) necessary for debugging.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <h2 class="title example">Configuring Package Metadata</h2>
+        <div class="content example">
+            <p>The package metadata, such as the author, description, and version, is configured within the **<code>project.json</code>** file:</p>
+            <ol>
+                <li class="content">Open the <code>project.json</code> file of your library project.</li>
+                <li class="content">Add or update metadata fields outside of the <code>supports</code>, <code>dependencies</code>, and <code>frameworks</code> sections.</li>
+            </ol>
+            <p>Example of updated metadata in <code>project.json</code>:</p>
+            <pre><code>{ 
+   "authors": [ "Mark Junior" ], 
+   "description": "String Library API", 
+   "version" : "1.0.1-*", 
+   "supports": {}, 
+   
+   "dependencies": { 
+      // ... dependencies listed here ...
+   }, 
+   "frameworks": { 
+      "netstandard1.3": {} 
+   } 
+}</code></pre>
+            <p>After updating the version to <code>1.0.1-*</code>, running **<code>dotnet pack</code>** again will generate a new package named **<code>StringLibrary.1.0.1.nupkg</code>** with the updated metadata.</p>
+        </div>
+
+        <h2 class="title">Publishing the Package to a Private Feed</h2>
+        <div class="content">
+            <p>To consume the library in another project, it must be published to a NuGet feed (either public or private). Using a private feed is often simpler for internal sharing:</p>
+            <ol>
+                <li class="content">
+                    **Install NuGet Commandline Utility**: This utility is required to push packages to a feed. It can be installed via the NuGet Package Manager UI (**<code>nuget.commandline</code>**) or downloaded manually.
+                </li>
+                <li class="content">
+                    **Push the Package**: Open the command prompt, navigate to the **<code>bin\Debug</code>** folder, and use the <code>nuget add</code> command to copy the package to your private feed directory:
+                    <pre><code>nuget add StringLibrary.1.0.1.nupkg -Source D:\PrivateNugetPackages</code></pre>
+                    <p>The <code>-Source</code> argument specifies the local path of your private package feed.</p>
+                </li>
+                <li class="content">
+                    **Verification**: The NuGet package is installed into the private feed location, typically creating a folder structure like <code>D:\PrivateNugetPackages\stringlibrary\1.0.1\StringLibrary.1.0.1.nupkg</code>. The package is now ready to be consumed by other projects that reference this private source.
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

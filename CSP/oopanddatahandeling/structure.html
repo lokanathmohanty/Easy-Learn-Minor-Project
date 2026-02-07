@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Structures (`struct`)</h1>
+        
+        <h2 class="title">Introduction to Structures</h2>
+        <div class="content">
+            <p>A **structure** (`struct`) in C# is a **value type** that encapsulates related variables, which can be of various data types, into a single variable. Structures are primarily used to represent a **record** or a group of closely related simple data values, such as coordinates (X, Y) or details of an item (Title, ID).</p>
+            
+            <h3>Key Distinction (Value Type):</h3>
+            <p>The crucial difference between a struct and a class is storage:</p>
+            <ul>
+                <li>**Structs are Value Types:** Stored on the **Stack** (or inline within another object), making them generally faster and better for small data sets where they are frequently passed by value.</li>
+                <li>**Classes are Reference Types:** Stored on the **Heap**.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Defining and Instantiating a Structure</h2>
+        <div class="content">
+            <h3>Definition Syntax:</h3>
+            <p>Use the **`struct`** keyword to define a new data type.</p>
+            <pre>
+struct Books {
+   public string title;
+   public string author;
+   public string subject;
+   public int book_id;
+}; 
+            </pre>
+            
+            <h3>Instantiation (Creation):</h3>
+            <p>Structs can be instantiated with or without the `new` operator. If `new` is not used, all fields must be manually initialized before the struct can be used.</p>
+            <ol>
+                <li>**Using `new` (Parameterized Constructor):** Initializes the struct and calls a custom or default constructor.
+                    <pre>Person p1 = new Person("Sudhir Sharma", 27, "SEO01");</pre>
+                </li>
+                <li>**Without `new` (Manual Assignment):** Declares the variable, but the fields remain unassigned until explicitly set.
+                    <pre>
+Person p1;
+p1.name = "Sudhir Sharma";
+p1.age = 27;
+                    </pre>
+                </li>
+            </ol>
+        </div>
+        
+        <h2 class="title">Example: Defining and Using a Simple Structure</h2>
+        <div class="content example">
+            <p>This demonstrates declaring two variables of the `Books` struct type and manually assigning values.</p>
+            <pre>
+struct Books {
+   public string title;
+   public int book_id;
+} 
+
+public class testStructure {
+   public static void Main(string[] args) {
+      Books Book1; // Declare struct variable
+      Book1.title = "C Programming";
+      Book1.book_id = 6495407;
+
+      Console.WriteLine( "Book 1 title : {0}", Book1.title);
+      Console.WriteLine("Book 1 book_id :{0}", Book1.book_id);
+   }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                Book 1 title : C Programming<br>
+                Book 1 book_id : 6495407
+            </p>
+        </div>
+        
+        <h2 class="title">Key Features and Differences from Classes</h2>
+        <div class="content">
+            <ul>
+                <li>**Support for Members:** Structures can have methods, fields, indexers, properties, operator methods, constructors, and events.</li>
+                <li>**Constructors:** Structures can have parameterized constructors, but they **cannot** define a parameterless (default) constructor, as the compiler always provides one automatically.</li>
+                <li>**Immutability:** Structs can be made **immutable** by using the `readonly` keyword on their fields, which is often recommended for thread safety and predictable behavior.</li>
+                <li>**No Inheritance:** Structures **cannot inherit** from other structs or classes, and they cannot be used as a base for others. They **can, however, implement interfaces**.</li>
+                <li>**Passing:** When a struct is passed as an argument to a method, a **copy** of the data is created (pass-by-value).</li>
+            </ul>
+        </div>
+    </div>
+</div>

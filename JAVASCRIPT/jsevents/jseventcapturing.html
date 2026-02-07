@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Event Capturing</h1>
+    <div class="content">
+      <p>Event capturing in JavaScript is the initial phase in the event propagation model where the event travels from the root of the document tree down to the target element. During this phase, the browser captures the event on the ancestors of the target element before reaching the target itself.</p>
+      <p>Event capturing and event bubbling are two phases in the JavaScript event propagation model. In event capturing, the browser captures and triggers events starting from the root of the document hierarchy and moving down to the target element. On the other hand, event bubbling occurs after the event reaches the target element and then bubbles up from the target to the root.</p>
+      <p>Capturing is useful for handling events at higher-level ancestors, while bubbling is the default behaviour where events propagate from the target back up the hierarchy. Understanding both phases is crucial for effective event handling and manipulation of the event flow.</p>
+      <p>Let us see some important aspects of event capturing:</p>
+      <ul>
+        <li><strong>Phase:</strong> Event capturing is the initial phase in the event propagation model.</li>
+        <li><strong>Direction:</strong> Capturing occurs in the reverse order of the element hierarchy, from the root of the document tree down to the target element.</li>
+        <li><strong>Use Case:</strong> Useful when you want to intercept and handle events at a higher-level ancestor before they reach the target element or trigger any bubbling phase handlers.</li>
+        <li><strong>Registration:</strong> Register event listeners for the capturing phase using the third parameter of addEventListener (e.g., element.addEventListener('click', myFunction, true);).</li>
+        <li><strong>Propagation:</strong> Automatic propagation that precedes the target and bubbling phases. The event flows down the hierarchy, triggering capturing phase handlers on each ancestor.</li>
+        <li><strong>Preventing Default:</strong> Use event.preventDefault() during the capturing phase to prevent the default behavior of the event before it reaches the target.</li>
+        <li><strong>Stopping Propagation:</strong> Use event.stopPropagation() in the capturing phase to stop further propagation of the event, preventing it from reaching the target or triggering bubbling phase handlers.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Basic Event Capturing</h2>
+    <div class="content">
+      <p>In this example, we have a container div (<code>container</code>) and a button (<code>myButton</code>) inside it. Two capturing phase event listeners are added using addEventListener with the true parameter to enable capturing. When you click the button, both capturing phase log messages will be displayed. This illustrates the capturing phase as the event travels from the document root down to the target element.</p>
+      <pre><code>&lt;div id="container"&gt;
+  &lt;button id="myButton"&gt;Click me!&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const output = document.getElementById('output');
+  document.getElementById('container').addEventListener('click', function(event) {
+    output.innerHTML += 'Capturing phase - Container clicked&lt;br&gt;';
+  }, true);
+
+  document.getElementById('myButton').addEventListener('click', function(event) {
+    output.innerHTML += 'Capturing phase - Button clicked&lt;br&gt;';
+  }, true);
+&lt;/script&gt;
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Preventing Default Behaviour</h2>
+    <div class="content">
+      <p>In this example, we have a hyperlink with an id of <code>link</code>. The capturing phase event listener is attached to the link during the capturing phase. When you click the link, the capturing phase log message will be displayed, and the default behaviour is prevented using <code>event.preventDefault()</code>.</p>
+      <pre><code>&lt;a href="https://www.tutorialspoint.com" id="link"&gt;Click me to prevent default&lt;/a&gt;
+
+&lt;script&gt;
+  document.getElementById('link').addEventListener('click', function(event) {
+    alert('Capturing phase - Link clicked');
+    event.preventDefault();
+  }, true);
+&lt;/script&gt;
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Capturing and Stopping Propagation</h2>
+    <div class="content">
+      <p>In this example, the parent div's capturing phase event listener actively halts propagation through the use of <code>event.stopPropagation()</code>. Only upon clicking the button will you see a log message during capture phase ("Parent clicked") being displayed; however, it does not trigger any further action within child elements' capturing phases.</p>
+      <pre><code>&lt;div id="parent"&gt;
+  &lt;button id="child"&gt;Click me!&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const output = document.getElementById('output');
+  document.getElementById('parent').addEventListener('click', function(event) {
+    output.innerHTML += 'Capturing phase - Parent clicked&lt;br&gt;';
+    event.stopPropagation();
+  }, true);
+
+  document.getElementById('child').addEventListener('click', function(event) {
+    output.innerHTML += 'Capturing phase - Child clicked&lt;br&gt;';
+  }, true);
+&lt;/script&gt;
+      </code></pre>
+    </div>
+  </div>
+</div>

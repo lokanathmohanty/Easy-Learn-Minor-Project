@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Random Forest</h1>
+    <div class="content">
+      <p>
+        Random Forest creates multiple decision trees and uses majority voting on the output of these trees to classify observations. It improves accuracy and reduces overfitting compared to a single decision tree. The error rate for cases not used in training is called the Out-of-Bag (OOB) error estimate.
+      </p>
+      <p>
+        The R package <code>randomForest</code> is used to build and analyze random forest models.
+      </p>
+      
+      <h2>Install Package</h2>
+      <pre><code>install.packages("randomForest")</code></pre>
+      
+      <h2>Basic Syntax</h2>
+      <pre><code>randomForest(formula, data)</code></pre>
+      
+      <p>
+        - <strong>formula</strong>: Specifies predictor and response variables.<br>
+        - <strong>data</strong>: Name of the data frame.
+      </p>
+      
+      <h2>Example</h2>
+      <pre><code># Load necessary packages
+library(party)
+library(randomForest)
+
+# Load sample data
+print(head(readingSkills))
+
+# Create random forest model
+output.forest &lt;- randomForest(nativeSpeaker ~ age + shoeSize + score, data = readingSkills)
+
+# View random forest model summary
+print(output.forest)
+
+# Show importance of predictors
+print(importance(output.forest, type = 2))
+</code></pre>
+      
+      <h2>Sample Output</h2>
+      <pre><code>Call:
+ randomForest(formula = nativeSpeaker ~ age + shoeSize + score, data = readingSkills)
+               Type of random forest: classification
+                     Number of trees: 500
+No. of variables tried at each split: 1
+
+        OOB estimate of error rate: 1%
+Confusion matrix:
+    no yes class.error
+no  99   1        0.01
+yes  1  99        0.01
+
+         MeanDecreaseGini
+age              13.95406
+shoeSize         18.91006
+score            56.73051
+</code></pre>
+      
+      <h2>Conclusion</h2>
+      <p>
+        The model indicates <code>shoeSize</code> and <code>score</code> are important predictors for native speaker status. The model achieves approximately 99% accuracy with only 1% OOB error.
+      </p>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

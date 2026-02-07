@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Quick Guide: Overview, Environment, and Syntax Essentials</h1>
+        
+        <div class="content">
+            <h2>I. Java Overview and Core Concepts</h2>
+            <p>Java, originally developed by **James Gosling** at Sun Microsystems and released in **1995**, is known for its core philosophy: **Write Once, Run Anywhere (WORA)**. This is achieved by compiling source code into platform-independent **bytecode**, which is then executed by the **Java Virtual Machine (JVM)** on any platform.</p>
+            
+            <h3>Key Characteristics of Java 🔑</h3>
+            <ul>
+                <li>**Object-Oriented:** Everything is based on the Object model, making it easily extensible.</li>
+                <li>**Platform Independent:** Compiled to bytecode, not platform-specific machine code.</li>
+                <li>**Robust:** Strong compile-time and runtime error checking (e.g., no explicit memory management).</li>
+                <li>**Secure:** Features for developing virus-free, tamper-free systems.</li>
+                <li>**Multithreaded:** Supports concurrent execution of multiple tasks within a program.</li>
+                <li>**Dynamic:** Capable of adapting to evolving environments and carrying extensive runtime information.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>II. Environment Setup (JDK 8)</h2>
+            <p>To write and run Java applications locally, you need the **Java Development Kit (JDK)**.</p>
+            
+            <h3>Essential Steps:</h3>
+            <ol>
+                <li><strong>Download & Install:</strong> Obtain the compatible **Java JDK** (version 8 or later is mentioned) from Oracle or OpenJDK.</li>
+                <li><strong>Set Environment Path:</strong> Configure the system's **PATH** environment variable to include the path to the JDK's <code>bin</code> directory (e.g., <code>C:\Program Files\java\jdk\bin</code>). This allows you to run Java tools (<code>javac</code>, <code>java</code>) from any command prompt location.</li>
+                <li><strong>Tools:</strong> Use a simple text editor (like Notepad/Notepad++) or a sophisticated IDE like **Netbeans** or **Eclipse** to write code.</li>
+            </ol>
+            
+            <h3>Compilation and Execution Example</h3>
+            <pre><code>// 1. Save code as MyFirstJavaProgram.java
+public class MyFirstJavaProgram {
+   public static void main(String []args) {
+      System.out.println("Hello World");
+   }
+}
+// 2. Compile:
+C:\> javac MyFirstJavaProgram.java
+
+// 3. Run:
+C:\> java MyFirstJavaProgram 
+// Output: Hello World</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>III. Java Basic Syntax Rules</h2>
+            <p>Understanding these rules is fundamental to writing compilable Java code:</p>
+            <ul>
+                <li><strong>Case Sensitivity:</strong> Java is case sensitive (e.g., <code>Hello</code> and <code>hello</code> are different).</li>
+                <li><strong>Class Names:</strong> Start with an **Upper Case** letter (e.g., <code>MyFirstJavaClass</code>).</li>
+                <li><strong>Method Names:</strong> Start with a **Lower Case** letter (e.g., <code>myMethodName()</code>).</li>
+                <li>**Program File Name:** Must **exactly match** the name of the **public class** within the file, followed by the <code>.java</code> extension.</li>
+                <li>**<code>main()</code> Method:** The entry point for all Java program execution: <code>public static void main(String args[])</code>.</li>
+            </ul>
+
+            <h3>Identifiers (Naming Rules)</h3>
+            <p>Identifiers (for classes, variables, methods) must:</p>
+            <ul>
+                <li>Begin with a **letter** (A-Z or a-z), a **currency character ($)**, or an **underscore (_) **.</li>
+                <li>Cannot be a **reserved keyword** (see list below).</li>
+            </ul>
+
+            <h3>Modifiers</h3>
+            <p>Used to modify classes, methods, or variables. They fall into two categories:</p>
+            <ul>
+                <li>**Access Modifiers:** <code>public</code>, <code>private</code>, <code>protected</code>, <code>default</code> (no keyword).</li>
+                <li>**Non-Access Modifiers:** <code>final</code>, <code>abstract</code>, <code>static</code>, <code>transient</code>, etc.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>IV. Variable Types and Data Types</h2>
+
+            <h3>Variable Types</h3>
+            <p>There are three types of variables, defined by their location and scope:</p>
+            <table>
+                <tr><th>Type</th><th>Location</th><th>Default Value?</th><th>Scope/Lifetime</th></tr>
+                <tr><td><strong>Local</strong></td><td>Inside method, constructor, or block</td><td>❌ (Must be initialized)</td><td>Only within the defining block/method.</td></tr>
+                <tr><td><strong>Instance</strong></td><td>Inside class, outside methods (non-static)</td><td>✅ (0, false, or null)</td><td>Throughout the object's lifetime.</td></tr>
+                <tr><td><strong>Class (Static)</strong></td><td>Inside class, outside methods (with <code>static</code>)</td><td>✅ (0, false, or null)</td><td>Created when program starts, shared across all objects.</td></tr>
+            </table>
+
+            <h3>Primitive Data Types (8 Total)</h3>
+            <p>These are the basic, built-in types, each with a fixed size:</p>
+            <ul>
+                <li>**Integers:** <code>byte</code> (8-bit), <code>short</code> (16-bit), <code>int</code> (32-bit, default), <code>long</code> (64-bit).</li>
+                <li>**Floating-Point:** <code>float</code> (32-bit, single-precision), <code>double</code> (64-bit, default).</li>
+                <li>**Character:** <code>char</code> (16-bit Unicode character).</li>
+                <li>**Boolean:** <code>boolean</code> (<code>true</code> or <code>false</code>).</li>
+            </ul>
+            <p>Reference/Object Data Types (like **Arrays** and **Strings**) are instances of classes.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>V. Java Keywords (Reserved Words)</h2>
+            <p>These words have special meaning to the compiler and cannot be used as identifiers. Important ones include:</p>
+            <p><code>abstract</code>, <code>assert</code>, <code>boolean</code>, <code>break</code>, <code>byte</code>, <code>case</code>, <code>catch</code>, <code>char</code>, <code>class</code>, <code>const</code> (reserved, not used), <code>continue</code>, <code>default</code>, <code>do</code>, <code>double</code>, <code>else</code>, <code>enum</code>, <code>extends</code>, <code>final</code>, <code>finally</code>, <code>float</code>, <code>for</code>, <code>goto</code> (reserved, not used), <code>if</code>, <code>implements</code>, <code>import</code>, <code>instanceof</code>, <code>int</code>, <code>interface</code>, <code>long</code>, <code>native</code>, <code>new</code>, <code>package</code>, <code>private</code>, <code>protected</code>, <code>public</code>, <code>return</code>, <code>short</code>, <code>static</code>, <code>strictfp</code>, <code>super</code>, <code>switch</code>, <code>synchronized</code>, <code>this</code>, <code>throw</code>, <code>throws</code>, <code>transient</code>, <code>try</code>, <code>void</code>, <code>volatile</code>, <code>while</code>.</p>
+        </div>
+    </div>
+</div>

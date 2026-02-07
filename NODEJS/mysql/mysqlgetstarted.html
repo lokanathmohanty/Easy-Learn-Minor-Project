@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MySQL Integration</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Node.js applications commonly interface with backend databases for persistent data storage and retrieval. MySQL is a widely used open-source relational database management system (RDBMS).
+      </p>
+      <p>
+        MySQL uses SQL to manage data, control user access and perform tasks such as data creation, modification, and backup.
+      </p>
+      
+      <h2>MySQL Installation</h2>
+      
+      <h3>On Ubuntu (Linux)</h3>
+      <ul>
+        <li>Update package info: <code>sudo apt-get update</code></li>
+        <li>Install MySQL server: <code>sudo apt-get install mysql-server</code></li>
+        <li>Configure root user password during installation</li>
+        <li>Install MySQL Workbench: <code>sudo apt-get install mysql-workbench</code></li>
+        <li>Manage MySQL with <code>systemctl status mysql</code></li>
+      </ul>
+      
+      <h3>On Windows</h3>
+      <ul>
+        <li>Download installer from <a href="https://dev.mysql.com/downloads/">MySQL official site</a></li>
+        <li>Run the MSI installer and choose "Full" setup</li>
+        <li>Set a strong root password during installation</li>
+        <li>Use MySQL Workbench GUI or MySQL command-line client for managing databases</li>
+      </ul>
+      
+      <h2>Connecting Node.js to MySQL</h2>
+      <p>
+        Use the <code>mysql</code> module from npm, which is simple to use and MIT licensed.
+      </p>
+      <p>Install the module:</p>
+      <pre><code>npm install mysql</code></pre>
+      
+      <h3>Sample Connection Code</h3>
+      <pre><code>var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "your_password"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
+</code></pre>
+      
+      <p>
+        After connecting, you can use standard SQL queries and the connection object's methods to interact with MySQL databases.
+      </p>
+    </div>
+  </div>
+</div>

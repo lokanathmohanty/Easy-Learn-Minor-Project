@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>EnumMap</code> Class Summary 🔢🗝️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.EnumMap</code>** class is a highly specialized and efficient **<code>Map</code>** implementation designed exclusively for use with keys of a single **enum type**. Its internal structure, which leverages the fixed and sequential nature of enum constants, allows it to achieve performance superior to a general-purpose <code>HashMap</code>.</p>
+
+            <hr>
+
+            <h2 class="title">I. Key Characteristics and Performance</h2>
+            <p><code>EnumMap</code> is optimized for enum keys, making it a powerful choice when applicable:</p>
+            <ul>
+                <li>
+                    <strong>Enum Keys Only:</strong> All keys in an `EnumMap` **must** belong to the single enum type specified when the map is created.
+                </li>
+                <li>
+                    **Predictable Iteration Order:** Entries are always maintained and iterated over in the **natural order of their keys** (the order in which the enum constants are declared in the `enum` definition).
+                </li>
+                <li>
+                    **Performance:** Due to its specialized implementation (internally, it may use an array where the enum's ordinal value acts as the array index), basic operations like `get()`, `put()`, and `remove()` are extremely fast—often approaching **constant time ($O(1)$)**, faster than the general-purpose $O(1)$ for <code>HashMap</code>.
+                </li>
+                <li>
+                    **Non-Synchronized:** It is **not thread-safe**. External synchronization is necessary for concurrent modification.
+                </li>
+                <li>
+                    **Null Values:** It **permits null values**, but it **does not permit null keys** (unlike <code>HashMap</code>).
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Construction and Key Type</h2>
+            <p>Unlike other map implementations, the key type must be provided during construction. This is necessary because the `EnumMap` needs to know the size and order of the underlying enum:</p>
+            <div class="example">
+                <pre><code>// 1. Define the Enum
+public enum Numbers {ONE, TWO, THREE, FOUR, FIVE}
+
+// 2. Instantiate the EnumMap, providing the Class literal
+EnumMap&lt;Numbers, Integer&gt; map = 
+   new EnumMap&lt;&gt;(**Numbers.class**);</code></pre>
+            </div>
+            <p>Other constructors allow initializing from an existing `EnumMap` or a standard `Map` while inferring the key type from the source.</p>
+
+            <hr>
+
+            <h2 class="title">III. Example of Ordering</h2>
+            <p>In the example, the enum constants are declared as `ONE, TWO, THREE`. Even though the internal hashing might differ, the output preserves this declaration order:</p>
+            <div class="example">
+                <p><strong>Enum Declaration Order:</strong></p>
+                <pre><code>public enum Numbers{**ONE**, **TWO**, **THREE**, FOUR, FIVE}</code></pre>
+                <p><strong>Output (Iteration Order):</strong></p>
+                <pre><code>{**ONE**=1, **TWO**=2, **THREE**=3}</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask File Uploading: Handling Client Files 📁</h1>
+        <div class="content">
+            <p>Handling file uploads in Flask is straightforward, requiring a specific HTML form structure and using the **<code>request.files</code>** object on the server side.</p>
+
+            <h2>HTML Form Requirement</h2>
+            <p>To enable file uploading, the HTML form must be configured to send data in the correct format. This requires setting the **<code>enctype</code>** attribute to **<code>multipart/form-data</code>** and specifying the **<code>POST</code>** method:</p>
+            <p><code>&lt;form action = "/uploader" method = "POST" enctype = "multipart/form-data"&gt;</code></p>
+
+            <h2>The Upload Process in Flask</h2>
+            <p>The file upload process involves these steps:</p>
+            <ol>
+                <li>The browser sends the file data to the server via the <code>POST</code> request.</li>
+                <li>The Flask view function retrieves the file object from the global **<code>request.files</code>** dictionary, using the input field's **<code>name</code>** attribute as the key (e.g., <code>request.files['file']</code>).</li>
+                <li>The file is temporarily stored on the server before being saved to its final destination using the file object's **<code>save()</code>** method.</li>
+            </ol>
+
+            <h3>Security Recommendation</h3>
+            <p>It is crucial to obtain a secure version of the uploaded file's original name before saving it to the filesystem to prevent security vulnerabilities. This is done using the **<code>secure_filename()</code>** function, which should be imported from the **<code>werkzeug.utils</code>** module.</p>
+
+            <h2>Configuration Settings</h2>
+            <p>You can configure default settings for file handling in the Flask application object's configuration:</p>
+            <ul>
+                <li>**<code>app.config['UPLOAD_FOLDER']</code>:** Defines the path to the directory where uploaded files should be saved.</li>
+                <li>**<code>app.config['MAX_CONTENT_PATH']</code>:** Specifies the **maximum allowable size** (in bytes) for an uploaded file. If the file exceeds this limit, Flask will raise a <code>413 Request Entity Too Large</code> error.</li>
+            </ul>
+        </div>
+
+        <h2 class="title">Example: Python File Handling Logic</h2>
+        <div class="content example">
+            <p>The following Python function demonstrates retrieving, securing the filename, and saving the file:</p>
+            <p><code>from werkzeug.utils import secure_filename</code></p>
+            <p><code>@app.route('/uploader', methods = ['POST'])</code></p>
+            <p><code>def uploader():</code></p>
+            <p><code>   f = request.files['file']</code></p>
+            <p><code>   f.save(secure_filename(f.filename))</code></p>
+            <p><code>   return 'file uploaded successfully'</code></p>
+        </div>
+    </div>
+</div>

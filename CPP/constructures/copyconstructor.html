@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Copy Constructor 👯</h1>
+
+        <div class="content">
+            <p>The **copy constructor** is a special member function used to initialize a new object from an existing object of the same class.</p>
+            <p>If you don't define one, the compiler provides an **Implicit (Shallow)** copy constructor. However, if your class manages dynamic memory (uses pointers and <code>new</code>), you **must** define an **Explicit (Deep)** copy constructor to prevent issues like **double-free errors**.</p>
+
+            <h3>Syntax</h3>
+            <pre class="example">
+ClassName(const ClassName &amp;obj); // Declaration
+ClassName::ClassName(const ClassName &amp;obj) {
+   // body of constructor
+}
+</pre>
+            <p>The parameter is typically a **constant reference** (`const ClassName &amp;obj`) to the source object.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">When is the Copy Constructor Invoked?</h2>
+
+        <p>The copy constructor is automatically called in three primary scenarios:</p>
+        <ol>
+            <li><strong>Initialization:</strong> When initializing a new object from an existing one:
+                <pre class="example">Line line2 = line1; // Copy initialization</pre>
+                <pre class="example">Line line2(line1); // Direct initialization</pre>
+            </li>
+            <li><strong>Pass by Value:</strong> When an object is passed **by value** as an argument to a function. (A copy is created for the function's parameter).
+                <pre class="example">void display(Line obj); // When called, copy constructor runs</pre>
+            </li>
+            <li><strong>Return by Value:</strong> When an object is returned **by value** from a function. (A temporary copy may be created).</li>
+        </ol>
+
+        <hr>
+
+        <h2 class="title">Shallow Copy vs. Deep Copy</h2>
+
+        <div class="content">
+            <p>This distinction is critical for classes containing pointers or dynamically allocated memory.</p>
+
+            <h3>1. Shallow Copy (Compiler Default)</h3>
+            <ul>
+                <li>The copy constructor simply copies the **values of the data members**.</li>
+                <li>If the member is a **pointer**, only the pointer's address is copied, meaning both the original and the new object point to the **same block of memory**.</li>
+                <li>**Danger:** When one object is destroyed, the memory is freed. If the second object is later destroyed, it attempts to free the same memory, resulting in a **double-free error**.</li>
+            </ul>
+
+            <h3>2. Deep Copy (User-Defined)</h3>
+            <ul>
+                <li>The user-defined copy constructor allocates **new memory** for the new object's pointers.</li>
+                <li>It then copies the **content** (the value) from the original object's memory into the newly allocated memory.</li>
+                <li>**Benefit:** The original and copied objects are completely **independent**, preventing resource conflicts.</li>
+            </ul>
+            <pre class="example">
+// Deep Copy Implementation for a class with a pointer 'ptr'
+Line::Line(const Line &amp;obj) {
+   ptr = new int;      // Allocate new memory for the new object
+   *ptr = *obj.ptr;    // Copy the value, not just the address
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">The Rule of Three/Five</h2>
+        <p>If you define a class member that manages a resource (like dynamic memory), you must manually define the functions responsible for managing that resource's lifespan. These include:</p>
+        <ul>
+            <li>**Rule of Three:** If you define the **Destructor** (`~ClassName()`), **Copy Constructor** (`ClassName(const ClassName&)`), or **Copy Assignment Operator** (`ClassName& operator=(const ClassName&)`), you must define all three.</li>
+            <li>**Rule of Five (Modern C++):** If you define any of the three above, you should also consider defining the **Move Constructor** and **Move Assignment Operator** to support efficient resource transfer.</li>
+        </ul>
+    </div>
+</div>

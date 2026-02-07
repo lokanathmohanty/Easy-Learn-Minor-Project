@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java 12 - New Features Summary (Non-LTS Release)</h1>
+
+        <div class="content">
+            <h2>Overview of Java 12</h2>
+            <p>**Java 12**, released in **March 2019**, followed Java's 6-month release cadence and is a **non-LTS (Long-Term Support)** feature release. It focused on introducing preview features and several minor but highly useful API additions and performance enhancements.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Key API and Language Features</h2>
+
+            <h3>1. Switch Expressions (Preview)</h3>
+            <p>Java 12 introduced a **preview** of enhanced **<code>switch</code>** statements (JEP 325) that can be used as an **expression**. This allows <code>switch</code> blocks to produce a value, eliminating the need for <code>break</code> statements and resulting in more compact and less error-prone code.</p>
+            <ul>
+                <li><strong>New Syntax:</strong> Uses the **arrow (<code>-&gt;</code>)** syntax for cleaner case labels.</li>
+                <li><strong>Result as Value:</strong> The result of the selected case is the value of the entire <code>switch</code> expression.</li>
+            </ul>
+            <pre><code>// Example of Switch Expression in Java 12 (Preview)
+int numLetters = switch (day) {
+    case MONDAY, FRIDAY, SUNDAY -> 6;
+    case TUESDAY                -> 7;
+    case THURSDAY, SATURDAY     -> 8;
+    case WEDNESDAY              -> 9;
+};</code></pre>
+
+            <h3>2. <code>File.mismatch()</code> Method</h3>
+            <p>A new utility method was added to **<code>java.io.File</code>** that efficiently compares two files. It returns the position of the first mismatching byte, or <code>-1L</code> if the files are identical. This simplifies file comparison operations.</p>
+
+            <h3>3. Compact Number Formatting</h3>
+            <p>New formatting styles were added to the **<code>java.text.NumberFormat</code>** class to produce human-readable, abbreviated strings for large numbers, useful for UI displays.</p>
+            <ul>
+                <li><strong>Example:</strong> Formatting <code>2000</code> as <code>"2K"</code> or <code>3000000</code> as <code>"3M"</code>, based on the locale.</li>
+            </ul>
+
+            <h3>4. <code>Teeing</code> Collector in Stream API</h3>
+            <p>The **<code>Collectors</code>** class gained the static factory method **<code>teeing()</code>**. This collector is a powerful tool that allows the results of a stream to be processed by **two different collectors simultaneously**, and then the results of those two collectors are merged by a final **<code>BiFunction</code>**.</p>
+            <pre><code>// Example: Find both Min and Max in a single stream pass
+stream.collect(Collectors.teeing(
+    Collectors.minBy(...), // Collector 1
+    Collectors.maxBy(...), // Collector 2
+    (min, max) -> ...      // BiFunction to merge results
+));</code></pre>
+
+            <h3>5. New String Methods</h3>
+            <p>Four new formatting methods were added to the **<code>String</code>** class:</p>
+            <ul>
+                <li>**<code>indent(int n)</code>:** Indents the string by <code>n</code> spaces (positive <code>n</code> indents, negative <code>n</code> removes leading spaces if possible).</li>
+                <li>**<code>transform(Function)</code>:** Applies a function to the string and returns the result, facilitating method chaining on a string value.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>JVM and Garbage Collection</h2>
+            <ul>
+                <li>
+                    <strong>Shenandoah GC (JEP 189):</strong> Introduced as an experimental, low-pause-time garbage collector. Shenandoah works concurrently with the running Java application to minimize pause times, especially on large heaps.
+                </li>
+                <li>
+                    <strong>G1 Garbage Collector Enhancements (JEP 344):</strong> The G1 collector gained the ability to automatically **abort a mixed garbage collection cycle** if the evacuation pause time budget is likely to be exceeded, improving reliability and responsiveness.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="session">
+    
+    <h1 class="title">JavaScript - Fetch API</h1>
+    
+    <div class="content">
+      <h2>What is Fetch API?</h2>
+      <p>
+        The JavaScript Fetch API is a web API that allows a web browser to make HTTP requests to a web server. 
+        It was introduced in ES6 as an alternative to the <code>XMLHttpRequest</code> (XHR) object, and it can 
+        handle <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong>, and <strong>DELETE</strong> requests.
+      </p>
+      <p>
+        The <code>fetch()</code> method is available by default in the browser’s <code>window</code> object. 
+        It returns a promise that resolves to the response object.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+fetch(URL, [options]);
+      </pre>
+      <ul>
+        <li><strong>URL</strong> − API endpoint to make a request.</li>
+        <li><strong>[options]</strong> − Optional object containing method, headers, body, etc.</li>
+      </ul>
+
+      <h2>Return Value</h2>
+      <p>
+        The <code>fetch()</code> method returns a promise, which can be handled using 
+        <code>then...catch</code> or with <code>async/await</code>.
+      </p>
+
+      <h2>Handling with then...catch</h2>
+      <pre>
+fetch(URL)
+  .then(res => res.json())
+  .then(data => {
+    // Handle data
+  })
+  .catch(err => {
+    // Handle error
+  });
+      </pre>
+
+      <h2>Example (then...catch)</h2>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;div id="output"&gt;&lt;/div&gt;
+  &lt;script&gt;
+    const output = document.getElementById('output');
+    const URL = 'https://jsonplaceholder.typicode.com/todos/5';
+    fetch(URL)
+      .then(res =&gt; res.json())
+      .then(data =&gt; {
+        output.innerHTML += "The data from the API is: &lt;br&gt;";
+        output.innerHTML += JSON.stringify(data);
+      });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>Handling with async/await</h2>
+      <pre>
+async function getData() {
+  let response = await fetch(URL);
+  let data = await response.json();
+  console.log(data);
+}
+getData();
+      </pre>
+
+      <h2>Options with Fetch API</h2>
+      <p>You can pass an object with options such as <code>method</code>, <code>headers</code>, <code>body</code>, etc.</p>
+      <pre>
+fetch(URL, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+});
+      </pre>
+
+      <h2>Examples</h2>
+      
+      <h3>GET Request</h3>
+      <pre>
+let options = { method: "GET" };
+fetch("https://dummy.restapiexample.com/api/v1/employee/2", options)
+  .then(res =&gt; res.json())
+  .then(res =&gt; console.log(res));
+      </pre>
+
+      <h3>POST Request</h3>
+      <pre>
+let employee = { emp_name: "Sachin", emp_age: "30" };
+let options = {
+  method: "POST",
+  headers: { "Content-Type": "application/json;charset=utf-8" },
+  body: JSON.stringify(employee)
+};
+fetch("https://dummy.restapiexample.com/api/v1/create", options)
+  .then(res =&gt; res.json())
+  .then(res =&gt; console.log(res));
+      </pre>
+
+      <h3>PUT Request</h3>
+      <pre>
+let animal = { name: "Lion", color: "Yellow", age: 10 };
+let options = {
+  method: "PUT",
+  headers: { "Content-Type": "application/json;charset=utf-8" },
+  body: JSON.stringify(animal)
+};
+fetch("https://dummy.restapiexample.com/api/v1/update/3", options)
+  .then(res =&gt; res.json())
+  .then(res =&gt; console.log(res));
+      </pre>
+
+      <h3>DELETE Request</h3>
+      <pre>
+let options = { method: "DELETE" };
+fetch("https://dummy.restapiexample.com/api/v1/delete/2", options)
+  .then(res =&gt; res.json())
+  .then(res =&gt; console.log(res));
+      </pre>
+
+      <h2>Advantages of Fetch API</h2>
+      <ul>
+        <li>Easy syntax for making requests</li>
+        <li>Promise-based handling</li>
+        <li>Built-in JSON conversion</li>
+        <li>Supports multiple request options</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

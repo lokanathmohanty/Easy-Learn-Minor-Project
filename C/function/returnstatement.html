@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Return Statement in C</h1>
+
+    <div class="content">
+      <p>The <strong>return</strong> statement terminates the execution of a function and returns control to the calling function. Every function should have a return statement as its last statement. The return type and returned value (expression) must match.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Syntax of return Statement</h2>
+      <pre><code>return value_or_expression;</code></pre>
+      <p>Example with <code>main()</code> function returning 0 to indicate successful completion:</p>
+      <pre><code>int main(){
+   // function body;
+   return 0;
+}</code></pre>
+      <p>Returning non-zero indicates failure.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">The void return Statement</h2>
+      <p>Functions with <code>void</code> return type may omit the return statement or use <code>return;</code> without any expression.</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+/* function declaration */
+void test() {
+   return;
+}
+
+int main() {
+   test();
+   printf("end");
+   return 0;
+}</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Return Type Mismatch Error</h2>
+      <p>If the function prototype and definition have conflicting return types, the compiler throws an error.</p>
+      <pre><code>int main() {
+   test(5);
+   printf("end");
+   return 0;
+}
+
+float test(int a) {
+   return 1.1;
+}</code></pre>
+      <p><strong>Error:</strong> conflicting types for 'test'</p>
+      <p>This happens because without a prototype, functions are assumed to return <code>int</code> by default.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Return Type Mismatch in Prototype vs Definition</h2>
+      <pre><code>float test(int);
+
+int main() {
+   test(5);
+   printf("end");
+   return 0;
+}
+
+float test(float a) {
+   return 1.1;
+}</code></pre>
+      <p>Prototype and definition mismatch causes a compile error.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Multiple Return Statements</h2>
+      <p>A function can have multiple conditional <code>return</code> statements but can return only a single value per call.</p>
+      <pre><code>int test(int);
+
+int main() {
+   test(5);
+   printf("end");
+   return 0;
+}
+
+int test(int a) {
+   if (a &lt; 3)
+      return 1;
+   else
+      return 0;
+}</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Function Returning an Array (Using Pointer)</h2>
+      <p>Functions cannot return entire arrays, but they can return pointers to arrays.</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int* test(int *);
+
+int main() {
+   int a[] = {1, 2, 3, 4};
+   int i;
+   int *b = test(a);
+
+   for (i = 0; i &lt; 4; i++) {
+      printf("%d\n", b[i]);
+   }
+   return 0;
+}
+
+int* test(int *a) {
+   int i;
+   for (i = 0; i &lt; 4; i++) {
+      a[i] = 2 * a[i];
+   }
+   return a;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>2
+4
+6
+8</code></pre>
+      <p>To return multiple values, use pointers or structures.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">exit() Instead of return Statement</h2>
+      <p>The <code>exit()</code> function terminates program execution immediately without returning control to the calling function. It is useful for unrecoverable errors or normal termination.</p>
+      <p><code>exit()</code> is declared in the <code>&lt;stdlib.h&gt;</code> header.</p>
+      <pre><code>void exit(int status);</code></pre>
+      <p>The <code>status</code> is an integer indicating success or failure, passed back to the operating system.</p>
+      <p>Unlike <code>return</code>, <code>exit()</code> does not return to the caller but ends the program entirely.</p>
+    </div>
+  </div>
+</div>

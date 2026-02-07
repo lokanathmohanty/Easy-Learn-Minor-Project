@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Restrict Keyword in C</h1>
+    <div class="content">
+      <p>The <code>restrict</code> keyword, introduced in the C99 standard, is a type qualifier used with pointers. It tells the compiler that the pointer is the only way to access the memory it points to during its lifetime. This allows the compiler to optimize code by assuming no other pointer will access the same memory.</p>
+
+      <h2>Syntax for Declaring a Restrict Pointer</h2>
+      <p>The general syntax is:</p>
+      <p><code>type* restrict pointer_name;</code></p>
+      <ul>
+        <li><strong>type</strong> — the data type of the pointer (e.g., int, char).</li>
+        <li><strong>restrict</strong> — the qualifier indicating exclusive access.</li>
+        <li><strong>pointer_name</strong> — the variable name of the pointer.</li>
+      </ul>
+
+      <h2>Example: Using restrict to Update Variables</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+void update(int *restrict x, int *restrict y) {
+   *x = *x + 10;
+   *y = *y + 20;
+}
+
+int main() {
+   int a = 5, b = 10;
+   update(&a, &b);
+   printf("a = %d, b = %d\n", a, b);
+   return 0;
+}
+</code></pre>
+      <p><strong>Output:</strong> a = 15, b = 30</p>
+
+      <h2>Why Use restrict?</h2>
+      <p>Even though programs produce the same output with or without <code>restrict</code>, using it allows the compiler to optimize memory access safely by knowing pointers don't overlap. This can lead to faster code execution especially in large, performance-critical applications such as scientific computing and graphics.</p>
+
+      <h2>Example: Adding Elements of Two Arrays</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+void add(int *restrict a, int *restrict b, int *restrict r, int n) {
+    for (int i = 0; i &lt; n; i++)
+        r[i] = a[i] + b[i];
+}
+
+int main() {
+    int a[] = {1,2,3,4,5};
+    int b[] = {5,6,7,8,10};
+    int r[5];
+    add(a, b, r, 5);
+    for (int i = 0; i &lt; 5; i++)
+        printf("%d ", r[i]);
+    return 0;
+}
+</code></pre>
+      <p><strong>Output:</strong> 6 8 10 12 15</p>
+
+      <h2>Usage Notes</h2>
+      <ul>
+        <li>The <code>restrict</code> keyword tells the compiler no other pointers access the same memory.</li>
+        <li>It enables optimizations such as instruction re-ordering, vectorization, and parallel execution.</li>
+        <li>Misusing <code>restrict</code> (allowing overlapping pointers) leads to undefined behavior and potential logic errors.</li>
+        <li>It is particularly useful when working with large data sets or performance-critical code.</li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      <p>The <code>restrict</code> keyword is a powerful tool in C to help compilers generate faster, optimized code by informing them about exclusive memory access through a pointer.</p>
+    </div>
+  </div>
+</div>

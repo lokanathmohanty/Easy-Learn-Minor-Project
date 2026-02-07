@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Aggregation</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Relationships Between Classes</h1>
+            <h2 class="subtitle">Session: Understanding Aggregation (HAS-A Relationship)</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is Aggregation?</h2>
+                <p>**Aggregation** is a specialized form of association between two classes that represents a **HAS-A relationship**. It occurs when one class (the 'whole') contains an instance of another class (the 'part') as one of its instance variables.</p>
+                <p>It is a **one-way, weak relationship** where the existence of the 'whole' object does **not** control the existence of the 'part' object. If the 'whole' object is destroyed, the 'part' object can continue to exist independently.</p>
+            </div>
+
+            <div class="content use">
+                <h2 class="subtitle">Use of Aggregation</h2>
+                <p>The primary use of aggregation is **code reusability**. By having one class contain an object of another class, it can utilize all the utility methods and properties defined in the contained object, without having to recreate that logic.</p>
+                <p>This design helps reduce code duplication and improves maintenance.</p>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Van HAS-A Speed</h2>
+                <p>In this example, the <code>Van</code> class contains an instance of the <code>Speed</code> class. The <code>Speed</code> object can exist separately from the <code>Van</code> object.</p>
+                <pre><code>class Speed {
+   private double max;
+   public double getMax() { ... }
+   // ... setter methods
+}
+
+class Van extends Vehicle {
+   private Speed speed; // Aggregation: Van HAS-A Speed
+
+   public void setSpeed(Speed speed) {
+      this.speed = speed;
+   }
+
+   public void print() {
+      // Van uses Speed's method:
+      System.out.println("Max Speed: " + speed.getMax() );
+   }
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>Vin: abcd1233, Max Speed: 120.0</code></pre>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Student HAS-A Address</h2>
+                <p>A <code>Student</code> object has an <code>Address</code> object. The address can be shared by multiple students or can exist even if the student object is deleted, making this a typical aggregation relationship.</p>
+                <pre><code>class Address {
+   // ... fields like strNum, city, state
+   Address(int street, String c, ...) { ... }
+}
+
+class Student {
+   int rno;
+   String stName;
+   Address stAddr; // Aggregation: Student HAS-A Address
+
+   Student(int roll, String name, Address address){
+      this.stAddr = address; // Address object passed in
+   }
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>Roll no: 1
+Name: Aashi
+Street: 10
+City: Bareilly
+State: UP
+Country: India</code></pre>
+            </div>
+
+            <div class="content comparison">
+                <h2 class="subtitle">Aggregation vs. Composition</h2>
+                <p>Aggregation is often compared to **Composition**. While both represent a HAS-A relationship:</p>
+                <ul>
+                    <li>**Aggregation (Weak Association):** The 'part' can exist without the 'whole'. Terminating the main object does not terminate the contained object.</li>
+                    <li>**Composition (Strong Association):** The 'part' cannot exist without the 'whole'. The parent object "owns" the child entity, and they have the same lifecycle.</li>
+                </ul>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Attribute Selector Property</h1>
+    <div class="content">
+      <p>
+        CSS attribute selectors provide a powerful mechanism to select HTML elements 
+        based on the presence or value of their attributes. Unlike class or ID selectors, 
+        attribute selectors enable developers to target elements more dynamically and 
+        precisely without altering HTML structure. This is especially useful for styling 
+        form elements, links, images, or custom data attributes. 
+      </p>
+      <p>
+        Attribute selectors are always written inside square brackets <code>[]</code>, 
+        and depending on the operator used, they can match exact values, partial substrings, 
+        starting values, or ending values.
+      </p>
+
+      <h2>Basic Syntax</h2>
+      <p>
+        A simple attribute selector checks if an element contains a specific attribute. 
+        If the attribute exists, the rule applies regardless of its value.
+      </p>
+      <p><strong>Syntax:</strong></p>
+      <p><code>[attribute]</code></p>
+
+      <h2>Example: Selecting Elements with a Data Attribute</h2>
+      <p>
+        In this example, all elements that contain a <code>data-toggle</code> attribute 
+        will be styled, regardless of what value it holds.
+      </p>
+      <p><strong>Example Code:</strong></p>
+      <pre>
+[data-toggle] {
+   background: yellow;
+   color: red;
+}
+      </pre>
+      <p>
+        When applied to HTML, it highlights any element containing the attribute 
+        <code>data-toggle</code>:
+      </p>
+      <pre>
+&lt;div data-toggle="yes"&gt;Styled Div&lt;/div&gt;
+&lt;p data-toggle="no"&gt;Styled Paragraph&lt;/p&gt;
+      </pre>
+
+      <h2>Types of Attribute Selectors</h2>
+      <ul>
+        <li><code>[attribute]</code> – Selects elements with the given attribute.</li>
+        <li><code>[attribute="value"]</code> – Selects elements with an exact attribute value.</li>
+        <li><code>[attribute*="value"]</code> – Matches attribute values containing a substring.</li>
+        <li><code>[attribute^="value"]</code> – Matches attribute values starting with a string.</li>
+        <li><code>[attribute$="value"]</code> – Matches attribute values ending with a string.</li>
+        <li><code>[attribute|="value"]</code> – Matches attribute values starting with value followed by a hyphen.</li>
+        <li><code>[attribute~="value"]</code> – Matches attribute values containing a word.</li>
+      </ul>
+
+      <h2>Practical Example: Attribute Equals Selector</h2>
+      <p>
+        Suppose we want to style only elements where <code>data-toggle</code> 
+        is explicitly set to <code>yes</code>:
+      </p>
+      <pre>
+[data-toggle="yes"] {
+   background: yellow;
+   color: red;
+}
+      </pre>
+      <pre>
+&lt;div data-toggle="yes"&gt;Styled&lt;/div&gt;
+&lt;div data-toggle="no"&gt;Not Styled&lt;/div&gt;
+      </pre>
+
+      <h2>Example: Attribute Contains Selector</h2>
+      <p>
+        The <code>*</code> operator is used to select elements where the attribute 
+        contains a substring. For example, images whose <code>src</code> contains 
+        the word <code>images</code>.
+      </p>
+      <pre>
+[src*="images"] {
+   border: 2px dashed red;
+}
+      </pre>
+      <pre>
+&lt;img src="/css/images/logo.png" alt="Logo"&gt;
+      </pre>
+
+      <h2>Example: Attribute Starts With Selector</h2>
+      <p>
+        This selector matches attribute values that begin with a specific string. 
+        It is commonly used for URLs.
+      </p>
+      <pre>
+[href^="https"] {
+   color: red;
+   text-decoration: none;
+}
+      </pre>
+      <pre>
+&lt;a href="https://example.com"&gt;Secure Link&lt;/a&gt;
+&lt;a href="http://example.com"&gt;Non-Secure Link&lt;/a&gt;
+      </pre>
+
+      <h2>Example: Attribute Ends With Selector</h2>
+      <p>
+        This selector matches elements whose attribute values end with a specific string. 
+        A common use case is selecting image formats like <code>.png</code>.
+      </p>
+      <pre>
+[src$=".png"] {
+   border: 2px solid green;
+}
+      </pre>
+      <pre>
+&lt;img src="logo.png" alt="PNG Logo"&gt;
+      </pre>
+
+      <h2>Example: Attribute with Hyphen Selector</h2>
+      <p>
+        This selector is useful for language attributes where subcodes are separated by a hyphen.
+      </p>
+      <pre>
+[lang|="en"] {
+   color: blue;
+}
+      </pre>
+      <pre>
+&lt;div lang="en-US"&gt;English Content&lt;/div&gt;
+&lt;div lang="fr"&gt;French Content&lt;/div&gt;
+      </pre>
+
+      <h2>Example: Attribute Contains Word Selector</h2>
+      <p>
+        The <code>~</code> operator matches attributes that contain a given word. 
+        It is often used with class names.
+      </p>
+      <pre>
+[class~="highlight"] {
+   background-color: yellow;
+}
+      </pre>
+      <pre>
+&lt;div class="highlight"&gt;Highlighted&lt;/div&gt;
+&lt;div class="highlighted"&gt;Not A Match&lt;/div&gt;
+      </pre>
+
+      <h2>Multiple Attribute Selectors</h2>
+      <p>
+        You can also combine multiple attribute conditions to refine selections. 
+        This is useful when elements need to meet more than one criteria.
+      </p>
+      <pre>
+a[href$=".htm"][target="_blank"] {
+   color: purple;
+}
+      </pre>
+      <pre>
+&lt;a href="page.htm" target="_blank"&gt;Styled Link&lt;/a&gt;
+&lt;a href="page.htm"&gt;Not Styled&lt;/a&gt;
+      </pre>
+
+      <h2>Attribute Selectors for Form Inputs</h2>
+      <p>
+        Attribute selectors are often used in forms to apply styles based on input types, 
+        placeholders, or names. This allows consistent styling across different form fields 
+        without manually assigning classes.
+      </p>
+      <pre>
+input[type="text"] {
+   border: 1px solid blue;
+}
+input[placeholder="Password"] {
+   border: 1px solid red;
+}
+      </pre>
+      <pre>
+&lt;input type="text" placeholder="Username"&gt;
+&lt;input type="password" placeholder="Password"&gt;
+      </pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        CSS attribute selectors make styling more flexible and powerful by enabling developers 
+        to target elements dynamically based on attributes and their values. They are particularly 
+        useful for forms, links, localization, and when working with dynamically generated content. 
+        Combined with other CSS combinators, attribute selectors unlock advanced control over styling.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">User-Defined Exceptions in Python</h1>
+    <div class="content">
+      <p>
+        User-defined exceptions in Python are custom error classes that you create to handle specific error conditions in your code. They inherit from the built-in <code>Exception</code> class or its subclasses, allowing precise control over error handling.
+      </p>
+      <p>
+        Benefits include clarity with specific error messages, granularity to handle different errors separately, and maintainability by centralizing error handling logic.
+      </p>
+
+      <h2>How to Create a User-Defined Exception</h2>
+      <h3>Step 1 - Define the Exception Class</h3>
+      <pre>
+class MyCustomError(Exception):
+   pass
+      </pre>
+      <p>
+        Inherit from <code>Exception</code> to get standard behavior. For simple exceptions, an empty class body with <code>pass</code> is enough.
+      </p>
+
+      <h3>Step 2 - Initialize the Exception</h3>
+      <pre>
+class InvalidAgeError(Exception):
+   def __init__(self, age, message="Age must be between 18 and 100"):
+      self.age = age
+      self.message = message
+      super().__init__(self.message)
+      </pre>
+      <p>
+        Initialize attributes to store additional error information. The <code>super()</code> call initializes the base exception class properly.
+      </p>
+
+      <h3>Step 3 - Optionally Override <code>__str__</code> or <code>__repr__</code></h3>
+      <pre>
+class InvalidAgeError(Exception):
+   def __init__(self, age, message="Age must be between 18 and 100"):
+      self.age = age
+      self.message = message
+      super().__init__(self.message)
+
+   def __str__(self):
+      return f"{self.message}. Provided age: {self.age}"
+      </pre>
+      <p>
+        Customize string representation for clearer error messages during printing or logging.
+      </p>
+
+      <h2>Raising User-Defined Exceptions</h2>
+      <p>Use the <code>raise</code> statement with your custom exception:</p>
+      <pre>
+def set_age(age):
+   if age < 18 or age > 100:
+      raise InvalidAgeError(age)
+   print(f"Age is set to {age}")
+      </pre>
+
+      <h2>Handling User-Defined Exceptions</h2>
+      <p>
+        Catch user-defined exceptions with try-except blocks and respond accordingly.
+      </p>
+      <pre>
+try:
+   set_age(150)
+except InvalidAgeError as e:
+   print(f"Invalid age: {e.age}. {e.message}")
+      </pre>
+
+      <h2>Complete Example</h2>
+      <pre>
+class InvalidAgeError(Exception):
+   def __init__(self, age, message="Age must be between 18 and 100"):
+      self.age = age
+      self.message = message
+      super().__init__(self.message)
+
+   def __str__(self):
+      return f"{self.message}. Provided age: {self.age}"
+
+def set_age(age):
+   if age < 18 or age > 100:
+      raise InvalidAgeError(age)
+   print(f"Age is set to {age}")
+
+try:
+   set_age(150)
+except InvalidAgeError as e:
+   print(f"Invalid age: {e.age}. {e.message}")
+      </pre>
+
+      <p>Output:</p>
+      <pre>Invalid age: 150. Age must be between 18 and 100</pre>
+    </div>
+
+   
+  </div>
+</div>

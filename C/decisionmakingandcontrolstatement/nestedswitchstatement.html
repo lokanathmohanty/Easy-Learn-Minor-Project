@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">C - Nested Switch Statements</h1>
+
+    <div class="content">
+
+      <p>In C, a <code>switch</code> statement can be nested within another <code>switch</code> statement. Even if the case constants of the inner and outer switches have common values, there will be no conflict.</p>
+
+      <h2 class="title">Syntax</h2>
+      <pre><code>switch(ch1) {
+   case 'A': 
+      printf("This A is part of outer switch");
+      switch(ch2) {
+         case 'A':
+            printf("This A is part of inner switch");
+            break;
+         case 'B':
+            /* case code */
+      }
+      break;
+   case 'B':
+      /* case code */
+}</code></pre>
+
+      <h2 class="title">Example: Basic Nested Switch</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main () {
+   int a = 100;
+   int b = 200;
+
+   switch(a) {
+      case 100: 
+         printf("This is part of outer switch\n");
+
+         switch(b) {
+            case 200:
+               printf("This is part of inner switch\n");
+         }
+   }
+
+   printf("Exact value of a is: %d\n", a);
+   printf("Exact value of b is: %d\n", b);
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>This is part of outer switch</li>
+        <li>This is part of inner switch</li>
+        <li>Exact value of a is: 100</li>
+        <li>Exact value of b is: 200</li>
+      </ul>
+
+      <h2 class="title">Nested Switch-Case Syntax</h2>
+      <p>Just like <code>if-else</code> statements, <code>switch-case</code> can also be nested within each other. Each <code>switch</code> can be placed inside a <code>case</code> block of an outer <code>switch</code>.</p>
+
+      <pre><code>switch (exp1) {
+   case val1:
+      switch (exp2) {
+         case val_a:
+            stmts;
+            break;
+         case val_b:
+            stmts;
+            break;
+      }
+      break;
+
+   case val2:
+      switch (expr2) {
+         case val_c:
+            stmts;
+            break;
+         case val_d:
+            stmts;
+            break;
+      }
+}</code></pre>
+
+      <h2 class="title">Example: Nested Switch with Multiple Variables</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int x = 1, y = 'b', z = 'X';
+
+   switch (x) {
+      case 1:
+         printf("Case 1 \n");
+
+         switch (y) {
+            case 'a':
+               printf("Case a \n");
+               break;
+            case 'b':
+               printf("Case b \n");
+               break;
+         }
+         break;
+
+      case 2:
+         printf("Case 2 \n");
+
+         switch (z) {
+            case 'X':
+               printf("Case X \n");
+               break;
+            case 'Y':
+               printf("Case Y \n");
+               break;
+         }
+   }
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>Case 1</li>
+        <li>Case b</li>
+      </ul>
+
+      <p><strong>Note:</strong> Changing the values of <code>x</code>, <code>y</code>, and <code>z</code> will affect which cases are executed.</p>
+
+    </div>
+  </div>
+</div>

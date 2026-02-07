@@ -1,0 +1,250 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Proxies</h1>
+
+    <div class="content">
+      <h2>Proxy in JavaScript</h2>
+      <p>
+        The JavaScript proxies are objects that allow you to wrap a particular object and customize 
+        the fundamental operations of the object, like getting and setting object properties. 
+        Using the proxy object, you can add custom behavior to the object.
+      </p>
+      <p>
+        Proxies are used to implement features such as logging, caching, and security.
+      </p>
+      <p>
+        We can create a proxy object using the <code>Proxy()</code> constructor. It accepts two parameters: 
+        the target object and the handler object, and returns a new proxy object.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre><code>const obj = new Proxy(targetObj, handler);</code></pre>
+
+      <ul>
+        <li><strong>targetObj</strong> − The target object for which you want to create a proxy.</li>
+        <li><strong>handler</strong> − An object containing functionality to customize behavior.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Example: Proxy with Getter</h2>
+      <pre><code>
+const person = {
+   name: "Same",
+   age: 32,
+}
+const handler = {
+   get: function (object, property) {
+      return object[property] ? object[property] : 
+      'Object doesnt contain the property.';
+   }
+}
+const proxyObj = new Proxy(person, handler);
+console.log("Name:", proxyObj.name);
+console.log("Height:", proxyObj.height);
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Name: Same
+Height: Object doesnt contain the property.
+      </code></pre>
+    </div>
+
+    <div class="content">
+      <h2>JavaScript Proxy Handlers</h2>
+      <p>
+        Proxy handlers allow you to override the default behavior of an object. 
+        Below are some commonly used handlers.
+      </p>
+
+      <h3>The <code>get()</code> Handler</h3>
+      <p>
+        The <code>get()</code> handler allows you to change the property accessing behavior.
+      </p>
+      <pre><code>
+const watch = {
+   brand: "Casio",
+   color: "Blue",
+   price: null,
+}
+const handler = {
+   get(object, property) {
+      return object[property] != null ? object[property] : "Property is null.";
+   }
+}
+const watchProxy = new Proxy(watch, handler);
+console.log("Brand:", watchProxy.brand);
+console.log("Price:", watchProxy.price);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Brand: Casio
+Price: Property is null.
+      </code></pre>
+    </div>
+
+    <div class="content">
+      <h3>The <code>set()</code> Handler</h3>
+      <p>
+        The <code>set()</code> handler changes the behavior of updating properties.
+      </p>
+      <pre><code>
+const watch = {
+   brand: "Casio",
+   color: "Blue",
+   price: null,
+}
+const handler = {
+   set(object, property, value) {
+      if (property === "price") {
+         object[property] = value;
+      } else {
+         object[property] = "Not Available";
+      }
+   }
+}
+const watchProxy = new Proxy(watch, handler);
+watchProxy.price = 2000;
+watchProxy.dial = "Round";
+console.log("Price:", watchProxy.price);
+console.log("Dial:", watchProxy.dial);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Price: 2000
+Dial: Not Available
+      </code></pre>
+    </div>
+
+    <div class="content">
+      <h3>The <code>apply()</code> Handler</h3>
+      <p>
+        The <code>apply()</code> handler is used to modify function calls.
+      </p>
+      <pre><code>
+const watch = {
+   brand: "Casio",
+   color: "Blue",
+   price: 2000,
+}
+const getWatchDetails = function (watch) {
+   return `Brand: ${watch.brand}, Color: ${watch.color}, Price: ${watch.price}`;
+}
+const getDetails = new Proxy(getWatchDetails, {
+   apply(target, thisArg, args) {
+      return target(...args).toUpperCase();
+   }
+});
+console.log(getDetails(watch));
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+BRAND: CASIO, COLOR: BLUE, PRICE: 2000
+      </code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Uses of Proxy in JavaScript</h2>
+
+      <h3>1. Validation</h3>
+      <pre><code>
+const numbers = { num1: 10, num2: 20, num3: 30 }
+const handler = {
+   set(object, property, value) {
+      if (value > object[property]) {
+         object[property] = value;
+      }
+   }
+}
+const numberProxy = new Proxy(numbers, handler);
+numberProxy.num1 = 20;
+numberProxy.num2 = 10;
+console.log("num1:", numbers.num1, "num2:", numbers.num2);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+num1: 20, num2: 20
+      </code></pre>
+
+      <h3>2. Access Control</h3>
+      <pre><code>
+const numbers = { num1: 10, num2: 20, num3: 30 }
+const handler = {
+   set(object, property, value) {
+      console.log("Object is read-only.");
+   }
+}
+const numberProxy = new Proxy(numbers, handler);
+numberProxy.num1 = 20;
+console.log("num1:", numberProxy.num1);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Object is read-only.
+num1: 10
+      </code></pre>
+
+      <h3>3. Side Effects</h3>
+      <pre><code>
+const emails = { email1: "abcd@gmail.com" }
+function emailValidator(email) {
+   return email.includes("@");
+}
+const handler = {
+   set(object, property, value) {
+      if (emailValidator(value)) {
+         object[property] = value;
+      }
+   }
+}
+const emailProxy = new Proxy(emails, handler);
+emailProxy.email1 = "nmc@gmail.com";
+console.log("email1:", emailProxy.email1);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+email1: nmc@gmail.com
+      </code></pre>
+    </div>
+
+    <div class="content">
+      <h2>JavaScript Proxy Handlers List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Handler</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>apply()</td><td>Changes the behavior of function calls.</td></tr>
+          <tr><td>construct()</td><td>Traps object construction with <code>new</code>.</td></tr>
+          <tr><td>defineProperty()</td><td>Intercepts property definition.</td></tr>
+          <tr><td>deleteProperty()</td><td>Intercepts property deletion.</td></tr>
+          <tr><td>get()</td><td>Intercepts property access.</td></tr>
+          <tr><td>getOwnPropertyDescriptor()</td><td>Intercepts property descriptor retrieval.</td></tr>
+          <tr><td>getPrototypeOf()</td><td>Intercepts prototype access.</td></tr>
+          <tr><td>has()</td><td>Intercepts the <code>in</code> operator.</td></tr>
+          <tr><td>isExtensible()</td><td>Intercepts <code>Object.isExtensible()</code>.</td></tr>
+          <tr><td>ownKeys()</td><td>Intercepts <code>Object.keys()</code> and similar.</td></tr>
+          <tr><td>preventExtension()</td><td>Intercepts attempts to prevent extensions.</td></tr>
+          <tr><td>set()</td><td>Intercepts property updates.</td></tr>
+          <tr><td>setPrototypeOf()</td><td>Intercepts prototype updates.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content">
+      <h2>Proxy Constructor</h2>
+      <ul>
+        <li><strong>Proxy()</strong> − Used to create a proxy object.</li>
+      </ul>
+
+      <h2>Static Method</h2>
+      <ul>
+        <li><strong>revocable()</strong> − Creates a revocable proxy object similar to Proxy().</li>
+      </ul>
+    </div>
+  </div>
+</div>

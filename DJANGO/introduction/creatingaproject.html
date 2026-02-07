@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Creating and Structuring a Project 🏗️</h1>
+        <div class="content">
+            <p>In Django, a **project** is the container for your entire web application. A project is composed of one or more independent **applications**, where each application is a self-contained set of code files that follows the MVT (Model-View-Template) pattern (e.g., a "forum" or a "news" engine). This modular structure promotes code reusability.</p>
+
+            <h2>Creating the Project</h2>
+            <p>To create a new project, navigate to your desired directory in the command line and use the <code>django-admin</code> utility:</p>
+            <pre><code>$ django-admin startproject myproject</code></pre>
+            <p>This command creates a top-level directory named <code>myproject</code>, which holds the project's necessary files.</p>
+
+            <hr>
+
+            <h2>Project Structure Breakdown</h2>
+            <p>The resulting directory structure contains two main elements:</p>
+            <pre><code>myproject/
+   manage.py
+   myproject/
+      __init__.py
+      settings.py
+      urls.py
+      wsgi.py</code></pre>
+            <ul>
+                <li>
+                    **<code>manage.py</code>**
+                    <p>This is your command-line utility for interacting with the project. It acts as a local <code>django-admin</code> for tasks like starting the development server, managing the database, and running tests. To see all available commands, use: <code>$ python manage.py help</code>.</p>
+                </li>
+                <li>
+                    **<code>myproject/</code> (The Settings Package)**
+                    <p>This is the actual Python package for your project. It contains the configuration files:</p>
+                    <ul>
+                        <li>**<code>settings.py</code>:** Contains all the project's configurations (database, time zone, installed apps, etc.).</li>
+                        <li>**<code>urls.py</code>:** The project's main URL configuration, acting as a table of contents that maps URLs to the appropriate application views.</li>
+                        <li>**<code>wsgi.py</code>:** Used for deploying the project with WSGI-compliant web servers (e.g., Gunicorn, Apache/mod_wsgi).</li>
+                        <li>**<code>__init__.py</code>:** A standard Python file indicating that the directory is a package.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2>Essential Project Settings (<code>settings.py</code>)</h2>
+            <p>The following are crucial configurations within the <code>settings.py</code> file:</p>
+
+            <h3>Debug Mode</h3>
+            <p><code>DEBUG = True</code></p>
+            <p>Setting this to **<code>True</code>** provides detailed error information and enables the Django development server to serve static files. **Always set this to <code>False</code> for live (production) projects** for security reasons.</p>
+
+            <h3>Database Configuration</h3>
+            <p>The **<code>DATABASES</code>** dictionary defines the connection parameters. The example uses the default SQLite setup:</p>
+            <pre><code>DATABASES = {
+   'default': {
+      'ENGINE': 'django.db.backends.sqlite3',
+      'NAME': 'database.sql',
+      # ... other settings for user/password/host/port
+   }
+}</code></pre>
+            <p>The <code>ENGINE</code> parameter changes for other databases (e.g., <code>django.db.backends.mysql</code>, <code>django.db.backends.postgresql_psycopg2</code>). Ensure the necessary database driver is installed before changing the engine.</p>
+
+            <hr>
+
+            <h2>Running the Development Server</h2>
+            <p>To confirm your project is set up correctly, start the built-in lightweight development server:</p>
+            <pre><code>$ python manage.py runserver</code></pre>
+            <p>This command starts the server, typically accessible at **<code>http://127.0.0.1:8000/</code>**.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Preprocessor Operators in C</h1>
+
+    <div class="content">
+      <p>Preprocessor operators are special symbol(s) that are used in the context of the <code>#define</code> directive. These operators are also called preprocessor-specific operators.</p>
+
+      <p>In C, a set of preprocessor operators have been defined, each with an important operation attached to it. In this chapter, we will explain the different types of preprocessor operators used in C.</p>
+
+      <p>The following preprocessor operators are implemented by most of the modern C compilers −</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Continuation operator (\)</td>
+            <td>Used to continue a macro that is too long for a single line.</td>
+          </tr>
+          <tr>
+            <td>Stringizing operator (#)</td>
+            <td>Causes the corresponding actual argument to be enclosed in double quotation marks.</td>
+          </tr>
+          <tr>
+            <td>Token-pasting operator (##)</td>
+            <td>Allows tokens used as actual arguments to be concatenated to form other tokens.</td>
+          </tr>
+          <tr>
+            <td>defined operator</td>
+            <td>Simplifies the writing of compound expressions in certain macro directives.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="title">Continuation Operator (\)</h2>
+      <p>This operator is used when the macro is quite complex and spreads over multiple lines. In case of a complex logic inside macro expansion, you'll need to break the line and write code that spreads over more than one line. In such cases, the macro continuation operator is very helpful.</p>
+
+      <h3 class="title">Example 1: Preprocessor Continuation Operator (\)</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#define message() { \
+   printf("TutorialsPoint Library contains\n"); \
+   printf("High quality Programming Tutorials"); \
+}
+
+int main() {
+   message();
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>TutorialsPoint Library contains
+High quality Programming Tutorials</code></pre>
+
+      <h3 class="title">Example 2: Preprocessor Continuation Operator (\)</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#define SHAPE(x) switch(x) { \  
+   case 1: printf("1. CIRCLE\n"); break; \  
+   case 2: printf("2. RECTANGLE\n"); break; \  
+   case 3: printf("3. SQUARE\n"); break; \  
+   default: printf("default. LINE\n"); \  
+}
+
+int main() {
+   SHAPE(1);
+   SHAPE(2);
+   SHAPE(3);
+   SHAPE(0);
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>1. CIRCLE
+2. RECTANGLE
+3. SQUARE
+default. LINE</code></pre>
+
+      <h2 class="title">Stringizing Operator (#)</h2>
+      <p>Sometimes you may want to convert a macro argument into a string constant. The number-sign or "stringizing" operator (<code>#</code>) converts macro parameters to string literals without expanding the parameter definition. This operator may be used only in a macro having a specified argument or parameter list.</p>
+
+      <h3 class="title">Example 1: Stringizing Operator</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#define stringize(x) printf(#x "\n")
+
+int main() {
+   stringize(Welcome To TutorialsPoint);
+   stringize("The Largest Tutorials Library");
+   stringize("Having video and Text Tutorials on Programming Languages");
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>Welcome To TutorialsPoint
+"The Largest Tutorials Library"
+"Having video and Text Tutorials on Programming Languages"</code></pre>
+
+      <h3 class="title">Example 2: Stringizing Operator</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#define STR_PRINT(x) #x
+
+main() {
+   printf(STR_PRINT(This is a string without double quotes));
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>This is a string without double quotes</code></pre>
+
+      <h2 class="title">Token Pasting Operator (##)</h2>
+      <p>The double-number-sign or token-pasting operator (<code>##</code>), sometimes called the merging or combining operator, is useful to merge two tokens into one while expanding macros.</p>
+
+      <p>When a macro is expanded, the two tokens on either side of each <code>##</code> operator are combined into a single token, which then replaces the <code>##</code> and the two original tokens in the macro expansion.</p>
+
+      <h3 class="title">Example 1: Token Pasting Operator (##)</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#define PASTE(arg1,arg2) arg1##arg2
+
+main() {
+   int value_1 = 1000;
+   printf("value_1 = %d\n", PASTE(value_,1));
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>value_1 = 1000</code></pre>
+
+      <h3 class="title">Example 2: Token Pasting Operator (##)</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#define TOKENS(X, Y) X##Y
+
+int main() {
+   printf("value1: %d\n", TOKENS(12,20));
+   printf("value2: %d\n", TOKENS(12,20) + 10);
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>value1: 1220
+value2: 1230</code></pre>
+
+      <h2 class="title">The defined Operator</h2>
+      <p>The defined preprocessor operator can only be used as a part of <code>#if</code> and <code>#elif</code> directives. The syntax of the defined operator is as follows −</p>
+
+      <pre><code>#if defined(macro1)   
+// code
+#elif defined(macro2)   
+// code
+#endif</code></pre>
+
+      <p>It is used in constant expressions to determine if an identifier is defined. If the specified identifier is defined, the value is true (non-zero). If the symbol is not defined, the value is false (zero).</p>
+
+      <h3 class="title">Example 1: defined Operator</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#define DEBUG 1
+
+int main() {
+   #if defined(DEBUG)
+   printf("DEBUG mode is on.\n");
+   #else
+   printf("DEBUG mode is off.\n");
+   #endif
+
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>DEBUG mode is on.</code></pre>
+
+      <h3 class="title">Example 2: defined Operator</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#define square(x) ((x) * (x))
+
+int main() {
+   #if defined square
+   printf("The square of the given number is: %d", square(5));
+   #endif
+
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>The square of the given number is: 25</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Events</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Node.js uses an asynchronous event-driven architecture on the server side, handling events such as File I/O operations, and server requests and responses.
+      </p>
+      <p>
+        Different objects emit various events, for example, the <code>net.Server</code> emits events when peers connect, and <code>ReadStream</code> emits events when files open or data is available to read.
+      </p>
+
+      <h2>Event Handling in Node.js API</h2>
+      <p>
+        Events are identified by Node.js, with callbacks attached to each event. When an event occurs, its corresponding callback(s) execute.
+      </p>
+
+      <h2>Using the Events Module</h2>
+      <p>
+        The Node.js <code>events</code> module provides the <code>EventEmitter</code> class for event handling.
+      </p>
+
+      <h3>Steps to Handle Events</h3>
+      <pre><code>// Import events module
+var events = require('events');
+
+// Create an eventEmitter object
+var eventEmitter = new events.EventEmitter();</code></pre>
+      <p>Bind event handlers to events:</p>
+      <pre><code>// Bind event and event handler
+eventEmitter.on('eventName', eventHandler);</code></pre>
+      <p>Trigger events programmatically:</p>
+      <pre><code>// Fire an event 
+eventEmitter.emit('eventName');</code></pre>
+
+      <h2>Example</h2>
+      <pre><code>// Import events module
+var events = require('events');
+
+// Create an eventEmitter object
+var eventEmitter = new events.EventEmitter();
+
+// Create an event handler
+var connectHandler = function connected() {
+   console.log('connection successful.');
+}
+
+// Bind the connection event with the handler
+eventEmitter.on('connection', connectHandler);
+
+// Bind another event with an anonymous function
+eventEmitter.on('data_received', function(){
+   console.log('data received successfully.');
+});
+
+// Fire the events
+eventEmitter.emit('connection');
+eventEmitter.emit('data_received');
+
+console.log("Program Ended.");</code></pre>
+
+      <h2>Output</h2>
+      <p>
+        <strong>connection successful.</strong><br/>
+        <strong>data received successfully.</strong><br/>
+        <strong>Program Ended.</strong>
+      </p>
+
+      <h2>Example: Asynchronous Callback with Error Handling</h2>
+      <p>Create a text file named <code>input.txt</code> with some content. Then create a <code>main.js</code> file:</p>
+      <pre><code>var fs = require("fs");
+fs.readFile('input.txt', function (err, data) {
+   if (err) {
+      console.log(err.stack);
+      return;
+   }
+   console.log(data.toString());
+});
+console.log("Program Ended");</code></pre>
+      <p>
+        This demonstrates an async function that reads a file, handling errors in the callback. The program logs "Program Ended" before the file content due to asynchronous execution.
+      </p>
+    </div>
+  </div>
+</div>

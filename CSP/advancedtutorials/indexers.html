@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Indexers: Virtual Array Access</h1>
+        
+        <div class="content">
+            <h2 class="title">What is an Indexer? 🔢</h2>
+            <p>An **indexer** allows an object of a class or structure to be indexed in the same way an array is indexed. When an indexer is defined, the class behaves like a **"virtual array,"** allowing its instances to be accessed using the array access operator (`[ ]`).</p>
+            <p>Indexers are conceptually similar to properties but, instead of returning or setting a single named field, they enable accessing specific parts of the object's internal data using an index.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Indexer Syntax and Structure</h2>
+            <p>Indexers are defined using the **<span class="example">`this`</span>** keyword, followed by the index parameter(s) inside square brackets.</p>
+            
+            <h3 class="title">Basic Syntax</h3>
+            <pre>element-type this[index-type index] {
+   // The get accessor (for reading)
+   get {
+      // Logic to retrieve the value at the given index
+      return internal_data[index];
+   }
+   
+   // The set accessor (for writing)
+   set {
+      // Logic to assign the 'value' to the internal data at the given index
+      internal_data[index] = value;
+   }
+}</pre>
+            
+            <h3 class="title">Key Differences from Properties</h3>
+            <ul>
+                <li>**Naming:** Indexers are defined using the keyword **<span class="example">`this`</span>**, not a user-defined name.</li>
+                <li>**Parameters:** Indexers **must** take one or more parameters inside the square brackets, which acts as the index. Properties have no parameters.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Versatility of Indexers</h2>
+            
+            <h3 class="title">1. Non-Integer Indexes (Dictionary-Style) 💡</h3>
+            <p>The index parameter does **not** have to be an integer. This allows you to create dictionary-like access where a string or other custom type is used as the key.</p>
+            <pre>// Indexer using a string key to access an internal Dictionary
+public string this[string name]
+{
+    get { return phoneBook.ContainsKey(name) ? phoneBook[name] : "Not Found"; }
+    set { phoneBook[name] = value; }
+}</pre>
+            <p>This allows instances of the class to be accessed like: <span class="example">`contacts["Aman"] = "1234..."`</span></p>
+
+            <h3 class="title">2. Overloaded Indexers</h3>
+            <p>Indexers can be overloaded, meaning you can define multiple indexers within the same class as long as their parameter signatures are different (e.g., one taking an <span class="example">`int`</span> and one taking a <span class="example">`string`</span>). This allows the class to be accessed in multiple ways.</p>
+
+            <h3 class="title">3. Access Modifiers on Accessors</h3>
+            <p>Similar to properties, you can apply access modifiers (<span class="example">`private`</span>, <span class="example">`protected`</span>) to the individual <span class="example">`get`</span> or <span class="example">`set`</span> accessors, providing granular control over how the internal data can be read or written from outside the class.</p>
+            <pre>public string this[int index]
+{
+    get { return items[index]; }
+    private set { items[index] = value; } // Cannot be set externally
+}</pre>
+        </div>
+    </div>
+</div>d

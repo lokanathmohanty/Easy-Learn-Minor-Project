@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP JSON Processing</h1>
+
+        <div class="content">
+            <p>**JSON (JavaScript Object Notation)** is a lightweight, text-based, language-independent data interchange format. PHP includes native support for JSON through the built-in **JSON extension** (enabled by default since PHP 5.2), providing functions to efficiently convert between PHP values and JSON strings.</p>
+
+            <hr>
+
+            <h2 class="title">PHP JSON Encoding and Decoding Functions</h2>
+
+            <h3>1. $\text{json\_encode()}$</h3>
+            <p>Converts a **PHP value** (e.g., array, object) into its **JSON string representation**. It serializes arrays and objects recursively.</p>
+            <pre>json_encode(mixed $value, int $flags = 0, int $depth = 512): string|false</pre>
+            <p><strong>Example:</strong> An associative array $\text{array('a' => 1, 'b' => 2)}$ becomes the JSON string $\text{"\{\"a\":1,\"b\":2\}"}$.</p>
+
+            <h3>2. $\text{json\_decode()}$</h3>
+            <p>Takes a **JSON encoded string** and converts it into a **PHP value** (an array or a generic object).</p>
+            <pre>json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0): mixed</pre>
+            <ul>
+                <li>If the optional $\text{\$associative}$ parameter is set to **$\text{true}$**, JSON objects are returned as **associative arrays** ($\text{array}$).</li>
+                <li>If $\text{\$associative}$ is set to **$\text{false}$** (the default behavior), JSON objects are returned as **objects** ($\text{stdClass}$).</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">JSON Error Handling</h2>
+            <p>After calling $\text{json\_encode()}$ or $\text{json\_decode()}$, it is crucial to check for errors, especially when decoding external data.</p>
+            
+            <h3>$\text{json\_last\_error()}$</h3>
+            <p>Returns an **integer** constant indicating the type of error that occurred during the last JSON operation. $\text{JSON\_ERROR\_NONE}$ (0) indicates success.</p>
+
+            <h3>$\text{json\_last\_error\_msg()}$</h3>
+            <p>Returns the corresponding **string message** for the last error (e.g., "No error", "Syntax error", "Malformed UTF-8 characters").</p>
+            
+            <p><strong>Common Error Constants:</strong></p>
+            <ul>
+                <li>$\text{JSON\_ERROR\_NONE}$: No error.</li>
+                <li>$\text{JSON\_ERROR\_SYNTAX}$: Invalid JSON format.</li>
+                <li>$\text{JSON\_ERROR\_CTRL\_CHAR}$: Control character error.</li>
+                <li>$\text{JSON\_ERROR\_RECURSION}$: Found one or more recursive references during encoding.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">JSON Flags ($\text{\$flags}$)</h2>
+            <p>Flags are optional bitmasks that modify the behavior of $\text{json\_encode()}$ or $\text{json\_decode()}$.</p>
+            
+            <table class="example">
+                <thead>
+                    <tr>
+                        <th>Constant</th>
+                        <th>Description</th>
+                        <th>Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$\text{JSON\_PRETTY\_PRINT}$</td>
+                        <td>Formats the JSON string with indentation and newlines, making it human-readable.</td>
+                        <td>$\text{json\_encode()}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{JSON\_UNESCAPED\_SLASHES}$</td>
+                        <td>Prevents forward slashes ($\text{/}$) from being escaped ($\text{\/}$). Useful for URLs.</td>
+                        <td>$\text{json\_encode()}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{JSON\_FORCE\_OBJECT}$</td>
+                        <td>Ensures that an empty array or numerically indexed non-empty array is encoded as a JSON object ($\text{\{\}}$), not a JSON array ($\text{[]}$).</td>
+                        <td>$\text{json\_encode()}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{JSON\_HEX\_TAG}$</td>
+                        <td>Encodes HTML tags ($\text{<}$ and $\text{>}$) to their hexadecimal representations.</td>
+                        <td>$\text{json\_encode()}$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

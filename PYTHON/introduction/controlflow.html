@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Control Flow</h1>
+    <div class="content">
+      <p>In Python, the flow of a program is regulated by conditional statements, loops, and function calls. By default, instructions are executed sequentially from top to bottom. However, control flow allows programs to make decisions and repeat tasks based on conditions.</p>
+
+      <h2>Decision Making Statements</h2>
+      <p>Decision-making statements execute different blocks of instructions depending on the result of a Boolean expression. Python supports <code>if</code>, <code>elif</code>, <code>else</code>, and <code>match-case</code> constructs.</p>
+
+      <h3>The if Statements</h3>
+      <pre>
+marks = 80 
+result = ""
+
+if marks &lt; 30:
+   result = "Failed"
+elif marks &gt; 75:
+   result = "Passed with distinction"
+else:
+   result = "Passed"
+
+print(result)
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+Passed with distinction
+      </pre>
+
+      <h3>The match Statement</h3>
+      <p><code>match-case</code> helps in decision-making by matching values or patterns.</p>
+      <pre>
+def checkVowel(n):
+   match n:
+      case 'a': return "Vowel alphabet"
+      case 'e': return "Vowel alphabet"
+      case 'i': return "Vowel alphabet"
+      case 'o': return "Vowel alphabet"
+      case 'u': return "Vowel alphabet"
+      case _: return "Simple alphabet"
+
+print(checkVowel('a'))
+print(checkVowel('m'))
+print(checkVowel('o'))
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+Vowel alphabet
+Simple alphabet
+Vowel alphabet
+      </pre>
+
+      <h2>Loops or Iteration Statements</h2>
+      <p>Loops allow repeated execution of a block of code until a condition is met. Python supports <code>for</code> loops and <code>while</code> loops.</p>
+
+      <h3>The for Loop</h3>
+      <p>The <code>for</code> loop iterates over items in a sequence such as lists, tuples, or strings.</p>
+      <pre>
+words = ["one", "two", "three"]
+for x in words:
+  print(x)
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+one
+two
+three
+      </pre>
+
+      <h3>The while Loop</h3>
+      <p>The <code>while</code> loop runs as long as a given condition evaluates to <code>True</code>.</p>
+      <pre>
+i = 1
+while i &lt; 6:
+  print(i)
+  i += 1
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+1
+2
+3
+4
+5
+      </pre>
+
+      <h2>Jump Statements</h2>
+      <p>Jump statements alter the normal sequence of execution inside loops. Python provides <code>break</code> and <code>continue</code> statements.</p>
+
+      <h3>The break Statement</h3>
+      <p>The <code>break</code> statement terminates the current loop and transfers control to the next statement outside the loop.</p>
+      <pre>
+x = 0
+
+while x &lt; 10:
+    print("x:", x)
+    if x == 5:
+        print("Breaking...")
+        break
+    x += 1
+
+print("End")
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+x: 0
+x: 1
+x: 2
+x: 3
+x: 4
+x: 5
+Breaking...
+End
+      </pre>
+
+      <h3>The continue Statement</h3>
+      <p>The <code>continue</code> statement skips the current iteration and moves control back to the beginning of the loop.</p>
+      <pre>
+for letter in "Python":
+    # continue when letter is 'h'
+    if letter == "h":
+        continue
+    print("Current Letter :", letter)
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+Current Letter : P
+Current Letter : y
+Current Letter : t
+Current Letter : o
+current letter : n
+      </pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Clearfix</h1>
+    <div class="content">
+      <p><strong>Clearfix</strong> is a common CSS technique used to fix issues caused by floated elements inside a container. Floated elements are taken out of the normal document flow, which often leads to their parent container collapsing and failing to wrap around them properly. Clearfix ensures that the parent container encloses its floated children correctly.</p>
+
+      <h2>Why Do We Need Clearfix?</h2>
+      <p>When elements are floated using <code>float: left;</code> or <code>float: right;</code>, they are removed from the normal flow of the document. This can cause:</p>
+      <ul>
+        <li>Parent containers collapsing to zero height.</li>
+        <li>Overlapping of content.</li>
+        <li>Broken alignment of surrounding elements.</li>
+        <li>Inconsistent layout across browsers.</li>
+      </ul>
+      <p>The clearfix technique solves this by forcing the container to clear the floated elements inside it.</p>
+
+      <h2>How Clearfix Works?</h2>
+      <p>The basic clearfix rule makes use of a pseudo-element <code>::after</code>. This element is automatically added after the floated content and clears both left and right floats:</p>
+      <ul>
+        <li><strong>content: ""</strong> → Generates an empty pseudo-element.</li>
+        <li><strong>display: table</strong> → Makes the pseudo-element a block-level element so it takes full width.</li>
+        <li><strong>clear: both</strong> → Ensures that both left and right floats are cleared.</li>
+      </ul>
+      <p>CSS Rule:</p>
+      <ul>
+        <li><code>.clearfix::after { content: ""; display: table; clear: both; }</code></li>
+      </ul>
+
+      <h2>Example: Without and With Clearfix</h2>
+      <p>Consider a container with an image floated to the right. Without clearfix, the container will not expand to fit the image, causing overflow issues. With clearfix, the container automatically adjusts its height.</p>
+      <ul>
+        <li><strong>Without Clearfix:</strong> The image overflows outside the container.</li>
+        <li><strong>With Clearfix:</strong> The container wraps around the image properly.</li>
+      </ul>
+
+      <h2>Clearfix Using Overflow Property</h2>
+      <p>Another way to achieve a clearfix effect is by using <code>overflow: auto;</code> on the parent container. This forces the container to stretch and include floated children. However, this method can sometimes create scrollbars if margins or paddings are not managed carefully, so it is less recommended compared to the pseudo-element method.</p>
+      <ul>
+        <li><strong>overflow: auto;</strong> makes the container expand to fit floated elements.</li>
+        <li>May introduce unwanted scrollbars in some layouts.</li>
+        <li>Best used for small, controlled containers.</li>
+      </ul>
+
+      <h2>Key Differences Between Methods</h2>
+      <ul>
+        <li><strong>Clearfix with ::after</strong> → Reliable, widely supported, prevents container collapse.</li>
+        <li><strong>Clearfix with overflow: auto;</strong> → Simpler but can introduce layout issues like scrollbars.</li>
+      </ul>
+
+      <h2>Practical Use Cases</h2>
+      <ul>
+        <li>Image galleries where images are floated inside a container.</li>
+        <li>Navigation bars that use floating list items.</li>
+        <li>Two-column or three-column layouts using floats.</li>
+        <li>Text wrapping around images with consistent container height.</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>Floated elements are removed from the normal flow, often collapsing their container.</li>
+        <li>Clearfix fixes this issue by ensuring the parent container properly encloses floated elements.</li>
+        <li>The recommended method is using <code>.clearfix::after</code> because it is flexible and avoids layout bugs.</li>
+        <li>Using <code>overflow: auto;</code> can also work but should be used carefully.</li>
+      </ul>
+
+      <p>By using clearfix, developers can ensure stable, consistent, and predictable layouts, especially when working with floats in web design.</p>
+    </div>
+  </div>
+</div>

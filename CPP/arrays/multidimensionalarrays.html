@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Multi-dimensional Arrays (MDAs) 📊</h1>
+
+        <div class="content">
+            <p>A **multi-dimensional array** (MDA) in C++ is an array of arrays, allowing data to be stored in a **grid-like structure** rather than a single sequence. While you can create arrays of any dimension, the most common are two-dimensional (2D) and three-dimensional (3D).</p>
+
+            <p>The general syntax for declaring an MDA is:</p>
+            <pre class="example">
+type name[size1][size2]...[sizeN];
+</pre>
+            <p>The total number of elements is the product of all sizes: $size1 \times size2 \times \dots \times sizeN$.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">I. Two-Dimensional (2D) Arrays</h2>
+            <p>A 2D array is essentially a **list of 1D arrays** and is often visualized as a **table** or **matrix** with rows and columns. </p>
+
+            <h3>Declaration and Access</h3>
+            <p>A 2D array is declared with two sets of brackets: `arrayName[rows][columns]`. Elements are accessed using two indices: `arrayName[row_index][column_index]`.</p>
+            <pre class="example">
+// Declaration of a 3-row, 4-column integer array
+int a[3][4];
+
+// Accessing the element in the 3rd row (index 2) and 4th column (index 3)
+int val = a[2][3]; 
+</pre>
+
+            <h3>Initialization</h3>
+            <p>You can initialize a 2D array by nesting braces to clearly delineate the data for each row, though the inner braces are optional.</p>
+            <pre class="example">
+// Initialization with nested braces (preferred for clarity)
+int a[3][4] = {  
+   {0, 1, 2, 3},    // Row 0
+   {4, 5, 6, 7},    // Row 1
+   {8, 9, 10, 11}   // Row 2
+};
+
+// Flat initialization (data is still stored row-by-row)
+int a[3][4] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">II. Three-Dimensional (3D) Arrays</h2>
+            <p>A 3D array extends the concept by adding a third dimension, often visualized as a **cube** or a stack of 2D arrays (layers). It is declared with three sets of brackets: `arrayName[depth/layer][rows][columns]`.</p>
+
+            <h3>Access and Initialization</h3>
+            <p>Elements are accessed using three indices: `b[layer_index][row_index][column_index]`.</p>
+            <pre class="example">
+// Declaration of a 2-layer, 3-row, 4-column array
+int b[2][3][4];
+
+// Accessing the element in Layer 1, Row 2, Column 3
+int val = b[1][2][3]; 
+</pre>
+            <p>Initialization uses triple-nested braces to delineate layers and rows:</p>
+            <pre class="example">
+int b[2][3][4] = {  
+  {  /* Layer 0 */
+    {0, 1, 2, 3},  
+    {4, 5, 6, 7}  
+  },
+  {  /* Layer 1 */
+    {12, 13, 14, 15}, 
+    {16, 17, 18, 19}  
+  }
+};
+</pre>
+        </div>
+    </div>
+</div>

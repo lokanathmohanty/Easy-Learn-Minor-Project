@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Arrays in Python</h1>
+    <div class="content">
+      <p>Python does not have a built-in array type like C++ or Java. Instead, the <code>array</code> module allows for the creation of arrays, which store elements of the same type at contiguous memory locations. Lists and tuples are often used as flexible arrays, but the <code>array</code> module is used for actual type-restricted arrays.</p>
+      
+      <h2 class="title">Creating an Array</h2>
+      <pre><code>import array as arr
+
+# Integer array
+a = arr.array('i', [1, 2, 3])
+print(type(a), a)
+
+# Character array
+a = arr.array('u', 'BAT')
+print(type(a), a)
+
+# Float array
+a = arr.array('d', [1.1, 2.2, 3.3])
+print(type(a), a)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>&lt;class 'array.array'&gt; array('i', [1, 2, 3])
+&lt;class 'array.array'&gt; array('u', 'BAT')
+&lt;class 'array.array'&gt; array('d', [1.1, 2.2, 3.3])</code></pre>
+
+      <h2 class="title">Array Typecodes</h2>
+      <ul>
+        <li><code>'b'</code> — signed integer (1 byte)</li>
+        <li><code>'B'</code> — unsigned integer (1 byte)</li>
+        <li><code>'u'</code> — Unicode character (2 bytes)</li>
+        <li><code>'h'</code> — signed integer (2 bytes)</li>
+        <li><code>'H'</code> — unsigned integer (2 bytes)</li>
+        <li><code>'i'</code> — signed integer (2 bytes)</li>
+        <li><code>'I'</code> — unsigned integer (2 bytes)</li>
+        <li><code>'l'</code> — signed integer (4 bytes)</li>
+        <li><code>'L'</code> — unsigned integer (4 bytes)</li>
+        <li><code>'q'</code> — signed integer (8 bytes)</li>
+        <li><code>'Q'</code> — unsigned integer (8 bytes)</li>
+        <li><code>'f'</code> — floating point (4 bytes)</li>
+        <li><code>'d'</code> — floating point (8 bytes)</li>
+      </ul>
+
+      <h2 class="title">Basic Array Operations</h2>
+      <ul>
+        <li><strong>Traverse:</strong> Print all elements one by one.</li>
+        <li><strong>Insertion:</strong> Add an element at a given index.</li>
+        <li><strong>Deletion:</strong> Remove an element at a given index.</li>
+        <li><strong>Search:</strong> Find an element by its value or index.</li>
+        <li><strong>Update:</strong> Change the value at a given index.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="session">
+    <h1 class="title">Example: Basic Operations</h1>
+    <div class="content">
+
+      <h2 class="title">Accessing Array Elements</h2>
+      <pre><code>from array import *
+array1 = array('i', [10,20,30,40,50])
+print(array1[0])
+print(array1[2])
+# Output:
+# 10
+# 30
+</code></pre>
+
+      <h2 class="title">Insertion</h2>
+      <pre><code>array1.insert(1, 60)
+for x in array1:
+    print(x)
+# Output:
+# 10
+# 60
+# 20
+# 30
+# 40
+# 50
+</code></pre>
+
+      <h2 class="title">Deletion</h2>
+      <pre><code>array1.remove(40)
+for x in array1:
+    print(x)
+# Output:
+# 10
+# 60
+# 20
+# 30
+# 50
+</code></pre>
+
+      <h2 class="title">Search</h2>
+      <pre><code>print(array1.index(30))
+# Output:
+# 3
+</code></pre>
+
+      <h2 class="title">Update</h2>
+      <pre><code>array1[2] = 80
+for x in array1:
+    print(x)
+# Output:
+# 10
+# 60
+# 80
+# 30
+# 50
+</code></pre>
+    </div>
+  </div>
+</div>

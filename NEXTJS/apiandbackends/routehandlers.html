@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Route Handlers (App Router) ⚙️</h1>
+        
+        <div class="content">
+            <h2 class="title">What are Route Handlers?</h2>
+            <p>**Route Handlers** are the equivalent of API Routes for the modern Next.js **App Router** architecture. They are used to create custom **server-side API endpoints** that can be consumed by the frontend (Client Components) or any external client. They define server-side logic for HTTP requests, such as fetching data, handling form submissions, or interacting with a database.</p>
+            
+            <h3 class="title">How They Work:</h3>
+            <ul>
+                <li>**Creation:** A Route Handler is created by adding a file named **<span class="example">`route.js`</span>** or **<span class="example">`route.ts`</span>** inside a folder within the <span class="example">`app`</span> directory (e.g., <span class="example">`app/api/hello/route.js`</span>).</li>
+                <li>**Endpoint Mapping:** The file path defines the API endpoint (e.g., <span class="example">`/api/hello`</span>).</li>
+                <li>**Coexistence:** A <span class="example">`route.js`</span> file **cannot** exist at the same folder level as a <span class="example">`page.js`</span> file, as they both map to the same URL segment.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Setting Up a Basic Route Handler</h2>
+            <p>A basic handler exports a function named after the HTTP method it handles. It receives a <span class="example">`Request`</span> object and must return a <span class="example">`Response`</span> object, typically using **<span class="example">`NextResponse.json()`</span>** for convenience.</p>
+            
+            <h3 class="title">Example (GET Request):</h3>
+            <pre>// File: app/api/hello/route.js
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  // Returns a JSON response with status 200 (OK)
+  return NextResponse.json({ message: 'Hello from Route Handler!' });
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Handling Multiple HTTP Methods</h2>
+            <p>You can handle different HTTP verbs by exporting separate functions named <span class="example">`GET`</span>, <span class="example">`POST`</span>, <span class="example">`PUT`</span>, <span class="example">`DELETE`</span>, etc., from the same <span class="example">`route.ts`</span> file.</p>
+            
+            <pre>// File: app/api/users/route.ts
+
+// Handles GET requests to /api/users
+export async function GET() {
+  return NextResponse.json(
+    { message: 'Fetching users' },
+    { status: 200 }
+  );
+}
+
+// Handles POST requests to /api/users (e.g., for creating a new user)
+export async function POST(request: Request) {
+  // Access the request body via the Request object
+  const data = await request.json(); 
+  return NextResponse.json(
+    { message: 'Creating user', data },
+    { status: 201 } // 201 Created
+  );
+}
+
+// Handles DELETE requests to /api/users
+export async function DELETE(request: Request) {
+  // Access query parameters from the request URL
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+  return NextResponse.json(
+    { message: 'Deleting user', id },
+    { status: 200 }
+  );
+}</pre>
+        </div>
+    </div>
+</div>

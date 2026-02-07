@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Survival Analysis</h1>
+    <div class="content">
+      <p>
+        Survival analysis predicts the time until a specific event occurs, such as the survival time of a patient or failure time of a machine. In R, survival analysis is conducted using the <code>survival</code> package.
+      </p>
+      <p>
+        Key functions are <code>Surv()</code> to create a survival object from time and event data, and <code>survfit()</code> to fit a survival curve and plot it.
+      </p>
+      
+      <h2>Installation</h2>
+      <pre><code>install.packages("survival")</code></pre>
+      
+      <h2>Usage</h2>
+      <pre><code>library(survival)</code></pre>
+      
+      <h2>Syntax</h2>
+      <pre><code>Surv(time, event)
+survfit(formula)</code></pre>
+      
+      <p>
+        - <strong>time</strong>: Follow-up time until event or censoring<br>
+        - <strong>event</strong>: Indicator whether event occurred (1) or censored (0)<br>
+        - <strong>formula</strong>: Model formula specifying response and predictors
+      </p>
+      
+      <h2>Example</h2>
+      <p>
+        The built-in dataset <code>pbc</code> records survival data on patients with primary biliary cirrhosis.
+      </p>
+      <pre><code>library(survival)
+
+# View data
+print(head(pbc))
+
+# Fit survival curve with time and status (event of interest: status==2)
+surv_obj <- Surv(pbc$time, pbc$status == 2)
+fit <- survfit(surv_obj ~ 1)
+
+# Save plot to file
+png("survival.png")
+plot(fit)
+dev.off()
+
+# Print summary
+print(fit)
+</code></pre>
+      
+      <h2>Sample Output</h2>
+      <pre><code>Call: survfit(formula = Surv(pbc$time, pbc$status == 2) ~ 1)
+
+      n  events  median 0.95LCL 0.95UCL 
+    418    161    3395   3090   3853 
+</code></pre>
+      
+      <p>
+        The survival curve shows survival probability over time, useful for estimating survival rates and median survival time.
+      </p>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

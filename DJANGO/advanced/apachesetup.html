@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Deploying with Apache using mod_wsgi 🚀</h1>
+        <div class="content">
+            <p>The **Django development server** is suitable only for testing and should not be used in a production environment. To deploy a Django application in production, a dedicated web server like **Apache** or Nginx is required. Serving a Django application via Apache is typically accomplished using the **<code>mod_wsgi</code>** module.</p>
+        </div>
+        <h2 class="example">Apache Configuration using <code>mod_wsgi</code></h2>
+        <div class="content">
+            <p>The link between Django and Apache is handled by the **<code>wsgi.py</code>** file located inside your main Django project folder (e.g., <code>myproject/myproject/wsgi.py</code>).</p>
+            <p>To configure Apache to serve your Django project, you need to edit its configuration file (e.g., <code>httpd.conf</code> or a virtual host configuration file) and add the following directives:</p>
+
+            <pre><code># The WSGIScriptAlias directive maps a URL path to a WSGI script file.
+# Here, it maps the root URL (/) to your project's wsgi.py file.
+WSGIScriptAlias / /var/www/html/myproject/myproject/wsgi.py
+
+# WSGIPythonPath tells the WSGI process to add your project directory 
+# to the Python path, allowing Python to import your project's settings.
+WSGIPythonPath /var/www/html/myproject/
+
+# The &lt;Directory&gt; block grants Apache access permissions to the WSGI file.
+&lt;Directory /var/www/html/myproject/&gt;
+   &lt;Files wsgi.py&gt;
+      Order deny,allow
+      Allow from all
+   &lt;/Files&gt;
+&lt;/Directory&gt;</code></pre>
+
+            <h3>Explanation of Directives:</h3>
+            <ul>
+                <li><strong><code>WSGIScriptAlias / /path/to/wsgi.py</code></strong>: This is the core directive. It tells Apache to pass all requests made to the root URL (<code>/</code>) to the specified WSGI application file (<code>wsgi.py</code>) for handling by Django.</li>
+                <li><strong><code>WSGIPythonPath /path/to/project/</code></strong>: This ensures that the Python interpreter running the WSGI process can find and import your Django project modules, including <code>settings.py</code>.</li>
+                <li><strong><code>&lt;Directory&gt;</code></strong>: This block ensures that Apache has the necessary permissions to read and execute the <code>wsgi.py</code> file, allowing the application to run.</li>
+            </ul>
+            <p>After making these changes, restarting Apache will allow the server to correctly interpret the URLs and serve the Django application instead of just listing the files.</p>
+        </div>
+    </div>
+</div>

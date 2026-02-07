@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Function bind() Method</h1>
+
+    <div class="content">
+      <p>The <strong>bind()</strong> method in JavaScript creates a new function with a specified <code>this</code> value and optional arguments, without invoking the original function immediately.</p>
+      <p>It is commonly used to set the context (<code>this</code>) for a function and to partially apply arguments. This is useful when we want to ensure that a function is executed in the desired context.</p>
+      <p>To fully understand <code>bind()</code>, we first need to recall how the <code>this</code> keyword works in JavaScript. The value of <code>this</code> depends on how a function is invoked and can vary across different contexts.</p>
+    </div>
+
+    <div class="content">
+      <h2>Syntax</h2>
+      <p><code>functionToBind.bind(thisValue, arg1, arg2, ...);</code></p>
+      <ul>
+        <li><strong>functionToBind</strong> − The original function to be bound.</li>
+        <li><strong>thisValue</strong> − The object that should be used as <code>this</code> inside the new function.</li>
+        <li><strong>arg1, arg2, ...</strong> − Optional arguments to be partially applied. These will be prepended to later arguments.</li>
+      </ul>
+      <p><strong>Return value:</strong> A new function with the given <code>this</code> value and fixed arguments.</p>
+    </div>
+
+    <div class="content">
+      <h2>Examples</h2>
+
+      <h3>Without Function bind() Method</h3>
+      <pre><code>
+function greet(message) {
+  console.log(message + ', ' + this.name);
+}
+
+const person = { name: 'John Doe' };
+greet('Hello'); 
+      </code></pre>
+      <p><strong>Output:</strong> <code>Hello, </code> (because <code>this.name</code> is undefined).</p>
+
+      <h3>With Function bind() Method</h3>
+      <pre><code>
+function greet(message) {
+  console.log(message + ', ' + this.name);
+}
+
+const person = { name: 'John Doe' };
+const greetPerson = greet.bind(person, 'Hello');
+
+greetPerson();
+      </code></pre>
+      <p><strong>Output:</strong> <code>Hello, John Doe</code></p>
+      <p>Here, <code>bind()</code> ensures that <code>this</code> refers to <code>person</code>, and the argument <code>'Hello'</code> is partially applied.</p>
+
+      <h3>Binding different objects to the same function</h3>
+      <pre><code>
+function printVal() {
+  console.log("Coordinates: " + this.X + ", " + this.Y);
+}
+
+const points1 = { X: 100, Y: 100 };
+const points2 = { X: 200, Y: 100 };
+const points3 = { X: 350, Y: 400 };
+
+const printFunc1 = printVal.bind(points1);
+const printFunc2 = printVal.bind(points2);
+const printFunc3 = printVal.bind(points3);
+
+printFunc1();
+printFunc2();
+printFunc3();
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Coordinates: 100,100</li>
+        <li>Coordinates: 200,100</li>
+        <li>Coordinates: 350,400</li>
+      </ul>
+
+      <h3>Setting default values of function parameters</h3>
+      <pre><code>
+function multiply(x, y) {
+  return x * y;
+}
+
+// Bind 'x' to 2
+const multiplyByTwo = multiply.bind(null, 2);
+
+console.log(multiplyByTwo(5));
+      </code></pre>
+      <p><strong>Output:</strong> <code>10</code></p>
+      <p>Here, <code>bind()</code> creates a new function where <code>x = 2</code>. Calling <code>multiplyByTwo(5)</code> results in <code>2 * 5 = 10</code>.</p>
+    </div>
+
+    <div class="content">
+      <p><strong>Important Note:</strong> The <code>bind()</code> method does not modify the original function. Instead, it returns a new function, allowing reuse in different contexts without altering the original implementation.</p>
+    </div>
+  </div>
+</div>

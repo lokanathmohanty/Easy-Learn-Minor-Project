@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Box Sizing</h1>
+    <div class="content">
+      <p>
+        The <b>box-sizing</b> property in CSS is used to define how the total width and height of an element is calculated. By default, the width and height of an element include its content, padding, and border. With the <b>box-sizing</b> property, you can alter this behavior to include or exclude the padding and border from the width and height calculation.
+      </p>
+
+      <p>
+        In older versions of CSS (CSS2), the default box model behavior often made the element look bigger than the dimensions specified:
+      </p>
+
+      <ul>
+        <li><b>width + padding + border = actual visible/rendered width</b></li>
+        <li><b>height + padding + border = actual visible/rendered height</b></li>
+      </ul>
+
+      <h2>CSS box-sizing Property</h2>
+      <p>
+        The CSS <b>box-sizing</b> property is useful for adjusting how element sizes are calculated, making layouts more predictable.
+      </p>
+
+      <h2>Possible Values</h2>
+      <ul>
+        <li>
+          <b>content-box</b>: This is the default value. Padding and border are added to the total width and height of the element.
+        </li>
+        <li>
+          <b>border-box</b>: Padding and border are included in the specified width and height, shrinking the content area.
+        </li>
+        <li>
+          <b>padding-box</b>: Not supported by browsers and cannot be used.
+        </li>
+      </ul>
+
+      <h2>Applies to</h2>
+      <p>
+        All HTML elements that accept width or height.
+      </p>
+
+      <h2>DOM Syntax</h2>
+      <p>
+        <code>object.style.boxSizing = "content-box | border-box";</code>
+      </p>
+
+      <h2>Example</h2>
+      <p>The following example demonstrates the difference between <b>content-box</b> and <b>border-box</b>:</p>
+
+      <div>
+        <h3>Example Code</h3>
+        <pre>
+&lt;div class="with-content-box"&gt;CONTENT BOX&lt;/div&gt;
+&lt;div class="with-border-box"&gt;BORDER BOX&lt;/div&gt;
+        </pre>
+      </div>
+
+      <p>
+        In this example, <b>content-box</b> includes padding in the calculation of width and height, while <b>border-box</b> does not. This makes <b>border-box</b> very useful for responsive designs.
+      </p>
+
+      <h2>Universal Box-Sizing Reset</h2>
+      <p>
+        For a smooth and fluid responsive design, many developers reset <b>box-sizing</b> for all elements:
+      </p>
+
+      <pre>
+* {
+   box-sizing: border-box;
+}
+      </pre>
+
+      <p>
+        A more complete syntax also applies to pseudo-elements:
+      </p>
+
+      <pre>
+*, *:before, *:after {
+   box-sizing: border-box;
+}
+      </pre>
+
+      <p>
+        Another flexible approach is to inherit <b>box-sizing</b>:
+      </p>
+
+      <pre>
+html {
+   box-sizing: border-box;
+}
+*, *:before, *:after {
+   box-sizing: inherit;
+}
+      </pre>
+
+      <h2>Browser Support</h2>
+      <p>
+        Modern browsers support <b>box-sizing: border-box</b> without prefixes. Older browsers may require <b>-webkit-</b> or <b>-moz-</b> prefixes:
+      </p>
+
+      <pre>
+html {
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+}
+*, *:before, *:after {
+   -webkit-box-sizing: inherit;
+   -moz-box-sizing: inherit;
+   box-sizing: inherit;
+}
+      </pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li><b>content-box</b> (default): Adds padding and border to the element size.</li>
+        <li><b>border-box</b>: Keeps total size fixed, includes padding and border inside dimensions.</li>
+        <li>Preferred for responsive design: <b>border-box</b>.</li>
+      </ul>
+    </div>
+  </div>
+</div>

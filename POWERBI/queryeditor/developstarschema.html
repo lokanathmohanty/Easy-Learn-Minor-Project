@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Power BI - Develop Star Schema</title>
+</head>
+<body>
+    <div class="container">
+        <div class="session">
+
+            <h1 class="title">Power BI - Develop Star Schema</h1>
+ 
+
+            <div class="content">
+                <p>A Star Schema is a data modeling structure where a central Fact table connects to multiple Dimension tables. Each Dimension table typically has a <strong>One-to-Many</strong> relationship with the Fact table. The Fact table contains measurable data (mostly integers), while the Dimension tables hold descriptive or categorical information used for filtering and analysis.</p>
+
+                <p>The Fact table helps summarize numeric fields and supports data segmentation and strong relational modeling in business analysis.</p>
+            </div>
+
+            <div class="content">
+                <h2>Case Study</h2>
+                <p>The task "Generating the Star Schema in Data Modeling" is given to Richard by a Data Analytics mentor.</p>
+
+                <h3>Solution</h3>
+                <p>Richard needs to understand the roles of Fact and Dimension tables to effectively build a Star Schema model.</p>
+            </div>
+
+            <div class="content">
+                <h2>How to Develop a Star Schema?</h2>
+                <p>Below are the steps Richard follows to create a Star Schema:</p>
+
+                <h3>Step 1</h3>
+                <p>Import the following datasets into Power BI Desktop:</p>
+                <ul>
+                    <li>D:\custid.xlsx</li>
+                    <li>D:\ck.xlsx (select both sheets)</li>
+                    <li>D:\date.xlsx</li>
+                </ul>
+                <p>After import, Power BI shows four tables: <strong>ck</strong>, <strong>customer_salary</strong>, <strong>dt</strong>, and <strong>Sheet1</strong>. It auto-detects relationships among them.</p>
+
+                <h3>Step 2</h3>
+                <p>Switch to the Model view to inspect and edit the relationships. Initially, the model shows:</p>
+                <ul>
+                    <li>One-to-Many between Sheet1 and dt</li>
+                    <li>One-to-One between ck and Sheet1</li>
+                    <li>One-to-One between Sheet1 and customer_salary</li>
+                </ul>
+
+                <h3>Step 3</h3>
+                <p>Edit the model to match Star Schema by deleting the existing relationship between <strong>ck</strong> and <strong>Sheet1</strong>. Then, create a new One-to-Many relationship from <strong>ck.Cust_key</strong> to <strong>dt.Cust_key</strong>. Confirm the relationship direction is unidirectional.</p>
+
+                <h3>Step 4</h3>
+                <p>Delete the relationship between <strong>Sheet1</strong> and <strong>customer_salary</strong>. Confirm the bidirectional filter is removed.</p>
+
+                <h3>Step 5</h3>
+                <p>Use <strong>Manage Relationships</strong> from the Home tab to create a new relationship between <strong>customer_salary</strong> and <strong>dt</strong>.</p>
+
+                <h3>Step 6</h3>
+                <p>In the "Create Relationship" dialog:</p>
+                <ul>
+                    <li>First Table: customer_salary</li>
+                    <li>Second Table: dt</li>
+                    <li>Cardinality: One-to-Many (1:*)</li>
+                </ul>
+                <p>Click OK to add the relationship.</p>
+
+                <h3>Step 7</h3>
+                <p>The new One-to-Many relationship is now added and visible in the relationship model.</p>
+
+                <h3>Step 8</h3>
+                <p>Now, Richard has successfully developed the Star Schema. In this schema:</p>
+                <ul>
+                    <li><strong>dt</strong> is the Fact table</li>
+                    <li><strong>ck</strong>, <strong>customer_salary</strong>, and other tables are Dimensions</li>
+                    <li>Each Dimension table has a One-to-Many relationship with the Fact table</li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2>Key Points While Developing the Star Schema</h2>
+                <ul>
+                    <li>Clearly identify the Fact table and Dimension tables.</li>
+                    <li>Hide unnecessary columns to simplify the model.</li>
+                    <li>Ensure Dimension tables have unique values for One-to-Many relationships.</li>
+                    <li>Fact table may contain duplicate values.</li>
+                    <li>Eliminate redundant relationships between Dimension tables.</li>
+                    <li>A shared column must exist between Fact and Dimension tables.</li>
+                    <li>Fact table should contain the foreign key referencing Dimension table’s primary key.</li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2>How to Identify a Fact Table vs a Dimension Table?</h2>
+                <ul>
+                    <li>A table with <strong>One</strong> cardinality is a Dimension table.</li>
+                    <li>A table with <strong>Many</strong> cardinality is a Fact table.</li>
+                    <li>Dimension tables generally have fewer fields.</li>
+                    <li>Fact tables often include multiple measurable fields.</li>
+                </ul>
+            </div>
+
+             
+
+        </div>
+    </div>
+</body>
+</html>

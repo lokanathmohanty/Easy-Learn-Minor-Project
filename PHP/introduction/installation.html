@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Installation Methods Summary</h1>
+
+    <div class="content">
+      <p>
+        To fully develop **PHP applications** (especially those involving web servers and databases), installing a local PHP environment is necessary. While **online PHP compilers** are useful for learning the basics, advanced features require a full setup.
+      </p>
+
+      <h2>The Three Vital Components (Manual Installation)</h2>
+      <p>
+        To run PHP web pages, you must install and configure three components:
+      </p>
+      <ul>
+        <li>
+          **Web Server:** Processes requests. Most common is the free **Apache Server**.
+        </li>
+        <li>
+          **Database:** Stores and retrieves data. The most commonly used free option is **MySQL** (or its fork, **MariaDB**).
+        </li>
+        <li>
+          **PHP Parser:** The engine that executes PHP script instructions and generates HTML output.
+        </li>
+      </ul>
+      <p>
+        **Note:** Manually installing and configuring these components is complex, especially for beginners.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Recommended Method: All-in-One Packages (XAMPP)</h2>
+      <p>
+        The easiest way to install a full PHP environment is by using an **all-in-one packaged distribution** that contains precompiled binaries for Apache, MySQL, and PHP.
+      </p>
+
+      <h3>XAMPP Overview (Cross-Platform)</h3>
+      <p>
+        **XAMPP** is the most popular package, created by Apache Friends. The acronym stands for:
+      </p>
+      <ul>
+        <li>**X** - Cross-platform (Windows, Linux, OS X)</li>
+        <li>**A** - Apache</li>
+        <li>**M** - MariaDB (a functional equivalent of MySQL)</li>
+        <li>**P** - PHP</li>
+        <li>**P** - Perl</li>
+      </ul>
+
+      <h3>Installation and Management (Linux Example)</h3>
+      <p>
+        The installation is wizard-based on Windows and uses simple command-line steps on Linux:
+      </p>
+      <ol>
+        <li>
+          **Install:** Change permissions (`chmod 755`) and run the installer (`sudo ./xampp-linux-*-installer.run`). XAMPP is installed in the `/opt/lampp` directory.
+        </li>
+        <li>
+          **Start:** Use the command `sudo /opt/lampp/lampp start`.
+        </li>
+        <li>
+          **Stop:** Use the command `sudo /opt/lampp/lampp stop`.
+        </li>
+      </ol>
+      <p>
+        A **Control Panel** (GUI tool) is also available on all platforms (e.g., `manager-linux.run` or `manager-osx`) to easily start and stop the Apache and MySQL servers.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Manual Installation Steps (Windows Example)</h2>
+      <p>
+        For a more controlled installation, the following steps detail the process for Windows using the Apache module:
+      </p>
+      <ol>
+        <li>**Download PHP Files:** Get the most recent **PHP x64 Thread Safe ZIP** package.</li>
+        <li>**Extract Files:** Extract the contents to a folder like `C:\php`.</li>
+        <li>
+          **Configure `php.ini`:** Copy `php.ini-development` to `php.ini`. Uncomment and set extensions (e.g., `extension=pdo_mysql`) and configure the `[mail function]` section if needed.
+        </li>
+        <li>
+          **Add to PATH:** Add the `C:\php` directory to the Windows **PATH environment variable** so the PHP executable can be found from any location.
+        </li>
+        <li>
+          **Configure Apache:** Edit `C:\Apache24\conf\httpd.conf` to load PHP as an Apache module using:
+          <p>
+            <code>PHPIniDir "C:/php"</code><br>
+            <code>LoadModule php_module "C:/php/php8apache2_4.dll"</code><br>
+            <code>AddType application/x-httpd-php .php</code>
+          </p>
+          Optionally, change `DirectoryIndex` to include `index.php`.
+        </li>
+        <li>
+          **Test:** Create an `index.php` file in the web root (`C:\Apache24\htdocs`) containing `&lt;?php phpinfo();?&gt;` and access it via the browser (`http://127.0.0.1/index.php`) to confirm the installation.
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

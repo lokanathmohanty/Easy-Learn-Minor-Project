@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - zoom Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS zoom property</strong> is used to control the magnification level of HTML elements. 
+        It allows developers to zoom in or out of an element by applying a scaling effect. 
+        However, it is important to note that <em>zoom</em> is a non-standard CSS property, 
+        meaning it is not part of the official CSS specification and might not work consistently across all browsers. 
+        Instead, developers are encouraged to use the <code>transform: scale()</code> property for better cross-browser compatibility.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>The syntax for the <code>zoom</code> property is:</p>
+      <p><code>zoom: normal | percentage | number;</code></p>
+
+      <h2>Possible Values</h2>
+      <ul>
+        <li><strong>normal:</strong> Renders the element at its normal size.</li>
+        <li><strong>&lt;percentage&gt;:</strong> Zoom factor in percent. <code>100%</code> is normal size, less than 100% zooms out, and more than 100% zooms in.</li>
+        <li><strong>&lt;number&gt;:</strong> Zoom factor in numeric value. <code>1.0</code> is normal size, less than 1.0 zooms out, and more than 1.0 zooms in.</li>
+      </ul>
+
+      <h2>Applies To</h2>
+      <p>
+        The <code>zoom</code> property can be applied to all HTML elements. 
+        However, because it is non-standard, some browsers may not fully support it.
+      </p>
+
+      <h2>CSS zoom Property with <code>normal</code> Value</h2>
+      <p>
+        The default value of <code>zoom</code> is <code>normal</code>, meaning the element 
+        will appear at its regular size without any magnification applied.
+      </p>
+      <p><strong>Example:</strong></p>
+      <pre><code>&lt;style&gt;
+  .normal {
+      zoom: normal;
+  }
+&lt;/style&gt;
+
+&lt;p class="normal"&gt;CSS zoom with normal value.&lt;/p&gt;
+</code></pre>
+
+      <h2>CSS zoom Property with Percent Value</h2>
+      <p>
+        Using a percentage value allows zooming in or out relative to the normal size. 
+        A value greater than <code>100%</code> will zoom in, and a value less than <code>100%</code> will zoom out.
+      </p>
+      <p><strong>Example:</strong> Zoom-in effect using <code>200%</code> on hover.</p>
+      <pre><code>&lt;style&gt;
+  .box {
+      height: 50px;
+      width: 200px;
+      border: 1px solid black;
+      text-align: center;
+      transition: all 0.3s ease;
+  }
+  .box:hover {
+      zoom: 200%;
+  }
+&lt;/style&gt;
+
+&lt;div class="box"&gt;Hover to Zoom&lt;/div&gt;
+</code></pre>
+
+      <h2>CSS zoom Property with Numeric Value</h2>
+      <p>
+        Instead of percentages, numeric values can also be used. 
+        A value greater than <code>1</code> zooms in, and a value less than <code>1</code> zooms out.
+      </p>
+      <p><strong>Example:</strong> Zoom-in effect with <code>zoom: 2</code>.</p>
+      <pre><code>&lt;style&gt;
+  .box {
+      height: 50px;
+      width: 200px;
+      border: 1px solid black;
+      text-align: center;
+      transition: all 0.3s ease;
+  }
+  .box:hover {
+      zoom: 2;
+  }
+&lt;/style&gt;
+
+&lt;div class="box"&gt;Hover to Zoom&lt;/div&gt;
+</code></pre>
+
+      <h2>CSS zoom Property with Transition</h2>
+      <p>
+        By combining <code>zoom</code> with transitions or even <code>transform: scale()</code>, 
+        smooth zoom animations can be created for interactive elements.
+      </p>
+      <p><strong>Example:</strong> Multiple boxes with different zoom levels and hover animations.</p>
+      <pre><code>&lt;style&gt;
+  .box {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      margin: 10px;
+      transition: transform 0.5s;
+  }
+  #a {
+      background-color: green;
+      zoom: normal;
+  }
+  #b {
+      background-color: pink;
+      zoom: 200%;
+  }
+  #c {
+      background-color: yellow;
+      zoom: 2.5;
+  }
+  .box:hover {
+      transform: scale(1.5);
+  }
+&lt;/style&gt;
+
+&lt;div id="a" class="box"&gt;&lt;/div&gt;
+&lt;div id="b" class="box"&gt;&lt;/div&gt;
+&lt;div id="c" class="box"&gt;&lt;/div&gt;
+</code></pre>
+
+      <h2>Best Practice</h2>
+      <p>
+        While <code>zoom</code> can be useful, it is recommended to use <code>transform: scale()</code> 
+        for reliable cross-browser support. For example:
+      </p>
+      <pre><code>&lt;style&gt;
+  .box {
+      width: 100px;
+      height: 100px;
+      background: lightblue;
+      transition: transform 0.5s;
+  }
+  .box:hover {
+      transform: scale(1.5);
+  }
+&lt;/style&gt;
+
+&lt;div class="box"&gt;&lt;/div&gt;
+</code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>The <code>zoom</code> property adjusts the magnification of elements.</li>
+        <li>It supports values like <code>normal</code>, percentages, and numbers.</li>
+        <li>It is <strong>non-standard</strong> and not recommended for production use.</li>
+        <li>Prefer using <code>transform: scale()</code> for better compatibility.</li>
+      </ul>
+    </div>
+  </div>
+</div>

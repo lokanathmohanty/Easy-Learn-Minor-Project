@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Geolocation API</h1>
+    <div class="content">
+      <p>The HTML Geolocation API allows web applications to access the geographical location of the user. Most modern browsers and mobile devices support this API.</p>
+      <p>JavaScript can capture your latitude and longitude and send it to a backend server for location-aware applications like maps or local business search.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Syntax</h2>
+    <div class="content">
+      <p>The Geolocation object can be accessed as follows:</p>
+      <p><code>var geolocation = navigator.geolocation;</code></p>
+      <p>This object provides methods to get the location of the device.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Geolocation API Methods</h2>
+    <div class="content">
+      <ul>
+        <li><code>getCurrentPosition()</code> – Retrieves the current geographic location of the user.</li>
+        <li><code>watchPosition()</code> – Retrieves periodic updates of the device’s current position.</li>
+        <li><code>clearWatch()</code> – Cancels an ongoing <code>watchPosition()</code> call.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Location Properties</h2>
+    <div class="content">
+      <p>The <code>Position</code> object contains location data:</p>
+      <ul>
+        <li><code>coords.latitude</code> – Latitude in decimal degrees.</li>
+        <li><code>coords.longitude</code> – Longitude in decimal degrees.</li>
+        <li><code>coords.altitude</code> – Altitude in meters above sea level (optional).</li>
+        <li><code>coords.accuracy</code> – Accuracy of the latitude/longitude values.</li>
+        <li><code>coords.speed</code> – Device’s ground speed (optional).</li>
+        <li><code>timestamp</code> – Time when the position was recorded.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Handling Errors</h2>
+    <div class="content">
+      <p>The API provides error handling through a <code>PositionError</code> object:</p>
+      <ul>
+        <li><code>PERMISSION_DENIED</code> – User denied the request for location.</li>
+        <li><code>POSITION_UNAVAILABLE</code> – Location data is not available.</li>
+        <li><code>TIMEOUT</code> – Request for location timed out.</li>
+        <li><code>UNKNOWN_ERROR</code> – An unknown error occurred.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Position Options</h2>
+    <div class="content">
+      <p>The <code>getCurrentPosition()</code> method accepts an optional third parameter called <code>options</code>:</p>
+      <ul>
+        <li><code>enableHighAccuracy</code> – Boolean to request high accuracy.</li>
+        <li><code>timeout</code> – Maximum time (in ms) to wait for position.</li>
+        <li><code>maximumAge</code> – Cache duration (in ms) for stored positions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example – Get Current Location</h2>
+    <div class="content">
+      <p>This example retrieves the current latitude and longitude:</p>
+      <p>
+        <code>
+          &lt;button onclick="getLocation()"&gt;Show Location&lt;/button&gt;<br><br>
+          &lt;script&gt;<br>
+          function getLocation() {<br>
+&nbsp;&nbsp;if (navigator.geolocation) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;navigator.geolocation.getCurrentPosition(showPosition);<br>
+&nbsp;&nbsp;} else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;alert("Geolocation not supported.");<br>
+&nbsp;&nbsp;}<br>
+          }<br><br>
+          function showPosition(position) {<br>
+&nbsp;&nbsp;alert("Latitude: " + position.coords.latitude +<br>
+&nbsp;&nbsp;" Longitude: " + position.coords.longitude);<br>
+          }<br>
+          &lt;/script&gt;
+        </code>
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example – Error Handling</h2>
+    <div class="content">
+      <p>This example shows how to handle location errors:</p>
+      <p>
+        <code>
+          function showError(error) {<br>
+&nbsp;&nbsp;switch(error.code) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case error.PERMISSION_DENIED:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("User denied the request.");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case error.POSITION_UNAVAILABLE:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("Location unavailable.");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case error.TIMEOUT:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("Request timed out.");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case error.UNKNOWN_ERROR:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("An unknown error occurred.");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;}<br>
+          }
+        </code>
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Supported Browsers</h2>
+    <div class="content">
+      <ul>
+        <li>Chrome – Yes</li>
+        <li>Edge – 9.0+</li>
+        <li>Firefox – 3.5+</li>
+        <li>Safari – 5.0+</li>
+        <li>Opera – 16.0+</li>
+      </ul>
+    </div>
+  </div>
+</div>

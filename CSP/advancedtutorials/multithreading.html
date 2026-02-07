@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Multithreading: Concurrent Execution 🔄</h1>
+        
+        <div class="content">
+            <h2 class="title">What is a Thread?</h2>
+            <p>A **thread** is defined as a unique flow of control or an execution path within a program. Threads are considered **lightweight processes** and are essential for **concurrent programming**, allowing an application to perform multiple tasks simultaneously, increasing CPU utilization and application efficiency.</p>
+            <p>In C#, multithreading involves the **<span class="example">`System.Threading.Thread`</span>** class.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Thread Life Cycle and States 🚦</h2>
+            <p>The life cycle of a thread spans from its creation as a **<span class="example">`Thread`</span>** object to its termination. Key states include:</p>
+            <ul>
+                <li>**Unstarted:** The thread object is created, but the **<span class="example">`Start()`</span>** method has not been called.</li>
+                <li>**Ready:** The thread is waiting for its turn to be executed by the CPU.</li>
+                <li>**Not Runnable (Blocked):** The thread is temporarily paused due to conditions like a call to **<span class="example">`Sleep()`</span>**, **<span class="example">`Wait()`</span>**, or blocking I/O operations.</li>
+                <li>**Dead:** The thread has completed its execution or was explicitly aborted.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Creating and Starting Threads</h2>
+            
+            <h3 class="title">Main Thread</h3>
+            <p>The first thread that executes when a C# program starts is the **main thread**. All other threads created are its child threads, accessible via **<span class="example">`Thread.CurrentThread`</span>**.</p>
+            
+            <h3 class="title">Creating Child Threads</h3>
+            <p>New threads are typically created by:</p>
+            <ol>
+                <li>Creating a delegate instance (**<span class="example">`ThreadStart`</span>** or **<span class="example">`ParameterizedThreadStart`</span>**) that points to the method the thread will execute.</li>
+                <li>Passing the delegate to a new **<span class="example">`Thread`</span>** object.</li>
+                <li>Calling the **<span class="example">`Start()`</span>** method on the **<span class="example">`Thread`</span>** object to begin execution.</li>
+            </ol>
+            <pre>// Example using ThreadStart delegate
+ThreadStart childref = new ThreadStart(CallToChildThread);
+Thread childThread = new Thread(childref);
+childThread.Start();</pre>
+            
+            <h3 class="title">Passing Parameters</h3>
+            <p>Parameters can be passed to the thread's execution method using the **<span class="example">`ParameterizedThreadStart`</span>** delegate or, more commonly in modern C#, using a **lambda expression**.</p>
+            <pre>// Using a lambda to pass parameters
+Thread thread = new Thread(() => PerformTask("Hello from thread!"));
+thread.Start();</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Managing and Destroying Threads</h2>
+            
+            <h3 class="title">Pausing a Thread</h3>
+            <p>The static method **<span class="example">`Thread.Sleep(int millisecondsTimeout)`</span>** causes the calling thread to pause execution for the specified duration.</p>
+            
+            <h3 class="title">Waiting for Termination</h3>
+            <p>The **<span class="example">`Join()`</span>** method blocks the calling thread (e.g., the main thread) until the target thread completes its execution.</p>
+            
+            <h3 class="title">Destroying (Aborting) a Thread ❌</h3>
+            <p>The **<span class="example">`Abort()`</span>** method is used to forcefully terminate a thread by raising a **<span class="example">`ThreadAbortException`</span>** in the target thread. While the thread is typically terminated, the exception cannot be caught in a standard <span class="example">`catch`</span> block; control is immediately transferred to the **<span class="example">`finally`</span>** block (if one exists) before the thread dies.</p>
+        </div>
+    </div>
+</div>

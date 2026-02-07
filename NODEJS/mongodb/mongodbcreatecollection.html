@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Create Collection</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        A MongoDB database contains collections, which group documents. Collections are similar to tables in relational databases but have no fixed schema.
+      </p>
+
+      <h2>Creating a Collection</h2>
+      <p>
+        Use the <code>createCollection()</code> method on a database object in Node.js to explicitly create collections.
+      </p>
+      <pre><code>const db = client.db("mydatabase");
+const collection = await db.createCollection("MyCollection");
+console.log("Collection created");
+console.log(collection);
+</code></pre>
+
+      <p>
+        Note: A collection is implicitly created if you insert a document into a non-existent collection.
+      </p>
+
+      <h2>Example Code</h2>
+      <pre><code>const { MongoClient } = require("mongodb");
+
+async function main() {
+  const uri = "mongodb://localhost:27017/";
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+    await createCollection(client, "mydatabase");
+  } finally {
+    await client.close();
+  }
+}
+
+async function createCollection(client, dbName) {
+  const db = client.db(dbName);
+  const collection = await db.createCollection("MyCollection");
+  console.log("Collection created");
+  console.log(collection);
+}
+
+main().catch(console.error);
+</code></pre>
+
+      <p>
+        After running, verify in MongoDB shell:
+      </p>
+      <pre><code>use mydatabase
+show collections</code></pre>
+
+      <p>
+        This will confirm the creation of <code>MyCollection</code>.
+      </p>
+    </div>
+  </div>
+</div>

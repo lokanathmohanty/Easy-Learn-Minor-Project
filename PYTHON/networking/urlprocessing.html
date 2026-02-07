@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="session">
+    <h1>Python - URL Processing</h1>
+    <p>URLs (Uniform Resource Locators) identify resources on the Internet. Python's <code>urllib</code> package provides tools to parse URLs, fetch web content, and handle URL-related errors.</p>
+    
+    <h2>Modules in urllib</h2>
+    <ul>
+      <li><code>urllib.parse</code>: For parsing URLs into components.</li>
+      <li><code>urllib.request</code>: For opening and reading URLs.</li>
+      <li><code>urllib.error</code>: For handling errors during URL operations.</li>
+      <li><code>urllib.robotparser</code>: For parsing robots.txt files.</li>
+    </ul>
+    
+    <h2>Parsing URLs with urllib.parse</h2>
+    <p>The <code>urlparse()</code> function splits a URL into parts: scheme, netloc, path, params, query, and fragment.</p>
+    <pre>
+from urllib.parse import urlparse
+
+url = "https://example.com/employees/name/?salary>=25000"
+parsed = urlparse(url)
+print("Scheme:", parsed.scheme)
+print("Netloc:", parsed.netloc)
+print("Path:", parsed.path)
+print("Params:", parsed.params)
+print("Query:", parsed.query)
+print("Fragment:", parsed.fragment)
+    </pre>
+    <p>Output:</p>
+    <p>Scheme: https<br>Netloc: example.com<br>Path: /employees/name/<br>Params: <br>Query: salary>=25000<br>Fragment:</p>
+    
+    <h2>Extracting Query Parameters</h2>
+    <p>Use <code>parse_qs()</code> to convert query strings into dictionaries.</p>
+    <pre>
+from urllib.parse import urlparse, parse_qs
+
+url = "https://example.com/employees?name=Anand&salary=25000"
+parsed = urlparse(url)
+query_params = parse_qs(parsed.query)
+print(query_params)
+    </pre>
+    <p>Output:</p>
+    <p>{'name': ['Anand'], 'salary': ['25000']}</p>
+    
+    <h2>Constructing URLs</h2>
+    <p><code>urlunparse()</code> and <code>urlunsplit()</code> create URLs from parts.</p>
+    <pre>
+from urllib.parse import urlunparse
+
+parts = ('https', 'example.com', '/employees/name/', '', 'salary>=25000', '')
+url = urlunparse(parts)
+print(url)
+    </pre>
+    <p>Output:</p>
+    <p>https://example.com/employees/name/?salary>=25000</p>
+    
+    <h2>Opening URLs with urllib.request</h2>
+    <p><code>urlopen()</code> opens URLs and returns a response object.</p>
+    <pre>
+from urllib.request import urlopen
+
+response = urlopen('https://www.example.com')
+data = response.read()
+print(data[:100])  # print first 100 bytes
+    </pre>
+    
+    <h2>Using Request Objects</h2>
+    <p>Request objects allow fine control over URL requests including headers and methods.</p>
+    <pre>
+from urllib.request import Request, urlopen
+
+req = Request('https://www.example.com', headers={'User-Agent': 'Mozilla/5.0'})
+response = urlopen(req)
+print(response.status)
+    </pre>
+    
+    <h2>Handling URL Errors</h2>
+    <p>Exceptions like <code>URLError</code> and <code>HTTPError</code> are raised for network or HTTP errors.</p>
+    <pre>
+from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
+
+try:
+    response = urlopen('http://no-such-url.example')
+except HTTPError as e:
+    print('HTTP Error:', e.code)
+except URLError as e:
+    print('URL Error:', e.reason)
+    </pre>
+    
+    <h2>Summary</h2>
+    <p>Python's <code>urllib</code> package facilitates working with URLs, including parsing, fetching, and error handling, making web operations easier.</p>
+  </div>
+</div>

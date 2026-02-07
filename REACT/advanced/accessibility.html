@@ -1,0 +1,123 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Accessibility</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            Accessibility (<strong>a11y</strong>) ensures web applications are usable by everyone, 
+            including those relying on assistive technologies. React supports accessibility through 
+            ARIA attributes, semantic HTML, form labeling, keyboard support, and third-party ARIA components.
+         </p>
+
+         <h2>ARIA (aria-*) Attributes</h2>
+         <p>
+            WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet Applications) provides 
+            attributes (<code>aria-*</code>) to make UI widgets accessible. React supports these attributes 
+            directly in <strong>kebab-case</strong>.
+         </p>
+
+         <div class="code-block">
+<pre><code>&lt;input
+   type="text"
+   aria-label={labelText}
+   aria-required="true"
+   name="name"
+/&gt;
+</code></pre>
+         </div>
+
+         <ul>
+            <li><code>aria-label</code> → Specifies the label for the input element.</li>
+            <li><code>aria-required</code> → Specifies that the input must be filled.</li>
+         </ul>
+
+         <h2>Semantic HTML</h2>
+         <p>
+            Semantic tags (<code>article</code>, <code>section</code>, <code>nav</code>, etc.) 
+            improve accessibility. React’s <code>Fragment</code> helps avoid unnecessary <code>&lt;div&gt;</code> wrappers.
+         </p>
+
+         <div class="code-block">
+<pre><code>// Using &lt;div&gt; wrapper
+function ShowItems({ data }) {
+   return (
+      &lt;div&gt;
+         &lt;dt&gt;{data.title}&lt;/dt&gt;
+         &lt;dd&gt;{data.description}&lt;/dd&gt;
+      &lt;/div&gt;
+   );
+}
+
+// Using &lt;Fragment&gt;
+function ShowItems({ data }) {
+   return (
+      &lt;Fragment&gt;
+         &lt;dt&gt;{data.title}&lt;/dt&gt;
+         &lt;dd&gt;{data.description}&lt;/dd&gt;
+      &lt;/Fragment&gt;
+   );
+}
+</code></pre>
+         </div>
+
+         <h2>Forms</h2>
+         <p>
+            Every input should have a descriptive label. React uses <code>htmlFor</code> 
+            to associate labels with form fields.
+         </p>
+
+         <div class="code-block">
+<pre><code>&lt;label htmlFor="firstName"&gt;Firstname:&lt;/label&gt;
+&lt;input id="firstName" type="text" name="name" /&gt;
+</code></pre>
+         </div>
+
+         <h2>Keyboard Support</h2>
+         <p>
+            Accessible apps must work fully with keyboards:
+         </p>
+
+         <ul>
+            <li><strong>Focus</strong> → Use <code>Ref</code> or <code>forwardRef</code> to manage DOM focus.</li>
+            <li><strong>Skip links</strong> → Allow users to skip navigation.</li>
+         </ul>
+
+         <div class="code-block">
+<pre><code>&lt;body&gt;
+   &lt;a href="#maincontent"&gt;Skip to main content&lt;/a&gt;
+   ...
+   &lt;main id="maincontent"&gt;
+      ...
+   &lt;/main&gt;
+&lt;/body&gt;
+</code></pre>
+         </div>
+
+         <p>
+            Mouse interactions should also be adapted to keyboard alternatives. React event 
+            handling makes this possible.
+         </p>
+
+         <h2>Aria Components</h2>
+         <p>
+            The React community provides components with built-in accessibility:
+         </p>
+         <ul>
+            <li><strong>react-aria</strong> – complete ARIA support for many components</li>
+            <li><strong>react-modal</strong>, <strong>react-aria-modal</strong> – accessible modal dialogs</li>
+            <li><strong>react-select</strong>, <strong>react-dropdown-aria</strong> – accessible select/dropdowns</li>
+            <li><strong>react-aria-menubutton</strong> – accessible menu buttons</li>
+            <li><strong>react-aria-tabpanel</strong> – accessible tab panels</li>
+         </ul>
+
+         <h2>Summary</h2>
+         <p>
+            React provides strong accessibility support via ARIA attributes, semantic HTML, 
+            form labeling, keyboard navigation, and third-party libraries. With these, developers 
+            can build fully accessible, inclusive applications.
+         </p>
+      </div>
+   </div>
+</div>

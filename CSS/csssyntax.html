@@ -1,0 +1,227 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Syntax</h1>
+    <div class="content">
+      <p>CSS stands for Cascade Style Sheet is popular stylesheet language used to design an interactive webpage. In this tutorial we will learn CSS syntax and usages of CSS along with HTML.</p>
+
+      <h2>CSS Syntax</h2>
+      <p>Following is the syntax of styling using CSS.</p>
+
+      <pre><code>selector {
+    property: value;
+}</code></pre>
+
+      <ul>
+        <li><strong>Selector:</strong> CSS selectors are used to select the HTML element or groups of elements you want to style on a web page.</li>
+        <li><strong>Property:</strong> A CSS property is an aspect or characteristic of an HTML element that can be styled or modified using CSS, such as color, font-size, or margin.</li>
+        <li><strong>Value:</strong> Values are assigned to properties. For example, color property can have value like red, green etc.</li>
+      </ul>
+
+      <p><strong>For Example:</strong></p>
+      <p>Syntax</p>
+
+      <h2>Multiple Style Rules</h2>
+      <p>If you want to define multiple rules for a single selectors you can specify those in single block separated by a semicolon (;).</p>
+
+      <p>Syntax</p>
+      <pre><code>selector{
+    property1: value1;
+    property2: value2;
+    property3: value3;
+}</code></pre>
+
+      <p>Now let us look an example for styling using CSS.</p>
+
+      <p><strong>Example</strong><br>Open Compiler</p>
+      <pre><code>&lt;!DOCTYPE html&gt; 
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;style&gt;
+        /* Style all the paragraphs */
+        p {
+            background-color: black;
+            color: white; 
+            padding: 5px;
+        }
+
+        /* Style all elements with class 'special' */
+        .special {
+            color: lightblue; /* Change text color */
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;p&gt;
+        This a normal paragraph...
+    &lt;/p&gt;
+    &lt;br&gt;   
+
+    &lt;p class="special"&gt;
+        This is a paragraph with class special...
+    &lt;/p&gt;
+    &lt;br&gt; 
+
+    &lt;div class="special"&gt;
+        This is a div with class special...
+    &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+      <h2>CSS Selectors Syntax</h2>
+      <p>CSS Selectors are used to select the HTML elements you want to style on a web page. They allow you to target specific elements or groups of elements to apply styles like colors, fonts, margins, and more. Different types of selectors are mentioned below:</p>
+
+      <h3>Universal Selector</h3>
+      <p>Universal selectors select and apply styles to all elements in an HTML document.</p>
+      <pre><code>* {
+   font-family: Verdana, sans-serif;
+   color: green;
+}</code></pre>
+
+      <h3>Element Selectors</h3>
+      <p>Element selectors select specific HTML elements.</p>
+      <pre><code>h1 {
+    color: #04af2f;
+}</code></pre>
+
+      <h3>Class Selectors</h3>
+      <p>Class selectors select and style an element with a specific value for its class attribute.</p>
+      <pre><code>.myDiv {
+    color: #04af2f;
+}</code></pre>
+
+      <h3>Id Selectors</h3>
+      <p>Id selectors select a single element with a particular value for the id attribute.</p>
+      <pre><code>#myDiv {
+    color: #04af2f;
+}</code></pre>
+
+      <h3>Attribute Selectors</h3>
+      <p>Attribute selectors select an element based on a specific attribute value.</p>
+      <pre><code>a[target] {
+   background-color: peachpuff;
+}</code></pre>
+
+      <p><strong>Example:</strong> This example demonstrates the types of selectors mentioned above.</p>
+      <p>Open Compiler</p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;CSS Selector&lt;/title&gt;
+    &lt;style&gt;
+        * {
+            background-color: #04af2f;
+            color: white;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        #myDiv {
+            height: 200px;
+            width: 200px;
+            background-color: antiquewhite;
+            color: black;
+        }
+
+        .para {
+            border: 1px solid black;
+        }
+
+        a[href]{
+         font-size: 2em;
+         color: red;
+      }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h3&gt;CSS selectors Example&lt;/h3&gt;
+    &lt;div id="myDiv"&gt;This is a div element.&lt;/div&gt;
+    &lt;p class="para"&gt;This is a paragraph element.&lt;/p&gt;
+    &lt;a href="/css/css_padding.htm" target="_blank"&gt;This is a Link&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>CSS Grouping and Nesting Syntax</h2>
+      <p>Grouping and nesting selectors allow us to apply the same style to multiple elements at a time.</p>
+
+      <h3>CSS Grouping Selector Syntax</h3>
+      <p>Grouping selectors are comma-separated and used to select multiple elements and style them at a time.</p>
+      <pre><code>div, p {
+    background-color: #04af2f;
+    color: white;
+}</code></pre>
+
+      <h3>CSS Nesting Syntax</h3>
+      <p>Nesting allows the nesting of one specific style rule within another.</p>
+      <pre><code>div p {
+    background-color: #04af2f;
+    color: white;
+    font-size: 20px;
+    letter-spacing: 1px;
+}</code></pre>
+
+      <h2>CSS Pseudo-Classes &amp; Pseudo-Elements Syntax</h2>
+      <p>Pseudo-class and pseudo-element, both select specific types of elements. The pseudo class defines the style for a specific state while the pseudo element targets a specific part of an element./p&gt;</p>
+
+      <h3>CSS Pseudo-Element Syntax</h3>
+      <p>CSS pseudo-element styles specific parts of an element.</p>
+      <pre><code>p:before {
+    content: "NOTE:";
+    font-weight: bold;
+}</code></pre>
+
+      <h3>CSS Pseudo-Class Syntax</h3>
+      <p>CSS pseudo-class in CSS is used to select and style elements based on their state.</p>
+      <pre><code>a:hover {
+    color: red;
+}</code></pre>
+
+      <h2>CSS Inclusion Syntax</h2>
+      <p>CSS can be used in any HTML document using three different methods which are: inline CSS, internal CSS, and external CSS.</p>
+
+      <h3>Inline CSS Syntax</h3>
+      <p>Inline CSS are used directly within HTML tags.</p>
+      <pre><code>&lt;div style="color: #04af2f;"&gt;Welcome to TutorialsPoint.&lt;/p&gt;</code></pre>
+
+      <h3>Internal CSS Syntax</h3>
+      <p>Internal CSS is used within the head section of an HTML document using a style tag.</p>
+      <pre><code>&lt;style&gt;
+    body {
+        background-color: #04af2f;
+    }
+&lt;/style&gt;</code></pre>
+
+      <h3>External CSS Syntax</h3>
+      <p>External CSS is written in a separate file having a .css extension and linked to the HTML document using link tag.</p>
+      <pre><code>&lt;link rel="stylesheet" type="text/css" href="style.css"&gt;</code></pre>
+
+      <h2>CSS Media Queries Syntax</h2>
+      <p>CSS media queries apply different CSS styles based on the screen size, resolution, and other characteristics and are often used for creating responsive designs.</p>
+      <pre><code>@media (max-width: 700px) {
+    body {
+        background-color: #04af2f;
+    }
+}</code></pre>
+
+      <h2>CSS Variables Syntax</h2>
+      <p>CSS Variables allows to store and reuse values throughout the CSS program.</p>
+      <pre><code>:root {
+    --main-color: #04af2f;
+}</code></pre>
+
+      <h2>CSS Comments Syntax</h2>
+      <p>CSS comments add an explanatory note about the code.</p>
+      <pre><code>/* This is a single line CSS comment */
+/* This is 
+a multi-line
+CSS comment 
+*/</code></pre>
+    </div>
+  </div>
+</div>

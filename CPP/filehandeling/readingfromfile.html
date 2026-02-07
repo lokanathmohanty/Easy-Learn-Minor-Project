@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Reading From File (<code>ifstream</code>) 📖</h1>
+
+        <div class="content">
+            <p>**File I/O** (Input/Output) in C++ allows programs to read data from external files, enabling **data persistence** beyond the program's execution scope. The primary tool for reading is the **Input File Stream** class, **<code>std::ifstream</code>**, found in the <code>&lt;fstream&gt;</code> header.</p>
+
+            <h3>Basic Reading Steps</h3>
+            <ol>
+                <li>**Open the file:** Create an <code>std::ifstream</code> object and associate it with a file name. Always check if the file opened successfully.</li>
+                <li>**Perform I/O:** Read data using extraction operators or specialized functions.</li>
+                <li>**Close the file:** Call <code>.close()</code> to release the file handle.</li>
+            </ol>
+            <pre class="example">
+std::ifstream inputFile("data.txt"); // 1. Open
+if (inputFile.is_open()) {
+    // 2. Perform I/O
+    inputFile.close(); // 3. Close
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Reading Text Files (Methods)</h2>
+
+        <div class="content">
+            <h3>1. Reading Word by Word (<code>&gt;&gt;</code> Operator)</h3>
+            <p>The stream extraction operator (<code>&gt;&gt;</code>) is the simplest method for reading **formatted data**. It automatically stops at any **whitespace** (space, newline, tab).</p>
+            <pre class="example">
+std::string word;
+while (inputFile >> word) { // Reads and stops when whitespace is hit
+    // Process 'word'
+}
+</pre>
+
+            <h3>2. Reading Line by Line (<code>std::getline()</code>)</h3>
+            <p>To read an **entire line of text**, including spaces, you use the non-member function `std::getline()`. It reads characters until it encounters a newline character (`\n`).</p>
+            <pre class="example">
+std::string line;
+while (std::getline(inputFile, line)) { // Reads until a newline is hit
+    // Process 'line'
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Reading Binary Files (<code>read()</code>)</h2>
+
+        <div class="content">
+            <p>For reading **raw, unformatted binary data**, you use the <code>read()</code> member function, ensuring the file is opened in binary mode (<code>std::ios::binary</code>).</p>
+            <pre class="example">
+file.read(buffer, size);
+</pre>
+            <ul>
+                <li>**<code>buffer</code>**: A pointer to the memory location where the data should be stored.</li>
+                <li>**<code>size</code>**: The number of bytes to read.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Error and Status Handling</h2>
+
+        <div class="content">
+            <p>Checking the state of the stream is essential for robust I/O:</p>
+            <ul>
+                <li>**<code>!stream</code>** or **<code>stream.fail()</code>**: Checks if a fatal or non-recoverable error occurred (e.g., file not found, bad data format).</li>
+                <li>**<code>stream.eof()</code>**: Returns true if the **End-of-File (EOF)** marker has been reached (usually checked after a failed read).</li>
+                <li>**<code>stream.good()</code>**: Returns true if no errors have occurred and the stream is ready for I/O.</li>
+            </ul>
+            <p>Note that the `while (inputFile >> word)` or `while (std::getline(inputFile, line))` loop structures are generally preferred, as they implicitly check the success of the read operation before continuing the loop.</p>
+        </div>
+    </div>
+</div>

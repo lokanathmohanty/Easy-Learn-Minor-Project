@@ -1,0 +1,149 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Variables</h1>
+    <div class="content">
+      <p>
+        CSS Variables are custom properties that allow you to store and reuse values throughout your CSS program. They are similar to variables in other programming languages and make your code more maintainable.
+      </p>
+
+      <h2>Table of Contents</h2>
+      <ul>
+        <li>How to declare a Variable in CSS?</li>
+        <li>The Traditional Way</li>
+        <li>Using CSS Variables</li>
+        <li>The Root Pseudo-Class</li>
+        <li>Inheritance of Custom Properties</li>
+        <li>CSS Variables Fallback Value</li>
+        <li>CSS Variables Invalid Value</li>
+        <li>CSS Variables in JavaScript</li>
+      </ul>
+
+      <h2>How to Declare a Variable in CSS?</h2>
+      <p>
+        CSS variables are typically defined using the <code>:root</code> selector.  
+        Example syntax:
+      </p>
+      <pre>
+:root {
+  --variable-name: value;
+}
+
+selector {
+  property: var(--variable-name, fallback-value);
+}
+      </pre>
+
+      <h2>The Traditional Way</h2>
+      <p>
+        Without variables, developers need to repeat the same values multiple times in CSS, leading to redundancy and harder maintenance.
+      </p>
+      <pre>
+body {
+  background-color: #f0f0f0;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+header {
+  background-color: #0044cc;
+  color: #fff;
+}
+      </pre>
+
+      <h2>Using CSS Variables</h2>
+      <p>
+        CSS variables reduce redundancy by storing values in one place and reusing them everywhere.
+      </p>
+      <pre>
+:root {
+  --main-bg-color: #f0f0f0;
+  --main-text-color: #333;
+  --primary-font: Arial, sans-serif;
+  --blue: #0044cc;
+  --header-text: #fff;
+}
+body {
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+  font-family: var(--primary-font);
+}
+header {
+  background-color: var(--blue);
+  color: var(--header-text);
+}
+      </pre>
+
+      <h2>The Root Pseudo-Class</h2>
+      <p>
+        Declaring variables in <code>:root</code> makes them global, meaning they can be accessed anywhere in the CSS. Variable names are case-sensitive.
+      </p>
+      <pre>
+:root {
+  --pink-color: pink;
+  --blue-color: blue;
+}
+.box {
+  background-color: var(--pink-color);
+  color: var(--blue-color);
+}
+      </pre>
+
+      <h2>Inheritance of Custom Properties</h2>
+      <p>
+        CSS variables can be inherited by child elements, which helps in applying consistent values across multiple elements.
+      </p>
+      <pre>
+:root {
+  --pink-color: pink;
+}
+.box {
+  --box-background: var(--pink-color);
+  background-color: var(--box-background);
+}
+.box1, .box2 {
+  background-color: var(--box-background);
+}
+      </pre>
+
+      <h2>CSS Variables Fallback Value</h2>
+      <p>
+        Fallback values ensure that if a variable is not defined, the browser uses a backup value.
+      </p>
+      <pre>
+.box {
+  background-color: var(--white-color, white);
+  color: var(--black-color, black);
+}
+      </pre>
+
+      <h2>CSS Variables Invalid Value</h2>
+      <p>
+        If a variable has an invalid value, the property using it will fallback to the default behavior.
+      </p>
+      <pre>
+:root {
+  --red-color: 15px; /* Invalid value */
+}
+h2 {
+  color: var(--red-color); /* ignored, defaults to black */
+}
+      </pre>
+
+      <h2>CSS Variables in JavaScript</h2>
+      <p>
+        JavaScript can be used to manipulate CSS variables dynamically at runtime.
+      </p>
+      <pre>
+const root = document.documentElement;
+root.style.setProperty('--padding', '20px');
+      </pre>
+
+      <h2>Practice Task</h2>
+      <ul>
+        <li>Create a color theme using CSS variables.</li>
+        <li>Define font sizes as variables and apply them across multiple elements.</li>
+        <li>Experiment with fallback values for undefined variables.</li>
+        <li>Use JavaScript to change a CSS variable dynamically.</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Images - Tutorial</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #222;
+    }
+    table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: #f0f0f0;
+        }
+    pre {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: "Courier New", monospace;
+      margin: 20px 0;
+      position: relative;
+    }
+    pre::before {
+      content: "Code Editor";
+      display: block;
+      background: #333;
+      color: #fff;
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 8px 8px 0 0;
+      position: absolute;
+      top: -32px;
+      left: 0;
+    }
+    code {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    ul {
+      margin: 10px 0 20px 30px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+    
+    <h1>HTML Images</h1>
+    <p>
+        HTML images provide visual content for web pages, enhancing user experiences and conveying information. 
+        They can be photographs, graphics, icons, or illustrations.
+    </p>
+    <p>
+        HTML offers various elements for embedding, manipulating, and controlling images, contributing to the aesthetics and functionality of websites. 
+        Understanding image tags, attributes, and responsive design principles is essential for effective web development.
+    </p>
+
+    <h2>HTML Image Syntax</h2>
+    <div class="example">
+        <code>&lt;img src="image_path" alt="Alternate text" width="200px" height="150px" /&gt;</code>
+    </div>
+    <ul>
+        <li><b>src</b>: Defines the image path (image URL).</li>
+        <li><b>alt</b>: Provides alternate text if the image cannot be displayed.</li>
+        <li><b>width</b> &amp; <b>height</b>: Define the size of the image.</li>
+    </ul>
+
+    <h2>Insert Image</h2>
+    <p>
+        Use the <code>&lt;img&gt;</code> tag with the <code>src</code> attribute to insert an image. 
+        The <code>&lt;img&gt;</code> tag is empty, meaning it does not have a closing tag.
+    </p>
+    <div class="example">
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Insert Image Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h1&gt;Example of HTML Image&lt;/h1&gt;
+   &lt;img src="/html/images/test.png" alt="Test Image" /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+    </div>
+
+    <h2>Set Image Location (Path)</h2>
+    <p>
+        Image paths can be absolute (starting from root <code>/</code>) or relative (from the HTML file’s directory).
+    </p>
+    <div class="example">
+<pre>
+&lt;img src="/html/images/test.png" alt="Test Image" /&gt;
+</pre>
+    </div>
+
+    <h2>Set Image Width and Height</h2>
+    <div class="example">
+<pre>
+&lt;img src="/html/images/test.png" alt="Test Image" width="450px" height="200px" /&gt;
+</pre>
+    </div>
+
+    <h2>Bordered Image</h2>
+    <div class="example">
+<pre>
+&lt;img src="/html/images/test.png" alt="Test Image" border="3" /&gt;
+</pre>
+    </div>
+
+    <h2>Image Alignment</h2>
+    <p>Use the <code>align</code> attribute to align images (left, right, center).</p>
+    <div class="example">
+<pre>
+&lt;img src="/html/images/test.png" alt="Test Image" align="right" /&gt;
+</pre>
+    </div>
+
+    <h2>Animated Images</h2>
+    <p>GIF images can be inserted directly using the <code>src</code> attribute.</p>
+    <div class="example">
+<pre>
+&lt;img src="/html/images/animated_image.gif" alt="Animated Image" /&gt;
+</pre>
+    </div>
+
+    <h2>Responsive Images</h2>
+    <h3>1. Using CSS</h3>
+    <div class="example">
+<pre>
+&lt;img src="/html/images/test.png" alt="Responsive Image" 
+     style="width: 100%; height: auto;" /&gt;
+</pre>
+    </div>
+    <h3>2. Using the &lt;picture&gt; Tag</h3>
+    <div class="example">
+<pre>
+&lt;picture&gt;
+  &lt;source media="(min-width: 800px)" srcset="large_image.jpg"&gt;
+  &lt;source media="(max-width: 799px)" srcset="small_image.jpg"&gt;
+  &lt;img src="default.jpg" alt="Responsive Image"&gt;
+&lt;/picture&gt;
+</pre>
+    </div>
+
+    <h2>Supported Image Formats</h2>
+    <table>
+        <tr>
+            <th>Image Format</th>
+            <th>Full Name</th>
+            <th>Transparency</th>
+            <th>Animation</th>
+            <th>Extensions</th>
+        </tr>
+        <tr>
+            <td>JPEG/JPG</td>
+            <td>Joint Photographic Experts Group</td>
+            <td>No</td>
+            <td>No</td>
+            <td>.jpg, .jpeg</td>
+        </tr>
+        <tr>
+            <td>PNG</td>
+            <td>Portable Network Graphics</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>.png</td>
+        </tr>
+        <tr>
+            <td>GIF</td>
+            <td>Graphics Interchange Format</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>.gif</td>
+        </tr>
+        <tr>
+            <td>SVG</td>
+            <td>Scalable Vector Graphics</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>.svg</td>
+        </tr>
+        <tr>
+            <td>WebP</td>
+            <td>Web Picture Format</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>.webp</td>
+        </tr>
+        <tr>
+            <td>BMP</td>
+            <td>Bitmap Image File</td>
+            <td>No</td>
+            <td>No</td>
+            <td>.bmp</td>
+        </tr>
+        <tr>
+            <td>ICO</td>
+            <td>Icon File</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>.ico</td>
+        </tr>
+    </table>
+
+</body>
+</html>

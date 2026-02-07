@@ -1,0 +1,161 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java switch Statement</h1>
+    <div class="content">
+      <h2>Session Content</h2>
+      <p>
+        The Java switch statement allows testing a variable for equality against multiple values called cases. It is a cleaner alternative to multiple if-else statements when checking one variable for many possible constants.
+      </p>
+      <p>The syntax is:</p>
+      <pre>
+switch(expression) {
+   case value:
+      // Statements
+      break; // optional
+   // other cases
+   default:
+      // Statements (optional)
+}
+      </pre>
+      <p>Important rules:</p>
+      <ul>
+        <li>Switch expression can only be an integer, byte, short, char, String, or enum.</li>
+        <li>Cases values must be constant or literal and match the switch expression's type.</li>
+        <li>When a case matches, statements execute until a break statement or the end of switch.</li>
+        <li>Break prevents flow through to subsequent cases.</li>
+        <li>Default case executes if no other case matches; it is optional and usually placed last.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Example 1: switch with char cases</h2>
+      <pre>
+public class Test {
+   public static void main(String args[]) {
+      char grade = 'C';
+      switch(grade) {
+         case 'A':
+            System.out.println("Excellent!");
+            break;
+         case 'B':
+         case 'C':
+            System.out.println("Well done");
+            break;
+         case 'D':
+            System.out.println("You passed");
+         case 'F':
+            System.out.println("Better try again");
+            break;
+         default:
+            System.out.println("Invalid grade");
+      }
+      System.out.println("Your grade is " + grade);
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>Well done<br>Your grade is C</p>
+    </div>
+
+    <div class="content">
+      <h2>Example 2: switch with int cases</h2>
+      <pre>
+public class Test {
+   public static void main(String args[]) {
+      int grade = 3;
+      switch(grade) {
+         case 1:
+            System.out.println("Excellent!");
+            break;
+         case 2:
+         case 3:
+            System.out.println("Well done");
+            break;
+         case 4:
+            System.out.println("You passed");
+         case 5:
+            System.out.println("Better try again");
+            break;
+         default:
+            System.out.println("Invalid grade");
+      }
+      System.out.println("Your grade is " + grade);
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>Well done<br>Your grade is 3</p>
+    </div>
+
+    <div class="content">
+      <h2>Example 3: switch with String cases</h2>
+      <pre>
+public class Test {
+   public static void main(String args[]) {
+      String grade = "C";
+      switch(grade) {
+         case "A":
+            System.out.println("Excellent!");
+            break;
+         case "B":
+         case "C":
+            System.out.println("Well done");
+            break;
+         case "D":
+            System.out.println("You passed");
+         case "F":
+            System.out.println("Better try again");
+            break;
+         default:
+            System.out.println("Invalid grade");
+      }
+      System.out.println("Your grade is " + grade);
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>Well done<br>Your grade is C</p>
+    </div>
+
+    <div class="content">
+      <h2>Example: Using default case</h2>
+      <pre>
+public class SwitchWithDefault {
+   public static void main(String[] args) {
+      int month = 13; // Invalid month
+      switch (month) {
+         case 1: System.out.println("January"); break;
+         case 2: System.out.println("February"); break;
+         case 3: System.out.println("March"); break;
+         case 4: System.out.println("April"); break;
+         case 12: System.out.println("December"); break;
+         default: System.out.println("Invalid month");
+      }
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>Invalid month</p>
+    </div>
+
+    <div class="content">
+      <h2>Example: Without default case</h2>
+      <pre>
+public class SwitchWithoutDefault {
+   public static void main(String[] args) {
+      int month = 13;
+      switch (month) {
+         case 1: System.out.println("January"); break;
+         case 2: System.out.println("February"); break;
+         case 3: System.out.println("March"); break;
+         case 4: System.out.println("April"); break;
+         case 12: System.out.println("December"); break;
+      }
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>(No output because month 13 does not match any case and no default is provided)</p>
+    </div>
+  </div>
+</div>

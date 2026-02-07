@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Java Documentation Using Javadoc Tool</h1>
+    </div>
+    <div class="content">
+      <p>Javadoc is a tool included with the JDK for generating HTML documentation from Java source code. It produces documentation pages based on special comments that follow a predefined format embedded in your Java code.</p>
+      <p>From Java 9 onwards, Javadoc supports generating docs in HTML5 format using the <code>-html5</code> option.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>What is Javadoc?</h2>
+    </div>
+    <div class="content">
+      <p>Javadoc comments start with <code>/**</code> and are placed before class, method, or field declarations. Comments can contain HTML tags like <code>&lt;h1&gt;</code> and <code>&lt;p&gt;</code> for formatting.</p>
+      <pre><code>/**
+ * <h1>Hello, World!</h1>
+ * The HelloWorld program implements an application that
+ * simply displays "Hello World!" to the standard output.
+ * <p>
+ * Proper comments make your program more user friendly and high quality.
+ *
+ * @author  Zara Ali
+ * @version 1.0
+ * @since   2014-03-31
+ */
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+    }
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Common Javadoc Tags</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><code>@author</code> - Specifies author of the code</li>
+        <li><code>@version</code> - Version info</li>
+        <li><code>@since</code> - Since which version</li>
+        <li><code>@param</code> - Describes method parameter</li>
+        <li><code>@return</code> - Describes return value</li>
+        <li><code>@throws</code> - Describes exceptions thrown</li>
+        <li><code>{@link}</code> - Creates hyperlink to other documented items</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Documenting AddNum Class</h2>
+    </div>
+    <div class="content">
+      <pre><code>import java.io.*;
+
+/**
+ * <h1>Add Two Numbers!</h1>
+ * This class adds two integers and prints the result.
+ * <p>
+ * <b>Note:</b> Proper comments produce user friendly and high-quality code.
+ * 
+ * @author Zara Ali
+ * @version 1.0
+ * @since 2014-03-31
+ */
+public class AddNum {
+    /**
+     * Adds two integers.
+     * @param numA first number
+     * @param numB second number
+     * @return the sum of numA and numB
+     */
+    public int addNum(int numA, int numB) {
+        return numA + numB;
+    }
+
+    /**
+     * Main method which uses addNum.
+     * @param args Unused.
+     * @throws IOException on input error.
+     * @see IOException
+     */
+    public static void main(String args[]) throws IOException {
+        AddNum obj = new AddNum();
+        int sum = obj.addNum(10, 20);
+        System.out.println("Sum of 10 and 20 is :" + sum);
+    }
+}</code></pre>
+      <p>Running <code>javadoc AddNum.java</code> generates HTML documentation of the class and methods.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Using Javadoc with HTML5</h2>
+    </div>
+    <div class="content">
+      <p>From Java 9 onward, running <code>javadoc -html5 AddNum.java</code> generates documentation in modern HTML5 format ensuring better compatibility and styling options.</p>
+      <p>Be aware of tag correctness; e.g., avoid using <code>@return</code> in methods with <code>void</code> return type to prevent errors.</p>
+    </div>
+  </div>
+</div>

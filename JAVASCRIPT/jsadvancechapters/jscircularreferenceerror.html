@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Circular Reference Error</h1>
+    <div class="content">
+      <p>When an object creates a direct or indirect reference to itself, it is known as circular referencing. It makes the loop closed. JavaScript has the same circular referencing issue as other programming languages. A few errors of JavaScript circular referencing modes will be discussed in this chapter.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">What is a Circular Reference in JS?</h2>
+    <div class="content">
+      <p>In JavaScript, a circular reference happens when two or more objects make reference to one another in a way that starts a loop. You have a circular reference, for example, if object A refers to object B and object B in turn refers back to object A.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example</h2>
+    <div class="content">
+      <p>Here is the basic example of circular reference in JavaScript −</p>
+      <pre><code>let person = {};
+let friend = {};
+
+// Making a circular reference
+person.bestFriend = friend;
+friend.bestFriend = person;</code></pre>
+      <p>This creates a loop in which <code>person</code> refers a <code>friend</code>, who in turn mentions the <code>person</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Problems With Circular References</h2>
+    <div class="content">
+      <p>It is preferable to organize data without cross-references between objects in order to prevent circular references.</p>
+      <ul>
+        <li><strong>Memory leaks:</strong> These happen when JavaScript's garbage collection refuses to remove objects with circular references resulting in memory that is not released.</li>
+        <li><strong>Stringify errors in JSON:</strong> Errors happen when circular references are tried to be converted to JSON, for example, by using <code>JSON.stringify()</code>. Because this method cannot support circular structures, an error will be produced.</li>
+      </ul>
+      <pre><code>let obj = {};
+obj.self = obj;
+
+// Throws "TypeError: Converting circular structure to JSON"
+JSON.stringify(obj);</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">How to Fix Circular References</h2>
+    <div class="content">
+      <p>A few standard methods can be used to correct circular references. These include using particular libraries that can handle circular structures, removing references prior to converting to JSON and rearranging data to prevent loops.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Remove Circular References</h2>
+    <div class="content">
+      <p>Find the location of the circular reference and remove it if it is not needed.</p>
+      <pre><code>let obj1 = {};
+// Avoid circular reference by not pointing obj1 back to obj2
+let obj2 = { obj1: obj1 };
+
+console.log(JSON.stringify(obj2));</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code>{"obj1":{}}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Use a Custom toJSON Method</h2>
+    <div class="content">
+      <p>If you want to stringify an object with circular references you can create a custom <code>toJSON</code> function to ignore them.</p>
+      <pre><code>let obj = {};
+obj.self = obj;
+
+obj.toJSON = function() {
+   let copy = { ...this };
+   
+   // Remove circular reference
+   delete copy.self; 
+   return copy;
+};
+
+// This will now work without errors
+console.log(JSON.stringify(obj));</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code>{}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Use a Library</h2>
+    <div class="content">
+      <p>Some libraries like <code>flatted</code> or <code>circular-json</code> can handle circular references automatically. Use the package instead of <code>JSON.stringify()</code> after installing it.</p>
+      <pre><code>// Using circular-json 
+const CircularJSON = require('circular-json');
+
+let obj = {};
+obj.self = obj;
+
+let jsonString = CircularJSON.stringify(obj);
+
+// Converts circular structure to JSON without error
+console.log(jsonString);</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code>{"self":"~"}</code></pre>
+    </div>
+  </div>
+</div>

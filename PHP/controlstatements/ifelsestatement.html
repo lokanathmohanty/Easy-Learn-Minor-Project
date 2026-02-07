@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `if...else` and `elseif` Statements</h1>
+
+    <div class="content">
+      <p>
+        The **`if...else`** statement is the core construct in PHP for controlling program flow based on conditions. It allows a program to make a decision: execute one block of code if a **Boolean expression** is true, and execute another block if it is false.
+      </p>
+
+      <h2>Basic `if...else` Syntax</h2>
+      <p>
+        The `if` statement evaluates a condition. The `else` keyword provides an alternative path when the condition fails.
+      </p>
+      <div class="example">
+        <code>
+          if (expression)<br>
+          &nbsp;&nbsp;&nbsp;code to be executed if expression is true;<br>
+          else<br>
+          &nbsp;&nbsp;&nbsp;code to be executed if expression is false;
+        </code>
+      </div>
+
+      <h3>Example: Simple Comparison</h3>
+      <p>
+        If the condition in the parenthesis evaluates to `true`, the `if` block executes. If `false`, the `else` block executes.
+      </p>
+      <div class="example">
+        <p>
+          <code>$a=10; $b=20;</code><br>
+          <code>if ($a > $b) { echo "a is bigger"; } else { echo "a is not bigger"; }</code>
+        </p>
+        <p class="content">Output: a is not bigger</p>
+      </div>
+
+      <hr>
+
+      <h2>The `elseif` Statement</h2>
+      <p>
+        The **`elseif`** construct is used to check **multiple conditions** sequentially. It runs its code block only if its condition is true AND all preceding `if` or `elseif` conditions were false.
+      </p>
+
+      <h3>`if...elseif...else` Syntax</h3>
+      <div class="example">
+        <code>
+          if (expr1)<br>
+          &nbsp;&nbsp;&nbsp;code to be executed if expr1 is true;<br>
+          elseif (expr2)<br>
+          &nbsp;&nbsp;&nbsp;code to be executed if expr2 is true;<br>
+          else<br>
+          &nbsp;&nbsp;&nbsp;code to be executed if all preceding expressions are false;
+        </code>
+      </div>
+      <p>
+        The first `true` condition in the chain is executed, and the rest of the chain is skipped.
+      </p>
+
+      <h3>Example: Checking Multiple Days</h3>
+      <p>
+        The script checks for Friday first, then Sunday, then defaults to "other days".
+      </p>
+      <div class="example">
+        <p>
+          <code>$d = date("D");</code><br>
+          <code>if ($d == "Fri") { echo "Weekend!"; }</code><br>
+          <code>elseif ($d == "Sun") { echo "Sunday!"; }</code><br>
+          <code>else { echo "Nice day!"; }</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Alternative Syntax (`if...endif;`)</h2>
+      <p>
+        PHP provides an alternative syntax that is often used when mixing PHP logic with large blocks of HTML. Instead of curly braces (`{}`), you use a **colon (`:`)** to open the block and keywords like **`endif;`**, **`else:`**, or **`elseif:`** to close or transition between blocks.
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php if ($d == "Fri"): ?&gt;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&lt;h2&gt;Have a nice weekend!&lt;/h2&gt;</code><br>
+          <code>&lt;?php else: ?&gt;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&lt;h2&gt;Have a nice day!&lt;/h2&gt;</code><br>
+          <code>&lt;?php endif ?&gt;</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

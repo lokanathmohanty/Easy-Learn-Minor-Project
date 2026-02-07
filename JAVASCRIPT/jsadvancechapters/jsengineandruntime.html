@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Engine and Runtime</h1>
+
+    <div class="content">
+      <p>A JavaScript engine is a computer software that executes JavaScript code. It is responsible for translating human-readable JavaScript code into instructions that the hardware of the computer can understand.</p>
+      <p>When JavaScript code is executed in a browser, it does not make direct contact with your computer's hardware. Rather, it communicates with the JavaScript engine, which acts as an interface between the system and your code.</p>
+      <p>Google's V8 Engine is the most used JS engine, even though each browser has its own. This V8 Engine powers Node.js, which is used to build server-side applications, and Google Chrome.</p>
+    </div>
+
+    <div class="content">
+      <h2>How JavaScript Engine Works?</h2>
+      <p>A call stack and a heap are always present in any JS engine. With the help of the execution context, our code is run in the call stack. Also, the heap is an unstructured memory pool that houses every item our application needs.</p>
+    </div>
+
+    <div class="content">
+      <h2>JavaScript Engine Working</h2>
+      <p>Now that you know where the code is executed, the next step is to find out how to compile it into machine code so that it can run later. But let's first review the compilation and interpretation.</p>
+    </div>
+
+    <div class="content">
+      <h2>Compilation vs Interpretation</h2>
+      <p>During compilation, all of the code is concurrently transformed into machine code and stored in a binary file that a computer can run.</p>
+      <p>Line by line the source code is executed by the interpreter during interpretation. While the program is running, the code still needs to be transformed into machine code, but this time it is done line by line.</p>
+      <p>In the past, JS was only an interpreted language. But "just-in-time" compilation, a combination of compilation and interpretation, is now used by the contemporary JS engine.</p>
+      <p>When using JIT compilation all of the code is concurrently translated into machine code and run immediately.</p>
+      <p>You are possibly curious about the difference between JIT and compilation. One notable distinction is that the machine code is saved in a portable file after compilation. There is no need to rush after the compilation process; you can run it whenever you like.</p>
+      <p>However, when JIT is used, the machine code must be executed as soon as the compilation process is completed.</p>
+    </div>
+
+    <div class="content">
+      <h2>JIT and JavaScript</h2>
+      <p>Let us look at how JIT works specifically in JavaScript.</p>
+      <p>So, when a piece of JavaScript code enters the engine, the first step is to parse it.</p>
+      <p>During the parsing process, the code is converted into a data structure known as the AST or Abstract Syntax Tree. This works by first breaking down each line of code into bits that are significant to the language (e.g. as the <code>const</code> or <code>function</code> keywords), and then saving all of these pieces into the tree in a structured manner.</p>
+      <p>This phase also determines whether there are any syntax mistakes. The generated tree is then used to generate machine code.</p>
+    </div>
+
+    <div class="content">
+      <h2>JIT in JavaScript</h2>
+      <p>The next stage is compilation. The engine takes the AST and compiles it into machine code. The machine code is then performed promptly because JIT is used; keep in mind that this execution occurs on the call stack.</p>
+      <p>But it's not the end. The contemporary JavaScript engine generates wasteful machine code in order to run the program as fast as possible. The engine then takes the pre-compiled code, optimizes and re-compiles it while the program is already running. All this optimizing happens in the background.</p>
+    </div>
+
+    <div class="content">
+      <h2>List of JavaScript Engines</h2>
+      <p>Here is the list of available JavaScript Engines −</p>
+      <ul>
+        <li>Google Chrome - V8</li>
+        <li>Edge (Internet Explorer) - Chakra</li>
+        <li>Mozilla Firefox - SpiderMonkey</li>
+        <li>Safari - JavaScript Core (WebKit)</li>
+      </ul>
+      <h3>V8</h3>
+      <p>Developed by Google for Chrome. It improves the user experience on websites and applications by accelerating JavaScript execution. Also, V8 manages memory by collecting superfluous information and makes it easier to use JavaScript on servers, like in Node.js.</p>
+      <h3>Chakra</h3>
+      <p>Chakra was created by Microsoft for Internet Explorer. It speeds up JavaScript and lets the browser do other things at the same time by running scripts on a separate CPU core.</p>
+      <h3>SpiderMonkey</h3>
+      <p>Brendan Eich at Netscape developed the first JavaScript engine, SpiderMonkey, which is currently maintained by Mozilla for Firefox. Anyone can use or modify it because it is open-source.</p>
+      <h3>WebKit</h3>
+      <p>WebKit for Safari was developed by Apple and is used by iOS devices, Kindles and PlayStations. WebKit manages common browser features like history and back-and-forth navigation in addition to displaying webpages.</p>
+    </div>
+
+    <div class="content">
+      <h2>What is a JavaScript Runtime?</h2>
+      <p>A JavaScript (JS) runtime is a full environment for executing JavaScript code. It is made up of a number of components that work together to help JavaScript applications run smoothly. When we talk about a JS runtime, we often mean the full ecosystem that goes beyond just executing code.</p>
+      <p>Depending on where JavaScript is executed (in the web browser or on the server with Node.js), the runtime may include additional environment-specific features. For example, in a browser, there can be functionality for managing browser events, accessing the DOM and interfacing with browser-specific functionalities.</p>
+      <p>For the time being, we will only cover the JavaScript runtime in the browser. Consider a JS runtime to be a large box containing all of the components required to run JavaScript in browser.</p>
+      <p>The JS engine is at the heart of any JS runtime. However, the engine alone is not sufficient. Web APIs are required for good functionality.</p>
+    </div>
+
+    <div class="content">
+      <h2>JS Runtime in the Browser</h2>
+      <p>JS runtimes, particularly those used in web browsers, include Web APIs that extend the fundamental JavaScript language's capabilities. These APIs include interactions with the Document Object Model (DOM), XMLHttpRequest (for sending HTTP requests), timers, and more.</p>
+      <p>Web APIs extend JavaScript's capabilities by allowing it to interact with the browser environment and perform activities like changing web-page structure, handling user events and sending network requests.</p>
+      <p>So, basically, Web APIs are engine-provided features that are not part of the JavaScript language. JavaScript gains access to these APIs via the window object.</p>
+      <p>Asynchronous actions in JavaScript, like receiving user input or performing network queries, make use of callback functions. These routines are placed in the callback queue and await execution. The callback queue manages asynchronous tasks in an ordered manner.</p>
+      <p>To react to specific events, we can attach event handler methods to DOM events like buttons. These event handler functions are also known as callback functions. So, when the click event occurs, the callback function will be called.</p>
+    </div>
+  </div>
+</div>

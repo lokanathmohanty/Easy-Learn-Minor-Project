@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Modifying Pointers ✏️</h1>
+
+        <div class="content">
+            <p>Modifying pointers in C++ involves changing one of two things:</p>
+            <ol>
+                <li>
+                    **The Pointer's Address (Reassignment):** Changing the **memory address** that the pointer variable is storing. This makes the pointer point to a different location or variable.
+                </li>
+                <li>
+                    **The Pointed-to Value (Dereferencing):** Changing the **data value** stored at the memory address the pointer currently points to.
+                </li>
+            </ol>
+            <p>Pointers are variables themselves, meaning their values (the stored memory addresses) can be changed.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">1. Modifying the Pointer's Address (Reassignment)</h2>
+            <p>This is done by assigning a new address to the pointer variable. The pointer can be reassigned to point to another existing variable or a newly allocated memory block.</p>
+            <pre class="example">
+int var1 = 10;
+int var2 = 20;
+int* ptr = &amp;var1;  // ptr = address of var1
+
+ptr = &amp;var2;       // MODIFICATION: ptr now holds the address of var2
+cout &lt;&lt; *ptr &lt;&lt; endl; // Output: 20
+</pre>
+
+            <h3>Reassignment to Dynamic Memory</h3>
+            <p>A pointer can be reassigned to point to memory allocated on the heap using the **<code>new</code>** operator.</p>
+            <pre class="example">
+int* dynamicPtr = new int(30);
+ptr = dynamicPtr; // MODIFICATION: ptr points to the new heap memory
+cout &lt;&lt; *ptr &lt;&lt; endl; // Output: 30
+
+// Crucial step: Release dynamic memory to prevent leaks
+delete dynamicPtr; 
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">2. Modifying the Pointed-to Value (Dereferencing)</h2>
+            <p>This is done using the **dereference operator** (**<code>*</code>**) to access the memory location and assign a new value to the original variable.</p>
+            <pre class="example">
+int var = 100;
+int* ptr = &amp;var; // ptr points to var
+
+*ptr = 500; // MODIFICATION: The value of 'var' is changed to 500
+cout &lt;&lt; var &lt;&lt; endl; // Output: 500
+</pre>
+        </div>
+    </div>
+</div>

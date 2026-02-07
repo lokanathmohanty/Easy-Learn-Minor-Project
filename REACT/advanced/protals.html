@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Portals</h1>
+
+    <div class="content">
+      <p>
+        Portals provide a way for a component to render its children into a DOM node 
+        outside its own DOM hierarchy. They are useful for modal dialogs, popups, tooltips, 
+        and other UI elements where rendering outside the parent DOM structure is preferred.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Concept and Usage of Portals</h2>
+      <p>Consider the following DOM structure in the main document:</p>
+      <pre><code>&lt;div id="root"&gt;&lt;/div&gt;
+&lt;div id="modalRoot"&gt;&lt;/div&gt;</code></pre>
+
+      <p>
+        The <code>root</code> node is attached to the main React component, 
+        while <code>modalRoot</code> can be used to render a modal dialog. 
+        This separation helps preserve modal styles and prevents interference 
+        from parent DOM styles.
+      </p>
+
+      <p>
+        React provides <code>createPortal</code> via the <code>ReactDOM</code> package:
+      </p>
+      <pre><code>ReactDOM.createPortal(child, container)</code></pre>
+
+      <ul>
+        <li><strong>child</strong> – the modal, tooltip, or other UI element</li>
+        <li><strong>container</strong> – the DOM node outside the parent hierarchy</li>
+      </ul>
+
+      <pre><code>render() {
+   return ReactDOM.createPortal(
+      this.props.children, 
+      domNode
+   );
+}</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Applying Portals</h2>
+      <p>Steps to create a React application with portals:</p>
+      <ul>
+        <li>Create a new React app and start it</li>
+        <li>Add a <code>modalRoot</code> div in <code>public/index.html</code></li>
+        <li>Create a <code>SimplePortal</code> component</li>
+        <li>Use the portal in <code>App</code> component</li>
+      </ul>
+
+      <h3>index.html</h3>
+      <pre><code>&lt;div id="root"&gt;&lt;/div&gt;
+&lt;div id="modalRoot"&gt;&lt;/div&gt;</code></pre>
+
+      <h3>SimplePortal Component</h3>
+      <pre><code>import React from "react";
+import PortalReactDOM from "react-dom";
+
+const modalRoot = document.getElementById("modalRoot");
+
+class SimplePortal extends React.Component {
+   render() {
+      return PortalReactDOM.createPortal(
+         &lt;div className="modal" onClick={this.props.onClose}&gt;
+            &lt;div className="modalContent"&gt;
+               {this.props.children}
+               &lt;hr /&gt;
+               &lt;button onClick={this.props.onClose}&gt;Close&lt;/button&gt;
+            &lt;/div&gt;
+         &lt;/div&gt;,
+         modalRoot
+      )
+   }
+}
+export default SimplePortal;</code></pre>
+
+      <h3>App Component</h3>
+      <pre><code>import React from "react";
+import SimplePortal from "./Components/SimplePortal";
+
+class App extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = { modal: false };
+   }
+
+   handleOpenModal = () =&gt; this.setState({ modal: true });
+   handleCloseModal = () =&gt; this.setState({ modal: false });
+
+   render() {
+      return (
+         &lt;div className="container"&gt;
+            &lt;p&gt;Main App&lt;/p&gt;
+            &lt;button onClick={this.handleOpenModal}&gt;Show Modal&lt;/button&gt;
+            { this.state.modal ? (
+               &lt;SimplePortal onClose={this.handleCloseModal}&gt;
+                  Hi, I am the modal dialog created using portal.
+               &lt;/SimplePortal&gt;
+            ) : null }
+         &lt;/div&gt;
+      );
+   }
+}
+export default App;</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Summary</h2>
+      <p>
+        React Portals provide an easy way to render components outside their parent 
+        DOM hierarchy. They are particularly useful for modals, tooltips, and overlays, 
+        while still maintaining proper event bubbling across different DOM nodes.
+      </p>
+    </div>
+  </div>
+</div>

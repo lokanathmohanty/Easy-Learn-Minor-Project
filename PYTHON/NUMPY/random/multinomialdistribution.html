@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Multinomial Distribution</h1>
+    <div class="content">
+      <p>The <strong>Multinomial Distribution</strong> is a generalization of the binomial distribution.</p>
+      <p>While the binomial distribution describes the number of successes in a sequence of <em>two</em> possible outcomes (like heads or tails in a coin toss), the multinomial distribution describes the outcomes for experiments with <em>multiple</em> possible outcomes (e.g., rolling a dice, or blood types in a population).</p>
+      <h2>Parameters:</h2>
+      <ul>
+        <li><strong>n</strong> — Number of times to run the experiment (number of trials).</li>
+        <li><strong>pvals</strong> — A list of probabilities for each possible outcome. For a fair 6-sided die, this would be <code>[1/6, 1/6, 1/6, 1/6, 1/6, 1/6]</code>.</li>
+        <li><strong>size</strong> — The shape of the output array (number of experiments to simulate).</li>
+      </ul>
+      <p>Note that multinomial samples return counts for <em>each</em> possible outcome, not a single value.</p>
+      <p>With enough trials and proper parameters, the multinomial distribution approaches a normal distribution for each outcome.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Dice Roll with Multinomial Distribution</h1>
+    <div class="content">
+      <p>Roll a dice 6 times and count the outcomes using NumPy:</p>
+      <pre><code>from numpy import random
+
+x = random.multinomial(n=6, pvals=[1/6]*6)
+
+print(x)
+</code></pre>
+      <p>This will output something like:</p>
+      <pre><code>[0 1 2 1 1 1]</code></pre>
+      <p>Meaning:</p>
+      <ul>
+        <li>0 times outcome 1</li>
+        <li>1 time outcome 2</li>
+        <li>2 times outcome 3</li>
+        <li>1 time outcome 4</li>
+        <li>1 time outcome 5</li>
+        <li>1 time outcome 6</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Descriptors</h1>
+    </div>
+    <div class="content">
+      <p>
+        Python Descriptors provide a powerful way to customize attribute access, assignment, and deletion in classes. They are objects that implement one or more of the special methods: <code>__get__</code>, <code>__set__</code>, and <code>__delete__</code>.
+      </p>
+      <p>
+        When a descriptor is used as a class attribute, Python automatically invokes these methods during attribute access or modification, enabling custom behavior like validation, logging, or computed properties.
+      </p>
+    </div>
+  </div>
+  <div class="session">
+    <div class="title">
+      <h2>Descriptor Methods and Examples</h2>
+    </div>
+    <div class="content">
+      <h3>1. The <code>__get__</code> Method</h3>
+      <pre>
+class Descriptor:
+    def __get__(self, instance, owner):
+        if instance is None:
+            return self
+        return instance._value
+
+class MyClass:
+    attr = Descriptor()
+
+    def __init__(self, value):
+        self._value = value
+
+obj = MyClass(42)
+print(obj.attr)  # Outputs: 42
+      </pre>
+      <h3>2. The <code>__set__</code> Method</h3>
+      <pre>
+class Descriptor:
+    def __set__(self, instance, value):
+        if not isinstance(value, int):
+            raise TypeError("Value must be an integer")
+        instance._value = value
+
+class MyClass:
+    attr = Descriptor()
+
+    def __init__(self, value):
+        self.attr = value
+
+obj = MyClass(42)
+print(obj.attr)
+
+obj.attr = 100
+print(obj.attr)
+      </pre>
+      <h3>3. The <code>__delete__</code> Method</h3>
+      <pre>
+class LoggedDescriptor:
+    def __init__(self, name):
+        self.name = name
+
+    def __get__(self, instance, owner):
+        return instance.__dict__.get(self.name)
+
+    def __set__(self, instance, value):
+        instance.__dict__[self.name] = value
+
+    def __delete__(self, instance):
+        if self.name in instance.__dict__:
+            print(f"Deleting {self.name} from {instance}")
+            del instance.__dict__[self.name]
+        else:
+            raise AttributeError(f"{self.name} not found")
+
+class Person:
+    name = LoggedDescriptor("name")
+    age = LoggedDescriptor("age")
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+p = Person("Tutorialspoint", 30)
+print(p.name)  # Outputs: Tutorialspoint
+print(p.age)   # Outputs: 30
+del p.name     # Prints deletion message
+print(p.name)  # Outputs: None
+del p.age      # Prints deletion message
+print(p.age)   # Outputs: None
+      </pre>
+    </div>
+  </div>
+  <div class="session">
+    <div class="title">
+      <h2>Types of Descriptors</h2>
+    </div>
+    <div class="content">
+      <table>
+        <thead>
+          <tr>
+            <th>Criteria</th>
+            <th>Data Descriptors</th>
+            <th>Non-Data Descriptors</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Methods Implemented</td>
+            <td><code>__get__</code> and <code>__set__</code> (optional <code>__delete__</code>)</td>
+            <td>Only <code>__get__</code></td>
+          </tr>
+          <tr>
+            <td>Precedence</td>
+            <td>Overrides instance attributes</td>
+            <td>Can be overridden by instance attributes</td>
+          </tr>
+          <tr>
+            <td>Use Cases</td>
+            <td>Validation, managed attributes, logging, enforcement</td>
+            <td>Method binding, caching, default values</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Data descriptors take precedence over instance attributes during attribute lookup, while non-data descriptors do not.
+      </p>
+    </div>
+  </div>
+  <div class="session">
+    <div class="content">
+      <p>
+        Descriptors form the foundation for Python features such as properties, methods, static methods, and class methods. They enable advanced capabilities like lazy evaluation, data validation, attribute management, and more, making them essential for fine-grained control over attribute behavior in object-oriented programming.
+      </p>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

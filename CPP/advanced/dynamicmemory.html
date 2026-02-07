@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Dynamic Memory (<code>new</code> and <code>delete</code>) 🧠</h1>
+
+        <div class="content">
+            <p>C++ program memory is primarily split into the **Stack** (for local variables and function calls) and the **Heap** (or "free store"). **Dynamic memory allocation** is the process of allocating memory from the **Heap** at **runtime**, which is necessary when the required memory size isn't known until the program is executing.</p>
+
+            <hr>
+
+            <h2 class="title">The <code>new</code> Operator (Allocation)</h2>
+
+            <p>The **<code>new</code>** operator is used to dynamically allocate memory on the heap for a variable or object of a given data type. It returns the **address** of the newly allocated memory space.</p>
+
+            <h3>Syntax</h3>
+            <pre class="example">
+// Single variable
+data-type* pointer = new data-type; 
+
+double* pvalue = new double;
+</pre>
+            <p>Unlike C's <code>malloc()</code>, the C++ <code>new</code> operator not only allocates memory but also **calls the constructor** for the object being created, which is vital for classes.</p>
+
+            <hr>
+
+            <h2 class="title">The <code>delete</code> Operator (Deallocation)</h2>
+
+            <p>The **<code>delete</code>** operator is used to de-allocate (free up) memory that was previously allocated using the <code>new</code> operator. Releasing unused memory prevents **memory leaks**.</p>
+
+            <h3>Syntax</h3>
+            <pre class="example">
+// For a single variable/object
+delete pointer; 
+
+delete pvalue;
+</pre>
+
+            <hr>
+
+            <h2 class="title">Dynamic Allocation for Arrays</h2>
+
+            <p>When allocating an array, the syntax for <code>new</code> changes slightly to include the size, and the syntax for <code>delete</code> **must** use square brackets (<code>[]</code>) to ensure all elements in the array are properly destructed and de-allocated.</p>
+
+            <h3>Syntax</h3>
+            <pre class="example">
+// Allocate an array of 20 chars
+char* pvalue = new char[20];       
+
+// Deallocate the array (REQUIRED for arrays!)
+delete [] pvalue; 
+</pre>
+            <p>If you allocate an array of objects (e.g., <code>new Box[4]</code>), using <code>delete []</code> ensures the **destructor** is called for all four objects before the memory is released.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Return a Pointer from a Function in C</h1>
+
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>In C programming, a function can take multiple arguments but return only one expression. This return value can be of any type, including a pointer to a primary or user-defined type. Returning a pointer allows access to variables or structures beyond the function's local scope.</p>
+
+      <h2>Return a Static Array from a Function</h2>
+      <p>Returning a pointer to a local variable is invalid because the variable no longer exists after the function ends. To return a pointer safely, use a <code>static</code> array.</p>
+
+      <h3 class="title">Example 1: Returning a static array</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+float * arrfunction(int);
+
+int main() {
+  int x = 100;
+  float *arr = arrfunction(x);
+  printf("Square of %d: %f\n", x, arr[0]);
+  printf("Cube of %d: %f\n", x, arr[1]);
+  printf("Square root of %d: %f\n", x, arr[2]);
+  return 0;
+}
+
+float *arrfunction(int x) {
+  static float arr[3];
+  arr[0] = pow(x, 2);
+  arr[1] = pow(x, 3);
+  arr[2] = pow(x, 0.5);
+  return arr;
+}</code></pre>
+
+      <h3 class="title">Example 2: Returning random numbers</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int *getRandom() {
+  static int r[10];
+  srand((unsigned)time(NULL));
+  for (int i = 0; i &lt; 10; ++i) {
+    r[i] = rand();
+  }
+  return r;
+}
+
+int main() {
+  int *p = getRandom();
+  for (int i = 0; i &lt; 10; i++) {
+    printf("*(p + %d): %d\n", i, *(p + i));
+  }
+  return 0;
+}</code></pre>
+
+      <h2>Return a String from a Function</h2>
+      <p>Strings in C are character arrays. You can dynamically allocate memory, manipulate a string, and return it from a function.</p>
+
+      <h3 class="title">Example: Returning a string</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+char *hellomsg(char *x) {
+  char *arr = (char *)malloc(50 * sizeof(char));
+  strcpy(arr, "Hello ");
+  strcat(arr, x);
+  return arr;
+}
+
+int main() {
+  char *name = "TutorialsPoint";
+  char *arr = hellomsg(name);
+  printf("%s\n", arr);
+  return 0;
+}</code></pre>
+
+      <h2>Return a Struct Pointer from a Function</h2>
+      <p>You can return a pointer to a <code>struct</code> by using a static struct variable inside a function.</p>
+
+      <h3 class="title">Example: Returning struct pointer</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+struct rectangle {
+  float len, brd;
+  double area;
+};
+
+struct rectangle *area(float x, float y) {
+  static struct rectangle r;
+  r.len = x;
+  r.brd = y;
+  r.area = x * y;
+  return &r;
+}
+
+int main() {
+  float x = 10.5, y = 20.5;
+  struct rectangle *r = area(x, y);
+  printf("Length: %f\nBreadth: %f\nArea: %lf\n", r-&gt;len, r-&gt;brd, r-&gt;area);
+  return 0;
+}</code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>Use <code>static</code> variables when returning array or struct pointers.</li>
+        <li>For strings, use <code>malloc()</code> to allocate memory dynamically.</li>
+        <li>Returning pointers provides flexible data handling across functions.</li>
+      </ul>
+    </div>
+  </div>
+</div>

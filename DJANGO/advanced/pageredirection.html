@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Page Redirection ➡️</h1>
+        <div class="content">
+            <p><strong>Page redirection</strong> is a core requirement in web applications, used after actions like logging in, submitting forms, or in case of errors. In Django, redirection is primarily handled by the **<code>redirect()</code>** shortcut method, imported from <code>django.shortcuts</code>.</p>
+        </div>
+        <h2 class="example">Using the <code>redirect()</code> Method</h2>
+        <div class="content">
+            <p>The <code>redirect()</code> function takes several types of arguments, ultimately returning an <code>HttpResponseRedirect</code> object that instructs the client's browser to load a new URL.</p>
+
+            <h3>1. Redirecting to an External or Full URL</h3>
+            <p>You can redirect users to an external website or a full absolute URL by passing the URL as a string argument:</p>
+            <pre><code>from django.shortcuts import redirect
+
+def hello(request):
+   # Redirects to the Django official website
+   return redirect("https://www.djangoproject.com")</code></pre>
+
+            <h3>2. Redirecting to an Internal View Function</h3>
+            <p>You can redirect to another view function within your project by passing the **view's name** (the function object) and any required keyword arguments (like URL parameters):</p>
+            <pre><code>from django.shortcuts import redirect
+
+def viewArticle(request, articleId):
+   # Redirects to the 'viewArticles' view, passing year and month arguments
+   return redirect(viewArticles, year = "2045", month = "02")
+
+def viewArticles(request, year, month):
+   # Target view: Displaying articles of 2045/02
+   text = "Displaying articles of : %s/%s"%(year, month)
+   return HttpResponse(text)</code></pre>
+
+            <h3>3. Redirecting using a URL Name (Recommended)</h3>
+            <p>The most robust way to redirect internally is by using the **<code>name</code>** parameter defined in your <code>urls.py</code> mapping. This avoids hardcoding view function names, making your code more resilient to refactoring:</p>
+            <p>If the URL pattern is mapped with <code>name='articles'</code>, the redirection can use that name:</p>
+            <pre><code>def viewArticle(request, articleId):
+   # Redirects using the registered URL name 'articles'
+   return redirect('articles', year = "2045", month = "02")</code></pre>
+
+            <h3>Permanent vs. Temporary Redirect</h3>
+            <p>By default, <code>redirect()</code> performs a temporary redirect (HTTP 302/307). You can make it permanent (HTTP 301) by passing the <code>permanent=True</code> parameter. This distinction is important for **SEO** (Search Engine Optimization):</p>
+            <pre><code># Permanent redirection (HTTP 301)
+return redirect("https://new.site.com", permanent = True)</code></pre>
+
+            <h3>The <code>reverse()</code> Function</h3>
+            <p>The **<code>reverse()</code>** function (from <code>django.urls</code>, formerly <code>django.core.urlresolvers.reverse</code>) is related to redirection. It is used to generate a URL string from a view name and its arguments, but unlike <code>redirect()</code>, it **only returns the URL string** and does not create an HTTP response object. It's often used when you need the URL string for other purposes (like inside a template or to calculate a path).</p>
+        </div>
+    </div>
+</div>

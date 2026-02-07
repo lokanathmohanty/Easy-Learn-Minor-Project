@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Power BI - DAX Counting Functions</title>
+</head>
+<body>
+
+  
+
+  <main>
+
+    <section>
+      <h2>Steps to Execute DAX Counting Functions</h2>
+      <ol>
+        <li>Import the dataset into Power BI Desktop.</li>
+        <li>Select <strong>New measure</strong> from the <strong>Table tools</strong> tab.</li>
+        <li>Specify a valid expression in the formula bar for each counting function.</li>
+        <li>Navigate to the <strong>Report View</strong> and choose any visual (Table, Matrix, Scorecard) to display the result.</li>
+      </ol>
+      <p><strong>Dataset:</strong> <code>D:\Employee12.xlsx</code></p>
+    </section>
+
+    <section>
+      <h2>1. DISTINCTCOUNT Function</h2>
+      <p>Returns the number of distinct values in a column (including <code>null</code> values).</p>
+      <pre><code>n1 = DISTINCTCOUNT('Electronic company'[Name])</code></pre>
+      <p><strong>Output:</strong> 9 distinct names</p>
+    </section>
+
+    <section>
+      <h2>2. DISTINCTCOUNTNOBLANK Function</h2>
+      <p>Same as DISTINCTCOUNT, but <code>null</code> values are ignored.</p>
+      <pre><code>r1 = DISTINCTCOUNTNOBLANK('Electronic Company'[Quantity])</code></pre>
+    </section>
+
+    <section>
+      <h2>3. COUNT Function</h2>
+      <p>Counts numeric, text, and date values, excluding <code>null</code> values.</p>
+      <pre><code>Quantity_count = COUNT('Electronic company'[Quantity])</code></pre>
+
+      <h4>Scenario: Boolean Values</h4>
+      <p>Using COUNT with Boolean values like <code>TRUE/FALSE</code>:</p>
+      <pre><code>dt = COUNT(Dessert[Like Dessert])</code></pre>
+      <p><strong>Note:</strong> COUNT will not return results for Boolean fields.</p>
+    </section>
+
+    <section>
+      <h2>4. COUNTA Function</h2>
+      <p>Counts all non-blank values including <code>TRUE/FALSE</code>.</p>
+      <pre><code>count_cost = COUNTA('Electronic Company'[Quantity])</code></pre>
+
+      <h4>Example with Boolean Values:</h4>
+      <pre><code>dt_count = COUNTA(Dessert[Like Dessert])</code></pre>
+    </section>
+
+    <section>
+      <h2>5. COUNTX Function</h2>
+      <p>Counts non-blank results of an expression across a table (excludes <code>TRUE/FALSE</code>).</p>
+      <pre><code>cnx = COUNTX(Dessert, Dessert[Name])</code></pre>
+    </section>
+
+    <section>
+      <h2>6. COUNTAX Function</h2>
+      <p>Like COUNTX but includes all data types (text, numbers, booleans).</p>
+      <pre><code>widgets_count = COUNTAX(Widgets, Widgets[Cost])</code></pre>
+    </section>
+
+    <section>
+      <h2>7. COUNTROWS Function</h2>
+      <p>Returns the total number of rows in a table.</p>
+      <pre><code>r1 = COUNTROWS('Electronic Company')</code></pre>
+      <p><strong>Output:</strong> 14 rows</p>
+    </section>
+
+    <section>
+      <h2>8. COUNTBLANK Function</h2>
+      <p>Returns the number of <code>null/blank</code> values in a column.</p>
+      <pre><code>cnt_blank = COUNTBLANK('Electronic Company'[Cost])</code></pre>
+      <p><strong>Output:</strong> 2 blank values</p>
+    </section>
+
+  </main>
+
+   
+   
+
+</body>
+</html>

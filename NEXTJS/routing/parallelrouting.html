@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Parallel Routing 🧩</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Parallel Routing?</h2>
+            <p>**Parallel Routing** is an advanced routing method in Next.js (App Router) that enables you to **simultaneously render one or more pages (or views) within the same layout**. This is particularly useful for creating complex dashboards, social media feeds, or split views where different sections of the UI should load and navigate independently.</p>
+            <p>A key feature is the ability to render these sections **conditionally**, allowing you to control which view appears based on the current URL or user state.</p>
+            
+            <h3 class="title">Example Use Case:</h3>
+            <p>Displaying a user's **Feed** on the left side and their **Profile** details on the right side, all within a single persistent layout.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Setting Up Parallel Routing</h2>
+            <p>Parallel routing uses **named slots** defined in the file system.</p>
+            
+            <h3 class="title">Step 1 & 2: Create Named Slots (The `@folder` Convention)</h3>
+            <p>Slots are defined by creating directories prefixed with the **<span class="example">`@`</span>** symbol. These folders represent the parallel segments of the route.</p>
+            <pre>app/
+  layout.tsx
+  page.tsx        // Default page content (if present)
+  @sidebar/       // &larr; Slot 1
+      page.tsx
+  @content/       // &larr; Slot 2
+      page.tsx</pre>
+            
+            <h3 class="title">Step 3: Define the Layout and Slots</h3>
+            <p>The parent **<span class="example">`layout.tsx`</span>** file must receive the slots as **props** and render them in the desired location in the UI. The prop names must match the slot folder names (e.g., <span class="example">`@sidebar`</span> becomes the <span class="example">`sidebar`</span> prop).</p>
+            <pre>// File: app/layout.tsx
+export default function RootLayout({ children, sidebar, content }) {
+    return (
+      &lt;html&gt;
+        &lt;body&gt;
+          &lt;div style={{ display: "flex" }}&gt;
+            &lt;aside&gt;{sidebar}&lt;/aside&gt; &lt;!-- Renders @sidebar/page.tsx --&gt;
+            &lt;main&gt;{content}&lt;/main&gt; &lt;!-- Renders @content/page.tsx --&gt;
+          &lt;/div&gt;
+          {children} &lt;!-- Renders app/page.tsx (the default page content) --&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    );
+}</pre>
+            
+            <h3 class="title">Step 4: Create Parallel Route Segments</h3>
+            <p>Each slot folder contains its own route segment file, which is an independent component.</p>
+            <pre>// File: @sidebar/page.tsx
+export default function Sidebar() {
+  return &lt;nav&gt;Sidebar Content&lt;/nav&gt;;
+}
+
+// File: @content/page.tsx
+export default function Content() {
+  return &lt;section&gt;Main Content&lt;/section&gt;;
+}</pre>
+        </div>
+    </div>
+</div>

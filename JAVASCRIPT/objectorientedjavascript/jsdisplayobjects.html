@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Display Objects</h1>
+
+    <div class="content">
+      <h2>Displaying Objects in JavaScript</h2>
+      <p>
+        There are different ways to display objects in JavaScript. Using the 
+        <code>console.log()</code> method, we can display the object in the web console. 
+        Sometimes developers require to display the object properties and their values 
+        in the HTML or for debugging the code.
+      </p>
+      <p>
+        When you print the object directly, it shows <code>[object Object]</code> 
+        instead of its properties, as demonstrated below.
+      </p>
+
+      <h2>Example: Printing Object Directly</h2>
+      <pre><code>
+const fruit = {
+  name: "Banana",
+  price: 100,
+}
+document.getElementById("output").innerHTML += fruit;
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <p>The object is: [object Object]</p>
+
+      <p>
+        To properly display objects, we can use several approaches:
+      </p>
+      <ul>
+        <li>Accessing the object properties</li>
+        <li>Using the <code>JSON.stringify()</code> method</li>
+        <li>Using the <code>Object.entries()</code> method</li>
+        <li>Using the <code>for...in</code> loop</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Accessing the Object Properties</h2>
+      <p>
+        You can use dot notation or square bracket notation to access and display 
+        property values individually.
+      </p>
+      <pre><code>
+const fruit = {
+  name: "Banana",
+  price: 100,
+}
+
+const fruitName = fruit.name;
+const fruitPrice = fruit["price"];
+
+document.getElementById("output").innerHTML = 
+  "The price of the " + fruitName + " is: " + fruitPrice;
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <p>The price of the Banana is: 100</p>
+    </div>
+
+    <div class="content">
+      <h2>Using the JSON.stringify() Method</h2>
+      <p>
+        The <code>JSON.stringify()</code> method converts an object into a string, 
+        making it easier to display dynamic or nested objects.
+      </p>
+      <pre><code>
+const fruit = {
+  name: "Banana",
+  price: 100,
+}
+
+document.getElementById("output").innerHTML += JSON.stringify(fruit);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <p>The fruit object is {"name":"Banana","price":100}</p>
+    </div>
+
+    <div class="content">
+      <h2>Using the Object.entries() Method</h2>
+      <p>
+        The <code>Object.entries()</code> method returns a 2D array of key-value pairs. 
+        You can loop through it to display each property and value.
+      </p>
+      <pre><code>
+const numbers = {
+  num1: 10,
+  num2: 20,
+  num3: 30,
+  num4: 40,
+}
+
+for (const [key, value] of Object.entries(numbers)) {
+  document.getElementById("output").innerHTML += key + ": " + value + "&lt;br&gt;";
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>num1: 10</li>
+        <li>num2: 20</li>
+        <li>num3: 30</li>
+        <li>num4: 40</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Using the for...in Loop</h2>
+      <p>
+        The <code>for...in</code> loop allows you to iterate through each property 
+        of the object and print its key-value pair.
+      </p>
+      <pre><code>
+const languages = {
+  language1: "JavaScript",
+  language2: "Python",
+  language3: "Java",
+  language4: "HTML",
+}
+
+for (const key in languages) {
+  document.getElementById("output").innerHTML += 
+    key + ": " + languages[key] + "&lt;br&gt;";
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>language1: JavaScript</li>
+        <li>language2: Python</li>
+        <li>language3: Java</li>
+        <li>language4: HTML</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Conclusion</h2>
+      <p>
+        The best way to display an object is by using the 
+        <code>JSON.stringify()</code> method, as it converts the object into a 
+        flat string and works with nested objects. Other methods are useful 
+        for custom or detailed property display.
+      </p>
+    </div>
+  </div>
+</div>

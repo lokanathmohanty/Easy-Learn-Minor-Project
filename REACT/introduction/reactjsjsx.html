@@ -1,0 +1,149 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - JSX</h1>
+    <div class="content">
+      <p>
+        JSX is an extension to JavaScript that allows writing code resembling HTML. 
+        JSX is mainly used to describe how the user interface should look, but it is 
+        not a template language—it is a syntax extension to JavaScript. 
+      </p>
+      <p>
+        JSX produces React elements that are rendered into the DOM. 
+        It compiles down to <code>React.createElement()</code> calls, 
+        so it can be used inside valid JavaScript code.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using JSX in ReactJS</h2>
+    <div class="content">
+      <ul>
+        <li>Assign to a variable</li>
+        <li>Assign to a variable based on a condition</li>
+        <li>Use as a return value of a function</li>
+        <li>Use as an argument of a function</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h3>Example: Assigning JSX</h3>
+      <pre>
+var greeting = &lt;h1&gt;Hello React!&lt;/h1&gt;;
+
+function Greeting() { 
+  return &lt;h1&gt;Hello React!&lt;/h1&gt; 
+} 
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Why JSX?</h2>
+    <div class="content">
+      <ul>
+        <li>Optimization during compilation makes JSX faster.</li>
+        <li>Combines markup and logic in a single file.</li>
+        <li>Most errors can be caught at compile time.</li>
+        <li>Simplifies template creation.</li>
+        <li>Prevents Cross Site Scripting (XSS) attacks.</li>
+        <li>Supports conditional statements, loops, and expressions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Expressions in JSX</h2>
+    <div class="content">
+      <p>
+        Expressions in JSX must be wrapped in curly braces <code>{ }</code>. 
+        They can use variables, functions, and computations from the surrounding scope.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example: Expression in JSX</h3>
+      <pre>
+&lt;script type="text/babel"&gt;
+  var cTime = new Date().toTimeString();
+  ReactDOM.render(
+    &lt;div&gt;&lt;p&gt;The current time is {cTime}&lt;/p&gt;&lt;/div&gt;, 
+    document.getElementById('react-app')
+  );
+&lt;/script&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Functions in JSX</h2>
+    <div class="example">
+      <h3>Example: Function Usage</h3>
+      <pre>
+&lt;script type="text/babel"&gt;
+  function getCurrentTime() {
+    return new Date().toTimeString();
+  }
+  ReactDOM.render(
+    &lt;div&gt;
+      &lt;p&gt;The current time is {getCurrentTime()}&lt;/p&gt;
+    &lt;/div&gt;, 
+    document.getElementById('react-app')
+  );
+&lt;/script&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Attributes in JSX</h2>
+    <div class="content">
+      <p>
+        JSX supports HTML-like attributes but uses camelCase names. 
+        For example:
+      </p>
+      <ul>
+        <li><code>className</code> instead of <code>class</code></li>
+        <li><code>htmlFor</code> instead of <code>for</code></li>
+        <li><code>tabIndex</code> instead of <code>tabindex</code></li>
+        <li><code>onClick</code> instead of <code>onclick</code></li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h3>Example: Attribute in JSX</h3>
+      <pre>
+&lt;script type="text/babel"&gt;
+  function getCurrentTime() {
+    return new Date().toTimeString();
+  }
+  var class_name = "red";
+  ReactDOM.render(
+    &lt;div&gt;
+      &lt;p&gt;The current time is 
+        &lt;span className={class_name}&gt;{getCurrentTime()}&lt;/span&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;, 
+    document.getElementById('react-app')
+  );
+&lt;/script&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Nested Elements in JSX</h2>
+    <div class="example">
+      <h3>Example: Nested Elements</h3>
+      <pre>
+&lt;div&gt;
+  This is a list:
+  &lt;ul&gt;
+    &lt;li&gt;Element 1&lt;/li&gt;
+    &lt;li&gt;Element 2&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+      </pre>
+    </div>
+  </div>
+</div>

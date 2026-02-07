@@ -1,0 +1,156 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML Audio Player with Visualizer</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>HTML provides native support for audio and video without requiring Flash. Using the Web Audio API, we can create an <strong>audio player with a visualizer</strong> that reacts to the frequency data of the playing sound. The visualizer will display bars or waves as the music plays. In this example, users can <strong>drag and drop local MP3 files</strong> into the player container.</p>
+
+      <h2>Code Files Required</h2>
+      <p>We need two files to build a custom HTML audio player with visualizer:</p>
+      <ul>
+        <li>An <strong>HTML file</strong> to define the structure.</li>
+        <li>A <strong>JavaScript file</strong> to handle audio processing and visualization.</li>
+      </ul>
+
+      <h2>1. HTML File</h2>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="container"&gt;
+      &lt;div id="canvas-container"&gt;
+         &lt;canvas width="600" height="300" id="canvas"&gt;&lt;/canvas&gt;
+         &lt;canvas width="600" height="300" id="canvas-copy"&gt;&lt;/canvas&gt;
+      &lt;/div&gt;
+      &lt;div id="instructions"&gt;
+         &lt;a href="https://www.tutorialspoint.com/index.htm"&gt;Tutorials Point&lt;/a&gt;
+         &lt;h2&gt;Drag Your Local MP3 Files&lt;/h2&gt;
+      &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;script src="js.html"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>2. JavaScript File</h2>
+      <pre><code>(function() {
+   var requestAnimationFrame = 
+      window.requestAnimationFrame || 
+      window.mozRequestAnimationFrame || 
+      window.webkitRequestAnimationFrame || 
+      window.msRequestAnimationFrame;
+   window.requestAnimationFrame = requestAnimationFrame;
+})();
+
+window.onload = function() {
+   var element = document.getElementById('container');
+   dropAndLoad(element, init, "ArrayBuffer");
+}
+
+function dropAndLoad(dropElement, callback, readFormat) {
+   dropElement.addEventListener('dragover', function(e) {
+      e.preventDefault();
+   }, false);
+
+   dropElement.addEventListener('drop', function(e) {
+      e.preventDefault();
+      loadFile(e.dataTransfer.files[0]);
+   }, false);
+
+   function loadFile(file) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+         callback(e.target.result);
+      }
+      reader['readAs' + readFormat](file);
+   }
+}
+
+function init(arrayBuffer) {
+   document.getElementById('instructions').innerHTML = 'Audio Loading';
+   var audioCtx = new AudioContext();
+   var analyser = audioCtx.createAnalyser();
+   audioCtx.decodeAudioData(arrayBuffer, function(buffer) {
+      var source = audioCtx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+      source.start(0);
+
+      var viz = new simpleViz();
+      new visualizer(viz.update, analyser);
+      document.getElementById('instructions').innerHTML = '';
+   });
+}
+
+function visualizer(visualization, analyser) {
+   function loop() {
+      var byteFreq = new Uint8Array(analyser.frequencyBinCount);
+      analyser.getByteFrequencyData(byteFreq);
+      visualization(byteFreq);
+      requestAnimationFrame(loop);
+   }
+   requestAnimationFrame(loop);
+}
+
+function simpleViz() {
+   var canvas = document.getElementById('canvas');
+   var ctx = canvas.getContext("2d");
+   var copyCtx = document.getElementById('canvas-copy').getContext("2d");
+   var barWidth = 10, barGap = 4;
+   var bars = Math.floor(canvas.width / (barWidth + barGap));
+
+   this.update = function(byteFreq) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      var step = Math.floor(byteFreq.length / bars);
+      for (var i = 0; i &lt; bars; i++) {
+         var barHeight = byteFreq[i * step];
+         ctx.fillRect(i * (barWidth + barGap), canvas.height - barHeight, barWidth, barHeight);
+         copyCtx.clearRect(0, 0, canvas.width, canvas.height);
+         copyCtx.drawImage(canvas, 0, 0);
+      }
+   }
+}
+</code></pre>
+
+      <h2>Complete Audio Player</h2>
+      <p>When combined, the above HTML and JavaScript files create an audio player with a bar visualizer. Dragging a local MP3 file into the container will play it with a synchronized visual effect.</p>
+
+      <h2>HTML Audio Player with Playlist</h2>
+      <p>We can extend the functionality by allowing multiple MP3 uploads to form a playlist:</p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;audio controls id="player" autoplay&gt;&lt;/audio&gt;
+   &lt;input type="file" id="fileInput" multiple&gt;
+
+   &lt;script&gt;
+      var fileInput = document.getElementById("fileInput"),
+          player = document.getElementById("player"),
+          index = 0, files;
+
+      function playNext(n) {
+         var url = URL.createObjectURL(files[n]);
+         player.src = url;
+         player.play();
+      }
+
+      fileInput.addEventListener('change', function() {
+         files = fileInput.files;
+         if (files.length) playNext(index);
+      });
+
+      player.addEventListener("ended", function() {
+         index++;
+         if (index &lt; files.length) playNext(index);
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <p>This example allows users to upload multiple MP3s, which then play automatically as a playlist.</p>
+
+    </div>
+  </div>
+</div>

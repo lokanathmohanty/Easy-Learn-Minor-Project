@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Special Data Types: $\text{Resource}$ and $\text{NULL}$</h1>
+
+        <div class="content">
+            <p>PHP classifies two data types as **special types**: $\text{resource}$ and $\text{NULL}$. These types serve specific roles outside the standard scalar and compound types.</p>
+
+            <hr>
+
+            <h2 class="title">1. $\text{Resource}$ Type ⚙️</h2>
+            <p>The $\text{resource}$ type is a special variable that holds a reference to an **external resource** managed outside of PHP, such as a database connection, an open file stream, or a network socket.</p>
+
+            <h3>Creation and Management</h3>
+            <ul>
+                <li><strong>Creation:</strong> Resources are created by specific built-in PHP functions (e.g., $\text{fopen()}$ for a file, $\text{curl\_init()}$ for a cURL session).</li>
+                <li><strong>Reference Counting:</strong> PHP's **Zend engine** uses a **reference counting system**. When the reference count for a resource drops to zero (meaning no variables point to it), the resource is automatically cleaned up by the **garbage collector** and the memory is freed, often calling an implicit close function (like $\text{fclose()}$ for a file). Manual freeing is generally not required.</li>
+            </ul>
+
+            <h3>Resource Inspection Functions</h3>
+            <ul>
+                <li>$\text{get\_resource\_type(resource \$handle): string}$: Returns a string identifying the type of the resource (e.g., $\text{'stream'}$ for a file handle).</li>
+                <li>$\text{get\_resource\_id(resource \$resource): int}$: Returns a unique integer identifier for the given resource.</li>
+            </ul>
+
+            <div class="example">
+                <p>Example of resource inspection:</p>
+                <pre>&lt;?php
+   $fp = fopen("somefile.txt", "r");
+   echo "Type: " . get_resource_type($fp); // Output: Type: stream
+   echo " ID: " . get_resource_id($fp);    // Output: ID: 5 (ID is variable)
+?&gt;</pre>
+            </div>
+
+            <hr>
+
+            <h2 class="title">2. $\text{NULL}$ Type 🚫</h2>
+            <p>The $\text{NULL}$ type signifies a variable that has **no value**. It is case-insensitive, but convention dictates using uppercase ($\text{NULL}$).</p>
+
+            <h3>Conditions for $\text{NULL}$</h3>
+            <p>A variable is considered $\text{NULL}$ if:</p>
+            <ul>
+                <li>It has been explicitly assigned the value $\text{NULL}$.</li>
+                <li>It has not been assigned a value yet.</li>
+                <li>It has been **unset** using the $\text{unset()}$ function.</li>
+            </ul>
+
+            <h3>$\text{NULL}$ Behavior in Casting</h3>
+            <p>When a $\text{NULL}$ variable is cast to a primary type, it behaves as follows:</p>
+            <ul>
+                <li>Casting to $\text{(int)}$ or $\text{(float)}$ results in **0** (zero).</li>
+                <li>Casting to $\text{(bool)}$ or $\text{(boolean)}$ results in **$\text{false}$**.</li>
+            </ul>
+            <pre>
+&lt;?php
+   $var = NULL;
+   var_dump((int) $var);    // Output: int(0)
+   var_dump((bool) $var);   // Output: bool(false)
+?&gt;</pre>
+        </div>
+    </div>
+</div>

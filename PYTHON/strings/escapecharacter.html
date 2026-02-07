@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Escape Characters</h1>
+    <div class="content">
+      <h2>Escape Character</h2>
+      <p>An escape character is a character followed by a backslash (<code>\</code>). It signals the interpreter that the following character or sequence has a special meaning. For example, <code>\n</code> represents a newline character.</p>
+
+      <p>Unless an <code>r</code> or <code>R</code> prefix is used, escape sequences in strings are interpreted according to rules similar to those used in C. Strings prefixed with <code>r</code> or <code>R</code> are considered <strong>raw strings</strong>, where escape characters are not processed.</p>
+
+      <h3>Example: Normal vs Raw String</h3>
+      <pre><code># normal string
+normal = "Hello"
+print(normal)
+
+# raw string
+raw = r"Hello"
+print(raw)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Hello
+Hello</code></pre>
+
+      <h3>Example with Escape Character</h3>
+      <pre><code>normal = "Hello\nWorld"
+print(normal)
+
+raw = r"Hello\nWorld"
+print(raw)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Hello
+World
+Hello\nWorld</code></pre>
+
+      <h2>Escape Characters in Python</h2>
+      <ul>
+        <li><code>\<newline></code> → Backslash and newline ignored</li>
+        <li><code>\\</code> → Backslash</li>
+        <li><code>\'</code> → Single quote</li>
+        <li><code>\"</code> → Double quote</li>
+        <li><code>\a</code> → ASCII Bell</li>
+        <li><code>\b</code> → ASCII Backspace</li>
+        <li><code>\f</code> → ASCII Formfeed</li>
+        <li><code>\n</code> → Newline</li>
+        <li><code>\r</code> → Carriage Return</li>
+        <li><code>\t</code> → Horizontal Tab</li>
+        <li><code>\v</code> → Vertical Tab</li>
+        <li><code>\ooo</code> → Character with octal value</li>
+        <li><code>\xhh</code> → Character with hexadecimal value</li>
+      </ul>
+
+      <h2>Escape Characters Example</h2>
+      <pre><code># ignore \
+s = 'This string will not include \
+backslashes or newline characters.'
+print(s)
+
+# escape backslash
+s = 'The \\character is called backslash'
+print(s)
+
+# escape single quote
+s = 'Hello \'Python\''
+print(s)
+
+# escape double quote
+s = "Hello \"Python\""
+print(s)
+
+# escape \b to generate ASCII backspace
+s = 'Hel\blo'
+print(s)
+
+# ASCII Bell character
+s = 'Hello\a'
+print(s)
+
+# newline
+s = 'Hello\nPython'
+print(s)
+
+# Horizontal tab
+s = 'Hello\tPython'
+print(s)
+
+# form feed
+s = "hello\fworld"
+print(s)
+
+# Octal notation
+s = "\101"
+print(s)
+
+# Hexadecimal notation
+s = "\x41"
+print(s)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>This string will not include backslashes or newline characters.
+The \character is called backslash
+Hello 'Python'
+Hello "Python"
+Helo
+Hello
+Hello
+Python
+Hello Python
+hello
+world
+A
+A</code></pre>
+    </div>
+  </div>
+</div>

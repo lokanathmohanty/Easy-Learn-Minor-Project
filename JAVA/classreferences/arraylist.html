@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>ArrayList</code> Class Summary 📏🔗</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.ArrayList</code>** class is the most common implementation of the **<code>List</code>** interface in Java. It provides a **resizable-array** implementation, which means it behaves like a standard array but can grow or shrink dynamically as elements are added or removed.</p>
+
+            <h2 class="title">I. Core Characteristics and Performance</h2>
+            <p><code>ArrayList</code> is a general-purpose, non-synchronized list with distinct performance characteristics:</p>
+            <ul>
+                <li>
+                    <strong>Dynamic Array:</strong> Unlike native Java arrays (which have a fixed size), <code>ArrayList</code> automatically manages its internal array storage. When the internal capacity is exceeded, a new, larger array is created, and all elements are copied over—this resizing operation is expensive ($O(n)$).
+                </li>
+                <li>
+                    <strong>Random Access:</strong> It implements the **<code>RandomAccess</code>** marker interface. Accessing an element by index using **<code>get(index)</code>** is extremely fast (constant time, $O(1)$).
+                </li>
+                <li>
+                    <strong>Insertions/Deletions:</strong> Adding or removing an element at the **end** of the list is fast ($O(1)$ amortized). However, inserting or removing an element from the **middle** of the list requires shifting all subsequent elements, resulting in slow, linear time performance ($O(n)$).
+                </li>
+                <li>
+                    <strong>Non-Synchronized:</strong> <code>ArrayList</code> is **not thread-safe**. If multiple threads access it concurrently, external synchronization is required. (For a thread-safe alternative, use **<code>Vector</code>** or **<code>Collections.synchronizedList(new ArrayList(...))</code>**).
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Constructors and Capacity Management</h2>
+            <ul class="example">
+                <li>
+                    **<code>ArrayList()</code>:** Creates an empty list with a default initial capacity (usually sufficient for **10 elements**).
+                </li>
+                <li>
+                    **<code>ArrayList(int initialCapacity)</code>:** Recommended when the approximate size is known, as it avoids initial resizing costs.
+                </li>
+                <li>
+                    **<code>void ensureCapacity(int minCapacity)</code>:** Allows a developer to manually increase the internal capacity, preventing resizing overheads during batch element additions.
+                </li>
+                <li>
+                    **<code>void trimToSize()</code>:** Reduces the internal array's capacity to the list's current size, minimizing memory usage after many deletions.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Demonstration of Operations</h2>
+            <p>The example illustrates the ease of adding and removing elements, a core feature of the dynamic nature of <code>ArrayList</code>.</p>
+            <div class="example">
+                <p><strong>Code Analysis:</strong></p>
+                <pre><code>// Initial size: 0 (capacity is 10)
+ArrayList al = new ArrayList(); 
+
+al.add("C"); 
+al.add(1, "A2"); // Fast, as insertion is near the start
+// Contents: [C, A2, A, E, B, D, F]
+
+al.remove("F"); // Removes element "F"
+al.remove(2);   // Removes the element at index 2 (which is "A")
+
+// Final Contents: [C, A2, E, B, D]
+// Size after deletions: 5</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

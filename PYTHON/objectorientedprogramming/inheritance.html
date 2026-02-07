@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Inheritance</h1>
+    <div class="content">
+      <p>Inheritance is a key feature of object-oriented programming that enables a class (child or subclass) to inherit properties and behaviors from another class (parent or base class). It allows code reuse and models real-world relationships.</p>
+      
+      <h2 class="title">Basic Syntax</h2>
+      <p><strong>Parent (Base) class:</strong></p>
+      <pre><code>class ParentClass:
+    # class body</code></pre>
+      <p><strong>Child (Derived) class:</strong></p>
+      <pre><code>class ChildClass(ParentClass):
+    # class body</code></pre>
+      
+      <h2 class="title">Types of Inheritance in Python</h2>
+      <ul>
+        <li>Single Inheritance</li>
+        <li>Multiple Inheritance</li>
+        <li>Multilevel Inheritance</li>
+        <li>Hierarchical Inheritance</li>
+        <li>Hybrid Inheritance</li>
+      </ul>
+      
+      <h2 class="title">Single Inheritance Example</h2>
+      <pre><code>class Parent:
+    def parent_method(self):
+        print("Calling parent method")
+
+class Child(Parent):
+    def child_method(self):
+        print("Calling child method")
+
+c = Child()
+c.child_method()
+c.parent_method()</code></pre>
+      <p>Output:<br>Calling child method<br>Calling parent method</p>
+      
+      <h2 class="title">Multiple Inheritance Example</h2>
+      <pre><code>class Division:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+    
+    def divide(self):
+        return self.a / self.b
+
+class Modulus:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+    
+    def modulus(self):
+        return self.a % self.b
+
+class DivMod(Division, Modulus):
+    def __init__(self, a, b):
+        Division.__init__(self, a, b)
+        Modulus.__init__(self, a, b)
+    
+    def div_and_mod(self):
+        return (self.divide(), self.modulus())
+
+dm = DivMod(10, 3)
+print("Divide:", dm.divide())
+print("Modulus:", dm.modulus())
+print("Div and Mod:", dm.div_and_mod())</code></pre>
+      <p>Output:<br>Divide: 3.3333333333333335<br>Modulus: 1<br>Div and Mod: (3.3333333333333335, 1)</p>
+      
+      <h2 class="title">Method Resolution Order (MRO)</h2>
+      <p>MRO defines the order Python follows to look for methods in multiple inheritance. It starts from the child class, then parents in order, then base classes, following the C3 linearization algorithm.</p>
+      <pre><code>print(DivMod.mro())
+# Output: [DivMod, Division, Modulus, object]</code></pre>
+      
+      <h2 class="title">Multilevel Inheritance Example</h2>
+      <pre><code>class Universe:
+    def universe_method(self):
+        print("In Universe")
+
+class Earth(Universe):
+    def earth_method(self):
+        print("On Earth")
+
+class India(Earth):
+    def india_method(self):
+        print("In India")
+
+i = India()
+i.universe_method()
+i.earth_method()
+i.india_method()</code></pre>
+      <p>Output:<br>In Universe<br>On Earth<br>In India</p>
+      
+      <h2 class="title">Hierarchical Inheritance Example</h2>
+      <pre><code>class Manager:
+    def manager_method(self):
+        print("Manager here")
+
+class Employee1(Manager):
+    def employee1_method(self):
+        print("Employee1 here")
+
+class Employee2(Manager):
+    def employee2_method(self):
+        print("Employee2 here")
+
+e1 = Employee1()
+e2 = Employee2()
+
+e1.manager_method()
+e1.employee1_method()
+e2.manager_method()
+e2.employee2_method()</code></pre>
+      <p>Output:<br>Manager here<br>Employee1 here<br>Manager here<br>Employee2 here</p>
+      
+      <h2 class="title">Hybrid Inheritance Example</h2>
+      <pre><code>class CEO:
+    def ceo_method(self):
+        print("CEO here")
+
+class Manager(CEO):
+    def manager_method(self):
+        print("Manager here")
+
+class Employee1(Manager):
+    def employee1_method(self):
+        print("Employee1 here")
+
+class Employee2(Manager, CEO):
+    def employee2_method(self):
+        print("Employee2 here")
+
+e2 = Employee2()
+e2.manager_method()
+e2.ceo_method()
+e2.employee2_method()</code></pre>
+      <p>Output:<br>Manager here<br>CEO here<br>Employee2 here</p>
+      
+      <h2 class="title">Using super() in Inheritance</h2>
+      <pre><code>class Parent:
+    def __init__(self, msg):
+        self.msg = msg
+    
+    def show(self):
+        print(self.msg)
+
+class Child(Parent):
+    def __init__(self, msg):
+        super().__init__(msg)
+
+c = Child("Welcome!")
+c.show()</code></pre>
+      <p>Output:<br>Welcome!</p>
+    </div>
+  </div>
+</div>

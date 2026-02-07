@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask and HTTP Methods: Handling Form Data 💻</h1>
+        <div class="content">
+            <p>The **HTTP protocol** defines various methods for client-server communication, which form the foundation of the web. By default, Flask routes only accept **<code>GET</code>** requests, but you can explicitly specify the allowed methods using the <code>methods</code> argument in the <code>@app.route()</code> decorator.</p>
+
+            <h2>Summary of Key HTTP Methods</h2>
+            <ul>
+                <li>**<code>GET</code>:** Used for **data retrieval**. Sends data unencrypted, typically via URL parameters (query string). This is the most common method.</li>
+                <li>**<code>POST</code>:** Used to **submit data** (like HTML form data) to be processed to a specified resource. Data is sent in the request body and is generally not cached.</li>
+                <li>**<code>HEAD</code>:** Identical to <code>GET</code>, but the server does not return a response body; useful for checking resource existence or metadata.</li>
+                <li>**<code>PUT</code>:** Used to **replace** a target resource's current representation with the uploaded content.</li>
+                <li>**<code>DELETE</code>:** Used to **remove** a target resource given by a URL.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Example: Conditional Handling of POST and GET</h2>
+        <div class="content example">
+            <p>The example demonstrates how the Flask **<code>request</code>** object is used to process data submitted via a form, determining whether the data arrived through a **<code>POST</code>** or **<code>GET</code>** request.</p>
+
+            <h3>The Flask <code>login()</code> Function</h3>
+            <p>The route <code>/login</code> is configured to handle both <code>POST</code> and <code>GET</code> methods:</p>
+            <p><code>@app.route('/login',methods = ['POST', 'GET'])</code></p>
+            <p>Inside the <code>login()</code> function, the **<code>request.method</code>** attribute is checked to dictate how the submitted data is retrieved:</p>
+
+            <h4>Data Retrieval Logic:</h4>
+            <ul>
+                <li>**If <code>POST</code> (Form Submission):**
+                    <p>The data (e.g., <code>nm</code>) is retrieved from the request body using the **<code>request.form</code>** dictionary (e.g., <code>user = request.form['nm']</code>).</p>
+                    <p>This happens when the form is submitted with <code>method = "post"</code>.</p>
+                </li>
+                <li>**If <code>GET</code> (URL Query String):**
+                    <p>The data (e.g., <code>nm</code>) is retrieved from the URL query parameters using the **<code>request.args</code>** dictionary (e.g., <code>user = request.args.get('nm')</code>).</p>
+                    <p>This happens when the form is submitted with <code>method = "get"</code>.</p>
+                </li>
+            </ul>
+            <p>In both cases, the application uses **<code>redirect(url_for('success', name = user))</code>** to pass the retrieved user name to the <code>/success/&lt;name&gt;</code> route, which then displays the welcome message.</p>
+        </div>
+    </div>
+</div>

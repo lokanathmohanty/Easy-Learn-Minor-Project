@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Variable Scope</h1>
+
+    <div class="content">
+      <p>
+        The **scope** of a variable in PHP is the context within which it is defined and accessible. PHP defines several variable scope types, the most crucial distinction being between variables inside and outside a function.
+      </p>
+
+      <h2>Variable Scope Types</h2>
+      
+      <h3>1. Local Variables</h3>
+      <p>
+        A variable declared **inside a function** has a **local scope**. It can only be accessed and manipulated within that function. When the function finishes execution, the variable is destroyed.
+      </p>
+      <div class="example">
+        <p>
+          <code>function myfunction() {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$local_var = "Hello"; // Local Scope</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo $local_var;</code><br>
+          <code>}</code><br>
+          <code>// Trying to access $local_var here results in an error.</code>
+        </p>
+      </div>
+
+      <h3>2. Global Variables</h3>
+      <p>
+        A variable declared **outside a function** has a **global scope**. It can be accessed throughout the script (outside of functions), but it is **not automatically available** inside any function's local scope.
+      </p>
+      
+      <h4>The `global` Keyword</h4>
+      <p>
+        To access and modify a global variable from within a function, you must explicitly declare it inside the function using the **`global`** keyword.
+      </p>
+      <div class="example">
+        <p>
+          <code>$a = 10; // Global variable</code><br>
+          <code>function myfunction() {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;**global $a;** // Makes the global $a accessible</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$a = $a + 10; // Modifies the global variable</code><br>
+          <code>}</code><br>
+          <code>myfunction();</code><br>
+          <code>echo $a; // Output: 20</code>
+        </p>
+      </div>
+
+      <h4>The `$GLOBALS` Array (Superglobal)</h4>
+      <p>
+        PHP stores all global variables in a special associative array called **`$GLOBALS`**. The variable name is the key, and its value is the array's value. This array is always available inside functions without the need for the `global` keyword.
+      </p>
+      <div class="example">
+        <p>
+          <code>$a = 10;</code><br>
+          <code>function myfunction() {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$GLOBALS['a'] += 10; // Accesses and modifies the global $a</code><br>
+          <code>}</code><br>
+          <code>myfunction();</code><br>
+          <code>echo $a; // Output: 20</code>
+        </p>
+      </div>
+
+      <h3>3. Static Variables</h3>
+      <p>
+        A variable declared inside a function with the **`static`** keyword is only initialized once (on the first call). It retains its last assigned value between function calls, unlike regular local variables, which are destroyed upon function exit.
+      </p>
+      <div class="example">
+        <p>
+          <code>function myfunction() {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;**static $x = 0;** // Initialized once</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "x = $x \n";</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$x++;</code><br>
+          <code>}</code><br>
+          <code>myfunction(); // Output: x = 0</code><br>
+          <code>myfunction(); // Output: x = 1 (Retains value from previous call)</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

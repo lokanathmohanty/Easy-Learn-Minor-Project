@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Strings: C-Style vs. <code>std::string</code> 📝</h1>
+
+        <div class="content">
+            <p>C++ supports two primary types of string representations, each with different mechanisms and capabilities:</p>
+            <ol>
+                <li>The **C-style character string** (null-terminated character array).</li>
+                <li>The **<code>std::string</code> class type** (part of the Standard C++ Library).</li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">1. The C-Style Character String</h2>
+            <p>Originating from C, this string type is a **one-dimensional array of characters** that must be explicitly or implicitly terminated by a **null character** (`'\0'`). The length of the array must be at least one greater than the number of visible characters.</p>
+
+            <h3>Declaration:</h3>
+            <pre class="example">char greeting[6] = {'H', 'e', 'l', 'l', 'o', '\0'};</pre>
+            <p>Or, more commonly, letting the compiler handle the size and null terminator:</p>
+            <pre class="example">char greeting[] = "Hello";</pre>
+
+            <h3>C-Style String Functions (from <code>&lt;cstring&gt;</code>/<code>&lt;string.h&gt;</code>)</h3>
+            <p>These functions operate directly on null-terminated character arrays. **Caution:** Many of these functions do not check array bounds, which can lead to buffer overflow vulnerabilities.</p>
+            <table>
+                <thead>
+                    <tr><th>Function</th><th>Purpose</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>strcpy(s1, s2)</code></td><td>Copies string <code>s2</code> into string <code>s1</code>.</td></tr>
+                    <tr><td><code>strcat(s1, s2)</code></td><td>Concatenates string <code>s2</code> onto the end of <code>s1</code>.</td></tr>
+                    <tr><td><code>strlen(s1)</code></td><td>Returns the length of string <code>s1</code> (excluding the <code>'\0'</code>).</td></tr>
+                    <tr><td><code>strcmp(s1, s2)</code></td><td>Compares strings lexicographically.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">2. The <code>std::string</code> Class</h2>
+            <p>This is the preferred and modern way to handle strings in C++. It is an object type defined in the **<code>&lt;string&gt;</code>** header file and offers dynamic memory management and powerful member functions, abstracting away the need for manual null termination and buffer sizing.</p>
+
+            <h3>Declaration and Operations:</h3>
+            <pre class="example">
+string str1 = "Hello";
+string str2 = "World";
+
+// Concatenation using the overloaded '+' operator:
+string str3 = str1 + str2; // Result: "HelloWorld"
+
+// Assignment using the overloaded '=' operator:
+str3 = str1; // Result: "Hello"
+</pre>
+
+            <h3>Essential <code>std::string</code> Member Functions:</h3>
+            <table>
+                <thead>
+                    <tr><th>Function</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>length()</code> / <code>size()</code></td><td>Returns the number of characters in the string.</td></tr>
+                    <tr><td><code>append(str)</code></td><td>Concatenates the given string to the end.</td></tr>
+                    <tr><td><code>push_back(char)</code></td><td>Adds a single character to the end.</td></tr>
+                    <tr><td><code>find()</code></td><td>Searches for a substring and returns the starting position.</td></tr>
+                    <tr><td><code>substr()</code></td><td>Returns a substring based on starting index and length.</td></tr>
+                    <tr><td><code>compare(str)</code></td><td>Compares the string with another string.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Input and Traversal Methods</h2>
+
+            <h3>String Input Methods</h3>
+            <ul>
+                <li>
+                    **<code>cin &gt;&gt; s;</code>:** Reads input only until the first whitespace (space, tab, newline) is encountered.
+                </li>
+                <li>
+                    **<code>getline(cin, s);</code>:** **Reads an entire line** of input, including spaces, until a newline character is encountered. This is generally preferred for reading user input sentences.
+                </li>
+                <li>
+                    **<code>stringstream</code>:** Used to treat a string as an input stream, allowing you to easily extract words or tokens from it.
+                </li>
+            </ul>
+
+            <h3>Traversing (Iterating) a String</h3>
+            <p>Characters in an <code>std::string</code> can be accessed or modified like an array element using its index (<code>s[i]</code>), or using loops:</p>
+            <ul>
+                <li>
+                    **Traditional <code>for</code> Loop:** Accesses characters by index:
+                    <pre class="example">for (int i = 0; i &lt; s.length(); i++) { /* use s[i] */ }</pre>
+                </li>
+                <li>
+                    **Range-Based <code>for</code> Loop (Foreach):** Iterates over the characters directly, often using a reference (<code>&amp;c</code>) to allow modification:
+                    <pre class="example">for (char&amp; c : s) { c = 'B'; }</pre>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

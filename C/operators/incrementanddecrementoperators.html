@@ -1,0 +1,152 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Increment and Decrement Operators in C</h1>
+    <div class="content">
+      <p>The increment operator (<code>++</code>) increases the value of a variable by 1, while the decrement operator (<code>--</code>) decreases the value by 1. These unary operators can be used as a prefix or postfix.</p>
+
+      <h2>Basic Example</h2>
+      <p>The following example shows the use of increment and decrement operators with different variations:</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 5, b = 5, c = 5, d = 5;
+  
+  a++; // postfix increment
+  ++b; // prefix increment
+  c--; // postfix decrement
+  --d; // prefix decrement
+
+  printf("a = %d\n", a);
+  printf("b = %d\n", b);
+  printf("c = %d\n", c);
+  printf("d = %d\n", d);
+
+  return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>a = 6<br>b = 6<br>c = 4<br>d = 4</p>
+
+      <h2>Prefix vs Postfix Increment</h2>
+      <p>The prefix increment operator increases the value before using it, while the postfix increment increases the value after using it.</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int x = 10;
+
+  int y = 10 + ++x;  // prefix increment
+  printf("x = %d, y = %d\n", x, y);
+
+  y = 10 + x++;      // postfix increment
+  printf("x = %d, y = %d\n", x, y);
+
+  return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>x = 11, y = 21<br>x = 12, y = 21</p>
+
+      <h2>Prefix vs Postfix Decrement</h2>
+      <p>The prefix decrement operator decreases the value before using it, while the postfix decrement decreases the value after using it.</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int x = 10;
+
+  int y = 10 + --x;  // prefix decrement
+  printf("x = %d, y = %d\n", x, y);
+
+  y = 10 + x--;      // postfix decrement
+  printf("x = %d, y = %d\n", x, y);
+
+  return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>x = 9, y = 19<br>x = 8, y = 19</p>
+
+      <h2>More Examples</h2>
+      <p>The following example demonstrates prefix and postfix increments and decrements with char and int types:</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+  char a = 'a', b = 'M';
+  int x = 5, y = 23;
+
+  printf("a: %c b: %c\n", a, b);
+  a++;
+  printf("postfix increment a: %c\n", a);
+
+  ++b;
+  printf("prefix increment b: %c\n", b);
+
+  printf("x: %d y: %d\n", x, y);
+  x--;
+  printf("postfix decrement x: %d\n", x);
+
+  --y;
+  printf("prefix decrement y: %d\n", y);
+
+  return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>a: a b: M<br>postfix increment a: b<br>prefix increment b: N<br>x: 5 y: 23<br>postfix decrement x: 4<br>prefix decrement y: 22</p>
+
+      <h2>Operator Precedence</h2>
+      <p>Postfix increment and decrement have higher precedence than prefix versions. Assignment operator has lower precedence than prefix increment.</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int x = 5, z;
+
+  z = x++;
+  printf("x: %d z: %d\n", x, z);
+
+  int y = 5;
+  z = ++y;
+  printf("y: %d z: %d\n", y, z);
+
+  return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>x: 6 z: 5<br>y: 6 z: 6</p>
+
+      <h2>Multiple Operators in Expression</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int x = 5, y = 5, z;
+
+  z = x++ + ++y;
+  printf("x: %d y: %d z: %d\n", x, y, z);
+
+  return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>x: 6 y: 6 z: 11</p>
+
+      <h2>Using Increment in Loop</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+  for (int x = 1; x &lt;= 5; x++) {
+    printf("x: %d\n", x);
+  }
+  return 0;
+}
+      </pre>
+      <p>Output:</p>
+      <p>x: 1<br>x: 2<br>x: 3<br>x: 4<br>x: 5</p>
+    </div>
+  </div>
+</div>

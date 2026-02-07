@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Join Tuples</h1>
+    <div class="content">
+      <p>Joining tuples in Python means combining elements from multiple tuples into a single new tuple without modifying the original tuples.</p>
+
+      <h2 class="title">Joining Tuples Using Concatenation (+) Operator</h2>
+      <p>The <code>+</code> operator joins two or more tuples to form a new tuple.</p>
+      <pre><code># Example
+T1 = (10, 20, 30, 40)
+T2 = ('one', 'two', 'three', 'four')
+joined_tuple = T1 + T2
+print("Joined Tuple:", joined_tuple)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>Joined Tuple: (10, 20, 30, 40, 'one', 'two', 'three', 'four')</code></pre>
+
+      <h2 class="title">Joining Tuples Using List Comprehension</h2>
+      <p>Using list comprehension to iterate over tuples and merge the elements into a list which can also represent joined tuples.</p>
+      <pre><code># Example
+T1 = (36, 24, 3)
+T2 = (84, 5, 81)
+joined_tuple = [item for subtuple in [T1, T2] for item in subtuple]
+print("Joined Tuple:", joined_tuple)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>Joined Tuple: [36, 24, 3, 84, 5, 81]</code></pre>
+
+      <h2 class="title">Joining Tuples Using extend() Function</h2>
+      <p>The <code>extend()</code> function works with lists, so convert tuples to lists, extend, then convert back to tuple.</p>
+      <pre><code># Example
+T1 = (10, 20, 30, 40)
+T2 = ('one', 'two', 'three', 'four')
+L1 = list(T1)
+L2 = list(T2)
+L1.extend(L2)
+T1 = tuple(L1)
+print("Joined Tuple:", T1)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>Joined Tuple: (10, 20, 30, 40, 'one', 'two', 'three', 'four')</code></pre>
+
+      <h2 class="title">Join Tuples Using sum() Function</h2>
+      <p>The <code>sum()</code> function can join tuples by concatenating elements if the tuples contain numeric elements.</p>
+      <pre><code># Example
+T1 = (10, 20, 30, 40)
+T2 = ('one', 'two', 'three', 'four')
+T3 = sum((T1, T2), ())
+print("Joined Tuple:", T3)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>Joined Tuple: (10, 20, 30, 40, 'one', 'two', 'three', 'four')</code></pre>
+
+      <h2 class="title">Joining Tuples Using for Loop</h2>
+      <p>Iterate over one tuple and append each element to another tuple using the <code>+=</code> operator within a loop.</p>
+      <pre><code># Example
+T1 = (10, 20, 30, 40)
+T2 = ('one', 'two', 'three', 'four')
+for t in T2:
+    T1 += (t,)
+print(T1)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>(10, 20, 30, 40, 'one', 'two', 'three', 'four')</code></pre>
+    </div>
+  </div>
+</div>

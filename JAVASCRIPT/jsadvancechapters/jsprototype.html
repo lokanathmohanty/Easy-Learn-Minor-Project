@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="session" data-session-id="js-prototype">
+    <h1 class="title">JavaScript - Prototype</h1>
+
+    <div class="content">
+      <p>Prototype is like a template in JavaScript. These templates help objects share properties and methods. Instead of duplicating code everywhere, we can define a method or property once and then share it with other instances of an object.</p>
+    </div>
+
+    <div class="content">
+      <h2>Types of Prototype in JavaScript</h2>
+      <p>In JavaScript, there are several types of prototypes used to share properties and methods among objects. The main types are:</p>
+      <ul>
+        <li>Object Prototype</li>
+        <li>Constructor Function Prototype</li>
+        <li>Function Prototype</li>
+        <li>Built-in Prototype</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Object Prototype</h2>
+      <p>The object prototype is the foundational template for all objects in JavaScript. This template is available in every object by default. It is like a built-in sheet of tools that every object can use.</p>
+
+      <h3>Code Snippet</h3>
+      <pre>
+let obj = {
+   name: "John",
+   age: 21
+};
+console.log(obj);
+console.log(obj.toString());  // [object Object]
+      </pre>
+
+      <h3>Output</h3>
+      <pre>
+{ name: 'Ansh', age: 24 }
+      </pre>
+
+      <p>In the above example, we created an object <code>obj</code> with properties <code>name</code> and <code>age</code>. We also used <code>toString()</code>, which is available by default from the object prototype.</p>
+    </div>
+
+    <div class="content">
+      <h2>Constructor Function Prototype</h2>
+      <p>A constructor function is a type of function used to create new objects. When we need to create multiple objects with the same properties and behaviors, we can use a constructor function. The constructor function prototype is used to share properties and methods among all objects created using that constructor.</p>
+
+      <h3>Code Snippet</h3>
+      <pre>
+function Person(name, age) {
+   this.name = name;
+   this.age = age;
+}
+Person.prototype.greet = function() {
+   return "Hello, " + this.name;
+}
+let person1 = new Person("John", 21);
+let person2 = new Person("Ansh", 24);
+      </pre>
+
+      <h3>Output</h3>
+      <pre>
+Hello, John
+Hello, Ansh
+      </pre>
+
+      <p>In the above example, we created a constructor function named <code>Person</code>. We added a method <code>greet</code> to the prototype of <code>Person</code>. Then we created two objects <code>person1</code> and <code>person2</code>, both of which could call the shared <code>greet()</code> method.</p>
+    </div>
+
+    <div class="content">
+      <h2>Function Prototype</h2>
+      <p>The function prototype is a template available to all functions in JavaScript. This prototype can be used to share properties and methods among functions.</p>
+
+      <h3>Code Snippet</h3>
+      <pre>
+function greet() {
+   return "Hello, World!";
+}
+console.log(greet.toString());  
+// function greet() { return "Hello, World!"; }
+      </pre>
+
+      <h3>Output</h3>
+      <pre>
+function greet() { return "Hello, World!"; }
+      </pre>
+
+      <p>In this example, we created a function named <code>greet</code>. We then used <code>toString()</code>, which is available by default in the function prototype.</p>
+    </div>
+
+    <div class="content">
+      <h2>Built-in Prototype</h2>
+      <p>JavaScript has many built-in objects such as <code>Array</code>, <code>String</code>, and <code>Number</code>. These built-in objects have their own prototypes, which provide useful methods that can be shared across their instances.</p>
+
+      <h3>Code Snippet</h3>
+      <pre>
+let arr = [1, 2, 3, 4, 5];
+
+console.log(arr);
+console.log(arr.toString());  // 1,2,3,4,5
+console.log(arr.join("-"));   // 1-2-3-4-5
+console.log(arr.reverse());   // [5, 4, 3, 2, 1]
+      </pre>
+
+      <h3>Output</h3>
+      <pre>
+[ 1, 2, 3, 4, 5 ]
+1,2,3,4,5
+1-2-3-4-5
+[ 5, 4, 3, 2, 1 ]
+      </pre>
+
+      <p>In this example, we created an array <code>arr</code>. We then used the <code>toString()</code>, <code>join()</code>, and <code>reverse()</code> methods, which are available by default from the array prototype.</p>
+    </div>
+
+    <div class="content">
+      <p>
+        <a href="#prev" class="prev">Previous</a> | 
+        <a href="#next" class="next">Next</a> | 
+        <a href="#toc" class="toc">Table of Contents</a>
+      </p>
+    </div>
+  </div>
+</div>

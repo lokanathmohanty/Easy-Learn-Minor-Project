@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Arrow Functions (PHP 7.4+)</h1>
+
+    <div class="content">
+      <p>
+        **Arrow Functions** (introduced in PHP 7.4) provide a concise, single-expression syntax for writing **Anonymous Functions** (Closures). They are designed for simplicity, making short, one-line callback functions much cleaner and more readable.
+      </p>
+
+      <h2>Syntax and Core Features</h2>
+      <p>
+        Arrow functions replace the `function` keyword with **`fn`** and automatically handle the return value.
+      </p>
+
+      <h3>1. Implicit Return</h3>
+      <p>
+        There is only one expression after the `=>` operator, and its calculated value is **automatically returned** without the need for an explicit `return` statement.
+      </p>
+      <div class="example">
+        <p>
+          **Syntax:** <code>fn (argument_list) **=> expr**</code><br>
+          <br>
+          **Example:**<br>
+          <code>$add = **fn** ($a, $b) **=>** $a + $b;</code>
+        </p>
+      </div>
+
+      <h3>2. Automatic Scope Access (Implicit `use`)</h3>
+      <p>
+        Unlike traditional anonymous functions (which require the `use` keyword), arrow functions **automatically capture variables by value** from the parent scope, allowing them to act as closures without the verbose syntax.
+      </p>
+      <div class="example">
+        <p>
+          <code>$maxmarks = 300;</code><br>
+          <code>$percent = fn ($marks) => $marks * 100 / **$maxmarks**;</code><br>
+          <br>
+          **Implicit Capture:** The `$maxmarks` variable is accessed directly from the parent scope.
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Usage as Callback Functions</h2>
+      <p>
+        Arrow functions are perfectly suited for quick, inline callbacks used in array functions.
+      </p>
+      
+      <h3>Filtering an Array (`array_filter`)</h3>
+      <div class="example">
+        <p>
+          <code>$numbers = [1, 2, 3, 4, 5];</code><br>
+          <code>$evenNumbers = **array_filter**($numbers, **fn($n) => $n % 2 === 0**);</code>
+        </p>
+        <p class="content">
+          The result is `[2, 4]`.
+        </p>
+      </div>
+
+      <h3>Transforming an Array (`array_map`)</h3>
+      <div class="example">
+        <p>
+          <code>$nums = [1, 2, 3];</code><br>
+          <code>$squared = **array_map**(**fn($n) => $n * $n**, $nums);</code>
+        </p>
+        <p class="content">
+          The result is `[1, 4, 9]`.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

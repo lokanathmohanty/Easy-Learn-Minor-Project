@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - require() Function</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        Files with JavaScript code that perform a specific task are called <b>modules</b>. 
+        Modules are self-contained and separated from other parts of code, which makes it easy 
+        to add, remove, and update functionalities without affecting the entire program.
+      </p>
+      <p>
+        If these modules are in separate JavaScript files, you should include them inside the 
+        main JavaScript code. The <code>require()</code> function is one way to do this.
+      </p>
+
+      <h2>How to Run ES and CommonJS Modules</h2>
+      <ul>
+        <li>
+          <b>ES Modules:</b> Use <code>import</code> and <code>export</code> statements. 
+          Most browsers support ES modules natively.
+        </li>
+        <li>
+          <b>CommonJS Modules:</b> By default, Node.js supports the CommonJS format which 
+          uses <code>module.exports</code> to export and <code>require()</code> to import.
+        </li>
+      </ul>
+
+      <h2>JavaScript require() Function</h2>
+      <p>
+        The <code>require()</code> method is a built-in CommonJS function in Node.js. 
+        By default, Node.js treats JavaScript code as CommonJS modules.
+      </p>
+      <p>
+        The function accepts a string parameter specifying the module's path:
+      </p>
+      <ul>
+        <li><b>Core module:</b> If no <code>./</code>, <code>../</code>, or <code>/</code> is present, Node.js assumes it’s a core or <code>node_modules</code> package.</li>
+        <li><b>Local module:</b> Paths starting with <code>./</code> or <code>../</code> are treated as relative/absolute paths.</li>
+        <li><b>Installed module:</b> Modules installed via npm are resolved from <code>node_modules</code>.</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <pre><code>
+const locName = require(locationName);
+      </code></pre>
+
+      <h2>Example: Local Module</h2>
+      <pre><code>
+// utils.js
+const get_full_name = (first_name, last_name) => {
+   return `My full name is ${first_name} ${last_name}`;
+};
+module.exports = get_full_name;
+      </code></pre>
+
+      <pre><code>
+// index.js
+const get_full_name = require('./utils.js');
+console.log(get_full_name('Amit', 'Sharma')); 
+      </code></pre>
+      <p><strong>Output:</strong> My full name is Amit Sharma</p>
+
+      <h2>Example: External Module</h2>
+      <pre><code>
+const myVar = require('http://web-module.location');
+      </code></pre>
+
+      <h2>Difference Between require() & import()</h2>
+      <ul>
+        <li><b>require()</b> can be used anywhere in your code, even conditionally.</li>
+        <li><b>import</b> must always be used at the top of the file and cannot be conditional.</li>
+        <li>Files imported with <code>require()</code> usually have a <code>.js</code> extension.</li>
+        <li>Files imported with <code>import</code> often use the <code>.mjs</code> extension.</li>
+      </ul>
+      <p>
+        In summary, <code>require()</code> is more flexible in Node.js, while 
+        <code>import</code> follows ES module standards and is preferred in modern JavaScript projects.
+      </p>
+    </div>
+  </div>
+</div>

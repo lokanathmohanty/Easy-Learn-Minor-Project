@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">C - Environment Setup</h1>
+    <div class="content">
+
+      <p>To begin programming in C, you need an environment where you can write, compile, and run your C programs. This includes:</p>
+      <ul>
+        <li><strong>A C Compiler</strong></li>
+        <li><strong>A Text Editor</strong></li>
+      </ul>
+
+      <h2 class="subtitle">The C Compiler</h2>
+      <p>C source code is human-readable, but it must be compiled into machine language before it can be executed by your CPU. Popular C compilers include:</p>
+      <ul>
+        <li><strong>GCC (GNU Compiler Collection):</strong> Open-source and supports many platforms (Windows, macOS, Linux).</li>
+        <li><strong>Clang:</strong> Part of the LLVM project, known for speed and optimizations.</li>
+        <li><strong>Microsoft Visual C++:</strong> Proprietary compiler for Windows, integrated with Visual Studio.</li>
+        <li><strong>Turbo C:</strong> Discontinued, once popular in the 1990s.</li>
+      </ul>
+
+      <p>This tutorial uses the <strong>GCC compiler</strong>, which works for both C and C++ programming languages.</p>
+
+      <h3 class="subsection">Installing GCC</h3>
+
+      <h4>On UNIX/Linux</h4>
+      <p>Check if GCC is installed:</p>
+      <pre><code>$ gcc -v</code></pre>
+      <p>If installed, you'll see output similar to:</p>
+      <pre><code>gcc version 11.3.0 (Ubuntu 11.3.0-1ubuntu1~22.04)</code></pre>
+      <p>If not installed, visit <a href="https://gcc.gnu.org/install/" target="_blank">https://gcc.gnu.org/install/</a> for instructions.</p>
+
+      <h4>On macOS</h4>
+      <p>Install <strong>Xcode</strong> from Apple’s developer website. Xcode includes GCC and other development tools.</p>
+      <p>Download from: <a href="https://developer.apple.com/technologies/tools/" target="_blank">developer.apple.com/technologies/tools/</a></p>
+
+      <h4>On Windows</h4>
+      <p>Install <strong>MinGW</strong>:</p>
+      <ol>
+        <li>Go to <a href="https://www.mingw-w64.org/downloads/" target="_blank">MinGW Downloads</a>.</li>
+        <li>Download <code>mingw-w64-install.exe</code>.</li>
+        <li>During setup, install at minimum:
+          <ul>
+            <li><code>gcc-core</code></li>
+            <li><code>gcc-g++</code></li>
+            <li><code>binutils</code></li>
+            <li>MinGW runtime</li>
+          </ul>
+        </li>
+        <li>Add the <code>bin</code> folder of MinGW to your <code>PATH</code> environment variable.</li>
+      </ol>
+      <p>After installation, you can run tools like <code>gcc</code>, <code>g++</code>, <code>ar</code>, etc., from the command line.</p>
+
+      <h2 class="subtitle">Text Editor</h2>
+      <p>To write C code, use any text editor such as:</p>
+      <ul>
+        <li>Notepad (Windows)</li>
+        <li>vi or vim (Linux/UNIX/Windows)</li>
+        <li>EMACS, Brief, Epsilon</li>
+      </ul>
+
+      <p>Source files should be saved with a <code>.c</code> extension (e.g., <code>hello.c</code>).</p>
+
+      <h2 class="subtitle">Using the Command Line</h2>
+      <p>After writing your code, you can compile and run it from the terminal or command prompt. Example:</p>
+      <pre><code>gcc -c hello.c -o hello.o
+gcc -o hello.exe hello.o
+./hello.exe</code></pre>
+      <p>If your code has errors, you'll need to go back and edit, then compile again.</p>
+
+      <h2 class="subtitle">Using an IDE</h2>
+      <p>To avoid the repetitive edit-compile-run cycle manually, use an IDE (Integrated Development Environment). IDEs allow you to:</p>
+      <ul>
+        <li>Edit, compile, debug, and run code in one interface</li>
+        <li>Get real-time syntax highlighting and error detection</li>
+      </ul>
+
+      <p>Popular IDEs for C include:</p>
+      <ul>
+        <li>Code::Blocks</li>
+        <li>NetBeans</li>
+        <li>VS Code</li>
+      </ul>
+
+      <h3 class="subsection">Installing Code::Blocks on Windows</h3>
+      <ol>
+        <li>Download <code>codeblocks-20.03mingw-setup.exe</code> from:
+          <a href="https://www.codeblocks.org/downloads/binaries/" target="_blank">Code::Blocks Binaries</a>
+        </li>
+        <li>During installation, select <strong>MinGW</strong> as the compiler.</li>
+        <li>Launch Code::Blocks and create a new project or file.</li>
+      </ol>
+
+      <h2 class="subtitle">Example Program</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   /* my first program in C */
+   printf("Hello, World! \n");
+
+   return 0;
+}</code></pre>
+
+      <h3 class="output-label">Output:</h3>
+      <pre><code>Hello, World!</code></pre>
+
+      <p>Build and run the code using the Build menu or <strong>F9</strong> shortcut. The output will appear in the terminal window.</p>
+
+    </div>
+  </div>
+</div>

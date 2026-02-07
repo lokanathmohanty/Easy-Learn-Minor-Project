@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Singleton Class</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Design Patterns</h1>
+            <h2 class="subtitle">Session: Singleton Class (Creational Pattern)</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is the Singleton Design Pattern? 🥇</h2>
+                <p>The **Singleton Pattern** is a creational design pattern that ensures a class has **only one instance** and provides a global point of access to that instance.</p>
+                <p>The class itself is responsible for creating and maintaining its single object, and it controls how that object is accessed.</p>
+            </div>
+
+            <hr>
+
+            <div class="content implementation">
+                <h2 class="subtitle">Achieving the Singleton Pattern in Java</h2>
+                <p>The Singleton pattern is achieved by applying three core principles to the class:</p>
+                <ol>
+                    <li>**Private Constructor:** Prevents any other class from directly instantiating the class using the <code>new</code> operator.</li>
+                    <li>**Private Static Instance:** A single, private, static field holds the only instance of the class.</li>
+                    <li>**Public Static Factory Method:** A public static method (conventionally named <code>getInstance()</code>) provides the global access point to the single instance.</li>
+                </ol>
+            </div>
+
+            <hr>
+
+            <div class="content uses-benefits">
+                <h2 class="subtitle">Advantages and Use Cases</h2>
+                <p>The Singleton pattern is used when **exactly one object** is required to coordinate actions across the system.</p>
+                <ul>
+                    <li>**Memory Management:** Saves memory because object creation overhead occurs only once.</li>
+                    <li>**Controlled Access:** Provides a controlled access point to the object, often controlling access to shared resources.</li>
+                    <li>**Common Use Cases:**
+                        <ul>
+                            <li>**Logger Classes** (all code writes to the same log file instance).</li>
+                            <li>**Configuration Managers** (one object holds all application settings).</li>
+                            <li>**Database Connection Pools** or thread pools.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <hr>
+
+            <div class="content examples">
+                <h2 class="subtitle">Types of Singleton Implementations</h2>
+
+                <h3>1. Eager Initialization (Initialization on Load)</h3>
+                <p>The instance is created at the time of class loading, guaranteeing its availability, but possibly using resources before it's actually needed.</p>
+                <pre><code>class Singleton {
+   // Instance created immediately when the class is loaded
+   private static Singleton singleton = new Singleton(); 
+
+   private Singleton() { } // Private constructor
+
+   public static Singleton getInstance() {
+      return singleton; // Just returns the existing instance
+   }
+}</code></pre>
+
+                <h3>2. Lazy Initialization (Classic Singleton)</h3>
+                <p>The instance is created only when the <code>getInstance()</code> method is called for the first time. This is more memory efficient if the instance is never used, but is **not thread-safe** in a multithreaded environment.</p>
+                <pre><code>class ClassicSingleton {
+   private static ClassicSingleton instance = null; // Initially null
+
+   private ClassicSingleton() { }
+
+   // NOT thread-safe
+   public static ClassicSingleton getInstance() {
+      if(instance == null) {
+         instance = new ClassicSingleton(); // Created only upon first call
+      }
+      return instance;
+   }
+}</code></pre>
+
+                <h3>3. Thread-Safe Lazy Initialization</h3>
+                <p>By adding the **<code>synchronized</code>** keyword, the method ensures that only one thread can execute the instance creation logic at a time, preventing multiple threads from creating multiple objects.</p>
+                <pre><code>class ThreadSafeSingleton {
+   private static ThreadSafeSingleton instance = null;
+
+   private ThreadSafeSingleton() { }
+
+   // Thread-safe, but adds performance overhead for every call
+   public static **synchronized** ThreadSafeSingleton getInstance() {
+      if(instance == null) {
+         instance = new ThreadSafeSingleton();
+      }
+      return instance;
+   }
+}</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

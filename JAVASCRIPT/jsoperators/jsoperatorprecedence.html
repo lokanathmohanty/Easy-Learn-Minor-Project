@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Operator Precedence</h1>
+    <div class="content">
+      <p>In JavaScript, operator precedence ensures the priority of the operators to be executed when a single expression contains multiple operators. So, whatever expressions have higher priority, the compiler executes it first over other operators and then executes the operators with the lower precedence.</p>
+      <p>Whenever you write any JavaScript expression with only 1 or 2 operators, you can easily understand the output of the expression. But when the expression contains multiple operators, you should know the concept of operator precedence to evaluate the expression correctly.</p>
+      <p>The best example of operator precedence is that in traditional mathematics, the multiplication operator has higher precedence over the addition or subtraction operator. So, if any mathematical expression contains the multiplication and addition of both operators, you need to perform the multiplication first.</p>
+    </div>
+
+    <h2 class="title">Associativity</h2>
+    <div class="content">
+      <p>The term associativity refers to the direction compiler should follow while evaluating the expression. In many situations, operators have the same precedence. In such cases, ambiguity occurs that which operation the compiler should perform first. So, the compiler takes the help of associativity. It can be from left to right or right to left.</p>
+      <p>For example:</p>
+      <p><strong>Expression:</strong> <code>let res = 50/5*2;</code></p>
+      <p>Evaluated as <code>(50/5) * 2</code> gives <strong>20</strong> as output.</p>
+      <p>Evaluated as <code>50/(5*2)</code> gives <strong>5</strong> as output.</p>
+      <p>To resolve this, the compiler uses associativity. Division and multiplication follow left-to-right associativity, so it evaluates as <code>(50/5)*2</code>.</p>
+      <p>The assignment operator has right-to-left associativity:</p>
+      <p><code>p = q = 90;</code></p>
+      <p>Here, <code>90</code> is assigned to <code>q</code>, and then <code>q</code> is assigned to <code>p</code>.</p>
+    </div>
+
+    <h2 class="title">Operator Precedence Table</h2>
+    <div class="content">
+      <p>The following table shows the operator, description, associativity, and example:</p>
+      <ul>
+        <li><strong>()</strong> - Grouping, L→R, Example: <code>(expression)</code></li>
+        <li><strong>.</strong> - Member of object, L→R, Example: <code>obj.property</code></li>
+        <li><strong>[]</strong> - Member of object, L→R, Example: <code>obj["property"]</code></li>
+        <li><strong>++ / --</strong> - Prefix/ Postfix Increment-Decrement, Associativity depends</li>
+        <li><strong>typeof, !, ~</strong> - Unary operators, R→L</li>
+        <li><strong>**, *, /, %</strong> - Arithmetic operators with precedence and associativity</li>
+        <li><strong>+ / -</strong> - Addition and subtraction</li>
+        <li><strong><</strong>, <strong>></strong>, <strong>instanceof</strong>, <strong>in</strong></li>
+        <li><strong>==, !=, ===, !==</strong> - Equality operators</li>
+        <li><strong>&, ^, |, &&, ||, ??</strong> - Bitwise and logical operators</li>
+        <li><strong>=, +=, -=, *=, /=, %=, **=</strong> - Assignment operators, R→L</li>
+        <li><strong>=></strong> - Arrow function operator</li>
+        <li><strong>,</strong> - Comma operator, L→R</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Examples</h2>
+    <div class="content">
+      <p><strong>Example 1:</strong></p>
+      <p>Expression with division, modulo, and multiplication:</p>
+      <pre><code>
+const first = 30 / 15 % 3 * 2;
+const second = 2 ** 3 ** 2;
+document.getElementById("output").innerHTML =
+   "The value of first expression is : " + first + "&lt;br&gt;" +
+   "The value of second expression is : " + second;
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The value of first expression is: 4</li>
+        <li>The value of second expression is: 512</li>
+      </ul>
+
+      <p><strong>Example 2:</strong> Using grouping operator () to change precedence:</p>
+      <pre><code>
+const first = 30 / ((15 % 3) * 2);
+const second = (2 ** 3) ** 2;
+document.getElementById("output").innerHTML =
+   "The value of first expression is : " + first + "&lt;br&gt;" +
+   "The value of second expression is : " + second;
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The value of first expression is: Infinity</li>
+        <li>The value of second expression is: 64</li>
+      </ul>
+      <p>The grouping operator has the highest precedence and can change the evaluation order of any expression.</p>
+    </div>
+  </div>
+</div>

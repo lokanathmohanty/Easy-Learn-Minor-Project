@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Descendant Selectors</h1>
+    <div class="content">
+      <p>
+        A <strong>CSS descendant selector</strong> is used to apply styles to elements 
+        that are nested (at any level) inside a specified parent element.  
+        A single space is used between selectors to indicate a descendant relationship.  
+        Unlike the <em>child selector (&gt;)</em>, the descendant selector applies to 
+        all levels of nesting.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+selector_1 selector_2 {
+  /* property: value; */
+  color: #04af2f;
+}
+      </pre>
+
+      <h2>Example 1: Styling Paragraphs Inside a Div</h2>
+      <p>
+        In this example, all <code>&lt;p&gt;</code> elements inside a 
+        <code>&lt;div&gt;</code> are given a green border.  
+        Paragraphs outside the div remain unchanged.
+      </p>
+      <pre>
+div p {
+  border: 2px solid #04af2f;
+}
+
+&lt;div&gt;
+  &lt;p&gt;This is a p element inside a div.&lt;/p&gt;
+  &lt;p&gt;This is second p element inside a div.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This is a p element outside the div element.&lt;/p&gt;
+      </pre>
+
+      <h2>Example 2: Using Hover with Descendant Selector</h2>
+      <p>
+        In this example, we use the descendant selector to target a 
+        <code>&lt;div&gt;</code> inside a container.  
+        When the inner div is hovered over, it rotates by 45 degrees.
+      </p>
+      <pre>
+.container, .container2 {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  background-color: #04af2f;
+  color: white;
+  font-size: 20px;
+  font-family: Verdana, sans-serif;
+  padding: 10px;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 100px;
+}
+
+.container div:hover {
+  transition: transform 0.5s ease;
+  transform: rotate(45deg);
+}
+
+&lt;div class="container"&gt;
+  &lt;div&gt;Box 1&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="container2"&gt;Box 2&lt;/div&gt;
+      </pre>
+
+      <h2>Key Notes</h2>
+      <ul>
+        <li>Descendant selectors match elements nested inside the parent, no matter how deep.</li>
+        <li>They are written with a space between parent and child selectors.</li>
+        <li>Use descendant selectors for applying styles to grouped sections of a page.</li>
+        <li>For direct children only, use the <strong>child selector (&gt;)</strong> instead.</li>
+      </ul>
+    </div>
+  </div>
+</div>

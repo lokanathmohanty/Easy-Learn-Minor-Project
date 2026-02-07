@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>HashSet</code> Class Summary 🧩</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.HashSet</code>** class is the primary, general-purpose implementation of the **<code>Set</code>** interface in Java. It is backed internally by a **<code>HashMap</code>**, which means it provides all the core guarantees of the Set contract, most notably **uniqueness** and **high-speed performance**.</p>
+
+            <hr>
+
+            <h2 class="title">I. Core Set Properties and Performance</h2>
+            <ul>
+                <li>
+                    <strong>Uniqueness:</strong> A set **cannot contain duplicate elements**. When the `add(E e)` method is called, the new element is added only if an element that is logically equal (based on the `equals()` and `hashCode()` methods) is not already present.
+                </li>
+                <li>
+                    <strong>Hashing Principle:</strong> Since it is backed by a `HashMap`, basic operations like **<code>add()</code>**, **<code>remove()</code>**, and **<code>contains()</code>** typically have **constant time complexity ($O(1)$)**, assuming a good hash function and minimal collisions.
+                </li>
+                <li>
+                    <strong>Unordered:</strong> A `HashSet` makes **no guarantee about the iteration order**. The order of elements is determined by the hash codes and internal structure and may change over time. (Use **<code>LinkedHashSet</code>** for insertion order or **<code>TreeSet</code>** for sorted order).
+                </li>
+                <li>
+                    <strong>Nulls Permitted:</strong> It allows the inclusion of a **single `null` element**.
+                </li>
+                <li>
+                    <strong>Non-Synchronized:</strong> It is **not thread-safe**. For concurrent use, the **<code>ConcurrentHashMap</code>** class (or `Collections.synchronizedSet(new HashSet())`) should be used.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Internal Implementation</h2>
+            <p>The **<code>HashSet</code>** is essentially a wrapper around a **<code>HashMap</code>** where:</p>
+            <ul>
+                <li>
+                    The elements added to the `HashSet` are stored as the **keys** of the internal `HashMap`.
+                </li>
+                <li>
+                    The **values** of the internal `HashMap` are a constant placeholder object (a static dummy object). Since keys must be unique in a Map, elements are guaranteed to be unique in the Set.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Constructors and Capacity</h2>
+            <p>Because it relies on the internal `HashMap`, its constructors allow fine-tuning the hash table's performance parameters:</p>
+            <ul class="example">
+                <li>
+                    **<code>HashSet()</code>:** Uses the default initial capacity (16) and load factor (0.75).
+                </li>
+                <li>
+                    **<code>HashSet(int initialCapacity, float loadFactor)</code>:** Allows explicit control over the size and resizing threshold, which can prevent rehashing overhead if the final set size is known or can be estimated.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

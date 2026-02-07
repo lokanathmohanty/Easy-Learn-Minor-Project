@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Memoization</h1>
+    <div class="content">
+      <p>
+        As our systems grow and start doing more complex calculations, the need for speed grows and process optimization becomes necessary. Ignoring this issue results in applications that use a lot of system resources and operate slowly.
+      </p>
+      <p>
+        In this chapter, we will discuss memoization, a technique that can significantly reduce processing time when used properly.
+      </p>
+
+      <h2>What is Memoization?</h2>
+      <p>
+        Memoization is a technique for speeding up applications by storing the results of expensive function calls and providing them when the same inputs are used again.
+      </p>
+      <ul>
+        <li><strong>Expensive Function Calls:</strong> Functions that consume a lot of time or memory.</li>
+        <li><strong>Cache:</strong> A temporary storage mechanism to store results for future reuse.</li>
+      </ul>
+
+      <h2>Benefits of Memoization</h2>
+      <p>
+        After receiving input, a function does the necessary computation, caches the result, and then returns the value. If the same input is received again in the future, the process will not need to be repeated.
+      </p>
+
+      <h2>When to Use Memoization?</h2>
+      <ul>
+        <li>When a function calls itself (recursive functions).</li>
+        <li>When the function is pure (always returns the same output for the same input).</li>
+        <li>When the function has high time complexity.</li>
+      </ul>
+
+      <h2>Memoization in JavaScript</h2>
+      <p>
+        Memoization in JavaScript is an optimization technique used to minimize runtime and memory usage. It reduces redundant computations by caching previous results.
+      </p>
+
+      <h2>How Does Memoization Work?</h2>
+      <p>
+        JavaScript memoization is based on two core concepts:
+      </p>
+      <ul>
+        <li>Closures</li>
+        <li>Higher-order functions</li>
+      </ul>
+
+      <h2>Closures</h2>
+      <p>
+        A closure is a function that has access to its own scope, the outer function's scope, and the global scope. Let's see an example:
+      </p>
+      <pre>
+let greeting = "Welcome";
+function welcomeMessage() { 
+   let user = "Rahul"; 
+   console.log(`${greeting} to the program, ${user}!`); 
+}
+welcomeMessage();
+      </pre>
+      <p><strong>Output:</strong> Welcome to the program, Rahul!</p>
+
+      <p>Now, using lexical scoping and returning a nested function:</p>
+      <pre>
+function welcomeMessage() { 
+   let user = "Rahul";
+   function welcome() {
+      console.log(`Greetings, ${user}!`);
+   }
+   return welcome;
+}
+let greet = welcomeMessage();
+greet();
+      </pre>
+      <p><strong>Output:</strong> Greetings Rahul!</p>
+
+      <h2>Higher-Order Functions</h2>
+      <p>
+        Higher-order functions take other functions as arguments or return them. In our closure example, <code>welcomeMessage()</code> is a higher-order function.
+      </p>
+
+      <h2>Example: Fibonacci Sequence</h2>
+      <p>
+        The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones:
+      </p>
+      <p>1, 1, 2, 3, 5, 8, 13, ...</p>
+
+      <h3>Naive Recursive Function</h3>
+      <pre>
+function fibonacciSeq(n) {
+   if (n &lt; 2)
+      return 1;
+   return fibonacciSeq(n - 1) + fibonacciSeq(n - 2);
+}
+      </pre>
+
+      <h3>Optimized with Memoization</h3>
+      <pre>
+function memoizedFibSeq(num, memo) {
+   memo = memo || [1, 1];  
+   if (num &lt;= 1) return memo[num];
+   if (memo[num]) return memo[num];
+   memo[num] = memoizedFibSeq(num - 1, memo) + memoizedFibSeq(num - 2, memo);
+   return memo[num];
+}
+
+console.log(memoizedFibSeq(10));
+      </pre>
+      <p><strong>Output:</strong> 89</p>
+    </div>
+  </div>
+</div>

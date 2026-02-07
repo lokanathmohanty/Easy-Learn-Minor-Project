@@ -1,0 +1,142 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">JavaScript - History Object</h1>
+
+        <div class="content">
+            <h2>Window History Object</h2>
+            <p>
+                In JavaScript, the <strong>history object</strong> contains information about the browser's 
+                session history. It keeps track of the array of visited URLs in the current session.
+            </p>
+            <p>
+                The <code>history</code> object is a property of the <code>window</code> object and can be 
+                accessed with or without referencing <code>window</code>.
+            </p>
+        </div>
+
+        <div class="content">
+            <h2>History Object Methods</h2>
+            <p>
+                The history object provides useful methods that allow us to navigate back and forth in the 
+                browser’s session history.
+            </p>
+            <p>Syntax:</p>
+            <ul>
+                <li><code>window.history.methodName();</code></li>
+                <li><code>history.methodName();</code></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2>JavaScript <code>back()</code> Method</h2>
+            <p>
+                The <code>back()</code> method loads the previous URL in the session history.
+            </p>
+            <p><strong>Syntax:</strong></p>
+            <pre><code>history.back();</code></pre>
+            <p><strong>Example:</strong></p>
+            <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p&gt;Click "Go Back" button to load previous URL&lt;/p&gt;
+   &lt;button onclick="goback()"&gt;Go Back&lt;/button&gt;
+   &lt;p id="output"&gt;&lt;/p&gt;
+   &lt;script&gt;
+      function goback() {
+         history.back();
+         document.getElementById("output").innerHTML +=
+            "You will have gone to previous URL if it exists";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+        </div>
+
+        <div class="content">
+            <h2>JavaScript <code>forward()</code> Method</h2>
+            <p>
+                The <code>forward()</code> method loads the next URL in the session history.
+            </p>
+            <p><strong>Syntax:</strong></p>
+            <pre><code>history.forward();</code></pre>
+            <p><strong>Example:</strong></p>
+            <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p&gt;Click "Go Forward" button to load next URL&lt;/p&gt;    
+   &lt;button onclick="goforward()"&gt;Go Forward&lt;/button&gt;
+   &lt;p id="output"&gt;&lt;/p&gt;
+   &lt;script&gt;
+      function goforward() {
+         history.forward();
+         document.getElementById("output").innerHTML =
+            "You will have forwarded to next URL if it exists.";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+        </div>
+
+        <div class="content">
+            <h2>JavaScript <code>go()</code> Method</h2>
+            <p>
+                The <code>go()</code> method loads a specific URL from the session history. 
+                The <code>count</code> parameter is a numeric value that represents which page to visit.
+            </p>
+            <p><strong>Syntax:</strong></p>
+            <pre><code>history.go(count);</code></pre>
+            <p><strong>Example 1: Move to 2nd previous page</strong></p>
+            <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p&gt;Click the button to load 2nd previous URL&lt;/p&gt;
+   &lt;button onclick="moveTo()"&gt;Move at 2nd previous URL&lt;/button&gt;
+   &lt;p id="output"&gt;&lt;/p&gt;
+   &lt;script&gt;
+      function moveTo() {
+         history.go(-2);
+         document.getElementById("output").innerHTML =
+            "You will have moved to 2nd previous URL if it exists.";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+            <p><strong>Example 2: Move to 2nd next page</strong></p>
+            <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p&gt;Click the button to load 2nd next URL&lt;/p&gt;    
+   &lt;button onclick="moveTo()"&gt;Move at 2nd next URL&lt;/button&gt;
+   &lt;p id="output"&gt;&lt;/p&gt;
+   &lt;script&gt;
+      function moveTo() {
+         history.go(2);
+         document.getElementById("output").innerHTML =
+            "You will have moved to 2nd next URL if it exists.";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+        </div>
+
+        <div class="content">
+            <h2>History Object Properties</h2>
+            <ul>
+                <li><code>length</code> – Returns the number of URLs in the session history list.</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2>History Object Methods</h2>
+            <ul>
+                <li><code>back()</code> – Takes you to the previous page.</li>
+                <li><code>forward()</code> – Takes you to the next page.</li>
+                <li><code>go()</code> – Takes you to a specific page in history.</li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PowerShell: Arrays</h1>
+    <div class="content">
+      <p>PowerShell arrays are fixed-size collections that store elements of any type in sequential order. They allow you to manage multiple related values under a single variable name, accessible by zero-based indices.</p>
+      <p>Arrays simplify handling bulk data compared to declaring many individual variables.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Declaring Arrays</h2>
+    <div class="content">
+      <p>Arrays can be declared by listing elements separated by commas or using range notation:</p>
+      <pre><code>$A = 1, 2, 3, 4
+$B = 1..4</code></pre>
+      <p>You may specify element data type, e.g., <code>[int[]]$A = 1, 2, 3, 4</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Accessing Array Elements</h2>
+    <div class="content">
+      <p>Use zero-based indices to retrieve or assign array values:</p>
+      <pre><code>$A[0]  # First element
+$A[3]  # Fourth element
+$A[1] = 10  # Assign new value</code></pre>
+      <p>Get total elements using <code>$A.Length</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Processing Arrays</h2>
+    <div class="content">
+      <p>Typical methods to loop through arrays include:</p>
+      <ul>
+        <li><strong>For Loop:</strong> Index-controlled iteration.</li>
+        <li><strong>ForEach Loop:</strong> Iteration over elements directly.</li>
+        <li><strong>While Loop:</strong> Conditional iteration with manual index control.</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code>for ($i = 0; $i -lt $A.Length; $i++) { $A[$i] }
+foreach ($item in $A) { $item }
+$i = 0; while ($i -lt $A.Length) { $A[$i]; $i++ }</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Array Manipulation</h2>
+    <div class="content">
+      <p>You can modify elements by index assignment and utilize array methods for adding, removing, or sorting items.</p>
+      <p>Example:</p>
+      <pre><code>$A[1] = 100   # Change second element
+$A.Sort()       # Sort array in place</code></pre>
+    </div>
+  </div>
+</div>

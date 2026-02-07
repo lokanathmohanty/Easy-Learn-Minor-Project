@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - React Without JSX</h1>
+
+    <div class="content">
+      <h2>What is JSX?</h2>
+      <p>
+        JSX is a JavaScript extension that lets developers write HTML-like code 
+        inside JavaScript. It makes the code easier to read and understand. 
+        Under the hood, JSX is compiled into JavaScript 
+        <code>React.createElement</code> calls before execution.
+      </p>
+      <p>
+        Example:
+      </p>
+      <pre><code>&lt;h1&gt;Hello World&lt;/h1&gt;</code></pre>
+      <p>
+        gets converted into:
+      </p>
+      <pre><code>React.createElement('h1', null, 'Hello World')</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>What is <code>createElement</code>?</h2>
+      <p>
+        <code>React.createElement</code> is the core API of React that creates 
+        React elements. It accepts three arguments:
+      </p>
+      <ol>
+        <li><b>Type</b> – HTML tag or React component (e.g., <code>'div'</code>, <code>'h1'</code>)</li>
+        <li><b>Props</b> – JavaScript object containing attributes (can be <code>null</code>)</li>
+        <li><b>Children</b> – Content or nested elements inside the component</li>
+      </ol>
+      <p>
+        Elements can be nested to any depth using <code>createElement</code>.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Working Example</h2>
+      <p>
+        Let's build a <b>BookListUsingCreateElement</b> component without JSX.
+      </p>
+
+      <h3>Step 1: Create a new app</h3>
+      <pre><code>create-react-app myapp
+cd myapp
+npm start</code></pre>
+
+      <h3>Step 2: Create the component</h3>
+      <pre><code>import React from 'react';
+
+class BookListUsingCreateElement extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         list: ['C++ Programming', 'Java Programming', 'JavaScript Programming']
+      };
+   }
+   render() {
+      let content = React.createElement(
+         'ol',
+         null,
+         this.state.list.map(
+            (item) =&gt; React.createElement('li', null, item)
+         )
+      );
+      return content;
+   }
+}
+export default BookListUsingCreateElement;</code></pre>
+
+      <p>
+        Explanation:
+      </p>
+      <ul>
+        <li><code>React.createElement('ol')</code> creates the ordered list container.</li>
+        <li><code>map()</code> loops through each book and returns 
+            <code>React.createElement('li', null, item)</code> for each.</li>
+        <li>No JSX is used—only pure <code>createElement</code>.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Step 3: Use the Component in App.js</h2>
+      <pre><code>import BookListUsingCreateElement 
+   from "./components/CreateElement/BookListUsingCreateElement";
+
+function App() {
+   return (
+      &lt;div&gt;
+         &lt;BookListUsingCreateElement /&gt;
+      &lt;/div&gt;
+   );
+}
+export default App;</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Final Output</h2>
+      <p>
+        When running <code>npm start</code>, the app will display:
+      </p>
+      <pre><code>1. C++ Programming
+2. Java Programming
+3. JavaScript Programming</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Summary</h2>
+      <ul>
+        <li>JSX simplifies writing React elements but is not mandatory.</li>
+        <li><code>React.createElement</code> provides full control over component creation.</li>
+        <li>Useful in environments where JSX cannot be used or when dynamic element creation is required.</li>
+      </ul>
+    </div>
+  </div>
+</div>

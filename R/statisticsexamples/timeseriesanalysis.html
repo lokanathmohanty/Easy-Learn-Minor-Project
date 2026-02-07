@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Time Series Analysis</h1>
+    <div class="content">
+      <p>
+        Time series analysis deals with data points ordered in time, such as stock prices or monthly rainfall. R handles time series data using specialized objects created with the <code>ts()</code> function, which can store numeric data with associated timestamps and frequency.
+      </p>
+
+      <h2 class="title">ts() Function Syntax</h2>
+      <pre><code>timeseries.object.name &lt;- ts(data, start, end, frequency)</code></pre>
+      <ul>
+        <li><strong>data</strong>: Numeric vector or matrix of observations</li>
+        <li><strong>start</strong>: Start time of series (optional)</li>
+        <li><strong>end</strong>: End time of series (optional)</li>
+        <li><strong>frequency</strong>: Number of observations per unit time (e.g., 12 for monthly)</li>
+      </ul>
+
+      <h2 class="title">Example: Single Time Series</h2>
+      <pre><code># Monthly rainfall data starting Jan 2012
+rainfall &lt;- c(799, 1174.8, 865.1, 1334.6, 635.4, 918.5, 685.5,
+               998.6, 784.2, 985, 882.8, 1071)
+
+# Create time series object
+rainfall.timeseries &lt;- ts(rainfall, start = c(2012, 1), frequency = 12)
+
+# Print the time series
+print(rainfall.timeseries)
+
+# Save the plot
+png(file = "rainfall.png")
+
+# Plot the time series
+plot(rainfall.timeseries)
+
+# Close device
+dev.off()
+</code></pre>
+
+      <h2 class="title">Output Sample</h2>
+      <pre><code>Jan    Feb    Mar    Apr    May     Jun    Jul    Aug    Sep
+2012  799.0  1174.8 865.1  1334.6  635.4  918.5  685.5  998.6  784.2
+Oct    Nov    Dec
+2012  985.0  882.8  1071.0
+</code></pre>
+
+      <h2 class="title">Frequency Values</h2>
+      <ul>
+        <li><code>frequency = 12</code>: Monthly data per year</li>
+        <li><code>frequency = 4</code>: Quarterly data</li>
+        <li><code>frequency = 6</code>: Data every 10 minutes in an hour</li>
+        <li><code>frequency = 24*6</code>: Data every 10 minutes in a day</li>
+      </ul>
+
+      <h2 class="title">Example: Multiple Time Series</h2>
+      <pre><code># Two rainfall series
+rainfall1 &lt;- c(799, 1174.8, 865.1, 1334.6, 635.4, 918.5, 685.5,
+                998.6, 784.2, 985, 882.8, 1071)
+rainfall2 &lt;- c(655, 1306.9, 1323.4, 1172.2, 562.2, 824, 822.4,
+                1265.5, 799.6, 1105.6, 1106.7, 1337.8)
+
+# Combine into matrix
+combined.rainfall &lt;- matrix(c(rainfall1, rainfall2), nrow = 12)
+
+# Create time series object with two series
+rainfall.timeseries &lt;- ts(combined.rainfall, start = c(2012, 1), frequency = 12)
+
+# Print the time series matrix
+print(rainfall.timeseries)
+
+# Save the plot
+png(file = "rainfall_combined.png")
+
+# Plot multiple time series
+plot(rainfall.timeseries, main = "Multiple Time Series")
+
+# Close device
+dev.off()
+</code></pre>
+
+      <h2 class="title">Output Sample</h2>
+      <pre><code>           Series 1  Series 2
+Jan 2012    799.0    655.0
+Feb 2012   1174.8   1306.9
+Mar 2012    865.1   1323.4
+Apr 2012   1334.6   1172.2
+May 2012    635.4    562.2
+Jun 2012    918.5    824.0
+Jul 2012    685.5    822.4
+Aug 2012    998.6   1265.5
+Sep 2012    784.2    799.6
+Oct 2012    985.0   1105.6
+Nov 2012    882.8   1106.7
+Dec 2012   1071.0   1337.8
+</code></pre>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

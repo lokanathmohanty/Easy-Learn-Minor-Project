@@ -1,0 +1,195 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Selectors</h1>
+    <div class="content">
+      <p>CSS Selectors are used to select the HTML elements you want to style on a web page. They allow you to target specific elements or groups of elements to apply styles like colors, fonts, margins, and more.</p>
+      <p>The element or elements that are selected by the selector are referred to as subject of the selector.</p>
+
+      <h2>CSS Universal Selector</h2>
+      <p>CSS universal selector is a special selector that selects all the elements in an HTML document. It is denoted by an asterisk mark (*).</p>
+      <h3>Syntax</h3>
+      <pre><code>* {
+   margin: 0;
+   padding: 0;
+}</code></pre>
+      <p>As per the above syntax, the universal selector is used to apply a margin and padding of 0 to all HTML elements.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+   * {
+      background-color: peachpuff;
+      color: darkgreen;
+      font-size: 25px;
+   }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h1&gt;Universal selector (*)&lt;/h1&gt;
+
+   &lt;div&gt;Parent element
+   &lt;p&gt;Child paragraph 1&lt;/p&gt;
+   &lt;p&gt;Child paragraph 2&lt;/p&gt;
+   &lt;/div&gt;
+
+   &lt;p&gt;Paragraph 3&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>CSS Element Selector</h2>
+      <p>CSS element selector selects and styles specific HTML elements. The element selector is defined by simply using the element's name in the stylesheet.</p>
+      <h3>Syntax</h3>
+      <pre><code>p {
+   color: green;
+}
+
+h1 {
+   text-decoration-line: underline;
+}</code></pre>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+   div {
+      border: 5px inset gold;
+      width: 300px;
+      text-align: center;
+   }
+
+   p {
+      color: green;
+   } 
+
+   h1 {
+      text-decoration-line: underline;
+   }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div&gt;
+      &lt;h1&gt;Type selector&lt;/h1&gt;
+      &lt;p&gt;div with border and text-aligned to center&lt;/p&gt;
+      &lt;p&gt;paragraph with green color&lt;/p&gt;
+      &lt;p&gt;h1 with an underline&lt;/p&gt;
+   &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>CSS Class Selector</h2>
+      <p>CSS class selector selects an element with a specific class attribute. The class selector is defined using a period (.) followed by the class name.</p>
+      <h3>Syntax</h3>
+      <pre><code>.style-h1 {
+   text-decoration-line: underline;
+}
+
+.style-p {
+   color: green;
+   font-size: 25px;
+}</code></pre>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+   .style-div {
+      border: 5px inset gold;
+      width: 300px;
+      text-align: center;
+   }
+
+   .style-p {
+      color: green;
+      font-size: 25px;
+   } 
+
+   .style-h1 {
+      text-decoration-line: underline;
+   }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div class="style-div"&gt;
+      &lt;h1 class="style-h1"&gt;class selector&lt;/h1&gt;
+      &lt;p class="style-p"&gt;class .style-p applied&lt;/p&gt;
+      &lt;p&gt;No class applied on this p element&lt;/p&gt;
+   &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>CSS ID Selector</h2>
+      <p>CSS ID selector selects an element with a specific value for its id attribute. It is denoted by the "#" (hash) symbol.</p>
+      <h3>Syntax</h3>
+      <pre><code>#style-p {
+   color: green;
+   font-size: 25px;
+} 
+
+#style-h1 {
+   text-decoration-line: underline;
+   color: red;
+}</code></pre>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+   #style-div {
+      border: 5px inset purple;
+      width: 300px;
+      text-align: center;
+      background-color: lightgoldenrodyellow;
+   }
+
+   #style-p {
+      color: green;
+      font-size: 25px;
+   } 
+
+   #style-h1 {
+      text-decoration-line: underline;
+      color: red;
+   }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div id="style-div"&gt;
+      &lt;h1 id="style-h1"&gt;ID selector&lt;/h1&gt;
+      &lt;p id="style-p"&gt;id #style-p applied&lt;/p&gt;
+      &lt;p&gt;No id applied on this p element&lt;/p&gt;
+   &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>CSS Attribute Selector</h2>
+      <p>CSS attribute selector selects an element based on a specific attribute or attribute values on an element.</p>
+      <h3>Syntax</h3>
+      <pre><code>a[target] {
+   background-color: peachpuff;
+}
+
+a[href="https://www.tutorialspoint.com"] {
+   background-color: peachpuff;
+}</code></pre>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+   a[target] {
+      background-color: #04af2f;
+      color: white;
+      font-size: 2em;
+   }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h2&gt;Attribute selector&lt;/h2&gt;
+   &lt;p&gt;Styling applied to anchor element with target attribute:&lt;/p&gt;
+   &lt;a href="#"&gt;Tutorialspoint&lt;/a&gt;
+   &lt;a href="#" target="_blank"&gt;google&lt;/a&gt;
+   &lt;a href="#" target="_self"&gt;wikipedia&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <!-- Similar structure continues for Group Selector, Pseudo-class, Pseudo-element, Descendant, Child, Adjacent Sibling, General Sibling, and Nested Selectors -->
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Classes and Objects</h1>
+    <div class="content">
+      <p>Python is an object-oriented programming language, meaning it is based on the OOP concept. Every entity in a Python program like numbers, strings, lists, and dictionaries are objects of corresponding built-in classes. The base class for all classes in Python is <code>Object</code>.</p>
+
+      <h2 class="title">What is a Class in Python?</h2>
+      <p>A <strong>class</strong> is a user-defined data type that defines the type of data an object can contain and the actions it can perform. It acts as a template for creating objects. For example, a class <code>Smartphone</code> could define attributes like RAM, ROM, screen size, and methods like call and message.</p>
+
+      <h2 class="title">Creating Classes in Python</h2>
+      <p>Use the <code>class</code> keyword followed by the class name and a colon to declare a class:</p>
+      <pre><code>class ClassName:
+    'Optional class documentation string'
+    class_suite
+</code></pre>
+      <p>The documentation string can be accessed via <code>ClassName.__doc__</code>. The class suite contains member variables and methods.</p>
+
+      <h3 class="title">Example</h3>
+      <pre><code>class Employee:
+    'Common base class for all employees'
+    empCount = 0
+
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+        Employee.empCount += 1
+    
+    def displayCount(self):
+        print("Total Employee %d" % Employee.empCount)
+
+    def displayEmployee(self):
+        print("Name : ", self.name, ", Salary: ", self.salary)
+</code></pre>
+
+      <h2 class="title">What is an Object?</h2>
+      <p>An <strong>object</strong> is an instance of a class with its own attributes and methods, defined by the class. Memory is allocated when objects are instantiated from the class.</p>
+
+      <h2 class="title">Creating Objects of Classes in Python</h2>
+      <p>Create instances by calling the class with the arguments required by its constructor <code>__init__</code> method:</p>
+      <pre><code>emp1 = Employee("Zara", 2000)
+emp2 = Employee("Manni", 5000)
+</code></pre>
+
+      <h2 class="title">Accessing Attributes of Objects</h2>
+      <p>Access attributes and methods using the dot <code>.</code> operator:</p>
+      <pre><code>emp1.displayEmployee()
+emp2.displayEmployee()
+print("Total Employee %d" % Employee.empCount)
+</code></pre>
+
+      <h2 class="title">Built-in Class Attributes</h2>
+      <p>Python classes keep built-in attributes accessible via dot notation:</p>
+      <ul>
+        <li><code>__dict__</code>: Dictionary containing class namespace.</li>
+        <li><code>__doc__</code>: Class documentation string.</li>
+        <li><code>__name__</code>: Class name.</li>
+        <li><code>__module__</code>: Module name where class is defined.</li>
+        <li><code>__bases__</code>: Tuple of base classes.</li>
+      </ul>
+
+      <h3 class="title">Example of Built-In Class Attributes</h3>
+      <pre><code>print("Employee.__doc__:", Employee.__doc__)
+print("Employee.__name__:", Employee.__name__)
+print("Employee.__module__:", Employee.__module__)
+print("Employee.__bases__:", Employee.__bases__)
+print("Employee.__dict__:", Employee.__dict__)
+</code></pre>
+
+      <h2 class="title">Garbage Collection (Destroying Objects)</h2>
+      <p>Python automatically deletes objects to free memory when their reference count reaches zero. You can define a destructor <code>__del__()</code> called when an object is destroyed.</p>
+
+      <h3 class="title">Example of Destructor</h3>
+      <pre><code>class Point:
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+    def __del__(self):
+        class_name = self.__class__.__name__
+        print(class_name, "destroyed")
+
+pt1 = Point()
+pt2 = pt1
+pt3 = pt1
+print(id(pt1), id(pt2), id(pt3))
+del pt1
+del pt2
+del pt3
+</code></pre>
+
+      <h2 class="title">Data Hiding in Python</h2>
+      <p>To hide object attributes from outside access, prefix names with double underscores. Such attributes are name-mangled and can be accessed as <code>object._className__attrName</code>.</p>
+
+      <h3 class="title">Example of Data Hiding</h3>
+      <pre><code>class JustCounter:
+    __secretCount = 0
+   
+    def count(self):
+        self.__secretCount += 1
+        print(self.__secretCount)
+
+counter = JustCounter()
+counter.count()
+counter.count()
+# print(counter.__secretCount)  # Raises AttributeError
+print(counter._JustCounter__secretCount)
+</code></pre>
+    </div>
+  </div>
+</div>

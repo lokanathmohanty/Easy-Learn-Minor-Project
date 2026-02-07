@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Different Methods for Updating Data (CRUD: Update) 🔄</h1>
+        <div class="content">
+            <p>Django's **Active Record pattern** enables the modification of existing database rows by manipulating model instances. The process involves retrieving one or more model objects, changing their attributes, and persisting the change back to the database.</p>
+
+            <h2>1. Direct ORM Methods (Shell or View)</h2>
+            <p>You can update objects programmatically using methods on the **Model Manager (`.objects`)** or by calling the **`.save()`** method on an instance.</p>
+
+            <h3>A. Updating a QuerySet (`.update()`)</h3>
+            <p>The `.filter()` method returns a **QuerySet**, which has an `.update()` method. This allows you to update multiple objects simultaneously in a single query.</p>
+            <pre><code># Find all objects where pk=2 (returns a QuerySet)
+obj_queryset = Dreamreal.objects.filter(pk=2) 
+# Update the name attribute on all objects in the QuerySet
+obj_queryset.update(name='example')</code></pre>
+
+            <h3>B. Instance Retrieval and `.save()`</h3>
+            <p>For single object updates, retrieve the object using `.get()`, modify the attribute(s) via simple assignment, and call `.save()`.</p>
+            <pre><code># Retrieve a single instance (raises error if multiple/none found)
+obj = Dreamreal.objects.get(phonenumber = 2376970) 
+# Update attribute
+obj.phonenumber = 24642367570
+# Save changes to the database
+obj.save()</code></pre>
+
+            <hr>
+
+            <h2>2. Updating via Function-Based Views (Manual or HTML Form)</h2>
+            <p>Views can handle updates by retrieving the object based on a primary key (`pk`) passed in the URL.</p>
+
+            <h3>A. Hardcoded Update</h3>
+            <p>The view retrieves the object, hardcodes the new value, and saves it. This is useful for fixed logic or demonstration but not dynamic user input.</p>
+            <pre><code>def update(request, pk):
+   obj = Dreamreal.objects.get(pk=pk)
+   obj.name = "admin" # Hardcoded change
+   obj.save()
+   return HttpResponse("Update successful")</code></pre>
+
+            <h3>B. Dynamic Update from Form Data</h3>
+            <p>The view handles both GET (displaying the pre-populated form) and POST (processing the updated data). Fields are manually extracted from `request.POST` and assigned to the retrieved object before calling `.save()`.</p>
+            <pre><code>def update(request, pk):
+   obj = Dreamreal.objects.get(pk=pk) 
+   if request.method == "POST":
+      # Manually update fields from POST data
+      obj.name = request.POST['name']
+      obj.save()
+      return HttpResponse("<h2>Record updated Successfully</h2>")
+   
+   # GET: Render the form with current object data
+   context = {"obj": obj}
+   return render(request, "myform.html", context)</code></pre>
+
+            <hr>
+
+            <h2>3. Using Django Forms (ModelForm) for Updates</h2>
+            <p>Using a **`ModelForm`** (like `DreamrealForm`) is the standard practice, as it handles data binding, validation, and persistence automatically.</p>
+            <ul>
+                <li>**GET:** The view fetches the existing object and passes it to the form instantiation using the **`instance`** argument: `form = DreamrealForm(instance=obj)`. This tells the form to pre-populate its fields with the object's current data.</li>
+                <li>**POST:** The view binds the form to both the POST data and the existing object: `form = DreamrealForm(request.POST, instance=obj)`. If valid, calling `form.save()` updates the existing instance rather than creating a new one.</li>
+            </ul>
+
+            <hr>
+
+            <h2>4. Using Generic Class-Based Views (`UpdateView`)</h2>
+            <p>The **`UpdateView`** class simplifies the update process by handling all boilerplate code (retrieving the object by `pk` from the URL, handling GET/POST, validation, and saving).</p>
+            <pre><code>from django.views.generic.edit import UpdateView 
+
+class DRUpdateView(UpdateView):  
+   model = Dreamreal  
+   fields = '__all__'  
+   template_name = "myform.html"
+   success_url = "../success/"</code></pre>
+            <p>When registered in `urls.py` with a path that includes `&lt;int:pk&gt;`, the `UpdateView` automatically finds the correct object, populates the form (using the specified template), and saves the changes upon submission.</p>
+        </div>
+    </div>
+</div>

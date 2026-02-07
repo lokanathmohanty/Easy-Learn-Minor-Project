@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Math Functions in C</title>
+</head>
+<body>
+  <div class="container">
+
+    <div class="session">
+      <h1 class="title">C Math Functions</h1>
+      <div class="content">
+        <p>
+          C language provides various functions to perform mathematical operations on numbers such as finding trigonometric ratios, calculating log and exponentials, rounding the numbers, etc. To use these math functions in a C program, you need to include the <code>math.h</code> header file.
+        </p>
+        <p>Math functions in C are categorized as follows:</p>
+        <ul>
+          <li>Trigonometric Functions</li>
+          <li>Inverse Trigonometric Functions</li>
+          <li>Hyperbolic Functions</li>
+          <li>Exponentiation and Logarithmic Functions</li>
+          <li>Floating-Point Functions</li>
+          <li>Power and Square Root Functions</li>
+          <li>Rounding Functions</li>
+          <li>Modulus Functions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Trigonometric Functions</h1>
+      <div class="content">
+        <p>
+          The <code>math.h</code> library defines the functions <code>sin()</code>, <code>cos()</code>, and <code>tan()</code> that return the respective trigonometric ratios of a given angle in radians.
+        </p>
+        <ul>
+          <li><code>double sin(double x)</code></li>
+          <li><code>double cos(double x)</code></li>
+          <li><code>double tan(double x)</code></li>
+        </ul>
+        <h2>Example</h2>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+#define PI 3.14159265
+
+int main() {
+   double x, sn, cs, tn, val;
+   x = 45.0;
+   val = PI / 180;
+
+   sn = sin(x*val);
+   cs = cos(x*val);
+   tn = tan(x*val);
+
+   printf("sin(%f) : %f\n", x, sn);
+   printf("cos(%f) : %f\n", x, cs);
+   printf("tan(%f) : %f\n", x, tn);
+
+   return(0);
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+sin(45.000000) : 0.707107
+cos(45.000000) : 0.707107
+tan(45.000000) : 1.000000
+        </pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Inverse Trigonometric Functions</h1>
+      <div class="content">
+        <p>
+          These functions return the arc (inverse) trigonometric values:
+        </p>
+        <ul>
+          <li><code>double asin(double x)</code></li>
+          <li><code>double acos(double x)</code></li>
+          <li><code>double atan(double x)</code></li>
+        </ul>
+        <h2>Example 1</h2>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+#define PI 3.14159265
+
+int main() {
+   double x, asn, acs, atn, val;
+   x = 0.9;
+   val = 180/PI;
+
+   asn = asin(x);
+   acs = acos(x);
+   atn = atan(x);
+
+   printf("asin(%f) : %f in radians\n", x, asn);
+   printf("acos(%f) : %f in radians\n", x, acs);
+   printf("atan(%f) : %f in radians\n", x, atn);
+
+   asn = (asn * 180) / PI;
+   acs = (acs * 180) / PI;
+   atn = (atn * 180) / PI;
+
+   printf("asin(%f) : %f in degrees\n", x, asn);
+   printf("acos(%f) : %f in degrees\n", x, acs);
+   printf("atan(%f) : %f in degrees\n", x, atn);
+
+   return(0);
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+asin(0.900000) : 1.119770 in radians
+acos(0.900000) : 0.451027 in radians
+atan(0.900000) : 0.732815 in radians
+asin(0.900000) : 64.158067 in degrees
+acos(0.900000) : 25.841933 in degrees
+atan(0.900000) : 41.987213 in degrees
+        </pre>
+
+        <h2>Example 2 - atan2()</h2>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+#define PI 3.14159265
+
+int main() {
+   double x, y, ret, val;
+   x = -7.0;
+   y = 7.0;
+   val = 180.0 / PI;
+
+   ret = atan2(y, x) * val;
+   printf("The arc tangent of x = %lf, y = %lf is %lf degrees\n", x, y, ret);
+
+   return(0);
+}</code></pre>
+        <h2>Output</h2>
+        <pre>The arc tangent of x = -7.000000, y = 7.000000 is 135.000000 degrees</pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Hyperbolic Functions</h1>
+      <div class="content">
+        <ul>
+          <li><code>double sinh(double x)</code></li>
+          <li><code>double cosh(double x)</code></li>
+          <li><code>double tanh(double x)</code></li>
+        </ul>
+        <h2>Example</h2>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+#define PI 3.14159265
+
+int main() {
+   double x, val, sh, ch, th;
+   x = 45;
+   val = PI / 180.0;
+
+   sh = sinh(x * val);
+   ch = cosh(x * val);
+   th = tanh(x * val);
+
+   printf("The sinh(%f) = %lf\n", x, sh);
+   printf("The cosh(%f) = %lf\n", x, ch);
+   printf("The tanh(%f) = %lf\n", x, th);
+
+   return(0);
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+The sinh(45.000000) = 0.868671
+The cosh(45.000000) = 1.324609
+The tanh(45.000000) = 0.655794
+        </pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Exponentiation and Logarithmic Functions</h1>
+      <div class="content">
+        <ul>
+          <li><code>exp(x)</code> – e<sup>x</sup></li>
+          <li><code>log(x)</code> – natural log (base e)</li>
+          <li><code>log10(x)</code> – base 10 log</li>
+        </ul>
+        <h2>Example</h2>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int main () {
+   double x = 2;
+   double e, ln, ls;
+
+   e = exp(2);
+   ln = log(e);
+   printf("exp(%f): %f log(%f): %f\n", x, e, e, ln);
+
+   ln = log(x);
+   printf("log(%f): %f\n", x, ln);
+   ls = log10(x);
+   printf("log10(%f): %f\n", x, ls);
+
+   return(0);
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+exp(2.000000): 7.389056 log(7.389056): 2.000000
+log(2.000000): 0.693147
+log10(2.000000): 0.301030
+        </pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Floating-Point Functions</h1>
+      <div class="content">
+        <h2>frexp()</h2>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int main () {
+   double x = 1024, fraction;
+   int e;
+
+   fraction = frexp(x, &e);
+   printf("x = %.2lf = %.2lf * 2^%d\n", x, fraction, e);
+
+   return(0);
+}</code></pre>
+        <h2>Output</h2>
+        <pre>x = 1024.00 = 0.50 * 2^11</pre>
+
+        <h2>ldexp()</h2>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int main () {
+   double x = 0.65;
+   int n = 3;
+   double ret = ldexp(x, n);
+
+   printf("%f * 2^%d = %f\n", x, n, ret);
+
+   return(0);
+}</code></pre>
+        <h2>Output</h2>
+        <pre>0.650000 * 2^3 = 5.200000</pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Power and Square Root Functions</h1>
+      <div class="content">
+        <ul>
+          <li><code>pow(x, y)</code> – returns x<sup>y</sup></li>
+          <li><code>sqrt(x)</code> – returns √x</li>
+        </ul>
+        <h2>Example</h2>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int main() {
+   double x = 9, y = 2;
+
+   printf("Square root of %lf is %lf\n", x, sqrt(x));
+   printf("Square root of %lf is %lf\n", x, pow(x, 0.5));
+   printf("%lf raised to power %lf is %lf\n", x, y, pow(x, y));
+
+   return(0);
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+Square root of 9.000000 is 3.000000
+Square root of 9.000000 is 3.000000
+9.000000 raised to power 2.000000 is 81.000000
+        </pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Rounding Functions</h1>
+      <div class="content">
+        <ul>
+          <li><code>ceil(x)</code> – smallest integer ≥ x</li>
+          <li><code>floor(x)</code> – largest integer ≤ x</li>
+          <li><code>round(x)</code> – nearest integer</li>
+        </ul>
+        <h2>Example</h2>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int main() {
+   float val1 = 1.2, val2 = 1.6, val3 = 2.8, val4 = -2.3;
+
+   printf("ceil(%lf) = %.1lf\n", val1, ceil(val1));
+   printf("floor(%lf) = %.1lf\n", val2, floor(val2));
+   printf("ceil(%lf) = %.1lf\n", val3, ceil(val3));
+   printf("floor(%lf) = %.1lf\n", val4, floor(val4));
+
+   printf("round(%lf) = %.1lf\n", val1, round(val1));
+   printf("round(%lf) = %.1lf\n", val4, round(val4));
+
+   return(0);
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+ceil(1.200000) = 2.0
+floor(1.600000) = 1.0
+ceil(2.800000) = 3.0
+floor(-2.300000) = -3.0
+round(1.200000) = 1.0
+round(-2.300000) = -2.0
+        </pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Modulus Functions</h1>
+      <div class="content">
+        <h2>modf()</h2>
+        <p>This function splits a floating-point number into its fractional and integer parts.</p>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int main () {
+   double x = 8.123456, fractpart, intpart;
+
+   fractpart = modf(x, &intpart);
+
+   printf("Integral part = %lf\n", intpart);
+   printf("Fraction Part = %lf\n", fractpart);
+
+   return(0);
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+Integral part = 8.000000
+Fraction Part = 0.123456
+        </pre>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

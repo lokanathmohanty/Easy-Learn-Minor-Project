@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Handling the 404 Page Not Found Error 🚫</h1>
+        <div class="content">
+            <p>The **404 Page Not Found** error is an HTTP status code indicating the server could not find the requested webpage. In Django, this typically occurs when a user accesses a URL that is not defined or mapped to a view function in the project's URL configuration (URLconf).</p>
+        </div>
+        <h2 class="example">Displaying a Custom 404 Error Page</h2>
+        <div class="content">
+            <p>Django offers two primary methods for customizing the 404 error page displayed to the user:</p>
+
+            <h3>Method 1: Using the Default 404.html Template (Recommended for Production)</h3>
+            <p>To display a custom, user-friendly 404 page instead of the detailed Django debug page, you must first configure the project for a production environment:</p>
+            <ul>
+                <li>**Disable Debugging:** Set the <code>DEBUG</code> parameter to <code>False</code> in <code>settings.py</code>. When <code>DEBUG</code> is <code>True</code>, Django displays the detailed default debug page.</li>
+                <li>**Set Allowed Hosts:** Specify valid hostnames or use <code>"*"</code> to allow any hostname in the <code>ALLOWED_HOSTS</code> setting:
+                    <pre><code>DEBUG = False
+ALLOWED_HOSTS = ["*"]</code></pre>
+                </li>
+                <li>**Create Template:** Create a template file named **<code>404.html</code>** and place it in the project's **<code>templates</code>** folder (or one of the template directories defined in <code>TEMPLATES</code>). Django will automatically render this template for any 404 error.</li>
+            </ul>
+
+            <h3>Method 2: Defining a Custom <code>handler404</code> View</h3>
+            <p>A more controlled approach is to define a custom view function for the 404 error:</p>
+            <ol>
+                <li>**Define the View:** Create a function, often named <code>handler404</code>, which takes <code>request</code> and an <code>exception</code> as arguments. This view renders your custom error template (e.g., <code>404handler.html</code>). This view is typically defined in a <code>views.py</code> file within the project folder.
+                    <pre><code>from django.shortcuts import render
+def handler404(request, exception):
+   return render(request, '404handler.html')</code></pre>
+                </li>
+                <li>**Register the Handler:** In the project's main URLconf (<code>urls.py</code>), assign the view function to the special **<code>handler404</code>** variable. This directs Django to use your function for all 404 errors.
+                    <pre><code>from . import views
+
+handler404 = views.handler404 
+
+urlpatterns = [
+   path('admin/', admin.site.urls),
+]</code></pre>
+                </li>
+                <li>**Create Template:** Create the corresponding HTML template (e.g., <code>404handler.html</code>) in the <code>templates</code> folder.</li>
+            </ol>
+            <p>This method offers more flexibility to pass additional context or perform custom logic when a 404 error occurs.</p>
+        </div>
+    </div>
+</div>

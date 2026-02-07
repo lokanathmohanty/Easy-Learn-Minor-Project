@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>IdentityHashMap</code> Class Summary 👤🗺️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.IdentityHashMap</code>** class is a specialized implementation of the **<code>Map</code>** interface that uses **reference equality (`==`)** instead of **object equality (`equals()`)** when comparing keys and values. This unique feature fundamentally changes how the map operates compared to a standard <code>HashMap</code>.</p>
+
+            <hr>
+
+            <h2 class="title">I. Key Feature: Reference Equality (`==`)</h2>
+            <p>In all standard `Map` implementations (like `HashMap` and `TreeMap`), two keys are considered equal if `key1.equals(key2)` is true. In contrast, `IdentityHashMap` uses the following rule:</p>
+            <ul class="example">
+                <li>
+                    A key `k1` is equal to a key `k2` **if and only if** **`k1 == k2`** (they are the exact same object instance in memory).
+                </li>
+                <li>
+                    This means two separate objects (even if their contents are identical, such as `new String("A")` and `new String("A")`) are treated as **two distinct keys** in an `IdentityHashMap`.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Use Cases and Purpose</h2>
+            <p>This class is not intended as a general-purpose map. It is primarily used for:</p>
+            <ul>
+                <li>
+                    **Serialization and Deep Copying:** Maintaining a map of objects that have already been processed to avoid infinite loops when traversing object graphs that contain cycles (i.e., when an object references itself or is referenced by a subsequent object).
+                </li>
+                <li>
+                    **Internal Map Views:** When creating a view of another structure where uniqueness must be based on object identity, rather than logical equality.
+                </li>
+                <li>
+                    **Testing/Debugging:** Storing state associated with specific object instances.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Characteristics and Behavior</h2>
+            <ul>
+                <li>
+                    **Non-Synchronized:** It is **not thread-safe**.
+                </li>
+                <li>
+                    **Unordered:** The iteration order is **not predictable** and is not guaranteed to remain constant.
+                </li>
+                <li>
+                    **Nulls Permitted:** It allows **one null key** and **multiple null values**.
+                </li>
+                <li>
+                    **Primitive Keys:** When using keys that are **immutable wrappers** (like `Integer` or `String`), the behavior can be confusing due to Java's use of caching or interning. For example, `new Integer(100)` and `new Integer(100)` are distinct, but `Integer.valueOf(5)` and `Integer.valueOf(5)` might be the same object due to caching (if the value is small).
+                </li>
+            </ul>
+
+            <div class="example">
+                <p><strong>Behavior Contrast Example:</strong></p>
+                <pre><code>String s1 = new String("hi");
+String s2 = new String("hi"); // s1.equals(s2) is true, but s1 != s2
+
+// HashMap: Treats s1 and s2 as the same key. Map size: 1
+// IdentityHashMap: Treats s1 and s2 as different keys. Map size: 2</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

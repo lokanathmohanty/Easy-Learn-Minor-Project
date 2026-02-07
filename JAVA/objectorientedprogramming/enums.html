@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Enum Class</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Special Types</h1>
+            <h2 class="subtitle">Session: Enum Class (Enumerations)</h2>
+        </header>
+
+        <section class="content introduction">
+            <h2 class="subtitle">What is a Java Enum? 🔢</h2>
+            <p>An **Enum** (short for **Enumeration**) is a special kind of **class** in Java that defines a fixed group of **constants**. It is used to group related values under a single type, ensuring **type safety** by allowing only predefined, valid values to be assigned.</p>
+            <p>Enums are declared using the **<code>enum</code>** keyword, and the constants are typically written in **uppercase** and separated by commas.</p>
+        </section>
+
+        <hr>
+
+        <section class="content why-enum">
+            <h2 class="subtitle">Why Use Enums Over Constants?</h2>
+            <p>Traditionally, fixed constants were defined using `public static final int` variables. The problem with this approach is a lack of type safety, as any `int` value (even invalid ones) could be assigned. Enums solve this by strictly limiting variables to the defined set of constants.</p>
+            <p>Enums are ideal for representing fixed sets like:</p>
+            <ul>
+                <li>Days of the week (`SUNDAY`, `MONDAY`, etc.)</li>
+                <li>Directions (`NORTH`, `SOUTH`, `EAST`, `WEST`)</li>
+                <li>Status Codes (`RUNNING`, `STOPPED`, `PAUSED`)</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section class="content syntax">
+            <h2 class="subtitle">Declaration and Usage</h2>
+
+            <h3>Declaration Syntax</h3>
+            <p>Enums can be declared outside a class (public) or inside a class (nested), but not inside a method.</p>
+            <pre><code>public enum Day {
+   SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
+}</code></pre>
+
+            <h3>Enum in a Switch Statement</h3>
+            <p>Enums work seamlessly with **<code>switch</code>** statements, providing clean and readable conditional logic:</p>
+            <pre><code>Mobile mobile = Mobile.Samsung;
+
+switch(mobile) {
+   case Samsung:
+      System.out.println("Samsung");
+      break;
+   case Nokia:
+      System.out.println("Nokia");
+      break;
+   // ... other cases
+}</code></pre>
+        </section>
+
+        <hr>
+
+        <section class="content methods">
+            <h2 class="subtitle">Built-in Enum Methods</h2>
+            <p>Since enums are a special kind of class, they inherit methods from **<code>java.lang.Enum</code>**:</p>
+            <ul>
+                <li><code>**name()**</code>: Returns the exact constant name as declared (e.g., "SUNDAY").</li>
+                <li><code>**toString()**</code>: By default, returns the same as <code>name()</code>.</li>
+                <li><code>**ordinal()**</code>: Returns the position of the constant in its declaration, starting from 0 (e.g., `SUNDAY` is 0, `MONDAY` is 1).</li>
+                <li><code>**compareTo(E o)**</code>: Compares the ordinal values of two enum constants.</li>
+                <li><code>**valueOf(Class&lt;T&gt; enumType, String name)**</code>: Static method that returns the enum constant matching the specified string name.</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section class="content conclusion">
+            <h2 class="subtitle">Key Takeaways</h2>
+            <p>Unlike normal classes where you create objects, an enum **automatically creates its objects**, which are the constants themselves. Enums always implicitly extend **<code>java.lang.Enum</code>** and their constructors are always private, meaning they cannot be explicitly subclassed or instantiated with `new`.</p>
+        </section>
+
+    </div>
+
+</body>
+</html>

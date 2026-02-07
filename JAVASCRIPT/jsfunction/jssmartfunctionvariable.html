@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Smart Function Parameters</h1>
+
+    <div class="content">
+      <p>The concept of smart function parameters in JavaScript makes a function adaptable to different use cases. It allows the function to handle different kinds of arguments passed during invocation.</p>
+      <p>Functions are an important concept for reusing code. In many cases, we need to ensure that functions are flexible enough to handle different situations.</p>
+      <p>Here are different ways to define a function with smart parameters:</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Default Function Parameters</h2>
+      <p>Default parameters allow handling <code>undefined</code> argument values or arguments that are not passed to the function during invocation.</p>
+      <p>In the example below, we set default values of parameters <code>a</code> and <code>b</code> to <code>100</code> and <code>50</code>.</p>
+      <pre><code>function division(a = 100, b = 50) {
+   return a / b;
+}</code></pre>
+
+      <h3 class="title">Example</h3>
+      <pre><code>&lt;script&gt;
+function division(a = 100, b = 50) {
+   return a / b;
+}
+document.getElementById("output").innerHTML =
+   division(10, 2) + "&lt;br&gt;" +
+   division(10, undefined) + "&lt;br&gt;" +
+   division();
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>5</li>
+        <li>0.2</li>
+        <li>2</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">JavaScript Rest Parameter</h2>
+      <p>When the number of arguments to pass is not fixed, you can use rest parameters. They allow collecting all remaining arguments into a single array. The rest parameter is represented by three dots (<code>...</code>) followed by the parameter name.</p>
+      <pre><code>function funcName(p1, p2, ...args) {
+   // Function body
+}</code></pre>
+
+      <h3 class="title">Example</h3>
+      <pre><code>&lt;script&gt;
+function sum(...nums) {
+   let totalSum = 0;
+   for (let p = 0; p &lt; nums.length; p++) {
+      totalSum += nums[p];
+   }
+   return totalSum;
+}
+document.getElementById("demo").innerHTML =
+   sum(1, 5, 8, 20, 23, 45) + "&lt;br&gt;" +
+   sum(10, 20, 30) + "&lt;br&gt;" +
+   sum() + "&lt;br&gt;";
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>102</li>
+        <li>60</li>
+        <li>0</li>
+      </ul>
+      <p><strong>Note:</strong> Always use the rest parameter as the last parameter.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">JavaScript Destructuring or Named Parameters</h2>
+      <p>You can pass a single object as a function argument and destructure it to extract only the required values. This is also called <strong>named parameters</strong>, since you get arguments based on property names.</p>
+      <pre><code>function funcName({ prop1, prop2 }) {
+   // Function body
+}</code></pre>
+
+      <h3 class="title">Example</h3>
+      <pre><code>&lt;script&gt;
+function printWatch({ brand, price }) {
+   return "The price of the " + brand + "'s watch is " + price;
+}
+
+const watch = {
+   brand: "Titan",
+   price: 10000,
+   currency: "INR"
+};
+
+document.getElementById("output").innerHTML = printWatch(watch);
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The price of the Titan's watch is 10000</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <p>These three concepts give us flexibility to pass function arguments effectively.</p>
+    </div>
+  </div>
+</div>

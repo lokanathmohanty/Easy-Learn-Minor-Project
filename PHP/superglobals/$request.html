@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `$_REQUEST` Superglobal</h1>
+
+    <div class="content">
+      <p>
+        The **`$_REQUEST`** is a **superglobal associative array** in PHP used to collect user input data. Its primary function is to act as a convenience variable by aggregating data from the `$_GET`, `$_POST`, and `$_COOKIE` superglobals into a single array.
+      </p>
+
+      <h2>Sources of Data for `$_REQUEST`</h2>
+      <p>
+        `$_REQUEST` can contain data from three methods of transmission:
+      </p>
+      <ul>
+        <li>**`$_GET`:** Variables passed via the URL query string (e.g., `?key=value`).</li>
+        <li>**`$_POST`:** Variables passed via an HTTP POST request (typically from an HTML form).</li>
+        <li>**`$_COOKIE`:** Variables passed via HTTP Cookies.</li>
+      </ul>
+
+      <h3>Order of Data Precedence</h3>
+      <p>
+        The order in which these sources are registered in the `$_REQUEST` array is controlled by the **`request_order`** directive in the PHP configuration file (`php.ini`). If a variable name exists in more than one source (e.g., in both `GET` and `POST`), the value assigned to `$_REQUEST` depends on this precedence order.
+      </p>
+
+      <h2>Usage with GET and POST Methods</h2>
+
+      <h3>Using `$_REQUEST` with GET</h3>
+      <p>
+        If the URL is accessed with a query string like <code>http://localhost/script.php?first_name=Amar</code>, the value can be collected using `$_REQUEST`.
+      </p>
+      <div class="example">
+        <p>
+          <code>echo $_REQUEST['first_name'];</code>
+        </p>
+        <p class="content">
+          Output: Amar
+        </p>
+      </div>
+
+      <h3>Using `$_REQUEST` with POST</h3>
+      <p>
+        If an HTML form submits data using the `method="post"` attribute, the data can also be collected using `$_REQUEST`.
+      </p>
+      <div class="example">
+        <p>
+          *In the receiving PHP script:*<br>
+          <code>if ($_SERVER["REQUEST_METHOD"] == "POST") {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo $_REQUEST['last_name'];</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Security Considerations ⚠️</h2>
+      <p>
+        While convenient, using `$_REQUEST` without care is generally discouraged due to security concerns:
+      </p>
+      <ul>
+        <li>
+          **Ambiguity:** It makes the source of the data ambiguous. A developer cannot tell if the input came from a legitimate form POST, a manipulated URL (GET), or a tampered cookie.
+        </li>
+        <li>
+          **Security Risk:** If a script expects a variable via POST but is vulnerable to cookie or URL manipulation, a malicious user could potentially override expected data by injecting a variable through a different, higher-precedence source.
+        </li>
+      </ul>
+      <p>
+        **Best Practice:** It is safer and clearer to use **`$_GET`**, **`$_POST`**, or **`$_COOKIE`** directly when you know and expect data from a specific method. Always **clean and validate** user input to prevent vulnerabilities like SQL injection and Cross-Site Scripting (XSS).
+      </p>
+    </div>
+  </div>
+</div>

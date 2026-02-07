@@ -1,0 +1,172 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">C - The if-else Statement</h1>
+
+    <div class="content">
+
+      <p>The <code>if-else</code> statement is one of the frequently used decision-making statements in C. It provides an alternative path of execution when the condition is not met. The use of <code>else</code> is optional.</p>
+
+      <h2 class="title">Syntax of if-else Statement</h2>
+
+      <pre><code>if (Boolean expr) {
+   Expression;
+   ...
+}
+else {
+   Expression;
+   ...
+}</code></pre>
+
+      <p>If the condition is true, the <code>if</code> block runs. If false, the <code>else</code> block runs.</p>
+
+      <h2 class="title">Example: Tax Calculation</h2>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int income = 5000;
+   float tax;
+   printf("Income: %d\n", income);
+
+   if (income &lt; 10000) {
+      tax = (float)(income * 10 / 100);
+      printf("tax: %f \n", tax);
+   } else {
+      tax = (float)(1000 + (income - 10000) * 15 / 100);
+      printf("tax: %f", tax);
+   }
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>Income: 5000<br>tax: 500.000000</li>
+        <li>Income: 15000<br>tax: 1750.000000</li>
+      </ul>
+
+      <h2 class="title">Example: Checking for a Digit</h2>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   char ch = '7';
+
+   if (ch &gt;= 48 &amp;&amp; ch &lt;= 57) {
+      printf("The character is a digit.");
+   } else {
+      printf("The character is not a digit.");
+   }
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>The character is a digit.</li>
+        <li>The character is not a digit. (when <code>ch = '*'</code>)</li>
+      </ul>
+
+      <h2 class="title">Incorrect Use Without Braces</h2>
+
+      <p>This code will throw a compilation error because the <code>else</code> is not paired properly due to missing braces:</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int amount = 50;
+   float discount;
+   printf("Amount: %d\n", amount);
+
+   if (amount &gt;= 100)
+      discount = amount * 10 / 100;
+      printf("Discount: %f \n", discount);
+   else
+      printf("Discount not applicable\n");
+
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li><strong>Error:</strong> 'else' without a previous 'if'</li>
+      </ul>
+
+      <h2 class="title">Incorrect Logic Without Braces</h2>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int amount = 50;
+   float discount, nett;
+   printf("Amount: %d\n", amount);
+
+   if (amount &lt; 100)
+      printf("Discount not applicable\n");
+   else
+      printf("Discount applicable");
+      discount = amount * 10 / 100;
+      nett = amount - discount;
+      printf("Discount: %f Net payable: %f", discount, nett);
+
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>
+          Amount: 50<br>
+          Discount not applicable<br>
+          Discount: 5.000000 Net payable: 45.000000
+        </li>
+      </ul>
+
+      <p><strong>Note:</strong> The output is incorrect because only the first statement is treated as part of the <code>else</code>. The rest are executed unconditionally. Always use curly braces to define blocks.</p>
+
+      <h2 class="title">Corrected Version</h2>
+
+      <pre><code>if (amount &gt;= 100) {
+   discount = amount * 10 / 100;
+   printf("Discount: %f \n", discount);
+} else {
+   printf("Discount not applicable\n");
+}</code></pre>
+
+      <h2 class="title">The else-if Statement</h2>
+
+      <p>Use <code>else if</code> when there are multiple conditions to check, one after the other.</p>
+
+      <h3 class="title">Syntax</h3>
+
+      <pre><code>if (condition) {
+   // Code block 1
+} else if (another_condition) {
+   // Code block 2
+} else {
+   // Default code block
+}</code></pre>
+
+      <h3 class="title">Example: Age Check</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(void) {
+   int age = 15;
+
+   if (age &lt; 18) {
+      printf("You need to be over 18 years old to continue\n");
+   } else if (age &lt; 21) {
+      printf("You need to be over 21\n");
+   } else {
+      printf("You are over 18 and older than 21 so you can continue \n");
+   }
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>You need to be over 18 years old to continue</li>
+        <li>You need to be over 21 (if age = 19)</li>
+        <li>You are over 18 and older than 21 so you can continue (if age = 25)</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

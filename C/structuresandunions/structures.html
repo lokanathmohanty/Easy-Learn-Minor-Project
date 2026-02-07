@@ -1,0 +1,281 @@
+<div class="container session">
+  <h1 class="title">Structures in C</h1>
+
+  <p class="content">
+    A structure in C is a derived or user-defined data type. We use the keyword <code>struct</code> to define a custom data type that groups together the elements of different types. The difference between an array and a structure is that an array is a homogenous collection of similar types, whereas a structure can have elements of different types stored adjacently and identified by a name.
+  </p>
+  <p class="content">
+    We are often required to work with values of different data types having certain relationships among them. For example, a book is described by its title (string), author (string), price (double), number of pages (integer), etc. Instead of using four different variables, these values can be stored in a single struct variable.
+  </p>
+
+  <h2 class="title">Declare (Create) a Structure</h2>
+  <p class="content">
+    You can create (declare) a structure by using the <code>struct</code> keyword followed by the <em>structure_tag</em> (structure name) and declare all of the members of the structure inside the curly braces along with their data types.
+  </p>
+  <p class="content">
+    To define a structure, you must use the <code>struct</code> statement. The struct statement defines a new data type, with more than one member.
+  </p>
+
+  <h3 class="title">Syntax of Structure Declaration</h3>
+  <pre class="content"><code>
+struct [structure_tag]{
+   member definition;
+   member definition;
+   ...
+   member definition;
+} [one or more structure variables];
+  </code></pre>
+  <p class="content">
+    The structure tag is optional and each member definition is a normal variable definition, such as <code>int i;</code> or <code>float f;</code> or any other valid variable definition.
+  </p>
+  <p class="content">
+    At the end of the structure's definition, before the final semicolon, you can specify one or more structure variables but it is optional.
+  </p>
+
+  <h3 class="title">Example</h3>
+  <pre class="content"><code>
+struct book{
+   char  title[50];
+   char  author[50];
+   double price;
+   int   pages;
+} book1;
+  </code></pre>
+  <p class="content">
+    Here, we declared the structure variable <code>book1</code> at the end of the structure definition. However, you can do it separately in a different statement.
+  </p>
+
+  <h2 class="title">Structure Variable Declaration</h2>
+  <p class="content">
+    To access and manipulate the members of the structure, you need to declare its variable first. To declare a structure variable, write the structure name along with the <code>struct</code> keyword followed by the name of the structure variable. This structure variable will be used to access and manipulate the structure members.
+  </p>
+  <h3 class="title">Example</h3>
+  <pre class="content"><code>
+struct book book1;
+  </code></pre>
+  <p class="content">
+    Usually, a structure is declared before the first function is defined in the program, after the include statements. That way, the derived type can be used for declaring its variable inside any function.
+  </p>
+
+  <h2 class="title">Structure Initialization</h2>
+  <p class="content">
+    The initialization of a struct variable is done by placing the value of each element inside curly brackets.
+  </p>
+  <h3 class="title">Example</h3>
+  <pre class="content"><code>
+struct book book1 = {"Learn C", "Dennis Ritchie", 675.50, 325};
+  </code></pre>
+
+  <h2 class="title">Accessing the Structure Members</h2>
+  <p class="content">
+    To access the members of a structure, first, you need to declare a structure variable and then use the dot (<code>.</code>) operator along with the structure variable.
+  </p>
+
+  <h3 class="title">Example 1</h3>
+  <pre class="content"><code>
+#include &lt;stdio.h&gt;
+
+struct book{
+   char title[10];
+   char author[20];
+   double price;
+   int pages;
+};
+
+int main(){
+   struct book book1 = {"Learn C", "Dennis Ritchie", 675.50, 325};
+   
+   printf("Title:  %s \n", book1.title);
+   printf("Author: %s \n", book1.author);
+   printf("Price:  %lf\n", book1.price);
+   printf("Pages:  %d \n", book1.pages);
+   printf("Size of book struct: %d", sizeof(struct book));
+   return 0;
+}
+  </code></pre>
+
+  <p class="content"><strong>Output</strong></p>
+  <pre class="content"><code>
+Title:  Learn C 
+Author: Dennis Ritchie 
+Price:  675.500000
+Pages:  325 
+Size of book struct: 48
+  </code></pre>
+
+  <h3 class="title">Example 2</h3>
+  <p class="content">
+    In the above program, we will make a small modification. Here, we will put the type definition and the variable declaration together, like this:
+  </p>
+  <pre class="content"><code>
+struct book{
+   char title[10];
+   char author[20];
+   double price;
+   int pages;
+} book1;
+  </code></pre>
+  <p class="content">
+    Note that if you declare a struct variable in this way, then you cannot initialize it with curly brackets. Instead, the elements need to be assigned individually.
+  </p>
+
+  <pre class="content"><code>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+struct book{
+   char title[10];
+   char author[20];
+   double price;
+   int pages;
+} book1;
+
+int main(){
+   strcpy(book1.title, "Learn C");
+   strcpy(book1.author, "Dennis Ritchie");
+   book1.price = 675.50;
+   book1.pages = 325;
+   
+   printf("Title: %s \n", book1.title);
+   printf("Author: %s \n", book1.author);
+   printf("Price: %lf \n", book1.price);
+   printf("Pages: %d \n", book1.pages);
+   return 0;
+}
+  </code></pre>
+
+  <p class="content"><strong>Output</strong></p>
+  <pre class="content"><code>
+Title: Learn C 
+Author: Dennis Ritchie 
+Price: 675.500000 
+Pages: 325
+  </code></pre>
+
+  <h2 class="title">Copying Structures</h2>
+  <p class="content">
+    The assignment (<code>=</code>) operator can be used to copy a structure directly. You can also use the assignment operator to assign the value of the member of one structure to another.
+  </p>
+  <p class="content">
+    Let's have two <code>struct book</code> variables, <code>book1</code> and <code>book2</code>. The variable <code>book1</code> is initialized with declaration, and we wish to assign the same values of its elements to that of <code>book2</code>.
+  </p>
+  <p class="content">
+    We can assign individual elements as follows:
+  </p>
+  <pre class="content"><code>
+struct book book1 = {"Learn C", "Dennis Ritchie", 675.50, 325}, book2;
+strcpy(book2.title, book1.title);
+strcpy(book2.author, book1.author);
+book2.price = book1.price;
+book2.pages = book1.pages;
+  </code></pre>
+  <p class="content">
+    Note the use of <code>strcpy()</code> function to assign the value to a string variable instead of using the <code>=</code> operator.
+  </p>
+
+  <h3 class="title">Example</h3>
+  <pre class="content"><code>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+struct book{
+   char title[10];
+   char author[20];
+   double price;
+   int pages;
+};
+
+int main(){
+   struct book book1 = {"Learn C", "Dennis Ritchie", 675.50, 325}, book2;
+   book2 = book1;
+   
+   printf("Title: %s \n", book2.title);
+   printf("Author: %s \n", book2.author);
+   printf("Price: %lf \n", book1.price);
+   printf("Pages: %d \n", book1.pages);
+   printf("Size of book struct: %d", sizeof(struct book));
+   return 0;
+}
+  </code></pre>
+
+  <p class="content"><strong>Output</strong></p>
+  <pre class="content"><code>
+Title: Learn C 
+Author: Dennis Ritchie 
+Price: 675.500000 
+Pages: 325 
+Size of book struct: 48
+  </code></pre>
+
+  <h2 class="title">Structures as Function Arguments</h2>
+  <p class="content">
+    You can pass a structure as a function argument in the same way as you pass any other variable or pointer.
+  </p>
+
+  <h3 class="title">Example</h3>
+  <pre class="content"><code>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+struct Books{
+   char title[50];
+   char author[50];
+   char subject[100];
+   int  book_id;
+};
+
+/* function declaration */
+void printBook(struct Books book);
+
+int main(){
+   struct Books Book1;
+   struct Books Book2;
+
+   strcpy(Book1.title, "C Programming");
+   strcpy(Book1.author, "Nuha Ali"); 
+   strcpy(Book1.subject, "C Programming Tutorial");
+   Book1.book_id = 6495407;
+
+   strcpy(Book2.title, "Telecom Billing");
+   strcpy(Book2.author, "Zara Ali");
+   strcpy(Book2.subject, "Telecom Billing Tutorial");
+   Book2.book_id = 6495700;
+
+   printBook(Book1);
+   printBook(Book2);
+   return 0;
+}
+
+void printBook(struct Books book){
+   printf("Book title : %s\n", book.title);
+   printf("Book author : %s\n", book.author);
+   printf("Book subject : %s\n", book.subject);
+   printf("Book book_id : %d\n", book.book_id);
+}
+  </code></pre>
+
+  <p class="content"><strong>Output</strong></p>
+  <pre class="content"><code>
+Book title : C Programming
+Book author : Nuha Ali
+Book subject : C Programming Tutorial
+Book book_id : 6495407
+Book title : Telecom Billing
+Book author : Zara Ali
+Book subject : Telecom Billing Tutorial
+Book book_id : 6495700
+  </code></pre>
+
+  <h2 class="title">Pointers to Structures</h2>
+  <p class="content">
+    You can define pointers to structures in the same way as you define pointers to any other variable.
+  </p>
+
+  <h3 class="title">Declaration of Pointer to a Structure</h3>
+  <pre class="content"><code>
+struct Books *struct_pointer;
+  </code></pre>
+
+  <h3 class="title">Initialization of Pointer to a Structure</h3>
+  <p class="content">
+    You can store

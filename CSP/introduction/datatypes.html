@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Data Types: Value, Reference, and Pointer Types</h1>
+        
+        <h2 class="title">What Are Data Types?</h2>
+        <div class="content">
+            <p>C# is a **strongly typed language**, meaning all variables must be declared with a **data type** before use. Data types specify the kind of data a variable can store (e.g., integer, character, boolean) and help with memory optimization and code readability.</p>
+            <p>Variables in C# are categorized into three main types:</p>
+            <ul>
+                <li><strong>Value Types:</strong> Store the actual data directly (e.g., <code>int</code>, <code>char</code>).</li>
+                <li><strong>Reference Types:</strong> Store a reference (memory address) to the actual data (e.g., <code>object</code>, <code>string</code>).</li>
+                <li><strong>Pointer Types:</strong> Store the memory address of another type (used in unsafe code).</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">1. Value Types</h2>
+        <div class="content">
+            <p>Value types directly contain their data and are derived from <code>System.ValueType</code>. Key types include:</p>
+            <ul>
+                <li><strong>Integral Types:</strong> <code>int</code> (4 bytes), <code>long</code> (8 bytes), <code>byte</code> (1 byte).</li>
+                <li><strong>Floating-Point Types:</strong> <code>float</code> (4 bytes, 6-7 precision), <code>double</code> (8 bytes, 15-16 precision), and <code>decimal</code> (16 bytes, best for financial data).</li>
+                <li><strong>Character Type:</strong> <code>char</code> (2 bytes, stores a single character).</li>
+                <li><strong>Boolean Type:</strong> <code>bool</code> (1 byte, stores <code>true</code> or <code>false</code>).</li>
+                <li><strong>User-Defined:</strong> <code>enum</code> (named constant values) and <code>struct</code> (encapsulates related data).</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">2. Reference Types (Example)</h2>
+        <div class="content example">
+            <p>Reference types store a pointer to the data. Changes made through one reference variable are reflected in others. Common types are:</p>
+            <ul>
+                <li><strong>Object Type:</strong> The base class (<code>System.Object</code>) for all C# types. Converting a value type to an object type is **boxing**, and the reverse is **unboxing**.</li>
+                <li><strong>Dynamic Type:</strong> Type checking is performed at **run-time**, allowing it to store any type of value.</li>
+                <li><strong>String Type:</strong> (Alias for <code>System.String</code>) Used for assigning text values. Use <code>StringBuilder</code> for efficient string modification.</li>
+                <li><strong>Array Type:</strong> Stores multiple values of the same type in a single variable.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Type Conversion</h2>
+        <div class="content">
+            <p>Converting data from one type to another is common:</p>
+            <ul>
+                <li><strong>Implicit Conversion:</strong> Occurs automatically when there is **no risk of data loss** (e.g., <code>int</code> to <code>double</code>).</li>
+                <li><strong>Explicit Conversion (Casting):</strong> Required when converting **incompatible types** where data loss is possible (e.g., <code>double</code> to <code>int</code> using <code>(int)</code>).</li>
+            </ul>
+            <pre>
+// Implicit
+int age = 18;
+double preciseAge = age; 
+
+// Explicit
+double salary = 50000.75;
+int roundedSalary = (int)salary; 
+            </pre>
+        </div>
+    </div>
+</div>

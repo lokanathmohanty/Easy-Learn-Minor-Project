@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>EnumSet</code> Class Summary 🔢🔠</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.EnumSet</code>** class is a high-performance, specialized **<code>Set</code>** implementation designed exclusively for use with elements of a single **enum type**. It is an abstract class, meaning you instantiate it using its static factory methods rather than constructors.</p>
+
+            <hr>
+
+            <h2 class="title">I. Key Characteristics and Performance</h2>
+            <p><code>EnumSet</code> is arguably the most efficient and concise Set implementation in the Java Collections Framework:</p>
+            <ul>
+                <li>
+                    <strong>Bit Vector Implementation:</strong> Internally, `EnumSet` is represented as a **bit vector** (or bit mask). Since the set of enum constants is fixed and finite, membership is tracked using a single bit for each constant. This makes operations extremely fast.
+                </li>
+                <li>
+                    <strong>Performance:</strong> All basic operations like **<code>add()</code>**, **<code>remove()</code>**, and **<code>contains()</code>** execute in **constant time ($O(1)$)** and are faster than general-purpose Sets like `HashSet`.
+                </li>
+                <li>
+                    <strong>Ordering:</strong> Elements are always maintained and iterated over in the **natural order** of their keys (the order in which the enum constants are declared).
+                </li>
+                <li>
+                    <strong>Single Enum Type:</strong> All elements must come from the single enum type specified at creation.
+                </li>
+                <li>
+                    <strong>Non-Synchronized:</strong> It is **not thread-safe**. External synchronization is required for concurrent modification.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Static Factory Methods (Creation)</h2>
+            <p>Because the class is abstract, instances are created using various static methods tailored for common set-up patterns:</p>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>static &lt;E&gt; EnumSet&lt;E&gt; **noneOf** (Class&lt;E&gt; elementType)</code></td>
+                    <td>Creates an **empty** set for the specified enum type.</td>
+                </tr>
+                <tr>
+                    <td><code>static &lt;E&gt; EnumSet&lt;E&gt; **allOf** (Class&lt;E&gt; elementType)</code></td>
+                    <td>Creates a set containing **all** of the enum constants for the specified type.</td>
+                </tr>
+                <tr>
+                    <td><code>static &lt;E&gt; EnumSet&lt;E&gt; **of** (E e1, ...)</code></td>
+                    <td>Creates a set initially containing the specified element(s).</td>
+                </tr>
+                <tr>
+                    <td><code>static &lt;E&gt; EnumSet&lt;E&gt; **range** (E from, E to)</code></td>
+                    <td>Creates a set containing all elements in the range between the two specified endpoints (inclusive).</td>
+                </tr>
+                <tr>
+                    <td><code>static &lt;E&gt; EnumSet&lt;E&gt; **complementOf** (EnumSet&lt;E&gt; s)</code></td>
+                    <td>Creates a set containing all constants in the enum type that are **not** in the specified set <code>s</code>.</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">III. Example of Usage</h2>
+            <p>The example demonstrates the simple use of the <code>of()</code> factory method to create a small, efficient set containing only a single enum constant:</p>
+            <div class="example">
+                <pre><code>public enum Numbers {ONE, TWO, THREE, FOUR, FIVE};
+
+// Creates a set of type Numbers containing only ONE.
+EnumSet&lt;Numbers&gt; set = EnumSet.of(Numbers.ONE);
+
+// Output: Set:[ONE]</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,157 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Type Conversion in C</h1>
+    <div class="content">
+      <p>In C programming, type conversion is the process of converting a value from one data type to another to ensure compatibility in expressions. This happens either implicitly by the compiler or explicitly by the programmer.</p>
+
+      <h2 class="title">Implicit Type Conversion</h2>
+      <p>Also known as automatic type conversion, it occurs when the compiler converts types on its own, typically promoting smaller data types to larger ones to maintain precision and consistency.</p>
+      <p>Rules include:</p>
+      <ul>
+        <li>Byte and short values are promoted to int.</li>
+        <li>If one operand is long, the expression is promoted to long.</li>
+        <li>If one operand is float, promote expression to float.</li>
+        <li>If any operand is double, promote expression to double.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Implicit Type Conversion</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int  i = 17;
+  char c = 'c'; // ASCII value 99
+
+  int sum = i + c;
+
+  printf("Value of sum: %d\n", sum);
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+Value of sum: 116
+      </code></pre>
+      <p>The char <code>c</code> is promoted to int using its ASCII value 99 before addition.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Usual Arithmetic Conversion</h2>
+    <p>When operands have different types, both are converted to a common type following this hierarchy:</p>
+    <ol>
+      <li>double</li>
+      <li>float</li>
+      <li>unsigned long</li>
+      <li>long</li>
+      <li>unsigned int</li>
+      <li>int</li>
+    </ol>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Usual Arithmetic Conversion</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  char a = 'A';   // ASCII 65
+  float b = a + 5.5;
+
+  printf("%f\n", b);
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+70.500000
+      </code></pre>
+      <p>Here, <code>a</code> is promoted to float to match the other operand.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Explicit Type Conversion (Typecasting)</h2>
+    <p>Typecasting is when the programmer explicitly converts a value from one type to another using the cast operator <code>(type)</code>. It is required when converting from a larger to a smaller type or between unrelated types (e.g., float to int).</p>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Without Typecasting</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int x = 10, y = 4;
+  float z = x / y;
+
+  printf("%f\n", z);
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+2.000000
+      </code></pre>
+      <p>Result is 2 because both operands are int and integer division truncates decimals.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: With Explicit Typecasting</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int x = 10, y = 4;
+  float z = (float) x / y;
+
+  printf("%f\n", z);
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+2.500000
+      </code></pre>
+      <p>Now the division occurs in floating-point arithmetic producing the correct result.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Typecasting Functions in C</h2>
+    <ul>
+      <li><code>atoi()</code>: Converts string to integer.</li>
+      <li><code>itoa()</code>: Converts integer to string.</li>
+      <li><code>malloc()</code>: Often used with explicit cast for pointer type.</li>
+    </ul>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using <code>atoi()</code></h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+  char str[] = "123";
+  int num = atoi(str);
+
+  printf("%d\n", num);
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+123
+      </code></pre>
+    </div>
+  </div>
+</div>

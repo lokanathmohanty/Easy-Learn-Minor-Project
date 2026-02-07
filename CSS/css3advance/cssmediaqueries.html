@@ -1,0 +1,201 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Media Queries</h1>
+    <div class="content">
+      <p>
+        Media queries in CSS are used to apply different styles depending on the screen size, resolution, orientation, or other characteristics of the device. They use the <code>@media</code> rule and are essential for responsive design, making websites adapt to mobile, tablet, and desktop devices.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+@media not|only mediatype and (media feature) and (media feature) {
+   /* CSS styles */
+}
+      </pre>
+      <p>
+        - <strong>media-type</strong> examples: <code>screen</code>, <code>print</code>, <code>speech</code>. <br>
+        - <strong>media-feature</strong> examples: <code>width</code>, <code>height</code>, <code>orientation</code>.
+      </p>
+
+      <h2>Table of Contents</h2>
+      <ul>
+        <li>Media Types</li>
+        <li>CSS Media Type Print</li>
+        <li>CSS Media Type Screen</li>
+        <li>CSS Media Type All</li>
+        <li>Width Ranges for Media Queries</li>
+        <li>Combining Media Queries</li>
+        <li>CSS Media Type With Only</li>
+        <li>CSS Media Queries AND Operator</li>
+        <li>Media Queries NOT Operator</li>
+        <li>Creating Complex Media Queries</li>
+        <li>Media Queries for Screen Orientation</li>
+        <li>List of Media Queries Features</li>
+      </ul>
+
+      <h2>Media Types</h2>
+      <ul>
+        <li><code>all</code>: Applies to all devices.</li>
+        <li><code>print</code>: Applies only when printing.</li>
+        <li><code>screen</code>: Applies to device screens like mobiles, tablets, and desktops.</li>
+      </ul>
+
+      <h2>CSS Media Type Print</h2>
+      <p>
+        Print styles are optimized for paper, usually removing dark backgrounds and using simple colors to save ink.
+      </p>
+      <pre>
+@media print {
+  body {
+    background-color: white;
+    color: black;
+  }
+}
+      </pre>
+
+      <h2>CSS Media Type All</h2>
+      <p>
+        The <code>all</code> keyword applies styles across all devices including screen and print.
+      </p>
+      <pre>
+@media all {
+  body {
+    font-size: 16px;
+  }
+}
+      </pre>
+
+      <h2>CSS Media Type Screen</h2>
+      <p>
+        Used for devices with screens. Often combined with screen width checks for responsiveness.
+      </p>
+      <pre>
+@media screen and (max-width: 500px) {
+  .container {
+    flex-direction: column;
+  }
+}
+      </pre>
+
+      <h2>Width Ranges for Media Queries</h2>
+      <p>
+        You can set rules for specific screen width ranges.
+      </p>
+      <pre>
+@media (min-width: 600px) and (max-width: 800px) {
+  p {
+    background-color: yellow;
+    color: red;
+  }
+}
+      </pre>
+
+      <h2>Combining Media Queries</h2>
+      <p>
+        Multiple queries can be combined using a comma, which acts like an OR operator.
+      </p>
+      <pre>
+@media (min-width: 500px), print {
+  body {
+    background-color: black;
+    color: white;
+  }
+}
+      </pre>
+
+      <h2>CSS Media Type With Only</h2>
+      <p>
+        Using <code>only</code> ensures that the rule applies only if the entire media query matches.
+      </p>
+      <pre>
+@media only screen and (min-width: 500px) and (max-width: 700px) {
+  body {
+    background-color: pink;
+    color: blue;
+  }
+}
+      </pre>
+
+      <h2>CSS Media Queries AND Operator</h2>
+      <p>
+        The <code>and</code> operator lets you combine multiple conditions. All must be true for the styles to apply.
+      </p>
+      <pre>
+@media (min-width: 500px) and (max-width: 700px) {
+  body {
+    background-color: lightgreen;
+    color: blue;
+  }
+}
+      </pre>
+
+      <h2>Media Queries NOT Operator</h2>
+      <p>
+        The <code>not</code> operator negates the condition and applies styles only if the query does not match.
+      </p>
+      <pre>
+@media not screen and (max-width: 700px) {
+  body {
+    background-color: orange;
+    color: white;
+  }
+}
+      </pre>
+
+      <h2>Creating Complex Media Queries</h2>
+      <p>
+        You can use <code>and</code>, <code>not</code>, and <code>only</code> operators together to create advanced queries.
+      </p>
+      <pre>
+@media only screen and (min-width: 500px) and (max-width: 700px) {
+  body {
+    background-color: pink;
+    color: blue;
+  }
+}
+@media not screen and (max-width: 700px) {
+  body {
+    background-color: orange;
+    color: white;
+  }
+}
+      </pre>
+
+      <h2>Media Queries for Screen Orientation</h2>
+      <p>
+        You can apply styles based on whether the device is in portrait or landscape orientation.
+      </p>
+      <pre>
+@media (min-width: 500px) and (orientation: landscape) {
+  body {
+    color: blue;
+  }
+}
+      </pre>
+
+      <h2>List of Media Queries Features</h2>
+      <p>
+        Common media features include:
+      </p>
+      <ul>
+        <li><code>width</code> - viewport width</li>
+        <li><code>height</code> - viewport height</li>
+        <li><code>orientation</code> - portrait or landscape</li>
+        <li><code>aspect-ratio</code> - width to height ratio</li>
+        <li><code>hover</code> - checks if device supports hover</li>
+        <li><code>pointer</code> - checks pointer type (mouse, touch)</li>
+        <li><code>prefers-color-scheme</code> - light or dark mode preference</li>
+        <li><code>prefers-reduced-motion</code> - user preference to reduce animations</li>
+        <li><code>resolution</code> - screen resolution in dpi</li>
+      </ul>
+
+      <h2>Practice Task</h2>
+      <ul>
+        <li>Create a responsive layout that changes from 2-column to 1-column below 600px.</li>
+        <li>Add print-specific styles that remove background colors.</li>
+        <li>Use orientation queries to style differently in landscape mode.</li>
+        <li>Experiment with prefers-color-scheme to create light/dark themes.</li>
+      </ul>
+    </div>
+  </div>
+</div>

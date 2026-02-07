@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Minifying JS</h1>
+    <div class="content">
+      <p>
+        JavaScript enables dynamic and interactive features on websites and web apps. It is a key component of modern web development. But as JavaScript files grow larger and more complex, they can significantly affect page load times and overall speed.
+      </p>
+      <p>
+        To solve this issue, developers use techniques like <strong>code minification</strong> to make JavaScript code simpler without compromising functionality.
+      </p>
+
+      <h2>What is "Code Minification"?</h2>
+      <p>
+        Minimization (also called minification) is the process of optimizing code to minimize bandwidth use, save space, and speed up page loads.
+      </p>
+      <p>
+        JavaScript code must be parsed, compressed, and outputted in a way that removes unnecessary characters such as:
+      </p>
+      <ul>
+        <li>White spaces</li>
+        <li>Comments</li>
+        <li>Newline characters</li>
+      </ul>
+      <p>
+        It may also include:
+      </p>
+      <ul>
+        <li>Renaming variables</li>
+        <li>Inlining methods</li>
+        <li>Removing block delimiters</li>
+        <li>Using implicit conditionals</li>
+      </ul>
+
+      <h2>Need for Minimizing the Code</h2>
+      <ul>
+        <li><strong>Faster Load Times:</strong> Minified code reduces file size, leading to faster downloads and execution.</li>
+        <li><strong>Bandwidth Optimization:</strong> Smaller files reduce server–client data transfer.</li>
+        <li><strong>Improved SEO:</strong> Faster pages are favored by search engines.</li>
+        <li><strong>Enhanced User Experience:</strong> Faster apps lower bounce rates and improve engagement.</li>
+      </ul>
+
+      <h2>Un-minified vs Minified JavaScript Code</h2>
+      <h3>Un-minified Code</h3>
+      <pre>
+// Program to check if a word is a palindrome
+function isPalindrome(word) {
+   // find the length of the word
+   const length = word.length;
+   
+   // loop through half of the word
+   for (let i = 0; i &lt; length / 2; i++) {   
+      // check if first and last characters are the same
+      if (word[i] !== word[length - 1 - i]) {
+         return 'This is not a palindrome';
+      }
+   }
+   return 'This is a palindrome';
+}
+// take input
+const inputWord = "hello";
+
+// call the function
+const result = isPalindrome(inputWord);
+console.log(result);
+      </pre>
+      <p><strong>Output:</strong> This is not a palindrome</p>
+
+      <h3>Minified Code</h3>
+      <pre>
+function isPalindrome(w){const l=w.length;for(let i=0;i&lt;l/2;i++)if(w[i]!==w[l-1-i])return"This is not a palindrome";return"This is a palindrome"}
+const inputWord="hello",result=isPalindrome(inputWord);console.log(result);
+      </pre>
+
+      <p>
+        We reduced <strong>529 bytes to 324 bytes</strong>, saving 205 bytes and improving page load speed by over 40%.
+      </p>
+
+      <h2>How to Minify JavaScript Code</h2>
+      <p>There are two main approaches:</p>
+      <ul>
+        <li>
+          <strong>Manual Minification:</strong> Removing spaces, comments, and newlines manually in a text editor. Suitable only for very small files.
+        </li>
+        <li>
+          <strong>Automated Tools:</strong> Using minification software or build tools (e.g., <code>uglify-js</code>, <code>terser</code>, Webpack) to automatically compress JavaScript.
+        </li>
+      </ul>
+      <p>
+        For large applications, automated tools are the industry standard.
+      </p>
+
+      <h2>Code Minification vs Compression</h2>
+      <ul>
+        <li>
+          <strong>Code Minification:</strong> Removes unnecessary characters from source code while preserving functionality. Improves readability and load time.
+        </li>
+        <li>
+          <strong>Compression:</strong> Reduces file size through encoding techniques (e.g., Gzip, Brotli). Used in network transmission to save bandwidth.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

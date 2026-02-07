@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Atomics Objects</h1>
+    <div class="content">
+      <p>The <b>Atomics</b> object in JavaScript provides a set of static methods for performing atomic operations on <b>SharedArrayBuffer</b> objects. Atomic operations are operations that are guaranteed to be completed in a single step, without being interrupted by other threads. This makes them useful for implementing concurrent data structures and algorithms.</p>
+
+      <p>The <b>Atomics</b> object, as part of the ECMAScript standard, serves as a crucial tool for managing shared memory in a multi-threaded environment.</p>
+
+      <h2>Atomics Object</h2>
+      <p>The Atomics object is a built-in JavaScript object that provides atomic operations on shared memory. It is designed to be used in a multi-threaded environment, where multiple threads or Web Workers may be concurrently accessing and modifying shared data.</p>
+
+      <h2>The Essence of "Atomic"</h2>
+      <p>In the context of the Atomics object, "atomic" signifies that it performs operations that are indivisible. Atomic operations prevent <b>race conditions</b>, where outcomes depend on timing and execution order.</p>
+
+      <h2>Atomic Operations</h2>
+      <p>Atomic operations are low-level operations on shared memory that execute as a single, uninterruptible unit. The Atomics object provides methods for additions, subtractions, bitwise operations, exchanges, and more.</p>
+
+      <h2>Methods</h2>
+      <ul>
+        <li><b>Atomics.add()</b> − Adds a value to an element and returns the original value.</li>
+        <li><b>Atomics.sub()</b> − Subtracts a value from an element and returns the original value.</li>
+        <li><b>Atomics.and()</b> − Performs atomic bitwise AND and returns the original value.</li>
+        <li><b>Atomics.or()</b> − Performs atomic bitwise OR and returns the original value.</li>
+        <li><b>Atomics.xor()</b> − Performs atomic bitwise XOR and returns the original value.</li>
+        <li><b>Atomics.load()</b> − Retrieves the value at a specified index atomically.</li>
+        <li><b>Atomics.store()</b> − Stores a value at a specified index atomically.</li>
+        <li><b>Atomics.exchange()</b> − Swaps a value with a specified value atomically.</li>
+        <li><b>Atomics.compareExchange()</b> − Compares and conditionally replaces a value atomically.</li>
+        <li><b>Atomics.wait()</b> − Waits for a value at an index to change.</li>
+        <li><b>Atomics.notify()</b> − Notifies waiting threads.</li>
+      </ul>
+
+      <h2>Examples</h2>
+
+      <h3>Example 1: Basic Usage of Atomics Operations</h3>
+      <p>These examples demonstrate addition, subtraction, bitwise operations, load, store, exchange, compareExchange, wait, and notify.</p>
+
+      <h4>Atomics.add()</h4>
+      <pre><code>// Shared memory setup
+const sharedBuffer = new SharedArrayBuffer(4);
+const sharedArray = new Int32Array(sharedBuffer);
+
+// Atomics.add()
+const originalAddValue = Atomics.add(sharedArray, 0, 10);
+console.log(`Atomics.add: Original value: ${originalAddValue}, New value: ${sharedArray[0]}`);
+</code></pre>
+
+      <h4>Atomics.sub()</h4>
+      <pre><code>// Shared memory setup
+const sharedBuffer = new SharedArrayBuffer(4);
+const sharedArray = new Int32Array(sharedBuffer);
+
+// Atomics.sub()
+const originalSubValue = Atomics.sub(sharedArray, 0, 5);
+console.log(`Atomics.sub: Original value: ${originalSubValue}, New value: ${sharedArray[0]}`);
+</code></pre>
+
+      <h4>Atomics.and()</h4>
+      <pre><code>// Atomics.and()
+const originalAndValue = Atomics.and(sharedArray, 0, 0b1010);
+console.log(`Atomics.and: Original value: ${originalAndValue}, New value: ${sharedArray[0].toString(2)}`);
+</code></pre>
+
+      <h4>Atomics.or()</h4>
+      <pre><code>// Atomics.or()
+const originalOrValue = Atomics.or(sharedArray, 0, 0b1100);
+console.log(`Atomics.or: Original value: ${originalOrValue}, New value: ${sharedArray[0].toString(2)}`);
+</code></pre>
+
+      <h4>Atomics.xor()</h4>
+      <pre><code>// Atomics.xor()
+const originalXorValue = Atomics.xor(sharedArray, 0, 0b0110);
+console.log(`Atomics.xor: Original value: ${originalXorValue}, New value: ${sharedArray[0].toString(2)}`);
+</code></pre>
+
+      <h4>Atomics.load()</h4>
+      <pre><code>// Atomics.load()
+const loadedValue = Atomics.load(sharedArray, 0);
+console.log(`Atomics.load: Loaded value: ${loadedValue}`);
+</code></pre>
+
+      <h4>Atomics.store()</h4>
+      <pre><code>// Atomics.store()
+Atomics.store(sharedArray, 0, 42);
+console.log(`Atomics.store: New value: ${sharedArray[0]}`);
+</code></pre>
+
+      <h4>Atomics.exchange()</h4>
+      <pre><code>// Atomics.exchange()
+const originalExchangeValue = Atomics.exchange(sharedArray, 0, 99);
+console.log(`Atomics.exchange: Original value: ${originalExchangeValue}, New value: ${sharedArray[0]}`);
+</code></pre>
+
+      <h4>Atomics.compareExchange()</h4>
+      <pre><code>// Atomics.compareExchange()
+const expectedValue = 99;
+const newValue = 55;
+const result = Atomics.compareExchange(sharedArray, 0, expectedValue, newValue);
+console.log(`Atomics.compareExchange: Original value: ${result}, New value: ${sharedArray[0]}`);
+</code></pre>
+
+      <h4>Atomics.wait()</h4>
+      <pre><code>// Atomics.wait()
+const valueToWaitFor = 55;
+Atomics.store(sharedArray, 0, valueToWaitFor);
+
+setTimeout(() => {
+    Atomics.notify(sharedArray, 0);
+}, 2000);
+
+const waitResult = Atomics.wait(sharedArray, 0, valueToWaitFor, 5000);
+console.log(`Atomics.wait: Wait result: ${waitResult}`);
+</code></pre>
+
+      <h3>Example 2: Real-World Use Case - Synchronized Counter</h3>
+      <p>In this example, multiple threads increment a shared counter using <b>Atomics.add()</b>, ensuring atomicity and preventing race conditions.</p>
+
+      <pre><code>const sharedBuffer = new SharedArrayBuffer(4);
+const sharedArray = new Int32Array(sharedBuffer);
+
+// Synchronized counter
+function incrementCounter() {
+  const incrementValue = 1;
+  const originalValue = Atomics.add(sharedArray, 0, incrementValue);
+  console.log(`Incremented counter by ${incrementValue}. New value: ${sharedArray[0]}`);
+}
+
+// Multiple threads incrementing the counter
+setInterval(() => {
+  incrementCounter();
+}, 1000);
+
+// Simulate other activities
+setInterval(() => {
+  console.log('Main thread doing other work.');
+}, 3000);
+</code></pre>
+    </div>
+  </div>
+</div>

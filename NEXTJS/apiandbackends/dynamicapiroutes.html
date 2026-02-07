@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Dynamic API Routes (Pages Router) 🔄</h1>
+        
+        <div class="content">
+            <h2 class="title">What are Dynamic API Routes?</h2>
+            <p>**Dynamic API Routes** are server-side endpoints designed to handle requests where a part of the URL is a variable parameter (like a product ID, a username, or a slug). This allows a single API file to serve content for thousands of different resources.</p>
+            <p>In the **Pages Router** system, these routes are defined by enclosing the variable segment in **square brackets** (<span class="example">`[param]`</span>) within the <span class="example">`pages/api`</span> directory structure.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Creating and Accessing Dynamic Routes</h2>
+            
+            <p>To create a dynamic route that handles different user IDs, you use the folder/file naming convention:</p>
+            <ul>
+                <li>**File Path:** <span class="example">`pages/api/user/[id].js`</span></li>
+                <li>**Endpoint:** <span class="example">`/api/user/[id]`</span> (e.g., <span class="example">`/api/user/123`</span>)</li>
+            </ul>
+            
+            <h3 class="title">Accessing the Parameter:</h3>
+            <p>The dynamic parameter is accessed via the **<span class="example">`req.query`</span>** object inside the API route handler function, where the key is the name used in the square brackets.</p>
+            <pre>// File: pages/api/user/[id].js
+export default function handler(req, res) {
+    // Access 'id' from the URL (e.g., /api/user/99)
+    const { id } = req.query; 
+    
+    res.status(200).json({ message: `Fetching data for user ${id}` });
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Handling HTTP Methods with Dynamic Routes</h2>
+            <p>You can combine dynamic parameters with method handling to perform different operations (GET, DELETE, etc.) on the specific resource identified by the parameter.</p>
+            <pre>// File: pages/api/user/[id].js
+export default function handler(req, res) {
+    const { id } = req.query; 
+  
+    if (req.method === 'GET') {
+        // Handle requests like GET /api/user/99
+        res.status(200).json({ message: `Fetching details for user ${id}` });
+    } 
+    else if (req.method === 'DELETE') {
+        // Handle requests like DELETE /api/user/99
+        res.status(200).json({ message: `User ${id} deleted successfully` });
+    } 
+    else {
+        // Fallback for unsupported methods
+        res.setHeader('Allow', ['GET', 'DELETE']);
+        res.status(405).end(`Method ${req.method} Not Allowed`);
+    }
+}</pre>
+            
+            <h3 class="title">Frontend Interaction Example:</h3>
+            <p>The client component uses the local <span class="example">`userId`</span> state to construct the dynamic API URL for both GET and DELETE operations.</p>
+            <pre>// Function to fetch user details (GET request)
+const fetchUserDetails = async () => {
+  const response = await fetch(`/api/user/${userId}`);
+  // ... handle response
+};
+
+// Function to delete user (DELETE request)
+const deleteUser = async () => {
+  const response = await fetch(`/api/user/${userId}`, 
+                                { method: 'DELETE' });
+  // ... handle response
+};</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Poisson Regression</h1>
+    <div class="content">
+      <p>
+        Poisson regression models count data, where the response variable represents the number of times an event occurs within a fixed interval. It assumes the response variable follows a Poisson distribution. The model relates predictors to the logarithm of the expected counts:
+      </p>
+      <p><strong>Model:</strong> \( \log(y) = a + b_1 x_1 + b_2 x_2 + \cdots + b_n x_n \)</p>
+      <p><strong>Parameters:</strong></p>
+      <ul>
+        <li>\( y \): Response count variable</li>
+        <li>\( a, b_i \): Numeric coefficients</li>
+        <li>\( x_i \): Predictor variables</li>
+      </ul>
+      <p>The <code>glm()</code> function with family set to <code>poisson</code> performs Poisson regression in R.</p>
+
+      <h2>Syntax</h2>
+      <pre><code>glm(formula, data, family = poisson)</code></pre>
+
+      <h2>Example</h2>
+      <p>Analyze the <code>warpbreaks</code> dataset describing counts of loom breaks affected by wool type and tension level.</p>
+      <pre><code># Load data
+input <- warpbreaks
+print(head(input))
+
+# Create Poisson regression model
+output <- glm(formula = breaks ~ wool + tension, data = warpbreaks, family = poisson)
+print(summary(output))
+</code></pre>
+
+      <h2>Sample Output</h2>
+      <pre><code>Call:
+glm(formula = breaks ~ wool + tension, family = poisson, data = warpbreaks)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-3.6871   -1.6503   -0.4269    1.1902    4.2616  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  3.69196    0.04541  81.302  < 2e-16 ***
+woolB      -0.20599    0.05157  -3.994 6.49e-05 ***
+tensionM   -0.32132    0.06027  -5.332 9.73e-08 ***
+tensionH   -0.51849    0.06396  -8.107 5.21e-16 ***
+---
+(Dispersion parameter for poisson family taken to be 1)
+
+Null deviance: 297.37 on 53 degrees of freedom
+Residual deviance: 210.39 on 50 degrees of freedom
+AIC: 493.06
+
+Number of Fisher Scoring iterations: 4
+</code></pre>
+
+      <h2>Interpretation</h2>
+      <p>Variables with p-values less than 0.05 (here, wool type B, and tensions M and H) significantly affect the count of breaks. This indicates their impact on the response variable.</p>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

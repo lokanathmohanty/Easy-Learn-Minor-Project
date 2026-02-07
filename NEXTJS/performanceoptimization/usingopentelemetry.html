@@ -1,0 +1,55 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Using OpenTelemetry</h1>
+        
+        <div class="content">
+            <h2 class="title">What is OpenTelemetry? 🔭</h2>
+            <p><strong>OpenTelemetry (OTel)</strong> is an open-source framework that provides a standardized set of APIs, SDKs, and tools to **collect and analyze telemetry data** from applications. This data includes **traces**, **metrics**, and **logs** (collectively, "observability").</p>
+            <ul>
+                <li class="example">It is a language and vendor-agnostic tool, meaning it supports various languages, frameworks, and monitoring backends (like Jaeger, Prometheus, or Datadog).</li>
+                <li class="example">It is used to gain **insights** into application behavior, making it easier to identify and diagnose issues in complex, distributed systems.</li>
+            </ul>
+            <p>Next.js supports OpenTelemetry **out of the box**, meaning the Next.js framework itself already includes instrumentation to generate basic telemetry data.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Setting Up OpenTelemetry in Next.js</h2>
+            <p>To simplify setting up and configuring the OpenTelemetry SDK in a Next.js project, it is recommended to use the official Vercel package, **<code>@vercel/otel</code>**.</p>
+            
+            <h3>Step 1: Install Packages</h3>
+            <p>Install the necessary packages, including the Vercel helper and related OpenTelemetry dependencies:</p>
+            <pre class="example"><code>npm install @vercel/otel @opentelemetry/sdk-logs @opentelemetry/api-logs @opentelemetry/instrumentation</code></pre>
+            
+            <h3>Step 2: Setup Instrumentation File</h3>
+            <p>Create a custom file named **<code>instrumentation.ts</code>** (or <code>.js</code>) in the **root directory** of your project. This file registers the OpenTelemetry configuration when the application starts.</p>
+            <pre class="example"><code>// /instrumentation.ts
+import { registerOTel } from '@vercel/otel'
+ 
+export function register() {
+  // Registers the OpenTelemetry SDK with a specified service name
+  registerOTel({ serviceName: 'next-app' })
+}</code></pre>
+            
+            <h3>Step 3: Test Instrumentation</h3>
+            <p>To view the collected telemetry data, you need an **OpenTelemetry Collector** running alongside a compatible **backend** (a place to store and visualize the data). When configured correctly, the application will begin sending traces, logs, and metrics to your chosen monitoring system.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Creating Custom Spans for Tracing</h2>
+            <p>In OpenTelemetry, a **span** is a fundamental unit of work or operation that can be individually timed and traced. It represents a single, timed event—like an API call, a database query, or a function execution—that is part of a larger trace.</p>
+            
+            <p>To create a custom span, you use the OpenTelemetry tracing API to start and end the operation:</p>
+            <pre class="example"><code>// Creates a span named 'fetchGithubStars'
+trace.getTracer('nextjs-example').startActiveSpan('fetchGithubStars', async (span) => {
+    try {
+        // The code block inside measures the duration of this operation
+        return await getValue()
+    } finally {
+        // It is crucial to always end the span to record the duration
+        span.end()
+    }
+})</code></pre>
+            <p>This code measures the exact duration it takes to execute the <code>getValue()</code> function, providing precise performance data for that specific unit of work.</p>
+        </div>
+    </div>
+</div>

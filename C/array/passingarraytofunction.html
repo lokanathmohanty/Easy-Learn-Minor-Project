@@ -1,0 +1,207 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Passing Arrays as Function Arguments in C</h1>
+    <div class="content">
+      <p>Arrays can be passed to functions using either <strong>call by value</strong> or <strong>call by reference</strong> methods.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Pass Array with Call by Value Method</h2>
+    <div class="content">
+      <p>In call by value, a copy of the array is passed to the function. Typically, the size of the array is fixed or passed as a separate argument.</p>
+    </div>
+
+    <h3 class="title">Example 1: Passing Fixed-size Array</h3>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+float average(int arr[5]);
+
+int main(){
+   int arr[] = {10, 34, 21, 78, 5};
+   float avg = average(arr);
+   printf("average: %f", avg);
+}
+
+float average(int arr[5]){
+   int sum = 0, i;
+   for (i = 0; i &lt; 5; i++) {
+      printf("arr[%d]: %d\n", i, arr[i]);
+      sum += arr[i];
+   }
+   return (float)sum / 5;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>arr[0]: 10
+arr[1]: 34
+arr[2]: 21
+arr[3]: 78
+arr[4]: 5
+average: 29.600000</code></pre>
+    </div>
+
+    <h3 class="title">Example 2: Passing Array with Size as Argument</h3>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+float average(int arr[], int length);
+
+int main(){
+   int arr[] = {10, 34, 21, 78, 5};
+   int length = sizeof(arr)/sizeof(int);
+   float avg = average(arr, length);
+   printf("average: %f", avg);
+}
+
+float average(int arr[], int length){
+   int sum = 0, i;
+   for (i = 0; i &lt; length; i++) {
+      printf("arr[%d]: %d\n", i, arr[i]);
+      sum += arr[i];
+   }
+   return (float)sum / length;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>arr[0]: 10
+arr[1]: 34
+arr[2]: 21
+arr[3]: 78
+arr[4]: 5
+average: 29.600000</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Pass Array with Call by Reference</h2>
+    <div class="content">
+      <p>In C, arrays are passed by reference by default. You can use pointers to traverse or modify the array inside the function.</p>
+    </div>
+
+    <h3 class="title">Example 1: Pointer Traversal</h3>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int a[] = {1, 2, 3, 4, 5};
+   int *x = a, i;
+   for (i = 0; i &lt; 5; i++) {
+      printf("%d\n", *x);
+      x++;
+   }
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>1
+2
+3
+4
+5</code></pre>
+    </div>
+
+    <h3 class="title">Example 2: Finding Maximum using Pointer</h3>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+int max(int *arr, int length);
+
+int main(){
+   int arr[] = {10, 34, 21, 78, 5};
+   int length = sizeof(arr)/sizeof(int);
+   int maxnum = max(arr, length);
+   printf("max: %d", maxnum);
+}
+
+int max(int *arr, int length){
+   int max = *arr;
+   int i;
+   for (i = 0; i &lt; length; i++){
+      printf("arr[%d]: %d\n", i, *arr);
+      if (*arr &gt; max)
+         max = *arr;
+      arr++;
+   }
+   return max;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>arr[0]: 10
+arr[1]: 34
+arr[2]: 21
+arr[3]: 78
+arr[4]: 5
+max: 78</code></pre>
+    </div>
+
+    <h3 class="title">Alternative Using Array Subscript</h3>
+    <div class="example">
+      <pre><code>int max(int *arr, int length){
+   int max = *arr;
+   int i;
+   for (i = 0; i &lt; length; i++){
+      printf("arr[%d]: %d\n", i, arr[i]);
+      if (arr[i] &gt; max)
+         max = arr[i];
+   }
+   return max;
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Pass Two-dimensional Array to Function</h2>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+int twoDarr(int *arr);
+
+int main(){
+   int arr[][3] = {10, 34, 21, 5, 25, 16};
+   twoDarr(*arr);
+}
+
+int twoDarr(int *arr){
+   int i, j;
+   for (i = 0; i &lt; 2; i++) {
+      for (j = 0; j &lt; 3; j++) {
+         printf("%d\t", arr[i]);
+         arr++;
+      }
+      printf("\n");
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>10    34    21
+5     25    16</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Function to Compare String Lengths</h2>
+    <div class="content">
+      <p>In C, strings are character arrays. The <code>strlen()</code> function returns the length of a string (excluding the null terminator).</p>
+    </div>
+
+    <h3 class="title">Example: Compare Two Strings</h3>
+    <div class="example">
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int compare(char *, char *);
+
+int main() {
+   char a[] = "BAT";
+   char b[] = "BALL";
+   int ret = compare(a, b);
+   return 0;
+}
+
+int compare(char *x, char *y){
+   if (strlen(x) &gt; strlen(y)){
+      printf("length of string a is greater than or equal to length of string b");
+   } else {
+      printf("length of string a is less than length of string b");
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>length of string a is less than length of string b</code></pre>
+    </div>
+  </div>
+
+</div>

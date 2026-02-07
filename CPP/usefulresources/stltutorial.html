@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Standard Template Library (STL) Tutorial Summary 📚</h1>
+
+        <div class="content">
+            <p>The **C++ STL** is a powerful set of **template classes and functions** providing efficient, reusable implementations of common data structures and algorithms, promoting high-quality, efficient code.</p>
+
+            <hr>
+
+            <h2 class="title">Core Components of the STL</h2>
+            <p>The STL is built around four fundamental components that work together:</p>
+            <table>
+                <thead>
+                    <tr><th>Component</th><th>Role</th><th>Example</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>**Containers**</td><td>Manage collections of objects (data structures).</td><td><code>std::vector</code>, <code>std::map</code>, <code>std::stack</code></td></tr>
+                    <tr><td>**Algorithms**</td><td>Functions that perform operations (e.g., sort, search, transform) on container contents.</td><td><code>std::sort()</code>, <code>std::find()</code>, <code>std::count()</code></td></tr>
+                    <tr><td>**Iterators**</td><td>Act as pointers to traverse and access elements within containers uniformly.</td><td><code>begin()</code>, <code>end()</code>, Random Access, Bidirectional</td></tr>
+                    <tr><td>**Functors**</td><td>Objects that can be called like functions (via overloaded <code>operator()</code>). Used by algorithms for custom operations.</td><td>Arithmetic, Comparison (e.g., <code>std::less</code>)</td></tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2 class="title">I. Containers Overview</h2>
+            <p>Containers are categorized based on how they store and manage elements:</p>
+            <ul>
+                <li>**Sequence Containers** (Linear, ordered storage):
+                    <ul>
+                        <li>**`std::vector`** (Dynamic Array), **`std::list`** (Doubly Linked List), **`std::deque`**.</li>
+                    </ul>
+                </li>
+                <li>**Associative Containers** (Sorted, Key-based access: $\text{O}(\log n)$):
+                    <ul>
+                        <li>**`std::set`** (Unique, sorted elements), **`std::map`** (Unique, sorted key-value pairs).</li>
+                        <li>**`std::multiset`** and **`std::multimap`** (Allow duplicates/duplicate keys).</li>
+                    </ul>
+                </li>
+                <li>**Unordered Associative Containers** (Hash Table-based: $\text{O}(1)$ average access):
+                    <ul>
+                        <li>**`std::unordered_set`**, **`std::unordered_map`** (Elements/pairs are unordered).</li>
+                        <li>**`std::unordered_multiset`** and **`std::unordered_multimap`** (Allow duplicates/duplicate keys).</li>
+                    </ul>
+                </li>
+                <li>**Container Adapters** (Provide specific interfaces for underlying containers):
+                    <ul>
+                        <li>**`std::stack`** (LIFO), **`std::queue`** (FIFO), **`std::priority_queue`**.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Algorithms Overview</h2>
+            <p>Algorithms are general-purpose functions that primarily take iterator ranges (e.g., `begin()` to `end()`) to operate on data.</p>
+            <ul>
+                <li>**Non-modifying:** <code>for_each</code>, <code>count</code>, <code>find</code>, <code>equal</code>, <code>search</code>.</li>
+                <li>**Modifying:** <code>copy</code>, <code>transform</code>, <code>remove</code>, <code>reverse</code>, <code>swap</code>.</li>
+                <li>**Sorting:** <code>sort</code>, <code>stable_sort</code>, <code>partial_sort</code>.</li>
+                <li>**Searching:** <code>binary_search</code> (requires sorted range), <code>lower_bound</code>, <code>upper_bound</code>.</li>
+                <li>**Numeric:** <code>accumulate</code> (sum/operation), <code>inner_product</code>.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Iterators (The Glue)</h2>
+            <p>Iterators abstract away the container's internal structure, allowing algorithms to work universally.</p>
+            <ul>
+                <li>**Input/Output:** Read-only / Write-only access.</li>
+                <li>**Forward:** Move only in one direction (`++it`).</li>
+                <li>**Bidirectional:** Move forward and backward (`++it`, `--it`).</li>
+                <li>**Random Access:** Support pointer arithmetic (e.g., `it + 5`), fastest access (like `std::vector`).</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">IV. Utilities (Modern Enhancements)</h2>
+            <p>These components provide specialized functionality:</p>
+            <ul>
+                <li>**Pair &amp; Tuple:** Fixed-size collection of heterogeneous types (`std::pair` holds two, `std::tuple` holds many).</li>
+                <li>**Smart Pointers:** `std::unique_ptr`, `std::shared_ptr`, `std::weak_ptr` (RAII for memory).</li>
+                <li>**C++17 Types:** `std::optional` (handles presence/absence of value), `std::variant` (type-safe union), `std::any` (type-safe container for any type).</li>
+                <li>**Type Traits:** Compile-time type checks (e.g., `std::is_same`, `std::enable_if`).</li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - The WeakMap Object</h1>
+
+    <div class="content">
+      <p>
+        A <strong>WeakMap</strong> object in JavaScript is a collection of key-value pairs 
+        where the keys are <em>weakly referenced</em>. The keys must be <code>objects</code> 
+        or <code>non-registered symbols</code>, while values can be of any arbitrary JavaScript type.
+      </p>
+      <p>
+        The <strong>difference between WeakMap and Map</strong> is that:
+        <ul>
+          <li><code>Map</code> can use any type of value as a key.</li>
+          <li><code>WeakMap</code> keys must be objects.</li>
+        </ul>
+        If you try to use a non-object key in a WeakMap, a <code>TypeError</code> occurs.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Syntax</h2>
+      <pre><code>const weak_map = new WeakMap();</code></pre>
+      <p>
+        The <code>new</code> keyword with <code>WeakMap()</code> creates a new WeakMap instance.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>WeakMap Properties</h2>
+      <ul>
+        <li><strong>constructor</strong> – returns the constructor function of a WeakMap.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>WeakMap Methods</h2>
+      <ul>
+        <li><strong>delete()</strong> – deletes a single key-value pair.</li>
+        <li><strong>get()</strong> – retrieves the value for a given key.</li>
+        <li><strong>has()</strong> – checks whether a key exists.</li>
+        <li><strong>set()</strong> – inserts a new key-value pair.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>WeakMap Constructor()</h2>
+      <ul>
+        <li><strong>WeakMap()</strong> – creates a new WeakMap object.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Examples</h2>
+
+      <h3>Example: Inserting key-value pair</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="output"&gt;The laptop price is: &lt;/p&gt;
+   &lt;script&gt;
+      const wm = new WeakMap();
+      const laptop = { brand: "HP", model: "Pavilion" };
+
+      wm.set(laptop, 100000);
+      document.getElementById("output").innerHTML += wm.get(laptop);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> The laptop price is: 100000</p>
+
+      <h3>Example: Deleting key-value pair</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output1"&gt;The laptop price is: &lt;/div&gt;
+   &lt;div id="output2"&gt;The laptop price after deletion is: &lt;/div&gt;
+   &lt;script&gt;
+      const wm = new WeakMap();
+      const laptop = { brand: "HP", model: "Pavilion" };
+
+      wm.set(laptop, 100000);
+      document.getElementById("output1").innerHTML += wm.get(laptop);
+
+      wm.delete(laptop);
+      document.getElementById("output2").innerHTML += wm.get(laptop);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p>
+        <strong>Output:</strong><br>
+        The laptop price is: 100000<br>
+        The laptop price after deletion is: undefined
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Note</h2>
+      <p><strong>WeakMaps are not iterable</strong> in JavaScript.</p>
+    </div>
+  </div>
+</div>

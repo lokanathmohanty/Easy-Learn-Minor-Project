@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python Multiple Inheritance</h1>
+    <div class="content">
+      <p>Multiple inheritance allows a class to inherit attributes and methods from more than one parent class. This helps combine features from multiple classes into a single child class.</p>
+      <p>The method resolution order (MRO) determines how Python resolves method names when multiple parents share the same method name.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example</h2>
+      <pre><code>class Father:
+    def skill1(self):
+        print("Father's skill: Gardening")
+
+class Mother:
+    def skill2(self):
+        print("Mother's skill: Cooking")
+
+class Child(Father, Mother):
+    pass
+
+c = Child()
+c.skill1()  # Father's skill: Gardening
+c.skill2()  # Mother's skill: Cooking
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Method Resolution Order (MRO)</h2>
+      <p>MRO defines the order in which base classes are searched when executing a method. When methods have the same name in multiple parent classes, Python follows MRO to decide which method to call.</p>
+      <p>You can check MRO with <code>ClassName.mro()</code> or <code>ClassName.__mro__</code>.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">MRO Example</h2>
+      <pre><code>print(Child.mro())
+# Output: [Child, Father, Mother, object]
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">MRO in Action</h2>
+      <p>If two parents have the same method name, Python uses MRO order to determine which method runs.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Method Conflict Example</h2>
+      <pre><code>class Father:
+    def skill(self):
+        print("Father's skill: Gardening")
+
+class Mother:
+    def skill(self):
+        print("Mother's skill: Cooking")
+
+class Child(Father, Mother):
+    pass
+
+c = Child()
+c.skill()  # Output: Father's skill: Gardening
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Using super() in Multiple Inheritance</h2>
+      <p><code>super()</code> allows child classes to call methods from parent classes following MRO. This enables method chaining across multiple inheritance.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">super() Example</h2>
+      <pre><code>class A:
+    def show(self):
+        print("Class A")
+
+class B(A):
+    def show(self):
+        print("Class B")
+        super().show()
+
+class C(A):
+    def show(self):
+        print("Class C")
+        super().show()
+
+class D(B, C):
+    def show(self):
+        print("Class D")
+        super().show()
+
+d = D()
+d.show()
+# Output:
+# Class D
+# Class B
+# Class C
+# Class A
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Diamond Problem</h2>
+      <p>This occurs when two parent classes inherit the same base class and a child class inherits both parents.</p>
+      <p>Python resolves this ambiguity using MRO.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Diamond Problem Example</h2>
+      <pre><code>class A:
+    def show(self):
+        print("Class A")
+
+class B(A):
+    def show(self):
+        print("Class B")
+
+class C(A):
+    def show(self):
+        print("Class C")
+
+class D(B, C):
+    pass
+
+d = D()
+d.show()  # Output: Class B
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Pros and Cons of Multiple Inheritance</h2>
+      <ul>
+        <li>Pros: Code reuse, modular design, combining functionalities.</li>
+        <li>Cons: Complexity, ambiguity, diamond problem, difficult maintenance.</li>
+      </ul>
+    </div>
+  </div>
+</div>

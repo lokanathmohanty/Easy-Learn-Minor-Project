@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Supercharged Sorts</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>
+        The <code>Array.sort()</code> method in JavaScript is a powerful tool for ordering data.
+        While simple numeric or alphabetical sorts are straightforward, sorting arrays of objects
+        based on multiple properties can be more complex. In this session, we will explore
+        advanced techniques to create multi-criteria, reusable, and efficient sorting logic.
+      </p>
+
+      <h2>Basics of Sorting</h2>
+      <p>
+        The <code>sort()</code> method accepts an optional comparator function that takes
+        two parameters (<code>a</code> and <code>b</code>) and returns:
+      </p>
+      <ul>
+        <li>A negative value → <code>a</code> comes before <code>b</code>.</li>
+        <li>A positive value → <code>b</code> comes before <code>a</code>.</li>
+        <li>Zero → Order remains unchanged.</li>
+      </ul>
+
+      <h3>Example: Sorting Numbers</h3>
+      <pre><code>
+const numbers = [12, 7, 19, 3, 8, 5, 10, 15];
+
+// Sorting in descending order
+numbers.sort((a, b) => b - a);
+
+console.log(numbers);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+[ 19, 15, 12, 10, 8, 7, 5, 3 ]
+      </code></pre>
+
+      <h2>Chaining Multiple Sort Criteria</h2>
+      <p>
+        When sorting objects by multiple properties, we can chain comparisons using
+        the <code>||</code> operator. This allows fallback sorting when earlier criteria are equal.
+      </p>
+
+      <h3>Example: Products Sorting</h3>
+      <pre><code>
+const products = [
+   { name: 'Smartphone', price: 699.99, rating: 4.7 },
+   { name: 'Headphones', price: 129.99, rating: 4.3 },
+   { name: 'Tablet', price: 399.99, rating: 4.1 },
+   { name: 'Smartwatch', price: 199.99, rating: 4.5 },
+];
+
+// Sort by price (asc), then rating (desc), then name (asc)
+products.sort((a, b) => 
+   a.price - b.price ||
+   b.rating - a.rating ||
+   a.name.localeCompare(b.name)
+);
+
+console.log(products);
+      </code></pre>
+
+      <h2>Reusable Comparator Functions</h2>
+      <p>
+        To improve readability, we can extract reusable comparator functions for each property.
+      </p>
+      <pre><code>
+const byPrice = (a, b) => a.price - b.price;
+const byRating = (a, b) => b.rating - a.rating;
+const byName = (a, b) => a.name.localeCompare(b.name);
+
+products.sort((a, b) =>
+  byPrice(a, b) || byRating(a, b) || byName(a, b)
+);
+      </code></pre>
+
+      <h2>Higher-Order sortBy Function</h2>
+      <p>
+        We can go further by writing a higher-order function <code>sortBy</code> that dynamically
+        generates comparator functions based on property names.
+      </p>
+
+      <h3>Example: Higher-Order sortBy</h3>
+      <pre><code>
+const sortBy = (prop) => (a, b) =>
+  a[prop] < b[prop] ? -1 :
+  a[prop] > b[prop] ? 1 : 
+  0;
+
+products.sort(
+  (a, b) => sortBy('price')(a, b) ||
+    sortBy('rating')(b, a) || 
+    sortBy('name')(a, b)
+);
+
+console.log(products);
+      </code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>Use <code>Array.sort()</code> with custom comparator functions.</li>
+        <li>Chain multiple criteria using <code>||</code> for fallback sorting.</li>
+        <li>Extract comparators into reusable functions for clarity.</li>
+        <li>Build higher-order <code>sortBy</code> functions for flexibility.</li>
+      </ul>
+      <p>
+        By applying these techniques, you can implement clean, scalable, and powerful sorting logic
+        for complex datasets in JavaScript.
+      </p>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Constructors and Destructors 🏗️/⚰️</h1>
+
+        <div class="content">
+            <p>**Constructors** and **Destructors** are special member functions automatically executed at the beginning and end of an object's lifecycle, respectively. They are crucial for initialization and resource cleanup.</p>
+
+            <hr>
+
+            <h2 class="title">The Class Constructor</h2>
+            <p>A **constructor** is a special member function that is executed automatically whenever a new object of the class is created.</p>
+            <ul>
+                <li>**Name:** Must have the **exact same name** as the class.</li>
+                <li>**Return Type:** Has **no return type** (not even `void`).</li>
+                <li>**Purpose:** Primarily used for **initializing** the object's data members.</li>
+            </ul>
+
+            <h3>Types of Constructors</h3>
+            <ol>
+                <li>
+                    <strong>Default Constructor:</strong> Has no parameters.
+                    <pre class="example">Line(); // Declaration
+Line::Line(void) { /* ... initialization ... */ }</pre>
+                </li>
+                <li>
+                    <strong>Parameterized Constructor:</strong> Takes one or more parameters, allowing initial values to be set during object creation.
+                    <pre class="example">Line(double len); // Declaration
+Line::Line(double len) { length = len; }</pre>
+                </li>
+            </ol>
+
+            <h3>Initialization Lists (Recommended)</h3>
+            <p>For parameterized constructors, the preferred way to initialize member fields is by using a **member initialization list**, which ensures initialization happens before the constructor body executes.</p>
+            <pre class="example">
+// Member initialization list syntax
+Line::Line(double len) : length(len) {
+   cout &lt;&lt; "Object created." &lt;&lt; endl;
+}
+</pre>
+            <p>This is generally more efficient and required for initializing <code>const</code> and reference members.</p>
+
+            <hr>
+
+            <h2 class="title">The Class Destructor</h2>
+            <p>A **destructor** is a special member function that is executed automatically whenever an object of the class is **destroyed** (e.g., when it goes out of scope or when <code>delete</code> is called on a pointer to the object).</p>
+            <ul>
+                <li>**Name:** Must have the **exact same name** as the class, prefixed with a **tilde** (~).</li>
+                <li>**Parameters/Return:** Cannot take **any parameters** and has **no return type**.</li>
+                <li>**Purpose:** Primarily used for **releasing resources** acquired by the object, such as closing files, deallocating memory (using <code>delete</code>), or cleaning up network connections.</li>
+            </ul>
+            <pre class="example">
+class Line {
+   public:
+      ~Line(); // Destructor declaration
+      // ...
+};
+
+Line::~Line(void) {
+   cout &lt;&lt; "Object is being deleted" &lt;&lt; endl; 
+   // Resource cleanup code goes here
+}
+</pre>
+        </div>
+    </div>
+</div>

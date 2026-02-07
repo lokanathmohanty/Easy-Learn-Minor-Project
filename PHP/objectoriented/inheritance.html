@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP - Inheritance</h1>
+
+    <div class="content">
+      <p>
+        **Inheritance** is a core OOP concept that allows a new class (**Child Class**) to derive properties, methods, and constants from an existing class (**Parent Class**). This relationship is often described as an **"Is-a"** relationship (e.g., a "Dog is a Animal"). Inheritance promotes **code reuse** and provides a logical structure for software modeling.
+      </p>
+
+      <h2>Class Inheritance Syntax</h2>
+      <p>
+        In PHP, the <code>extends</code> keyword is used to establish an inheritance relationship:
+      </p>
+      <pre><code>class ChildClass extends ParentClass {
+   // New or overridden functionality goes here
+}</code></pre>
+      <p>
+        The Child Class automatically inherits all **public** and **protected** members of the Parent Class.
+      </p>
+
+      <h2>Types of Inheritance in PHP</h2>
+      <p>PHP primarily supports two types of class inheritance:</p>
+      <ul>
+        <li>
+          <strong>Single Inheritance</strong>: One Child Class inherits from one Parent Class.
+        </li>
+        <li>
+          <strong>Multilevel Inheritance</strong>: A class inherits from another class, which itself inherits from a third class (e.g., Puppy extends Dog, and Dog extends Animal).
+        </li>
+      </ul>
+      <p class="example">
+        **Note:** PHP does **not** support **Multiple Inheritance** (extending two or more classes simultaneously).
+      </p>
+    </div>
+
+    <h2 class="title">Example: Multilevel Inheritance</h2>
+    <div class="content example">
+      <p>
+        The <code>Puppy</code> object has access to its own methods, plus the methods inherited from <code>Dog</code> and <code>Animal</code>.
+      </p>
+      <pre><code>&lt;?php
+   class Animal {  
+      public function sound() { echo "Animals make sound\n"; }  
+   }  
+   
+   class Dog extends Animal {  
+      public function bark() { echo "Dog barks\n"; }  
+   }  
+   
+   class Puppy extends Dog {  
+      public function weep() { echo "Puppy weeps\n"; }  
+   }  
+   
+   $myPuppy = new Puppy();  
+   $myPuppy->sound(); // Inherited from Animal
+   $myPuppy->bark();  // Inherited from Dog
+   $myPuppy->weep();  // Defined in Puppy
+?&gt;</code></pre>
+    </div>
+
+    <h2 class="title">Method Overriding</h2>
+    <div class="content">
+      <p>
+        **Method Overriding** occurs when a Child Class redefines a method that already exists in its Parent Class. The child's definition will be executed when the method is called on an object of the Child Class.
+      </p>
+      <pre><code>&lt;?php
+   class ParentClass {
+      public function thanks() { echo "Thank you from parent class\n"; }
+   }
+   class ChildClass extends ParentClass {
+      // Overrides the parent's method
+      public function thanks() { echo "Thank you from the child class\n"; }
+   }
+
+   $obj2 = new ChildClass;
+   $obj2->thanks(); // Output: Thank you from the child class
+?&gt;</code></pre>
+      <h3>Calling Parent Methods</h3>
+      <p>
+        When overriding a method (or a constructor), you can call the parent's implementation using the **scope resolution operator** (<code>::</code>) with the <code>parent</code> keyword. This is especially useful for extending functionality rather than completely replacing it.
+      </p>
+      <pre><code>public function getebook(...) {
+   parent::getbook($param1, $param2); // Calls method in the immediate parent
+   $this->format = $param3; // Adds new functionality
+}</code></pre>
+    </div>
+
+    <h2 class="title">Constructors in Inheritance</h2>
+    <div class="content">
+      <ul>
+        <li>
+          If the **Child Class does NOT define a constructor**, the Parent Class's constructor (if public or protected) is automatically inherited and called upon instantiation.
+        </li>
+        <li>
+          If the **Child Class DOES define a constructor**, the parent's constructor is **NOT** automatically called. To execute the parent's initialization logic, you must explicitly call it inside the child's constructor:
+          <pre><code>public function __construct(){
+   parent::__construct(); // Explicitly calls the Parent's constructor
+   echo "This is child class constructor" . PHP_EOL;
+}</code></pre>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Usage of final Keyword</h2>
+    <div class="content">
+      <p>
+        The <code>final</code> keyword prevents further modification or extension:
+      </p>
+      <ul>
+        <li>
+          When prefixed to a **method** (e.g., <code>final public function sound()</code>), it prevents any Child Class from **overriding** that method.
+        </li>
+        <li>
+          When prefixed to a **class** (e.g., <code>final class Animal</code>), it prevents any other class from **extending** (inheriting from) it.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

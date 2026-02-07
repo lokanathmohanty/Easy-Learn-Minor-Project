@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS justify-self Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS justify-self</strong> property defines how a grid item is aligned 
+        within its grid cell along the inline (row) axis. This property only applies 
+        to elements that are direct children of a grid container. It overrides the 
+        <code>justify-items</code> value set on the container for that specific item.
+      </p>
+      <p>
+        It is very useful when you want to control the alignment of an individual 
+        grid item without changing the alignment of all other items inside the container.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>
+        The basic syntax of the property is:
+      </p>
+      <ul>
+        <li><code>justify-self: auto | normal | stretch | start | end | left | right | center | baseline | initial | inherit;</code></li>
+      </ul>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>auto:</strong> Inherits the grid container’s <code>justify-items</code> value. This is the default.</li>
+        <li><strong>normal:</strong> Depends on the layout mode. In a grid layout, it behaves like <code>stretch</code>.</li>
+        <li><strong>stretch:</strong> The grid item expands to fill the grid cell, if no width is set.</li>
+        <li><strong>start:</strong> Aligns the item to the start edge of the grid cell (left in LTR languages).</li>
+        <li><strong>end:</strong> Aligns the item to the end edge of the grid cell (right in LTR languages).</li>
+        <li><strong>left:</strong> Aligns the item explicitly to the left edge.</li>
+        <li><strong>right:</strong> Aligns the item explicitly to the right edge.</li>
+        <li><strong>center:</strong> Centers the item horizontally inside the grid cell.</li>
+        <li><strong>baseline:</strong> Aligns the item to the baseline of the grid cell’s row.</li>
+        <li><strong>initial:</strong> Resets the property to its default value.</li>
+        <li><strong>inherit:</strong> Inherits the value from the parent element.</li>
+      </ul>
+
+      <h2>Examples</h2>
+      <p>
+        Below are some examples showing different uses of the 
+        <code>justify-self</code> property. In these examples, we imagine a grid 
+        container with three columns and three items, where the alignment of the 
+        second item is controlled using different values.
+      </p>
+
+      <h2>Example 1: justify-self with <code>auto</code></h2>
+      <p>
+        The item will follow the container’s <code>justify-items</code> value.
+      </p>
+      <pre>
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: stretch;
+}
+.item {
+  justify-self: auto;
+}
+      </pre>
+
+      <h2>Example 2: justify-self with <code>center</code></h2>
+      <p>
+        The grid item is placed at the center of its grid cell.
+      </p>
+      <pre>
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.item {
+  justify-self: center;
+}
+      </pre>
+
+      <h2>Example 3: justify-self with <code>start</code> and <code>end</code></h2>
+      <p>
+        This aligns the grid item to the start or end of the grid cell, depending 
+        on writing direction.
+      </p>
+      <pre>
+.item-start {
+  justify-self: start;
+}
+.item-end {
+  justify-self: end;
+}
+      </pre>
+
+      <h2>Example 4: justify-self with <code>stretch</code></h2>
+      <p>
+        The grid item will expand to fill the width of its grid cell.
+      </p>
+      <pre>
+.item {
+  justify-self: stretch;
+}
+      </pre>
+
+      <h2>Supported Browsers</h2>
+      <p>
+        The <code>justify-self</code> property is widely supported in modern 
+        browsers. Below is a compatibility table:
+      </p>
+      <ul>
+        <li><strong>Chrome:</strong> 57+</li>
+        <li><strong>Edge:</strong> 16+</li>
+        <li><strong>Firefox:</strong> 45+</li>
+        <li><strong>Safari:</strong> 10.1+</li>
+        <li><strong>Opera:</strong> 44+</li>
+      </ul>
+    </div>
+  </div>
+</div>

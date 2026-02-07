@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Lazy Loading</h1>
+    <div class="content">
+
+      <p>
+        In JavaScript, <strong>lazy loading</strong> is a technique to improve website performance by only loading 
+        what is immediately needed, such as images or videos in the current viewport. 
+        Content not visible on the screen is loaded later when it becomes necessary.
+      </p>
+
+      <p>
+        For example, when you open Instagram, only the images and videos visible on the current screen are loaded. 
+        As you scroll down, more images and videos are fetched. This makes the app load faster and 
+        improves the user experience.
+      </p>
+
+      <h2>Why Do We Need Lazy Loading?</h2>
+      <ul>
+        <li>Useful when a website contains many images or files.</li>
+        <li>Improves overall performance of the website.</li>
+        <li>Enhances user experience by loading content on demand.</li>
+        <li>Reduces initial loading time of the website.</li>
+      </ul>
+
+      <h2>Example of Lazy Loading</h2>
+      <p>
+        The following code snippet demonstrates how to implement lazy loading in JavaScript:
+      </p>
+
+      <pre><code>const images = document.querySelectorAll("[data-src]");
+
+function preloadImage(img) {
+  const src = img.getAttribute("data-src");
+  if (!src) {
+    return;
+  }
+  img.src = src;
+  img.removeAttribute("data-src");
+}
+
+const imgOptions = {
+  threshold: 0,
+  rootMargin: "0px 0px 300px 0px"
+};
+
+const imgObserver = new IntersectionObserver((entries, imgObserver) =&gt; {
+  entries.forEach(entry =&gt; {
+    if (!entry.isIntersecting) {
+      return;
+    } else {
+      preloadImage(entry.target);
+      imgObserver.unobserve(entry.target);
+    }
+  });
+}, imgOptions);
+
+images.forEach(image =&gt; {
+  imgObserver.observe(image);
+});</code></pre>
+
+      <h2>Explanation</h2>
+      <p>
+        This code sets up lazy loading for images using the <code>IntersectionObserver</code> API:
+      </p>
+      <ul>
+        <li>Images with the attribute <code>data-src</code> act as placeholders.</li>
+        <li>The <code>IntersectionObserver</code> watches when an image enters the viewport.</li>
+        <li>When an image is visible, its <code>data-src</code> is replaced with <code>src</code> and loaded.</li>
+        <li>The observer then stops watching that image to avoid reloading.</li>
+      </ul>
+
+      <p>
+        This ensures that the page doesn’t load all images at once, improving performance and reducing load time.
+      </p>
+
+    </div>
+  </div>
+</div>

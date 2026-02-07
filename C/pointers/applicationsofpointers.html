@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Applications of Pointers in C</h1>
+    <div class="content">
+      <p>One of the most important features of C is that it provides low-level memory access with the concept of pointers. A pointer is a variable that stores the address of another variable in the memory.</p>
+      <p>The provision of pointers has many applications such as passing arrays and struct types to functions, dynamic memory allocation, etc. In this chapter, we will explain some important applications of pointers in C.</p>
+
+      <h2 class="title">To Access Array Elements</h2>
+      <p>Array elements can be accessed through pointers by declaring and initializing a pointer to an array. Incrementing the pointer moves it to the next element.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int arr[] = {1,2,3,4,5};
+   int *ptr = arr;
+
+   for(int i = 0; i <= 4; i++){
+      printf("arr[%d]: %d\n", i, *ptr);
+      ptr++;
+   }
+   
+   return 0;
+}
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>arr[0]: 1
+arr[1]: 2
+arr[2]: 3
+arr[3]: 4
+arr[4]: 5
+</code></pre>
+
+      <h2 class="title">For Allocating Memory Dynamically</h2>
+      <p>Pointers play a key role in dynamic memory allocation. Functions like <code>malloc()</code>, <code>calloc()</code>, and <code>realloc()</code> are used to allocate and manage memory during runtime.</p>
+
+      <h3>1. The <code>malloc()</code> Function</h3>
+      <p><code>malloc()</code> allocates a block of memory of the specified size (in bytes) and returns a void pointer. Example:</p>
+      <pre><code>int *ptr;
+ptr = (int *) malloc(sizeof(int));
+</code></pre>
+      <p>Example of allocating memory for a string:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+   char *name;
+   name = (char *) malloc(strlen("TutorialsPoint") + 1);
+
+   if(name == NULL) {
+      fprintf(stderr, "Error - unable to allocate required memory\n");
+   } else {
+      strcpy(name, "TutorialsPoint");
+      printf("Name = %s\n", name);
+   }
+   free(name);
+}
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Name = TutorialsPoint
+</code></pre>
+
+      <h3>2. The <code>calloc()</code> Function</h3>
+      <p><code>calloc()</code> allocates memory for an array of elements and initializes all bytes to zero.</p>
+      <pre><code>int *ptr;
+ptr = (int *) calloc(25, sizeof(int));
+</code></pre>
+
+      <h3>3. The <code>realloc()</code> Function</h3>
+      <p><code>realloc()</code> changes the size of a previously allocated memory block.</p>
+      <pre><code>ptr = (int *) realloc(ptr, new_size);
+</code></pre>
+
+      <h2 class="title">For Passing Arguments as Reference</h2>
+      <p>Passing pointers to functions allows functions to modify variables in the caller’s scope and to return multiple values indirectly.</p>
+
+      <h3>Example: Swap Two Variables</h3>
+      <pre><code>int swap(int *x, int *y) {
+   int z = *x;
+   *x = *y;
+   *y = z;
+   return 0;
+}
+</code></pre>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int swap(int *x, int *y);
+
+int main() {
+   int a = 10, b = 20;
+   printf("Before swap, a = %d, b = %d\n", a, b);
+   swap(&a, &b);
+   printf("After swap, a = %d, b = %d\n", a, b);
+   return 0;
+}
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Before swap, a = 10, b = 20
+After swap, a = 20, b = 10
+</code></pre>
+
+      <h2 class="title">For Passing an Array to Function</h2>
+      <p>Arrays are passed by reference by passing the pointer to the first element. The function can then access and manipulate the array elements.</p>
+      
+      <pre><code>#include &lt;stdio.h&gt;
+
+int max(int *arr, int length);
+
+int main() {
+   int arr[] = {10, 34, 21, 78, 5};
+   int length = sizeof(arr)/sizeof(arr[0]);
+   int maxnum = max(arr, length);
+   printf("max: %d\n", maxnum);
+   return 0;
+}
+
+int max(int *arr, int length) {
+   int max = *arr;
+   for(int i = 0; i < length; i++) {
+      printf("arr[%d]: %d\n", i, *arr);
+      if(*arr > max)
+         max = *arr;
+      arr++;
+   }
+   return max;
+}
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>arr[0]: 10
+arr[1]: 34
+arr[2]: 21
+arr[3]: 78
+arr[4]: 5
+max: 78
+</code></pre>
+
+      <h2 class="title">For Returning Multiple Values from a Function</h2>
+      <p>Since functions can only return one value, pointers allow returning multiple values by modifying variables through their addresses.</p>
+      
+      <pre><code>#include &lt;stdio.h&gt;
+
+void funAddSub(int a, int b, int* add, int* sub) {
+  *add = a + b;
+  *sub = a - b;
+}
+
+int main() {
+  int num1 = 10, num2 = 3;
+  int res1, res2;
+
+  funAddSub(num1, num2, &res1, &res2);
+  printf("Addition is %d and subtraction is %d\n", res1, res2);
+
+  return 0;
+}
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Addition is 13 and subtraction is 7
+</code></pre>
+    </div>
+  </div>
+</div>

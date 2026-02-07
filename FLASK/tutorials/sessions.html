@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask Sessions: Managing Client-Side State 🔑</h1>
+        <div class="content">
+            <p>A **Session** represents the time interval during which a client interacts with a server. In Flask, session data is stored on the **client side** (in the browser), typically on top of a cookie. This allows data to be held across multiple requests within the session.</p>
+
+            <h2>Session Security and Mechanism</h2>
+            <ul>
+                <li>**Session ID:** Each client's session is assigned a unique Session ID.</li>
+                <li>**Storage:** The session data is stored in a cookie that is cryptographically **signed** by the server to prevent tampering.</li>
+                <li>**Requirement:** Due to the encryption requirement, a Flask application **must** define a **<code>SECRET_KEY</code>**. This key is used for the signing process.</li>
+            </ul>
+
+            <h2 class="title">Session Object Manipulation</h2>
+            <p>The **<code>session</code> object** is a dictionary-like structure containing key-value pairs of session variables. You must import the <code>session</code> object from the Flask module to use it.</p>
+            <ul>
+                <li>**Setting a Variable:** Assign a value to a key: <code>session['username'] = 'admin'</code></li>
+                <li>**Checking for a Variable:** Use the <code>in</code> operator: <code>if 'username' in session:</code></li>
+                <li>**Releasing (Deleting) a Variable:** Use the <code>pop()</code> method: <code>session.pop('username', None)</code></li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Example: Login, Logout, and Index Logic</h2>
+        <div class="content example">
+            <p>This demonstration uses sessions to manage a simple login state:</p>
+
+            <h3>1. The <code>SECRET_KEY</code> Setup (Mandatory)</h3>
+            <p>Before running the app, the <code>SECRET_KEY</code> must be set for session signing:</p>
+            <p><code>app.secret_key = 'any random string'</code></p>
+
+            <h3>2. The Index Page (<code>/</code>)</h3>
+            <p>The <code>index()</code> function checks the existence of the <code>'username'</code> key in the <code>session</code> object to determine the user's login status:</p>
+            <ul>
+                <li>**Logged In:** If <code>'username'</code> is found, it displays a welcome message and a link to log out.</li>
+                <li>**Logged Out:** If <code>'username'</code> is not found, it displays a "not logged in" message and a link to log in.</li>
+            </ul>
+
+            <h3>3. The Login Process (<code>/login</code>)</h3>
+            <p>The <code>login()</code> function handles the form submission (POST):</p>
+            <p><code>if request.method == 'POST':</code></p>
+            <p><code>   session['username'] = request.form['username']</code></p>
+            <p>The application retrieves the username from the submitted form data (<code>request.form</code>) and immediately **sets the session variable**. It then redirects the user to the index page (<code>/</code>), which will now recognize the user as logged in.</p>
+
+            <h3>4. The Logout Process (<code>/logout</code>)</h3>
+            <p>The <code>logout()</code> function simply removes the session variable:</p>
+            <p><code>session.pop('username', None)</code></p>
+            <p>The function then redirects the user back to the index page, which now displays the "not logged in" message.</p>
+        </div>
+    </div>
+</div>

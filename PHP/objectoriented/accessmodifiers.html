@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP - Access Modifiers</h1>
+
+    <div class="content">
+      <p>
+        **Access Modifiers** (or **Visibility Markers**) in PHP—namely **public**, **private**, and **protected**—control the visibility and accessibility of a class's properties and methods. These keywords are fundamental to implementing **Encapsulation**, one of the core principles of Object-Oriented Programming (OOP).
+      </p>
+
+      <h2>The Principle of Encapsulation</h2>
+      <p>
+        Encapsulation is the practice of hiding an object's internal data (properties) from direct outside access and exposing it only through controlled means (public methods). This is typically achieved by making data members **private** or **protected**, and methods that access or modify that data **public**. 
+      </p>
+
+      <h2>Access Modifier Definitions</h2>
+      <p>
+        The three access modifiers determine the scope from which a class member can be accessed:
+      </p>
+
+      <ul>
+        <li>
+          <strong>Public</strong>: Members are accessible **from anywhere**: inside the class, by inherited classes, and from the outside environment via an object instance. Class members are **public by default** if no keyword is specified (though modern practice requires explicit declaration).
+        </li>
+        <li>
+          <strong>Protected</strong>: Members are accessible **only** within the class in which they are declared, and by all classes that **inherit** from it (child classes). They are not accessible from outside the object.
+        </li>
+        <li>
+          <strong>Private</strong>: Members are accessible **only** within the class in which they are declared. They are not accessible by inherited classes or from the outside environment.
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Accessibility Rules Summary</h2>
+    <div class="content">
+      <p>
+        This table summarizes where each type of member is accessible:
+      </p>
+      <table border="1">
+        <tr>
+          <th>Context</th>
+          <th>Public</th>
+          <th>Protected</th>
+          <th>Private</th>
+        </tr>
+        <tr>
+          <td>Access from within the same class</td>
+          <td>✅ Yes</td>
+          <td>✅ Yes</td>
+          <td>✅ Yes</td>
+        </tr>
+        <tr>
+          <td>Access from a child (inherited) class</td>
+          <td>✅ Yes</td>
+          <td>✅ Yes</td>
+          <td>❌ No</td>
+        </tr>
+        <tr>
+          <td>Access from outside the class (via object)</td>
+          <td>✅ Yes</td>
+          <td>❌ No</td>
+          <td>❌ No</td>
+        </tr>
+      </table>
+    </div>
+
+    <h2 class="title">Example: Private Access Control</h2>
+    <div class="content example">
+      <p>
+        By declaring <code>$price</code> and <code>$title</code> as **private**, direct access from outside the class (e.g., <code>$b1->title</code>) is prevented, enforcing the use of the public methods (e.g., <code>getTitle()</code>) for controlled access.
+      </p>
+      <pre><code>&lt;?php
+   class Book {
+      private $price; // Only accessible inside Book
+      private $title; 
+
+      public function __construct(string $param1, int $param2) {
+         // Access is allowed here because it's inside the class
+         $this->title = $param1;
+         $this->price = $param2;
+      }
+
+      public function getTitle() { // Public function provides controlled access
+         echo "Title: $this->title &lt;br/&gt;";
+      }
+   }
+   $b1 = new Book("Private Data Test", 500);
+   $b1->getTitle(); // Works
+   
+   // echo $b1->title; 
+   // ^- This line would cause a Fatal Error: Cannot access private property
+?&gt;</code></pre>
+    </div>
+
+    <h2 class="title">Example: Protected Access Control</h2>
+    <div class="content example">
+      <p>
+        The fatal error shown in the source material confirms that a protected member (<code>$title</code> in <code>Book</code>) **cannot** be accessed by an object (<code>$b</code>) passed to a function (<code>getmytitle</code>) of an **unrelated** class (<code>mybook</code>). Access is only granted within the <code>Book</code> class and any class that directly <code>extends</code> <code>Book</code>.
+      </p>
+      <pre><code>&lt;?php
+   class Book {
+      protected $title; // Accessible in Book and child classes
+      // ... constructor and other public methods
+   }
+
+   // This class is NOT a child of Book
+   class mybook {
+      public function getmytitle($b) {
+         // This causes an error because mybook is not a child of Book
+         echo "Title: $b->title &lt;br/&gt;"; 
+      }
+   }
+   
+   $b = new Book();
+   $b1 = new mybook();
+   
+   // $b1->getmytitle($b);
+   // ^- This causes a Fatal Error: Cannot access protected property Book::$title
+?&gt;</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Unicode System</h1>
+    <div class="content">
+      <h2>What is Unicode System?</h2>
+      <p>Python uses the Unicode standard to represent characters, which allows applications to work with multiple languages such as English, French, Japanese, Hebrew, or Hindi. A character is the smallest component of text (e.g., 'A', 'B', 'C'). Unicode assigns each character a unique code point (from 0 to 0x10FFFF).</p>
+
+      <h2>Character Encoding</h2>
+      <p>Unicode code points are represented in memory as code units, which are mapped to bytes. The process of converting characters into bytes is called <b>encoding</b>, while converting bytes back into characters is called <b>decoding</b>.</p>
+      <p>Python supports the following common encodings:</p>
+      <ul>
+        <li><b>UTF-8</b></li>
+        <li><b>UTF-16</b></li>
+        <li><b>UTF-32</b></li>
+      </ul>
+
+      <h2>Python's Unicode Support</h2>
+      <p>Since Python 3, all strings are Unicode by default. Any string created with quotes (<code>'</code>, <code>"</code>, <code>'''</code>, <code>"""</code>) is stored as Unicode. Python source code files are encoded in UTF-8 by default.</p>
+      <p>Strings can contain either literal characters or Unicode escape sequences (e.g., <code>"¾"</code> or <code>"\u00BE"</code>).</p>
+
+      <h3>Example</h3>
+      <pre>
+var = "3/4"
+print(var)
+
+var = "\u00BE"
+print(var)
+      </pre>
+      <p>Output:</p>
+      <pre>
+3/4
+¾
+      </pre>
+
+      <h3>Example - Storing Digits Using Unicode</h3>
+      <pre>
+var = "\u0031\u0030"
+print(var)
+      </pre>
+      <p>Output:</p>
+      <pre>
+10
+      </pre>
+
+      <h2>Encoding and Decoding</h2>
+      <p>
+        - <b>encode()</b> → Converts string (Unicode) into bytes.<br>
+        - <b>decode()</b> → Converts bytes back into string (Unicode).
+      </p>
+
+      <h3>Example - Encode and Decode ASCII String</h3>
+      <pre>
+string = "Hello"
+tobytes = string.encode('utf-8')
+print(tobytes)
+
+string = tobytes.decode('utf-8')
+print(string)
+      </pre>
+      <p>Output:</p>
+      <pre>
+b'Hello'
+Hello
+      </pre>
+
+      <h3>Example - Using Rupee Symbol</h3>
+      <pre>
+string = "\u20B9"
+print(string)
+
+tobytes = string.encode('utf-8')
+print(tobytes)
+
+string = tobytes.decode('utf-8')
+print(string)
+      </pre>
+      <p>Output:</p>
+      <pre>
+₹
+b'\xe2\x82\xb9'
+₹
+      </pre>
+    </div>
+  </div>
+</div>

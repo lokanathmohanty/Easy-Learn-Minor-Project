@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">JavaScript - Geolocation API</h1>
+
+    <div class="content">
+      <h2>Geolocation API</h2>
+      <p>
+        The Geolocation API provides a JavaScript interface to access the user's geographical location data. 
+        It uses the device’s GPS, Wi-Fi, or network signals to detect location. 
+        Since location data is sensitive, browsers always ask for user permission before sharing it.
+      </p>
+      <p>
+        Real-time use cases include: ride-sharing apps, food delivery, location tagging, maps, and suggesting nearby places.
+      </p>
+
+      <h2>Real-time Use Cases</h2>
+      <ul>
+        <li>Get user’s coordinates and show them on a map.</li>
+        <li>Tag a user’s location on a photo.</li>
+        <li>Suggest nearby stores, petrol pumps, or restaurants.</li>
+        <li>Track product or food delivery location.</li>
+        <li>Pick up users from their current location in ride apps.</li>
+      </ul>
+
+      <h2>Using the Geolocation API</h2>
+      <pre>
+var geolocation = navigator.geolocation;
+      </pre>
+
+      <h2>Example: Checking Browser Support</h2>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;div id="output"&gt;&lt;/div&gt;
+  &lt;script&gt;
+    const output = document.getElementById("output");
+    if (navigator.geolocation) {
+      output.innerHTML += "Geolocation is supported by your browser.";
+    } else {
+      output.innerHTML += "Geolocation is not supported by your browser.";
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>Geolocation Methods</h2>
+      <ul>
+        <li><code>getCurrentPosition()</code> – Get current user location.</li>
+        <li><code>watchPosition()</code> – Continuously track live location.</li>
+        <li><code>clearWatch()</code> – Stop tracking a user’s location.</li>
+      </ul>
+
+      <h2>Location Properties</h2>
+      <ul>
+        <li><strong>coords.latitude</strong> – Latitude in decimal degrees.</li>
+        <li><strong>coords.longitude</strong> – Longitude in decimal degrees.</li>
+        <li><strong>coords.altitude</strong> – Optional altitude in meters.</li>
+        <li><strong>coords.accuracy</strong> – Accuracy of coordinates in meters.</li>
+        <li><strong>coords.heading</strong> – Direction of movement (degrees).</li>
+        <li><strong>coords.speed</strong> – Speed in meters per second.</li>
+        <li><strong>timestamp</strong> – Time when location was retrieved.</li>
+      </ul>
+
+      <h2>Example: Getting User's Location</h2>
+      <pre>
+navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
+      </pre>
+
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;h3&gt;Location Information&lt;/h3&gt;
+  &lt;button onclick="findLocation()"&gt;Find Location&lt;/button&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const output = document.getElementById("output");
+    function findLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getCords);
+      } else {
+        output.innerHTML += "Geo Location is not supported by this browser!";
+      }
+    }
+    function getCords(coords) {
+      output.innerHTML += "Latitude: " + coords.coords.latitude + "&lt;br&gt;";
+      output.innerHTML += "Longitude: " + coords.coords.longitude + "&lt;br&gt;";
+      output.innerHTML += "Accuracy: " + coords.coords.accuracy + "&lt;br&gt;";
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>Geolocation Errors</h2>
+      <p>Common error cases:</p>
+      <ul>
+        <li>User denied permission</li>
+        <li>Location unavailable</li>
+        <li>Request timed out</li>
+        <li>Unknown error</li>
+      </ul>
+
+      <h2>Example: Error Handling</h2>
+      <pre>
+navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      </pre>
+
+      <pre>
+function errorCallback(err) {
+  switch (err.code) {
+    case err.PERMISSION_DENIED:
+      console.log("Permission denied");
+      break;
+    case err.POSITION_UNAVAILABLE:
+      console.log("Position unavailable");
+      break;
+    case err.TIMEOUT:
+      console.log("Request timed out");
+      break;
+    default:
+      console.log("Unknown error");
+  }
+}
+      </pre>
+
+      <h2>Geolocation Options</h2>
+      <ul>
+        <li><strong>enableHighAccuracy</strong> – Request most accurate location.</li>
+        <li><strong>timeout</strong> – Maximum wait time in ms.</li>
+        <li><strong>maximumAge</strong> – Cache age limit in ms.</li>
+      </ul>
+
+      <h2>Example: Using Options</h2>
+      <pre>
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+navigator.geolocation.getCurrentPosition(success, error, options);
+      </pre>
+
+      <h2>Watching the Current Location</h2>
+      <p>
+        The <code>watchPosition()</code> method tracks live location. 
+        Use <code>clearWatch()</code> to stop tracking.
+      </p>
+
+      <h2>Example: watchPosition()</h2>
+      <pre>
+let id = navigator.geolocation.watchPosition(getCoords);
+setTimeout(() =&gt; {
+  navigator.geolocation.clearWatch(id);
+  console.log("Tracking stopped");
+}, 30000);
+      </pre>
+
+    </div>
+  </div>
+</div>

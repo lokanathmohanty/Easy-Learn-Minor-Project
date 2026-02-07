@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - place-items Property</h1>
+    <div class="content">
+      <p>
+        The <code>place-items</code> property in CSS is a shorthand property used to define 
+        both <code>align-items</code> and <code>justify-items</code> simultaneously. 
+        It is particularly useful in CSS Grid Layouts, where developers need to control 
+        the alignment of items along both the block (column) and inline (row) axes in a concise manner. 
+      </p>
+      <p>
+        By using this shorthand, you avoid writing two separate properties, 
+        and you can achieve compact alignment configurations for grid and, to some extent, flex items.
+      </p>
+
+      <h2>Shorthand For</h2>
+      <ul>
+        <li><code>align-items</code></li>
+        <li><code>justify-items</code></li>
+      </ul>
+
+      <h2>Possible Values</h2>
+      <ul>
+        <li><b>Single Value</b>: Applies the same alignment for both block and inline directions. Example: <code>place-items: center;</code></li>
+        <li><b>Two Values</b>: The first defines <code>align-items</code> (block axis) and the second defines <code>justify-items</code> (inline axis). Example: <code>place-items: start end;</code></li>
+      </ul>
+
+      <h2>Common Values</h2>
+      <ul>
+        <li><b>normal</b> – Default alignment based on the container.</li>
+        <li><b>start</b> – Aligns items to the start edge.</li>
+        <li><b>end</b> – Aligns items to the end edge.</li>
+        <li><b>center</b> – Aligns items at the center.</li>
+        <li><b>stretch</b> – Stretches items to fill the container.</li>
+        <li><b>self-start</b>, <b>self-end</b> – Aligns relative to the item’s writing mode.</li>
+        <li><b>flex-start</b>, <b>flex-end</b> – Similar to start and end but for flex contexts.</li>
+        <li><b>baseline</b>, <b>first baseline</b>, <b>last baseline</b> – Aligns items to text baselines.</li>
+        <li><b>legacy</b> values – Provide backward compatibility in certain layouts.</li>
+      </ul>
+
+      <h2>Applies To</h2>
+      <p>
+        All elements, but primarily useful with CSS Grid containers. 
+        Its effect on flex containers is limited and experimental.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+/* Single keyword applies to both axes */
+place-items: center;
+
+/* Align block axis then inline axis */
+place-items: normal start;
+place-items: end center;
+
+/* Using baseline alignment */
+place-items: first baseline legacy;
+place-items: last baseline normal;
+
+/* Using stretch */
+place-items: stretch;
+      </pre>
+
+      <h2>Examples</h2>
+
+      <h3>1. Place items inside a Grid Container</h3>
+      <pre>
+.grid-container {
+   display: grid;
+   grid-template-columns: repeat(3, 100px);
+   height: 400px;
+   width: 350px;
+   place-items: center;
+}
+
+.grid-container > div {
+   border: 1px solid black;
+   padding: 10px;
+}
+      </pre>
+      <p>
+        In this example, all grid items are centered both vertically and horizontally inside the grid cells.
+      </p>
+
+      <h3>2. Place items with different alignment values</h3>
+      <pre>
+.grid-container {
+   display: grid;
+   grid-template-columns: repeat(3, 100px);
+   height: 400px;
+   width: 350px;
+   place-items: start end;
+}
+      </pre>
+      <p>
+        Here, grid items align to the top (start of block axis) 
+        and to the right (end of inline axis).
+      </p>
+
+      <h3>3. Place items in a Flex Container (limited support)</h3>
+      <pre>
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   height: 350px;
+   width: 350px;
+   place-items: center stretch;
+}
+
+.flex-container > div {
+   border: 1px solid black;
+   padding: 10px;
+   width: 60px;
+   height: 60px;
+}
+      </pre>
+      <p>
+        While <code>place-items</code> is not fully standardized for flex containers, 
+        some browsers allow it. In this case, items will align to the center vertically 
+        and stretch horizontally.
+      </p>
+
+      <h2>Content Summary</h2>
+      <p>
+        The <code>place-items</code> property provides a convenient shorthand for 
+        <code>align-items</code> and <code>justify-items</code>. It is most powerful 
+        when used in grid containers to align items along both axes. For flex layouts, 
+        its support is partial and may vary across browsers. Using <code>place-items</code> 
+        allows for cleaner, shorter code while keeping alignment rules consistent.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,199 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Unions in C</h1>
+
+    <div class="content">
+      <h2 class="title">What is a Union?</h2>
+      <p>A union is a special data type in C that allows storing different data types in the same memory location. Only one member can contain a value at a time. Unions provide an efficient way of using the same memory location for multiple purposes.</p>
+      <p>All members share the same memory location, and the size of the union is defined by its largest member.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Defining a Union</h2>
+      <p>Union variables are created similarly to structures. The keyword <code>union</code> is used to define unions in C.</p>
+      <p>Syntax:</p>
+      <pre><code>union [union tag] {
+  member definition;
+  member definition;
+  ...
+} [one or more union variables];</code></pre>
+      <p>The "union tag" is optional, and member definitions are normal variable declarations.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Accessing Union Members</h2>
+      <p>Use the dot operator (<code>.</code>) to access union members.</p>
+      <p>Syntax:</p>
+      <p><code>union_variable.member_name;</code></p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Initializing Union Members</h2>
+      <p>Assign values to union members using the assignment operator (<code>=</code>).</p>
+      <p>Syntax:</p>
+      <p><code>union_variable.member_name = value;</code></p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example 1: Using Union</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+union Data {
+  int i;
+  float f;
+  char str[20];
+};
+
+int main() {
+  union Data data;
+
+  data.i = 10;
+  data.f = 220.5;
+  strcpy(data.str, "C Programming");
+
+  printf("data.i: %d \n", data.i);
+  printf("data.f: %f \n", data.f);
+  printf("data.str: %s \n", data.str);
+  return 0;
+}
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>data.i: 1917853763</p>
+      <p>data.f: 4122360580327794860452759994368.000000</p>
+      <p>data.str: C Programming</p>
+      <p>This shows that only the last assigned member holds a valid value; others show garbage.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example 2: Using One Member at a Time</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+union Data {
+  int i;
+  float f;
+  char str[20];
+};
+
+int main() {
+  union Data data;
+
+  data.i = 10;
+  printf("data.i: %d \n", data.i);
+
+  data.f = 220.5;
+  printf("data.f: %f \n", data.f);
+
+  strcpy(data.str, "C Programming");
+  printf("data.str: %s \n", data.str);
+
+  return 0;
+}
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>data.i: 10</p>
+      <p>data.f: 220.500000</p>
+      <p>data.str: C Programming</p>
+      <p>Using one member at a time prevents garbage values.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Size of a Union</h2>
+      <p>The size of a union is equal to the size of its largest member. Use <code>sizeof()</code> to determine the size.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Size of a Union</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+union Data {
+  int a;
+  float b;
+  char c[20];
+};
+
+int main() {
+  union Data data;
+
+  printf("Size of a: %lu bytes\n", sizeof(data.a));
+  printf("Size of b: %lu bytes\n", sizeof(data.b));
+  printf("Size of c: %lu bytes\n", sizeof(data.c));
+
+  printf("Size of union: %lu bytes\n", sizeof(data));
+
+  return 0;
+}
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Size of a: 4 bytes</p>
+      <p>Size of b: 4 bytes</p>
+      <p>Size of c: 20 bytes</p>
+      <p>Size of union: 20 bytes</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Difference Between Structure and Union</h2>
+      <ul>
+        <li>Structures allocate separate memory for each member; unions share the same memory for all members.</li>
+        <li>Size of structure = sum of sizes of all members; size of union = size of largest member.</li>
+        <li>Only one union member can hold a value at a time; structure members can hold values simultaneously.</li>
+      </ul>
+      <p>Example of union and struct definitions with the same members:</p>
+      <pre><code>union myunion {
+  int a;
+  double b;
+  char c;
+};
+
+struct mystruct {
+  int a;
+  double b;
+  char c;
+};</code></pre>
+      <p>The union occupies memory equal to the largest member (double), while the struct occupies combined memory of all members.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Memory Occupied by Union</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+union Data {
+  int i;
+  float f;
+  char str[20];
+};
+
+int main() {
+  union Data data;
+  printf("Memory occupied by Union Data: %d \n", sizeof(data));
+  return 0;
+}
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Memory occupied by Union Data: 20</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Memory Occupied by Structure</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+struct Data {
+  int i;
+  float f;
+  char str[20];
+};
+
+int main() {
+  struct Data data;
+  printf("Memory occupied by Struct Data: %d \n", sizeof(data));
+  return 0;
+}
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Memory occupied by Struct Data: 28</p>
+    </div>
+  </div>
+</div>

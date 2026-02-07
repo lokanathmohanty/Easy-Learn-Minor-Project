@@ -1,0 +1,155 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - tRPC Library</h1>
+    <div class="content">
+      <p>
+        tRPC is a type-safe TypeScript module that uses the RPC (Remote Procedure Call) API design 
+        to process API requests and return results. Unlike REST APIs, tRPC has no request types such 
+        as GET or POST. Instead, every request passes through a query system that returns responses 
+        based on input and query.
+      </p>
+
+      <h2>What is tRPC?</h2>
+      <p>
+        tRPC adds a type-safe layer to the RPC architectural framework. While RESTful APIs rely on 
+        request types, tRPC simplifies the process by using built-in functions and 
+        <code>react-query</code> for handling requests. With tRPC:
+      </p>
+      <ul>
+        <li>No need for a dedicated <code>/API</code> folder with multiple routes.</li>
+        <li>Requests are described using URLs to represent queries.</li>
+        <li>Type safety ensures only valid data is sent between client and server.</li>
+      </ul>
+
+      <h2>Need of tRPC</h2>
+      <p>
+        The main benefit of tRPC is type safety. This ensures:
+      </p>
+      <ul>
+        <li>Clients cannot send invalid data to the server.</li>
+        <li>Errors such as assigning strings to number properties are immediately caught.</li>
+        <li>Both IDEs and browsers alert developers about type mismatches.</li>
+      </ul>
+      <p>
+        tRPC uses <strong>Zod</strong> to construct data schemas. For example, if an API route requires 
+        user information, you can define an object with Zod on the server side, and tRPC will ensure 
+        the client sends data in the correct format.
+      </p>
+
+      <h2>Usage of tRPC</h2>
+      <p>
+        It only takes a few seconds to launch an Express server and start creating tRPC routes and queries. 
+        Typically, the client-side (React) and server-side (Express) remain separate, connected via CORS.
+      </p>
+
+      <h3>Folder Structure</h3>
+      <p>
+        Start by creating a directory named <code>tRPC-Demo</code>. Inside, create a folder 
+        <code>trpclibrary</code> to hold both the server and client projects:
+      </p>
+      <pre><code>
+tRPC-Demo
+ └── trpclibrary
+      ├── client-side (React App Folder)
+      ├── server-side (Express Server Folder)
+ package.json
+      </code></pre>
+
+      <h3>Root package.json</h3>
+      <p>
+        Add a <code>package.json</code> file in the root directory:
+      </p>
+      <pre><code>
+{
+  "name": "trpclibrary",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"wsrun --parallel start\""
+  },
+  "workspaces": [
+    "trpclibrary/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "wsrun": "^5.2.0"
+  }
+}
+      </code></pre>
+
+      <h3>Setting up the Server</h3>
+      <p>
+        Navigate into the <code>trpclibrary</code> folder and create the server with:
+      </p>
+      <pre><code>
+npx create-mf-app
+? Pick the name of your app: server-side
+? Project Type: API Server
+? Port number: 3005
+? Template: express
+      </code></pre>
+      <p>
+        Install dependencies and start the server:
+      </p>
+      <pre><code>
+cd server-side
+npm install
+npm start
+      </code></pre>
+
+      <h3>Setting up the Client</h3>
+      <p>
+        Next, create the client-side project:
+      </p>
+      <pre><code>
+npx create-mf-app
+? Pick the name of your app: client-side
+? Project Type: Application
+? Port number: 3000
+? Framework: react
+? Language: typescript
+? CSS: Tailwind
+? Bundler: Webpack
+      </code></pre>
+      <p>
+        Install dependencies and start the client:
+      </p>
+      <pre><code>
+cd client-side
+npm install
+npm start
+      </code></pre>
+
+      <h3>Configuring TypeScript</h3>
+      <p>
+        In both the server and client directories, initialize TypeScript configuration:
+      </p>
+      <pre><code>
+npx tsc --init
+      </code></pre>
+
+      <h3>Installing Required Libraries</h3>
+      <p>
+        On the server side, install tRPC, CORS, and Zod:
+      </p>
+      <pre><code>
+yarn add @trpc/server zod cors
+      </code></pre>
+      <p>
+        On the client side, install:
+      </p>
+      <pre><code>
+yarn add @trpc/client @trpc/react-query @tanstack/react-query zod
+      </code></pre>
+
+      <h2>Summary</h2>
+      <p>
+        tRPC simplifies API development by removing the need for traditional REST routes while ensuring 
+        type safety using TypeScript and Zod. It enables seamless integration between client and server, 
+        making development faster and less error-prone.
+      </p>
+    </div>
+  </div>
+</div>

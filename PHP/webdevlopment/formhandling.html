@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Form Handling</h1>
+        <div class="content">
+            <p>**Form Handling** is the process where a PHP script receives, validates, and processes data submitted by a user through an HTML form. This is crucial for creating interactive and dynamic web applications.</p>
+            
+            <h2 class="title">HTML Form Structure and Attributes</h2>
+            <p>An HTML form is defined by the <code>&lt;form&gt;</code> element and its attributes, which dictate how data is transmitted:</p>
+            <ul>
+                <li><strong><code>action</code></strong>: Specifies the URL (the PHP script) that will process the form submission. Using <code>&lt;?php echo $_SERVER['PHP_SELF'];?&gt;</code> submits the data back to the same file.</li>
+                <li><strong><code>method</code></strong>: Defines the HTTP method used for submission. The primary values are:
+                    <ul>
+                        <li><strong><code>POST</code></strong>: Sends data in the HTTP request body. Preferred for sensitive data (like passwords) or large amounts of data, as it's not visible in the URL.</li>
+                        <li><strong><code>GET</code> (default)</strong>: Appends data to the `action` URL as query parameters. Suitable for non-sensitive data or search forms.</li>
+                    </ul>
+                </li>
+                <li><strong><code>enctype</code></strong>: Defines how form data is encoded. Must be set to <code>multipart/form-data</code> if the form includes file uploads (<code>&lt;input type="file"&gt;</code>).</li>
+            </ul>
+
+            <h2 class="title">Accessing Form Data in PHP</h2>
+            <p>PHP uses two primary **superglobal arrays** to access submitted form data. The choice depends on the form's <code>method</code> attribute:</p>
+            <ul>
+                <li>**<code>$_POST</code>**: An associative array used to collect data submitted via the **POST** method.</li>
+                <li>**<code>$_GET</code>**: An associative array used to collect data submitted via the **GET** method.</li>
+            </ul>
+            <p>In both cases, data is accessed using the **<code>name</code> attribute** of the HTML form control as the array key (e.g., <code>$_POST["username"]</code>).</p>
+
+            <h3 class="title">Form Validation and Security</h3>
+            <p>Before using submitted data, it is critical for security and reliability to:</p>
+            <ol>
+                <li><strong>Check Submission:</strong> Use <code>if ($_SERVER["REQUEST_METHOD"] == "POST")</code> to ensure the script only processes data after a form submission.</li>
+                <li><strong>Clean Data:</strong> Use functions like **<code>htmlspecialchars()</code>** to convert special characters to HTML entities, preventing Cross-Site Scripting (XSS) attacks if the data is echoed back to the user.</li>
+            </ol>
+        </div>
+        
+        <h2 class="title">Example Session: Retrieving POST Data</h2>
+        <div class="content example">
+            <p>This script handles a submission, retrieves the name and email using <code>$_POST</code>, and echoes the sanitized results.</p>
+            
+            <pre><code>
+&lt;?php
+   $name = $email = "";
+
+   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      // 1. Retrieve and sanitize the data
+      $name = htmlspecialchars($_POST["name"]);
+      $email = htmlspecialchars($_POST["email"]);
+
+      echo "&lt;h2&gt;Thank you!&lt;/h2&gt;";
+      echo "Name Received: " . $name . "&lt;br&gt;";
+      echo "Email Received: " . $email . "&lt;br&gt;";
+   }
+?&gt;
+&lt;form method = "post" action = "&lt;?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?&gt;"&gt;
+   Name: &lt;input type = "text" name = "name"&gt;&lt;br&gt;
+   Email: &lt;input type = "email" name = "email"&gt;&lt;br&gt;
+   &lt;input type = "submit" value = "Send Data"&gt; 
+&lt;/form&gt;
+            </code></pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Input Sanitization Techniques</h1>
+
+        <div class="content">
+            <h2 class="title">What is Input Sanitization?</h2>
+            <p><strong>Input sanitization</strong> is the crucial process of cleaning user-provided data by removing potentially harmful or undesired characters and code before it's processed by server-side scripts. The main goals are <strong>Security</strong> (preventing attacks like XSS and SQL Injection), <strong>Data Integrity</strong> (ensuring stored information is consistent), and improving <strong>User Experience</strong> (reducing errors).</p>
+
+            <h2 class="title">Core Sanitization Functions</h2>
+
+            <h3>The $\text{htmlspecialchars()}$ Function</h3>
+            <p>This function is essential for preventing **Cross-Site Scripting (XSS)** attacks when displaying user input as HTML. It converts special characters to their corresponding HTML entities, rendering them harmless (e.g., they will be displayed as text instead of executed as code).</p>
+            <ul>
+                <li><code>&lt;</code> (less than) becomes <code>&amp;lt;</code></li>
+                <li><code>&gt;</code> (greater than) becomes <code>&amp;gt;</code></li>
+                <li><code>"</code> (double quote) becomes <code>&amp;quot;</code> (unless $\text{ENT\_NOQUOTES}$ is set)</li>
+                <li><code>'</code> (single quote) becomes <code>&amp;#039;</code> (when $\text{ENT\_QUOTES}$ is set)</li>
+            </ul>
+
+            <h3>The $\text{strip\_tags()}$ Function</h3>
+            <p>This function removes all HTML and PHP tags from a string. It is useful for enforcing plain text content in fields where no formatting is allowed. An optional second parameter ($\text{\$allowed\_tags}$) can specify tags that should be preserved.</p>
+            <pre>
+&lt;?php
+   $text = '&lt;p&gt;Hello World&lt;/p&gt;&lt;a href="#"&gt;Click&lt;/a&gt;';
+   echo strip_tags($text);             // Output: Hello World Click
+   echo strip_tags($text, '&lt;a&gt;');   // Output: Hello World&lt;a href="#"&gt;Click&lt;/a&gt;
+?&gt;</pre>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Content Example: $\text{filter\_var()}$ and SQL Safety</h2>
+
+            <h3>The $\text{filter\_var()}$ Function</h3>
+            <p>This versatile function can sanitize input using predefined <strong>filter constants</strong> ($\text{\$filter}$). It is often preferred for specific data types.</p>
+            <p><strong>Examples of Sanitize Filters:</strong></p>
+            <ul>
+                <li>$\text{FILTER\_SANITIZE\_EMAIL}$: Removes all characters except letters, digits, and valid email symbols.</li>
+                <li>$\text{FILTER\_SANITIZE\_URL}$: Removes all characters except letters, digits, and valid URL symbols.</li>
+                <li>$\text{FILTER\_SANITIZE\_NUMBER\_INT}$: Removes all characters except digits, plus, and minus signs.</li>
+                <li>$\text{FILTER\_SANITIZE\_FULL\_SPECIAL\_CHARS}$: Equivalent to $\text{htmlspecialchars()}$ with $\text{ENT\_QUOTES}$ set.</li>
+            </ul>
+            <pre>
+&lt;?php
+   $a = 'abc def@xyz.com';
+   $sa = filter_var($a, FILTER_SANITIZE_EMAIL);
+   // Output: abcdef@xyz.com
+?&gt;</pre>
+
+            <h3>Database Escaping (SQL Injection Prevention)</h3>
+            <p>To prevent **SQL Injection** attacks, special characters in user input must be properly <strong>escaped</strong> before being used in a database query.</p>
+            <ul>
+                <li>**$\text{mysqli\_real\_escape\_string()}$:** Escapes special characters (like $\text{'}$, $\text{"}$, $\text{\}$, $\text{\textbackslash n}$) in the string for use in an $\text{SQL}$ statement, based on the current connection's character set. This is the **correct and modern** way to escape data before constructing a query (though using prepared statements is the superior method).</li>
+                <li>**$\text{addslashes()}$ (Discouraged):** Simply adds backslashes before $\text{'}$, $\text{"}$, $\text{\}$, and $\text{NUL}$. This function is generally considered unsafe for database use as it is character-set unaware and not robust enough against all SQL injection techniques.</li>
+            </ul>
+            <pre>
+&lt;?php
+   // Using MySQLi object-oriented approach (Recommended for escaping)
+   $conn = new mysqli("localhost", "user", "pass", "db");
+   $user_input = "O'Reilly";
+   $safe_input = $conn->real_escape_string($user_input); 
+   // $safe_input will be: O\'Reilly
+   $query = "SELECT * FROM users WHERE name = '$safe_input'";
+?&gt;</pre>
+        </div>
+    </div>
+</div>

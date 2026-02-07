@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Return Type Declarations</h1>
+
+    <div class="content">
+      <p>
+        Introduced in **PHP 7**, **Return Type Declarations** allow a function definition to explicitly specify the expected data type of the value the function will return. This acts as a contract, improving code reliability and clarity.
+      </p>
+
+      <h2>Syntax and Supported Types</h2>
+      <p>The return type is declared by adding a colon (`:`) followed by the desired type after the function's parameter list.</p>
+      <div class="example">
+        <code>function myfunction(type $par1): **type** { /* ... */ return $val; }</code>
+      </div>
+
+      <p>Supported return types include:</p>
+      <ul>
+        <li>
+          **Scalar Types:** `int`, `float`, `bool`, `string`
+        </li>
+        <li>
+          **Compound Types:** `array`, `callable`
+        </li>
+        <li>
+          **Custom Types:** Class and Interface names
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Coercive vs. Strict Mode</h2>
+      <p>
+        Return type declarations follow the same coercive/strict rules as parameter type declarations, controlled by the `declare(strict_types=1);` statement at the top of the file.
+      </p>
+
+      <h3>Coercive Mode (Default)</h3>
+      <p>
+        In the default mode, PHP attempts to **coerce** the returned value into the declared return type if a simple conversion is possible.
+      </p>
+      <ul>
+        <li>
+          **Behavior:** If a function declares `: int` but returns the float `2.0`, PHP will coerce it to the integer `2`. The script continues to execute.
+        </li>
+      </ul>
+      <div class="example">
+        <p>
+          <code>function division(int $x, int $y): int { /* ... */ return $x/$y; }</code><br>
+          <code>division(20.5, 10); // Returns 2 (Input $x is coerced to 20, then $z=2.0 is coerced to int 2)</code>
+        </p>
+      </div>
+
+      <h3>Strict Mode (Opt-in)</h3>
+      <p>
+        When `declare(strict_types=1);` is enabled, no coercion is allowed. The returned value's type must exactly match the declared return type.
+      </p>
+      <ul>
+        <li>
+          **Behavior:** If the returned value's type does not strictly match the declared return type, PHP throws a **`TypeError`** (Fatal Error).
+        </li>
+      </ul>
+      <div class="example">
+        <p>
+          <code>declare(strict_types=1);</code><br>
+          <code>function division(int $x, int $y): **int** { return (float)$x/$y; }</code><br>
+          <code>// Calling division(20, 10) results in a **TypeError** because the function explicitly returns a **float** (2.0) but declared **int**.</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

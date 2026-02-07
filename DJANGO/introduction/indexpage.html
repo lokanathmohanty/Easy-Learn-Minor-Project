@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django Index Page and Multiple App Structure 🏠</h1>
+        <div class="content">
+            <p>The Django **index page** is the page displayed at the root URL of your project (e.g., <code>http://localhost:8000/</code>). After successful installation and project creation, a default "It worked!" page is shown. The key to customizing this page is to map the root URL (<code>/</code>) to a specific view function.</p>
+
+            <h2>Creating the Root Index Page</h2>
+            <p>To make a custom index page, the following steps were performed:</p>
+            <ol>
+                <li>**Application Creation:** An application (<code>myapp</code>) was created using <code>python manage.py startapp myapp</code>.</li>
+                <li>**Registration:** The app was registered in <code>myproject/settings.py</code> by adding <code>'myapp'</code> to <code>INSTALLED_APPS</code>.</li>
+                <li>**View Definition:** The <code>index()</code> view was defined in <code>myapp/views.py</code> to render an HTML template (e.g., <code>index.html</code>) using <code>render(request, 'index.html', {})</code>.</li>
+                <li>**App URL Mapping:** A <code>myapp/urls.py</code> file was created to map the empty path (<code>''</code>) to the <code>index</code> view:
+                    <pre><code>urlpatterns = [
+   path('', views.index, name='index'),
+]</code></pre>
+                </li>
+                <li>**Root URL Inclusion:** The main <code>myproject/urls.py</code> was updated to include the app's URLs at the root path:
+                    <pre><code>urlpatterns = [
+   path('', include('myapp.urls')),
+   path('admin/', admin.site.urls),
+]</code></pre>
+                </li>
+            </ol>
+            <p>By including <code>myapp.urls</code> at the root path (<code>path('', include('myapp.urls'))</code>), the app's <code>index</code> view takes over the project's home page.</p>
+
+            <hr>
+
+            <h2>Structuring a Project with Multiple Applications</h2>
+            <p>In a real-world scenario, a project has multiple apps (e.g., <code>customers</code> and <code>products</code>). The project's index page often serves as a navigation hub linking to the home pages of these individual apps.</p>
+
+            <h3>1. Creating and Configuring Multiple Apps</h3>
+            <p>Two new applications, <code>customers</code> and <code>products</code>, were created and registered in <code>settings.py</code>.</p>
+
+            <h3>2. App URL Structure and Views</h3>
+            <p>Each new app (<code>customers</code> and <code>products</code>) defines its own <code>index()</code> view (e.g., rendering <code>customerindex.html</code>) and its own <code>urls.py</code> file, mapping its root (<code>''</code>) to its respective <code>index</code> view function (e.g., <code>path("", views.index, name="customer-index")</code>).</p>
+
+            <h3>3. Centralized Project URL Routing</h3>
+            <p>The main project <code>myproject/urls.py</code> directs traffic to the correct application based on the URL prefix:</p>
+            <pre><code>urlpatterns = [
+   path('admin/', admin.site.urls),
+   path('products/', include("products.urls")),
+   path('customers/', include("customers.urls")),
+   path('', views.index, name='index'), # Project index page (optional)
+]</code></pre>
+            <ul>
+                <li>The URL **<code>/customers/</code>** directs traffic to the <code>customers.urls</code>, which then resolves to the **Customer App's index view**.</li>
+                <li>The URL **<code>/products/</code>** directs traffic to the <code>products.urls</code>, which then resolves to the **Products App's index view**.</li>
+            </ul>
+
+            <p>The overall project index page (<code>/</code>) can now display a navigation sidebar with links like <code>&lt;a href="customers/"&gt;Customers&lt;/a&gt;</code>, allowing users to navigate the different modules of the web application.</p>
+        </div>
+    </div>
+</div>

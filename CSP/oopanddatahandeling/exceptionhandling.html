@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Exception Handling</h1>
+        
+        <h2 class="title">What is an Exception?</h2>
+        <div class="content">
+            <p>An **exception** is a problem or an abnormal event that arises during the execution of a program, such as an attempt to divide by zero (<code>DivideByZeroException</code>), referencing a null object (<code>NullReferenceException</code>), or accessing an array outside its bounds (<code>IndexOutOfRangeException</code>). Exception handling provides a structured way to manage these runtime errors.</p>
+        </div>
+        
+        <h2 class="title">The Four Exception Handling Keywords</h2>
+        <div class="content">
+            <p>C# exception handling relies on four keywords:</p>
+            <ul>
+                <li><strong><code>try</code></strong>: Identifies a block of code where an exception might occur. This block is considered "protected code."</li>
+                <li><strong><code>catch</code></strong>: Identifies the block of code (the exception handler) that executes when a specific type of exception is thrown in the <code>try</code> block.</li>
+                <li><strong><code>finally</code></strong>: Contains statements that are **always executed**, regardless of whether an exception was thrown or caught. It's ideal for cleanup tasks like closing files or releasing resources.</li>
+                <li><strong><code>throw</code></strong>: Used to explicitly raise an exception, either a predefined system exception or a user-defined exception.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Basic Structure and Flow</h2>
+        <div class="content">
+            <p>The **<code>try</code>** block must be followed by at least one **<code>catch</code>** block or a **<code>finally</code>** block (or both). The system checks <code>catch</code> blocks sequentially.</p>
+            <pre>
+try {
+   // Code that might cause an exception (e.g., division)
+   result = num1 / num2; 
+} catch( DivideByZeroException e ) {
+   // Handle specific division by zero error
+   Console.WriteLine("Error: Cannot divide by zero.");
+} catch( Exception ex ) {
+   // Catch any other exception (should be listed last)
+} finally {
+   // This code runs unconditionally
+   Console.WriteLine("Cleanup complete.");
+}
+            </pre>
+            
+            <h3>Multiple Catch Blocks:</h3>
+            <p>You can list multiple <code>catch</code> blocks, each tailored to a specific exception type (e.g., <code>IndexOutOfRangeException</code>, <code>DivideByZeroException</code>). When doing this, specific exceptions must be listed before the more general <code>System.Exception</code> base class.</p>
+        </div>
+        
+        <h2 class="title">Exception Classes and User-Defined Exceptions</h2>
+        <div class="content">
+            <p>All exception classes in C# are derived directly or indirectly from the **<code>System.Exception</code>** class.</p>
+            
+            <h3>Key Base Classes:</h3>
+            <ul>
+                <li><strong><code>System.SystemException</code></strong>: The base class for all predefined, runtime exceptions (like <code>NullReferenceException</code> or <code>DivideByZeroException</code>).</li>
+                <li><strong><code>System.ApplicationException</code></strong>: The recommended base class for **user-defined exceptions**.</li>
+            </ul>
+            
+            <h3>Creating Custom Exceptions:</h3>
+            <p>To define your own exception, you must derive a new class from <code>System.Exception</code> (or <code>System.ApplicationException</code>).</p>
+            <pre>
+public class TempIsZeroException : Exception {
+   // Constructor calls the base Exception constructor
+   public TempIsZeroException(string message) : base(message) { }
+}
+
+public void showTemp() {
+   if(temperature == 0) {
+      throw (new TempIsZeroException("Zero Temperature found"));
+   }
+}
+            </pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">C - The If Statement</h1>
+
+    <div class="content">
+      <p>Conditional execution of instructions is the basic requirement of a computer program. The <strong>if</strong> statement in C is the primary conditional statement. C allows an optional <strong>else</strong> keyword to specify the statements to be executed if the if condition is false.</p>
+
+      <h2 class="title">Syntax of if Statement</h2>
+      <p>The <code>if</code> statement is written with the following syntax:</p>
+
+      <pre><code>if (boolean_expression) {
+   /* statement(s) will execute if the boolean expression is true */
+}</code></pre>
+
+      <h2 class="title">How if Statement Works?</h2>
+      <p>If the Boolean expression evaluates to <strong>true</strong>, then the block of code inside the if statement will be executed. If the expression evaluates to <strong>false</strong>, the program continues after the if block.</p>
+
+      <h2 class="title">Example: Simple If Statement</h2>
+      <p>This example checks if a variable is less than 20 and displays a message accordingly.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int a;
+   a = 12;  // change to 40 and run again
+   printf("Value of a is : %d\n", a);
+
+   if (a &lt; 20) {
+      printf("a is less than 20\n");
+   }
+
+   return 0;
+}</code></pre>
+
+      <h2 class="title">Output</h2>
+      <ul>
+        <li>Value of a is: 12<br>a is less than 20</li>
+        <li>Value of a is: 40</li>
+      </ul>
+
+      <h2 class="title">If Statement with Logical Operations</h2>
+      <p>You can use logical operators like <code>&amp;&amp;</code> or <code>||</code> within an if condition to check compound expressions.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int a = 10, b = 5, c = 7;
+
+   if (a &gt;= b &amp;&amp; a &gt;= c) {
+      printf("a is greater than b and c\n");
+   }
+
+   printf("a: %d b: %d c: %d", a, b, c);
+   return 0;
+}</code></pre>
+
+      <h2 class="title">Output</h2>
+      <ul>
+        <li>a is greater than b and c<br>a: 10 b: 5 c: 7</li>
+        <li>a: 10 b: 20 c: 15</li>
+      </ul>
+
+      <h2 class="title">Multiple If Statements</h2>
+      <p>Use multiple <code>if</code> statements to handle various conditions.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int amount;
+   float discount, net;
+
+   amount = 500;  // try 2250 or 5200
+
+   if (amount &lt; 1000) {
+      discount = 0;
+   }
+   if (amount &gt;= 1000 &amp;&amp; amount &lt; 5000) {
+      discount = 5;
+   }
+   if (amount &gt;= 5000) {
+      discount = 10;
+   }
+
+   net = amount - amount * discount / 100;
+   printf("Amount: %d Discount: %f Net payable: %f", amount, discount, net);
+
+   return 0;
+}</code></pre>
+
+      <h2 class="title">Output</h2>
+      <ul>
+        <li>Amount: 500 Discount: 0.000000 Net payable: 500.000000</li>
+        <li>Amount: 2250 Discount: 5.000000 Net payable: 2137.500000</li>
+        <li>Amount: 5200 Discount: 10.000000 Net payable: 4680.000000</li>
+      </ul>
+
+      <h2 class="title">Checking Multiple Conditions</h2>
+      <p>You can use logical operators to check multiple conditions in one <code>if</code> statement.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int phy = 50, maths = 50;
+   float avg;
+
+   avg = (float)(phy + maths) / 2;
+   printf("Phy: %d Maths: %d Avg: %f\n", phy, maths, avg);
+
+   if (avg &gt;= 50 &amp;&amp; (maths &gt;= 35 &amp;&amp; phy &gt;= 35)) {
+      printf("Result: Pass");
+   }
+
+   if (avg &lt; 50) {
+      printf("Result: Fail\n");
+   }
+
+   return 0;
+}</code></pre>
+
+      <h2 class="title">Output</h2>
+      <ul>
+        <li>Phy: 50 Maths: 50 Avg: 50.000000<br>Result: Pass</li>
+        <li>Phy: 40 Maths: 40 Avg: 40.000000<br>Result: Fail</li>
+        <li>Phy: 80 Maths: 40 Avg: 60.000000<br>Result: Pass</li>
+      </ul>
+    </div>
+
+  </div>
+</div>

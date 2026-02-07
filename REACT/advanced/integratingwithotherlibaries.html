@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Integrating with Other Libraries</h1>
+    <div class="content">
+      <p>
+        Even though React provides all necessary features to create a complete web application, 
+        integration with other libraries is often required due to legacy systems, migration from 
+        another framework, etc. React can co-exist with other libraries and provides the necessary 
+        infrastructure to work alongside them.
+      </p>
+
+      <h2>CreateRoot Based Integration</h2>
+      <p>
+        React uses <code>createRoot()</code> from the <code>ReactDOMClient</code> module to attach itself 
+        to the main HTML document. This method only affects the attached element, making it possible to 
+        intermix multiple libraries within the same document.
+      </p>
+      <div class="example">
+        <h3>Example: React + jQuery</h3>
+        <p>
+          In this example, React is rendered into one container while jQuery manipulates another container.
+        </p>
+      </div>
+
+      <h2>Ref Based Integration</h2>
+      <p>
+        Since React does not know about DOM manipulations done by other libraries, 
+        <strong>Refs</strong> can be used as an escape hatch. By attaching refs, React can delegate DOM 
+        manipulation to third-party libraries.
+      </p>
+      <div class="example">
+        <h3>Steps for Ref Integration</h3>
+        <ul>
+          <li>Create a React component that renders an empty <code>&lt;div&gt;</code>.</li>
+          <li>Attach a ref to the rendered <code>&lt;div&gt;</code>.</li>
+          <li>Use <code>componentDidMount()</code> to initialize the third-party library on the ref.</li>
+          <li>Clean up using <code>componentWillUnmount()</code>.</li>
+        </ul>
+      </div>
+
+      <h2>jQuery Slick Plugin Integration</h2>
+      <p>
+        As an example, let us integrate the popular 
+        <a href="https://github.com/kenwheeler/slick" target="_blank">Slick jQuery plugin</a> 
+        into a React component.
+      </p>
+      <div class="example">
+        <h3>Process</h3>
+        <ul>
+          <li>Install and include slick-carousel assets.</li>
+          <li>Create a React component that attaches slick to a ref.</li>
+          <li>Render the component and pass child slides.</li>
+        </ul>
+      </div>
+
+      <h2>Summary</h2>
+      <p>
+        React provides multiple ways to integrate with other libraries. Developers should prefer 
+        React solutions whenever possible but can use interop methods for legacy systems, migration 
+        projects, or unavoidable external dependencies.
+      </p>
+    </div>
+  </div>
+</div>

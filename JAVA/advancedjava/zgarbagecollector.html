@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Z Garbage Collector (ZGC)</h1>
+
+        <div class="content">
+            <h2>What is ZGC?</h2>
+            <p>The **Z Garbage Collector (ZGC)** is a scalable, low-latency garbage collection mechanism introduced in **Java 11** as an experimental feature and made a standard feature in **Java 15**. ZGC is designed for applications requiring extremely low pause times, even with very large heaps.</p>
+
+            <h3>Key Differentiating Feature: Low Pause Time</h3>
+            <p>ZGC's central guarantee is that the garbage collection **pause time is not dependent on the heap size**. Regardless of whether the heap is 2MB or 16TB, the maximum pause time will ideally **never exceed 10 milliseconds** (ms). This makes it perfect for applications like large-scale machine learning or massive data processing where responsiveness is critical.</p>
+
+            <h3>Evolution and Enhancements (Java 16+)</h3>
+            <p>Initially, ZGC had limitations, such as not being able to return unused heap memory to the operating system. Subsequent Java versions, particularly Java 16, brought significant improvements:</p>
+            <ul>
+                <li><strong>Dynamic Heap Management:</strong> ZGC now returns uncommitted heap memory to the operating system by default (unless the maximum heap size is reached).</li>
+                <li><strong>Scalability:</strong> The maximum supported heap size has been increased from 4TB to a massive **16TB**.</li>
+                <li><strong>Concurrent Stack Processing:</strong> Thread-stack processing was moved from being a safepoint-blocking operation to a **concurrent, incremental, and lazy** phase, dramatically reducing pause times further.</li>
+                <li><strong>NUMA Awareness:</strong> Support for Non-Uniform Memory Access architectures for better performance on large servers.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Using and Configuring ZGC</h2>
+            <p>ZGC is not the default collector (G1 is the default in modern JVMs) and must be explicitly enabled using a JVM flag.</p>
+            
+            <h3>Enabling ZGC</h3>
+            <p>To enable the Z Garbage Collector, use the following JVM argument:</p>
+            <pre><code>-XX:+UseZGC</code></pre>
+            
+            <h3>Heap Uncommit/Memory Return</h3>
+            <p>By default, modern ZGC (Java 15+) will return unused memory to the OS. To revert to the older behavior (pre-Java 15), you can:</p>
+            <ul>
+                <li>Use the option: <code>-XX:-ZUncommit</code></li>
+                <li>Set the initial and maximum heap sizes to be the same: <code>-Xms&lt;size&gt; -Xmx&lt;size&gt;</code></li>
+            </ul>
+        </div>
+    </div>
+</div>

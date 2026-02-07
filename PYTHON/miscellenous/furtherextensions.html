@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Further Extensions</h1>
+    <div class="content">
+      <p>
+        Any code that you write using compiled languages like C, C++, or Java can be integrated or imported into another Python script. 
+        This code is called an <em>extension</em>. A Python extension module is essentially a normal C library. On Unix systems, these libraries usually end in 
+        <code>.so</code> (shared object), while on Windows they end in <code>.dll</code> (dynamically linked library).
+      </p>
+
+      <h2>Pre-Requisites for Writing Extensions</h2>
+      <ul>
+        <li>Python header files (install the Python development package on Unix).</li>
+        <li>Windows users get headers with the binary Python installer.</li>
+        <li>Good knowledge of C or C++.</li>
+      </ul>
+
+      <h2>Structure of a Python Extension</h2>
+      <p>A Python extension module usually contains:</p>
+      <ul>
+        <li>The header file <code>Python.h</code>.</li>
+        <li>C functions to be exposed to Python.</li>
+        <li>A method mapping table.</li>
+        <li>An initialization function.</li>
+      </ul>
+
+      <h2>The Header File Python.h</h2>
+      <p>
+        Include <code>Python.h</code> before any other headers to access the Python API used for integrating with the interpreter.
+      </p>
+
+      <h2>C Function Signatures</h2>
+      <p>
+        Functions for extensions have one of these signatures:
+      </p>
+      <ul>
+        <li><code>static PyObject *MyFunction(PyObject *self, PyObject *args);</code></li>
+        <li><code>static PyObject *MyFunctionWithKeywords(PyObject *self, PyObject *args, PyObject *kw);</code></li>
+        <li><code>static PyObject *MyFunctionWithNoArgs(PyObject *self);</code></li>
+      </ul>
+      <p>Use <code>Py_RETURN_NONE</code> if no value needs to be returned.</p>
+
+      <h2>The Method Mapping Table</h2>
+      <p>
+        Functions are linked using a <code>PyMethodDef</code> structure:
+      </p>
+      <ul>
+        <li><code>ml_name</code> – function name as seen in Python.</li>
+        <li><code>ml_meth</code> – pointer to the C function.</li>
+        <li><code>ml_flags</code> – calling convention (e.g., <code>METH_VARARGS</code>).</li>
+        <li><code>ml_doc</code> – function docstring, optional.</li>
+      </ul>
+
+      <h2>The Initialization Function</h2>
+      <p>
+        The initialization function is required when the module is loaded and is named <code>initModule</code>, where <code>Module</code> is the module name. 
+        Use <code>PyMODINIT_FUNC</code> for portability.
+      </p>
+      <p>Example:</p>
+      <pre>
+PyMODINIT_FUNC initModule() {
+   Py_InitModule3(func, module_methods, "docstring...");
+}
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Hello World Extension</h2>
+    <div class="content">
+      <pre>
+#include &lt;Python.h&gt;
+static PyObject* helloworld(PyObject* self)
+{
+   return Py_BuildValue("s", "Hello, Python extensions!!");
+}
+
+static char helloworld_docs[] = "helloworld(): Example docstring\n";
+
+static PyMethodDef helloworld_funcs[] = {
+   {"helloworld", (PyCFunction)helloworld, METH_NOARGS, helloworld_docs},
+   {NULL}
+};
+
+void inithelloworld(void) {
+   Py_InitModule3("helloworld", helloworld_funcs, "Extension module example!");
+}
+      </pre>
+      <p>
+        Save as <code>hello.c</code> and compile using a <code>setup.py</code> file with <code>distutils</code>.
+      </p>
+      <pre>
+from distutils.core import setup, Extension
+setup(name='helloworld', version='1.0',
+   ext_modules=[Extension('helloworld', ['hello.c'])])
+      </pre>
+      <p>Install with:</p>
+      <pre>$ python setup.py install</pre>
+      <p>Use from Python:</p>
+      <pre>
+import helloworld
+print(helloworld.helloworld())
+      </pre>
+      <p>Output:</p>
+      <pre>Hello, Python extensions!!</pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Passing Function Parameters</h2>
+    <div class="content">
+      <p>
+        Use <code>PyArg_ParseTuple</code> to extract Python arguments in your C function. Arguments are described using a format string.
+      </p>
+      <pre>
+static PyObject *module_func(PyObject *self, PyObject *args) {
+   int i;
+   double d;
+   char *s;
+   if (!PyArg_ParseTuple(args, "ids", &i, &d, &s)) {
+      return NULL;
+   }
+   Py_RETURN_NONE;
+}
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Returning Values</h2>
+    <div class="content">
+      <p>
+        Use <code>Py_BuildValue</code> to build Python objects from C values.
+      </p>
+      <pre>
+static PyObject *foo_add(PyObject *self, PyObject *args) {
+   int a, b;
+   if (!PyArg_ParseTuple(args, "ii", &a, &b)) {
+      return NULL;
+   }
+   return Py_BuildValue("i", a + b);
+}
+      </pre>
+      <p>This works like:</p>
+      <pre>
+def add(a, b):
+   return a + b
+      </pre>
+      <p>You can also return multiple values as tuples:</p>
+      <pre>
+return Py_BuildValue("ii", a + b, a - b);
+      </pre>
+    </div>
+  </div>
+</div>

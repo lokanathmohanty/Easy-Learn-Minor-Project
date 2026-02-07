@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">The const Qualifier in C</h1>
+    <div class="content">
+      <p>The <code>const</code> qualifier in C is used to declare variables whose values should remain constant throughout the program. Once declared as <code>const</code>, a variable becomes read-only and cannot be modified.</p>
+
+      <h2 class="title">Why Use <code>const</code>?</h2>
+      <p>Using <code>const</code> improves code safety, readability, and maintainability by clearly signaling which values are meant to remain fixed. It protects important constants such as mathematical values (like PI), array sizes, or configuration values from accidental changes.</p>
+
+      <h2 class="title">Example of <code>const</code> Variable</h2>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   const float PI = 3.14;
+   printf("Value of PI: %f\n", PI);
+   // PI = 10;  // Not allowed, will cause error
+   return 0;
+}
+      </code></pre>
+
+      <h2 class="title">Using <code>const</code> with Pointers</h2>
+      <p>The <code>const</code> qualifier can be used in three pointer-related scenarios:</p>
+      <ul>
+        <li><strong>Pointer to constant:</strong> The pointer can point to different variables, but the value pointed to cannot be changed through the pointer.</li>
+        <li><strong>Constant pointer to variable:</strong> The pointer cannot point elsewhere but the value it points to can be changed.</li>
+        <li><strong>Constant pointer to constant:</strong> The pointer cannot be changed to point elsewhere, nor can the value be changed through it.</li>
+      </ul>
+
+      <h3 class="title">Pointer to Constant Example</h3>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   int x = 10, y = 20;
+   const int *ptr = &x;
+   printf("Value pointed by ptr: %d\n", *ptr);
+   // *ptr = 15; // Error: cannot modify value through ptr
+   ptr = &y;    // Allowed: pointer can point elsewhere
+   printf("Value pointed by ptr: %d\n", *ptr);
+   return 0;
+}
+      </code></pre>
+
+      <h3 class="title">Constant Pointer to Variable Example</h3>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   int i = 10, j = 20;
+   int* const ptr = &i;
+   printf("ptr: %d\n", *ptr);
+   *ptr = 100; // Allowed: value can be changed
+   printf("ptr: %d\n", *ptr);
+   // ptr = &j; // Error: pointer cannot point elsewhere
+   return 0;
+}
+      </code></pre>
+
+      <h3 class="title">Constant Pointer to Constant Example</h3>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   int i = 10, j = 20;
+   const int* const ptr = &i;
+   printf("ptr: %d\n", *ptr);
+   // ptr = &j; // Error: pointer cannot point elsewhere
+   // *ptr = 50; // Error: value cannot be changed
+   return 0;
+}
+      </code></pre>
+
+      <h2 class="title">Advantages of <code>const</code></h2>
+      <ul>
+        <li>Prevents accidental modification of important values.</li>
+        <li>Improves program safety and reduces bugs.</li>
+        <li>Makes intentions clear to programmers and the compiler.</li>
+        <li>Allows compiler optimizations for read-only data.</li>
+        <li>Reduces unnecessary copying of values, improving performance.</li>
+      </ul>
+    </div>
+  </div>
+</div>

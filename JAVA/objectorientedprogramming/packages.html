@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Packages</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Code Organization</h1>
+            <h2 class="subtitle">Session: Packages</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What are Java Packages? 📦</h2>
+                <p>A **Package** in Java is a mechanism for **grouping related types** (classes, interfaces, enumerations, and annotations) together. They serve several critical purposes:</p>
+                <ul>
+                    <li>**Namespace Management:** They prevent **naming conflicts** by creating a unique namespace for each group of classes.</li>
+                    <li>**Access Control:** They provide a mechanism for controlling access to classes and members.</li>
+                    <li>**Organization:** They make it easier to search, locate, and use related types.</li>
+                </ul>
+            </div>
+
+            <div class="content types">
+                <h2 class="subtitle">Types of Packages</h2>
+                <p>Java packages are categorized as:</p>
+                <ul>
+                    <li>**Built-in Packages:** Packages that come with the Java Development Kit (JDK), such as <code>java.lang</code> (fundamental classes), <code>java.io</code> (input/output), and <code>java.util</code> (utility classes).</li>
+                    <li>**User-defined Packages:** Packages created by developers to group their own related classes and interfaces.</li>
+                </ul>
+            </div>
+
+            <div class="content creation">
+                <h2 class="subtitle">Creating a Java Package</h2>
+                <p>To create a package, use the **`package`** statement as the **first line** of the source file. It is a best practice to use all lowercase letters for package names to avoid conflicts with class names.</p>
+                <pre><code>/* File name : Animal.java */
+package animals; // Declares the package for this file
+
+interface Animal {
+   public void eat();
+   public void travel();
+}</code></pre>
+                <p>To compile files with package statements, you must use the **`-d`** (directory) option to specify where the package directory structure should be created:</p>
+                <pre><code>$ javac -d . MammalInt.java</code></pre>
+                <p>This command creates a folder named <code>animals</code> (if it doesn't exist) and places the compiled <code>.class</code> file inside it.</p>
+            </div>
+
+            <div class="content importing">
+                <h2 class="subtitle">Importing Java Packages</h2>
+                <p>To use a class from a different package, you must make it accessible using one of three methods:</p>
+                <ol>
+                    <li>**Fully Qualified Name:** Use the complete package path every time the class is referenced (e.g., `payroll.Employee e = new payroll.Employee();`).</li>
+                    <li>**Specific Class Import:** Import only the required class using the `import` keyword (e.g., `import payroll.Employee;`).</li>
+                    <li>**Wildcard Import:** Import all public types within a package using the asterisk (`*`) (e.g., `import payroll.*;`).</li>
+                </ol>
+                <p class="example">Import statements must appear **after the package statement** and **before the class declaration**.</p>
+            </div>
+
+            <div class="content structure">
+                <h2 class="subtitle">Package Directory Structure</h2>
+                <p>The package name must directly correspond to the directory structure on the file system. This allows the compiler and JVM to locate the compiled `.class` files.</p>
+                <p>For a class declared as `package com.apple.computers;`, the path to the source file should be:</p>
+                <pre><code>...\com\apple\computers\Dell.java</code></pre>
+                <p>The compiler and JVM use the **`CLASSPATH`** system variable to find the root directory where the package structure begins (e.g., `<path-two>\classes`). The full path to the class file is then constructed as: **`CLASSPATH`** + **`package name`**.</p>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

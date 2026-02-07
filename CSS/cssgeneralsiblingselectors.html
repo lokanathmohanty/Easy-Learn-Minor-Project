@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - General Sibling Selectors</h1>
+    <div class="content">
+      <p>
+        A <strong>CSS general sibling selector</strong> ( <code>~</code> ) is used to 
+        select all elements that are siblings of a specified element and share the same parent.  
+        Unlike the adjacent sibling selector (<code>+</code>), it applies to <em>all matching siblings</em>, 
+        not just the one immediately following.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+selector1 ~ selector2 {
+  /* property: value; */
+  color: #04af2f;
+}
+      </pre>
+
+      <h2>Example 1: Styling Paragraphs After a Div</h2>
+      <p>
+        In this example, all <code>&lt;p&gt;</code> elements that are siblings of 
+        a <code>&lt;div&gt;</code> (and come after it) are styled with green text.  
+        Paragraphs inside the div or before it remain unaffected.
+      </p>
+      <pre>
+div {
+  border: 2px solid #031926;
+}
+div ~ p {
+  color: #04af2f;
+}
+
+&lt;p&gt;This paragraph is above the div and will not be styled.&lt;/p&gt;
+
+&lt;div&gt;
+  &lt;p&gt;This paragraph is inside the div and will not be styled.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This paragraph comes after the div and will be green.&lt;/p&gt;
+&lt;p&gt;This second paragraph after the div will also be green.&lt;/p&gt;
+      </pre>
+
+      <h2>Example 2: Applying Styles After an h3 Tag</h2>
+      <p>
+        Here, the general sibling selector is applied to all 
+        <code>&lt;p&gt;</code> tags that are siblings of an <code>&lt;h3&gt;</code>.  
+        The styles include a background color, italic font style, and larger font size.
+      </p>
+      <pre>
+.container {
+  padding: 20px;
+  border: 2px solid #031926;
+  font-family: Verdana, sans-serif;
+}
+h3 ~ p {
+  font-family: Verdana, sans-serif;
+  font-size: 20px;
+  font-style: italic;
+  background-color: #04af2f;
+  color: white;
+}
+
+&lt;div class="container"&gt;
+  &lt;h3&gt;This is an h3 tag&lt;/h3&gt;
+  &lt;p&gt;This paragraph follows the h3 tag and is styled.&lt;/p&gt;
+  &lt;p&gt;This is another p tag after the h3 and is also styled.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This p tag is outside the container and not affected.&lt;/p&gt;
+      </pre>
+
+      <h2>Key Notes</h2>
+      <ul>
+        <li>The <strong>general sibling selector</strong> (<code>~</code>) applies styles to all siblings that come after the referenced element.</li>
+        <li>It ignores siblings that appear before the reference element.</li>
+        <li>It is different from the <strong>adjacent sibling selector</strong> (<code>+</code>), which only applies to the <em>immediately next</em> sibling.</li>
+        <li>Useful when you want to style a group of elements following a particular tag.</li>
+      </ul>
+    </div>
+  </div>
+</div>

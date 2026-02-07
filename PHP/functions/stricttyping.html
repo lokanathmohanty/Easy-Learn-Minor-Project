@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Strict Typing</h1>
+
+    <div class="content">
+      <p>
+        By default, PHP is a **weakly typed** language, meaning it performs **automatic type casting** (type juggling) on variables whenever possible to match the context of an operation. **Strict Typing** is a feature that overrides this default behavior to prevent implicit type conversion, enforcing that passed values strictly match the declared **Type Hints**.
+      </p>
+
+      <h2>Enabling Strict Typing</h2>
+      <p>
+        To enable strict typing for a specific file, you must add the following directive as the very first statement in the PHP file (immediately after the `&lt;?php` tag):
+      </p>
+      <div class="example">
+        <code>&lt;?php</code><br>
+        <code>&nbsp;&nbsp;&nbsp;**declare (strict_types=1);**</code>
+      </div>
+      <p>
+        Note that the `declare(strict_types=1)` setting only affects function calls made from **within that specific file** and does not apply globally across the application.
+      </p>
+
+      <hr>
+
+      <h2>Impact of Strict Typing vs. Weak Typing</h2>
+
+      <h3>Weak Typing (Default Behavior)</h3>
+      <p>
+        Without strict typing, PHP attempts to convert argument types to match the **Type Hints** on the function parameters.
+      </p>
+      <div class="example">
+        <p>
+          *Function defined with type hints:* <code>function addition(int $x, int $y) { /* ... */ }</code><br>
+          *Function called with a string:* <code>addition("10", 20);</code>
+        </p>
+        <p class="content">
+          $\rightarrow$ **Result:** PHP converts `"10"` to `10` and executes successfully, resulting in an addition of 30.
+        </p>
+      </div>
+
+      <h3>Strict Typing (Forced Type Checking)</h3>
+      <p>
+        When `declare(strict_types=1)` is active, PHP will **not** perform implicit casting. If the type of the argument does not exactly match the declared type hint, a fatal `TypeError` is immediately thrown.
+      </p>
+      <div class="example">
+        <p>
+          *With strict\_types=1:* <code>addition("10", 20);</code>
+        </p>
+        <p class="content">
+          $\rightarrow$ **Fatal Error:** Uncaught TypeError: addition(): Argument #1 ($x) must be of type int, string given.
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Strict Return Type Checking</h2>
+      <p>
+        Since PHP 7, **Return Type Declarations** can also be added using a colon (`:`) after the parameter list (e.g., `: int`). In strict mode, if a function returns a value that doesn't match the declared return type, a fatal `TypeError` is thrown.
+      </p>
+      <div class="example">
+        <p>
+          *Return type declared as `int` but returns `float`:*<br>
+          <code>function division(int $x, int $y) : **int** { return $x/$y; }</code><br>
+          <code>division(10, 20);</code> // Returns 0.5 (float)
+        </p>
+        <p class="content">
+          $\rightarrow$ **Fatal Error:** Uncaught TypeError: division(): Return value must be of type int, float returned.
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Benefits of Strict Typing</h2>
+      <ul>
+        <li>
+          **Code Reliability:** Increases type safety and significantly reduces the risk of subtle runtime bugs caused by unexpected implicit type conversions.
+        </li>
+        <li>
+          **Readability & Maintainability:** Explicit type definitions make the function's expectations clearer to other developers, improving long-term code maintenance.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

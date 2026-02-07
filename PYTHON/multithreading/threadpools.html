@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Thread Pools</h1>
+    </div>
+    <div class="content">
+      <p>A thread pool efficiently manages multiple threads to execute tasks concurrently. Python's standard <code>threading</code> module does not provide direct thread pooling, but thread pools are available via the <code>multiprocessing.dummy</code> module and the <code>concurrent.futures</code> module.</p>
+      <p>Thread pools reuse worker threads to reduce the overhead of creating/destroying threads repeatedly, improving performance for large numbers of tasks.</p>
+      <p>Two main classes for thread pools in Python are:</p>
+      <ul>
+        <li><strong>ThreadPool</strong> from <code>multiprocessing.dummy</code></li>
+        <li><strong>ThreadPoolExecutor</strong> from <code>concurrent.futures</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Using the Python ThreadPool Class</h2>
+    </div>
+    <div class="content">
+      <p>The <code>ThreadPool</code> class manages a pool of worker threads submitting jobs for concurrent execution. It shares an interface with the <code>Pool</code> class (for processes) and should be closed or terminated properly.</p>
+      <p><strong>Example:</strong> Concurrently computing squares and cubes of numbers using a thread pool with 3 worker threads.</p>
+      <pre>
+from multiprocessing.dummy import Pool as ThreadPool
+import time
+
+def square(number):
+   sqr = number * number
+   time.sleep(1)
+   print("Number:{} Square:{}".format(number, sqr))
+
+def cube(number):
+   cub = number * number * number
+   time.sleep(1)
+   print("Number:{} Cube:{}".format(number, cub))
+
+numbers = [1, 2, 3, 4, 5]
+pool = ThreadPool(3)
+pool.map(square, numbers)
+pool.map(cube, numbers)
+pool.close()
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        Number:2 Square:4<br>
+        Number:1 Square:1<br>
+        Number:3 Square:9<br>
+        Number:4 Square:16<br>
+        Number:5 Square:25<br>
+        Number:1 Cube:1<br>
+        Number:2 Cube:8<br>
+        Number:3 Cube:27<br>
+        Number:4 Cube:64<br>
+        Number:5 Cube:125
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Using the Python ThreadPoolExecutor Class</h2>
+    </div>
+    <div class="content">
+      <p>The <code>ThreadPoolExecutor</code> class from the <code>concurrent.futures</code> module provides a high-level interface for asynchronous function execution using threads. It manages a pool of worker threads executing submitted tasks.</p>
+      <p>The <code>Future</code> class encapsulates asynchronous execution, allowing you to check task status and obtain results.</p>
+      <p><strong>Example:</strong> Submit square and cube functions to a thread pool and check their execution status.</p>
+      <pre>
+from concurrent.futures import ThreadPoolExecutor
+from time import sleep
+
+def square(numbers):
+   for val in numbers:
+      ret = val * val
+      sleep(1)
+      print("Number:{} Square:{}".format(val, ret))
+
+def cube(numbers):
+   for val in numbers:
+      ret = val * val * val
+      sleep(1)
+      print("Number:{} Cube:{}".format(val, ret))
+
+if __name__ == '__main__':
+   numbers = [1, 2, 3, 4, 5]
+   executor = ThreadPoolExecutor(4)
+   thread1 = executor.submit(square, numbers)
+   thread2 = executor.submit(cube, numbers)
+   print("Thread 1 executed ? :", thread1.done())
+   print("Thread 2 executed ? :", thread2.done())
+   sleep(2)
+   print("Thread 1 executed ? :", thread1.done())
+   print("Thread 2 executed ? :", thread2.done())
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        Thread 1 executed ? : False<br>
+        Thread 2 executed ? : False<br>
+        Number:1 Square:1<br>
+        Number:1 Cube:1<br>
+        Thread 1 executed ? : False<br>
+        Thread 2 executed ? : False<br>
+        Number:2 Square:4<br>
+        Number:2 Cube:8<br>
+        Number:3 Square:9<br>
+        Number:3 Cube:27<br>
+        Number:4 Square:16<br>
+        Number:4 Cube:64<br>
+        Number:5 Square:25<br>
+        Number:5 Cube:125
+      </p>
+    </div>
+  </div>
+</div>

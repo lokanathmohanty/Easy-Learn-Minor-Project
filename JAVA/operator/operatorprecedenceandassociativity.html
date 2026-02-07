@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java Operator Precedence and Associativity</h1>
+    <div class="content">
+      <h2>Session Content</h2>
+      <p>
+        In Java, operator precedence determines which part of an expression is evaluated first. Operators with higher precedence are executed before those with lower precedence. When operators of the same precedence appear together, associativity decides the direction of evaluation.
+      </p>
+      <p>
+        Most arithmetic and logical operators have left-to-right associativity, while assignment and ternary operators have right-to-left associativity.
+      </p>
+    </div>
+    <div class="content">
+      <h2>Operator Precedence Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Precedence</th>
+            <th>Category</th>
+            <th>Operators</th>
+            <th>Associativity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Postfix</td>
+            <td>() [] . (dot)</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Unary</td>
+            <td>++ -- + - ~ !</td>
+            <td>Right to left</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Multiplicative</td>
+            <td>* / %</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Additive</td>
+            <td>+ -</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Shift</td>
+            <td>&lt;&lt; &gt;&gt; &gt;&gt;&gt;</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Relational</td>
+            <td>&lt; &lt;= &gt; &gt;= instanceof</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Equality</td>
+            <td>== !=</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Bitwise AND</td>
+            <td>&amp;</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Bitwise XOR</td>
+            <td>^</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Bitwise OR</td>
+            <td>|</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Logical AND</td>
+            <td>&amp;&amp;</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Logical OR</td>
+            <td>||</td>
+            <td>Left to right</td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>Conditional</td>
+            <td>?:</td>
+            <td>Right to left</td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>Assignment</td>
+            <td>= += -= *= /= %= &= ^= |= <<= >>= >>>=</td>
+            <td>Right to left</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="content">
+      <h2>Example 1: Operator Precedence</h2>
+      <pre>
+public class OperatorPrecedenceExample {
+    public static void main(String[] args) {
+        int result = 10 + 5 * 2 - 8 / 4; // precedence applied
+        System.out.println("Result: " + result);
+    }
+}
+      </pre>
+      <p>Output:</p>
+      <p>Result: 18</p>
+      <p>Evaluation steps:</p>
+      <ul>
+        <li>5 * 2 = 10</li>
+        <li>8 / 4 = 2</li>
+        <li>Expression becomes: 10 + 10 - 2</li>
+        <li>10 + 10 = 20</li>
+        <li>20 - 2 = 18</li>
+      </ul>
+    </div>
+    <div class="content">
+      <h2>Example 2: Operator Associativity</h2>
+      <pre>
+public class AssociativityExample {
+    public static void main(String[] args) {
+        int a, b, c;
+        a = b = c = 2; // right-to-left associative assignment
+        System.out.println("a: " + a + ", b: " + b + ", c: " + c);
+    }
+}
+      </pre>
+      <p>Output:</p>
+      <p>a: 2, b: 2, c: 2</p>
+      <p>Stepwise:</p>
+      <ul>
+        <li>c = 2</li>
+        <li>b = c</li>
+        <li>a = b</li>
+      </ul>
+    </div>
+  </div>
+</div>

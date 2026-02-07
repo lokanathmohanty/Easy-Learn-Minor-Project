@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP HTTP Authentication</h1>
+
+        <div class="content">
+            <p>PHP uses the **$\text{header()}$ function** to interact with the client browser and the server to initiate HTTP authentication. This process forces the browser to display a Username/Password input window by sending an "Authentication Required" status.</p>
+
+            <hr>
+
+            <h2 class="title">The $\text{header()}$ Function for HTTP Control</h2>
+            <p>The $\text{header()}$ function is used to send a raw HTTP header back to the client. This function is critical for handling authentication and redirects.</p>
+            <pre>header(string $header, bool $replace = true, int $response_code = 0): void</pre>
+            
+            <h3>Forcing Authentication</h3>
+            <p>To force the browser to pop up the login box, two specific headers must be sent:</p>
+            <ol>
+                <li>$\text{WWW-Authenticate: Basic realm="My Realm"}$: This header tells the browser to use **Basic** authentication and provides a prompt message ($\text{My Realm}$).</li>
+                <li>$\text{HTTP/1.0 401 Unauthorized}$: This HTTP response code signals to the client that the requested resource requires authorization.</li>
+            </ol>
+            <p><strong>Note:</strong> To ensure authentication headers are correctly passed, you may need a **$\text{.htaccess}$** file with the directive $\text{CGIPassAuth On}$ in the document root.</p>
+
+            <h2 class="title">Handling Credentials in PHP</h2>
+            <p>Once the user enters their credentials and attempts to sign in, the PHP script's URL is called again. The provided username and password are made available in the superglobal **$\text{\$\_SERVER}$** array via three predefined variables (only $\text{Basic}$ and $\text{Digest}$ methods are supported):</p>
+            <ul>
+                <li>$\text{\$\_SERVER['PHP\_AUTH\_USER']}$: Contains the user name entered by the client.</li>
+                <li>$\text{\$\_SERVER['PHP\_AUTH\_PW']}$: Contains the password entered by the client.</li>
+                <li>$\text{\$\_SERVER['AUTH\_TYPE']}$: Contains the authentication method used (e.g., $\text{Basic}$).</li>
+            </ul>
+
+            <h2 class="title">Authentication Logic Example</h2>
+            <p>The standard flow involves checking if credentials have been submitted. If not, the script forces the browser to prompt the user. If they have, the script performs authentication.</p>
+            <pre>
+&lt;?php
+   if (!isset($_SERVER['PHP_AUTH_USER'])) {
+      // 1. Force the login prompt if credentials aren't set
+      header('WWW-Authenticate: Basic realm="My Realm"');
+      header('HTTP/1.0 401 Unauthorized');
+      echo 'User hits Cancel button';
+      exit; // Crucial: Stop execution after sending headers
+   } else {
+      // 2. Credentials have been received, proceed to verification
+      echo "&lt;p&gt;Hello {$_SERVER['PHP_AUTH_USER']}.&lt;/p&gt;";
+      // A real application would verify these credentials against a database
+   }
+?&gt;</pre>
+            
+            <h2 class="title">Using $\text{header()}$ for Redirection</h2>
+            <p>The $\text{header()}$ function is also commonly used for redirecting the client to a new URL. This requires the $\text{Location}$ header.</p>
+            <pre>
+&lt;?php
+   header("Location: http://www.example.com/"); 
+   exit; // Always use exit after a Location header to stop execution
+?&gt;</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Font Optimization (`@next/font`) 🖋️</h1>
+        
+        <div class="content">
+            <h2 class="title">Introduction to Next.js Font Optimization</h2>
+            <p>The **`@next/font`** module is the recommended way to handle external and custom fonts in Next.js applications. It provides built-in utilities to ensure that fonts are automatically **preloaded**, optimized, and self-hosted (in the case of Google Fonts), which significantly improves loading performance and reduces the chance of **Cumulative Layout Shift (CLS)**.</p>
+            
+            <h3 class="title">Key Optimization Features:</h3>
+            <ul>
+                <li>**Zero CLS:** Automatically handles font loading to prevent the content from jumping when the font loads.</li>
+                <li>**Automatic Self-Hosting:** Google Fonts are downloaded and served from your origin, reducing external requests.</li>
+                <li>**Minimizing File Sizes:** Removes unused characters (**sub-setting**) to ensure only necessary glyphs are loaded.</li>
+                <li>**Fallback:** Ensures content remains visible using system fonts while the custom font loads.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">1. Using Google Fonts (`next/font/google`)</h2>
+            <p>To use a Google Font, you import it directly from the **`next/font/google`** package and call the function with configuration options (e.g., subsets and weights).</p>
+            <pre>import { Inter } from 'next/font/google';
+
+// Configure the Inter font
+const inter = Inter({
+  subsets: ['latin'],  // Required to subset the font for size
+  weight: '400',       // Specifies font weight
+});
+
+export default function Home() {
+  return (
+    // Apply the font by referencing its generated CSS class name
+    &lt;div className={inter.className}&gt;
+      &lt;h1&gt;Hello, Next.js with Inter font!&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">2. Using Local/Custom Fonts (`next/font/local`)</h2>
+            <p>To use fonts hosted within your project, you import **`localFont`** and provide the path to your font file(s) using the **`src`** argument. This ensures the font is self-hosted with the same optimization benefits.</p>
+            <pre>import localFont from 'next/font/local';
+
+// Configure the local font
+const myFont = localFont({
+  src: './path/to/font.woff2',  // Path relative to the file where localFont is called
+  weight: '400',
+  style: 'normal',
+});
+
+export default function Home() {
+  return (
+    &lt;div className={myFont.className}&gt;
+      &lt;h1&gt;Hello, Next.js custom font!&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Key Arguments for Font Configuration</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Argument</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`src`</span></td>
+                        <td>(Local Fonts) Specifies the relative path to the font file(s).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`subsets`</span></td>
+                        <td>(Google Fonts) An array specifying which character subsets (e.g., `'latin'`) to include for file size reduction.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`weight`</span> / <span class="example">`style`</span></td>
+                        <td>Defines the weight (e.g., `'400'`, `'700'`) or style (e.g., `'italic'`) of the font variant to load.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`variable`</span></td>
+                        <td>A CSS variable name (e.g., `'--font-inter'`) to make the font globally available via CSS.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`fallback`</span></td>
+                        <td>An array of system font names to use while the custom font is loading.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`display`</span></td>
+                        <td>The CSS `font-display` strategy (e.g., `'swap'`, `'fallback'`) to control font loading behavior.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

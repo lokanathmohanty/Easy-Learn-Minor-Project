@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Arrays</h1>
+
+    <div class="content">
+      <p>
+        An **array** in PHP is an ordered map that stores multiple data values, often related, in a single variable. Arrays are highly flexible in PHP because they can associate **values** with **keys**, where keys can be either integers or strings.
+      </p>
+      <p>
+        PHP arrays can implement various data structures like lists, hash tables, dictionaries, and stacks.
+      </p>
+
+      <h2>Array Declaration and Syntax</h2>
+      <p>There are two primary ways to define an array in PHP:</p>
+
+      <h3>1. Using the `array()` function (Legacy)</h3>
+      <p>The built-in function takes comma-separated elements as arguments.</p>
+      <div class="example">
+        <code>$arr1 = array(10, "string", 1.55, true);</code><br>
+        <code>$arr2 = array("key" => "value", "apple" => 1);</code>
+      </div>
+
+      <h3>2. Using Square Brackets `[]` (Short Syntax - Recommended)</h3>
+      <p>This is the preferred, concise syntax for declaring an array, similar to JavaScript or Python.</p>
+      <div class="example">
+        <code>$arr1 = [10, "string", 1.55, true];</code><br>
+        <code>$arr2 = ["key" => "value", "apple" => 1];</code>
+      </div>
+
+      <hr>
+
+      <h2>Types of Arrays in PHP</h2>
+      <p>PHP uses the same internal structure (an ordered map) for all arrays, but they are categorized based on how keys are assigned and accessed:</p>
+
+      <h3>1. Indexed Array</h3>
+      <p>
+        A collection of values where each element is accessed using a numerical, zero-based index. When keys aren't explicitly specified, PHP assigns them automatically starting from 0.
+      </p>
+      <div class="example">
+        <p>
+          <code>$fruits = ["Apple", "Banana", "Orange"];</code><br>
+          Access: <code>$fruits[0]</code> $\rightarrow$ "Apple"
+        </p>
+      </div>
+
+      <h3>2. Associative Array</h3>
+      <p>
+        A collection of **key-value pairs**, where the keys are explicitly defined, usually as strings. This acts as a dictionary or hash map. The key is associated with its value using the **`=>`** symbol.
+      </p>
+      <div class="example">
+        <p>
+          <code>$marks = ["Ankit" => 85, "Eisha" => 90];</code><br>
+          Access: <code>$marks["Eisha"]</code> $\rightarrow$ 90
+        </p>
+      </div>
+
+      <h3>3. Multi-Dimensional Array</h3>
+      <p>
+        An array where one or more of its elements are themselves arrays. This allows for storing complex, structured data like tables or matrices.
+      </p>
+      <div class="example">
+        <p>
+          <code>$students = [</code><br>
+          <code>&nbsp;&nbsp;&nbsp;["Ankit", 85, "A"], // Row 0 (Indexed Sub-array)</code><br>
+          <code>&nbsp;&nbsp;&nbsp;["Eisha", 90, "A+"] // Row 1</code><br>
+          <code>];</code><br>
+          Access: <code>$students[0][1]</code> $\rightarrow$ 85
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Accessing Array Elements</h2>
+      <p>Elements are retrieved using the bracket syntax `array[key]`, regardless of whether the key is a number or a string.</p>
+      <div class="example">
+        <p>
+          <code>$arr1 = [10, 20];</code> $\rightarrow$ `var_dump($arr1[1])` is `int(20)`
+        </p>
+        <p>
+          <code>$arr2 = ["two"=>2];</code> $\rightarrow$ `var_dump($arr2["two"])` is `int(2)`
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django Admin: Including Custom Models ➕</h1>
+        <div class="content">
+            <p>While the built-in models like **Groups** and **Users** are automatically registered with the Django Admin site upon project creation, **custom models** declared in your applications are not. You must explicitly register them in the corresponding app's **<code>admin.py</code>** file to manage them through the administrative interface.</p>
+
+            <hr>
+
+            <h2>Steps to Register a Custom Model</h2>
+
+            <h3>1. Define the Model (<code>models.py</code>)</h3>
+            <p>The model must first be defined within your application's <code>models.py</code> file. For the example application <code>myapp</code>, the <code>Employee</code> model is defined with several fields:</p>
+            <pre><code>from django.db import models
+
+class Employee(models.Model):  
+   empno = models.CharField(max_length=20)  
+   empname = models.CharField(max_length=100)    
+   contact = models.CharField(max_length=15)  
+   salary = models.IntegerField()
+   joined_date = models.DateField(null=True)
+   class Meta:  
+      db_table = "employee"</code></pre>
+
+            <h3>2. Create and Apply Migrations</h3>
+            <p>Once the model is defined, the database must be updated to include the new table structure. This is done by creating the migration script and then applying it:</p>
+            <pre><code>$ python manage.py makemigrations myapp
+$ python manage.py migrate</code></pre>
+
+            <h3>3. Register the Model (<code>admin.py</code>)</h3>
+            <p>To include the model in the Admin interface, import both the <code>admin</code> module and the custom model, then use the <code>admin.site.register()</code> function:</p>
+            <pre><code>from django.contrib import admin
+from .models import Employee # Import the custom model
+
+admin.site.register(Employee)</code></pre>
+
+            <hr>
+
+            <h2>Result and Next Steps</h2>
+            <p>After registering the model and running the server, the **Employee** model will appear on the Admin homepage under the **MYAPP** section, allowing a superuser to perform CRUD operations.</p>
+            <p>By default, the list view for model objects is often unhelpful, showing generic labels like "Employee object (1)". To improve this, you should add a **<code>__str__()</code>** method to the <code>Employee</code> model class. This method defines a **meaningful string representation** of the object (e.g., returning <code>self.empname</code>) that the Admin interface will then use in its lists.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MySQL Order By</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        In Node.js applications, retrieving data from MySQL with specific orderings is common. The <code>ORDER BY</code> clause sorts the result set based on one or more columns, in ascending (<code>ASC</code>) or descending (<code>DESC</code>) order.
+      </p>
+      <p>
+        Default order is ascending. Numeric fields sort from smallest to largest, string fields sort alphabetically, and date/time fields sort chronologically.
+      </p>
+
+      <h2>ORDER BY Syntax</h2>
+      <pre><code>SELECT select_list FROM table_name
+ORDER BY column1 [ASC|DESC], column2 [ASC|DESC], ...;</code></pre>
+
+      <h2>Example: Simple ORDER BY</h2>
+      <pre><code>var mysql = require('mysql');
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "mypassword",
+  database: "mydb"
+});
+
+var qry = `SELECT * FROM employee ORDER BY salary;`;
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(qry, function(err, results) {
+    if (err) throw err;
+    console.log(results);
+  });
+  con.end();
+});</code></pre>
+
+      <h2>Sample Output</h2>
+      <pre><code>[
+  { id: 1, name: 'Ravi', age: 25, salary: 25000 },
+  { id: 3, name: 'Meena', age: 26, salary: 27000 },
+  { id: 2, name: 'Anil', age: 26, salary: 30000 }
+]</code></pre>
+
+      <h2>Example: Descending ORDER BY</h2>
+      <pre><code>var qry = `SELECT * FROM employee ORDER BY name DESC;`;</code></pre>
+
+      <h2>Multiple Column Sorting</h2>
+      <p>
+        You can sort by multiple columns to create nested sorting. Rows are first sorted by the first column; ties are resolved by the second column, and so forth.
+      </p>
+      <p>Example with the <code>world</code> database's <code>city</code> table:</p>
+      <pre><code>var mysql = require('mysql');
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "mypassword",
+  database: "world"
+});
+
+var qry = `
+  SELECT * FROM city
+  WHERE name LIKE 'D%' AND countrycode='IND'
+  ORDER BY district, population;
+`;
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(qry, function(err, results) {
+    if (err) throw err;
+    console.log(results);
+  });
+  con.end();
+});</code></pre>
+
+      <h2>Sample Output Snippet</h2>
+      <pre><code>[
+  { ID: 1276, Name: 'Dibrugarh', CountryCode: 'IND', District: 'Assam', Population: 120127 },
+  { ID: 1350, Name: 'Dehri', CountryCode: 'IND', District: 'Bihar', Population: 94526 },
+  { ID: 1138, Name: 'Darbhanga', CountryCode: 'IND', District: 'Bihar', Population: 218391 },
+  ...
+]</code></pre>
+
+      <p>Data is sorted first by <code>district</code> then by <code>population</code> ascending.</p>
+    </div>
+  </div>
+</div>

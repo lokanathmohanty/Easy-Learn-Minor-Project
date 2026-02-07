@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Positional Arguments</h1>
+    <div class="content">
+      <p>
+        The list of variables declared in the parentheses at the time of defining a 
+        function are the <strong>formal arguments</strong>. These are also called 
+        <em>positional arguments</em>. A function may be defined with any number of 
+        formal arguments.
+      </p>
+
+      <p>While calling a function:</p>
+      <ul>
+        <li>All the arguments are required.</li>
+        <li>The number of actual arguments must be equal to the number of formal arguments.</li>
+        <li>They pick up values in the order of definition.</li>
+        <li>The type of arguments must match.</li>
+        <li>Names of formal and actual arguments need not be same.</li>
+      </ul>
+
+      <h2>Positional Arguments Examples</h2>
+
+      <h3>Example 1</h3>
+      <p>The following example shows the use of positional arguments:</p>
+      <pre><code>def add(x, y):
+    z = x + y
+    print("x={} y={} x+y={}".format(x, y, z))
+
+a = 10
+b = 20
+add(a, b)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>x=10 y=20 x+y=30</code></pre>
+
+      <p>
+        Here, the <code>add()</code> function has two formal arguments. When integers 10 and 20 are passed, 
+        the variable <code>a</code> takes 10 and <code>b</code> takes 20 in the order of declaration.
+      </p>
+
+      <h3>Example 2</h3>
+      <p>If the number of arguments do not match, Python raises an error:</p>
+      <pre><code>def add(x, y):
+    z = x + y
+    print(z)
+
+a = 10
+add(a)</code></pre>
+
+      <p><strong>Error:</strong></p>
+      <pre><code>TypeError: add() missing 1 required positional argument: 'y'</code></pre>
+
+      <h3>Example 3</h3>
+      <p>If more arguments are passed than expected:</p>
+      <pre><code>def add(x, y):
+    z = x + y
+    print("x={} y={} x+y={}".format(x, y, z))
+
+add(10, 20, 30)</code></pre>
+
+      <p><strong>Error:</strong></p>
+      <pre><code>TypeError: add() takes 2 positional arguments but 3 were given</code></pre>
+
+      <h3>Example 4</h3>
+      <p>Data type of actual and formal arguments must match:</p>
+      <pre><code>def add(x, y):
+    z = x + y
+    print(z)
+
+a = "Hello"
+b = 20
+add(a, b)</code></pre>
+
+      <p><strong>Error:</strong></p>
+      <pre><code>TypeError: can only concatenate str (not "int") to str</code></pre>
+
+      <h2>Difference between Positional and Keyword Arguments</h2>
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Positional Argument</th>
+            <th>Keyword Argument</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Only the names of arguments are used to pass data.</td>
+            <td>Arguments are passed in <code>name=value</code> form.</td>
+          </tr>
+          <tr>
+            <td>Arguments are passed in the order defined in the function.</td>
+            <td>Order does not matter when using keywords.</td>
+          </tr>
+          <tr>
+            <td><code>function(param1, param2, ...)</code></td>
+            <td><code>function(param1=value1, ...)</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

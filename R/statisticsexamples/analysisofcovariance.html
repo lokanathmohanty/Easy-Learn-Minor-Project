@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Analysis of Covariance (Poisson Regression)</h1>
+    <div class="content">
+      <p>
+        Poisson regression models count data (non-fractional values), assuming the response variable follows a Poisson distribution. It models the log of the expected count as a linear combination of predictor variables:
+      </p>
+      <p><strong>Model:</strong> \( \log(y) = a + b_1 x_1 + b_2 x_2 + \dots + b_n x_n \)</p>
+      <p>
+        where \(y\) is the count response, \(a, b_i\) are numeric coefficients, and \(x_i\) are predictor variables.
+      </p>
+      <p>The <code>glm()</code> function with family set to <code>poisson</code> is used.</p>
+
+      <h2>Syntax</h2>
+      <pre><code>glm(formula, data, family = poisson)</code></pre>
+
+      <h2>Example</h2>
+      <p>Use the built-in "warpbreaks" dataset relating wool type and tension to number of warp breaks:</p>
+      <pre><code># Load data
+input &lt;- warpbreaks
+print(head(input))
+
+# Create Poisson regression model
+output &lt;- glm(formula = breaks ~ wool + tension, data = warpbreaks, family = poisson)
+print(summary(output))
+</code></pre>
+
+      <h2>Sample Output</h2>
+      <pre><code>Call:
+glm(formula = breaks ~ wool + tension, family = poisson, data = warpbreaks)
+
+Deviance Residuals: 
+    Min       1Q     Median       3Q      Max  
+  -3.6871  -1.6503  -0.4269     1.1902   4.2616  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  3.69196    0.04541  81.302  < 2e-16 ***
+woolB       -0.20599    0.05157  -3.994 6.49e-05 ***
+tensionM    -0.32132    0.06027  -5.332 9.73e-08 ***
+tensionH    -0.51849    0.06396  -8.107 5.21e-16 ***
+---
+Dispersion parameter for poisson family taken to be 1
+
+Null deviance: 297.37  on 53  degrees of freedom
+Residual deviance: 210.39  on 50  degrees of freedom
+AIC: 493.06
+
+Number of Fisher Scoring iterations: 4
+</code></pre>
+
+      <h2>Interpretation</h2>
+      <p>
+        Predictors with p-value &lt; 0.05 (wool type B, tension M and H) significantly affect the count response variable. This indicates a meaningful impact on the number of warp breaks.
+      </p>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

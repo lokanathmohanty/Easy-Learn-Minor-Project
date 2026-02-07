@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Signal Handling 🚦🚨</h1>
+
+        <div class="content">
+            <p>**Signals** are software interrupts delivered to a process by the operating system (OS) to notify it of an event, often an exceptional condition. Handling signals allows a program to clean up resources or log state before being terminated.</p>
+            <p>The C++ signal-handling library is provided via the header **<code>&lt;csignal&gt;</code>**.</p>
+
+            <hr>
+
+            <h2 class="title">Catchable Signals</h2>
+
+            <p>Here are some of the standard signals defined that a C++ program can register a handler for:</p>
+            <table>
+                <thead>
+                    <tr><th>Signal</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>**<code>SIGINT</code>**</td><td>Receipt of an **interactive attention signal** (e.g., Ctrl+C).</td></tr>
+                    <tr><td>**<code>SIGTERM</code>**</td><td>A **termination request** sent to the program (graceful shutdown).</td></tr>
+                    <tr><td>**<code>SIGFPE</code>**</td><td>An **erroneous arithmetic operation** (e.g., divide by zero).</td></tr>
+                    <tr><td>**<code>SIGSEGV</code>**</td><td>An **invalid access to storage** (Segmentation Fault).</td></tr>
+                    <tr><td>**<code>SIGABRT</code>**</td><td>Abnormal termination, such as a call to <code>abort()</code>.</td></tr>
+                    <tr><td>**<code>SIGILL</code>**</td><td>Detection of an illegal instruction.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <h2 class="title">The <code>signal()</code> Function (Registering Handlers)</h2>
+
+        <div class="content">
+            <p>The core function for trapping unexpected events is **<code>signal()</code>**. It registers a specific signal number with a custom function (the signal handler) that should execute when that signal is received.</p>
+            <h3>Syntax</h3>
+            <pre class="example">
+void (*signal (int sig, void (*func)(int)))(int); 
+</pre>
+            <p>In simpler terms, it takes two arguments:</p>
+            <ol>
+                <li>The **signal number** to catch (e.g., `SIGINT`).</li>
+                <li>A **pointer to the signal-handling function** (e.g., `signalHandler`), which must take a single `int` argument (the signal number) and return `void`.</li>
+            </ol>
+            <pre class="example">
+// Register SIGINT (2) to be handled by signalHandler()
+signal(SIGINT, signalHandler);  
+</pre>
+            <p>The signal handler function typically performs necessary cleanup before terminating the program (often via `exit(signum)`).</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">The <code>raise()</code> Function (Generating Signals)</h2>
+
+        <div class="content">
+            <p>The **<code>raise()</code>** function allows a program to **send a signal to itself** internally, simulating an external interrupt. This is often used for testing error handling routines.</p>
+            <h3>Syntax</h3>
+            <pre class="example">
+int raise (signal sig);
+</pre>
+            <p>The example shows how a program can deliberately call its own signal handler by executing `raise(SIGINT)` at a specific point in the code.</p>
+        </div>
+    </div>
+</div>

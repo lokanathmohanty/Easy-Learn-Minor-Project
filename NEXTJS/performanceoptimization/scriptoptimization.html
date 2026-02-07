@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Script Optimization</h1>
+        
+        <div class="content">
+            <h2 class="title">The Next.js <code>&lt;Script&gt;</code> Component</h2>
+            <p>The Next.js **<code>&lt;Script&gt;</code> component** extends the standard HTML <code>&lt;script&gt;</code> tag, providing extra props to include and **optimize the loading of external scripts** (typically third-party resources). Using this component helps prevent heavy external scripts from blocking the main thread and degrading performance.</p>
+            
+            <p>For scripts needed across multiple routes, import <code>next/script</code> and include the script directly in your **Layout component**.</p>
+            
+            <p>The <code>&lt;Script&gt;</code> component optimizes script loading by:</p>
+            <ul>
+                <li class="example">Defining an optimized **loading strategy** using the <code>strategy</code> prop.</li>
+                <li class="example">Specifying **callback functions** to execute upon loading success or failure.</li>
+                <li class="example">Setting **priority** for critical scripts.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Defining Script Loading Strategy</h2>
+            <p>The **<code>strategy</code>** prop is the core mechanism for controlling script loading. It dictates when the script should be loaded and executed relative to the page's render cycle. The default value is **<code>afterInteractive</code>**.</p>
+            
+            <table>
+                <tr>
+                    <th>Strategy Value</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>afterInteractive</code> (Default)</td>
+                    <td>The script is loaded after the page has finished rendering and is interactive. Use for scripts that can be deferred but are needed relatively soon (e.g., analytics).</td>
+                </tr>
+                <tr>
+                    <td><code>lazyOnload</code></td>
+                    <td>The script is loaded lazily after the page and all critical resources have finished loading. Use for background or low-priority scripts (e.g., chat bots, social widgets).</td>
+                </tr>
+                <tr>
+                    <td><code>beforeInteractive</code></td>
+                    <td>The script is loaded and executed before the page starts rendering. Use only for essential scripts that must run before any part of the page is interactive (e.g., critical polyfills, consent managers).</td>
+                </tr>
+                <tr>
+                    <td><code>worker</code></td>
+                    <td>The script is loaded and executed as a Web Worker, off the main thread. (Requires Next.js configuration and should be used with caution).</td>
+                </tr>
+            </table>
+            
+            <p><strong>Example: Using the <code>lazyOnload</code> Strategy</strong></p>
+            <pre class="example"><code>import Script from 'next/script'
+
+export default function Page() {
+    return (
+        &lt;Script src="link/to/script.js" strategy="lazyOnload"&gt;&lt;/Script&gt;
+    );
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Script Loading Callbacks and Priority</h2>
+            <p>The <code>&lt;Script&gt;</code> component supports several optional props for controlling behavior and reacting to load events:</p>
+            
+            <h3>Callback Functions</h3>
+            <p>These functions are essential for managing state or reacting to the external script's status:</p>
+            <ul>
+                <li class="example">
+                    <strong><code>onLoad</code>:</strong> Called when the script successfully loads and is ready to execute.
+                    <pre class="example"><code>&lt;Script src="..." onLoad={() => console.log('Script loaded successfully')}&gt;</code></pre>
+                </li>
+                <li class="example">
+                    <strong><code>onReady</code>:</strong> Called when the script finishes loading and its execution is complete.
+                    <pre class="example"><code>&lt;Script src="..." onReady={() => console.log('Script is ready')}&gt;</code></pre>
+                </li>
+                <li class="example">
+                    <strong><code>onError</code>:</strong> Called if the script fails to load.
+                </li>
+            </ul>
+            
+            <h3>Script Loading Priority</h3>
+            <p>Setting the **<code>priority</code>** prop to <code>true</code> is a signal to Next.js that the script is crucial and should be loaded quickly. This is typically only used alongside the <code>beforeInteractive</code> or <code>afterInteractive</code> strategies for truly important resources.</p>
+            <pre class="example"><code>&lt;Script src="link/to/script.js" priority={true}&gt;&lt;/Script&gt;</code></pre>
+        </div>
+    </div>
+</div>

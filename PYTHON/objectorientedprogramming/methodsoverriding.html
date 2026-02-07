@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python Method Overriding</h1>
+    <div class="content">
+      <p>Method overriding in Python allows a subclass to provide a specific implementation for a method that is already defined in its superclass. The method to be called is determined at runtime based on the actual object invoking it.</p>
+      <p>Overriding is useful when a child class wants to modify or extend the behavior of inherited methods.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Basic Method Overriding Example</h2>
+      <pre><code>class Parent:
+    def myMethod(self):
+        print('Calling parent method')
+
+class Child(Parent):
+    def myMethod(self):
+        print('Calling child method')
+
+c = Child()
+c.myMethod()  # Output: Calling child method
+</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Here, the child class overrides the <code>myMethod</code> of the parent class. When called on a child instance, the child's method is executed.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Overriding With Constructor and Method</h2>
+      <pre><code>class Employee:
+    def __init__(self, nm, sal):
+        self.name = nm
+        self.salary = sal
+
+    def getName(self):
+        return self.name
+
+    def getSalary(self):
+        return self.salary
+
+class SalesOfficer(Employee):
+    def __init__(self, nm, sal, inc):
+        super().__init__(nm, sal)  # Call parent constructor
+        self.incnt = inc
+
+    def getSalary(self):
+        return self.salary + self.incnt
+
+e1 = Employee("Rajesh", 9000)
+print(f"Total salary for {e1.getName()} is Rs {e1.getSalary()}")
+
+s1 = SalesOfficer("Kiran", 10000, 1000)
+print(f"Total salary for {s1.getName()} is Rs {s1.getSalary()}")
+</code></pre>
+      <p>Output:<br>
+      Total salary for Rajesh is Rs 9000<br>
+      Total salary for Kiran is Rs 11000</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Common Overridable Methods in Python</h2>
+      <p>Python's base class <code>object</code> has special methods that can be overridden to customize class behavior:</p>
+      <ul>
+        <li><code>__init__(self[, args...])</code>: Constructor method.</li>
+        <li><code>__del__(self)</code>: Destructor method called when an object is deleted.</li>
+        <li><code>__repr__(self)</code>: Method to return an evaluatable string representation of the object.</li>
+        <li><code>__str__(self)</code>: Method to return a readable string representation of the object.</li>
+      </ul>
+    </div>
+  </div>
+</div>

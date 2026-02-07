@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Pages: The Building Blocks of Routing 📄</h1>
+        
+        <div class="content">
+            <h2 class="title">What Pages Are and Where They Live</h2>
+            <p>In Next.js, **pages** are **React components** that define the user interface for a specific route. The framework uses a **file-based routing system**, where the file names and folder structure within the primary routing directory automatically map to URLs.</p>
+            <ul>
+                <li><strong>Recommended Directory:</strong> The **<span class="example">`/app`</span>** directory (using the **App Router**) is the current standard.</li>
+                <li><strong>Page File:</strong> Any file named **<span class="example">`page.js`</span>** (or <span class="example">`page.tsx`</span>) inside a folder in the <span class="example">`/app`</span> directory becomes a public route.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Creating Different Page Types</h2>
+            
+            <h3 class="title">1. Home Page (Root Route)</h3>
+            <p>The home page is defined by the <span class="example">`page.js`</span> file located directly inside the <span class="example">`/app`</span> directory.</p>
+            <ul>
+                <li>**File:** <span class="example">`app/page.jsx`</span></li>
+                <li>**Route:** <span class="example">`http://localhost:3000/`</span></li>
+            </ul>
+            <pre>// app/page.jsx
+export default function Home() {
+    return (&lt;h1&gt;Welcome to My Next.js App&lt;/h1&gt;);
+}</pre>
+            
+            <h3 class="title">2. Nested Routing Pages</h3>
+            <p>Routes with segments (e.g., <span class="example">`/about`</span>) are created by adding a **folder** and placing a <span class="example">`page.js`</span> file inside it.</p>
+            <ul>
+                <li>**File:** <span class="example">`app/about/page.jsx`</span></li>
+                <li>**Route:** <span class="example">`http://localhost:3000/about`</span></li>
+            </ul>
+            
+            <h3 class="title">3. Dynamic Routing Pages</h3>
+            <p>Dynamic routes are used when the URL contains a variable (a parameter). The folder name for the dynamic segment is enclosed in **square brackets** (<span class="example">`[]`</span>). Parameters are retrieved using the <span class="example">`useParams()`</span> hook (for client components).</p>
+            <ul>
+                <li>**File:** <span class="example">`app/products/[id]/page.tsx`</span></li>
+                <li>**Route:** <span class="example">`http://localhost:3000/products/123`</span> (where <span class="example">`id`</span> is <span class="example">`123`</span>)</li>
+            </ul>
+            <pre>// Accesses the dynamic parameter 'id'
+const { id } = useParams();</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Layout Pages (Shared UI)</h2>
+            <p>In the App Router, **Layout Pages** define the **shared UI** across multiple pages or nested routes. They are defined by the special file name **<span class="example">`layout.js`</span>** (or <span class="example">`layout.tsx`</span>) and are essential for maintaining persistent elements like headers and footers during navigation.</p>
+            <p>A layout component must accept and render a **<span class="example">`children`</span>** prop, which will be the content of the nested <span class="example">`page.js`</span> file.</p>
+            <pre>// app/layout.jsx (Example)
+export default function RootLayout({ children }) {
+  return (
+    &lt;html lang="en"&gt;
+      &lt;body&gt;
+        &lt;header&gt;&lt;h1&gt;Header Element&lt;/h1&gt;&lt;/header&gt;
+        &lt;main&gt;{children}&lt;/main&gt; &lt;!-- Page content goes here --&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</pre>
+        </div>
+    </div>
+</div>d

@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - this Keyword</h1>
+
+    <div class="content">
+      <h2>What is 'this' keyword?</h2>
+      <p>
+        In JavaScript, the <code>this</code> keyword contains the reference to the object. It represents the context of the function or current code. It is used to access the properties and methods of the current object.
+      </p>
+      <p>
+        When <code>this</code> is used inside a function, it refers to the object that the function is called with. Since functions are also objects in JavaScript, you can also use <code>this</code> with them.
+      </p>
+
+      <h2>Which object does 'this' refer to?</h2>
+      <ul>
+        <li>In the global scope, <code>this</code> refers to the <code>window</code> object.</li>
+        <li>Inside a function, it usually represents the <code>window</code> object.</li>
+        <li>In strict mode functions, it becomes <code>undefined</code>.</li>
+        <li>In object methods, it refers to the object itself.</li>
+        <li>In event handlers, it refers to the element where the event occurred.</li>
+        <li>With <code>call()</code>, <code>apply()</code>, or <code>bind()</code>, you can explicitly set it.</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <pre>
+this.property
+this.method();
+      </pre>
+
+      <h2>Examples</h2>
+
+      <h3>'this' in the Global Scope</h3>
+      <pre>
+var num = 10;
+function printNum() {
+   console.log(this.num);
+}
+this.printNum(); // 10
+      </pre>
+
+      <h3>'this' in a Function</h3>
+      <pre>
+var message = "Hello World!";
+function printMessage() {
+   var message = "Hi!";
+   console.log(this.message);
+}
+printMessage(); // "Hello World!"
+      </pre>
+
+      <h3>'this' in Strict Mode</h3>
+      <pre>
+"use strict";
+function test() {
+   console.log(this); 
+}
+test(); // undefined
+      </pre>
+
+      <h3>'this' in a Constructor Function</h3>
+      <pre>
+function Animal() {
+   this.name = "Lion";
+   this.age = 3;
+}
+const newAnimal = new Animal();
+console.log(newAnimal.name); // Lion
+      </pre>
+
+      <h3>'this' in an Arrow Function</h3>
+      <pre>
+const wall = {
+  size: "10",
+  color: "blue",
+  getDetails() {
+    const getInnerDetails = () => {
+      console.log(this); // wall object
+    }
+    getInnerDetails();
+  }
+};
+wall.getDetails();
+      </pre>
+
+      <h3>'this' in an Object Method</h3>
+      <pre>
+const fruit = {
+   name: "Apple",
+   color: "Red",
+   printDetails() {
+      console.log(this.name, this.color);
+   }
+}
+fruit.printDetails(); // Apple Red
+      </pre>
+
+      <h3>'this' in a Child Function of an Object Method</h3>
+      <pre>
+const person = {
+   name: "Salman",
+   printDetails() {
+      function inner() {
+         console.log(this); // Window
+      }
+      inner();
+   }
+}
+person.printDetails();
+      </pre>
+
+      <h3>'this' in Event Handlers</h3>
+      <pre>
+&lt;div onclick="this.style.display='none'"&gt;Click me&lt;/div&gt;
+      </pre>
+
+      <h3>Explicit Function Binding</h3>
+      <p><strong>Using call():</strong></p>
+      <pre>
+const lion = {
+   color: "Yellow",
+   age: 10,
+   printDetails() {
+      console.log(this.color, this.age);
+   }
+}
+const tiger = { color: "Orange", age: 15 };
+lion.printDetails.call(tiger); // Orange 15
+      </pre>
+
+      <p><strong>Using bind():</strong></p>
+      <pre>
+const tigerDetails = lion.printDetails.bind(tiger);
+tigerDetails(); // Orange 15
+      </pre>
+
+      <h2>'this' Precedence</h2>
+      <ol>
+        <li><code>bind()</code> method</li>
+        <li><code>call()</code> and <code>apply()</code> methods</li>
+        <li>Object method</li>
+        <li>Global scope</li>
+      </ol>
+    </div>
+  </div>
+</div>

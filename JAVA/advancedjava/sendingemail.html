@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Java - Sending Email</h1>
+
+    <div class="content">
+      <p>To send an e-mail using Java, you need to install the JavaMail API and Java Activation Framework (JAF). Download the latest versions and add <code>mail.jar</code> and <code>activation.jar</code> to your classpath.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Send a Simple Email</h2>
+      <p>Use JavaMail to send a basic email assuming the host (e.g., localhost) can connect to the internet and deliver email messages.</p>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Sending a Simple Email</h3>
+      <pre><code>// File Name SendEmail.java
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+
+public class SendEmail {
+   public static void main(String[] args) {
+      String to = "abcd@gmail.com";
+      String from = "web@gmail.com";
+      String host = "localhost";
+      Properties properties = System.getProperties();
+      properties.setProperty("mail.smtp.host", host);
+      Session session = Session.getDefaultInstance(properties);
+      try {
+         MimeMessage message = new MimeMessage(session);
+         message.setFrom(new InternetAddress(from));
+         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+         message.setSubject("This is the Subject Line!");
+         message.setText("This is actual message");
+         Transport.send(message);
+         System.out.println("Sent message successfully....");
+      } catch (MessagingException mex) {
+         mex.printStackTrace();
+      }
+   }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>$ java SendEmail
+Sent message successfully....</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Sending to Multiple Recipients</h2>
+      <p>Use <code>addRecipients()</code> method with <code>Message.RecipientType.TO</code>, <code>CC</code>, or <code>BCC</code> and an array of <code>InternetAddress</code> to send to multiple addresses.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Send an HTML Email</h2>
+      <p>To send HTML content, use <code>message.setContent()</code> with <code>"text/html"</code> MIME type.</p>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: HTML Email</h3>
+      <pre><code>// File Name SendHTMLEmail.java
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+
+public class SendHTMLEmail {
+   public static void main(String[] args) {
+      String to = "abcd@gmail.com";
+      String from = "web@gmail.com";
+      String host = "localhost";
+      Properties properties = System.getProperties();
+      properties.setProperty("mail.smtp.host", host);
+      Session session = Session.getDefaultInstance(properties);
+      try {
+         MimeMessage message = new MimeMessage(session);
+         message.setFrom(new InternetAddress(from));
+         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+         message.setSubject("This is the Subject Line!");
+         message.setContent("&lt;h1&gt;This is actual message&lt;/h1&gt;", "text/html");
+         Transport.send(message);
+         System.out.println("Sent message successfully....");
+      } catch (MessagingException mex) {
+         mex.printStackTrace();
+      }
+   }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>$ java SendHTMLEmail
+Sent message successfully....</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Send Email with Attachment</h2>
+      <p>Use <code>MimeMultipart</code> and <code>MimeBodyPart</code> to compose an email with a file attachment.</p>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Email with Attachment</h3>
+      <pre><code>// File Name SendFileEmail.java
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+
+public class SendFileEmail {
+   public static void main(String[] args) {
+      String to = "abcd@gmail.com";
+      String from = "web@gmail.com";
+      String host = "localhost";
+      Properties properties = System.getProperties();
+      properties.setProperty("mail.smtp.host", host);
+      Session session = Session.getDefaultInstance(properties);
+      try {
+         MimeMessage message = new MimeMessage(session);
+         message.setFrom(new InternetAddress(from));
+         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+         message.setSubject("This is the Subject Line!");
+
+         BodyPart messageBodyPart = new MimeBodyPart();
+         messageBodyPart.setText("This is message body");
+
+         Multipart multipart = new MimeMultipart();
+         multipart.addBodyPart(messageBodyPart);
+
+         messageBodyPart = new MimeBodyPart();
+         String filename = "file.txt";
+         DataSource source = new FileDataSource(filename);
+         messageBodyPart.setDataHandler(new DataHandler(source));
+         messageBodyPart.setFileName(filename);
+         multipart.addBodyPart(messageBodyPart);
+
+         message.setContent(multipart);
+         Transport.send(message);
+         System.out.println("Sent message successfully....");
+      } catch (MessagingException mex) {
+         mex.printStackTrace();
+      }
+   }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>$ java SendFileEmail
+Sent message successfully....</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">User Authentication</h2>
+      <p>If the email server requires authentication, you can add these properties:</p>
+      <pre><code>props.setProperty("mail.user", "myuser");
+props.setProperty("mail.password", "mypwd");</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Conclusion</h2>
+      <p>JavaMail provides a flexible way to send plain text, HTML, or file attachments via email. With proper setup, Java applications can integrate email functionality to notify users, send reports, or deliver alerts efficiently.</p>
+    </div>
+
+  </div>
+</div>

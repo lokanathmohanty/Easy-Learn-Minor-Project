@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# `break` Statement</h1>
+        
+        <h2 class="title">Purpose of the `break` Statement</h2>
+        <div class="content">
+            <p>The **`break` statement** in C# is a control flow mechanism used to **immediately terminate** the execution of the nearest enclosing loop (<code>for</code>, <code>while</code>, or <code>do...while</code>) or the **`switch`** statement.</p>
+            <ul>
+                <li>When encountered inside a loop, program control instantly resumes at the statement following the loop's block.</li>
+                <li>In **nested loops**, `break` only terminates the **innermost** loop in which it appears.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Syntax</h2>
+        <div class="content">
+            <pre>
+break;
+            </pre>
+        </div>
+        
+        <h2 class="title">Example: Using `break` with a `while` Loop</h2>
+        <div class="content example">
+            <p>This example shows how `break` stops a <code>while</code> loop prematurely based on a conditional check **inside** the loop body:</p>
+            <pre>
+using System;
+class Program {
+    static void Main(string[] args) {
+        int a = 10;
+         
+        while (a < 20) {
+            Console.WriteLine("value of a: {0}", a);
+            a++; // a becomes 11, 12, 13, 14, 15, 16...
+            
+            if (a > 15) {
+               /* break terminates the loop when a reaches 16 */
+               break;
+            }
+        }
+        // Execution resumes here after the break
+    }
+}
+            </pre>
+            <p><strong>Output:</strong> The loop prints values of <code>a</code> from 10 up to 15, stopping before reaching 20.</p>
+            <p class="content">
+                value of a: 10<br>
+                value of a: 11<br>
+                value of a: 12<br>
+                value of a: 13<br>
+                value of a: 14<br>
+                value of a: 15
+            </p>
+        </div>
+        
+        <h2 class="title">Example: Using `break` for Searching in a `for` Loop</h2>
+        <div class="content example">
+            <p>Using `break` is efficient for searching, as it prevents unnecessary iterations once the target is found:</p>
+            <pre>
+using System;
+class BreakExample {
+   static void Main() {
+      for (int i = 1; i <= 10; i++) {
+         if (i % 2 == 0) {
+            Console.WriteLine("First even number found: " + i);
+            break; // Loop stops immediately here (at i=2)
+         }
+         Console.WriteLine("Checking number: " + i);
+      }
+      Console.WriteLine("Loop terminated after finding the first even number.");
+   }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                Checking number: 1<br>
+                First even number found: 2<br>
+                Loop terminated after finding the first even number.
+            </p>
+        </div>
+    </div>
+</div>

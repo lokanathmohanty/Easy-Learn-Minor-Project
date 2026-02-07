@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Multiple Regression</h1>
+    <div class="content">
+      <p>
+        Multiple regression extends linear regression to model the relationship between one response variable and multiple predictor variables. The model is expressed as
+        \[
+        y = a + b_1 x_1 + b_2 x_2 + \dots + b_n x_n
+        \]
+        where \(y\) is the response, the \(x_i\) are predictors, and \(a, b_i\) are coefficients.
+      </p>
+
+      <h2 class="title">lm() Function Syntax</h2>
+      <pre><code>lm(y ~ x1 + x2 + x3 + ..., data)</code></pre>
+      <p>
+        - <strong>formula</strong>: Relationship between response and predictors.<br>
+        - <strong>data</strong>: Data frame containing the variables.
+      </p>
+
+      <h2 class="title">Example Input Data</h2>
+      <pre><code>input &lt;- mtcars[, c("mpg", "disp", "hp", "wt")]
+print(head(input))
+</code></pre>
+      <p>Sample output:</p>
+      <pre><code>                   mpg   disp   hp    wt
+Mazda RX4          21.0  160    110   2.620
+Mazda RX4 Wag      21.0  160    110   2.875
+Datsun 710         22.8  108     93   2.320
+Hornet 4 Drive     21.4  258    110   3.215
+Hornet Sportabout  18.7  360    175   3.440
+Valiant            18.1  225    105   3.460
+</code></pre>
+
+      <h2 class="title">Create Relationship Model & Get Coefficients</h2>
+      <pre><code># Create model
+model &lt;- lm(mpg ~ disp + hp + wt, data = input)
+
+# Print model
+print(model)
+
+# Extract coefficients
+cat("# # # # The Coefficient Values # # # \n")
+a &lt;- coef(model)[1]        # Intercept
+Xdisp &lt;- coef(model)[2]    # disp coefficient
+Xhp &lt;- coef(model)[3]      # hp coefficient
+Xwt &lt;- coef(model)[4]      # wt coefficient
+
+print(a)
+print(Xdisp)
+print(Xhp)
+print(Xwt)
+</code></pre>
+
+      <p>Sample output:</p>
+      <pre><code>Call:
+lm(formula = mpg ~ disp + hp + wt, data = input)
+
+Coefficients:
+(Intercept)         disp           hp           wt  
+  37.105505      -0.000937        -0.031157    -3.800891  
+
+# # # # The Coefficient Values # # # 
+(Intercept) 
+   37.10551 
+         disp 
+-0.0009370091 
+         hp 
+-0.03115655 
+       wt 
+-3.800891 
+</code></pre>
+
+      <h2 class="title">Regression Equation</h2>
+      <p>
+        Using the coefficients, the regression equation is:
+      </p>
+      <pre><code>Y = 37.15 + (-0.000937)*x1 + (-0.0311)*x2 + (-3.8008)*x3
+where:
+x1 = disp, x2 = hp, x3 = wt
+</code></pre>
+
+      <h2 class="title">Predict New Values</h2>
+      <pre><code># Predict mileage given new predictors
+newdata &lt;- data.frame(disp = 221, hp = 102, wt = 2.91)
+predicted_mpg &lt;- predict(model, newdata)
+print(predicted_mpg)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 22.7104
+</code></pre>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

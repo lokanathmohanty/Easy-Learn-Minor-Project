@@ -1,0 +1,126 @@
+<div class="container">
+   <div class="session">
+      <h1 class="title">JavaScript - Higher Order Function</h1>
+      <div class="content">
+         <p>
+            A higher order function accepts other functions as parameters and returns a function. 
+            To know about Higher-order functions, we should learn about callback functions.
+         </p>
+         <p>
+            A callback function is a function that is passed to another function as an argument. 
+            With the help of callback functions, one function can call another function, 
+            and the callback function runs only after the other function has finished. 
+            Some of the higher-order functions are <code>map()</code>, <code>reduce()</code>, and <code>filter()</code>.
+         </p>
+
+         <h2>Example without Higher Order Functions</h2>
+         <p>
+            In the following code, we have a list of numbers, and we want to increment each element by 10. 
+            To achieve this without using higher order functions, we loop through the array and push the incremented values to a new array.
+         </p>
+         <pre>
+const numbers = [1, 2, 3, 4, 5];
+incrementedNums = [];
+
+for(i = 0; i &lt; numbers.length; i++){
+   added = i + 10;
+   incrementedNums.push(added);
+}
+console.log(incrementedNums);
+         </pre>
+         <p><strong>Output:</strong></p>
+         <pre>[11, 12, 13, 14, 15]</pre>
+
+         <h2>Common Higher Order Functions in JavaScript</h2>
+         <ul>
+            <li>map()</li>
+            <li>filter()</li>
+            <li>reduce()</li>
+            <li>forEach()</li>
+         </ul>
+
+         <h2>Advantages of Higher Order Functions</h2>
+         <ul>
+            <li>Code Reusability</li>
+            <li>Less Code</li>
+            <li>Easy to Understand</li>
+            <li>Easy to Maintain</li>
+         </ul>
+
+         <h2>Usage of Higher Order Functions</h2>
+
+         <h3>Using <code>map()</code> function</h3>
+         <p>
+            The <code>map()</code> function iterates through an array and applies a callback function 
+            to every element, returning a new array.
+         </p>
+         <pre>
+numbers = [4, 9, 16, 25, 36];
+root = numbers.map(Math.sqrt);
+console.log(root);
+         </pre>
+         <p><strong>Output:</strong></p>
+         <pre>[2, 3, 4, 5, 6]</pre>
+
+         <h3>Using <code>filter()</code> function</h3>
+         <p>
+            The <code>filter()</code> method returns a new array containing only the elements that satisfy the provided condition.
+         </p>
+         <pre>
+numbers = [10, 11, 12, 14, 15];
+even = numbers.filter(iseven);
+
+function iseven(n){
+   return (n % 2 === 0);
+}
+console.log(even);
+         </pre>
+         <p><strong>Output:</strong></p>
+         <pre>[10, 12, 14]</pre>
+
+         <h3>Using <code>reduce()</code> function</h3>
+         <p>
+            The <code>reduce()</code> method reduces an array to a single value by applying a callback function on each element.
+         </p>
+         <pre>
+numbers = [10, 11, 12, 13];
+
+total = numbers.reduce(function(acc, el){
+   return acc + el;
+}, 0);
+
+console.log(total);
+         </pre>
+         <p><strong>Output:</strong></p>
+         <pre>46</pre>
+
+         <h3>Using <code>forEach()</code> function</h3>
+         <p>
+            The <code>forEach()</code> method executes a callback function for each element in the array. 
+            Unlike <code>map()</code>, it does not return a new array.
+         </p>
+         <pre>
+const numbers = [10, 20, 30, 40];
+
+sum = 0;
+numbers.forEach(add);
+
+function add(n){
+   sum = sum + n;
+}
+console.log(sum);
+         </pre>
+         <p><strong>Output:</strong></p>
+         <pre>100</pre>
+
+         <h2>Conclusion</h2>
+         <p>
+            Higher Order Functions operate on other functions, either by taking them as arguments or by returning them. 
+            JavaScript, being a functional programming language, supports Higher Order Functions. 
+            They help make the code more concise, readable, and maintainable. 
+            Built-in functions like <code>map()</code>, <code>filter()</code>, <code>reduce()</code>, and <code>forEach()</code> 
+            are widely used in real-world applications.
+         </p>
+      </div>
+   </div>
+</div>

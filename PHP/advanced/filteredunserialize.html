@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Filtered $\text{unserialize()}$ (PHP 7+) 🛡️</h1>
+
+        <div class="content">
+            <p>The $\text{unserialize()}$ function converts a serialized string back into a PHP value. Starting with PHP 7, a crucial security feature was added: the ability to filter which classes can be instantiated during the unserialization process. This helps mitigate security vulnerabilities, especially when processing data from untrusted sources.</p>
+
+            <hr>
+
+            <h2 class="title">The $\text{unserialize()}$ Function Signature</h2>
+            <p>The updated function signature allows for an optional $\text{\$options}$ array:</p>
+            <pre>unserialize(string $data, array $options = [ ]): mixed</pre>
+
+            <h2 class="title">The $\text{\$options}$ Parameter and $\text{allowed\_classes}$</h2>
+            <p>The $\text{\$options}$ array is associative and currently supports the $\text{allowed\_classes}$ and $\text{max\_depth}$ keys.</p>
+
+            <h3>$\text{allowed\_classes}$</h3>
+            <p>This key controls which classes are permitted to be instantiated from the serialized string:</p>
+            <ul>
+                <li><strong>Array of Class Names:</strong> Pass an array of string class names (e.g., $\text{["MyClass", "NewClass"]}$) to accept **only** those specific classes.</li>
+                <li><strong>$\text{true}$ (Default):</strong> Accepts **all** classes. (If the $\text{\$options}$ parameter is omitted, this is the default behavior.)</li>
+                <li><strong>$\text{false}$:</strong> Accepts **no** classes. All objects found in the serialized data will be converted to a generic internal object called **$\text{\_\_PHP\_Incomplete\_Class}$**.</li>
+            </ul>
+
+            <h3>$\text{max\_depth}$</h3>
+            <p>This key sets the maximum permitted depth of nested structures (arrays, objects) during unserialization, helping to prevent Denial of Service (DoS) attacks from deeply nested malicious data.</p>
+
+            <h2 class="title">Usage Example</h2>
+            <p>If you have a serialized string that contains an object of $\text{NewClass}$, you can specifically permit only that class:</p>
+            <pre>
+&lt;?php
+   class MyClass { ... }
+   class NewClass { 
+      var int $y;
+      function __construct(int $y) {
+         $this->y = $y;
+      }
+   }
+
+   $sob2 = serialize(new NewClass(20));
+
+   // Only allow objects of NewClass and MyClass to be instantiated
+   $usob2 = unserialize($sob2 , [
+      "allowed_classes" => ["MyClass", "NewClass"]
+   ]);
+
+   echo $usob2->y; // Output: 20 (Successfully unserialized as NewClass)
+
+   // If $sob2 contained a disallowed object, it would become __PHP_Incomplete_Class.
+?&gt;</pre>
+        </div>
+    </div>
+</div>

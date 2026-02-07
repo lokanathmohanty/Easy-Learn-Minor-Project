@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Optimize Memory Usage</h1>
+        
+        <div class="content">
+            <h2 class="title">Memory Usage in Next.js Applications</h2>
+            <p>A Next.js application consumes system memory on both the server and client sides. Monitoring and optimizing this usage is critical for application stability, performance, and cost efficiency.</p>
+            
+            <h3>Server Side Memory Usage</h3>
+            <p>Memory on the server is used by the Node.js process for tasks such as:</p>
+            <ul>
+                <li>**Server-Side Rendering (SSR):** Allocating memory for component rendering.</li>
+                <li>**Data Fetching and Caching:** Storing results of Data Caches and Request Memoization.</li>
+                <li>**API Routes Execution:** Handling API logic and connections.</li>
+            </ul>
+            
+            <h3>Client Side Memory Usage</h3>
+            <p>Memory on the client (browser) is used for:</p>
+            <ul>
+                <li>**DOM Elements:** Storing the structure and content of the rendered page.</li>
+                <li>**JavaScript Bundle Size:** Holding the necessary JavaScript code.</li>
+                <li>**Browser Caching:** Storing assets like media and resources.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Monitor Next.js Memory Usage</h2>
+            <p>Next.js provides command-line tools to help developers monitor and diagnose memory issues, particularly memory leaks during the build process.</p>
+            
+            <h3>Display Memory Usage on Build 🔬</h3>
+            <p>In Next.js version 14 and above, you can run an experimental command to continuously print memory usage during the build:</p>
+            <pre class="example"><code>next build --experimental-debug-memory-usage</code></pre>
+            <p>This command outputs real-time information about **heap usage** and **garbage collection statistics** as the application is building.</p>
+
+            <h3>Record a Heap Profile for Debugging</h3>
+            <p>For deeper investigation into memory leaks, you can record a heap profile and analyze it using Chrome DevTools:</p>
+            <ol>
+                <li>Run the build process while passing the <code>--heap-prof</code> flag to Node.js:
+                <pre class="example"><code>node --heap-prof node_modules/next/dist/bin/next build</code></pre></li>
+                <li>This command generates a **<code>.heapprofile</code>** file upon completion.</li>
+                <li>Load this file in the **Memory tab** of Chrome DevTools to visualize heap usage and pinpoint potential memory leak sources.</li>
+            </ol>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Techniques to Optimize Memory Usage</h2>
+            <p>Applying the following techniques can help reduce both server and client memory footprint:</p>
+            <ul>
+                <li class="example">
+                    <strong>Reduce JavaScript Bundles:</strong> Ensure **Tree Shaking** is active. This process removes unused code from JavaScript modules to optimize the final bundle size, thereby reducing client-side memory consumption.
+                </li>
+                <li class="example">
+                    <strong>Use Optimized Imports:</strong> For large packages, use the <code>optimizePackageImports</code> option in <code>next.config.js</code> to ensure that only the needed parts of a library are imported, reducing both bundle size and build-time memory.
+                </li>
+                <li class="example">
+                    <strong>Disable Source Maps (Production):</strong> Source map generation consumes additional memory during the build. You can disable them for production builds in your configuration:
+                    <pre class="example"><code>// next.config.js
+module.exports = {
+  productionBrowserSourceMaps: false,
+  experimental: {
+    serverSourceMaps: false,
+  },
+}</code></pre>
+                </li>
+                <li class="example">
+                    <strong>Fix Edge Memory Issues:</strong> Upgrade to the latest version of Next.js (v14.1.3 or above) to resolve known memory issues related to the Edge Runtime.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Variables: Declaration, Types, and Assignment</h1>
+
+    <div class="content">
+      <p>
+        **Variables** in PHP are used to store data and are a fundamental part of the language. A key feature of PHP is that it is a **loosely typed language**, meaning you do not need to explicitly declare a variable's data type; PHP determines the type based on the value assigned to it.
+      </p>
+
+      <h2>How to Declare a Variable in PHP</h2>
+      <p>
+        To declare a variable, you must prefix the name with a dollar sign (`$`) and then assign a value.
+      </p>
+      <div class="example">
+        <code>$variable_name = value;</code>
+      </div>
+
+      <h3>PHP Variable Rules:</h3>
+      <ul>
+        <li>A variable must start with the **`$` symbol**.</li>
+        <li>The variable name must start with a **letter or an underscore** (`_`).</li>
+        <li>A variable name **cannot start with a number**.</li>
+        <li>Variable names are **case-sensitive** (e.g., `$Name` and `$name` are distinct).</li>
+      </ul>
+      <div class="example">
+        <p>
+          <code>$Name = "Amit"; // Different from $name</code><br>
+          <code>$name = "Samay";</code><br>
+          <code class="content">Output: AmitSamay</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Variable Types and Automatic Type Conversion</h2>
+
+      <h3>Primary Variable Types:</h3>
+      <ul>
+        <li>**String:** Sequence of characters (text).</li>
+        <li>**Integer:** Whole numbers (no decimals).</li>
+        <li>**Float (Double):** Decimal numbers.</li>
+        <li>**Boolean:** Represents `true` or `false`.</li>
+        <li>**Array:** Stores multiple values in one variable.</li>
+        <li>**Object:** An instance of a class.</li>
+        <li>**NULL:** Represents a variable with no value.</li>
+      </ul>
+
+      <h3>Automatic Type Conversion (Type Juggling)</h3>
+      <p>
+        PHP automatically converts variable types when necessary, such as during arithmetic operations.
+      </p>
+      <div class="example">
+        <p>
+          <code>$x = 10; // Integer</code><br>
+          <code>$y = "20"; // String</code><br>
+          <code>echo "x + y is: ", $x + $y;</code><br>
+          <code class="content">Output: x + y is: 30</code> (PHP converts "20" to an integer 20 before addition)
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Variable Assignment Methods</h2>
+
+      <h3>1. Assigned by Value (Default)</h3>
+      <p>
+        When you assign one variable to another, a **copy** of the value is made. Changes to the original variable after the assignment will **not** affect the new variable.
+      </p>
+      <div class="example">
+        <p>
+          <code>$x = 10; $y = 20;</code><br>
+          <code>$z = $x + $y; // z is 30</code><br>
+          <code>$y = 5; // Change y</code><br>
+          <code class="content">Output: (after) z = 30</code> (z is unchanged)
+        </p>
+      </div>
+
+      <h3>2. Assigned by Reference</h3>
+      <p>
+        Using the **ampersand (`&`)** symbol creates an **alias** (or reference) to the original variable. Both variables point to the same value in memory, so changing one variable **will change the other**.
+      </p>
+      <div class="example">
+        <p>
+          <code>$x = 10;</code><br>
+          <code>$y = &$x; // y references x</code><br>
+          <code>$y = 20; // y changes, so x also becomes 20</code><br>
+          <code class="content">Output: x=20 y=20 z = 40</code> (Both x and y are now 20)
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Variable Scope in PHP</h2>
+      <p>
+        **Scope** defines the accessibility range of a variable within the program. PHP variables can have one of four scope types:
+      </p>
+      <ul>
+        <li>**Local Variables:** Declared inside a function and only accessible within that function.</li>
+        <li>**Global Variables:** Declared outside a function and accessible anywhere in the script, **except** inside a function without using the `global` keyword or the `$GLOBALS` array.</li>
+        <li>**Static Variables:** Declared inside a function but retain their last value between calls to that function.</li>
+        <li>**Function Parameters:** Variables that receive the values passed to a function.</li>
+      </ul>
+    </div>
+  </div>
+</div>

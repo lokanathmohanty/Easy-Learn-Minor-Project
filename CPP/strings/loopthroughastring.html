@@ -1,0 +1,53 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">C++ Loop Through a String 🚶‍♀️</h1>
+
+        <div class="content">
+            <p>Looping through a C++ **<code>std::string</code>**—an object array of characters—is the process of iterating over each character to access, modify, or analyze its contents. This can be achieved using various loop structures:</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">1. Using the Traditional <code>for</code> Loop</h2>
+            <p>This method uses an **index variable** (typically <code>i</code> or <code>size_t i</code>) to traverse the string from the first character (index 0) up to (but not including) the string's length, accessing each character via array notation (<code>str[i]</code>).</p>
+            <pre class="example">
+std::string str = "TutorialsPoint";
+for (size_t i = 0; i < str.length(); ++i) {
+   std::cout << str[i] <<" ";
+}
+</pre>
+            <p>This approach gives **direct control** over the index, which is useful if you need to access adjacent elements or the character's position.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">2. Using the <code>while</code> Loop</h2>
+            <p>The <code>while</code> loop also relies on an **external counter** (index) to manage iteration. The condition checks the index against the string's length before each execution, and the counter must be manually incremented within the loop body.</p>
+            <pre class="example">
+std::string str = "TutorialsPoint";
+size_t i = 0;
+while (i < str.length()) {
+   std::cout << str[i] << " ";
+   ++i; // Must remember to increment!
+}
+</pre>
+            <p>Like the <code>for</code> loop, this allows index access but requires careful initialization and manual update of the counter.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">3. Using the Range-Based <code>for</code> Loop (Foreach)</h2>
+            <p>Introduced in C++11, this is the **most idiomatic and cleanest way** to iterate over containers like <code>std::string</code>. It automatically handles the iteration without explicit indexing or managing loop termination.</p>
+            <pre class="example">
+std::string str = "TutorialsPoint";
+for (char c : str) { // 'c' is a copy of the character
+   std::cout << c << " ";
+}
+</pre>
+            <p>To **modify** the string's characters, you must use a **reference** (<code>char&amp; c : str</code>). This method is preferred for its simplicity and safety, as it eliminates potential index errors.</p>
+        </div>
+    </div>
+</div>

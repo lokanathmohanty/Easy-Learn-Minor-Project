@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Prototypal Inheritance</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        The classical inheritance phenomenon involves making a new class that actually extends
+        or reuses the attributes, functions, or methods of another class that are used by different
+        programming languages (like C, C++, Java, and so on). JavaScript uses <strong>Prototype Inheritance</strong> 
+        rather than classical inheritance.
+      </p>
+      <p>
+        Prototype Inheritance happens when one object uses the prototype linkage to access another 
+        object's attributes or methods. All JavaScript objects derive properties and methods from their 
+        prototypes. Prototypes are hidden objects that inherit properties and methods from their parent classes.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>The prototype inheritance syntax contains the <code>__proto__</code> property:</p>
+      <pre><code>child.__proto__ = parent;</code></pre>
+
+      <h2>Example of Prototypal Inheritance</h2>
+      <p>
+        Assume you have a basic car (a "prototype") with parts like wheels and an engine. A sports car can 
+        inherit these features without starting from scratch, and still extend functionality.
+      </p>
+      <pre><code>
+// Basic car object (prototype)
+let car = {
+  wheels: 4,
+  drive: function() {
+    console.log("The car is driving");
+  }
+}; 
+
+// SportsCar object
+let sportsCar = {
+  speed: 200,
+}; 
+
+// SportsCar inherits from car
+sportsCar.__proto__ = car;
+
+sportsCar.drive();        // inherited method
+console.log(sportsCar.wheels); // inherited property
+console.log(sportsCar.speed);  // new property
+      </code></pre>
+
+      <h2>Properties of Prototypal Inheritance</h2>
+      <ul>
+        <li>Properties are characteristics that identify an object.</li>
+        <li>Prototype's properties are shared by all instances that inherit from it.</li>
+        <li>JavaScript searches for a property first in the object, then in its prototype chain.</li>
+        <li>Properties can be values, arrays, objects, or any other JavaScript data type.</li>
+      </ul>
+
+      <h2>Methods of Prototypal Inheritance</h2>
+      <p>Methods are functions bound to an object. With prototypal inheritance, methods can be shared across objects.</p>
+
+      <h3>1. Object.create</h3>
+      <pre><code>
+// Prototype object
+const animalPrototype = {
+  describe: function() {
+    console.log(`This is a ${this.species}, and it is ${this.age} years old.`);
+  }
+};
+
+const tiger = Object.create(animalPrototype);
+tiger.species = 'Tiger';
+tiger.age = 5;
+tiger.describe();
+      </code></pre>
+
+      <h3>2. Object.prototype.constructor</h3>
+      <pre><code>
+// Constructor function
+function Animal(species, age) {
+  this.species = species;
+  this.age = age;
+}
+
+const animal = new Animal('Tiger', 5);
+console.log(animal.constructor);
+      </code></pre>
+
+      <h3>3. hasOwnProperty</h3>
+      <pre><code>
+const animal = {
+  species: 'Lion',
+  habitat: 'Grasslands'
+};
+
+console.log(animal.hasOwnProperty('species')); 
+console.log(animal.hasOwnProperty('habitat')); 
+console.log(animal.hasOwnProperty('diet')); 
+      </code></pre>
+
+      <h2>The Prototype Chain</h2>
+      <pre><code>
+let pupil = { id: 1 };
+let fee = { id: 2 };
+let institution = { id: 3 };
+
+pupil.__proto__ = institution; 
+pupil.__proto__.__proto__ = fee; 
+
+console.log(pupil.id); 
+console.log(pupil.__proto__.id); 
+      </code></pre>
+
+      <h2>Inheriting Methods</h2>
+      <pre><code>
+let userBase = {
+  canRead: true,
+  profession: "",
+  showReadPermission: function () {
+    console.log(this.canRead);
+  },
+  set info(value) {
+    this.profession = value;
+  },
+  get info() {
+    return `${this.profession}`;
+  },
+};
+
+let writer = { canWrite: true };
+writer.__proto__ = userBase;
+
+writer.showReadPermission(); 
+writer.info = "blogger"; 
+console.log(writer.info); 
+      </code></pre>
+
+      <h2>Drawbacks of Prototypal Inheritance</h2>
+      <ul>
+        <li>Limits flexibility because a single <code>__proto__</code> can only inherit from one object.</li>
+        <li>Multiple inheritances require chaining with <code>__proto__.__proto__</code>, making hierarchy complex.</li>
+        <li>Prototype relationships can only be created using objects.</li>
+        <li>Accessing properties with the same name across prototypes is difficult.</li>
+        <li>Same prototypes cannot be inherited as it creates loops.</li>
+      </ul>
+    </div>
+  </div>
+</div>

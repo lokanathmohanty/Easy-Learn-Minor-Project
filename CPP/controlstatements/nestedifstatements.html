@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Nested <code>if</code> Statements 🧱</h1>
+
+        <div class="content">
+            <p>A **nested `if` statement** is an `if` or `else if` statement that is placed entirely inside another `if` or `else if` statement. This structure allows you to test for complex, hierarchical, or dependent conditions.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Syntax and Logic</h2>
+            <p>Nesting means the inner condition is only evaluated if the outer condition is **true**.</p>
+            <h3>General Syntax:</h3>
+            <pre class="example">
+if (outer_condition) {
+   // Executes only if outer_condition is TRUE
+   
+   if (inner_condition) {
+      // Executes only if BOTH outer_condition AND inner_condition are TRUE
+   }
+   // Other code executed if outer_condition is TRUE, regardless of inner_condition
+}
+</pre>
+            <p>This structure is particularly useful when the second condition is only meaningful or safe to check once the first condition has been verified.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Example Analysis</h2>
+            <p>The provided code checks if <code>a</code> is 100, and if so, it then checks if <code>b</code> is 200. Both conditions must be met to execute the innermost print statement.</p>
+            <pre class="example">
+int a = 100;
+int b = 200;
+
+if ( a == 100 ) { // Outer Check: 100 == 100 is TRUE. Proceed inside.
+   
+   if ( b == 200 ) { // Inner Check: 200 == 200 is TRUE.
+      cout << "Value of a is 100 and b is 200" << endl; 
+   }
+}
+// Final print statements always execute
+</pre>
+            <p>Since both conditions are true, the output is:</p>
+            <pre class="example">
+Value of a is 100 and b is 200
+Exact value of a is : 100
+Exact value of b is : 200
+</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - URL Encoding</h1>
+    <div class="content">
+      <p>
+        URL encoding is the practice of translating unprintable characters or characters with special 
+        meaning within URLs to a representation that is unambiguous and universally accepted by web 
+        browsers and servers. These characters include:
+      </p>
+
+      <ul>
+        <li>
+          <strong>ASCII control characters</strong> − Unprintable characters typically used for output control. 
+          Character ranges 00-1F hex (0-31 decimal) and 7F (127 decimal).
+        </li>
+        <li>
+          <strong>Non-ASCII control characters</strong> − Characters beyond the ASCII character set of 128 
+          characters. This range includes the entire "top half" of the ISO-Latin set 80-FF hex 
+          (128-255 decimal).
+        </li>
+        <li>
+          <strong>Reserved characters</strong> − Special characters such as <code>$</code>, <code>&amp;</code>, 
+          <code>+</code>, <code>,</code>, <code>/</code>, <code>:</code>, <code>;</code>, <code>=</code>, 
+          <code>?</code>, and <code>@</code>. These have specific meanings in URLs and must be encoded.
+        </li>
+        <li>
+          <strong>Unsafe characters</strong> − Characters like space, quotes, <code>&lt;</code>, <code>&gt;</code>, 
+          <code>#</code>, <code>%</code>, braces, pipes, backslash, caret, tilde, brackets, and grave accent. 
+          These can be misinterpreted and should always be encoded.
+        </li>
+      </ul>
+
+      <p>
+        The encoding notation replaces the desired character with three characters: a percent sign and 
+        two hexadecimal digits that correspond to the position of the character in the ASCII set.
+      </p>
+
+      <h2>Example</h2>
+      <p>
+        One of the most common special characters is a white space. Since you cannot directly type a space 
+        in a URL, you use <code>%20</code>.  
+      </p>
+      <p>
+        Example:  
+        <code>http://www.example.com/new%20pricing.htm</code>
+      </p>
+      <p>
+        This URL retrieves a document named <em>"new pricing.htm"</em> from <code>www.example.com</code>.
+      </p>
+
+      <h2>ASCII Control Characters Encoding</h2>
+      <p>
+        This includes encoding for character ranges 00-1F hex (0-31 decimal) and 7F (127 decimal).
+      </p>
+      <ul>
+        <li><code>0 (00 hex) → %00</code></li>
+        <li><code>9 (09 hex, tab) → %09</code></li>
+        <li><code>10 (0a hex, linefeed) → %0a</code></li>
+        <li><code>13 (0d hex, carriage return) → %0d</code></li>
+        <li><code>127 (7f hex) → %7f</code></li>
+      </ul>
+
+      <h2>Non-ASCII Control Characters Encoding</h2>
+      <p>
+        This includes the encoding for the "top half" of the ISO-Latin set (80-FF hex, 128-255 decimal).
+      </p>
+      <ul>
+        <li><code>161 (a1 hex, ¡) → %a1</code></li>
+        <li><code>162 (a2 hex, ¢) → %a2</code></li>
+        <li><code>163 (a3 hex, £) → %a3</code></li>
+        <li><code>169 (a9 hex, ©) → %a9</code></li>
+        <li><code>255 (ff hex, ÿ) → %ff</code></li>
+      </ul>
+
+      <h2>Reserved Characters Encoding</h2>
+      <ul>
+        <li><code>$ → %24</code></li>
+        <li><code>&amp; → %26</code></li>
+        <li><code>+ → %2b</code></li>
+        <li><code>/ → %2f</code></li>
+        <li><code>? → %3f</code></li>
+        <li><code>@ → %40</code></li>
+      </ul>
+
+      <h2>Unsafe Characters Encoding</h2>
+      <ul>
+        <li><code>space → %20</code></li>
+        <li><code>" → %22</code></li>
+        <li><code>&lt; → %3c</code></li>
+        <li><code>&gt; → %3e</code></li>
+        <li><code># → %23</code></li>
+        <li><code>% → %25</code></li>
+        <li><code>{ → %7b</code></li>
+        <li><code>} → %7d</code></li>
+        <li><code>| → %7c</code></li>
+        <li><code>\ → %5c</code></li>
+        <li><code>^ → %5e</code></li>
+        <li><code>~ → %7e</code></li>
+        <li><code>[ → %5b</code></li>
+        <li><code>] → %5d</code></li>
+        <li><code>` → %60</code></li>
+      </ul>
+    </div>
+  </div>
+</div>

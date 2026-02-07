@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Static Classes</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Nested Class Types</h1>
+            <h2 class="subtitle">Session: Static Nested Classes</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">Concept of Static Classes in Java</h2>
+                <p>In Java, the **<code>static</code>** keyword can only be applied to **nested classes** (classes defined inside another class). An **Outer Class** cannot be declared static.</p>
+                <p>A **Static Nested Class** is essentially a static member of the outer class, similar to a static variable or method. It is the official term for what is often loosely referred to as a "static class."</p>
+            </div>
+
+            <hr>
+
+            <div class="content features">
+                <h2 class="subtitle">Key Features of Static Nested Classes</h2>
+                <p>Static nested classes are fundamentally different from non-static inner classes because they:</p>
+                <ul>
+                    <li>**No Outer Instance Dependency:** They **do not** require an instance of the outer class to be created. You can instantiate them directly using the outer class name.</li>
+                    <li>**Access Restriction:** They **cannot** access the non-static (instance) members (variables or methods) of the outer class. They can only access the **static** members of the outer class.</li>
+                    <li>**Scope:** They are members of the outer class's namespace, accessible via the outer class name.</li>
+                </ul>
+                <p><strong>Syntax:</strong></p>
+                <pre><code>class MyOuter {
+   static class Nested_Demo {
+      // Class definition...
+   }
+}</code></pre>
+            </div>
+
+            <hr>
+
+            <div class="content instantiation">
+                <h2 class="subtitle">Instantiation and Access</h2>
+                <p>Since a static nested class doesn't depend on an outer object, its instantiation syntax is similar to calling a static member, but with the <code>new</code> keyword:</p>
+
+                <h3>1. Accessing Static Members Directly (If within the Outer Class)</h3>
+                <p>If the calling code (like <code>main</code>) is part of the outer class, the nested class can be accessed directly:</p>
+                <pre><code>public class Outer {
+   static class NestedDemo {
+      public static void print() { ... }
+   }
+   public static void main(String args[]) {
+      NestedDemo.print(); // Direct call
+   }
+}</code></pre>
+
+                <h3>2. Accessing from External Classes (Static Context)</h3>
+                <p>Use the outer class name to scope the access:</p>
+                <pre><code>public class Tester {
+   public static void main(String[] arguments) {
+	   Outer.NestedDemo.print(); // Scoped call via Outer class
+   }
+}</code></pre>
+
+                <h3>3. Instantiating to Call Instance Methods (If within External Classes)</h3>
+                <p>If the static nested class has instance methods, you must instantiate it, still using the outer class name for scope:</p>
+                <pre><code>public class Tester {
+   public static void main(String[] arguments) {
+	   // Instantiation: Outer.NestedDemo object = new Outer.NestedDemo();
+	   new Outer.NestedDemo().print();
+   }
+}</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Event Management</h1>
+    <div class="content">
+      <p>Events are actions performed by a user to interact with an application. They can be small actions like hovering a mouse pointer on an element, resizing an application window, or dragging and dropping elements to upload files. Events in React are divided into three categories:</p>
+      <ul>
+        <li><strong>Mouse Events</strong> − onClick, onDrag, onDoubleClick</li>
+        <li><strong>Keyboard Events</strong> − onKeyDown, onKeyPress, onKeyUp</li>
+        <li><strong>Focus Events</strong> − onFocus, onBlur</li>
+      </ul>
+      <p>For each event, JavaScript provides responses using <strong>Event Handlers</strong>. Event Management is the process of working with events using these handlers.</p>
+    </div>
+
+    <h2 class="title">Event Management in ReactJS</h2>
+    <div class="content">
+      <p>Event management enables the user to interact with a web application. React supports all events available in web applications, and event handling is similar to DOM events with small changes. Some examples include:</p>
+      <ul>
+        <li>Clicking on a component</li>
+        <li>Scrolling the page</li>
+        <li>Hovering over elements</li>
+        <li>Submitting a form</li>
+        <li>Redirecting to another page</li>
+        <li>Loading images</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Synthetic React Events</h2>
+    <div class="content">
+      <p>React uses <strong>SyntheticEvent</strong>, a cross-browser wrapper for native events. This ensures events work identically across all browsers. Each synthetic event has attributes like:</p>
+      <ul>
+        <li><code>bubbles</code>, <code>cancelable</code>, <code>isTrusted</code></li>
+        <li><code>currentTarget</code>, <code>target</code>, <code>nativeEvent</code></li>
+        <li><code>preventDefault()</code>, <code>stopPropagation()</code>, <code>persist()</code></li>
+        <li><code>timeStamp</code>, <code>type</code></li>
+      </ul>
+      <p>Since synthetic events are reused, their properties become null after the event callback is executed.</p>
+    </div>
+
+    <h2 class="title">Adding an Event</h2>
+    <div class="content">
+      <p>React events are defined using camelCase and written inside curly braces. The syntax differs for functional and class components:</p>
+      <ul>
+        <li><strong>Functional Component:</strong> <code>onClick = {"{action}"}</code></li>
+        <li><strong>Class Component:</strong> <code>onClick = {"{this.action}"}</code></li>
+      </ul>
+    </div>
+
+    <h2 class="title">Handling an Event</h2>
+    <div class="content">
+      <p>Steps to handle an event:</p>
+      <ul>
+        <li>Define an event handler method.</li>
+        <li>Use <code>console.log()</code> or any action inside the handler.</li>
+      </ul>
+      <p>Example handler:</p>
+      <p><code>log() { console.log("Event is fired"); }</code></p>
+      <p>Or with lambda syntax:</p>
+      <p><code>log = () => { console.log("Event is fired"); }</code></p>
+    </div>
+
+    <h2 class="title">Passing Arguments to Event Handler</h2>
+    <div class="content">
+      <p>Two methods are available:</p>
+      <ul>
+        <li><strong>Arrow Method:</strong> Pass <code>e</code> for event target details or add extra arguments before <code>e</code>.</li>
+        <li><strong>Bind Method:</strong> Bind the event handler in the constructor to ensure <code>this</code> is available.</li>
+      </ul>
+      <p>Example using <strong>bind</strong> in constructor:</p>
+      <p><code>this.logContent = this.logContent.bind(this);</code></p>
+      <p>Setting handler in JSX:</p>
+      <ul>
+        <li><code>&lt;div onClick={"{this.log}"}&gt; ... &lt;/div&gt;</code></li>
+        <li><code>&lt;div onClick={"{this.log.bind(this, extra)}"}&gt; ... &lt;/div&gt;</code></li>
+      </ul>
+    </div>
+
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <ul>
+        <li>Events allow users to interact with React apps.</li>
+        <li>React uses <strong>SyntheticEvent</strong> for cross-browser compatibility.</li>
+        <li>Event handlers can be written with arrow functions or bound in the constructor.</li>
+        <li>Arguments can be passed using arrow or bind methods.</li>
+      </ul>
+    </div>
+  </div>
+</div>

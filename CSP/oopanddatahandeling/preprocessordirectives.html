@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Preprocessor Directives</h1>
+        
+        <h2 class="title">Introduction and Syntax</h2>
+        <div class="content">
+            <p><strong>Preprocessor Directives</strong> are instructions to the compiler to preprocess information *before* the actual compilation phase begins. They primarily help in **conditional compilation** and code organization.</p>
+            <ul>
+                <li>All preprocessor directives begin with the hash symbol (**<code>#</code>**).</li>
+                <li>They are **not statements**, so they do not end with a semicolon (<code>;</code>).</li>
+                <li>They must be the **only instruction** on a line.</li>
+            </ul>
+            <p>Unlike C/C++, C# doesn't have a separate preprocessor but processes these directives internally to control which code blocks are included in the final assembly.</p>
+        </div>
+        
+        <h2 class="title">Conditional Compilation Directives</h2>
+        <div class="content">
+            <p>These directives control which sections of code are compiled based on whether a symbol is defined.</p>
+            
+            <h3>Defining and Undefining Symbols:</h3>
+            <ul>
+                <li><strong><code>#define symbol</code></strong>: Creates a symbolic constant that can be tested later. It does not assign a value; it only defines existence.</li>
+                <li><strong><code>#undef symbol</code></strong>: Undefines a previously defined symbol.</li>
+            </ul>
+            <pre>
+#define DEBUG_MODE // Symbol defined
+#undef RELEASE_MODE // Symbol undefined
+            </pre>
+            
+            <h3>Conditional Logic:</h3>
+            <p>Used to check if a symbol is defined. Only the code within the true block is passed to the compiler.</p>
+            <ul>
+                <li><strong><code>#if symbol</code></strong>: Tests if a symbol evaluates to <code>true</code>.</li>
+                <li><strong><code>#else</code></strong>: Executes if the preceding <code>#if</code> or <code>#elif</code> is <code>false</code>.</li>
+                <li><strong><code>#elif symbol</code></strong>: Checks an additional condition if the preceding <code>#if</code> is <code>false</code> (a combination of <code>#else</code> and <code>#if</code>).</li>
+                <li><strong><code>#endif</code></strong>: Marks the end of a conditional directive block.</li>
+            </ul>
+            <pre>
+#if DEBUG && !VC_V10 // Using logical operators (&&, ||, !)
+   Console.WriteLine("Debug build is active.");
+#elif !DEBUG
+   Console.WriteLine("Release build is active.");
+#else
+   Console.WriteLine("Configuration not matched.");
+#endif
+            </pre>
+        </div>
+        
+        <h2 class="title">Diagnostic and Utility Directives</h2>
+        <div class="content">
+            
+            <h3><code>#error</code> and <code>#warning</code>:</h3>
+            <p>These directives are used to manually generate compiler errors or warnings, often placed inside conditional directives to flag improper configurations or incomplete code.</p>
+            <ul>
+                <li><strong><code>#error "Custom error message"</code></strong>: Stops compilation and displays the message.</li>
+                <li><strong><code>#warning "Custom warning message"</code></strong>: Displays a warning but allows compilation to proceed.</li>
+            </ul>
+            <pre>
+#if BETA_VERSION
+   #warning "This is a beta version. Use with caution."
+#endif
+            </pre>
+            
+            <h3><code>#region</code> and <code>#endregion</code>:</h3>
+            <p>These directives are purely for **code organization** within the IDE (like Visual Studio). They allow blocks of code to be defined as collapsible regions, improving readability by letting the developer outline and collapse sections of code.</p>
+            <pre>
+#region Public Methods
+// Code for public methods
+#endregion
+
+#region Private Fields
+// Code for private fields
+#endregion
+            </pre>
+            
+            <h3><code>#line</code>:</h3>
+            <p>Used to change the compiler's line number and (optionally) the file name output for errors and warnings. This is useful for code generation tools.</p>
+            <ul>
+                <li>**<code>#line 100 "MyFile.cs"</code>**: Sets the current line number to 100 and the filename to "MyFile.cs" for error reporting.</li>
+                <li>**<code>#line default</code>**: Reverts the line numbering and filename back to the default setting.</li>
+            </ul>
+        </div>
+    </div>
+</div>

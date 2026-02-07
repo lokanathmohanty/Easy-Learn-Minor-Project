@@ -1,0 +1,130 @@
+<div class="content">
+  <h1> Unicode-bidi </h1>
+  <p>The <strong>unicode-bidi</strong> property controls how bidirectional (BiDi) text is laid out when left-to-right (LTR) and right-to-left (RTL) scripts appear together. It works in tandem with the <strong>direction</strong> property and lets authors embed, isolate, or override the Unicode Bidirectional Algorithm for specific elements.</p>
+  <p>Use cases include mixing Arabic or Hebrew with English, showing part numbers that include both Latin letters and RTL words, or ensuring inline widgets do not affect surrounding paragraph order.</p>
+
+  <h2>Key Concepts</h2>
+  <ul>
+    <li><strong>Bidirectional text</strong>: Some scripts (e.g., Arabic, Hebrew) run RTL, while others (e.g., English) run LTR. Mixed content requires rules to decide visual order.</li>
+    <li><strong>Base direction</strong>: The <strong>direction</strong> property defines the base direction for an element’s text flow (values commonly <em>ltr</em> or <em>rtl</em>).</li>
+    <li><strong>Algorithm control</strong>: <strong>unicode-bidi</strong> fine-tunes how the Unicode Bidirectional Algorithm is applied to an element and its inline descendants.</li>
+  </ul>
+
+  <h2>Syntax (as text)</h2>
+  <p>unicode-bidi: normal | embed | bidi-override | isolate | isolate-override | plaintext</p>
+  <p>direction: ltr | rtl</p>
+  <p>DOM style text (conceptual): object.style.unicodeBidi = "…"</p>
+
+  <h2>When to Use Each Value</h2>
+  <ul>
+    <li><strong>normal</strong>: Use the default Unicode algorithm with no special embedding or isolation. Good for most content.</li>
+    <li><strong>embed</strong>: Start a new embedding level that follows the element’s <strong>direction</strong>. Use when you need a localized direction block that inherits its own base direction without overriding character order.</li>
+    <li><strong>bidi-override</strong>: Force inline content to strictly follow the element’s <strong>direction</strong>, overriding natural character order. Use sparingly for special cases such as mirrored labels or legacy data that must be forced.</li>
+    <li><strong>isolate</strong>: Keep the element’s content from influencing the bidi ordering of siblings. Use for inline widgets, badges, or user-generated snippets to avoid “spillover.”</li>
+    <li><strong>isolate-override</strong>: Combine isolation with override behavior. Use only when you need both isolation from neighbors and strict direction inside.</li>
+    <li><strong>plaintext</strong>: Determine the base direction from the element’s own first strong character and prevent its content from affecting or being affected by outside context. Useful for pasted text blocks of unknown language.</li>
+  </ul>
+
+  <h2>Important Notes</h2>
+  <ul>
+    <li><strong>Works with inline layout</strong>: Some values have no effect on non-inline elements; test within text contexts.</li>
+    <li><strong>Pair with direction</strong>: For <strong>embed</strong>, <strong>bidi-override</strong>, and <strong>isolate-override</strong>, set <strong>direction</strong> to <em>ltr</em> or <em>rtl</em> to get predictable results.</li>
+    <li><strong>Not affected by all</strong>: The <strong>unicode-bidi</strong> and <strong>direction</strong> properties are not reset by the CSS <em>all</em> shorthand.</li>
+    <li><strong>Authoring caution</strong>: Overuse can make text unreadable. Prefer semantic HTML and natural language order; use overrides only to fix specific rendering issues.</li>
+  </ul>
+
+  <h2>Text-Only Examples (what you would configure)</h2>
+  <ul>
+    <li>
+      <p><strong>Example 1: Default bidirectional behavior</strong></p>
+      <p>direction: rtl</p>
+      <p>unicode-bidi: normal</p>
+      <p>Expected effect: Paragraph flows RTL using the Unicode algorithm. Latin snippets stay LTR within the RTL paragraph automatically.</p>
+    </li>
+    <li>
+      <p><strong>Example 2: Embedded RTL section inside LTR page</strong></p>
+      <p>direction: rtl</p>
+      <p>unicode-bidi: embed</p>
+      <p>Expected effect: The element establishes its own RTL embedding level without forcing strict override of character order.</p>
+    </li>
+    <li>
+      <p><strong>Example 3: Forced override</strong></p>
+      <p>direction: rtl</p>
+      <p>unicode-bidi: bidi-override</p>
+      <p>Expected effect: Inline characters render strictly right-to-left order, ignoring natural character direction. Use with extreme care.</p>
+    </li>
+    <li>
+      <p><strong>Example 4: Isolating an inline badge</strong></p>
+      <p>unicode-bidi: isolate</p>
+      <p>No direction change required unless you also want a specific base direction.</p>
+      <p>Expected effect: The badge’s internal text does not alter or get altered by surrounding text order.</p>
+    </li>
+    <li>
+      <p><strong>Example 5: Isolate and override together</strong></p>
+      <p>direction: rtl</p>
+      <p>unicode-bidi: isolate-override</p>
+      <p>Expected effect: The element is isolated from neighbors and its internal text strictly follows RTL order.</p>
+    </li>
+    <li>
+      <p><strong>Example 6: Plaintext block with unknown language</strong></p>
+      <p>unicode-bidi: plaintext</p>
+      <p>Expected effect: Base direction is resolved from the first strong character of the element; surrounding content is unaffected.</p>
+    </li>
+  </ul>
+
+  <h2>Practical Scenarios</h2>
+  <ul>
+    <li><strong>Mixed labels</strong>: Product codes or usernames where Latin letters appear inside Arabic sentences. Prefer <em>normal</em> or <em>embed</em> with appropriate <em>direction</em>.</li>
+    <li><strong>Inline UI chips</strong>: Category tags or counters inside multilingual paragraphs. Use <em>isolate</em> so chips don’t reorder surrounding text.</li>
+    <li><strong>Pasted content</strong>: Chat messages or CMS blocks of unknown language. Consider <em>plaintext</em> to resolve direction locally.</li>
+  </ul>
+
+  <h2>Step-By-Step Lab (text guidance)</h2>
+  <ul>
+    <li>Create a paragraph that includes Arabic and English. Leave defaults: unicode-bidi: normal; direction: rtl for the paragraph. Observe natural reordering.</li>
+    <li>Wrap an English phrase with a child element and set unicode-bidi: embed; direction: ltr on that child. Observe stable LTR phrase inside RTL paragraph.</li>
+    <li>Add a small inline counter and set unicode-bidi: isolate on it. Confirm that removing the isolate value causes reordering issues, then reapply to fix.</li>
+    <li>Experiment with bidi-override for a short code sample to see forced reordering; revert afterward to avoid readability issues.</li>
+  </ul>
+
+  <h2>Do and Don’t</h2>
+  <ul>
+    <li>Do set <strong>direction</strong> when using <em>embed</em>, <em>bidi-override</em>, or <em>isolate-override</em>.</li>
+    <li>Do prefer <em>isolate</em> for inline widgets and user-generated fragments.</li>
+    <li>Don’t override natural character order unless there’s a specific rendering problem to solve.</li>
+    <li>Don’t rely on <em>bidi-override</em> for entire paragraphs of normal prose.</li>
+  </ul>
+
+  <h2>Accessibility and Internationalization Tips</h2>
+  <ul>
+    <li>Use correct language metadata elsewhere (for example, page language and element-level language indicators) so assistive technologies can choose proper reading rules.</li>
+    <li>Test with real RTL/LTR samples, not just placeholder Latin text.</li>
+    <li>Keep source order meaningful; BiDi control should not change logical reading order for screen readers.</li>
+  </ul>
+
+  <h2>Troubleshooting</h2>
+  <ul>
+    <li><strong>Issue:</strong> Numbers or punctuation appear in unexpected positions.</li>
+    <li><strong>Check:</strong> The element’s <strong>direction</strong> and whether a child needs <strong>isolate</strong> or <strong>embed</strong>.</li>
+    <li><strong>Fix:</strong> Apply <em>isolate</em> to inline widgets; use <em>embed</em> with the correct <em>direction</em> on subruns.</li>
+  </ul>
+
+  <h2>Quick Reference</h2>
+  <ul>
+    <li>normal — default Unicode algorithm</li>
+    <li>embed — new embedding level with its own base direction</li>
+    <li>bidi-override — force strict rendering by base direction</li>
+    <li>isolate — prevent influence on neighbors</li>
+    <li>isolate-override — isolate + override combined</li>
+    <li>plaintext — base direction from first strong character, isolated</li>
+  </ul>
+
+  <h2>Mini Quiz</h2>
+  <ul>
+    <li>Which value prevents an inline widget from reordering surrounding text? (Answer: isolate)</li>
+    <li>Which values require you to set the base direction explicitly for predictable results? (Answer: embed, bidi-override, isolate-override)</li>
+    <li>Which value derives base direction from the element’s first strong character? (Answer: plaintext)</li>
+  </ul>
+
+   
+</div>

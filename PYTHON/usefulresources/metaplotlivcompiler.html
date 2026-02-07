@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Python Live Compiler Session</title>
+</head>
+<body>
+    <div class="container">
+        <div class="session">
+            <h1 class="title">Understanding Python Compilation</h1>
+
+            <div class="content">
+                <h2 class="title">Code Input</h2>
+                <pre class="code-block">
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+                </pre>
+            </div>
+
+            <div class="content">
+                <h2 class="title">AST (Abstract Syntax Tree)</h2>
+                <pre class="ast-block">
+Module(
+  body=[
+    FunctionDef(
+      name='factorial',
+      args=arguments(posonlyargs=[], args=[arg(arg='n')], kwonlyargs=[], kw_defaults=[], defaults=[]),
+      body=[
+        If(
+          test=Compare(Name('n', Load()), [Constant(0)], []),
+          body=[Return(Constant(1))],
+          orelse=[Return(BinOp(Name('n', Load()), Mult(), Call(Name('factorial', Load()), [BinOp(Name('n', Load()), Sub(), Constant(1))], [])))]
+        )
+      ],
+      decorator_list=[]
+    )
+  ]
+)
+                </pre>
+            </div>
+
+            <div class="content">
+                <h2 class="title">Bytecode Output</h2>
+                <pre class="bytecode-block">
+  0 LOAD_FAST                0 (n)
+  2 LOAD_CONST               1 (0)
+  4 COMPARE_OP               2 (==)
+  6 POP_JUMP_IF_FALSE        14
+  8 LOAD_CONST               2 (1)
+ 10 RETURN_VALUE
+ 12 LOAD_GLOBAL              0 (factorial)
+ 14 LOAD_FAST                0 (n)
+ 16 LOAD_CONST               3 (1)
+ 18 BINARY_SUBTRACT
+ 20 CALL_FUNCTION            1
+ 22 BINARY_MULTIPLY
+ 24 RETURN_VALUE
+                </pre>
+            </div>
+
+            <div class="content">
+                <h2 class="title">Explanation</h2>
+                <ul>
+                    <li>The <code>FunctionDef</code> node defines a function named <code>factorial</code> with one argument <code>n</code>.</li>
+                    <li>The <code>If</code> node checks if <code>n == 0</code>. If true, returns <code>1</code>, else executes the recursive call.</li>
+                    <li>The bytecode instructions map fairly directly: load arguments, compare, branch based on result, etc.</li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2 class="title">Example</h2>
+                <p>Change the code so that it prints the result instead of returning it. Observe the differences in AST & bytecode.</p>
+            </div>
+
+            <div class="content">
+                <h2 class="title">Exercise</h2>
+                <p>Write a Python function <code>fibonacci(n)</code> using recursion. Predict its AST & bytecode, then run it and compare.</p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

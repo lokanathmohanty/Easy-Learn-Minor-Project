@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Context Managers</h1>
+    </div>
+    <div class="content">
+      <p>
+        Context managers in Python provide a powerful and clean way to manage resources such as file streams, database connections, and locks safely and efficiently. They encapsulate setup and cleanup logic by defining a runtime context for use with the <code>with</code> statement.
+      </p>
+      <p>
+        A context manager ensures that resources are properly acquired and released, even in the presence of errors or exceptions.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>How Context Managers Work</h2>
+    </div>
+    <div class="content">
+      <p>
+        Context managers implement either the synchronous methods <code>__enter__()</code> and <code>__exit__()</code>, or asynchronous methods <code>__aenter__()</code> and <code>__aexit__()</code> for use with <code>with</code> or <code>async with</code> statements. The <code>__enter__()</code> method is executed at the beginning of the block and the <code>__exit__()</code> method runs at the end to perform cleanup.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Synchronous Context Manager</h2>
+    </div>
+    <div class="content">
+      <pre>
+class MyContextManager:
+    def __enter__(self):
+        print("Entering the context")
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Exiting the context")
+        if exc_type:
+            print("An exception occurred")
+        return True  # Suppress exception
+
+with MyContextManager():
+    print("Inside the block")
+    # Intentionally raise an exception
+    result = 1 / 0
+      </pre>
+      <p>
+        Output:
+<pre>
+Entering the context
+Inside the block
+Exiting the context
+An exception occurred
+</pre>
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Asynchronous Context Manager</h2>
+    </div>
+    <div class="content">
+      <pre>
+import asyncio
+
+class AsyncContextManager:
+    async def __aenter__(self):
+        print("Entering async context")
+        return self
+
+    async def __aexit__(self, exc_type, exc_value, traceback):
+        print("Exiting async context")
+        if exc_type:
+            print("Exception occurred")
+        return True
+
+async def main():
+    async with AsyncContextManager():
+        print("Inside async block")
+        # Trigger an exception
+        raise ValueError("Oops!")
+
+asyncio.run(main())
+      </pre>
+      <p>
+        Output:
+<pre>
+Entering async context
+Inside async block
+Exiting async context
+Exception occurred
+</pre>
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Creating Context Managers Using contextlib</h2>
+    </div>
+    <div class="content">
+      <p>
+        The <code>contextlib</code> module simplifies context manager creation. The <code>@contextlib.contextmanager</code> decorator lets you write generator-based context managers easily by yielding control inside a try-finally block.
+      </p>
+      <pre>
+from contextlib import contextmanager
+
+@contextmanager
+def my_context():
+    print("Entering")
+    try:
+        yield
+    finally:
+        print("Exiting")
+
+with my_context():
+    print("Inside with block")
+      </pre>
+      <p>
+        Output:
+<pre>
+Entering
+Inside with block
+Exiting
+</pre>
+      </p>
+      <p>
+        For asynchronous context managers, use <code>@contextlib.asynccontextmanager</code> with async functions and <code>async with</code>.
+      </p>
+      <pre>
+from contextlib import asynccontextmanager
+import asyncio
+
+@asynccontextmanager
+async def async_context():
+    print("Entering async")
+    try:
+        yield
+    finally:
+        print("Exiting async")
+
+async def main():
+    async with async_context():
+        print("Inside async block")
+        await asyncio.sleep(1)
+
+asyncio.run(main())
+      </pre>
+      <p>
+        Output:
+<pre>
+Entering async
+Inside async block
+Exiting async
+</pre>
+      </p>
+    </div>
+  </div>
+ 
+    </div>
+  </div>
+</div>

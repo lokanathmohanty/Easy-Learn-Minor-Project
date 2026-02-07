@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java Type Casting (Conversion)</h1>
+    <div class="content">
+      <p>Type casting is a technique that is used either by the compiler or a programmer to convert one data type to another in Java. Type casting is also known as type conversion. For example, converting int to double, double to int, short to int, etc.</p>
+      <p>There are two types of type casting allowed in Java programming:</p>
+      <ul>
+        <li>Widening type casting</li>
+        <li>Narrowing type casting</li>
+      </ul>
+
+      <h2 class="title">Widening Type Casting</h2>
+      <p>Widening type casting is also known as implicit type casting in which a smaller type is converted into a larger type, it is done by the compiler automatically.</p>
+      <p><strong>Hierarchy</strong><br>
+      Here is the hierarchy of widening type casting in Java:</p>
+      <p>byte &gt; short &gt; char &gt; int &gt; long &gt; float &gt; double</p>
+      <p>The compiler plays a role in the type conversion instead of programmers. It changes the type of the variables at the compile time. Also, type conversion occurs from the small data type to large data type only.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example</h2>
+      <pre class="content">
+package com.tutorialspoint;
+
+public class Tester {
+   // Main driver method
+   public static void main(String[] args) {
+      // Define int variables
+      int num1 = 5004;
+      double num2 = 2.5;
+      double sum = num1 + num2;
+      // show output
+      System.out.println("The sum of " + num1 + " and " + num2 + " is " + sum);
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>The sum of 5004 and 2.5 is 5006.5</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Type Conversion Error</h2>
+      <p>The type conversion error occurs when you try to assign a value of a larger data type to a variable of a smaller data type without explicitly converting it.</p>
+      <p>Java compiler performs implicit type conversion when assigning values between compatible types, but it does not allow the conversion from a larger data type to a smaller one without explicit type casting.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example</h2>
+      <pre class="content">
+package com.tutorialspoint;
+
+public class Tester {
+   // Main driver method
+   public static void main(String[] args) {
+      // Define int variables
+      int num1 = 5004;
+      double num2 = 2.5;
+      int sum = num1 + num2;
+      // show output
+      System.out.println("The sum of " + num1 + " and " + num2 + " is " + sum);
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>Exception in thread "main" java.lang.Error: Unresolved compilation problem: <br>
+      Type mismatch: cannot convert from double to int</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Narrowing Type Casting</h2>
+      <p>Narrowing type casting is also known as explicit type casting or explicit type conversion which is done by the programmer manually. In the narrowing type casting a larger type can be converted into a smaller type.</p>
+      <p>When a programmer changes the variable type while writing the code. We can use the cast operator to change the type of the variable. For example, double to int or int to double.</p>
+      <p><strong>Syntax</strong><br>
+      Below is the syntax for narrowing type casting i.e., to manually type conversion:</p>
+      <p>double doubleNum = (double) num;</p>
+      <p>The above code statement will convert the variable to double type.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example</h2>
+      <pre class="content">
+package com.tutorialspoint;
+
+public class Tester {
+   // Main driver method
+   public static void main(String[] args) {
+      // Define int variable
+      int num = 5004;
+      // Type casting int to double
+      double doubleNum = (double) num;
+      // show output
+      System.out.println("The value of " + num + " after converting to the double is " + doubleNum);
+      // Type casting double to int
+      int convertedInt = (int) doubleNum;
+      // show output
+      System.out.println("The value of " + doubleNum + " after converting to the int again is " + convertedInt);
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>The value of 5004 after converting to the double is 5004.0<br>
+      The value of 5004.0 after converting to the int again is 5004</p>
+    </div>
+  </div>
+</div>

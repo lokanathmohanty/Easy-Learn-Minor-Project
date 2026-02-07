@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Variable Swapping Techniques 🔄</h1>
+
+        <div class="content">
+            <p>While PHP doesn't have a dedicated built-in function for swapping two variables, there are several effective and clever techniques to interchange their values. These methods offer different approaches based on performance and code readability.</p>
+
+            <hr>
+
+            <h2 class="title">1. Using a Temporary Variable (The Obvious Way)</h2>
+            <p>This is the most straightforward, easy-to-read, and generally recommended method. It uses a third variable ($\text{\$c}$) as a temporary placeholder to hold one value while the assignment takes place.</p>
+            <pre>
+&lt;?php
+   $a = 10;
+   $b = 20;
+   // Start swap
+   $c = $a; // Store $a's value
+   $a = $b; // $a now gets $b's value
+   $b = $c; // $b now gets $a's original value
+   // End swap
+   echo "After swapping - \$a = $a, \$b = $b"; // Output: $a = 20, $b = 10
+?&gt;</pre>
+
+            <hr>
+
+            <h2 class="title">2. Using Arithmetic Operators (No Temp Variable)</h2>
+            <p>This technique swaps two numbers without needing a third variable by leveraging arithmetic properties. It primarily works by storing the sum (or difference) in one variable and isolating the original values through subsequent subtraction operations.</p>
+            <pre>
+&lt;?php
+   $a = 10;
+   $b = 20;
+   // Start swap
+   $a = $a + $b; // $a becomes 30 (10 + 20)
+   $b = $a - $b; // $b becomes 10 (30 - 20)
+   $a = $a - $b; // $a becomes 20 (30 - 10)
+   // End swap
+   echo "After swapping - \$a = $a, \$b = $b"; // Output: $a = 20, $b = 10
+?&gt;</pre>
+            <p>This method can also be implemented using subtraction ($\text{-}$), multiplication ($\text{*}$), and division ($\text{/}$), although division should be used with caution due to potential precision loss with floating-point numbers.</p>
+
+            <hr>
+
+            <h2 class="title">3. Using $\text{list()}$ and Array Destructuring (Modern PHP)</h2>
+            <p>The $\text{list()}$ function (or its modern equivalent, array destructuring) can be used to unpack an array into separate variables. By packing the original variables into an array and then unpacking them in reverse order, the swap is achieved in a single conceptual step.</p>
+            <pre>
+&lt;?php
+   $a = 10;
+   $b = 20;
+   // Start swap (using list() - compatible with older PHP)
+   $arr = [$a, $b];
+   list($b, $a) = $arr; // Unpack $arr's elements into $b and $a in reverse order
+
+   // In modern PHP, this is cleaner (PHP 7.1+):
+   // [$b, $a] = [$a, $b];
+
+   // End swap
+   echo "After swapping - \$a = $a, \$b = $b"; // Output: $a = 20, $b = 10
+?&gt;</pre>
+
+            <hr>
+
+            <h2 class="title">4. Using Bitwise XOR ($\text{\^}$) (The Cryptic Way)</h2>
+            <p>The bitwise XOR operator ($\text{\^}$) provides a third memory-efficient method to swap two variables, primarily used for integers. The XOR operation has the property that $\text{A} \oplus \text{B} \oplus \text{B} = \text{A}$.</p>
+            <pre>
+&lt;?php
+   $a = 10;
+   $b = 20;
+   // Start swap
+   $a = $a ^ $b; // $a now holds A ^ B
+   $b = $a ^ $b; // $b now holds (A ^ B) ^ B, which equals A
+   $a = $a ^ $b; // $a now holds (A ^ B) ^ A, which equals B
+   // End swap
+   echo "After swapping - \$a = $a, \$b = $b"; // Output: $a = 20, $b = 10
+?&gt;</pre>
+        </div>
+    </div>
+</div>

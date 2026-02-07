@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Preprocessor Directives (#) ⚙️</h1>
+
+        <div class="content">
+            <p>The **C++ Preprocessor** is a tool that processes the source code **before** the actual compilation begins. It handles directives—special instructions that modify the source code based on specific rules.</p>
+            <p>All preprocessor directives start with the **pound sign (`#`)** and do **not** end with a semicolon (`;`).</p>
+
+            <hr>
+
+            <h2 class="title">The <code>#define</code> Preprocessor (Macros)</h2>
+
+            <p>The `#define` directive is used to create symbolic constants or macros. When the program is preprocessed, every subsequent occurrence of the macro-name is replaced by the replacement-text.</p>
+
+            <h3>Simple Macro</h3>
+            <pre class="example">
+#define PI 3.14159
+// The preprocessor replaces PI with 3.14159 everywhere.
+</pre>
+
+            <h3>Function-Like Macros</h3>
+            <p>Macros can take arguments, mimicking functions. It's best practice to use plenty of parentheses to prevent operator precedence issues when the macro is expanded.</p>
+            <pre class="example">
+#define MIN(a,b) (((a)<(b)) ? a : b)
+// MIN(x, y) is textually replaced by the conditional expression.
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Conditional Compilation</h2>
+
+        <div class="content">
+            <p>These directives allow you to include or exclude specific blocks of code from compilation based on certain conditions, which is essential for managing code across different platforms or debug modes.</p>
+            <table>
+                <thead>
+                    <tr><th>Directive</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>**<code>#ifdef MACRO</code>**</td><td>Compiles the following code block only if <code>MACRO</code> **has been defined**.</td></tr>
+                    <tr><td>**<code>#ifndef MACRO</code>**</td><td>Compiles the following code block only if <code>MACRO</code> **has NOT been defined**.</td></tr>
+                    <tr><td>**<code>#if condition</code>**</td><td>Compiles the code if the specified constant expression is true.</td></tr>
+                    <tr><td>**<code>#else</code> / <code>#elif</code>**</td><td>Provide alternatives for the <code>#if</code>, <code>#ifdef</code>, or <code>#ifndef</code> block.</td></tr>
+                    <tr><td>**<code>#endif</code>**</td><td>Marks the end of a conditional compilation block.</td></tr>
+                </tbody>
+            </table>
+            <p>A common pattern for debugging:</p>
+            <pre class="example">
+#ifdef DEBUG
+   cerr &lt;&lt; "Debugging trace..." &lt;&lt; endl; // Only compiled if DEBUG is defined
+#endif
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">The <code>#</code> and <code>##</code> Operators</h2>
+
+        <div class="content">
+            <ul>
+                <li>
+                    **<code>#</code> (Stringizing Operator):** Converts a token from the macro argument into a **string literal** (surrounded by quotes).
+                    <pre class="example">#define MKSTR(x) #x
+MKSTR(HELLO C++)  // Preprocessed to: "HELLO C++"
+</pre>
+                </li>
+                <li>
+                    **<code>##</code> (Token Pasting Operator):** Concatenates two tokens together to form a single new token.
+                    <pre class="example">#define concat(a, b) a ## b
+concat(x, y)  // Preprocessed to: xy
+</pre>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Predefined C++ Macros</h2>
+
+        <div class="content">
+            <p>C++ provides several built-in macros that expand to constants at compile time, often used for logging or debugging:</p>
+            <ul>
+                <li>**<code>__LINE__</code>**: The current line number in the source file.</li>
+                <li>**<code>__FILE__</code>**: The name of the current source file (as a string literal).</li>
+                <li>**<code>__DATE__</code>**: The compilation date (as a string literal).</li>
+                <li>**<code>__TIME__</code>**: The compilation time (as a string literal).</li>
+            </ul>
+        </div>
+    </div>
+</div>

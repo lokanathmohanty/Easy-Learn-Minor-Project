@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Function, Hook, and API Reference 📚</h1>
+        
+        <div class="content">
+            <p>Next.js provides a comprehensive set of **built-in APIs, functions, and hooks** to manage data fetching, routing, and server-side operations. This reference summarizes key functions used across both the legacy Pages Router and the modern App Router.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">App Router Functions & Hooks (Recommended)</h2>
+            <p>These functions are primarily used in the modern **<span class="example">`app`</span>** directory structure for Server and Client Components.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function/Hook</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`useParams()`</span></td>
+                        <td>Retrieves **dynamic route parameters** (e.g., `id` from `[id]`) in a **Client Component**.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`usePathname()`</span></td>
+                        <td>Provides the **current URL pathname** (e.g., `/products/123`) in a **Client Component**.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`useSearchParams()`</span></td>
+                        <td>Provides access to **URL query parameters** (e.g., `?sort=price`) in a **Client Component**.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`generateMetadata()`</span></td>
+                        <td>Generates **dynamic metadata** (title, description, SEO tags) based on route parameters or fetched data at request time.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`generateStaticParams()`</span></td>
+                        <td>Generates parameters for **dynamic routes** during **Static Site Generation (SSG)** (similar to `getStaticPaths`).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`redirect()`</span> / <span class="example">`permanentRedirect()`</span></td>
+                        <td>Generates a redirection response (302 or 301 status codes) on the server.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`notFound()`</span></td>
+                        <td>Returns a **404 HTTP status** and renders the nearest `not-found.js` file.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`cookies()`</span> / <span class="example">`headers()`</span></td>
+                        <td>Allows reading/manipulating **HTTP Cookies** or **Headers** in **Server Components** or Route Handlers.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`revalidatePath()`</span> / <span class="example">`revalidateTag()`</span></td>
+                        <td>Manually invalidates cached data for a path or an associated fetch tag (**On-Demand Revalidation**).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Pages Router Functions & Hooks (Legacy)</h2>
+            <p>These functions are specific to the legacy **<span class="example">`pages`</span>** directory structure.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function/Hook</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`getStaticProps()`</span></td>
+                        <td>Fetches data at **build time** for Static Site Generation (SSG).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`getStaticPaths()`</span></td>
+                        <td>Used alongside `getStaticProps` to pre-render **dynamic routes** at build time.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`getServerSideProps()`</span></td>
+                        <td>Fetches data on the **server at request time** (Server-Side Rendering or SSR).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`getInitialProps()`</span></td>
+                        <td>Legacy method for data fetching on both server and client side.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`useRouter()`</span></td>
+                        <td>Client-side hook to access the router object for imperative navigation.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`useAmp()`</span></td>
+                        <td>Hook to detect if the current page is being rendered as an **Accelerated Mobile Page (AMP)**.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

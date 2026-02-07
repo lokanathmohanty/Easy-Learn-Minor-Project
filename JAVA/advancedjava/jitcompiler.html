@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Just-In-Time (JIT) Compiler</h1>
+
+        <div class="content">
+            <h2>The Role of the JIT Compiler</h2>
+            <p>The **Just-In-Time (JIT) Compiler** is a core component of the **Java Virtual Machine (JVM)** designed to boost execution speed. Java code is initially compiled by <code>javac</code> into **Bytecode**, which the JVM can interpret. However, interpretation is slow.</p>
+            <p>The JIT compiler solves this by translating the frequently executed sections of Bytecode—known as **HotSpots**—into **native machine code** at runtime. Once compiled, this native code is reused for subsequent calls, offering performance comparable to statically compiled languages (like C++), while retaining Java's platform independence.</p>
+
+            <h3>Java: Compiled and Interpreted</h3>
+            <p>Java achieves its speed and portability by employing a hybrid approach:</p>
+            <ul>
+                <li><strong>Compilation (Static):</strong> Java source code $\rightarrow$ Bytecode (platform-independent) by <code>javac</code>.</li>
+                <li><strong>Interpretation (Dynamic):</strong> JVM executes the Bytecode line-by-line initially.</li>
+                <li><strong>JIT Compilation:</strong> JVM identifies hotspots and compiles them $\rightarrow$ Native machine code (platform-specific) for heavy optimization.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Working Mechanism and Compilation Levels</h2>
+            <p>The JIT compiler works by constantly **profiling** the running application to gather data on method calls, loop iterations, and types. It uses this information to determine when and how aggressively to optimize a section of code.</p>
+
+            <h3>Compilation Tiers (Tiered Compilation)</h3>
+            <p>Modern JVMs use a tiered compilation model with five levels to balance startup time with long-term performance:</p>
+            <ul>
+                <li><strong>Level 0 (Interpreter):</strong> Executes Bytecode directly.</li>
+                <li><strong>Level 1 (C1 - Client Compiler):</strong> Fast compilation with light optimization (for quick startup).</li>
+                <li><strong>Level 2/3/4 (C2 - Server Compiler):</strong> Slower compilation process but performs heavy, complex optimizations based on extensive profiling data (for long-running applications).</li>
+            </ul>
+
+            <h3>Client vs. Server Modes</h3>
+            <ul>
+                <li>
+                    <strong>Client Mode (C1):</strong> Enabled using <code>-client</code>. Starts compiling sooner with less aggressive optimization. Best for desktop applications and GUI programs where **startup time** is critical.
+                </li>
+                <li>
+                    <strong>Server Mode (C2):</strong> Enabled using <code>-server</code>. Waits longer to gather more profiling data before compiling. Generates heavily optimized, faster code. Best for **long-running server applications** where peak performance is prioritized over initial startup time.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title example">Examples of JIT Optimizations</h2>
+            <div class="content">
+                <ul>
+                    <li>
+                        <strong>Method Inlining:</strong> Replaces a method call with the body of the method itself. This eliminates the overhead of a method call (stack push/pop) and enables further surrounding optimizations.
+                    </li>
+                    <li>
+                        <strong>Dead Code Elimination:</strong> Removes code sections that the profiling determines will never be executed or whose results are never used.
+                    </li>
+                    <li>
+                        <strong>Local Variable Caching:</strong> For frequently updated variables (like a loop counter <code>sum</code>), the JIT compiles the code to hold the variable's value in a CPU **register** (a fast memory location) instead of repeatedly fetching and storing it in main memory during each loop iteration.
+                    </li>
+                    <li>
+                        <strong>Type Check Elision:</strong> In a loop, if the JIT observes that an object (e.g., <code>obj1</code>) is consistently a specific type (e.g., <code>String</code>), it generates native code that calls the <code>String.equals()</code> method directly, skipping repeated runtime checks on the object's class.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

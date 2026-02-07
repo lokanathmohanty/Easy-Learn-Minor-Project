@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Temporal Dead Zone (TDZ)</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>
+        The <strong>Temporal Dead Zone (TDZ)</strong> in JavaScript refers to the period between
+        entering a scope and the point where variables declared with <code>let</code> or
+        <code>const</code> are initialized. During this time, attempting to access the variable
+        results in a <code>ReferenceError</code>.
+      </p>
+
+      <h2>Why Does Temporal Dead Zone Happen?</h2>
+      <ul>
+        <li>
+          <strong>Block Scope:</strong> Variables declared with <code>let</code> and <code>const</code>
+          are limited to the block in which they are defined.
+        </li>
+        <li>
+          <strong>Cannot Access Before Declaration:</strong> Variables remain in the TDZ until
+          their declaration line is executed.
+        </li>
+        <li>
+          This behavior prevents accidental usage of uninitialized variables and leads to safer code.
+        </li>
+      </ul>
+
+      <h2>Examples of Temporal Dead Zone</h2>
+
+      <h3>Example 1: Access Before Declaration</h3>
+      <pre><code>
+// This will throw an error
+console.log(myVar); 
+let myVar = 5;
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+ReferenceError: Cannot access 'myVar' before initialization
+      </code></pre>
+
+      <h3>Example 2: Inside a Function</h3>
+      <pre><code>
+function myFunction() {
+   // This will throw an error
+   console.log(myNum); 
+   let myNum = 10;
+}
+myFunction();
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+ReferenceError: Cannot access 'myNum' before initialization
+      </code></pre>
+
+      <h3>Example 3: Inside a Block</h3>
+      <pre><code>
+if (true) {
+   // This will throw an error
+   console.log(myConst); 
+   const myConst = 20;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+ReferenceError: Cannot access 'myConst' before initialization
+      </code></pre>
+
+      <h2>How to Avoid TDZ in JavaScript?</h2>
+      <p>
+        To avoid TDZ-related errors, always declare variables before using them.
+        Following best practices ensures predictable and bug-free code.
+      </p>
+
+      <h3>Declare Variables at the Beginning</h3>
+      <pre><code>
+function exampleFunction() {
+   // Declare at the top
+   let count = 0; 
+   console.log("Initial count:", count); 
+   count = 5;
+   console.log("Updated count:", count); 
+   console.log("End of exampleFunction");
+}
+
+// Example usage:
+exampleFunction();
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Initial count: 0
+Updated count: 5
+End of exampleFunction
+      </code></pre>
+
+      <h3>Avoid Using Variables Before Declaration</h3>
+      <pre><code>
+// Declare the variable first
+let num = 10; 
+
+// Now safe to use
+console.log(num);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+10
+      </code></pre>
+
+      <h3>Using var (Not Recommended)</h3>
+      <p>
+        Variables declared with <code>var</code> are hoisted and initialized with
+        <code>undefined</code>, so they do not have a TDZ. However, <code>var</code>
+        can cause confusion and should generally be avoided.
+      </p>
+      <pre><code>
+// No error, but outputs undefined
+console.log(a); 
+var a = 5;
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+undefined
+      </code></pre>
+
+      <h3>Organize Code to Minimize TDZ Errors</h3>
+      <pre><code>
+function calculateArea(radius) {
+   console.log("Starting calculation...");
+   if (radius > 0) {
+      console.log("Radius is greater than 0, proceeding with calculation.");
+
+      // Declare variables before using them
+      let pi = 3.14; 
+      let area = pi * radius * radius;
+      console.log("Calculated area:", area);
+      return area;
+   } else {
+      console.log("Radius is not greater than 0, returning 0.");
+   }   
+   return 0;
+}
+
+// Example usage
+calculateArea(5);   
+calculateArea(-3);  
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Starting calculation...
+Radius is greater than 0, proceeding with calculation.
+Calculated area: 78.5
+Starting calculation...
+Radius is not greater than 0, returning 0.
+      </code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>TDZ applies only to <code>let</code> and <code>const</code>.</li>
+        <li>Accessing a variable before declaration causes a <code>ReferenceError</code>.</li>
+        <li>Declare variables at the beginning of blocks to avoid TDZ.</li>
+        <li>Prefer <code>let</code> and <code>const</code> over <code>var</code> for cleaner code.</li>
+        <li>Organize code to minimize errors and ensure clarity.</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

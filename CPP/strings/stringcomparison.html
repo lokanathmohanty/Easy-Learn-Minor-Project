@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ String Comparison: C-Style vs. <code>std::string</code> 🟰🆚</h1>
+
+        <div class="content">
+            <p>C++ string comparison is the process of evaluating two strings to determine their **equality** or their **lexicographical order**. By default, all comparisons in C++ are **case-sensitive**, meaning the ASCII values of the characters (e.g., 'A' vs. 'a') determine the result.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">I. Comparing C-Style Strings (<code>char[]</code>)</h2>
+            <p>C-style strings, which are null-terminated character arrays, **cannot** be compared directly using standard operators (like `==` or `&lt;`). You must use functions from the <code>&lt;cstring&gt;</code> library.</p>
+
+            <h3>1. <code>strcmp(str1, str2)</code></h3>
+            <p>This is the primary function for comparing two C-style strings lexicographically (based on ASCII values).</p>
+            <ul>
+                <li>Returns **0** if strings are equal.</li>
+                <li>Returns a **negative value** if `str1` is lexicographically less than `str2`.</li>
+                <li>Returns a **positive value** if `str1` is lexicographically greater than `str2`.</li>
+            </ul>
+            <p><strong>Lexicographical Order Example:</strong> In `strcmp("hello", "Tutorialspoint")`, the comparison is: 'h' (ASCII 104) vs. 'T' (ASCII 84). Since $104 > 84$, the result is a positive number, indicating "hello" is greater.</p>
+
+            <h3>2. <code>strcoll(str1, str2)</code></h3>
+            <p>Compares two C-style strings based on the **current locale** settings, which is essential for proper sorting and internationalization (handling language-specific character ordering rules).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">II. Comparing <code>std::string</code> Objects (Modern C++)</h2>
+            <p><code>std::string</code> objects can be compared using two convenient methods.</p>
+
+            <h3>1. Comparison Operators (`==`, `!=`, `&lt;`, `&gt;`, etc.)</h3>
+            <p>The standard C++ comparison operators are overloaded for <code>std::string</code>, allowing for direct, readable comparison that works lexicographically.</p>
+            <pre class="example">
+std::string str1 = "Allen";
+std::string str2 = "allen";
+
+// Result: 0 (false) because 'A' (65) != 'a' (97)
+str1 == str2
+
+// Result: 1 (true) because 'A' (65) &lt; 'a' (97)
+str1 &lt; str2 
+</pre>
+
+            <h3>2. <code>std::string::compare()</code> Method</h3>
+            <p>This member function performs a lexicographical comparison and is similar to `strcmp()` but designed for <code>std::string</code>. It is often preferred when comparing a substring or a segment of a string.</p>
+            <ul>
+                <li>Returns **0** if the strings are equal.</li>
+                <li>Returns a **positive value** if the calling string is greater.</li>
+                <li>Returns a **negative value** if the calling string is lesser.</li>
+            </ul>
+            <pre class="example">
+std::string str1 = "apple";
+std::string str2 = "banana";
+
+// Result: negative (e.g., -1) because 'a' &lt; 'b'
+str1.compare(str2) 
+
+// Result: 0
+str1.compare("apple")
+</pre>
+        </div>
+    </div>
+</div>

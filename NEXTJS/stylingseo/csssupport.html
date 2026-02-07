@@ -1,0 +1,310 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">Next.js - CSS Support</h1>
+
+   
+
+    <div class="content">
+      <p>
+        In Next.js, you can apply styling particular to a component (scoped) or global styling that affects all components. This chapter explores the styling methods supported by Next.js, how to style a module, and how to apply global styles.
+      </p>
+
+      <h2 class="title">Styling Next.js App</h2>
+      <p>Next.js supports different ways of styling your application, such as:</p>
+      <ul>
+        <li class="content">**CSS Modules**</li>
+        <li class="content">**Tailwind CSS**</li>
+        <li class="content">**SASS**</li>
+        <li class="content">**CSS-in-JS**</li>
+      </ul>
+
+      <h2 class="title">CSS Modules in Next.js</h2>
+      <p>
+        We can use **CSS Modules** to specify styles explicitly for a particular component. The styles specified by this method will be **scoped** and will **not affect any other components**.
+      </p>
+
+      <h2 class="title">Styling a Next.js Module</h2>
+      <p>
+        A stylesheet defined for a Next.js module should end with the **`.module.css`** extension.
+      </p>
+      <ul>
+        <li class="content">
+          You **cannot use element selectors** (like `h1`, `p`) inside CSS module files; these are only allowed inside Next.js <a href="#">global CSS</a> styles.
+        </li>
+        <li class="content">
+          In a Next.js module, you use the syntax **`styles.className`** or **`styles.idName`** to reference classes or IDs from the imported CSS file.
+        </li>
+      </ul>
+
+      <h2 class="title example">Example of Styling a Module (`page.tsx`)</h2>
+      <div class="example">
+        <p>// app/about/page.tsx</p>
+        <p>
+          <code>
+            // Import the CSS module<br>
+            import styles from './about.module.css';<br>
+            <br>
+            export default function About() {<br>
+            &nbsp;&nbsp;return (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;div className=&#123;styles.div&#125;&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1 className=&#123;styles.h1&#125;&gt;About Us&lt;/h1&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2 className=&#123;styles.h2&#125;&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome to the Next JS About page!<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/h2&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+            &nbsp;&nbsp;);<br>
+            }
+          </code>
+        </p>
+      </div>
+
+      <h2 class="title example">Example of Module CSS File (`about.module.css`)</h2>
+      <div class="example">
+        <p>// app/about/about.module.css file</p>
+        <p>
+          <code>
+            .div &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;font-family: Arial, sans-serif;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;padding: 20px;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;background-color: #f9f9f9;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;border: 2px solid;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;border-radius: 10px;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;max-width: 500px;<br>
+            }<br>
+            .h1 &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;color: #0070f3;<br>
+            }<br>
+            .h2 &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;color: #333;<br>
+            }
+          </code>
+        </p>
+      </div>
+      <p>
+        **Output**: The CSS styles are only affecting the "About" module.
+      </p>
+
+      <h2 class="title">Setup Tailwind CSS in Next.js</h2>
+      <p>
+        **Tailwind CSS** is a utility-first CSS framework. When creating a Next.js app, you are prompted to include it. If you choose to, Next.js will automatically set it up.
+      </p>
+
+      <h3 class="title">Step 1: Install Tailwind CSS (Manual Setup)</h3>
+      <p>Run the following commands in your project terminal:</p>
+      <div class="example">
+        <p>// Install tailwind and peer dependencies</p>
+        <p><code>npm install -D tailwindcss postcss autoprefixer</code></p>
+        <p>// Initialize tailwind and generate config files</p>
+        <p><code>npx tailwindcss init -p</code></p>
+      </div>
+
+      <h3 class="title">Step 2: Configure Template Paths (`tailwind.config.ts`)</h3>
+      <p>
+        Add paths to all of your template files (files that use Tailwind CSS) to the **`content`** array in the generated `tailwind.config.ts` file.
+      </p>
+      <div class="example">
+        <p>// ./tailwind.config.ts</p>
+        <p>
+          <code>
+            module.exports = {<br>
+            &nbsp;&nbsp;content: [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"./app/**/&#123;js,ts,jsx,tsx,mdx&#125;",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"./pages/**/&#123;js,ts,jsx,tsx,mdx&#125;",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"./components/**/&#123;js,ts,jsx,tsx,mdx&#125;",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"./src/**/&#123;js,ts,jsx,tsx,mdx&#125;",<br>
+            &nbsp;&nbsp;],<br>
+            &nbsp;&nbsp;theme: &#123; /* ... */ &#125;,<br>
+            &nbsp;&nbsp;plugins: [],<br>
+            }
+          </code>
+        </p>
+      </div>
+
+      <h3 class="title">Step 3: Add the Tailwind Directives (`globals.css`)</h3>
+      <p>
+        Add the `@tailwind` directives to your global CSS file (`globals.css`) to inject Tailwind's `base`, `components`, and `utilities` styles.
+      </p>
+      <div class="example">
+        <p>// ./global.css</p>
+        <p>
+          <code>
+            @tailwind base;<br>
+            @tailwind components;<br>
+            @tailwind utilities;
+          </code>
+        </p>
+      </div>
+
+      <h3 class="title">Step 4: Start Using Tailwind</h3>
+      <p>
+        You can now use Tailwind CSS utility classes to style any component.
+      </p>
+      <div class="example">
+        <p>// app/page.tsx</p>
+        <p>
+          <code>
+            export default function Home() {<br>
+            &nbsp;&nbsp;return (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1 className="text-3xl font-bold overline" &gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome to My Next.js App<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/h1&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p className="text-base text-gray-700" &gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the home page.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+            &nbsp;&nbsp;);<br>
+            }
+          </code>
+        </p>
+      </div>
+
+      <h2 class="title">Next.js SASS Support</h2>
+      <p>
+        **SASS** is a CSS pre-processor. Next.js has **built-in support** for SASS after the package is installed, supporting both the **`.scss`** and **`.sass`** extensions.
+      </p>
+      <ul>
+        <li class="content">
+          You can use component-level SASS within CSS Modules by using the **`.module.scss`** or **`.module.sass`** extension.
+        </li>
+      </ul>
+
+      <h3 class="title">Install SASS</h3>
+      <p>Run the following code to install SASS:</p>
+      <div class="example">
+        <p><code>npm install --save-dev sass</code></p>
+      </div>
+
+      <h3 class="title">Customizing SASS Options</h3>
+      <p>
+        You can configure SASS options inside the **`next.config.ts`** file, for example, to set global variables or specify the implementation.
+      </p>
+      <div class="example">
+        <p>// ./next.config.ts (Example of additionalData)</p>
+        <p>
+          <code>
+            const nextConfig: NextConfig = {<br>
+            &nbsp;&nbsp;sassOptions: {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;additionalData: `$var: red;`,<br>
+            &nbsp;&nbsp;},<br>
+            }
+          </code>
+        </p>
+        <p>// Example of specifying implementation (optional)</p>
+        <p>
+          <code>
+            const nextConfig: NextConfig = {<br>
+            &nbsp;&nbsp;sassOptions: {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;implementation: 'sass-embedded', // Default is 'sass'<br>
+            &nbsp;&nbsp;},<br>
+            }
+          </code>
+        </p>
+      </div>
+
+      <h3 class="title example">Example of SASS in Next.js</h3>
+      <p>
+        SASS variables can be exported and imported into components, as shown below:
+      </p>
+      <div class="example">
+        <p>// app/variables.module.scss</p>
+        <p>
+          <code>
+            $primary-color: #64ff00;<br>
+            <br>
+            :export &#123;<br>
+            &nbsp;&nbsp;primaryColor: $primary-color;<br>
+            }<br>
+            <br>
+            // app/page.tsx<br>
+            import variables from './variables.module.scss'<br>
+            <br>
+            export default function Page() &#123;<br>
+            &nbsp;&nbsp;return &lt;h1 style=&#123;&#123; color: variables.primaryColor &#125;&#125;&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hello, Next.js!<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/h1&gt;<br>
+            }
+          </code>
+        </p>
+      </div>
+
+      <h2 class="title">Next.js CSS-in-JS</h2>
+      <p>
+        **CSS-in-JS** allows you to write styles directly in JavaScript, scoped to individual components. Next.js supports libraries like **styled-components**, **Emotion**, and its built-in **styled-jsx**.
+      </p>
+      <ul>
+        <li class="content">
+          **Note**: CSS-in-JS libraries which require runtime JavaScript are **not supported in Server Components**. It is recommended to use CSS-in-JS only in **Client Components** (by adding `'use client'`).
+        </li>
+      </ul>
+
+      <h3 class="title">Using Styled JSX</h3>
+      <p>
+        Next.js has built-in support for **styled-jsx**, allowing you to style components with scoped CSS without additional dependencies.
+      </p>
+      <div class="example">
+        <p>// /app/page.tsx</p>
+        <p>
+          <code>
+            'use client';<br>
+            <br>
+            export default function Home() &#123;<br>
+            &nbsp;&nbsp;return (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Hello, Next.js!&lt;/h1&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Welcome to CSS-in-JS.&lt;/p&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;style jsx&gt;&#123;`</p>
+            <p>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h1 &#123;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: green;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p &#123;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 18px;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: gray;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            </p>
+            <p>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`&#125;&lt;/style&gt;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+              &nbsp;&nbsp;);<br>
+              }
+            </p>
+          </code>
+        </p>
+      </div>
+
+      <h3 class="title">Using Styled Components</h3>
+      <p>
+        **Styled-components** is a popular third-party library. To use it, you must first install the package and the Babel plugin:
+      </p>
+      <div class="example">
+        <p><code>npm install styled-components</code></p>
+        <p><code>npm install --save-dev babel-plugin-styled-components</code></p>
+      </div>
+      <p>
+        After installation, you can use it to create styled components:
+      </p>
+      <div class="example">
+        <p>// /app/page.tsx</p>
+        <p>
+          <code>
+            'use client';<br>
+            import styled from 'styled-components';<br>
+            <br>
+            const Title = styled.h1` color: green; `; // Define a styled component<br>
+            const Paragraph = styled.p` font-size: 18px; color: gray; `; // Define another<br>
+            <br>
+            export default function Home() &#123;<br>
+            &nbsp;&nbsp;return (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Title&gt;Hello, Next.js!&lt;/Title&gt;  &lt;!-- Use the styled component --&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Paragraph&gt;Welcome to CSS-in-JS.&lt;/Paragraph&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+            &nbsp;&nbsp;);<br>
+            }
+          </code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

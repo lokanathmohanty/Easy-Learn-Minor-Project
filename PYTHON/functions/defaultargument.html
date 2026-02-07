@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Default Arguments</h1>
+    <div class="content">
+      <p>
+        Python allows us to assign a <strong>default value</strong> to one or more function parameters.  
+        If no value is provided for such an argument during a function call, the default value is used.  
+        If a value is passed, it overrides the default.
+      </p>
+
+      <h2>Example of Default Arguments</h2>
+      <pre><code># Function definition 
+def showinfo(name, city="Hyderabad"):
+    print("Name:", name)
+    print("City:", city)
+
+# Function calls
+showinfo(name="Ansh", city="Delhi")
+showinfo(name="Shrey")</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Name: Ansh
+City: Delhi
+Name: Shrey
+City: Hyderabad</code></pre>
+
+      <h2>Calling Function Without Keyword Arguments</h2>
+      <p>
+        Default arguments make it possible to skip passing values in function calls if they are optional.
+      </p>
+
+      <pre><code># Function definition 
+def percent(phy, maths, maxmarks=200):
+    val = (phy + maths) * 100 / maxmarks
+    return val
+
+# Function calls
+print("percentage:", percent(60, 70))      # uses default maxmarks=200
+print("percentage:", percent(40, 46, 100)) # overrides default</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>percentage: 65.0
+percentage: 86.0</code></pre>
+
+      <h2>⚠️ Mutable Objects as Default Arguments</h2>
+      <p>
+        Default arguments are evaluated <strong>only once</strong> when the function is defined, 
+        not each time it is called.  
+        If a <strong>mutable object</strong> (like a list or dictionary) is used as a default and modified, 
+        the change persists across function calls.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>def fcn(nums, numericlist=[]):
+    numericlist.append(nums + 1)
+    print(numericlist)
+
+# Function calls
+fcn(66)
+fcn(68)
+fcn(70)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>[67]
+[67, 69]
+[67, 69, 71]</code></pre>
+
+      <p>
+        ✅ To avoid this issue, always use <code>None</code> as the default for mutable arguments 
+        and initialize inside the function:
+      </p>
+
+      <pre><code>def fcn(nums, numericlist=None):
+    if numericlist is None:
+        numericlist = []
+    numericlist.append(nums + 1)
+    print(numericlist)
+
+fcn(66)
+fcn(68)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>[67]
+[69]</code></pre>
+    </div>
+  </div>
+</div>

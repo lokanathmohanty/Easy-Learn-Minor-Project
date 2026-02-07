@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Null Checking</h1>
+    <div class="content">
+
+      <p>
+        In JavaScript, the <code>null</code> value indicates the intentional absence of any object value.  
+        It is a primitive value that evaluates to <code>false</code> in Boolean operations.
+      </p>
+      <p>
+        This is different from <code>undefined</code>, which means a variable has been declared but has not been assigned a value.
+      </p>
+      <p>
+        Example: think of a box that is empty — it has <em>nothing</em> inside. That box is like a <code>null</code> variable in JavaScript.
+      </p>
+
+      <h2>Checking Null Values</h2>
+      <p>
+        We can check <code>null</code> values in JavaScript using different methods:
+      </p>
+      <ul>
+        <li>Using the Strict Equality Operator (<code>===</code>)</li>
+        <li>Using the <code>typeof</code> operator</li>
+        <li>Using <code>Object.is()</code> method</li>
+      </ul>
+
+      <h2>1. Using the Strict Equality Operator (<code>===</code>)</h2>
+      <p>
+        The strict equality operator checks both the value and the type.
+      </p>
+      <pre><code>var v = null;
+if (v === null) {
+   console.log("Value is null");
+} else {
+   console.log("Value is not null");
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>Value is null</code></pre>
+
+      <h2>2. Using the <code>typeof</code> Operator</h2>
+      <p>
+        The <code>typeof</code> operator checks the type of a variable.  
+        For <code>null</code>, it returns <code>"object"</code>.
+      </p>
+      <pre><code>var v = null;
+if (!v && typeof v === "object") {
+   console.log("Value is null");
+} else {
+   console.log("Value is not null");
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>Value is null</code></pre>
+
+      <h2>3. Using <code>Object.is()</code> Method</h2>
+      <p>
+        The <code>Object.is()</code> method compares two values and returns <code>true</code> if they are the same.
+      </p>
+      <pre><code>var v = null;
+if (Object.is(v, null)) {
+   console.log("Value is null");
+} else {
+   console.log("Value is not null");
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>Value is null</code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        We can check for <code>null</code> values in JavaScript using:
+      </p>
+      <ul>
+        <li><code>===</code> (strict equality operator)</li>
+        <li><code>typeof</code> (type checking)</li>
+        <li><code>Object.is()</code> (value comparison)</li>
+      </ul>
+      <p>
+        Each method confirms whether a variable contains a <code>null</code> value.
+      </p>
+
+    </div>
+  </div>
+</div>

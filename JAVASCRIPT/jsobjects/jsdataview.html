@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - DataView</h1>
+
+    <div class="content">
+      <p>
+        The <strong>DataView</strong> is an object in JavaScript that allows you to work with the binary data stored in the <strong>ArrayBuffer</strong>. It provides a low-level interface for reading and writing number types in a binary ArrayBuffer.
+      </p>
+      <p>
+        The DataView object provides built-in methods for reading and writing 1, 2, and 4-byte signed and unsigned integers, as well as 4 and 8-byte floating-point numbers from the buffer.
+      </p>
+      <p>
+        An ArrayBuffer is an array of bytes, usually referred to in other languages as a "byte array". You cannot directly manipulate the data of an ArrayBuffer like a regular array. Using the ArrayBuffer you can create a DataView object, which represents the buffer in a specific format. You can use the DataView object to read from and write to the contents of the buffer.
+      </p>
+    </div>
+
+    <h2 class="title">Syntax</h2>
+    <div class="content">
+      <p>Following is the syntax to create a DataView object in JavaScript −</p>
+      <pre><code>new DataView(buffer, byteOffset, byteLength)</code></pre>
+      <p>
+        Here, the <em>buffer</em> is an existing ArrayBuffer used for storage.  
+        The <em>byteOffset</em> parameter (optional) represents the offset in bytes to the first byte in the buffer.  
+        The <em>byteLength</em> parameter (optional) represents the number of elements in the byte array.
+      </p>
+    </div>
+
+    <h2 class="title">Example: Creating a DataView Object</h2>
+    <div class="content">
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+&lt;script&gt;
+   const buffer = new ArrayBuffer(16);
+   // creating dataview object
+   const data_view = new DataView(buffer);
+   document.write("The type of data_view is: " + typeof(data_view));
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <p>The type of data_view is: object</p>
+    </div>
+
+    <h2 class="title">JavaScript DataView Properties</h2>
+    <div class="content">
+      <ul>
+        <li><strong>buffer</strong> − Returns the ArrayBuffer or SharedArrayBuffer.</li>
+        <li><strong>byteLength</strong> − Returns the length (in bytes) of this view.</li>
+        <li><strong>byteOffset</strong> − Returns the offset (in bytes) of this view from the start of its ArrayBuffer or SharedArrayBuffer.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">JavaScript DataView Methods</h2>
+    <div class="content">
+      <p>Following are the methods of the JavaScript DataView object −</p>
+      <ul>
+        <li><strong>getBigInt64()</strong> − Returns a BigInt from the range of -2<sup>63</sup> to 2<sup>63</sup>-1.</li>
+        <li><strong>getBigUint64()</strong> − Returns a BigInt from the range of 0 to 2<sup>64</sup>-1.</li>
+        <li><strong>getFloat32()</strong> − Returns a floating point number from -3.4e38 to 3.4e38.</li>
+        <li><strong>getFloat64()</strong> − Returns any number value.</li>
+        <li><strong>getInt16()</strong> − Returns an integer from -32768 to 32767.</li>
+        <li><strong>getInt32()</strong> − Returns an integer from -2147483648 to 2147483647.</li>
+        <li><strong>getInt8()</strong> − Returns an integer from -128 to 127.</li>
+        <li><strong>getUint16()</strong> − Returns an integer from 0 to 65535.</li>
+        <li><strong>getUint32()</strong> − Returns an integer from 0 to 4294967295.</li>
+        <li><strong>getUint8()</strong> − Returns an integer from 0 to 255.</li>
+        <li><strong>setBigInt64()</strong> − Returns undefined.</li>
+        <li><strong>setBigUint64()</strong> − Returns undefined.</li>
+        <li><strong>setFloat32()</strong> − Returns undefined.</li>
+        <li><strong>setFloat64()</strong> − Returns undefined.</li>
+        <li><strong>setInt16()</strong> − Returns undefined.</li>
+        <li><strong>setInt32()</strong> − Returns undefined.</li>
+        <li><strong>setInt8()</strong> − Returns undefined.</li>
+        <li><strong>setUint16()</strong> − Returns undefined.</li>
+        <li><strong>setUint32()</strong> − Returns undefined.</li>
+        <li><strong>setUint8()</strong> − Returns undefined.</li>
+      </ul>
+    </div>
+  </div>
+</div>

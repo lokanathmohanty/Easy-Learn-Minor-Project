@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Strings</h1>
+        
+        <h2 class="title">Introduction to Strings</h2>
+        <div class="content">
+            <p>In C#, a **string** is a sequence of characters. The <code>string</code> keyword is an alias for the <code>System.String</code> class, which is a **reference type**. Unlike arrays of characters, the <code>String</code> class provides a rich set of features for manipulation and comparison.</p>
+            <p>Strings in C# are **immutable**, meaning once a string object is created, its value cannot be changed. Any operation that appears to modify a string (like concatenation or replacement) actually creates a **new** string object in memory.</p>
+        </div>
+        
+        <h2 class="title">Creating a String Object</h2>
+        <div class="content">
+            <p>A string object can be created in several ways:</p>
+            <ul>
+                <li><strong>Using a literal:</strong> The most common method. <code>string message = "Hello, C#!";</code></li>
+                <li><strong>Concatenation:</strong> Using the <code>+</code> operator. <code>string fullname = fname + " " + lname;</code></li>
+                <li><strong>From a character array:</strong> Using the <code>String</code> class constructor. <code>string greetings = new string(letters);</code></li>
+                <li><strong>Formatting:</strong> Using <code>String.Format()</code> or interpolation to convert values/objects to their string representation.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Common String Operations</h2>
+        <div class="content">
+            <h3>1. Finding Length</h3>
+            <p>Use the read-only **`Length`** property to get the number of characters in the string.</p>
+            <pre>
+string str = "C# Programming";
+int length = str.Length; // length is 14
+            </pre>
+            
+            <h3>2. Iterating Characters</h3>
+            <p>Strings can be treated like arrays of characters, allowing iteration using a `foreach` loop.</p>
+            <pre>
+string str = "C# by TP";
+foreach (char ch in str) {
+   Console.WriteLine(ch); // Prints each character on a new line
+}
+            </pre>
+
+            <h3>3. Comparing Strings</h3>
+            <p>Use the static **`String.Compare()`** method or the equality operator (`==`) to check if two strings are equal or to determine their relative order.</p>
+            <pre>
+string str1 = "Hello";
+string str2 = "World";
+if (String.Compare(str1, str2) == 0) {
+   // Strings are equal
+}
+            </pre>
+            
+            <h3>4. Substring and Checking Content</h3>
+            <ul>
+                <li>**`Contains()`:** Checks if a string includes a specified substring.</li>
+                <li>**`Substring()`:** Extracts a part of the string starting at a specified index (zero-based).</li>
+            </ul>
+            <pre>
+string str = "C# Programming Language";
+string substr = str.Substring(3, 11); // Starts at index 3, takes 11 chars
+// substr is "Programming"
+            </pre>
+            
+            <h3>5. Joining Strings</h3>
+            <p>The static **`String.Join()`** method concatenates the elements of a string array using a specified separator.</p>
+            <pre>
+string[] lines = { "C# is modern", "Object-oriented" };
+string result = String.Join("\n", lines);
+// result will include a newline between the elements
+            </pre>
+        </div>
+        
+        <h2 class="title">Handling Mutable Strings with `StringBuilder`</h2>
+        <div class="content">
+            <p>Since `string` objects are immutable, repeated modifications (like appending text in a loop) create many temporary string objects, which can be inefficient.</p>
+            <p>The **`System.Text.StringBuilder`** class is used when you need to perform extensive, efficient modifications (appending, inserting, replacing) to a string without generating new memory allocations for every change.</p>
+            <pre>
+using System.Text;
+StringBuilder sb = new StringBuilder("Hello");
+sb.Append(" World!");
+sb.Insert(6, "C# ");
+sb.Replace("World", "Everyone");
+// sb.ToString() returns "Hello C# Everyone!"
+            </pre>
+        </div>
+        
+        <h2 class="title">Common String Class Methods</h2>
+        <div class="content">
+            <p>The <code>String</code> class offers many powerful methods for manipulation:</p>
+            <ul>
+                <li><strong>`Trim()`:</strong> Removes all leading and trailing white-space characters.</li>
+                <li><strong>`ToUpper()` / `ToLower()`:</strong> Converts the entire string to uppercase or lowercase.</li>
+                <li><strong>`Replace()`:</strong> Replaces all occurrences of a specified substring with another.</li>
+                <li><strong>`Split()`:</strong> Splits the string into an array of substrings based on specified delimiters.</li>
+                <li><strong>`IsNullOrEmpty()` / `IsNullOrWhiteSpace()`:</strong> Essential for input validation and checking if a string is empty or contains only whitespace.</li>
+            </ul>
+        </div>
+    </div>
+</div>s

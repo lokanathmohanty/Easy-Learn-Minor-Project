@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - File System</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        The Node.js <code>fs</code> module allows interacting with the file system to perform operations like reading, writing, and managing files and directories. It supports both synchronous and asynchronous methods for efficient handling.
+      </p>
+      
+      <h2>Basic File Operations</h2>
+      <h3>Writing to a File</h3>
+      <pre><code>const fs = require('fs');
+const data = `Tutorials Point is giving self learning content
+to teach the world in simple and easy way!!!!!`;
+
+// Synchronous write
+fs.writeFileSync("input.txt", data);
+
+// Asynchronous write
+fs.writeFile("input.txt", data, (err) => {
+  if (err) console.error(err);
+  else console.log("Write operation complete.");
+});
+</code></pre>
+      
+      <h3>Reading from a File</h3>
+      <pre><code>const fs = require('fs');
+
+// Synchronous read
+const data = fs.readFileSync("input.txt");
+console.log(data.toString());
+
+// Asynchronous read
+fs.readFile("input.txt", (err, data) => {
+  if (err) console.error(err);
+  else console.log(data.toString());
+});
+</code></pre>
+
+      <h2>Working with File Descriptors</h2>
+      <p>Open a file, write data, read data and close it:</p>
+      <pre><code>const fs = require('fs');
+const content = "Sample content for file.";
+
+// Open file for writing
+fs.open('input.txt', 'w', (err, fd) => {
+  if (err) throw err;
+
+  fs.write(fd, content, (err) => {
+    if (err) throw err;
+
+    fs.close(fd, (err) => {
+      if (err) throw err;
+      console.log("File written and closed successfully.");
+    });
+  });
+});
+</code></pre>
+
+      <h2>Modifying Files</h2>
+      <p>Truncate file content to a specific length:</p>
+      <pre><code>fs.open('input.txt', 'r+', (err, fd) => {
+  if (err) throw err;
+
+  fs.ftruncate(fd, 10, (err) => {
+    if (err) throw err;
+
+    console.log("File truncated to 10 bytes.");
+
+    fs.close(fd, (err) => {
+      if (err) throw err;
+      console.log("File closed.");
+    });
+  });
+});
+</code></pre>
+
+      <h2>File and Directory Management</h2>
+      <h3>Deleting a File</h3>
+      <pre><code>fs.unlink('input.txt', (err) => {
+  if (err) console.error(err);
+  else console.log("File deleted successfully.");
+});
+</code></pre>
+
+      <h3>Creating a Directory</h3>
+      <pre><code>fs.mkdir('testDir', (err) => {
+  if (err) console.error(err);
+  else console.log("Directory created.");
+});
+</code></pre>
+
+      <h3>Reading a Directory</h3>
+      <pre><code>fs.readdir('.', (err, files) => {
+  if (err) console.error(err);
+  else files.forEach(file => console.log(file));
+});
+</code></pre>
+
+      <h3>Removing a Directory</h3>
+      <pre><code>fs.rmdir('testDir', (err) => {
+  if (err) console.error(err);
+  else console.log("Directory removed.");
+});
+</code></pre>
+
+      <h2>Using the fs.stat() method</h2>
+      <pre><code>fs.stat('input.txt', (err, stats) => {
+  if (err) console.error(err);
+  else {
+    console.log(stats);
+    console.log("Is File? " + stats.isFile());
+    console.log("Is Directory? " + stats.isDirectory());
+  }
+});
+</code></pre>
+
+      <h2>Notes</h2>
+      <ul>
+        <li>Asynchronous methods are preferred for non-blocking operations.</li>
+        <li>File descriptors are unique integers returned from <code>fs.open()</code> and used for read/write operations.</li>
+        <li>Remember to close files after operations using <code>fs.close()</code> to free up resources.</li>
+      </ul>
+    </div>
+  </div>
+</div>

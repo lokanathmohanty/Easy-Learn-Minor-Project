@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Database Access</h1>
+    </div>
+    <div class="content">
+      <p>Database access in Python enables applications to store, retrieve, update, and manage persistent data. Python supports various databases using specific packages.</p>
+      <p>Popular databases include SQLite, MySQL, PostgreSQL, Oracle, Microsoft SQL Server, and more.</p>
+      <p>Python uses the standardized DB-API (PEP 249) for database connectivity, making it easier to switch between databases.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>SQLite Database with Python</h2>
+    </div>
+    <div class="content">
+      <p>SQLite is a file-based, serverless relational database supported via the built-in <code>sqlite3</code> module.</p>
+      <p>Steps to work with SQLite:</p>
+      <ol>
+        <li>Create a connection with <code>sqlite3.connect()</code>.</li>
+        <li>Create a cursor to execute SQL statements.</li>
+        <li>Execute SQL commands and commit transactions.</li>
+        <li>Close the connection after work is finished.</li>
+      </ol>
+      <pre><code>import sqlite3
+conn = sqlite3.connect('testdb.sqlite3')
+cur = conn.cursor()
+# Create table
+cur.execute('''CREATE TABLE Employee (
+    EmpID INTEGER PRIMARY KEY AUTOINCREMENT,
+    FIRST_NAME TEXT,
+    LAST_NAME TEXT,
+    AGE INTEGER,
+    SEX TEXT,
+    INCOME FLOAT)''')
+conn.commit()
+conn.close()</code></pre>
+      <p>Schema created successfully.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>CRUD Operations</h2>
+    </div>
+    <div class="content">
+      <h3>Insert Data</h3>
+      <pre><code>cur.execute("INSERT INTO Employee (FIRST_NAME, LAST_NAME, AGE, SEX, INCOME) VALUES (?, ?, ?, ?, ?)",
+            ('Mac', 'Mohan', 20, 'M', 2000))
+conn.commit()</code></pre>
+
+      <h3>Read Data</h3>
+      <pre><code>cur.execute("SELECT * FROM Employee")
+rows = cur.fetchall()
+for row in rows:
+    print(row)</code></pre>
+
+      <h3>Update Data</h3>
+      <pre><code>cur.execute("UPDATE Employee SET INCOME = INCOME + 1000 WHERE INCOME = ?", (2000,))
+conn.commit()</code></pre>
+
+      <h3>Delete Data</h3>
+      <pre><code>cur.execute("DELETE FROM Employee WHERE INCOME < ?", (3000,))
+conn.commit()</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Transaction Management</h2>
+    </div>
+    <div class="content">
+      <p>Transactions ensure consistency with four properties: Atomicity, Consistency, Isolation, Durability (ACID).</p>
+      <p>Use <code>conn.commit()</code> to save changes and <code>conn.rollback()</code> to revert.</p>
+      <pre><code>try:
+    cur.execute("DELETE FROM Employee WHERE AGE > ?", (20,))
+    conn.commit()
+except:
+    conn.rollback()</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Connecting to MySQL with PyMySQL</h2>
+    </div>
+    <div class="content">
+      <p>PyMySQL is a pure Python MySQL client following DB-API standard.</p>
+      <p>To install:</p>
+      <pre><code>pip install pymysql</code></pre>
+      <p>To connect:</p>
+      <pre><code>import pymysql
+db = pymysql.connect(
+    host="localhost",
+    user="testuser",
+    password="test123",
+    database="TESTDB")</code></pre>
+      <p>Then use cursor() and execute queries similarly to sqlite3.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Error Handling</h2>
+    </div>
+    <div class="content">
+      <p>DB-API implementations provide standardized exceptions:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Exception</th><th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Warning</td><td>Non-fatal issues</td></tr>
+          <tr><td>Error</td><td>Base for all database errors</td></tr>
+          <tr><td>InterfaceError</td><td>Errors in the interface</td></tr>
+          <tr><td>DatabaseError</td><td>Database-related errors</td></tr>
+          <tr><td>DataError</td><td>Errors related to data</td></tr>
+          <tr><td>OperationalError</td><td>Operational errors like connection failures</td></tr>
+          <tr><td>IntegrityError</td><td>Constraint violations</td></tr>
+          <tr><td>InternalError</td><td>Internal database errors</td></tr>
+          <tr><td>ProgrammingError</td><td>Programming mistakes</td></tr>
+          <tr><td>NotSupportedError</td><td>Unsupported operations</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Routing: App Router vs. Page Router 🧭</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Routing in Next.js?</h2>
+            <p>**Routing** is the mechanism that determines how an application navigates between different URLs. Next.js includes a **built-in, file-system based router**, meaning you don't need external routing libraries. The structure of your files and folders inside a specific root directory defines the application's URL paths.</p>
+            <ul>
+                <li>**Folders:** Define a route segment (a path).</li>
+                <li>**Files (e.g., `page.js`):** Define the UI component rendered for that specific route.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Types of Routing Systems in Next.js</h2>
+            <p>When creating a project, you choose one of two routing systems:</p>
+            
+            <h3 class="title">1. App Router (Current Standard, from v13+)</h3>
+            <p>This is the **new, recommended** routing system, built on **React Server Components**. It uses the **<span class="example">`/app`</span>** directory.</p>
+            <ul>
+                <li>**Basic Route:** <span class="example">`app/about/page.tsx`</span> maps to <span class="example">`/about`</span>.</li>
+                <li>**Shared Layouts:** Uses special files like <span class="example">`layout.js`</span> (or <span class="example">`layout.tsx`</span>) to define persistent UI across routes.</li>
+                <li>**Nested Routing:** Achieved naturally by creating nested folders (e.g., <span class="example">`app/dashboard/[id]/page.js`</span>).</li>
+                <li>**Special Files:** Supports dedicated files for loading states (<span class="example">`loading.js`</span>) and error handling (<span class="example">`error.js`</span>).</li>
+            </ul>
+            
+            <h3 class="title">2. Page Router (Legacy)</h3>
+            <p>This is the older system used in Next.js versions before 13. It uses the **<span class="example">`/pages`</span>** directory.</p>
+            <ul>
+                <li>**Basic Route:** <span class="example">`pages/about.js`</span> (or <span class="example">`pages/about/index.js`</span>) maps to <span class="example">`/about`</span>.</li>
+                <li>**File-to-Route Mapping:** Any file inside the <span class="example">`/pages`</span> directory automatically becomes a route.</li>
+                <li>**API Routes:** Defined strictly within the **<span class="example">`pages/api`</span>** directory.</li>
+                <li>**Dynamic Routes:** Uses square brackets in filenames, e.g., <span class="example">`pages/product/[id].js`</span>.</li>
+            </ul>
+        </div>
+    </div>
+</div>

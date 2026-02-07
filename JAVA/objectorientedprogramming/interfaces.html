@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Interfaces</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Abstraction and Contracts</h1>
+            <h2 class="subtitle">Session: Interfaces</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is a Java Interface?</h2>
+                <p>A Java **Interface** is a blueprint or a contract that defines a set of behaviors that any class implementing it must adhere to. It is primarily a collection of **abstract methods** used to achieve **100% abstraction**.</p>
+                <p>An interface is a **reference type** and is similar to a class but with strict restrictions:</p>
+                <ul>
+                    <li>You **cannot instantiate** an interface.</li>
+                    <li>Methods are implicitly **<code>public</code>** and **<code>abstract</code>** (no body), unless declared as **<code>default</code>** or **<code>static</code>**.</li>
+                    <li>Fields are implicitly **<code>public</code>**, **<code>static</code>**, and **<code>final</code>** (constants).</li>
+                </ul>
+            </div>
+
+            <div class="content implementation">
+                <h2 class="subtitle">Implementing Interfaces with <code>implements</code></h2>
+                <p>A class uses the **<code>implements</code>** keyword to adopt an interface. By implementing an interface, the class signs a contract to provide a concrete definition (body) for every abstract method declared in that interface (unless the class itself is declared <code>abstract</code>).</p>
+                <pre><code>interface Animal {
+   void eat(); // implicitly public abstract
+}
+
+public class MammalInt implements Animal {
+   // Must provide implementation for all abstract methods
+   public void eat() {
+      System.out.println("Mammal eats");
+   }
+}</code></pre>
+            </div>
+
+            <div class="content rules">
+                <h2 class="subtitle">Key Rules for Interfaces and Inheritance</h2>
+                <ul>
+                    <li>**Class-Interface Relationship:** A class **<code>implements</code>** an interface. A class can implement **multiple interfaces** (solving the multiple inheritance problem for behavior).</li>
+                    <li>**Interface-Interface Relationship:** An interface **<code>extends</code>** another interface. An interface can extend **multiple parent interfaces**.</li>
+                    <li>**Overriding Methods:** When implementing interface methods, the overriding method must maintain the exact same signature and cannot have a more restrictive access level (they must be <code>public</code>).</li>
+                </ul>
+            </div>
+
+            <div class="content extending">
+                <h2 class="subtitle">Extending Multiple Interfaces</h2>
+                <p>Java supports a single class extending one class but allows it to implement multiple interfaces, or for one interface to extend multiple interfaces:</p>
+                <pre><code>// Interface extends multiple parent interfaces
+public interface Hockey extends Sports, Event { ... }
+
+// Class implements multiple interfaces
+public class HockeyDemo implements Hockey, Event {
+    // Must implement all methods from Hockey AND Event
+}</code></pre>
+            </div>
+
+            <div class="content tagging">
+                <h2 class="subtitle">Tagging Interfaces (Marker Interfaces)</h2>
+                <p>A **Tagging Interface** (or Marker Interface) is an interface that contains **no methods** (e.g., <code>java.util.EventListener</code>). Its purpose is solely to:</p>
+                <ol>
+                    <li>**Create a Common Parent:** Establish a common base type for a group of related interfaces or classes.</li>
+                    <li>**Add a Data Type:** Allow a class implementing it to be identified as a specific type at runtime (via polymorphism and the <code>instanceof</code> operator), allowing the JVM or other code to apply special handling (e.g., Serialization, Cloning).</li>
+                </ol>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

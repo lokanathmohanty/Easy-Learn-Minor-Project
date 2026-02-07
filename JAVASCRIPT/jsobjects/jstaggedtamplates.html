@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Tagged Templates</h1>
+    <div class="content">
+      <p>
+        The tagged templates in JavaScript are an advanced version of template literals. 
+        You can define a function to format a string and use it with a template literal, 
+        so the string is formatted according to the logic of the function.
+      </p>
+      <p>
+        The tagged template is used with a template literal by calling only the function name, 
+        without parentheses.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre><code>
+function format(str, exp1, exp2, ...expN) {
+    // Format the string
+}
+
+let res = format`${exp1} abcd ${exp2}`;
+      </code></pre>
+      <p>
+        The <code>format()</code> function acts as a template tag. It takes multiple parameters:
+      </p>
+      <ul>
+        <li><strong>str</strong> − An array of string literals.</li>
+        <li><strong>exp1, exp2, ...expN</strong> − The expressions inside the template literal.</li>
+      </ul>
+
+      <h2>Examples</h2>
+
+      <h3>Basic Tagged Template</h3>
+      <pre><code>
+function format(str) {
+   return str.join("").toUpperCase();
+}
+let res = format`Hi How are you?`;
+      </code></pre>
+      <p><strong>Output:</strong> HI HOW ARE YOU?</p>
+
+      <h3>Expression with Tagged Templates</h3>
+      <pre><code>
+function format(str, name) {
+   return str.join(" ") + name;
+}
+let name = "John";
+let res = format`Hi ${name}, How are you?`;
+      </code></pre>
+      <p><strong>Output:</strong> Hi , How are you?John</p>
+
+      <h3>Using Rest Parameter</h3>
+      <p>
+        You can also use the rest parameter (<code>...values</code>) to collect all expressions into a single array.
+      </p>
+      <pre><code>
+function format(str, ...values) {
+   console.log(values);
+   return str.join(" ") + values[1];
+}
+const price = 100;
+let name = "John";
+const res = format`Hi,${name} The price is ${price}`;
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>John,100</li>
+        <li>Hi, The price is 100</li>
+      </ul>
+    </div>
+  </div>
+</div>

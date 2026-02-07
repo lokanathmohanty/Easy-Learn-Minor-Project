@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="session">
+
+    <div class="title">
+      <h1>NumPy Splitting Array</h1>
+      <h2>Splitting NumPy Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>Splitting is the reverse operation of joining.</p>
+      <p>Joining merges multiple arrays into one, while splitting breaks one array into multiple.</p>
+      <p>Use <code>array_split()</code> to split arrays by passing the array and number of splits.</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6])
+newarr = np.array_split(arr, 3)
+print(newarr)</code></pre>
+
+      <p>Note: The return value is a list containing three arrays.</p>
+      <p>If the array has fewer elements than required, it will adjust splits accordingly.</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6])
+newarr = np.array_split(arr, 4)
+print(newarr)</code></pre>
+
+      <p>Note: <code>split()</code> is also available but does not adjust when elements are fewer, unlike <code>array_split()</code>.</p>
+    </div>
+
+    <div class="title">
+      <h2>Split Into Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>The return value of <code>array_split()</code> is a list of arrays. You can access each split like elements of a list.</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6])
+newarr = np.array_split(arr, 3)
+
+print(newarr[0])
+print(newarr[1])
+print(newarr[2])</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>Splitting 2-D Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>Use the same syntax to split 2-D arrays.</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11, 12]])
+newarr = np.array_split(arr, 3)
+print(newarr)</code></pre>
+
+      <p>This returns three 2-D arrays.</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15], [16, 17, 18]])
+newarr = np.array_split(arr, 3)
+print(newarr)</code></pre>
+
+      <p>You can also specify the axis to split along. The example below splits along columns (axis=1):</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15], [16, 17, 18]])
+newarr = np.array_split(arr, 3, axis=1)
+print(newarr)</code></pre>
+
+      <p>An alternate solution is using <code>hsplit()</code>, which splits along columns (horizontal split):</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15], [16, 17, 18]])
+newarr = np.hsplit(arr, 3)
+print(newarr)</code></pre>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Signal Handling</h1>
+    </div>
+    <div class="content">
+      <p>
+        Signal handling in Python allows defining custom handlers for asynchronous events such as keyboard interrupts, alarms, and termination requests. Using the <code>signal</code> module, you can control how your program responds to various signals.
+      </p>
+      <p>
+        A signal handler is a function executed when a specific signal is received. The <code>signal.signal()</code> function associates signals with handlers.
+      </p>
+      <p>
+        Some default handlers include:<br>
+        SIGPIPE is ignored.<br>
+        SIGINT triggers a KeyboardInterrupt exception.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Common Signals</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><code>SIGINT:</code> Interrupt from keyboard (Ctrl+C) raises KeyboardInterrupt.</li>
+        <li><code>SIGTERM:</code> Termination signal.</li>
+        <li><code>SIGALRM:</code> Timer signal from <code>alarm()</code>.</li>
+        <li><code>SIGCHLD:</code> Child process stopped or terminated.</li>
+        <li><code>SIGUSR1</code> and <code>SIGUSR2:</code> User-defined signals.</li>
+      </ul>
+      <p>
+        Signal handlers execute in the main thread; signals cannot be used for inter-thread communication.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Setting a Signal Handler</h2>
+    </div>
+    <div class="content">
+      <pre>
+import signal
+import time
+
+def handle_signal(signum, frame):
+   print(f"Signal {signum} received")
+
+signal.signal(signal.SIGINT, handle_signal)
+
+print("Press Ctrl+C to trigger SIGINT")
+while True:
+   time.sleep(1)
+      </pre>
+      <p>Output example:</p>
+      <pre>
+Press Ctrl+C to trigger SIGINT
+Signal 2 received
+Signal 2 received
+Signal 2 received
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Signal Handling on Windows</h2>
+    </div>
+    <div class="content">
+      <p>
+        On Windows, <code>signal.signal()</code> supports limited signals. Unsupported signals raise <code>ValueError</code>, and unknown signal names raise <code>AttributeError</code>.
+      </p>
+      <p>Supported signals include:</p>
+      <ul>
+        <li>SIGABRT</li>
+        <li>SIGFPE</li>
+        <li>SIGILL</li>
+        <li>SIGINT</li>
+        <li>SIGSEGV</li>
+        <li>SIGTERM</li>
+        <li>SIGBREAK</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Handling Timers and Alarms</h2>
+    </div>
+    <div class="content">
+      <pre>
+import signal
+import time
+
+def handler(signum, stack):
+   print('Alarm: ', time.ctime())
+
+signal.signal(signal.SIGALRM, handler)
+signal.alarm(2)
+time.sleep(5)
+for i in range(5):
+   signal.alarm(2)
+   time.sleep(5)
+   print("interrupted #%d" % i)
+      </pre>
+      <p>Output example:</p>
+      <pre>
+Alarm:  Wed Jul 17 17:30:11 2024
+Alarm:  Wed Jul 17 17:30:16 2024
+interrupted #0
+Alarm:  Wed Jul 17 17:30:21 2024
+interrupted #1
+Alarm:  Wed Jul 17 17:30:26 2024
+interrupted #2
+Alarm:  Wed Jul 17 17:30:31 2024
+interrupted #3
+Alarm:  Wed Jul 17 17:30:36 2024
+interrupted #4
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Getting Signal Names from Numbers</h2>
+    </div>
+    <div class="content">
+      <p>
+        Python does not provide a direct way to get signal names from numbers, but you can reverse the <code>signal</code> module attributes into a dictionary to map numbers to names.
+      </p>
+      <pre>
+import signal
+
+sig_items = reversed(sorted(signal.__dict__.items()))
+final = dict((k, v) for v, k in sig_items if v.startswith('SIG') and not v.startswith('SIG_'))
+print(final)
+      </pre>
+      <p>Output example:</p>
+      <pre>
+{<Signals.SIGXFSZ: 25>: 'SIGXFSZ', <Signals.SIGXCPU: 24>: 'SIGXCPU', <Signals.SIGWINCH: 28>: 'SIGWINCH', ...}
+      </pre>
+    </div>
+  </div>
+
+   
+    </div>
+  </div>
+</div>

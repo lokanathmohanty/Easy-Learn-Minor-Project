@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - AJAX Auto Complete Search (Live Search)</h1>
+
+        <div class="content">
+            <h2 class="title">The Autocomplete Feature (Typeahead)</h2>
+            <p>The **Autocomplete** or **Live Search** feature provides input suggestions to the user as they type, creating a dynamic and efficient search experience. This implementation uses **AJAX** to send keystrokes to a **PHP** script, which then searches a server-side **XML document** and returns matching results.</p>
+
+            <h3 class="title">Data Source: $\text{autocomplete.xml}$</h3>
+            <p>The suggestions are sourced from an XML file structured with multiple $\text{<link>}$ elements. Each $\text{<link>}$ contains a $\text{<title>}$ (the course name) and a $\text{<url>}$ (the destination link).</p>
+            <pre>
+...
+&lt;link&gt;
+   &lt;title&gt;Java&lt;/title&gt;
+   &lt;url&gt;.../java/index.htm&lt;/url&gt;
+&lt;/link&gt;
+...</pre>
+
+            <h3 class="title">Client-Side Logic ($\text{index.php}$)</h3>
+            <p>The $\text{index.php}$ script contains the HTML form and the **$\text{showResult()}$** JavaScript function, which is triggered by the $\text{onkeyup}$ event of the input field. This function:</p>
+            <ul>
+                <li>Clears the display area ($\text{\div id="livesearch"}$) if the input string ($\text{str}$) is empty.</li>
+                <li>Uses **$\text{XMLHttpRequest}$** to send the input value via a $\text{GET}$ request to $\text{livesearch.php?q=...}$.</li>
+                <li>Asynchronously waits for the $\text{status} = 200$ response.</li>
+                <li>Updates the $\text{\div id="livesearch"}$ with the response text ($\text{xmlhttp.responseText}$) and adds a border style to the container.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: XML Parser in PHP ($\text{livesearch.php}$)</h2>
+
+            <h3>Server-Side Search Logic</h3>
+            <p>The PHP script is responsible for reading the XML, filtering results based on the query, and formatting the output.</p>
+            <ol>
+                <li><strong>Load XML:</strong> The script loads the $\text{autocomplete.xml}$ file into a $\text{DOMDocument}$ object: $\text{\$xml\_doc->load('autocomplete.xml')}$.</li>
+                <li><strong>Extract Query:</strong> Retrieves the user input from the $\text{GET}$ request: $\text{\$q = \$_GET['q']}$.</li>
+                <li><strong>Iterate and Search:</strong> It retrieves all $\text{<link>}$ nodes ($\text{\$x}$) and iterates through them. The search uses **$\text{stripos()}$** (case-insensitive find) to check if the query string ($\text{\$q}$) exists anywhere within the concatenated node values ($\text{title}$ and $\text{url}$), a simple but effective matching technique.</li>
+                <li><strong>Build Response:</strong> All matching links' full node values are concatenated into the $\text{\$result}$ string.</li>
+                <li><strong>Output:</strong> If $\text{\$result}$ is empty, it outputs "$\text{No records found.}$"; otherwise, it $\text{echo}$s the accumulated matching links back to the client.</li>
+            </ol>
+            <pre>
+&lt;?php
+   $xml_doc = new DOMDocument();
+   $xml_doc->load('autocomplete.xml');
+
+   $x=$xml_doc->getElementsByTagName('link');
+   $q = $_GET['q'];
+   $result = '';
+
+   foreach($x as $node) {
+      // Check if the query 'q' is found case-insensitively within the combined text of the link node
+      if (stripos("{$node->nodeValue}", $q) !== false) {
+         // Appending the raw nodeValue (which includes both title and url)
+         $result .= "{$node->nodeValue}&lt;br /&gt;"; 
+      }
+   }
+
+   if ($result == '')
+      $result = 'No records found.';
+
+   echo $result;
+?&gt;</pre>
+        </div>
+    </div>
+</div>

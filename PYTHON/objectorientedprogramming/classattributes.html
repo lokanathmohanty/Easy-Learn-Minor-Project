@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Class Attributes</h1>
+    <div class="content">
+      <p>Attributes are properties or variables defined inside a class. They provide information about the data a class contains. There are two types of attributes in Python: <strong>instance attributes</strong> and <strong>class attributes</strong>.</p>
+
+      <h2 class="title">Class Attributes (Variables)</h2>
+      <p>Class attributes belong to the class itself and are shared by all instances of the class. They are defined inside the class but outside any method, typically outside the <code>__init__()</code> constructor. Class attributes can be accessed using the class name or objects.</p>
+
+      <h3 class="title">Example: Accessing Class Attributes</h3>
+      <pre><code>class Employee:
+    name = "Bhavesh Aggarwal"
+    age = "30"
+
+emp = Employee()
+print("Name of the Employee:", emp.name)
+print("Age of the Employee:", emp.age)
+</code></pre>
+      <p>Output:<br>Name of the Employee: Bhavesh Aggarwal<br>Age of the Employee: 30</p>
+
+      <h2 class="title">Modifying Class Attributes</h2>
+      <p>You can modify a class attribute by assigning a new value using the class name and dot notation. For example, incrementing a count of employees:</p>
+      <pre><code>class Employee:
+    empCount = 0
+
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+        Employee.empCount += 1
+        print("Name:", self.__name, ", Age: ", self.__age)
+        print("Employee Count:", Employee.empCount)
+
+e1 = Employee("Bhavana", 24)
+print()
+e2 = Employee("Rajesh", 26)
+</code></pre>
+      <p>Output:<br>Name: Bhavana , Age:  24<br>Employee Count: 1<br><br>Name: Rajesh , Age:  26<br>Employee Count: 2</p>
+
+      <h2 class="title">Significance of Class Attributes</h2>
+      <ul>
+        <li>Define properties that should have the same value for all objects.</li>
+        <li>Set default values for instances.</li>
+        <li>Useful for creating singletons used across code.</li>
+      </ul>
+
+      <h2 class="title">Built-in Class Attributes</h2>
+      <p>Python classes also have built-in attributes accessible via dot notation:</p>
+      <ul>
+        <li><code>__dict__</code>: Dictionary containing the class namespace.</li>
+        <li><code>__doc__</code>: Class documentation string or None if undefined.</li>
+        <li><code>__name__</code>: Class name.</li>
+        <li><code>__module__</code>: Module name in which the class is defined.</li>
+        <li><code>__bases__</code>: Tuple containing base classes.</li>
+      </ul>
+
+      <h3 class="title">Example: Accessing Built-In Class Attributes</h3>
+      <pre><code>class Employee:
+    def __init__(self, name="Bhavana", age=24):
+        self.name = name
+        self.age = age
+
+    def displayEmployee(self):
+        print("Name : ", self.name, ", age: ", self.age)
+
+print("Employee.__doc__:", Employee.__doc__)
+print("Employee.__name__:", Employee.__name__)
+print("Employee.__module__:", Employee.__module__)
+print("Employee.__bases__:", Employee.__bases__)
+print("Employee.__dict__:", Employee.__dict__)
+</code></pre>
+      <p>Output:<br>Employee.__doc__: None<br>Employee.__name__: Employee<br>Employee.__module__: __main__<br>Employee.__bases__: (&lt;class 'object'&gt;,)<br>Employee.__dict__: {'__module__': '__main__', '__init__': &lt;function Employee.__init__ at 0x...&gt;, 'displayEmployee': &lt;function Employee.displayEmployee at 0x...&gt;, '__dict__': &lt;attribute '__dict__' of 'Employee' objects&gt;, '__weakref__': &lt;attribute '__weakref__' of 'Employee' objects&gt;, '__doc__': None}</p>
+
+      <h2 class="title">Instance Attributes</h2>
+      <p>Instance attributes are defined inside the constructor <code>__init__()</code> and are specific to each object instance. They are accessed and modified using the <code>self</code> parameter.</p>
+
+      <h3 class="title">Example: Instance Attributes</h3>
+      <pre><code>class Student:
+    def __init__(self, name, grade):
+        self.__name = name
+        self.__grade = grade
+        print("Name:", self.__name, ", Grade:", self.__grade)
+
+student1 = Student("Ram", "B")
+student2 = Student("Shyam", "C")
+</code></pre>
+      <p>Output:<br>Name: Ram , Grade: B<br>Name: Shyam , Grade: C</p>
+
+      <h2 class="title">Instance vs Class Attributes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>S.No.</th>
+            <th>Instance Attribute</th>
+            <th>Class Attribute</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Defined inside <code>__init__()</code> constructor method.</td>
+            <td>Defined inside class but outside <code>__init__()</code>.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Unique to each object instance.</td>
+            <td>Shared by all instances of the class.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Accessed via object name and dot notation.</td>
+            <td>Accessed via class name or object name.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Modifications affect only that specific object instance.</td>
+            <td>Modifications affect all instances.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - The Iterables Object</h1>
+
+    <div class="content">
+      <p>
+        In JavaScript, <strong>iterables</strong> are objects that can be iterated through using the 
+        <code>for...of</code> loop. They can also be iterated using other methods such as 
+        <code>forEach()</code>, <code>map()</code>, etc.
+      </p>
+      <p>
+        Basically, you can traverse through each element of the iterable in JavaScript.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Common Iterables</h2>
+      <ul>
+        <li>Array</li>
+        <li>String</li>
+        <li>Map</li>
+        <li>Set</li>
+        <li>Arguments</li>
+        <li>NodeList</li>
+        <li>TypedArrays</li>
+        <li>Generators</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Iterate using the for...of loop</h2>
+      <p>Examples of iterating through arrays, strings, sets, and maps using <code>for...of</code>:</p>
+
+      <h3>Example: Iterate over an array</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Iterating the array: &lt;/div&gt;
+   &lt;div id="demo"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      const array = ["Hello", "Hi", 10, 20, 30];
+      for (let ele of array) {
+         output.innerHTML += ele + ", ";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> Iterating the array: Hello, Hi, 10, 20, 30,</p>
+
+      <h3>Example: Iterate over a string</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="demo"&gt;Iterating a string: &lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      let str = "Hello";
+      for (let char of str) {
+         output.innerHTML += char + ", ";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> Iterating a string: H, e, l, l, o,</p>
+
+      <h3>Example: Iterate over a set</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="demo"&gt;Iterating the Set: &lt;/p&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      const set = new Set([10, 20, 30, 40, 40, 50, 50]);
+      for (let ele of set) {
+         output.innerHTML += ele + ", ";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> Iterating the Set: 10, 20, 30, 40, 50,</p>
+
+      <h3>Example: Iterate over a map</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="demo"&gt;Iterating the Map: &lt;br&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      const map = new Map([
+         ["1", "one"],
+         ["2", "two"],
+         ["3", "three"],
+      ]);
+      for (let ele of map) {
+         output.innerHTML += ele + "&lt;br&gt;";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong><br>Iterating the Map:<br>1,one<br>2,two<br>3,three</p>
+    </div>
+
+    <div class="content">
+      <h2>Iterate using the forEach() method</h2>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Using the forEach() method: &lt;/div&gt;
+   &lt;div id="demo"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      const array = [true, false, 50, 40, "Hi"];
+      array.forEach((ele) =&gt; {
+         output.innerHTML += ele + ", ";
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> Using the forEach() method: true, false, 50, 40, Hi,</p>
+    </div>
+
+    <div class="content">
+      <h2>Iterate using the map() method</h2>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="demo"&gt;Using the map() method: &lt;/p&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      const array = [true, false, 50, 40, "Hi"];
+      array.map((ele) =&gt; {
+         output.innerHTML += ele + ", ";
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> Using the map() method: true, false, 50, 40, Hi,</p>
+    </div>
+
+    <div class="content">
+      <h2>Note</h2>
+      <p>
+        Iterables can also be traversed using traditional loops such as <code>for</code> and 
+        <code>while</code>. JavaScript also allows us to define <strong>custom iterators</strong>.
+      </p>
+    </div>
+  </div>
+</div>

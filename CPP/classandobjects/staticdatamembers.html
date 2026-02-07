@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Static Data Members in C++ (Class-Level Variables) 📊</h1>
+
+        <div class="content">
+            <p>A **static data member** is a special type of class variable that is shared by **all objects** (instances) of that class. Unlike regular data members, which get a separate copy for every object, a static member has only **one single copy** in memory for the entire class, regardless of how many objects are created.</p>
+            <p>This single copy can be accessed and modified by any object of the class, making it useful for managing **class-level state**.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Declaration and Initialization</h2>
+
+            <h3>Declaration (Inside the Class)</h3>
+            <p>Static data members are declared inside the class definition using the **<code>static</code>** keyword:</p>
+            <pre class="example">
+class ClassName {
+   public:
+     static dataType staticMemberName; 
+};
+</pre>
+
+            <h3>Initialization (Outside the Class)</h3>
+            <p>A static data member must be **defined and initialized outside the class definition** in the source file, using the **scope resolution operator** (`::`). This is where the memory for the single copy is actually allocated.</p>
+            <pre class="example">
+// Initialization: Sets the value and allocates memory
+dataType ClassName::staticMemberName = initialValue; 
+</pre>
+            <p>If no explicit initialization is given, static data members are automatically initialized to zero.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Accessing Static Data Members</h2>
+            <p>Static members can be accessed even if no objects of the class have been created.</p>
+
+            <ul>
+                <li>
+                    <strong>Using the Class Name (Recommended):</strong> This method clearly indicates that the member is shared across the entire class.
+                    <pre class="example">
+ClassName::staticDataMember; 
+</pre>
+                </li>
+                <li>
+                    <strong>Using an Object (Discouraged):</strong> Although technically allowed, accessing static data via an object (e.g., <code>objectName.staticDataMember</code>) is misleading because the value is independent of the specific object used.
+                </li>
+            </ul>
+
+            <h3>Example: Tracking Object Count</h3>
+            <p>This common use case shows the static member <code>totalBooks</code> being incremented in the constructor and accessed using the class name via a static function.</p>
+            <pre class="example">
+class Book {
+   public:
+      static int totalBooks; // Shared counter
+      Book(string title, string author) {
+         // ...
+         totalBooks++;       // Increments the single shared counter
+      }
+      static void displayTotalBooks() {
+         cout &lt;&lt; totalBooks; // Accessed via the static method
+      }
+};
+
+// Required definition and initialization
+int Book::totalBooks = 0; 
+
+int main() {
+   Book book1("Title1", "Author1");
+   Book book2("Title2", "Author2");
+   
+   // Access using Class Name
+   Book::displayTotalBooks(); // Output: 2
+   
+   return 0;
+}
+</pre>
+        </div>
+    </div>
+</div>

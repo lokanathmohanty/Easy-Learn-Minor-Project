@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Pointers (Memory Addresses) 📍</h1>
+
+        <div class="content">
+            <p>A **pointer** is a special type of variable that stores the **memory address** of another variable. Pointers are essential for dynamic memory allocation, efficient array manipulation, and achieving various C++ programming tasks.</p>
+
+            <h3>The Address-of Operator (<code>&amp;</code>)</h3>
+            <p>Every variable occupies a location in memory. The **address-of operator** (`&amp;`) is used to retrieve the memory address of a variable.</p>
+            <pre class="example">
+int var = 20;
+cout &lt;&lt; &amp;var &lt;&lt; endl; // Prints the memory address of 'var' (e.g., 0xbfc601ac)
+</pre>
+
+            <h3>Pointer Declaration</h3>
+            <p>Pointers are declared using the **dereference/indirection operator** (`*`). The declaration specifies the **type of data** the pointer will point to (the base type), not the type of the pointer itself (which is always a memory address).</p>
+            <pre class="example">
+type *var_name;
+
+int *ip;    // Pointer to an integer
+double *dp; // Pointer to a double
+char *ch;   // Pointer to a character
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Using Pointers: The Three Steps</h2>
+
+            <ol>
+                <li>
+                    <strong>Declaration:</strong> Declare the pointer variable (`int *ip;`).
+                </li>
+                <li>
+                    <strong>Assignment:</strong> Assign the address of a variable to the pointer (`ip = &var;`).
+                </li>
+                <li>
+                    <strong>Dereferencing:</strong> Access the value at the memory address stored in the pointer using the dereference operator (`*`).
+                </li>
+            </ol>
+
+            <h3>The Dereference Operator (<code>*</code>)</h3>
+            <p>The **dereference operator** (`*`), when placed before a pointer variable, returns the **value** stored at the address the pointer holds.</p>
+            <pre class="example">
+int var = 20;   // Actual variable
+int *ip;        // Pointer variable
+
+ip = &var;      // 1. Store address of var in ip
+
+cout &lt;&lt; ip &lt;&lt; endl;   // Prints the address (0x...)
+cout &lt;&lt; *ip &lt;&lt; endl;  // 2. Prints the value at that address (20)
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Key Pointer Concepts</h2>
+            <ul>
+                <li>
+                    <strong>Null Pointers:</strong> A pointer initialized to `NULL` (or `nullptr` in modern C++) is guaranteed not to point to a valid memory location, which is used to indicate that a pointer does not point anywhere.
+                </li>
+                <li>
+                    <strong>Pointer Arithmetic:</strong> Arithmetic operators (`++`, `--`, `+`, `-`) can be used on pointers. When you increment a pointer (e.g., `p++`), the address increases by the size of the base type (e.g., if `p` is an `int*`, the address jumps 4 bytes, assuming 4-byte integers).
+                </li>
+                <li>
+                    <strong>Pointers vs. Arrays:</strong> The name of an array often **decays** into a constant pointer to its first element, showing a deep relationship between the two concepts.
+                </li>
+                <li>
+                    <strong>Pointer to Pointer:</strong> C++ allows you to declare a pointer that stores the address of another pointer (e.g., `int **pp;`).
+                </li>
+                <li>
+                    <strong>Passing Pointers to Functions:</strong> Passing arguments by address (using pointers) allows the called function to modify the original variable in the calling function (Call by Reference using Pointers).
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

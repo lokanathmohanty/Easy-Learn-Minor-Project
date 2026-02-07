@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Chi Square Test</h1>
+
+    <div class="content">
+      <p>
+        Chi-Square test is a statistical method to determine if two categorical variables have a significant correlation between them. Both variables should be from the same population and categorical like Yes/No, Male/Female, Red/Green, etc.
+      </p>
+      <p>
+        For example, we can analyze people's ice-cream buying patterns to correlate gender with preferred ice-cream flavor. If a correlation is found, appropriate stocks can be planned accordingly.
+      </p>
+    </div>
+    
+    <div class="content">
+      <h2>Syntax</h2>
+      <p>The function used for performing chi-Square test is <code>chisq.test()</code>.</p>
+      <p>Basic syntax:</p>
+      <p><code>chisq.test(data)</code></p>
+      <p>
+        Where <code>data</code> is a table containing the count values of the observed variables.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Example</h2>
+      <p>Using the Cars93 dataset from the <code>MASS</code> library representing sales of different car models in 1993, we test the correlation between types of cars and their airbags.</p>
+      <pre>
+library("MASS")
+car.data <- data.frame(Cars93$AirBags, Cars93$Type)
+car.data = table(Cars93$AirBags, Cars93$Type)
+print(car.data)
+print(chisq.test(car.data))
+      </pre>
+      <p>Output of the table:</p>
+      <pre>
+             Compact Large Midsize Small Sporty Van
+Driver & Passenger   2    4      7     0      3   0
+Driver only          9    7     11     5      8   3
+None                 5    0      4    16      3   6
+      </pre>
+      <p>Chi-Square test results:</p>
+      <pre>
+Pearson's Chi-squared test
+
+data:  car.data
+X-squared = 33.001, df = 10, p-value = 0.0002723
+
+Warning message:
+In chisq.test(car.data) : Chi-squared approximation may be incorrect
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Conclusion</h2>
+      <p>The p-value < 0.05 indicates a strong correlation between car types and airbag types in this dataset.</p>
+    </div>
+
+  
+      </p>
+    </div>
+  </div>
+</div>

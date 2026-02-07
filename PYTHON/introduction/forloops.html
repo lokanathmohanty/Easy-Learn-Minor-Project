@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - For Loops</h1>
+    <div class="content">
+      <p>
+        The <code>for</code> loop in Python provides the ability to loop over the items of any sequence, 
+        such as a list, tuple, or a string. It performs the same action on each item of the sequence.
+      </p>
+      <p>
+        This loop starts with the <code>for</code> keyword, followed by a variable that represents the current 
+        item in the sequence. The <code>in</code> keyword links the variable to the sequence you want to 
+        iterate over. A colon (<code>:</code>) is used at the end of the loop header, and the indented block 
+        of code beneath it is executed once for each item in the sequence.
+      </p>
+
+      <h2>Syntax of Python for Loop</h2>
+      <pre><code>for iterating_var in sequence:
+   statement(s)
+</code></pre>
+      <p>
+        Here, <code>iterating_var</code> is a variable to which the value of each sequence item will be 
+        assigned during each iteration. <code>statement(s)</code> represents the block of code that you 
+        want to execute repeatedly.
+      </p>
+
+      <h2>Flowchart of Python for Loop</h2>
+      <p>The following diagram illustrates the working of a for loop:</p>
+      <p><em>For Loop Flowchart</em></p>
+
+      <h2>Python for Loop with Strings</h2>
+      <p>
+        Since strings are sequences of characters, you can iterate over each character using a 
+        <code>for</code> loop.
+      </p>
+      <pre><code>zen = '''
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+'''
+for char in zen:
+   if char not in 'aeiou':
+      print(char, end='')
+</code></pre>
+
+      <h2>Python for Loop with Tuples</h2>
+      <p>Tuples are also sequences, so you can loop through their items.</p>
+      <pre><code>numbers = (34,54,67,21,78,97,45,44,80,19)
+total = 0
+for num in numbers:
+   total += num
+print("Total =", total)
+</code></pre>
+
+      <h2>Python for Loop with Lists</h2>
+      <p>Lists are sequences, and you can iterate over their elements using a <code>for</code> loop.</p>
+      <pre><code>numbers = [34,54,67,21,78,97,45,44,80,19]
+for num in numbers:
+   if num % 2 == 0:
+      print(num)
+</code></pre>
+
+      <h2>Python for Loop with Range Objects</h2>
+      <p>
+        Python's built-in <code>range()</code> function generates a sequence of numbers, often used in 
+        <code>for</code> loops.
+      </p>
+      <pre><code>for num in range(5):
+   print(num, end=' ')
+print()
+for num in range(10, 20):
+   print(num, end=' ')
+print()
+for num in range(1, 10, 2):
+   print(num, end=' ')
+</code></pre>
+
+      <h2>Python for Loop with Dictionaries</h2>
+      <p>
+        Dictionaries are not sequences, but you can iterate over their keys, values, or key-value pairs 
+        using a <code>for</code> loop.
+      </p>
+      <pre><code>numbers = {10:"Ten", 20:"Twenty", 30:"Thirty", 40:"Forty"}
+for x in numbers:
+   print(x, ":", numbers[x])
+</code></pre>
+      <pre><code>for x in numbers.items():
+   print(x)
+</code></pre>
+
+      <h2>Using else Statement with For Loop</h2>
+      <p>
+        An <code>else</code> clause can be added to a <code>for</code> loop. It is executed when the loop 
+        finishes iterating the sequence without encountering a <code>break</code>.
+      </p>
+      <pre><code># For loop to iterate between 10 to 20
+for num in range(10, 20):
+   for i in range(2, num):
+      if num % i == 0:
+         j = num / i
+         print("%d equals %d * %d" % (num, i, j))
+         break
+   else:
+      print(num, "is a prime number")
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Exploring Python for Loops</h1>
+    <div class="content">
+      <p>Here are some questions to explore while practicing for loops:</p>
+      <ul>
+        <li>How does iteration differ for a string, list, and dictionary?</li>
+        <li>What happens if you use <code>range()</code> without specifying <code>start</code> or <code>step</code>?</li>
+        <li>Can you use a <code>for</code> loop to build a dictionary dynamically?</li>
+        <li>What role does the <code>else</code> clause play in a <code>for</code> loop?</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Creating a .NET Standard Library</h1>
+
+        <div class="content">
+            <p>A class library provides reusable types and methods that can be called from different applications. By developing a class library using **.NET Core**, it targets the **.NET Standard Library**. This allows the library to be consumed by any .NET platform (like .NET Framework, .NET Core, or Xamarin) that supports that specific version of .NET Standard.</p>
+        </div>
+
+        <h2 class="title">Adding the Class Library Project</h2>
+        <div class="content">
+            <p>To begin, we will add a new class library project to our existing solution:</p>
+            <ol>
+                <li class="content">In Solution Explorer, right-click on the <strong>src</strong> folder (or the solution node) and select <strong>Add &rarr; New Project</strong>.</li>
+                <li class="content">In the Add New Project dialog, choose the <strong>.NET Core</strong> node.</li>
+                <li class="content">Select the **Class Library (.NET Core)** project template.</li>
+                <li class="content">Enter the name <strong>"UtilityLibrary"</strong> for the project and click <strong>OK</strong>.</li>
+            </ol>
+            <p>Once the project is created, we will add a new class to house our utility methods.</p>
+            <ol start="5">
+                <li class="content">Right-click on the new <strong>UtilityLibrary</strong> project in Solution Explorer and select <strong>Add &rarr; Class...</strong></li>
+                <li class="content">Name the class file <strong>StringLib.cs</strong> and click <strong>Add</strong>.</li>
+            </ol>
+        </div>
+
+        <h2 class="title example">Implementing the String Library Class (StringLib.cs)</h2>
+        <div class="content example">
+            <p>Replace the content of the newly created <code>StringLib.cs</code> file with the following code. This static class contains extension methods for the <code>String</code> type to check the case or numeric value of the first character.</p>
+            <pre><code>using System; 
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Threading.Tasks; 
+  
+namespace UtilityLibrary { 
+   public static class StringLib { 
+      // Checks if the string starts with an uppercase letter
+      public static bool StartsWithUpper(this String str) { 
+         if (String.IsNullOrWhiteSpace(str)) 
+            return false; 
+         Char ch = str[0]; 
+         return Char.IsUpper(ch); 
+      } 
+      
+      // Checks if the string starts with a lowercase letter
+      public static bool StartsWithLower(this String str) { 
+         if (String.IsNullOrWhiteSpace(str)) 
+            return false; 
+         Char ch = str[0]; 
+         return Char.IsLower(ch); 
+      } 
+      
+      // Checks if the string starts with a number
+      public static bool StartsWithNumber(this String str) { 
+         if (String.IsNullOrWhiteSpace(str)) 
+            return false;  
+         Char ch = str[0]; 
+         return Char.IsNumber(ch); 
+      } 
+   } 
+}</code></pre>
+            <p>After saving the file, choose **Build &rarr; Build Solution** from the menu bar to ensure the new class library compiles successfully.</p>
+        </div>
+
+        <h2 class="title">Consuming the Library (Adding Reference)</h2>
+        <div class="content">
+            <p>To use the <code>StringLib</code> extension methods in our existing console application (<code>FirstApp</code>), we must add a project reference:</p>
+            <ol>
+                <li class="content">Expand the **FirstApp** project in Solution Explorer.</li>
+                <li class="content">Right-click on **References** and select **Add Reference**.</li>
+                <li class="content">In the Reference Manager dialog box, find and select the **UtilityLibrary** project.</li>
+                <li class="content">Click **OK**.</li>
+            </ol>
+            <p>The console project now has access to the public types and methods defined in the <code>UtilityLibrary</code>.</p>
+        </div>
+
+        <h2 class="title example">Using the Extension Methods in FirstApp (Program.cs)</h2>
+        <div class="content example">
+            <p>Open the <code>Program.cs</code> file in the <code>FirstApp</code> project and replace the existing code with the following implementation, which uses the <code>StartsWithUpper</code> extension method:</p>
+            <pre><code>using System; 
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Threading.Tasks; 
+using UtilityLibrary; 
+
+namespace FirstApp { 
+   public class Program { 
+      public static void Main(string[] args) { 
+         int rows = Console.WindowHeight; 
+         Console.Clear(); 
+         
+         do { 
+            if (Console.CursorTop >= rows || Console.CursorTop == 0) { 
+               Console.Clear(); 
+               Console.WriteLine("\nPress &lt;Enter&gt; only to exit; otherwise, enter a string and press &lt;Enter&gt;:\n"); 
+            } 
+            
+            string input = Console.ReadLine(); 
+            
+            if (String.IsNullOrEmpty(input)) break; 
+            
+            Console.WriteLine("Input: {0} {1,30}: {2}\n", input, "Begins with uppercase? ", 
+            input.StartsWithUpper() ? "Yes" : "No"); 
+            
+         } while (true); 
+      } 
+   } 
+}</code></pre>
+            <p>Run the application. When you type a string and press Enter, the console output will indicate whether the input string begins with an uppercase character by calling the extension method from your newly created <code>UtilityLibrary</code>.</p>
+            <p>You can further enhance this console application by using the other extension methods (`StartsWithLower` and `StartsWithNumber`) in a similar fashion.</p>
+        </div>
+    </div>
+</div>

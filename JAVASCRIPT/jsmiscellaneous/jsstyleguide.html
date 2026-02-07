@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Style Guide</h1>
+    <div class="content">
+      <p>A JavaScript style guide is a set of rules that define how code should be written. It ensures consistency, readability, and maintainability, especially in large projects where multiple developers collaborate. Following a style guide avoids confusion and makes complex codebases easier to manage.</p>
+
+      <h2>Code Indentation</h2>
+      <p>Indent your code using a fixed number of spaces (commonly 2, 3, or 4) and avoid trailing white spaces.</p>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Indentation Conventions&lt;/h2&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById('output');
+      function func() {
+         output.innerHTML = "Function executed!";
+         return 10;
+      }
+      func();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Comments</h2>
+      <p>Prefer single-line comments (<code>//</code>) instead of block comments, and align them neatly with the code.</p>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Comment Conventions&lt;/h2&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById('output');
+      output.innerHTML = "Hello World!";
+      // var a = 10;
+      // var b = 20;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Variable Declaration</h2>
+      <p>Always declare variables at the top of their scope, whether global or local. Variable names must start with a letter.</p>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Variable Conventions&lt;/h2&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      var a = 10;
+      var b = 20;
+      document.getElementById('output').innerHTML =
+         "The sum of 10 and 20 is: " + (a + b);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Identifier Names in camelCase</h2>
+      <p>Identifiers (variables, functions, objects, etc.) should follow <strong>camelCase</strong> convention: start with a lowercase letter, and capitalize the first letter of subsequent words.</p>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;camelCase Conventions&lt;/h2&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      var greetMessage = "Hello Developers!";
+      let output = document.getElementById('output');
+      // Function name with camelCase
+      function executeGreet() {
+         output.innerHTML = greetMessage;
+      }
+      executeGreet();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Spaces and Brackets</h2>
+      <p>Use white space before and after operators, and around brackets for readability.</p>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Spaces and Brackets Conventions&lt;/h2&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      let output = document.getElementById('output');
+      if (9 &gt; 10) {
+         output.innerHTML += "9 is greater than 10";
+      } else {
+         output.innerHTML += "9 is not greater than 10";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Object Rules</h2>
+      <p>Objects should be written with each property on a new line, separated by commas, and without a trailing comma after the last property.</p>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Object Conventions&lt;/h2&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const obj = {
+         prop1: 'value1',
+         prop2: 'value2',
+         prop3: 'value3'
+      };
+      document.getElementById("output").innerHTML =
+         JSON.stringify(obj, null, 2);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Statement Rules</h2>
+      <p>Statements can be:</p>
+      <ul>
+        <li><strong>Simple one-line</strong>: must end with a semicolon.</li>
+        <li><strong>Compound</strong>: opening bracket on the same line, body on the next line, no semicolon after the closing bracket.</li>
+        <li><strong>Multi-line</strong>: break long conditions or expressions after operators.</li>
+      </ul>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Statement Guidelines Conventions&lt;/h2&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById('output');
+      // Simple one-line statement
+      const arr = ["one", "two", "three"];
+
+      // Compound statement
+      for (let i = 0; i &lt; arr.length; i++) {
+         output.innerHTML += arr[i] + "&lt;br&gt;";
+      }
+
+      // Multi-line statement
+      if (10 &gt; 9 && 10 &gt; 5 && 10 &gt; 6) {
+         output.innerHTML +=
+            "10 is greater than 9 and 10 is greater than 5 &lt;br&gt;";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Line Length</h2>
+      <p>Keep lines within 80 characters. Break long strings or code into multiple lines for readability.</p>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt;Line Length Conventions&lt;/h2&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      let str = `This is too long a sentence.
+         Let's put the limit of 80 characters.`;
+      document.getElementById('output').innerHTML = str;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Conclusion</h2>
+      <p>Following a style guide ensures that code remains consistent, clean, and maintainable. While the rules above are common, teams may define their own conventions, but consistency across the project is essential.</p>
+    </div>
+  </div>
+</div>

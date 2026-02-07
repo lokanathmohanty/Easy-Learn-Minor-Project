@@ -1,0 +1,204 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Mutability vs Immutability</h1>
+
+    <div class="content">
+      <p>
+        If you are a web developer you have seen the terms <strong>mutable</strong> and
+        <strong>immutable</strong> objects in JavaScript. But what these words mean, and why do
+        they matter? This section will help you understand.
+      </p>
+
+      <ul>
+        <li>What mutable and immutable objects are</li>
+        <li>The main differences between them</li>
+        <li>How to make and change them</li>
+        <li>The benefits and drawbacks of using each type in your code</li>
+      </ul>
+
+      <p>
+        This knowledge is very helpful for writing cleaner, safer, and more reliable JavaScript
+        code.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Mutable Objects</h2>
+      <p>
+        Mutable objects in JavaScript are ones that can be changed after they are created,
+        including arrays, objects, functions, and dates. To add, remove or modify values in these
+        objects, use bracket notation (<code>object["property"]</code>) or dot notation
+        (<code>object.property</code>).
+      </p>
+      <p>
+        But, changing these objects can sometimes lead to problems: it can unintentionally affect
+        other parts of your code, make debugging more difficult, and use more memory.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>const student = {
+  name: "Aarav",
+  age: 15,
+  hobbies: ["drawing", "playing guitar", "cycling"]
+};
+
+const student2 = student;
+console.log(student);
+console.log(student2);
+
+student2.age = 25;
+console.log(student);
+console.log(student2);</code></pre>
+
+      <p>
+        Changing the age of <code>student2</code> affects the age of the <code>student</code>
+        object because both point to the same thing in memory.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Clone Object Properties</h2>
+      <p>
+        To clone the properties of an object, use the <code>Object.assign()</code> function with
+        the spread operator. These allow you to update the attributes of the cloned object while
+        keeping the original object's properties unchanged.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>const student = {
+  name: "Aarav",
+  age: 15,
+  hobbies: ["drawing", "playing guitar", "cycling"]
+};
+
+const student2 = Object.assign({}, student);
+student2.age = 25;
+
+console.log(student);
+console.log(student2);</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Immutable Objects</h2>
+      <p>
+        Immutable objects are those that cannot be modified after they are created. Strings,
+        numbers, booleans, <code>null</code>, and <code>undefined</code> are all immutable in
+        JavaScript.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>let student1 = "Aarti";
+let student2 = student1;
+
+student1 = "Saurabh";
+console.log(student1);
+console.log(student2);</code></pre>
+
+      <p>
+        Changing <code>student1</code> does not affect <code>student2</code>. Primitive values
+        are copied, not referenced.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Creating Immutable Objects</h2>
+      <ul>
+        <li>
+          Use <code>Object.freeze()</code> to block changes to an existing object or array.
+        </li>
+        <li>
+          Use the <code>const</code> keyword to prevent reassignment of variables.
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Modifying Immutable Objects</h2>
+      <p>
+        Since immutable objects cannot be changed directly, you can use the spread operator or
+        <code>Object.assign()</code> to create new versions with updates.
+      </p>
+
+      <h3>Using Spread Operator (Array Example)</h3>
+      <pre><code>const fruits = ["apple", "banana", "orange"];
+const newFruits = [...fruits, "grape"];
+
+console.log(newFruits);
+console.log(fruits);</code></pre>
+
+      <h3>Using Spread Operator (Object Example)</h3>
+      <pre><code>const person = { name: "Maya", age: 30 };
+const newPerson = { ...person, country: "India" };
+
+console.log(newPerson);
+console.log(person);</code></pre>
+
+      <h3>Using Object.assign()</h3>
+      <pre><code>const person = { name: "Maya", age: 30 };
+const additionalInfo = { country: "India", hobby: "reading" };
+
+const newPerson = Object.assign({}, person, additionalInfo);
+
+console.log(newPerson);
+console.log(person);</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Benefits of Immutability</h2>
+      <ul>
+        <li>Avoids side effects in your code</li>
+        <li>Improves performance in frameworks like React</li>
+        <li>Makes debugging and reasoning about code easier</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Drawbacks of Immutability</h2>
+      <ul>
+        <li>Increased memory consumption due to new object creation</li>
+        <li>Can impact garbage collection performance</li>
+        <li>Requires additional methods or operators, making code verbose</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Mutability vs Immutability</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Mutability</th>
+            <th>Immutability</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Meaning</td>
+            <td>You can change the value after creation.</td>
+            <td>Once created, the value cannot be changed.</td>
+          </tr>
+          <tr>
+            <td>Example</td>
+            <td>Arrays or objects (<code>let numbers = [1, 2, 3];</code>)</td>
+            <td>Strings or numbers (<code>const name = "Amit";</code>)</td>
+          </tr>
+          <tr>
+            <td>Can you change it?</td>
+            <td>Yes, you can change or modify it.</td>
+            <td>No, you cannot change it directly.</td>
+          </tr>
+          <tr>
+            <td>How to change?</td>
+            <td>You modify the original value.</td>
+            <td>You create a new value instead of changing the original.</td>
+          </tr>
+          <tr>
+            <td>Example code (change)</td>
+            <td><code>numbers.push(4);</code></td>
+            <td><code>const newName = name + " Deepak";</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

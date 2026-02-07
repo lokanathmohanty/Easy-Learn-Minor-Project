@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Window/Document Events</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        JavaScript window events are actions that occur when the user does something affecting the entire browser window, like loading, resizing, closing, or moving the window. The most common window event is simply loading the window by opening a particular web page. This event is handled by the <code>onload</code> event handler.
+      </p>
+      <p>
+        Developers can use JavaScript to create dynamic, interactive web pages that respond to user actions. The interactivity depends on two core aspects: window events and document events. Operating at the browser level, window events control the overall state of the browser window, while document events interact with the HTML document, allowing developers to react specifically to elements or actions within a page.
+      </p>
+
+      <h2>Window Events</h2>
+      <p>
+        At the browser level, window events are associated with the <code>window</code> object, which represents the browser's window. These events are frequently used to oversee the overall state of a browser window or manage global interactions.
+      </p>
+      <ul>
+        <li><strong>load</strong> – Triggered when the entire web page, including all its resources, has finished loading.</li>
+        <li><strong>unload</strong> – Fired when the user is leaving the page or closing the browser window or tab.</li>
+        <li><strong>resize</strong> – Activated when the size of the browser window is changed.</li>
+        <li><strong>scroll</strong> – Fired when the user scrolls the page.</li>
+      </ul>
+
+      <h2>Example: Demonstrating Window Events</h2>
+      <p>
+        In this example, a script listens for the <code>load</code>, <code>resize</code>, and <code>scroll</code> events on the window. When the page loads, an alert informs the user. Resizing the window triggers an alert with the new size, and scrolling also triggers an alert.
+      </p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Window Events Example&lt;/title&gt;
+   &lt;script&gt;
+      window.addEventListener('load', function() {
+         alert('The page has finished loading!');
+      });
+
+      window.addEventListener('resize', function() {
+         alert("Page has been resized. New size: " + window.innerWidth + " x " + window.innerHeight);
+      });
+
+      window.addEventListener('scroll', function() {
+         alert('You have scrolled on this page.');
+      }, {once:true});
+   &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h2&gt;Resize or Scroll this page to see events&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Document Events</h2>
+      <p>
+        Document events occur at the level of the HTML document within the window and are associated with the <code>document</code> object, which represents the HTML content of the page.
+      </p>
+      <ul>
+        <li><strong>DOMContentLoaded</strong> – Triggered when the HTML document has been completely loaded and parsed, without waiting for external resources like images.</li>
+        <li><strong>click</strong> – Fired when the user clicks on an element.</li>
+        <li><strong>submit</strong> – Triggered when a form is submitted.</li>
+        <li><strong>keydown / keyup / keypress</strong> – Fired when a key is pressed, released, or both.</li>
+        <li><strong>change</strong> – Fired when the value of an input element changes, such as text inputs or dropdowns.</li>
+      </ul>
+
+      <h2>Example: Demonstrating Document Events</h2>
+      <p>
+        In this example, scripts listen for <code>DOMContentLoaded</code>, <code>click</code>, <code>submit</code>, and <code>keydown</code> events. When the DOM loads, an alert notifies the user. Clicking shows the clicked element's tag name, submitting a form alerts submission, and pressing a key alerts the pressed key.
+      </p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Document Events Example&lt;/title&gt;
+   &lt;script&gt;
+      document.addEventListener('DOMContentLoaded', function() {
+         alert('DOM content has been fully loaded!');
+      });
+
+      document.addEventListener('click', function(event) {
+         alert('Element clicked! Tag Name: ' + event.target.tagName);
+      }, {once:true});
+
+      document.addEventListener('submit', function() {
+         alert('Form submitted!');
+      });
+
+      document.addEventListener('keydown', function(event) {
+         alert('Key pressed: ' + event.key);
+      }, {once:true});
+   &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;form&gt;
+      &lt;label for="username"&gt;Username:&lt;/label&gt;
+      &lt;input type="text" id="username" name="username"&gt;
+      &lt;button type="submit"&gt;Submit&lt;/button&gt;
+   &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </div>
+  </div>
+</div>

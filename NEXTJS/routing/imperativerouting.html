@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Imperative Routing (Programmatic Navigation) ⚙️</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Imperative Routing?</h2>
+            <p>**Imperative routing** is a method of navigating between pages programmatically, typically based on a **user action** (like submitting a form) or a **dynamic condition** (like checking authentication status). Unlike **declarative routing** (using the <span class="example">`&lt;Link&gt;`</span> component), this approach uses custom logic to determine *when* and *where* to navigate.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Implementing Imperative Routing with `useRouter`</h2>
+            <p>To perform programmatic navigation on the client side, Next.js provides the **<span class="example">`useRouter`</span>** hook from **<span class="example">`next/navigation`</span>** (for the App Router). Since it's a hook, it must be used within a **Client Component** (files marked with <span class="example">`"use client"`</span>).</p>
+            
+            <h3 class="title">Key Router Methods:</h3>
+            <ul>
+                <li><span class="example">`router.push(path)`</span>: Navigates to a new path and adds a new entry to the browser history stack (allows the user to go back).</li>
+                <li><span class="example">`router.replace(path)`</span>: Navigates to a new path and replaces the current entry in the history stack (the user **cannot** go back to the previous page).</li>
+            </ul>
+            
+            <h3 class="title">Example: Navigating After a User Action (Order Placement)</h3>
+            <p>In this example, after a button click, an alert is shown, and the user is programmatically redirected to the home page using <span class="example">`router.push("/")`</span>.</p>
+            <pre>"use client";
+import { useRouter } from "next/navigation";
+
+export default function ProductPage({ params }) {
+    const router = useRouter();
+
+    const handleClick = () =&gt; {
+        alert("Order Placed...");
+        router.push("/"); // &larr; Imperative navigation
+    };
+    // ... returns component with &lt;button onClick={handleClick}&gt;
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Routing Based on Conditions (Authentication)</h2>
+            <p>Imperative routing is crucial for logic that requires redirection. A common use case is checking user authentication status and redirecting unauthenticated users to a login page.</p>
+            <pre>// app/protected-page/page.tsx file
+"use client";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function ProtectedPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const userAuthenticated = false; 
+    
+    if (!userAuthenticated) {
+      // Redirects to /login page and prevents the user from navigating back here
+      router.replace('/login'); 
+    }
+  }, [router]);
+
+  return &lt;div&gt; Welcome to the Protected Page &lt;/div&gt;;
+}</pre>
+            <p>In the scenario above, if a user tries to access the <span class="example">`/protected-page`</span> while not authenticated, the <span class="example">`useEffect`</span> hook runs on the client, detects the unauthenticated status, and immediately performs an imperative redirect to the <span class="example">`/login`</span> route.</p>
+        </div>
+    </div>
+</div>

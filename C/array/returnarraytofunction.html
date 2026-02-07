@@ -1,0 +1,220 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Return Array from Function in C</h1>
+    <div class="content">
+      <p>Functions in C can return values to the caller. Although C functions typically return a single value, you can return an array using various techniques:</p>
+      <ul>
+        <li>Passing an array and returning its pointer</li>
+        <li>Returning a static array</li>
+        <li>Returning dynamically allocated array with <code>malloc()</code></li>
+        <li>Embedding the array in a <code>struct</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Pass array by reference -->
+  <div class="session">
+    <h2 class="title">Pass Array by Reference</h2>
+    <p>An uninitialized array is passed to a function, and its pointer is returned. The array is modified inside the function.</p>
+
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int arrfunction(int, float *);
+
+int main() {
+   int x = 100;
+   float arr[3];
+   arrfunction(x, arr);
+   printf("Square of %d: %f\n", x, arr[0]);
+   printf("cube of %d: %f\n", x, arr[1]);
+   printf("Square root of %d: %f\n", x, arr[2]);
+   return 0;
+}
+
+int arrfunction(int x, float *arr) {
+   arr[0] = pow(x, 2);
+   arr[1] = pow(x, 3);
+   arr[2] = pow(x, 0.5);
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre><code>Square of 100: 10000.000000
+cube of 100: 1000000.000000
+Square root of 100: 10.000000</code></pre>
+  </div>
+
+  <!-- Return static array -->
+  <div class="session">
+    <h2 class="title">Return Static Array</h2>
+    <p>A static array inside the function is used to store the values, and its pointer is returned. This avoids returning a local variable pointer.</p>
+
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+float * arrfunction(int);
+
+int main() {
+   int x = 100;
+   float *arr = arrfunction(x);
+   printf("Square of %d: %f\n", x, arr[0]);
+   printf("cube of %d: %f\n", x, arr[1]);
+   printf("Square root of %d: %f\n", x, arr[2]);
+   return 0;
+}
+
+float *arrfunction(int x) {
+   static float arr[3];
+   arr[0] = pow(x, 2);
+   arr[1] = pow(x, 3);
+   arr[2] = pow(x, 0.5);
+   return arr;
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre><code>Square of 100: 10000.000000
+cube of 100: 1000000.000000
+Square root of 100: 10.000000</code></pre>
+  </div>
+
+  <!-- Return array of random numbers -->
+  <div class="session">
+    <h2 class="title">Return Array of Random Numbers</h2>
+    <p>This example shows how to return a static array filled with random integers.</p>
+
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int *getRandom() {
+   static int r[10];
+   int i;
+   srand((unsigned)time(NULL));
+   for (i = 0; i &lt; 10; ++i) {
+      r[i] = rand();
+      printf("r[%d] = %d\n", i, r[i]);
+   }
+   return r;
+}
+
+int main() {
+   int *p = getRandom();
+   for (int i = 0; i &lt; 10; i++) {
+      printf("*(p + %d) : %d\n", i, *(p + i));
+   }
+   return 0;
+}</code></pre>
+
+    <p><strong>Sample Output:</strong></p>
+    <pre><code>r[0] = 2110147662
+r[1] = 1427553496
+...
+*(p + 0) : 2110147662
+*(p + 1) : 1427553496
+...</code></pre>
+  </div>
+
+  <!-- Using malloc -->
+  <div class="session">
+    <h2 class="title">Return Array Using malloc()</h2>
+    <p><code>malloc()</code> dynamically allocates memory during runtime. Always remember to free it if no longer needed.</p>
+
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+#include &lt;stdlib.h&gt;
+
+float * arrfunction(int);
+
+int main() {
+   int x = 16;
+   float *arr = arrfunction(x);
+   printf("Square of %d: %f\n", x, arr[0]);
+   printf("cube of %d: %f\n", x, arr[1]);
+   printf("Square root of %d: %f\n", x, arr[2]);
+   free(arr);  // Optional cleanup
+   return 0;
+}
+
+float *arrfunction(int x) {
+   float *arr = (float *)malloc(3 * sizeof(float));
+   arr[0] = pow(x, 2);
+   arr[1] = pow(x, 3);
+   arr[2] = pow(x, 0.5);
+   return arr;
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre><code>Square of 16: 256.000000
+cube of 16: 4096.000000
+Square root of 16: 4.000000</code></pre>
+  </div>
+
+  <!-- Using struct -->
+  <div class="session">
+    <h2 class="title">Return Array Inside a Struct</h2>
+    <p>Embedding arrays inside <code>struct</code> is a clean and type-safe way to return multiple values.</p>
+
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+struct mystruct {
+   float arr[3];
+};
+
+struct mystruct myfunction(int x);
+
+int main() {
+   int x = 9;
+   struct mystruct s = myfunction(x);
+   printf("Square of %d: %f\n", x, s.arr[0]);
+   printf("cube of %d: %f\n", x, s.arr[1]);
+   printf("Square root of %d: %f\n", x, s.arr[2]);
+   return 0;
+}
+
+struct mystruct myfunction(int x) {
+   struct mystruct s1;
+   s1.arr[0] = pow(x, 2);
+   s1.arr[1] = pow(x, 3);
+   s1.arr[2] = pow(x, 0.5);
+   return s1;
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre><code>Square of 9: 81.000000
+cube of 9: 729.000000
+Square root of 9: 3.000000</code></pre>
+  </div>
+
+  <!-- Return string -->
+  <div class="session">
+    <h2 class="title">Return String from Function</h2>
+    <p>Strings in C are character arrays. Use dynamic memory or static storage to safely return strings from functions.</p>
+
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+char * hellomsg(char *);
+
+int main() {
+   char *name = "TutorialsPoint";
+   char *arr = hellomsg(name);
+   printf("%s\n", arr);
+   free(arr); // free dynamically allocated memory
+   return 0;
+}
+
+char * hellomsg(char *x) {
+   char *arr = (char *)malloc(50 * sizeof(char));
+   strcpy(arr, "Hello ");
+   strcat(arr, x);
+   return arr;
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre><code>Hello TutorialsPoint</code></pre>
+  </div>
+
+</div>

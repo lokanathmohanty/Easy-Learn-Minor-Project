@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Servlets Summary 🌐🚀</h1>
+
+        <div class="content">
+            <p><strong>Java Servlets</strong> provide a component-based, platform-independent method for building **Web-based applications**. They act as a middle tier between a web browser (or other HTTP client) and a web server, handling client requests and dynamically generating responses.</p>
+
+            <hr>
+
+            <h2 class="title">I. Key Advantages Over CGI</h2>
+            <p>Servlets were developed to overcome the performance and security limitations of the older Common Gateway Interface (CGI) programs:</p>
+            <ul>
+                <li>
+                    <strong>Superior Performance:</strong> Servlets execute **within the address space of the Web server** (managed by a Servlet Container like Tomcat). Unlike CGI, it is **not necessary to create a separate OS process** to handle each client request, saving significant time and resources.
+                </li>
+                <li>
+                    <strong>Platform Independence:</strong> Since they're written in Java, they run on any platform with a Java Virtual Machine (JVM).
+                </li>
+                <li>
+                    <strong>Robustness & Security:</strong> Servlets are managed by the Java security manager on the server, enforcing restrictions and protecting server resources.
+                </li>
+                <li>
+                    <strong>Access to Java APIs:</strong> Servlets have full access to the entire Java API family, including **JDBC** for database access, RMI, and sockets.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Servlet Life Cycle and Core Methods</h2>
+            <p>Servlets follow a strict, container-managed life cycle, primarily implemented by extending the **<code>HttpServlet</code>** abstract class from the **<code>javax.servlet.http</code>** package:</p>
+            <ol>
+                <li>
+                    **<code>init()</code>:** Called once by the container upon loading the servlet. Used for one-time initialization (e.g., setting up a database connection pool or static configuration).
+                </li>
+                <li>
+                    **<code>service()</code>:** The container calls this for every client request. It dispatches the request to the appropriate `doGet()`, `doPost()`, or other `do*()` method based on the HTTP method.
+                </li>
+                <li>
+                    **<code>doGet(request, response)</code> / <code>doPost(request, response)</code>:** The workhorse methods. They handle the business logic of the request (e.g., retrieving data) and formulate the response.
+                    <ul>
+                        <li>**<code>HttpServletRequest</code>:** Provides client data (parameters, headers, cookies).</li>
+                        <li>**<code>HttpServletResponse</code>:** Used to send the final response back to the client (setting content type, writing the output stream via **<code>PrintWriter</code>**).</li>
+                    </ul>
+                </li>
+                <li>
+                    **<code>destroy()</code>:** Called once by the container before the servlet is taken out of service. Used to perform cleanup (e.g., closing open database connections).
+                </li>
+            </ol>
+
+            <hr>
+
+            <h2 class="title">III. Applications and Functionality</h2>
+            <p>Servlets perform the core server-side tasks necessary for dynamic web applications:</p>
+            <ul>
+                <li>
+                    **Request Handling:** Read explicit data (HTML form fields) and implicit HTTP data (cookies, headers, session data) sent by the client.
+                </li>
+                <li>
+                    **Business Processing:** Execute complex tasks, which may involve:
+                    <ul>
+                        <li>Talking to a database (via JDBC).</li>
+                        <li>Invoking external services (Web services, RMI calls).</li>
+                        <li>Computing the required response directly.</li>
+                    </ul>
+                </li>
+                <li>
+                    **Response Generation:** Send explicit data (the document content) to the client, which can be in various formats: **HTML**, **XML**, **JSON**, or binary data (like images). They also manage implicit HTTP responses (setting status codes, content type, and caching parameters).
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

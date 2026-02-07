@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - XML Files</h1>
+    <div class="content">
+      <p>
+        XML (Extensible Markup Language) is a file format that stores data using markup tags to describe the meaning of data, unlike HTML which focuses on page structure. R can read XML files using the <code>XML</code> package.
+      </p>
+
+      <h2 class="title">Input Data</h2>
+      <p>Create an XML file (e.g., <code>input.xml</code>) with employee data structured inside <code>&lt;RECORDS&gt;</code> and <code>&lt;EMPLOYEE&gt;</code> tags containing child elements like <code>ID</code>, <code>NAME</code>, <code>SALARY</code>, <code>STARTDATE</code>, and <code>DEPT</code>.</p>
+
+      <h2 class="title">Reading XML File</h2>
+      <pre><code># Load required packages
+library("XML")
+library("methods")
+
+# Parse the XML file
+result &lt;- xmlParse(file = "input.xml")
+
+# Print parsed result
+print(result)
+</code></pre>
+      <p>Output snippet:</p>
+      <pre><code>1
+Rick
+623.3
+1/1/2012
+IT
+2
+Dan
+515.2
+9/23/2013
+Operations
+...
+</code></pre>
+
+      <h2 class="title">Number of Nodes in XML File</h2>
+      <pre><code># Extract root node
+rootnode &lt;- xmlRoot(result)
+
+# Count number of nodes
+rootsize &lt;- xmlSize(rootnode)
+
+print(rootsize)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 8
+</code></pre>
+
+      <h2 class="title">Details of the First Node</h2>
+      <pre><code># Print first node in root
+print(rootnode[1])
+</code></pre>
+      <p>Output:</p>
+      <pre><code>$EMPLOYEE
+   1
+   Rick
+   623.3
+   1/1/2012
+   IT
+
+attr(,"class")
+[1] "XMLInternalNodeList" "XMLNodeList"
+</code></pre>
+
+      <h2 class="title">Accessing Different Elements of a Node</h2>
+      <pre><code># Access specific node elements
+print(rootnode[[1]][[1]]) # ID of 1st EMPLOYEE
+print(rootnode[[1]][[5]]) # DEPT of 1st EMPLOYEE
+print(rootnode[[3]][[2]]) # NAME of 3rd EMPLOYEE
+</code></pre>
+      <p>Output:</p>
+      <pre><code>1
+IT
+Michelle
+</code></pre>
+
+      <h2 class="title">Convert XML to Data Frame</h2>
+      <pre><code># Convert XML file to data frame for analysis
+xmldataframe &lt;- xmlToDataFrame("input.xml")
+print(xmldataframe)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  ID    NAME SALARY STARTDATE       DEPT
+1  1    Rick  623.3 2012-01-01        IT
+2  2     Dan  515.2 2013-09-23 Operations
+3  3 Michelle 611.0 2014-11-15        IT
+4  4    Ryan  729.0 2014-05-11        HR
+5 NA    Gary  843.2 2015-03-27   Finance
+6  6    Nina  578.0 2013-05-21        IT
+7  7   Simon  632.8 2013-07-30 Operations
+8  8    Guru  722.5 2014-06-17   Finance
+</code></pre>
+      <p>Now the data is available as a dataframe for further manipulation and analysis.</p>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

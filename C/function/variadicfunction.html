@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Variadic Functions in C</h1>
+
+    <div class="content">
+      <h2 class="title">Introduction</h2>
+      <p>Variadic functions are powerful but rarely used features in C that allow functions to accept a variable number of arguments, adding flexibility to programming.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">What is a Variadic Function?</h2>
+      <p>A variadic function can take a variable number of arguments. It must have at least one fixed argument before the variable arguments.</p>
+      <p>Common examples include the standard library functions <code>printf()</code> and <code>scanf()</code>, which take a variable number of arguments following the format specifier.</p>
+      <p>Example usage of <code>printf</code>:</p>
+      <p><code>printf("format specifier", arg1, arg2, arg3, ...);</code></p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Syntax of Variadic Functions</h2>
+      <p>Variadic functions are defined with at least one fixed argument followed by an ellipsis <code>...</code>:</p>
+      <p><code>return_type function_name(type arg1, ...);</code></p>
+      <p>To handle variable arguments, include the <code>&lt;stdarg.h&gt;</code> header which provides these macros:</p>
+      <ul>
+        <li><code>va_start(va_list ap, arg)</code>: Initializes the variable argument list.</li>
+        <li><code>va_arg(va_list ap, type)</code>: Retrieves the next argument of the given type.</li>
+        <li><code>va_copy(va_list dest, va_list src)</code>: Copies the argument list.</li>
+        <li><code>va_end(va_list ap)</code>: Ends traversal and cleans up.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example 1: Sum of Numbers Using a Variadic Function</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+
+// Variadic function to add numbers
+int addition(int n, ...) {
+   va_list args;
+   int i, sum = 0;
+
+   va_start(args, n);
+
+   for (i = 0; i &lt; n; i++) {
+      sum += va_arg(args, int);
+   }
+
+   va_end(args);
+
+   return sum;
+}
+
+int main() {
+   printf("Sum = %d ", addition(5, 1, 2, 3, 4, 5));
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Sum = 15</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example 2: Finding the Largest Number Using a Variadic Function</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+
+// Variadic function to find the largest number
+int largest(int n, ...) {
+   va_list args;
+   int i, max = 0;
+
+   va_start(args, n);
+
+   for (i = 0; i &lt; n; i++) {
+      int x = va_arg(args, int);
+      if (x &gt;= max)
+         max = x;
+   }
+
+   va_end(args);
+   return max;
+}
+
+int main() {
+   printf("Largest number in the list = %d ", largest(5, 12, 34, 21, 45, 32));
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Largest number in the list = 45</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example 3: Concatenation of Multiple Strings Using a Variadic Function</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdarg.h&gt;
+
+char * concat(int n, ...) {
+   va_list args;
+   int i;
+   static char string[100], *word;
+
+   va_start(args, n);
+   strcpy(string, "");
+
+   for (i = 0; i &lt; n; i++) {
+      word = va_arg(args, char *);
+      strcat(string, word);
+      strcat(string, " ");
+   }
+
+   va_end(args);
+
+   return string;
+}
+
+int main() {
+   char *string1 = concat(2, "Hello", "World");
+   printf("%s\n", string1);
+   char *string2 = concat(3, "How", "are", "you?");
+   printf("%s\n", string2);
+
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Hello World
+How are you?</code></pre>
+    </div>
+
+  </div>
+</div>

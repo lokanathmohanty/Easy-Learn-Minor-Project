@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Variables</h1>
+    <div class="content">
+      <p>
+        A variable provides named storage that programs can manipulate. In R, a variable can store an atomic vector, a group of atomic vectors, or multiple R objects combined. Valid variable names consist of letters, numbers, dots (.) or underscores (_), and must start with a letter or a dot not followed by a number.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Variable Name</th>
+            <th>Validity</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>var_name2.</td>
+            <td>Valid</td>
+            <td>Contains letters, numbers, dot, and underscore</td>
+          </tr>
+          <tr>
+            <td>var_name%</td>
+            <td>Invalid</td>
+            <td>Contains character '%', only dot(.) and underscore allowed</td>
+          </tr>
+          <tr>
+            <td>2var_name</td>
+            <td>Invalid</td>
+            <td>Starts with a number</td>
+          </tr>
+          <tr>
+            <td>.var_name, var.name</td>
+            <td>Valid</td>
+            <td>Start with dot(.) not followed by a number</td>
+          </tr>
+          <tr>
+            <td>.2var_name</td>
+            <td>Invalid</td>
+            <td>Dot followed by a number</td>
+          </tr>
+          <tr>
+            <td>_var_name</td>
+            <td>Invalid</td>
+            <td>Starts with underscore, not allowed</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="title">Variable Assignment</h2>
+      <p>
+        Variables can be assigned values using leftward (<code>&lt;-</code>), rightward (<code>-&gt;</code>), or equal to (<code>=</code>) operators. Values can be printed using <code>print()</code> or <code>cat()</code> functions. The <code>cat()</code> function concatenates multiple items into continuous output.
+      </p>
+      <pre><code># Assignment using equal operator
+var.1 = c(0, 1, 2, 3)
+
+# Assignment using leftward operator
+var.2 &lt;- c("learn", "R")
+
+# Assignment using rightward operator
+c(TRUE, 1) -&gt; var.3
+
+print(var.1)
+cat("var.1 is ", var.1, "\n")
+cat("var.2 is ", var.2, "\n")
+cat("var.3 is ", var.3, "\n")
+</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>[1] 0 1 2 3
+var.1 is 0 1 2 3 
+var.2 is learn R 
+var.3 is 1 1
+</code></pre>
+      <p>
+        Note: The vector <code>c(TRUE,1)</code> mixes logical and numeric types; logical TRUE is coerced to numeric 1.
+      </p>
+
+      <h2 class="title">Data Type of a Variable</h2>
+      <p>
+        R is dynamically typed, so variables take the data type of the assigned object and can change type whenever reassigned.
+      </p>
+      <pre><code>var_x &lt;- "Hello"
+cat("The class of var_x is ", class(var_x), "\n")
+
+var_x &lt;- 34.5
+cat("Now the class of var_x is ", class(var_x), "\n")
+
+var_x &lt;- 27L
+cat("Next the class of var_x becomes ", class(var_x), "\n")
+</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>The class of var_x is character
+Now the class of var_x is numeric
+Next the class of var_x becomes integer
+</code></pre>
+
+      <h2 class="title">Finding Variables</h2>
+      <p>
+        To list all variables currently available in the workspace, use the <code>ls()</code> function. You can filter variables with a pattern.
+      </p>
+      <pre><code>print(ls())</code></pre>
+      <p>
+        Sample output:
+      </p>
+      <pre><code>[1] "my var" "my_new_var" "my_var" "var.1" "var.2" "var.3" "var.name" "var_name2." "var_x" "varname"</code></pre>
+      <p>
+        To list variables starting with "var":
+      </p>
+      <pre><code>print(ls(pattern = "var"))</code></pre>
+      <p>
+        To list hidden variables starting with dot(.) use the argument <code>all.names = TRUE</code>:
+      </p>
+      <pre><code>print(ls(all.names = TRUE))</code></pre>
+
+      <h2 class="title">Deleting Variables</h2>
+      <p>
+        Variables can be deleted using the <code>rm()</code> function:
+      </p>
+      <pre><code>rm(var.3)
+print(var.3)  # Throws error: object not found
+</code></pre>
+      <p>
+        To delete all variables:
+      </p>
+      <pre><code>rm(list = ls())
+print(ls())  # Outputs character(0)
+</code></pre>
+    </div>
+  </div>
+
+  
+    </div>
+  </div>
+</div>

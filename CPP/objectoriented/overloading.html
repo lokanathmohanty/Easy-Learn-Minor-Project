@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Overloading (Operator and Function) 🎭</h1>
+
+        <div class="content">
+            <p>**Overloading** is a core C++ feature that allows the reuse of a name (for a function or an operator) to perform different operations depending on the types or number of arguments involved. The compiler resolves which specific definition to use through a process called **overload resolution**.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">1. Function Overloading</h2>
+
+        <div class="content">
+            <p>**Function overloading** allows multiple functions in the same scope to share the same name. They must be distinguished by either:</p>
+            <ul>
+                <li>The **number of arguments**.</li>
+                <li>The **type of arguments**.</li>
+            </ul>
+            <p>Crucially, you **cannot** overload functions that differ only by their return type.</p>
+
+            <h3>Example</h3>
+            <p>The <code>print()</code> function is overloaded to handle different data types:</p>
+            <pre class="example">
+void print(int i);       // Prints an integer
+void print(double f);    // Prints a double
+void print(char* c);     // Prints a C-style string
+</pre>
+            <p>When you call `pd.print(500.263);`, the compiler automatically selects the `void print(double f)` definition.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">2. Operator Overloading</h2>
+
+        <div class="content">
+            <p>**Operator overloading** allows you to redefine the behavior of most C++ built-in operators (like `+`, `-`, `*`, `==`, etc.) when applied to **user-defined types** (objects). This makes working with custom objects more intuitive.</p>
+
+            <h3>Syntax</h3>
+            <p>An overloaded operator is a function defined using the keyword **<code>operator</code>** followed by the operator symbol.</p>
+            <pre class="example">
+// Member function declaration for overloading '+'
+Box operator+(const Box&amp;); 
+</pre>
+
+            <h3>Example: Overloading the Addition Operator (`+`)</h3>
+            <p>The example shows the `+` operator being overloaded to define the "addition" of two `Box` objects (summing their respective dimensions).</p>
+            <pre class="example">
+// Defined as a member function of Box
+Box Box::operator+(const Box&amp; b) {
+   Box box;
+   // 'this' refers to the object on the left of the '+' (Box1)
+   // 'b' refers to the object on the right of the '+' (Box2)
+   box.length = this-&gt;length + b.length;
+   // ...
+   return box;
+}
+</pre>
+            <p>This allows the natural syntax: `Box3 = Box1 + Box2;`</p>
+
+            <h3>Overloadable Operators (Partial List)</h3>
+            <p>Most common operators are overloadable, including: `+`, `-`, `*`, `/`, `=`, `==`, `!=`, `<`, `>`, `<<`, `>>`, `[]`, `()`, and `new`/`delete`.</p>
+
+            <h3>Non-Overloadable Operators</h3>
+            <p>A few operators cannot be overloaded to preserve language consistency: **Scope Resolution** (`::`), **Member Selection** (`.`), **Pointer to Member Selection** (`.*`), and the **Ternary Conditional** (`?:`).</p>
+        </div>
+    </div>
+</div>

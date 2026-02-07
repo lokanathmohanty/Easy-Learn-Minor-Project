@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Storage Classes in C++ 💾</h1>
+
+        <div class="content">
+            <p>A **storage class** defines the **scope (visibility)** and **life-time** of variables and functions within a C++ program. These specifiers precede the data type they modify.</p>
+        </div>
+
+        <div class="content">
+            <h2 class="title">1. The <code>auto</code> Storage Class</h2>
+            <p>The <code>auto</code> specifier is the **default storage class for all local variables** (variables declared inside a function or block).</p>
+            <ul>
+                <li><strong>Scope:</strong> Local (visible only within the function/block).</li>
+                <li><strong>Life-time:</strong> Exists only while the program control is inside that function/block.</li>
+                <li><strong>Note (C++11 and later):</strong> The primary modern use of <code>auto</code> is for **type deduction** (letting the compiler automatically deduce the variable's type from its initializer), which superseded its original role as a storage specifier.</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2 class="title">2. The <code>register</code> Storage Class</h2>
+            <p>The <code>register</code> storage class is a **suggestion to the compiler** to store the local variable in a CPU register instead of standard memory (RAM) for faster access. This is ideal for frequently accessed variables like counters.</p>
+            <ul>
+                <li><strong>Constraint:</strong> Since it might not have a memory address, the unary address operator (<code>&amp;</code>) cannot be applied to a <code>register</code> variable.</li>
+                <li><strong>Reality:</strong> The compiler decides whether to honor the request based on hardware and implementation constraints.</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2 class="title">3. The <code>static</code> Storage Class</h2>
+            <p>The <code>static</code> specifier changes the behavior of variables and functions in two primary ways, depending on its location:</p>
+            <p><strong>For Local Variables (Inside a function):</strong></p>
+            <ul>
+                <li><strong>Life-time:</strong> The variable is created only once and remains in existence for the **entire life-time of the program**. It retains its value between function calls.</li>
+                <li><strong>Scope:</strong> Remains local (visible only within the function).</li>
+            </ul>
+            <p><strong>For Global Variables and Functions (Outside all functions, in a file):</strong></p>
+            <ul>
+                <li><strong>Scope:</strong> The variable or function's visibility is restricted to the **file in which it is declared** (internal linkage). It cannot be accessed by other files using <code>extern</code>.</li>
+            </ul>
+            <p><strong>For Class Members:</strong> It ensures that only one copy of the member is shared by all objects of the class.</p>
+        </div>
+
+        <div class="content">
+            <h2 class="title">4. The <code>extern</code> Storage Class</h2>
+            <p>The <code>extern</code> storage class is used to **declare** a global variable or function that is **defined elsewhere** (often in a separate file). It provides a reference to a globally visible storage location.</p>
+            <ul>
+                <li><strong>Purpose:</strong> To declare a variable or function without defining it (i.e., without allocating storage for it) in the current file. This is crucial for linking multiple source files that share global resources.</li>
+                <li><strong>Constraint:</strong> An <code>extern</code> declaration cannot initialize the variable because it merely points to an existing definition.</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2 class="title">5. The <code>mutable</code> Storage Class</h2>
+            <p>The <code>mutable</code> specifier applies only to class data members (not functions or local variables). Its sole purpose is to allow a member variable to be modified **even if it belongs to a <code>const</code> object** or is being modified within a <code>const</code> member function.</p>
+        </div>
+    </div>
+</div>

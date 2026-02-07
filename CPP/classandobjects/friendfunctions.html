@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Friend Functions and Classes (Trusted Access) 🤝</h1>
+
+        <div class="content">
+            <p>A **friend function** is a function that is **defined outside a class's scope** but is granted special permission to access all of that class's **private** and **protected** members. Although its prototype appears in the class definition, a friend function is **not a member function** of the class.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Declaring a Friend Function</h2>
+
+        <div class="content">
+            <p>To establish a function as a friend, its prototype must be placed inside the class definition, preceded by the keyword **<code>friend</code>**.</p>
+            <pre class="example">
+class Box {
+   private:
+      double width;
+   public:
+      // Declares printWidth as a friend function
+      friend void printWidth(Box box); 
+      void setWidth(double wid);
+};
+
+// Definition is outside the class scope
+void printWidth(Box box) {
+   // This function can now access box.width directly
+   cout &lt;&lt; "Width: " &lt;&lt; box.width &lt;&lt; endl; 
+}
+</pre>
+            <p>The friend function must accept the class object as a parameter (by value or reference) to access its members.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Friend Functions vs. Member Functions</h2>
+
+        <div class="content">
+            <table>
+                <thead>
+                    <tr><th>Feature</th><th>Friend Function</th><th>Member Function</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Membership</strong></td>
+                        <td>**Non-member** function.</td>
+                        <td>**Member** of the class.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Access to <code>this</code></strong></td>
+                        <td>**No** access to the implicit <code>this</code> pointer.</td>
+                        <td>**Has** access to the implicit <code>this</code> pointer.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Call Site</strong></td>
+                        <td>Called like a normal function: <code>functionName(object)</code>.</td>
+                        <td>Called using the object: <code>object.functionName()</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inheritance</strong></td>
+                        <td>Cannot be inherited by derived classes.</td>
+                        <td>Can be inherited by derived classes.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Friend Classes</h2>
+
+        <div class="content">
+            <p>If an entire class is declared as a friend, it is known as a **friend class**. This grants **all member functions** of the friend class the ability to access the private and protected members of the class that declared it as a friend.</p>
+            <pre class="example">
+class ClassA {
+   private:
+      int dataA;
+   public:
+      // Declare ClassB as a friend of ClassA
+      friend class ClassB; 
+};
+
+class ClassB {
+   public:
+      void showDataFromA(const ClassA&amp; objA) {
+         // ClassB can access ClassA's private dataA
+         cout &lt;&lt; objA.dataA &lt;&lt; endl; 
+      }
+};
+</pre>
+            <p>A **forward declaration** (`class ClassB;`) is often required if the friend class is referenced before its definition.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">JavaScript - Yield Operator</h1>
+        <div class="content">
+            <p>The <strong>yield operator</strong> in JavaScript is used to pause and resume the generator function asynchronously. Generator functions are special functions that can be paused or resumed during execution. They are defined using the <code>function*</code> syntax. The <code>yield</code> keyword can only be used inside a generator function.</p>
+            
+            <p>The <code>yield</code> operator pauses the execution of the generator function and returns its operand (expression) to the generator’s caller.</p>
+
+            <h2>Syntax</h2>
+            <p>The syntax of the yield operator in JavaScript is:</p>
+            <pre><code>yield expression;</code></pre>
+
+            <h2>Parameter</h2>
+            <p><strong>expression</strong> – The value to yield from the generator function via the iterator protocol. If omitted, <code>undefined</code> is yielded.</p>
+
+            <h2>Return Value</h2>
+            <p>It returns the optional value passed to the generator’s <code>next()</code> method to resume execution.</p>
+
+            <h2>Yield Operator in Generator Function</h2>
+            <p>When a generator function is called, it returns a generator object. Calling the <code>next()</code> method on this object resumes execution until a <code>yield</code> is encountered, which pauses the execution and returns the value after <code>yield</code> to the caller.</p>
+            <p>The <code>next()</code> method returns an iterator object with two properties: <code>value</code> (the yielded value) and <code>done</code> (a boolean indicating completion).</p>
+
+            <h2>Example: Basic Generator Function</h2>
+            <pre><code>function* test() {
+    console.log("I'm before yield expression");
+    yield 20;
+}
+const genObj = test();
+console.log(genObj.next());
+</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>I'm before yield expression
+{ value: 20, done: false }
+</code></pre>
+
+            <h2>Example: Returning Multiple Values</h2>
+            <pre><code>function* test() {
+    yield 20;
+    yield [1,2,3];
+    yield "Hello World";
+}
+let res = test();
+console.log(res.next());
+console.log(res.next());
+console.log(res.next());
+console.log(res.next());
+</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>{ value: 20, done: false }
+{ value: [ 1, 2, 3 ], done: false }
+{ value: 'Hello World', done: false }
+{ value: undefined, done: true }
+</code></pre>
+
+            <h2>Example: Returning Undefined</h2>
+            <pre><code>function* test() {
+    yield;
+}
+let res = test();
+console.log(res.next());
+console.log(res.next());
+</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>{ value: undefined, done: false }
+{ value: undefined, done: true }
+</code></pre>
+
+            <h2>Example: Passing a Value to next()</h2>
+            <pre><code>function* test() {
+    let result = yield 20;
+    console.log("default value passed to next() method " + result);
+}
+let res = test();
+console.log(res.next());
+console.log(res.next(30));
+</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>{ value: 20, done: false }
+default value passed to next() method 30
+{ value: undefined, done: true }
+</code></pre>
+
+            <h2>Example: Yield in a Loop</h2>
+            <pre><code>function* test() {
+    for (let p = 0; p &lt; 6; p += 2) {
+        yield p;
+    }
+}
+let res = test();
+console.log(res.next());
+console.log(res.next());
+console.log(res.next());
+console.log(res.next());
+</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>{ value: 0, done: false }
+{ value: 2, done: false }
+{ value: 4, done: false }
+{ value: undefined, done: true }
+</code></pre>
+
+            <h2>Use Cases</h2>
+            <p>The <code>yield</code> operator is commonly used for:</p>
+            <ul>
+                <li>Asynchronous operations</li>
+                <li>Lazy evaluations</li>
+                <li>Task scheduling</li>
+                <li>Iterating through large datasets</li>
+                <li>Creating custom iterators</li>
+            </ul>
+        </div>
+    </div>
+</div>

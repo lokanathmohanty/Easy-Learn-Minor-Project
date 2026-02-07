@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Power BI - Manage Relationships</title>
+</head>
+<body>
+    <div class="container">
+        <div class="session">
+
+             
+
+            <div class="content">
+                <p>Once datasets are uploaded into Power BI Desktop, it automatically detects relationships between them.</p>
+                <p>To modify or manage these relationships, Power BI provides the <strong>Manage relationships</strong> feature. This allows users to add, edit, or delete existing relationships between tables.</p>
+            </div>
+
+            <div class="content">
+                <h2>Handle Relationship in Data Modeling</h2>
+                <p>Follow these steps to manage relationships in your data model:</p>
+
+                <h3>Step 1</h3>
+                <p>Go to the <strong>Model View</strong> and click on <strong>Manage relationships</strong> under the <strong>Home</strong> tab.</p>
+                <p>You will see existing relationships such as many-to-one between <strong>dt</strong> and <strong>Sheet1</strong>.</p>
+
+                <h3>Step 2</h3>
+                <p>In the <strong>Manage relationships</strong> dialog, you can add, edit, or delete a relationship. To delete, select a relationship and click <strong>Delete</strong>.</p>
+
+                <h3>Step 3</h3>
+                <p>Confirm the deletion in the <strong>Delete relationship</strong> dialog box.</p>
+
+                <h3>Step 4</h3>
+                <p>After deletion, the connection between the two tables (e.g., <strong>dt</strong> and <strong>Sheet1</strong>) will be removed in the Model View.</p>
+
+                <h3>Step 5</h3>
+                <p>Click on <strong>New</strong> in the <strong>Manage relationships</strong> dialog to create a new relationship.</p>
+                <ul>
+                    <li>First Table: <strong>Sheet1</strong></li>
+                    <li>Second Table: <strong>dt</strong></li>
+                    <li>Cardinality: <strong>One to many (1:*)</strong></li>
+                </ul>
+                <p>Click <strong>OK</strong> and then <strong>Close</strong>.</p>
+
+                <p>This creates a one-to-many relationship where the arrow goes from <strong>Sheet1</strong> to <strong>dt</strong>, showing a single cross-filter direction.</p>
+
+                <h3>Step 6</h3>
+                <p>In the <strong>Properties</strong> pane, set the cross-filter direction to <strong>Both</strong> and click <strong>Apply changes</strong>. This makes the relationship bidirectional, which can help when dealing with multiple datasets.</p>
+            </div>
+
+            <div class="content">
+                <h2>Strong vs Weak Relationships</h2>
+                <ul>
+                    <li><strong>Strong Relationship:</strong> Represented by a solid line.</li>
+                    <li><strong>Weak Relationship:</strong> Represented by a dotted line.</li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2>Types of Keys in Data Modeling</h2>
+                <ul>
+                    <li><strong>Primary Key:</strong> Contains unique, non-null values.</li>
+                    <li><strong>Foreign Key:</strong> A field in another table that refers to the primary key.</li>
+                    <li><strong>Composite Key:</strong> Combines multiple fields to ensure uniqueness. Duplicate or empty values should be removed first.</li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2>Key Points While Managing Relationships</h2>
+                <ul>
+                    <li>Only one active relationship can exist between two tables.</li>
+                    <li>You can set <strong>Single</strong> or <strong>Both</strong> for cross-filter direction.</li>
+                    <li>Too many relationships can create confusion and complexity.</li>
+                    <li><strong>Circular relationships</strong> are not allowed.</li>
+                    <li>Proper relationships reduce model size and increase performance.</li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2>Role-Playing Dimensions</h2>
+                <p>If a table has multiple one-to-many relationships with another, only one can be active. The inactive relationships can still be used via DAX expressions.</p>
+            </div>
+
+            <div class="content">
+                <h2>Table Configuration and Column Properties</h2>
+                <p>In the <strong>Model View</strong>, selecting a table opens the <strong>Properties</strong> pane with two sections: <strong>General</strong> and <strong>Advanced</strong>.</p>
+
+                <h3>General Section</h3>
+                <ul>
+                    <li>Rename the table under <strong>Name</strong>.</li>
+                    <li>Write a description under <strong>Description</strong>.</li>
+                    <li>Set the <strong>Row label</strong> (e.g., "Yr").</li>
+                    <li>Select a <strong>Key column</strong> (e.g., "ky_id").</li>
+                </ul>
+
+                <h3>Advanced Section</h3>
+                <p>Here, you can change the <strong>Storage mode</strong> from <strong>Import</strong> to <strong>Direct Query</strong>. Sometimes this may be disabled due to configuration issues.</p>
+
+                <h3>Formatting Options</h3>
+                <p>When selecting a numeric column (e.g., <strong>ky_id</strong>), you will see formatting options:</p>
+                <ul>
+                    <li>Data type</li>
+                    <li>Format</li>
+                    <li>Percent format</li>
+                    <li>Thousand separator</li>
+                </ul>
+                <p>You can choose <strong>Fixed decimal number</strong> and adjust formatting accordingly. Use <strong>Table View</strong> to preview the formatted fields.</p>
+            </div>
+ 
+
+        </div>
+    </div>
+</body>
+</html>

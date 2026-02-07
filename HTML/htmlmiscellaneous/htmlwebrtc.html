@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Web RTC</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p><strong>WebRTC</strong>, introduced by the World Wide Web Consortium (W3C), supports browser-to-browser applications such as voice calling, video chat, and peer-to-peer (P2P) file sharing.</p>
+
+      <h2>WebRTC APIs</h2>
+      <ul>
+        <li><strong>MediaStream</strong> − Access to the user's camera and microphone.</li>
+        <li><strong>RTCPeerConnection</strong> − Enables audio and video calling facilities.</li>
+        <li><strong>RTCDataChannel</strong> − Provides peer-to-peer communication.</li>
+      </ul>
+
+      <h2>MediaStream</h2>
+      <p>The <code>MediaStream</code> interface represents synchronized streams of media. For example, in a chat application, it can access webcam video or microphone audio. If no audio tracks are available, <code>stream.getAudioTracks()</code> returns an empty array. Similarly, <code>stream.getVideoTracks()</code> provides access to connected video devices.</p>
+
+      <h3>Sample Code: MediaStream</h3>
+      <pre><code>function gotStream(stream) {
+   window.AudioContext = window.AudioContext || window.webkitAudioContext;
+   var audioContext = new AudioContext();
+   
+   // Create an AudioNode from the stream
+   var mediaStreamSource = audioContext.createMediaStreamSource(stream);
+   // Connect it to destination to hear yourself
+   mediaStreamSource.connect(audioContext.destination);
+}
+navigator.getUserMedia({audio:true}, gotStream);
+</code></pre>
+
+      <h2>Session Control, Network & Media Information</h2>
+      <p>WebRTC requires peer-to-peer communication between browsers. This mechanism depends on signaling, network information, session control, and media information. Developers can use protocols like SIP, XMPP, or any two-way communication system for signaling.</p>
+
+      <h3>Sample Code: Signaling and Peer Connection</h3>
+      <pre><code>var signalingChannel = createSignalingChannel();
+var pc;
+var configuration = ...;
+
+// run start(true) to initiate a call
+function start(isCaller) {
+   pc = new RTCPeerConnection(configuration);
+
+   // send any ice candidates to the other peer
+   pc.onicecandidate = function (evt) {
+      signalingChannel.send(JSON.stringify({ "candidate": evt.candidate }));
+   };
+
+   // once remote stream arrives, show it in the remote video element
+   pc.onaddstream = function (evt) {
+      remoteView.src = URL.createObjectURL(evt.stream);
+   };
+
+   // get the local stream, show it in the local video element and send it
+   navigator.getUserMedia({ "audio": true, "video": true }, function (stream) {
+      selfView.src = URL.createObjectURL(stream);
+      pc.addStream(stream);
+
+      if (isCaller)
+         pc.createOffer(gotDescription);
+      else
+         pc.createAnswer(pc.remoteDescription, gotDescription);
+
+      function gotDescription(desc) {
+         pc.setLocalDescription(desc);
+         signalingChannel.send(JSON.stringify({ "sdp": desc }));
+      }
+   });
+}
+
+signalingChannel.onmessage = function (evt) {
+   if (!pc) start(false);
+   var signal = JSON.parse(evt.data);
+
+   if (signal.sdp)
+      pc.setRemoteDescription(new RTCSessionDescription(signal.sdp));
+   else
+      pc.addIceCandidate(new RTCIceCandidate(signal.candidate));
+};
+</code></pre>
+
+    </div>
+  </div>
+</div>

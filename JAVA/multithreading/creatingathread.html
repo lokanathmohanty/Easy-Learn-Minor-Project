@@ -1,0 +1,148 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Creating a Thread</h1>
+    <div class="content">
+      <p>In Java, you can create a thread using two primary approaches:</p>
+      <ul>
+        <li>By Implementing a <code>Runnable</code> Interface</li>
+        <li>By Extending a <code>Thread</code> Class</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Create a Thread by Implementing a Runnable Interface</h2>
+    <div class="content">
+      <p>To create a thread by implementing the <code>Runnable</code> interface, follow these steps:</p>
+      <ol>
+        <li>
+          <p>Implement the <code>run()</code> method provided by the <code>Runnable</code> interface. This method contains the code that constitutes the new thread's task.</p>
+        </li>
+        <li>
+          <p>Instantiate a <code>Thread</code> object, passing the <code>Runnable</code> instance to its constructor.</p>
+        </li>
+        <li>
+          <p>Invoke the <code>start()</code> method on the <code>Thread</code> object to begin execution of the thread.</p>
+        </li>
+      </ol>
+      <p>Here's an example:</p>
+      <pre><code>class RunnableDemo implements Runnable {
+    private String threadName;
+
+    RunnableDemo(String name) {
+        threadName = name;
+        System.out.println("Thread: " + threadName + ", State: New");
+    }
+
+    public void run() {
+        System.out.println("Thread: " + threadName + ", State: Running");
+        for (int i = 4; i > 0; i--) {
+            System.out.println("Thread: " + threadName + ", " + i);
+        }
+        System.out.println("Thread: " + threadName + ", State: Dead");
+    }
+}
+
+public class TestThread {
+    public static void main(String args[]) {
+        RunnableDemo runnableDemo1 = new RunnableDemo("Thread-1");
+        RunnableDemo runnableDemo2 = new RunnableDemo("Thread-2");
+
+        Thread thread1 = new Thread(runnableDemo1);
+        Thread thread2 = new Thread(runnableDemo2);
+
+        thread1.start();
+        thread2.start();
+    }
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Create a Thread by Extending a Thread Class</h2>
+    <div class="content">
+      <p>Alternatively, you can create a thread by extending the <code>Thread</code> class:</p>
+      <ol>
+        <li>
+          <p>Define a class that extends the <code>Thread</code> class and override its <code>run()</code> method with the desired task.</p>
+        </li>
+        <li>
+          <p>Instantiate an object of your class.</p>
+        </li>
+        <li>
+          <p>Call the <code>start()</code> method on the object to begin execution of the thread.</p>
+        </li>
+      </ol>
+      <p>Here's an example:</p>
+      <pre><code>class ThreadDemo extends Thread {
+    ThreadDemo(String name) {
+        super(name);
+        System.out.println("Thread: " + name + ", State: New");
+    }
+
+    public void run() {
+        System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Running");
+        for (int i = 4; i > 0; i--) {
+            System.out.println("Thread: " + Thread.currentThread().getName() + ", " + i);
+        }
+        System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Dead");
+    }
+
+    public void start() {
+        System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Start");
+        super.start();
+    }
+}
+
+public class TestThread {
+    public static void main(String args[]) {
+        ThreadDemo thread1 = new ThreadDemo("Thread-1");
+        ThreadDemo thread2 = new ThreadDemo("Thread-2");
+        thread1.start();
+        thread2.start();
+    }
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Demonstrating the <code>sleep()</code> Method</h2>
+    <div class="content">
+      <p>The <code>sleep()</code> method pauses the execution of the current thread for a specified duration, allowing other threads to execute. This can be useful for simulating delays or for allowing other threads to perform their tasks.</p>
+      <p>Here's an example:</p>
+      <pre><code>class ThreadDemo extends Thread {
+    ThreadDemo(String name) {
+        super(name);
+        System.out.println("Thread: " + name + ", State: New");
+    }
+
+    public void run() {
+        System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Running");
+        for (int i = 4; i > 0; i--) {
+            System.out.println("Thread: " + Thread.currentThread().getName() + ", " + i);
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Dead");
+    }
+
+    public void start() {
+        System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Start");
+        super.start();
+    }
+}
+
+public class TestThread {
+    public static void main(String args[]) {
+        ThreadDemo thread1 = new ThreadDemo("Thread-1");
+        ThreadDemo thread2 = new ThreadDemo("Thread-2");
+        thread1.start();
+        thread2.start();
+    }
+}</code></pre>
+    </div>
+  </div>
+</div>

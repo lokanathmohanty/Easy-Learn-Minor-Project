@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MySQL Insert Into</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        In a MySQL table, records (rows) store data with columns (attributes) as defined by the table structure. The <code>INSERT INTO</code> statement is used to add new rows.
+      </p>
+      
+      <h2>MySQL Insert Syntax</h2>
+      <pre><code>INSERT INTO table_name (field1, field2, ...)
+VALUES (value1, value2, ...);</code></pre>
+      <p>If the values match the table structure's order and count, the field list can be omitted. Auto-increment fields are filled automatically.</p>
+      
+      <h2>Insert Example in MySQL CLI</h2>
+      <pre><code>INSERT INTO employee VALUES (1, "Ravi", 25, 25000);
+
+SELECT * FROM employee;</code></pre>
+      <p>Output:</p>
+      <pre><code>+----+-------+-----+--------+
+| id | name  | age | salary |
++----+-------+-----+--------+
+|  1 | Ravi  |  25 |  25000 |
++----+-------+-----+--------+</code></pre>
+      
+      <h2>Insert Using Node.js</h2>
+      <p>Load database in connection:</p>
+      <pre><code>var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "mypassword",
+  database: "mydb"
+});</code></pre>
+
+      <h3>Simple Insert</h3>
+      <pre><code>var qry = `INSERT INTO employee (name, age, salary)
+VALUES ("Ravi", 25, 25000);`;
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(qry, function(err, result) {
+    if (err) throw err;
+    console.log("New Record inserted successfully");
+  });
+  con.end();
+});</code></pre>
+      
+      <h3>Prepared Statement Insert</h3>
+      <p>Use placeholders <code>?</code> and pass values as array for safer queries:</p>
+      <pre><code>var data = ["Ravi", 25, 25000];
+var qry = `INSERT INTO employee (name, age, salary) VALUES (?, ?, ?);`;
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(qry, data, function(err, result) {
+    if (err) throw err;
+    console.log("New Record inserted successfully");
+  });
+  con.end();
+});</code></pre>
+      
+      <h3>Insert Multiple Records</h3>
+      <pre><code>var data = [
+  ["Ravi", 25, 25000],
+  ["Anil", 26, 30000],
+  ["Meena", 26, 27000]
+];
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  for (var i = 0; i < data.length; i++) {
+    con.query(qry, data[i], function(err, result) {
+      if (err) throw err;
+      console.log("New Record inserted successfully");
+    });
+  }
+  con.end();
+});</code></pre>
+      
+      <h3>Check Inserted Data</h3>
+      <pre><code>SELECT * FROM employee;</code></pre>
+      <p>Result:</p>
+      <pre><code>+----+-------+-----+--------+
+| id | name  | age | salary |
++----+-------+-----+--------+
+|  1 | Ravi  |  25 |  25000 |
+|  2 | Anil  |  26 |  30000 |
+|  3 | Meena |  26 |  27000 |
++----+-------+-----+--------+</code></pre>
+    </div>
+  </div>
+</div>

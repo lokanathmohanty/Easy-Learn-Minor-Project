@@ -1,0 +1,176 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">C - Properties of Array</h1>
+    <div class="content">
+      <p>Arrays are an important data structure in C, enabling easy handling of large amounts of similar data. Their usefulness arises from a set of fundamental properties derived from their definition as a contiguous collection of elements of the same data type.</p>
+      <p>The key properties of arrays in C include:</p>
+      <ul>
+        <li>Collection of Same Data Type</li>
+        <li>Contiguous Memory Allocation</li>
+        <li>Fixed Size</li>
+        <li>Length Depends on Type</li>
+        <li>Indexing</li>
+        <li>Pointer Relationship</li>
+        <li>Lower and Upper Bounds</li>
+        <li>Multi-dimensional Array</li>
+        <li>Implementation of Complex Data Structures</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Collection of Same Data Type</h2>
+    <div class="content">
+      <p>All elements in an array must have the same data type to ensure consistent access and operations.</p>
+      <pre><code>int arr[] = {50, 67.55, "hello", 21};</code></pre>
+      <p>This will cause a compiler warning due to mismatched data types.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Contiguous Memory Allocation</h2>
+    <div class="content">
+      <p>Array elements are stored in a continuous memory block, enabling efficient random access and better memory locality.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Fixed Size</h2>
+    <div class="content">
+      <p>The size of an array is fixed at declaration and cannot change during program execution.</p>
+      <pre><code>// Accepted
+#define SIZE 10
+int arr[SIZE];
+
+// Also accepted
+const int SIZE = 10;
+int arr[SIZE];
+
+// Not accepted
+int SIZE = 10;
+int arr[SIZE];  // Error
+
+// Invalid
+float num[10.5];  // Error: size must be an integer
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Length Depends on Type</h2>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int num[10] = {50, 55, 67, 73, 45, 21, 39, 70, 49, 51};
+   int size = sizeof(num) / sizeof(int);
+   printf("element at lower bound num[0]: %d \n", num[0]);
+   printf("at upper bound: %d byte \n", num[size-1]); 
+   printf("length of int array: %ld \n", sizeof(num));
+
+   double nm[10] = {50, 55, 67, 73, 45, 21, 39, 70, 49, 51};
+   size = sizeof(nm) / sizeof(double);
+   printf("element at lower bound nm[0]: %f \n", nm[0]);
+   printf("element at upper bound: %f \n", nm[size-1]);
+   printf("byte length of double array: %ld \n", sizeof(nm));
+
+   return 0;
+}</code></pre>
+        <p><strong>Output:</strong></p>
+        <pre><code>element at lower bound num[0]: 50 
+at upper bound: 51 byte 
+length of int array: 40 
+element at lower bound nm[0]: 50.000000 
+element at upper bound: 51.000000 
+byte length of double array: 80</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Indexing</h2>
+    <div class="content">
+      <p>Arrays are indexed starting at 0. You can use the index to access or modify individual elements.</p>
+      <div class="example">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int a[] = {1, 2, 3, 4, 5};
+   for (int i = 0; i < 4; i++) {
+      printf("a[%d]: %d \n", i, a[i]);
+   }
+   return 0;
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Pointer Relationship</h2>
+    <div class="content">
+      <p>The name of the array is treated as a constant pointer to the first element of the array.</p>
+      <div class="example">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int num[10] = {50, 55, 67, 73, 45, 21, 39, 70, 49, 51};
+   printf("num[0]: %d Address of 0th element: %d\n", num[0], &num[0]);
+   printf("Address of array: %d", num);
+   return 0;
+}</code></pre>
+        <p>Both addresses will be the same.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Lower and Upper Bounds</h2>
+    <div class="content">
+      <p>The lower bound is always index 0, and the upper bound is <code>size - 1</code>.</p>
+      <div class="example">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int num[10] = {50, 55, 67, 73, 45, 21, 39, 70, 49, 51};
+   int size = sizeof(num) / sizeof(int);
+   printf("element at lower bound num[0]: %d at upper bound: %d Size of array: %d", 
+   num[0], num[size-1], size);
+   return 0;
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Multi-dimensional Array</h2>
+    <div class="content">
+      <p>Arrays can have more than one dimension, such as 2D (matrix), 3D, etc. A 1D array is like a list, a 2D array is like a table.</p>
+      <div class="example">
+        <pre><code>int a[3][3] = {
+   {1, 2, 3},
+   {11, 22, 33},
+   {111, 222, 333}
+};</code></pre>
+      </div>
+      <p>Multi-dimensional arrays are commonly used in databases, spreadsheets, and simulations.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Implementation of Complex Data Structures</h2>
+    <div class="content">
+      <p>Arrays are foundational in implementing data structures like stacks, queues, and trees.</p>
+      <div class="example">
+        <pre><code>typedef struct stack {
+   int top;
+   int arr[10];
+} Stack;</code></pre>
+        <p>This example shows a stack structure using an integer array.</p>
+      </div>
+    </div>
+  </div>
+
+</div>

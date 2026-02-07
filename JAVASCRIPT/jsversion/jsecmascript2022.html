@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - ECMAScript 2022</h1>
+    <div class="content">
+      <p>The ECMAScript 2022 standard was released in 2022. It introduced several important features such as private methods and fields, <code>Array.at()</code> and <code>String.at()</code> methods, <code>Object.hasOwn()</code>, <code>error.cause</code>, and <code>await import</code>. This chapter discusses all the newly added features in ECMAScript 2022.</p>
+
+      <h2>New Features Added in ECMAScript 2022</h2>
+      <ul>
+        <li>Array <code>at()</code> Method</li>
+        <li>String <code>at()</code> Method</li>
+        <li>Private Methods and Fields</li>
+        <li><code>Object.hasOwn()</code></li>
+        <li><code>error.cause</code></li>
+        <li><code>await import</code></li>
+      </ul>
+
+      <h2>Array at() Method</h2>
+      <p>The <code>Array.at()</code> method allows accessing elements at a given index, supporting negative indices for easier access to elements from the end.</p>
+      <h3>Example</h3>
+      <pre><code>
+const arr = [10, 20, 60, 72, 6, 12, 23];
+console.log("The last array element is:", arr.at(-1));
+console.log("The third last array element is:", arr.at(-3));
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+The last array element is: 23
+The third last array element is: 6
+      </code></pre>
+
+      <h2>String at() Method</h2>
+      <p>The <code>String.at()</code> method allows accessing characters at a given index, with support for negative indices.</p>
+      <h3>Example</h3>
+      <pre><code>
+let str = "Hello world";
+console.log("The last string character is:", str.at(-1));
+console.log("The fourth last string character is:", str.at(-4));
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+The last string character is: d
+The fourth last string character is: o
+      </code></pre>
+
+      <h2>Private Methods and Fields</h2>
+      <p>Private fields and methods are defined using the <code>#</code> prefix. They cannot be accessed outside of the class, only within the class itself.</p>
+      <h3>Example</h3>
+      <pre><code>
+class Car {
+  #brand;
+  constructor(brand) {
+    this.#brand = brand;
+  }
+  getBrand() {
+    return this.#carBrand();
+  }
+  #carBrand() {
+    return "The car brand is " + this.#brand;
+  }
+}
+
+const BMW = new Car("BMW");
+console.log(BMW.getBrand());
+      </code></pre>
+      <p><strong>Output:</strong> The car brand is BMW</p>
+
+      <h2>Object.hasOwn()</h2>
+      <p>The <code>Object.hasOwn()</code> method is a safer replacement for <code>Object.hasOwnProperty()</code>, checking if an object has a specific property.</p>
+      <h3>Example</h3>
+      <pre><code>
+const obj = { name: "sam", age: 50 };
+console.log("Does obj contain name property?", Object.hasOwn(obj, "name"));
+      </code></pre>
+      <p><strong>Output:</strong> Does obj contain name property? true</p>
+
+      <h2>The error.cause Property</h2>
+      <p>The <code>cause</code> property provides additional context for an error, describing why it occurred.</p>
+      <h3>Example</h3>
+      <pre><code>
+try {
+  throw new Error("New error", { cause: "Testing with error." });
+} catch (error) {
+  console.log("The reason for the error is:", error.cause);
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+The reason for the error is: Testing with error.
+      </code></pre>
+
+      <h2>Await Import</h2>
+      <p>Dynamic modules can be imported asynchronously using <code>await import</code>. This is useful when loading modules conditionally or lazily.</p>
+      <h3>Example</h3>
+      <pre><code>
+(async function () {
+  await (await import('./math.js')).default();
+  await (await import('./operations.js')).default();
+})();
+      </code></pre>
+
+      <div class="note">
+        <p><strong>Warning:</strong> Some of the above features may not be supported in older browsers. Use polyfills if necessary.</p>
+      </div>
+    </div>
+  </div>
+</div>

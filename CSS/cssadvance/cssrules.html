@@ -1,0 +1,115 @@
+ <div class="container">
+   <div class="session">
+      <h1 class="title">CSS - @ Rules</h1>
+
+      <div class="content">
+         <p>CSS at-rules are special instructions or statements beginning with the "@" symbol. They control or modify the behavior of the stylesheet and extend CSS capabilities beyond basic selectors and property-value pairs. They can define external stylesheets, apply styles conditionally, manage fonts, animations, and more.</p>
+
+         <p>An at-rule begins with an at (@) sign, followed by an identifier, and includes everything up to the next semicolon or CSS block.</p>
+
+         <h2>Syntax</h2>
+         <p>General structure of an at-rule:</p>
+         <p><code>@identifier (RULE);</code></p>
+
+         <h2>Types of @ Rules</h2>
+
+         <h3>Regular At-Rules</h3>
+         <ul>
+            <li><strong>@charset</strong>: Specifies the character encoding of an external stylesheet.</li>
+            <li><strong>@import</strong>: Imports an external CSS file into the current stylesheet.</li>
+            <li><strong>@namespace</strong>: Declares and defines XML namespaces within a CSS stylesheet.</li>
+         </ul>
+
+         <h3>Nested At-Rules</h3>
+         <ul>
+            <li><strong>@media</strong>: Applies styles if the device meets defined conditions.</li>
+            <li><strong>@supports</strong>: Applies styles if the browser supports the given condition.</li>
+            <li><strong>@page</strong>: Defines the layout of printed pages.</li>
+            <li><strong>@font-face</strong>: Defines custom fonts to be used in a webpage.</li>
+            <li><strong>@keyframes</strong>: Defines steps for CSS animations.</li>
+            <li><strong>@counter-style</strong>: Defines custom counter styles.</li>
+            <li><strong>@font-feature-values</strong>: Handles alternate glyphs in OpenType fonts.</li>
+            <li><strong>@property</strong>: Defines custom properties and variables.</li>
+            <li><strong>@layer</strong>: Creates cascade layers with precedence order.</li>
+         </ul>
+      </div>
+
+      <div class="example">
+         <h2 class="title">Example: @page</h2>
+         <p>This example demonstrates the usage of the <code>@page</code> rule to control printing layout:</p>
+<pre>
+@page :first {
+   margin-left: 80%;
+   margin-top: 80%;
+}
+
+p {
+   page-break-after: always;
+}
+</pre>
+
+         <h2 class="title">Example: @keyframes</h2>
+         <p>This example shows how to use <code>@keyframes</code> for animation:</p>
+<pre>
+p {
+   animation-duration: 3s;
+   animation-name: slidein;
+}
+
+@keyframes slidein {
+   from {
+      margin-left: 100%;
+      width: 300%;
+   }
+   to {
+      margin-left: 0%;
+      width: 100%;
+   }
+}
+</pre>
+
+         <h2 class="title">Example: @property</h2>
+         <p>This example shows defining and using a custom property with <code>@property</code>:</p>
+<pre>
+@property --item-size {
+   syntax: "&lt;percentage&gt;";
+   inherits: true;
+   initial-value: 40%;
+}
+
+.container {
+   display: flex;
+   height: 100px;
+   --item-size: 50%;
+   --item-color: tomato;
+   --item-border: 5px solid green;
+}
+
+.item {
+   width: var(--item-size);
+   height: var(--item-size);
+   border: var(--item-border);
+   background-color: var(--item-color);
+}
+</pre>
+
+         <h2 class="title">List of CSS @ Rules</h2>
+         <ul>
+            <li><code>@charset "UTF-8";</code></li>
+            <li><code>@container (width &gt; 400px) { h1 { font-size: 2em; } }</code></li>
+            <li><code>@counter-style sample {}</code></li>
+            <li><code>@font-face { font-family: "CustomFont"; src: url("customfont.woff2") format("woff2"); }</code></li>
+            <li><code>@font-feature-values "CustomFont" { @swash { fancy: 2; } }</code></li>
+            <li><code>@font-palette-values One { font-family: "Bungee Spice"; }</code></li>
+            <li><code>@import url("style.css");</code></li>
+            <li><code>@keyframes sample-slide { from { transform: translateY(100%); } }</code></li>
+            <li><code>@layer sample-layer { .margin-lg { margin: 5px; } }</code></li>
+            <li><code>@media screen and (max-width: 600px) {}</code></li>
+            <li><code>@namespace svg url();</code></li>
+            <li><code>@page { size: 5in 6in; margin-left: 4in; }</code></li>
+            <li><code>@property sample-property { rules }</code></li>
+            <li><code>@supports (transform-origin: 10% 10%) {}</code></li>
+         </ul>
+      </div>
+   </div>
+</div>

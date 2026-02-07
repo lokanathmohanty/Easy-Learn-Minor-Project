@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java 8 - New Date-Time API (<code>java.time</code>)</h1>
+
+        <div class="content">
+            <h2>Why a New Date-Time API? 🕰️</h2>
+            <p>The new Date-Time API, introduced in **Java 8** under the package **<code>java.time</code>**, addresses major drawbacks of the legacy <code>java.util.Date</code> and <code>java.util.Calendar</code> classes:</p>
+            <ul>
+                <li>
+                    <strong>Not Thread-Safe:</strong> The old API was mutable and not thread-safe, forcing developers to deal with concurrency issues. The new API classes are **immutable**, resolving this problem.
+                </li>
+                <li>
+                    <strong>Poor Design & Uniformity:</strong> The old API had non-uniform conventions (e.g., months starting at 0, years starting at 1900). The new API provides **clearer, direct utility methods** for date operations and adheres to the ISO 8601 standard.
+                </li>
+                <li>
+                    <strong>Difficult Time Zone Handling:</strong> Time zone complexities required excessive boilerplate code in the old API. The new API offers specialized classes for clear and simple time zone management.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Local Date-Time API (Zone-Neutral)</h2>
+            <p>These classes are for date and time development where time zone context is **not required**:</p>
+            <ul>
+                <li>
+                    <strong><code>LocalDate</code>:</strong> A date without time-of-day (e.g., <code>2024-10-16</code>).
+                </li>
+                <li>
+                    <strong><code>LocalTime</code>:</strong> A time without date or time zone (e.g., <code>14:25:54</code>).
+                </li>
+                <li>
+                    <strong><code>LocalDateTime</code>:</strong> A combination of <code>LocalDate</code> and <code>LocalTime</code>, without a time zone (e.g., <code>2024-10-16T14:25:54</code>).
+                </li>
+            </ul>
+            <p>These classes offer methods for creation (<code>now()</code>, <code>of()</code>, <code>parse()</code>) and modification (<code>plus()</code>, <code>withDayOfMonth()</code>, etc.).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Zoned Date-Time API (Time Zone Support)</h2>
+            <p>This API is used when time zone context is critical:</p>
+            <ul>
+                <li>
+                    <strong><code>ZoneId</code>:</strong> Represents a time zone identifier (e.g., <code>Europe/Paris</code>, <code>Asia/Karachi</code>).
+                </li>
+                <li>
+                    <strong><code>ZonedDateTime</code>:</strong> A full date and time combined with a time zone (e.g., <code>2007-12-03T10:15:30+05:00[Asia/Karachi]</code>). This is the class to use for global/multi-zone applications.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Temporal Manipulation Classes</h2>
+            <ul>
+                <li>
+                    <h3><code>ChronoUnit</code> Enum</h3>
+                    <p>Replaces integer constants for date and time fields. Used with methods like <code>plus()</code> to add or subtract specific units of time:</p>
+                    <pre><code>LocalDate nextWeek = today.plus(1, ChronoUnit.WEEKS);</code></pre>
+                </li>
+                <li>
+                    <h3><code>Period</code> and <code>Duration</code></h3>
+                    <p>Classes used to represent amounts of time:</p>
+                    <ul>
+                        <li><strong><code>Period</code>:</strong> Deals with **date-based** time amounts (years, months, days). E.g., <code>Period.between(date1, date2)</code>.</li>
+                        <li><strong><code>Duration</code>:</strong> Deals with **time-based** time amounts (hours, minutes, seconds, nanos). E.g., <code>Duration.ofHours(2)</code>.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3><code>TemporalAdjusters</code></h3>
+                    <p>A utility class used with the <code>with()</code> method to perform complex date mathematics, such as finding the next Tuesday or the last day of the month.</p>
+                    <pre><code>LocalDate nextTuesday = date1.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));</code></pre>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

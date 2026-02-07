@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Update Tuples</h1>
+    <div class="content">
+      <p>In Python, tuples are immutable, meaning once created their elements cannot be changed directly. However, you can create an updated tuple by combining operations such as concatenation, slicing, and unpacking.</p>
+
+      <h2 class="title">Updating Tuples Using Concatenation</h2>
+      <p>The <code>+</code> operator joins two tuples to create a new one with all elements.</p>
+      <pre><code># Example
+T1 = (10, 20, 30, 40)
+T2 = ('one', 'two', 'three', 'four')
+T1 = T1 + T2
+print(T1)  # (10, 20, 30, 40, 'one', 'two', 'three', 'four')</code></pre>
+
+      <h2 class="title">Updating Tuples Using Slicing</h2>
+      <p>Use slicing to split the original tuple and insert new elements between slices.</p>
+      <pre><code># Example
+T1 = (37, 14, 95, 40)
+new_elements = ('green', 'blue', 'red', 'pink')
+part1 = T1[:2]
+part2 = T1[2:]
+updated_tuple = part1 + new_elements + part2
+print("Original Tuple:", T1)
+print("Updated Tuple:", updated_tuple)</code></pre>
+
+      <h2 class="title">Updating Tuples Using List Comprehension</h2>
+      <p>Convert tuple to list, update elements with list comprehension, and convert back.</p>
+      <pre><code># Example
+T1 = (10, 20, 30, 40)
+list_T1 = list(T1)
+updated_list = [item + 100 for item in list_T1]
+updated_tuple = tuple(updated_list)
+print("Original Tuple:", T1)
+print("Updated Tuple:", updated_tuple)</code></pre>
+
+      <h2 class="title">Updating Tuples Using append() Function (Indirect)</h2>
+      <p>Convert tuple to list, use <code>append()</code>, then convert back to tuple.</p>
+      <pre><code># Example
+T1 = (10, 20, 30, 40)
+list_T1 = list(T1)
+new_elements = [50, 60, 70]
+for element in new_elements:
+    list_T1.append(element)
+updated_tuple = tuple(list_T1)
+print("Original Tuple:", T1)
+print("Updated Tuple:", updated_tuple)</code></pre>
+    </div>
+  </div>
+</div>

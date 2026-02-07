@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Java - Basic Syntax</title>
+</head>
+<body>
+
+<h1>Java - Basic Syntax</h1>
+
+<p>When we consider a Java program, it can be defined as a collection of objects that communicate via invoking each other's methods. Let us now briefly look into what do class, object, methods, and instance variables mean.</p>
+
+<ul>
+<li><strong>Object</strong> − Objects have states and behaviors. Example: A dog has states - color, name, breed as well as behavior such as wagging their tail, barking, eating. An object is an instance of a class.</li>
+<li><strong>Class</strong> − A class can be defined as a template/blueprint that describes the behavior/state that the object of its type supports.</li>
+<li><strong>Methods</strong> − A method is basically a behavior. A class can contain many methods. It is in methods where the logics are written, data is manipulated and all the actions are executed.</li>
+<li><strong>Instance Variables</strong> − Each object has its unique set of instance variables. An object's state is created by the values assigned to these instance variables.</li>
+</ul>
+
+<h2>First Java Program</h2>
+<p>Let us look at a simple code that will print the words Hello World.</p>
+
+<h3>Example</h3>
+<pre><code>public class MyFirstJavaProgram {
+
+   /* This is my first java program.
+    * This will print 'Hello World' as the output
+    */
+
+   public static void main(String []args) {
+      System.out.println("Hello World"); // prints Hello World
+   }
+}
+</code></pre>
+
+<p>Let's look at how to save the file, compile, and run the program. Please follow the subsequent steps −</p>
+
+<ol>
+<li>Open notepad and add the code as above.</li>
+<li>Save the file as: MyFirstJavaProgram.java.</li>
+<li>Open a command prompt window and go to the directory where you saved the class. Assume it's C:\.</li>
+<li>Type 'javac MyFirstJavaProgram.java' and press enter to compile your code. If there are no errors in your code, the command prompt will take you to the next line (Assumption : The path variable is set).</li>
+<li>Now, type ' java MyFirstJavaProgram ' to run your program.</li>
+<li>You will be able to see ' Hello World ' printed on the window.</li>
+</ol>
+
+<h3>Output</h3>
+<pre><code>C:\> javac MyFirstJavaProgram.java
+C:\> java MyFirstJavaProgram 
+Hello World
+</code></pre>
+
+<h2>Basic Syntax</h2>
+<p>About Java programs, it is very important to keep in mind the following points.</p>
+
+<ul>
+<li><strong>Case Sensitivity</strong> − Java is case sensitive, which means identifier Hello and hello would have different meaning in Java.</li>
+<li><strong>Class Names</strong> − For all class names the first letter should be in Upper Case. If several words are used to form a name of the class, each inner word's first letter should be in Upper Case.</li>
+<p>Example − class MyFirstJavaClass</p>
+<li><strong>Method Names</strong> − All method names should start with a Lower Case letter. If several words are used to form the name of the method, then each inner word's first letter should be in Upper Case.</li>
+<p>Example − public void myMethodName()</p>
+<li><strong>Program File Name</strong> − Name of the program file should exactly match the class name.</li>
+<p>When saving the file, you should save it using the class name (Remember Java is case sensitive) and append '.java' to the end of the name (if the file name and the class name do not match, your program will not compile).</p>
+<p>But please make a note that in case you do not have a public class present in the file then file name can be different than class name. It is also not mandatory to have a public class in the file.</p>
+<p>Example − Assume 'MyFirstJavaProgram' is the class name. Then the file should be saved as 'MyFirstJavaProgram.java'</p>
+<li><strong>public static void main(String args[])</strong> − Java program processing starts from the main() method which is a mandatory part of every Java program.</li>
+</ul>
+
+<h2>Java Identifiers</h2>
+<p>All Java components require names. Names used for classes, variables, and methods are called identifiers.</p>
+
+<p>In Java, there are several points to remember about identifiers. They are as follows −</p>
+
+<ul>
+<li>All identifiers should begin with a letter (A to Z or a to z), currency character ($) or an underscore (_).</li>
+<li>After the first character, identifiers can have any combination of characters.</li>
+<li>A keyword cannot be used as an identifier.</li>
+<li>Most importantly, identifiers are case sensitive.</li>
+</ul>
+
+<p>Examples of legal identifiers: age, $salary, _value, __1_value.</p>
+<p>Examples of illegal identifiers: 123abc, -salary.</p>
+
+<h2>Java Modifiers</h2>
+<p>Like other languages, it is possible to modify classes, methods, etc., by using modifiers. There are two categories of modifiers −</p>
+
+<ul>
+<li><strong>Access Modifiers</strong> − default, public , protected, private</li>
+<li><strong>Non-access Modifiers</strong> − final, abstract, strictfp</li>
+</ul>
+
+<p>We will be looking into more details about modifiers in the next section.</p>
+
+<h2>Java Variables</h2>
+<p>Following are the types of variables in Java −</p>
+
+<ul>
+<li>Local Variables</li>
+<li>Class Variables (Static Variables)</li>
+<li>Instance Variables (Non-static Variables)</li>
+</ul>
+
+<h2>Java Arrays</h2>
+<p>Arrays are objects that store multiple variables of the same type. However, an array itself is an object on the heap. We will look into how to declare, construct, and initialize in the upcoming chapters.</p>
+
+<h2>Java Enums</h2>
+<p>Enums were introduced in Java 5.0. Enums restrict a variable to have one of only a few predefined values. The values in this enumerated list are called enums.</p>
+
+<p>With the use of enums it is possible to reduce the number of bugs in your code.</p>
+
+<p>For example, if we consider an application for a fresh juice shop, it would be possible to restrict the glass size to small, medium, and large. This would make sure that it would not allow anyone to order any size other than small, medium, or large.</p>
+
+<h3>Example</h3>
+<pre><code>class FreshJuice {
+   enum FreshJuiceSize{ SMALL, MEDIUM, LARGE }
+   FreshJuiceSize size;
+}
+
+public class FreshJuiceTest {
+
+   public static void main(String args[]) {
+      FreshJuice juice = new FreshJuice();
+      juice.size = FreshJuice.FreshJuiceSize.MEDIUM ;
+      System.out.println("Size: " + juice.size);
+   }
+}
+</code></pre>
+
+<h3>Output</h3>
+<p>The above example will produce the following result −</p>
+<pre><code>Size: MEDIUM
+</code></pre>
+
+<p>Note − Enums can be declared as their own or inside a class. Methods, variables, constructors can be defined inside enums as well.</p>
+
+<h2>Java Keywords</h2>
+<p>The following list shows the reserved words in Java. These reserved words may not be used as constant or variable or any other identifier names.</p>
+
+<table border="1" cellpadding="5" cellspacing="0">
+<thead>
+<tr>
+<th>Sr.No</th>
+<th>Reserved Words &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>abstract</strong><br>As per dictionary, abstraction is the quality of dealing with ideas rather than events.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>assert</strong><br>assert keyword is used in Java to define assertion. An assertion is a statement in Java which ensures the correctness of any assumptions which have been done in the program.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>boolean</strong><br>boolean datatype is one of the eight primitive datatype supported by Java. It provides means to create boolean type variables which can accept a boolean value as true or false.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>break</strong><br>The break statement in Java programming language has the following two usages −<br><br>When the break statement is encountered inside a loop, the loop is immediately terminated and the program control resumes at the next statement following the loop.<br><br>It can be used to terminate a case in the switch statement.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>byte</strong><br>byte datatype is one of the eight primitive datatype supported by Java. It provides means to create byte type variables which can accept a byte value.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>case</strong><br>case keyword is part of switch statement which allows a variable to be tested for equality against a list of values.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>catch</strong><br>An exception (or exceptional event) is a problem that arises during the execution of a program. Exceptions are caught by the catch block.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>char</strong><br>char datatype is one of the eight primitive datatype supported by Java. It provides means to create char type variables which can accept a character value.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>class</strong><br>class keyword is used to declare a class.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>const</strong><br>const is not used. It is a reserved keyword.</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>continue</strong><br>The continue statement in Java programming language is used to continue the current iteration of a loop (for, while, or do-while) and start the next iteration.</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>default</strong><br>The default keyword is used in switch statements. It specifies the statements to execute if no case matches.</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>do</strong><br>The do statement executes a block of statements repeatedly until a particular condition is true. It is an exit controlled loop.</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>double</strong><br>double datatype is one of the eight primitive datatype supported by Java. It provides means to create double type variables which can accept a double value.</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>else</strong><br>else statement contains a block of code that executes if the conditional expression in the if statement evaluates to false.</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>enum</strong><br>enum keyword is used to declare an enumerated (unchangeable) type.</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>extends</strong><br>extends keyword is used to indicate that a class is inheriting the properties of a superclass.</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>final</strong><br>final keyword is used to declare constants, prevent method overriding, and inheritance.</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>finally</strong><br>The finally block is used to execute important code such as closing connection, stream etc.</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>float</strong><br>float datatype is one of the eight primitive datatype supported by Java. It provides means to create float type variables which can accept a floating point value.</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>for</strong><br>The for loop is used to iterate a part of the program several times.</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>goto</strong><br>goto is not used. It is a reserved keyword.</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>if</strong><br>The if statement is used to test the condition. It executes some code if the condition is true.</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>implements</strong><br>implements keyword is used to implement an interface.</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>import</strong><br>import keyword is used to import a package, class or interface.</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>instanceof</strong><br>instanceof keyword is used to test whether the object is an instance of the specified type (class or subclass or interface).</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>int</strong><br>int datatype is one of the eight primitive datatype supported by Java. It provides means to create integer type variables which can accept integer values.</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>interface</strong><br>interface keyword is used to declare an interface.</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>long</strong><br>long datatype is one of the eight primitive datatype supported by Java. It provides means to create long type variables which can accept a long integer value.</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>native</strong><br>native keyword is used to specify that a method is implemented in native code using JNI (Java Native Interface).</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>new</strong><br>new keyword is used to create new objects.</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>null</strong><br>null is a literal and a keyword which indicates that the reference points to no object.</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>package</strong><br>package keyword is used to create a package.</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>private</strong><br>private keyword is an access modifier indicating that the member is accessible only within its own class.</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>protected</strong><br>protected keyword is an access modifier indicating that the member is accessible within its own package and by subclasses.</td>
+</tr>
+<tr>
+<td>36</td>
+<td><strong>public</strong><br>public keyword is an access modifier indicating that the member is accessible from any other class.</td>
+</tr>
+<tr>
+<td>37</td>
+<td><strong>return</strong><br>return keyword is used to exit from a method and optionally pass back a value.</td>
+</tr>
+<tr>
+<td>38</td>
+<td><strong>short</strong><br>short datatype is one of the eight primitive datatype supported by Java. It provides means to create short type variables which can accept a short integer value.</td>
+</tr>
+<tr>
+<td>39</td>
+<td><strong>static</strong><br>static keyword is used for memory management mainly. It means a member belongs to the class rather than instance of the class.</td>
+</tr>
+<tr>
+<td>40</td>
+<td><strong>strictfp</strong><br>strictfp keyword is used to restrict floating-point calculations to ensure portability.</td>
+</tr>
+<tr>
+<td>41</td>
+<td><strong>super</strong><br>super keyword is a reference variable which is used to refer immediate parent class object.</td>
+</tr>
+<tr>
+<td>42</td>
+<td><strong>switch</strong><br>switch keyword is used to select one of many code blocks to be executed.</td>
+</tr>
+<tr>
+<td>43</td>
+<td><strong>synchronized</strong><br>synchronized keyword is used in multi-threading to ensure that only one thread can access a resource at a time.</td>
+</tr>
+<tr>
+<td>44</td>
+<td><strong>this</strong><br>this keyword is a reference variable that refers to the current object.</td>
+</tr>
+<tr>
+<td>45</td>
+<td><strong>throw</strong><br>throw keyword is used to explicitly throw an exception.</td>
+</tr>
+<tr>
+<td>46</td>
+<td><strong>throws</strong><br>throws keyword is used to declare exceptions in a method signature.</td>
+</tr>
+<tr>
+<td>47</td>
+<td><strong>transient</strong><br>transient keyword is used to indicate that a field should not be serialized.</td>
+</tr>
+<tr>
+<td>48</td>
+<td><strong>try</strong><br>try keyword is used to specify a block where exceptions can occur.</td>
+</tr>
+<tr>
+<td>49</td>
+<td><strong>void</strong><br>void keyword is used to specify that a method does not return any value.</td>
+</tr>
+<tr>
+<td>50</td>
+<td><strong>volatile</strong><br>volatile keyword is used in multi-threading to indicate that a variable's value will be modified by different threads.</td>
+</tr>
+<tr>
+<td>51</td>
+<td><strong>while</strong><br>while keyword is used to create a loop that executes as long as a specified condition is true.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Java Comments</h2>
+<p>Comments in Java are used to provide information about the program and are ignored by the compiler.</p>
+
+<ul>
+<li>Single line comment − <code>// This is a comment</code></li>
+<li>Multiline comment − <code>/* This is a comment */</code></li>
+<li>Documentation comment − <code>/** This is a documentation comment */</code></li>
+</ul>
+
+<h2>Inheritance</h2>
+<p>Inheritance is one of the core concepts of object-oriented programming. It is a mechanism wherein a new class is derived from an existing class.</p>
+
+<h2>Interfaces</h2>
+<p>Interface is a mechanism to achieve fully abstract class in Java. It is a collection of abstract methods.</p>
+
+</body>
+</html>

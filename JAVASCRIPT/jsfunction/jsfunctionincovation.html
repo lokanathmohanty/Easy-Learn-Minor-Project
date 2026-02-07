@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Function Invocation</h1>
+
+    <div class="content">
+      <h2>Function Invocation</h2>
+      <p>
+        The function invocation in JavaScript is the process of executing a function. 
+        A JavaScript function can be invoked using the function name followed by a pair of parentheses. 
+        When you write a function code in JavaScript, it defines the function with expressions and statements. 
+        Now, to evaluate these expressions, it is necessary to invoke the function. 
+        The function invocation is the synonym of the function call or function execution.
+      </p>
+      <p>
+        A JavaScript function can be defined using function declaration or function expression. 
+        The code inside the curly braces in the function definition are not executed when function is defined. 
+        To execute the code, we need to invoke the function.
+      </p>
+      <p>
+        The call a function and invoke a function are two interchangeable terms. 
+        But we can invoke a function without calling it. 
+        For example, self-invoking functions are invoked without calling them.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+functionName()
+OR
+functionName(arg1, arg2, ... argN);
+      </pre>
+
+      <h2>Example</h2>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="output"&gt; &lt;/p&gt;
+   &lt;script&gt;    
+      function merge(str1, str2) {
+         return str1 + str2;
+      }
+      document.getElementById("output").innerHTML = merge("Hello", " World!");  
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><strong>Output:</strong> Hello World!</p>
+
+      <h2>Invocation of Function Constructor</h2>
+      <p>
+        When you invoke a function with the <code>new</code> keyword, it works as a function constructor. 
+        The function constructor is used to create an object from the function definition.
+      </p>
+
+      <pre>
+const varName = new funcName(arguments);
+      </pre>
+
+      <h3>Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="output"&gt; The ODCar object is: &lt;/p&gt;
+   &lt;script&gt;
+      function Car(name, model, year) {
+         this.name = name;
+         this.model = model;
+         this.year = year;
+      }
+      const ODCar = new Car("OD", "Q6", 2020);
+      document.getElementById("output").innerHTML += JSON.stringify(ODCar);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><strong>Output:</strong> The ODCar object is: {"name":"OD","model":"Q6","year":2020}</p>
+
+      <h2>Object Method Invocation</h2>
+      <p>
+        The JavaScript object can also contain the function, and it is called the method.
+      </p>
+      <pre>
+obj.func();
+      </pre>
+
+      <h3>Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="output"&gt;The age of John is: &lt;/p&gt;
+   &lt;script&gt;
+      const obj = {
+         name: "John",
+         getAge: () =&gt; {
+            return 10;
+         }
+      }
+      document.getElementById("output").innerHTML += obj.getAge();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><strong>Output:</strong> The age of John is: 10</p>
+
+      <h2>Self-Invoking Functions</h2>
+      <p>
+        The self-invoking functions in JavaScript are executed just after they are defined. 
+        There is no need to call these types of functions to invoke them. 
+        These are also called Immediately Invoked Function Expressions (IIFEs).
+      </p>
+
+      <h3>Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;head&gt;
+   &lt;script&gt;
+      (function () {alert("Hello World")})();
+   &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>Other Methods to Invoke a Function</h2>
+      <p>
+        JavaScript contains two special methods to invoke functions differently:
+      </p>
+      <ul>
+        <li><strong>call()</strong> – Immediate invocation with separate arguments.</li>
+        <li><strong>apply()</strong> – Immediate invocation with an array of arguments.</li>
+      </ul>
+    </div>
+  </div>
+</div>

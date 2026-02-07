@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Streams (Java 8+)</h1>
+
+        <div class="content">
+            <h2>The Need for Streams and Declarative Programming 💡</h2>
+            <p>The **Stream API**, introduced in **Java 8**, is a new abstract layer that allows developers to process sequences of objects in a **declarative way**. Before streams, aggregate operations on collections required verbose, error-prone code using loops and explicit checks.</p>
+            <p>Streams solve two major problems:</p>
+            <ul>
+                <li><strong>Verbosity:</strong> Replaces boilerplate loop-based code (the "how") with high-level descriptions of the desired outcome (the "what"), similar to SQL.</li>
+                <li><strong>Parallelism:</strong> Enables easy and efficient **parallel processing** of data, automatically leveraging multi-core architectures without complex, manual thread management.</li>
+            </ul>
+
+            <h3>What is a Stream?</h3>
+            <p>A stream represents a **sequence of elements from a source** (like a Collection or Array) that supports **aggregate operations** but **never stores the elements** itself. Elements are computed or retrieved on demand.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Stream Characteristics and Operations</h2>
+
+            <h3>The Stream Pipeline</h3>
+            <p>Stream operations are executed in a pipeline structure:</p>
+            <ol>
+                <li><strong>Source:</strong> The origin of the elements (e.g., <code>List.stream()</code>).</li>
+                <li><strong>Intermediate Operations:</strong> Operations that process the input and return another stream itself, allowing for **pipelining**. They are lazily executed (only when a terminal operation is called). Examples: <code>filter()</code>, <code>map()</code>, <code>sorted()</code>, <code>limit()</code>.</li>
+                <li><strong>Terminal Operation:</strong> The final operation that consumes the stream and produces a result (or a side effect). After a terminal operation, the stream cannot be reused. Examples: <code>collect()</code>, <code>forEach()</code>, <code>count()</code>, <code>reduce()</code>.</li>
+            </ol>
+
+            <h3>Generating Streams</h3>
+            <ul>
+                <li><strong>Sequential Stream:</strong> <code>collection.stream()</code></li>
+                <li><strong>Parallel Stream:</strong> <code>collection.parallelStream()</code> (leveraging multiple CPU cores)</li>
+                <li><strong>Random Data Stream:</strong> <code>new Random().ints().limit(10)</code></li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Key Intermediate Stream Methods</h2>
+            <ul>
+                <li>
+                    <strong><code>filter(Predicate)</code>:</strong> Selects elements based on a condition, eliminating elements that don't match.
+                    <pre><code>strings.stream().filter(s -> s.isEmpty()).count();</code></pre>
+                </li>
+                <li>
+                    <strong><code>map(Function)</code>:</strong> Transforms each element into a new element or value of a potentially different type.
+                    <pre><code>numbers.stream().map(i -> i * i); // Converts Integer to its square</code></pre>
+                </li>
+                <li>
+                    <strong><code>distinct()</code>:</strong> Returns a stream with unique elements, based on the object's <code>equals()</code> and <code>hashCode()</code> methods.
+                </li>
+                <li>
+                    <strong><code>limit(long maxSize)</code>:</strong> Truncates the stream, ensuring the result contains no more than the specified number of elements.
+                </li>
+                <li>
+                    <strong><code>sorted()</code>:</strong> Returns a stream sorted according to natural order (or a custom <code>Comparator</code>).
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Key Terminal Stream Methods</h2>
+            <ul>
+                <li>
+                    <strong><code>forEach(Consumer)</code>:</strong> Performs an action for each element. This is a terminal operation used for side effects (like printing).
+                </li>
+                <li>
+                    <strong><code>collect(Collector)</code>:</strong> Performs a mutable reduction operation, accumulating the stream elements into a container like a <code>List</code>, <code>Set</code>, or <code>Map</code>. The <code>Collectors</code> class provides many predefined methods:
+                    <ul>
+                        <li><code>Collectors.toList()</code>: Accumulates elements into a <code>List</code>.</li>
+                        <li><code>Collectors.joining(delimiter)</code>: Concatenates elements into a single <code>String</code>.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong><code>summaryStatistics()</code>:</strong> Used with <code>mapToInt()</code>, <code>mapToLong()</code>, or <code>mapToDouble()</code> to efficiently compute basic statistics (min, max, sum, average, count) in a single pass.
+                    <pre><code>IntSummaryStatistics stats = numbers.stream().mapToInt(x -> x).summaryStatistics();</code></pre>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

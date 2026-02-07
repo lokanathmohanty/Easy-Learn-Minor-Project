@@ -1,0 +1,161 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - DOM Animation</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        DOM animation can be achieved by changing an element's style using JavaScript. When changes are made gradually with a small time interval, the animation appears continuous. There are three main ways to animate DOM elements:
+      </p>
+      <ul>
+        <li><strong>Using CSS transitions</strong> – triggered by changes in element properties.</li>
+        <li><strong>Using CSS animations</strong> – allows keyframes and more control over timing.</li>
+        <li><strong>Using JavaScript</strong> – provides the most flexibility for complex animations.</li>
+      </ul>
+
+      <h2>Animating with <code>setInterval()</code></h2>
+      <p>
+        You can use the <code>setInterval()</code> method to update the style of a DOM element at regular intervals. This creates the effect of animation.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre><code>
+let id = setInterval(frame_func, timeframe);
+function frame_func() {
+    if (animation_end) {
+        clearInterval(id);
+    } else {
+        // change style to animate
+    }
+}
+      </code></pre>
+
+      <h3>Example: Moving a Div</h3>
+      <pre><code>
+&lt;div id="parent"&gt;
+  &lt;div id="child"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;button onclick="startAnimation()"&gt;Animate Div&lt;/button&gt;
+
+&lt;script&gt;
+function startAnimation() {
+  const elem = document.getElementById("child");
+  let pos = 0;
+  let id = setInterval(animationFrame, 5);
+  function animationFrame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++;
+      elem.style.left = pos + "px";
+    }
+  }
+}
+&lt;/script&gt;
+      </code></pre>
+
+      <h3>Example: Fading a Div</h3>
+      <pre><code>
+&lt;div id="parent"&gt;&lt;/div&gt;
+&lt;button onclick="startAnimation()"&gt;Animate Div&lt;/button&gt;
+
+&lt;script&gt;
+function startAnimation() {
+  const parent = document.getElementById("parent");
+  let opacity = 1;
+  let id = setInterval(animationFrame, 50);
+  function animationFrame() {
+    if (opacity &lt;= 0) {
+      clearInterval(id);
+      parent.style.opacity = 1;
+      parent.style.backgroundColor = "red";
+    } else {
+      parent.style.opacity = opacity;
+      opacity = opacity - 0.1;
+    }
+  }
+}
+&lt;/script&gt;
+      </code></pre>
+
+      <h2>Animating with <code>requestAnimationFrame()</code></h2>
+      <p>
+        The <code>requestAnimationFrame()</code> method provides smoother animations compared to <code>setInterval()</code> by syncing with the browser’s repaint cycle.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre><code>
+function animate() {
+    // animation logic
+    requestAnimationFrame(animate);
+}
+animate();
+      </code></pre>
+
+      <h3>Example: Moving a Div</h3>
+      <pre><code>
+&lt;div id="parent"&gt;
+  &lt;div id="child"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;button onclick="startAnimation()"&gt;Animate Div&lt;/button&gt;
+&lt;button onclick="stopAnimation()"&gt;Stop Animation&lt;/button&gt;
+
+&lt;script&gt;
+let animationId;
+let pos = 0;
+function startAnimation() {
+  const elem = document.getElementById("child");
+  function animationFrame() {
+    if (pos &lt; 650) {
+      pos++;
+      elem.style.left = pos + "px";
+      animationId = requestAnimationFrame(animationFrame);
+    }
+  }
+  animationFrame();
+}
+function stopAnimation() {
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+    animationId = null;
+  }
+}
+&lt;/script&gt;
+      </code></pre>
+
+      <h2>Animating by Changing CSS Properties</h2>
+      <p>
+        JavaScript can dynamically update the CSS <code>animation</code> property to apply predefined keyframe animations.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre><code>
+element.style.animation = "key_frame_name duration timing_function iterationCount";
+      </code></pre>
+
+      <h3>Example: Using Keyframes</h3>
+      <pre><code>
+&lt;div id="element"&gt;Animate&lt;/div&gt;
+&lt;button onclick="animateDiv()"&gt;Animate Div&lt;/button&gt;
+
+&lt;style&gt;
+@keyframes moveAnimation {
+  from { transform: translateX(0); }
+  to { transform: translateX(550px); }
+}
+&lt;/style&gt;
+
+&lt;script&gt;
+function animateDiv() {
+  const element = document.getElementById("element");
+  element.style.animation = "moveAnimation 3s ease-in-out infinite";
+}
+&lt;/script&gt;
+      </code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        While CSS transitions and animations are simple to use, JavaScript offers more flexibility. Among JavaScript methods, <code>requestAnimationFrame()</code> is generally the best choice for smooth, efficient animations.
+      </p>
+    </div>
+  </div>
+</div>

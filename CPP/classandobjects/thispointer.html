@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Inline Functions ➡️ (Compiler Optimization)</h1>
+
+        <div class="content">
+            <p>An **inline function** is a request to the C++ compiler to perform a specific optimization: instead of generating code for a normal function call, the compiler should place a **copy of the function's code** directly at each point where the function is called. This process is called **inlining** or **function expansion**.</p>
+            <p>The primary goal is to **eliminate the overhead** associated with a function call (like saving registers and pushing/popping arguments on the stack), making small, frequently called functions execute faster.</p>
+
+            <h3>Defining an Inline Function</h3>
+            <p>You use the keyword **<code>inline</code>** before the function definition. The function must be defined before it is called.</p>
+            <pre class="example">
+inline int Max(int x, int y) {
+   return (x > y) ? x : y; // Short, efficient code
+}
+</pre>
+            <p><em>Note: The **<code>inline</code>** keyword is only a **request**; the compiler may ignore it if the function is too large or complex.</em></p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Inline Functions with Classes</h2>
+            <p>C++ has a special rule for member functions:</p>
+            <ul>
+                <li>Any function defined **inside** the class definition is **implicitly** an inline function, even if you don't use the <code>inline</code> keyword.</li>
+            </ul>
+            <p>To explicitly define an inline member function when the definition is **outside** the class:</p>
+            <ol>
+                <li>Declare the function prototype inside the class.</li>
+                <li>Define the function outside the class using the <code>inline</code> keyword with the function definition.</li>
+            </ol>
+            <pre class="example">
+class Number {
+   // ... declarations ...
+   public:
+      int addNumbers(); // Declaration
+};
+
+// Definition with the inline keyword
+inline int Number::addNumbers() {
+    return num1 + num2;
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Advantages and Disadvantages</h2>
+
+            <h3>Advantages ✅</h3>
+            <ul>
+                <li>**Reduced Overhead:** Eliminates the function call overhead (stack manipulation, saving registers), which speeds up execution for very short functions.</li>
+                <li>**Optimization:** Allows the compiler to perform context-specific optimizations, as the code is integrated directly into the calling location.</li>
+            </ul>
+
+            <h3>Disadvantages ❌</h3>
+            <ul>
+                <li>**Increased Code Size:** Replacing the function call with the function's code body at every call site increases the overall executable size ("code bloat").</li>
+                <li>**Slower Compilation:** The compilation process can slow down because the compiler has to perform these expansions.</li>
+                <li>**Maintenance Cost:** Any change to an inline function requires all files that call it to be recompiled.</li>
+            </ul>
+        </div>
+    </div>
+</div>

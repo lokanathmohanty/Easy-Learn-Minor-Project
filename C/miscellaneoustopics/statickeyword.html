@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Static Keyword in C</title>
+</head>
+<body>
+  <div class="container">
+
+    <div class="session">
+      <h1 class="title">Static Keyword in C</h1>
+      <div class="content">
+
+        <h2>What is static Keyword in C?</h2>
+        <p>
+          The static keyword in C is one of the storage class specifiers which has different meanings based on the context in which it is used.
+        </p>
+        <p>
+          The "static" keyword is used to declare a static variable as well as to define a static function. When declared as "static", a variable represents a static storage class.
+        </p>
+        <p>
+          A static function is available only inside the program file (with ".c" extension) in which it is defined. One cannot use the "extern" keyword to import a static function into another file.
+        </p>
+
+        <h2>Uses of static Keyword</h2>
+        <ul>
+          <li>
+            <strong>Static Local Variable:</strong> Lifetime is till the end of the program and retains value between function calls.
+          </li>
+          <li>
+            <strong>Static Global Variable:</strong> Accessible only within the file it is declared in.
+          </li>
+          <li>
+            <strong>Static Functions:</strong> Scope limited to the file in which the function is declared.
+          </li>
+        </ul>
+
+        <h2>Static Variables (static Keyword with Variables)</h2>
+        <p>
+          When a variable is declared as static, it is initialized only once. It persists for the duration of the program and retains its value across function calls.
+        </p>
+        <ul>
+          <li>Compiler allocates space in main memory.</li>
+          <li>Initialized to zero by default.</li>
+          <li>Not re-initialized on every function call.</li>
+          <li>Has local scope.</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Example: Static Variable in a Function</h1>
+      <div class="content">
+        <pre>
+<code>#include &lt;stdio.h&gt;
+
+int counter();
+
+int main() {
+   counter();
+   counter();
+   counter();
+   return 0;
+}
+
+int counter() {
+   static int x;
+   printf("Value of x as it enters the function: %d\n", x);
+   x++;
+   printf("Incremented value of x: %d\n", x);
+}</code>
+        </pre>
+
+        <h2>Output</h2>
+        <pre>
+Value of x as it enters the function: 0
+Incremented value of x: 1
+Value of x as it enters the function: 1
+Incremented value of x: 2
+Value of x as it enters the function: 2
+Incremented value of x: 3
+        </pre>
+
+        <p>
+          A static variable is similar to a global variable in terms of lifetime but differs in scope. Static variables are private to the function or block in which they are declared.
+        </p>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Static Functions (static Keyword with Functions)</h1>
+      <div class="content">
+        <p>
+          By default, all functions are global and accessible anywhere in the program. When a function is declared static, its scope is restricted to the object file it resides in.
+        </p>
+
+        <h2>Example: Static Function in Different Files</h2>
+        <p>Contents of <code>file1.c</code>:</p>
+        <pre>
+<code>static void staticFunc(void) {
+   printf("Inside the static function staticFunc()");
+}</code>
+        </pre>
+        <p>Contents of <code>main.c</code>:</p>
+        <pre>
+<code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+   staticFunc();
+   return 0;
+}</code>
+        </pre>
+        <p>
+          This will result in an error: <strong>undefined reference to staticFunc()</strong> because the function is not visible outside its file.
+        </p>
+
+        <h2>Example: Static Function in Same File</h2>
+        <pre>
+<code>#include &lt;stdio.h&gt;
+
+static void staticFunc(void){
+   printf("Inside the static function staticFunc()");
+}
+
+int main(){
+   staticFunc();
+   return 0;
+}</code>
+        </pre>
+        <h2>Output</h2>
+        <pre>
+Inside the static function staticFunc()
+        </pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Example: Multiple Static Functions</h1>
+      <div class="content">
+        <pre>
+<code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+
+static int square(int num) {
+   return num * num;
+}
+
+static void voidfn() {
+   printf("From inside the static function.\n");
+}
+
+static int intfn(int num2) {
+   return sqrt(num2);
+}
+
+int main() {
+   int n1 = 16;
+   int val;
+
+   val = square(n1);
+   printf("The square of the %d : %d\n", n1, val);
+
+   voidfn();
+
+   val = intfn(n1);
+   printf("The square root of the %d : %d\n", n1, val);
+
+   return 0;
+}</code>
+        </pre>
+
+        <h2>Output</h2>
+        <pre>
+The square of the 16 : 256
+From inside the static function.
+The square root of the 16 : 4
+        </pre>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

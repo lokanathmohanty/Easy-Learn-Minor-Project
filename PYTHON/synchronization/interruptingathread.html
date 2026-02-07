@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Interrupting Threads</h1>
+    </div>
+    <div class="content">
+      <p>Interrupting a thread in Python requires coordination since Python does not provide a direct way to forcefully terminate threads. Common approaches use <code>threading.Event</code> or a custom flag to signal the thread to stop.</p>
+    </div>
+
+    <div class="title">
+      <h2>Interrupting Using Event Object</h2>
+    </div>
+    <div class="content">
+      <p>An Event object acts as a signal that, when set, instructs threads to stop their work loops gracefully.</p>
+      <pre>
+from time import sleep
+from threading import Thread, Event
+
+class MyThread(Thread):
+    def __init__(self, event):
+        super().__init__()
+        self.event = event
+
+    def run(self):
+        i = 0
+        while not self.event.is_set():
+            i += 1
+            print('Child thread running...', i)
+            sleep(0.5)
+        print('Child Thread Interrupted')
+
+event = Event()
+thread = MyThread(event)
+thread.start()
+
+sleep(3)
+print('Main thread stopping child thread')
+event.set()
+
+thread.join()
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        Child thread running... 1<br>
+        Child thread running... 2<br>
+        Child thread running... 3<br>
+        Main thread stopping child thread<br>
+        Child Thread Interrupted
+      </p>
+    </div>
+
+    <div class="title">
+      <h2>Interrupting Using Thread Flag</h2>
+    </div>
+    <div class="content">
+      <p>A thread can monitor a custom flag attribute to decide when to stop execution.</p>
+      <pre>
+import threading
+import time
+
+def worker():
+    t = threading.current_thread()
+    while getattr(t, "do_run", True):
+        print("working on a task")
+        time.sleep(1)
+    print("Stopping the Thread")
+
+t = threading.Thread(target=worker)
+t.start()
+
+time.sleep(5)
+t.do_run = False
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        working on a task<br>
+        working on a task<br>
+        working on a task<br>
+        working on a task<br>
+        working on a task<br>
+        Stopping the Thread
+      </p>
+    </div>
+  </div>
+</div>

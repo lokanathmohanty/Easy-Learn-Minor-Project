@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Canvas</h1>
+    <div class="content">
+      <h2>Handling Canvas with JavaScript</h2>
+      <p>The HTML <code>&lt;canvas&gt;</code> element can be used to create and draw graphics on the web page. It can draw various graphics or shapes, like lines, circles, etc., on the web page and animate them.</p>
+
+      <p>You can define <code>&lt;canvas&gt;</code> element in HTML, and after that, you need to use JavaScript to draw graphics on the web page. Let's look at the syntaxes to define a canvas element in HTML and manipulate with JavaScript.</p>
+
+      <h2>Syntax</h2>
+      <p>Use the following syntax to create an HTML canvas element.</p>
+      <pre><code>&lt;canvas id="myCanvas" width="480" height="320"&gt;
+   Your browser does not support the HTML canvas tag.
+&lt;/canvas&gt;</code></pre>
+
+      <p>We access the canvas element using the <code>getElementById()</code> method of the document object.</p>
+      <pre><code>var canvas = document.getElementById('canvas_id');
+var ctx = canvas.getContext('2d');</code></pre>
+
+      <p>In JavaScript, we can use the <code>getContext('2d')</code> method to get the context of the 2D canvas. Next, we can use various methods to draw a shape and fill in the color by taking the <code>ctx</code> variable as a reference.</p>
+
+      <h2>Examples</h2>
+
+      <h3>Example: Drawing a Rectangle</h3>
+      <pre><code>&lt;canvas id="myCanvas" width="600" height="300"&gt;
+   Your browser does not support the HTML canvas tag.
+&lt;/canvas&gt;
+
+&lt;script&gt;
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.fillStyle = "#FF0000";
+ctx.fillRect(50,30, 470, 240);
+&lt;/script&gt;</code></pre>
+
+      <h3>Example: Drawing a Circle</h3>
+      <pre><code>&lt;canvas id="myCanvas" width="600" height="300"&gt;
+   Your browser does not support the HTML canvas tag.
+&lt;/canvas&gt;
+
+&lt;script&gt;
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.arc(300, 150, 100, 0, 2 * Math.PI);
+ctx.stroke();
+ctx.fillStyle = "green";
+ctx.fill();
+&lt;/script&gt;</code></pre>
+
+      <h3>Example: Drawing Lines</h3>
+      <pre><code>&lt;canvas id="myCanvas" width="600" height="300"&gt;
+   Your browser does not support the HTML canvas tag.
+&lt;/canvas&gt;
+
+&lt;script&gt;
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.moveTo(0, 0);
+ctx.lineTo(300, 200);
+ctx.stroke();
+ctx.moveTo(300, 200);
+ctx.lineTo(400, 0);
+ctx.stroke();
+&lt;/script&gt;</code></pre>
+
+      <h3>Example: Drawing a Linear Gradient</h3>
+      <pre><code>&lt;canvas id="myCanvas" width="600" height="300"&gt;
+   Your browser does not support the HTML canvas tag.
+&lt;/canvas&gt;
+
+&lt;script&gt;
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.beginPath();
+var grd = ctx.createLinearGradient(0, 0, 440, 0);
+grd.addColorStop(0, "yellow");
+grd.addColorStop(1, "white");
+ctx.fillStyle = grd;
+ctx.fillRect(10, 10, 550, 240);
+ctx.fill();
+ctx.closePath();
+&lt;/script&gt;</code></pre>
+
+      <h3>Example: Text Rendering</h3>
+      <pre><code>&lt;canvas id="myCanvas" width="600" height="200"&gt;
+   Your browser does not support the HTML canvas tag.
+&lt;/canvas&gt;
+
+&lt;script&gt;
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+ctx.font = '30px Arial';
+ctx.fillStyle = 'red';
+ctx.fillText('Hello, Canvas!', 150, 100);
+&lt;/script&gt;</code></pre>
+
+      <p>We have learned to use <code>&lt;canvas&gt;</code> elements in HTML and draw graphics by accessing elements using JavaScript. We can draw various shapes and add colors to shapes.</p>
+    </div>
+  </div>
+</div>

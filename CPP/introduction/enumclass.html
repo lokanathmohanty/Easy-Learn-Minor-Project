@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ <code>enum class</code> (Scoped Enumerations) 🛡️</h1>
+
+        <div class="content">
+            <p>The **<code>enum class</code>** (or **scoped enumeration**, introduced in C++11) is a modern C++ feature designed to solve the problems of name clashes and lack of type safety associated with traditional C++ enumerations.</p>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Key Features and Declaration</h2>
+
+            <h3>Improved Scope</h3>
+            <p>The enumerator values are **scoped** (confined) to the <code>enum class</code> itself, meaning they do not "leak" into the surrounding scope (e.g., the global namespace). This prevents potential **name clashes**.</p>
+            <p><strong>Declaration Syntax:</strong></p>
+            <pre class="example">enum class EnumName {
+    Value1,
+    Value2,
+    // ...
+};</pre>
+            <p><strong>Accessing Values:</strong> You must use the **Scope Resolution Operator (<code>::</code>)** to access the values, ensuring clarity and preventing ambiguity:</p>
+            <pre class="example">EnumName::Value</pre>
+            <p>For example, to access <code>Friday</code> from the <code>Day</code> enum class: <code>Day today = Day::Friday;</code></p>
+
+            <h3>Enhanced Type Safety</h3>
+            <p><code>enum class</code> values do **not implicitly convert to integers** (<code>int</code>). This is a crucial aspect of type safety, preventing accidental arithmetic operations or comparison with unrelated integer constants.</p>
+            <p>If you need the underlying integer value, you must use an **explicit type cast** (e.g., <code>static_cast&lt;int&gt;(Day::Friday)</code>).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Underlying Type of <code>enum class</code></h2>
+            <p>By default, the underlying type of an <code>enum class</code> is **<code>int</code>**. However, you can explicitly specify a different integral type using the colon (<code>:</code>) syntax. This is useful for optimizing memory usage or ensuring a required value range.</p>
+            <p><strong>Syntax to Specify Underlying Type:</strong></p>
+            <pre class="example">enum class EnumName : UnderlyingType { ... };</pre>
+            <p><strong>Example:</strong> Using <code>unsigned int</code> as the underlying type to guarantee non-negative storage and potentially reduce size.</p>
+            <pre class="example">
+enum class Status : unsigned int {
+    Ok = 0,     
+    Error = 1
+};
+</pre>
+            <p>In this example, each <code>Status</code> enumerator is guaranteed to be stored using the size and range of an <code>unsigned int</code>.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,161 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">C++ Constants/Literals</h1>
+
+    <div class="content">
+      <p>Constants refer to fixed values that the program may not alter and they are called <strong>literals</strong>.</p>
+      <p>Constants can be of any of the basic data types and can be divided into Integer Numerals, Floating-Point Numerals, Characters, Strings and Boolean Values.</p>
+      <p>Again, constants are treated just like regular variables except that their values cannot be modified after their definition.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Integer Literals</h2>
+      <p>An integer literal can be a decimal, octal, or hexadecimal constant. A prefix specifies the base or radix: 0x or 0X for hexadecimal, 0 for octal, and nothing for decimal.</p>
+      <p>An integer literal can also have a suffix that is a combination of U and L, for unsigned and long, respectively. The suffix can be uppercase or lowercase and can be in any order.</p>
+      <p>Here are some examples of integer literals:</p>
+      <ul>
+        <li>212 // Legal</li>
+        <li>215u // Legal</li>
+        <li>0xFeeL // Legal</li>
+        <li>078 // Illegal: 8 is not an octal digit</li>
+        <li>032UU // Illegal: cannot repeat a suffix</li>
+      </ul>
+      <p>Following are other examples of various types of Integer literals:</p>
+      <ul>
+        <li>85 // decimal</li>
+        <li>0213 // octal</li>
+        <li>0x4b // hexadecimal</li>
+        <li>30 // int</li>
+        <li>30u // unsigned int</li>
+        <li>30l // long</li>
+        <li>30ul // unsigned long</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Floating-point Literals</h2>
+      <p>A floating-point literal has an integer part, a decimal point, a fractional part, and an exponent part. You can represent floating point literals either in decimal form or exponential form.</p>
+      <p>While representing using decimal form, you must include the decimal point, the exponent, or both and while representing using exponential form, you must include the integer part, the fractional part, or both. The signed exponent is introduced by e or E.</p>
+      <p>Here are some examples of floating-point literals:</p>
+      <ul>
+        <li>3.14159 // Legal</li>
+        <li>314159E-5L // Legal</li>
+        <li>510E // Illegal: incomplete exponent</li>
+        <li>210f // Illegal: no decimal or exponent</li>
+        <li>.e55 // Illegal: missing integer or fraction</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Boolean Literals</h2>
+      <p>There are two Boolean literals and they are part of standard C++ keywords:</p>
+      <ul>
+        <li>A value of <strong>true</strong> representing true.</li>
+        <li>A value of <strong>false</strong> representing false.</li>
+      </ul>
+      <p>You should not consider the value of true equal to 1 and value of false equal to 0.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Character Literals</h2>
+      <p>Character literals are enclosed in single quotes. If the literal begins with L (uppercase only), it is a wide character literal (e.g., L'x') and should be stored in wchar_t type of variable . Otherwise, it is a narrow character literal (e.g., 'x') and can be stored in a simple variable of char type.</p>
+      <p>A character literal can be a plain character (e.g., 'x'), an escape sequence (e.g., '\t'), or a universal character (e.g., '\u02C0').</p>
+      <p>There are certain characters in C++ when they are preceded by a backslash they will have special meaning and they are used to represent like newline (\n) or tab (\t). Here is a list of some of such escape sequence codes:</p>
+      <ul>
+        <li>\\ : \ character</li>
+        <li>\' : ' character</li>
+        <li>\" : " character</li>
+        <li>\? : ? character</li>
+        <li>\a : Alert or bell</li>
+        <li>\b : Backspace</li>
+        <li>\f : Form feed</li>
+        <li>\n : Newline</li>
+        <li>\r : Carriage return</li>
+        <li>\t : Horizontal tab</li>
+        <li>\v : Vertical tab</li>
+        <li>\ooo : Octal number of one to three digits</li>
+        <li>\xhh . . . : Hexadecimal number of one or more digits</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Escape Sequence Example</h2>
+      <p>#include &lt;iostream&gt;</p>
+      <p>using namespace std;</p>
+      <p>int main() {</p>
+      <p>&nbsp;&nbsp;&nbsp;cout &lt;&lt; "Hello\tWorld\n\n";</p>
+      <p>&nbsp;&nbsp;&nbsp;return 0;</p>
+      <p>}</p>
+      <p>When the above code is compiled and executed, it produces the following result:</p>
+      <p>Hello&nbsp;&nbsp;&nbsp;World</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">String Literals</h2>
+      <p>String literals are enclosed in double quotes. A string contains characters that are similar to character literals: plain characters, escape sequences, and universal characters.</p>
+      <p>You can break a long line into multiple lines using string literals and separate them using whitespaces.</p>
+      <p>Here are some examples of string literals. All three forms are identical strings.</p>
+      <ul>
+        <li>"hello, dear"</li>
+        <li>"hello, \ <br>dear"</li>
+        <li>"hello, " "d" "ear"</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Defining Constants</h2>
+      <p>There are two simple ways in C++ to define constants:</p>
+      <ul>
+        <li>Using #define preprocessor.</li>
+        <li>Using const keyword.</li>
+      </ul>
+      <h3>The #define Preprocessor</h3>
+      <p>Following is the form to use #define preprocessor to define a constant:</p>
+      <p>#define identifier value</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">#define Example</h2>
+      <p>#include &lt;iostream&gt;</p>
+      <p>using namespace std;</p>
+      <p>#define LENGTH 10</p>
+      <p>#define WIDTH 5</p>
+      <p>#define NEWLINE '\n'</p>
+      <p>int main() {</p>
+      <p>&nbsp;&nbsp;&nbsp;int area;</p>
+      <p>&nbsp;&nbsp;&nbsp;area = LENGTH * WIDTH;</p>
+      <p>&nbsp;&nbsp;&nbsp;cout &lt;&lt; area;</p>
+      <p>&nbsp;&nbsp;&nbsp;cout &lt;&lt; NEWLINE;</p>
+      <p>&nbsp;&nbsp;&nbsp;return 0;</p>
+      <p>}</p>
+      <p>When the above code is compiled and executed, it produces the following result:</p>
+      <p>50</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">The const Keyword</h2>
+      <p>You can use const prefix to declare constants with a specific type as follows:</p>
+      <p>const type variable = value;</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">const Keyword Example</h2>
+      <p>#include &lt;iostream&gt;</p>
+      <p>using namespace std;</p>
+      <p>int main() {</p>
+      <p>&nbsp;&nbsp;&nbsp;const int LENGTH = 10;</p>
+      <p>&nbsp;&nbsp;&nbsp;const int WIDTH = 5;</p>
+      <p>&nbsp;&nbsp;&nbsp;const char NEWLINE = '\n';</p>
+      <p>&nbsp;&nbsp;&nbsp;int area;</p>
+      <p>&nbsp;&nbsp;&nbsp;area = LENGTH * WIDTH;</p>
+      <p>&nbsp;&nbsp;&nbsp;cout &lt;&lt; area;</p>
+      <p>&nbsp;&nbsp;&nbsp;cout &lt;&lt; NEWLINE;</p>
+      <p>&nbsp;&nbsp;&nbsp;return 0;</p>
+      <p>}</p>
+      <p>When the above code is compiled and executed, it produces the following result:</p>
+      <p>50</p>
+      <p>Note that it is a good programming practice to define constants in CAPITALS.</p>
+    </div>
+
+  </div>
+</div>

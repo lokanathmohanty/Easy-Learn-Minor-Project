@@ -1,0 +1,247 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - OOPs (Object-Oriented Programming) Concepts</h1>
+
+    <div class="content">
+      <h2>OOPs (Object-Oriented Programming System)</h2>
+      <p>Object means a real-world entity such as a mobile, book, table, computer, watch, etc. Object-Oriented Programming is a methodology or paradigm to design a program using classes and objects. It simplifies software development and maintenance by providing some concepts.</p>
+      <p>In this tutorial, we will learn about the concepts of Java (OOPs) object-oriented programming systems.</p>
+    </div>
+
+    <div class="content">
+      <h2>Java OOPs Concepts</h2>
+      <ul>
+        <li>Class</li>
+        <li>Object</li>
+        <li>Inheritance</li>
+        <li>Polymorphism</li>
+        <li>Abstraction</li>
+        <li>Encapsulation</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Class</h2>
+      <p>In object-oriented programming, a class is a blueprint from which individual objects are created. A class defines attributes and methods that the objects will have.</p>
+      <p>Example:</p>
+      <pre><code>public class Student {
+   String name;
+   int rollNo;
+   String section;
+
+   Student(String name, int rollNo, String section){
+      this.name = name;
+      this.rollNo = rollNo;
+      this.section = section;
+   }
+
+   public void printDetails() {
+      System.out.println("Student Details:");
+      System.out.println(this.name + ", " + this.rollNo + ", " + section);
+   }
+}</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Object</h2>
+      <p>An object is an instance of a class and represents an entity with state and behavior.</p>
+      <p>Example:</p>
+      <pre><code>public class Student {
+   String name;
+   int rollNo;
+   String section;
+
+   Student(String name, int rollNo, String section){
+      this.name = name;
+      this.rollNo = rollNo;
+      this.section = section;
+   }
+
+   public void printDetails() {
+      System.out.print("Student Details: ");
+      System.out.println(this.name + ", " + this.rollNo + ", " + section);
+   }
+
+   public static void main(String[] args) {
+      Student student1 = new Student("Robert", 1, "IX Blue");
+      Student student2 = new Student("Adam", 2, "IX Red");
+      Student student3 = new Student("Julie", 3, "IX Blue");
+
+      student1.printDetails();
+      student2.printDetails();
+      student3.printDetails();
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Student Details: Robert, 1, IX Blue</li>
+        <li>Student Details: Adam, 2, IX Red</li>
+        <li>Student Details: Julie, 3, IX Blue</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Inheritance</h2>
+      <p>Inheritance is the process of one class acquiring the properties and behaviors of another class. The class being inherited from is called the parent (or base) class, and the class inheriting is the child (or derived) class.</p>
+      <p>Example:</p>
+      <pre><code>class Person {
+   String name;
+
+   Person(String name){
+      this.name = name;
+   }
+}
+
+public class Student extends Person {
+   int rollNo;
+   String section;
+
+   Student(String name, int rollNo, String section){
+      super(name);
+      this.rollNo = rollNo;
+      this.section = section;
+   }
+
+   public void printDetails() {
+      System.out.print("Student Details: ");
+      System.out.println(this.name + ", " + this.rollNo + ", " + section);
+   }
+
+   public static void main(String[] args) {
+      Student student1 = new Student("Robert", 1, "IX Blue");
+      Student student2 = new Student("Adam", 2, "IX Red");
+      Student student3 = new Student("Julie", 3, "IX Blue");
+
+      student1.printDetails();
+      student2.printDetails();
+      student3.printDetails();
+   }
+}</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Polymorphism</h2>
+      <p>Polymorphism allows methods to have the same name but different behaviors. It is implemented through method overloading and method overriding.</p>
+      <p>Example (Method Overloading):</p>
+      <pre><code>public class Student {
+   String name;
+   int rollNo;
+   String section;
+
+   Student(String name, int rollNo, String section){
+      this.name = name;
+      this.rollNo = rollNo;
+      this.section = section;
+   }
+
+   public void printDetails() {
+      System.out.print("Student Details: ");
+      System.out.println(this.name + ", " + this.rollNo + ", " + section);
+   }
+
+   public void printDetails(boolean hideSection) {
+      System.out.print("Student Details: ");
+      System.out.println(this.name + ", " + this.rollNo + ", " + (hideSection ? "" : section));
+   }
+
+   public static void main(String[] args) {
+      Student student1 = new Student("Robert", 1, "IX Blue");
+      Student student2 = new Student("Adam", 2, "IX Red");
+      Student student3 = new Student("Julie", 3, "IX Blue");
+
+      student1.printDetails();
+      student2.printDetails(true);
+      student3.printDetails(false);
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Student Details: Robert, 1, IX Blue</li>
+        <li>Student Details: Adam, 2, </li>
+        <li>Student Details: Julie, 3, IX Blue</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Abstraction</h2>
+      <p>Abstraction hides the internal implementation and only shows the necessary features. In Java, it's implemented using abstract classes or interfaces.</p>
+      <p>Example:</p>
+      <pre><code>abstract class Vehicle {
+   public void startEngine() {
+      System.out.println("Engine Started");
+   }
+}
+
+public class Car extends Vehicle {
+   private String color;
+
+   public Car(String color) {
+      this.color = color;
+   }
+
+   public void printDetails() {
+      System.out.println("Car color: " + this.color);
+   }
+
+   public static void main(String[] args) {
+      Car car = new Car("White");
+      car.printDetails();
+      car.startEngine();
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Car color: White</li>
+        <li>Engine Started</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Encapsulation</h2>
+      <p>Encapsulation is the process of binding data and methods together and restricting direct access to some components. It’s usually implemented by using private fields and public methods.</p>
+      <p>Example:</p>
+      <pre><code>public class Student {
+   private String name;
+   private int rollNo;
+   private String section;
+
+   Student(String name, int rollNo, String section){
+      this.name = name;
+      this.rollNo = rollNo;
+      this.section = section;
+   }
+
+   public void printDetails() {
+      System.out.print("Student Details: ");
+      System.out.println(this.name + ", " + this.rollNo + ", " + section);
+   }
+
+   public static void main(String[] args) {
+      Student student1 = new Student("Robert", 1, "IX Blue");
+      Student student2 = new Student("Adam", 2, "IX Red");
+      Student student3 = new Student("Julie", 3, "IX Blue");
+
+      student1.printDetails();
+      student2.printDetails();
+      student3.printDetails();
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Student Details: Robert, 1, IX Blue</li>
+        <li>Student Details: Adam, 2, IX Red</li>
+        <li>Student Details: Julie, 3, IX Blue</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Advantages of Java OOPs</h2>
+      <ul>
+        <li>OOPs concepts are easier to implement and understand.</li>
+        <li>Faster execution than procedural programming in large systems.</li>
+        <li>Supports code reusability through inheritance.</li>
+        <li>Encapsulation helps to protect sensitive data.</li>
+      </ul>
+    </div>
+  </div>
+</div>

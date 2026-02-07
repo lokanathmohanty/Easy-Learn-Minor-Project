@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `$_SERVER` Superglobal</h1>
+
+    <div class="content">
+      <p>
+        The **`$_SERVER`** is a **superglobal associative array** in PHP that contains information about the web server, the execution environment, and the current request headers. Because this information is supplied by the web server, its content can vary widely depending on the server software (e.g., Apache, Nginx) and how the script is being run (e.g., web access vs. command line).
+      </p>
+
+      <h2>Key Information Stored in `$_SERVER`</h2>
+      <p>
+        The array holds essential data about the script, the request, and the client/server environment.
+      </p>
+
+      <table>
+        <tr>
+          <th>Variable</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>**`PHP_SELF`**</td>
+          <td>The filename of the currently executing script, relative to the document root.</td>
+        </tr>
+        <tr>
+          <td>**`REQUEST_METHOD`**</td>
+          <td>The HTTP method used to access the page (e.g., `GET`, `POST`, `PUT`).</td>
+        </tr>
+        <tr>
+          <td>**`QUERY_STRING`**</td>
+          <td>The raw query string (key=value&amp;key2=value2) appended to the URL after the `?`.</td>
+        </tr>
+        <tr>
+          <td>**`REQUEST_URI`**</td>
+          <td>The full URI used to access the page, including the query string (e.g., `/path/script.php?id=1`).</td>
+        </tr>
+        <tr>
+          <td>**`DOCUMENT_ROOT`**</td>
+          <td>The directory path on the server configured as the web root (e.g., `C:/xampp/htdocs`).</td>
+        </tr>
+        <tr>
+          <td>**`REMOTE_ADDR`**</td>
+          <td>The IP address of the machine viewing the current page (the client).</td>
+        </tr>
+        <tr>
+          <td>**`SERVER_NAME`**</td>
+          <td>The host name of the server (e.g., `localhost` or `www.example.com`).</td>
+        </tr>
+        <tr>
+          <td>**`SERVER_PORT`**</td>
+          <td>The port on which the web server is listening (usually `80` or `443`).</td>
+        </tr>
+      </table>
+
+      <h2>HTTP Request Headers</h2>
+      <p>
+        PHP automatically includes all incoming **HTTP Request Headers** into the `$_SERVER` array. These entries are prefixed with **`HTTP_`** followed by the capitalized header name (with hyphens replaced by underscores).
+      </p>
+      <div class="example">
+        <p>
+          The HTTP header **`Accept-Language`** becomes the `$_SERVER` entry: **`$_SERVER['HTTP_ACCEPT_LANGUAGE']`**.<br>
+          The HTTP header **`Host`** becomes the `$_SERVER` entry: **`$_SERVER['HTTP_HOST']`**.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

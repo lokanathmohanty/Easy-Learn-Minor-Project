@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java Collections Framework</h1>
+
+    <div class="content">
+      <h2 class="title">Content</h2>
+      <p>Prior to Java 2, Java provided ad hoc classes such as Dictionary, Vector, Stack, and Properties to store and manipulate groups of objects. Although these classes were quite useful, they lacked a central, unifying theme. Thus, the way that you used Vector was different from the way that you used Properties.</p>
+      <p>The collections framework was designed to meet several goals, such as:</p>
+      <ul>
+        <li>The framework had to be high-performance. The implementations for the fundamental collections (dynamic arrays, linked lists, trees, and hashtables) were to be highly efficient.</li>
+        <li>The framework had to allow different types of collections to work in a similar manner and with a high degree of interoperability.</li>
+        <li>The framework had to extend and/or adapt a collection easily.</li>
+      </ul>
+      <p>Towards this end, the entire collections framework is designed around a set of standard interfaces. Several standard implementations such as LinkedList, HashSet, and TreeSet, of these interfaces are provided that you may use as-is and you may also implement your own collection, if you choose.</p>
+      <p>A collections framework is a unified architecture for representing and manipulating collections. All collections frameworks contain the following:</p>
+      <ul>
+        <li><strong>Interfaces:</strong> These are abstract data types that represent collections. Interfaces allow collections to be manipulated independently of the details of their representation. In object-oriented languages, interfaces generally form a hierarchy.</li>
+        <li><strong>Implementations, i.e., Classes:</strong> These are the concrete implementations of the collection interfaces. In essence, they are reusable data structures.</li>
+        <li><strong>Algorithms:</strong> These are the methods that perform useful computations, such as searching and sorting, on objects that implement collection interfaces. The algorithms are said to be polymorphic: that is, the same method can be used on many different implementations of the appropriate collection interface.</li>
+      </ul>
+      <p>In addition to collections, the framework defines several map interfaces and classes. Maps store key/value pairs. Although maps are not collections in the proper use of the term, they are fully integrated with collections.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example</h2>
+      <h3 class="title">GreetingClient.java</h3>
+      <p>A client program that connects to a server by using a socket and sends a greeting, then waits for a response.</p>
+      <pre><code>
+package com.tutorialspoint;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+
+public class GreetingClient {
+   public static void main(String [] args) {
+      String serverName = args[0];
+      int port = Integer.parseInt(args[1]);
+      try {
+         System.out.println("Connecting to " + serverName + " on port " + port);
+         Socket client = new Socket(serverName, port);
+         
+         System.out.println("Just connected to " + client.getRemoteSocketAddress());
+         OutputStream outToServer = client.getOutputStream();
+         DataOutputStream out = new DataOutputStream(outToServer);
+         
+         out.writeUTF("Hello from " + client.getLocalSocketAddress());
+         InputStream inFromServer = client.getInputStream();
+         DataInputStream in = new DataInputStream(inFromServer);
+         
+         System.out.println("Server says " + in.readUTF());
+         client.close();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}
+      </code></pre>
+
+      <h3 class="title">GreetingServer.java</h3>
+      <p>A server program that listens for clients on a specified port and responds to greetings.</p>
+      <pre><code>
+package com.tutorialspoint;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+
+public class GreetingServer extends Thread {
+   private ServerSocket serverSocket;
+
+   public GreetingServer(int port) throws IOException {
+      serverSocket = new ServerSocket(port);
+      serverSocket.setSoTimeout(10000);
+   }
+
+   public void run() {
+      while(true) {
+         try {
+            System.out.println("Waiting for client on port " + 
+               serverSocket.getLocalPort() + "...");
+            Socket server = serverSocket.accept();
+            
+            System.out.println("Just connected to " + server.getRemoteSocketAddress());
+            DataInputStream in = new DataInputStream(server.getInputStream());
+            
+            System.out.println(in.readUTF());
+            DataOutputStream out = new DataOutputStream(server.getOutputStream());
+            out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress()
+               + "\nGoodbye!");
+            server.close();
+            
+         } catch (SocketTimeoutException s) {
+            System.out.println("Socket timed out!");
+            break;
+         } catch (IOException e) {
+            e.printStackTrace();
+            break;
+         }
+      }
+   }
+
+   public static void main(String [] args) {
+      int port = Integer.parseInt(args[0]);
+      try {
+         Thread t = new GreetingServer(port);
+         t.start();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}
+      </code></pre>
+    </div>
+  </div>
+</div>

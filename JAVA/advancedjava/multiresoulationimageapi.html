@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Multi-Resolution Image API (Java 9+)</h1>
+
+        <div class="content">
+            <h2>Purpose of the Multi-Resolution Image API</h2>
+            <p>The **Multi-Resolution Image API**, introduced in **Java 9** (part of the <code>java.awt.image</code> package), allows a developer to treat a collection of images, each representing a different resolution variant of the same content (like a logo), as a **single logical image**.</p>
+            <p>The primary goal is to **simplify image handling** and enable Java applications to automatically select and use the most appropriate image variant based on the current display environment, such as high-DPI (Retina) screens. This is crucial for modern applications that need to look sharp across various screen densities.</p>
+
+            <h2>Key Classes and Methods</h2>
+            <p>The API revolves around the following main components:</p>
+            <ul>
+                <li>**<code>MultiResolutionImage</code> (Interface):** The core interface representing an image with multiple resolution variants.</li>
+                <li>**<code>BaseMultiResolutionImage</code> (Class):** A concrete implementation of the interface, used to combine a list of <code>java.awt.Image</code> objects into a single multi-resolution image.</li>
+            </ul>
+
+            <h3>Major Operations</h3>
+            <p>The interface provides two key methods for working with the variants:</p>
+            <ol>
+                <li>
+                    **<code>Image getResolutionVariant(double destImageWidth, double destImageHeight)</code>**
+                    <p>This is the most important method. It examines the required destination size (width and height) and returns the **best-suited** physical image variant from the collection. If an exact match is not available, it returns the variant that provides the best quality without excessive scaling (often the nearest larger variant).</p>
+                </li>
+                <li>
+                    **<code>List&lt;Image&gt; getResolutionVariants()</code>**
+                    <p>Returns a read-only <code>List</code> containing all the individual <code>Image</code> objects that make up the multi-resolution image. This is useful for inspection or debugging purposes.</p>
+                </li>
+            </ol>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Selection Logic Example</h2>
+            <div class="content">
+                <p>Consider three variants of a logo: Small (156x45), Medium (311x89), and Large (622x178).</p>
+                
+                <p>When calling <code>getResolutionVariant(width, height)</code>, the behavior demonstrates intelligent selection:</p>
+                <ul>
+                    <li>**Request (311x89):** Returns the Medium (311x89) image. (Exact Match)</li>
+                    <li>**Request (622x178):** Returns the Large (622x178) image. (Exact Match)</li>
+                    <li>**Request (300x300):** Returns the Large (622x178) image. Since 300x300 is closer to the Large variant's resolution than the Medium one, and to avoid scaling up a small image too much, the larger image is chosen, even if it's not an exact match.</li>
+                </ul>
+                <p>This automated selection ensures that the display system renders a crisp image by utilizing the highest resolution available that doesn't significantly overshoot the required display size.</p>
+            </div>
+        </div>
+    </div>
+</div>

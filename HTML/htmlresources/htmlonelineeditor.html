@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>HTML - One-Line Editor</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f7faf9;
+      --card: #ffffff;
+      --accent: #DE3163;
+      --muted: #556;
+      --mono: 'Courier New', monospace;
+      --radius: 8px;
+    }
+    body {
+      margin: 16px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: #222;
+    }
+    .container {
+      max-width: 900px;
+      margin: 12px auto;
+      padding: 18px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 24px rgba(30,30,30,0.06);
+    }
+    .title { margin: 0 0 8px 0; color: var(--accent); font-size: 20px; }
+    .content p { margin: 8px 0 14px 0; color: var(--muted); }
+    .row { display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap; }
+    .editor-wrap {
+      flex:1 1 100%;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    /* single-line editable area */
+    .one-line {
+      flex:1 1 auto;
+      min-width:160px;
+      padding:10px 12px;
+      border-radius:6px;
+      border:1px solid #e6e6e6;
+      background:#fff;
+      box-shadow: inset 0 1px 0 rgba(0,0,0,0.02);
+      outline:none;
+      font-family: var(--mono);
+      font-size:14px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .one-line[contenteditable="true"]:empty::before {
+      content: attr(data-placeholder);
+      color:#9aa;
+      font-style:italic;
+    }
+    .controls { display:flex; gap:8px; }
+    button {
+      padding:8px 10px;
+      border-radius:6px;
+      border:1px solid #ddd;
+      background:linear-gradient(#fff,#f7f7f7);
+      cursor:pointer;
+      font-size:13px;
+    }
+    button.primary { background: linear-gradient(#ffedf2,#ffe6f0); border-color:#f2c7d6; color:var(--accent); }
+    .panel {
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .panel > .card {
+      background:#fcfcfd;
+      border:1px solid #eee;
+      padding:12px;
+      border-radius:6px;
+      min-height:84px;
+    }
+    .panel h3 { margin:0 0 8px 0; font-size:13px; color:var(--muted); }
+    .preview {
+      border-radius:6px;
+      padding:10px;
+      min-height:60px;
+      background: #fff;
+      border:1px dashed #eee;
+    }
+    pre.code {
+      margin:0;
+      font-family: var(--mono);
+      font-size:13px;
+      overflow:auto;
+      white-space:pre-wrap;
+      word-break:break-all;
+      background: #0f1724;
+      color: #e6eef6;
+      padding:10px;
+      border-radius:6px;
+    }
+    .hint { font-size:12px; color:#888; margin-top:8px; }
+    @media (max-width:720px){
+      .panel { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+      <h1 class="title">HTML - One-Line Editor</h1>
+      <div class="content">
+
+        <p>Type a single-line snippet of HTML below. The right column shows the rendered result and the raw escaped HTML. Press <strong>Copy</strong> to copy raw HTML.</p>
+
+        <div class="row editor-wrap">
+          <!-- contenteditable one-line editor -->
+          <div id="editor"
+               class="one-line"
+               contenteditable="true"
+               data-placeholder="Type HTML here (e.g. &lt;strong&gt;Hi&lt;/strong&gt; or &lt;img src='...' /&gt; )"
+               spellcheck="false"
+               aria-label="One line HTML editor"></div>
+
+          <div class="controls">
+            <button id="btn-render" title="Render (same as typing)">Render</button>
+            <button id="btn-clear" title="Clear">Clear</button>
+            <button id="btn-copy" class="primary" title="Copy raw HTML to clipboard">Copy</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="card">
+            <h3>Rendered Preview</h3>
+            <div id="preview" class="preview" aria-live="polite"></div>
+            <div class="hint">Preview updates as you type. &lt;script&gt; tags are ignored for safety.</div>
+          </div>
+
+          <div class="card">
+            <h3>Raw / Escaped HTML</h3>
+            <pre id="code" class="code"></pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Utility: escape HTML for code view
+    function escapeHtml(s){
+      return s.replace(/&/g,'&amp;')
+              .replace(/</g,'&lt;')
+              .replace(/>/g,'&gt;')
+              .replace(/"/g,'&quot;')
+              .replace(/'/g,'&#39;');
+    }
+
+    const editor = document.getElementById('editor');
+    const preview = document.getElementById('preview');
+    const code = document.getElementById('code');
+    const btnCopy = document.getElementById('btn-copy');
+    const btnClear = document.getElementById('btn-clear');
+    const btnRender = document.getElementById('btn-render');
+
+    // keep it single-line: prevent Enter and paste newlines
+    editor.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+      }
+    });
+    editor.addEventListener('paste', (ev) => {
+      ev.preventDefault();
+      const text = (ev.clipboardData || window.clipboardData).getData('text');
+      const single = text.replace(/[\r\n]+/g, ' ');
+      // insert at cursor
+      document.execCommand('insertText', false, single);
+    });
+
+    // sanitize: remove <script> tags before injecting into preview
+    function sanitizeHtml(html){
+      // remove script tags entirely
+      return html.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
+    }
+
+    function updateAll(){
+      const raw = editor.innerText || editor.textContent || '';
+      // allow user to enter literal "<" ">" — if they type them as characters they'll be included
+      // we treat editor as raw HTML input (designer choice)
+      const html = sanitizeHtml(editor.innerText.trim());
+      // update preview (interpreted HTML)
+      preview.innerHTML = html;
+      // update escaped raw code view
+      code.textContent = escapeHtml(html || '');
+    }
+
+    // live update as the user types
+    editor.addEventListener('input', updateAll);
+    editor.addEventListener('blur', updateAll);
+
+    // buttons
+    btnRender.addEventListener('click', updateAll);
+    btnClear.addEventListener('click', () => {
+      editor.textContent = '';
+      updateAll();
+      editor.focus();
+    });
+
+    btnCopy.addEventListener('click', async () => {
+      const text = editor.innerText.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        btnCopy.textContent = 'Copied';
+        setTimeout(()=> btnCopy.textContent = 'Copy', 1200);
+      } catch(err) {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); btnCopy.textContent = 'Copied'; }
+        catch(e) { alert('Copy failed'); }
+        ta.remove();
+        setTimeout(()=> btnCopy.textContent = 'Copy', 1200);
+      }
+    });
+
+    // initialize with an example
+    editor.textContent = '<strong>Hello</strong> — <em>one-line</em> <img src="https://via.placeholder.com/40" alt="pic" />';
+    updateAll();
+    // focus caret at end
+    editor.focus();
+    // move caret to end
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.selectNodeContents(editor);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Create Your Own ufunc</h1>
+    <div class="content">
+      <h2>How To Create Your Own ufunc</h2>
+      <p>To create your own ufunc, you have to define a function, like you do with normal functions in Python, then you add it to your NumPy ufunc library with the <code>frompyfunc()</code> method.</p>
+      <p>The <code>frompyfunc()</code> method takes the following arguments:</p>
+      <ul>
+        <li><strong>function</strong> - the name of the function.</li>
+        <li><strong>inputs</strong> - the number of input arguments (arrays).</li>
+        <li><strong>outputs</strong> - the number of output arrays.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Create Your Own ufunc for Addition</h1>
+    <div class="content">
+      <pre><code>import numpy as np
+
+def myadd(x, y):
+  return x + y
+
+myadd = np.frompyfunc(myadd, 2, 1)
+
+print(myadd([1, 2, 3, 4], [5, 6, 7, 8]))
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Check if a Function is a ufunc</h1>
+    <div class="content">
+      <p>Check the type of a function to see if it is a ufunc or not.</p>
+      <p>A ufunc should return <code>&lt;class 'numpy.ufunc'&gt;</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Check if <code>np.add</code> is a ufunc</h1>
+    <div class="content">
+      <pre><code>import numpy as np
+
+print(type(np.add))
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Check the type of <code>np.concatenate</code></h1>
+    <div class="content">
+      <pre><code>import numpy as np
+
+print(type(np.concatenate))
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Check the type of a Non-Existent Function</h1>
+    <div class="content">
+      <p>This will produce an error:</p>
+      <pre><code>import numpy as np
+
+print(type(np.blahblah))
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Use an If Statement to Check if a Function is a ufunc</h1>
+    <div class="content">
+      <pre><code>import numpy as np
+
+if type(np.add) == np.ufunc:
+  print('add is ufunc')
+else:
+  print('add is not ufunc')
+</code></pre>
+    </div>
+  </div>
+</div>

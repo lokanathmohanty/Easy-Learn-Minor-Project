@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS clip Property</h1>
+    <div class="content">
+      <p>
+        The <code>clip</code> property in CSS is used to define a clipping region for an element, 
+        which controls which portion of the element is visible. Anything outside the clipping region 
+        will be hidden. This property only applies to elements with 
+        <code>position: absolute</code> or <code>position: fixed</code>.
+      </p>
+
+      <h2>Syntax</h2>
+      <p><code>clip: auto | rect(top, right, bottom, left) | initial | inherit;</code></p>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>auto</strong> – No clipping is applied (default value).</li>
+        <li><strong>rect(top, right, bottom, left)</strong> – Defines a rectangular clipping region.</li>
+        <li><strong>initial</strong> – Sets the property to its default value.</li>
+        <li><strong>inherit</strong> – Inherits the property value from the parent element.</li>
+      </ul>
+
+      <h2>Example: clip with <code>auto</code> Value</h2>
+      <p>
+        Using <code>clip: auto;</code> ensures no clipping is applied, so the element remains fully visible.
+      </p>
+      <div>
+        <pre>
+.sample {
+  width: 200px;
+  background-color: lightblue;
+  padding: 10px;
+}
+
+.clip-rect {
+  position: absolute;
+  width: 200px;
+  background-color: lightblue;
+  padding: 10px;
+  clip: auto;
+}
+        </pre>
+      </div>
+
+      <div>
+        <pre>
+&lt;div class="sample"&gt;
+  This is an example of full visible content without clipping.
+&lt;/div&gt;
+
+&lt;div class="clip-rect"&gt;
+  This content also remains fully visible since clip is set to auto.
+&lt;/div&gt;
+        </pre>
+      </div>
+
+      <h2>Example: clip with <code>rect()</code> Value</h2>
+      <p>
+        The <code>rect()</code> function defines a rectangular area by specifying 
+        <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code> offsets.
+      </p>
+      <div>
+        <pre>
+.sample {
+  width: 200px;
+  background-color: lightgreen;
+  padding: 10px;
+}
+
+.clip-rect {
+  position: absolute;
+  width: 200px;
+  background-color: lightgreen;
+  padding: 10px;
+  clip: rect(0px, 170px, 140px, 0px);
+}
+        </pre>
+      </div>
+
+      <div>
+        <pre>
+&lt;div class="sample"&gt;
+  This is the original content displayed without clipping.
+&lt;/div&gt;
+
+&lt;div class="clip-rect"&gt;
+  This content is clipped using rect(0px, 170px, 140px, 0px).
+&lt;/div&gt;
+        </pre>
+      </div>
+
+      <h2>Example: clip Property with Images</h2>
+      <p>
+        The <code>clip</code> property can also be applied to absolutely positioned images.
+      </p>
+      <div>
+        <pre>
+img {
+  width: 300px;
+  height: 200px;
+}
+
+.clip-auto {
+  position: absolute;
+  clip: auto;
+}
+
+.clip-rect {
+  position: absolute;
+  clip: rect(0px, 140px, 170px, 0px);
+}
+        </pre>
+      </div>
+
+      <div>
+        <pre>
+&lt;img src="flower.jpg" alt="original image"&gt;
+
+&lt;img src="flower.jpg" class="clip-auto" alt="auto clipped image"&gt;
+
+&lt;img src="flower.jpg" class="clip-rect" alt="rect clipped image"&gt;
+        </pre>
+      </div>
+
+      <h2>Important Notes</h2>
+      <ul>
+        <li>The <code>clip</code> property is deprecated and replaced by <code>clip-path</code>.</li>
+        <li>It will not work if <code>overflow: visible</code> is applied to the element.</li>
+      </ul>
+
+      <h2>Browser Support</h2>
+      <ul>
+        <li><strong>Chrome:</strong> 1.0+</li>
+        <li><strong>Edge:</strong> 8.0+</li>
+        <li><strong>Firefox:</strong> 1.0+</li>
+        <li><strong>Safari:</strong> 1.0+</li>
+        <li><strong>Opera:</strong> 7.0+</li>
+      </ul>
+    </div>
+  </div>
+</div>

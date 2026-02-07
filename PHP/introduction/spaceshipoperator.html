@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Spaceship Operator (`&lt;=&gt;`)</h1>
+
+    <div class="content">
+      <p>
+        The **Spaceship Operator** (`&lt;=&gt;`), introduced in **PHP 7.0**, is a **three-way comparison operator**. It is used to quickly determine if the left operand is less than, equal to, or greater than the right operand. It can be used to compare various types, including integers, floats, strings, and arrays.
+      </p>
+
+      <h2>Syntax and Return Values</h2>
+      <p>The operator compares two operands and returns one of three possible integer values:</p>
+      <div class="example">
+        <code>$result = operand1 **&lt;=&gt;** operand2;</code>
+      </div>
+      <ul>
+        <li>
+          **Returns `-1` (Less Than):** If `operand1` is less than `operand2`.
+        </li>
+        <li>
+          **Returns `0` (Equal To):** If `operand1` is equal to `operand2`.
+        </li>
+        <li>
+          **Returns `1` (Greater Than):** If `operand1` is greater than `operand2`.
+        </li>
+      </ul>
+
+      <hr>
+
+      <h2>Usage Examples with Different Data Types</h2>
+
+      <h3>1. Numeric Comparison</h3>
+      <p>Used for comparing numbers, including the result of calculations.</p>
+      <div class="example">
+        <p>
+          <code>$x = 7; $y_calc = 10 / 2; // $y_calc is 5</code><br>
+          <code>$z = $x &lt;=&gt; $y_calc;</code>
+        </p>
+        <p>Since $7$ is greater than $5$, the result is $\mathbf{1}$.</p>
+      </div>
+
+      <h3>2. String Comparison (Lexicographical)</h3>
+      <p>Compares strings alphabetically (lexicographically). This comparison is similar to the result of `strcmp()`, based on character ASCII values.</p>
+      <div class="example">
+        <p>
+          <code>"bat" &lt;=&gt; "ball"</code> $\rightarrow$ **$1$** ("bat" comes after "ball")<br>
+          <code>"bat" &lt;=&gt; "baz"</code> $\rightarrow$ **$-1$** ("bat" comes before "baz")<br>
+          <code>"PHP" &lt;=&gt; "PHP"</code> $\rightarrow$ **$0$**
+        </p>
+      </div>
+
+      <h3>3. Boolean Comparison</h3>
+      <p>
+        The spaceship operator also works with Boolean values, where **`false` is treated as less than `true`**.
+      </p>
+      <div class="example">
+        <p>
+          <code>true &lt;=&gt; false</code> $\rightarrow$ **$1$**<br>
+          <code>false &lt;=&gt; true</code> $\rightarrow$ **$-1$**<br>
+          <code>true &lt;=&gt; true</code> $\rightarrow$ **$0$**
+        </p>
+      </div>
+      <p>
+        This behavior extends to comparison of Booleans with numbers, where `false` is treated as $0$ and `true` as $1$. For instance, `10 &lt;=&gt; true` evaluates to $1$ because $10$ is greater than $1$.
+      </p>
+    </div>
+  </div>
+</div>

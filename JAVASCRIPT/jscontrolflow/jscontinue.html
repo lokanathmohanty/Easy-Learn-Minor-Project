@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript — Continue Statement</h1>
+
+    <div class="content">
+      <h2 class="title">Overview</h2>
+      <p>The <code>continue</code> statement in JavaScript is used to skip the current iteration of a loop and continue with the next iteration. It is often used with an <code>if</code> statement to check a condition and bypass certain iterations.</p>
+      <p>When encountered, <code>continue</code> jumps to the next loop evaluation, skipping any remaining code in the current iteration.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Syntax</h2>
+      <p><code>continue;</code></p>
+      <p><code>continue label;</code></p>
+      <p>The label is optional and can be used to control outer loops in nested structures.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Key Points</h2>
+      <ul>
+        <li><p>Skips the current iteration of the loop.</p></li>
+        <li><p>Execution resumes at the loop’s condition check.</p></li>
+        <li><p>Can be used in <code>for</code>, <code>while</code>, and <code>do...while</code> loops.</p></li>
+        <li><p>Labeled <code>continue</code> can skip iterations of an outer loop.</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Continue with for loop</h2>
+      <p>Here, the loop skips printing the value 3:</p>
+      <p><code>for (let x = 1; x &lt; 5; x++) { if (x == 3) continue; }</code></p>
+      <p>Output: 1, 2, 4</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Continue with while loop</h2>
+      <p>This while loop skips iterations when <em>x</em> is 2 or 3:</p>
+      <p><code>while (x &lt; 5) { x++; if (x == 2 || x == 3) continue; }</code></p>
+      <p>Output: 4, 5</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example — Continue with nested loops</h2>
+      <p>You can use <code>continue</code> inside nested loops. In the parent loop below, iterations for <em>x</em> equal to 2 or 3 are skipped. In the nested loop, iterations where <em>y</em> equals 3 are skipped:</p>
+      <p><code>for (let x = 1; x &lt; 5; x++) { if (x == 2 || x == 3) continue; for (let y = 1; y &lt; 5; y++) { if (y == 3) continue; } }</code></p>
+      <p>Output: 1-1, 1-2, 1-4, 4-1, 4-2, 4-4</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Using labels with continue</h2>
+      <p>A labeled <code>continue</code> statement allows skipping the current iteration of an outer loop from within an inner loop.</p>
+      <p>Example pattern:</p>
+      <p><code>outer: for (let i = 0; i &lt; n; i++) { for (let j = 0; j &lt; m; j++) { if (condition) continue outer; } }</code></p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Common Pitfalls</h2>
+      <ul>
+        <li><p>Overusing <code>continue</code> can make loop logic harder to understand.</p></li>
+        <li><p>Using <code>continue</code> without updating loop variables may cause infinite loops.</p></li>
+        <li><p>Labeled <code>continue</code> is rarely needed — use it cautiously.</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Practice Tasks</h2>
+      <ul>
+        <li><p>Write a loop that prints only even numbers between 1 and 10 using <code>continue</code>.</p></li>
+        <li><p>Create a while loop that skips numbers divisible by 3.</p></li>
+        <li><p>Implement nested loops where an inner condition uses <code>continue</code> to skip processing certain combinations.</p></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Summary</h2>
+      <p>The <code>continue</code> statement is useful when you want to skip specific iterations within loops without breaking out of them entirely. It provides fine control over which parts of a loop’s body should execute.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Further Reading</h2>
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/continue">MDN — continue</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

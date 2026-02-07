@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - DOM Events</h1>
+    <div class="content">
+      <p>The DOM events are actions that can be performed on HTML elements. When an event occurs, it triggers a JavaScript function. This function can then be used to change the HTML element or perform other actions.</p>
+      <p>Here are some examples of DOM events:</p>
+      <ul>
+        <li><strong>Click</strong> − This event occurs when a user clicks on an HTML element.</li>
+        <li><strong>Load</strong> − This event occurs when an HTML element is loaded.</li>
+        <li><strong>Change</strong> − This event occurs when the value of an HTML element is changed.</li>
+        <li><strong>Submit</strong> − This event occurs when an HTML form is submitted.</li>
+      </ul>
+      <p>You can use the event handlers or <code>addEventListener()</code> method to listen to and react to the DOM events. The <code>addEventListener()</code> method takes two arguments: the name of the event and the function that you want to be called when the event occurs.</p>
+      <p>The DOM events are also referred as Document Object Model events. It is used to interact with the DOM elements and manipulate the DOM elements from JavaScript when any event occurs.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The onclick Event Type</h2>
+    <div class="content">
+      <p>This is the most frequently used event type which occurs when a user clicks the left button of the mouse. You can put your validation, warning etc., against this event type.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;   
+   &lt;script&gt;
+      function sayHello() {
+         alert("Hello World")
+      }
+   &lt;/script&gt;      
+&lt;/head&gt;   
+&lt;body&gt;
+   &lt;p&gt;Click the following button and see result&lt;/p&gt;      
+   &lt;form&gt;
+      &lt;input type="button" onclick="sayHello()" value="Say Hello" /&gt;
+   &lt;/form&gt;      
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The ondblclick Event Type</h2>
+    <div class="content">
+      <p>We use the <code>ondblclick</code> event handler with the element. When users double click the button, it calls the <code>changeColor()</code> function. In the <code>changeColor()</code> function, we change the color of the text. So, the code will change the text's color when the user double-clicks the button.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2 id="text"&gt; Hi Users! &lt;/h2&gt;
+   &lt;button ondblclick="changeColor()"&gt; Double click me! &lt;/button&gt;
+   &lt;script&gt;
+      function changeColor() {
+         document.getElementById("text").style.color = "red";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The onkeydown Event Type</h2>
+    <div class="content">
+      <p>We used the <code>keydown</code> event with the &lt;input&gt; element. Whenever the user presses any key, it will call the <code>customizeInput()</code> function. In the function, we change the background color of the input and the input text to red.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;p&gt; Enter character/s by pressing any key &lt;/p&gt;
+   &lt;input type="text" onkeydown="customizeInput()"&gt;
+   &lt;script&gt;
+      function customizeInput() {
+         var ele = document.getElementsByTagName("INPUT")[0];
+         ele.style.backgroundColor = "yellow";
+         ele.style.color = "red";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </div>
+  </div>
+</div>

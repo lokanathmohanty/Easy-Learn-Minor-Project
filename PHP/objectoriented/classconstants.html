@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP - Class Constants</h1>
+
+    <div class="content">
+      <p>
+        A **Class Constant** is an identifier within a class that holds a constant value—a value that remains unchanged throughout the execution of the program. They are defined using the <code>const</code> keyword and are not prefixed with the dollar sign (<code>$</code>).
+      </p>
+
+      <h2>Key Characteristics of Class Constants</h2>
+      <ul>
+        <li>
+          <strong>Immutability</strong>: Once a constant's value is set, it **cannot be modified**.
+        </li>
+        <li>
+          <strong>Static and Scope</strong>: Class constants are automatically **static**. They belong to the class itself, not a specific object instance. You don't need an object to access them.
+        </li>
+        <li>
+          <strong>Value Type</strong>: The value must be an **expression** (including global constants like <code>M_PI</code> or simple values), not a variable, function call, or property.
+        </li>
+        <li>
+          <strong>Visibility</strong>: The default visibility is **public**. However, as of PHP 7.1, you can use **private** and **protected** access modifiers.
+        </li>
+        <li>
+          <strong>Naming Convention</strong>: Conventionally, constant names are written in **UPPERCASE**.
+        </li>
+      </ul>
+
+      <h2>Accessing Class Constants</h2>
+      <p>
+        Class constants are accessed using the **Scope Resolution Operator** (<code>::</code>).
+      </p>
+      <ul>
+        <li>
+          <strong>From outside the class</strong>, use the class name:
+          <pre><code>echo SomeClass::CONSTANT_NAME;</code></pre>
+        </li>
+        <li>
+          <strong>From inside a method</strong>, use the <code>self</code> keyword:
+          <pre><code>$area = $this->side**2 * self::PI;</code></pre>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Defining and Accessing a Constant</h2>
+    <div class="content example">
+      <p>
+        This example defines a constant <code>PI</code> and uses it within the <code>area()</code> method.
+      </p>
+      <pre><code>&lt;?php
+   class square {
+      const PI = M_PI; // Uses the built-in global constant
+      var $side = 5;
+
+      function area() {
+         // Accessing the constant using self::PI
+         $area = $this->side**2 * self::PI;
+         return $area;
+      }
+   }
+
+   $s1 = new square();
+   // Accessing the constant from outside the class using ClassName::CONSTANT
+   echo "PI = " . square::PI . "\n";
+   echo "area = " . $s1->area();
+?&gt;</code></pre>
+    </div>
+
+    <h2 class="title">Class Constant Visibility Modifiers</h2>
+    <div class="content">
+      <p>
+        Class constants can be set to **private** or **protected** to restrict access, similar to properties. Attempting to access a private constant from outside the class results in a Fatal Error.
+      </p>
+      <pre><code>&lt;?php
+   class example {
+      const X = 10;           // Public (default)
+      private const Y = 20;   // Private
+   }
+   
+   echo "public = " . example::X . "\n"; // Works
+   // echo "private = " . example::Y . "\n"; // Causes Fatal Error
+?&gt;</code></pre>
+    </div>
+
+    <h2 class="title">Advantages of Class Constants</h2>
+    <div class="content">
+      <p>
+        Using class constants improves code quality by:
+      </p>
+      <ul>
+        <li>
+          **Readability**: Providing meaningful, descriptive names instead of using "magic numbers" (raw, unexplained values).
+        </li>
+        <li>
+          **Maintainability**: Centralizing fixed values so that if a value needs to change, it only needs to be updated in one place.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

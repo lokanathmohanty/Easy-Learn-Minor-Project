@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="session">
+     
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        React introduces an entirely new concept called React Hooks from React 16.8. 
+        Even though it is a relatively new concept, it enables React functional components 
+        to have their own state and life-cycle. Also, React Hooks enable functional components 
+        to use many features not available earlier. 
+      </p>
+      <p>
+        Let us see how to do state management in a functional component using React Hooks in this chapter.
+      </p>
+
+      <h2>What is React Hooks?</h2>
+      <p>
+        React Hooks are special functions provided by React to handle a specific functionality 
+        inside a React functional component. For example, React provides the <code>useState()</code> 
+        function to manage state in a functional component.
+      </p>
+      <p>
+        The general signature of <code>useState()</code> Hook is as follows:
+      </p>
+      <pre><code>const [stateVariable, setStateFunction] = useState(initialValue);</code></pre>
+
+      <h3>Example</h3>
+      <p>
+        State management in a clock component using Hooks:
+      </p>
+      <pre><code>
+const [currentDateTime, setCurrentDateTime] = useState(new Date());
+setInterval(() => setCurrentDateTime(new Date()), 1000);
+      </code></pre>
+      <ul>
+        <li><strong>currentDateTime</strong> − Variable used to hold current date and time.</li>
+        <li><strong>setCurrentDateTime()</strong> − Function used to set current date and time.</li>
+      </ul>
+
+      <h2>Create a Stateful Component</h2>
+      <p>Steps to recreate a clock component using Hooks:</p>
+      <ul>
+        <li>Create a new React application <code>react-clock-hook-app</code>.</li>
+        <li>Open the app in your editor and create <code>src/components/Clock.js</code>.</li>
+        <li>Import React and <code>useState</code>.</li>
+      </ul>
+      <pre><code>import React, { useState } from 'react';</code></pre>
+      <p>Create Clock component and state Hook:</p>
+      <pre><code>
+function Clock() {
+  const [currentDateTime, setCurrentDateTime] = useState(new Date());
+  setInterval(() => setCurrentDateTime(new Date()), 1000);
+  return (
+    &lt;div&gt;&lt;p&gt;The current time is {currentDateTime.toString()}&lt;/p&gt;&lt;/div&gt;
+  );
+}
+export default Clock;
+      </code></pre>
+
+      <h2>Using the Component</h2>
+      <pre><code>
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Clock from './components/Clock';
+
+ReactDOM.render(
+  &lt;React.StrictMode&gt;
+    &lt;Clock /&gt;
+  &lt;/React.StrictMode&gt;,
+  document.getElementById('root')
+);
+      </code></pre>
+      <p>Serve the application with <code>npm start</code> and open <code>http://localhost:3000</code>.</p>
+
+      <h2>Cleanup with useEffect</h2>
+      <p>
+        The above application works fine. However, the interval has to be cleared 
+        when the application ends. This can be done using the <code>useEffect</code> Hook, 
+        which will be discussed in the upcoming chapter.
+      </p>
+
+      <h2>Introducing State in Expense Manager App</h2>
+      <p>
+        Let us introduce state management in the expense manager application 
+        by adding a feature to remove an expense item using Hooks.
+      </p>
+
+      <h3>Steps</h3>
+      <ul>
+        <li>Create <code>ExpenseEntryItemListFn.js</code> under <code>src/components</code>.</li>
+        <li>Import React, <code>useState</code>, and CSS.</li>
+        <li>Create the <code>ExpenseEntryItemListFn</code> component.</li>
+        <li>Initialize state with props.</li>
+        <li>Add event handlers for hover and delete.</li>
+        <li>Calculate total amount.</li>
+        <li>Render a table of expense items.</li>
+      </ul>
+
+      <h3>Complete Code</h3>
+      <pre><code>
+import React, { useState } from 'react';
+import './ExpenseEntryItemList.css';
+
+function ExpenseEntryItemListFn(props) {
+  const [items, setItems] = useState(props.items);
+
+  function handleDelete(id, e) {
+    e.preventDefault();
+    let newItems = items.filter(item => item.id !== id);
+    setItems(newItems);
+  }
+
+  function getTotal() {
+    return items.reduce((total, item) => total + item.amount, 0);
+  }
+
+  const lists = items.map(item =&gt;
+    &lt;tr key={item.id}&gt;
+      &lt;td&gt;{item.name}&lt;/td&gt;
+      &lt;td&gt;{item.amount}&lt;/td&gt;
+      &lt;td&gt;{new Date(item.spendDate).toDateString()}&lt;/td&gt;
+      &lt;td&gt;{item.category}&lt;/td&gt;
+      &lt;td&gt;&lt;a href="#" onClick={(e) =&gt; handleDelete(item.id, e)}&gt;Remove&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  );
+
+  return (
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Item&lt;/th&gt;
+          &lt;th&gt;Amount&lt;/th&gt;
+          &lt;th&gt;Date&lt;/th&gt;
+          &lt;th&gt;Category&lt;/th&gt;
+          &lt;th&gt;Remove&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        {lists}
+        &lt;tr&gt;
+          &lt;td colSpan="1"&gt;Total Amount&lt;/td&gt;
+          &lt;td colSpan="4"&gt;{getTotal()}&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  );
+}
+export default ExpenseEntryItemListFn;
+      </code></pre>
+
+      <h2>Running the Expense Manager</h2>
+      <p>
+        Update <code>index.js</code> to include the component, serve the app using <code>npm start</code>, 
+        and open <code>http://localhost:3000</code>. Clicking "Remove" will delete the expense item 
+        and update the UI.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Comparison Operators Examples</h1>
+
+    <div class="content">
+      <p>
+        **Comparison Operators** in PHP are used to compare two operands and determine their relationship. They always return a **Boolean** value (`true` or `false`). These operators are essential for conditional statements and decision-making logic.
+      </p>
+
+      <h2>Standard Comparison Operators</h2>
+      <table>
+        <tr>
+          <th>Operator</th>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><code>==</code></td>
+          <td>Equal</td>
+          <td>Checks for **equal value** (Type coercion is allowed).</td>
+        </tr>
+        <tr>
+          <td><code>!=</code> or <code>&lt;&gt;</code></td>
+          <td>Not Equal</td>
+          <td>Checks for **unequal value** (Type coercion is allowed).</td>
+        </tr>
+        <tr>
+          <td><code>&gt;</code></td>
+          <td>Greater Than</td>
+          <td>Left operand is strictly greater than right.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;</code></td>
+          <td>Less Than</td>
+          <td>Left operand is strictly less than right.</td>
+        </tr>
+        <tr>
+          <td><code>&gt;=</code></td>
+          <td>Greater Than or Equal To</td>
+          <td>Checks if the left operand is greater than or equal to the right.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;=</code></td>
+          <td>Less Than or Equal To</td>
+          <td>Checks if the left operand is less than or equal to the right.</td>
+        </tr>
+      </table>
+
+      <hr>
+
+      <h2>Strict vs. Loose Comparison</h2>
+      <p>
+        PHP provides "strict" comparison operators that check both **value AND data type**, preventing PHP's automatic type coercion.
+      </p>
+
+      <h3>1. Equality (`==`) vs. Identity (`===`)</h3>
+      <ul>
+        <li>
+          **`==` (Equal):** Checks only if the **values** are the same. If types differ, PHP converts one to match the other before comparing.
+          <div class="example">
+            <code>$x = 15; $y = "15";</code><br>
+            <code>$x == $y</code> $\rightarrow$ <code>true</code> (Value is equal)
+          </div>
+        </li>
+        <li>
+          **`===` (Identical):** Checks if both the **value** AND the **data type** are the same. No type conversion occurs.
+          <div class="example">
+            <code>$x = 15; $y = "15";</code><br>
+            <code>$x === $y</code> $\rightarrow$ <code>false</code> (Integer is not identical to String)
+          </div>
+        </li>
+      </ul>
+
+      <h3>2. Inequality (`!=`) vs. Non-Identity (`!==`)</h3>
+      <p>
+        The same principle applies to negative comparisons. `!==` is generally safer for robust type checking.
+      </p>
+      <div class="example">
+        <code>$p = 50; $q = "50";</code><br>
+        <code>$p != $q</code> $\rightarrow$ <code>false</code> (Value is equal)<br>
+        <code>$p !== $q</code> $\rightarrow$ <code>true</code> (Types are different)
+      </div>
+
+      <hr>
+
+      <h2>The Spaceship Operator (`&lt;=&gt;`)</h2>
+      <p>
+        Introduced in PHP 7, the **Spaceship Operator** is a three-way comparison operator that returns an integer indicating the relationship between the two operands.
+      </p>
+      <ul>
+        <li>
+          **Returns `-1`:** If the left operand is **less than** the right.
+        </li>
+        <li>
+          **Returns `0`:** If the operands are **equal**.
+        </li>
+        <li>
+          **Returns `1`:** If the left operand is **greater than** the right.
+        </li>
+      </ul>
+      <div class="example">
+        <code>5 &lt;=&gt; 10</code> $\rightarrow$ <code>-1</code><br>
+        <code>20 &lt;=&gt; 10</code> $\rightarrow$ <code>1</code><br>
+        <code>10 &lt;=&gt; 10</code> $\rightarrow$ <code>0</code>
+      </div>
+    </div>
+  </div>
+</div>

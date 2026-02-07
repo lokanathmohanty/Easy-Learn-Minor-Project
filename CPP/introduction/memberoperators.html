@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Member Access Operators (Dot <code>.</code> & Arrow <code>-&gt;</code>)</h1>
+
+        <div class="content">
+            <p>The **dot (<code>.</code>)** and **arrow (<code>-&gt;</code>)** operators are used to **reference individual members** (variables or functions) within classes, structures, and unions. They are essential for accessing the data and behavior encapsulated by these user-defined types.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">1. The Dot Operator (<code>.</code>)</h2>
+            <p>The dot operator is used when accessing a member directly through the **object (or instance) name** itself. It operates on the actual object stored in memory.</p>
+
+            <h3>Syntax</h3>
+            <pre class="example">object.member_name</pre>
+
+            <h3>Example</h3>
+            <p>If you have an <code>Employee</code> variable named <code>emp</code>, you use the dot operator to access its members:</p>
+            <pre class="example">
+struct Employee { char first_name[20]; };
+Employee emp;
+
+// Accessing the member via the object name
+strcpy(emp.first_name, "zara"); 
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">2. The Arrow Operator (<code>-&gt;</code>)</h2>
+            <p>The arrow operator is used when accessing a member through a **pointer to an object**. It automatically dereferences the pointer and then accesses the member.</p>
+
+            <h3>Syntax</h3>
+            <pre class="example">pointer_to_object-&gt;member_name</pre>
+
+            <h3>Equivalence</h3>
+            <p>The expression <code>p_emp->first_name</code> is functionally equivalent to using the dot operator combined with the dereference operator (<code>*</code>):</p>
+            <pre class="example">(*p_emp).first_name</pre>
+            <p>The arrow operator is a shorthand convenience that simplifies code when dealing with pointers.</p>
+
+            <h3>Example</h3>
+            <p>If <code>p_emp</code> is a pointer pointing to the <code>emp</code> object:</p>
+            <pre class="example">
+Employee emp;
+Employee* p_emp = &amp;emp; // p_emp holds the address of emp
+
+// Accessing the member via the pointer
+strcpy(p_emp-&gt;first_name, "zara");
+</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `while` Loop</h1>
+
+    <div class="content">
+      <p>
+        The **`while`** loop is the simplest **entry-controlled** looping construct in PHP. It repeatedly executes a block of code as long as a specified **Boolean expression** remains `true`. The condition is checked **before** the execution of the loop body in every iteration.
+      </p>
+
+      <h2>`while` Loop Syntax and Flow</h2>
+      <p>The loop consists of the `while` keyword, a condition, and the statements to be executed.</p>
+      <div class="example">
+        <code>while (expr) { statements }</code>
+      </div>
+      <ul>
+        <li>
+          **Entry-Controlled:** If the expression evaluates to `false` initially, the loop body is **never executed**.
+        </li>
+        <li>
+          **Termination:** It is crucial that the loop body contains code that eventually makes the `expr` false, or the loop will become infinite.
+        </li>
+      </ul>
+
+      <hr>
+
+      <h2>Simple `while` Loop Examples</h2>
+
+      <h3>Incrementing Loop</h3>
+      <p>A variable `$x` is initialized to 1. The loop continues as long as `$x` is less than or equal to 10. The value of `$x` is incremented inside the loop to ensure termination.</p>
+      <div class="example">
+        <p>
+          <code>$x = 1;</code><br>
+          <code>while ($x&lt;=10) { echo "Iteration No. $x \n"; $x++; }</code>
+        </p>
+        <p class="content">Output (Partial): Iteration No. 1 ... Iteration No. 10</p>
+      </div>
+
+      <h3>Decrementing Loop</h3>
+      <p>The loop variable is initialized to a large value and decremented until the condition is no longer true.</p>
+      <div class="example">
+        <p>
+          <code>$x = 5;</code><br>
+          <code>while ($x&gt;0) { echo "Iteration No. $x \n"; $x--; }</code>
+        </p>
+        <p class="content">Output: Iteration No. 5 \n ... \n Iteration No. 1</p>
+      </div>
+
+      <hr>
+
+      <h2>Practical Applications</h2>
+
+      <h3>Iterating Indexed Arrays</h3>
+      <p>
+        The `while` loop can traverse an indexed array by using a counter variable (`$x`) to access elements by index until the counter reaches the array's size (`count($numbers)`).
+      </p>
+      <div class="example">
+        <p>
+          <code>$numbers = array(10, 20, 30);</code><br>
+          <code>$size = count($numbers); $x=0;</code><br>
+          <code>while ($x&lt;$size) { echo "Number at index $x is $numbers[$x] \n"; $x++; }</code>
+        </p>
+        <p class="content">Output: Number at index 0 is 10 ...</p>
+      </div>
+
+      <h3>Nested `while` Loops</h3>
+      <p>
+        Using one `while` loop inside another allows for processing two-dimensional data or executing repetitive tasks for each outer loop iteration. The inner loop's counter must be **re-initialized** for each new iteration of the outer loop.
+      </p>
+      <div class="example">
+        <p>
+          <code>$i=1; $j=1;</code><br>
+          <code>while ($i&lt;=3){ while ($j&lt;=3){ /* ... */ $j++; } $j=1; $i++; }</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Alternative Syntax (`while: endwhile;`)</h2>
+      <p>
+        PHP provides an alternative syntax for the `while` loop, typically used when intermixing PHP with large HTML blocks. It uses a **colon (`:`)** to open the body and the **`endwhile;`** keyword to close it.
+      </p>
+      <div class="example">
+        <code>while ($x&lt;=10): echo "Iteration No. $x \n"; $x++; endwhile;</code>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,177 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Relational Operators in C</h1>
+    <div class="content">
+
+      <p>Relational operators in C are used to <strong>compare two values</strong>. They are typically used in <em>Boolean expressions</em> and control flow statements like <code>if</code>, <code>while</code>, and <code>for</code>.</p>
+
+      <p>All relational operations return either:</p>
+      <ul>
+        <li><code>0</code> → False</li>
+        <li><code>1</code> (or any non-zero value) → True</li>
+      </ul>
+
+      <p>Note: C does not have a Boolean type by default, so it uses integers (0 = false, non-zero = true).</p>
+
+      <h2 class="title">Relational Operators Table</h2>
+      <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>==</td><td>Equal to</td><td>(A == B)</td></tr>
+          <tr><td>!=</td><td>Not equal to</td><td>(A != B)</td></tr>
+          <tr><td>&gt;</td><td>Greater than</td><td>(A &gt; B)</td></tr>
+          <tr><td>&lt;</td><td>Less than</td><td>(A &lt; B)</td></tr>
+          <tr><td>&gt;=</td><td>Greater than or equal to</td><td>(A &gt;= B)</td></tr>
+          <tr><td>&lt;=</td><td>Less than or equal to</td><td>(A &lt;= B)</td></tr>
+        </tbody>
+      </table>
+
+      <p>All relational operators are <strong>binary operators</strong> and require two operands.</p>
+
+      <h2 class="title">Example 1: Simple Comparison</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int op1 = 5;
+   int op2 = 3;
+
+   printf("op1: %d op2: %d op1 &lt; op2: %d\n", op1, op2, op1 &lt; op2);
+   return 0;
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>op1: 5 op2: 3 op1 < op2: 0</code></pre>
+
+      <h2 class="title">Example 2: Using All Relational Operators</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 21;
+   int b = 10;
+
+   printf("a: %d b: %d\n", a, b);
+
+   if(a == b)
+      printf("Line 1 - a is equal to b\n");
+   else
+      printf("Line 1 - a is not equal to b\n");
+
+   if (a < b)
+      printf("Line 2 - a is less than b\n");
+   else
+      printf("Line 2 - a is not less than b\n");
+
+   if (a > b)
+      printf("Line 3 - a is greater than b\n");
+   else
+      printf("Line 3 - a is not greater than b\n");
+
+   // Change values
+   a = 5;
+   b = 20;
+
+   printf("\na: %d b: %d\n", a, b);
+
+   if (a <= b)
+      printf("Line 4 - a is either less than or equal to b\n");
+
+   if (b >= a)
+      printf("Line 5 - b is either greater than or equal to a\n");
+
+   if(a != b)
+      printf("Line 6 - a is not equal to b\n");
+   else
+      printf("Line 6 - a is equal to b\n");
+
+   return 0;
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>a: 21 b: 10
+Line 1 - a is not equal to b
+Line 2 - a is not less than b
+Line 3 - a is greater than b
+
+a: 5 b: 20
+Line 4 - a is either less than or equal to b
+Line 5 - b is either greater than or equal to a
+Line 6 - a is not equal to b</code></pre>
+
+      <h2 class="title">Example 3: Common Mistake Using = Instead of ==</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 5;
+   int b = 3;
+
+   if (a = b)  // Mistake: should be == not =
+      printf("a is equal to b");
+   else
+      printf("a is not equal to b");
+
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>a is equal to b</code></pre>
+      <p><strong>Explanation:</strong> <code>a = b</code> assigns 3 to <code>a</code>, which is non-zero. Hence, the condition evaluates as true.</p>
+
+      <h2 class="title">Example 4: Relational Operators with char</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   char a = 'B';
+   char b = 'd';
+
+   printf("a: %c b: %c\n", a, b);
+
+   if(a == b)
+      printf("Line 1 - a is equal to b\n");
+   else
+      printf("Line 1 - a is not equal to b\n");
+
+   if (a < b)
+      printf("Line 2 - a is less than b\n");
+   else
+      printf("Line 2 - a is not less than b\n");
+
+   if (a > b)
+      printf("Line 3 - a is greater than b\n");
+   else
+      printf("Line 3 - a is not greater than b\n");
+
+   if(a != b)
+      printf("Line 4 - a is not equal to b\n");
+   else
+      printf("Line 4 - a is equal to b\n");
+
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>a: B b: d
+Line 1 - a is not equal to b
+Line 2 - a is less than b
+Line 3 - a is not greater than b
+Line 4 - a is not equal to b</code></pre>
+
+      <p><strong>Note:</strong> Characters are compared based on their ASCII values.</p>
+
+      <h2 class="title">Important Notes</h2>
+      <ul>
+        <li>Relational operators <strong>cannot</strong> be used to compare arrays or structures directly.</li>
+        <li>Always double-check your usage of <code>=</code> vs <code>==</code> in conditionals.</li>
+        <li>You can use relational operators with <code>char</code> because it is internally treated as an integer type.</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

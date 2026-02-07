@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Create an Event-Aware Component</h1>
+
+    <div class="content">
+      <p>Event management is one of the important features in a web application. It enables the user to interact with the application. React supports all events available in a web application. React event handling is very similar to DOM events with little changes. For example, clicking on a component is one of the common events observed in React-based websites.</p>
+      <p>An <strong>event-aware component</strong> in React is a component that contains an event handler method within it. The component can either be a class component or a functional component.</p>
+    </div>
+
+    <h2 class="title">How to create an Event-Aware Component?</h2>
+    <div class="content">
+      <p>Let us create a new component, <strong>MessageWithEvent</strong>, and handle events in the component to understand event management in React.</p>
+
+      <ul>
+        <li><strong>Step 1</strong> − Open the <em>expense-manager</em> application and create a file <code>MessageWithEvent.js</code> inside <code>src/components</code>.</li>
+        <li><strong>Step 2</strong> − Create a class <code>MessageWithEvent</code> with a constructor.</li>
+        <li><strong>Step 3</strong> − Define an event handler method <code>logEventToConsole</code> to log event details.</li>
+        <li><strong>Step 4</strong> − Implement <code>render()</code> to return a greeting message.</li>
+        <li><strong>Step 5</strong> − Attach <code>logEventToConsole</code> as a click event handler.</li>
+        <li><strong>Step 6</strong> − Bind the event handler inside the constructor.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Complete Code: MessageWithEvent Component</h2>
+    <div class="content">
+      <p>The complete code of the <code>MessageWithEvent</code> component is shown below:</p>
+      <p><code>
+import React from 'react'; <br><br>
+class MessageWithEvent extends React.Component {<br>
+&nbsp;&nbsp;constructor(props) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;super(props);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.logEventToConsole = this.logEventToConsole.bind();<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;logEventToConsole(e) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log(e.target.innerHTML);<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;render() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div onClick={this.logEventToConsole}&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Hello {this.props.name}!&lt;/p&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+export default MessageWithEvent;
+      </code></p>
+    </div>
+
+    <h2 class="title">Using the Component</h2>
+    <div class="content">
+      <p>Update <code>index.js</code> to use the <code>MessageWithEvent</code> component:</p>
+      <p><code>
+import React from 'react';<br>
+import ReactDOM from 'react-dom';<br>
+import MessageWithEvent from './components/MessageWithEvent';<br><br>
+ReactDOM.render(<br>
+&nbsp;&nbsp;&lt;React.StrictMode&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MessageWithEvent name="React" /&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MessageWithEvent name="React developer" /&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+&nbsp;&nbsp;&lt;/React.StrictMode&gt;,<br>
+&nbsp;&nbsp;document.getElementById('root')<br>
+);<br>
+      </code></p>
+      <p>Run <code>npm start</code> and open <code>http://localhost:3000</code>. Clicking the component will log messages to the console.</p>
+    </div>
+
+    <h2 class="title">Passing Extra Information to Event Handler</h2>
+    <div class="content">
+      <p>We can pass additional information (for example, <code>msgid</code>) to the event handler.</p>
+      <ul>
+        <li><strong>Step 1</strong> − Update the event handler to accept <code>msgid</code>.</li>
+        <li><strong>Step 2</strong> − Bind <code>msgid</code> in the <code>render()</code> method.</li>
+      </ul>
+
+      <p><code>
+class MessageWithEvent extends React.Component {<br>
+&nbsp;&nbsp;constructor(props) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;super(props);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.logEventToConsole = this.logEventToConsole.bind();<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;logEventToConsole(msgid, e) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log(e.target.innerHTML);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log(msgid);<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;render() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div onClick={this.logEventToConsole.bind(this, Math.floor(Math.random() * 10))}&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Hello {this.props.name}!&lt;/p&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+export default MessageWithEvent;
+      </code></p>
+      <p>Now, when you click on the component, it will log both the message text and the <code>msgid</code> to the console.</p>
+    </div>
+  </div>
+</div>

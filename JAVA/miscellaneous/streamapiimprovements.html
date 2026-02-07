@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Stream API Improvements (Java 9+)</h1>
+
+        <div class="content">
+            <h2>New Methods for Java Streams 🌊</h2>
+            <p>The **Java Stream API** received four major method additions in **Java 9** to provide more control over stream processing, especially for conditionally limiting elements and handling potential <code>null</code> values.</p>
+
+            <h3>1. <code>takeWhile(Predicate)</code></h3>
+            <p>This method is a short-circuiting intermediate operation. For an ordered stream, it returns a stream consisting of elements from the beginning of the source stream **until the provided <code>Predicate</code> returns <code>false</code>** for the first time. The stream stops processing and discards all subsequent elements after the predicate fails.</p>
+            <pre><code>Stream.of("a", "b", "c", "", "e", "f")
+    .takeWhile(s -&gt; !s.isEmpty()) // Stops when it hits the empty string ""
+    .forEach(System.out::print); // Output: abc</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h3>2. <code>dropWhile(Predicate)</code></h3>
+            <p>This method is the inverse of <code>takeWhile()</code>. For an ordered stream, it **discards (drops) elements from the start of the stream** as long as the provided <code>Predicate</code> returns <code>true</code>. Once the predicate returns <code>false</code> for the first time, it includes that element and **all remaining elements** in the resulting stream.</p>
+            <pre><code>Stream.of("a", "b", "c", "", "e", "f")
+    .dropWhile(s -&gt; !s.isEmpty()) // Drops "a", "b", "c"
+    .forEach(System.out::print); // Output: "" + "e" + "f" -&gt; ef</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h3>3. Enhanced <code>iterate(T seed, Predicate hasNext, UnaryOperator next)</code></h3>
+            <p>The <code>iterate</code> method now includes a **<code>Predicate</code>** as a parameter. This predicate serves as a **stopping condition** (a <code>hasNext</code> check), allowing developers to create an infinite stream and define an explicit limit for it in a single statement, avoiding the need for an external <code>limit()</code> call.</p>
+            <pre><code>IntStream.iterate(3, 
+    x -&gt; x &lt; 10, // Predicate (stop condition)
+    x -&gt; x + 3 // UnaryOperator (next element)
+).forEach(System.out::println); 
+// Output: 3, 6, 9 (stops before 12)</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h3>4. <code>ofNullable(T t)</code></h3>
+            <p>This static factory method simplifies null handling when creating streams. It returns:</p>
+            <ul>
+                <li>A sequential <code>Stream</code> containing **a single element** if the argument <code>t</code> is **non-null**.</li>
+                <li>An **empty <code>Stream</code>** if the argument <code>t</code> is **<code>null</code>**.</li>
+            </ul>
+            <p>This prevents potential <code>NullPointerException</code> errors and streamlines code that might otherwise require explicit <code>if (t != null)</code> checks before streaming.</p>
+        </div>
+
+        <div class="example">
+            <h2 class="title example">Example: Using <code>ofNullable</code></h2>
+            <div class="content">
+                <pre><code>long count1 = Stream.ofNullable(100).count();
+// count1 will be 1
+
+long count2 = Stream.ofNullable(null).count();
+// count2 will be 0</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

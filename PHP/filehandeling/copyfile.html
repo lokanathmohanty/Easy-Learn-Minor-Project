@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP File Copying</h1>
+
+    <div class="content">
+      <p>
+        Copying files in PHP is a common task used for creating backups, duplicating resources, or moving files to a new location while preserving the original. PHP offers several ways to perform file copying, ranging from a dedicated built-in function to manual I/O operations.
+      </p>
+
+      <h2>The Dedicated `copy()` Function (Recommended) ⭐</h2>
+      <p>
+        The simplest and most efficient way to duplicate a file in PHP is using the **`copy()`** function. It handles the entire process internally, requiring only the source and destination paths.
+      </p>
+      <div class="example">
+        <p>
+          **Syntax:**<br>
+          <code>copy(string $source, string $destination): bool</code>
+        </p>
+        <p>
+          **Example:**<br>
+          <code>$sFile = "original.txt";</code><br>
+          <code>$dFile = "backup/original_backup.txt"; // Copies to a new folder</code><br>
+          <br>
+          <code>if (copy($sFile, $dFile)) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "File copied successfully!";</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Alternative Methods for Copying</h2>
+
+      <h3>1. Using `file_get_contents()` and `file_put_contents()` 📝</h3>
+      <p>
+        This method is fast and concise for smaller files. It reads the entire source file into a single string in memory, and then writes that string to the destination file.
+      </p>
+      <div class="example">
+        <p>
+          <code>$source = "hello.txt";</code><br>
+          <code>$target = "test.txt";</code><br>
+          <br>
+          <code>$data = **file_get_contents**($source); // Read all into memory</code><br>
+          <code>**file_put_contents**($target, $data); // Write from memory</code>
+        </p>
+      </div>
+
+      <h3>2. Manual Read/Write Loop (for Large Files) 🔄</h3>
+      <p>
+        For very large files, manual I/O using `fopen()`, `fgets()`, and `fputs()` is more memory-efficient. It processes the file line by line (or in chunks), preventing the entire file from being loaded into the server's RAM.
+      </p>
+      <div class="example">
+        <p>
+          <code>$src = fopen("hello.txt", "r");</code><br>
+          <code>$dest = fopen("new.txt", "w");</code><br>
+          <br>
+          <code>while(! feof($src)) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$str = fgets($src);</code><br>
+          <code>&nbsp;&nbsp;&nbsp;fputs($dest, $str);</code><br>
+          <code>}</code><br>
+          <code>fclose($src);</code><br>
+          <code>fclose($dest);</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Error Prevention and Best Practices ⚠️</h2>
+      <p>
+        Before attempting to copy, it's crucial to check that the source file exists and that the destination directory has the appropriate write permissions.
+      </p>
+      <div class="example">
+        <p>
+          <code>$sFile = "data.txt";</code><br>
+          <code>if (**file_exists**($sFile) && **is_writable**('backup/')) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;// Proceed with copy()</code><br>
+          <code>} else {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "Check file existence or write permissions.";</code><br>
+          <code>}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

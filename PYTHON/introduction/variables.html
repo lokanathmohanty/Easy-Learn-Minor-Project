@@ -1,0 +1,179 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Variables</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>Python variables are reserved memory locations used to store values within a program. When you create a variable, memory is reserved for it. The type of data stored determines the amount of memory allocated.</p>
+
+      <h2>Memory Addresses</h2>
+      <p>All data in Python is stored in memory locations represented internally in binary form. Python’s <code>id()</code> function returns the address where the object is stored.</p>
+      <pre>
+>>> "May"
+'May'
+>>> id("May")
+2167264641264
+
+>>> 18
+18
+>>> id(18)
+140714055169352
+      </pre>
+      <p>Variables act as labels (identifiers) to refer to these memory locations using the assignment operator <code>=</code>.</p>
+      <pre>
+>>> month = "May"
+>>> age = 18
+      </pre>
+
+      <h2>Creating Variables</h2>
+      <p>Variables in Python are created automatically when a value is assigned:</p>
+      <pre>
+counter = 100        # integer
+miles   = 1000.0     # float
+name    = "Zara Ali" # string
+      </pre>
+
+      <h2>Printing Variables</h2>
+      <p>Use <code>print()</code> to display variable values:</p>
+      <pre>
+counter = 100
+miles   = 1000.0
+name    = "Zara Ali"
+
+print(counter)
+print(miles)
+print(name)
+# Output:
+# 100
+# 1000.0
+# Zara Ali
+      </pre>
+
+      <h2>Deleting Variables</h2>
+      <p>Use <code>del</code> to delete a variable:</p>
+      <pre>
+counter = 100
+print(counter)
+
+del counter
+print(counter)  # NameError: counter is not defined
+      </pre>
+
+      <h2>Getting Type of Variables</h2>
+      <p>Use <code>type()</code> to find a variable’s data type:</p>
+      <pre>
+x = "Zara"
+y = 10
+z = 10.10
+
+print(type(x))  # str
+print(type(y))  # int
+print(type(z))  # float
+      </pre>
+
+      <h2>Casting Variables</h2>
+      <p>You can explicitly specify the type with casting:</p>
+      <pre>
+x = str(10)   # '10'
+y = int(10)   # 10
+z = float(10) # 10.0
+      </pre>
+
+      <h2>Case Sensitivity</h2>
+      <p>Variable names are case sensitive:</p>
+      <pre>
+age = 20
+Age = 30
+print(age) # 20
+print(Age) # 30
+      </pre>
+
+      <h2>Multiple Assignment</h2>
+      <p>Assign the same or different values to multiple variables:</p>
+      <pre>
+a = b = c = 100
+print(a, b, c)  # 100 100 100
+
+a, b, c = 1, 2, "Zara Ali"
+print(a, b, c)  # 1 2 Zara Ali
+      </pre>
+
+      <h2>Naming Conventions</h2>
+      <p>Rules for variable names:</p>
+      <ul>
+        <li>Must start with a letter or underscore (_).</li>
+        <li>Cannot start with a number or special character.</li>
+        <li>Can contain letters, digits, and underscores.</li>
+        <li>Case-sensitive (Name ≠ NAME).</li>
+        <li>Cannot use reserved keywords.</li>
+      </ul>
+      <p>Naming styles:</p>
+      <ul>
+        <li><b>Camel Case:</b> <code>pricePerLitre</code></li>
+        <li><b>Pascal Case:</b> <code>PricePerLitre</code></li>
+        <li><b>Snake Case:</b> <code>price_per_litre</code></li>
+      </ul>
+
+      <h2>Examples</h2>
+      <h3>Valid Variable Names</h3>
+      <pre>
+counter = 100
+_count = 100
+name1 = "Zara"
+zara_salary = 100000
+      </pre>
+
+      <h3>Invalid Variable Names</h3>
+      <pre>
+1counter = 100     # Invalid
+$_count = 100      # Invalid
+zara-salary = 1000 # Invalid
+      </pre>
+
+      <h2>Using Variables in Programs</h2>
+      <pre>
+width = 10
+height = 20
+area = width * height
+perimeter = 2 * (width + height)
+
+print("Area =", area)
+print("Perimeter =", perimeter)
+# Output:
+# Area = 200
+# Perimeter = 60
+      </pre>
+
+      <h2>Local Variables</h2>
+      <p>Defined inside a function and only accessible there:</p>
+      <pre>
+def sum(x, y):
+    total = x + y
+    return total
+
+print(sum(5, 10))  # 15
+      </pre>
+
+      <h2>Global Variables</h2>
+      <p>Defined outside a function and accessible everywhere:</p>
+      <pre>
+x = 5
+y = 10
+
+def sum():
+    return x + y
+
+print(sum())  # 15
+      </pre>
+
+      <h2>Constants</h2>
+      <p>Python doesn’t have true constants but by convention we use ALL_CAPS names:</p>
+      <pre>
+PI_VALUE = 3.14159
+MAX_USERS = 100
+      </pre>
+
+      <h2>Variables in Python vs C/C++</h2>
+      <p>In C/C++, variables are memory locations. In Python, variables are references (labels) to objects in memory. Multiple variables can point to the same object. When an object is no longer referenced, Python’s garbage collector releases the memory.</p>
+    </div>
+  </div>
+</div>

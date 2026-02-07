@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - MySQL Login Example (Basic Authentication)</h1>
+
+        <div class="content">
+            <h2 class="title">Overview and Setup</h2>
+            <p>This example demonstrates a fundamental user authentication system for a PHP application using **MySQL** as the backend database. It validates a user's $\text{username}$ and $\text{password}$ against records in a $\text{MySQL}$ table ($\text{admin}$).</p>
+
+            <h3>Database Requirements</h3>
+            <p>A database named $\text{mydb}$ with a table named $\text{admin}$ is required. The following $\text{SQL}$ creates the table and inserts test credentials:</p>
+            <pre>
+CREATE TABLE `admin` (
+   `username` varchar(10) NOT NULL PRIMARY KEY,
+   `passcode` varchar(10) NOT NULL
+);
+INSERT INTO `admin` (`username`, `passcode`) VALUES
+('guest', 'abc123'), ('manager', 'secret'), ('user', 'test');</pre>
+
+            <h3>1. Database Connection ($\text{config.php}$)</h3>
+            <p>This script establishes the connection to the MySQL database using the **$\text{mysqli}$** extension.</p>
+            <pre>
+&lt;?php
+   define('DB_SERVER', 'localhost');
+   define('DB_USERNAME', 'root');
+   define('DB_PASSWORD', '');
+   define('DB_DATABASE', 'mydb');
+   $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+?&gt;</pre>
+        </div>
+
+        <div class="example">
+            <h2 class="title">2. Login Logic ($\text{login.php}$)</h2>
+            <p>The $\text{login.php}$ script handles the $\text{HTML}$ form, processes the submitted credentials, queries the database, and manages the session state.</p>
+            <pre>
+&lt;?php
+   include("config.php");
+   session_start();
+   $error='';
+
+   if($_SERVER["REQUEST_METHOD"] == "POST") {
+      // Basic input sanitization to prevent SQL Injection
+      $myusername = mysqli_real_escape_string($db,$_POST['username']);
+      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
+
+      // Execute SQL query
+      $sql = "SELECT * FROM admin WHERE username = '$myusername' AND passcode = '$mypassword'";
+      $result = mysqli_query($db,$sql);      
+      $count = mysqli_num_rows($result);
+
+      if($count == 1) {
+         // Success: Create session and redirect
+         $_SESSION['login_user'] = $myusername;
+         header("location: welcome.php");
+      } else {
+         $error = "Your Login Name or Password is invalid";
+      }
+   }
+// ... HTML form follows ...
+?&gt;</pre>
+
+            <h2 class="title">3. Session and Protection ($\text{session.php}$)</h2>
+            <p>This script is included at the beginning of all protected pages (like $\text{welcome.php}$). It verifies if a valid session exists; otherwise, it redirects the user back to the login page.</p>
+            <pre>
+&lt;?php
+   session_start();
+
+   if(!isset($_SESSION['login_user'])){
+      header("location: login.php");
+      die(); // Stop script execution
+   }
+   $login_session = $_SESSION['login_user'];
+?&gt;</pre>
+
+            <h2 class="title">4. Welcome and Logout</h2>
+            <ul>
+                <li>**$\text{welcome.php}$:** Displays a personalized greeting by retrieving the $\text{\$login\_session}$ variable, which holds the authenticated username.</li>
+                <li>**$\text{logout.php}$:** Clears the session data ($\text{session\_destroy()}$) and redirects the user back to the login page, effectively ending the user's logged-in state.</li>
+            </ul>
+        </div>
+    </div>
+</div>

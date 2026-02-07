@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Scalar Type Declarations (Type Hinting)</h1>
+
+    <div class="content">
+      <p>
+        **Scalar Type Declarations** (often called **Type Hinting**) allow developers to specify the expected data type for parameters and return values in function signatures. Introduced in **PHP 7**, this feature extends older type hinting capabilities (which only covered arrays, callables, and classes) to include **scalar types**:
+      </p>
+      <ul>
+        <li>
+          **`int`**
+        </li>
+        <li>
+          **`float`**
+        </li>
+        <li>
+          **`string`**
+        </li>
+        <li>
+          **`bool`**
+        </li>
+      </ul>
+      <p>
+        This feature improves code readability, helps IDEs provide better assistance, and enables developers to enforce data integrity.
+      </p>
+
+      <h2>Modes of Operation</h2>
+      <p>PHP 7+ implements scalar type declarations in two distinct modes, controlling how the language handles type mismatches:</p>
+
+      <h3>1. Coercive Mode (Default)</h3>
+      <p>
+        **Coercive mode** is PHP's default behavior, aligning with its nature as a weakly-typed language. When a value is passed to a function, the PHP parser attempts to **coerce** (convert) the value into the declared type if possible.
+      </p>
+      <ul>
+        <li>
+          **No Explicit Declaration Needed:** This is the default mode (`declare(strict_types=0)`).
+        </li>
+        <li>
+          **Behavior:** Incompatible types are converted if a sensible conversion exists (e.g., a string that looks like a number is converted to `int` or `float`).
+        </li>
+        <li>
+          **Example:** If a function expects `(int $x)`, passing the string `"10"` works, as PHP coerces `"10"` to the integer `10`.
+          <div class="example">
+            <code>function addition(int $x, int $y) { /* ... */ }</code><br>
+            <code>addition("10", 20); // Succeeds: "10" is coerced to 10</code>
+          </div>
+        </li>
+      </ul>
+
+      <hr>
+
+      <h3>2. Strict Mode (Opt-in)</h3>
+      <p>
+        **Strict mode** forces the PHP parser to enforce that the type of the value passed **must exactly match** the declared parameter type. This mode is enabled on a **per-file basis** using a special `declare` statement at the top of the script.
+      </p>
+      <ul>
+        <li>
+          **Enabling:** Must be explicitly declared at the very top of the PHP file (usually just below `&lt;?php`).
+          <div class="example">
+            <code>&lt;?php declare (strict_types=1);</code>
+          </div>
+        </li>
+        <li>
+          **Behavior:** If the types do not match exactly, PHP throws a **`TypeError`** (a Fatal Error in PHP 7) and **halts execution**. No automatic type coercion is attempted.
+        </li>
+        <li>
+          **Example:** If a function expects `(int $x)`:
+          <div class="example">
+            <code>declare (strict_types=1);</code><br>
+            <code>function addition(int $x, int $y) { /* ... */ }</code><br>
+            <code>addition("10", 20); // Fails: Throws TypeError (string given, int expected)</code>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

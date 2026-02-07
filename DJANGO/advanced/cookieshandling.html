@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Cookies Handling 🍪</h1>
+        <div class="content">
+            <p><strong>Cookies</strong> are small pieces of data stored on the client's browser, used to remember state or personalized information about the visitor. In Django, cookies are handled by setting them on the **response** object and reading them from the **request** object.</p>
+
+            <h2>Setting Cookies (The Response Object)</h2>
+            <p>Cookies are set using the **<code>set_cookie()</code>** method, which must be called on the **<code>HttpResponse</code>** object (the response that is being sent back to the client). All cookie values are stored as **strings**.</p>
+            <pre><code>response = render_to_response(request, 'loggedin.html', {"username" : username}, 
+   context_instance = RequestContext(request))
+
+# Set the cookies on the response object
+response.set_cookie('last_connection', datetime.datetime.now())
+response.set_cookie('username', username) # Corrected to store username, not time
+
+return response</code></pre>
+            <p>The <code>set_cookie()</code> method accepts optional arguments like <code>max_age</code> (in seconds) or <code>expires</code> (a <code>datetime</code> object) to control the cookie's lifespan.</p>
+
+            <h2>Reading Cookies (The Request Object)</h2>
+            <p>Cookies sent by the client browser are accessed via the **<code>request.COOKIES</code>** dictionary, where the cookie names are keys and the values are strings.</p>
+            <pre><code>def formView(request):
+   if 'username' in request.COOKIES and 'last_connection' in request.COOKIES:
+      username = request.COOKIES['username']
+      last_connection = request.COOKIES['last_connection'] # Value is a string
+
+      # String must be converted back to a datetime object for comparison
+      # Example uses string slicing ([:-7]) and strptime for conversion
+      last_connection_time = datetime.datetime.strptime(last_connection[:-7], 
+         "%Y-%m-%d %H:%M:%S")
+      
+      # Check if the session is still active (less than 10 seconds old)
+      if (datetime.datetime.now() - last_connection_time).seconds < 10:
+         return render(request, 'loggedin.html', {"username" : username})
+      else:
+         # Session expired: display login form
+         return render(request, 'login.html', {})
+   else:
+      # No cookies present: display login form
+      return render(request, 'login.html', {})</code></pre>
+        </div>
+    </div>
+</div>

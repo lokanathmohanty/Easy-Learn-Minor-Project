@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - DOM Document</h1>
+
+    <div class="content">
+      <p>
+        The JavaScript DOM <code>document</code> object owns all objects in the webpage. It represents the webpage. When the webpage is loaded in the browser, it creates an HTML DOM <code>document</code> object. It is the root of the HTML document.
+      </p>
+
+      <p>
+        The <code>document</code> object contains various properties and methods you can use to get details about HTML elements and customize them. With document objects, JavaScript can access and change a document's structure, content, or style.
+      </p>
+
+      <h2>Accessing DOM Document Object</h2>
+      <p>
+        The webpage is represented as the DOM <code>document</code> object. To access any element in the webpage, you start from the <code>document</code> object. In JavaScript, <code>document</code> is a property of the <code>window</code> object:
+      </p>
+
+      <pre>
+window.document
+// or simply
+document
+      </pre>
+
+      <h2>Window Document Object - URL Property</h2>
+      <p>
+        You can extract and work with the URL of the document using the <code>URL</code> property.
+      </p>
+
+      <h2>JavaScript DOM Document Methods</h2>
+      <ul>
+        <li><code>writeln()</code> – Writes HTML or JavaScript to a document and adds a newline.</li>
+        <li><code>write()</code> – Writes HTML or JavaScript directly to a document.</li>
+        <li><code>hasFocus()</code> – Checks if the document or element has focus.</li>
+        <li><code>renameNode()</code> – Renames a node.</li>
+        <li><code>open()</code> – Opens a document for writing.</li>
+        <li><code>normalizeDocument()</code> – Normalizes the entire document.</li>
+        <li><code>normalize()</code> – Removes empty text nodes and merges adjacent ones.</li>
+        <li><code>adoptNode()</code> – Adopts a node from another document.</li>
+        <li><code>addEventListener()</code> – Attaches an event handler.</li>
+        <li><code>execCommand()</code> – Executes a command on an editable section.</li>
+        <li><code>createTextNode()</code> – Creates a text node.</li>
+        <li><code>createEvent()</code> – Creates an event object.</li>
+        <li><code>createDocumentFragment()</code> – Creates an empty document fragment.</li>
+        <li><code>createComment()</code> – Creates a comment node.</li>
+        <li><code>createAttribute()</code> – Creates an attribute object.</li>
+        <li><code>close()</code> – Closes the output stream.</li>
+        <li><code>getElementsByTagName()</code> – Gets elements by tag name.</li>
+        <li><code>getElementsByName()</code> – Gets elements by name attribute.</li>
+        <li><code>getElementsByClassName()</code> – Gets elements by class name.</li>
+        <li><code>getElementById()</code> – Gets an element by ID.</li>
+        <li><code>createElement()</code> – Creates an HTML element.</li>
+      </ul>
+
+      <h2>JavaScript DOM Document Properties</h2>
+      <ul>
+        <li><code>URL</code> – Returns the complete document URL.</li>
+        <li><code>title</code> – Gets or sets the title of the document.</li>
+        <li><code>scripts</code> – Returns all script elements.</li>
+        <li><code>links</code> – Returns all <code>&lt;a&gt;</code> and <code>&lt;area&gt;</code> elements with <code>href</code>.</li>
+        <li><code>lastModified</code> – Returns last modified date/time.</li>
+        <li><code>inputEncoding</code> – Returns document character encoding.</li>
+        <li><code>images</code> – Returns all image elements.</li>
+        <li><code>forms</code> – Returns all form elements.</li>
+        <li><code>head</code> – Returns the head element.</li>
+        <li><code>domain</code> – Returns the domain of the document.</li>
+        <li><code>documentURI</code> – Gets or sets the document location.</li>
+        <li><code>documentElement</code> – Returns the document element object.</li>
+        <li><code>doctype</code> – Returns the document type declaration.</li>
+        <li><code>designMode</code> – Checks if document is editable.</li>
+        <li><code>cookie</code> – Allows create/read/delete cookies.</li>
+        <li><code>anchors</code> – Lists all <code>&lt;a&gt;</code> tags with name attribute.</li>
+        <li><code>baseURI</code> – Returns the base URI.</li>
+      </ul>
+
+      <h2>Examples</h2>
+
+      <h3>childElementCount Property</h3>
+      <pre>
+&lt;div&gt;First Element&lt;/div&gt;
+&lt;div&gt;Second Element&lt;/div&gt;
+&lt;div&gt;Third Element&lt;/div&gt;
+&lt;div id="output"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  document.getElementById('output').innerHTML =
+    "Total number of child elements: " + document.childElementCount;
+&lt;/script&gt;
+      </pre>
+
+      <h3>links Property</h3>
+      <pre>
+&lt;div&gt;&lt;a href="https://tutorialspoint.com/"&gt;Home&lt;/a&gt;&lt;/div&gt;
+&lt;div&gt;&lt;a href="https://www.tutorialspoint.com/articles/category/javascript"&gt;JavaScript&lt;/a&gt;&lt;/div&gt;
+&lt;div id="output"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  const allLinks = document.links;
+  document.getElementById("output").innerHTML += "The webpage contains the below links:&lt;br&gt;";
+  for (let link of allLinks) {
+    output.innerHTML += link + "&lt;br&gt;";
+  }
+&lt;/script&gt;
+      </pre>
+
+      <h3>title Property</h3>
+      <pre>
+&lt;head&gt;
+  &lt;title&gt;JavaScript - HTML DOM Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="output"&gt;The title of the document is: &lt;/div&gt;
+
+  &lt;script&gt;
+    document.getElementById("output").innerHTML += document.title;
+  &lt;/script&gt;
+&lt;/body&gt;
+      </pre>
+    </div>
+  </div>
+</div>

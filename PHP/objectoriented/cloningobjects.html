@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Cloning Objects</h1>
+        <div class="content">
+            <p>In PHP, simply assigning one object variable to another (e.g., <code>$obj1 = $obj2;</code>) creates a **reference copy**, where both variables point to the exact same object in memory. To create a true, independent duplicate of an object, you must use the **<code>clone</code>** keyword.</p>
+            
+            <h2 class="title">Shallow Copy vs. Deep Copy</h2>
+            <p>The method used for duplication determines whether the new object shares internal data with the original:</p>
+            
+            <ul>
+                <li><strong>Shallow Copy (<code>clone</code> keyword):</strong> Creates a new object and copies all of the original object's property values. If a property contains a primitive value (like a string or integer), the value is copied. If a property contains another **object**, only the **reference** (pointer) to that nested object is copied. Thus, the new object shares the nested object with the original.</li>
+                <li><strong>Deep Copy (<code>clone</code> + <code>__clone()</code> magic method):</strong> Creates a completely independent copy. It duplicates the main object *and* recursively duplicates any nested objects referenced within the original.</li>
+            </ul>
+
+            <h3 class="title">The Magic Method <code>__clone()</code></h3>
+            <p>When the <code>clone</code> keyword is used, PHP first performs a shallow copy. If a **<code>__clone()</code>** magic method is defined in the class, it is immediately called on the newly created object. This method is where you place logic to turn the shallow copy into a deep copy by explicitly cloning any nested object properties:</p>
+            <pre><code>public function __clone() {
+   $this->nestedObject = clone $this->nestedObject;
+}</code></pre>
+            <p>This ensures the copied object holds a reference to a brand new nested object, rather than sharing the original's.</p>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Cloning Behavior with Nested Objects</h3>
+            <p>Consider a class <code>Basket</code> containing a property <code>$item</code>, which is an object. Without <code>__clone()</code>, changes to <code>$obj1->item</code> affect <code>$obj2->item</code>.</p>
+            
+            <pre><code>
+class Item { 
+   public $name = 'Apple'; 
+}
+
+class Basket {
+   public $item;
+   public $count;
+}
+
+$obj1 = new Basket();
+$obj1->item = new Item();
+$obj1->count = 1;
+
+// 1. Shallow Copy (using clone)
+$obj2 = clone $obj1;
+
+// Change simple property: only affects $obj1 (Shallow Copy works here)
+$obj1->count = 5; 
+
+// Change nested object: affects BOTH $obj1 and $obj2! (Shared reference)
+$obj1->item->name = 'Orange'; 
+
+// $obj1->count is 5, $obj2->count is 1 (independent)
+// $obj1->item->name is 'Orange', $obj2->item->name is 'Orange' (shared object)
+            </code></pre>
+
+            <h3 class="title">Creating a Deep Copy (Fixing the Shared Object)</h3>
+            <p>By adding the <code>__clone()</code> method to <code>Basket</code>, we ensure the nested object is also duplicated.</p>
+            <pre><code>
+class Basket {
+   // ... properties ...
+   public function __clone() {
+      // Deep copy: explicitly clone the nested object
+      $this->item = clone $this->item; 
+   }
+}
+// After this, the nested Item object is no longer shared.
+// $obj2->item->name remains 'Apple' after $obj1 changes it to 'Orange'.
+            </code></pre>
+        </div>
+    </div>
+</div>

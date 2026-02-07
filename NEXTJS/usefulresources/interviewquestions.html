@@ -1,0 +1,199 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Interview Questions and Answers</h1>
+        <p>This list covers fundamental, intermediate, and advanced topics to help you prepare for your Next.js job interview.</p>
+        
+        <hr>
+        
+        <h2 class="title">Basic Next.js Interview Questions</h2>
+        
+        <div class="content">
+            <h3>1. What is Next.js and how is it different from React?</h3>
+            <p><strong>Next.js</strong> is a full-stack **React framework** that is built on top of React and Node.js. It adds features like **Server-Side Rendering (SSR)**, **Static Site Generation (SSG)**, file-system routing, and API Routes to create production-ready web applications.</p>
+            <p><strong>React</strong> is primarily a **JavaScript library** focused on building user interfaces (UIs) in the browser (Client-Side Rendering). Next.js uses React as its core UI library but provides the necessary structure and rendering strategies to build complex, high-performance, and SEO-friendly applications.</p>
+        </div>
+        
+        <div class="content">
+            <h3>2. Mention some key features of Next.js.</h3>
+            <ul>
+                <li class="example"><strong>Server-Side Rendering (SSR) & Static Site Generation (SSG):</strong> Advanced pre-rendering capabilities for performance and SEO.</li>
+                <li class="example"><strong>File-based Routing:</strong> Routes are automatically created based on the file and folder structure in the <code>app/</code> directory.</li>
+                <li class="example"><strong>API Routes:</strong> Allows you to create serverless functions (backend endpoints) directly within your Next.js project.</li>
+                <li class="example"><strong>Automatic Code Splitting:</strong> Code is automatically split into smaller chunks, reducing the initial load time.</li>
+                <li class="example"><strong>Image & Font Optimization:</strong> Built-in components (<code>&lt;Image&gt;</code>, <code>next/font</code>) handle performance optimization automatically.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h3>7. Explain the concept of routing in Next.js.</h3>
+            <p>Routing in Next.js is **file-system based**. The structure of files and folders within the **<code>app/</code>** directory (App Router) automatically defines the application's routes. A route is typically defined by a folder path, and the leaf file, **<code>page.tsx</code>** (or <code>page.js</code>), creates the UI for that route segment.</p>
+            <p>For example, a file at <code>app/users/profile/page.tsx</code> automatically creates the route accessible at <code>/users/profile</code>.</p>
+        </div>
+        
+        <div class="content">
+            <h3>8. What are App Router and Page Router in Next.js?</h3>
+            <p>These are two different approaches to handling routing and rendering in Next.js:</p>
+            <ul>
+                <li class="example">
+                    <strong>App Router (Next.js 13+):</strong> The modern and recommended approach using the **<code>app/</code>** directory. It is built on **React Server Components**, offering advanced features like nested routing, shared layouts, and a flexible rendering model (SSR, SSG, Static).
+                </li>
+                <li class="example">
+                    <strong>Page Router (Legacy):</strong> The traditional approach using the **<code>pages/</code>** directory. It is simpler and primarily relies on Client-Side Rendering with optional classic data fetching methods like <code>getServerSideProps</code>.
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h3>9. Explain the concept of static site generation in Next.js.</h3>
+            <p><strong>Static Site Generation (SSG)</strong> is a pre-rendering strategy where the complete HTML page is generated **at build time** (when you run <code>npm run build</code>). This HTML file is then cached by a CDN (Content Delivery Network) and served to the user almost instantly upon request.</p>
+            <p>SSG is ideal for content that does not change frequently, such as blog posts, documentation, and marketing pages. By default, Next.js components that don't involve external data fetching use static rendering.</p>
+        </div>
+        
+        <div class="content">
+            <h3>13. What is the difference between client-side and server-side rendering?</h3>
+            <p>These are the two main ways a web page's HTML is generated:</p>
+            <table>
+                <tr>
+                    <th>Criteria</th>
+                    <th>Client-side Rendering (CSR)</th>
+                    <th>Server-side Rendering (SSR)</th>
+                </tr>
+                <tr>
+                    <td><strong>Rendering</strong></td>
+                    <td>HTML is built in the **browser** using JavaScript after the initial load.</td>
+                    <td>HTML is fully generated on the **server** and sent ready-to-display to the browser.</td>
+                </tr>
+                <tr>
+                    <td><strong>Initial Load Time</strong></td>
+                    <td>Slower (must download, parse, and execute JavaScript first).</td>
+                    <td>Faster (browser receives rendered HTML instantly).</td>
+                </tr>
+                <tr>
+                    <td><strong>SEO</strong></td>
+                    <td>Less ideal; search engines may struggle with the initial blank HTML shell.</td>
+                    <td>Excellent; content is fully rendered and immediately available for crawlers.</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="content">
+            <h3>14. Explain pre-rendering and its types in Next.js.</h3>
+            <p><strong>Pre-rendering</strong> is the technique where Next.js generates the HTML for a page in advance, rather than sending a blank page and waiting for the client's JavaScript to render the content. This leads to faster Time to Interactive (TTI) and better SEO.</p>
+            <p>The process of loading JavaScript to the pre-rendered HTML page to make it interactive is called **Hydration**.</p>
+            <p>Next.js primarily uses two types of pre-rendering:</p>
+            <ul>
+                <li class="example"><strong>Static Site Generation (SSG):</strong> HTML is generated at **build time**.</li>
+                <li class="example"><strong>Server-Side Rendering (SSR):</strong> HTML is generated **per request** on the server.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <h2 class="title">Medium Level Next.js Interview Questions</h2>
+        
+        <div class="content">
+            <h3>17. What are API Routes in Next.js?</h3>
+            <p><strong>API Routes</strong> are a feature that allows you to create **backend endpoints** (serverless functions) directly within your Next.js application, typically inside the **<code>app/api/</code>** directory.</p>
+            <p>They are used to handle server-side logic, such as:</p>
+            <ul>
+                <li class="example">Fetching data from a database.</li>
+                <li class="example">Handling form submissions.</li>
+                <li class="example">Implementing authentication or server-side utility functions.</li>
+            </ul>
+            <p>The file name defines the API endpoint (e.g., <code>app/api/users/route.ts</code> is the endpoint <code>/api/users</code>).</p>
+        </div>
+        
+        <div class="content">
+            <h3>21. What is middleware? Why is it used in Next.js?</h3>
+            <p>A Next.js **Middleware** is a function that runs **before** a request is completed, but after a user navigates to a URL. It allows you to execute code logic before a route segment is rendered.</p>
+            <p>Middleware is defined in a **<code>middleware.ts</code>** (or <code>middleware.js</code>) file in the root or an <code>app</code> directory.</p>
+            <p>It is primarily used for:</p>
+            <ul>
+                <li class="example"><strong>Authentication:</strong> Checking if a user is logged in before allowing access to a page.</li>
+                <li class="example"><strong>Authorization/A/B Testing:</strong> Applying different layouts or logic based on user roles or group.</li>
+                <li class="example"><strong>URL Rewriting/Redirecting:</strong> Programmatically changing the destination of a request (e.g., forcing a redirect using <code>NextResponse.redirect</code>).</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h3>24. What is lazy loading in Next.js?</h3>
+            <p><strong>Lazy Loading</strong> is a performance optimization technique that delays the loading of non-critical resources until they are actually needed. By default, Next.js handles route-based code splitting, which is a form of lazy loading.</p>
+            <p>Developers implement lazy loading for components or modules using the built-in **<code>next/dynamic</code>** function:</p>
+            <pre class="example"><code>import dynamic from 'next/dynamic'
+
+const DynamicComponent = dynamic(() => import('../components/HeavyComponent'), {
+  loading: () => &lt;p&gt;Loading...&lt;/p&gt;,
+})</code></pre>
+            <p>This ensures the JavaScript bundle for <code>HeavyComponent</code> is not included in the initial page load, thus improving the application's TTI.</p>
+        </div>
+        
+        <div class="content">
+            <h3>25. Explain how to implement dynamic routing in Next.js.</h3>
+            <p><strong>Dynamic routing</strong> allows you to create flexible routes where a segment of the URL path is determined by dynamic data (like a product ID or a slug).</p>
+            <p>In the App Router, you create a dynamic segment by enclosing the folder name in **square brackets** (<code>[]</code>). The name inside the brackets becomes the parameter accessible in your page component via the <code>params</code> prop.</p>
+            <p><strong>Example:</strong></p>
+            <p>A file at <code>app/products/[id]/page.tsx</code> creates a route structure where <code>[id]</code> is the dynamic segment. Accessing <code>/products/123</code> makes <code>123</code> available as <code>params.id</code> in the component.</p>
+            <pre class="example"><code>// app/products/[id]/page.tsx
+export default function ProductPage({ params }) {
+  // params.id will be the value in the URL, e.g., '123'
+  return &lt;h1&gt;Product ID: {params.id}&lt;/h1&gt;
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h3>27. What is Incremental Static Regeneration (ISR)?</h3>
+            <p><strong>Incremental Static Regeneration (ISR)</strong> is an advanced Next.js feature that allows you to update statically pre-rendered pages **after** the site has been built and deployed, without requiring a full rebuild of the application.</p>
+            <p>It works by setting a **<code>revalidate</code>** time (a time-to-live) in seconds on a page's data fetching function (e.g., <code>getStaticProps</code> in the Page Router or using <code>fetch</code> options in the App Router).</p>
+            <ul>
+                <li class="example">When a user requests a page older than the <code>revalidate</code> time, they are served the **stale (cached) page** instantly.</li>
+                <li class="example">Next.js then regenerates the page **in the background**.</li>
+                <li class="example">Subsequent users receive the newly regenerated version.</li>
+            </ul>
+            <p>ISR provides the performance of static sites while retaining the freshness of server-side rendering.</p>
+        </div>
+        
+        <hr>
+        
+        <h2 class="title">Advanced Next.js Interview Questions</h2>
+        
+        <div class="content">
+            <h3>15. What is Partial Pre-rendering (PPR) in Next.js?</h3>
+            <p><strong>Partial Pre-rendering (PPR)</strong> is a key rendering pattern in the App Router that automatically optimizes dynamic content by treating it as a performance enhancement rather than a blocker.</p>
+            <ul>
+                <li class="example">It enables the rendering of the **Static Shell** (the majority of the page's HTML) at build time or cache time.</li>
+                <li class="example">The remaining **Dynamic Holes** (e.g., a personalized cart icon or weather widget) are rendered on the server only when requested and streamed in later.</li>
+                <li class="example">This provides a fast initial load time (similar to SSG) while ensuring the dynamic parts are always fresh (like SSR), without relying on client-side fetching.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h3>26. How to create custom Metadata for each page in Next.js?</h3>
+            <p>In the **App Router**, you create dynamic metadata (like title or description) by exporting an asynchronous **<code>generateMetadata()</code>** function from a <code>page.tsx</code> file. This function runs on the server and receives the route **<code>params</code>**, allowing the metadata to be dynamically set before the page is rendered.</p>
+            <pre class="example"><code>// app/products/[id]/page.tsx
+import { Metadata } from "next";
+
+type Props ={ params: { id: string } };
+
+// This runs on the server
+export const generateMetadata = ({ params }: Props): Metadata => {
+    return {
+        // Dynamic title based on the route parameter
+        title: `Product ${params.id} - My Store`, 
+    };
+}</code></pre>
+            <p>This pattern is crucial for **SEO**, as it ensures search engines receive the correct, dynamic metadata when crawling the page.</p>
+        </div>
+        
+        <div class="content">
+            <h3>28. What is the <code>next.config.js</code> file? Explain its key properties.</h3>
+            <p>The **<code>next.config.js</code>** file is a JavaScript or TypeScript file located in the root of your project that allows you to **customize the default behavior** of your Next.js application, including the build process, runtime options, and more. It is an extension of the framework's core functionality.</p>
+            <p>Key properties include:</p>
+            <ul>
+                <li class="example"><strong><code>output</code>:</strong> Controls the build output (e.g., <code>"standalone"</code> for optimized self-hosting or <code>"export"</code> for static HTML export).</li>
+                <li class="example"><strong><code>redirects()</code>:</strong> An asynchronous function used to define a list of URL redirects that are applied early in the request lifecycle.</li>
+                <li class="example"><strong><code>headers()</code>:</strong> An asynchronous function to define custom HTTP headers (e.g., caching policies, security headers) to be applied to responses.</li>
+                <li class="example"><strong><code>env</code>:</strong> Defines environment variables that should be exposed to the application.</li>
+            </ul>
+        </div>
+    </div>
+</div>

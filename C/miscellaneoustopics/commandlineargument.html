@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Command Line Arguments in C</title>
+</head>
+<body>
+  <div class="container">
+
+    <section class="session">
+      <h1 class="title">Command Line Arguments in C</h1>
+      <div class="content">
+        <p>In any C program, execution starts from the <code>main()</code> function. While other functions may accept arguments and return values, the <code>main()</code> function typically has no arguments and returns <code>0</code>.</p>
+        <pre><code>int main() { 
+   ...
+   return 0;
+}</code></pre>
+
+        <p>You can accept input using <code>scanf()</code> inside <code>main()</code> like this:</p>
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int a;
+   scanf("%d", &a);
+   printf("%d", a);
+   return 0;
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="session">
+      <h1 class="title">What are Command Line Arguments?</h1>
+      <div class="content">
+        <p>Instead of taking input from within the program, we can pass input at runtime via the command line. These values are called <strong>command line arguments</strong>.</p>
+        <p>This is useful when you want to pass parameters to control the behavior of your program externally, such as:</p>
+        <pre>C:\users\user&gt;hello Prakash</pre>
+        <p>The above command would pass "Prakash" as a command-line argument to your program.</p>
+      </div>
+    </section>
+
+    <section class="session">
+      <h1 class="title">argc and argv</h1>
+      <div class="content">
+        <p>To receive command line arguments, the <code>main()</code> function must be defined with two parameters:</p>
+        <pre><code>int main(int argc, char *argv[])</code></pre>
+        <ul>
+          <li><code>argc</code>: Argument count — number of command line arguments</li>
+          <li><code>argv</code>: Argument vector — array of character pointers to the arguments</li>
+        </ul>
+        <p><code>argv[0]</code> is the name of the program itself, and the remaining arguments are the values passed by the user.</p>
+      </div>
+    </section>
+
+    <section class="session">
+      <h1 class="title">Simple Example</h1>
+      <div class="content">
+        <p>Save the following code as <code>hello.c</code>:</p>
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main (int argc, char * argv[]) {
+   printf("Hello %s", argv[1]);
+   return 0;
+}</code></pre>
+
+        <h2>Compile and Run</h2>
+        <pre>
+C:\Users\user&gt;gcc -c hello.c -o hello.o
+C:\Users\user&gt;gcc -o hello.exe hello.o
+C:\Users\user&gt;hello Prakash
+        </pre>
+
+        <h2>Output</h2>
+        <pre>Hello Prakash</pre>
+
+        <p><strong>On Linux:</strong></p>
+        <pre>
+$ gcc hello.c
+$ ./a.out Prakash
+        </pre>
+      </div>
+    </section>
+
+    <section class="session">
+      <h1 class="title">Example: Argument Count Check</h1>
+      <div class="content">
+        <p>This program checks how many arguments were passed:</p>
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main (int argc, char *argv[]) {
+   if (argc == 2) {
+      printf("The argument supplied is %s\n", argv[1]);
+   } else if (argc > 2) {
+      printf("Too many arguments supplied.\n");
+   } else {
+      printf("One argument expected.\n");
+   }
+}</code></pre>
+
+        <h2>Output</h2>
+        <pre>
+$ ./a.out testing
+The argument supplied is testing.
+
+$ ./a.out testing1 testing2
+Too many arguments supplied.
+
+$ ./a.out
+One argument expected.
+        </pre>
+      </div>
+    </section>
+
+    <section class="session">
+      <h1 class="title">Notes on argc and argv</h1>
+      <div class="content">
+        <ul>
+          <li><code>argv[0]</code> → Name of the executable</li>
+          <li><code>argv[1]</code> → First argument</li>
+          <li><code>argc</code> is always at least 1 (because <code>argv[0]</code> is always present)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="session">
+      <h1 class="title">Passing Numbers via Command Line</h1>
+      <div class="content">
+        <p>The following program adds two numbers passed as arguments:</p>
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main (int argc, char * argv[]) {
+   int c = argv[1] + argv[2]; // Incorrect
+   printf("addition: %d", c);
+   return 0;
+}</code></pre>
+
+        <h2>Compilation Error</h2>
+        <p>You'll get an error because <code>argv[1]</code> and <code>argv[2]</code> are strings (char pointers).</p>
+        <pre>error: invalid operands to binary + (have 'char *' and 'char *')</pre>
+      </div>
+    </section>
+
+    <section class="session">
+      <h1 class="title">Using atoi()</h1>
+      <div class="content">
+        <p>Use the <code>atoi()</code> function to convert string arguments to integers:</p>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main (int argc, char * argv[]) {
+   int c = atoi(argv[1]) + atoi(argv[2]);
+   printf("addition: %d", c);
+   return 0;
+}</code></pre>
+
+        <h2>Run</h2>
+        <pre>
+C:\Users\user&gt;add 10 20
+addition: 30
+        </pre>
+      </div>
+    </section>
+
+    <section class="session">
+      <h1 class="title">Arguments with Spaces</h1>
+      <div class="content">
+        <p>If an argument has spaces, wrap it in quotes:</p>
+        <pre>
+$ ./a.out "testing1 testing2"
+        </pre>
+
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main(int argc, char *argv[]) {
+   printf("Program name %s\n", argv[0]);
+
+   if(argc == 2) {
+      printf("The argument supplied is %s\n", argv[1]);
+   }
+   else if(argc > 2) {
+      printf("Too many arguments supplied.\n");
+   }
+   else {
+      printf("One argument expected.\n");
+   }
+}</code></pre>
+
+        <h2>Output</h2>
+        <pre>
+Program name ./a.out
+The argument supplied is testing1 testing2
+        </pre>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

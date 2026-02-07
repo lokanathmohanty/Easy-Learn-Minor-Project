@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Decision Making Statements</h1>
+        
+        <h2 class="title">Overview of Decision Making</h2>
+        <div class="content">
+            <p><strong>Decision making structures</strong> allow the programmer to control the **flow of execution** by specifying conditions to be tested. Based on whether a **Boolean expression** evaluates to <code>true</code> or <code>false</code>, the program executes specific blocks of statements.</p>
+            
+            <p>C# provides five main types of decision-making statements:</p>
+            <ol>
+                <li><code>if</code> statement</li>
+                <li><code>if...else</code> statement</li>
+                <li><code>nested if</code> statements</li>
+                <li><code>switch</code> statement</li>
+                <li><code>nested switch</code> statements</li>
+            </ol>
+        </div>
+        
+        <h2 class="title">if and if...else Statements (Example)</h2>
+        <div class="content example">
+            <h3>Simple <code>if</code> Statement</h3>
+            <p>Executes a block of code only if the condition is <code>true</code>.</p>
+            <pre>
+int temperature = 30;
+
+if (temperature > 25) // Condition is true
+{
+    Console.WriteLine("It's a hot day.");
+}
+            </pre>
+            
+            <h3><code>if...else</code> Statement</h3>
+            <p>Executes the first block if the condition is <code>true</code>, and the second block (the <code>else</code> part) if the condition is <code>false</code>.</p>
+            <pre>
+int temperature = 21;
+
+if (temperature > 25)
+{
+    Console.WriteLine("It's a hot day.");
+}
+else // Condition is false, this runs
+{
+    Console.WriteLine("The weather is pleasant.");
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">The switch Statement (Example)</h2>
+        <div class="content example">
+            <p>The <code>switch</code> statement tests a variable for **equality** against a list of values (called **cases**). It is often cleaner than a long chain of <code>if-else if</code> statements when checking a single value against many possibilities.</p>
+            <ul>
+                <li>The **<code>break</code>** keyword is essential to exit the <code>switch</code> once a case is matched.</li>
+                <li>The **<code>default</code>** case is optional and executes if no match is found.</li>
+            </ul>
+            <pre>
+int day = 3;
+            
+switch (day)
+{
+    case 1:
+        Console.WriteLine("Sunday");
+        break;
+    case 3: // Match!
+        Console.WriteLine("Tuesday");
+        break;
+    default:
+        Console.WriteLine("Invalid day number!");
+        break;
+}
+            </pre>
+        </div>
+
+        <h2 class="title">Ternary Operator (<code>? :</code>) - Conditional Expression</h2>
+        <div class="content">
+            <p>The **conditional operator** <code>Exp1 ? Exp2 : Exp3</code> is a concise way to replace simple <code>if...else</code> statements.</p>
+            <p><strong>Evaluation:</strong> If <code>Exp1</code> is <code>true</code>, the result is <code>Exp2</code>. If <code>Exp1</code> is <code>false</code>, the result is <code>Exp3</code>.</p>
+            <pre>
+// Equivalent to: if (age >= 18) return "Adult" else return "Minor"
+string status = (age >= 18) ? "Adult" : "Minor";
+            </pre>
+        </div>
+    </div>
+</div>

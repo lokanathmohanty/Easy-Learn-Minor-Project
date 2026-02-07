@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="session">
+
+    <div class="title">
+      <h1>Poisson Distribution</h1>
+    </div>
+
+    <div class="content">
+      <h2>Poisson Distribution</h2>
+      <p>Poisson Distribution is a <strong>Discrete Distribution</strong>.</p>
+      <p>It estimates how many times an event can happen in a specified time. For example, if someone eats twice a day, what is the probability they will eat thrice?</p>
+
+      <h3>Parameters:</h3>
+      <ul>
+        <li><strong>lam</strong> - Rate or known number of occurrences (e.g., 2 for the above problem).</li>
+        <li><strong>size</strong> - The shape of the returned array.</li>
+      </ul>
+
+      <h3>Example: Generate a random 1x10 distribution for occurrence 2</h3>
+      <pre><code>from numpy import random
+
+x = random.poisson(lam=2, size=10)
+
+print(x)</code></pre>
+
+      <h3>Visualization of Poisson Distribution</h3>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.displot(random.poisson(lam=2, size=1000))
+
+plt.show()</code></pre>
+
+      <h2>Difference Between Normal and Poisson Distribution</h2>
+      <p>Normal distribution is <em>continuous</em> whereas Poisson is <em>discrete</em>. But for a large enough Poisson distribution, it will approximate a normal distribution with certain mean and standard deviation.</p>
+
+      <h3>Example: Compare Normal and Poisson distributions</h3>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = {
+  "normal": random.normal(loc=50, scale=7, size=1000),
+  "poisson": random.poisson(lam=50, size=1000)
+}
+
+sns.displot(data, kind="kde")
+
+plt.show()</code></pre>
+
+      <h2>Difference Between Binomial and Poisson Distribution</h2>
+      <p>Binomial distribution only has two possible outcomes, whereas Poisson distribution can have unlimited possible outcomes.</p>
+      <p>For very large <code>n</code> and near-zero <code>p</code>, the binomial distribution closely resembles the Poisson distribution where <code>n * p ≈ lam</code>.</p>
+
+      <h3>Example: Compare Binomial and Poisson distributions</h3>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = {
+  "binomial": random.binomial(n=1000, p=0.01, size=1000),
+  "poisson": random.poisson(lam=10, size=1000)
+}
+
+sns.displot(data, kind="kde")
+
+plt.show()</code></pre>
+
+    </div>
+  </div>
+</div>

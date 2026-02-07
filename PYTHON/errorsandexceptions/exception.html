@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Exception Handling</h1>
+    
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        Exception handling in Python refers to managing runtime errors that may occur 
+        during the execution of a program. These exceptions can arise from 
+        division by zero, accessing a missing file, or performing operations on 
+        incompatible data types.
+      </p>
+      <p>
+        Python provides mechanisms to deal with such errors gracefully:
+       
+      
+      <h2>What is an Exception?</h2>
+      <p>
+        An exception is an event that disrupts the normal flow of program execution. 
+        It is represented by a Python object and raised when something unexpected occurs. 
+        If not handled, the program terminates. Handled properly, the program 
+        can continue smoothly.
+      </p>
+      
+      <h2>Exception Handling Syntax</h2>
+      <pre>
+try:
+    # Code that may cause an exception
+    ...
+except ExceptionI:
+    # Handle ExceptionI
+except ExceptionII:
+    # Handle ExceptionII
+else:
+    # Executes if no exception occurs
+      </pre>
+      <p>
+        Key points about the <code>try-except-else</code> syntax:
+      </p>
+      <ul>
+        <li>A single <code>try</code> block can have multiple <code>except</code> clauses.</li>
+        <li>A generic <code>except</code> clause can catch any exception.</li>
+        <li>An optional <code>else</code> block runs only if no exceptions occur.</li>
+      </ul>
+      
+      <h2>Examples</h2>
+      <h3>File Handling Example</h3>
+      <pre>
+try:
+    fh = open("testfile", "w")
+    fh.write("This is my test file for exception handling!!")
+except IOError:
+    print("Error: can't find file or read data")
+else:
+    print("Written content in the file successfully")
+    fh.close()
+      </pre>
+      
+      <p>Expected Output:</p>
+      <ul>
+        <li>If file opens successfully: <em>Written content in the file successfully</em></li>
+        <li>If file access fails: <em>Error: can't find file or read data</em></li>
+      </ul>
+      
+      <h2>The finally Clause</h2>
+      <p>
+        The <code>finally</code> block runs regardless of whether an exception occurs. 
+        It is typically used for cleanup tasks such as closing files or releasing resources.
+      </p>
+      <pre>
+try:
+    fh = open("testfile", "w")
+    fh.write("Testing exception handling with finally block")
+finally:
+    print("Closing resources or performing cleanup")
+      </pre>
+      
+      <h2>Raising Exceptions</h2>
+      <p>
+        You can create and raise exceptions using the <code>raise</code> statement. 
+        Python also allows custom user-defined exceptions by inheriting from built-in classes.
+      </p>
+      <pre>
+class NetworkError(RuntimeError):
+    def __init__(self, arg):
+        self.args = arg
+
+try:
+    raise NetworkError("Bad hostname")
+except NetworkError as e:
+    print(e.args)
+      </pre>
+      
+      <h2>Standard Exceptions</h2>
+      <p>
+        Python provides many built-in exceptions. Some common ones include:
+      </p>
+      <ul>
+        <li><code>ZeroDivisionError</code> − Division by zero occurs.</li>
+        <li><code>ValueError</code> − Invalid value passed to a valid datatype.</li>
+        <li><code>IOError</code> − Input-output operation failure.</li>
+        <li><code>AttributeError</code> − Invalid attribute reference.</li>
+        <li><code>TypeError</code> − Operation applied to an object of inappropriate type.</li>
+      </ul>
+      
+    
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Magic Constants Summary</h1>
+
+    <div class="content">
+      <p>
+        **Magic Constants** in PHP are special, predefined constants that change their value based on where they are used in the script. They are resolved at **compile time** (unlike regular constants resolved at runtime) and are **case-insensitive**.
+      </p>
+
+      <h2>File and Location Constants</h2>
+      <p>These constants provide information about the script's location:</p>
+      <ul>
+        <li>
+          **`__LINE__`**: Returns the **current line number** in the file.
+          <div class="example">
+            <code>echo "Line number is " . __LINE__ . ".";</code>
+          </div>
+        </li>
+        <li>
+          **`__FILE__`**: Returns the **full path and filename** of the script (or the included file, if used inside an include).
+          <div class="example">
+            <code>echo "Script name is " . __FILE__ . ".";</code>
+          </div>
+        </li>
+        <li>
+          **`__DIR__`**: Returns the **directory** of the file. It is equivalent to `dirname(__FILE__)`. It does not have a trailing slash unless it's the root directory.
+          <div class="example">
+            <code>echo "Directory is " . __DIR__ . ".";</code>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Scope and Context Constants</h2>
+      <p>These constants identify the surrounding function, class, or namespace:</p>
+      <ul>
+        <li>
+          **`__FUNCTION__`**: Returns the **name of the function** where the constant is used (or `{closure}` for anonymous functions). Returns a blank string if used outside a function.
+          <div class="example">
+            <code>function hello() { echo "Function name is ". __FUNCTION__ . ""; }</code> $\rightarrow$ <code>hello</code>
+          </div>
+        </li>
+        <li>
+          **`__CLASS__`**: Returns the **name of the class** where the constant is used, including the namespace it was declared in.
+          <div class="example">
+            <code>class myclass { ... echo __CLASS__; }</code> $\rightarrow$ <code>myclass</code>
+          </div>
+        </li>
+        <li>
+          **`__METHOD__`**: Returns the **full method name** including the class (e.g., `ClassName::MethodName`).
+          <div class="example">
+            <code>function mymethod() { echo __METHOD__; }</code> $\rightarrow$ <code>myclass::mymethod</code>
+          </div>
+        </li>
+        <li>
+          **`__TRAIT__`**: Returns the **name of the trait** where the constant is used. Traits are used for code reuse across classes.
+          <div class="example">
+            <code>trait mytrait { ... echo __TRAIT__; }</code> $\rightarrow$ <code>mytrait</code>
+          </div>
+        </li>
+        <li>
+          **`__NAMESPACE__`**: Returns the **name of the current namespace**. Namespaces help group related classes/functions and prevent naming conflicts.
+          <div class="example">
+            <code>namespace myspace; echo __NAMESPACE__;</code> $\rightarrow$ <code>myspace</code>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Special Class Constant: `ClassName::class`</h2>
+      <p>
+        This special constant returns the **fully qualified class name** (including the namespace). Unlike the other magic constants, it does not use double underscores.
+      </p>
+      <div class="example">
+        <p>
+          <code>namespace myspace;<br>echo myclass::class;</code> $\rightarrow$ <code>myspace\myclass</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>d

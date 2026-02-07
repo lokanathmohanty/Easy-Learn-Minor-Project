@@ -1,0 +1,219 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Form Component (React Bootstrap)</h1>
+    <div class="content">
+      <p>React provides form components through third-party UI libraries. One of the most popular options is <strong>React Bootstrap</strong> (<a href="https://react-bootstrap.github.io/">react-bootstrap.github.io</a>), which ports almost all Bootstrap UI components to React, including forms.</p>
+      <p>Forms are used to collect user input, validate it, and send it to the server. React Bootstrap provides multiple components to make working with forms easier and more customizable.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Form Component</h2>
+    <div class="content">
+      <p>The <code>Form</code> component is the base wrapper for form elements.</p>
+      <ul>
+        <li><code>ref</code> − Access underlying DOM node.</li>
+        <li><code>as</code> − Specify a custom element instead of <code>&lt;form&gt;</code>.</li>
+        <li><code>validated</code> − Enable validation styles when set to <code>true</code>.</li>
+      </ul>
+      <p><strong>Example:</strong></p>
+      <pre>
+&lt;Form&gt;
+   &lt;!-- Use form control --&gt;
+&lt;/Form&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Form.Control</h2>
+    <div class="content">
+      <p>The <code>Form.Control</code> component is used to render input elements of various types.</p>
+      <ul>
+        <li><code>type</code> − Defines input type (text, email, password, etc.).</li>
+        <li><code>size</code> − Controls size (sm, lg).</li>
+        <li><code>disabled</code>, <code>readOnly</code>, <code>plaintext</code> − Modify behavior.</li>
+        <li><code>isValid</code> / <code>isInvalid</code> − Show validation states.</li>
+      </ul>
+      <p><strong>Example:</strong></p>
+      <pre>
+&lt;&gt;
+   &lt;Form.Control type="text" size="lg" placeholder="Large text" /&gt;
+   &lt;br /&gt;
+   &lt;Form.Control type="text" placeholder="Normal text" /&gt;
+   &lt;br /&gt;
+   &lt;Form.Control type="text" size="sm" placeholder="Small text" /&gt;
+&lt;/&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Form.Label &amp; Form.Group</h2>
+    <div class="content">
+      <p><code>Form.Label</code> is used to render labels, while <code>Form.Group</code> groups labels and controls together.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+&lt;Form.Group controlId="formFile" className="mb-3"&gt;
+   &lt;Form.Label&gt;Upload file&lt;/Form.Label&gt;
+   &lt;Form.Control type="file" /&gt;
+&lt;/Form.Group&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Form.Text</h2>
+    <div class="content">
+      <p>Use <code>Form.Text</code> to display helper text below inputs.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+&lt;Form.Label htmlFor="pwd"&gt;Password&lt;/Form.Label&gt;
+&lt;Form.Control type="password" id="pwd" aria-describedby="passwordHelp" /&gt;
+&lt;Form.Text id="passwordHelp" muted&gt;
+   Password must be 8–12 characters, include 1 digit, 1 special character, and 1 capital letter.
+&lt;/Form.Text&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Form.Select</h2>
+    <div class="content">
+      <p>Used to render <code>&lt;select&gt;</code> dropdowns.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+&lt;Form.Select aria-label="Select category"&gt;
+   &lt;option value="sm"&gt;Small&lt;/option&gt;
+   &lt;option value="lg"&gt;Large&lt;/option&gt;
+   &lt;option value="xl"&gt;Extra large&lt;/option&gt;
+&lt;/Form.Select&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Form.Check</h2>
+    <div class="content">
+      <p><code>Form.Check</code> is used for checkboxes, radios, and switches.</p>
+      <p><strong>Example (radio buttons):</strong></p>
+      <pre>
+&lt;Form.Group controlId="gender" className="mb-3"&gt;
+   &lt;Form.Label&gt;Select your gender&lt;/Form.Label&gt;
+   &lt;Form.Check type="radio" id="male" label="Male" name="gender" /&gt;
+   &lt;Form.Check type="radio" id="female" label="Female" name="gender" /&gt;
+&lt;/Form.Group&gt;
+      </pre>
+      <p><strong>Example (checkboxes with labels):</strong></p>
+      <pre>
+&lt;Form.Group controlId="language" className="mb-3"&gt;
+   &lt;Form.Label&gt;Favorite Languages&lt;/Form.Label&gt;
+   &lt;Form.Check type="checkbox" id="java"&gt;
+      &lt;Form.Check.Input type="checkbox" isValid /&gt;
+      &lt;Form.Check.Label&gt;Java&lt;/Form.Check.Label&gt;
+   &lt;/Form.Check&gt;
+   &lt;Form.Check type="checkbox" id="js"&gt;
+      &lt;Form.Check.Input type="checkbox" isValid /&gt;
+      &lt;Form.Check.Label&gt;JavaScript&lt;/Form.Check.Label&gt;
+   &lt;/Form.Check&gt;
+&lt;/Form.Group&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Form.Range</h2>
+    <div class="content">
+      <p><code>Form.Range</code> renders a slider input.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+&lt;Form.Label&gt;Select by range&lt;/Form.Label&gt;
+&lt;Form.Range value="25" /&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">InputGroup</h2>
+    <div class="content">
+      <p>Use <code>InputGroup</code> to combine inputs and text.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+&lt;Form.Group controlId="email" className="mb-3"&gt;
+   &lt;Form.Label&gt;Enter your email&lt;/Form.Label&gt;
+   &lt;InputGroup className="mb-3"&gt;
+      &lt;Form.Control aria-label="Email address" aria-describedby="domain" /&gt;
+      &lt;InputGroup.Text id="domain"&gt;@tutorialspoint.com&lt;/InputGroup.Text&gt;
+   &lt;/InputGroup&gt;
+&lt;/Form.Group&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Applying Form Component</h2>
+    <div class="content">
+      <p>Steps to use React Bootstrap form:</p>
+      <pre>
+create-react-app myapp
+cd myapp
+npm start
+npm install --save bootstrap react-bootstrap
+      </pre>
+      <p>Create <code>SimpleForm.js</code>:</p>
+      <pre>
+import { Form, Button } from 'react-bootstrap';
+
+function SimpleForm() {
+   return (
+      &lt;Form&gt;
+         &lt;Form.Group className="mb-3" controlId="email"&gt;
+            &lt;Form.Label&gt;Email address&lt;/Form.Label&gt;
+            &lt;Form.Control type="email" placeholder="Enter email" /&gt;
+            &lt;Form.Text className="text-muted"&gt;
+               This email address will be used for communication purpose.
+            &lt;/Form.Text&gt;
+         &lt;/Form.Group&gt;
+
+         &lt;Form.Group className="mb-3" controlId="password"&gt;
+            &lt;Form.Label&gt;Password&lt;/Form.Label&gt;
+            &lt;Form.Control type="password" placeholder="Password" /&gt;
+         &lt;/Form.Group&gt;
+
+         &lt;Form.Group className="mb-3" controlId="formBasicCheckbox"&gt;
+            &lt;Form.Check type="checkbox" label="Save password" /&gt;
+         &lt;/Form.Group&gt;
+
+         &lt;Button variant="primary" type="submit"&gt;
+            Submit
+         &lt;/Button&gt;
+      &lt;/Form&gt;
+   );
+}
+export default SimpleForm;
+      </pre>
+      <p>Update <code>App.js</code>:</p>
+      <pre>
+import './App.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import SimpleForm from './Components/SimpleForm'
+
+function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;SimpleForm /&gt;
+      &lt;/div&gt;
+   );
+}
+export default App;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <p>The React Bootstrap form component provides a wide range of form elements with easy-to-use props and Bootstrap styling. It allows developers to quickly build responsive, validated, and accessible forms.</p>
+    </div>
+  </div>
+</div>

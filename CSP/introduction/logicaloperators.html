@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Logical Operators</h1>
+        
+        <h2 class="title">What Are Logical Operators?</h2>
+        <div class="content">
+            <p><strong>Logical Operators</strong> are used to **combine** and **evaluate multiple conditions** (Boolean expressions) in C#. They always return a **Boolean value** (<code>true</code> or <code>false</code>) and are crucial for decision-making logic, control flow, and data validation.</p>
+            
+            <h3>Key Logical Operators:</h3>
+            <ul>
+                <li><strong>Logical AND (<code>&amp;&amp;</code>):</strong> Returns <code>true</code> only if **both** operands are <code>true</code>.</li>
+                <li><strong>Logical OR (<code>||</code>):</strong> Returns <code>true</code> if **at least one** operand is <code>true</code>.</li>
+                <li><strong>Logical NOT (<code>!</code>):</strong> Reverses the logical state of its operand (converts <code>true</code> to <code>false</code> and vice versa).</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Logical AND (<code>&amp;&amp;</code>) Example</h2>
+        <div class="content example">
+            <p>Used when all conditions must be met, such as checking user eligibility based on age and ID presence:</p>
+            <pre>
+int age = 20;
+bool hasID = true;
+
+// Only runs if (20 &gt;= 18) AND (hasID is true)
+if (age &gt;= 18 &amp;&amp; hasID)
+{
+    Console.WriteLine("Allowed to enter."); 
+}
+            </pre>
+            
+            <h3>Use Case: Login Validation</h3>
+            <p>Requires both username and password to match for successful login:</p>
+            <pre>
+string username = "admin";
+string password = "pass123";
+
+if (username == "admin" &amp;&amp; password == "pass123")
+{
+    Console.WriteLine("Login successful.");
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Logical OR (<code>||</code>) Example</h2>
+        <div class="content example">
+            <p>Used when satisfying any one of the conditions is enough, such as granting a discount if the user is a member OR their purchase is large:</p>
+            <pre>
+bool isMember = true;
+double purchaseAmount = 120.0;
+
+// Runs if (isMember is true) OR (120.0 &gt; 100)
+if (isMember || purchaseAmount &gt; 100)
+{
+    Console.WriteLine("Discount applied.");
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Logical NOT (<code>!</code>) Example</h2>
+        <div class="content example">
+            <p>Used to negate a condition, often simplifying code (e.g., checking if a variable is <strong>not</strong> a certain state).</p>
+            <pre>
+bool isRaining = false;
+
+// Checks if (!false), which is true
+if (!isRaining)
+{
+    Console.WriteLine("Go outside!");
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Best Practices</h2>
+        <div class="content">
+            <ul>
+                <li>Use **parentheses** (e.g., <code>((A &amp;&amp; B) || C)</code>) to explicitly group conditions, clarifying the order of evaluation and improving readability.</li>
+                <li>**Simplify expressions** by using the NOT operator: use <code>if (!isReady)</code> instead of the verbose <code>if (isReady == false)</code>.</li>
+                <li>**Avoid redundant checks**: <code>if (x)</code> is sufficient instead of <code>if (x == true)</code> when <code>x</code> is already a Boolean.</li>
+                <li>Always consider **edge cases** when combining complex conditions.</li>
+            </ul>
+        </div>
+    </div>
+</div>

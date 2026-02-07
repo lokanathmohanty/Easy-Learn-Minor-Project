@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Object Methods</h1>
+    <div class="content">
+      <p>
+        In JavaScript, <b>object methods</b> are properties that contain function definitions. 
+        An object is a collection of properties, and a property can hold any value, 
+        including a function. When a property’s value is a function, it is called a <b>method</b>.
+      </p>
+
+      <p>
+        Object methods allow you to encapsulate logic within objects, making code reusable, 
+        organized, and easier to maintain. You can define methods directly inside objects, 
+        invoke them with parentheses, and even add or update them dynamically.
+      </p>
+
+      <h2 class="title">Syntax</h2>
+      <p>
+        Defining a method inside an object:
+      </p>
+      <pre>
+const obj = {
+  sum: function () {
+    // method body
+  }
+}
+obj.sum();
+      </pre>
+      <p>
+        In the above example, <code>sum</code> is a method inside the <code>obj</code> object. 
+        You access and invoke it with <code>obj.sum()</code>.
+      </p>
+
+      <h2 class="title">Example: Adding a Method</h2>
+      <p>
+        Here, the <code>company</code> object contains a method <code>getInfo()</code> that 
+        uses the <code>this</code> keyword to access object properties.
+      </p>
+      <pre>
+const company = {
+  companyName: "Tutorials Point",
+  companyWebsite: "www.tutorialspoint.com",
+  getInfo: function () {
+    return "Company Name: " + this.companyName + 
+           "<br>Website: " + this.companyWebsite;
+  }
+}
+document.getElementById("output").innerHTML = company.getInfo();
+      </pre>
+      <p><b>Output:</b></p>
+      <p>
+        Company Name: Tutorials Point <br>
+        Website: www.tutorialspoint.com
+      </p>
+
+      <h2 class="title">Object Method Shorthand</h2>
+      <p>
+        ES6 introduced a shorthand way to define methods in objects without the 
+        <code>function</code> keyword.
+      </p>
+      <pre>
+const employee = {
+  name: "John Doe",
+  age: 32,
+  getInfo() {
+    return "The employee name is " + this.name + 
+           " and his age is " + this.age + " Years.";
+  }
+}
+document.getElementById("output").innerHTML = employee.getInfo();
+      </pre>
+      <p><b>Output:</b> The employee name is John Doe and his age is 32 Years.</p>
+
+      <h2 class="title">Example: Method with Parameters</h2>
+      <p>
+        Methods can take arguments and return results just like normal functions.
+      </p>
+      <pre>
+const nums = {
+  getSum(a, b) {
+    return a + b;
+  }
+}
+document.getElementById("output").innerHTML = nums.getSum(2, 3);
+      </pre>
+      <p><b>Output:</b> 5</p>
+
+      <h2 class="title">Adding or Updating Methods</h2>
+      <p>
+        You can add or update methods dynamically using dot or square bracket notation.
+      </p>
+      <pre>
+const nums = {
+  getSum(a, b) {
+    return a + b;
+  }
+}
+nums.getMul = function(a, b) {
+  return a * b;
+}
+document.getElementById("output").innerHTML = nums.getMul(2, 3);
+      </pre>
+      <p><b>Output:</b> 6</p>
+
+      <h2 class="title">Using Built-in Methods</h2>
+      <p>
+        JavaScript objects also have built-in methods. For example, numbers have 
+        <code>toString()</code>, strings have <code>toUpperCase()</code>, etc.
+      </p>
+      <pre>
+const num = new Number(20);
+let str = num.toString();
+document.getElementById("output").innerHTML = 
+  "After converting: " + str + "<br>Type: " + typeof str;
+      </pre>
+      <p><b>Output:</b></p>
+      <p>
+        After converting: 20 <br>
+        Type: string
+      </p>
+    </div>
+  </div>
+</div>

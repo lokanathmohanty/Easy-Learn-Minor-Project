@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Insert</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        MongoDB is a document-oriented NoSQL database that stores data as JSON-like documents in collections. Each document is a set of key-value pairs and has a unique "_id" field acting as the primary key.
+      </p>
+      <p>
+        In Node.js, MongoDB documents can be added using <code>insertOne()</code> (single document) or <code>insertMany()</code> (multiple documents) from the MongoDB driver.
+      </p>
+
+      <h2>Document Structure</h2>
+      <pre><code>{
+  field1: value1,
+  field2: value2,
+  ...
+  fieldN: valueN
+}</code></pre>
+      <p>
+        If <code>_id</code> is omitted, MongoDB automatically generates an ObjectId.
+      </p>
+
+      <h2>Insert a Single Document (insertOne)</h2>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+  const uri = "mongodb://localhost:27017";
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+    await insertDoc(client, "mydatabase", "products", {
+      ProductID: 1,
+      Name: "Laptop",
+      Price: 25000
+    });
+  } finally {
+    await client.close();
+  }
+}
+
+async function insertDoc(client, dbName, colName, doc) {
+  const db = client.db(dbName);
+  const collection = db.collection(colName);
+  const result = await collection.insertOne(doc);
+  console.log(`New document created with _id: ${result.insertedId}`);
+}
+
+main().catch(console.error);</code></pre>
+      <p>Example output:</p>
+      <pre><code>New document created with _id: 65809214693bd4622a5efc3</code></pre>
+
+      <h2>Insert Multiple Documents (insertMany)</h2>
+      <pre><code>async function insertDocs(client) {
+  const docs = [
+    { ProductID: 1, Name: "Laptop", price: 25000 },
+    { ProductID: 2, Name: "TV", price: 40000 },
+    { ProductID: 3, Name: "Router", price: 2000 },
+    { ProductID: 4, Name: "Scanner", price: 5000 },
+    { ProductID: 5, Name: "Printer", price: 9000 }
+  ];
+  const result = await client.db("mydatabase").collection("products").insertMany(docs);
+  console.log(`${result.insertedCount} new documents inserted.`);
+  console.log("Inserted IDs:", result.insertedIds);
+}</code></pre>
+      <p>Output example:</p>
+      <pre><code>5 new documents inserted.
+Inserted IDs: {
+  '0': ObjectId("..."),
+  '1': ObjectId("..."),
+  ...
+}</code></pre>
+
+      <h2>Data Verification</h2>
+      <p>
+        Documents inserted can be viewed in MongoDB shell:
+      </p>
+      <pre><code>use mydatabase
+db.products.find()</code></pre>
+    </div>
+  </div>
+</div>

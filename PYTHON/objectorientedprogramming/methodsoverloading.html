@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python Method Overloading</h1>
+    <div class="content">
+      <p>Method overloading is the concept of defining multiple methods with the same name but different parameters (number or type) within the same class.</p>
+      <p>Unlike languages like Java or C++, Python does not support traditional method overloading. The last defined method overrides any previous definitions.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Incorrect Overloading Example</h2>
+      <pre><code>class Example:
+    def add(self, a, b):
+        return a + b
+    
+    def add(self, a, b, c):
+        return a + b + c
+
+obj = Example()
+print(obj.add(10, 20, 30))  # Works: 60
+print(obj.add(10, 20))      # Fails: TypeError
+</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Since Python only retains the last definition of <code>add</code>, calling it with two arguments results in an error.</p>
+      <p>You can simulate method overloading by using default parameter values or variable-length arguments.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Simulated Overloading Using Default Parameters</h2>
+      <pre><code>class Example:
+    def add(self, a=None, b=None, c=None):
+        if a is not None and b is not None and c is not None:
+            return a + b + c
+        elif a is not None and b is not None:
+            return a + b
+        else:
+            return 0
+
+obj = Example()
+print(obj.add(10, 20, 30))  # Output: 60
+print(obj.add(10, 20))      # Output: 30
+print(obj.add())            # Output: 0
+</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Alternatively, you can use the third-party <code>multipledispatch</code> module which allows true method overloading.</p>
+      <p>The <code>@dispatch</code> decorator is used to specify the parameter types for each overloaded method.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Method Overloading with MultipleDispatch Module</h2>
+      <pre><code>from multipledispatch import dispatch
+
+class Example:
+    @dispatch(int, int)
+    def add(self, a, b):
+        return a + b
+    
+    @dispatch(int, int, int)
+    def add(self, a, b, c):
+        return a + b + c
+
+obj = Example()
+print(obj.add(10, 20))      # Output: 30
+print(obj.add(10, 20, 30))  # Output: 60
+</code></pre>
+    </div>
+  </div>
+</div>

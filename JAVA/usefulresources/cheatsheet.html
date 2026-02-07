@@ -1,0 +1,200 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Cheatsheet: Fundamentals and Core Concepts 🚀</h1>
+
+        <div class="content">
+            <h2>I. Program Structure & I/O</h2>
+            <p><strong>Basic Structure</strong></p>
+            <pre><code>// Package Declaration (Optional)
+// import java.util.Scanner; // Import external classes
+
+public class Class_name {
+   public static void main(String[] args) {
+      // Main execution point
+   }
+}</code></pre>
+            <hr>
+            <p><strong>Output</strong></p>
+            <ul>
+                <li><code>System.out.<strong>println</strong>("Hello");</code>: Prints text and adds a **new line**.</li>
+                <li><code>System.out.<strong>print</strong>("Hello");</code>: Prints text **without** a new line.</li>
+            </ul>
+            <hr>
+            <p><strong>User Input (Scanner)</strong></p>
+            <pre><code>import java.util.Scanner;
+
+Scanner myObj = new Scanner(System.in);
+System.out.println("Enter input:");
+String input = myObj.nextLine(); // Reads entire line (String)
+// int number = myObj.nextInt(); // Reads an integer
+myObj.close(); // Close the resource</code></pre>
+            <hr>
+            <p><strong>Comments</strong></p>
+            <ul>
+                <li>Single-line: <code>// This is a comment</code></li>
+                <li>Multi-line: <code>/* This is a multi-line comment */</code></li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>II. Data Types, Variables, & Access</h2>
+
+            <h3>Access Modifiers</h3>
+            <table>
+                <tr><th>Modifier</th><th>Class</th><th>Package</th><th>Subclass</th><th>World</th></tr>
+                <tr><td><strong>public</strong></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+                <tr><td><strong>protected</strong></td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
+                <tr><td><strong>default</strong> (none)</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr>
+                <tr><td><strong>private</strong></td><td>✅</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            </table>
+
+            <h3>Primitive Data Types (Built-in)</h3>
+            <table>
+                <tr><th>Type</th><th>Size</th><th>Range/Description</th></tr>
+                <tr><td><code>byte</code></td><td>8-bit</td><td>-128 to 127</td></tr>
+                <tr><td><code>short</code></td><td>16-bit</td><td>-32,768 to 32,767</td></tr>
+                <tr><td><code>int</code></td><td>32-bit</td><td>Standard whole number</td></tr>
+                <tr><td><code>long</code></td><td>64-bit</td><td>Large whole number</td></tr>
+                <tr><td><code>float</code></td><td>32-bit</td><td>Single-precision fractional number (e.g., <code>10.5f</code>)</td></tr>
+                <tr><td><code>double</code></td><td>64-bit</td><td>Double-precision fractional number (default for decimals)</td></tr>
+                <tr><td><code>char</code></td><td>16-bit</td><td>Single Unicode character (e.g., <code>'A'</code>)</td></tr>
+                <tr><td><code>boolean</code></td><td>1-bit</td><td><code>true</code> or <code>false</code></td></tr>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>III. Control Flow (Loops & Conditionals)</h2>
+
+            <h3>Conditionals</h3>
+            <p><strong>If-Else</strong></p>
+            <pre><code>if (condition) {
+   // runs if true
+} else if (anotherCondition) {
+   // runs if first is false, and this one is true
+} else {
+   // runs if all conditions are false
+}</code></pre>
+            <p><strong>Switch Statement</strong></p>
+            <pre><code>switch (expression) {
+   case value1:
+      // code block
+      break; // Essential to exit case
+   default:
+      // code block
+}</code></pre>
+
+            <h3>Loops</h3>
+            <p><strong>For Loop</strong></p>
+            <pre><code>for (initialization; termination_condition; increment) {
+   // code block runs repeatedly
+}
+// Example: for (int i = 0; i < 10; i++)</code></pre>
+            <p><strong>While Loop</strong></p>
+            <pre><code>while (condition) {
+   // code block runs as long as condition is true
+}</code></pre>
+
+            <h3>Loop Control</h3>
+            <ul>
+                <li><strong><code>break</code>:</strong> Immediately exits the **entire loop**.</li>
+                <li><strong><code>continue</code>:</strong> Skips the rest of the **current loop iteration** and proceeds to the next one.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>IV. Object-Oriented Programming (OOP)</h2>
+
+            <h3>OOP Pillars</h3>
+            <ol>
+                <li>
+                    <strong>Encapsulation:</strong> Bundling data (fields) and methods that operate on the data into a single unit (class). Use **<code>private</code>** fields and **<code>public</code>** methods (getters/setters) to control access.
+                </li>
+                <li>
+                    <strong>Inheritance:</strong> A class (subclass/child) inherits properties and methods from another class (superclass/parent) using the **<code>extends</code>** keyword.
+                    <pre><code>class Child extends Parent { ... }</code></pre>
+                </li>
+                <li>
+                    <strong>Polymorphism:</strong> Allowing methods to do different things based on the object it is acting upon. Achieved via **Method Overriding** (same method signature in subclass) and **Method Overloading** (same method name, different parameters in the same class).
+                </li>
+                <li>
+                    <strong>Abstraction:</strong> Hiding complex implementation details and showing only essential features. Achieved using **<code>abstract</code>** classes/methods or **Interfaces**.
+                </li>
+            </ol>
+
+            <h3>Constructors</h3>
+            <ul>
+                <li>Code block used to **initialize** a new object. It must have the **same name as the class**.</li>
+                <li><strong>Default Constructor:</strong> Has no parameters (automatically generated if none are declared).</li>
+                <li><strong>Parameterized Constructor:</strong> Accepts parameters to set initial values for instance variables.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>V. Arrays and Strings</h2>
+
+            <h3>Arrays</h3>
+            <ul>
+                <li>
+                    <strong>Single-Dimensional:</strong> Stores multiple values of the same type.
+                    <pre><code>int[] arr = new int[5]; // Declaration and initialization
+arr[0] = 10; // Accessing by index</code></pre>
+                </li>
+                <li>
+                    <strong>Multi-Dimensional:</strong> Arrays of arrays (e.g., a matrix).
+                    <pre><code>int[][] matrix = new int[3][3];</code></pre>
+                </li>
+            </ul>
+
+            <h3>String Key Methods (<code>java.lang.String</code>)</h3>
+            <table>
+                <tr><th>Method</th><th>Description</th></tr>
+                <tr><td><code>.length()</code></td><td>Returns the length of the string.</td></tr>
+                <tr><td><code>.charAt(index)</code></td><td>Returns the character at the specified index.</td></tr>
+                <tr><td><code>.substring(begin, end)</code></td><td>Returns a new substring.</td></tr>
+                <tr><td><code>.indexOf("sub")</code></td><td>Returns the index of the first occurrence.</td></tr>
+                <tr><td><code>.toUpperCase()</code>, <code>.toLowerCase()</code></td><td>Converts case.</td></tr>
+                <tr><td><code>.trim()</code></td><td>Removes leading/trailing whitespace.</td></tr>
+            </table>
+
+            <h3>String Comparison</h3>
+            <ul>
+                <li><strong>Content:</strong> Use <code>str1.<strong>equals</strong>(str2)</code> for reliable content comparison.</li>
+                <li><strong>Reference:</strong> The <code>==</code> operator compares object references (memory addresses). Use only for comparing primitive types or checking if two references point to the exact same object.</li>
+                <li><strong>Lexicographical:</strong> Use <code>str1.<strong>compareTo</strong>(str2)</code> to determine ordering (-ve, 0, or +ve).</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>VI. Exception Handling</h2>
+
+            <h3>Try-Catch-Finally</h3>
+            <p>Used to handle runtime errors gracefully, maintaining the program's flow.</p>
+            <pre><code>try {
+   // Code that might throw an exception (e.g., 10 / 0)
+} catch (ArithmeticException e) {
+   // Code to handle a specific exception type
+} catch (Exception e) {
+   // Code to handle any other exception
+} finally {
+   // Code that ALWAYS executes (e.g., closing resources)
+}</code></pre>
+
+            <h3>Throwing Exceptions</h3>
+            <p>The **<code>throw</code>** keyword is used to explicitly throw an exception object.</p>
+            <pre><code>// Syntax:
+if (condition_is_bad) {
+   throw new CustomException("Error message");
+}</code></pre>
+        </div>
+    </div>
+</div>

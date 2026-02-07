@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Abstraction</h1>
+    <div class="content">
+      <p>Abstraction is a major principle of object-oriented programming. It means exposing only relevant data and functionalities to the user, while hiding complex implementation details. This helps manage complexity and enhances maintainability in software design.</p>
+      <p>In Python, abstraction can be achieved using abstract classes, which serve as blueprints and enforce that derived classes implement specific methods.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Types of Abstraction</h2>
+      <ul>
+        <li>Data abstraction: Hides the actual data details and shows only essential features.</li>
+        <li>Process abstraction: Hides the implementation details of underlying processes or logic.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Python Abstract Classes</h2>
+      <p>An abstract class provides a common interface for its subclasses and cannot be instantiated directly. It must inherit from <code>ABC</code> (Abstract Base Class) and contain at least one method marked with the <code>@abstractmethod</code> decorator.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Abstract Class Example</h2>
+      <pre><code>from abc import ABC, abstractmethod
+
+class Demo(ABC):
+    @abstractmethod
+    def method1(self):
+        print("abstract method")
+
+    def method2(self):
+        print("concrete method")
+
+# obj = Demo()  # TypeError: Can't instantiate abstract class Demo
+</code></pre>
+    </div>
+
+    <div class="content">
+      <p>An abstract class must be used as a base for another class. The child class must override all abstract methods from the abstract class to be instantiable.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Abstract Method Overriding</h2>
+      <pre><code>from abc import ABC, abstractmethod
+
+class DemoClass(ABC):
+    @abstractmethod
+    def method1(self):
+        print("abstract method")
+    def method2(self):
+        print("concrete method")
+
+class ConcreteClass(DemoClass):
+    def method1(self):
+        super().method1()
+
+obj = ConcreteClass()
+obj.method1()
+obj.method2()
+# Output:
+# abstract method
+# concrete method
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Benefits of Abstraction</h2>
+      <ul>
+        <li>Keeps code modular and clean by hiding unnecessary details.</li>
+        <li>Promotes reusability and ease of code maintenance.</li>
+        <li>Enforces consistency and contract in derived classes.</li>
+      </ul>
+    </div>
+  </div>
+</div>

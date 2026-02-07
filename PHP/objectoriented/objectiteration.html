@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Object Iteration</h1>
+        <div class="content">
+            <p>**Object iteration** is the process of traversing through the properties of a PHP object, typically using a **<code>foreach</code>** loop. This is useful for inspecting or processing all available data in an object without accessing each property individually.</p>
+            
+            <h2 class="title">Iteration with <code>foreach</code> Loop</h2>
+            <p>The standard <code>foreach</code> loop can iterate over an object instance. However, access is restricted based on the scope from which the loop is executed:</p>
+            <ul>
+                <li>**Outside the Class:** Only **public** properties are visible and accessible. Private and protected properties are ignored.</li>
+                <li>**Inside the Class:** When the <code>foreach</code> loop is executed from an instance method (e.g., <code>foreach ($this as $key =&gt; $value)</code>), **all** properties (public, private, and protected) are accessible.</li>
+            </ul>
+
+            <h3 class="title">Why Use Object Iteration?</h3>
+            <ul>
+                <li>**Efficient Data Management:** Easily process data from multiple objects or properties.</li>
+                <li>**Code Simplification:** Reduces the need for repeated code to access individual members.</li>
+                <li>**Debugging/Inspection:** Quickly view the state (properties) of an object.</li>
+            </ul>
+
+            <h2 class="title">Using the <code>Iterator</code> Interface</h2>
+            <p>For more control over the iteration process—such as defining which properties to iterate, the order, or generating dynamic keys/values—a class can implement the **<code>Iterator</code>** interface. This interface requires five methods to be defined:</p>
+            <ul>
+                <li>**<code>rewind()</code>:** Resets the internal pointer to the beginning (first element). Called once before the loop starts.</li>
+                <li>**<code>current()</code>:** Returns the element at the current position.</li>
+                <li>**<code>key()</code>:** Returns the key (index) of the current element.</li>
+                <li>**<code>next()</code>:** Moves the internal pointer to the next element. Called after each iteration.</li>
+                <li>**<code>valid()</code>:** Checks if the current position is valid (i.e., if there are more elements).</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Basic Iteration (Public Properties Only)</h3>
+            <p>When iterating outside the class definition, only members with <code>public</code> visibility are included in the loop.</p>
+            
+            <pre><code>
+class Item {
+   private $secret = "Hidden";
+   public $name = "Widget";
+   public $price = 9.99;
+}
+
+$obj = new Item();
+
+// Only $name and $price are shown outside the class
+foreach($obj as $key =&gt; $value) {
+   print "$key =&gt; $value\n";
+}
+// Output:
+// name =&gt; Widget
+// price =&gt; 9.99
+            </code></pre>
+
+            <h3 class="title">Iterator Implementation Example</h3>
+            <p>A class implementing <code>Iterator</code> can customize the traversal logic, often over an internal array.</p>
+            <p>Note: The example below represents the conceptual structure.</p>
+            
+            <pre><code>
+class Book implements Iterator {
+   private $properties = ['title' =&gt; 'PHP Basics', 'author' =&gt; 'Jane Doe'];
+   private $position = 0;
+
+   public function rewind(): void { $this-&gt;position = 0; }
+
+   public function current() { 
+      return array_values($this-&gt;properties)[$this-&gt;position];
+   }
+
+   public function key() { 
+      return array_keys($this-&gt;properties)[$this-&gt;position]; 
+   }
+
+   public function next(): void { ++$this-&gt;position; }
+
+   public function valid(): bool { 
+      return $this-&gt;position &lt; count($this-&gt;properties);
+   }
+}
+
+$book = new Book();
+foreach ($book as $k =&gt; $v) {
+   print "$k: $v\n";
+}
+// Output:
+// title: PHP Basics  
+// author: Jane Doe
+            </code></pre>
+        </div>
+    </div>
+</div>

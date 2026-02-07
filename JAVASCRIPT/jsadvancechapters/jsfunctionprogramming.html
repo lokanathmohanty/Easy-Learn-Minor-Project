@@ -1,0 +1,119 @@
+ <div class="container">
+  <div class="session" data-session-id="js-functional-programming">
+    <h1 class="title">JavaScript - Functional Programming</h1>
+
+    <div class="content">
+      <p>There are mainly two programming paradigms: the imperative programming paradigm and the declarative programming paradigm. Functional programming is a subtype of the declarative paradigm. The term paradigm refers to the approach to solving a particular problem.</p>
+      <p>Functional programming has been in use for the last decades but came into trend after 2015 when the last main revised version of JavaScript was released. There are many benefits to using functional programming, which we will discuss in this tutorial.</p>
+    </div>
+
+    <div class="content">
+      <h2>Characteristics of Functional Programming</h2>
+      <p>Functional programming works as mathematical functions work. It allows developers to develop software based on function evaluation. Programmers can break the code into small parts (functions), making it easier to evaluate and test code. The following concepts are covered in this tutorial:</p>
+      <ul>
+        <li>Pure Functions</li>
+        <li>Code Readability</li>
+        <li>Immutability</li>
+        <li>Higher-Order Functions</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Pure Functions</h2>
+      <p>In JavaScript, we can write pure functions. A pure function takes values as parameters, performs some operations, and returns the output. It never shares variables with other functions or uses global variables.</p>
+      <p>Properties of a pure function:</p>
+      <ul>
+        <li>Always returns the same output for the same input.</li>
+        <li>Does not depend on any external state or variables that are not passed as arguments.</li>
+        <li>Does not produce side effects such as modifying global variables or changing the state of external objects.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Example: Pure Function</h2>
+      <p>In the example below, <code>pure_func()</code> takes a value as a parameter and multiplies it by 2. It does not rely on or modify any global variables.</p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;h2&gt;Pure Function Example&lt;/h2&gt;
+  &lt;div id="result"&gt;&lt;/div&gt;
+  &lt;script&gt;
+    let result = document.getElementById('result');
+    let global_var = 10;
+    function pure_func(value){
+       return value * 2;
+    }
+    result.innerHTML = pure_func(5);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Immutability in JavaScript</h2>
+      <p>Immutability means that once a value is declared, it cannot be changed. In JavaScript, immutability can be achieved with the <code>const</code> keyword.</p>
+    </div>
+
+    <div class="content">
+      <h2>Example: Immutability</h2>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;h2&gt;Immutability Example&lt;/h2&gt;
+  &lt;div id="result"&gt;&lt;/div&gt;
+  &lt;script&gt;
+    let result = document.getElementById('result');
+    const value = 10;
+    value = 20; // ❌ Error
+    result.innerHTML = value;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><strong>Output:</strong> <code>TypeError: Assignment to constant variable.</code></p>
+    </div>
+
+    <div class="content">
+      <h2>Code Readability</h2>
+      <p>Since functional programming relies heavily on functions, it makes code more readable. Instead of manual loops, methods like <code>for-of</code>, <code>filter()</code>, and <code>map()</code> clearly express the intent of the operation.</p>
+      <p>For example, filtering values from an array is easier with <code>filter()</code> compared to writing a manual loop.</p>
+    </div>
+
+    <div class="content">
+      <h2>Higher-Order Functions</h2>
+      <p>A higher-order function is a function that takes another function as an argument or returns one. For example, the <code>reduce()</code> method accepts a callback function to reduce an array into a single value.</p>
+    </div>
+
+    <div class="content">
+      <h2>Example: Higher-Order Function</h2>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;h2&gt;Higher Order Function Example&lt;/h2&gt;
+  &lt;div id="result"&gt;&lt;/div&gt;
+  &lt;script&gt;
+    let result = document.getElementById('result');
+    let arr = [1, 2, 3, 4, 5];
+    let sum = arr.reduce((acc, val) =&gt; acc + val);
+    result.innerHTML = sum;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Conclusion</h2>
+      <p>We learned that functional programming in JavaScript helps write maintainable and readable code with fewer bugs by focusing on pure functions, immutability, and higher-order functions.</p>
+    </div>
+
+    <div class="content">
+      <p>
+        <a href="#prev" class="prev">Previous</a> | 
+        <a href="#next" class="next">Next</a> | 
+        <a href="#toc" class="toc">Table of Contents</a>
+      </p>
+    </div>
+  </div>
+</div>

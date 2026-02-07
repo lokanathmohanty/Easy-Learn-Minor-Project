@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Comparison Operators</h1>
+
+    <div class="content">
+      <p>Comparison operators in Python are used in conditional statements (<code>if</code>, <code>else</code>, <code>elif</code>) and looping statements (<code>while</code>, <code>for</code>). They are also called relational operators.</p>
+      <p>Some common operators are <code>&lt;</code> (less than) and <code>&gt;</code> (greater than). Python also supports <code>&lt;=</code> (less than or equal to) and <code>&gt;=</code> (greater than or equal to).</p>
+      <p>In addition, Python provides equality (<code>==</code>) and inequality (<code>!=</code>) operators. Hence, there are six comparison operators in Python:</p>
+
+      <ul>
+        <li><code>&lt;</code> : Less than &nbsp;&nbsp; → <code>a &lt; b</code></li>
+        <li><code>&gt;</code> : Greater than &nbsp;&nbsp; → <code>a &gt; b</code></li>
+        <li><code>&lt;=</code> : Less than or equal to &nbsp;&nbsp; → <code>a &lt;= b</code></li>
+        <li><code>&gt;=</code> : Greater than or equal to &nbsp;&nbsp; → <code>a &gt;= b</code></li>
+        <li><code>==</code> : Equal to &nbsp;&nbsp; → <code>a == b</code></li>
+        <li><code>!=</code> : Not equal to &nbsp;&nbsp; → <code>a != b</code></li>
+      </ul>
+
+      <p>These operators are binary, requiring two operands. Expressions with comparison operators are Boolean expressions and always return <code>True</code> or <code>False</code>.</p>
+    </div>
+
+    <h2 class="title">Examples with Numbers</h2>
+    <div class="content">
+      <p>Example with integers:</p>
+      <p><code>
+a=5 <br>
+b=7 <br>
+print(a &gt; b)  # False <br>
+print(a &lt; b)  # True
+      </code></p>
+
+      <p>Detailed integer comparisons:</p>
+      <p><code>
+a=5; b=7 <br>
+print("a&gt;b is", a&gt;b)   # False <br>
+print("a&lt;b is", a&lt;b)   # True <br>
+print("a==b is", a==b) # False <br>
+print("a!=b is", a!=b) # True
+      </code></p>
+
+      <p>Comparison of int and float:</p>
+      <p><code>
+a=10; b=10.0 <br>
+print("a==b is", a==b) # True <br>
+print("a!=b is", a!=b) # False
+      </code></p>
+    </div>
+
+    <h2 class="title">Comparison of Complex Numbers</h2>
+    <div class="content">
+      <p>Complex numbers support only equality operators (<code>==</code>, <code>!=</code>).</p>
+      <p><code>
+a=10+1j; b=10-1j <br>
+print(a==b) # False <br>
+print(a!=b) # True
+      </code></p>
+
+      <p>Using <code>&lt;</code> or <code>&gt;</code> raises a <code>TypeError</code>.</p>
+    </div>
+
+    <h2 class="title">Comparison of Booleans</h2>
+    <div class="content">
+      <p>Booleans are treated as integers (<code>True=1</code>, <code>False=0</code>).</p>
+      <p><code>
+a=True; b=False <br>
+print(a &gt; b)  # True <br>
+print(a &lt; b)  # False <br>
+print(a==b)   # False <br>
+print(a!=b)   # True
+      </code></p>
+    </div>
+
+    <h2 class="title">Comparison of Sequence Types</h2>
+    <div class="content">
+      <p>Only similar sequence types can be compared (string with string, tuple with tuple). Lists cannot be compared with tuples.</p>
+      <p>Sequences use lexicographical ordering (compared element by element).</p>
+
+      <p>Example with strings:</p>
+      <p><code>
+a="BAT"; b="BALL" <br>
+print(a &gt; b)  # True (T &gt; L in Unicode order)
+      </code></p>
+
+      <p>Example with tuples:</p>
+      <p><code>
+a=(1,2,4); b=(1,2,3) <br>
+print(a &gt; b)  # True (4 &gt; 3 at index 2)
+      </code></p>
+    </div>
+
+    <h2 class="title">Comparison of Dictionaries</h2>
+    <div class="content">
+      <p>Python dictionaries do not support <code>&lt;</code> or <code>&gt;</code>. Using them raises <code>TypeError</code>.</p>
+      <p>Only equality (<code>==</code>) and inequality (<code>!=</code>) are supported. Equality checks whether both dictionaries have the same key-value pairs.</p>
+      <p><code>
+a={1:1,2:2} <br>
+b={2:2,1:1,3:3} <br>
+print(a==b)  # False <br>
+print(a!=b)  # True
+      </code></p>
+    </div>
+  </div>
+</div>

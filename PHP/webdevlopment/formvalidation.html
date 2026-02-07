@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Form Validation</h1>
+        <div class="content">
+            <p>**Form Validation** is the process of checking whether user-submitted data meets the required criteria before it is processed. This step is critical for maintaining **data integrity**, improving **user experience**, and ensuring **security**.</p>
+            
+            <h2 class="title">Types of Validation</h2>
+            <ul>
+                <li><strong>Client-Side Validation:</strong> Occurs in the user's browser (typically using JavaScript or HTML5 input types like `type="email"`). It provides **instant feedback** but can be bypassed.</li>
+                <li><strong>Server-Side Validation:</strong> Occurs after the form is submitted, using a language like PHP. It is **essential for security** because it cannot be bypassed, ensuring data is processed correctly regardless of the client-side settings.</li>
+            </ul>
+
+            <h2 class="title">Server-Side Validation Techniques in PHP</h2>
+            <p>PHP validation focuses on cleaning data and checking content and format:</p>
+            
+            <h3 class="title">Data Cleaning and Safety</h3>
+            <ul>
+                <li><strong><code>trim()</code>:</strong> Removes whitespace from the beginning and end of a string.</li>
+                <li><strong><code>htmlspecialchars()</code>:</strong> Converts special characters (like `<`, `>`, `&`) into HTML entities. This is the **primary defense against Cross-Site Scripting (XSS)** attacks when echoing user data back to the browser.</li>
+            </ul>
+            
+            <h3 class="title">Content Checks (Rules)</h3>
+            <ul>
+                <li><strong>Required Fields:</strong> Use <code>empty()</code> or <code>isset()</code> on the <code>$_POST</code> or <code>$_GET</code> array value to ensure essential fields are not left blank.</li>
+                <li><strong>Data Type:</strong> Use functions like **<code>is_numeric()</code>** to enforce that fields like age or phone numbers contain only digits.</li>
+                <li><strong>Format/Pattern Matching:</strong> Use **Regular Expressions** (`preg_match()`) or built-in filter functions (e.g., `filter_var()` for email/URL checks) to ensure data matches a specific format.</li>
+            </ul>
+
+            <h3 class="title">Preventing <code>$_SERVER["PHP_SELF"]</code> Exploits</h3>
+            <p>To safely submit a form to the same script, the <code>action</code> attribute must be protected. If not sanitized, a hacker could inject malicious code into the URL that would be executed when the form loads.</p>
+            <pre><code>&lt;form action="&lt;?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?&gt;" method="post"&gt;</code></pre>
+            <p>Wrapping <code>$_SERVER["PHP_SELF"]</code> with <code>htmlspecialchars()</code> prevents any injected code from being executed, treating it as harmless plain text instead.</p>
+        </div>
+        
+        <h2 class="title">Example Session: Basic Server-Side Validation</h2>
+        <div class="content example">
+            <p>This example demonstrates checking for empty fields, cleaning the data, and validating if a field is numeric.</p>
+            
+            <pre><code>
+&lt;?php
+   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $name = trim($_POST["name"]);
+      $age = trim($_POST["age"]);
+      
+      // 1. Check for empty fields
+      if (empty($name) || empty($age)) {
+         echo "Error: Name and Age fields are required.";
+      } 
+      // 2. Validate Age is numeric
+      else if (!is_numeric($age)) {
+         echo "Error: Age must be a number.";
+      }
+      // 3. Process the clean data
+      else {
+         $safe_name = htmlspecialchars($name);
+         echo "Submission successful for: " . $safe_name . " (" . $age . ")";
+      }
+   }
+?&gt;
+&lt;form action="&lt;?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?&gt;" method="post"&gt;
+   Name: &lt;input type="text" name="name"&gt;&lt;br&gt;
+   Age: &lt;input type="text" name="age"&gt;&lt;br&gt;
+   &lt;input type="submit"&gt;
+&lt;/form&gt;
+            </code></pre>
+        </div>
+    </div>
+</div>

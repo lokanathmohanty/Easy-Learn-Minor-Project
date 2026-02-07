@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Helpful Null Pointer Exceptions (Java 14+)</h1>
+
+        <div class="content">
+            <h2>The Enhancement to <code>NullPointerException</code></h2>
+            <p>The **Helpful <code>NullPointerException</code>** feature was introduced in **Java 14** (as a preview, standard in Java 15) to address the lack of detail in traditional NPE messages. The old exception only provided the file name and line number, making it difficult to debug complex chained method calls.</p>
+
+            <h3>Traditional NPE (Pre-Java 14)</h3>
+            <p>A nested call like <code>emp.getDept().getName()</code> would fail, but the error message would only point to the line number, leaving the developer to guess whether <code>emp</code>, the result of <code>getDept()</code>, or something else was null.</p>
+            <pre><code>Exception in thread "main" java.lang.NullPointerException
+    at com.tutorialspoint.Tester.main(Tester.java:10)</code></pre>
+
+            <h3>Informative NPE (Java 15+)</h3>
+            <p>The enhanced NPE message explicitly identifies **which expression evaluated to null** in a chained call, significantly speeding up debugging.</p>
+            <pre><code>Exception in thread "main" java.lang.NullPointerException: 
+    Cannot invoke "com.tutorialspoint.Department.getName()" 
+    because the return value of "com.tutorialspoint.Employee.getDept()" is null
+    at com.tutorialspoint.Tester.main(Tester.java:10)</code></pre>
+
+            <p class="example">The message clearly indicates that the return value of <code>getDept()</code> was null, which prevented the invocation of <code>getName()</code>.</p>
+
+            <h2>Enabling and Usage</h2>
+            <ul>
+                <li>
+                    <strong>Java 14/15:</strong> This feature was initially enabled using the flag: <code>-XX:+ShowCodeDetailsInExceptionMessages</code>.
+                </li>
+                <li>
+                    <strong>Java 20 onwards:</strong> The Helpful NPE feature is **enabled by default**, requiring no special flags to run the application.
+                </li>
+            </ul>
+
+            <h3>Informative NPE for Local Variables</h3>
+            <p>The enhancement also applies to local variables. When accessing a property of a null local variable, the exception message now includes the name of the variable that was null, provided the code is compiled with debugging information (which is the default behavior in modern Java):</p>
+            <pre><code>// name is null
+
+Exception in thread "main" java.lang.NullPointerException: 
+    Cannot invoke "String.length()" because "name" is null
+    at com.tutorialspoint.Tester.main(Tester.java:8)</code></pre>
+        </div>
+    </div>
+</div>

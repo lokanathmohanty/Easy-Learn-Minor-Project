@@ -1,0 +1,108 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - useMemo</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            The <code>useMemo</code> hook helps improve the performance of React applications by 
+            memoizing the result of expensive calculations and reusing them until dependencies change.
+         </p>
+
+         <h2>Signature</h2>
+         <div class="code-block">
+<pre><code>const result = useMemo(expensive_fn, dependency_array);
+</code></pre>
+         </div>
+
+         <ul>
+            <li><strong>expensive_fn</strong> − Function that performs expensive logic and returns output.</li>
+            <li><strong>dependency_array</strong> − List of dependencies that control when the calculation runs again.</li>
+         </ul>
+
+         <h2>Example: Summation with useMemo</h2>
+         <div class="code-block">
+<pre><code>const limit = 1000;
+const sum = useMemo(() =&gt; {
+   let total = 0;
+   for(let i = 1; i &lt;= limit; i++) {
+      total += i;
+   }
+   return total;
+}, [limit])
+</code></pre>
+         </div>
+         <p>
+            In this example, the summation logic executes only when <code>limit</code> changes. 
+            Between renders, the memoized value is reused.
+         </p>
+
+         <h2>Applying useMemo in a Component</h2>
+         <div class="code-block">
+<pre><code>import React, { useState, useEffect, useMemo } from "react";
+
+function Sum() {
+   const [currentTime, setCurrentTime] = useState(new Date());
+   const [limit, setLimit] = useState(10);
+
+   useEffect(() =&gt; {
+      const interval = setInterval(() =&gt; setCurrentTime(new Date()), 1000);
+      return () =&gt; clearInterval(interval);
+   }, []);
+
+   const sum = useMemo(() =&gt; {
+      let total = 0;
+      for (let i = 1; i &lt;= limit; i++) {
+         total += i;
+      }
+      return total;
+   }, [limit]);
+
+   return (
+      &lt;div&gt;
+         &lt;input value={limit} onChange={e =&gt; setLimit(Number(e.target.value))} /&gt;
+         &lt;div&gt;Sum from 1 to {limit}: &lt;b&gt;{sum}&lt;/b&gt;&lt;/div&gt;
+         &lt;div&gt;Time: &lt;b&gt;{currentTime.toLocaleTimeString()}&lt;/b&gt;&lt;/div&gt;
+      &lt;/div&gt;
+   );
+}
+export default Sum;
+</code></pre>
+         </div>
+
+         <h2>Preserving References</h2>
+         <p>
+            Reference types such as arrays, objects, and functions are recreated on each render, even 
+            if their values remain the same. <code>useMemo</code> can preserve them to prevent 
+            unnecessary re-renders.
+         </p>
+
+         <div class="code-block">
+<pre><code>const input = useMemo(() =&gt; [1, 1000], []);
+</code></pre>
+         </div>
+
+         <h2>Advantages</h2>
+         <ul>
+            <li>Simple to use API.</li>
+            <li>Improves application performance.</li>
+            <li>Prevents unnecessary recalculations.</li>
+         </ul>
+
+         <h2>Disadvantages</h2>
+         <ul>
+            <li>Overuse decreases readability.</li>
+            <li>Makes debugging more complex.</li>
+            <li>Requires good understanding of JavaScript references.</li>
+         </ul>
+
+         <h2>Summary</h2>
+         <p>
+            React applications are already optimized, but in certain cases, memoization is required to 
+            boost performance. The <code>useMemo</code> hook is useful in those scenarios, but should 
+            only be applied when absolutely necessary.
+         </p>
+      </div>
+   </div>
+</div>

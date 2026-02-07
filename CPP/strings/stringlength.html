@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ String Length Methods 📏</h1>
+
+        <div class="content">
+            <p>The **length of a string** is the number of characters it contains. C++ supports two string types, offering different ways to determine their length:</p>
+            <ul>
+                <li>**C-Style Character Arrays** (`char[]`)</li>
+                <li>**<code>std::string</code> Objects** (from the <code>&lt;string&gt;</code> class)</li>
+            </ul>
+            <p>The length calculation always **stops** at the first occurrence of the **null terminating character** (`'\0'`), if present.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">I. <code>std::string</code> Member Methods (Preferred)</h2>
+            <p>These methods are built into the <code>std::string</code> class and are the standard, safe way to get the length of a string object.</p>
+
+            <h3>1. <code>string::length()</code> and <code>string::size()</code></h3>
+            <p>These two member functions are **functionally identical** and return the number of characters in the string object.</p>
+            <pre class="example">
+std::string s = "I love TP !!!";
+// Both length() and size() return 13
+int len1 = s.length(); 
+int len2 = s.size(); 
+</pre>
+            <p>Note: When an <code>std::string</code> is initialized with an explicit null character (e.g., `"I love TP !!!\0 and others"`), its <code>length()</code> and <code>size()</code> methods will correctly report the length up to the actual null character found during initialization, which is 13 in the examples.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">II. C-Style Function</h2>
+
+            <h3>2. <code>strlen()</code> Method</h3>
+            <p>This function, found in the <code>&lt;cstring&gt;</code> header (or <code>&lt;string.h&gt;</code>), is designed for **C-style character arrays** (`char[]`). It takes the string array name (which decays to a pointer) and counts characters until it encounters the `'\0'` terminator.</p>
+            <pre class="example">
+char s[] = "I love TP !!!";
+size_t len = strlen(s); // Returns 13
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">III. Iterative Methods (Manual Counting)</h2>
+            <p>These methods manually reproduce the behavior of <code>strlen()</code> by looping through the string character by character and incrementing a counter until the `'\0'` is reached.</p>
+
+            <h3>3. Using an Iterative <code>for</code> Loop</h3>
+            <pre class="example">
+std::string s = "I love TP !!!";
+int count = 0;
+for(int i = 0; s[i] != '\0'; i++) 
+   count++; // count will be 13
+</pre>
+
+            <h3>4. Using an Iterative <code>while</code> Loop</h3>
+            <pre class="example">
+std::string s = "I love TP !!!";
+int count = 0, i = 0;
+while(s[i] != '\0') {
+   count++; 
+   i++;
+}
+// count will be 13
+</pre>
+        </div>
+    </div>
+</div>

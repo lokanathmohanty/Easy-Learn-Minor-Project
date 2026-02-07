@@ -1,0 +1,95 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">R - Data Reshaping</h1>
+    <div class="content">
+      <p>
+        Data reshaping in R involves changing the organization of data into rows and columns. While most data processing uses data frames, sometimes you need to convert them into different formats. R offers various functions to split, merge, transpose rows and columns, and more.
+      </p>
+
+      <h2 class="title">Joining Columns and Rows in a Data Frame</h2>
+      <p>We can combine vectors into a data frame using <code>cbind()</code>, and merge two data frames using <code>rbind()</code>.</p>
+      <pre><code># Create vectors
+city &lt;- c("Tampa", "Seattle", "Hartford", "Denver")
+state &lt;- c("FL", "WA", "CT", "CO")
+zipcode &lt;- c(33602, 98104, 6161, 80294)
+
+# Combine into one data frame
+addresses &lt;- cbind(city, state, zipcode)
+
+cat("# # # # The First data frame\n")
+print(addresses)
+
+# Another data frame
+new.address &lt;- data.frame(
+  city = c("Lowry", "Charlotte"),
+  state = c("CO", "FL"),
+  zipcode = c("80230", "33949"),
+  stringsAsFactors = FALSE
+)
+
+cat("# # # The Second data frame\n")
+print(new.address)
+
+# Combine rows from both data frames
+all.addresses &lt;- rbind(addresses, new.address)
+
+cat("# # # The combined data frame\n")
+print(all.addresses)
+</code></pre>
+      <p>Output:</p>
+      <pre><code># # # # The First data frame
+     city       state zipcode
+[1,] "Tampa"    "FL"  "33602"
+[2,] "Seattle"  "WA"  "98104"
+[3,] "Hartford" "CT"  "6161"
+[4,] "Denver"   "CO"  "80294"
+
+# # # The Second data frame
+       city       state   zipcode
+1      Lowry      CO      80230
+2      Charlotte  FL      33949
+
+# # # The combined data frame
+       city      state zipcode
+1      Tampa     FL    33602
+2      Seattle   WA    98104
+3      Hartford  CT     6161
+4      Denver    CO    80294
+5      Lowry     CO    80230
+6      Charlotte FL    33949
+</code></pre>
+
+      <h2 class="title">Merging Data Frames</h2>
+      <p>
+        Use the <code>merge()</code> function to merge two data frames by matching columns with the same names.
+      </p>
+      <pre><code>library(MASS)
+merged.Pima &lt;- merge(x = Pima.te, y = Pima.tr,
+  by.x = c("bp", "bmi"),
+  by.y = c("bp", "bmi")
+)
+print(merged.Pima)
+nrow(merged.Pima)
+</code></pre>
+      <p>This merges rows with matching <code>bp</code> and <code>bmi</code> values from <code>Pima.te</code> and <code>Pima.tr</code> datasets.</p>
+
+      <h2 class="title">Melting and Casting</h2>
+      <p>
+        Reshaping data from wide to long format can be done using <code>melt()</code>, and from long back to wide using <code>cast()</code>. This helps in data aggregation and reorganization.
+      </p>
+      <pre><code>library(MASS)
+print(ships)
+
+molten.ships &lt;- melt(ships, id = c("type","year"))
+print(molten.ships)
+
+recasted.ship &lt;- cast(molten.ships, type + year ~ variable, sum)
+print(recasted.ship)
+</code></pre>
+      <p>The library <code>MASS</code> contains the <code>ships</code> dataset. Melting converts columns (other than <code>type</code>, <code>year</code>) to rows, and casting aggregates values back by <code>type</code> and <code>year</code>.</p>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PowerShell: Special Variables</h1>
+    <div class="content">
+      <p>PowerShell special variables, also known as automatic variables, store information about the current state of the PowerShell session or pipeline. These variables are predefined and update automatically as you use PowerShell.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Key PowerShell Special Variables</h2>
+    <div class="content">
+      <ul>
+        <li><code>$$</code> - Contains the last token in the previous command line.</li>
+        <li><code>$?</code> - Indicates success (True) or failure (False) of the last operation.</li>
+        <li><code>$^</code> - Contains the first token in the previous command line.</li>
+        <li><code>$_</code> or <code>$PSItem</code> - Represents the current object in the pipeline.</li>
+        <li><code>$ARGS</code> - An array of undeclared parameters passed to script or function.</li>
+        <li><code>$ERROR</code> - Collection of error objects from recent errors.</li>
+        <li><code>$LASTEXITCODE</code> - Exit code of the last Windows-based program run.</li>
+        <li><code>$HOME</code> - Path of the current user's home directory.</li>
+        <li><code>$PID</code> - Process ID of the current PowerShell session.</li>
+        <li><code>$PROFILE</code> - Path to the user's PowerShell profile script.</li>
+        <li><code>$PSVersionTable</code> - Displays properties about the PowerShell version in use.</li>
+        <li><code>$TRUE</code> / <code>$FALSE</code> - Built-in boolean constants for true and false.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Usage Examples</h2>
+    <div class="content">
+      <p><strong>Example: Using the pipeline item variable <code>$_</code></strong></p>
+      <pre><code>Get-Process | Where-Object { $_.CPU -gt 100 }</code></pre>
+      <p>This selects processes where the CPU usage is greater than 100.</p>
+
+      <p><strong>Example: Checking command success with <code>$?</code></strong></p>
+      <pre><code>Get-ChildItem "C:\NonExistentFolder"
+echo $?</code></pre>
+      <p>This outputs False because the folder does not exist.</p>
+    </div>
+  </div>
+</div>

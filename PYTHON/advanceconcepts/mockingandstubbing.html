@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Mocking and Stubbing</h1>
+    </div>
+    <div class="content">
+      <p>
+        Python mocking and stubbing are important techniques in unit testing that help isolate the functionality being tested by replacing real objects or methods with controlled substitutes.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Python Mocking</h2>
+    </div>
+    <div class="content">
+      <p>
+        Mocking is a testing technique where mock objects simulate behaviors of real objects, useful when dealing with complex or unpredictable dependencies like databases or web services. It isolates the code under test from its dependencies.
+      </p>
+      <ul>
+        <li><strong>Behavior Simulation:</strong> Mocks can return specific values, raise exceptions, or mimic real object behavior.</li>
+        <li><strong>Interaction Verification:</strong> Mocks record usage allowing verification of method calls and arguments.</li>
+        <li><strong>Test Isolation:</strong> Mocks let tests focus on code logic without external dependencies.</li>
+      </ul>
+      <pre>
+from unittest.mock import Mock
+
+database = Mock()
+database.get_user.return_value = {"name": "Prasad", "age": 30}
+
+user = database.get_user("prasad_id")
+print(user)
+
+database.get_user.assert_called_with("prasad_id")
+      </pre>
+      <p>Output:</p>
+      <pre>
+{'name': 'Prasad', 'age': 30}
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Python Stubbing</h2>
+    </div>
+    <div class="content">
+      <p>
+        Stubbing replaces methods or functions with stubs that return fixed, predetermined responses without recording interactions. Stubs simplify tests by providing consistent inputs.
+      </p>
+      <ul>
+        <li><strong>Fixed Responses:</strong> Stubs always return specific predefined values.</li>
+        <li><strong>Simplified Dependencies:</strong> Avoid managing complex dependencies setup.</li>
+        <li><strong>Focus on Inputs:</strong> Emphasizes consistent inputs and outputs for tests.</li>
+      </ul>
+      <pre>
+from unittest.mock import patch
+
+def get_user_from_db(user_id):
+   pass
+
+with patch('__main__.get_user_from_db', return_value={"name": "Prasad", "age": 25}):
+   user = get_user_from_db("prasad_id")
+   print(user)
+      </pre>
+      <p>Output:</p>
+      <pre>
+{'name': 'Prasad', 'age': 25}
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Python Mocking Vs. Stubbing</h2>
+    </div>
+    <div class="content">
+      <p>
+        The table below compares mocking and stubbing to clarify their distinctions and help choose the right method.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Criteria</th>
+            <th>Mocking</th>
+            <th>Stubbing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Purpose</td>
+            <td>Simulate behavior of real objects</td>
+            <td>Provide fixed, predetermined responses</td>
+          </tr>
+          <tr>
+            <td>Interaction Verification</td>
+            <td>Can verify method calls and arguments</td>
+            <td>Typically does not verify interactions</td>
+          </tr>
+          <tr>
+            <td>Complexity</td>
+            <td>More complex; simulates various behaviors</td>
+            <td>Simpler; focuses on controlled inputs</td>
+          </tr>
+          <tr>
+            <td>Use Case</td>
+            <td>Isolate and test code with complex dependencies</td>
+            <td>Simplify tests by providing known responses</td>
+          </tr>
+          <tr>
+            <td>Recording Behavior</td>
+            <td>Records how methods were called</td>
+            <td>Does not record interactions</td>
+          </tr>
+          <tr>
+            <td>State Management</td>
+            <td>Can maintain state across calls</td>
+            <td>Usually stateless; returns fixed output</td>
+          </tr>
+          <tr>
+            <td>Framework Support</td>
+            <td>Primarily uses <code>unittest.mock</code> with <code>Mock</code> and <code>MagicMock</code></td>
+            <td>Uses <code>unittest.mock</code>'s <code>patch</code> for simple replacements</td>
+          </tr>
+          <tr>
+            <td>Flexibility</td>
+            <td>Highly flexible; simulates exceptions and side effects</td>
+            <td>Limited flexibility; focused on return values</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+   
+  </div>
+</div>

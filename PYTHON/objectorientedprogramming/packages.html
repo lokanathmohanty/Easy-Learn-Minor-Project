@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Packages</h1>
+    <div class="content">
+      <p>A Python package is a directory containing one or more module files and a special <code>__init__.py</code> file. Packages organize modules into namespaces and support modular program development.</p>
+      <p>Modules are individual Python files (.py) with classes or functions, while packages are folders grouping related modules. The <code>__init__.py</code> file marks the directory as a package and can expose selected functions or resources.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Creating a Python Package</h2>
+      <ul>
+        <li>Create an outer folder (e.g. <code>packagedemo</code>).</li>
+        <li>Inside, make a folder named <code>mypackage</code>.</li>
+        <li>Add modules (e.g. <code>areafunctions.py</code>, <code>mathfunctions.py</code>).</li>
+        <li>Add an empty or populated <code>__init__.py</code> file to mark <code>mypackage</code> as a package.</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Sample Package Structure and Module Code</h2>
+      <pre><code># mypackage/mathfunctions.py
+def sum(x,y):
+    return x + y
+
+def average(x,y):
+    return (x + y) / 2
+
+def power(x,y):
+    return x ** y
+
+# mypackage/areafunctions.py
+def rectangle(w,h):
+    return w * h
+
+def circle(r):
+    import math
+    return math.pi * math.pow(r, 2)
+</code></pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Testing the Package</h2>
+      <pre><code># example.py (above the mypackage folder)
+from mypackage.areafunctions import rectangle
+print("Area :", rectangle(10, 20))
+
+from mypackage.mathfunctions import average
+print("average:", average(10, 20))
+# Output:
+# Area : 200
+# average: 15.0
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Using <code>__init__.py</code> to Expose Selected Functions</h2>
+      <pre><code># mypackage/__init__.py
+from .areafunctions import circle
+from .mathfunctions import sum, power
+</code></pre>
+      <p>This allows you to import these functions directly from the package name.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Direct Import Example</h2>
+      <pre><code># testpackage.py
+from mypackage import power, circle
+
+print("Area of circle:", circle(5))
+print("10 raised to 2:", power(10, 2))
+# Output:
+# Area of circle: 78.53981633974483
+# 10 raised to 2: 100
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Installing the Package Using PIP</h2>
+      <pre><code># setup.py
+from setuptools import setup
+setup(
+    name='mypackage',
+    version='0.1',
+    description='Package setup script',
+    url='#',
+    author='anonymous',
+    author_email='test@gmail.com',
+    license='MIT',
+    packages=['mypackage'],
+    zip_safe=False
+)
+</code></pre>
+      <p>Run <code>pip3 install .</code> from the parent folder to install the package system-wide.</p>
+    </div>
+
+    <div class="content">
+      <ul>
+        <li>After installation, you can import and use your package from anywhere in your system as a standard Python library.</li>
+        <li>Packages help keep code organized, reusable, and easy to distribute in Python projects.</li>
+      </ul>
+    </div>
+  </div>
+</div>

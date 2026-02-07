@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Next.js - Global CSS</h1>
+
+    <div class="content" style="display: flex; justify-content: space-between;">
+      <a href="#" class="example">Previous</a>
+      <a href="#" class="example">Quiz</a>
+      <a href="#" class="example">Next</a>
+    </div>
+
+    <div class="content">
+      <p>
+        **Next.js** provides a separate global CSS file to declare CSS styles that affect **all pages** in an application. In this chapter, we will learn how to apply global CSS to a Next.js application.
+      </p>
+
+      <h2 class="title">Next.js Global Styles</h2>
+      <p>
+        **Global CSS** refers to styles that apply to the entire application rather than being scoped to individual components. These styles are typically defined in a CSS file and imported at a **central entry point**, such as the `layout` component in the App Router or the `_app.js` file in the Pages Router.
+      </p>
+
+      <h2 class="title">Create a Global CSS File</h2>
+      <p>
+        If you are using the **App Router** for your Next.js project, you will already have a `globals.css` file in the project's `app` folder. For the **Pages Router**, you can find the global CSS file inside the `styles` folder.
+      </p>
+      <p>
+        Paste the following code into your global CSS file:
+      </p>
+
+      <div class="example">
+        <p>// /app/globals.css</p>
+        <p>
+          <code>
+            div {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;font-family: Arial, sans-serif;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;padding: 20px;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;background-color: #f9f9f9;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;border: 2px solid;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;border-radius: 10px;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;max-width: 400px;<br>
+            }<br>
+            h1 {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;color: #0070f3;<br>
+            }<br>
+            h2 {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;color: #333;<br>
+            }
+          </code>
+        </p>
+      </div>
+
+      <h2 class="title">Import Global CSS</h2>
+      <p>
+        Importing global CSS is done at the **layout component**. This is a special component that is visible in every route, and styles applied to this component will be applicable to all other components.
+      </p>
+
+      <div class="example">
+        <p>// app/layout.tsx</p>
+        <p>
+          <code>
+            import './/globals.css'; // **Import CSS**<br>
+            interface RootLayoutProps {<br>
+            &nbsp;&nbsp;children: ReactNode;<br>
+            }<br>
+            <br>
+            export default function RootLayout({ children }: RootLayoutProps) {<br>
+            &nbsp;&nbsp;return (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;html lang="en"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;header&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Header Element&lt;/h1&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/header&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;main&gt;{children}&lt;/main&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/html&gt;<br>
+            &nbsp;&nbsp;);<br>
+            }
+          </code>
+        </p>
+      </div>
+
+      <h2 class="title">Output</h2>
+      <p>
+        In the output, the style applied is reflected on every page.
+      </p>
+
+      <h2 class="title example">Next.js Global Style Rules</h2>
+      <ul>
+        <li class="content">You **cannot directly import** global CSS in components. Imports must be done at the **root level** (i.e., `layout.tsx` or `_app.js`).</li>
+        <li class="content">Global CSS applies styles to **every component** in the project.</li>
+        <li class="content">Only **`.css` files** are supported for Global CSS imports. Other preprocessors like Sass require specific configuration.</li>
+      </ul>
+    </div>
+
+    <div class="content" style="text-align: right;">
+      <a href="#" class="example">Print Page</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Indexed Arrays</h1>
+
+    <div class="content">
+      <p>
+        An **Indexed Array** is a collection of values where each element is automatically assigned a numerical index (key) starting from **0** and incrementing sequentially. It is the simplest type of array in PHP.
+      </p>
+
+      <h2>Creating an Indexed Array</h2>
+      <p>You can create an indexed array using the `array()` function or the short square bracket syntax `[]`:</p>
+      <div class="example">
+        <p>
+          <code>$arr1 = array("a", 10, 9.99, true);</code><br>
+          <code>$arr2 = ["a", 10, 9.99, true];</code>
+        </p>
+      </div>
+      <p>
+        **Note:** An indexed array can hold mixed data types, including strings, numbers, floats, Booleans, and even other arrays.
+      </p>
+
+      <hr>
+
+      <h2>Accessing and Manipulating Elements</h2>
+      <p>Elements are accessed using the syntax **`array[index]`**.</p>
+      <div class="example">
+        <code>$arr1 = [10, 20, 30];</code><br>
+        <code>echo $arr1[1]; // Output: 20</code><br>
+        <code>$arr1[0] = 100; // Modification in place</code>
+      </div>
+      <p>
+        The values can also be assigned in reverse order to a new array, demonstrating access and modification:
+      </p>
+      <div class="example">
+        <p>
+          Reversing an array using `for` loop:<br>
+          <code>$arr1[0]=10, $arr2[4]=10</code><br>
+          <code>$arr1[4]=50, $arr2[0]=50</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Traversing an Indexed Array</h2>
+      <p>Any loop construct can be used to iterate over an indexed array:</p>
+
+      <h3>1. `for` Loop (Using `count()` and Index)</h3>
+      <p>This is the traditional method, requiring the array size to be determined first using the **`count()`** function.</p>
+      <div class="example">
+        <p>
+          <code>$numbers = array(10, 20, 30);</code><br>
+          <code>for ($i=0; $i&lt;count($numbers); $i++){</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "numbers[$i] = $numbers[$i] \n";</code><br>
+          <code>}</code>
+        </p>
+        <p class="content">Output: numbers[0] = 10 ...</p>
+      </div>
+
+      <h3>2. `foreach` Loop (Recommended for Simple Iteration)</h3>
+      <p>The `foreach` loop simplifies traversal by automatically handling the indexing.</p>
+      <div class="example">
+        <p>
+          **Value-Only:** `foreach ($arr1 as $val) { echo $val; }`<br>
+          **Key-Value:** `foreach ($arr1 as $key => $val) { echo "arr1[$key] = $val \n"; }`
+        </p>
+        <p class="content">Output: arr1[0] = 10 ...</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,193 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Multithreading</h1>
+    </div>
+    <div class="content">
+      <p>In Python, multithreading allows multiple threads to run concurrently within a single process, enabling a program to perform multiple tasks simultaneously. This is particularly useful for I/O-bound operations to enhance efficiency and responsiveness.</p>
+      <p>Generally, programs execute instructions sequentially. Multithreading divides a main task into subtasks and executes them overlappingly.</p>
+      <h2>Comparison with Processes</h2>
+      <p>Processes have separate memory spaces, while threads share the same memory space within a process, making threads lightweight and faster for communication but requiring careful synchronization.</p>
+      <p>A program starts with a main thread that can create additional threads executing concurrently until they finish and merge back.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Thread Handling Modules in Python</h2>
+    </div>
+    <div class="content">
+      <p>Python provides two main modules for thread management: <code>_thread</code> and <code>threading</code>.</p>
+      
+      <h3>The _thread Module</h3>
+      <p>This low-level module offers basic thread management and synchronization primitives like locks.</p>
+      
+      <h3>The threading Module</h3>
+      <p>A higher-level, more powerful API introduced in Python 2.4 that builds on <code>_thread</code> and offers thread classes and useful methods such as:</p>
+      <ul>
+        <li><code>activeCount()</code>: returns number of active threads</li>
+        <li><code>currentThread()</code>: returns the current thread object</li>
+        <li><code>enumerate()</code>: lists all active thread objects</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Starting a New Thread</h2>
+    </div>
+    <div class="content">
+      <h3>Using the _thread Module</h3>
+      <p>Creates and starts threads using <code>start_new_thread()</code>.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+import _thread
+import time
+
+def print_name(name, *arg):
+   print(name, *arg)
+
+name = "Tutorialspoint..."
+_thread.start_new_thread(print_name, (name, 1))
+_thread.start_new_thread(print_name, (name, 1, 2))
+
+time.sleep(0.5)
+      </pre>
+      
+      <h3>Using the threading Module</h3>
+      <p>Recommended for higher-level thread management with the <code>Thread</code> class, allowing easier thread control.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+import threading
+import time
+
+def print_name(name, *args):
+    print(name, *args)
+
+name = "Tutorialspoint..."
+
+thread1 = threading.Thread(target=print_name, args=(name, 1))
+thread2 = threading.Thread(target=print_name, args=(name, 1, 2))
+
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+
+print("Threads are finished...exiting")
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Synchronizing Threads</h2>
+    </div>
+    <div class="content">
+      <p>The <code>threading</code> module provides lock objects for synchronization. Locks prevent race conditions by allowing only one thread to access a resource at a time.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+import threading
+import time
+
+class myThread(threading.Thread):
+   def __init__(self, threadID, name, counter):
+      threading.Thread.__init__(self)
+      self.threadID = threadID
+      self.name = name
+      self.counter = counter
+   def run(self):
+      print("Starting " + self.name)
+      threadLock.acquire()
+      print_time(self.name, self.counter, 3)
+      threadLock.release()
+
+def print_time(threadName, delay, counter):
+   while counter:
+      time.sleep(delay)
+      print("%s: %s" % (threadName, time.ctime(time.time())))
+      counter -= 1
+
+threadLock = threading.Lock()
+
+thread1 = myThread(1, "Thread-1", 1)
+thread2 = myThread(2, "Thread-2", 2)
+
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+
+print("Exiting Main Thread")
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Multithreaded Priority Queue</h2>
+    </div>
+    <div class="content">
+      <p>The <code>queue</code> module enables thread-safe queues for inter-thread communication with methods like <code>get()</code>, <code>put()</code>, <code>empty()</code>, and <code>full()</code>.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+import queue
+import threading
+import time
+
+exitFlag = 0
+
+class myThread(threading.Thread):
+   def __init__(self, threadID, name, q):
+      threading.Thread.__init__(self)
+      self.threadID = threadID
+      self.name = name
+      self.q = q
+   def run(self):
+      print("Starting " + self.name)
+      process_data(self.name, self.q)
+      print("Exiting " + self.name)
+
+def process_data(threadName, q):
+   while not exitFlag:
+      queueLock.acquire()
+      if not workQueue.empty():
+         data = q.get()
+         queueLock.release()
+         print("%s processing %s" % (threadName, data))
+      else:
+         queueLock.release()
+         time.sleep(1)
+
+threadList = ["Thread-1", "Thread-2", "Thread-3"]
+nameList = ["One", "Two", "Three", "Four", "Five"]
+queueLock = threading.Lock()
+workQueue = queue.Queue(10)
+threads = []
+threadID = 1
+
+for tName in threadList:
+   thread = myThread(threadID, tName, workQueue)
+   thread.start()
+   threads.append(thread)
+   threadID += 1
+
+queueLock.acquire()
+for word in nameList:
+   workQueue.put(word)
+queueLock.release()
+
+while not workQueue.empty():
+   pass
+
+exitFlag = 1
+
+for t in threads:
+   t.join()
+print("Exiting Main Thread")
+      </pre>
+    </div>
+  </div>
+</div>

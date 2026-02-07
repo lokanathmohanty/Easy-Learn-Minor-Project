@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Structure Padding and Packing in C</h1>
+    <div class="content">
+      <h2 class="title">What is Structure Padding in C?</h2>
+      <p>Structure padding in C is the process handled by the CPU architecture. It adds empty bytes within a structure to align data members naturally in memory. Alignment requirements depend on the processor architecture, such as data bus size, not on the language itself.</p>
+
+      <h2 class="title">Understanding Structure Padding with Examples</h2>
+      <p>Consider the following struct definition:</p>
+      <pre><code>struct struct1 {
+  char x;
+  int y;
+  char z;
+};</code></pre>
+
+      <h3 class="title">Example 1</h3>
+      <p>Check the size of this struct:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+struct struct1 {
+  char a;
+  char b;
+  int c;
+};
+
+int main() {
+  printf("Size: %d", sizeof(struct struct1));
+  return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Size: 8</code></pre>
+      <p>This is unexpected because <code>char</code> is 1 byte and <code>int</code> is 4 bytes, so we might expect 6 bytes total.</p>
+
+      <h3 class="title">Explanation of Structure Padding</h3>
+      <p>On a 32-bit processor (4 bytes per word), the CPU accesses memory in 4-byte chunks. To optimize access, padding bytes are inserted to align the <code>int</code> member on a 4-byte boundary. Thus, two empty bytes are added after the two <code>char</code> members, increasing total size to 8 bytes.</p>
+
+      <h3 class="title">Example 2</h3>
+      <p>Changing member order and types:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+struct struct1 {
+  char a;
+  int b;
+  char c;
+};
+
+int main() {
+  printf("size: %d", sizeof(struct struct1));
+  return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>size: 12</code></pre>
+      <p>Explanation: 
+        - <code>char a</code> occupies 1 byte, followed by 3 padding bytes.
+        - <code>int b</code> occupies next 4 bytes.
+        - <code>char c</code> occupies 1 byte, followed by 3 padding bytes.
+        - Total size becomes 12 bytes due to padding for alignment.</p>
+
+      <h2 class="title">What is Structure Packing in C?</h2>
+      <p>Structure packing reduces the padding by minimizing or eliminating the empty bytes added for alignment, thus saving memory.</p>
+
+      <h2 class="title">Understanding Structure Packing with Examples</h2>
+      <p>There are two common ways to enforce packing:</p>
+      <ul>
+        <li>Using <code>#pragma pack(1)</code> directive</li>
+        <li>Using <code>__attribute__((packed))</code> GCC attribute</li>
+      </ul>
+
+      <h3 class="title">Using <code>#pragma pack(1)</code> Directive</h3>
+      <p>This directive forces the compiler to pack the structure members without padding.</p>
+      <pre><code>#include &lt;stdio.h&gt;
+#pragma pack(1)
+
+struct struct1 {
+  char a;
+  int b;
+  char c;
+};
+
+int main() {
+  printf("size: %d", sizeof(struct struct1));
+  return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>size: 6</code></pre>
+      <p>This shows that padding is avoided and memory is saved.</p>
+
+      <h3 class="title">Using <code>__attribute__((packed))</code></h3>
+      <p>This GCC-specific attribute achieves the same packing effect by applying it to the struct definition.</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+struct __attribute__((packed)) struct1 {
+  char a;
+  int b;
+  char c;
+};
+
+int main() {
+  printf("size: %d", sizeof(struct struct1));
+  return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>size: 6</code></pre>
+      <p>This method also avoids padding and saves memory.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">void Pointer in C</h1>
+    <div class="content">
+      <h2>What Is a void Pointer?</h2>
+      <p>A <code>void</code> pointer (written <code>void *</code>) is a special pointer type that is not associated with any specific data type. It is a generic pointer that can hold the address of any data type (except function types in a portable manner). :contentReference[oaicite:0]{index=0}</p>
+
+      <h2>Declaring a void Pointer</h2>
+      <p>Syntax:</p>
+      <pre><code>void *ptr;</code></pre>
+
+      <h2>Example of void Pointer Usage</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 10;
+  char b = 'x';
+
+  // void pointer holds address of int a
+  void *ptr = &a;
+  printf("Address of 'a': %p\n", &a);
+  printf("Void pointer points to: %p\n", ptr);
+
+  // now assign it to point to char b
+  ptr = &b;
+  printf("Address of 'b': %p\n", &b);
+  printf("Void pointer points to: %p\n", ptr);
+
+  return 0;
+}</code></pre>
+      <p>Output will show the addresses (in pointer form) of <code>a</code> and <code>b</code> and how <code>ptr</code> can point to both.</p>
+
+      <h2>Array of void Pointers</h2>
+      <p>You can create an array of <code>void *</code> pointers to hold addresses of different types:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  void *arr[3];
+  int a = 100;
+  float b = 20.5;
+  char *c = "Hello";
+
+  arr[0] = &a;
+  arr[1] = &b;
+  arr[2] = &c;
+
+  printf("Integer: %d\n", *((int *)arr[0]));
+  printf("Float: %f\n", *((float *)arr[1]));
+  printf("String: %s\n", *((char **)arr[2]));
+
+  return 0;
+}</code></pre>
+
+      <h2>Applications of void Pointers</h2>
+      <ul>
+        <li>The <code>malloc()</code> and <code>calloc()</code> functions return <code>void *</code> so they can allocate memory for any data type. :contentReference[oaicite:1]{index=1}</li>
+        <li>Used in writing generic functions (e.g. library routines) that need to handle different data types. :contentReference[oaicite:2]{index=2}</li>
+        <li>Implementing flexible data structures (linked lists, trees) with generic payload types. :contentReference[oaicite:3]{index=3}</li>
+      </ul>
+
+      <h2>Limitations of void Pointers</h2>
+      <ul>
+        <li>You cannot dereference a <code>void *</code> directly because its pointed-to type is unknown. You must cast it back to a concrete pointer type first. :contentReference[oaicite:4]{index=4}</li>
+        <li>Pointer arithmetic (e.g. <code>ptr + 1</code>) is not allowed on <code>void *</code> because the size of the underlying type is unknown. :contentReference[oaicite:5]{index=5}</li>
+      </ul>
+    </div>
+  </div>
+</div>

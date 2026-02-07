@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Operator Precedence</h1>
+    <div class="content">
+      <p>An expression may have multiple operators to be evaluated. The operator precedence defines the order in which operators are evaluated. In other words, the precedence determines the priority of operators in an expression.</p>
+      <p>For example:</p>
+      <pre>
+a = 2 + 3 * 5
+      </pre>
+      <p>Here, multiplication has higher precedence than addition. So <code>3 * 5</code> is evaluated first (15), then added to 2. Hence, the value of <code>a</code> is 17.</p>
+      <p>Python generally follows the <strong>BODMAS rule</strong> (Brackets, Orders, Division/Multiplication, Addition, Subtraction).</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Operator Associativity</h2>
+    <div class="content">
+      <p>If multiple operators in an expression have the same precedence, then <strong>associativity</strong> determines the order of evaluation.</p>
+      <p>Most operators have <strong>left-to-right associativity</strong>, meaning the operator on the left is applied first.</p>
+      <p>Example:</p>
+      <pre>
+b = 10 / 5 * 4
+      </pre>
+      <p>Both <code>/</code> and <code>*</code> have the same precedence. With left-to-right associativity:</p>
+      <ul>
+        <li><code>10 / 5 = 2</code></li>
+        <li><code>2 * 4 = 8</code></li>
+      </ul>
+      <p>So, <code>b = 8</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Python Operator Precedence Table</h2>
+    <div class="content">
+      <p>The following table shows operators in decreasing order of precedence:</p>
+      <ul>
+        <li>1. <code>()</code>, <code>[]</code>, <code>{}</code> – Parentheses and braces</li>
+        <li>2. <code>[index]</code>, <code>[index:index]</code> – Subscription, slicing</li>
+        <li>3. <code>await x</code> – Await expression</li>
+        <li>4. <code>**</code> – Exponentiation</li>
+        <li>5. <code>+x</code>, <code>-x</code>, <code>~x</code> – Unary operators</li>
+        <li>6. <code>*</code>, <code>@</code>, <code>/</code>, <code>//</code>, <code>%</code> – Multiplication, division, etc.</li>
+        <li>7. <code>+</code>, <code>-</code> – Addition, subtraction</li>
+        <li>8. <code>&lt;&lt;</code>, <code>&gt;&gt;</code> – Shifts</li>
+        <li>9. <code>&amp;</code> – Bitwise AND</li>
+        <li>10. <code>^</code> – Bitwise XOR</li>
+        <li>11. <code>|</code> – Bitwise OR</li>
+        <li>12. <code>in</code>, <code>not in</code>, <code>is</code>, <code>is not</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>!=</code>, <code>==</code> – Comparisons</li>
+        <li>13. <code>not x</code> – Boolean NOT</li>
+        <li>14. <code>and</code> – Boolean AND</li>
+        <li>15. <code>or</code> – Boolean OR</li>
+        <li>16. <code>if else</code> – Conditional expression</li>
+        <li>17. <code>lambda</code> – Lambda expression</li>
+        <li>18. <code>:=</code> – Walrus operator</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Python Operator Precedence Example</h2>
+    <div class="content">
+      <pre>
+a = 20
+b = 10
+c = 15
+d = 5
+e = 0
+
+e = (a + b) * c / d       # (30 * 15) / 5
+print("Value of (a + b) * c / d is ", e)
+
+e = ((a + b) * c) / d     # (30 * 15) / 5
+print("Value of ((a + b) * c) / d is ", e)
+
+e = (a + b) * (c / d)     # (30) * (15 / 5)
+print("Value of (a + b) * (c / d) is ", e)
+
+e = a + (b * c) / d       # 20 + (150 / 5)
+print("Value of a + (b * c) / d is ", e)
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+Value of (a + b) * c / d is  90.0
+Value of ((a + b) * c) / d is  90.0
+Value of (a + b) * (c / d) is  90.0
+Value of a + (b * c) / d is  50.0
+      </pre>
+    </div>
+  </div>
+</div>

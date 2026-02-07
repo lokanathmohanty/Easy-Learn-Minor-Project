@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django Quick Guide: Basics and Setup 🐍🚀</h1>
+        <div class="content">
+            <p><strong>Django</strong> is a high-level, open-source **Python web framework** that promotes rapid development and clean, pragmatic design. It was created in 2003 at the Lawrence Journal-World and named after jazz guitarist Django Reinhardt.</p>
+
+            <h2>Design Philosophies &amp; Advantages</h2>
+            <p>Django adheres to several core philosophies that streamline web development:</p>
+            <ul>
+                <li><strong>Don't Repeat Yourself (DRY)</strong>: Every piece of code should be defined in exactly one place.</li>
+                <li><strong>Loosely Coupled</strong>: Elements of the stack should be independent of others.</li>
+                <li><strong>Fast Development &amp; Less Coding</strong>: Facilitates hyper-fast development with minimal code required.</li>
+            </ul>
+            <p>Key advantages include built-in support for **Object-Relational Mapping (ORM)** for database handling (MySQL, PostgreSQL, etc.), **multilingual support**, **caching**, **RSS**, and a ready-to-use **administrative GUI**.</p>
+        </div>
+        
+        <hr>
+
+        <h2 class="example">Django Architecture: The MVT Pattern</h2>
+        <div class="content">
+            <p>Unlike the traditional Model-View-Controller (MVC) pattern, Django uses the **Model-View-Template (MVT)** pattern. The key difference is that **Django handles the Controller part** (the software code that mediates interactions), leaving the developer to focus on the other three components:</p>
+            <ul>
+                <li><strong>Model (M)</strong>: The data structure (Python classes defining database layout and relationships).</li>
+                <li><strong>View (V)</strong>: The business logic that receives the HTTP request and returns an HTTP response (often rendering a template).</li>
+                <li><strong>Template (T)</strong>: The front-end design (an HTML file mixed with the Django Template Language or DTL).</li>
+            </ul>
+            <p><strong>Workflow:</strong> User Request &rarr; Django Controller &rarr; View &rarr; Model (data) &rarr; Template (display) &rarr; HTTP Response to User.</p>
+        </div>
+
+        <hr>
+        
+        <h2 class="example">Environment Setup</h2>
+        <div class="content">
+            <h3>Step 1 &amp; 2: Python and Django Installation</h3>
+            <ul>
+                <li><strong>Python:</strong> Django is pure Python; ensure you have a compatible version installed (e.g., Python 2.7.3+). Verify with <code>python --version</code>.</li>
+                <li><strong>Django:</strong> Install using <code>pip</code> (recommended) or manually from the archive.
+                    <pre><code>$ pip install django</code></pre>
+                    Test the installation:
+                    <pre><code>$ django-admin --version</code></pre>
+                </li>
+            </ul>
+
+            <h3>Step 3 &amp; 4: Database and Web Server</h3>
+            <ul>
+                <li><strong>Database:</strong> Django supports major SQL databases (**MySQL, PostgreSQL, SQLite 3, Oracle**) and some NoSQL databases via external forks (**MongoDB, GoogleAppEngine Datastore**).</li>
+                <li><strong>Web Server:</strong> Django includes a **lightweight development server** for testing (run with <code>python manage.py runserver</code>), but for production, you need servers like **Apache** or **Nginx**.</li>
+            </ul>
+        </div>
+        
+        <hr>
+
+        <h2 class="example">Creating a Project Structure</h2>
+        <div class="content">
+            <p>A Django web application is called a **Project**, which is composed of one or more independent **Applications**. This structure allows applications to be easily reused across different projects.</p>
+            <p>To start a new project:</p>
+            <pre><code>$ django-admin startproject myproject</code></pre>
+            <p>This command creates a directory structure:</p>
+            <pre><code>myproject/
+   manage.py        &lt;-- Utility for project management
+   myproject/       &lt;-- Inner project directory (the package)
+      __init__.py
+      settings.py   &lt;-- Project configuration
+      urls.py       &lt;-- URL declarations/routing
+      wsgi.py       &lt;-- Entry point for WSGI-compatible web servers</code></pre>
+        </div>
+    </div>
+</div>

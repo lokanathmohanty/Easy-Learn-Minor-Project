@@ -1,0 +1,182 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Arithmetic Operators in C</h1>
+    <div class="content">
+
+      <p>Arithmetic operators in C are certain special symbols, predefined to perform arithmetic operations. We are familiar with the basic arithmetic operations − addition, subtraction, multiplication and division. C is a computational language, so these operators are essential in performing a computerised process.</p>
+
+      <p>In addition to the above operations assigned to the four symbols <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code> respectively, C has another arithmetic operator called the modulo operator for which we use the <code>%</code> symbol.</p>
+
+      <h2 class="title">Arithmetic Operators Table</h2>
+      <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>+</td><td>Adds two operands.</td></tr>
+          <tr><td>-</td><td>Subtracts second operand from the first.</td></tr>
+          <tr><td>*</td><td>Multiplies both operands.</td></tr>
+          <tr><td>/</td><td>Divides numerator by denominator.</td></tr>
+          <tr><td>%</td><td>Modulus operator returns remainder after integer division.</td></tr>
+          <tr><td>++</td><td>Increment operator increases the integer value by one.</td></tr>
+          <tr><td>--</td><td>Decrement operator decreases the integer value by one.</td></tr>
+        </tbody>
+      </table>
+
+      <p>The <code>++</code> and <code>--</code> operators will be covered in a separate chapter.</p>
+
+      <h2 class="title">Example: Arithmetic Operators in C</h2>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   int op1 = 10;
+   int op2 = 3;
+
+   printf("Operand1: %d Operand2: %d \n\n", op1, op2);  
+   printf("Addition of op1 and op2: %d\n", op1 + op2);
+   printf("Subtraction of op2 from op1: %d\n", op1 - op2);
+   printf("Multiplication of op1 and op2: %d\n", op1 * op2);
+   printf("Division of op1 by op2: %d\n", op1/op2);
+
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+Operand1: 10 Operand2: 3
+
+Addition of op1 and op2: 13
+Subtraction of op2 from op1: 7
+Multiplication of op1 and op2: 30
+Division of op1 by op2: 3
+      </code></pre>
+
+      <h2 class="title">Type Casting in C</h2>
+      <p>The first three results are as expected, but the result of division is not. You expect 10/3 to be a fractional number (3.333333). Is it because we used the <code>%d</code> format specifier to print the outcome of the division? If we change the last line of the code as follows −</p>
+      <pre><code>printf("Division of op1 by op2: %f\n", op1/op2);</code></pre>
+      <p>Now the output will be <code>0.000000</code>, which is surprising. The reason is that dividing two integers returns an integer.</p>
+
+      <p>To get floating-point division, at least one operand must be a float, or you can typecast one operand:</p>
+      <pre><code>printf("Division of op1 by op2: %f\n", (float)op1/op2);</code></pre>
+      <p>This will produce the correct output:</p>
+      <pre><code>Division of op1 by op2: 3.333333</code></pre>
+
+      <p><strong>Note:</strong> Using <code>%d</code> to print a floating-point expression will always result in 0.</p>
+
+      <h2 class="title">Example: Arithmetic Operations with float</h2>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   int op1 = 10;
+   float op2 = 2.5;
+
+   printf("Operand1: %d Operand2: %f\n", op1, op2);
+   printf("Addition of op1 and op2: %f\n", op1 + op2);
+   printf("Subtraction of op2 from op1: %f\n", op1 - op2);
+   printf("Multiplication of op1 and op2: %f\n", op1 * op2);
+   printf("Division of op1 by op2: %f\n", op1/op2);
+
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+Operand1: 10 Operand2: 2.500000
+Addition of op1 and op2: 12.500000
+Subtraction of op2 from op1: 7.500000
+Multiplication of op1 and op2: 25.000000
+Division of op1 by op2: 4.000000
+      </code></pre>
+
+      <h2 class="title">Arithmetic Operations with char Data Type</h2>
+      <p>In C, <code>char</code> is a subset of <code>int</code>, so arithmetic operations can be performed with <code>char</code> operands.</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   char op1 = 'F';
+   int op2 = 3;
+
+   printf("operand1: %c operand2: %d\n", op1, op2);
+   printf("Addition of op1 and op2: %d\n", op1 + op2);
+   printf("Subtraction of op2 from op1: %d\n", op1 - op2);
+   printf("Multiplication of op1 and op2: %d\n", op1 * op2);
+   printf("Division of op1 by op2: %d\n", op1/op2);
+
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+operand1: F operand2: 3
+
+Addition of op1 and op2: 73
+Subtraction of op2 from op1: 67
+Multiplication of op1 and op2: 210
+Division of op1 by op2: 23
+      </code></pre>
+      <p>Note: The <code>%c</code> specifier returns the ASCII character; if the arithmetic result is out of <code>char</code> range, <code>%c</code> may print a blank.</p>
+
+      <h2 class="title">Modulo Operator in C</h2>
+      <p>The modulo operator <code>%</code> returns the remainder of a division operation.</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   int op1 = 10;
+   int op2 = 3;
+
+   printf("Operand1: %d Operand2: %d\n", op1, op2);
+   printf("Modulo of op1 and op2: %d\n", op1%op2);
+
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+Operand1: 10 Operand2: 3
+Modulo of op1 and op2: 1
+      </code></pre>
+      <p>The modulo operator requires both operands to be integers. Using a float operand causes a compile error:</p>
+      <pre><code>
+float op1 = 10;
+int op2 = 3;
+printf("Modulo of op1 and op2: %d\n", op1%op2);
+      </code></pre>
+      <p>Error message:</p>
+      <pre><code>error: invalid operands to binary % (have 'float' and 'int')</code></pre>
+      <p>Note: <code>char</code> operands are allowed with modulo.</p>
+
+      <h2 class="title">Negation Operator in C</h2>
+      <p>The <code>-</code> symbol can act as a unary negation operator.</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main(){
+
+   int op1 = 5;
+   int op2 = -op1;
+
+   printf("Operand1: %d Operand2: %d\n", op1, op2);
+
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+Operand1: 5 Operand2: -5
+      </code></pre>
+      <p>Here, <code>-op1</code> returns the negative value of <code>op1</code> and assigns it to <code>op2</code>.</p>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - CSV Files</h1>
+    <div class="content">
+      <p>
+        In R, data can be read from and written to files outside the R environment. CSV (Comma Separated Values) files are a common text format where values are separated by commas. R offers functions to read from and write to CSV files, which should be located in the working directory or accessed via set paths.
+      </p>
+
+      <h2 class="title">Getting and Setting the Working Directory</h2>
+      <pre><code># Get current working directory
+print(getwd())
+
+# Set new working directory
+setwd("/web/com")
+
+# Verify current working directory
+print(getwd())
+</code></pre>
+
+      <h2 class="title">Reading a CSV File</h2>
+      <p>Read a CSV file available in the current working directory using <code>read.csv()</code>:</p>
+      <pre><code>data &lt;- read.csv("input.csv")
+print(data)
+</code></pre>
+      <p>Sample output:</p>
+      <pre><code>  id     name   salary  start_date     dept
+1  1     Rick    623.30 2012-01-01       IT
+2  2      Dan    515.20 2013-09-23 Operations
+3  3 Michelle   611.00 2014-11-15       IT
+4  4     Ryan    729.00 2014-05-11       HR
+5 NA     Gary    843.25 2015-03-27   Finance
+6  6     Nina    578.00 2013-05-21       IT
+7  7    Simon    632.80 2013-07-30 Operations
+8  8     Guru    722.50 2014-06-17   Finance
+</code></pre>
+
+      <h2 class="title">Analyzing the CSV Data Frame</h2>
+      <pre><code>data &lt;- read.csv("input.csv")
+
+print(is.data.frame(data))
+print(ncol(data))
+print(nrow(data))
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] TRUE
+[1] 5
+[1] 8
+</code></pre>
+
+      <h2 class="title">Get the Maximum Salary</h2>
+      <pre><code># Find maximum salary in the data
+sal &lt;- max(data$salary)
+print(sal)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 843.25
+</code></pre>
+
+      <h2 class="title">Get Details of Person with Maximum Salary</h2>
+      <pre><code>retval &lt;- subset(data, salary == max(salary))
+print(retval)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>   id   name  salary  start_date  dept
+5 NA    Gary 843.25   2015-03-27  Finance
+</code></pre>
+
+      <h2 class="title">Get All People Working in IT Department</h2>
+      <pre><code>retval &lt;- subset(data, dept == "IT")
+print(retval)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  id   name  salary  start_date  dept
+1  1   Rick  623.3   2012-01-01   IT
+3  3 Michelle 611.0   2014-11-15   IT
+6  6   Nina  578.0   2013-05-21   IT
+</code></pre>
+
+      <h2 class="title">Get the People in IT with Salary Greater Than 600</h2>
+      <pre><code>info &lt;- subset(data, salary &gt; 600 &amp; dept == "IT")
+print(info)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  id   name  salary  start_date  dept
+1  1   Rick  623.3   2012-01-01   IT
+3  3 Michelle 611.0  2014-11-15   IT
+</code></pre>
+
+      <h2 class="title">Get People Who Joined on or After 2014</h2>
+      <pre><code>retval &lt;- subset(data, as.Date(start_date) &gt;= as.Date("2014-01-01"))
+print(retval)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  id   name  salary  start_date  dept
+3  3 Michelle 611.00 2014-11-15   IT
+4  4 Ryan   729.00 2014-05-11   HR
+5 NA Gary 843.25 2015-03-27   Finance
+8  8 Guru 722.50 2014-06-17   Finance
+</code></pre>
+
+      <h2 class="title">Writing Data Frame into a CSV File</h2>
+      <pre><code># Write a subset into a new CSV file
+write.csv(retval, "output.csv")
+
+newdata &lt;- read.csv("output.csv")
+print(newdata)
+</code></pre>
+      <p>Output (with row.names column X):</p>
+      <pre><code>  X id    name     salary  start_date  dept
+1 3 Michelle 611.00 2014-11-15   IT
+2 4 Ryan    729.00 2014-05-11   HR
+3 5 Gary    843.25 2015-03-27 Finance
+4 8 Guru    722.50 2014-06-17 Finance
+</code></pre>
+
+      <h2 class="title">Writing CSV without Row Names</h2>
+      <pre><code>write.csv(retval, "output.csv", row.names = FALSE)
+newdata &lt;- read.csv("output.csv")
+print(newdata)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  id    name    salary  start_date  dept
+1 3 Michelle 611.00 2014-11-15   IT
+2 4 Ryan    729.00 2014-05-11   HR
+3 5 Gary    843.25 2015-03-27 Finance
+4 8 Guru    722.50 2014-06-17 Finance
+</code></pre>
+    </div>
+  </div>
+
+  
+    </div>
+  </div>
+</div>

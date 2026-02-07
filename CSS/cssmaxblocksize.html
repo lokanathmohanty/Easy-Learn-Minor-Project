@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - max-block-size Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS max-block-size</strong> property sets the maximum block size of an element. 
+        The block dimension is determined by the <code>writing-mode</code> property. If the content 
+        naturally fits within the defined block size, the property has no effect.
+      </p>
+
+      <h2>Syntax</h2>
+      <p><code>max-block-size: auto | length | percentage | initial | inherit;</code></p>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>auto</strong> – Default. No maximum block size is enforced.</li>
+        <li><strong>length</strong> – Sets the maximum block size using units such as px, em, rem, etc.</li>
+        <li><strong>percentage</strong> – Sets the maximum block size relative to the containing element’s size.</li>
+        <li><strong>initial</strong> – Resets the property to its default value.</li>
+        <li><strong>inherit</strong> – Inherits the property value from its parent element.</li>
+      </ul>
+
+      <h2>Examples of CSS max-block-size</h2>
+
+      <h2>Example 1: Auto Value</h2>
+      <p>
+        Using <code>auto</code> allows the block size to expand as needed, based on the content.
+      </p>
+      <pre>
+.container {
+  background-color: lightgreen;
+  max-block-size: auto;
+}
+      </pre>
+
+      <h2>Example 2: Length Values</h2>
+      <p>
+        You can restrict the maximum block size using absolute or relative length units.
+      </p>
+      <pre>
+.size1 {
+  max-block-size: 85px;
+}
+
+.size2 {
+  max-block-size: 4.5em;
+}
+      </pre>
+
+      <h2>Example 3: Percentage Values</h2>
+      <p>
+        Percentage values set the maximum block size relative to the container element.
+      </p>
+      <pre>
+.outer-container {
+  height: 100px;
+}
+
+.size1 {
+  max-block-size: 55%;
+}
+
+.size2 {
+  max-block-size: 75%;
+}
+      </pre>
+
+      <h2>Example 4: With Writing Mode</h2>
+      <p>
+        The <code>writing-mode</code> property changes how block size is calculated:
+      </p>
+      <ul>
+        <li><code>horizontal-lr</code> – block size grows from top to bottom.</li>
+        <li><code>vertical-rl</code> – block size grows from right to left.</li>
+      </ul>
+      <pre>
+.container {
+  max-block-size: 55%;
+}
+
+.horizontal {
+  writing-mode: horizontal-lr;
+}
+
+.vertical {
+  writing-mode: vertical-rl;
+}
+      </pre>
+
+      <h2>Supported Browsers</h2>
+      <ul>
+        <li>Chrome – 57+</li>
+        <li>Edge – 79+</li>
+        <li>Firefox – 41+</li>
+        <li>Safari – 12.1+</li>
+        <li>Opera – 44+</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <p>
+        The <code>max-block-size</code> property provides a flexible way to control the maximum 
+        block dimension of an element, adapting to different writing modes. It is useful when 
+        designing responsive layouts, ensuring that blocks don’t grow excessively beyond 
+        desired limits.
+      </p>
+    </div>
+  </div>
+</div>

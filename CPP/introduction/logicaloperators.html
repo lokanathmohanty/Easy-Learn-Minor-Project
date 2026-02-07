@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Logical Operators (<code>&amp;&amp;</code>, <code>||</code>, <code>!</code>) 🧠</h1>
+
+        <div class="content">
+            <p>**Logical operators** in C++ are used to combine multiple conditions or negate a single condition. They perform logical operations on **Boolean values** (<code>true</code>/<code>false</code>) or expressions, where any **non-zero value is treated as <code>true</code>** and **zero is treated as <code>false</code>**.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Types of Logical Operators</h2>
+
+            <h3>1. Logical AND (<code>&amp;&amp;</code>)</h3>
+            <p>The result is **<code>true</code> (non-zero)** only if **both** operands are <code>true</code>. If either operand is <code>false</code> (zero), the result is <code>false</code>.</p>
+            <p>It uses **short-circuit evaluation**: if the first operand is <code>false</code>, the second operand is not evaluated.</p>
+
+            <h3>2. Logical OR (<code>||</code>)</h3>
+            <p>The result is **<code>true</code> (non-zero)** if **at least one** of the operands is <code>true</code>. The result is <code>false</code> only if both operands are <code>false</code>.</p>
+            <p>It also uses **short-circuit evaluation**: if the first operand is <code>true</code>, the second operand is not evaluated.</p>
+
+            <h3>3. Logical NOT (<code>!</code>)</h3>
+            <p>This is a unary operator that negates the logical state of its operand. If the condition is <code>true</code>, it returns <code>false</code> (0), and if the condition is <code>false</code>, it returns <code>true</code> (1).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Example Walkthrough</h2>
+
+            <p>The provided code demonstrates how the operators work with integer values:</p>
+            <pre class="example">
+int a = 5;  // Treated as true
+int b = 20; // Treated as true
+
+// Line 1: if(a &amp;&amp; b) 
+// (5 &amp;&amp; 20) -> true &amp;&amp; true = true
+// Output: Line 1 - Condition is true
+
+// Line 2: if(a || b)
+// (5 || 20) -> true || true = true
+// Output: Line 2 - Condition is true
+
+// --- Change values ---
+a = 0;  // Treated as false
+b = 10; // Treated as true
+
+// Line 3/4: if(a &amp;&amp; b)
+// (0 &amp;&amp; 10) -> false &amp;&amp; true = false
+// Output: Line 4 - Condition is not true
+
+// Line 5: if(!(a &amp;&amp; b))
+// !(0 &amp;&amp; 10) -> !(false) = true
+// Output: Line 5 - Condition is true
+</pre>
+            <p>The final output is:</p>
+            <pre class="example">
+Line 1 - Condition is true
+Line 2 - Condition is true
+Line 4 - Condition is not true
+Line 5 - Condition is true
+</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - String Formatting</h1>
+    <div class="content">
+      <p>String formatting in Python is the process of building a string dynamically by inserting values of variables or expressions into a predefined string. Since the string concatenation operator does not accept non-string operands, Python provides several formatting techniques.</p>
+
+      <h2>String Formatting Techniques</h2>
+      <ul>
+        <li>Using <code>%</code> operator</li>
+        <li>Using <code>format()</code> method</li>
+        <li>Using f-strings</li>
+        <li>Using <code>Template</code> class</li>
+      </ul>
+
+      <h3>1. Using % Operator</h3>
+      <p>The <code>%</code> operator, also known as the modulo operator, is often referred to as the string formatting operator. It uses format specifiers such as <code>%s</code> for strings.</p>
+      <pre><code>name = "Tutorialspoint"
+print("Welcome to %s!" % name)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Welcome to Tutorialspoint!</code></pre>
+
+      <h3>2. Using format() Method</h3>
+      <p>The <code>format()</code> method is a built-in method of the <code>str</code> class. It uses curly braces <code>{}</code> as placeholders, which are replaced by the arguments passed into the method.</p>
+      <pre><code>str = "Welcome to {}"
+print(str.format("Tutorialspoint"))</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Welcome to Tutorialspoint</code></pre>
+
+      <h3>3. Using f-strings</h3>
+      <p>F-strings (formatted string literals) allow embedding expressions directly inside string literals using curly braces <code>{}</code>. They are prefixed with <code>f</code>.</p>
+      <pre><code>item1_price = 2500
+item2_price = 300
+total = f'Total: {item1_price + item2_price}'
+print(total)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Total: 2800</code></pre>
+
+      <h3>4. Using String Template Class</h3>
+      <p>The <code>Template</code> class from the <code>string</code> module uses placeholders prefixed with <code>$</code>. The <code>substitute()</code> method replaces these placeholders with values.</p>
+      <pre><code>from string import Template
+
+str = "Hello and Welcome to $name !"
+templateObj = Template(str)
+new_str = templateObj.substitute(name="Tutorialspoint")
+print(new_str)</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Hello and Welcome to Tutorialspoint !</code></pre>
+    </div>
+  </div>
+</div>

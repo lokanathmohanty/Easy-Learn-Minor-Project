@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Collection Factory Methods (Java 9+)</h1>
+
+        <div class="content">
+            <h2>Introduction to Collection Factory Methods</h2>
+            <p>In **Java 9**, static **factory methods** were added to the **<code>List</code>**, **<code>Set</code>**, and **<code>Map</code>** interfaces. These methods provide a concise and less verbose way to create **immutable** (unmodifiable) instances of these collections.</p>
+            <p>The primary benefit is developer convenience, as they eliminate the multi-step process previously required to create and then wrap a mutable collection using <code>Collections.unmodifiableList/Set/Map()</code>.</p>
+        </div>
+
+        <div class="content">
+            <h2>Factory Methods for List and Set</h2>
+            <p>The **<code>List</code>** and **<code>Set</code>** interfaces gained overloaded static <code>of()</code> methods:</p>
+            <ul>
+                <li>**<code>static &lt;E&gt; List&lt;E&gt; of(E... elements)</code>**</li>
+                <li>**<code>static &lt;E&gt; Set&lt;E&gt; of(E... elements)</code>**</li>
+            </ul>
+            <p>There are also several overloaded methods (up to 10 elements) for performance reasons, but the variadic (<code>...</code>) version handles any number of elements.</p>
+
+            <h3>Key Features of <code>List.of()</code> and <code>Set.of()</code></h3>
+            <ul>
+                <li>They return an **immutable** collection. Any attempt to add, remove, or modify an element will result in an <code>UnsupportedOperationException</code>.</li>
+                <li>They **do not allow null elements**. Passing a <code>null</code> element will immediately throw a <code>NullPointerException</code>.</li>
+                <li>For <code>Set.of()</code>, passing **duplicate elements** in the input will throw an <code>IllegalArgumentException</code>.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">List and Set Syntax Comparison</h2>
+            <div class="content">
+                <h3>Pre-Java 9 (Verbose, Multi-Step)</h3>
+                <pre><code>// List Example
+List&lt;String&gt; list = new ArrayList&lt;&gt;();
+list.add("A");
+list.add("B");
+list = Collections.unmodifiableList(list);
+
+// Set Example
+Set&lt;String&gt; set = new HashSet&lt;&gt;();
+set.add("A");
+set.add("B");
+set = Collections.unmodifiableSet(set);</code></pre>
+
+                <h3>Java 9+ (Concise, Single-Step)</h3>
+                <pre><code>// List Example
+List&lt;String&gt; list = List.of("A", "B", "C");
+
+// Set Example
+Set&lt;String&gt; set = Set.of("A", "B", "C");</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Factory Methods for Map</h2>
+            <p>The **<code>Map</code>** interface was also enhanced with static factory methods. Since maps require both keys and values, the <code>of()</code> methods take them in pairs:</p>
+            <ul>
+                <li>**<code>static &lt;K, V&gt; Map&lt;K, V&gt; of(K k1, V v1, K k2, V v2, ...)</code>** (Up to 10 key-value pairs)</li>
+                <li>**<code>static &lt;K, V&gt; Map&lt;K, V&gt; ofEntries(Map.Entry&lt;? extends K, ? extends V&gt;... entries)</code>** (For more than 10 pairs or dynamically created entries)</li>
+            </ul>
+
+            <h3>Key Features of <code>Map.of()</code></h3>
+            <ul>
+                <li>It returns an **immutable** map.</li>
+                <li>It **does not allow null keys or null values**.</li>
+                <li>It **does not allow duplicate keys**. Passing duplicate keys will result in an <code>IllegalArgumentException</code>.</li>
+                <li>The map's iteration order is typically unspecified.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Map Syntax Comparison</h2>
+            <div class="content">
+                <h3>Pre-Java 9 (Verbose, Multi-Step)</h3>
+                <pre><code>Map&lt;String, String&gt; map = new HashMap&lt;&gt;();
+map.put("A", "Apple");
+map.put("B", "Boy");
+map = Collections.unmodifiableMap(map);</code></pre>
+
+                <h3>Java 9+ (Concise, Single-Step)</h3>
+                <pre><code>Map&lt;String, String&gt; map = Map.of("A", "Apple", "B", "Boy", "C", "Cat");</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Miscellaneous Operators</h1>
+        
+        <h2 class="title">Overview of Special Operators</h2>
+        <div class="content">
+            <p><strong>Miscellaneous Operators</strong> are specialized operators that do not fit into the standard arithmetic, relational, or logical categories. They perform functions related to **type handling**, **null checking**, and **memory information**.</p>
+            
+            <h3>Key Operator Groups:</h3>
+            <ul>
+                <li><strong>Conditional:</strong> <code>?:</code> (Ternary)</li>
+                <li><strong>Null Handling:</strong> <code>??</code> (Null-Coalescing), <code>??=</code> (Null-Coalescing Assignment)</li>
+                <li><strong>Type Checking/Casting:</strong> <code>is</code>, <code>as</code>, <code>typeof()</code></li>
+                <li><strong>Memory/Size:</strong> <code>sizeof()</code></li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Conditional and Null Handling Operators</h2>
+        <div class="content example">
+            <h3>Ternary Operator (<code>? :</code>)</h3>
+            <p>This operator is a concise shorthand for a simple <code>if-else</code> statement. It requires three operands: <code>(Condition ? Value if True : Value if False)</code>.</p>
+            <pre>
+int age = 20;
+string result = (age >= 18) ? "Adult" : "Minor";
+
+Console.WriteLine(result); // Output: Adult
+            </pre>
+            
+            <h3>Null-Coalescing Operator (<code>??</code>)</h3>
+            <p>Returns the left operand if it is **not** <code>null</code>; otherwise, it returns the right operand (the default value).</p>
+            <pre>
+int? number = null;
+int result = number ?? 100; // If number is null, result is 100
+
+Console.WriteLine(result); // Output: 100
+            </pre>
+            
+            <h3>Null-Coalescing Assignment (<code>??=</code>)</h3>
+            <p>Assigns a value to the left operand **only if** the left operand is currently <code>null</code>.</p>
+            <pre>
+string message = null;
+message ??= "Default Message"; 
+
+// If message was null, it now holds "Default Message".
+            </pre>
+        </div>
+        
+        <h2 class="title">Type Checking and Information Operators</h2>
+        <div class="content example">
+            <h3>Type Checking (<code>is</code>)</h3>
+            <p>The <code>is</code> operator checks if an object is compatible with a given type. It can also be used for **pattern matching** to check and extract a value simultaneously (C# 7.0+).</p>
+            <pre>
+object obj = 42;
+
+// Check if obj is an int AND assign its value to the new variable 'number'
+if (obj is int number) 
+{
+    Console.WriteLine("obj is an integer: " + number);
+}
+            </pre>
+            
+            <h3>Safe Type Casting (<code>as</code>)</h3>
+            <p>The <code>as</code> operator attempts to cast an expression to a specified reference type or nullable value type. Unlike a direct cast, it returns **<code>null</code>** on failure instead of throwing an exception, making the code safer.</p>
+            <pre>
+object obj = "Hello, C#";
+string str = obj as string; // str now holds "Hello, C#"
+
+object num = 42;
+string badCast = num as string; // badCast now holds null (no exception)
+            </pre>
+            
+            <h3>Size and Type Info (<code>sizeof</code> and <code>typeof</code>)</h3>
+            <ul>
+                <li><code>sizeof(T)</code>: Returns the size in bytes of a value type (e.g., <code>sizeof(int)</code> returns 4). Requires an <code>unsafe</code> context.</li>
+                <li><code>typeof(T)</code>: Returns the **System.Type** object for the specified type.</li>
+            </ul>
+        </div>
+    </div>
+</div>

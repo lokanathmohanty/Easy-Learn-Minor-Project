@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Numbers Class</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Data Type Hierarchy</h1>
+            <h2 class="subtitle">Session: The Abstract Number Class</h2>
+        </header>
+
+        <section class="content introduction">
+            <h2 class="subtitle">The Java Number Class</h2>
+            <p>The **<code>Number</code>** class, part of the **<code>java.lang</code>** package, is an **abstract superclass** for all classes that represent numeric primitive values in object form. It serves as the common base for the six numeric wrapper classes: **<code>Byte</code>**, **<code>Short</code>**, **<code>Integer</code>**, **<code>Long</code>**, **<code>Float</code>**, and **<code>Double</code>**.</p>
+            <p>The primary purpose of the `Number` class is to provide a standardized set of methods for converting any of its numeric subclasses into the six primitive numeric types.</p>
+        </section>
+
+        <hr>
+
+        <section class="content role-of-wrapper">
+            <h2 class="subtitle">Wrapper Classes and Autoboxing</h2>
+            <p>Wrapper classes (subclasses of <code>Number</code>, plus <code>Boolean</code> and <code>Character</code>) allow primitive values to be used as objects, which is required by **Java Collections** (like <code>ArrayList</code>) and other object-centric APIs.</p>
+            <ul>
+                <li>**Boxing (Autoboxing):** The automatic conversion of a primitive type (e.g., <code>int</code>) into its corresponding wrapper object (e.g., <code>Integer</code>).</li>
+                <li>**Unboxing:** The automatic conversion of a wrapper object back into its primitive type.</li>
+            </ul>
+            <p>The compiler handles these conversions automatically to simplify mixed operations, as shown in the example:</p>
+            <pre><code>Integer x = 5;   // Autoboxing (int to Integer)
+x = x + 10;      // Unboxing (Integer to int), addition, then Autoboxing (int to Integer)</code></pre>
+        </section>
+
+        <hr>
+
+        <section class="content number-methods">
+            <h2 class="subtitle">Core Conversion Methods (Implemented by Subclasses)</h2>
+            <p>The abstract <code>Number</code> class defines the following instance methods, which are implemented by all its numeric subclasses. These methods allow universal casting from any wrapper type to any primitive numeric type:</p>
+            <ul>
+                <li><code>**byteValue()**</code>: Returns the number's value as a `byte`.</li>
+                <li><code>**shortValue()**</code>: Returns the number's value as a `short`.</li>
+                <li><code>**intValue()**</code>: Returns the number's value as an `int`.</li>
+                <li><code>**longValue()**</code>: Returns the number's value as a `long`.</li>
+                <li><code>**floatValue()**</code>: Returns the number's value as a `float`.</li>
+                <li><code>**doubleValue()**</code>: Returns the number's value as a `double`.</li>
+            </ul>
+            <p>In addition to these, wrapper classes also contain utility methods (like <code>parseInt()</code>, <code>valueOf()</code>, <code>min()</code>, <code>max()</code>, and overridden <code>equals()</code>/<code>toString()</code>) that operate on or retrieve numeric values.</p>
+        </section>
+
+    </div>
+
+</body>
+</html>

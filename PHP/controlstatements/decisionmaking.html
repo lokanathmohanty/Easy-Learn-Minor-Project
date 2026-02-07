@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Decision Making (Conditional Statements)</h1>
+
+    <div class="content">
+      <p>
+        **Decision making** in programming allows the sequential flow of execution to be altered based on specific conditions. PHP supports several conditional statements to implement this logic.
+      </p>
+      <div class="example">
+        
+      </div>
+
+      <h2>Decision Making Statements in PHP</h2>
+      <p>PHP offers three main constructs for decision control:</p>
+
+      <h3>1. `if...else` Statement</h3>
+      <p>
+        This is the most fundamental conditional structure. A **Boolean expression** is evaluated; if it is **`true`**, the code block immediately following the `if` is executed. If it is **`false`**, the code block following the optional `else` is executed.
+      </p>
+      <div class="example">
+        <code>if (expr) { statement1 } else { statement2 }</code>
+      </div>
+      <p>
+        Any expression involving comparison operators (`<`, `>`, `==`, etc.) or logical operators (`&&`, `||`, `!`) is a Boolean expression.
+      </p>
+
+      <h3>2. `elseif` Statement</h3>
+      <p>
+        The `elseif` statement is used with `if` to check **multiple, distinct conditions** sequentially. As soon as one condition evaluates to `TRUE`, its corresponding code block is executed, and the entire structure is exited.
+      </p>
+      <div class="example">
+        <code>if (cond1) { /* code A */ } elseif (cond2) { /* code B */ } else { /* code C */ }</code>
+      </div>
+
+      <h3>3. `switch` Statement</h3>
+      <p>
+        The `switch` statement is used to perform a specific action based on the value of a **single variable or expression**. It is generally preferred over a long series of `if..elseif..else` statements when checking one variable against many possible discrete values, improving readability.
+      </p>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <h2>Advanced Conditional Usage</h2>
+
+      <h3>Nested `if` Statements</h3>
+      <p>
+        An `if` statement can be placed within the block of another `if` or `else` statement to handle **sequential dependencies** or more complex logic.
+      </p>
+      <div class="example">
+        <p>
+          <code>if ($age >= 18) { /* outer condition true */</code><br>
+          <code>&nbsp;&nbsp;&nbsp;if ($age < 60) { echo "Adult"; } // inner condition</code><br>
+          <code>&nbsp;&nbsp;&nbsp;else { echo "Senior"; }</code><br>
+          <code>} else { echo "Minor"; }</code>
+        </p>
+      </div>
+
+      <h3>`break` and `continue` (Context within Control Flow)</h3>
+      <p>
+        While primarily used in loops, `break` is essential in `switch` statements to prevent **fall-through** (execution of code in subsequent `case` blocks). `continue` is used in loops to skip the rest of the current iteration and move to the next.
+      </p>
+      <div class="example">
+        <p>
+          <code>switch ($day) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;case "Monday": echo "Start"; **break;** // Prevents fall-through</code><br>
+          <code>&nbsp;&nbsp;&nbsp;case "Friday": echo "Weekend"; break;</code><br>
+          <code>}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

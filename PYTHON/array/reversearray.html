@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Reverse Arrays in Python</h1>
+    <div class="content">
+      <p>Reversing an array means rearranging its elements in the opposite order. In Python, arrays can be reversed using various methods including slicing, <code>reverse()</code>, <code>reversed()</code>, and a <code>for</code> loop.</p>
+
+      <h2 class="title">Using Slicing Operation</h2>
+      <p>Slicing with <code>[::-1]</code> creates a new reversed copy of the array.</p>
+      <pre><code>import array as arr
+numericArray = arr.array('i', [88, 99, 77, 55, 66])
+print("Original array:", numericArray)
+revArray = numericArray[::-1]
+print("Reversed array:", revArray)
+# Output:
+# Original array: array('i', [88, 99, 77, 55, 66])
+# Reversed array: array('i', [66, 55, 77, 99, 88])
+</code></pre>
+
+      <h2 class="title">Using <code>reverse()</code> Method of List</h2>
+      <p>The array must first be converted to a list, reversed, then converted back to an array.</p>
+      <pre><code>import array as arr
+numericArray = arr.array('i', [10, 5, 15, 4, 6, 20, 9])
+print("Array before reversing:", numericArray)
+newArray = numericArray.tolist()
+newArray.reverse()
+revArray = arr.array('i', newArray)
+print("Array after reversing:", revArray)
+# Output:
+# Array before reversing: array('i', [10, 5, 15, 4, 6, 20, 9])
+# Array after reversing: array('i', [9, 20, 6, 4, 15, 5, 10])
+</code></pre>
+
+      <h2 class="title">Using <code>reversed()</code> Method</h2>
+      <p><code>reversed()</code> returns an iterator which can be converted back to an array.</p>
+      <pre><code>import array as arr
+numericArray = arr.array('i', [12, 10, 14, 16, 20, 18])
+print("Array before reversing:", numericArray)
+newArray = list(reversed(numericArray))
+revArray = arr.array('i', newArray)
+print("Array after reversing:", revArray)
+# Output:
+# Array before reversing: array('i', [12, 10, 14, 16, 20, 18])
+# Array after reversing: array('i', [18, 20, 16, 14, 10, 12])
+</code></pre>
+
+      <h2 class="title">Using For Loop</h2>
+      <p>Loop through the original array from the last element to the first and append each element to a new array.</p>
+      <pre><code>import array as arr
+a = arr.array('i', [10, 5, 15, 4, 6, 20, 9])
+b = arr.array('i')
+for i in range(len(a)-1, -1, -1):
+    b.append(a[i])
+print(a)
+print(b)
+# Output:
+# array('i', [10, 5, 15, 4, 6, 20, 9])
+# array('i', [9, 20, 6, 4, 15, 5, 10])
+</code></pre>
+    </div>
+  </div>
+</div>

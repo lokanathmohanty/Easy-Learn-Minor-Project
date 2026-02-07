@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Web Fonts</h1>
+    <div class="content">
+      <p>Font that is used in a website, but not installed by default on the user's device, is known as the web font. CSS allows to specify the font files, that are available on the web, to be easily downloaded along with your website when accessed.</p>
+    </div>
+
+    <h2 class="title">CSS Web Fonts - Font Format Types</h2>
+    <div class="content">
+      <ul>
+        <li><strong>TrueType Fonts (TTF):</strong> Outline font developed by Apple. Most common font format for MacOS and Windows.</li>
+        <li><strong>OpenType Fonts (OTF):</strong> Derived from TrueType with additional intricate data structures and more typographic control.</li>
+        <li><strong>Web Open Font Format (WOFF):</strong> Developed by Mozilla, compressed format based on TrueType and OpenType with metadata support.</li>
+        <li><strong>Web Open Font Format2 (WOFF2):</strong> Improved compression compared to WOFF.</li>
+        <li><strong>SVG Fonts / Shapes:</strong> Based on OpenType, allows multi-color, transparency, and animation in characters.</li>
+        <li><strong>Embedded Open Type Fonts (EOT):</strong> Compact form of OpenType developed by Microsoft, supported only by Internet Explorer.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">CSS Web Fonts - Key Points</h2>
+    <div class="content">
+      <ul>
+        <li>Web fonts are generally not free; licensing rules must be followed.</li>
+        <li>WOFF and WOFF2 formats are supported by most browsers.</li>
+        <li>WOFF2 supports variable, chromatic, and collection fonts.</li>
+        <li>Order of font listing is important, browser picks the first supported format.</li>
+        <li>Legacy browsers may require EOT, TTF, and SVG fonts.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">CSS Web Fonts - @font-face At-Rule</h2>
+    <div class="content">
+      <p>The <code>@font-face</code> rule allows you to specify fonts not installed on the user’s device. Example syntax:</p>
+      <pre>
+@font-face {
+   font-family: "Sansation Light Font";
+   src: url("font/SansationLight.woff") format("woff");
+   font-weight: normal;
+   font-style: normal;
+}
+      </pre>
+      <p>Key descriptors:</p>
+      <ul>
+        <li><strong>font-family:</strong> Name used to reference the font in CSS.</li>
+        <li><strong>src:</strong> Path to the font file, can include multiple formats.</li>
+        <li><strong>font-weight:</strong> Specifies font thickness (e.g., 100–400).</li>
+        <li><strong>font-style:</strong> Normal, italic, or oblique style.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Using @font-face</h2>
+    <div class="content">
+      <pre>
+@font-face {
+   font-family: "Sansation Light Font";
+   src: url("font/SansationLight.woff");
+}
+body {
+   font-family: "Sansation Light Font", serif;
+}
+      </pre>
+      <p>This applies the custom Sansation Light font to the webpage.</p>
+    </div>
+
+    <h2 class="title">CSS Web Fonts - font-stretch</h2>
+    <div class="content">
+      <p>You can set stretch values for a font face, either as percentages or named values:</p>
+      <ul>
+        <li>50% → Condensed</li>
+        <li>100% → Normal</li>
+        <li>200% → Expanded</li>
+        <li>Named values include: semi-condensed, extra-condensed, ultra-condensed, semi-expanded, extra-expanded, ultra-expanded</li>
+      </ul>
+    </div>
+
+    <h2 class="title">CSS Web Fonts - Online Font Service</h2>
+    <div class="content">
+      <p>Many font services exist, often subscription-based. <a href="https://fonts.google.com">Google Fonts</a> is free and easy to use:</p>
+      <ul>
+        <li>Browse and select fonts.</li>
+        <li>Click the (+) button to add to your selection.</li>
+        <li>Copy the generated HTML link and place inside your <code>&lt;head&gt;</code>.</li>
+        <li>Apply the font using CSS font-family property.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">CSS Web Fonts - Import Font</h2>
+    <div class="content">
+      <p>Example of importing Google Fonts:</p>
+      <pre>
+&lt;link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet"&gt;
+
+h1, h2 {
+   font-family: 'Lobster', cursive;
+}
+p {
+   font-family: 'Raleway', sans-serif;
+}
+      </pre>
+      <p>This imports and applies the Lobster and Raleway fonts to headings and paragraphs.</p>
+    </div>
+  </div>
+</div>

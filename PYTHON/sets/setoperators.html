@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Set Operators</h1>
+    <div class="content">
+      <p>
+        Set operators in Python are symbols and functions that allow performing operations such as union, intersection, difference, and symmetric difference on sets. These operators help combine, compare, and modify sets easily.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Set Union Operator (|)</h2>
+    <div class="content">
+      <p>
+        The union of two sets contains all distinct elements present in either set or both. It can be performed using the <code>|</code> operator or the <code>union()</code> method.
+      </p>
+      <pre><code>
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+set3 = {6, 8, 9}
+set4 = {9, 45, 73}
+
+union_set1 = set1.union(set2)
+union_set2 = set3 | set4
+
+print('The union of set1 and set2 is', union_set1)
+print('The union of set3 and set4 is', union_set2)
+      </code></pre>
+      <p>Output:</p>
+      <p>{1, 2, 3, 4, 5}</p>
+      <p>{73, 6, 8, 9, 45}</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Set Intersection Operator (&amp;)</h2>
+    <div class="content">
+      <p>
+        The intersection of two sets contains only the elements common to both sets. It can be performed using the <code>&amp;</code> operator or the <code>intersection()</code> method.
+      </p>
+      <pre><code>
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+set3 = {6, 8, 9}
+set4 = {9, 8, 73}
+
+intersection_set1 = set1.intersection(set2)
+intersection_set2 = set3 & set4
+
+print('The intersection of set1 and set2 is', intersection_set1)
+print('The intersection of set3 and set4 is', intersection_set2)
+      </code></pre>
+      <p>Output:</p>
+      <p>{3}</p>
+      <p>{8, 9}</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Set Difference Operator (-)</h2>
+    <div class="content">
+      <p>
+        The difference of two sets contains elements in the first set that are not in the second set. It can be performed using the <code>-</code> operator or the <code>difference()</code> method.
+      </p>
+      <pre><code>
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+set3 = {6, 8, 9}
+set4 = {9, 8, 73}
+
+difference_set1 = set1.difference(set2)
+difference_set2 = set3 - set4
+
+print('The difference between set1 and set2 is', difference_set1)
+print('The difference between set3 and set4 is', difference_set2)
+      </code></pre>
+      <p>Output:</p>
+      <p>{1, 2}</p>
+      <p>{6}</p>
+      <p><em>Note: Difference is not commutative, i.e., <code>s1 - s2</code> is different from <code>s2 - s1</code>.</em></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Set Symmetric Difference Operator (^)</h2>
+    <div class="content">
+      <p>
+        The symmetric difference contains elements that are in either set but not in both. It can be performed using the <code>^</code> operator or the <code>symmetric_difference()</code> method.
+      </p>
+      <pre><code>
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+set3 = {6, 8, 9}
+set4 = {9, 8, 73}
+
+symmetric_difference_set1 = set1.symmetric_difference(set2)
+symmetric_difference_set2 = set3 ^ set4
+
+print('The symmetric difference of set1 and set2 is', symmetric_difference_set1)
+print('The symmetric difference of set3 and set4 is', symmetric_difference_set2)
+      </code></pre>
+      <p>Output:</p>
+      <p>{1, 2, 4, 5}</p>
+      <p>{73, 6}</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Subset Testing Operation</h2>
+    <div class="content">
+      <p>
+        To check if one set is a subset of another (all elements of the first set present in the second), use the <code>issubset()</code> method or the <code>&lt;=</code> operator.
+      </p>
+      <pre><code>
+set1 = {1, 2}
+set2 = {1, 2, 3, 4}
+set3 = {64, 47, 245, 48}
+set4 = {64, 47, 3}
+
+is_subset1 = set1.issubset(set2)
+is_subset2 = set3 <= set4
+
+print('set1 is a subset of set2:', is_subset1)
+print('set3 is a subset of set4:', is_subset2)
+      </code></pre>
+      <p>Output:</p>
+      <p>set1 is a subset of set2: True</p>
+      <p>set3 is a subset of set4: False</p>
+    </div>
+  </div>
+</div>

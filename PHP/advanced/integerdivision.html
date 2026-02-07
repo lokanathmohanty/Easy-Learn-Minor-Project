@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP $\text{intdiv()}$ Function for Integer Division ➗</h1>
+
+        <div class="content">
+            <p>The $\text{intdiv()}$ function, introduced in PHP 7, performs **integer division** on two integer operands, returning only the integer quotient of the division. This function is valuable because standard PHP division ($\text{/}$) returns a floating-point number ($\text{float}$), even if the result is an integer.</p>
+
+            <hr>
+
+            <h2 class="title">Syntax and Behavior</h2>
+            <pre>int intdiv ( int $x , int $y )</pre>
+            <p>The function returns the mathematical integer part of $\text{x/y}$. Its behavior is defined by the relationship: $\text{x} = \text{y} \times \text{quotient} + \text{remainder}$, where the result is the $\text{quotient}$.</p>
+            
+            <h3>Sign Rules:</h3>
+            <ul>
+                <li>If both $\text{x}$ and $\text{y}$ have the same sign (both positive or both negative), the result is **positive**.</li>
+                <li>If $\text{x}$ and $\text{y}$ have different signs (one positive, one negative), the result is **negative**.</li>
+                <li>The result is always an **integer**.</li>
+            </ul>
+
+            <h2 class="title">Examples of $\text{intdiv()}$</h2>
+            
+            <h3>Case 1: Standard Division</h3>
+            <p>When the numerator is greater than the denominator:</p>
+            <pre>
+&lt;?php
+   echo intdiv(10, 3); // Output: 3 (10 / 3 = 3.33, integer part is 3)
+?&gt;</pre>
+            <p>When the numerator is less than the denominator:</p>
+            <pre>
+&lt;?php
+   echo intdiv(3, 10); // Output: 0 (3 / 10 = 0.3, integer part is 0)
+?&gt;</pre>
+
+            <h3>Case 2: Handling Negative Numbers</h3>
+            <p>The result truncates toward zero, consistent with the sign rules above:</p>
+            <pre>
+&lt;?php
+   echo intdiv(10, -3);  // Output: -3
+   echo intdiv(-10, 3);  // Output: -3
+   echo intdiv(-10, -3); // Output: 3
+?&gt;</pre>
+            
+            <h2 class="title">Error Handling: Division by Zero</h2>
+            <p>Unlike standard division, which returns $\text{INF}$ (Infinity) when dividing by zero, $\text{intdiv()}$ throws an exception.</p>
+            <pre>
+&lt;?php
+   // Throws a fatal error
+   intdiv(10, 0); 
+?&gt;</pre>
+            <p>This operation results in a **$\text{DivisionByZeroError}$** exception.</p>
+        </div>
+    </div>
+</div>

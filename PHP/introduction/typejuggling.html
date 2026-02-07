@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Type Juggling Explained</h1>
+
+    <div class="content">
+      <p>
+        **Type Juggling** is the term for PHP's feature of **automatic type conversion** at runtime. Because PHP is a **dynamically typed language**, a variable does not have a fixed data type; its type is determined by the value currently assigned to it.
+      </p>
+
+      <h2>Automatic Type Conversion in Action</h2>
+      <p>
+        Type juggling happens in two main scenarios: when a variable is reassigned, and when an expression is evaluated.
+      </p>
+
+      <h3>1. Variable Reassignment</h3>
+      <p>The variable's type changes whenever a new value of a different type is assigned.</p>
+      <div class="example">
+        <p>
+          <code>$var = "Hello"; // Type: string</code><br>
+          <code>$var = 10; // Type: integer</code><br>
+          <code>$var = true; // Type: boolean</code>
+        </p>
+      </div>
+      <div class="content">
+        <hr>
+      </div>
+
+      <h3>2. Expression Evaluation</h3>
+      <p>
+        When performing an operation between two different types, PHP automatically converts one type to match the other, allowing the operation to proceed.
+      </p>
+      <div class="example">
+        <p>
+          <code>$var1 = 100; // integer</code><br>
+          <code>$var2 = "100"; // string</code><br>
+          <code>$var3 = $var1 + $var2;</code> $\rightarrow$ PHP converts **"100"** to `100` before addition.<br>
+          <code class="content">Output: int(200)</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Type Juggling vs. Type Casting</h2>
+      <p>
+        The key difference lies in who initiates the conversion:
+      </p>
+      <ul>
+        <li>
+          **Type Juggling:** PHP performs the conversion **automatically** without any user action (e.g., in arithmetic operations or conditional checks).
+        </li>
+        <li>
+          **Type Casting:** The programmer **explicitly forces** the conversion using casting operators (e.g., `(int)`) or type conversion functions (e.g., `strval()`).
+        </li>
+      </ul>
+      <div class="example">
+        <p>
+          <code>$var1 = 100;</code><br>
+          <code>$var2 = (boolean)$var1; // Explicit Type Casting</code>
+        </p>
+      </div>
+      <div class="content">
+        <hr>
+      </div>
+
+      <h2>Type Juggling Security Vulnerability ⚠️</h2>
+      <p>
+        The automatic conversion by type juggling can create **security vulnerabilities** when using the **loose comparison operator (`==`)**.
+      </p>
+      <ul>
+        <li>
+          When comparing a string to a number with `==`, PHP attempts to convert the string to a number. If the string starts with digits (e.g., `"123abc"`), PHP uses the leading numeric part (`123`) and ignores the rest, often resulting in an unintended match.
+          <div class="example">
+            <code>"123abc" == 123</code> $\rightarrow$ **TRUE** (Vulnerability)
+          </div>
+        </li>
+      </ul>
+      <p>
+        **How to Resolve This:** Always use the **strict comparison operator (`===`)** for comparisons, especially for authentication or token checks. `===` checks **both the value and the data type**, preventing PHP from performing automatic type juggling.
+      </p>
+      <div class="example">
+        <code>"123abc" === 123</code> $\rightarrow$ **FALSE** (Secure)
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Variable Arguments in C</h1>
+    <div class="content">
+      <p>Sometimes, you may need a function that accepts a variable number of arguments instead of a fixed number. C provides a way to do this using <code>stdarg.h</code>.</p>
+
+      <p>The syntax for such a function is:</p>
+      <pre><code>int func(int, ... ) {
+   ...
+}</code></pre>
+
+      <p>Here, the last parameter is an ellipsis (<code>...</code>) and the parameter just before it (usually an <code>int</code>) typically represents the number of variable arguments passed.</p>
+
+      <h2>How to implement variable arguments in C</h2>
+      <ol>
+        <li>Define the function with its last parameter as ellipses, and the preceding parameter as an <code>int</code> representing the count of variable arguments.</li>
+        <li>Create a <code>va_list</code> variable in the function (defined in <code>stdarg.h</code>).</li>
+        <li>Use the macro <code>va_start</code> to initialize the <code>va_list</code> variable.</li>
+        <li>Use the macro <code>va_arg</code> to access each argument in the list.</li>
+        <li>Use the macro <code>va_end</code> to clean up.</li>
+      </ol>
+
+      <h2>Example</h2>
+      <p>This example shows a function that calculates the average of a variable number of integer arguments.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+
+double average(int num, ...) {
+   va_list valist;
+   double sum = 0.0;
+   int i;
+
+   /* initialize valist for num number of arguments */
+   va_start(valist, num);
+
+   /* access all the arguments assigned to valist */
+   for (i = 0; i &lt; num; i++) {
+      sum += va_arg(valist, int);
+   }
+
+   /* clean memory reserved for valist */
+   va_end(valist);
+
+   return sum / num;
+}
+
+int main() {
+   printf("Average of 2, 3, 4, 5 = %f\n", average(4, 2, 3, 4, 5));
+   printf("Average of 5, 10, 15 = %f\n", average(3, 5, 10, 15));
+}
+</code></pre>
+
+      <h2>Output</h2>
+      <pre><code>Average of 2, 3, 4, 5 = 3.500000
+Average of 5, 10, 15 = 10.000000
+</code></pre>
+
+      <p>Note that the first argument to <code>average()</code> indicates how many variable arguments are passed. The ellipses <code>...</code> allow the function to accept that variable number of arguments.</p>
+    </div>
+  </div>
+</div>

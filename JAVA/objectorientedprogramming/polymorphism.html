@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Polymorphism</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Object-Oriented Concepts</h1>
+            <h2 class="subtitle">Session: Polymorphism (Many Forms)</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is Polymorphism?</h2>
+                <p>**Polymorphism** is the ability of an object or method to take on many forms. It allows a single method name or reference variable to behave differently depending on the context or the actual object type being used.</p>
+                <p>Any Java object that passes more than one **IS-A test** (e.g., A <code>Deer</code> IS-A <code>Animal</code> and a <code>Deer</code> IS-A <code>Vegetarian</code>) is considered polymorphic.</p>
+            </div>
+
+            <div class="content use">
+                <h2 class="subtitle">Using Parent References for Child Objects</h2>
+                <p>The most common use of polymorphism is when a **parent class reference** or **interface reference** is used to refer to a **child class object**.</p>
+                <pre><code>// Legal polymorphic declarations:
+Deer d = new Deer();
+Animal a = d;        // Parent class reference points to Child object
+Vegetarian v = d;    // Interface reference points to Child object</code></pre>
+                <p>The type of the reference variable (<code>Animal</code> or <code>Vegetarian</code>) determines which methods can be called, but the actual method executed at runtime depends on the object type (<code>Deer</code>).</p>
+            </div>
+
+            <div class="content types">
+                <h2 class="subtitle">Types of Java Polymorphism</h2>
+                <p>Polymorphism is categorized into two main types based on when the method call is resolved:</p>
+                <ul>
+                    <li>**Compile-Time Polymorphism** (Static Binding)</li>
+                    <li>**Run-Time Polymorphism** (Dynamic Binding)</li>
+                </ul>
+            </div>
+
+            <div class="content compile-time">
+                <h2 class="subtitle">1. Compile-Time Polymorphism (Method Overloading)</h2>
+                <p>This is achieved through **Method Overloading**, where multiple methods in the same class have the same name but different parameter lists (different number, type, or order of arguments). The correct method to call is determined by the compiler at compile time.</p>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Method Overloading</h2>
+                <pre><code>public class Main {
+  // Method 1: two integers
+  public int addition(int x, int y) { ... } 
+
+  // Method 2: three integers
+  public int addition(int x, int y, int z) { ... }
+
+  // Method 3: two doubles
+  public double addition(double x, double y) { ... } 
+  
+  // The compiler selects the correct 'addition' method based on arguments provided:
+  // number.addition(444, 555); -> Calls Method 1
+  // number.addition(10.15, 20.22); -> Calls Method 3
+}</code></pre>
+            </div>
+
+            <div class="content runtime">
+                <h2 class="subtitle">2. Run-Time Polymorphism (Method Overriding)</h2>
+                <p>This is achieved through **Method Overriding**, which is implemented via **inheritance**. A subclass provides a specific implementation for a method that is already provided by its superclass. The method to execute is determined at runtime (dynamic method dispatch).</p>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Method Overriding (Dynamic Dispatch)</h2>
+                <pre><code>class Vehicle {
+  public void displayInfo() { ... }
+}
+
+class Car extends Vehicle {
+  @Override
+  public void displayInfo() { // Overrides parent method
+    System.out.println("I have a Car.");
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Vehicle v1 = new Car(); // Upcasting: Parent reference, Child object
+    
+    // The JVM invokes the overridden method in the actual object (Car), 
+    // despite the reference type being Vehicle.
+    v1.displayInfo();
+  }
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>I have a Car.</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

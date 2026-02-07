@@ -1,0 +1,153 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Custom Hooks</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            Hooks are integral part of React function components. While React provides several built-in hooks, 
+            sometimes developers need specialized logic. React allows creating <strong>custom hooks</strong> 
+            by extracting and reusing logic across components.
+         </p>
+
+         <h2>Create a Custom Hook</h2>
+         <p>
+            We’ll build an infinite scroll feature, first inside a component, then extract it as a 
+            reusable <code>useInfiniteScroll</code> custom hook.
+         </p>
+
+         <h2>Step 1: Implement Infinite Scroll in a Component</h2>
+         <p>
+            Start with a <code>TodoList</code> component that generates dummy items. As the user scrolls 
+            to the bottom, more items are appended.
+         </p>
+
+         <div class="code-block">
+<pre><code>import React, { useState, useEffect, useMemo } from "react";
+
+function TodoList() {
+   const [count, setCount] = useState(100);
+   let data = [];
+
+   useMemo(() =&gt; {
+      for (let i = 1; i &lt;= count; i++) {
+         data.push({ id: i, todo: "Todo Item " + i });
+      }
+   }, [count]);
+
+   useEffect(() =&gt; {
+      function handleScroll() {
+         const isBottom =
+            window.innerHeight + document.documentElement.scrollTop
+            === document.documentElement.offsetHeight;
+
+         if (isBottom) setCount(count + 100);
+      }
+      window.addEventListener("scroll", handleScroll);
+      return () =&gt; window.removeEventListener("scroll", handleScroll);
+   }, []);
+
+   return (
+      &lt;div&gt;
+         &lt;p&gt;List of Todo list&lt;/p&gt;
+         &lt;ul&gt;
+            {data.map(item =&gt; &lt;li key={item.id}&gt;{item.todo}&lt;/li&gt;)}
+         &lt;/ul&gt;
+      &lt;/div&gt;
+   );
+}
+export default TodoList;
+</code></pre>
+         </div>
+
+         <h2>Step 2: Extract Infinite Scroll into a Custom Hook</h2>
+         <p>
+            Next, we refactor the logic into a custom hook named <code>useInfiniteScroll</code>.
+         </p>
+
+         <div class="code-block">
+<pre><code>import React, { useState, useEffect } from "react";
+
+export default function useInfiniteScroll(loadDataFn) {
+   const [bottom, setBottom] = useState(false);
+
+   useEffect(() =&gt; {
+      function handleScroll() {
+         if (window.innerHeight + document.documentElement.scrollTop
+            !== document.documentElement.offsetHeight) return;
+         setBottom(true);
+      }
+      window.addEventListener("scroll", handleScroll);
+      return () =&gt; window.removeEventListener("scroll", handleScroll);
+   }, []);
+
+   useEffect(() =&gt; {
+      if (!bottom) return;
+      loadDataFn();
+   }, [bottom]);
+
+   return [bottom, setBottom];
+}
+</code></pre>
+         </div>
+
+         <h2>Step 3: Use the Custom Hook in a Component</h2>
+         <p>
+            Now we create <code>TodoListUsingCustomHook</code> and use <code>useInfiniteScroll</code> 
+            to handle loading more items.
+         </p>
+
+         <div class="code-block">
+<pre><code>import React, { useState, useEffect } from "react";
+import useInfiniteScroll from "../Hooks/useInfiniteScroll";
+
+function TodoListUsingCustomHook() {
+   const [data, setData] = useState([]);
+   const [count, setCount] = useState(100);
+   const [bottom, setBottom] = useInfiniteScroll(loadMoreData);
+
+   const loadData = () =&gt; {
+      let items = [];
+      for (let i = 1; i &lt;= count; i++) {
+         items.push({ id: i, todo: "Todo Item " + i });
+      }
+      setData(items);
+   };
+
+   function loadMoreData() {
+      let items = [];
+      for (let i = 1; i &lt;= count; i++) {
+         items.push({ id: i, todo: "Todo Item " + i });
+      }
+      setData(items);
+      setCount(count + 100);
+      setBottom(false);
+   }
+
+   useEffect(() =&gt; {
+      loadData(count);
+   }, []);
+
+   return (
+      &lt;div&gt;
+         &lt;p&gt;List of Todo list&lt;/p&gt;
+         &lt;ul&gt;
+            {data.map(item =&gt; &lt;li key={item.id}&gt;{item.todo}&lt;/li&gt;)}
+         &lt;/ul&gt;
+      &lt;/div&gt;
+   );
+}
+export default TodoListUsingCustomHook;
+</code></pre>
+         </div>
+
+         <h2>Summary</h2>
+         <p>
+            Custom hooks allow developers to extract reusable logic from components. In this example, 
+            we successfully created <code>useInfiniteScroll</code>, which can now be reused in any 
+            React component requiring infinite scroll.
+         </p>
+      </div>
+   </div>
+</div>

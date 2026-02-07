@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Private Variables</h1>
+    <div class="content">
+      <p>Python is an object-oriented programming language that allows you to create classes and objects. Encapsulation is one of the core principles of OOPs. To achieve encapsulation, we use private variables and methods. In this session, we will discuss private variables in Python and how to use them.</p>
+
+      <h2>What are Private Variables?</h2>
+      <p>Private variables are a special type of variable that is only accessible within the class they are defined in. They are not directly accessible from outside the class or from any subclass. This helps protect data from unauthorized access or modification.</p>
+      <p>Access to private variables can be allowed using getter and setter methods.</p>
+
+      <h2>Defining Private Variables in Python</h2>
+      <p>In Python, private variables are defined using a double underscore <code>__</code> before the variable name. A single underscore <code>_</code> indicates a protected variable.</p>
+
+      <h3>Example</h3>
+      <pre><code>class MyClass:
+    def __init__(self):
+        self.__private_var = "I am Private"
+
+    def show_private(self):
+        return self.__private_var
+
+obj = MyClass()
+print(obj.show_private())   # ✓ Access through method
+# print(obj.__private_var)  # ✗ AttributeError
+</code></pre>
+
+      <h2>Name Mangling for Private Variables</h2>
+      <p>Private variables can still be accessed outside the class using <strong>name mangling</strong>. Python internally changes <code>__var</code> to <code>_ClassName__var</code>.</p>
+
+      <h3>Example</h3>
+      <pre><code>obj = MyClass()
+print(obj._MyClass__private_var)  # Access using name mangling
+</code></pre>
+
+      <h2>Private Methods in Python</h2>
+      <p>Similar to variables, methods can also be private by prefixing with double underscore.</p>
+
+      <h3>Example</h3>
+      <pre><code>class MyClass:
+    def __init__(self):
+        self.__private_var = "I am Private"
+
+    def __private_method(self):
+        return "This is a private method"
+
+    def show_private(self):
+        return self.__private_var + " and " + self.__private_method()
+
+obj = MyClass()
+print(obj.show_private())                  # ✓ Access through method
+print(obj._MyClass__private_method())      # ✓ Access using name mangling
+</code></pre>
+
+      <h2>Real World Example of Private Variables</h2>
+      <p>A banking application ensures sensitive data like balance is private. Access is provided through methods like deposit and withdraw.</p>
+
+      <h3>Example</h3>
+      <pre><code>class BankAccount:
+    def __init__(self, account_number, balance):
+        self.__account_number = account_number
+        self.__balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+        return self.__balance
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+        return self.__balance
+
+    def get_balance(self):
+        return self.__balance
+
+account = BankAccount("12345", 1000)
+print(account.get_balance())  # 1000
+account.deposit(500)
+print(account.get_balance())  # 1500
+</code></pre>
+
+      <h2>Public vs Protected vs Private Variables</h2>
+      <ul>
+        <li><strong>Public Variables:</strong> Accessible from anywhere.</li>
+        <li><strong>Protected Variables:</strong> Accessible within class and subclasses.</li>
+        <li><strong>Private Variables:</strong> Accessible only within the class itself.</li>
+      </ul>
+
+      <h3>Syntax</h3>
+      <ul>
+        <li>Public: <code>var</code></li>
+        <li>Protected: <code>_var</code></li>
+        <li>Private: <code>__var</code></li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      <p>Private variables help achieve encapsulation in Python. Although name mangling allows access from outside, it is not recommended as it breaks encapsulation principles. Getter and setter methods should be used instead.</p>
+    </div>
+  </div>
+</div>

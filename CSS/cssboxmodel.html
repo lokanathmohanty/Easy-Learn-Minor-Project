@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Box Model</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS Box Model</strong> is one of the most fundamental concepts in CSS that describes how 
+        elements on a web page are structured and displayed. Every element in CSS is considered as a rectangular box, 
+        and the box model defines its properties such as <em>content</em>, <em>padding</em>, <em>border</em>, 
+        and <em>margin</em>. 
+      </p>
+      <p>
+        Understanding the box model is crucial because it affects layout, spacing, positioning, and the 
+        way elements interact with each other on a webpage.
+      </p>
+
+      <h2>Components of the Box Model</h2>
+      <ul>
+        <li>
+          <strong>Content:</strong> The innermost part of the box, where the actual text, images, or other content resides. 
+          Its size can be controlled with <code>width</code> and <code>height</code> properties.
+        </li>
+        <li>
+          <strong>Padding:</strong> The space between the content and the element’s border. It provides breathing room 
+          inside the box and can be set individually for each side (top, right, bottom, left).
+        </li>
+        <li>
+          <strong>Border:</strong> Surrounds the padding and content. Borders can have width, style, and color.
+        </li>
+        <li>
+          <strong>Margin:</strong> The outermost layer of the box that creates space between the element and its neighbors.
+        </li>
+      </ul>
+
+      <h2>Total Element Size Calculation</h2>
+      <p>
+        The total space occupied by an element is calculated as:
+      </p>
+      <p>
+        <code>Total width = content width + padding + border + margin</code><br>
+        <code>Total height = content height + padding + border + margin</code>
+      </p>
+
+      <h2>Types of Box Model</h2>
+      <p>There are two main types of box models in CSS:</p>
+      <ul>
+        <li><strong>Standard Box Model (content-box):</strong> Default behavior where width and height only apply to the content.</li>
+        <li><strong>Alternative Box Model (border-box):</strong> Width and height include content, padding, and border.</li>
+      </ul>
+
+      <h2>Standard Box Model Example</h2>
+      <pre>
+.box {
+   width: 300px;
+   height: 100px;
+   margin: 20px;
+   padding: 15px;
+   border: 5px solid green;
+   box-sizing: content-box; /* Default */
+}
+      </pre>
+      <p>
+        In this case, the total width becomes <code>300 + 15 + 15 + 5 + 5 = 340px</code> 
+        and the total height becomes <code>100 + 15 + 15 + 5 + 5 = 140px</code>.
+      </p>
+
+      <h2>Alternative Box Model Example</h2>
+      <pre>
+.box {
+   width: 300px;
+   height: 100px;
+   margin: 20px;
+   padding: 15px;
+   border: 5px solid green;
+   box-sizing: border-box;
+}
+      </pre>
+      <p>
+        With <code>box-sizing: border-box</code>, the total width and height remain exactly 
+        <code>300px</code> and <code>100px</code>, since padding and border are included.
+      </p>
+
+      <h2>Example in HTML</h2>
+      <pre>
+&lt;div class="box"&gt;
+   This is a box model example
+&lt;/div&gt;
+      </pre>
+
+      <h2>Box Model with Inline Elements</h2>
+      <p>
+        Inline elements also follow the box model with padding, border, and margin. 
+        By default, their width cannot be set, but using <code>display: inline-block</code> 
+        allows them to respect <code>width</code> and <code>height</code> values.
+      </p>
+      <pre>
+a {
+   padding: 1em 2em;
+   margin: 5px 10px;
+   border: 5px solid red;
+   display: inline-block;
+}
+      </pre>
+
+      <h2>Significance of the Box Model</h2>
+      <ul>
+        <li><strong>Visual Representation:</strong> Helps understand how elements occupy space.</li>
+        <li><strong>Layout & Positioning:</strong> Determines how elements are aligned on the page.</li>
+        <li><strong>Precise Size Calculations:</strong> Ensures correct element dimensions.</li>
+        <li><strong>Control & Customization:</strong> Provides flexibility in design adjustments.</li>
+        <li><strong>Responsive Design:</strong> Essential for ensuring layouts adapt to different devices.</li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      <p>
+        The CSS Box Model is the foundation of web layout. Mastering it allows developers to 
+        accurately control spacing, alignment, and responsiveness, making it one of the most 
+        important concepts to learn in CSS.
+      </p>
+    </div>
+  </div>
+</div>

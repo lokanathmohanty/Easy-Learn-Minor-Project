@@ -1,0 +1,59 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">Next.js `&lt;Head&gt;` Component (Pages Router) ⚙️</h1>
+        
+        <div class="content">
+            <h2 class="title">Purpose and Features</h2>
+            <p>The **`<Head>` component** (imported from <span class="example">`'next/head'`</span>) is used in the **Pages Router** (<span class="example">`pages/`</span> directory) to modify the document's **`<head>`** section on a per-page basis. This is crucial for **SEO optimization** and defining essential page metadata.</p>
+            
+            <p class="example">⚠️ **Note:** The `<Head>` component is only supported in the legacy Pages Router. In the modern App Router (<span class="example">`app/`</span> directory), use the **<span class="example">`generateMetadata()`</span>** function instead.</p>
+            
+            <h3 class="title">Key Features:</h3>
+            <ul>
+                <li>**Server-Side Rendering (SSR):** Content inside `<Head>` is rendered server-side, ensuring metadata is immediately available to search engine crawlers.</li>
+                <li>**Dynamic Metadata:** You can set page-specific values for `<title>`, `<meta>` tags, and `<link>` elements using JavaScript variables and logic.</li>
+                <li>**Automatic Duplication Handling:** Next.js manages tag rendering to ensure that if multiple `<title>` tags are defined, the most recently rendered one takes precedence.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Basic Usage and Syntax</h2>
+            <p>You import the component and place it anywhere within your page component's return statement. Next.js will hoist the contents into the final `<head>` tag of the HTML document.</p>
+            <pre>import Head from 'next/head'
+
+export default function About() {
+  return (
+    &lt;&gt;
+        &lt;Head&gt;
+            &lt;title&gt;About Us - My Website&lt;/title&gt;
+            &lt;meta name="keywords" content="about us, company, team" /&gt;
+            &lt;link rel="icon" href="/favicon.ico" /&gt;
+        &lt;/Head&gt;
+        &lt;h1&gt;About Us&lt;/h1&gt;
+        &lt;p&gt;Welcome to the about us page of our website!&lt;/p&gt;
+    &lt;/&gt;
+  )}</pre>
+            
+            <h3 class="title">Generating Dynamic Metadata Example</h3>
+            <p>The content within `<Head>` can use JavaScript expressions for dynamic values, allowing you to create titles or descriptions that change based on data (e.g., fetched from an API).</p>
+            <pre>import Head from 'next/head';
+
+export default function About() {
+  const companyName = "TutorialsPoint";
+
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        {/* Dynamic title using a variable */}
+        &lt;title&gt;About Us - {companyName}&lt;/title&gt;
+        &lt;meta name="keywords" content="about us, company, team" /&gt;
+      &lt;/Head&gt;
+      &lt;h1&gt;About Us&lt;/h1&gt;
+    &lt;/&gt;
+  );}
+</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>String</code> Class Summary 📝</h1>
+
+        <div class="content">
+            <p>In Java, **Strings** are **objects** that represent a sequence of characters. The core class for handling text is **<code>java.lang.String</code>**.</p>
+
+            <h2 class="title">I. Immutability: The Most Important Concept 🔒</h2>
+            <ul>
+                <li>
+                    The **<code>String</code>** class is **immutable**. Once a <code>String</code> object is created, its value cannot be changed.
+                </li>
+                <li>
+                    Any method that appears to "modify" a string (like <code>concat()</code>, <code>substring()</code>, or <code>toUpperCase()</code>) actually creates and returns a **new <code>String</code> object**. The original object remains unchanged.
+                </li>
+                <li>
+                    **Alternatives:** For scenarios requiring frequent text modifications, the mutable classes **<code>StringBuilder</code>** (faster, not thread-safe) or **<code>StringBuffer</code>** (thread-safe, slower) should be used.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Creation and Concatenation</h2>
+            <ul>
+                <li>
+                    <strong>Literal Creation:</strong> The most common and memory-efficient way is using a string literal: <code>String s = "Hello";</code>. The compiler uses the **String Pool** to reuse identical literals.
+                </li>
+                <li>
+                    <strong>Constructor Creation:</strong> You can create a new object using the <code>new</code> keyword, often from a character array: <code>String s = new String(charArray);</code>.
+                </li>
+                <li>
+                    <strong>Concatenation:</strong>
+                    <ul>
+                        <li>The **`+` operator** is the most common way and is optimized by the compiler (often internally using <code>StringBuilder</code> for efficiency).</li>
+                        <li>The **<code>concat(String str)</code>** method explicitly returns a new concatenated string.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Essential Accessor and Utility Methods</h2>
+
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Method Examples</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><strong>Accessors</strong></td>
+                    <td><code>int length()</code>, <code>char charAt(int index)</code>, <code>int indexOf(String str)</code></td>
+                    <td>Retrieving information about the string (size, specific character, location of substring).</td>
+                </tr>
+                <tr>
+                    <td><strong>Comparison</strong></td>
+                    <td><code>boolean equals(Object obj)</code>, <code>boolean equalsIgnoreCase(String str)</code>, <code>int compareTo(String str)</code></td>
+                    <td>Checking equality or lexicographical order. Note that <code>==</code> checks object reference equality, not content equality.</td>
+                </tr>
+                <tr>
+                    <td><strong>Modification (New String)</strong></td>
+                    <td><code>String substring(int begin)</code>, <code>String replace(char old, char new)</code>, <code>String trim()</code>, <code>String toUpperCase()</code></td>
+                    <td>Methods that generate and return a new string with the specified change.</td>
+                </tr>
+                <tr>
+                    <td><strong>Parsing/Splitting</strong></td>
+                    <td><code>String[] split(String regex)</code></td>
+                    <td>Divides the string into an array of strings based on a regular expression delimiter.</td>
+                </tr>
+                <tr>
+                    <td><strong>Formatting</strong></td>
+                    <td><code>static String format(String format, Object... args)</code></td>
+                    <td>Returns a formatted string, similar to <code>printf()</code>, allowing reuse of the formatted text.</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">IV. Unicode and Code Points</h2>
+            <p>Java strings are Unicode sequences. Methods using the term "Code Point" (like <code>codePointAt()</code> and <code>codePointCount()</code>) are available to correctly handle characters outside of the Basic Multilingual Plane (BMP), which require two <code>char</code> values (surrogate pairs) to represent a single character.</p>
+        </div>
+    </div>
+</div>

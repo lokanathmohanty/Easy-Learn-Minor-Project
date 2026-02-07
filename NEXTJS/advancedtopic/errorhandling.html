@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Next.js - Error Handling</h1>
+ 
+    <div class="content">
+      <h2 class="title">Error Handling in Next.js</h2>
+      <p>
+        **Next.js** provides a built-in error handling mechanism to help developers detect and handle errors in their applications. For example, if a user tries to access a page that does not exist, you can display a custom **404 error page** according to your application theme.
+      </p>
+      <p>There are two types of errors that can occur in Next.js:</p>
+      <ul>
+        <li class="content">**Expected Errors** (e.g., specific form validation issues)</li>
+        <li class="content">**Unexpected Errors** (e.g., server-side crashes)</li>
+      </ul>
+      <p>
+        Expected errors are often handled by creating custom error pages. Unexpected errors are harder and can be caught using the **`useActionState`** hook to return the error message to the client.
+      </p>
+
+      <h2 class="title">Create a Page to Handle Internal Server Error (500)</h2>
+      <p>
+        An **Internal Server Error (500)** occurs when the server is unable to process a request. By default, Next.js shows a generic 500 page, but you can create a customized one by creating a file named **`500.tsx`** (or `.js`) in the root of the **`/app`** directory (or `/pages` for Pages Router).
+      </p>
+
+      <h3 class="title example">Code for Custom 500 Page</h3>
+      <div class="example">
+        <p>// /app/500.tsx</p>
+        <p>
+          <code>
+            export default function Custom500() &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;return (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;500 - Server Error&lt;/h1&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Sorry, something went wrong on our server.&lt;/p&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;);<br>
+            &#125;<br>
+          </code>
+        </p>
+      </div>
+      <p>
+        This page will be displayed when an unexpected error is thrown on the server side (e.g., inside a Server Component or a Server Action).
+      </p>
+
+      <h2 class="title">Create a Custom 404 Error Page</h2>
+      <p>
+        A **404 error** is raised when a user tries to access a route that does not exist in the application. To handle this, you can create a file named **`not-found.tsx`** (App Router) or **`404.tsx`** (Pages Router).
+      </p>
+
+      <h3 class="title example">Code for Custom 404 Page (Pages Router Example)</h3>
+      <div class="example">
+        <p>// /app/404.tsx</p>
+        <p>
+          <code>
+            export default function Custom404() &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;return (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;404 - Page Not Found&lt;/h1&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Sorry, the page you are looking for does not exist.&lt;/p&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;);<br>
+            &#125;
+          </code>
+        </p>
+      </div>
+
+      <h2 class="title">Handling Unexpected Errors (Form Validation)</h2>
+      <p>
+        Unexpected errors, especially those that result from server-side logic like failed form validation, should be handled explicitly and returned to the client for better user experience.
+      </p>
+      <p>
+        You can use the **`useActionState`** hook from React (imported via `'use client'`) to catch the result (including errors) of a Server Action and update the UI with a message.
+      </p>
+      <ul>
+        <li class="content">
+          **Recommendation**: Avoid using `try/catch` blocks for **expected errors**. Instead, model expected errors as return values of the action, not as thrown exceptions.
+        </li>
+      </ul>
+
+      <h3 class="title example">Example using `useActionState`</h3>
+      <p>
+        This example shows a Client Component using `useActionState` to manage the state returned by a Server Action (`createPost`).
+      </p>
+      <div class="example">
+        <p>// Component using the Server Action</p>
+        <p>
+          <code>
+            'use client'<br>
+            import &#123; useActionState &#125; from 'react'<br>
+            import &#123; createPost &#125; from '@/app/actions'<br>
+            <br>
+            const initialState = &#123;<br>
+            &nbsp;&nbsp;message: '',<br>
+            &#125;<br>
+            <br>
+            export function Form() &#123;<br>
+            &nbsp;&nbsp;// useActionState returns a state object, the action, and the pending status<br>
+            &nbsp;&nbsp;const [state, formAction, pending] = useActionState(createPost, initialState)<br>
+            <br>
+            &nbsp;&nbsp;return (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;form action=&#123;formAction&#125;&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;textarea id="content" name="content" required /&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;state?.message && &lt;p&gt;&#123;state.message&#125;&lt;/p&gt;&#125; &lt;!-- Display error message --&gt;<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button disabled=&#123;pending&#125;&gt;Create Post&lt;/button&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/form&gt;<br>
+            &nbsp;&nbsp;)<br>
+            &#125;<br>
+          </code>
+        </p>
+      </div>
+    </div>
+
+    <div class="content" style="text-align: right;">
+      <a href="#" class="example">Print Page</a>
+    </div>
+  </div>
+</div>

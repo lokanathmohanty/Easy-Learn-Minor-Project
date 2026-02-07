@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - place-self Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS place-self</strong> property is a shorthand property used to align 
+        individual items within a grid or flex container. It combines two properties:
+      </p>
+      <ul>
+        <li><strong>align-self</strong> – controls alignment in the block (vertical) direction.</li>
+        <li><strong>justify-self</strong> – controls alignment in the inline (horizontal) direction.</li>
+      </ul>
+      <p>
+        By using <code>place-self</code>, you can set both values in a single line. If only one 
+        value is provided, it applies to <code>align-self</code>, while <code>justify-self</code> 
+        defaults to <code>auto</code>.
+      </p>
+
+      <h2>Possible Values</h2>
+      <ul>
+        <li><strong>auto</strong> – Uses the parent’s <code>align-self</code> value.</li>
+        <li><strong>normal</strong> – Acts differently depending on layout mode:
+          <ul>
+            <li>Behaves like <code>start</code> on replaced absolutely positioned boxes.</li>
+            <li>Behaves like <code>stretch</code> in most other contexts.</li>
+          </ul>
+        </li>
+        <li><strong>self-start</strong> – Aligns item to the start edge of its alignment container.</li>
+        <li><strong>self-end</strong> – Aligns item to the end edge of its alignment container.</li>
+        <li><strong>flex-start</strong> – Aligns item to the start of the cross-axis.</li>
+        <li><strong>flex-end</strong> – Aligns item to the end of the cross-axis.</li>
+        <li><strong>center</strong> – Centers the item within its container.</li>
+        <li><strong>baseline / first baseline / last baseline</strong> – Aligns item with baseline rules.</li>
+        <li><strong>stretch</strong> – Stretches the item to fill available space.</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <p>Examples of valid syntax:</p>
+      <ul>
+        <li><code>place-self: auto center;</code></li>
+        <li><code>place-self: normal start;</code></li>
+        <li><code>place-self: center normal;</code></li>
+        <li><code>place-self: self-start auto;</code></li>
+        <li><code>place-self: flex-end normal;</code></li>
+        <li><code>place-self: stretch auto;</code></li>
+      </ul>
+
+      <h2>Applies To</h2>
+      <p>
+        This property applies to block-level boxes, absolutely positioned boxes, flex items, 
+        and grid items.
+      </p>
+
+      <h2>Examples</h2>
+
+      <h2>Example 1: place-self: normal start</h2>
+      <p>
+        In this example, <code>Item 2</code> is aligned to the start of its grid cell.
+      </p>
+      <pre>
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 100px;
+}
+.item2 {
+  place-self: normal start;
+}
+      </pre>
+
+      <h2>Example 2: place-self: auto center</h2>
+      <p>
+        In this example, <code>Item 2</code> is centered inside its grid cell.
+      </p>
+      <pre>
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 100px;
+}
+.item2 {
+  place-self: auto center;
+}
+      </pre>
+
+      <h2>Example 3: place-self: center normal</h2>
+      <p>
+        In this case, <code>Item 2</code> is aligned both horizontally and vertically in the center.
+      </p>
+      <pre>
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 100px;
+}
+.item2 {
+  place-self: center normal;
+}
+      </pre>
+
+      <h2>Example 4: place-self: end normal</h2>
+      <p>
+        Here, <code>Item 2</code> is aligned to the end of its grid cell.
+      </p>
+      <pre>
+.item2 {
+  place-self: end normal;
+}
+      </pre>
+
+      <h2>Example 5: place-self: self-start auto</h2>
+      <p>
+        <code>Item 2</code> is aligned to the start of the row vertically, with automatic horizontal positioning.
+      </p>
+      <pre>
+.item2 {
+  place-self: self-start auto;
+}
+      </pre>
+
+      <h2>Example 6: place-self: flex-end normal</h2>
+      <p>
+        Aligns <code>Item 2</code> to the right edge of its container.
+      </p>
+      <pre>
+.item2 {
+  place-self: flex-end normal;
+}
+      </pre>
+
+      <h2>Example 7: place-self: baseline normal</h2>
+      <p>
+        Aligns <code>Item 2</code> to the baseline of the row.
+      </p>
+      <pre>
+.item2 {
+  place-self: baseline normal;
+}
+      </pre>
+
+      <h2>Example 8: place-self: stretch auto</h2>
+      <p>
+        This makes <code>Item 2</code> stretch to fill its grid cell horizontally.
+      </p>
+      <pre>
+.item2 {
+  place-self: stretch auto;
+}
+      </pre>
+
+      <h2>Summary</h2>
+      <p>
+        The <code>place-self</code> property is a powerful shorthand for aligning items in grid 
+        and flexbox layouts. It allows developers to control both vertical and horizontal 
+        alignment with a single declaration. This makes layouts more concise and easier to 
+        manage compared to setting <code>align-self</code> and <code>justify-self</code> separately.
+      </p>
+    </div>
+  </div>
+</div>

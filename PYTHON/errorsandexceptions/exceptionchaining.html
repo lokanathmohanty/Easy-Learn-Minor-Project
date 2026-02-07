@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Exception Chaining</h1>
+    <div class="content">
+      <p>
+        Exception chaining is a technique of handling exceptions by re-throwing a caught exception after wrapping it inside a new exception. The original exception is saved as a property (such as <code>cause</code>) of the new exception.
+      </p>
+      <p>
+        During the handling of one exception 'A', it is possible that another exception 'B' may occur. It is useful to know about both exceptions in order to debug the problem. Exception handlers may deliberately re-raise exceptions to provide extra information or translate exceptions.
+      </p>
+
+      <h2>Basic Example</h2>
+      <pre>
+try:
+   open("nofile.txt")
+except OSError:
+   raise RuntimeError("unable to handle error")
+      </pre>
+      <p>This produces a chained traceback showing both exceptions:</p>
+
+      <h2>The <code>raise ... from</code> Statement</h2>
+      <p>
+        Using an optional <code>from</code> clause in the <code>raise</code> statement indicates that an exception is a direct consequence of another. This helps clarify exception relationships in tracebacks.
+      </p>
+      <pre>
+try:
+   open("nofile.txt")
+except OSError as exc:
+   raise RuntimeError from exc
+      </pre>
+      <p>This results in output showing the original exception as the direct cause of the new one.</p>
+
+      <h2>The <code>raise ... from None</code> Statement</h2>
+      <p>
+        Using <code>from None</code> disables the automatic exception chaining.
+      </p>
+      <pre>
+try:
+   open("nofile.txt")
+except OSError as exc:
+   raise RuntimeError from None
+      </pre>
+      <p>This suppresses the original exception in the traceback.</p>
+
+      <h2>The <code>__context__</code> and <code>__cause__</code> Attributes</h2>
+      <p>
+        Raising an exception inside an except block automatically assigns the caught exception to the new exception's <code>__context__</code>. You can assign <code>__cause__</code> explicitly using <code>raise ... from</code>.
+      </p>
+      <pre>
+try:
+   try:
+      raise ValueError("ValueError")
+   except ValueError as e1:
+      raise TypeError("TypeError") from e1
+except TypeError as e2:
+   print("The exception was", repr(e2))
+   print("Its __context__ was", repr(e2.__context__))
+   print("Its __cause__ was", repr(e2.__cause__))
+      </pre>
+      <p>Output:</p>
+      <pre>
+The exception was TypeError('TypeError')
+Its __context__ was ValueError('ValueError')
+Its __cause__ was ValueError('ValueError')
+      </pre>
+    </div>
+
+   
+  </div>
+</div>

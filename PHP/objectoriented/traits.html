@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Traits</h1>
+        <div class="content">
+            <p>**Traits** are a mechanism for code reuse in single-inheritance languages like PHP. They allow you to define a group of methods that can be injected into multiple independent classes, effectively overcoming the limitation of a class only being able to **extend** one parent class.</p>
+            
+            <h2 class="title">Creating and Using Traits</h2>
+            <ul>
+                <li>A trait is defined using the **<code>trait</code>** keyword, similar to a class or interface.</li>
+                <li>A class makes the methods of a trait available by using the **<code>use</code>** keyword inside its body.</li>
+                <li>Methods from a trait are included in the class and are available just as if they were defined in the class itself.</li>
+                <li>It is **not possible to instantiate a Trait** on its own.</li>
+            </ul>
+
+            <h2 class="title">Advanced Trait Features</h2>
+            <p>A single class can use **multiple traits**, and PHP provides tools to handle conflicts when two traits define a method with the same name:</p>
+            
+            <h3 class="title">Conflict Resolution</h3>
+            <ul>
+                <li>**Class Overrides Trait:** If the class itself defines a method with the same name as a trait method, the class's method takes precedence (overrides) the trait's method.</li>
+                <li>**<code>insteadof</code> Keyword:** When two traits used in the same class have a name collision, the <code>insteadof</code> keyword is used to explicitly specify which trait's method should be used.
+                    <p>Example: <code>use TraitA, TraitB { TraitB::methodName insteadof TraitA; }</code></p></li>
+                <li>**Aliasing (`as`):** The <code>as</code> keyword can be used to give a trait method an alternative name (an alias), allowing both conflicting methods to be available in the class under different names.
+                    <p>Example: <code>TraitA::methodName as newName;</code></p></li>
+            </ul>
+
+            <h3 class="title">Why Use Traits?</h3>
+            <p>Traits help to achieve better code organization and reusability:</p>
+            <ol>
+                <li>They allow for fine-grained, horizontal reuse of functionality among unrelated classes.</li>
+                <li>They help keep the code clean and avoid the need to write the same methods repeatedly in different classes.</li>
+                <li>They provide a flexible alternative to traditional inheritance for sharing behavior.</li>
+            </ol>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Reusing Calculation Logic</h3>
+            <p>The following example demonstrates using two separate traits, <code>addition</code> and <code>multiplication</code>, inside a single <code>numbers</code> class to mix functionalities efficiently.</p>
+            
+            <pre><code>
+trait addition {
+   function add($x, $y) { return $x + $y; }
+}
+
+trait multiplication {
+   function multiply($x, $y) { return $x * $y; }
+}
+
+class numbers {
+   // Injecting methods from both traits
+   use addition, multiplication; 
+   private int $m1, $m2;
+
+   function __construct($x, $y) {
+      $this->m1 = $x;
+      $this->m2 = $y;
+   }
+
+   function calculate(): array {
+      // The class can call trait methods as if they were its own
+      $sum = $this->add($this->m1, $this->m2);
+      $product = $this->multiply($this->m1, $this->m2);
+      return [$sum, $product];
+   }
+}
+
+$obj = new numbers(10, 5);
+// Output: Addition: 15, Multiplication: 50
+            </code></pre>
+        </div>
+    </div>
+</div>

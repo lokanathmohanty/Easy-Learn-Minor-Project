@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Logical Operators in C</h1>
+    <div class="content">
+      <p>Logical operators in C evaluate to either True or False and are typically used with Boolean operands.</p>
+      <p>The logical AND operator (<code>&&</code>) and the logical OR operator (<code>||</code>) are binary operators requiring two operands, while the logical NOT operator (<code>!</code>) is unary.</p>
+      <p>Since C treats 0 as False and any non-zero number as True, operands to logical operators are implicitly converted to Boolean values.</p>
+
+      <h2>Logical Operators</h2>
+      <ul>
+        <li><code>&&</code> (Logical AND): True if both operands are non-zero.</li>
+        <li><code>||</code> (Logical OR): True if either operand is non-zero.</li>
+        <li><code>!</code> (Logical NOT): Unary operator that reverses logical state.</li>
+      </ul>
+
+      <h2>Truth Tables</h2>
+      <h3>Logical AND (<code>&&</code>)</h3>
+      <ul>
+        <li>true && true = true</li>
+        <li>true && false = false</li>
+        <li>false && true = false</li>
+        <li>false && false = false</li>
+      </ul>
+
+      <h3>Logical OR (<code>||</code>)</h3>
+      <ul>
+        <li>true || true = true</li>
+        <li>true || false = true</li>
+        <li>false || true = true</li>
+        <li>false || false = false</li>
+      </ul>
+
+      <h3>Logical NOT (<code>!</code>)</h3>
+      <ul>
+        <li>!true = false</li>
+        <li>!false = true</li>
+      </ul>
+
+      <h2>Examples</h2>
+      <p>Example 1: Basic logical operators usage in C</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 5;
+   int b = 20;
+
+   if (a && b){
+      printf("Line 1 - Condition is true\n");
+   }
+
+   if (a || b){
+      printf("Line 2 - Condition is true\n");
+   }
+
+   a = 0;
+   b = 10;
+
+   if (a && b){
+      printf("Line 3 - Condition is true\n");
+   } else {
+      printf("Line 3 - Condition is not true\n");
+   }
+
+   if (!(a && b)){
+      printf("Line 4 - Condition is true\n");
+   }
+   return 0;
+}
+</code></pre>
+
+      <p>Output:</p>
+      <p>Line 1 - Condition is true<br>
+      Line 2 - Condition is true<br>
+      Line 3 - Condition is not true<br>
+      Line 4 - Condition is true</p>
+
+      <p>Example 2: Logical operators with <code>char</code> type</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   char a = 'a';
+   char b = '\0'; // Null character
+
+   if (a && b){
+      printf("Line 1 - Condition is true\n");
+   }
+
+   if (a || b){
+      printf("Line 2 - Condition is true\n");
+   }
+   return 0;
+}
+</code></pre>
+
+      <p>Output:</p>
+      <p>Line 2 - Condition is true</p>
+
+      <p>Example 3: Compound Boolean expression using logical OR</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int phy = 50;
+   int maths = 60;
+
+   if (phy &lt; 50 || maths &lt; 50){
+      printf("Result:Fail");
+   } else {
+      printf("Result:Pass");
+   }
+   return 0;
+}
+</code></pre>
+
+      <p>Output: Result:Pass</p>
+
+      <p>Example 4: Compound Boolean expression using logical AND</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int phy = 50;
+   int maths = 60;
+
+   if (phy &gt;= 50 && maths &gt;= 50){
+      printf("Result: Pass");
+   } else {
+      printf("Result: Fail");
+   }
+   return 0;
+}
+</code></pre>
+
+      <p>Output: Result: Pass</p>
+
+      <p>Example 5: Using logical NOT operator in a while loop</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int i = 0;
+
+   while (!(i &gt; 5)){
+      printf("i = %d\n", i);
+      i++;
+   }
+   return 0;
+}
+</code></pre>
+
+      <p>Output:</p>
+      <p>i = 0<br>
+i = 1<br>
+i = 2<br>
+i = 3<br>
+i = 4<br>
+i = 5</p>
+
+      <p>Logical operators are commonly used to build complex boolean expressions and control program flow.</p>
+    </div>
+  </div>
+</div>

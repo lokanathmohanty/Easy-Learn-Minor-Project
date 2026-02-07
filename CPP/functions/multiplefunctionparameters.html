@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Functions with Multiple Parameters 🔢</h1>
+
+        <div class="content">
+            <p>C++ functions can accept **multiple parameters** (arguments), enabling them to perform complex operations that require several inputs. This feature is fundamental to modular design, allowing functions to work with various subsets of data simultaneously.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Syntax and Data Types</h2>
+            <p>Multiple parameters are defined in the function signature by listing them separated by commas, each with its own specific **data type** and **name**.</p>
+            <pre class="example">
+return_type function_name(param1_type param1_name, param2_type param2_name, ...);
+</pre>
+            <p>Functions can accept parameters of a **single data type** (e.g., three <code>int</code>s for a sum) or **multiple different data types** (e.g., a <code>string</code> name, an <code>int</code> age, and a <code>double</code> height), allowing for flexible input handling.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Parameter Passing Techniques</h2>
+            <p>The technique used to pass multiple arguments determines how the data is transferred and whether the function can modify the original variables:</p>
+            <ul>
+                <li>
+                    <strong>Pass by Value (Default):</strong> A **copy** of the actual argument's value is passed. Changes inside the function **do not** affect the original variable. This is simple and safe but can be inefficient for large objects.
+                </li>
+                <li>
+                    <strong>Pass by Reference (using <code>&amp;</code>):</strong> A **reference (alias)** to the original variable is passed. The function works directly with the original data, meaning changes **do** affect the original variable. This is highly efficient as it avoids copying.
+                </li>
+                <li>
+                    <strong>Pass by Constant Reference (using <code>const &amp;</code>):</strong> The address is passed for efficiency, but the <code>const</code> keyword ensures the function **cannot modify** the original data. This is the best practice for passing large immutable types like <code>std::string</code>.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Types of Multiple Parameters</h2>
+
+            <h3>1. Fixed Number of Parameters</h3>
+            <p>The standard function type where the exact number of parameters is specified in the declaration and remains constant for every call.</p>
+
+            <h3>2. Default Parameters</h3>
+            <p>Parameters assigned a default value in the function declaration. If the argument is omitted during the function call, the default value is used. Default parameters must be placed at the **end** of the parameter list.</p>
+            <pre class="example">
+// If no name or age is provided, defaults are used.
+void greet(const string& name = "Guest", int age = 0);
+</pre>
+
+            <h3>3. Variable Number of Parameters (Variadic)</h3>
+            <p>Functions that can accept an arbitrary, unspecified number of arguments. In modern C++ (since C++11), this is accomplished using **variadic templates** (<code>template&lt;typename... Args&gt;</code>).</p>
+
+            <h3>4. Parameter Objects and Named Parameters</h3>
+            <p>While C++ doesn't have native **named parameters**, a clean, object-oriented approach is to group related values into a **struct** or **class** (a **Parameter Object**). The function then takes a single parameter of that complex type, improving readability and organization.</p>
+            <pre class="example">
+struct Person { string name; int age; };
+
+// Function takes one Person object, containing multiple data points.
+void printPerson(const Person& p) { ... }
+</pre>
+        </div>
+    </div>
+</div>

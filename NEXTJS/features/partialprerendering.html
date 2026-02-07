@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Partial Pre-Rendering (PPR) ✨</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Partial Pre-Rendering?</h2>
+            <p>**Partial Pre-Rendering (PPR)** is an experimental rendering pattern in Next.js designed to combine the performance benefits of static rendering with the up-to-date nature of dynamic rendering on a **single page**. It ensures the fastest possible initial load by serving static content immediately while streaming dynamic content to the client.</p>
+            <p>During the build phase, the entire page's static structure is pre-rendered, including a **static fallback** for any dynamic sections. The actual dynamic data is fetched later on demand.</p>
+            <p class="example">**Note:** PPR is an experimental, canary feature and is not recommended for production use as it is subject to change.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">How PPR Works (Static Shell + Streaming)</h2>
+            <p>PPR uses **React Suspense** boundaries to define the dynamic parts of a page:</p>
+            
+            <h3 class="title">1. Initial Static Shell Generation</h3>
+            <ul>
+                <li>At **build time**, Next.js generates the basic HTML structure (the "static shell") of the page.</li>
+                <li>All genuinely **static components** are included in this initial HTML.</li>
+                <li>The areas wrapped in **<span class="example">`&lt;Suspense&gt;`</span>** are replaced by their **<span class="example">`fallback`</span>** content (e.g., a loading spinner).</li>
+                <li>When the user first visits the page, they immediately see this static HTML and the fallback, resulting in a very fast **First Contentful Paint (FCP)**.</li>
+            </ul>
+            
+            <h3 class="title">2. Dynamic Content Streaming</h3>
+            <ul>
+                <li>The page then loads the client-side JavaScript.</li>
+                <li>The dynamic component (the child of <span class="example">`&lt;Suspense&gt;`</span>) starts fetching its data (often with the <span class="example">`cache: 'no-store'`</span> option).</li>
+                <li>Once the dynamic data is ready, the content is **streamed** to the client, replacing the fallback UI with the final, data-rich component.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Key Implementation Element</h2>
+            <p>The core mechanism for triggering Partial Pre-rendering is the combination of an **`async` Server Component** (for dynamic data fetching) wrapped in a **`&lt;Suspense&gt;`** boundary:</p>
+            <pre>export default function Page() {
+  return (
+    &lt;main&gt;
+      {/* Static content runs immediately at build time */}
+      &lt;StaticContent /&gt;
+      
+      {/* Dynamic component is replaced by fallback until data arrives */}
+      &lt;Suspense fallback={&lt;div&gt;Loading products...&lt;/div&gt;}&gt;
+        &lt;DynamicProducts /&gt;
+      &lt;/Suspense&gt;
+    &lt;/main&gt;
+  )}</pre>
+        </div>
+    </div>
+</div>

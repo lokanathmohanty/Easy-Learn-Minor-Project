@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Encryption using OpenSSL</h1>
+
+        <div class="content">
+            <p>PHP handles encryption and decryption using the **OpenSSL extension**, which replaced the deprecated $\text{mcrypt}$ extension in PHP 7.2. OpenSSL provides an extensive set of cryptographic capabilities, including support for modern algorithms like **AES (Advanced Encryption Standard)**.</p>
+            <p>You can check the supported algorithms using the $\text{openssl\_get\_cipher\_methods()}$ function.</p>
+
+            <hr>
+
+            <h2 class="title">The $\text{openssl\_encrypt()}$ Function 🔐</h2>
+            <p>This function encrypts the given **plaintext data** using a specified cipher, key (passphrase), and **Initialization Vector (IV)**. It returns the encrypted data as a raw or Base64 encoded string.</p>
+            <pre>
+openssl_encrypt(
+   string $data,
+   string $cipher_algo,
+   string $passphrase,
+   int $options = 0,
+   string $iv = "",
+   // ... other parameters for AEAD modes
+): string|false</pre>
+            
+            <h3>Key Parameters:</h3>
+            <ul>
+                <li>$\text{\$data}$: The plaintext message to be encrypted.</li>
+                <li>$\text{\$cipher\_algo}$: The encryption method (e.g., $\text{"aes-256-cbc"}$, $\text{"BF-CBC"}$).</li>
+                <li>$\text{\$passphrase}$: The secret key used for encryption/decryption.</li>
+                <li>$\text{\$iv}$: The **Initialization Vector** (a non-secret random value that ensures the same plaintext encrypts to different ciphertext each time, making it harder to break). The IV **must be stored and transmitted** alongside the ciphertext.</li>
+                <li>$\text{\$options}$: Used to specify if the output should be raw binary ($\text{OPENSSL\_RAW\_DATA}$). By default, output is Base64 encoded.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">The $\text{openssl\_decrypt()}$ Function 🔓</h2>
+            <p>This function performs the reverse operation, decrypting the ciphertext back into the original plaintext. It requires the same $\text{cipher\_algo}$, $\text{passphrase}$, and **$\text{IV}$** that were used during encryption.</p>
+            <pre>
+openssl_decrypt(
+   string $data,
+   string $cipher_algo,
+   string $passphrase,
+   int $options = 0,
+   string $iv = "",
+   // ... other parameters for AEAD modes
+): string|false</pre>
+            
+            <p>The function returns the original plaintext string on success or $\text{false}$ on failure (e.g., if the key or IV is incorrect).</p>
+
+            <hr>
+
+            <h2 class="title">Encryption Process Example (BF-CBC)</h2>
+            <p>The following example demonstrates the necessary steps: obtaining the correct IV length, generating a secure random IV, encrypting, and then decrypting.</p>
+            <pre>
+&lt;?php
+   // 1. Define inputs
+   $source = "PHP: Hypertext Preprocessor";
+   $algo = "BF-CBC";
+   $key = "abcABC123!@#"; 
+
+   // 2. Generate a secure, random IV
+   $ivlength = openssl_cipher_iv_length($algo);
+   // Generate IV using cryptographically secure random bytes
+   $iv = random_bytes($ivlength); 
+
+   // 3. Encryption (using default Base64 output)
+   $encstring = openssl_encrypt($source, $algo, $key, 0, $iv);
+
+   // 4. Decryption
+   $decrstring = openssl_decrypt($encstring, $algo, $key, 0, $iv);
+
+   echo "Original: " . $source . "\n";
+   echo "Encrypted: " . $encstring . "\n";
+   echo "Decrypted: " . $decrstring;
+?&gt;</pre>
+            <p>Note: In real-world applications, you must use strong ciphers like $\text{aes-256-gcm}$ or $\text{aes-256-cbc}$, and the **IV must be unique and securely generated** for every encryption operation.</p>
+        </div>
+    </div>
+</div>

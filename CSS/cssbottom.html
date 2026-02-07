@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS bottom Property</h1>
+    <div class="content">
+      <p>The CSS <code>bottom</code> property is used to define the bottom position of a positioned element. It specifies the distance between the bottom edge of the element and the bottom edge of its containing element. The way this property works depends on the <code>position</code> value (absolute, relative, fixed, sticky). For elements with <code>static</code> position, the <code>bottom</code> property has no effect.</p>
+
+      <h2>Syntax</h2>
+      <p><code>bottom: auto | length | percentage | initial | inherit;</code></p>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>auto:</strong> Default value. Lets the browser calculate the position.</li>
+        <li><strong>length:</strong> Sets distance in units like <code>px</code>, <code>em</code>. Negative values are valid.</li>
+        <li><strong>percentage:</strong> Sets distance as a percentage of the containing element’s height. Negative values are valid.</li>
+        <li><strong>initial:</strong> Resets the property to its default value.</li>
+        <li><strong>inherit:</strong> Inherits the value from the parent element.</li>
+      </ul>
+
+      <h2>Bottom Property with Absolute Position</h2>
+      <p>When used with <code>position: absolute</code>, the <code>bottom</code> property places the element relative to its first positioned ancestor (non-static). The offset is measured from the bottom edge of the parent.</p>
+
+      <h3>Example</h3>
+      <pre>
+.container {
+  position: relative;
+  height: 400px;
+}
+.box {
+  position: absolute;
+  bottom: 150px;
+}
+.box2 {
+  position: absolute;
+  bottom: 10%;
+}
+.box3 {
+  position: absolute;
+  bottom: auto;
+}
+      </pre>
+      <p>Here, <code>box</code> is placed 150px from the bottom, <code>box2</code> is placed 10% above the bottom, and <code>box3</code> defaults to auto (calculated by the browser).</p>
+
+      <h2>Bottom Property with Relative Position</h2>
+      <p>When used with <code>position: relative</code>, the <code>bottom</code> property shifts the element relative to its normal position in the flow.</p>
+
+      <h3>Example</h3>
+      <pre>
+.box {
+  position: relative;
+  bottom: auto;
+}
+.box2 {
+  position: relative;
+  bottom: 55%;
+}
+.box3 {
+  position: relative;
+  bottom: 25px;
+}
+      </pre>
+      <p>In this case, <code>box2</code> moves up by 55% of its containing block, and <code>box3</code> moves up by 25px, while <code>box</code> remains unchanged (auto).</p>
+
+      <h2>Bottom Property with Fixed Position</h2>
+      <p>With <code>position: fixed</code>, the element is placed relative to the viewport and stays in that position even when the page scrolls.</p>
+
+      <h3>Example</h3>
+      <pre>
+.box {
+  position: fixed;
+  bottom: auto;
+}
+.box2 {
+  position: fixed;
+  bottom: 75px;
+}
+.box3 {
+  position: fixed;
+  bottom: 2%;
+}
+      </pre>
+      <p>Here, <code>box2</code> is always fixed 75px from the viewport bottom, and <code>box3</code> is 2% above the viewport’s bottom edge.</p>
+
+      <h2>Bottom Property with Sticky Position</h2>
+      <p>With <code>position: sticky</code>, the element toggles between relative and fixed positioning depending on scroll position. The <code>bottom</code> property determines how close it can get to the container’s bottom edge before stopping.</p>
+
+      <h3>Example</h3>
+      <pre>
+.box {
+  position: sticky;
+  bottom: auto;
+}
+.box2 {
+  position: sticky;
+  bottom: 10px;
+}
+.box3 {
+  position: sticky;
+  bottom: 10%;
+}
+      </pre>
+      <p>Here, <code>box2</code> sticks 10px from the container’s bottom, and <code>box3</code> sticks 10% above the bottom.</p>
+
+      <h2>Important Note</h2>
+      <p>For elements with <code>position: static</code> (the default), the <code>bottom</code> property has no effect. The element will remain in the normal flow of the document.</p>
+
+      <h2>Supported Browsers</h2>
+      <ul>
+        <li>Chrome: 1.0+</li>
+        <li>Edge: 5.0+</li>
+        <li>Firefox: 1.0+</li>
+        <li>Safari: 1.0+</li>
+        <li>Opera: 6.0+</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li><code>bottom</code> only works on positioned elements (relative, absolute, fixed, sticky).</li>
+        <li>It specifies how far an element is offset from its containing block or viewport.</li>
+        <li>Negative values are allowed, pushing the element outside its container.</li>
+        <li><code>static</code> elements ignore <code>bottom</code>.</li>
+      </ul>
+    </div>
+  </div>
+</div>

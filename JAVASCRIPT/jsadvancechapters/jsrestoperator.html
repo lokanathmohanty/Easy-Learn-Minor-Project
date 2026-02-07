@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="session" data-session-id="js-rest-operator">
+    <h1 class="title">JavaScript - Rest Operator</h1>
+
+    <div class="content">
+      <p>
+        There are times when we want to pass any number of arguments to a function or get specific elements separately 
+        from an array or object. In such cases, we can use the <strong>rest operator</strong>.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>What is Rest Operator?</h2>
+      <p>
+        The rest operator (<code>...</code>) allows us to call a function with any number of arguments and access 
+        those excess arguments as an array. It also enables destructuring of arrays or objects, collecting the remaining 
+        elements or properties into a single array or object.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Rest Operator with Function Parameters</h2>
+      <p>
+        When defining a function, the rest operator can be used to capture all remaining arguments inside an array. 
+        This allows us to handle any number of arguments dynamically.
+      </p>
+      <pre>
+function sum(...args) {
+  let total = 0;
+  for (let i of args) {
+     total += i;
+  }
+  return total;
+}
+
+console.log(sum(1, 2, 3, 4, 5));  // 15
+console.log(sum(1, 2, 3));        // 6
+      </pre>
+      <p><strong>Output:</strong><br>15<br>6</p>
+    </div>
+
+    <div class="content">
+      <h2>Rest Operator with Array Destructuring</h2>
+      <p>
+        The rest operator helps in array destructuring by allowing us to extract specific elements separately while 
+        collecting the remaining elements in another array.
+      </p>
+      <pre>
+let arr = [1, 2, 3, 4, 5];
+let [first, second, ...rest] = arr;
+
+console.log(first);   // 1
+console.log(second);  // 2
+console.log(rest);    // [3, 4, 5]
+      </pre>
+      <p><strong>Output:</strong><br>1<br>2<br>[3, 4, 5]</p>
+    </div>
+
+    <div class="content">
+      <h2>Rest Operator with Object Destructuring</h2>
+      <p>
+        Similarly, the rest operator can be used with object destructuring to extract specific properties while collecting 
+        the remaining properties into a new object.
+      </p>
+      <pre>
+let obj = { name: "Aish", age: 21, city: "Hyderabad", country: "India" };
+let { name, age, ...rest } = obj;
+
+console.log(name);  // Aish
+console.log(age);   // 21
+console.log(rest);  // { city: "Hyderabad", country: "India" }
+      </pre>
+      <p><strong>Output:</strong><br>Aish<br>21<br>{ city: "Hyderabad", country: "India" }</p>
+    </div>
+
+    <div class="content">
+      <p>
+        <a href="#prev" class="prev">Previous</a> | 
+        <a href="#next" class="next">Next</a> | 
+        <a href="#toc" class="toc">Table of Contents</a>
+      </p>
+    </div>
+  </div>
+</div>

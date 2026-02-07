@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Callbacks Concept</h1>
+    <div class="content">
+      <h2>What is a Callback?</h2>
+      <p>
+        In Node.js, a callback is a special asynchronous function passed as an argument to another function. It enables Node.js to perform tasks asynchronously, letting other operations run while waiting for a lengthy process to complete. Callbacks are essential for non-blocking operations.
+      </p>
+
+      <h2>Callback Syntax</h2>
+      <pre><code>function function_name(argument, function (callback_argument) {
+  // callback body
+})</code></pre>
+
+      <h2>Example: setTimeout Callback</h2>
+      <pre><code>setTimeout(function () {
+  console.log('This prints after 1000 ms');
+}, 1000);
+
+console.log("Hello World");</code></pre>
+      <p>Output:</p>
+      <p><strong>Hello World</strong></p>
+      <p><strong>This prints after 1000 ms</strong></p>
+
+      <h2>Blocking Code Example</h2>
+      <p>This example reads a file synchronously, blocking further execution until complete.</p>
+      <pre><code>var fs = require("fs");
+var data = fs.readFileSync('input.txt');
+console.log(data.toString());
+
+let i = 1;
+while (i <= 5) {
+  console.log("The number is " + i);
+  i++;
+}</code></pre>
+
+      <h2>Non-Blocking Code Example Using Callback</h2>
+      <p>This example reads a file asynchronously and uses a callback function to handle results without blocking.</p>
+      <pre><code>var fs = require("fs");
+fs.readFile('input.txt', function (err, data) {
+  if (err) return console.error(err);
+  console.log(data.toString());
+});
+
+let i = 1;
+while (i <= 5) {
+  console.log("The number is " + i);
+  i++;
+}</code></pre>
+      <p>Output:</p>
+      <p>
+        The numbers 1 through 5 will print before the file contents, showing non-blocking behavior.
+      </p>
+
+      <h2>Callback as Arrow Function</h2>
+      <p>Using ES6 arrow functions simplifies callback syntax:</p>
+      <pre><code>var fs = require("fs");
+fs.readFile('input.txt', (err, data) => {
+  if (err) return console.error(err);
+  console.log(data.toString());
+});
+
+let i = 1;
+while (i <= 5) {
+  console.log("The number is " + i);
+  i++;
+}</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,225 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Classes and Objects</h1>
+
+    <div class="content">
+      <p>Java is an Object-Oriented programming language. In Java, the classes and objects are the basic and important features of object-oriented programming. Java supports the following OOP concepts:</p>
+      <ul>
+        <li>Classes</li>
+        <li>Objects</li>
+        <li>Inheritance</li>
+        <li>Polymorphism</li>
+        <li>Encapsulation</li>
+        <li>Abstraction</li>
+        <li>Instance</li>
+        <li>Method</li>
+        <li>Message Passing</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>What are Java Classes?</h2>
+      <p>A class is a blueprint from which individual objects are created. It defines attributes and methods for objects. For example, "Student" can be a class, while student1 and student2 are its objects.</p>
+      <h3>Properties of Java Classes</h3>
+      <ul>
+        <li>A class does not consume memory until an object is created.</li>
+        <li>A class represents a concept, not an actual object.</li>
+        <li>A class contains data members and methods.</li>
+        <li>Classes can be nested.</li>
+        <li>Classes follow OOP rules like inheritance, encapsulation, and abstraction.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h3>Types of Class Variables</h3>
+      <ul>
+        <li><strong>Local variables</strong> – Declared inside methods or blocks.</li>
+        <li><strong>Instance variables</strong> – Declared in a class but outside methods, initialized when an object is created.</li>
+        <li><strong>Class variables</strong> – Declared with <code>static</code> keyword, shared across all objects.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h3>Creating (Declaring) a Java Class</h3>
+      <p><strong>Syntax:</strong></p>
+      <pre><code>access_modifier class ClassName {
+  // data members
+  // constructors
+  // methods
+}</code></pre>
+
+      <p><strong>Example:</strong></p>
+      <pre><code>class Dog {
+  String breed;
+  int age;
+  String color;
+
+  public void setBreed(String breed) {
+    this.breed = breed;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  public void printDetails() {
+    System.out.println("Dog detials:");
+    System.out.println(this.breed);
+    System.out.println(this.age);
+    System.out.println(this.color);
+  }
+}</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>What are Java Objects?</h2>
+      <p>An object is an instance of a class and represents a real-world entity with state and behavior. For example, a dog object may have state (breed, color, age) and behavior (barking, running).</p>
+
+      <h3>Creating (Declaring) a Java Object</h3>
+      <p><strong>Syntax:</strong></p>
+      <pre><code>ClassName objectName = new ClassName();</code></pre>
+      <p><strong>Example:</strong></p>
+      <pre><code>public class Main {
+  public static void main(String[] args) {
+    Dog obj = new Dog();
+    obj.setBreed("Golden Retriever");
+    obj.setAge(2);
+    obj.setColor("Golden");
+    obj.printDetails();
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Dog detials:</li>
+        <li>Golden Retriever</li>
+        <li>2</li>
+        <li>Golden</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Accessing Instance Variables and Methods</h2>
+      <p>Instance variables and methods are accessed using the object reference.</p>
+      <pre><code>ObjectReference = new Constructor();
+ObjectReference.variableName;
+ObjectReference.methodName();</code></pre>
+
+      <p><strong>Example:</strong></p>
+      <pre><code>public class Puppy {
+  int puppyAge;
+
+  public Puppy(String name) {
+    System.out.println("Name chosen is :" + name );
+  }
+
+  public void setAge(int age) {
+    puppyAge = age;
+  }
+
+  public int getAge() {
+    System.out.println("Puppy's age is :" + puppyAge );
+    return puppyAge;
+  }
+
+  public static void main(String[] args) {
+    Puppy myPuppy = new Puppy("tommy");
+    myPuppy.setAge(2);
+    myPuppy.getAge();
+    System.out.println("Variable Value :" + myPuppy.puppyAge);
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Name chosen is :tommy</li>
+        <li>Puppy's age is :2</li>
+        <li>Variable Value :2</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Rules for Using Classes and Objects</h2>
+      <ul>
+        <li>Only one public class per source file.</li>
+        <li>Source file can have multiple non-public classes.</li>
+        <li>Public class name must match the file name (e.g., <code>Employee.java</code>).</li>
+        <li>If using packages, the <code>package</code> statement should be first.</li>
+        <li><code>import</code> statements must follow the package statement (if any).</li>
+        <li>All classes in the same file share import/package declarations.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>More Examples on Java Classes and Objects</h2>
+      <h3>Example 1: Employee Class</h3>
+      <pre><code>import java.io.*;
+
+public class Employee {
+  String name;
+  int age;
+  String designation;
+  double salary;
+
+  public Employee(String name) {
+    this.name = name;
+  }
+
+  public void empAge(int empAge) {
+    age = empAge;
+  }
+
+  public void empDesignation(String empDesig) {
+    designation = empDesig;
+  }
+
+  public void empSalary(double empSalary) {
+    salary = empSalary;
+  }
+
+  public void printEmployee() {
+    System.out.println("Name:" + name);
+    System.out.println("Age:" + age);
+    System.out.println("Designation:" + designation);
+    System.out.println("Salary:" + salary);
+  }
+}</code></pre>
+
+      <h3>Example 2: EmployeeTest Class</h3>
+      <pre><code>import java.io.*;
+
+public class EmployeeTest {
+  public static void main(String[] args) {
+    Employee empOne = new Employee("James Smith");
+    Employee empTwo = new Employee("Mary Anne");
+
+    empOne.empAge(26);
+    empOne.empDesignation("Senior Software Engineer");
+    empOne.empSalary(1000);
+    empOne.printEmployee();
+
+    empTwo.empAge(21);
+    empTwo.empDesignation("Software Engineer");
+    empTwo.empSalary(500);
+    empTwo.printEmployee();
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Name:James Smith</li>
+        <li>Age:26</li>
+        <li>Designation:Senior Software Engineer</li>
+        <li>Salary:1000.0</li>
+        <li>Name:Mary Anne</li>
+        <li>Age:21</li>
+        <li>Designation:Software Engineer</li>
+        <li>Salary:500.0</li>
+      </ul>
+    </div>
+  </div>
+</div>

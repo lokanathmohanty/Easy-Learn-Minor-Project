@@ -1,0 +1,66 @@
+
+
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - AJAX RSS Feed Integration Example</h1>
+
+        <div class="content">
+            <h2 class="title">Really Simple Syndication (RSS) and AJAX</h2>
+            <p>The **Really Simple Syndication (RSS)** format is used to publish frequently updated web content (like news, blogs, and media). This example demonstrates integrating **RSS feeds** into a website using the **AJAX** pattern with **PHP** as the server-side processor. The user can select a news source, and the latest headlines are fetched and displayed dynamically without reloading the page.</p>
+
+            <h3 class="title">Client-Side Logic ($\text{index.html}$)</h3>
+            <p>The client page contains a $\text{select}$ form element. When the user changes the selection ($\text{onchange}$), the **$\text{showRSS()}$** JavaScript function is executed. This function performs the following steps:</p>
+            <ul>
+                <li>Creates an **$\text{XMLHttpRequest}$ ($\text{XHR}$)** object.</li>
+                <li>Sends an asynchronous $\text{GET}$ request to $\text{rss.php}$, passing the selected feed value ($\text{cnn}$, $\text{bbc}$, $\text{pc}$) as the $\text{q}$ query parameter.</li>
+                <li>Upon receiving a successful response ($\text{readyState} = 4$, $\text{status} = 200$), it updates the content of the $\text{\div id="output"}$ element with the $\text{responseText}$ received from the server.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Server-Side RSS Parsing ($\text{rss.php}$)</h2>
+
+            <h3>PHP Feed Selection and Parsing</h3>
+            <p>The $\text{rss.php}$ script receives the feed choice ($\text{\$q}$) via $\text{\$_GET}$ and uses PHP's **$\text{DOMDocument}$** class to retrieve and parse the external RSS XML data.</p>
+            <ol>
+                <li>**Determine URL:** An $\text{if/elseif}$ structure maps the input query ($\text{\$q}$) to the corresponding RSS feed $\text{URL}$ ($\text{\$xml}$).</li>
+                <li>**Load XML:** The $\text{\$xmlDoc->load(\$xml);}$ method loads the external XML data directly from the $\text{URL}$.</li>
+                <li>**Extract Channel Info:** It uses $\text{getElementsByTagName()}$ to extract and $\text{echo}$ the channel's general information ($\text{title}$, $\text{link}$, $\text{description}$).</li>
+                <li>**Extract Items:** It fetches all $\text{<item>}$ elements ($\text{\$x}$), which represent the individual news stories. The script then iterates through the first few items (up to $\text{i <= 2}$) to extract the $\text{item}$'s $\text{title}$, $\text{link}$, and $\text{description}$.</li>
+                <li>**Generate HTML Output:** The extracted data is formatted into HTML paragraphs and links and $\text{echo}$ed back to the client as the AJAX response.</li>
+            </ol>
+            <pre>
+&lt;?php
+   $q = $_GET["q"];
+   // URL selection based on $q...
+
+   $xmlDoc = new DOMDocument();
+   $xmlDoc->load($xml); // Loads the external RSS feed
+
+   // --- Extract Channel Info ---
+   $channel = $xmlDoc->getElementsByTagName('channel')->item(0);
+   $channel_title = $channel->getElementsByTagName('title')
+   -&gt;item(0)-&gt;childNodes-&gt;item(0)-&gt;nodeValue;
+   // ... other channel extracts
+
+   echo("&lt;p&gt;&lt;a href = '" . $channel_link . "'&gt;" . 
+      $channel_title . "&lt;/a&gt;");
+   echo("&lt;br&gt;");
+   echo($channel_desc . "&lt;/p&gt;");
+
+   // --- Extract Individual Items ---
+   $x = $xmlDoc->getElementsByTagName('item');
+
+   for ($i = 0; $i&lt;=2; $i++) { // Limit to first 3 items
+      $item_title = $x-&gt;item($i)-&gt;getElementsByTagName('title')
+      -&gt;item(0)-&gt;childNodes-&gt;item(0)-&gt;nodeValue;
+      // ... other item extracts
+
+      echo ("&lt;p&gt;&lt;a href = '" . $item_link . "'&gt;" . $item_title . "&lt;/a&gt;");
+      echo ("&lt;br&gt;");
+      echo ($item_desc . "&lt;/p&gt;");
+   }
+?&gt;</pre>
+        </div>
+    </div>
+</div>

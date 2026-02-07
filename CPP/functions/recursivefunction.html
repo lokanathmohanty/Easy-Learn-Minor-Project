@@ -1,0 +1,192 @@
+Return Statement in C++
+Previous
+Quiz
+Next
+The return statement in C++ is used to exit a function and to send a value back to the function's caller which is optional depending on requirement. It plays a very important role in controlling the flow of a program and making sure that functions will provide results to other parts of the code.
+
+Syntax
+Below is the syntax of using return statement in C++ −
+
+return [expression];
+Where, "expression" is optional, specifically used for function. If provided, it specifies the value to be returned to the caller.
+
+Example of return Statement
+The following is an example of return statement −
+
+#include <iostream>
+using namespace std;
+
+int sum(int a, int b){
+   // Here, returning sum of a and b
+   return a + b;
+}
+
+int main(){
+   // Calling the function
+   int ans = sum(5, 2);
+   cout << "The sum of two integers 5 and 2 is:  " << ans << endl;
+
+   // Returning from the main (),
+   // 0 represents execution done without any error
+   return 0;
+}
+Output
+The sum of two integers 5 and 2 is:  7
+Key Aspects of return Statement
+1. Function Termination
+When a return statement is executed, the function exits immediately, and optionally sends value back to the caller.
+
+2. Returning Types
+Return by Value
+In this the specified value in return statement is sent back to the caller. This is essential for functions which perform calculations or need to provide results.
+
+int Add(int a, int b) {
+   return a + b;  // Returns the sum of a and b
+}
+No Return Value (void)
+The functions which are declared with void, the return statement can be used without an expression to exit the function early.
+
+void GetMessage() {
+   cout << "Hello, TutorialsPoint Learner!";
+   return;  // Exits the function
+}
+3. Multiple return Statements
+A function may consist of multiple return statements, which we generally get to see within conditional statements.
+
+int max(int a, int b) {
+   if (a > b)
+      return a;
+   else
+      return b;
+}
+4. Returning Objects
+Functions can return objects, which can be useful for returning multiple values encapsulated in a class or struct.
+
+struct point {
+   int x, y;
+};
+
+point getOrigin() {
+   return {0, 0};
+}
+5. Early Exit
+The return statement can be used to exit a function early, which is useful for error handling or special conditions.
+
+int divideInteger(int a, int b) {
+   if (b == 0) {
+      cer << "Error: Division by zero!" << endl;
+      return -1; // Shows an error
+   }
+   return a / b;
+}
+Return Types and Value Handling in C++
+In C++, the return type of a function determines what kind of value (if any) a function will return to the caller. Proper handling of return types and values is important for making sure that functions behave as expected and integrate smoothly with other parts of the program.
+
+1. Primitive Data Types
+Primitive data types are the basic built-in types provided by C++. Common examples are like int, float, double, char etc.
+
+Example
+#include <iostream>
+using namespace std;
+// created a function which returns an integer
+int getSquare(int num) {
+   return num * num;
+}
+int main() {
+   int value = 5;
+   int result = getSquare(value); // Calling the function and storing its result
+   cout << "The square of " << value << " is " << result << endl;
+   return 0;
+}
+Output
+The square of 5 is 25
+2. User-Defined Types
+User-defined types include structs and classes. These types allow you to define complex data structures and customize them as per your specific requirements.
+
+Example with Struct
+#include <iostream>
+using namespace std;
+struct Point {
+   int x;
+   int y;
+};
+Point createPoint(int x, int y) {
+   Point p;
+   p.x = x;
+   p.y = y;
+   return p; // will returns a Point object
+}
+int main() {
+   Point p = createPoint(10, 20);
+   cout << "Point coordinates: (" << p.x << ", " << p.y << ")" << endl;
+   return 0;
+}
+Output
+Point coordinates: (10, 20)
+Example with Classes
+#include <iostream>
+using namespace std;
+
+class rectangle {
+   public:
+      rectangle(int w, int h) : width(w), height(h) {}
+      int getArea() const {
+         return width * height;
+      }
+   private:
+      int width;
+      int height;
+};
+
+rectangle createRectangle(int width, int height) {
+   return rectangle(width, height); // Returns a Rectangle object
+}
+
+int main() {
+   rectangle rect = createRectangle(10, 5);
+   cout << "Area of given Rectangle is: " << rect.getArea() << endl;
+   return 0;
+}
+Output
+Area of given Rectangle is: 50
+3. References and Pointers
+References and pointers are used to refer to variables or objects without making any copies. Which can be useful for efficiency and and easy to modify the original data when needed.
+
+Returning by Reference
+#include <iostream>
+using namespace std;
+int globalValue = 100;
+
+int& getGlobalValue() {
+   return globalValue; // Returns a reference to the global variable
+}
+
+int main() {
+   int& ref = getGlobalValue();
+   ref = 200; // Modifies the global variable
+   cout << "Global Value: " << globalValue << endl; 
+   return 0;
+}
+Output
+Global Value: 200
+Returning by Pointer
+#include <iostream>
+using namespace std;
+int* createArray(int size) {
+   int* array = new int[size]; // Allocating memory dynamically
+   for (int i = 0; i < size; ++i) {
+      array[i] = i * 10;
+   }
+   return array; // Returning a pointer to the allocated array
+}
+
+int main() {
+   int* myArray = createArray(5);
+   for (int i = 0; i < 5; ++i) {
+      cout << myArray[i] << " ";
+   }
+   delete[] myArray; // Free dynamically allocated memory
+   return 0;
+}
+Output
+0 10 20 30 40 

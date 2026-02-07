@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML - Image Map</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #222;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: "Courier New", monospace;
+      margin: 20px 0;
+      position: relative;
+    }
+    pre::before {
+      content: "Code Editor";
+      display: block;
+      background: #333;
+      color: #fff;
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 8px 8px 0 0;
+      position: absolute;
+      top: -32px;
+      left: 0;
+    }
+    code {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    ul {
+      margin: 10px 0 20px 30px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>HTML - Image Map</h1>
+
+  <h2>Image Maps</h2>
+  <p>
+    HTML image maps are defined by the <code>&lt;map&gt;</code> tag. An image map enables specific areas of an image 
+    to be clickable, acting as links to different destinations. This technique is useful for creating complex navigation 
+    systems or interactive graphics on a webpage.
+  </p>
+  <p>
+    By defining various shapes (rectangles, circles, and polygons) within an image, each with its own associated link, 
+    developers can create dynamic and interactive visual content that enhances user engagement and navigation.
+  </p>
+
+  <h2>Use of Image Maps</h2>
+  <p>
+    Image maps are useful for creating complex navigation, interactive diagrams, or engaging visual experiences, enhancing 
+    user engagement and interactivity on web pages.
+  </p>
+  <p>
+    It is useful to create interactive graphics by defining clickable regions within an image. This allows users to 
+    interact with different image parts, triggering specific actions or links.
+  </p>
+
+  <h2>HTML &lt;map&gt; Tag</h2>
+  <p>
+    The <code>&lt;map&gt;</code> tag is used to create a client-side image map, turning specific regions of an image into 
+    interactive elements. This allows users to click on different areas of the image, triggering various actions. The 
+    <code>&lt;map&gt;</code> element serves as a container for <code>&lt;area&gt;</code> elements, each defining a clickable 
+    region with specific attributes.
+  </p>
+
+  <h3>Syntax</h3>
+  <pre>
+&lt;map name="world_map"&gt;
+   &lt;!-- Define your clickable areas here --&gt;
+&lt;/map&gt;
+  </pre>
+  <p>
+    When used in conjunction with the <code>&lt;img&gt;</code> tag, the <code>&lt;map&gt;</code> tag establishes a connection 
+    between the image and its associated map. This enables web developers to create dynamic and interactive content by defining 
+    distinct clickable zones within an image.
+  </p>
+
+  <h2>Defining Areas (Shapes) in Image Maps</h2>
+  <p>
+    The <code>&lt;area&gt;</code> tag is used within the <code>&lt;map&gt;</code> tag to define clickable regions on an image. 
+    It specifies the shape, coordinates, and associated actions for each clickable area.
+  </p>
+
+  <h3>Syntax</h3>
+  <pre>
+&lt;area shape="shape_value" coords="coordinates" href="url" alt="Description"&gt;
+  </pre>
+
+  <h3>1. Rectangular Area</h3>
+  <p>
+    You can define a rectangular shape by assigning the <code>rect</code> value to the <code>shape</code> attribute. 
+    The rectangular shape requires coordinates for the top-left and bottom-right corners.
+  </p>
+  <pre>
+&lt;area shape="rect" coords="x1,y1,x2,y2" href="url" alt="Description"&gt;
+  </pre>
+
+  <ul>
+    <li><b>x1, y1</b> – Coordinates of the top-left corner.</li>
+    <li><b>x2, y2</b> – Coordinates of the bottom-right corner.</li>
+  </ul>
+
+  <h3>2. Circular Area</h3>
+  <p>
+    You can define a circular shape by assigning the <code>circle</code> value to the <code>shape</code> attribute. 
+    The circular shape requires center coordinates (x, y) and radius (r).
+  </p>
+  <pre>
+&lt;area shape="circle" coords="x,y,r" href="url" alt="Description"&gt;
+  </pre>
+
+  <ul>
+    <li><b>x, y</b> – Coordinates of the circle's center.</li>
+    <li><b>r</b> – Radius of the circle.</li>
+  </ul>
+
+  <h3>3. Polygon Area</h3>
+  <p>
+    You can define a polygon shape by assigning the <code>poly</code> value to the <code>shape</code> attribute. 
+    The polygon shape requires a series of coordinates to form the shape.
+  </p>
+  <pre>
+&lt;area shape="poly" coords="x1,y1,x2,y2,..,xn,yn" href="url" alt="Description"&gt;
+  </pre>
+  <p>
+    Where <code>x1, y1 ... xn, yn</code> coordinates form the polygon.
+  </p>
+
+  <h2>Creating an Image Map in HTML</h2>
+  <p>To create an image map in HTML, follow these steps:</p>
+
+  <h3>Step 1: Prepare Your Image</h3>
+  <pre>
+&lt;img src="/images/logo.png" usemap="#image_map"&gt;
+  </pre>
+
+  <h3>Step 2: Define the Image Map</h3>
+  <pre>
+&lt;map name="image_map"&gt;
+&lt;/map&gt;
+  </pre>
+
+  <h3>Step 3: Define Clickable Areas</h3>
+  <pre>
+&lt;map name="image_map"&gt;
+  &lt;area shape="circle" coords="45,32,49" href="index.htm" alt="tutorialspoint"&gt;
+  &lt;area shape="rect" coords="245,50,85,9" href="/tutorialslibrary.htm" alt="tutorials_library"&gt;
+&lt;/map&gt;
+  </pre>
+
+  <h2>Example of HTML Image Map</h2>
+  <div class="example">
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Image Map Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;img src="/images/logo.png" usemap="#image_map"&gt;
+   &lt;map name="image_map"&gt;
+      &lt;area shape="circle" coords="45,32,49" href="/index.htm" alt="tutorialspoint"&gt;
+      &lt;area shape="rect" coords="245,50,85,9" href="/tutorialslibrary.htm" alt="tutorials_library"&gt;
+   &lt;/map&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </pre>
+  </div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">Warnings in Python</h1>
+    <div class="content">
+      <p>
+        In Python, a <strong>warning</strong> is a message alerting that something unexpected happened while running code. Unlike errors, warnings do not stop program execution and are used to indicate potential issues or deprecated features.
+      </p>
+
+      <h2>Display a Warning Message</h2>
+      <pre>
+import warnings
+
+print("TutorialsPoint")
+
+warnings.warn("You got a warning!")
+      </pre>
+      <p>Output:</p>
+      <pre>
+TutorialsPoint
+/path/to/script.py:7: UserWarning: You got a warning!
+  warnings.warn("You got a warning!")
+      </pre>
+
+      <h2>Types of Warning Classes</h2>
+      <ul>
+        <li><strong>UserWarning:</strong> Default for general warnings.</li>
+        <li><strong>DeprecationWarning:</strong> Indicates deprecated features.</li>
+        <li><strong>SyntaxWarning:</strong> Warns of syntax-related issues.</li>
+        <li><strong>RuntimeWarning:</strong> Indicates runtime-related doubts.</li>
+        <li><strong>ImportWarning:</strong> Indicates issues during module import.</li>
+      </ul>
+
+      <h2>Warning Filters</h2>
+      <p>
+        Control warning behavior using <code>warnings.filterwarnings()</code>. Common actions:
+      </p>
+      <ul>
+        <li><code>default</code> - Show first occurrence per location.</li>
+        <li><code>always</code> - Always show warning.</li>
+        <li><code>ignore</code> - Suppress warnings.</li>
+        <li><code>error</code> - Convert warnings to exceptions.</li>
+        <li><code>module</code> - Show first warning per module.</li>
+        <li><code>once</code> - Show warning only once.</li>
+      </ul>
+
+      <h2>Example: Turn Warning into an Error</h2>
+      <pre>
+import warnings
+
+warnings.filterwarnings("error", category=UserWarning)
+
+try:
+    warnings.warn("This is a warning!", UserWarning)
+except UserWarning as e:
+    print("Caught as error:", e)
+      </pre>
+      <p>Output:</p>
+      <pre>Caught as error: This is a warning!</pre>
+
+      <h2>Example: Ignore Warnings</h2>
+      <pre>
+import warnings
+
+warnings.filterwarnings("ignore")
+
+print("Warning message: ")
+warnings.warn("This warning will be ignored!")
+      </pre>
+      <p>Output:</p>
+      <pre>Warning message: </pre>
+
+      <h2>Functions Available in warnings Module</h2>
+      <p>Common functions include:</p>
+      <ul>
+        <li><code>warnings.warn(message, category)</code>: Issue a warning.</li>
+        <li><code>warnings.showwarning()</code>: Write warning to a file.</li>
+        <li><code>warnings.warn_explicit()</code>: More control issuing warnings.</li>
+        <li><code>warnings.filterwarnings(action, ...)</code>: Set warning filters.</li>
+        <li><code>warnings.simplefilter(action, category)</code>: Simplified filter control.</li>
+        <li><code>warnings.resetwarnings()</code>: Reset filters to default.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <p>
+        Warnings in Python provide a mechanism to alert about potential issues without stopping program execution. The warnings module offers comprehensive tools to issue and control warning messages effectively.
+      </p>
+    </div>
+    
+  </div>
+</div>

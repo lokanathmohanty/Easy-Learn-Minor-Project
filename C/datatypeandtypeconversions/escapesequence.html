@@ -1,0 +1,177 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Escape Sequences in C</h1>
+    <div class="content">
+      <p>An escape sequence in C is a literal consisting of multiple characters enclosed in single quotes, starting with a backslash (\) that gives special meaning to the character following it. Escape sequences allow representation of characters that are difficult or impossible to express directly in strings or character literals.</p>
+      <p>For example, the escape sequence <code>\n</code> represents a newline (line break), equivalent to pressing the Enter key.</p>
+      <p>Escape sequences are widely used for formatting output, controlling cursor movements, and representing special characters.</p>
+
+      <h2 class="title">Common Escape Sequences</h2>
+      <ul>
+        <li><code>\\</code> - Backslash character</li>
+        <li><code>\'</code> - Single quote character</li>
+        <li><code>\"</code> - Double quote character</li>
+        <li><code>\?</code> - Question mark character</li>
+        <li><code>\a</code> - Alert or bell (makes a beep sound)</li>
+        <li><code>\b</code> - Backspace (moves cursor back)</li>
+        <li><code>\f</code> - Form feed (page break)</li>
+        <li><code>\n</code> - Newline (line feed)</li>
+        <li><code>\r</code> - Carriage return (return cursor to line start)</li>
+        <li><code>\t</code> - Horizontal tab</li>
+        <li><code>\v</code> - Vertical tab</li>
+        <li><code>\ooo</code> - Octal number (one to three octal digits)</li>
+        <li><code>\xhh</code> - Hexadecimal number (one or more hex digits)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Newline Escape Sequence (\n)</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   printf("Hello.\nGood morning.\nMy name is Ravi");
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre class="example"><code>
+Hello.
+Good morning.
+My name is Ravi
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Tab Escape Sequence (\t)</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   printf("Name:\tRavi\tMarks:\t50");
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre class="example"><code>
+Name:   Ravi    Marks:  50
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Backslash Escape Sequence (\\)</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   printf("Directory in Windows: C:\\\\users\\\\user");
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre class="example"><code>
+Directory in Windows: C:\users\user
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Quotes Escape Sequences (\" and \')</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   printf("Welcome to \"TutorialsPoint\"\n");
+   printf ("\'Welcome\' to TutorialsPoint");
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre class="example"><code>
+Welcome to "TutorialsPoint"
+'Welcome' to TutorialsPoint
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Backspace Escape Sequence (\b)</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   printf("Welcome to\b TutorialsPoint");
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre class="example"><code>
+Welcome t TutorialsPoint
+      </code></pre>
+      <p>(Note: The character before the backspace disappears)</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Octal Escape Sequence (\ooo)</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   printf("%c", '\141');
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre class="example"><code>
+a
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Hexadecimal Escape Sequence (\xhh)</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   printf("%c", '\x41');
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre class="example"><code>
+A
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Alert or Bell Escape Sequence (\a)</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   printf("Hello \a world\n");
+   return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre class="example"><code>
+Hello  world
+      </code></pre>
+      <p>(Terminal may produce a beep or flash alert)</p>
+    </div>
+  </div>
+</div>

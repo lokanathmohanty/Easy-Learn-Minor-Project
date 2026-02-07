@@ -1,0 +1,144 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - The Number Object</h1>
+
+    <div class="content">
+      <p>The JavaScript <code>Number</code> object represents numerical data as floating-point numbers. It provides different properties (constants) and methods for working with numbers. In practice, you rarely need to explicitly create <code>Number</code> objects, because the browser automatically wraps number literals as Number objects when needed.</p>
+      <p>You can create a Number object using the <code>Number</code> constructor, or convert other types (such as strings) to numbers using the <code>Number()</code> function.</p>
+      <p>JavaScript numbers are always stored as floating-point values (64-bit IEEE 754 format). JavaScript does not distinguish between integers and floating-point values.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Syntax</h2>
+      <pre><code>const val = new Number(number);</code></pre>
+      <p>If a non-number argument is provided and cannot be converted, it returns <code>NaN</code> (Not-a-Number).</p>
+      <p>We can also create number primitives directly:</p>
+      <pre><code>let num1 = 24;
+let num2 = 35.65;</code></pre>
+      <p>JavaScript automatically treats primitives like Number objects when needed, so you can access Number methods and properties on them.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Number Properties</h2>
+      <ul>
+        <li><code>EPSILON</code> – Difference between 1 and the smallest floating-point number greater than 1.</li>
+        <li><code>MAX_SAFE_INTEGER</code> – Maximum safe integer value.</li>
+        <li><code>MAX_VALUE</code> – Largest possible number (<code>1.7976931348623157E+308</code>).</li>
+        <li><code>MIN_SAFE_INTEGER</code> – Minimum safe integer value.</li>
+        <li><code>MIN_VALUE</code> – Smallest possible number (<code>5E-324</code>).</li>
+        <li><code>NaN</code> – Represents a “Not-a-Number” value.</li>
+        <li><code>NEGATIVE_INFINITY</code> – Value less than <code>MIN_VALUE</code>.</li>
+        <li><code>POSITIVE_INFINITY</code> – Value greater than <code>MAX_VALUE</code>.</li>
+        <li><code>prototype</code> – Allows extending Number with custom properties/methods.</li>
+        <li><code>constructor</code> – Refers to the function that created the object (Number by default).</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Number Methods</h2>
+
+      <h3 class="title">Instance Methods</h3>
+      <ul>
+        <li><code>toExponential()</code> – Displays number in exponential notation.</li>
+        <li><code>toFixed()</code> – Formats with fixed decimal digits.</li>
+        <li><code>toLocaleString()</code> – Converts number to a locale-sensitive string.</li>
+        <li><code>toPrecision()</code> – Formats number with specified total digits.</li>
+        <li><code>toString()</code> – Converts number to string.</li>
+        <li><code>valueOf()</code> – Returns primitive value of the number.</li>
+      </ul>
+
+      <h3 class="title">Static Methods</h3>
+      <ul>
+        <li><code>isNaN()</code> – Checks if a value is NaN.</li>
+        <li><code>isFinite()</code> – Checks if value is finite.</li>
+        <li><code>isInteger()</code> – Checks if value is an integer.</li>
+        <li><code>isSafeInteger()</code> – Checks if value is a safe integer.</li>
+        <li><code>parseFloat()</code> – Parses a float from a string.</li>
+        <li><code>parseInt()</code> – Parses an integer from a string.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Examples</h2>
+
+      <h3 class="title">Creating Number Object</h3>
+      <pre><code>&lt;script&gt;
+const num = new Number(20);
+document.getElementById("output").innerHTML =
+   "num = " + num + "&lt;br&gt;" +
+   "typeof num : " + typeof num;
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>num = 20</li>
+        <li>typeof num : object</li>
+      </ul>
+
+      <h3 class="title">Using Number Properties</h3>
+      <pre><code>&lt;script&gt;
+document.getElementById("output").innerHTML =
+   "Max Value : " + Number.MAX_VALUE + "&lt;br&gt;" +
+   "Min Value : " + Number.MIN_VALUE + "&lt;br&gt;" +
+   "Positive Infinity : " + Number.POSITIVE_INFINITY + "&lt;br&gt;" +
+   "Negative Infinity : " + Number.NEGATIVE_INFINITY + "&lt;br&gt;" +
+   "NaN : " + Number.NaN;
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Max Value : 1.7976931348623157e+308</li>
+        <li>Min Value : 5e-324</li>
+        <li>Positive Infinity : Infinity</li>
+        <li>Negative Infinity : -Infinity</li>
+        <li>NaN : NaN</li>
+      </ul>
+
+      <h3 class="title">Using Number Methods</h3>
+      <pre><code>&lt;script&gt;
+const num = 877.5312;
+document.getElementById("output").innerHTML =
+   "num.toExponential() : " + num.toExponential() + "&lt;br&gt;" +
+   "num.toFixed() : " + num.toFixed() + "&lt;br&gt;" +
+   "num.toPrecision(2) : " + num.toPrecision(2);
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>num.toExponential() : 8.775312e+2</li>
+        <li>num.toFixed() : 878</li>
+        <li>num.toPrecision(2) : 8.8e+2</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">JavaScript Number() Function</h2>
+      <p>The <code>Number()</code> function converts a value into a number primitive. Unlike the <code>Number</code> constructor, it does not create a Number object.</p>
+      <pre><code>let num = Number(val);</code></pre>
+
+      <h3 class="title">Example</h3>
+      <pre><code>&lt;script&gt;
+let num = Number(10);
+document.getElementById("output").innerHTML =
+   "num = " + num + "&lt;br&gt;" +
+   "typeof num = " + typeof num;
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>num = 10</li>
+        <li>typeof num = number</li>
+      </ul>
+
+      <h3 class="title">Converting Numeric Strings</h3>
+      <pre><code>&lt;script&gt;
+let str = "102.34";
+let num = Number(str);
+document.getElementById("output").innerHTML =
+   "num = " + num + "&lt;br&gt;" +
+   "typeof num = " + typeof num;
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>num = 102.34</li>
+        <li>typeof num = number</li>
+      </ul>
+    </div>
+  </div>
+</div>

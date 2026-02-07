@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Express Framework</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Express.js is a minimal, flexible web framework for Node.js, providing robust features for web and mobile application development. It simplifies handling HTTP requests, routing, templating, and connecting with databases.
+      </p>
+      <p>
+        While Node.js has a built-in asynchronous http server, Express abstracts low-level HTTP request/response handling, letting developers focus on application logic.
+      </p>
+
+      <h2>Installing Express</h2>
+      <pre><code>npm init
+npm install express --save
+</code></pre>
+      <p>
+        Installs Express locally and creates required project files.
+      </p>
+
+      <h2>Hello World Example</h2>
+      <pre><code>var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('Hello World');
+});
+
+var server = app.listen(5000, function () {
+  console.log("Express App running at http://127.0.0.1:5000/");
+});
+</code></pre>
+      <p>
+        Run with <code>node index.js</code> and visit <a href="http://localhost:5000/">http://localhost:5000/</a> to see "Hello World".
+      </p>
+
+      <h2>Application Object</h2>
+      <p>
+        The <code>app</code> object created by Express handles HTTP requests, renders views, and configures middleware.
+      </p>
+      <p>
+        The <code>app.listen()</code> method encapsulates Node.js’s <code>http.createServer()</code> to start a web server.
+      </p>
+
+      <h2>Basic Routing</h2>
+      <p>
+        Express supports asynchronous HTTP methods:
+      </p>
+      <ul>
+        <li><code>app.get(path, callback)</code></li>
+        <li><code>app.post(path, callback)</code></li>
+        <li><code>app.put(path, callback)</code></li>
+        <li><code>app.delete(path, callback)</code></li>
+      </ul>
+      <p>
+        Callback functions receive <code>request</code> and <code>response</code> objects. The <code>send()</code> method sends responses.
+      </p>
+
+      <h2>Serve HTML with sendFile()</h2>
+      <pre><code>var express = require('express');
+var app = express();
+var path = require('path');
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+var server = app.listen(5000, function () {
+  console.log("Express App running at http://127.0.0.1:5000/");
+});
+</code></pre>
+
+      <p>Example <code>index.html</code>:</p>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;h2 style="text-align: center;"&gt;Hello World&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Handling GET Form Data</h2>
+      <p>HTML form submits data via GET to <code>/process_get</code>:</p>
+      <pre><code>&lt;form action="/process_get" method="GET"&gt;
+  First Name: &lt;input type="text" name="first_name"&gt; &lt;br&gt;
+  Last Name: &lt;input type="text" name="last_name"&gt; &lt;br&gt;
+  &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+</code></pre>
+
+      <p>Express route:</p>
+      <pre><code>app.get('/process_get', function (req, res) {
+  var response = {
+    first_name: req.query.first_name,
+    last_name: req.query.last_name
+  };
+  console.log(response);
+  res.end(JSON.stringify(response));
+});
+</code></pre>
+
+      <h2>Handling POST Form Data</h2>
+      <p>
+        Use <code>body-parser</code> middleware for URL-encoded POST data.
+      </p>
+      <pre><code>npm install body-parser --save
+</code></pre>
+      <pre><code>var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+app.post('/process_post', urlencodedParser, function (req, res) {
+  var response = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name
+  };
+  console.log(response);
+  res.end(JSON.stringify(response));
+});
+</code></pre>
+
+      <h2>Serve Static Files</h2>
+      <p>Express middleware to serve static files (images, CSS, JS):</p>
+      <pre><code>app.use(express.static('public'));</code></pre>
+      <p>
+        Place static assets like images in <code>public/images/</code>. For example, you can access <code>public/images/logo.png</code> at <code>http://localhost:5000/images/logo.png</code>.
+      </p>
+
+      <h2>Run the App</h2>
+      <pre><code>node index.js</code></pre>
+      <p>Access <a href="http://127.0.0.1:5000/">http://127.0.0.1:5000/</a> in a browser to see the app.</p>
+    </div>
+  </div>
+</div>

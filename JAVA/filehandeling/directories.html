@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Directory Operations</h1>
+    <div class="content">
+      <p>Directories in Java are represented by <code>File</code> objects and can contain files as well as other directories. With the <code>File</code> class, you can create, list, and delete directories programmatically. The following sections illustrate key directory operations in Java.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating Directories</h2>
+    <div class="content">
+      <ul>
+        <li><code>mkdir()</code> creates a single directory and returns <code>true</code> on success.</li>
+        <li><code>mkdirs()</code> creates the directory and all necessary parent directories.</li>
+      </ul>
+      <pre><code>String dirname = "/tmp/user/java/bin";
+File directory = new File(dirname);
+// Create parent and directory structure
+directory.mkdirs();
+System.out.println(directory.exists()); // Output: true</code></pre>
+      <p>Using <code>mkdirs()</code> ensures all directories in the path are created as required.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Listing Directory Contents</h2>
+    <div class="content">
+      <p>You can read all files and directories inside a directory with the <code>list()</code> method:</p>
+      <pre><code>File dir = new File("/tmp");
+String[] paths = dir.list();
+for(String path : paths) {
+    System.out.println(path);
+}</code></pre>
+      <p>This prints the names of all files and subdirectories in "/tmp".</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Deleting Directories</h2>
+    <div class="content">
+      <p>To delete a directory, use the <code>delete()</code> method. Note: The directory must be empty before it can be deleted.</p>
+      <pre><code>File file = new File("/tmp/user/java/bin");
+if(file.exists()) {
+    boolean success = file.delete();
+    if (success) {
+        System.out.println("The directory has been successfully deleted.");
+    } else {
+        System.out.println("The directory deletion failed.");
+    }
+} else {
+    System.out.println("The directory is not present.");
+}</code></pre>
+      <p>Attempting to delete a non-empty directory will fail—ensure the directory is empty or use recursion to remove all contents first.</p>
+    </div>
+  </div>
+</div>

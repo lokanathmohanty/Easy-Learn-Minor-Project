@@ -1,0 +1,123 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Classes and Objects</h1>
+        
+        <h2 class="title">C# Classes (The Blueprint)</h2>
+        <div class="content">
+            <p>A **class** is the fundamental construct of Object-Oriented Programming (OOP) in C#. It serves as a **blueprint** or **template** for creating objects. A class encapsulates related **data (fields)** and **behavior (methods)** together, helping to achieve **encapsulation** and code organization.</p>
+            
+            <h3>Declaration Syntax:</h3>
+            <pre>
+&lt;access specifier&gt; class ClassName {
+   // Member Variables (Fields)
+   &lt;access specifier&gt; &lt;data type&gt; variable1;
+   
+   // Member Methods (Functions)
+   &lt;access specifier&gt; &lt;return type&gt; method1(parameter_list) {
+      // method body
+   }
+}
+            </pre>
+            <p><strong>Note:</strong> The default access specifier for a class itself is `internal`. The default access specifier for class members (fields, methods) is `private`.</p>
+        </div>
+        
+        <h2 class="title">C# Objects (The Instance)</h2>
+        <div class="content">
+            <p>An **object** is an **instance** of a class. It is a concrete entity created from the class blueprint. An object stores specific data (its state) and can access the methods defined in its class (its behavior).</p>
+            
+            <h3>Object Instantiation:</h3>
+            <p>Objects are created using the **`new`** keyword, which allocates memory for the object on the **Heap**.</p>
+            <pre>
+class_name object_name = new class_name();
+
+// Example:
+Box Box1 = new Box(); // Box1 is an object (instance) of the Box class
+            </pre>
+            
+            <h3>Accessing Members:</h3>
+            <p>Class members are accessed using the **dot (`.`) operator** linked to the object name.</p>
+            <pre>
+Box1.height = 5.0; // Accessing a field (data)
+double vol = Box1.getVolume(); // Calling a method (behavior)
+            </pre>
+        </div>
+        
+        <h2 class="title">Constructors and Destructors</h2>
+        <div class="content">
+            <h3>Constructors</h3>
+            <p>A **constructor** is a special method with the **same name as the class** and no return type. It is executed automatically when an object is created using the `new` keyword. Its purpose is to initialize the object's fields.</p>
+            <ul>
+                <li><strong>Default Constructor:</strong> Has no parameters.</li>
+                <li><strong>Parameterized Constructor:</strong> Takes arguments, allowing you to set initial field values at creation.</li>
+            </ul>
+            <pre>
+class Line {
+   // Default Constructor
+   public Line() { Console.WriteLine("Object is being created"); } 
+   
+   // Parameterized Constructor
+   public Line(double len) { this.length = len; }
+}
+            </pre>
+            
+            <h3>Destructors</h3>
+            <p>A **destructor** is a special method prefixed with a tilde (`~`) and also has the same name as the class. It is used to perform any necessary cleanup before the garbage collector reclaims the object's memory. Destructors cannot be called explicitly, cannot have parameters, and cannot be overloaded.</p>
+            <pre>
+~Line() { 
+    Console.WriteLine("Object is being deleted"); 
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Access Modifiers and Encapsulation</h2>
+        <div class="content">
+            <p>Access modifiers define visibility. Good practice dictates using **`private`** for fields (data) to achieve **encapsulation**, forcing interaction via public methods or properties to control data manipulation.</p>
+            
+            <table>
+                <tr>
+                    <th>Modifier</th>
+                    <th>Scope</th>
+                </tr>
+                <tr>
+                    <td><code>public</code></td>
+                    <td>Accessible from **anywhere**.</td>
+                </tr>
+                <tr>
+                    <td><code>private</code></td>
+                    <td>Accessible **only within the same class**. (Default for members)</td>
+                </tr>
+                <tr>
+                    <td><code>protected</code></td>
+                    <td>Accessible within the same class and **derived classes**.</td>
+                </tr>
+                <tr>
+                    <td><code>internal</code></td>
+                    <td>Accessible within the **current assembly** (project). (Default for class type)</td>
+                </tr>
+            </table>
+            
+            <p><strong>Example of Encapsulation:</strong></p>
+            <pre>
+class Box {
+   private double length; // Data is hidden
+
+   public void setLength(double len) { // Controlled access via public method
+      length = len;
+   }
+   public double getVolume() { // Method to access computed value
+      return length * ...;
+   }
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Static Members</h2>
+        <div class="content">
+            <p>The **`static`** keyword is used to declare members that belong to the **class itself**, rather than to any specific instance (object) of the class. Only a single copy of a static member exists, regardless of how many objects are created.</p>
+            <ul>
+                <li>**Static Variables:** Used for values shared by all instances, like counters or global constants. They are accessed via the class name: <code>StaticVar.num</code>.</li>
+                <li>**Static Methods:** Can only access other static members. They are often used for utility functions that don't need object-specific data (e.g., <code>Main()</code> method).</li>
+            </ul>
+        </div>
+    </div>
+</div>

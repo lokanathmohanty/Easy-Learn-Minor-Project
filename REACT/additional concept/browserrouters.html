@@ -1,0 +1,184 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - BrowserRouter</h1>
+    <div class="content">
+      <p>Routing is an important concept in front-end applications. React community provides a router library called <strong>React Router</strong>. Let us learn the concept of React Router and how to use it in a React application.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Router Concepts</h2>
+    <div class="content">
+      <p>The primary purpose of the router is to match the given URL to a React component and render it. It should also manage browser history for forward and backward navigation.</p>
+      <p>Main components of React Router:</p>
+      <ul>
+        <li><strong>BrowserRouter</strong> – Top-level component that manages history and URL state.</li>
+        <li><strong>Routes</strong> – Builds configuration by matching paths with components.</li>
+        <li><strong>Route</strong> – Actual router configuration, supports nesting.</li>
+        <li><strong>Outlet</strong> – Renders the next match inside the parent component.</li>
+        <li><strong>Link</strong> – Used for navigation, similar to <code>&lt;a&gt;</code> tag.</li>
+        <li><strong>navigate()</strong> – API to programmatically navigate to another route.</li>
+      </ul>
+      <pre>
+&lt;BrowserRouter&gt;
+   &lt;Routes&gt;
+      &lt;Route path="/" element={&lt;App /&gt;}&gt;
+         &lt;Route index element={&lt;Home /&gt;} /&gt;
+         &lt;Route path="admin" element={&lt;Admin /&gt;}&gt;
+            &lt;Route path="product" element={&lt;ProductListing /&gt;} /&gt;
+            &lt;Route path="category" element={&lt;CategoryListing /&gt;} /&gt;
+            &lt;Route index element={&lt;Dashboard /&gt;} /&gt;
+         &lt;/Route&gt;
+      &lt;/Route&gt;
+      &lt;Route path="/login" element={&lt;Login /&gt;} /&gt;
+   &lt;/Routes&gt;
+&lt;/BrowserRouter&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Router Workflow</h2>
+    <div class="content">
+      <p>Example application pages:</p>
+      <ul>
+        <li>Home (<code>/</code>)</li>
+        <li>Contact (<code>/contact</code>)</li>
+        <li>Register (<code>/register</code>)</li>
+        <li>Admin (<code>/admin</code>)</li>
+        <li>AdminDashboard (<code>/admin/dashboard</code>)</li>
+      </ul>
+      <pre>
+&lt;BrowserRouter&gt;
+   &lt;Routes&gt;
+      &lt;Route path="/" element={&lt;App /&gt;}&gt;
+         &lt;Route index element={&lt;Home /&gt;} /&gt;
+         &lt;Route path="contact" element={&lt;Contact /&gt;} /&gt;
+         &lt;Route path="register" element={&lt;Register /&gt;} /&gt;
+         &lt;Route path="admin" element={&lt;Admin /&gt;}&gt;
+            &lt;Route path="dashboard" element={&lt;AdminDashboard /&gt;} /&gt;
+            &lt;Route path="category" element={&lt;CategoryListing /&gt;} /&gt;
+            &lt;Route index element={&lt;AdminDashboard /&gt;} /&gt;
+         &lt;/Route&gt;
+      &lt;/Route&gt;
+   &lt;/Routes&gt;
+&lt;/BrowserRouter&gt;
+      </pre>
+      <p>Steps for <code>/admin/dashboard</code> navigation:</p>
+      <ul>
+        <li>BrowserRouter initializes history and state.</li>
+        <li>Routes checks child routes and finds a match.</li>
+        <li>Admin component renders with <code>&lt;Outlet /&gt;</code>.</li>
+        <li>Outlet loads the nested route (<code>AdminDashboard</code>).</li>
+        <li>Link or navigate() updates URL and BrowserRouter re-renders.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Applying Routers</h2>
+    <div class="content">
+      <p>Steps to create a new application with router:</p>
+      <pre>
+create-react-app myapp
+cd myapp
+npm start
+npm install --save react-router-dom
+      </pre>
+
+      <p>Create Home component (<code>src/Pages/Home.js</code>):</p>
+      <pre>
+function Home() {
+   return &lt;h3&gt;Home&lt;/h3&gt;
+}
+export default Home
+      </pre>
+
+      <p>Create Greeting component (<code>src/Pages/Greeting.js</code>):</p>
+      <pre>
+function Greeting() {
+   return &lt;h3&gt;Hello World!&lt;/h3&gt;
+}
+export default Greeting
+      </pre>
+
+      <p>Setup App.js:</p>
+      <pre>
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from './Pages/Layout';
+import Home from './Pages/Home';
+import Greeting from './Pages/Greeting';
+
+function App() {
+   return (
+      &lt;BrowserRouter&gt;
+         &lt;Routes&gt;
+            &lt;Route path="/" element={&lt;Layout /&gt;}&gt;
+               &lt;Route index element={&lt;Home /&gt;} /&gt;
+               &lt;Route path="greet" element={&lt;Greeting /&gt;} /&gt;
+            &lt;/Route&gt;
+         &lt;/Routes&gt;
+      &lt;/BrowserRouter&gt;
+   );
+}
+export default App;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Layout Component</h2>
+    <div class="content">
+      <pre>
+import { Outlet, Link } from "react-router-dom";
+function Layout() {
+   return (
+      &lt;&gt;
+         &lt;nav&gt;
+            &lt;ul&gt;
+               &lt;li&gt;&lt;Link to="/"&gt;Home&lt;/Link&gt;&lt;/li&gt;
+               &lt;li&gt;&lt;Link to="/greet"&gt;Greeting&lt;/Link&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/nav&gt;
+         &lt;Outlet /&gt;
+      &lt;/&gt;
+   )
+}
+export default Layout;
+      </pre>
+      <p>The <code>Outlet</code> renders the selected nested component.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Handling Unknown Routes</h2>
+    <div class="content">
+      <p>Create <code>PageNotAvailable</code> component:</p>
+      <pre>
+import { Link } from "react-router-dom"
+function PageNotAvailable() {
+   return (
+      &lt;p&gt;The page is not available. Please &lt;Link to="/"&gt;click here&lt;/Link&gt; to go to home page.&lt;/p&gt;
+   )
+}
+export default PageNotAvailable
+      </pre>
+
+      <p>Update App.js:</p>
+      <pre>
+import PageNotAvailable from './Pages/PageNotAvailable'
+
+&lt;Route path="*" element={&lt;PageNotAvailable /&gt;} /&gt;
+      </pre>
+
+      <p>This ensures unmatched routes display a friendly error page.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <p>React Router is simple and effective. It supports <code>BrowserRouter</code>, <code>Routes</code>, <code>Route</code>, <code>Link</code>, <code>Outlet</code>, and <code>navigate()</code> to build applications with navigation. It allows nested routing and handles unknown paths gracefully.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Nested `if` Statements</h1>
+        
+        <h2 class="title">What Are Nested `if` Statements?</h2>
+        <div class="content">
+            <p>A **nested `if` statement** is an `if` or `if-else` statement that is placed **inside the body** (target) of another `if` or `else if` statement. Nesting is a legal and common technique in C# used to evaluate **multiple levels of related conditions** in a structured manner.</p>
+            <p>The inner `if` statement will only be reached and evaluated if its outer, containing condition is first determined to be **true**.</p>
+        </div>
+        
+        <h2 class="title">Syntax</h2>
+        <div class="content">
+            <p>The following syntax shows how one `if` statement can be placed within another:</p>
+            <pre>
+if( boolean_expression 1) {
+   /* Executes when boolean_expression 1 is true */
+   
+   if(boolean_expression 2) {
+      /* Executes ONLY if BOTH expressions 1 and 2 are true */
+   }
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Example: Simple Nested `if`</h2>
+        <div class="content example">
+            <p>This demonstrates sequential checking of two independent conditions (<code>a</code> and <code>b</code>):</p>
+            <pre>
+using System;
+
+class Program {
+    static void Main(string[] args) {
+        int a = 100;
+        int b = 200;
+         
+        /* Outer Check: if (100 == 100) -> True */
+        if (a == 100) {
+            
+            /* Inner Check: if (200 == 200) -> True. This code executes. */
+            if (b == 200) {
+               Console.WriteLine("Value of a is 100 and b is 200");
+            }
+        }
+    }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                Value of a is 100 and b is 200
+            </p>
+        </div>
+        
+        <h2 class="title">Example: Nested `else if` for Grading</h2>
+        <div class="content example">
+            <p>Nesting can be used to add more granular conditions or detail once a broader category (the outer condition) has been met. Here, an extra performance message is added only for the 'Grade A' category:</p>
+            <pre>
+using System;
+
+public class Example{
+   public static void Main()
+   {
+      int marks = 85;
+      
+      if (marks >= 90)
+      {
+         Console.WriteLine("Grade: A+");
+      }
+      else if (marks >= 80) // Condition is true (85 >= 80)
+      {
+         Console.WriteLine("Grade: A");
+         
+         if (marks >= 85) // Inner condition is true (85 >= 85)
+         {
+            Console.WriteLine("Excellent Performance!");
+         }
+         else
+         {
+            Console.WriteLine("Good Job!");
+         }
+      }
+      // ... other else if blocks are skipped ...
+   }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                Grade: A<br>
+                Excellent Performance!
+            </p>
+        </div>
+    </div>
+</div>s

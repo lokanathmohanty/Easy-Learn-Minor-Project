@@ -1,0 +1,124 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Using useReducer</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            The <code>useReducer</code> hook is an advanced alternative to <code>useState</code> for 
+            state management. It works by using a reducer function to handle state transitions based 
+            on actions, making complex state logic easier to manage.
+         </p>
+
+         <h2>Signature</h2>
+         <div class="code-block">
+<pre><code>const [state, dispatch] = useReducer(reducerFunction, initialState, initFunction)
+</code></pre>
+         </div>
+
+         <ul>
+            <li><strong>state</strong> − Current state information.</li>
+            <li><strong>dispatch</strong> − Function used to trigger actions.</li>
+            <li><strong>reducerFunction</strong> − Function handling state updates.</li>
+            <li><strong>initialState</strong> − The starting state value.</li>
+            <li><strong>initFunction</strong> − Optional initializer for computed state.</li>
+         </ul>
+
+         <h2>Reducer Function</h2>
+         <div class="code-block">
+<pre><code>(state, action) => updatedState
+</code></pre>
+         </div>
+
+         <h2>Example: Counter with useReducer</h2>
+         <div class="code-block">
+<pre><code>function reducer(state, action) {
+   switch (action.type) {
+      case 'increment':
+         return { count: state.count + 1 }
+      case 'decrement':
+         return { count: state.count - 1 }
+      default:
+         throw new Error()
+   }
+}
+
+function Counter() {
+   const [state, dispatch] = useReducer(reducer, { count: 0 })
+
+   return (
+      &lt;&gt;
+         Count: {state.count}
+         &lt;button onClick={() =&gt; dispatch({ type: 'increment' })}&gt;+&lt;/button&gt;
+         &lt;button onClick={() =&gt; dispatch({ type: 'decrement' })}&gt;-&lt;/button&gt;
+      &lt;/&gt;
+   )
+}
+</code></pre>
+         </div>
+
+         <h2>Example: Todo List with useReducer</h2>
+         <div class="code-block">
+<pre><code>function todoReducer(items, action) {
+   switch (action.type) {
+      case 'add':
+         return [...items, { id: Date.now(), todo: action.payload }]
+      case 'delete':
+         return items.filter(item =&gt; item.id !== action.payload.id)
+      default:
+         throw new Error()
+   }
+}
+
+function TodoReducerList() {
+   const [todo, setTodo] = useState('')
+   const [items, dispatch] = useReducer(todoReducer, [])
+
+   const handleAdd = () =&gt; {
+      dispatch({ type: 'add', payload: todo })
+      setTodo('')
+   }
+
+   const handleDelete = (id) =&gt; {
+      dispatch({ type: 'delete', payload: { id } })
+   }
+
+   return (
+      &lt;div&gt;
+         &lt;p&gt;List of Todo Items&lt;/p&gt;
+         &lt;ul&gt;
+            {items.map(item =&gt; (
+               &lt;li key={item.id}&gt;
+                  {item.todo}
+                  &lt;button onClick={() =&gt; handleDelete(item.id)}&gt;Delete&lt;/button&gt;
+               &lt;/li&gt;
+            ))}
+            &lt;li&gt;
+               &lt;input value={todo} onChange={(e) =&gt; setTodo(e.target.value)} /&gt;
+               &lt;button onClick={handleAdd}&gt;Add&lt;/button&gt;
+            &lt;/li&gt;
+         &lt;/ul&gt;
+      &lt;/div&gt;
+   )
+}
+</code></pre>
+         </div>
+
+         <h2>Key Points</h2>
+         <ul>
+            <li><code>useReducer</code> simplifies handling of complex state updates.</li>
+            <li>It uses a reducer function to manage state transitions.</li>
+            <li><code>dispatch</code> triggers state changes based on action types.</li>
+            <li>Great for managing state logic involving multiple sub-values.</li>
+         </ul>
+
+         <h2>Summary</h2>
+         <p>
+            The <code>useReducer</code> hook introduces the reducer pattern in React state management.
+            It improves code readability, encourages reuse, and makes complex logic easier to 
+            maintain. It’s an essential tool for building scalable React applications.
+         </p>
+      </div>
+   </div>
+</div>

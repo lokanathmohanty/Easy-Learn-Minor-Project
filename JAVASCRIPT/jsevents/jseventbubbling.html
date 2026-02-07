@@ -1,0 +1,76 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Event Bubbling</h1>
+
+    <!-- Content section -->
+    <div class="content">
+      <h2 class="title">Content</h2>
+
+      <p>Event bubbling is the process by which an event triggered on a DOM element propagates upward through its ancestors. When an event occurs on a target element, event handlers on parent elements may also run as the event "bubbles" up the DOM tree.</p>
+
+      <h2 class="title">Event Bubbling Steps</h2>
+      <ul>
+        <li><strong>Event triggering</strong> — the event originates on a target element.</li>
+        <li><strong>Capturing phase (optional)</strong> — the event travels from the document root down to the target (handlers registered for capture run here).</li>
+        <li><strong>Target phase</strong> — the event reaches the target element.</li>
+        <li><strong>Bubbling phase</strong> — the event bubbles from the target up through ancestor elements (handlers registered without capture run here).</li>
+      </ul>
+
+      <h2 class="title">When to use bubbling</h2>
+      <ul>
+        <li>When you want a single handler on a parent to manage many child elements.</li>
+        <li>To handle dynamically added elements without attaching handlers to each new element.</li>
+        <li>To implement centralized logging or analytics for user interactions.</li>
+      </ul>
+
+      <h2 class="title">How to stop bubbling</h2>
+      <p>Inside an event handler you can prevent further propagation by calling <strong>event.stopPropagation()</strong> or stop all default behavior and propagation with <strong>event.stopImmediatePropagation()</strong>.</p>
+    </div>
+
+    <!-- Examples section -->
+    <div class="content">
+      <h2 class="title">Example</h2>
+
+      <h2 class="title">Example — Two nested &lt;div&gt; elements (description)</h2>
+      <p>This example demonstrates two nested elements. A click on the inner (child) element triggers its handler and then the parent's handler due to bubbling.</p>
+      <p>HTML structure shown (escaped):</p>
+      <p>&lt;div id="parent"&gt;</p>
+      <p>&lt;div id="child"&gt;Click me&lt;/div&gt;</p>
+      <p>&lt;/div&gt;</p>
+      <p>JavaScript description:</p>
+      <ul>
+        <li>Attach a "click" listener to the parent: <em>parent.addEventListener('click', parentHandler)</em></li>
+        <li>Attach a "click" listener to the child: <em>child.addEventListener('click', childHandler)</em></li>
+        <li>Clicking the child runs <em>childHandler</em> then <em>parentHandler</em> unless propagation is stopped.</li>
+      </ul>
+
+      <h2 class="title">Example — Three nested levels (description)</h2>
+      <p>This example shows three nested levels. Clicking the innermost element triggers handlers on level 3, then level 2, then level 1 as the event bubbles up.</p>
+      <p>HTML structure shown (escaped):</p>
+      <p>&lt;div id="level1"&gt;</p>
+      <p>&lt;div id="level2"&gt;</p>
+      <p>&lt;div id="level3"&gt;Click here&lt;/div&gt;</p>
+      <p>&lt;/div&gt;</p>
+      <p>&lt;/div&gt;</p>
+      <p>Behavior notes:</p>
+      <ul>
+        <li>Use <em>event.target</em> inside handlers to detect the original target element.</li>
+        <li>Use <em>event.currentTarget</em> to refer to the element whose handler is currently executing.</li>
+        <li>To prevent parent handlers from running, call <em>event.stopPropagation()</em> inside the child handler.</li>
+      </ul>
+    </div>
+
+    <!-- Quick reference -->
+    <div class="content">
+      <h2 class="title">Quick Reference</h2>
+      <ul>
+        <li><strong>event.target</strong> — original element that initiated the event.</li>
+        <li><strong>event.currentTarget</strong> — element whose event listener is executing.</li>
+        <li><strong>stopPropagation()</strong> — stops bubbling to ancestor handlers.</li>
+        <li><strong>stopImmediatePropagation()</strong> — stops other listeners on the same element and further propagation.</li>
+      </ul>
+      <p>Tip: favor event delegation (a single handler on an ancestor) when managing many similar child elements.</p>
+    </div>
+
+  </div>
+</div>

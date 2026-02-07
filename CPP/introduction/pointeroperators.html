@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Pointer Operators (&amp; and *)</h1>
+
+        <div class="content">
+            <p>C++ uses two fundamental **pointer operators** to manage memory addresses and the values stored at those addresses:</p>
+            <ul>
+                <li>**Address-of Operator** (<code>&amp;</code>)</li>
+                <li>**Indirection/Dereference Operator** (<code>*</code>)</li>
+            </ul>
+            <p>A **pointer** is a variable that stores the memory address of another variable.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">1. Address-of Operator (<code>&amp;</code>)</h2>
+            <p>The **Address-of Operator** (<code>&amp;</code>) is a unary operator that returns the **memory address** of its operand (variable). It is used to initialize a pointer variable.</p>
+            <ul>
+                <li>**Read as:** "the address of"</li>
+                <li>**Example:** If <code>var</code> is a variable, <code>&amp;var</code> gives the memory location where <code>var</code>'s value is stored.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">2. Indirection/Dereference Operator (<code>*</code>)</h2>
+            <p>The **Indirection Operator** (<code>*</code>) is the complement of <code>&amp;</code>. It is a unary operator that performs **dereferencing**, returning the **value** of the variable located at the address specified by its operand (the pointer).</p>
+            <ul>
+                <li>**Read as:** "the value at the address contained in"</li>
+                <li>**Example:** If <code>ptr</code> holds a memory address, <code>*ptr</code> retrieves the actual data stored at that address.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Example Walkthrough</h2>
+            <p>The provided code demonstrates the relationship between the variable, its address, and the dereferenced value:</p>
+            <pre class="example">
+int var = 3000; // var holds the value 3000
+int *ptr;       // ptr is a pointer to an integer
+int val;        // val will hold the retrieved value
+
+// 1. Address of Operator (&amp;)
+ptr = &amp;var; // ptr now stores the memory address of var
+
+// 2. Indirection Operator (*)
+val = *ptr; // val is assigned the value found at the address stored in ptr (which is 3000)
+</pre>
+            <p><strong>Output Analysis:</strong></p>
+            <pre class="example">
+Value of var :3000       // The direct value of the variable
+Value of ptr :0xbff64494 // The memory address stored in the pointer (var's address)
+Value of val :3000       // The value retrieved by dereferencing the pointer
+</pre>
+            <p>*Note: The address value (<code>0xbff64494</code>) will vary each time the program runs.*</p>
+        </div>
+    </div>
+</div>

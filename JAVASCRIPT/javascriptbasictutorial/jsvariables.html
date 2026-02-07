@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Variables</h1>
+    <div class="content">
+      <h2>JavaScript Variables</h2>
+      <p>JavaScript variables are used to store data that can be changed later on. These variables are like named containers where you can place data and refer to it by name.</p>
+      <p>In JavaScript, you can declare variables in 4 ways:</p>
+      <ul>
+        <li>Without using any keywords.</li>
+        <li>Using the <code>var</code> keyword.</li>
+        <li>Using the <code>let</code> keyword.</li>
+        <li>Using the <code>const</code> keyword.</li>
+      </ul>
+      <p>The <code>let</code> and <code>const</code> keywords were introduced in ES6 (2015). Before that, only <code>var</code> was used.</p>
+      
+      <h2>Variable Declaration in JavaScript</h2>
+      <p>Example of declaring variables without using keywords:</p>
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+   Money = 10;
+   Name = "tutorialspoint";
+&lt;/script&gt;
+</code></pre>
+
+      <p>Using the <code>var</code> keyword:</p>
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+   var money;
+   var name;
+&lt;/script&gt;
+</code></pre>
+
+      <p>Declaring multiple variables with the same <code>var</code>:</p>
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+   var money, name;
+&lt;/script&gt;
+</code></pre>
+
+      <h2>Variable Initialization</h2>
+      <p>Storing a value in a variable is called initialization. It can be done at declaration or later.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+   var name = "Ali";
+   var money;
+   money = 2000.50;
+&lt;/script&gt;
+</code></pre>
+
+      <p><b>Note:</b> Use the <code>var</code> keyword only once for a variable. Do not redeclare the same variable.</p>
+
+      <h2>JavaScript Data Types</h2>
+      <p>Variables can hold values of any type dynamically, such as numbers, strings, booleans, or objects.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+   var num = 765; // Number
+   var str = "Welcome"; // String
+   var bool = false; // Boolean
+&lt;/script&gt;
+</code></pre>
+
+      <h2>JavaScript Variable Names (Identifiers)</h2>
+      <p>Identifiers are names for variables. Rules:</p>
+      <ul>
+        <li>Can contain letters, digits, underscores (_), and dollar signs ($).</li>
+        <li>Must not start with a digit.</li>
+        <li>Case-sensitive (e.g., <code>Name</code> and <code>name</code> are different).</li>
+        <li>Can contain Unicode characters.</li>
+        <li>Must not use reserved keywords.</li>
+      </ul>
+
+      <h2>Using $ and _</h2>
+      <p>These characters are valid in variable names.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt; Variables in JavaScript &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;script&gt;
+        var _abc = "Hi!";
+        var $abc = "Hello!";
+        // var 9abc = "Bye!";  // Invalid
+        document.write("_abc " + _abc + "&lt;br&gt;");
+        document.write("$abc = " + $abc + "&lt;br&gt;");
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Undefined Variable Value</h2>
+      <p>If a variable is declared but not initialized, it has the value <code>undefined</code>.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;script&gt;
+      var num;
+      document.write("The value of num is: " + num + "&lt;br/&gt;");
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>JavaScript Variable Scope</h2>
+      <p>Variables can have two scopes:</p>
+      <ul>
+        <li><b>Global:</b> accessible throughout the program.</li>
+        <li><b>Local:</b> accessible only inside the function where defined.</li>
+      </ul>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;JavaScript Variable Scope Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body onload="checkscope();"&gt;   
+   &lt;script&gt;
+      var myVar = "global"; // Global variable
+      function checkscope() {
+         var myVar = "local"; // Local variable
+         document.write(myVar);
+      }
+   &lt;/script&gt;     
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Variables without var</h2>
+      <p>If declared without <code>var</code>, they are global variables.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt; Variables without var keyword &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;script&gt;
+      name = "tutorialspoint"; // String
+      number = 10.25; // Number
+      document.write("name = " + name + ", number = " + number + "&lt;br&gt;");
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Re-declaring Variables</h2>
+      <p>If a variable is redeclared without initialization, it does not lose its previous value.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt; Variables with var keyword &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;script&gt;
+      var age = 10;
+      var age;
+      document.write("age = " + age + "&lt;br&gt;");
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </div>
+  </div>
+</div>

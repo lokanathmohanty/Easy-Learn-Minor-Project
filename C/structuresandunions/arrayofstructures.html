@@ -1,0 +1,60 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">Array of Structures in C</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        In C programming, a <code>struct</code> is a derived data type that groups variables under one name. An array of structures allows you to handle multiple records as in a database.
+      </p>
+      <h2>Defining and Initializing</h2>
+      <p>Define a struct type called <code>book</code> with members like title, price, and pages:</p>
+      <pre><code>
+struct book {
+  char title[10];
+  double price;
+  int pages;
+};
+      </code></pre>
+      <p>Initialize an array of such structs using nested curly braces:</p>
+      <pre><code>
+struct book b[3] = {
+  {"Learn C", 650.50, 325}, 
+  {"C Pointers", 175, 225}, 
+  {"C Pearls", 250, 250}
+};
+      </code></pre>
+      <h2>Accessing Elements</h2>
+      <p>
+        Access members by indexing and using the dot operator:
+      </p>
+      <pre><code>
+printf("%s costs %.2lf and has %d pages\n", b[0].title, b[0].price, b[0].pages);
+      </code></pre>
+      <h2>Modifying Struct Arrays</h2>
+      <p>You can assign values using <code>strcpy</code> and direct assignment after declaration.</p>
+      <h2>Sorting</h2>
+      <p>Sort the array based on a member like price using nested loops and assignment:</p>
+      <pre><code>
+struct book temp;
+for (int i = 0; i < 2; i++) {
+  for (int j = i + 1; j < 3; j++) {
+    if (b[i].price > b[j].price) {
+      temp = b[i];
+      b[i] = b[j];
+      b[j] = temp;
+    }
+  }
+}
+      </code></pre>
+      <h2>Pointers to Struct Arrays</h2>
+      <p>You can use pointers to iterate over struct arrays and access members with the arrow operator:</p>
+      <pre><code>
+struct book *ptr = b;
+for (int i = 0; i < 3; i++) {
+  printf("Title: %s Price: %.2lf Pages: %d\n", ptr->title, ptr->price, ptr->pages);
+  ptr++;
+}
+      </code></pre>
+    </div>
+  </div>
+</div>

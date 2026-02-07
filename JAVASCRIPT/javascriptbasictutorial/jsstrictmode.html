@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Strict Mode</h1>
+    <div class="content">
+      <h2>Strict Mode in JavaScript</h2>
+      <p>In JavaScript, the strict mode is introduced in the ES5 (ECMAScript 2009). The purpose behind introducing the "strict mode" is to make the JavaScript code more secure.</p>
+      <p>The <code>'use strict'</code> literal expression is used to add the strict mode in the JavaScript code. It removes silent errors from the code, such as using variables without declaration or modifying a read-only property of an object.</p>
+      
+      <h2>Enabling Strict Mode</h2>
+      <p>To enable strict mode, you should write the following literal expression at the top of your code:</p>
+      <p><code>'use strict';</code></p>
+      <p>The <code>'use strict'</code> directive enables JavaScript's strict mode.</p>
+
+      <h2>Why Use the Strict Mode?</h2>
+      <ul>
+        <li><strong>Error Prevention:</strong> Prevents common errors such as using undeclared variables or reserved keywords as identifiers.</li>
+        <li><strong>Safer Code:</strong> Avoids accidental global variable creation and disallows unsafe statements like <code>with</code>.</li>
+        <li><strong>Future Compatibility:</strong> Prepares code for future reserved keywords (e.g., <code>public</code>).</li>
+      </ul>
+
+      <h2>Strict Mode in the Global Scope</h2>
+      <p>When <code>'use strict'</code> is added at the top of a JavaScript file, strict mode applies to the entire code.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+"use strict";
+let y = 50; // Valid
+document.write("The value of Y is: " + y);
+x = 100; // Invalid, will throw error
+document.write("The value of X is: " + x);
+&lt;/script&gt;
+</code></pre>
+
+      <h2>Strict Mode in the Local Scope</h2>
+      <p>Strict mode can also be enabled inside a function, restricting its scope only to that function.</p>
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+x = 100; // Valid outside strict mode
+document.write("The value of X is - " + x);
+
+function test() {
+   "use strict";
+   y = 50; // Invalid inside strict mode
+   document.write("The value of Y is: " + y);
+}
+test();
+&lt;/script&gt;
+</code></pre>
+
+      <h2>Mistakes Not Allowed in Strict Mode</h2>
+      <ul>
+        <li>Using variables without declaring them.</li>
+        <li>Using objects without declaring them.</li>
+        <li>Deleting variables, functions, or object prototypes.</li>
+        <li>Functions with duplicate parameter names.</li>
+        <li>Assigning octal numbers or using escape characters.</li>
+        <li>Using reserved keywords like <code>eval</code>, <code>arguments</code>, <code>public</code>, etc.</li>
+        <li>Writing to read-only object properties or assigning values to getters.</li>
+        <li>Using <code>this</code> in functions without an object context (defaults to <code>undefined</code>).</li>
+        <li>Using <code>with</code> statements.</li>
+        <li>Declaring variables with <code>eval()</code>.</li>
+        <li>Using reserved future keywords like <code>implements</code>, <code>interface</code>, <code>package</code>, <code>private</code>, <code>protected</code>.</li>
+      </ul>
+    </div>
+  </div>
+</div>

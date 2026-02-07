@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>BitSet</code> Class Summary 🔢🗜️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.BitSet</code>** class implements a special, highly efficient data structure—a **vector of bits** that grows as needed. It's used to represent a set of non-negative integers as individual binary flags (true/false) in a compact, dynamic array.</p>
+
+            <hr>
+
+            <h2 class="title">I. Core Characteristics and Efficiency</h2>
+            <p><code>BitSet</code> excels at representing a large number of boolean flags efficiently, allowing for fast set algebra operations.</p>
+            <ul>
+                <li>
+                    **Space Efficiency:** It stores each boolean value using a single bit. This is extremely memory-efficient, especially when dealing with large, sparse sets of flags.
+                </li>
+                <li>
+                    **Dynamic Size:** The array of bits automatically grows as needed to accommodate a set bit at a higher index, similar to a `Vector` or `ArrayList`.
+                </li>
+                <li>
+                    **Initial State:** All bits in a new `BitSet` initially have the value **`false`** (or 0).
+                </li>
+                <li>
+                    **Indexing:** The index of a bit corresponds to the integer value it represents. For example, setting the bit at index 10 means the number 10 is in the set.
+                </li>
+                <li>
+                    **Non-Synchronized:** It is **not thread-safe** and requires external synchronization for concurrent modification.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Bitwise and Set Operations</h2>
+            <p>The primary utility of `BitSet` lies in its ability to perform highly optimized set algebra (intersection, union, difference) using bitwise logic:</p>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Set Algebra Equivalent</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><code>void **and**(BitSet set)</code></td>
+                    <td>Intersection ($\cap$)</td>
+                    <td>Keeps bits set to `true` **only** if they are `true` in **both** `BitSet` objects.</td>
+                </tr>
+                <tr>
+                    <td><code>void **or**(BitSet set)</code></td>
+                    <td>Union ($\cup$)</td>
+                    <td>Sets bits to `true` if they are `true` in **either** `BitSet` object.</td>
+                </tr>
+                <tr>
+                    <td><code>void **xor**(BitSet set)</code></td>
+                    <td>Symmetric Difference ($\triangle$)</td>
+                    <td>Sets bits to `true` if they are `true` in **one but not both** `BitSet` objects.</td>
+                </tr>
+                <tr>
+                    <td><code>void **andNot**(BitSet set)</code></td>
+                    <td>Difference ($\setminus$)</td>
+                    <td>Clears bits in the target `BitSet` if the corresponding bit is set in the argument `BitSet`. (i.e., this $\setminus$ set)</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">III. Key Access and Utility Methods</h2>
+            <p>Other essential methods for managing and querying the bit vector:</p>
+            <ul>
+                <li>
+                    **<code>void set(int bitIndex)</code>:** Sets the bit at the specified index to `true`.
+                </li>
+                <li>
+                    **<code>boolean get(int bitIndex)</code>:** Returns the value (`true` or `false`) of the bit at the specified index.
+                </li>
+                <li>
+                    **<code>int cardinality()</code>:** Returns the **number of bits set to `true`** (the size of the represented set).
+                </li>
+                <li>
+                    **<code>int length()</code>:** Returns the "logical size," which is the index of the highest set bit **plus one**.
+                </li>
+                <li>
+                    **<code>int nextSetBit(int fromIndex)</code>:** Efficiently finds the index of the next `true` bit starting from a given index.
+                </li>
+            </ul>
+
+            <div class="example">
+                <p><strong>Example Demonstration:</strong></p>
+                <p>The final `XOR` operation is `bits2 XOR bits1`. The output `{}` means that after the previous `OR` operation, `bits2` became `{0, 2, 4, 6, 8, 10, 12, 14}` which is exactly the same as `bits1`. Since XOR returns `true` only if bits are different, the result of two identical sets is an empty set (`{}`).</p>
+            </div>
+        </div>
+    </div>
+</div>

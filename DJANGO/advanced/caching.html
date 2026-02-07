@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Caching Framework ⚡</h1>
+        <div class="content">
+            <p><strong>Caching</strong> is the process of storing the result of an expensive calculation or dynamic page generation so it can be served quickly on subsequent requests without being re-calculated. Django includes a robust, flexible caching system that allows you to cache **entire sites**, **specific views**, or **parts of a template**.</p>
+        </div>
+        <h2 class="example">Setting Up the Cache Backend</h2>
+        <div class="content">
+            <p>Before using caching, you must configure where Django should store the cached data using the **<code>CACHES</code>** dictionary in <code>settings.py</code>:</p>
+
+            <h3>Database Cache</h3>
+            <p>Saves cache data directly into a database table. You must specify the table name using the **<code>LOCATION</code>** key and create the table with <code>python manage.py createcachetable</code>.</p>
+            <pre><code>CACHES = {
+   'default': {
+      'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+      'LOCATION': 'my_cache_table', # The name of the table to use
+   }
+}</code></pre>
+
+            <h3>File System Cache</h3>
+            <p>Saves cache data as files on the server's file system. You must specify a directory path with the **<code>LOCATION</code>** key.</p>
+            <pre><code>CACHES = {
+   'default': {
+      'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+      'LOCATION': '/var/tmp/django_cache', # Ensure this directory exists and is writable
+   }
+}</code></pre>
+
+            <h3>In-Memory Cache (Memcached)</h3>
+            <p>This is generally the fastest and most efficient method, storing data directly in memory using services like Memcached or Redis. You must have the respective service running and installed with the necessary Python bindings.</p>
+            <pre><code>CACHES = {
+   'default': {
+      'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+      'LOCATION': '127.0.0.1:11211', # IP:Port of the Memcached server
+   }
+}</code></pre>
+
+            <hr>
+
+            <h2>Caching Techniques in Django</h2>
+
+            <h3>1. Caching the Entire Site (Middleware)</h3>
+            <p>To cache every page output across your entire site, you use specific middleware classes. The order is crucial: <code>UpdateCacheMiddleware</code> must come before <code>FetchFromCacheMiddleware</code>.</p>
+            <pre><code># In settings.py
+MIDDLEWARE = [
+   'django.middleware.cache.UpdateCacheMiddleware',
+   'django.middleware.common.CommonMiddleware',
+   'django.middleware.cache.FetchFromCacheMiddleware',
+   # ... other middleware ...
+]
+
+CACHE_MIDDLEWARE_ALIAS = 'default' # Use the 'default' cache defined above
+CACHE_MIDDLEWARE_SECONDS = 600    # Cache pages for 600 seconds (10 minutes)</code></pre>
+
+            <h3>2. Caching a View (Decorator)</h3>
+            <p>You can cache the output of an individual view function using the **<code>@cache_page</code>** decorator. The decorator takes the cache duration in seconds as its parameter.</p>
+            <pre><code>from django.views.decorators.cache import cache_page
+from django.http import HttpResponse
+
+@cache_page(60 * 15) # Cache the result for 15 minutes (900 seconds)
+def viewArticles(request, year, month):
+   text = "Displaying articles of: %s/%s" % (year, month)
+   return HttpResponse(text)</code></pre>
+            <p>Alternatively, you can apply the decorator directly in your <code>urls.py</code> when defining the path, eliminating the need to import it in the view file:</p>
+            <pre><code># In urls.py
+from django.views.decorators.cache import cache_page
+# ...
+url(r'^articles/(?P<month>\d{2})/(?P<year>\d{4})/', 
+    cache_page(60 * 15)('viewArticles'), name = 'articles'),</code></pre>
+            <p><strong>Note:</strong> When a view has URL parameters (like year/month), Django caches each unique URL request separately.</p>
+
+            <h3>3. Caching a Template Fragment (Template Tag)</h3>
+            <p>To cache only a specific, expensive-to-render block within an HTML template, use the **<code>{% cache %}</code>** template tag.</p>
+            <pre><code>{% load cache %}
+{% extends "main_template.html" %}
+{% block title %}My Hello Page{% endblock %}
+
+{% cache 500 content %}
+{% block content %}
+    &lt;h1&gt;Hello World!!!&lt;/h1&gt;
+    &lt;p&gt;Today is {{today}}&lt;/p&gt;
+    &lt;!-- ... expensive calculations or database loops go here ... --&gt;
+{% endblock %}
+{% endcache %}</code></pre>
+            <p>The tag requires two arguments: the cache duration in seconds (e.g., <code>500</code>) and a unique name for the cache fragment (e.g., <code>content</code>).</p>
+        </div>
+    </div>
+</div>

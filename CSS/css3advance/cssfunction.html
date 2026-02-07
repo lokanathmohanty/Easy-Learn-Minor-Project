@@ -1,0 +1,184 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Value Functions</h1>
+    <div class="content">
+      <p>
+        CSS value functions allow you to generate values for CSS properties dynamically. These functions take parameters and return a value that can be used in place of a static value. They make styling more powerful, flexible, and adaptive.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+selector {
+   property: function([argument]? [, argument]!);
+}
+      </pre>
+      <p>
+        The function name appears first in the value syntax, followed by parentheses. Inside the parentheses, arguments are placed, separated either by spaces or commas depending on the function.
+      </p>
+
+      <h2>Transform Functions</h2>
+      <p>
+        The <code>&lt;transform-function&gt;</code> type represents visual transformations and is used inside the <code>transform</code> property.
+      </p>
+      <ul>
+        <li><code>translateX()</code> - moves an element horizontally</li>
+        <li><code>translateY()</code> - moves an element vertically</li>
+        <li><code>translateZ()</code> - moves an element along the z-axis</li>
+        <li><code>translate()</code> - moves an element in 2D</li>
+        <li><code>translate3d()</code> - moves an element in 3D</li>
+        <li><code>rotateX()</code> - rotates around x-axis</li>
+        <li><code>rotateY()</code> - rotates around y-axis</li>
+        <li><code>rotateZ()</code> - rotates around z-axis</li>
+        <li><code>rotate()</code> - rotates in 2D</li>
+        <li><code>rotate3d()</code> - rotates in 3D</li>
+        <li><code>scaleX()</code>, <code>scaleY()</code>, <code>scaleZ()</code> - scales in respective directions</li>
+        <li><code>scale()</code> - scales in 2D</li>
+        <li><code>scale3d()</code> - scales in 3D</li>
+        <li><code>skewX()</code>, <code>skewY()</code>, <code>skew()</code> - skews elements</li>
+        <li><code>matrix()</code> - applies 2D matrix transform</li>
+        <li><code>matrix3d()</code> - applies 3D matrix transform</li>
+        <li><code>perspective()</code> - sets perspective for 3D transforms</li>
+      </ul>
+      <pre>
+.box {
+  transform: translateX(100px) rotate(45deg) scale(1.5);
+}
+      </pre>
+
+      <h2>Math Functions</h2>
+      <ul>
+        <li><code>calc()</code> - performs arithmetic calculations</li>
+        <li><code>min()</code> - picks the smallest value</li>
+        <li><code>max()</code> - picks the largest value</li>
+        <li><code>clamp()</code> - constrains value between min and max</li>
+        <li><code>round()</code> - rounds numbers</li>
+        <li><code>sin()</code>, <code>cos()</code>, <code>tan()</code>, <code>asin()</code>, <code>acos()</code>, <code>atan()</code>, <code>atan2()</code> - trigonometric functions</li>
+      </ul>
+      <pre>
+div {
+  width: calc(100% - 50px);
+  font-size: clamp(14px, 2vw, 20px);
+}
+      </pre>
+
+      <h2>Filter Functions</h2>
+      <p>
+        <code>&lt;filter-function&gt;</code> applies graphical effects with <code>filter</code> or <code>backdrop-filter</code>.
+      </p>
+      <ul>
+        <li><code>blur()</code> - blurs image</li>
+        <li><code>brightness()</code> - adjusts brightness</li>
+        <li><code>contrast()</code> - adjusts contrast</li>
+        <li><code>drop-shadow()</code> - applies shadow</li>
+        <li><code>grayscale()</code>, <code>hue-rotate()</code>, <code>invert()</code>, <code>opacity()</code>, <code>saturate()</code>, <code>sepia()</code></li>
+      </ul>
+      <pre>
+img {
+  filter: grayscale(100%) brightness(1.2);
+}
+      </pre>
+
+      <h2>Color Functions</h2>
+      <ul>
+        <li><code>rgb()</code>, <code>hsl()</code>, <code>hwb()</code></li>
+        <li><code>lch()</code>, <code>oklch()</code>, <code>lab()</code>, <code>oklab()</code></li>
+        <li><code>color()</code>, <code>color-mix()</code></li>
+      </ul>
+      <pre>
+div {
+  background: color-mix(in srgb, red 40%, blue);
+}
+      </pre>
+
+      <h2>Image Functions</h2>
+      <ul>
+        <li><code>linear-gradient()</code>, <code>radial-gradient()</code>, <code>conic-gradient()</code></li>
+        <li><code>repeating-linear-gradient()</code>, <code>repeating-radial-gradient()</code>, <code>repeating-conic-gradient()</code></li>
+        <li><code>image-set()</code>, <code>cross-fade()</code>, <code>paint()</code></li>
+      </ul>
+      <pre>
+div {
+  background: linear-gradient(to right, red, yellow);
+}
+      </pre>
+
+      <h2>Counter Functions</h2>
+      <ul>
+        <li><code>counter()</code> - returns current counter</li>
+        <li><code>counters()</code> - returns nested counters</li>
+      </ul>
+      <pre>
+ol {
+  counter-reset: item;
+}
+li::before {
+  counter-increment: item;
+  content: counter(item) ". ";
+}
+      </pre>
+
+      <h2>Shape Functions</h2>
+      <ul>
+        <li><code>circle()</code>, <code>ellipse()</code>, <code>inset()</code>, <code>polygon()</code>, <code>path()</code></li>
+      </ul>
+      <pre>
+div {
+  clip-path: circle(50% at center);
+}
+      </pre>
+
+      <h2>Reference Functions</h2>
+      <ul>
+        <li><code>attr()</code> - pulls attribute value</li>
+        <li><code>env()</code> - environment variable</li>
+        <li><code>url()</code> - loads resource</li>
+        <li><code>var()</code> - uses CSS custom property</li>
+      </ul>
+      <pre>
+a::after {
+  content: " (" attr(href) ")";
+}
+      </pre>
+
+      <h2>Grid Functions</h2>
+      <ul>
+        <li><code>fit-content()</code></li>
+        <li><code>minmax()</code></li>
+        <li><code>repeat()</code></li>
+      </ul>
+      <pre>
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+}
+      </pre>
+
+      <h2>Font Functions</h2>
+      <ul>
+        <li><code>stylistic()</code>, <code>styleset()</code>, <code>character-variant()</code>, <code>swash()</code>, <code>ornaments()</code>, <code>annotation()</code></li>
+      </ul>
+
+      <h2>Easing Functions</h2>
+      <ul>
+        <li><code>linear()</code> - linear animation</li>
+        <li><code>cubic-bezier()</code> - custom curve</li>
+        <li><code>steps()</code> - stepped transition</li>
+      </ul>
+      <pre>
+div {
+  transition: all 2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+      </pre>
+
+      <h2>Practice Exercises</h2>
+      <ul>
+        <li>Use <code>calc()</code> to create a layout that adapts to available space.</li>
+        <li>Apply <code>rotate()</code> and <code>scale()</code> transforms on hover.</li>
+        <li>Create a <code>linear-gradient()</code> background with three colors.</li>
+        <li>Experiment with <code>color-mix()</code> to blend two colors.</li>
+        <li>Build a responsive grid using <code>repeat()</code> and <code>minmax()</code>.</li>
+        <li>Add <code>blur()</code> and <code>contrast()</code> effects to an image.</li>
+      </ul>
+    </div>
+  </div>
+</div>

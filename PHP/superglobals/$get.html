@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `$_GET` Superglobal</h1>
+
+    <div class="content">
+      <p>
+        The **`$_GET`** is a **superglobal associative array** in PHP used to collect data passed to the current script via the **URL query string**. This data is visible in the browser's address bar and is typically associated with the HTTP **GET** request method, though it is populated anytime a query string is present.
+      </p>
+
+      <h2>How `$_GET` is Populated</h2>
+      <p>
+        Data is passed to `$_GET` in two main ways:
+      </p>
+
+      <h3>1. Direct URL Access (Query String)</h3>
+      <p>
+        Key-value pairs are appended to the URL after a question mark (`?`), separated by ampersands (`&`).
+      </p>
+      <div class="example">
+        <p>
+          **URL:** <code>http://server/script.php?**name=Amit&age=22**</code><br>
+          <br>
+          **PHP Access:**<br>
+          <code>echo $_GET['name']; // Amit</code><br>
+          <code>echo $_GET['age']; // 22</code>
+        </p>
+      </div>
+
+      <h3>2. HTML Form Submission (<code>method="get"</code>)</h3>
+      <p>
+        If an HTML form uses the `method="get"` attribute, the field names and values are automatically appended to the action URL as a query string when the form is submitted.
+      </p>
+      <div class="example">
+        <p>
+          **HTML:** <code>&lt;form action="hello.php" **method="get"**&gt;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&lt;input type="text" **name="first_name"** /&gt;</code><br>
+          <code>&lt;/form&gt;</code>
+        </p>
+        <p>
+          **PHP:** <code>echo $_GET['first_name'];</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Security and Best Practices ⚠️</h2>
+      <ul>
+        <li>
+          **Visibility & Limits:** Data sent via `GET` is visible in the URL, browser history, and server logs, making it **unsuitable for sensitive data** like passwords. Additionally, URLs have length restrictions, limiting the data volume.
+        </li>
+        <li>
+          **Sanitization is Critical:** Since data comes directly from the URL, it is easily manipulated by users. To prevent Cross-Site Scripting (XSS) and other vulnerabilities, always sanitize and validate all input from `$_GET`.
+          <div class="example">
+            <p>
+              Use `htmlspecialchars()` to convert special characters (like `<`, `>`, `&`) into their HTML entity equivalents before echoing them to the browser:
+            </p>
+            <code>echo htmlspecialchars($_GET["name"]);</code>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

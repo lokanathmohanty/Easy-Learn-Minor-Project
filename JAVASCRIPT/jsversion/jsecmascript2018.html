@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - ECMAScript 2018</h1>
+    <div class="content">
+      <p>The ECMAScript 2018 version of JavaScript was released in 2018. ECMAScript 2017 introduced significant enhancement to the language. Two important features introduced in this version are asynchronous iteration for improved handling of asynchronous operations, and <code>Promise.finally()</code> to execute code regardless of promise resolution. This chapter will discuss all the new added features in ECMAScript 2018.</p>
+      
+      <h2>New Added Features in ECMAScript 2018</h2>
+      <ul>
+        <li>Asynchronous iteration</li>
+        <li>New features of the <code>RegExp()</code> Object</li>
+        <li><code>Promise.finally()</code></li>
+        <li>Rest object properties</li>
+      </ul>
+
+      <h2>JavaScript Asynchronous Iteration</h2>
+      <p>You can also use the <code>await</code> keyword with the <code>for</code> loop to make asynchronous iterations.</p>
+      <p>For example, you are iterating multiple promises, and in each iteration, you need to stop the code execution until the current promise gets resolved or rejected.</p>
+      <h3>Example</h3>
+      <pre><code>async function* gen_function() {
+   for (let p = 0; p &lt; 5; p++) {
+      await new Promise(res =&gt; setTimeout(res, 500));
+      yield p;
+   }
+}
+
+async function test() {
+   for await (const ele of gen_function()) {
+      console.log("Returned element is:", ele);
+   }
+}
+test();</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Returned element is: 0</li>
+        <li>Returned element is: 1</li>
+        <li>Returned element is: 2</li>
+        <li>Returned element is: 3</li>
+        <li>Returned element is: 4</li>
+      </ul>
+
+      <h2>New features of the <code>RegExp()</code> object</h2>
+      <p>In ECMAScript 2018, the following four new regular expression features were introduced:</p>
+      <ul>
+        <li>Unicode Property Escapes (<code>\p{...}</code>)</li>
+        <li>Lookbehind Assertions (<code>?&lt;=</code>) and (<code>?&lt;!</code>)</li>
+        <li>Named Capture Groups</li>
+        <li><code>s</code> (dotAll) Flag</li>
+      </ul>
+
+      <h3>Unicode Property Escapes (<code>\p{...}</code>)</h3>
+      <p>Allows you to match Unicode characters using properties.</p>
+      <pre><code>const regex = /\p{Letter}/u;
+console.log(regex.test('Y')); // true
+console.log(regex.test('6')); // false</code></pre>
+
+      <h3>Lookbehind Assertions (<code>?&lt;=</code> and <code>?&lt;!</code>)</h3>
+      <pre><code>const lookBehind = /(?&lt;=@)\w+/;
+console.log(lookBehind.exec('abcd@tutorialspoint.com')[0]); // tutorialspoint</code></pre>
+
+      <h3>Named Capture Groups</h3>
+      <pre><code>const datePattern = /(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})-(?&lt;day&gt;\d{2})/;
+const match = datePattern.exec('2023-08-22');
+console.log(match.groups.year); // 2023</code></pre>
+
+      <h3><code>s</code> (dotAll) Flag</h3>
+      <pre><code>const strRegex = /Hello.programmers/s;
+console.log(strRegex.test('Hello\nprogrammers')); // true</code></pre>
+
+      <h2>JavaScript Promise finally()</h2>
+      <p>You can use the <code>finally()</code> block with promises to execute particular code after the promise gets resolved or rejected.</p>
+      <pre><code>const getData = new Promise((res, rej) =&gt; {
+   setTimeout(() =&gt; {
+      res("Promise resolved!");
+   }, 1000);
+});
+
+getData
+   .then(result =&gt; {
+      console.log(result);
+   })
+   .finally(() =&gt; {
+      console.log("In the finally block!");
+   });</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Promise resolved!</li>
+        <li>In the finally block!</li>
+      </ul>
+
+      <h2>JavaScript Rest Object Properties</h2>
+      <p>The spread operator can be used while destructuring objects to collect remaining properties into a single variable.</p>
+      <pre><code>const numbers = {
+   num1: 40,
+   num2: 50,
+   num3: 80,
+   num4: 90,
+}
+
+const { num1, ...nums } = numbers;
+console.log(num1); // 40
+console.log(nums); // { num2: 50, num3: 80, num4: 90 }</code></pre>
+    </div>
+  </div>
+</div>

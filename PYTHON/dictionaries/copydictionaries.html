@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Copy Dictionaries in Python</h1>
+    <div class="content">
+      <p>Copying dictionaries in Python can be done in two major ways: <strong>shallow copy</strong> and <strong>deep copy</strong>, depending on whether you want nested objects to be duplicated or just referenced.</p>
+
+      <h2 class="title">Shallow Copy</h2>
+      <p>A shallow copy creates a new dictionary, but the values inside (mutable objects like lists or nested dictionaries) are still references to the original dictionary's objects.</p>
+
+      <h2 class="title">Deep Copy</h2>
+      <p>A deep copy creates a new dictionary, including copies of all nested objects so that the copy is fully independent from the original dictionary.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Code Examples</h1>
+    <div class="content">
+      <h2 class="title">Example of Shallow Copy Using <code>copy()</code> Method</h2>
+      <pre>
+<code>original_dict = {"name": "Alice", "age": 25, "skills": ["Python", "Data Science"]}
+shallow_copy = original_dict.copy()
+
+shallow_copy["age"] = 26
+shallow_copy["skills"].append("Machine Learning")
+
+print("Original:", original_dict)
+print("Shallow copy:", shallow_copy)
+</code>
+      </pre>
+
+      <h2 class="title">Example of Deep Copy Using <code>copy.deepcopy()</code></h2>
+      <pre>
+<code>import copy
+
+original_dict = {
+    "name": "Alice",
+    "age": 25,
+    "skills": ["Python", "Data Science"],
+    "education": {"degree": "Bachelor's", "field": "Computer Science"}
+}
+
+deep_copy = copy.deepcopy(original_dict)
+
+deep_copy["age"] = 26
+deep_copy["skills"].append("Machine Learning")
+deep_copy["education"]["degree"] = "Master's"
+
+print("Original:", original_dict)
+print("Deep copy:", deep_copy)
+</code>
+      </pre>
+    </div>
+  </div>
+</div>

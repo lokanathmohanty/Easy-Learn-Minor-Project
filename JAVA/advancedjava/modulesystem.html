@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Platform Module System (JPMS) - Java 9+</h1>
+
+        <div class="content">
+            <h2>What is the Java Module System?</h2>
+            <p>The **Java Platform Module System (JPMS)**, introduced in **Java 9**, fundamentally changes how Java code is organized and packaged. A **Module** is a new programming component and an abstraction layer above a package.</p>
+            <p>It is a **self-describing collection of code and data** that defines what it needs (dependencies) and what it makes available (exports). This system is designed to improve encapsulation, security, reliability, and performance by addressing the long-standing "JAR hell" and classpath issues.</p>
+            <p class="example">The Java platform itself is modularized, as seen by the command <code>java --list-modules</code>, which shows many individual modules like <code>java.base</code>, <code>java.desktop</code>, and <code>java.xml</code>.</p>
+
+            <h2>Core Principles of Modularity</h2>
+            <p>A module enforces two critical concepts:</p>
+            <ol>
+                <li>
+                    <strong>Strong Encapsulation:</strong> By default, all packages within a module are **not visible** to the outside world. A package must be **explicitly exported** to be public. This prevents unauthorized access to internal implementation details, even public classes, which was a weakness of the old classpath system.
+                </li>
+                <li>
+                    <strong>Reliable Configuration:</strong> A module explicitly declares its dependencies using the <code>requires</code> directive. The Java Runtime Environment (JRE) can verify that all necessary modules are present at link time or run time, leading to more reliable applications (no more "missing dependency" errors at runtime).
+                </li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Declaring a Module: <code>module-info.java</code></h2>
+            <p>Every custom module is defined by a **module descriptor** file named **<code>module-info.java</code>** located at the root of the module's source folder. This file contains all the metadata about the module.</p>
+
+            <h3>Key Directives (Module Declarations)</h3>
+            <ul>
+                <li>
+                    <strong><code>module my.module { }</code></strong>
+                    <p>The basic declaration, assigning a unique name to the module.</p>
+                </li>
+                <li>
+                    <strong><code>requires other.module;</code></strong>
+                    <p>Declares a **mandatory dependency**. This module cannot compile or run without <code>other.module</code> being available.</p>
+                </li>
+                <li>
+                    <strong><code>requires transitive other.module;</code></strong>
+                    <p>Declares a dependency that is also exposed to any module that depends on *this* module. If module A requires transitive module B, and module C requires module A, then module C implicitly requires module B.</p>
+                </li>
+                <li>
+                    <strong><code>requires static optional.module;</code></strong>
+                    <p>Declares an **optional (compile-time) dependency**. The module is needed for compilation but is optional at runtime. It's often used when a module might not be present on the target JRE.</p>
+                </li>
+                <li>
+                    <strong><code>exports com.mypackage.api;</code></strong>
+                    <p>Makes the **public types** (classes, interfaces) in the specified package accessible to **all** other modules that require this module.</p>
+                </li>
+                <li>
+                    <strong><code>opens com.mypackage.internal;</code></strong>
+                    <p>Allows the package's contents to be accessed by **reflection** at runtime, which is sometimes necessary for frameworks (like Spring or Hibernate) that inspect code dynamically. It bypasses strong encapsulation for that package.</p>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title">New Development Features</h2>
+            <div class="content">
+                <ul>
+                    <li>
+                        <strong>Modular JARs:</strong> A standard JAR file that includes a <code>module-info.class</code> file in its root.
+                    </li>
+                    <li>
+                        <strong>JMOD Format:</strong> A new packaging format, similar to JAR, that can also contain native code, configuration files, and other non-Java resources, mainly used by the platform itself.
+                    </li>
+                    <li>
+                        <strong><code>jlink</code> Tool:</strong> A new tool that allows developers to assemble a specific set of modules to create a **custom, optimized JRE runtime image** that contains only the components needed for the application. This drastically reduces the size of deployment bundles.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

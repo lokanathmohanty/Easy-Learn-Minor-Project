@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Safe Assignment Operator</h1>
+    <div class="content">
+      <p>
+        JavaScript Safe Assignment Operator (<code>?=</code>) is a suggested new feature for JavaScript that makes it easier to handle errors in code. 
+        This operator helps developers deal with errors more simply, without having to use complicated <code>try/catch</code> blocks.
+      </p>
+      <p>
+        It is denoted by the <code>?=</code> symbol. It is currently under development and not yet part of the official ECMAScript specification.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>The syntax for using the Safe Assignment Operator is as follows:</p>
+      <p><code>variable ?= value;</code></p>
+
+      <h2>Examples</h2>
+      <p>Here are simple examples of using the safe assignment operator to better understand it:</p>
+
+      <h3>Using Safe Assignment Operator</h3>
+      <p>
+        This example demonstrates how to use the operator to assign a value only if the variable is currently <code>null</code> or <code>undefined</code>.
+      </p>
+      <pre><code>
+// Initial variable set to null
+let username = null;
+
+// Using the Safe Assignment Operator
+// to assign a default value
+username ?= "Guest";
+
+// Alerting the result
+alert(username); // This will alert "Guest"
+      </code></pre>
+      <h4>Output</h4>
+      <p>
+        The variable <code>username</code> is set as <code>null</code>. 
+        The line <code>username ?= "Guest";</code> checks if it's <code>null</code> or <code>undefined</code> and sets it to "Guest". 
+        Finally, <code>alert(username);</code> shows that <code>username</code> is now "Guest".
+      </p>
+      <p><strong>Guest</strong></p>
+
+      <h3>Assign a Calculated Value</h3>
+      <p>
+        This example demonstrates how to use the operator to assign a calculated value only if the variable is currently <code>null</code> or <code>undefined</code>.
+      </p>
+      <pre><code>
+// Function to perform a simple calculation
+function calculate(value) {
+    return value * 2; // Simple calculation: double the input
+}
+
+// Initial variable set to null
+let result = null;
+
+// Using the Safe Assignment Operator to assign the calculated value
+result ?= calculate(5); // Assigns 10 if result is null
+
+// Alerting the result
+alert(result); // This will alert "10"
+      </code></pre>
+      <h4>Output</h4>
+      <p>
+        The <code>calculate</code> function takes a number and returns its double. 
+        The variable <code>result</code> is set as <code>null</code>. 
+        The line <code>result ?= calculate(5);</code> checks if result is <code>null</code>, and since it is, it calls <code>calculate(5)</code>, which returns 10 and assigns it to <code>result</code>. 
+        Finally, <code>alert(result);</code> shows that <code>result</code> is now 10.
+      </p>
+      <p><strong>10</strong></p>
+
+      <p>
+        This operator is supported by modern browsers 
+        (Chrome 91+, Firefox 89+, Edge 91+, Safari 15+) and Node.js (14.17.0+).
+      </p>
+    </div>
+  </div>
+</div>

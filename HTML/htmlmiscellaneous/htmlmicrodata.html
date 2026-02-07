@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Microdata</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>Microdata is a standardized way to provide additional semantics in web pages. It lets us define custom elements and embed custom properties. A microdata structure consists of groups of name-value pairs.</p>
+      <p>These groups are called <strong>items</strong>, and each name-value pair is a <strong>property</strong>. Both items and properties are represented by normal HTML elements.</p>
+
+      <h2>Using Microdata in HTML Documents</h2>
+      <p>To create an item, the <code>itemscope</code> attribute is used. To add a property, the <code>itemprop</code> attribute is used on one of the item's descendants.</p>
+
+      <h3>Example</h3>
+      <pre><code>&lt;div itemscope&gt;
+  &lt;p&gt;My name is &lt;span itemprop="name"&gt;Zara&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div itemscope&gt;
+  &lt;p&gt;My name is &lt;span itemprop="name"&gt;Nuha&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+      <h2>Global Attributes in Microdata</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>itemscope</code></td>
+            <td>Creates an item. Boolean attribute that marks the start of microdata.</td>
+          </tr>
+          <tr>
+            <td><code>itemtype</code></td>
+            <td>A valid URL that defines the item and provides context for its properties.</td>
+          </tr>
+          <tr>
+            <td><code>itemid</code></td>
+            <td>A global identifier for the item.</td>
+          </tr>
+          <tr>
+            <td><code>itemprop</code></td>
+            <td>Defines a property of the item.</td>
+          </tr>
+          <tr>
+            <td><code>itemref</code></td>
+            <td>Lists additional elements to crawl for name-value pairs of the item.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Properties Datatypes</h2>
+      <p>Properties generally have string values, but they can also represent URLs, dates, times, or even nested groups of properties.</p>
+
+      <h3>Example: Image as a URL</h3>
+      <pre><code>&lt;div itemscope&gt;
+  &lt;img itemprop="image" src="tp-logo.gif" alt="TutorialsPoint"&gt;
+&lt;/div&gt;
+</code></pre>
+
+      <h3>Example: Date Property</h3>
+      <pre><code>&lt;div itemscope&gt;
+  My birthday is −
+  &lt;time itemprop="birthday" datetime="1971-05-08"&gt;
+    Aug 5th 1971
+  &lt;/time&gt;
+&lt;/div&gt;
+</code></pre>
+
+      <h2>Microdata API Support</h2>
+      <p>If a browser supports the HTML5 Microdata API, it exposes a <code>getItems()</code> function on the <code>document</code> object. If not, the function will be undefined.</p>
+
+      <pre><code>function supports_microdata_api() {
+  return !!document.getItems;
+}
+</code></pre>
+
+      <p>The HTML5 microdata standard includes both markup (for search engines) and DOM functions (for browsers). Search engines that don’t support microdata simply ignore the attributes.</p>
+
+      <h2>Defining Microdata Vocabulary</h2>
+      <p>To define a microdata vocabulary, you need a namespace URL that points to a working web page. For example, <code>http://data-vocabulary.org/Person</code> can be used as the namespace for a personal microdata vocabulary with the following properties:</p>
+      <ul>
+        <li><strong>name</strong> – Person’s name as text.</li>
+        <li><strong>photo</strong> – A URL to a person’s photo.</li>
+        <li><strong>url</strong> – A website belonging to the person.</li>
+      </ul>
+
+      <h3>Example: Person Microdata</h3>
+      <pre><code>&lt;div itemscope&gt;
+  &lt;section itemscope itemtype="http://data-vocabulary.org/Person"&gt;
+    &lt;h1 itemprop="name"&gt;Gopal K Varma&lt;/h1&gt;
+    &lt;p&gt;
+      &lt;img itemprop="photo" src="http://www.tutorialspoint.com/green/images/logo.png"&gt;
+    &lt;/p&gt;
+    &lt;a itemprop="url" href="#"&gt;Site&lt;/a&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+</code></pre>
+
+      <h2>Google and Microdata</h2>
+      <p>Google supports microdata as part of its Rich Snippets program. When Google’s crawler detects valid microdata, it extracts and stores the structured properties alongside the rest of the page data.</p>
+
+    </div>
+  </div>
+</div>

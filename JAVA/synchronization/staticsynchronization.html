@@ -1,0 +1,170 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Static Synchronization</h1>
+
+    <div class="content">
+      <h2 class="content-title">Introduction</h2>
+      <p>Synchronization ensures safe cooperation between multiple threads accessing shared resources. In static synchronization, the lock is applied at the <strong>class level</strong>, not object level, which means if one thread is executing a static synchronized method, all other threads trying to access any static synchronized method on the same class are blocked.</p>
+
+      <h2 class="content-title">Multithreading</h2>
+      <p>Multithreading allows simultaneous execution of two or more parts of a program. Each thread runs independently and enables better resource utilization, especially CPU time, improving performance.</p>
+
+      <h2 class="content-title">Synchronization</h2>
+      <p>Since threads run asynchronously, their interactions can be unpredictable. If multiple threads try to access the same resource (like writing to a file), results may be faulty. Synchronization ensures that only one thread accesses a resource at a time by acquiring a lock.</p>
+
+      <h2 class="content-title">Static Synchronization</h2>
+      <p>Static synchronization applies a <strong>class-level lock</strong>, meaning the lock is on the class object rather than instance objects. Only one thread can access a static synchronized method of a class at a time, across all instances.</p>
+
+      <h3 class="content-title">Syntax</h3>
+      <pre><code>static synchronized returnType methodName(parameters) {
+   // synchronized code
+}</code></pre>
+
+      <h2 class="content-title">Example: Without Static Synchronization</h2>
+      <p>This version doesn't use static synchronization, so threads might interleave and print the counter values out of order.</p>
+
+      <pre><code>package com.tutorialspoint;
+
+class PrintDemo {
+   public static void printCount() {
+      try {
+         for (int i = 5; i > 0; i--) {
+            Thread.sleep(50);
+            System.out.println("Counter   ---   " + i);
+         }
+      } catch (Exception e) {
+         System.out.println("Thread  interrupted.");
+      }
+   }
+}
+
+class ThreadDemo extends Thread {
+   private Thread t;
+   private String threadName;
+
+   ThreadDemo(String name) {
+      threadName = name;
+   }
+
+   public void run() {
+      PrintDemo.printCount();
+      System.out.println("Thread " + threadName + " exiting.");
+   }
+
+   public void start() {
+      System.out.println("Starting " + threadName);
+      if (t == null) {
+         t = new Thread(this, threadName);
+         t.start();
+      }
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      ThreadDemo t1 = new ThreadDemo("Thread - 1");
+      ThreadDemo t2 = new ThreadDemo("Thread - 2");
+
+      t1.start();
+      t2.start();
+
+      try {
+         t1.join();
+         t2.join();
+      } catch (Exception e) {
+         System.out.println("Interrupted");
+      }
+   }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Starting Thread - 1 
+Starting Thread - 2 
+Counter   ---   5
+Counter   ---   5
+Counter   ---   4
+Counter   ---   4
+Counter   ---   3
+Counter   ---   3
+Counter   ---   2
+Counter   ---   2
+Counter   ---   1
+Counter   ---   1
+Thread Thread - 1  exiting.
+Thread Thread - 2  exiting.</code></pre>
+
+      <h2 class="content-title">Example: With Static Synchronization</h2>
+      <p>Now we synchronize the static method. This ensures the counter prints in order every time because the class-level lock prevents overlapping access to the <code>printCount()</code> method.</p>
+
+      <pre><code>package com.tutorialspoint;
+
+class PrintDemo {
+   public static synchronized void printCount() {
+      try {
+         for (int i = 5; i > 0; i--) {
+            Thread.sleep(50);
+            System.out.println("Counter   ---   " + i);
+         }
+      } catch (Exception e) {
+         System.out.println("Thread  interrupted.");
+      }
+   }
+}
+
+class ThreadDemo extends Thread {
+   private Thread t;
+   private String threadName;
+
+   ThreadDemo(String name) {
+      threadName = name;
+   }
+
+   public void run() {
+      PrintDemo.printCount();
+      System.out.println("Thread " + threadName + " exiting.");
+   }
+
+   public void start() {
+      System.out.println("Starting " + threadName);
+      if (t == null) {
+         t = new Thread(this, threadName);
+         t.start();
+      }
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      ThreadDemo t1 = new ThreadDemo("Thread - 1");
+      ThreadDemo t2 = new ThreadDemo("Thread - 2");
+
+      t1.start();
+      t2.start();
+
+      try {
+         t1.join();
+         t2.join();
+      } catch (Exception e) {
+         System.out.println("Interrupted");
+      }
+   }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Starting Thread - 1 
+Starting Thread - 2 
+Counter   ---   5
+Counter   ---   4
+Counter   ---   3
+Counter   ---   2
+Counter   ---   1
+Thread Thread - 1  exiting.
+Counter   ---   5
+Counter   ---   4
+Counter   ---   3
+Counter   ---   2
+Counter   ---   1
+Thread Thread - 2  exiting.</code></pre>
+    </div>
+  </div>
+</div>

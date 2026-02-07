@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django MVT Architecture: A Variation of MVC 🧱</h1>
+        <div class="content">
+            <p>Most web frameworks use the **Model-View-Controller (MVC)** pattern. Django utilizes a variation called **Model-View-Template (MVT)**, which streamlines the development process by having the framework itself manage the "Controller" aspect.</p>
+
+            <h2>Web Framework Advantages</h2>
+            <p>A web framework like Django provides a **standard, reusable software platform** that enables rapid development by offering out-of-the-box generic functionality. This includes tasks such as:</p>
+            <ul>
+                <li>Easy connectivity to **databases**.</li>
+                <li>Efficient **session management**.</li>
+                <li>Integration with **templating tools** to render dynamic content.</li>
+            </ul>
+
+            <hr>
+
+            <h2>The MVC Pattern</h2>
+            <p>MVC separates application development into three distinct layers to manage the data, logic, and presentation:</p>
+            <ul>
+                <li>**Model (Data Layer):** Maintains and manages the data. It is responsible for data definitions, processing logic, and interaction with the **database**. It responds to requests from the Controller.</li>
+                <li>**View (Presentation Layer):** Generates the **User Interface (UI)**, typically HTML/CSS. It takes care of placement and formatting of the result, receiving data from the Controller.</li>
+                <li>**Controller (Logic/Coordinator):** Intercepts user requests, coordinates with the Model to fetch/update data, and instructs the View to render the appropriate response back to the client.</li>
+            </ul>
+
+            <hr>
+
+            <h2>Django's MVT Architecture</h2>
+            <p>The MVT approach adapts the MVC roles as follows:</p>
+            <ol>
+                <li>**Model:** The **Data Layer**. A **Python class** where attributes define the database table structure. Django's **Object-Relational Mapper (ORM)** handles CRUD (Create, Read, Update, Delete) operations without writing raw SQL.</li>
+                <li>**View:** The **Processing Logic Layer**. A Python function that receives the request, reads parameters (path, query, body), interacts with the Model (ORM), processes the data, and decides which Template to render.</li>
+                <li>**Template:** The **Presentation Layer**. A web page (HTML) interspersed with code blocks of the **Django Template Language (DTL)**. Django's template processor inserts context data from the View to formulate a dynamic response.</li>
+            </ol>
+
+            <hr>
+
+            <h2>The URL Dispatcher (The Controller Equivalent)</h2>
+            <p>Django handles the "Controller" role using the **URL Dispatcher mechanism**, primarily defined in the **<code>urls.py</code>** module:</p>
+            <ul>
+                <li>When the server receives a request URL, the dispatcher matches its pattern against the defined **URL patterns** in <code>urls.py</code>.</li>
+                <li>The flow is then **routed** to the associated **View Function**.</li>
+                <li>This automatic request-to-view routing is why the developer only works with M, V, and T.</li>
+            </ul>
+
+            <p>The **Request-Response Cycle** in Django is:</p>
+            <p>User Request ➡️ **URL Dispatcher** (routes) ➡️ **View Function** (logic & model interaction) ➡️ **Model** (data/ORM) ➡️ **Template** (rendering) ➡️ Response to User.</p>
+        </div>
+    </div>
+</div>

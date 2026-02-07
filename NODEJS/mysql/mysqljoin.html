@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MySQL Join</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        MySQL JOIN queries enable combining rows from multiple tables based on related columns, typically foreign keys. This facilitates complex queries across related entities in Node.js applications.
+      </p>
+
+      <h2>Tables Used</h2>
+      <p>Members table:</p>
+      <pre><code>CREATE TABLE members (
+  member_id INT AUTO_INCREMENT,
+  name VARCHAR(100),
+  PRIMARY KEY (member_id)
+);
+INSERT INTO members(name) VALUES('John'),('Jane'),('Mary'),('David'),('Amelia');
+</code></pre>
+      <p>Committees table:</p>
+      <pre><code>CREATE TABLE committees (
+  committee_id INT AUTO_INCREMENT,
+  name VARCHAR(100),
+  PRIMARY KEY (committee_id)
+);
+INSERT INTO committees(name) VALUES('John'),('Mary'),('Amelia'),('Joe');
+</code></pre>
+
+      <h2>MySQL INNER JOIN</h2>
+      <p>Returns rows with matching values in both tables.</p>
+      <pre><code>SELECT m.member_id, m.name AS member, c.committee_id, c.name AS committee
+FROM members m
+INNER JOIN committees c ON c.name = m.name;</code></pre>
+
+      <h3>Node.js Example</h3>
+      <pre><code>var mysql = require('mysql');
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "mypassword",
+  database: "mydb"
+});
+
+var qry = `
+SELECT m.member_id, m.name AS member, c.committee_id, c.name AS committee
+FROM members m
+INNER JOIN committees c ON c.name = m.name;
+`;
+
+con.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(qry, function (err, results) {
+    if (err) throw err;
+    results.forEach((row) => {
+      console.log(JSON.stringify(row));
+    });
+  });
+  con.end();
+});</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>{"member_id":1,"member":"John","committee_id":1,"committee":"John"}
+{"member_id":3,"member":"Mary","committee_id":2,"committee":"Mary"}
+{"member_id":5,"member":"Amelia","committee_id":3,"committee":"Amelia"}</code></pre>
+
+      <h2>MySQL LEFT JOIN</h2>
+      <p>Returns all rows from left table; unmatched right table columns are NULL.</p>
+      <pre><code>SELECT m.member_id, m.name AS member, c.committee_id, c.name AS committee
+FROM members m
+LEFT JOIN committees c USING(name);</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>{"member_id":1,"member":"John","committee_id":1,"committee":"John"}
+{"member_id":2,"member":"Jane","committee_id":null,"committee":null}
+{"member_id":3,"member":"Mary","committee_id":2,"committee":"Mary"}
+{"member_id":4,"member":"David","committee_id":null,"committee":null}
+{"member_id":5,"member":"Amelia","committee_id":3,"committee":"Amelia"}</code></pre>
+
+      <h4>Find members not in committees:</h4>
+      <pre><code>SELECT m.member_id, m.name AS member, c.committee_id, c.name AS committee
+FROM members m
+LEFT JOIN committees c USING(name)
+WHERE c.committee_id IS NULL;</code></pre>
+
+      <h2>MySQL RIGHT JOIN</h2>
+      <p>Returns all rows from right table; unmatched left table columns are NULL.</p>
+      <pre><code>SELECT m.member_id, m.name AS member, c.committee_id, c.name AS committee
+FROM members m
+RIGHT JOIN committees c ON c.name = m.name;</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>{"member_id":1,"member":"John","committee_id":1,"committee":"John"}
+{"member_id":3,"member":"Mary","committee_id":2,"committee":"Mary"}
+{"member_id":5,"member":"Amelia","committee_id":3,"committee":"Amelia"}
+{"member_id":null,"member":null,"committee_id":4,"committee":"Joe"}</code></pre>
+    </div>
+  </div>
+</div>

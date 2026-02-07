@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>LinkedHashSet</code> Class Summary 🔗🧩</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.LinkedHashSet</code>** class is an implementation of the **<code>Set</code>** interface that combines the fast performance of a **hash table** (like <code>HashSet</code>) with the element ordering of a **doubly-linked list**. It is essentially a subclass of <code>HashSet</code> that guarantees a **predictable iteration order**.</p>
+
+            <hr>
+
+            <h2 class="title">I. Core Feature: Insertion Order Preservation</h2>
+            <p>The defining characteristic of <code>LinkedHashSet</code> is its ability to maintain the order in which elements were inserted into the set (Insertion Order).</p>
+            <ul>
+                <li>
+                    **Predictable Iteration:** When you iterate over the set (using an Iterator, `forEach`, or `Spliterator`), elements are returned in the **exact order they were added**.
+                </li>
+                <li>
+                    **Uniqueness:** Like all `Set` implementations, it enforces element uniqueness based on object equality (`equals()` and `hashCode()`). If an element is added twice, the second operation returns `false`, and the element's position in the insertion order remains unchanged.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Performance and Internal Structure</h2>
+            <p><code>LinkedHashSet</code> achieves its dual functionality by being backed by a **<code>LinkedHashMap</code>** internally, similar to how <code>HashSet</code> is backed by a <code>HashMap</code>:</p>
+            <ul>
+                <li>
+                    **Speed:** Fundamental operations like **<code>add()</code>**, **<code>remove()</code>**, and **<code>contains()</code>** remain **constant time ($O(1)$)**, just like in <code>HashSet</code>, because the core structure is still a hash table.
+                </li>
+                <li>
+                    **Iteration:** Iteration is generally slightly **more efficient** than <code>HashSet</code> because it only follows the linked list of entries, avoiding the traversal of potentially empty hash table buckets.
+                </li>
+                <li>
+                    **Overhead:** The cost of maintaining the insertion order is a **slightly higher memory overhead** compared to a regular <code>HashSet</code>, due to the maintenance of the doubly-linked list pointers.
+                </li>
+                <li>
+                    **Nulls and Synchronization:** It **permits a single `null` element** and is **not synchronized** (not thread-safe).
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Example of Insertion Order</h2>
+            <p>The example demonstrates that the output order perfectly matches the insertion order:</p>
+            <div class="example">
+                <pre><code>// Insertion Order: 1, 2, 3
+newset.add(1); 
+newset.add(2);
+newset.add(3);  
+
+// Output (Spliterator Iteration Order):
+1
+2
+3</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

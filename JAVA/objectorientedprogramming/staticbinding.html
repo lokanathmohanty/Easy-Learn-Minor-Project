@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Static Binding</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Binding Mechanisms</h1>
+            <h2 class="subtitle">Session: Static Binding (Compile-Time Polymorphism)</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is Static Binding?</h2>
+                <p>**Binding** is the mechanism that links a method call to its actual code implementation. **Static Binding** (also known as **Compile-Time Binding** or **Early Binding**) is the process where this link is resolved by the compiler **before** the program is executed (at compile time).</p>
+                <p>The compiler determines exactly which method implementation to call based solely on the method signature and the reference type declared in the source code.</p>
+            </div>
+
+            <div class="content characteristics">
+                <h2 class="subtitle">Characteristics of Static Binding</h2>
+                <p>The compiler uses the following information to resolve method calls at compile time:</p>
+                <ul>
+                    <li>**Linking Time:** Resolution occurs at **Compile Time**.</li>
+                    <li>**Resolution Mechanism:** It uses the **type of the class** (declared reference type) and the **method signature** (name, number, and type of arguments).</li>
+                    <li>**Example:** **Method Overloading** is the primary example of static binding.</li>
+                    <li>**Methods Involved:** **Private**, **final**, and **static** methods use static binding because they cannot be overridden, making their call fixed and predictable.</li>
+                </ul>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Method Overloading Uses Static Binding</h2>
+                <p>In method overloading, the compiler decides which version of the <code>add</code> method to call based on the number and type of arguments provided during the call.</p>
+                <pre><code>class Calculator{
+   public static int add(int a, int b){ ... }      // Method 1 (Two args)
+   public static int add(int a, int b, int c){ ... } // Method 2 (Three args)
+}
+
+public class Tester {
+   public static void main(String args[]){
+      // Compiler sees two arguments, links to Method 1 (Static Binding)
+      System.out.println(Calculator.add(20, 40)); 
+      
+      // Compiler sees three arguments, links to Method 2 (Static Binding)
+      System.out.println(Calculator.add(40, 50, 60)); 
+   }
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>60
+150</code></pre>
+            </div>
+
+            <div class="content types">
+                <h2 class="subtitle">Static Binding with Different Argument Types</h2>
+                <p>The principle remains the same when methods are differentiated by argument type. The compiler matches the call to the most appropriate method signature available in the class at compile time.</p>
+                <pre><code>class Calculator{
+   public int add(int a, int b){ ... }    // Accepts int
+   public double add(double a, double b){ ... } // Accepts double
+}
+
+public class Tester {
+   public static void main(String args[]){
+      Calculator calculator = new Calculator();   
+      
+      // Compiler sees int arguments, links to int method
+      System.out.println(calculator.add(20, 40));
+      
+      // Compiler sees double arguments, links to double method
+      System.out.println(calculator.add(20.0, 40.0));
+   }
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>60
+60.0</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - SSE API (Server-Sent Events)</h1>
+    <div class="content">
+      <h2>Server-Sent Events (SSE API)</h2>
+      <p>Server-sent events are a way of sending data from a server to a web page without requiring the page to refresh or make repeated requests. These events are useful for creating real-time applications, such as chat systems, news feeds, or notifications.</p>
+      <p>Using SSE, a persistent connection is opened to the server, allowing the server to continuously push data to the browser. This eliminates the need for continuous polling and standardizes how we stream data from the server to the client.</p>
+
+      <h2>How to Use SSE in a Web Application?</h2>
+      <p>To use Server-Sent Events in a web application, we need to add an <code>&lt;eventsource&gt;</code> element. Its <code>src</code> attribute should point to a URL that provides a persistent HTTP connection which streams events. The URL usually points to a PHP, PERL, or Python script that sends event data consistently.</p>
+
+      <h3 class="title">Instance</h3>
+      <div class="content">
+        <p>The following is a sample HTML code of a web application that would expect server time:</p>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;script type="text/javascript"&gt;
+      /* Define event handling logic here */
+   &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div id="sse"&gt;
+      &lt;eventsource src="/cgi-bin/ticker.cgi" /&gt;
+   &lt;/div&gt;
+   &lt;div id="ticker"&gt;
+      &lt;TIME&gt;
+   &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <h2>Server-side Script for SSE</h2>
+      <p>The following are the steps for sending server-sent events from a server-side script:</p>
+      <ul>
+        <li><b>Set the Content-Type Header</b><br><code>print "Content-Type: text/event-stream\n\n";</code></li>
+        <li><b>Send an Event Name</b><br><code>print "Event: server-time\n";</code></li>
+        <li><b>Send Event Data</b><br><code>print "Data: $time\n";</code></li>
+      </ul>
+      <p>Finally, here is a complete example of a <code>ticker.cgi</code> script written in Perl:</p>
+      <pre>
+#!/usr/bin/perl
+print "Content-Type: text/event-stream\n\n";
+while(true){
+   print "Event: server-time\n";
+   $time = localtime();
+   print "Data: $time\n";
+   sleep(5);
+}
+      </pre>
+
+      <h2>Handle Server-Sent Events</h2>
+      <p>We can also modify the client-side web application to listen for and process server-sent events using an <code>eventsource</code> object.</p>
+
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="text/javascript"&gt;
+      document.getElementsByTagName("eventsource")[0].addEventListener("server-time", eventHandler, false);
+      function eventHandler(event) {
+         // Display time sent by the server
+         document.querySelector('#ticker').innerHTML = event.data;
+      }
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="sse"&gt;
+      &lt;eventsource src="/cgi-bin/ticker.cgi" /&gt;
+    &lt;/div&gt;
+    &lt;div id="ticker" name="ticker"&gt; [TIME] &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <p><b>Note:</b> Before testing Server-Sent Events, make sure your web browser supports this feature.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>WeakHashMap</code> Class Summary 👻🗑️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.WeakHashMap</code>** class is a specialized implementation of the **<code>Map</code>** interface that uses **weak references** to store its keys. This feature makes it highly unique: an entry in a `WeakHashMap` can be automatically **removed by the garbage collector (GC)** if its key is no longer strongly referenced anywhere else in the application.</p>
+
+            <hr>
+
+            <h2 class="title">I. Key Feature: Weak Keys and Garbage Collection</h2>
+            <p>The core purpose of `WeakHashMap` is to prevent an application from running out of memory due to unwanted map entries (memory leaks). The keys are treated as follows:</p>
+            <ul>
+                <li>
+                    **Automatic Removal:** If the only remaining reference to a key object is the one held internally by the `WeakHashMap`, the key is considered **"weakly reachable."** The Java Garbage Collector is then free to collect that key object.
+                </li>
+                <li>
+                    **Entry Cleanup:** Once the key object is finalized and garbage collected, the corresponding key-value entry is **automatically removed** from the `WeakHashMap`. This effectively makes the map a temporary store for metadata that should not prevent its associated object (the key) from being removed from memory.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Typical Use Case: Metadata Caching</h2>
+            <p>A `WeakHashMap` is often used for caching metadata or supplemental information associated with objects outside of the objects themselves. For example, storing styling properties for UI components:</p>
+            <ul class="example">
+                <li>
+                    If a UI component is destroyed (and its last **strong** reference is gone), it should be garbage collected.
+                </li>
+                <li>
+                    The `WeakHashMap` ensures that the styling entry for that component is **also removed** from the cache, preventing a memory leak, as the map is not keeping the component alive.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Characteristics and Behavior</h2>
+            <ul>
+                <li>
+                    **Unordered:** Like its superclass `HashMap`, the iteration order is **not guaranteed** to be constant or predictable.
+                </li>
+                <li>
+                    **Nulls Supported:** It supports **one null key** and **null values**.
+                </li>
+                <li>
+                    **Performance:** Its performance characteristics (typical $O(1)$ for fundamental operations) are similar to `HashMap`.
+                </li>
+                <li>
+                    **Non-Synchronized:** It is **not thread-safe**. (Use external synchronization or a concurrent alternative if needed in a multithreaded environment).
+                </li>
+                <li>
+                    **Key Identity:** This class is often used when the key objects are compared using object identity (`==`), although it technically uses the `equals()` and `hashCode()` methods. For the GC dependency to work as intended, the key object is usually expected to be unique.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">IV. Important Distinction (Weak Keys vs. Weak Values)</h2>
+            <p>It's vital to note that **only the keys are weak**. The **values** are held by **strong references** within the map. If an entry is removed due to key collection, the value may still be held by the application if other strong references exist.</p>
+        </div>
+    </div>
+</div>

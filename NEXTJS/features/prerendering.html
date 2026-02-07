@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Pre-Rendering: Static vs. Server-Side 🚀</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Pre-Rendering?</h2>
+            <p>**Pre-rendering** is a core technique in Next.js where the application generates the **HTML page in advance** on the server, rather than sending a blank page and waiting for client-side JavaScript to fetch data and build the content. By default, Next.js pre-renders every page.</p>
+            <p>The subsequent process where the client-side JavaScript loads and connects to the pre-rendered HTML (making it interactive) is called **hydration**.</p>
+            
+            <h3 class="title">Why Use Pre-Rendering?</h3>
+            <ul>
+                <li>**Improved Performance:** Delivers a ready-to-use HTML page, significantly reducing the **Time to Interactive (TTI)**.</li>
+                <li>**Better SEO:** Search engines (crawlers) can easily read the fully formed HTML content, improving page ranking.</li>
+                <li>**Superior User Experience:** Users see the content faster, preventing the "blank screen" effect.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Types of Pre-Rendering</h2>
+            <p>Next.js offers two distinct forms of pre-rendering, chosen based on data freshness requirements:</p>
+            
+            <h3 class="title">1. Static Site Generation (SSG) 🏗️</h3>
+            <p>SSG generates the HTML pages **once at build time** (<span class="example">`next build`</span>). This static HTML file is then cached and reused for every user request until the next deployment/rebuild or revalidation. It is the **default** strategy for pages without external data fetching.</p>
+            
+            <h4 class="title">Implementation (Page Router):</h4>
+            <p>Use the **<span class="example">`getStaticProps()`</span>** function to fetch data exclusively during the build process.</p>
+            <pre>// Data is fetched and rendered once at build time
+export async function getStaticProps() {
+    const data = await fetch('...').then( res => res.json() );
+    return { props: { data } };
+}</pre>
+            
+            <h3 class="title">2. Server-Side Rendering (SSR) 💻</h3>
+            <p>SSR generates the HTML page **on every request** to the server. This ensures the user always sees the most dynamic and up-to-date content, as the data is fetched just moments before the HTML is sent.</p>
+            
+            <h4 class="title">Implementation (Page Router):</h4>
+            <p>Use the **<span class="example">`getServerSideProps()`</span>** function, which executes on the server for every incoming request.</p>
+            <pre>// Data is fetched and rendered on every client request
+export async function getServerSideProps() {
+    const response = await fetch('https://link/to/api');
+    const data = await response.json();
+    return { props: { data } };
+}</pre>
+        </div>
+    </div>
+</div>

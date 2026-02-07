@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Pointer Arithmetic in C</h1>
+    <div class="content">
+      <p>A pointer variable in C stores the address of another variable. The address is always an integer. Pointer arithmetic allows incrementing, decrementing, adding or subtracting integers, subtracting pointers, and comparing pointers. These operations are different from general integer arithmetic because the pointer arithmetic takes into account the size of the data type the pointer points to.</p>
+      
+      <h2 class="title">Increment and Decrement of a Pointer</h2>
+      <p>The increment (++) and decrement (--) operators move the pointer to the next or previous element in memory, respectively, taking into account the size of the data type.</p>
+      
+      <h2 class="title">Addition and Subtraction of Integer to Pointer</h2>
+      <p>You can add or subtract an integer to/from a pointer, which moves the pointer by that integer times the size of the data type.</p>
+      
+      <h2 class="title">Subtraction of Pointers</h2>
+      <p>Subtracting two pointers returns the number of elements between them (assuming they point to the same array).</p>
+      
+      <h2 class="title">Comparison of Pointers</h2>
+      <p>Pointers can be compared using relational operators if they point to elements within the same array or memory block.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Traversing an Array with Pointer Arithmetic</h2>
+    <div class="content">
+      <p>The following example demonstrates how you can traverse an integer array by incrementing a pointer:</p>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int a[] = {10, 20, 30, 40, 50};
+  int *ptr = a;
+  int length = sizeof(a) / sizeof(int);
+
+  for (int i = 0; i &lt; length; i++) {
+    printf("Address of a[%d] = %p, Value = %d\n", i, (void*)ptr, *ptr);
+    ptr++;
+  }
+
+  return 0;
+}
+</code>
+      </pre>
+    </div>
+  </div>
+</div>

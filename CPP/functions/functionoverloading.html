@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Function Overloading (Compile-Time Polymorphism) 🔄</h1>
+
+        <div class="content">
+            <p><strong>Function Overloading</strong> is a powerful feature in C++ that allows you to define **multiple functions** with the **same name** within the same scope. The key is that each overloaded function must have a distinct **function signature**, achieved by varying the type, order, or number of its parameters.</p>
+            <p>This is a form of **compile-time polymorphism**, enabling a single function name to be used for a set of related operations, making the code more readable and intuitive.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">How Overloading Works (The Function Signature)</h2>
+            <p>When the compiler encounters a function call, it determines which version of the overloaded function to execute by examining the **function signature** of the call and matching it against the defined signatures. The signature includes:</p>
+            <ol>
+                <li>The **Number** of parameters.</li>
+                <li>The **Type** of each parameter.</li>
+                <li>The **Order** of the parameters.</li>
+            </ol>
+            <p>The **return type** alone is **not** part of the function signature and cannot be used to differentiate overloaded functions.</p>
+
+            <h3>Example: Multiple Definitions for <code>addition</code></h3>
+            <pre class="example">
+// Signature 1: (int, int)
+int addition(int a, int b) { ... } 
+
+// Signature 2: (int, int, int)
+int addition(int a, int b, int c) { ... } 
+
+// Signature 3: (float, float) - Different parameter types
+float addition(float a, float b) { ... } 
+</pre>
+            <p>When calling <code>addition(10.5f, 20.3f)</code>, the compiler matches the call to the function that takes two `float` arguments (Signature 3).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Overloading Criteria</h2>
+
+            <h3>1. Based on Number of Parameters</h3>
+            <p>The functions have the same name but accept a different count of arguments.</p>
+            <pre class="example">
+void display(int a);           // Call: display(10);
+void display(int a, double b); // Call: display(10, 3.14);
+</pre>
+
+            <h3>2. Based on Different Parameter Types</h3>
+            <p>The functions have the same name and number of arguments, but the types are different.</p>
+            <pre class="example">
+void show(int a);    // Call: show(10);
+void show(double a); // Call: show(3.14);
+</pre>
+
+            <h3>3. Based on Different Parameter Order</h3>
+            <p>The functions have the same name, the same number of arguments, and the same *types*, but their **sequence** is different.</p>
+            <pre class="example">
+void display(int a, double b);    // Call: display(10, 3.14);
+void display(double a, int b);    // Call: display(3.14, 10);
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Common Use Cases</h2>
+            <p>Function overloading is crucial for creating intuitive APIs:</p>
+            <ul>
+                <li>**Handling Different Data Types:** Implementing the same core logic (e.g., `max`, `add`, `print`) for various data types (`int`, `float`, `string`) under a single, unified function name.</li>
+                <li>**Providing Optional Parameters:** Using different overloads to handle cases where a user might or might not supply certain parameters (though **default parameters** are often an alternative for this).</li>
+                <li>**Different Contexts:** Providing variations of a function to suit specific requirements, such as a function that saves data requiring only the file name, and another overload requiring the file name and encryption key.</li>
+            </ul>
+        </div>
+    </div>
+</div>

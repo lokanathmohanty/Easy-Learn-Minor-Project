@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# `continue` Statement</h1>
+        
+        <h2 class="title">Purpose of the `continue` Statement</h2>
+        <div class="content">
+            <p>The **`continue` statement** is a control flow mechanism used within loops (<code>for</code>, <code>while</code>, or <code>do...while</code>) that forces the program to **skip the remainder of the code block** for the current iteration and immediately jump to the next iteration.</p>
+            <ul>
+                <li>For a **`for` loop**, `continue` causes the flow of control to jump directly to the **increment/decrement** step, followed by the conditional test.</li>
+                <li>For **`while`** and **`do...while`** loops, `continue` causes the flow of control to jump directly to the **conditional test**.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Syntax</h2>
+        <div class="content">
+            <pre>
+continue;
+            </pre>
+        </div>
+        
+        <h2 class="title">Example: Skipping an Iteration in a `do...while` Loop</h2>
+        <div class="content example">
+            <p>This example demonstrates how `continue` prevents the <code>Console.WriteLine</code> from executing when the loop variable <code>a</code> is 15. Notice that the update (<code>a = a + 1</code>) **must** be placed before <code>continue</code> to avoid an infinite loop.</p>
+            <pre>
+using System;
+class Program {
+    static void Main(string[] args) {
+        int a = 10;
+         
+        do {
+            if (a == 15) {
+               // Must update 'a' here before continuing!
+               a = a + 1; 
+               continue; // Skips Console.WriteLine for a=15
+            }
+            Console.WriteLine("value of a: {0}", a);
+            a++;
+        } 
+        while (a < 20);
+    }
+} 
+            </pre>
+            <p><strong>Output:</strong> The value 15 is missing, as its iteration was skipped.</p>
+            <p class="content">
+                value of a: 10<br>
+                value of a: 11<br>
+                value of a: 12<br>
+                value of a: 13<br>
+                value of a: 14<br>
+                value of a: 16<br>
+                value of a: 17<br>
+                value of a: 18<br>
+                value of a: 19
+            </p>
+        </div>
+        
+        <h2 class="title">Example: Filtering with `continue` in a `for` Loop</h2>
+        <div class="content example">
+            <p>This is a common use case: using `continue` to process only elements that meet a certain criterion (in this case, odd numbers) while ignoring others:</p>
+            <pre>
+using System;
+class ContinueExample {
+   static void Main() {
+      for (int i = 1; i <= 10; i++) {
+         // Check for even numbers
+         if (i % 2 == 0) {
+            continue; // Skip the rest of the loop body; go to i++
+         }
+         Console.WriteLine("Odd number: " + i);
+      }
+      Console.WriteLine("Loop completed.");
+   }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                Odd number: 1<br>
+                Odd number: 3<br>
+                Odd number: 5<br>
+                Odd number: 7<br>
+                Odd number: 9<br>
+                Loop completed.
+            </p>
+        </div>
+    </div>
+</div>

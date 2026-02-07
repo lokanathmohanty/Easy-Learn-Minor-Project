@@ -1,0 +1,84 @@
+<div class="content">
+  <h2 class="title">Overview</h2>
+  <p>The <code>break</code> statement terminates the current loop or <code>switch</code> block immediately. Execution continues with the statement that follows the terminated statement. When used inside nested loops, <code>break</code> exits only the loop in which it appears unless used with a label.</p>
+</div>
+
+<div class="content">
+  <h2 class="title">Syntax</h2>
+  <p>break;</p>
+  <p>break labelName;</p>
+  <p>The label is optional and can be used to target an outer loop.</p>
+</div>
+
+<div class="content">
+  <h2 class="title">Behavior</h2>
+  <ul>
+    <li><p>Exits the nearest enclosing loop or <code>switch</code> statement.</p></li>
+    <li><p>When used with a label, it exits the labeled statement.</p></li>
+    <li><p>Useful to stop processing early when a condition is met.</p></li>
+  </ul>
+</div>
+
+<div class="content">
+  <h2 class="title">Example — break with a for loop</h2>
+  <p>Loop example that stops when <em>x</em> equals 5:</p>
+  <p>for (let x = 1; x &lt; 10; x++) { if (x == 5) { break; } /* use x */ }</p>
+  <p>Output sequence: 1, 2, 3, 4</p>
+</div>
+
+<div class="content">
+  <h2 class="title">Example — break with a while loop</h2>
+  <p>Loop example that exits when <em>x</em> is 3 or 7:</p>
+  <p>let x = 1; while (x &lt; 10) { if (x == 3 || x == 7) { break; } x = x + 1; /* use x */ }</p>
+  <p>Example output when condition triggers early: 2, 3</p>
+</div>
+
+<div class="content">
+  <h2 class="title">Example — break in nested loops</h2>
+  <p>Inner loop break only exits the inner loop; outer loop continues unless it also executes a break:</p>
+  <p>for (let x = 1; x &lt; 10; x++) { for (let y = 1; y &lt; 10; y++) { if (y == 3) break; /* inner */ } if (x == 3) break; /* outer */ }</p>
+  <p>Result: pairs printed while inner &lt; 3, stopping entirely when x == 3.</p>
+</div>
+
+<div class="content">
+  <h2 class="title">Example — break with switch</h2>
+  <p>Use <code>break</code> to prevent fall-through in a switch:</p>
+  <p>switch (p) { case 10: /* ... */ break; case 20: /* ... */ break; default: /* ... */ }</p>
+  <p>When a case matches and runs, the following <code>break</code> stops execution of the switch block.</p>
+</div>
+
+<div class="content">
+  <h2 class="title">Using labels with break</h2>
+  <p>You can label loops and use <code>break labelName;</code> to exit an outer loop from within an inner loop. Place the label immediately before the loop you want to target.</p>
+  <p>Example pattern: outerLoop: for (...) { inner: for (...) { if (condition) break outerLoop; } }</p>
+</div>
+
+<div class="content">
+  <h2 class="title">Common Pitfalls</h2>
+  <ul>
+    <li><p>Relying on <code>break</code> for normal loop termination can make logic harder to follow if overused.</p></li>
+    <li><p>Incorrect label placement or spelling prevents the labeled break from targeting the intended loop.</p></li>
+    <li><p>Using <code>break</code> inside try/finally blocks may still execute finally blocks — be mindful of side effects.</p></li>
+  </ul>
+</div>
+
+<div class="content">
+  <h2 class="title">Practice Tasks</h2>
+  <ul>
+    <li><p>Write a loop that searches an array for the first negative number and breaks when found.</p></li>
+    <li><p>Create nested loops and use a labeled break to exit both loops when a condition is met.</p></li>
+    <li><p>Implement a <code>switch</code> with several cases and ensure each case uses <code>break</code> to avoid fall-through.</p></li>
+  </ul>
+</div>
+
+<div class="content">
+  <h2 class="title">Summary</h2>
+  <p>The <code>break</code> statement is a simple but powerful control tool to exit loops or switch blocks immediately. Use it to stop processing when a target condition is reached, and consider labeled breaks only when nested-loop control is necessary.</p>
+</div>
+
+<div class="content">
+  <h2 class="title">Further Reading</h2>
+  <ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/break">MDN — break</a></li>
+  </ul>
+</div>

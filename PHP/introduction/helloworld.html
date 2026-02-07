@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP "Hello World" Program Guide</h1>
+
+    <div class="content">
+      <p>
+        The "Hello World" program is the traditional first step in learning a new language, serving to **verify that your PHP environment is installed and working correctly**. Since PHP is a **server-side scripting language**, the code must be processed by a web server and the PHP module.
+      </p>
+
+      <h2>Setup: The Web Server Document Root</h2>
+      <p>
+        To be accessible via a web browser, the PHP code must be placed inside the web server's **document root** directory.
+      </p>
+      <ul>
+        <li>
+          **Server Requirement:** This guide assumes the use of an all-in-one package like **XAMPP**. The Apache server must be started via the XAMPP control panel.
+        </li>
+        <li>
+          **Document Root Location:**
+          <ul>
+            <li>**Windows (XAMPP):** Typically `C:\xampp\htdocs\`</li>
+            <li>**Linux (XAMPP):** Typically `/opt/lamp/htdocs/`</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Steps to Run "Hello World" in Browser</h2>
+      <ol>
+        <li>
+          **Create Script:** Create a new file named `hello.php` inside the document root folder (`htdocs`).
+        </li>
+        <li>
+          **Add Code:** Open `hello.php` in a text editor and enter the following canonical PHP code:
+          <div class="example">
+            <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;echo "Hello World!";?&gt;</code>
+          </div>
+        </li>
+        <li>
+          **Execute:** Open your web browser and navigate to the URL:
+          <p>
+            <code>http://localhost/hello.php</code>
+          </p>
+        </li>
+        <li>
+          **Output:** The browser will display the text: "Hello World!"
+        </li>
+      </ol>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Mixing HTML and PHP</h2>
+      <p>
+        PHP is designed to be embedded directly into HTML. The `echo` statement sends its output directly to the browser as part of the HTML document.
+      </p>
+
+      <h3>Example: Embedding in an HTML Page</h3>
+      <div class="example">
+        <p>
+          <code>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&lt;h1&gt;My PHP Website&lt;/h1&gt;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&lt;?php</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Hello World!";</code><br>
+          <code>&nbsp;&nbsp;&nbsp;?&gt;</code><br>
+          <code>&lt;/body&gt;&lt;/html&gt;</code>
+        </p>
+      </div>
+
+      <h3>Example: Outputting HTML Tags</h3>
+      <p>
+        You can include HTML tags directly within the string passed to the `echo` statement, and the browser will interpret them normally.
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;echo "&lt;h1 align='center'&gt;Hello World!&lt;/h1&gt;";?&gt;</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Running PHP from Command Prompt (CLI)</h2>
+      <p>
+        PHP scripts can also be executed without a web server using the **Command Line Interface (CLI)**, provided the PHP executable path (`php.exe`) is added to the system's PATH environment variable.
+      </p>
+      <div class="example">
+        <p>
+          **Command:** <code>C:\xampp\htdocs&gt;php hello.php</code><br>
+          **Output:** <code>Hello PHP!!!!!</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

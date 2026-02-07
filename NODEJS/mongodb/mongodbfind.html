@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Find</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        In MongoDB, the <code>find()</code> and <code>findOne()</code> methods are used to query documents, similar to SQL's SELECT statement. These methods return matching documents from a collection based on a filter.
+      </p>
+
+      <h2>Finding All Documents</h2>
+      <p>Use <code>find({})</code> to retrieve all documents in a collection.</p>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+  const uri = "mongodb://localhost:27017/";
+  const client = new MongoClient(uri);
+  try {
+    await client.connect();
+    await listAll(client, "mydb", "products");
+  } finally {
+    await client.close();
+  }
+}
+
+async function listAll(client, dbName, colName) {
+  const result = await client.db(dbName).collection(colName).find({}).toArray();
+  console.log(JSON.stringify(result));
+}
+
+main().catch(console.error);</code></pre>
+      <p>Sample output:</p>
+      <pre><code>[{"_id":"65809214693bd4622484dce3","ProductID":1,"Name":"Laptop","Price":25000}, ...]</code></pre>
+
+      <h2>Traversing the Resultset</h2>
+      <p>Use a loop, such as <code>forEach</code>, to process documents:</p>
+      <pre><code>result.forEach(row => {
+  console.log(row['Name'], row['Price']);
+});</code></pre>
+      <p>Sample output:</p>
+      <pre><code>Desktop 20000
+Laptop 25000
+TV 40000
+Router 2000
+Scanner 5000
+Printer 9000</code></pre>
+
+      <h2>findOne() Method</h2>
+      <p>Returns the first document matching the filter:</p>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+  const uri = "mongodb://localhost:27017/";
+  const client = new MongoClient(uri);
+  try {
+    await client.connect();
+    await findOneDoc(client, "mydb", "products");
+  } finally {
+    await client.close();
+  }
+}
+
+async function findOneDoc(client, dbName, colName) {
+  const result = await client.db(dbName).collection(colName).findOne({ Name: "TV" });
+  console.log(JSON.stringify(result));
+}
+
+main().catch(console.error);</code></pre>
+      <p>Sample output:</p>
+      <pre><code>{"_id":"6580964f20f979d2e9a72ae8","ProductID":2,"Name":"TV","Price":40000}</code></pre>
+      
+      <p>Without filter, <code>findOne({})</code> returns the first document in the collection.</p>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+  const uri = "mongodb://localhost:27017/";
+  const client = new MongoClient(uri);
+  try {
+    await client.connect();
+    await findOneDoc(client, "mydb", "products");
+  } finally {
+    await client.close();
+  }
+}
+
+async function findOneDoc(client, dbName, colName) {
+  const result = await client.db(dbName).collection(colName).findOne({});
+  console.log(JSON.stringify(result));
+}
+
+main().catch(console.error);</code></pre>
+      <p>Sample output:</p>
+      <pre><code>{"_id":"65809214693bd4622484dce3","ProductID":1,"Name":"Laptop","Price":25000}</code></pre>
+    </div>
+  </div>
+</div>

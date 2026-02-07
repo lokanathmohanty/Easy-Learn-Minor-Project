@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">DAX Logical Functions in Power BI</h1>
+    <div class="content">
+      <p>DAX logical functions allow you to build powerful conditional expressions that support complex decision-making in Power BI models. These functions evaluate boolean logic to return TRUE, FALSE, or custom results based on conditions.</p>
+      <p>They are essential for data modeling, enabling users to implement row-level logic, error handling, and conditional formatting.</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Primary DAX Logical Functions with Examples</h2>
+    <div class="content">
+      <ul>
+        <li><strong>AND()</strong> - Returns TRUE if both conditions are TRUE, otherwise FALSE.<br>
+        Example: <code>cal = AND(Sheet1[Theory Marks]>40, Sheet1[Practical Marks]>2)</code></li>
+        
+        <li><strong>OR()</strong> - Returns TRUE if either condition is TRUE, otherwise FALSE.<br>
+        Example: <code>cal = OR(Sheet1[Theory Marks]>40, Sheet1[Practical Marks]>2)</code></li>
+        
+        <li><strong>NOT()</strong> - Reverses the logical value.<br>
+        Example: <code>c1 = NOT(Sheet1[cal])</code></li>
+        
+        <li><strong>IF()</strong> - Returns one value if TRUE, another if FALSE.<br>
+        Example: <code>cal = IF(AND(Sheet1[Theory Marks]>40, Sheet1[Practical Marks]>2), "Pass", "Fail")</code></li>
+        
+        <li><strong>COALESCE()</strong> - Returns first non-blank value from the parameters.<br>
+        Example: <code>mn = COALESCE(Sheet1[Wr_lf_balance], Sheet1[Jb_st], Sheet1[EST])</code></li>
+        
+        <li><strong>SWITCH()</strong> - Evaluates multiple conditions and returns corresponding results.<br>
+        Example: <code>pr = SWITCH(TRUE(), Sheet1[cal]=TRUE(), "Student Pass", Sheet1[cal]=FALSE(), "Student Fail")</code></li>
+        
+        <li><strong>IFERROR()</strong> - Returns specified value if expression results in error.<br>
+        Example: <code>err = IFERROR('Sheet1'[Theory Marks], 0)</code></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Additional Logical Functions</h2>
+    <div class="content">
+      <ul>
+        <li><strong>BITAND()</strong> - Returns bitwise AND of two numbers.</li>
+        <li><strong>BITOR()</strong> - Returns bitwise OR of two numbers.</li>
+        <li><strong>BITXOR()</strong> - Returns bitwise XOR of two numbers.</li>
+        <li><strong>BITLSHIFT()</strong> - Bitwise left shift operation.</li>
+        <li><strong>TRUE()</strong> - Returns logical TRUE.</li>
+        <li><strong>FALSE()</strong> - Returns logical FALSE.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Using Logical Expressions in Power BI</h2>
+    <div class="content">
+      <p>Logical functions can be combined with other DAX functions for conditional calculations, data cleaning, and error handling.</p>
+      <p>They form the basis for creating dynamic measures and calculated columns that respond to user interactions and report contexts.</p>
+    </div>
+  </div>
+</div>

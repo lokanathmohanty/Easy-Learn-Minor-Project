@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - addEventListener()</h1>
+    <div class="content">
+      <p>The JavaScript <code>addEventListener()</code> method is used to attach an event handler function to an HTML element. This allows you to specify a function that will be executed when a particular event occurs on the specified element.</p>
+      <p>Events are a specific occurrence or action like user clicks, keypress or page loads. The browser detects these events and triggers associated JavaScript functions known as event handlers to respond accordingly.</p>
+      <p>Developers employ the <code>addEventListener()</code> method for linking particular HTML elements with specific function behaviours when those events occur. Examples of events include clicks, mouse movements, keyboard inputs, and document loading.</p>
+      
+      <h2>Syntax</h2>
+      <p>The basic syntax for <code>addEventListener()</code> is as follows:</p>
+      <p><code>element.addEventListener(event, function, options);</code></p>
+      <p>Here <strong>element</strong> is an HTML element, such as a button, input or div. It can be selected using methods like <code>getElementById</code>, <code>getElementsByClassName</code>, <code>getElementsByTagName</code> and <code>querySelector</code>.</p>
+
+      <h2>Parameters</h2>
+      <ul>
+        <li><strong>event</strong> − a string that represents the type of action such as <code>click</code>, <code>mouseover</code>, or <code>keydown</code>.</li>
+        <li><strong>function</strong> − a named, anonymous or reference to an existing function that is executed when the specified event occurs.</li>
+        <li><strong>options (optional)</strong> − specifies additional settings such as capturing or once behaviours related to the event listener.</li>
+      </ul>
+
+      <h2>Example: Alert on Clicking Button</h2>
+      <p>In this example, a simple button is displayed which, upon clicking, shows an alert. The event listener is attached to the button using <code>addEventListener()</code>.</p>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Click Event Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;p&gt; Click the button below to perform an event &lt;/p&gt;
+   &lt;button id="myButton"&gt;Click Me&lt;/button&gt;
+
+   &lt;script&gt;
+      const button = document.getElementById("myButton");
+      function handleClick() {
+         alert("Button clicked!");
+      }
+      button.addEventListener("click", handleClick);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Example: Colour Change on Mouse Over</h2>
+      <p>In this example, a <code>div</code> initially has a light blue background. When the mouse hovers over it, the color changes to light coral, and when the mouse leaves, it changes back to blue.</p>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Mouseover Event Example&lt;/title&gt;
+   &lt;style&gt;
+      #myDiv {
+         width: 600px;
+         height: 200px;
+         background-color: lightblue;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div id="myDiv"&gt;Hover over me&lt;/div&gt;
+   &lt;script&gt;
+      const myDiv = document.getElementById("myDiv");
+      function handleMouseover() {
+         myDiv.style.backgroundColor = "lightcoral";
+      } 
+      myDiv.addEventListener("mouseover", handleMouseover);
+
+      function handleMouseout() {
+         myDiv.style.backgroundColor = "lightblue";
+      }
+      myDiv.addEventListener("mouseout", handleMouseout);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <p>There can be multiple event listeners for the same element, like in the second example which has two event listeners (<code>mouseover</code> and <code>mouseout</code>). Event listeners can be removed using the <code>removeEventListener()</code> function. By passing <code>once:true</code> in the options, the event listener is removed automatically after being invoked once.</p>
+      <p><strong>Important:</strong> Do not use the "on" prefix when specifying events. For example, use <code>"click"</code> instead of <code>"onclick"</code>.</p>
+    </div>
+  </div>
+</div>

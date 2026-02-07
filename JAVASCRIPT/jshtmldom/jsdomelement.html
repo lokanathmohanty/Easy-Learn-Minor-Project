@@ -1,0 +1,164 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - DOM Elements</h1>
+
+    <div class="content">
+      <p>
+        The HTML DOM (Document Object Model) elements represent the structure of a web page. With JavaScript, you can access and manipulate these elements using their <code>id</code>, <code>name</code>, <code>tag name</code>, <code>class name</code>, and more.
+      </p>
+
+      <p>
+        When a web page loads in the browser, it creates a DOM tree representing the structure of the page. JavaScript provides methods and properties to access, modify, or replace DOM elements dynamically.
+      </p>
+
+      <h2>Accessing DOM Elements</h2>
+
+      <h3>Get Element by ID</h3>
+      <p>
+        Use <code>getElementById()</code> to access an element by its unique <code>id</code>.
+      </p>
+      <pre>
+document.getElementById('id');
+      </pre>
+      <p>Example:</p>
+      <pre>
+&lt;div id="output"&gt;&lt;/div&gt;
+&lt;script&gt;
+  document.getElementById('output').innerHTML = "The element is accessed using the id.";
+&lt;/script&gt;
+      </pre>
+
+      <h3>Get Elements by Name</h3>
+      <p>
+        Use <code>getElementsByName()</code> to access elements by their <code>name</code> attribute. Returns a NodeList.
+      </p>
+      <pre>
+document.getElementsByName('name');
+      </pre>
+      <p>Example:</p>
+      <pre>
+&lt;div name="text"&gt;Hello World!&lt;/div&gt;
+&lt;script&gt;
+  const divEle = document.getElementsByName('text');
+  console.log(divEle[0].innerHTML);
+&lt;/script&gt;
+      </pre>
+
+      <h3>Get Elements by Class Name</h3>
+      <p>
+        Use <code>getElementsByClassName()</code> to access elements by their class name.
+      </p>
+      <pre>
+document.getElementsByClassName('className');
+      </pre>
+      <p>Example:</p>
+      <pre>
+&lt;div class="fruit"&gt;Apple&lt;/div&gt;
+&lt;script&gt;
+  const divEle = document.getElementsByClassName('fruit');
+  console.log(divEle[0].innerHTML);
+&lt;/script&gt;
+      </pre>
+
+      <h3>Get Elements by Tag Name</h3>
+      <p>
+        Use <code>getElementsByTagName()</code> to access elements by their tag.
+      </p>
+      <pre>
+document.getElementsByTagName('p');
+      </pre>
+      <p>Example:</p>
+      <pre>
+&lt;p&gt;This is the first paragraph.&lt;/p&gt;
+&lt;p&gt;This is the second paragraph.&lt;/p&gt;
+&lt;script&gt;
+  const paras = document.getElementsByTagName('p');
+  console.log(paras[0].innerHTML);
+  console.log(paras[1].innerHTML);
+&lt;/script&gt;
+      </pre>
+
+      <h2>Modifying DOM Elements</h2>
+
+      <h3>Modify Content</h3>
+      <p>
+        Use <code>textContent</code> or <code>innerHTML</code> to update content of an element.
+      </p>
+      <pre>
+element.textContent = "New Text";
+      </pre>
+      <p>Example:</p>
+      <pre>
+&lt;p id="text"&gt;Hello World!&lt;/p&gt;
+&lt;script&gt;
+  document.getElementById("text").textContent = "This is updated text!";
+&lt;/script&gt;
+      </pre>
+
+      <h3>Replace Child Element</h3>
+      <p>
+        Use <code>replaceChild()</code> to replace a child node.
+      </p>
+      <pre>
+parent.replaceChild(newNode, oldNode);
+      </pre>
+      <p>Example:</p>
+      <pre>
+&lt;div id="text"&gt;
+  &lt;p&gt;Hi Users!&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+  let textDiv = document.getElementById("text");
+  let newText = document.createTextNode("Hello World");
+  textDiv.replaceChild(newText, textDiv.childNodes[1]);
+&lt;/script&gt;
+      </pre>
+
+      <h2>Adding Events to DOM Elements</h2>
+      <p>
+        Use <code>addEventListener()</code> to add events.
+      </p>
+      <pre>
+element.addEventListener(eventName, callback);
+      </pre>
+      <p>Example:</p>
+      <pre>
+&lt;div id="text"&gt;Click me&lt;/div&gt;
+&lt;script&gt;
+  let text = document.getElementById("text");
+  text.addEventListener("click", function () {
+    console.log("You clicked on the div element");
+  });
+&lt;/script&gt;
+      </pre>
+
+      <h2>List of JavaScript DOM Element Methods</h2>
+      <ul>
+        <li><code>toString()</code> – Converts element to string.</li>
+        <li><code>setAttribute()</code> – Sets an attribute.</li>
+        <li><code>querySelector()</code> – Returns first element matching selector.</li>
+        <li><code>querySelectorAll()</code> – Returns all elements matching selector.</li>
+        <li><code>remove()</code> – Removes element from DOM.</li>
+        <li><code>appendChild()</code> – Adds a new child node.</li>
+        <li><code>replaceChild()</code> – Replaces one child with another.</li>
+        <li><code>addEventListener()</code> – Adds an event listener.</li>
+        <li><code>cloneNode()</code> – Duplicates a node.</li>
+        <li><code>matches()</code> – Tests if element matches a selector.</li>
+      </ul>
+
+      <h2>List of JavaScript DOM Element Properties</h2>
+      <ul>
+        <li><code>id</code> – Gets/sets the element’s id.</li>
+        <li><code>className</code> – Gets/sets class value.</li>
+        <li><code>classList</code> – Returns collection of CSS classes.</li>
+        <li><code>innerHTML</code> – Gets/sets HTML content.</li>
+        <li><code>textContent</code> – Gets/sets text content.</li>
+        <li><code>outerHTML</code> – Gets/sets full HTML including element itself.</li>
+        <li><code>tagName</code> – Returns the tag name.</li>
+        <li><code>children</code> – Returns child elements.</li>
+        <li><code>childElementCount</code> – Number of child elements.</li>
+        <li><code>style</code> – Access inline styles.</li>
+      </ul>
+    </div>
+  </div>
+</div>

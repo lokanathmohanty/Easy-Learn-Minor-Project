@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Enums</h1>
+    <div class="content">
+      <p>
+        Enums in Python allow defining a set of named constant values, making the code more descriptive and safer. The Enum class in the enum module is used to create enumerations.
+      </p>
+    </div>
+  </div>
+  <div class="session">
+    <h2 class="title">Basic Enum Example</h2>
+    <div class="content">
+      <pre><code>from enum import Enum
+
+class subjects(Enum):
+  ENGLISH = 1
+  MATHS = 2
+  SCIENCE = 3
+  SANSKRIT = 4
+
+obj = subjects.MATHS
+print(type(obj))
+</code></pre>
+      <p>Output:</p>
+      <p>&lt;enum 'subjects'&gt;</p>
+    </div>
+  </div>
+  <div class="session">
+    <h2 class="title">@unique Decorator to Prevent Duplicates</h2>
+    <div class="content">
+      <pre><code>from enum import Enum, unique
+
+@unique
+class subjects(Enum):
+  ENGLISH = 1
+  MATHS = 2
+  GEOGRAPHY = 3
+  SANSKRIT = 2
+</code></pre>
+      <p>This raises a <code>ValueError</code> due to duplicate values assigned.</p>
+    </div>
+  </div>
+  <div class="session">
+    <h2 class="title">Alternative Enum Creation Method</h2>
+    <div class="content">
+      <pre><code>from enum import Enum
+
+subjects = Enum("subjects", "ENGLISH MATHS SCIENCE SANSKRIT")
+
+print(subjects.ENGLISH)
+print(subjects.MATHS)
+print(subjects.SCIENCE)
+print(subjects.SANSKRIT)
+</code></pre>
+      <p>Output:</p>
+      <p>subjects.ENGLISH<br>subjects.MATHS<br>subjects.SCIENCE<br>subjects.SANSKRIT</p>
+    </div>
+  </div>
+  <div class="session">
+    <h2 class="title">Accessing Enum Members</h2>
+    <div class="content">
+      <pre><code>from enum import Enum
+
+class subjects(Enum):
+  ENGLISH = "E"
+  MATHS = "M"
+  GEOGRAPHY = "G"
+  SANSKRIT = "S"
+
+obj = subjects.SANSKRIT
+print(type(obj))
+print(obj.name)
+print(obj.value)
+</code></pre>
+      <p>Output:</p>
+      <p>&lt;enum 'subjects'&gt;<br>SANSKRIT<br>S</p>
+    </div>
+  </div>
+  <div class="session">
+    <h2 class="title">Iterating Through Enum Members</h2>
+    <div class="content">
+      <pre><code>from enum import Enum
+
+class subjects(Enum):
+  ENGLISH = "E"
+  MATHS = "M"
+  GEOGRAPHY = "G"
+  SANSKRIT = "S"
+
+for sub in subjects:
+  print(sub.name, sub.value)
+</code></pre>
+      <p>Output:</p>
+      <p>ENGLISH E<br>MATHS M<br>GEOGRAPHY G<br>SANSKRIT S</p>
+    </div>
+  </div>
+  
+  </div>
+</div>

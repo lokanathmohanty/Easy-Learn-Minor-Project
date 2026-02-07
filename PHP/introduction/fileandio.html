@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Files and I/O (Input/Output)</h1>
+
+    <div class="content">
+      <p>
+        **PHP Files and I/O** refers to the process of managing files—reading, writing, creating, and deleting—using built-in PHP functions. File management is crucial for storing and retrieving persistent data in web applications.
+      </p>
+
+      <h2>1. Opening and Closing Files</h2>
+
+      <h3>Opening a File: `fopen()`</h3>
+      <p>
+        The `fopen()` function opens a file and is mandatory before any read or write operation. It requires two arguments: the **file name** and the **mode**. It returns a **file pointer** resource on success, or `false` on failure.
+      </p>
+      <div class="example">
+        <code>$file = fopen( "data.txt", "r" );</code>
+      </div>
+
+      <h3>File Modes (`fopen`):</h3>
+      <p>The mode specifies the intended operation and pointer placement:</p>
+      <ul>
+        <li>
+          **`r`**: **Read** only. Pointer at the beginning.
+        </li>
+        <li>
+          **`r+`**: **Read and Write**. Pointer at the beginning.
+        </li>
+        <li>
+          **`w`**: **Write** only. Creates file if it doesn't exist, **truncates** file to zero length if it does. Pointer at the beginning.
+        </li>
+        <li>
+          **`w+`**: **Read and Write**. Creates file if it doesn't exist, **truncates** file to zero length if it does. Pointer at the beginning.
+        </li>
+        <li>
+          **`a`**: **Append** (Write only). Creates file if it doesn't exist. Pointer at the **end** of the file.
+        </li>
+        <li>
+          **`a+`**: **Append and Read**. Creates file if it doesn't exist. Pointer at the **end** of the file.
+        </li>
+      </ul>
+
+      <h3>Closing a File: `fclose()`</h3>
+      <p>
+        The `fclose()` function closes an open file resource. It takes the **file pointer** as its argument and is critical for freeing up system resources.
+      </p>
+      <div class="example">
+        <code>fclose( $file );</code>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">2. Reading a File</h2>
+      <p>
+        The primary function for reading content from an open file is `fread()`.
+      </p>
+
+      <h3>`fread()` Function</h3>
+      <p>
+        Reads data from the file pointer. It requires two arguments: the **file pointer** and the **length in bytes** to read.
+      </p>
+
+      <h3>`filesize()` Function</h3>
+      <p>
+        Used to determine the total size of the file in bytes, which is often passed to `fread()` to read the entire file content. It takes the **file name** as an argument.
+      </p>
+
+      <h3>Reading Steps:</h3>
+      <ol>
+        <li>Open the file (`fopen($filename, "r")`).</li>
+        <li>Get the file size (`filesize($filename)`).</li>
+        <li>Read the content (`fread($file_pointer, $filesize)`).</li>
+        <li>Close the file (`fclose($file_pointer)`).</li>
+      </ol>
+    </div>
+
+    <div class="content">
+      <h2 class="title">3. Writing a File</h2>
+      <p>
+        The `fwrite()` function is used to write or append data to an open file.
+      </p>
+
+      <h3>`fwrite()` Function</h3>
+      <p>
+        Writes the contents of a string to a file. It requires the **file pointer** and the **string of data** to be written. An optional third argument can limit the length of the data written.
+      </p>
+      <div class="example">
+        <code>$file = fopen( "log.txt", "w" ); // Opens for writing, truncates if exists</code><br>
+        <code>fwrite( $file, "This is a new log entry.\n" );</code><br>
+        <code>fclose( $file );</code>
+      </div>
+      <p>
+        The **`file_exists()`** function can be used to check if a file has been successfully created or exists on the file system.
+      </p>
+    </div>
+  </div>
+</div>

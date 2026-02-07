@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Conditional (Ternary) Operators Examples</h1>
+
+    <div class="content">
+      <p>
+        The **Conditional Operator** (often called the **Ternary Operator**) provides a concise, single-line way to write conditional expressions, typically replacing simple `if-else` statements. It evaluates a condition and returns one of two values based on whether the condition is `true` or `false`.
+      </p>
+
+      <h2>Ternary Operator Syntax and Structure</h2>
+      <p>The operator consists of three parts (hence "ternary"):</p>
+      <div class="example">
+        <code>condition ? value_if_true : value_if_false</code>
+      </div>
+      <ul>
+        <li>
+          **`condition`**: The expression that is evaluated (must result in a Boolean value).
+        </li>
+        <li>
+          **`value_if_true`**: The value returned if the condition is `true`.
+        </li>
+        <li>
+          **`value_if_false`**: The value returned if the condition is `false`.
+        </li>
+      </ul>
+
+      <hr>
+
+      <h2>Basic Usage Examples</h2>
+
+      <h3>1. Assigning a Value Based on Comparison</h3>
+      <p>This is the most common use: assigning one of two values to a variable based on a simple comparison.</p>
+      <div class="example">
+        <p>
+          <code>$a = 10; $b = 20;</code><br>
+          <code>$result = ($a &gt; $b ) ? $a : $b;</code>
+        </p>
+        <p>Since $a > $b (10 > 20) is **false**, the `value_if_false` ($b, which is 20) is assigned to `$result`.
+        </p>
+        <p class="content">Output: TEST1 : Value of result is 20</p>
+      </div>
+
+      <h3>2. Check Even or Odd</h3>
+      <p>Using the modulus operator (`%`) within the condition to determine the output string.</p>
+      <div class="example">
+        <p>
+          <code>$num = 15;</code><br>
+          <code>$result = ($num % 2 == 0) ? "Even" : "Odd";</code>
+        </p>
+        <p class="content">Output: Number 15 is Odd</p>
+      </div>
+
+      <hr>
+
+      <h2>Nested Ternary Operators</h2>
+      <p>
+        Ternary operators can be **nested** to handle more than two outcomes, effectively replacing `if-elseif-else` constructs. However, nesting should be used sparingly as it can quickly reduce code readability.
+      </p>
+
+      <h3>Find Maximum of Three Numbers (Nested Example)</h3>
+      <p>
+        The outer condition checks if `$x` is greater than `$y`. The inner ternary then resolves the maximum of the remaining two possibilities.
+      </p>
+      <div class="example">
+        <p>
+          <code>$x = 50; $y = 30; $z = 80;</code><br>
+          <code>$max = ($x &gt; $y) ? (($x &gt; $z) ? $x : $z) : (($y &gt; $z) ? $y : $z);</code>
+        </p>
+        <p>
+          **Evaluation Path:**<br>
+          1. $x > $y (50 > 30) $\rightarrow$ **True**.<br>
+          2. Execute `value_if_true`: `($x > $z) ? $x : $z`<br>
+          3. $x > $z (50 > 80) $\rightarrow$ **False**.<br>
+          4. Return `value_if_false` from inner: **$z** (80).
+        </p>
+        <p class="content">Output: The maximum number is 80</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Using useEffect</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            React provides <code>useEffect</code> to perform side effects in a component.  
+            Some common side effects include:
+         </p>
+
+         <ul>
+            <li>Fetching data from an external source</li>
+            <li>Updating DOM elements after rendering</li>
+            <li>Managing subscriptions</li>
+            <li>Using timers</li>
+            <li>Logging</li>
+         </ul>
+
+         <p>
+            In class-based components, these were handled by lifecycle methods such as 
+            <code>componentDidMount</code>, <code>componentDidUpdate</code>, and <code>componentWillUnmount</code>.  
+            The <code>useEffect</code> hook replaces these lifecycle events in function components.
+         </p>
+
+         <h2>Example</h2>
+         <p>
+            Below is an example of fetching data with <code>useEffect</code>:
+         </p>
+
+         <div class="code-block">
+<pre><code>import { useState, useEffect } from "react";
+
+function NameList() {
+   const [data, setData] = useState([]);
+   const [isLoading, setLoading] = useState(true);
+
+   useEffect(() => {
+      fetch("json/names.json")
+         .then(res => res.json())
+         .then(json => {
+            setData(json);
+            setLoading(false);
+         });
+   }, []);
+
+   return (
+      &lt;div&gt;
+         {isLoading &amp;&amp; &lt;span&gt;Loading...&lt;/span&gt;}
+         {!isLoading &amp;&amp; data.map(item =&gt; 
+            &lt;span key={item.id}&gt;{item.name} &lt;/span&gt;
+         )}
+      &lt;/div&gt;
+   );
+}
+
+export default NameList;</code></pre>
+         </div>
+
+         <p>
+            In this example, data is fetched only once after the initial render because an empty dependency 
+            array <code>[]</code> is passed to <code>useEffect</code>.
+         </p>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Multiple Inheritance 🔗🔗</h1>
+
+        <div class="content">
+            <p>**Multiple inheritance** is a C++ feature that allows a **derived class** to inherit attributes and behaviors from **more than one base class**. This is used to combine the functionalities of several parent classes into a single child class, modeling real-world entities that possess multiple characteristics (e.g., a <code>DualModeVehicle</code> is both a <code>Car</code> and a <code>Boat</code>).</p>
+
+            <h3>Implementation Syntax</h3>
+            <p>Multiple base classes are specified in the derived class declaration using a **comma-separated list** with their respective access specifiers:</p>
+            <pre class="example">
+class Derived : public Base1, public Base2 {
+   // Derived class inherits members from both Base1 and Base2
+};
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Challenges and Solutions</h2>
+
+        <div class="content">
+            <p>While powerful, multiple inheritance introduces two main challenges:</p>
+
+            <h3>1. Ambiguity</h3>
+            <p>Ambiguity occurs when two or more base classes have members (functions or variables) with the **exact same name**, and the derived class tries to access one without specifying which one.</p>
+            <pre class="example">
+// Base1::show() and Base2::show() both exist.
+// Calling obj.show() is ambiguous.
+
+// Resolution: Use **Scope Resolution Operator (::)**
+void Derived::show() {
+    Base1::show(); // Explicitly call Base1's version
+    Base2::show(); // Explicitly call Base2's version
+}
+</pre>
+
+            <h3>2. The Diamond Problem 💎</h3>
+            <p>This arises when a class inherits from two classes, which themselves both inherit from a common grandparent class. This structure forms a "diamond" shape in the inheritance graph. The derived class ends up with **two copies** of the common grandparent's members, leading to ambiguity.</p>
+            <p></p>
+            <h4>Solution: Virtual Inheritance</h4>
+            <p>The **<code>virtual</code>** keyword is used when declaring the base classes in the intermediate derived classes to ensure that **only a single instance** of the common grandparent base class exists in the final derived object.</p>
+            <pre class="example">
+class Derived1 : **virtual** public Base {}; 
+class Derived2 : **virtual** public Base {}; 
+
+class Final : public Derived1, public Derived2 {}; 
+// Final object now has only one Base instance, resolving ambiguity.
+</pre>
+        </div>
+    </div>
+</div>

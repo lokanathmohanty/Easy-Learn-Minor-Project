@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Monkey Patching</h1>
+    </div>
+    <div class="content">
+      <p>
+        Monkey patching in Python refers to the practice of dynamically modifying or extending code at runtime, typically replacing or adding new functionalities to existing modules, classes, or methods without altering their original source code.
+      </p>
+      <p>
+        The term "monkey patching" originates from the idea of making changes in an ad-hoc or temporary manner, akin to how a monkey might patch something up using whatever materials are at hand.
+      </p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="title">
+      <h2>Steps to Perform Monkey Patching</h2>
+    </div>
+    <div class="content">
+      <ol>
+        <li>Import the module or class you want to modify.</li>
+        <li>Define a new function or method with the desired behavior.</li>
+        <li>Replace the original function or method by assigning the new implementation to the attribute of the class or module.</li>
+      </ol>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="title">
+      <h2>Example of Monkey Patching</h2>
+    </div>
+    <div class="content">
+      <p><strong>Original Module:</strong></p>
+      <pre>
+# original_module.py
+class MyClass:
+   def say_hello(self):
+      return "Hello, Welcome to Tutorialspoint!"
+      </pre>
+      <p><strong>Patch Module:</strong></p>
+      <pre>
+# patch_module.py
+from original_module import MyClass
+
+def new_say_hello(self):
+   return "Greetings!"
+
+MyClass.say_hello = new_say_hello
+      </pre>
+      <p><strong>Testing the Patch:</strong></p>
+      <pre>
+# test_patch.py
+from original_module import MyClass
+import patch_module
+
+obj = MyClass()
+print(obj.say_hello())    # Output: Greetings!
+      </pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="title">
+      <h2>Drawbacks of Monkey Patching</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>Overuse:</strong> Excessive monkey patching can make code hard to understand and maintain. Use it judiciously.</li>
+        <li><strong>Compatibility:</strong> It may introduce unexpected behaviors, especially in complex or large code bases.</li>
+      </ul>
+    </div>
+  </div>
+  
+  
+  </div>
+</div>

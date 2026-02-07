@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="session">
+    <h1>Python - Network Programming</h1>
+    <p>Python's network programming capabilities enable communication between processes on the same or different machines. Unix domain sockets are used for local machine IPC, while TCP/IP sockets facilitate networking over the Internet or LAN.</p>
+
+    <h2>Common Protocols and Corresponding Python Modules</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Protocol</th>
+          <th>Use Case</th>
+          <th>Port</th>
+          <th>Python Modules</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>HTTP</td>
+          <td>Web Pages</td>
+          <td>80</td>
+          <td>httplib, urllib</td>
+        </tr>
+        <tr>
+          <td>FTP</td>
+          <td>File Transfer</td>
+          <td>20</td>
+          <td>ftplib</td>
+        </tr>
+        <tr>
+          <td>SMTP</td>
+          <td>Email Sending</td>
+          <td>25</td>
+          <td>smtplib</td>
+        </tr>
+        <tr>
+          <td>POP3</td>
+          <td>Email Retrieval</td>
+          <td>110</td>
+          <td>poplib</td>
+        </tr>
+        <tr>
+          <td>Telnet</td>
+          <td>Remote Command</td>
+          <td>23</td>
+          <td>telnetlib</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Socket Programming Basics</h2>
+    <p>The <code>socket</code> module is the fundamental building block, providing access to TCP/IP and UDP sockets.</p>
+    <p>You create a socket object with:</p>
+    <pre>
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # TCP/IP socket
+    </pre>
+    <p>Here, <code>AF_INET</code> indicates IPv4 addressing, and <code>SOCK_STREAM</code> means TCP (connection-oriented).</p>
+
+    <h2>Simple Server Example</h2>
+    <pre>
+import socket
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind(('localhost', 12345))
+server_socket.listen(1)
+print("Server listening...")
+
+conn, addr = server_socket.accept()
+print(f"Connection accepted from {addr}")
+
+while True:
+    data = conn.recv(1024)
+    if not data:
+        break
+    print(f"Received: {data.decode()}")
+    conn.sendall(b"Message received")
+
+conn.close()
+server_socket.close()
+    </pre>
+
+    <h2>Simple Client Example</h2>
+    <pre>
+import socket
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect(('localhost', 12345))
+
+client_socket.sendall(b"Hello Server")
+data = client_socket.recv(1024)
+print(f"Received from server: {data.decode()}")
+
+client_socket.close()
+    </pre>
+
+    <h2>Summary</h2>
+    <p>Python supports many network protocols and provides socket-level and high-level interfaces for network communication. Using sockets, you can build client-server applications, chat programs, file transfer tools, and more.</p>
+  </div>
+</div>

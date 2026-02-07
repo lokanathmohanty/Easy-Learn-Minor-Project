@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript and Cookies</h1>
+
+    <div class="content">
+      <h2>What are Cookies?</h2>
+      <p>In JavaScript, cookies are pieces of data stored in the user's web browser. They are stored as key-value pairs and can be manipulated using the <code>cookie</code> property of the <code>document</code> object. You can set, read, update, and delete cookies from JavaScript.</p>
+
+      <h2>Why are Cookies Needed?</h2>
+      <p>HTTP is a stateless protocol, meaning it does not retain user session information across requests. Cookies help websites remember user sessions, preferences, logins, and activities across multiple pages.</p>
+      <p>Examples of use cases include:</p>
+      <ul>
+        <li>Remembering user login state</li>
+        <li>Tracking purchases or shopping cart data</li>
+        <li>Storing visitor preferences</li>
+        <li>Caching for better performance</li>
+      </ul>
+
+      <h2>How It Works</h2>
+      <p>When a server sends data to a browser, it is stored as a cookie (plain text). On subsequent requests, the browser automatically sends the cookie back to the server. Cookies typically contain these fields:</p>
+      <ul>
+        <li><strong>Expires</strong> – Date when the cookie will expire.</li>
+        <li><strong>Domain</strong> – The domain where the cookie is valid.</li>
+        <li><strong>Path</strong> – The path of the page or directory for which the cookie is valid.</li>
+        <li><strong>Secure</strong> – Restricts cookies to secure connections if set.</li>
+        <li><strong>Name=Value</strong> – Data stored in key-value pairs.</li>
+      </ul>
+
+      <h2>Setting / Storing Cookies</h2>
+      <p>The simplest way to create a cookie is to assign a string value to <code>document.cookie</code>:</p>
+      <pre><code>document.cookie = "key1=value1; key2=value2; expires=date";</code></pre>
+      <p>Example:</p>
+      <pre><code>&lt;script&gt;
+function WriteCookie() {
+  if (document.myform.customer.value == "") {
+    alert("Enter some value!");
+    return;
+  }
+  let cookievalue = escape(document.myform.customer.value) + ";";
+  document.cookie = "name=" + cookievalue;
+  document.write("Setting Cookies : name=" + cookievalue);
+}
+&lt;/script&gt;</code></pre>
+
+      <h2>Reading Cookies</h2>
+      <p>You can read cookies using <code>document.cookie</code>, which returns all cookies as a single string of key-value pairs separated by semicolons.</p>
+      <pre><code>&lt;script&gt;
+function ReadCookie() {
+  let allcookies = document.cookie;
+  document.write("All Cookies : " + allcookies);
+
+  let cookiearray = allcookies.split(';');
+  for (let i = 0; i &lt; cookiearray.length; i++) {
+    let name = cookiearray[i].split('=')[0];
+    let value = cookiearray[i].split('=')[1];
+    document.write("Key is : " + name + " and Value is : " + value);
+  }
+}
+&lt;/script&gt;</code></pre>
+
+      <h2>Setting Cookies Expiry Date</h2>
+      <p>You can extend cookie lifetime by adding the <code>expires</code> attribute:</p>
+      <pre><code>&lt;script&gt;
+function WriteCookie() {
+  let now = new Date();
+  now.setMonth(now.getMonth() + 1);
+
+  let cookievalue = escape(document.myform.customer.value) + ";";
+  document.cookie = "name=" + cookievalue;
+  document.cookie = "expires=" + now.toUTCString() + ";";
+  document.write("Setting Cookies : name=" + cookievalue);
+}
+&lt;/script&gt;</code></pre>
+
+      <h2>Deleting a Cookie</h2>
+      <p>To delete a cookie, set its expiry date to a past date:</p>
+      <pre><code>&lt;script&gt;
+function WriteCookie() {
+  let now = new Date();
+  now.setMonth(now.getMonth() - 1);
+
+  let cookievalue = escape(document.myform.customer.value) + ";";
+  document.cookie = "name=" + cookievalue;
+  document.cookie = "expires=" + now.toUTCString() + ";";
+  document.write("Deleting Cookie : name=" + cookievalue);
+}
+&lt;/script&gt;</code></pre>
+
+      <h2>Updating Cookies</h2>
+      <p>Updating a cookie is done by setting the same key with a new value:</p>
+      <pre><code>document.cookie = "key1=newValue";</code></pre>
+      <p>Example:</p>
+      <pre><code>&lt;script&gt;
+let output = document.getElementById("output");
+
+function setCookies() {
+  document.cookie = "cartItem=watch";
+  document.cookie = "price=10000";
+}
+
+function updateCookies() {
+  document.cookie = "cartItem=bag";
+  document.cookie = "price=5000";
+}
+
+function getCookies() {
+  let allCookies = document.cookie.split("; ");
+  output.innerHTML = "The cookie data are : &lt;br&gt;";
+  for (const cookie of allCookies) {
+    const [key, value] = cookie.split("=");
+    if (key == "cartItem" || key == "price") {
+      output.innerHTML += key + " : " + decodeURIComponent(value) + "&lt;br&gt;";
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+    </div>
+  </div>
+</div>

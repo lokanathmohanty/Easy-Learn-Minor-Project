@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask URL Building with <code>url_for()</code> and Redirection 🔄</h1>
+        <div class="content">
+            <p>The **<code>url_for()</code>** function in Flask is a powerful tool used to dynamically build a URL for a specific view function. This is more reliable than hardcoding URLs, as it ensures URLs are updated automatically if route rules change.</p>
+
+            <h2>Functionality of <code>url_for()</code></h2>
+            <p>The function accepts two types of arguments:</p>
+            <ul>
+                <li>The first argument is the **endpoint name** (typically the name of the **view function**).</li>
+                <li>Subsequent arguments are passed as **keyword arguments** to satisfy any **variable parts** defined in the target URL's rule (e.g., <code>&lt;guest&gt;</code> in <code>/guest/&lt;guest&gt;</code>).</li>
+            </ul>
+        </div>
+
+        <h2 class="title">Example: Dynamic Redirection</h2>
+        <div class="content example">
+            <p>The following example demonstrates how <code>url_for()</code> is combined with the **<code>redirect()</code>** function to route a user based on a condition:</p>
+
+            <h3>Code Logic Summary</h3>
+            <p>The application defines three routes: <code>/admin</code>, <code>/guest/&lt;guest&gt;</code>, and <code>/user/&lt;name&gt;</code>. The <code>hello_user(name)</code> function acts as a dispatcher:</p>
+            <ul>
+                <li>If the <code>name</code> passed in the URL is **<code>'admin'</code>**, the function uses <code>redirect(url_for('hello_admin'))</code> to send the user to the <code>/admin</code> page.</li>
+                <li>Otherwise, it uses <code>redirect(url_for('hello_guest', guest = name))</code>. Here, <code>url_for()</code> builds the URL for the <code>hello_guest</code> function and passes the URL variable <code>name</code> as the keyword argument <code>guest</code>.</li>
+            </ul>
+
+            <h3>Execution Results</h3>
+            <p>Visiting the dispatcher URL leads to different results based on the input name:</p>
+            <ul>
+                <li>**URL Input:** <code>http://localhost:5000/user/admin</code>
+                    <p><strong>Result:</strong> Redirects to <code>/admin</code>. Output is **Hello Admin**.</p>
+                </li>
+                <li>**URL Input:** <code>http://localhost:5000/user/mvl</code>
+                    <p><strong>Result:</strong> Redirects to <code>/guest/mvl</code>. Output is **Hello mvl as Guest**.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

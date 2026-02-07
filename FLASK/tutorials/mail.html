@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask-Mail: Sending Emails from a Flask Application 📧</h1>
+        <div class="content">
+            <p>The **Flask-Mail** extension simplifies the process of sending emails from a web application by providing a straightforward interface to any email server (SMTP). To begin, the extension must be installed using <code>pip install Flask-Mail</code>.</p>
+
+            <h2>Configuration Parameters</h2>
+            <p>Flask-Mail requires configuration settings to connect to the email server. These are set on the Flask application's <code>config</code> object:</p>
+            <ul>
+                <li>**<code>MAIL_SERVER</code> / <code>MAIL_PORT</code>:** The address and port number of the email server (e.g., <code>smtp.gmail.com</code> and <code>465</code>).</li>
+                <li>**<code>MAIL_USE_TLS</code> / <code>MAIL_USE_SSL</code>:** Used to enable/disable security protocols like Transport Security Layer (TLS) or Secure Sockets Layer (SSL).</li>
+                <li>**<code>MAIL_USERNAME</code> / <code>MAIL_PASSWORD</code>:** Credentials for the sender's email account.</li>
+                <li>**<code>MAIL_DEFAULT_SENDER</code>:** Sets the default sender address for messages.</li>
+                <li>**<code>MAIL_SUPPRESS_SEND</code>:** If set to <code>True</code>, emails are suppressed (not actually sent), often used during testing.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Core Classes and Methods</h2>
+        <div class="content">
+            <h3>1. The <code>Mail</code> Class</h3>
+            <p>The <code>Mail</code> class manages the overall email-messaging system. An instance is created by passing the Flask application object to its constructor: <code>mail = Mail(app)</code>.</p>
+            <p>Key Methods:</p>
+            <ul>
+                <li>**<code>send(message)</code>:** Sends the contents of a <code>Message</code> class object.</li>
+                <li>**<code>connect()</code>:** Opens a connection with the mail host.</li>
+            </ul>
+
+            <h3>2. The <code>Message</code> Class</h3>
+            <p>The <code>Message</code> class encapsulates a single email, holding all its content and metadata.</p>
+            <p>Constructor Parameters include: <code>subject</code>, **<code>recipients</code>** (a list), **<code>body</code>** (plain text), **<code>html</code>** (HTML content), and **<code>sender</code>**.</p>
+            <p>Key Methods:</p>
+            <ul>
+                <li>**<code>attach()</code>:** Adds an attachment to the message, taking parameters like <code>filename</code>, <code>content_type</code>, and raw <code>data</code>.</li>
+                <li>**<code>add_recipient()</code>:** Adds another recipient to the message's list.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Example: Sending an Email with Gmail SMTP</h2>
+        <div class="content example">
+            <p>This example demonstrates sending a basic email using Flask-Mail configured for Gmail's SMTP service (note: specific security settings might be needed on the Gmail account):</p>
+            <p>First, configuration is set up for SSL connection on port 465:</p>
+            <p><code>app.config['MAIL_SERVER']='smtp.gmail.com'</code></p>
+            <p><code>app.config['MAIL_PORT'] = 465</code></p>
+            <p><code>app.config['MAIL_USE_SSL'] = True</code></p>
+
+            <p>The <code>index()</code> view function creates and sends the message:</p>
+            <p><code>def index():</code></p>
+            <p><code>   msg = Message('Hello', sender = 'yourId@gmail.com', recipients = ['id1@gmail.com'])</code></p>
+            <p><code>   msg.body = "Hello Flask message sent from Flask-Mail"</code></p>
+            <p><code>   mail.send(msg)</code></p>
+            <p>This creates a message with a subject, sender, and list of recipients, sets the plain text body, and finally calls the <code>mail.send()</code> method to transmit the email.</p>
+        </div>
+    </div>
+</div>

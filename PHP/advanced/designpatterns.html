@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Design Patterns</h1>
+
+        <div class="content">
+            <p><strong>Design Patterns</strong> are reusable, formalized best practices and solutions that serve as templates for addressing commonly occurring problems in software design. Implementing these patterns allows for the development of robust, maintainable, and scalable PHP applications.</p>
+
+            <hr>
+
+            <h2 class="title">1. Singleton Pattern 🥇</h2>
+            <p>The Singleton pattern restricts the instantiation of a class to **only one object** throughout the application's lifecycle, providing a single, global point of access to that instance. A common application is managing a **database connection**, which should only be established once.</p>
+            <p>This is typically enforced by making the constructor $\text{private}$ or $\text{final}$ and providing a $\text{public static}$ method ($\text{getConnect()}$) to retrieve the single instance.</p>
+            <pre>
+// Key elements:
+private static $obj;              // Stores the single instance
+private final function __construct() { /* ... */ } // Prevents external instantiation
+public static function getConnect() {
+   if (!isset(self::$obj)) {
+      self::$obj = new DataBaseConnector(); // Creates instance only once
+   }
+   return self::$obj;
+}</pre>
+
+            <hr>
+
+            <h2 class="title">2. Factory Pattern 🏭</h2>
+            <p>The Factory pattern provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created. It abstracts the instantiation logic, so the client code does not declare the desired object directly. Instead, it relies on a separate **Factory class** with a $\text{static}$ method to create the required object.</p>
+            <pre>
+class AutomobileFactory {
+   // The static create() method is the "factory" that handles instantiation
+   public static function create($make, $model) {
+      return new Automobile($make, $model);
+   }
+}
+
+$pulsar = AutomobileFactory::create('ktm', 'Pulsar');
+// Client code asks the factory for an object, not instantiating directly.</pre>
+
+            <hr>
+
+            <h2 class="title">3. Strategy Pattern ♟️</h2>
+            <p>The Strategy pattern recommends encapsulating a family of algorithms (strategies) into separate classes, making them interchangeable. The **Context class** (the client) maintains a reference to a Strategy object and delegates the work to it, without knowing the specific implementation of the algorithm.</p>
+            <ul>
+                <li><strong>Interface:</strong> Defines the method ($\text{case()}$) that all strategies must implement.</li>
+                <li><strong>Strategies ($\text{ucase}, \text{lcase}$):</strong> Implement the common method in different ways (e.g., convert to upper/lower case).</li>
+                <li><strong>Context ($\text{testdata}$):</strong> Holds the data and delegates processing to the specific strategy object passed to its $\text{process()}$ method.</li>
+            </ul>
+            <pre>
+// Client code selects and passes a strategy to the context object
+echo $obj->process(new ucase);  // Applies the ucase strategy
+echo $obj->process(new lcase);  // Applies the lcase strategy</pre>
+
+            <hr>
+
+            <h2 class="title">4. MVC Design Pattern 📐</h2>
+            <p>The **Model-View-Controller (MVC)** is a popular architectural pattern that separates an application into three interconnected parts to isolate the internal representation of information from the user interface.</p>
+            <p>Most major PHP frameworks (Laravel, Symfony, Yii) are built on the MVC architecture to ensure code quality and separation of concerns.</p>
+            <div class="example">
+                <ul>
+                    <li>**Model ($\text{model.php}$):** Manages the application's data, logic, and rules. It interacts directly with the database. (The **Data Structure** / **Back-end**).</li>
+                    <li>**View ($\text{view.php}$):** Renders the output (HTML, CSS) based on the data received from the Controller. It is the user interface. (The **GUI** / **User Interface**).</li>
+                    <li>**Controller ($\text{controller.php}$):** The "middleman." It accepts input from the View (e.g., form submission), determines the next action, works with the Model to fetch or update data, and chooses which View to render next. (The **Processing Logic** / **Adapter**).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

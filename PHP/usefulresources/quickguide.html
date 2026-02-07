@@ -1,0 +1,119 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Quick Guide to PHP 🐘</h1>
+
+        <div class="content">
+            <p>**PHP (Hypertext Preprocessor)** is a widely used, open-source scripting language especially suited for web development and can be embedded into HTML. It is executed on the server, generating HTML that is sent to the client's web browser.</p>
+
+            <hr>
+
+            <h2 class="title">Core Syntax</h2>
+
+            <h3>PHP Tags</h3>
+            <p>PHP code is enclosed within standard tags:</p>
+            <pre>&lt;?php // PHP code here ?&gt;</pre>
+            <p>Use the short echo tag for quick output:</p>
+            <pre>&lt;?= $variable; ?&gt;</pre>
+
+            <h3>Statements and Variables</h3>
+            <p>All statements are terminated with a semicolon ($\text{;}$). Variables are declared using the dollar sign ($\text{\$}$):</p>
+            <pre>&lt;?php
+   $message = "Hello, PHP!"; // Variable declaration
+   echo $message;            // Output statement
+?&gt;</pre>
+            <p>PHP is **case-sensitive** for variables, but generally **case-insensitive** for function and class names.</p>
+
+            <hr>
+
+            <h2 class="title">Data Types and Operators</h2>
+
+            <h3>Basic Data Types</h3>
+            <ul>
+                <li>**Scalar:** $\text{String}$, $\text{Integer}$, $\text{Float}$ ($\text{Double}$), $\text{Boolean}$.</li>
+                <li>**Compound:** $\text{Array}$ (indexed or associative), $\text{Object}$.</li>
+            </ul>
+
+            <h3>Concatenation</h3>
+            <p>The dot ($\text{.}$) operator is used to join strings:</p>
+            <pre>$full = "First" . " " . "Last";</pre>
+
+            <h3>Comparison</h3>
+            <p>The **double equals ($\text{==}$)** compares values (loose), while the **triple equals ($\text{===}$)** compares both value and type (strict).</p>
+            <pre>
+$a = 10;
+$b = "10";
+var_dump($a == $b);  // true (value is same)
+var_dump($a === $b); // false (type is different)</pre>
+            <p>The **spaceship operator ($\text{<=>}$)** returns -1, 0, or 1 for less than, equal to, or greater than, respectively.</p>
+
+            <hr>
+
+            <h2 class="title">Control Structures</h2>
+
+            <h3>Conditional Statements</h3>
+            <pre>
+if ($condition) {
+    // code
+} elseif ($other_condition) {
+    // code
+} else {
+    // code
+}</pre>
+
+            <h3>Loops</h3>
+            <p>The $\text{foreach}$ loop is most common for iterating over arrays:</p>
+            <pre>
+$colors = ['red', 'green', 'blue'];
+foreach ($colors as $color) {
+    echo $color;
+}</pre>
+
+            <hr>
+
+            <h2 class="title">Functions and Arrays</h2>
+
+            <h3>User-Defined Functions</h3>
+            <pre>
+function greet($name) {
+    return "Hello, " . $name;
+}
+echo greet("Alice");</pre>
+
+            <h3>Arrays</h3>
+            <p>Arrays can be indexed (numeric keys) or associative (string keys).</p>
+            <pre>
+// Indexed
+$names = ['Bob', 'Charlie'];
+
+// Associative
+$person = [
+    'name' => 'Dave',
+    'age' => 30
+];
+echo $person['name']; // Output: Dave</pre>
+
+            <h3>Superglobals</h3>
+            <p>Built-in arrays available in all scopes, used for environmental and request data:</p>
+            <ul>
+                <li>$\text{\$\_GET}$: Variables passed via $\text{URL}$ parameters.</li>
+                <li>$\text{\$\_POST}$: Variables passed via $\text{HTTP}$ $\text{POST}$ method.</li>
+                <li>$\text{\$\_SESSION}$: Session variables.</li>
+                <li>$\text{\$\_SERVER}$: Server and execution environment information.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Object-Oriented Programming (OOP)</h2>
+
+            <p>PHP fully supports $\text{OOP}$ concepts including $\text{Classes}$, $\text{Objects}$, $\text{Inheritance}$, $\text{Interfaces}$, and $\text{Traits}$.</p>
+            <pre>
+class Car {
+    public $color;
+    public function __construct($c) {
+        $this->color = $c;
+    }
+}
+$myCar = new Car("Red");</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HTML Audio — E-Learning Session</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+      <h1 class="title">HTML &lt;audio&gt; Element</h1>
+
+      <div class="content">
+        <h2>Overview</h2>
+        <p>
+          The HTML <code>&lt;audio&gt;</code> element embeds an audio file inside a web page. 
+          Similar to the <code>&lt;video&gt;</code> element, it supports multiple audio formats 
+          (such as MP3, WAV, and OGG) and provides built-in playback features like play, pause, 
+          and volume control.
+        </p>
+
+        <h2>Common Attributes</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>controls</code></td>
+              <td>Adds built-in controls (play, pause, volume).</td>
+            </tr>
+            <tr>
+              <td><code>autoplay</code></td>
+              <td>Plays the audio automatically when the page loads.</td>
+            </tr>
+            <tr>
+              <td><code>loop</code></td>
+              <td>Replays the audio after it ends.</td>
+            </tr>
+            <tr>
+              <td><code>muted</code></td>
+              <td>Starts the audio in muted mode.</td>
+            </tr>
+            <tr>
+              <td><code>preload</code></td>
+              <td>Specifies how the audio should be preloaded by the browser.</td>
+            </tr>
+            <tr>
+              <td><code>src</code></td>
+              <td>Specifies the path to the audio file.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Basic Syntax</h2>
+        <pre><code>&lt;audio controls&gt;
+  &lt;source src="file_path" type="audio/mpeg"&gt;
+  Your browser does not support the audio element.
+&lt;/audio&gt;
+</code></pre>
+
+        <h2>Example: Multiple Sources</h2>
+        <p>This example provides MP3, WAV, and OGG sources so the browser can select the most suitable format.</p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;p&gt;Working with audio element&lt;/p&gt;
+  &lt;audio controls&gt;
+    &lt;source src="/html/media/audio/sample_3sec_audio.mp3" type="audio/mp3"&gt;
+    &lt;source src="/html/media/audio/sample_3sec_audio.wav" type="audio/wav"&gt;
+    &lt;source src="/html/media/audio/sample_3sec_audio.ogg" type="audio/ogg"&gt;
+    Your browser does not support the &lt;audio&gt; element.
+  &lt;/audio&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+        <h2>Autoplay, Muted, and Loop</h2>
+        <p>
+          Use the <code>autoplay</code>, <code>muted</code>, and <code>loop</code> attributes to play the audio automatically, start it muted, and replay it continuously. 
+          Autoplay often requires the <code>muted</code> attribute to work in modern browsers.
+        </p>
+
+        <pre><code>&lt;audio controls autoplay muted loop&gt;
+  &lt;source src="/html/media/audio/sample_3sec_audio.mp3" type="audio/mp3"&gt;
+  &lt;source src="/html/media/audio/sample_3sec_audio.wav" type="audio/wav"&gt;
+  &lt;source src="/html/media/audio/sample_3sec_audio.ogg" type="audio/ogg"&gt;
+  Your browser does not support the &lt;audio&gt; element.
+&lt;/audio&gt;
+</code></pre>
+
+        <h2>Browser Format Support</h2>
+        <p>The table below shows the support for common audio formats across different browsers:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Browser</th>
+              <th>OGG</th>
+              <th>WAV</th>
+              <th>MP4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Chrome</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Edge</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Safari</td>
+              <td>No</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Firefox</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Opera</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Best Practices</h2>
+        <ul>
+          <li>Provide multiple formats for maximum browser compatibility.</li>
+          <li>Always include fallback text for unsupported browsers.</li>
+          <li>Use <code>autoplay</code> with <code>muted</code> to prevent unwanted sound on load.</li>
+          <li>Consider accessibility by providing transcripts or captions where necessary.</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

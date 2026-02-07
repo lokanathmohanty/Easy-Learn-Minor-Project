@@ -1,0 +1,171 @@
+<div class="container">
+   <div class="session">
+      <h1 class="title">ReactJS - Render Props</h1>
+      <div class="content">
+         <p>Since react components are interconnected by composition (having one component inside another) rather than by inheritance, logic used in a react component will not be shared to another component directly. React provides multiple options to share the logic between components and one such option is <strong>Render Props</strong>. Render props is basically passing a function with necessary rendering logic to a component having core functionality through its props. Hence, it is termed as render props.</p>
+      </div>
+   </div>
+
+   <div class="session">
+      <h2 class="title">How to use render props</h2>
+      <div class="content">
+         <p>Let us see how to use render props and share logic between two components in a step-by-step manner. Consider the scenario of fetching and rendering the data from an external URL.</p>
+         <ul>
+            <li>Create a component, <strong>FetcherComponent</strong> with data fetching logic for the given <code>props.url</code>.</li>
+            <li>Update <strong>FetcherComponent</strong> so that the core rendering logic will be delegated to <code>this.props.render</code>.</li>
+            <li>Create a <strong>FetcherConsumerComponent</strong> that consumes <strong>FetcherComponent</strong> and provides the rendering logic.</li>
+         </ul>
+         <h2 class="title">Example Code</h2>
+         <h3>FetcherComponent with data fetching logic</h3>
+         <pre>
+componentDidMount() {
+   fetch(this.props.url)
+   .then((response) =&gt; response.json())
+   .then((data) =&gt; {
+      this.setState({
+         data: data
+      });
+   });
+}
+         </pre>
+         <h3>Updated FetcherComponent with render props</h3>
+         <pre>
+render() {
+   return (
+      &lt;div&gt;
+         &lt;h2&gt;Fetch react component&lt;/h2&gt;
+         {this.state.data &amp;&amp; this.props.render(this.state.data)}
+      &lt;/div&gt;
+   )
+}
+         </pre>
+         <p>Here, <code>this.props.render</code> is the function with rendering logic and is passed into <strong>FetcherComponent</strong> through props.</p>
+
+         <h3>FetcherConsumerComponent Example</h3>
+         <pre>
+render() {
+   return (
+      &lt;FetcherComponent url="users.json" render={(items) =&gt; (
+         &lt;ul&gt;
+            {items &amp;&amp; items.length &amp;&amp; items.map((item) =&gt;
+               &lt;li key={item.id}&gt;{item.name}&lt;/li&gt;
+            )}
+         &lt;/ul&gt;
+      )} /&gt;
+   )
+}
+         </pre>
+      </div>
+   </div>
+
+   <div class="session">
+      <h2 class="title">Applying render props</h2>
+      <div class="content">
+         <p>First of all, create a new react application:</p>
+         <pre>
+create-react-app myapp
+cd myapp
+npm start
+         </pre>
+
+         <p>Create a component <strong>FetchRenderProps</strong> with data fetching logic.</p>
+         <h3>FetchRenderProps.js</h3>
+         <pre>
+import React from "react";
+class FetchRenderProps extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = { data: [] }
+   }
+   componentDidMount() {
+      fetch(this.props.url)
+      .then((response) =&gt; response.json())
+      .then((data) =&gt; {
+         this.setState({ data: data });
+      });
+   }
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;h2&gt;Fetch react component&lt;/h2&gt;
+            {this.state.data &amp;&amp; this.props.render(this.state.data)}
+         &lt;/div&gt;
+      )
+   }
+}
+export default FetchRenderProps;
+         </pre>
+
+         <p>Create JSON files to fetch:</p>
+         <h3>users.json</h3>
+         <pre>
+[{"id":1,"name":"Fowler","age":18},
+{"id":2,"name":"Donnell","age":24},
+{"id":3,"name":"Pall","age":26}]
+         </pre>
+
+         <h3>todo_list.json</h3>
+         <pre>
+[{"id":1,"title":"Learn JavaScript","is_done":true},
+{"id":2,"title":"Learn React","is_done":true},
+{"id":3,"title":"Learn Typescript","is_done":false}]
+         </pre>
+
+         <h3>SimpleRenderProps.js</h3>
+         <pre>
+import React from "react";
+import FetchRenderProps from "./FetchRenderProps";
+class SimpleRenderProps extends React.Component {
+   render() {
+      return (
+         &lt;&gt;
+            &lt;FetchRenderProps url="users.json" render={(items) =&gt; (
+               &lt;ul&gt;
+                  {items &amp;&amp; items.length &amp;&amp; items.map((item) =&gt;
+                     &lt;li key={item.id}&gt;{item.name}&lt;/li&gt;
+                  )}
+               &lt;/ul&gt;
+            )} /&gt;
+
+            &lt;FetchRenderProps url="todo_list.json" render={(items) =&gt; (
+               &lt;ul&gt;
+                  {items &amp;&amp; items.length &amp;&amp; items.map((item) =&gt;
+                     &lt;li key={item.id}&gt;
+                        {item.title} {item.is_done &amp;&amp; &lt;strong&gt;Done&lt;/strong&gt;}
+                     &lt;/li&gt;
+                  )}
+               &lt;/ul&gt;
+            )} /&gt;
+         &lt;/&gt;
+      )
+   }
+}
+export default SimpleRenderProps;
+         </pre>
+
+         <h3>App.js</h3>
+         <pre>
+import './App.css'
+import React from 'react';
+import SimpleRenderProps from './Components/SimpleRenderProps'
+function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;div style={{ padding: "10px" }}&gt;
+            &lt;SimpleRenderProps /&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+   );
+}
+export default App;
+         </pre>
+      </div>
+   </div>
+
+   <div class="session">
+      <h2 class="title">Summary</h2>
+      <div class="content">
+         <p>Render props is an efficient method to share logic between components. It is extensively used in many third-party components with good success rate and is a time-tested method to share logic in the React domain.</p>
+      </div>
+   </div>
+</div>

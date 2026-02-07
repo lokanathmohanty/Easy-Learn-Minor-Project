@@ -1,0 +1,53 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">C++ <code>do...while</code> Loop (Exit-Controlled) 🔁</h1>
+
+        <div class="content">
+            <p>The **<code>do...while</code> loop** is an **exit-controlled** loop, meaning its condition is tested **after** the loop body has executed. Its defining characteristic is the guarantee that the statements within the loop will execute **at least once**, regardless of whether the condition is initially true or false.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Syntax and Mechanism</h2>
+            <p>The loop starts with the <code>do</code> keyword, executes the body, and then checks the <code>while</code> condition at the end. Note the semicolon after the <code>while(condition)</code> part.</p>
+            <pre class="example">
+do {
+   // Statement(s) to execute repeatedly
+   // This code runs at least one time.
+} while (condition); // Semicolon is required here!
+</pre>
+            <p>The flow of control is:</p>
+            <ol>
+                <li>The code block after <code>do</code> executes.</li>
+                <li>The <code>condition</code> is tested.</li>
+                <li>If the <code>condition</code> is **true**, control jumps back to <code>do</code> to repeat the process.</li>
+                <li>If the <code>condition</code> is **false**, the loop terminates.</li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Example Analysis (<code>a</code> starts at 10)</h2>
+            <p>The example demonstrates the loop iterating while <code>a</code> is less than 20. The variable <code>a</code> is initialized, and then the <code>do</code> block executes immediately.</p>
+            <pre class="example">
+int a = 10;
+
+do {
+   cout << "value of a: " << a << endl;
+   a = a + 1; // Crucial step to ensure termination
+} while ( a < 20 ); // Condition checked after execution
+</pre>
+            <p>The loop prints the value of <code>a</code> from 10 up to 19. When <code>a</code> becomes 20, the condition ($20 < 20$) fails, and the loop terminates. The output is identical to the <code>for</code> and <code>while</code> examples because the condition was true from the start:</p>
+            <pre class="example">
+value of a: 10
+value of a: 11
+...
+value of a: 18
+value of a: 19
+</pre>
+            <p>If <code>a</code> were initialized to 20 or greater, the <code>do...while</code> loop would still execute once, printing the initial value, whereas a <code>while</code> loop would skip entirely.</p>
+        </div>
+    </div>
+</div>

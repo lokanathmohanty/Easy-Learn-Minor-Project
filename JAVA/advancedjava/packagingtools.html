@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Packaging Tool (jpackage)</h1>
+
+        <div class="content">
+            <h2>Purpose and Introduction</h2>
+            <p>The **<code>jpackage</code>** tool, introduced in **Java 14** (and replacing the older <code>javapackager</code>), is a command-line utility that enables developers to package Java applications into **native, platform-specific installers**. This ensures the end-user can install and run the Java application like any other software (e.g., a <code>.exe</code> on Windows or a <code>.dmg</code> on macOS), without needing a pre-installed JRE or JDK.</p>
+            <p><code>jpackage</code> creates a self-contained application bundle that includes the application's code, dependencies, and a minimal, customized Java Runtime Environment (JRE) created using <code>jlink</code>.</p>
+
+            <h3>Why is <code>jpackage</code> necessary?</h3>
+            <p>Modern software distribution requires a seamless installation experience. <code>jpackage</code> addresses this by:</p>
+            <ul>
+                <li>**Bundling the Runtime:** Including a minimal JRE with the application, eliminating the dependency on the user having a compatible Java installation.</li>
+                <li>**Native Format:** Generating installers specific to the operating system:
+                    <ul>
+                        <li>**Windows:** <code>.exe</code>, <code>.msi</code></li>
+                        <li>**macOS:** <code>.pkg</code>, <code>.dmg</code></li>
+                        <li>**Linux:** <code>.deb</code>, <code>.rpm</code></li>
+                    </ul>
+                </li>
+                <li>**Customization:** Allowing developers to specify application icons, installation directories, JVM options, and more.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Prerequisites for Using <code>jpackage</code></h2>
+            <p>To create native installers, <code>jpackage</code> often relies on native platform-specific tools, which must be installed separately:</p>
+            <ul>
+                <li><strong>Windows:</strong> Requires a third-party tool like **WiX Toolset (version 3.0 or later)** for creating <code>.exe</code> and <code>.msi</code> installers.</li>
+                <li><strong>Linux (Debian/Ubuntu):</strong> Requires the **<code>fakeroot</code>** package (for <code>.deb</code>).</li>
+                <li><strong>Linux (Red Hat/Fedora):</strong> Requires the **<code>rpm-build</code>** package (for <code>.rpm</code>).</li>
+                <li><strong>macOS:</strong> Requires **Xcode command-line tools**.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title example">Example Command Syntax</h2>
+            <p>The following command demonstrates packaging a Java application named <code>APITester</code> into a Windows MSI installer:</p>
+            <pre><code>jpackage --input lib \
+  --name APITester \
+  --main-jar APITester.jar \
+  --main-class com.tutorialspoint.APITester \
+  --type msi \
+  --java-options '-Xms512m'</code></pre>
+            <p><strong>Common Command Line Options:</strong></p>
+            <ul>
+                <li><strong><code>--input &lt;folder&gt;</code>:</strong> Specifies the directory containing the application's JAR files and resources.</li>
+                <li><strong><code>--name &lt;name&gt;</code>:</strong> The name of the resulting package and the application.</li>
+                <li><strong><code>--main-jar &lt;file&gt;</code>:</strong> The application's main JAR file.</li>
+                <li><strong><code>--main-class &lt;class&gt;</code>:</strong> The entry point class within the main JAR. (Optional if specified in <code>MANIFEST.MF</code>).</li>
+                <li><strong><code>--type &lt;type&gt;</code>:</strong> The desired output format (e.g., <code>msi</code>, <code>dmg</code>, <code>deb</code>).</li>
+                <li><strong><code>--java-options &lt;options&gt;</code>:</strong> Specifies options to be passed to the JVM when the application is launched (e.g., heap size, system properties).</li>
+            </ul>
+        </div>
+    </div>
+</div>

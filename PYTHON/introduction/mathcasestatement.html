@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Match-Case Statement</h1>
+    <div class="content">
+      <p>The <b>match-case statement</b> in Python (introduced in Python 3.10) is used for pattern matching. It compares an expression’s value against multiple patterns defined in <code>case</code> blocks. Only the first matching case executes.</p>
+      <p>This is similar to <code>switch-case</code> in C/C++/Java, but Python’s implementation is more powerful, resembling pattern matching in languages like Rust and Haskell.</p>
+
+      <h2>Syntax</h2>
+      <pre>
+match variable_name:
+    case 'pattern1': statement1
+    case 'pattern2': statement2
+    ...
+    case 'patternN': statementN
+      </pre>
+
+      <h2>Example</h2>
+      <p>Example showing weekdays using match-case:</p>
+      <pre>
+def weekday(n):
+    match n:
+        case 0: return "Monday"
+        case 1: return "Tuesday"
+        case 2: return "Wednesday"
+        case 3: return "Thursday"
+        case 4: return "Friday"
+        case 5: return "Saturday"
+        case 6: return "Sunday"
+        case _: return "Invalid day number"
+
+print(weekday(3))
+print(weekday(6))
+print(weekday(7))
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+Thursday
+Sunday
+Invalid day number
+      </pre>
+      <p>The <code>_</code> symbol is a <b>wildcard case</b>, executed when no other case matches.</p>
+
+      <h2>Combined Cases</h2>
+      <p>You can combine multiple cases using the <code>|</code> (OR) operator.</p>
+      <pre>
+def access(user):
+    match user:
+        case "admin" | "manager": return "Full access"
+        case "Guest": return "Limited access"
+        case _: return "No access"
+
+print(access("manager"))
+print(access("Guest"))
+print(access("Ravi"))
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+Full access
+Limited access
+No access
+      </pre>
+
+      <h2>Using Lists in Match-Case</h2>
+      <p>Lists can also be used in <code>case</code> clauses, including variable-length lists using <code>*</code>.</p>
+      <pre>
+def greeting(details):
+    match details:
+        case [time, name]:
+            return f"Good {time} {name}!"
+        case [time, *names]:
+            msg = ""
+            for name in names:
+                msg += f"Good {time} {name}!\n"
+            return msg
+
+print(greeting(["Morning", "Ravi"]))
+print(greeting(["Afternoon", "Guest"]))
+print(greeting(["Evening", "Kajal", "Praveen", "Lata"]))
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+Good Morning Ravi!
+Good Afternoon Guest!
+Good Evening Kajal!
+Good Evening Praveen!
+Good Evening Lata!
+      </pre>
+
+      <h2>Using "if" in Case Clause</h2>
+      <p>Conditional expressions can be added using <code>if</code> inside a case clause.</p>
+      <pre>
+def intr(details):
+    match details:
+        case [amt, duration] if amt < 10000:
+            return amt * 10 * duration / 100
+        case [amt, duration] if amt >= 10000:
+            return amt * 15 * duration / 100
+
+print("Interest =", intr([5000, 5]))
+print("Interest =", intr([15000, 3]))
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+Interest = 2500.0
+Interest = 6750.0
+      </pre>
+    </div>
+  </div>
+</div>

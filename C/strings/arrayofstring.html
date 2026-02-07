@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Array of Strings in C</h1>
+    <div class="content">
+      <h2>What is an Array of Strings?</h2>
+      <p>
+        An array of strings in C is a two-dimensional array where each row represents a null-terminated string. It allows storing multiple strings indexed by their position in the array.
+      </p>
+      <h2>Declaration and Initialization</h2>
+      <p>To declare an array of strings, define a 2D char array specifying number of strings and max length of each string:</p>
+      <pre><code>char strings[no_of_strings][max_length];</code></pre>
+      <p>Example:</p>
+      <pre><code>
+char langs[10][15] = {
+  "PYTHON", "JAVASCRIPT", "PHP",
+  "NODE JS", "HTML", "KOTLIN", "C++",
+  "REACT JS", "RUST", "VBSCRIPT"
+};
+      </code></pre>
+      <h2>Memory Considerations</h2>
+      <p>
+        Each character occupies 1 byte, so total memory equals rows × columns. Strings shorter than max length have unused space after the null character.
+      </p>
+      <h2>Using an Array of Pointers</h2>
+      <p>
+        To save memory, use an array of pointers to strings instead of a 2D array. Each pointer refers to a separately allocated string.
+      </p>
+      <pre><code>
+char *langs[10] = {
+  "PYTHON", "JAVASCRIPT", "PHP",
+  "NODE JS", "HTML", "KOTLIN", "C++",
+  "REACT JS", "RUST", "VBSCRIPT"
+};
+      </code></pre>
+      <h2>String Operations</h2>
+      <ul>
+        <li>Printing strings using <code>printf("%s")</code> in a loop.</li>
+        <li>Finding longest string using <code>strlen()</code> function.</li>
+        <li>Sorting strings with <code>strcmp()</code> and swapping using <code>strcpy()</code>.</li>
+      </ul>
+    </div>
+  </div>
+</div>

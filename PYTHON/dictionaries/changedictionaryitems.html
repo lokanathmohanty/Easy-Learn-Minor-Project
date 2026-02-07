@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Change Dictionary Items</h1>
+    <div class="content">
+      <p>Changing dictionary items in Python refers to modifying the values associated with specific keys within a dictionary. This can involve updating the value of an existing key, adding a new key-value pair, or removing a key-value pair from the dictionary.</p>
+      <p>Dictionaries are mutable, meaning their contents can be modified after they are created.</p>
+
+      <h2>Modifying Dictionary Values</h2>
+      <p>Modifying values in a Python dictionary refers to changing the value associated with an existing key. To achieve this, you can directly assign a new value to that key.</p>
+      <pre><code># Initial dictionary
+person = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+# Modifying the value associated with the key 'age'
+person['age'] = 26
+print(person)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>{'name': 'Alice', 'age': 26, 'city': 'New York'}</code></pre>
+
+      <h2>Updating Multiple Dictionary Values</h2>
+      <p>If you need to update multiple values in a dictionary at once, you can use the <code>update()</code> method. This method updates a dictionary with elements from another dictionary or iterable of key-value pairs.</p>
+      <pre><code># Initial dictionary
+person = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+# Updating multiple values
+person.update({'age': 26, 'city': 'Los Angeles'})
+print(person)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>{'name': 'Alice', 'age': 26, 'city': 'Los Angeles'}</code></pre>
+
+      <h2>Conditional Dictionary Modification</h2>
+      <p>Conditional modification refers to changing the value only if a certain condition is met.</p>
+      <pre><code># Initial dictionary
+person = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+# Conditionally modifying 'age'
+if person['age'] == 25:
+   person['age'] = 26
+print(person)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>{'name': 'Alice', 'age': 26, 'city': 'New York'}</code></pre>
+
+      <h2>Modify Dictionary by Adding New Key-Value Pairs</h2>
+      <p>You can add new key-value pairs to a dictionary either using assignment or the <code>setdefault()</code> method.</p>
+
+      <h3>Using Assignment Operator</h3>
+      <pre><code># Initial dictionary
+person = {'name': 'Alice', 'age': 25}
+# Adding a new key-value pair
+person['city'] = 'New York'
+print(person)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>{'name': 'Alice', 'age': 25, 'city': 'New York'}</code></pre>
+
+      <h3>Using setdefault() Method</h3>
+      <pre><code># Initial dictionary
+person = {'name': 'Alice', 'age': 25}
+# Adding 'city' only if it doesn't exist
+person.setdefault('city', 'New York')
+print(person)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>{'name': 'Alice', 'age': 25, 'city': 'New York'}</code></pre>
+
+      <h2>Modify Dictionary by Removing Key-Value Pairs</h2>
+      <p>You can remove items from a dictionary using <code>del</code>, <code>pop()</code>, or <code>popitem()</code>.</p>
+
+      <h3>Using del Statement</h3>
+      <pre><code># Initial dictionary
+person = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+# Remove 'age'
+del person['age']
+print(person)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>{'name': 'Alice', 'city': 'New York'}</code></pre>
+
+      <h3>Using pop() Method</h3>
+      <pre><code># Initial dictionary
+person = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+# Remove 'age' and return its value
+removed_age = person.pop('age')
+print(person)
+print("Removed age:", removed_age)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>{'name': 'Alice', 'city': 'New York'}
+Removed age: 25</code></pre>
+
+      <h3>Using popitem() Method</h3>
+      <pre><code># Initial dictionary
+person = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+# Remove the last key-value pair
+removed_item = person.popitem()
+print(person)
+print("Removed item:", removed_item)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>{'name': 'Alice', 'age': 25}
+Removed item: ('city', 'New York')</code></pre>
+    </div>
+  </div>
+</div>

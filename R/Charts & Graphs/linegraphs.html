@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Line Graphs</h1>
+    <div class="content">
+      <p>
+        A line chart connects a series of data points with line segments, often to identify trends over time or another ordered variable. In R, line graphs are created using the <code>plot()</code> function with customizable styles and multiple lines on the same plot.
+      </p>
+
+      <h2 class="title">Basic Syntax</h2>
+      <pre><code>plot(v, type, col, xlab, ylab, main)</code></pre>
+      <ul>
+        <li><strong>v</strong>: Numeric vector for Y-axis values</li>
+        <li><strong>type</strong>: "p" (points only), "l" (lines only), "o" (both)</li>
+        <li><strong>xlab</strong>: X-axis label</li>
+        <li><strong>ylab</strong>: Y-axis label</li>
+        <li><strong>main</strong>: Title of the chart</li>
+        <li><strong>col</strong>: Color for points/lines</li>
+      </ul>
+
+      <h2 class="title">Simple Line Chart Example</h2>
+      <pre><code># Data for the chart
+v &lt;- c(7, 12, 28, 3, 41)
+
+png(file = "line_chart.jpg")
+plot(v, type = "o")
+dev.off()
+</code></pre>
+
+      <h2 class="title">Add Title, Color, and Labels</h2>
+      <pre><code>v &lt;- c(7, 12, 28, 3, 41)
+
+png(file = "line_chart_label_colored.jpg")
+plot(v, type = "o", col = "red", xlab = "Month", ylab = "Rain fall", main = "Rain fall chart")
+dev.off()
+</code></pre>
+
+      <h2 class="title">Multiple Lines on One Chart</h2>
+      <pre><code>v &lt;- c(7, 12, 28, 3, 41)
+t &lt;- c(14, 7, 6, 19, 3)
+
+png(file = "line_chart_2_lines.jpg")
+plot(v, type = "o", col = "red", xlab = "Month", ylab = "Rain fall", main = "Rain fall chart")
+lines(t, type = "o", col = "blue")
+dev.off()
+</code></pre>
+
+      <p>
+        Use these scripts to generate and customize line plots in R, including handling multiple series on a single graph.
+      </p>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

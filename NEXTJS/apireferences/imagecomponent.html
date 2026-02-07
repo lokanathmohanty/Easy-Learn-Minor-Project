@@ -1,0 +1,107 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js `&lt;Image&gt;` Component 🖼️</h1>
+        
+        <div class="content">
+            <h2 class="title">Overview and Syntax</h2>
+            <p>The Next.js **`<Image>` component** extends the standard HTML `<img />` tag, providing automatic features for optimizing images, improving loading performance, and preventing layout shift. It accepts all standard `<img>` attributes plus additional Next.js-specific props for control over optimization.</p>
+            
+            <h3 class="title">Basic Syntax:</h3>
+            <p>The <span class="example">`src`</span>, <span class="example">`width`</span>, <span class="example">`height`</span>, and <span class="example">`alt`</span> props are typically **required** when the image is not set to fill its container.</p>
+            <pre>import Image from 'next/image' 
+
+export default function Page() {
+  return (
+    &lt;Image
+        src="/relative/path/to/image.jpg"
+        width={500}
+        height={300}
+        alt="Descriptive alternative text"
+    /&gt;
+  )}</pre>
+            <p>If using images from your project's **`public`** directory, use a relative path like <span class="example">`/image.jpg`</span>. For external URLs, you must configure **`remotePatterns`** in your <span class="example">`next.config.ts`</span> file for security.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Key Next.js Props for `<Image>`</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prop</th>
+                        <th>Status</th>
+                        <th>Purpose & Default Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`src`</span></td>
+                        <td>**Required**</td>
+                        <td>The URL or local path to the image source.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`width`</span> / <span class="example">`height`</span></td>
+                        <td>**Required***</td>
+                        <td>The intrinsic dimensions of the image (in pixels) to prevent layout shift. (Not required if using <span class="example">`fill`</span> or <span class="example">`sizes`</span>).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`alt`</span></td>
+                        <td>**Required**</td>
+                        <td>Alternative text for screen readers and SEO.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`fill`</span></td>
+                        <td>Optional</td>
+                        <td>If <span class="example">`true`</span>, the image scales to fill the parent element, and <span class="example">`width`</span>/<span class="example">`height`</span> are not needed.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`priority`</span></td>
+                        <td>Optional</td>
+                        <td>If <span class="example">`true`</span>, loads the image eagerly (non-lazy) and includes it in the preloaded resources, usually for **LCP (Largest Contentful Paint)** images.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`quality`</span></td>
+                        <td>Optional</td>
+                        <td>Defines the optimization quality (1-100), defaults to 75.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`placeholder`</span></td>
+                        <td>Optional</td>
+                        <td>Defines a low-quality placeholder displayed until the main image loads, often set to <span class="example">`"blur"`</span> to use <span class="example">`blurDataURL`</span>.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`loading`</span></td>
+                        <td>Optional</td>
+                        <td>Specifies native loading behavior: <span class="example">`"lazy"`</span> (default for non-priority) or <span class="example">`"eager"`</span>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Example: Applying Inline Styles</h2>
+            <p>You can apply standard CSS inline styles using the **<span class="example">`style`</span>** prop, passed as a JavaScript object. This is useful for presentation aspects like borders, rounded corners, or object fitting.</p>
+            <pre>import Image from 'next/image'
+
+export default function Page() {
+    const imageStyle = {
+        borderRadius: '50%',
+        border: '5px solid black',
+    };
+
+    return (
+        &lt;Image
+            src="/profile.jpg"
+            width={200}
+            height={100}
+            alt="Profile Image"
+            style={imageStyle} // &larr; Applying the custom style
+        /&gt;
+    )}</pre>
+        </div>
+    </div>
+</div>

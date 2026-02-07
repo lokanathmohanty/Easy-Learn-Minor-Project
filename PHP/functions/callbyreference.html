@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP: Call by Reference</h1>
+
+    <div class="content">
+      <p>
+        **Call by Reference** is a mechanism that allows a function to **modify the original variable** passed as an argument from the calling environment. Unlike the default "Call by Value" mechanism (which works on a copy), Call by Reference passes an **alias** or **reference** to the original variable.
+      </p>
+
+      <h2>Mechanism: The Reference Operator (`&`)</h2>
+      <p>
+        To enable call by reference, the **ampersand (`&`)** symbol must be placed before the formal parameter name in the function's definition.
+      </p>
+
+      <h3>1. Declaring a Function for Call by Reference</h3>
+      <div class="example">
+        <p>
+          <code>function change_data(**&amp;**$arg1, **&amp;**$arg2) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;// Changes here modify the original variables passed in</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <h3>2. Example: Modifying the Original Variable</h3>
+      <p>
+        In this example, the formal parameter `&$nm` acts as an alias to the actual argument `$name`. When `&$nm` is modified inside the function, the change is instantly reflected in `$name` outside the function.
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php</code><br>
+          <code>&nbsp;&nbsp;&nbsp;function change_name(**&amp;**$nm) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$nm = $nm."_new";</code><br>
+          <code>&nbsp;&nbsp;&nbsp;}</code><br>
+          <br>
+          <code>&nbsp;&nbsp;&nbsp;$name = "John";</code><br>
+          <code>&nbsp;&nbsp;&nbsp;change_name($name);</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "My name now is **$name**"; // Output: John_new</code><br>
+          <code>?&gt;</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Practical Use Case: Swapping Variables</h2>
+      <p>
+        A classic example is swapping two variables. Using call by value fails to affect the actual arguments, but using call by reference makes the swap persistent outside the function.
+      </p>
+      <div class="example">
+        <p>
+          **Reference Swap Function:**<br>
+          <code>function swap_ref(**&amp;**$a, **&amp;**$b) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$c = $a; $a = $b; $b = $c;</code><br>
+          <code>}</code><br>
+          <br>
+          <code>$x = 10; $y = 20;</code><br>
+          <code>swap_ref($x, $y);</code><br>
+          <code>echo "$x $y"; // Output: 20 10</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Return by Reference</h2>
+      <p>
+        A function can also **return a reference** to a variable (usually a static or global variable). This allows the variable receiving the returned value to also become an alias to the original variable inside the function.
+      </p>
+      <div class="example">
+        <p>
+          **Syntax:** Prefix both the function declaration and the variable assignment with `&`.<br>
+          <code>function **&amp;**myfunction() { /* ... */ return $x; }</code><br>
+          <code>$a = **&amp;**myfunction();</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

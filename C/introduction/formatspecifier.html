@@ -1,0 +1,109 @@
+
+<div class="container">
+  <div class="session">
+    <h1 class="title">Format Specifiers in C</h1>
+    <div class="content">
+      <p>Format specifiers are special symbols used in formatted input/output functions such as <code>printf()</code> and <code>scanf()</code>, as well as file IO functions like <code>fprintf()</code> and <code>fscanf()</code>. They specify the type of data to be printed or read, guiding the compiler for proper interpretation.</p>
+
+      <h2 class="title">Why Use Format Specifiers?</h2>
+      <p>Input/output devices communicate via streams of textual data. Format specifiers let the program interpret this text correctly as integers, floats, strings, etc., and convert variables into text for output.</p>
+
+      <h2 class="title">Common Format Specifiers</h2>
+      <ul>
+        <li><code>%c</code>: Character</li>
+        <li><code>%d</code>: Signed integer</li>
+        <li><code>%i</code>: Signed integer (alternate)</li>
+        <li><code>%f</code>: Float</li>
+        <li><code>%e</code> or <code>%E</code>: Scientific notation (float)</li>
+        <li><code>%g</code> or <code>%G</code>: Automatically select %f or %e</li>
+        <li><code>%hi</code>: Short signed integer</li>
+        <li><code>%hu</code>: Short unsigned integer</li>
+        <li><code>%ld</code> or <code>%li</code>: Long integer</li>
+        <li><code>%lf</code>: Double</li>
+        <li><code>%Lf</code>: Long double</li>
+        <li><code>%lu</code>: Unsigned long</li>
+        <li><code>%lli</code> or <code>%lld</code>: Long long integer</li>
+        <li><code>%llu</code>: Unsigned long long</li>
+        <li><code>%o</code>: Octal number</li>
+        <li><code>%p</code>: Pointer (memory address)</li>
+        <li><code>%s</code>: String</li>
+        <li><code>%u</code>: Unsigned integer</li>
+        <li><code>%x</code> or <code>%X</code>: Hexadecimal (lowercase / uppercase)</li>
+        <li><code>%%</code>: Prints the percent sign</li>
+      </ul>
+
+      <h2 class="title">Integer Format Specifiers Example</h2>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   int num = 20;
+   printf("Signed integer: %d\n", num);
+   printf("Unsigned integer: %i\n", num);
+   printf("Long integer: %ld\n", num);
+   printf("Octal integer: %o\n", num);
+   printf("Hexadecimal integer: %x\n", num);
+   return 0;
+}
+      </code></pre>
+
+      <h2 class="title">Floating-point Format Specifiers</h2>
+      <p>C uses <code>%f</code> for single precision floats, <code>%lf</code> for double precision, and <code>%Lf</code> for long double. You can specify precision and width, for example <code>%4.2f</code> prints a number in a width of 4 characters with 2 decimals.</p>
+
+      <h2 class="title">Floating-point Format Example</h2>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   float num = 5.347;
+   printf("float: %f\n", num);
+   printf("double: %lf\n", num);
+   printf("Scientific notation: %e\n", num);
+   printf("Width and precision: %4.2f\n", num);
+   return 0;
+}
+      </code></pre>
+
+      <h2 class="title">String Format Specifiers</h2>
+      <p>The <code>%c</code> specifier prints a single character; using <code>%d</code> with a char prints its ASCII value. The <code>%s</code> specifier prints a string (array of chars).</p>
+
+      <h2 class="title">String Example</h2>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   char ch = 'D';
+   char word[] = "Hello World";
+
+   printf("As character: %c\n", ch);
+   printf("As ASCII value: %d\n", ch);
+   printf("String: %s\n", word);
+   return 0;
+}
+      </code></pre>
+
+      <h2 class="title">Use in File IO</h2>
+      <p>Format specifiers are also used in <code>fprintf()</code> and <code>fscanf()</code> for formatted reading and writing from/to files.</p>
+
+      <h2 class="title">File IO Example</h2>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   int x, y, z;
+   FILE *fp = fopen("test.txt", "w");
+   x = 10; y = 20; z = 30;
+   fprintf(fp, "%d, %d, %d", x, y, z);
+   fclose(fp);
+
+   fp = fopen("test.txt", "r");
+   fscanf(fp, "%d, %d, %d", &x, &y, &z);
+   printf("%d, %d, %d\n", x, y, z);
+   fclose(fp);
+
+   return 0;
+}
+      </code></pre>
+    </div>
+  </div>
+</div>

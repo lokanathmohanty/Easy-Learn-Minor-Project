@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `$_FILES` Superglobal for File Uploads</h1>
+
+    <div class="content">
+      <p>
+        The **`$_FILES`** is a **superglobal associative array** in PHP used to collect and manage files uploaded to the server via an HTTP POST request. It contains critical metadata about the file, its temporary location, and any upload errors.
+      </p>
+
+      <h2>Client-Side Requirements for File Upload ⚙️</h2>
+      <p>
+        For `$_FILES` to be populated, the HTML form must meet three specific requirements:
+      </p>
+      <div class="example">
+        <ol>
+          <li>The form method must be **`POST`**: <code>method="POST"</code></li>
+          <li>The encoding type must be **`multipart/form-data`**: <code>enctype="multipart/form-data"</code></li>
+          <li>It must contain an input field of type **`file`**: <code>&lt;input type="file" name="file"&gt;</code></li>
+        </ol>
+      </div>
+
+      <hr>
+
+      <h2>Structure and Properties of `$_FILES`</h2>
+      <p>
+        `$_FILES` is a two-dimensional associative array. The first key is the `name` attribute of the HTML input field (e.g., `$_FILES['file']`), and the second keys are the file properties:
+      </p>
+      <ul>
+        <li>**`['name']`**: The **original filename** on the user's computer (e.g., `image.jpg`).</li>
+        <li>**`['type']`**: The file's MIME type (e.g., `image/jpeg`). *Note: This is supplied by the browser and should not be trusted for validation.*</li>
+        <li>**`['size']`**: The size of the file in **bytes**.</li>
+        <li>**`['tmp_name']`**: The **full path** to the temporary file stored on the server (e.g., `/tmp/phpXyZ.tmp`). This is the file you must move to its permanent location.</li>
+        <li>**`['error']`**: The error code associated with the upload (<code>0</code> means success).</li>
+      </ul>
+
+      <h3>Handling Uploaded Files</h3>
+      <p>
+        The file is initially stored in the temporary location (`tmp_name`). To make the file permanent, you must use the PHP function **`move_uploaded_file()`** to move it from the temporary location to a secure, permanent directory on the server.
+      </p>
+
+      <hr>
+
+      <h2>File Upload Error Codes</h2>
+      <p>
+        The `$_FILES['file']['error']` property provides a numeric code indicating the success or failure of the upload process.
+      </p>
+      <table>
+        <tr>
+          <th>Code</th>
+          <th>Constant</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>**0**</td>
+          <td>`UPLOAD_ERR_OK`</td>
+          <td>The file was uploaded successfully.</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>`UPLOAD_ERR_INI_SIZE`</td>
+          <td>File exceeds the `upload_max_filesize` setting in `php.ini`.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>`UPLOAD_ERR_NO_FILE`</td>
+          <td>No file was uploaded (user submitted the form without selecting a file).</td>
+        </tr>
+      </table>
+
+      <hr>
+
+      <h2>Multiple File Uploads</h2>
+      <p>
+        To allow a user to select multiple files, you must append `[]` to the input element's name, turning the property into an array:
+      </p>
+      <div class="example">
+        <p>
+          *HTML:* <code>&lt;input type="file" **name="files[]"**&gt;</code><br>
+          <br>
+          *PHP Access:* You must loop through the nested arrays (e.g., `$_FILES["files"]["name"]`) to process each uploaded file individually.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

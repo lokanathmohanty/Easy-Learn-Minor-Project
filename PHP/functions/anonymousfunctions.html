@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Anonymous Functions (Closures / Lambda Functions)</h1>
+
+    <div class="content">
+      <p>
+        An **Anonymous Function** (also called a **Closure** or **Lambda Function**) is a function that is defined without a specified **name**. They are often used for one-time tasks or as inline **callback functions** passed as arguments to other functions.
+      </p>
+
+      <h2>Definition and Basic Syntax</h2>
+      <p>
+        Anonymous functions are treated as expressions and must be terminated with a semicolon (`;`). They are typically assigned to a variable, which is then used to call the function. They are implemented using PHP's built-in **`Closure`** class.
+      </p>
+      <div class="example">
+        <p>
+          **Syntax:**<br>
+          <code>$var = function ($arg1, $arg2) { /* statements */ return $val; **;** };</code><br>
+          <br>
+          **Example:**<br>
+          <code>$add = function ($a, $b) { return $a+$b; };</code><br>
+          <code>echo $add(5, 10); // Output: 15</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Anonymous Functions as Callbacks</h2>
+      <p>
+        Anonymous functions are excellent for providing custom logic to higher-order functions (functions that accept other functions as arguments), such as array manipulation utilities.
+      </p>
+      <div class="example">
+        <p>
+          Using an anonymous function as the comparison logic for the `usort()` built-in function:
+        </p>
+        <p>
+          <code>$arr = [10, 3, 70];</code><br>
+          <code>**usort** ($arr, function ($x , $y) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;return $x > $y; // Custom sorting logic</code><br>
+          <code>});</code>
+        </p>
+        <p class="content">The array `$arr` is sorted to: [3, 10, 70].</p>
+      </div>
+
+      <hr>
+
+      <h2>Anonymous Functions as Closures (`use` Keyword)</h2>
+      <p>
+        An anonymous function becomes a **Closure** when it captures variables from the scope in which it was defined. This is achieved using the **`use`** keyword. The variables must be explicitly listed in the `use` clause.
+      </p>
+      <div class="example">
+        <p>
+          <code>$maxmarks = 300;</code><br>
+          <code>$percent = function ($marks) **use ($maxmarks)** {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;return $marks * 100 / $maxmarks; // Accessing $maxmarks from outside</code><br>
+          <code>};</code><br>
+          <code>echo $percent(250); // Output: 83.333...</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Static Anonymous Functions</h2>
+      <p>
+        An anonymous function can be declared with the **`static`** keyword. This prevents the function from automatically binding the current class instance (`$this`) to its context.
+      </p>
+      <div class="example">
+        <p>
+          <code>$myFunction = **static** function($name) { /* ... */ };</code>
+        </p>
+        <p class="content">
+          This is useful to prevent unintentional access to `$this` when the function does not need object context.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Spread Operator</h1>
+    <div class="content">
+      <h2>What is a Spread Operator?</h2>
+      <p>
+        The JavaScript spread operator <code>(...)</code> allows us to spread out elements of an iterable such as an array. 
+        It was introduced in ES6. The main use cases of the spread operator are copying array elements, concatenating arrays or objects, 
+        and using with rest parameters.
+      </p>
+
+      <h2>Example: Expanding Array Elements</h2>
+      <pre><code>let x = ["Tutorials", "Point"];
+console.log(x); // [ 'Tutorials', 'Point' ]
+console.log(...x); // Tutorials Point</code></pre>
+
+      <h2>Spread Operator to Concatenate Arrays</h2>
+      <p>
+        The spread operator can be used to concatenate arrays.
+      </p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const nums1 = [10, 20, 30];
+      const nums2 = [40, 50, 60];
+      const res = [...nums1, ...nums2];
+      document.getElementById("output").innerHTML = res;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> 10,20,30,40,50,60</p>
+
+      <h2>Spread Operator to Clone an Array</h2>
+      <p>
+        Assigning one array to another references the same memory location. 
+        The spread operator creates an actual copy instead.
+      </p>
+
+      <h3>Example: Without Spread Operator</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="result1"&gt;&lt;/div&gt;
+   &lt;div id="result2"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const nums1 = [10, 20, 30];
+      const nums2 = nums1;
+      document.getElementById("result1").innerHTML = nums2;
+      nums1.push(40);
+      document.getElementById("result2").innerHTML = nums2;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>10,20,30</li>
+        <li>10,20,30,40</li>
+      </ul>
+
+      <h3>Example: With Spread Operator</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="result1"&gt;&lt;/div&gt;
+   &lt;div id="result2"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const nums1 = [10, 20, 30];
+      const nums3 = [...nums1];
+      document.getElementById("result1").innerHTML = nums3;
+      nums1.push(50);
+      document.getElementById("result2").innerHTML = nums1 + "&lt;br&gt;";
+      document.getElementById("result2").innerHTML += nums3;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>10,20,30</li>
+        <li>10,20,30,50</li>
+        <li>10,20,30</li>
+      </ul>
+
+      <h2>Spread Operator to Concatenate Objects</h2>
+      <p>
+        The spread operator can also copy object properties into another object.
+      </p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="result1"&gt;&lt;/div&gt;
+   &lt;div id="result2"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const car = { gears: 6, color: "Black" }
+      document.getElementById("result1").innerHTML = JSON.stringify(car);
+
+      const BMW = { model: "X5", year: 2019, ...car }
+      document.getElementById("result2").innerHTML = JSON.stringify(BMW);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>{"gears":6,"color":"Black"}</li>
+        <li>{"model":"X5","year":2019,"gears":6,"color":"Black"}</li>
+      </ul>
+
+      <h2>Function Rest Parameters</h2>
+      <p>
+        The spread operator can also be used with rest parameters in functions.
+      </p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="result"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      function sum(a, ...nums) {
+         let sum = a;
+         for (let i = 0; i &lt; nums.length; i++) {
+            sum += nums[i];
+         }
+         document.getElementById("result").innerHTML = sum;
+      }
+      sum(3, 6, 9, 8, 6, 5, 3, 3, 2, 1);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> 46</p>
+
+      <p>
+        The spread operator can also expand strings into arrays of characters, clone strings, or work with iterable objects like <code>Set</code> and <code>Map</code>.
+      </p>
+    </div>
+  </div>
+</div>

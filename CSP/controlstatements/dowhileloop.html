@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# `do...while` Loop</h1>
+        
+        <h2 class="title">Introduction to the `do...while` Loop</h2>
+        <div class="content">
+            <p>The **`do...while` loop** is a repetition control structure similar to the `while` loop, but with one critical difference: it is a **post-test loop**. This means the loop body executes **first**, and the condition is checked **at the end**.</p>
+            <p>This structure guarantees that the statements within the loop will execute **at least once**, even if the condition is initially <code>false</code>. This makes it ideal for scenarios requiring a mandatory initial execution, such as menu display or input validation.</p>
+        </div>
+        
+        <h2 class="title">Syntax and Control Flow</h2>
+        <div class="content">
+            <h3>Syntax:</h3>
+            <pre>
+do {
+   statement(s);
+} while( condition ); // Note the mandatory semicolon
+            </pre>
+            
+            <h3>Control Flow:</h3>
+            <ol>
+                <li>The code block within the **`do`** section executes.</li>
+                <li>The **`condition`** (in the `while` part) is then evaluated.</li>
+                <li>If the condition is <code>true</code>, the flow of control jumps back to the **`do`** block, and the process repeats.</li>
+                <li>If the condition is <code>false</code>, the loop terminates, and execution continues with the statement following the `while` line.</li>
+            </ol>
+        </div>
+        
+        <h2 class="title">Example: Guaranteed Execution (10 to 19)</h2>
+        <div class="content example">
+            <p>The loop executes once before checking if <code>a &lt; 20</code> is true. Since the starting value of <code>a</code> is 10, the loop continues until <code>a</code> reaches 20.</p>
+            <pre>
+using System;
+class Program {
+    static void Main(string[] args) {
+        int a = 10;
+         
+        do {
+            Console.WriteLine("value of a: {0}", a);
+            a = a + 1;
+        } while (a < 20);
+    }
+} 
+            </pre>
+            <p><strong>Output:</strong> Values 10 through 19 are printed.</p>
+        </div>
+        
+        <h2 class="title">Common Use Cases</h2>
+        <div class="content">
+            <p>The `do...while` loop is specifically chosen when the task requires an initial run:</p>
+            <ul>
+                <li>**User Input & Validation:** Prompting the user for input and continuing to loop until the input satisfies a criteria (e.g., entering a positive number). This ensures the prompt is shown at least once.</li>
+                <li>**Menu-Driven Programs:** Displaying a main menu to the user and looping back until a specific exit option is chosen. The menu must be displayed initially.</li>
+                <li>**Retry Mechanisms:** Attempting an operation (like connecting to a server) once, then checking a condition (success) to determine if further attempts are needed.</li>
+            </ul>
+        </div>
+    </div>
+</div>

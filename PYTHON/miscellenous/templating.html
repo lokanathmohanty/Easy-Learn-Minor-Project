@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Templating</h1>
+    </div>
+    <div class="content">
+      <p>Templating in Python is a technique for generating dynamic content, typically HTML, by combining static templates with data.</p>
+      <p>Python provides simple string templates and powerful templating engines like Jinja2.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>String Templates using string.Template</h2>
+    </div>
+    <div class="content">
+      <p>Use the <code>Template</code> class from the <code>string</code> module for simple and safe placeholder substitution.</p>
+
+      <h3>Creating Template</h3>
+      <pre><code>from string import Template
+template = Template("Hello, $name!")</code></pre>
+
+      <h3>Substituting Values</h3>
+      <pre><code>tempStr = Template('Hello. My name is $name and my age is $age')
+newStr = tempStr.substitute(name='Pushpa', age=26)
+print(newStr)</code></pre>
+      <p>Output: <code>Hello. My name is Pushpa and my age is 26</code></p>
+
+      <h3>Using Dictionary</h3>
+      <pre><code>dct = {'name': 'Pushpalata', 'age': 25}
+newStr = tempStr.substitute(dct)
+print(newStr)</code></pre>
+
+      <h3>Handling Missing Keys</h3>
+      <p>Using <code>substitute()</code> with missing keys raises <code>KeyError</code>.</p>
+      <p>Use <code>safe_substitute()</code> to avoid this, leaving placeholders unchanged.</p>
+      <pre><code>newStr = tempStr.safe_substitute({'name': 'Pushpalata'})
+print(newStr)</code></pre>
+      <p>Output: <code>Hello. My name is Pushpalata and my age is $age</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Using Jinja2 Templating Engine</h2>
+    </div>
+    <div class="content">
+      <p>Jinja2 is a powerful, feature-rich templating engine popular in web development.</p>
+
+      <h3>Installing Jinja2</h3>
+      <pre><code>pip install jinja2</code></pre>
+
+      <h3>Creating a Template (template.html)</h3>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Hello, {{ name }}!&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, {{ name }}!&lt;/h1&gt;
+    &lt;p&gt;Welcome to our site.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h3>Rendering the Template</h3>
+      <pre><code>from jinja2 import Template, FileSystemLoader, Environment
+
+file_loader = FileSystemLoader('.')
+env = Environment(loader=file_loader)
+template = env.get_template('template.html')
+
+output = template.render(name='Alice')
+print(output)</code></pre>
+      <p>This outputs HTML with placeholders replaced by data.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Advanced Jinja2 Features</h2>
+    </div>
+    <div class="content">
+      <h3>Template Inheritance</h3>
+      <pre><code>&lt;!-- base.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;{% block title %}Default Title{% endblock %}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    {% block content %}{% endblock %}
+&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!-- child.html --&gt;
+{% extends "base.html" %}
+
+{% block title %}Child Page{% endblock %}
+{% block content %}
+&lt;h1&gt;Child Page Content&lt;/h1&gt;
+{% endblock %}</code></pre>
+
+      <h3>Loops</h3>
+      <pre><code>&lt;ul&gt;
+{% for item in items %}
+    &lt;li&gt;{{ item }}&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;</code></pre>
+
+      <h3>Conditionals</h3>
+      <pre><code>{% if user %}
+    &lt;p&gt;Welcome, {{ user }}!&lt;/p&gt;
+{% else %}
+    &lt;p&gt;Please log in.&lt;/p&gt;
+{% endif %}</code></pre>
+
+      <h3>Custom Filters</h3>
+      <pre><code># Define a custom filter function
+def reverse_string(s):
+    return s[::-1]
+
+# Register the filter
+env.filters['reverse'] = reverse_string
+
+# Use in template:
+{{ "hello" | reverse }}</code></pre>
+      <p>Output: <code>olleh</code></p>
+    </div>
+  </div>
+</div>

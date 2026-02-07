@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Object Serialization</h1>
+
+        <div class="content">
+            <h2>Mechanism and Purpose of Serialization</h2>
+            <p><strong>Object Serialization</strong> is a mechanism in Java that converts an object's state (its data) into a **sequence of bytes**. This byte stream includes the object's data, its type, and the type information of the data within it. The primary uses are:</p>
+            <ul>
+                <li><strong>Persistence:</strong> Writing an object's state to a file or database for long-term storage.</li>
+                <li><strong>Networking:</strong> Transmitting an object between different Java Virtual Machines (JVMs), potentially running on different platforms.</li>
+            </ul>
+            <p>The reverse process, reading the byte sequence and recreating the object in memory, is called **Deserialization**. This process is platform-independent, meaning an object serialized on one OS can be successfully deserialized on another.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Implementing Serialization</h2>
+            <p>For a class to be serializable, two conditions must be met:</p>
+            <ol>
+                <li>
+                    <strong>Implement <code>Serializable</code>:</strong> The class must implement the marker interface **<code>java.io.Serializable</code>**. This interface has no methods; it merely marks the class as eligible for serialization.
+                </li>
+                <li>
+                    <strong>Handle Non-Serializable Fields:</strong> All fields in the class must be serializable. If a field's type is not serializable (e.g., a custom class not implementing the interface), it must be explicitly marked with the **<code>transient</code>** keyword.
+                </li>
+            </ol>
+
+            <h3>The <code>transient</code> Keyword</h3>
+            <p>When a field is marked <code>transient</code>, its value is **ignored** during the serialization process. When the object is deserialized, the <code>transient</code> field is initialized to its type's **default value** (e.g., 0 for numeric types, <code>false</code> for boolean, and <code>null</code> for objects), as demonstrated by the deserialized SSN value being <code>0</code>.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Serialization/Deserialization Methods</h2>
+            <p>The core methods are provided by the high-level stream classes, **<code>ObjectOutputStream</code>** and **<code>ObjectInputStream</code>**.</p>
+
+            <h3>1. Serializing an Object (Writing)</h3>
+            <p>Uses <code>ObjectOutputStream</code>, typically wrapped around a <code>FileOutputStream</code>:</p>
+            <pre><code>public final void writeObject(Object x) throws IOException</code></pre>
+            <p>This method converts the object <code>x</code> into a byte stream and sends it to the underlying output stream.</p>
+
+            <h3>2. Deserializing an Object (Reading)</h3>
+            <p>Uses <code>ObjectInputStream</code>, typically wrapped around a <code>FileInputStream</code>:</p>
+            <pre><code>public final Object readObject() throws IOException, ClassNotFoundException</code></pre>
+            <p>This method reads the byte stream and reconstructs the object. The return value is of type <code>Object</code>, which **must be cast** back to the original class type (e.g., <code>(Employee) in.readObject()</code>).</p>
+            <p>It throws **<code>ClassNotFoundException</code>** if the JVM cannot find the bytecode for the class during the reconstruction process.</p>
+        </div>
+    </div>
+</div>

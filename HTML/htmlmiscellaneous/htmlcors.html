@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - CORS</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p><strong>Cross-Origin Resource Sharing (CORS)</strong> is a mechanism that allows loading restricted resources from another domain in a web browser.</p>
+      <p>For example, when using the HTML5 video player, it may request camera permission. If the user allows it, the camera opens; otherwise, access is denied. Similarly, CORS ensures controlled access to external resources.</p>
+
+      <h2>Making a CORS Request</h2>
+      <p>Modern browsers like Chrome, Firefox, Opera, and Safari use the <code>XMLHttpRequest2</code> object, while Internet Explorer uses a similar <code>XDomainRequest</code> object.</p>
+
+      <pre><code>function createCORSRequest(method, url) {
+   var xhr = new XMLHttpRequest();
+   
+   if ("withCredentials" in xhr) {
+      xhr.open(method, url, true);
+   } else if (typeof XDomainRequest != "undefined") {
+      xhr = new XDomainRequest();
+      xhr.open(method, url);
+   } else {
+      xhr = null;
+   }
+   return xhr;
+}
+
+var xhr = createCORSRequest('GET', url);
+if (!xhr) {
+   throw new Error('CORS not supported');
+}
+</code></pre>
+
+      <h2>Event Handlers in CORS</h2>
+      <ul>
+        <li><strong>onloadstart</strong> − Starts the request</li>
+        <li><strong>onprogress</strong> − Loads and sends data</li>
+        <li><strong>onabort</strong> − Aborts the request</li>
+        <li><strong>onerror</strong> − Request has failed</li>
+        <li><strong>onload</strong> − Request loaded successfully</li>
+        <li><strong>ontimeout</strong> − Timeout occurred before completion</li>
+        <li><strong>onloadend</strong> − Request completed (success or failure)</li>
+      </ul>
+
+      <h3>Example: Using onload and onerror</h3>
+      <pre><code>xhr.onload = function() {
+   var responseText = xhr.responseText;
+   console.log(responseText);
+};
+
+xhr.onerror = function() {
+   console.log('There was an error!');
+};
+</code></pre>
+
+      <h2>Example of CORS with Handler</h2>
+      <p>The following example demonstrates a complete CORS request with <code>onload</code> and <code>onerror</code> handling:</p>
+
+      <pre><code>// Create the XHR object.
+function createCORSRequest(method, url) {
+   var xhr = new XMLHttpRequest();
+   if ("withCredentials" in xhr) {
+      xhr.open(method, url, true);
+   } else if (typeof XDomainRequest != "undefined") {
+      xhr = new XDomainRequest();
+      xhr.open(method, url);
+   } else {
+      xhr = null;
+   }
+   return xhr;
+}
+
+// Helper to parse the title tag.
+function getTitle(text) {
+   return text.match('&lt;title&gt;(.*)?&lt;/title&gt;')[1];
+}
+
+// Make the actual CORS request.
+function makeCorsRequest() {
+   var url = 'http://www.tutorialspoint.com';
+   var xhr = createCORSRequest('GET', url);
+   if (!xhr) {
+      alert('CORS not supported');
+      return;
+   }
+   
+   xhr.onload = function() {
+      var text = xhr.responseText;
+      var title = getTitle(text);
+      alert('Response from CORS request to ' + url + ': ' + title);
+   };
+
+   xhr.onerror = function() {
+      alert('Woops, there was an error making the request.');
+   };
+
+   xhr.send();
+}
+</code></pre>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Passing Arrays to Functions ➡️</h1>
+
+        <div class="content">
+            <p>C++ does not pass an entire array **by value** to a function. Instead, when an array name is passed as an argument, it **decays** into a **pointer** to its first element. Therefore, when a function receives an array, it is actually receiving a memory address (a pointer).</p>
+            <p>Because the array size is lost in this process, it is standard practice to pass the size of the array as a **separate integer argument** to prevent buffer overflows.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Formal Parameter Declaration Methods</h2>
+            <p>When declaring a function that accepts a single-dimension array, you have three ways to define the formal parameter. All three methods are equivalent to the compiler, as they all indicate that a pointer to the array's element type will be received:</p>
+
+            <ol>
+                <li>
+                    <strong>As a Pointer (Recommended for Clarity):</strong>
+                    <pre class="example">void myFunction(int *param);</pre>
+                </li>
+                <li>
+                    <strong>As an Unsized Array (Common):</strong>
+                    <pre class="example">void myFunction(int param[]);</pre>
+                </li>
+                <li>
+                    <strong>As a Sized Array (Size is Ignored):</strong>
+                    <pre class="example">void myFunction(int param[10]);</pre>
+                    <p class="example"><em>Note: The size `10` is generally ignored by the compiler, as C++ performs **no bounds checking** on array parameters.</em></p>
+                </li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Example: Calculating Array Average</h2>
+            <p>This example demonstrates the standard method of passing the array (as a pointer) and its size separately to safely process the elements.</p>
+            <pre class="example">
+// Function Definition: Receives the array (as a pointer) and its size
+double getAverage(int arr[], int size) {
+   int sum = 0;
+   for (int i = 0; i &lt; size; ++i) {
+      sum += arr[i];
+   }
+   return (double)sum / size;
+}
+
+int main () {
+   int balance[5] = {1000, 2, 3, 17, 50};
+   double avg;
+
+   // Function Call: Pass the array name and the size
+   avg = getAverage(balance, 5); 
+ 
+   // Output: 214.4
+   cout &lt;&lt; "Average value is: " &lt;&lt; avg &lt;&lt; endl; 
+   
+   return 0;
+}
+</pre>
+        </div>
+    </div>
+</div>

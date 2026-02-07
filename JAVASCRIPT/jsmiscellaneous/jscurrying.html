@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Currying</h1>
+    <div class="content">
+      <p>In JavaScript, currying is a functional programming technique that is used to transform a function that takes multiple arguments into a sequence of functions that each takes a single argument. Currying is mainly used in event handling and to avoid passing the same variable as a function argument multiple times.</p>
+
+      <h2>How to achieve currying in JavaScript?</h2>
+      <p>There are two different ways to achieve currying in JavaScript, as given below.</p>
+      <ul>
+        <li>Using the closures function</li>
+        <li>Using the bind() method</li>
+      </ul>
+
+      <h2>Currying using closures</h2>
+      <p>In JavaScript, closures is a technique in which inner functions can access the variables of the outer functions. To achieve currying using the closures technique, we can use the sequence of functions, each taking a single argument.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>function funcName(a) {
+   return function (b) {
+      // add more functions
+      // OR
+      return a * b;
+   }
+}
+funcName(a)(b);</code></pre>
+
+      <p>The above function given in the syntax is similar to the below function.</p>
+      <pre><code>function funcName(a, b) {
+   return a * b;
+}
+funcName(a, b);</code></pre>
+
+      <h3>Example</h3>
+      <p>In the code below, we have created the <b>mul()</b> function, which takes the single value as a parameter and returns the function taking 'b' as a parameter. The inner function also returns another function, which takes the 'c' as a parameter and returns the multiplication of the 'a, 'b, and 'c.</p>
+
+      <div class="title">Example Code</div>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;JavaScript currying using using closures&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div id = "output"&gt; &lt;/div&gt;
+   &lt;script&gt;
+      // Achieving the currying 
+      function mul(a) {
+         return function (b) {
+            return function (c) {
+               return a * b * c;
+            }
+         }
+      }
+      // Calling the currying function
+      let result = mul(2)(3)(4);
+      document.getElementById("output").innerHTML = "The result is: " + result;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <p><b>Output</b><br>The result is: 24</p>
+
+      <h2>Currying using bind() method</h2>
+      <p>In JavaScript, the bind() method is used to create a new function and store it in the variable. The bind() is often used to partially prepend arguments to the current arguments of the function, effectively allowing you to curry functions.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>let multiplyByTwo = multiply.bind(null, 2);
+let multiplyByTwoAndThree = multiplyByTwo.bind(null, 3);
+multiplyByTwoAndThree(4); // Outputs: 24</code></pre>
+
+      <h3>Example</h3>
+      <div class="title">Example Code</div>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;JavaScript currying using bind() method&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div id = "output"&gt; &lt;/div&gt;
+   &lt;script&gt;
+      // Original multiply function that accepts three arguments
+      function multiply(x, y, z) {
+         return x * y * z;
+      }
+      // Using the bind() method to achieve currying by partially applying the first argument (2)
+      let multiplyByTwo = multiply.bind(null, 2);
+
+      // Further currying by partially applying the second argument (3).
+      let multiplyByTwoAndThree = multiplyByTwo.bind(null, 3);
+
+      // Finally calling the curried function with the third argument (10) and outputting the result
+      document.getElementById("output").innerHTML = "The result is: " + multiplyByTwoAndThree(10);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <p><b>Output</b><br>The result is: 60</p>
+
+      <h2>Use cases of Currying</h2>
+      <ul>
+        <li>Currying can be used to handle asynchronous operations, in which functions return the promises.</li>
+        <li>It is even helpful in handling situations where we need to partially apply functions with specific arguments that can represent the current context of the event.</li>
+        <li>It allows the creation of highly configurable middleware functions that can be used across different parts of the code.</li>
+      </ul>
+    </div>
+  </div>
+</div>

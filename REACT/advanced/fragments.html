@@ -1,0 +1,146 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Fragments</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            <b>Fragments</b> provide a simple way to group multiple React elements 
+            without adding extra nodes to the DOM. They are useful when a component 
+            needs to return multiple elements but wrapping them in an additional 
+            container (like <code>&lt;div&gt;</code>) is undesirable.
+         </p>
+
+         <h2>Why Fragments?</h2>
+         <p>
+            By default, React components can only return a single parent element. 
+            Wrapping elements in a generic container works, but may cause issues 
+            in scenarios like:
+         </p>
+         <ul>
+            <li>Returning list elements such as <code>&lt;li&gt;</code> or <code>&lt;td&gt;</code>, 
+                which must be children of specific tags.</li>
+            <li>When only part of the list should be returned, to be wrapped 
+                later by the parent.</li>
+         </ul>
+
+         <h2>Example Without Fragment</h2>
+         <div class="code-block">
+<pre><code>&lt;div&gt;
+   &lt;p&gt;One&lt;/p&gt;
+   &lt;p&gt;Two&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+         </div>
+
+         <p>
+            This adds unnecessary <code>&lt;div&gt;</code> wrappers into the DOM.
+         </p>
+
+         <h2>Using a Component Without Fragment</h2>
+         <h3>ListOfCustomer.js</h3>
+         <div class="code-block">
+<pre><code>import React from 'react';
+
+class ListOfCustomer extends React.Component {
+   render() {
+      var names = this.props['names'];
+      var namesList = names.map(
+         (name, index) =&gt; &lt;li&gt;{name}&lt;/li&gt;
+      );
+      return &lt;ul&gt;{namesList}&lt;/ul&gt;;
+   }
+}
+
+export default ListOfCustomer;
+</code></pre>
+         </div>
+
+         <h3>App.js</h3>
+         <div class="code-block">
+<pre><code>import ListOfCustomer from './components/ListOfCustomer';
+
+function App() {
+   var names = ["John", "Peter"];
+   return (
+      &lt;ul&gt;
+         &lt;ListOfCustomer names={names} /&gt;
+      &lt;/ul&gt;
+   );
+}
+
+export default App;
+</code></pre>
+         </div>
+
+         <p>
+            This produces invalid nested lists:
+         </p>
+         <div class="code-block">
+<pre><code>&lt;ul&gt;&lt;ul&gt;&lt;li&gt;John&lt;/li&gt;&lt;li&gt;Peter&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;
+</code></pre>
+         </div>
+
+         <h2>Using React.Fragment</h2>
+         <h3>ListOfCustomer.js</h3>
+         <div class="code-block">
+<pre><code>import React, { Fragment } from 'react';
+
+class ListOfCustomer extends React.Component {
+   render() {
+      var names = this.props['names'];
+      var namesList = names.map(
+         (name, index) =&gt; &lt;li&gt;{name}&lt;/li&gt;
+      );
+      return &lt;React.Fragment&gt;{namesList}&lt;/React.Fragment&gt;;
+   }
+}
+
+export default ListOfCustomer;
+</code></pre>
+         </div>
+
+         <p>
+            Now the component returns valid markup:
+         </p>
+         <div class="code-block">
+<pre><code>&lt;ul&gt;&lt;li&gt;John&lt;/li&gt;&lt;li&gt;Peter&lt;/li&gt;&lt;/ul&gt;
+</code></pre>
+         </div>
+
+         <h2>Keyed Fragments</h2>
+         <p>
+            React requires a unique <code>key</code> for each child element in a list. 
+            <code>React.Fragment</code> supports a <code>key</code> attribute for this purpose:
+         </p>
+
+         <div class="code-block">
+<pre><code>var namesList = names.map(
+   (name, index) =&gt; &lt;li key={index}&gt;{name}&lt;/li&gt;
+);
+
+return &lt;React.Fragment&gt;{namesList}&lt;/React.Fragment&gt;;
+</code></pre>
+         </div>
+
+         <h2>Short Syntax</h2>
+         <p>
+            Instead of writing <code>&lt;React.Fragment&gt;&lt;/React.Fragment&gt;</code>, 
+            a shorter syntax <code>&lt;&gt; &lt;/&gt;</code> can be used:
+         </p>
+
+         <div class="code-block">
+<pre><code>return &lt;&gt;{namesList}&lt;/&gt;;
+</code></pre>
+         </div>
+
+         <h2>Summary</h2>
+         <p>
+            <b>Fragments</b> let you group a list of children elements without 
+            adding extra nodes to the DOM. They support keys when rendering lists 
+            and provide a clean short syntax for readability.
+         </p>
+      </div>
+   </div>
+</div>

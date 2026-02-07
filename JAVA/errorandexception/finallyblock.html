@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Java Finally Block</h1>
+    </div>
+    <div class="content">
+      <p>The <strong>finally block</strong> in Java always executes after the try and catch blocks, regardless of whether an exception was thrown or handled. It is commonly used for cleanup actions, such as closing files, releasing resources, or printing final statements.</p>
+      <ul>
+        <li>A catch clause cannot exist without a try statement.</li>
+        <li>It is not compulsory to have a finally clause with every try/catch block.</li>
+        <li>The try block cannot be present without either a catch or a finally clause.</li>
+        <li>Code cannot be placed between the try, catch, and finally blocks.</li>
+        <li>The finally block may not execute if <code>exit()</code> is called before it, or if a fatal error occurs.</li>
+        <li>Finally will execute even if a method returns a value within a try block.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="session">
+    <div class="title">
+      <h2>Java Finally Block Example</h2>
+    </div>
+    <div class="content">
+      <p>This example demonstrates a <code>finally</code> block after an exception is caught. The finally block executes regardless of the outcome:</p>
+      <pre>
+package com.tutorialspoint;
+
+public class ExcepTest {
+   public static void main(String args[]) {
+      int a[] = new int[2];
+      try {
+         System.out.println("Access element three :" + a[3]);
+      } catch (ArrayIndexOutOfBoundsException e) {
+         System.out.println("Exception thrown  :" + e);
+      }finally {
+         a[0] = 6;
+         System.out.println("First element value: " + a[0]);
+         System.out.println("The finally statement is executed");
+      }
+   }
+}
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+Exception thrown  :java.lang.ArrayIndexOutOfBoundsException: 3
+First element value: 6
+The finally statement is executed
+      </pre>
+    </div>
+  </div>
+  <div class="session">
+    <div class="title">
+      <h2>More Examples of Finally Block</h2>
+    </div>
+    <div class="content">
+      <p><strong>Example 1:</strong> If the exception is NOT handled by the catch block, finally block still executes:</p>
+      <pre>
+package com.tutorialspoint;
+
+public class ExcepTest {
+   public static void main(String args[]) {
+      int a[] = new int[2];
+      try {
+         System.out.println("Access element three :" + a[3]);
+      } catch (ArithmeticException e) {
+         System.out.println("Exception thrown  :" + e);
+      }finally {
+         a[0] = 6;
+         System.out.println("First element value: " + a[0]);
+         System.out.println("The finally statement is executed");
+      }
+   }
+}
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+First element value: 6
+The finally statement is executed
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 3
+      </pre>
+      <p><strong>Example 2:</strong> Even when the try block returns a value, finally executes:</p>
+      <pre>
+package com.tutorialspoint;
+
+public class ExcepTest {
+   public static void main(String args[]) {     
+      System.out.println(testFinallyBlock());
+   }
+
+   private static int testFinallyBlock() {
+      int a[] = new int[2];
+      try {
+         return 1; 
+      } catch (ArrayIndexOutOfBoundsException e) {
+         System.out.println("Exception thrown  :" + e);
+      }finally {
+         a[0] = 6;
+         System.out.println("First element value: " + a[0]);
+         System.out.println("The finally statement is executed");
+      }
+      return 0;
+   }
+}
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+First element value: 6
+The finally statement is executed
+1
+      </pre>
+    </div>
+  </div>
+</div>

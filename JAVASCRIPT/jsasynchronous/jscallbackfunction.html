@@ -1,0 +1,157 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Callback Functions</h1>
+    <div class="content">
+
+      <h2>What is the Callback Function?</h2>
+      <p>
+        The callback function in JavaScript is regularly passed as an argument of another function.
+        The callback function name can be any valid identifier.
+      </p>
+      <p>
+        The callback function can be called inside the parent function after completing a particular task.
+        It is mainly used to handle asynchronous operations.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+function func_name(callback) {
+   // function body
+   callback();
+}
+func_name(callback); // Function invocation
+
+// OR
+func_name(() => {
+   // Callback function body
+})
+      </pre>
+      <p>
+        You can also pass an arrow or anonymous function as a callback function.
+      </p>
+
+      <h2>Example</h2>
+      <p>
+        In this example, the <code>multiply()</code> function is passed as an argument to the <code>sum()</code> function.
+      </p>
+      <pre>
+function multiply(a) {
+   let m = a * 4;
+   console.log("The result is " + m);
+}
+
+function sum(a, b, callback) {
+   let c = a + b;
+   callback(c);
+}
+
+sum(4, 8, multiply);
+      </pre>
+      <p><strong>Output:</strong> The result is 48</p>
+
+      <h2>Passing an Anonymous Function as a Callback</h2>
+      <pre>
+function mathOperation(a, b, callback) {
+   let result = callback(a, b);
+   console.log("The result is " + result);
+}
+
+mathOperation(10, 20, function (a, b) {
+   return a + b;
+});
+
+mathOperation(20, 10, function (a, b) {
+   return a - b;
+});
+
+mathOperation(10, 20, function (a, b) {
+   return a * b;
+});
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The result is 30</li>
+        <li>The result is 10</li>
+        <li>The result is 200</li>
+      </ul>
+
+      <h2>Need for the Callback Function</h2>
+      <p>
+        JavaScript is single-threaded and executes code line-by-line.
+        For tasks like fetching data, loading images, or API requests, callbacks prevent blocking execution.
+      </p>
+
+      <h2>Example with setTimeout()</h2>
+      <pre>
+console.log("Start of the program");
+
+setTimeout(function printMessage() {
+   console.log("In the printMessage() function");
+}, 500);
+
+console.log("End of the program");
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Start of the program</li>
+        <li>End of the program</li>
+        <li>In the printMessage() function</li>
+      </ul>
+
+      <h2>Callbacks with Built-in Methods</h2>
+
+      <h3>array.sort()</h3>
+      <pre>
+let arr = [23, 21, 56, 11, 10, 7, 8];
+console.log(arr.sort()); // Ascending
+
+let sorted = arr.sort(function(a, b) {
+   return b - a;
+});
+console.log(sorted); // Descending
+      </pre>
+
+      <h3>array.filter()</h3>
+      <pre>
+let arr = [23, 21, 56, 11, 10, 7, 8];
+let evenNums = arr.filter(function(element) {
+   return element % 2 === 0;
+});
+console.log(evenNums);
+      </pre>
+
+      <h2>Callbacks with Events</h2>
+      <pre>
+let button = document.getElementById("btn");
+button.addEventListener("click", function() {
+   console.log("You clicked the button");
+});
+      </pre>
+
+      <h2>Nesting Callbacks and Callback Hell</h2>
+      <pre>
+function asyncTask(taskName, duration, callback) {
+   console.log("Task started " + taskName);
+   setTimeout(() => {
+      console.log("Completed " + taskName);
+      callback();
+   }, duration);
+}
+
+asyncTask("Task 1", 1000, () => {
+   asyncTask("Task 2", 1500, () => {
+      asyncTask("Task 3", 1000, () => {
+         console.log("All tasks completed");
+      });
+   });
+});
+      </pre>
+      <p>
+        Nested callbacks can become complex and difficult to read.
+        This is known as <strong>Callback Hell</strong>.
+        In such cases, <code>Promises</code> or <code>async/await</code> should be used.
+      </p>
+
+    </div>
+  </div>
+</div>

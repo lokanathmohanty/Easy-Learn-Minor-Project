@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Optional Class </h1>
+
+        <div class="content">
+            <h2>The Purpose of <code>Optional&lt;T&gt;</code></h2>
+            <p>The **<code>Optional&lt;T&gt;</code>** class, introduced in **Java 8**, is a container object used to wrap an object that may or may not be present. Its primary goal is to provide a clean, intention-revealing way to handle potentially **missing values**, thereby helping developers avoid the infamous **<code>NullPointerException</code>** (NPE).</p>
+            <p>Instead of manually checking for <code>null</code> at every potential point, <code>Optional</code> forces the developer to explicitly think about and define the action to take if the value is "available" or "absent."</p>
+
+            <h3>How <code>Optional</code> Works</h3>
+            <p><code>Optional</code> acts as a wrapper. Instead of returning a value that might be <code>null</code>, a method returns an <code>Optional</code>. The consumer of that value then uses methods on the <code>Optional</code> instance to safely interact with the contained value.</p>
+            <p class="example">It turns a potential runtime error (NPE) into a compile-time signal, promoting more robust code.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Creating <code>Optional</code> Instances</h2>
+            <p>There are three main static methods to create an <code>Optional</code> object:</p>
+            <ul>
+                <li>
+                    <strong><code>Optional.empty()</code>:</strong> Returns an empty <code>Optional</code> instance, representing an absent value.
+                </li>
+                <li>
+                    <strong><code>Optional.of(T value)</code>:</strong> Returns an <code>Optional</code> containing the specified non-null value. **Throws <code>NullPointerException</code> if the value is <code>null</code>.** Use this only when you are certain the value is non-null.
+                </li>
+                <li>
+                    <strong><code>Optional.ofNullable(T value)</code>:</strong> Returns an <code>Optional</code> containing the value if it is non-null, or returns an empty <code>Optional</code> if the value is <code>null</code>. This is the **most commonly used** factory method.
+                </li>
+            </ul>
+
+            <h2>Checking for Presence</h2>
+            <ul>
+                <li>
+                    <strong><code>boolean isPresent()</code>:</strong> Returns <code>true</code> if the <code>Optional</code> holds a non-null value, <code>false</code> otherwise.
+                </li>
+                <li>
+                    <strong><code>boolean isEmpty()</code>:</strong> (Added in Java 11) The logical opposite of <code>isPresent()</code>. Returns <code>true</code> if the <code>Optional</code> is empty.
+                </li>
+                <li>
+                    <strong><code>void ifPresent(Consumer)</code>:</strong> If a value is present, it executes the provided <code>Consumer</code> (a lambda expression); otherwise, it does nothing. This encourages functional, non-blocking code flow.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title">Handling Absent Values (Fallback Strategies)</h2>
+            <div class="content">
+                <p>These utility methods allow you to safely extract the value or provide a fallback without manual <code>null</code> checks.</p>
+                <ul>
+                    <li>
+                        <strong><code>T orElse(T other)</code>:</strong>
+                        <p>Returns the contained value if present, otherwise returns the provided default value (<code>other</code>). **Note:** The default value is evaluated unconditionally, even if the <code>Optional</code> is present.</p>
+                        <pre><code>Integer result = Optional.ofNullable(null).orElse(0); // result is 0</code></pre>
+                    </li>
+                    <li>
+                        <strong><code>T orElseGet(Supplier&lt;? extends T&gt; other)</code>:</strong>
+                        <p>Returns the contained value if present, otherwise invokes the <code>Supplier</code> function to return a default value. **Note:** The supplier is only called if the <code>Optional</code> is empty (lazy evaluation), which is more efficient for generating complex defaults.</p>
+                        <pre><code>Integer result = valueOptional.orElseGet(() -> expensiveCalculation()); // expensiveCalculation runs only if needed</code></pre>
+                    </li>
+                    <li>
+                        <strong><code>T orElseThrow()</code> or <code>T orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier)</code>:</strong>
+                        <p>Returns the contained value if present, otherwise throws an exception. This is for cases where the absence of a value is truly an exceptional, fatal condition. The parameter-less version throws <code>NoSuchElementException</code>.</p>
+                        <pre><code>// Throws NoSuchElementException if empty
+User user = userOptional.orElseThrow(); 
+
+// Throws a custom exception if empty
+User user = userOptional.orElseThrow(() -> new IllegalArgumentException("User ID is required."));</code></pre>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Incremental Static Regeneration (ISR) ♻️</h1>
+        
+        <div class="content">
+            <h2 class="title">What is ISR?</h2>
+            <p>**Incremental Static Regeneration (ISR)** is a Next.js feature that allows you to **update static pages after deployment** without needing a full site rebuild. It bridges the gap between the high performance of **Static Site Generation (SSG)** and the up-to-date content of **Server-Side Rendering (SSR)**.</p>
+            <p>Pages are initially generated at build time, but they can be *incrementally* updated while the application is running, ensuring content remains fresh without sacrificing speed.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">How ISR Works (Stale-While-Revalidate)</h2>
+            <ol>
+                <li>**Build Time:** The page is pre-rendered into static HTML (like SSG).</li>
+                <li>**User Request (Before Expiration):** If the page's cache time has not expired, the **cached static version** is served instantly.</li>
+                <li>**User Request (After Expiration):**
+                    <ul>
+                        <li>The user is immediately served the **stale (old) static version**.</li>
+                        <li>Next.js triggers a **revalidation process in the background** to generate a new version of the page.</li>
+                    </ul>
+                </li>
+                <li>**Subsequent Requests:** Once the new version is ready, subsequent users will receive the **newly generated, fresh static version**.</li>
+            </ol>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Implementing ISR</h2>
+            <p>ISR is configured in two primary ways: **Time-based** and **On-demand**.</p>
+            
+            <h3 class="title">1. Time-based Revalidation ⏰</h3>
+            <p>This method automatically checks for updates after a defined time interval. This is primarily done using the **<span class="example">`revalidate`</span>** option:</p>
+            <ul>
+                <li>**Page Router:** Set the <span class="example">`revalidate`</span> property in the return object of **<span class="example">`getStaticProps`</span>**.</li>
+                <li>**App Router:** Export a **<span class="example">`revalidate`</span>** constant from a component file.</li>
+            </ul>
+            <pre>// App Router Example: Revalidate every 5 seconds
+export const revalidate = 5
+
+async function getData() {
+  // ... fetch data ...
+}
+// This page will update its timestamp/data at most every 5 seconds
+export default async function Page() { /* ... */ }</pre>
+            
+            <h3 class="title">2. On-demand Revalidation (Event-based) ✨</h3>
+            <p>This technique allows you to update the page cache manually based on an event (e.g., content changes in a CMS, a button click, or a webhook call) rather than waiting for a timeout.</p>
+            <ul>
+                <li>**Mechanism:** Uses the **<span class="example">`revalidatePath`</span>** function (or <span class="example">`revalidateTag`</span>) inside a Server Action or an API Route.</li>
+            </ul>
+            <pre>// Example using Server Actions (App Router)
+import { revalidatePath } from 'next/cache'
+
+async function handleRevalidate() {
+  'use server'
+  // Clears the cache for the home page (the next request will re-generate it)
+  revalidatePath('/') 
+}</pre>
+        </div>
+    </div>
+</div>

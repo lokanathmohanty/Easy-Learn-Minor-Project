@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Get Started</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        MongoDB is a document-oriented NoSQL database that stores data in BSON (binary JSON) format. It is well-suited for Node.js applications due to its schema-free design and JSON-like data representation.
+      </p>
+
+      <h2>Installation</h2>
+      <h3>Windows</h3>
+      <ol>
+        <li>Download MongoDB installer from <a href="https://www.mongodb.com/try/download/community">MongoDB official site</a>.</li>
+        <li>Run installer, choose Custom setup, uncheck "Install as service".</li>
+        <li>Create data directory e.g. <code>d:\data\db</code> and start MongoDB with: <code>mongod --dbpath=d:\data\db</code></li>
+        <li>Use MongoDB Compass or CLI to connect to <code>mongodb://localhost:27017</code>.</li>
+      </ol>
+
+      <h3>Ubuntu</h3>
+      <pre><code>sudo apt-get update
+sudo apt-get install -y mongodb-org</code></pre>
+
+      <h2>Node.js MongoDB Driver Setup</h2>
+      <ol>
+        <li>Initialize Node.js project:<br>
+          <code>npm init -y</code></li>
+        <li>Install MongoDB driver:<br>
+          <code>npm install mongodb</code></li>
+      </ol>
+
+      <h2>Connecting to MongoDB</h2>
+      <pre><code>const { MongoClient } = require('mongodb');
+const url = 'mongodb://localhost:27017';
+const client = new MongoClient(url);
+const dbName = 'myProject';
+
+async function main() {
+  await client.connect();
+  console.log('Connected successfully to server');
+  const db = client.db(dbName);
+  const collection = db.collection('documents');
+
+  // Further database operations here
+
+  return 'done.';
+}
+
+main()
+  .then(console.log)
+  .catch(console.error)
+  .finally(() => client.close());
+</code></pre>
+
+      <p>Run with <code>node app.js</code>. Output:<br>
+        <code>Connected successfully to server<br>done.</code>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Binomial Distribution</h1>
+    <div class="content">
+      <p>
+        The binomial distribution models the probability of a fixed number of successes in a series of independent trials, each with the same probability of success. For instance, the probability of getting exactly 3 heads in 10 coin tosses.
+      </p>
+      
+      <h2 class="title">Key Functions</h2>
+      <ul>
+        <li><code>dbinom(x, size, prob)</code>: Probability mass function - gives probability of exactly x successes in size trials.</li>
+        <li><code>pbinom(x, size, prob)</code>: Cumulative distribution - probability of up to x successes.</li>
+        <li><code>qbinom(p, size, prob)</code>: Quantile function - number of successes for cumulative probability p.</li>
+        <li><code>rbinom(n, size, prob)</code>: Generates n random numbers from binomial distribution.</li>
+      </ul>
+      
+      <h2 class="title">dbinom() Example</h2>
+      <pre><code># Values from 0 to 50 successes
+x &lt;- seq(0, 50, by=1)
+
+# Probability mass function with 50 trials, prob = 0.5
+y &lt;- dbinom(x, size=50, prob=0.5)
+
+# Save plot
+png(file="dbinom.png")
+
+# Plot probability mass function
+plot(x, y)
+
+# Close device
+dev.off()
+</code></pre>
+      
+      <h2 class="title">pbinom() Example</h2>
+      <pre><code># Probability of getting 26 or fewer heads in 51 tosses
+result &lt;- pbinom(26, size=51, prob=0.5)
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 0.610116
+</code></pre>
+      
+      <h2 class="title">qbinom() Example</h2>
+      <pre><code># Number of heads corresponding to 25% cumulative probability in 51 tosses
+result &lt;- qbinom(0.25, size=51, prob=0.5)
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 23
+</code></pre>
+      
+      <h2 class="title">rbinom() Example</h2>
+      <pre><code># Generate 8 random binomial values - 150 trials with prob 0.4
+values &lt;- rbinom(8, size=150, prob=0.4)
+print(values)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 58 61 59 66 55 60 61 67
+</code></pre>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

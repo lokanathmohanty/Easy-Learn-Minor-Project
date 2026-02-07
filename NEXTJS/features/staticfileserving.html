@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Static Site Generation (SSG) 🧱</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Static Site Generation (Static Rendering)?</h2>
+            <p>**Static Site Generation (SSG)** is an optimization technique where the HTML for a page is rendered at **build time** (when you run <span class="example">`next build`</span>). This fully formed HTML is then **cached** by a Content Delivery Network (CDN) and served to the client almost instantaneously on every request.</p>
+            <p>Because the HTML is ready before the user ever asks for it, SSG provides **superior performance**, **better user experience**, and is excellent for **SEO**.</p>
+            <p>By default, all components in Next.js that do not involve data fetching are statically rendered.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Implementing SSG with Data Fetching</h2>
+            <p>For pages that fetch external data but whose content rarely changes, you can use SSG to pre-render the data into the HTML at build time.</p>
+            
+            <h3 class="title">1. SSG for Simple Pages</h3>
+            <p>In the **Page Router** (Next.js &lt; 13), you export the **<span class="example">`getStaticProps()`</span>** asynchronous function. This function runs only on the server at build time, fetches the necessary data, and passes it as props to the React component.</p>
+            <pre>// Use getStaticProps to fetch data at build time
+export async function getStaticProps() {
+    const response = await fetch('https://link/to/api');
+    const posts = await response.json();
+  
+    return {
+      props: { posts }, // Data passed to the component
+    };
+}</pre>
+            
+            <h3 class="title">2. SSG for Dynamic Routes</h3>
+            <p>For dynamic pages (like product detail pages or individual blog posts), Next.js needs to know **which specific paths** to pre-render at build time. This is achieved by exporting a second function: **<span class="example">`getStaticPaths`</span>**.</p>
+            
+            <ul>
+                <li>**<span class="example">`getStaticPaths`</span>:** This function fetches a list of possible IDs (or slugs) from an external source and returns an array of **<span class="example">`paths`</span>** to pre-render.</li>
+                <li>**<span class="example">`getStaticProps`</span>:** This function runs for **each path** returned by <span class="example">`getStaticPaths`</span>, using the <span class="example">`params`</span> object to fetch the data specific to that ID.</li>
+            </ul>
+            <pre>// pages/product/[id]/page.tsx file (Page Router example)
+
+export async function getStaticPaths() {
+    // 1. Fetch all available product IDs
+    const products = await fetch('...').then(res => res.json());
+    
+    // 2. Map IDs to path objects
+    const paths = products.map((product) => ({
+        params: { id: product.id.toString() },
+    }));
+    
+    // 3. Return paths and set fallback to false (404 for unlisted paths)
+    return { paths, fallback: false };
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">When to Use SSG</h2>
+            <p>SSG is the ideal choice (and the Next.js default behavior) for content that prioritizes speed and does not change often:</p>
+            <ul>
+                <li>✅ **Marketing Pages:** Landing pages, company info, static FAQs.</li>
+                <li>✅ **Blog Posts & Documentation:** Content that is updated only when the site is rebuilt.</li>
+                <li>✅ **Any Page** that can tolerate its content being slightly outdated between deployments.</li>
+            </ul>
+        </div>
+    </div>
+</div>

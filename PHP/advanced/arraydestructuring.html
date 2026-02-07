@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Array Destructuring (Unpacking)</h1>
+
+        <div class="content">
+            <h2 class="title">Concept of Array Destructuring</h2>
+            <p><strong>Array Destructuring</strong>, or **Unpacking**, is a mechanism in PHP used to extract elements from an array directly into individual, distinct variables in a single statement. This is achieved using the $\text{list()}$ language construct or its modern shorthand, the square bracket notation $\text{[]}$.</p>
+            <p>The assignment is positional for indexed arrays, meaning the first element in the array is assigned to the first variable in the list, and so on.</p>
+
+            <h3 class="title">Syntax and Basic Example (Indexed Arrays)</h3>
+            <p>Destructuring an indexed array relies on the order of elements:</p>
+            <pre>
+// Using list() construct
+list($var1, $var2, $var3) = array(val1, val2, val3);
+
+// Using the modern shorthand notation (preferred)
+[$var1, $var2, $var3] = array(val1, val2, val3);</pre>
+
+            <pre>
+&lt;?php
+   $marks = array(50, 56, 70);
+   list($p, $c, $m) = $marks;
+   echo "Physics: $p  Chemistry: $c  Maths: $m" . PHP_EOL; // Output: Physics: 50  Chemistry: 56  Maths: 70
+?&gt;</pre>
+
+            <hr>
+
+            <h3 class="title">Destructuring Associative Arrays (PHP 7.1+)</h3>
+            <p>Since PHP 7.1.0, destructuring can be used with associative arrays by specifying the array **key** alongside the target variable name. This makes the assignment independent of the element order.</p>
+            <pre>
+// Using list() with keys
+list('key1' => $var1, 'key2' => $var2) = $array;
+
+// Using the modern shorthand with keys
+['key1' => $var1, 'key2' => $var2] = $array;</pre>
+
+            <pre>
+&lt;?php
+   $marks = array('p'=>50, 'c'=>56, 'm'=>70);
+   // The order of $c, $p, $m does not matter; only the keys ('c', 'p', 'm') do.
+   ['c'=>$c, 'm'=>$m, 'p'=>$p] = $marks;
+   echo "Physics: $p  Chemistry: $c  Maths: $m" . PHP_EOL; 
+?&gt;</pre>
+
+            <hr>
+
+            <h3 class="title">Skipping and Nested Arrays</h3>
+
+            <h4>Skipping Elements (Indexed Arrays)</h4>
+            <p>For indexed arrays, specific elements can be skipped during destructuring by simply leaving the variable position empty in the $\text{list()}$ or $\text{[]}$ construct.</p>
+            <pre>
+&lt;?php
+   $marks = array(50, 56, 70);
+   // Skips the second element (56)
+   [$p, , $m] = $marks;
+   echo "Physics: $p  Maths: $m" . PHP_EOL; // Output: Physics: 50  Maths: 70
+?&gt;</pre>
+
+            <h4>Destructuring Nested Arrays</h4>
+            <p>The shorthand notation allows for deep destructuring of nested arrays by nesting the destructuring syntax within itself.</p>
+            <pre>
+&lt;?php
+   $data = ['info' => ['id' => 101, 'name' => 'Alice']];
+   
+   // Destructures 'info' key, then destructures the inner array by its keys
+   ['info' => ['id' => $userId, 'name' => $userName]] = $data;
+   
+   echo "User ID: $userId, Name: $userName" . PHP_EOL;
+?&gt;</pre>
+        </div>
+    </div>
+</div>

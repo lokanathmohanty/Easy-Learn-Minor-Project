@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Methods</h1>
+        
+        <h2 class="title">Definition and Structure of a Method</h2>
+        <div class="content">
+            <p>A **method** is a block of code containing a group of statements that together perform a specific task. Methods are essential for code organization, reusability, and modularity.</p>
+            <p>To use a method, you must first **define** it and then **call** it.</p>
+            
+            <h3>Syntax for Defining a Method:</h3>
+            <pre>
+&lt;Access Specifier&gt; &lt;Return Type&gt; &lt;Method Name&gt;(Parameter List) {
+   Method Body
+}
+            </pre>
+            
+            <h3>Key Elements:</h3>
+            <ul>
+                <li><strong>Access Specifier:</strong> Determines the visibility (e.g., <code>public</code>, <code>private</code>).</li>
+                <li><strong>Return Type:</strong> The data type of the value the method returns. Use <code>void</code> if the method returns no value.</li>
+                <li><strong>Method Name:</strong> A unique identifier (case-sensitive).</li>
+                <li><strong>Parameter List:</strong> Optional. Defines the types, order, and number of inputs the method accepts.</li>
+                <li><strong>Method Body:</strong> The instructions to be executed.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Calling Methods</h2>
+        <div class="content">
+            <p>Methods are executed by **calling** them. The way you call a method depends on whether it's an instance method or a static method.</p>
+            <ul>
+                <li><strong>Instance Method (Non-static):</strong> Requires an **object instance** of the class (e.g., <code>objectName.Method()</code>).</li>
+                <li><strong>Static Method:</strong> Can be called directly using the **class name** (e.g., <code>ClassName.StaticMethod()</code>). The <code>Main()</code> method is always static.</li>
+            </ul>
+            
+            <h3>Example: Defining and Calling an Instance Method</h3>
+            <pre>
+class NumberManipulator {
+    public int FindMax(int num1, int num2) {
+        // ... method body ...
+        return result;
+    }
+    
+    static void Main(string[] args) {
+        // Create an instance of the class
+        NumberManipulator n = new NumberManipulator();
+
+        // Call the instance method using the object 'n'
+        int ret = n.FindMax(100, 200); 
+        Console.WriteLine("Max value is : {0}", ret ); // Output: 200
+    }
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Recursive Method Call</h2>
+        <div class="content">
+            <p>A **recursive method** is one that calls itself within its own body. Recursion is often used to solve problems that can be broken down into smaller, similar sub-problems, such as calculating factorials.</p>
+            
+            <h3>Example: Factorial Calculation</h3>
+            <pre>
+public int factorial(int num) {
+    if (num == 1) {
+        return 1; // Base case (stops the recursion)
+    } else {
+        // Recursive call: num * factorial(num - 1)
+        return factorial(num - 1) * num; 
+    }
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Types of Methods by Functionality</h2>
+        <div class="content">
+            <ul>
+                <li><strong>Simple Method Without Parameters (<code>void</code>):</strong> Performs a task without input and doesn't return data.
+                    <pre>static void WelcomeMsg() { /* ... */ }</pre>
+                </li>
+                <li><strong>Method With Parameters:</strong> Accepts values as input to perform dynamic operations.
+                    <pre>static void Add(int a, int b) { /* ... */ }</pre>
+                </li>
+                <li><strong>Method With Return Value:</strong> Performs an operation and returns a single result using the <code>return</code> statement.
+                    <pre>static int Multiply(int x, int y) { return x * y; }</pre>
+                </li>
+                <li><strong>Method with Default Parameters:</strong> Parameters are assigned default values, which are used if no argument is explicitly passed during the call.
+                    <pre>static void WelcomeMsg(string name = "Guest") { /* ... */ }</pre>
+                </li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Passing Parameters to a Method</h2>
+        <div class="content">
+            <p>C# offers three main mechanisms for passing arguments to a method:</p>
+            <ol>
+                <li><strong>Value Parameters (Default):</strong> The method receives a copy of the argument's value. Changes made to the parameter inside the method **do not** affect the original argument.</li>
+                <li><strong>Reference Parameters (using <code>ref</code>):</strong> The method receives a reference to the argument's memory location. Changes made to the parameter **do** affect the original argument. The variable **must** be initialized before passing.</li>
+                <li><strong>Output Parameters (using <code>out</code>):</strong> Similar to <code>ref</code>, but the primary purpose is to return a value out of the method. The variable **does not** need to be initialized before passing, but the method **must** assign a value to it before returning. Useful for returning multiple values.</li>
+            </ol>
+        </div>
+    </div>
+</div>

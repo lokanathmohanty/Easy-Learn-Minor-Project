@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Get Date Methods</h1>
+    <div class="content">
+      <p>JavaScript utilizes the <code>Date</code> object for date and time manipulation. This object offers an array of methods that facilitate retrieval and modification of date-specific information. Here, we will discuss the get date methods within JavaScript which fetch different components of the date/time.</p>
+
+      <h2 class="title">Common Get Date Methods</h2>
+      <ul>
+        <li><strong>getFullYear():</strong> Returns the 4-digit year (local time).</li>
+        <li><strong>getMonth():</strong> Returns the month (0–11, where 0 = January).</li>
+        <li><strong>getDate():</strong> Returns the day of the month (1–31).</li>
+        <li><strong>getHours():</strong> Returns the hour (0–23).</li>
+        <li><strong>getMinutes():</strong> Returns the minutes (0–59).</li>
+        <li><strong>getSeconds():</strong> Returns the seconds (0–59).</li>
+        <li><strong>getMilliseconds():</strong> Returns the milliseconds (0–999).</li>
+        <li><strong>getDay():</strong> Returns the day of week (0 = Sunday, 6 = Saturday).</li>
+        <li><strong>getUTCFullYear():</strong> Returns the 4-digit year (UTC).</li>
+        <li><strong>getUTCMonth():</strong> Returns the month (0–11, UTC).</li>
+        <li><strong>getUTCDate():</strong> Returns the day of the month (UTC).</li>
+        <li><strong>getUTCHours():</strong> Returns the hours (UTC).</li>
+        <li><strong>getUTCMinutes():</strong> Returns the minutes (UTC).</li>
+        <li><strong>getUTCSeconds():</strong> Returns the seconds (UTC).</li>
+        <li><strong>getUTCMilliseconds():</strong> Returns the milliseconds (UTC).</li>
+      </ul>
+
+      <h2 class="title">Example 1: Simple demonstration of get date methods</h2>
+      <div class="content">
+        <p>The following code creates a <code>Date</code> object and displays various date and time components, including both local and UTC values.</p>
+        <h3 class="title">Example Code</h3>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Example to demonstrate get date methods in JavaScript&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;script&gt;
+      const currentDate = new Date();
+      function displayResult(methodName, result) {
+         const resultDiv = document.createElement('div');
+         resultDiv.innerHTML = `${methodName}: ${result}`;
+         document.body.appendChild(resultDiv);
+      }
+      displayResult('getFullYear()', currentDate.getFullYear());
+      displayResult('getMonth()', currentDate.getMonth());
+      displayResult('getDate()', currentDate.getDate());
+      displayResult('getHours()', currentDate.getHours());
+      displayResult('getMinutes()', currentDate.getMinutes());
+      displayResult('getSeconds()', currentDate.getSeconds());
+      displayResult('getMilliseconds()', currentDate.getMilliseconds());
+      displayResult('getDay()', currentDate.getDay());
+      displayResult('getUTCFullYear()', currentDate.getUTCFullYear());
+      displayResult('getUTCMonth()', currentDate.getUTCMonth());
+      displayResult('getUTCDate()', currentDate.getUTCDate());
+      displayResult('getUTCHours()', currentDate.getUTCHours());
+      displayResult('getUTCMinutes()', currentDate.getUTCMinutes());
+      displayResult('getUTCSeconds()', currentDate.getUTCSeconds());
+      displayResult('getUTCMilliseconds()', currentDate.getUTCMilliseconds());
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <h2 class="title">Example 2: Comparison of two dates</h2>
+      <div class="content">
+        <p>This example compares two dates (<code>date1</code> and <code>date2</code>) and prints whether one is earlier, later, or equal to the other.</p>
+        <h3 class="title">Example Code</h3>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Comparison of two dates in JavaScript&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;script&gt;
+      const date1 = new Date(2024, 0, 18);
+      const date2 = new Date(2024, 0, 26);
+
+      function displayComparison() {
+         const date1Div = document.createElement('div');
+         date1Div.innerHTML = `Date 1: ${date1.toDateString()}`;
+         document.body.appendChild(date1Div);
+
+         const date2Div = document.createElement('div');
+         date2Div.innerHTML = `Date 2: ${date2.toDateString()}`;
+         document.body.appendChild(date2Div);
+
+         const resultDiv = document.createElement('div');
+         if (date1 > date2) {
+            resultDiv.innerHTML = "date 1 is later than date 2";
+         } else if (date1 &lt; date2) {
+            resultDiv.innerHTML = "date 1 is earlier than date 2";
+         } else {
+            resultDiv.innerHTML = "Both dates are equal";
+         }
+         document.body.appendChild(resultDiv);
+      }
+
+      displayComparison();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>

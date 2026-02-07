@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Boolean Class</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Wrapper Classes</h1>
+            <h2 class="subtitle">Session: The Boolean Class</h2>
+        </header>
+
+        <section class="content introduction">
+            <h2 class="subtitle">Introduction to the Boolean Class</h2>
+            <p>The **<code>java.lang.Boolean</code>** class is the wrapper class for the primitive type **<code>boolean</code>**. It allows a primitive boolean value (<code>true</code> or <code>false</code>) to be represented as an object. This is essential for use in Java Collections and other object-oriented APIs.</p>
+            <p>The class is declared as **<code>public final class Boolean</code>**, meaning it cannot be subclassed.</p>
+        </section>
+
+        <hr>
+
+        <section class="content fields">
+            <h2 class="subtitle">Key Static Fields</h2>
+            <p>The <code>Boolean</code> class provides three important static constants:</p>
+            <ul>
+                <li><code>**static Boolean TRUE**</code>: The Boolean object representing the primitive value `true`.</li>
+                <li><code>**static Boolean FALSE**</code>: The Boolean object representing the primitive value `false`.</li>
+                <li><code>**static Class&lt;Boolean&gt; TYPE**</code>: The Class object representing the primitive type `boolean`.</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section class="content constructors-methods">
+            <h2 class="subtitle">Constructors and Utility Methods</h2>
+            <p>Although the constructor **<code>Boolean(boolean value)</code>** is available, modern practice discourages its use in favor of the static factory method **<code>valueOf()</code>** to take advantage of object caching (since there are only two possible Boolean instances: TRUE and FALSE).</p>
+
+            <h3>Core Methods:</h3>
+            <ul>
+                <li><code>**boolean booleanValue()**</code>: Returns the value of the Boolean object as a primitive `boolean`. (The explicit method for **unboxing**).</li>
+                <li><code>**static Boolean valueOf(boolean b)**</code>: Returns a canonical `Boolean` instance (`TRUE` or `FALSE`) representing the specified primitive value.</li>
+                <li><code>**static boolean parseBoolean(String s)**</code>: Parses a string. Returns `true` only if the string argument is not null and is equal, ignoring case, to the string "true"; otherwise, it returns `false`.</li>
+            </ul>
+
+            <h3>Logical Operations:</h3>
+            <p>The class also includes utility methods for basic logical operations on primitives:</p>
+            <ul>
+                <li><code>**static boolean logicalAnd(boolean a, boolean b)**</code></li>
+                <li><code>**static boolean logicalOr(boolean a, boolean b)**</code></li>
+                <li><code>**static boolean logicalXor(boolean a, boolean b)**</code></li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section class="content comparison">
+            <h2 class="subtitle">Comparison</h2>
+            <p>The <code>Boolean</code> class implements the <code>Comparable&lt;Boolean&gt;</code> interface, defining a natural order where <code>TRUE</code> is considered greater than <code>FALSE</code>.</p>
+            <pre><code>int res = b1.compareTo(b2);</code></pre>
+            <ul>
+                <li>If `b1` equals `b2`, `res` is 0.</li>
+                <li>If `b1` is `TRUE` and `b2` is `FALSE`, `res` is positive (> 0).</li>
+                <li>If `b1` is `FALSE` and `b2` is `TRUE`, `res` is negative (< 0).</li>
+            </ul>
+        </section>
+
+    </div>
+
+</body>
+</html>

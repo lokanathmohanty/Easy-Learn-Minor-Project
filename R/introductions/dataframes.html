@@ -1,0 +1,142 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Data Frames</h1>
+    <div class="content">
+      <p>
+        A data frame is a two-dimensional table-like structure where each column contains values of one variable and each row contains one set of values from each column.
+      </p>
+      <p>Characteristics of a data frame:</p>
+      <ul>
+        <li>Column names should be non-empty.</li>
+        <li>Row names should be unique.</li>
+        <li>Data in columns can be numeric, factor, or character.</li>
+        <li>Each column must have the same number of data items.</li>
+      </ul>
+
+      <h2 class="title">Create Data Frame</h2>
+      <pre><code># Create the data frame
+emp.data &lt;- data.frame(
+  emp_id = c(1:5),
+  emp_name = c("Rick","Dan","Michelle","Ryan","Gary"),
+  salary = c(623.3,515.2,611.0,729.0,843.25),
+  start_date = as.Date(c("2012-01-01", "2013-09-23", "2014-11-15", "2014-05-11", "2015-03-27")),
+  stringsAsFactors = FALSE
+)
+print(emp.data)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  emp_id emp_name salary start_date
+1      1     Rick  623.30 2012-01-01
+2      2      Dan  515.20 2013-09-23
+3      3 Michelle  611.00 2014-11-15
+4      4     Ryan  729.00 2014-05-11
+5      5     Gary  843.25 2015-03-27
+</code></pre>
+
+      <h2 class="title">Get Structure of Data Frame</h2>
+      <pre><code># Get the structure of the data frame
+str(emp.data)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>'data.frame': 5 obs. of 4 variables:
+ $ emp_id    : int  1 2 3 4 5
+ $ emp_name  : chr  "Rick" "Dan" "Michelle" "Ryan" ...
+ $ salary    : num  623 515 611 729 843
+ $ start_date: Date, format: "2012-01-01" "2013-09-23" "2014-11-15" "2014-05-11" ...
+</code></pre>
+
+      <h2 class="title">Summary of Data</h2>
+      <pre><code># Print the summary of the data
+summary(emp.data)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>     emp_id      emp_name        salary           start_date     
+ Min.   :1.00   Length:5          Min.   :515.2   Min.   :2012-01-01  
+ 1st Qu.:2.00   Class :character   1st Qu.:611.0   1st Qu.:2013-09-23  
+ Median :3.00   Mode  :character   Median :623.3   Median :2014-05-11  
+ Mean   :3.00                      Mean   :664.4   Mean   :2014-01-14  
+ 3rd Qu.:4.00                      3rd Qu.:729.0   3rd Qu.:2014-11-15  
+ Max.   :5.00                      Max.   :843.2   Max.   :2015-03-27  
+</code></pre>
+
+      <h2 class="title">Extract Data</h2>
+      <pre><code># Extract specific columns
+result &lt;- data.frame(emp.data$emp_name, emp.data$salary)
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  emp.data.emp_name emp.data.salary
+1              Rick          623.30
+2               Dan          515.20
+3          Michelle          611.00
+4              Ryan          729.00
+5              Gary          843.25
+</code></pre>
+
+      <h2 class="title">Extract Rows and Columns</h2>
+      <pre><code># Extract first two rows
+result &lt;- emp.data[1:2,]
+print(result)
+
+# Extract 3rd and 5th row, 2nd and 4th column
+result &lt;- emp.data[c(3, 5), c(2, 4)]
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  emp_id emp_name salary   start_date
+1      1     Rick  623.3 2012-01-01
+2      2      Dan  515.2 2013-09-23
+
+  emp_name start_date
+3 Michelle 2014-11-15
+5     Gary 2015-03-27
+</code></pre>
+
+      <h2 class="title">Expand Data Frame</h2>
+
+      <h3 class="title">Add Column</h3>
+      <pre><code># Add new column 'dept'
+emp.data$dept &lt;- c("IT", "Operations", "IT", "HR", "Finance")
+print(emp.data)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  emp_id emp_name salary start_date       dept
+1      1     Rick  623.30 2012-01-01         IT
+2      2      Dan  515.20 2013-09-23 Operations
+3      3 Michelle  611.00 2014-11-15         IT
+4      4     Ryan  729.00 2014-05-11         HR
+5      5     Gary  843.25 2015-03-27    Finance
+</code></pre>
+
+      <h3 class="title">Add Row</h3>
+      <pre><code># Create new data frame of rows to add
+emp.newdata &lt;- data.frame(
+  emp_id = c(6:8),
+  emp_name = c("Rasmi", "Pranab", "Tusar"),
+  salary = c(578.0, 722.5, 632.8),
+  start_date = as.Date(c("2013-05-21", "2013-07-30", "2014-06-17")),
+  dept = c("IT", "Operations", "Finance"),
+  stringsAsFactors = FALSE
+)
+
+# Combine with existing data frame
+emp.finaldata &lt;- rbind(emp.data, emp.newdata)
+print(emp.finaldata)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  emp_id emp_name salary start_date       dept
+1      1     Rick  623.30 2012-01-01         IT
+2      2      Dan  515.20 2013-09-23 Operations
+3      3 Michelle  611.00 2014-11-15         IT
+4      4     Ryan  729.00 2014-05-11         HR
+5      5     Gary  843.25 2015-03-27    Finance
+6      6    Rasmi  578.00 2013-05-21         IT
+7      7   Pranab  722.50 2013-07-30 Operations
+8      8    Tusar  632.80 2014-06-17    Finance
+</code></pre>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

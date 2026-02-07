@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Keyword Arguments</h1>
+    <div class="content">
+      <p>
+        Python allows passing function arguments in the form of <strong>keywords</strong>, also called 
+        <em>named arguments</em>. Variables defined in the function signature can be explicitly 
+        assigned values during the function call using their names.
+      </p>
+
+      <h2>Calling Function with Keyword Arguments</h2>
+      <pre><code># Function definition
+def printinfo(name, age):
+    print("Name:", name)
+    print("Age", age)
+
+# Function calls
+printinfo("Naveen", 29)              # positional arguments
+printinfo(name="miki", age=30)       # keyword arguments</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Name: Naveen
+Age 29
+Name: miki
+Age 30</code></pre>
+
+      <h2>Order of Keyword Arguments</h2>
+      <p>
+        Normally, arguments are assigned in the order of appearance.  
+        But when using <strong>keyword arguments</strong>, order does not matter.
+      </p>
+
+      <h3>Example with Positional Arguments</h3>
+      <pre><code>def division(num, den):
+    quotient = num / den
+    print("num:{} den:{} quotient:{}".format(num, den, quotient))
+
+division(10, 5)
+division(5, 10)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>num:10 den:5 quotient:2.0
+num:5 den:10 quotient:0.5</code></pre>
+
+      <h3>Example with Keyword Arguments</h3>
+      <pre><code>def division(num, den):
+    quotient = num / den
+    print("num:{} den:{} quotient:{}".format(num, den, quotient))
+
+division(num=10, den=5)
+division(den=5, num=10)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>num:10 den:5 quotient:2.0
+num:10 den:5 quotient:2.0</code></pre>
+
+      <h2>Mixing Positional and Keyword Arguments</h2>
+      <p>
+        You can mix positional and keyword arguments.  
+        <strong>But positional arguments must always come first.</strong>
+      </p>
+
+      <pre><code>def division(num, den):
+    quotient = num / den
+    print("num:{} den:{} quotient:{}".format(num, den, quotient))
+
+division(num=5, 10)   # ❌ Invalid</code></pre>
+
+      <p><strong>Error:</strong></p>
+      <pre><code>SyntaxError: non-keyword arg after keyword arg</code></pre>
+
+      <h2>Quick Comparison</h2>
+      <table class="argument-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Example</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Positional</td>
+            <td><code>printinfo("Naveen", 29)</code></td>
+            <td>Values assigned by order</td>
+          </tr>
+          <tr>
+            <td>Keyword</td>
+            <td><code>printinfo(name="miki", age=30)</code></td>
+            <td>Order doesn’t matter</td>
+          </tr>
+          <tr>
+            <td>Mixed</td>
+            <td><code>printinfo("Naveen", age=29)</code></td>
+            <td>Positional must come first</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

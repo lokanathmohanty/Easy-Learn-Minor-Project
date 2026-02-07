@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>JSON in Python</h1>
+    </div>
+    <div class="content">
+      <p>JSON (JavaScript Object Notation) is a lightweight, text-based data format used for data exchange between systems. It is easy to read and write for humans, and easy to parse and generate by machines.</p>
+      <p>Python provides the <code>json</code> module to serialize Python objects to JSON and deserialize JSON strings to Python objects.</p>
+      <ul>
+        <li>Supported types for serialization include: dict, list, tuple, str, int, float, bool, and None.</li>
+        <li>JSON strings use double quotes for keys and string values.</li>
+      </ul>
+      <p><strong>Serialization example (Python object to JSON string):</strong></p>
+      <pre><code>import json
+
+data = {"name": "Alice", "age": 30, "city": "New York"}
+
+json_string = json.dumps(data)
+print(json_string)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>{"name": "Alice", "age": 30, "city": "New York"}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>JSON Deserialization</h2>
+    </div>
+    <div class="content">
+      <p>Deserialization converts a JSON string or file content back into Python objects.</p>
+      <p>You can deserialize from strings using <code>json.loads()</code> or from files using <code>json.load()</code>.</p>
+      <p><strong>Deserialize JSON string to object example:</strong></p>
+      <pre><code>import json
+
+json_string = '{"name": "John", "age": 30, "is_student": false, "courses": ["Math", "Science"]}'
+
+obj = json.loads(json_string)
+print(obj)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>{'name': 'John', 'age': 30, 'is_student': False, 'courses': ['Math', 'Science']}</code></pre>
+      <p><strong>Deserialize JSON from file example:</strong></p>
+      <pre><code>import json
+
+with open("data.json", "r") as f:
+    obj = json.load(f)
+print(obj)
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Advanced JSON Handling</h2>
+    </div>
+    <div class="content">
+      <p>For JSON data containing custom objects, use the <code>object_hook</code> parameter to provide a function that converts decoded dictionaries into Python objects.</p>
+      <p><strong>Example with custom deserialization:</strong></p>
+      <pre><code>import json
+from datetime import datetime
+
+def custom_deserializer(dct):
+    if 'joined' in dct:
+        dct['joined'] = datetime.fromisoformat(dct['joined'])
+    return dct
+
+json_str = '{"name": "John", "joined": "2021-05-17T10:15:00"}'
+
+obj = json.loads(json_str, object_hook=custom_deserializer)
+print(obj)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>{'name': 'John', 'joined': datetime.datetime(2021, 5, 17, 10, 15)}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>JSONEncoder and JSONDecoder Classes</h2>
+    </div>
+    <div class="content">
+      <p>The <code>JSONEncoder</code> class serializes Python objects to JSON-formatted strings, supporting types as shown below:</p>
+      <ul>
+        <li>Python <code>dict</code> → JSON object</li>
+        <li>Python <code>list</code>, <code>tuple</code> → JSON array</li>
+        <li>Python <code>str</code> → JSON string</li>
+        <li>Python <code>int</code>, <code>float</code> → JSON number</li>
+        <li>Python <code>True</code> → JSON true</li>
+        <li>Python <code>False</code> → JSON false</li>
+        <li>Python <code>None</code> → JSON null</li>
+      </ul>
+      <p>Main methods include <code>encode()</code> and <code>iterencode()</code>, and options to control indentation and sorting keys.</p>
+      <p><strong>Example using <code>iterencode()</code>:</strong></p>
+      <pre><code>import json
+
+data = ['Rakesh', {'marks': (50, 60, 70)}]
+encoder = json.JSONEncoder()
+
+for chunk in encoder.iterencode(data):
+    print(chunk)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>["Rakesh", { "marks" : [50, 60, 70]}]</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>JSONDecoder</h2>
+    </div>
+    <div class="content">
+      <p>The <code>JSONDecoder</code> class decodes JSON strings into Python objects. Main method is <code>decode()</code>.</p>
+      <p><strong>Example:</strong></p>
+      <pre><code>import json
+
+data = ['Rakesh', {'marks': (50, 60, 70)}]
+encoder = json.JSONEncoder()
+json_str = encoder.encode(data)
+
+decoder = json.JSONDecoder()
+py_obj = decoder.decode(json_str)
+print(py_obj, type(py_obj))
+</code></pre>
+      <p>Output:</p>
+      <pre><code>['Rakesh', {'marks': [50, 60, 70]}] &lt;class 'list'&gt;</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Core Functions in json Module</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><code>json.dump()</code>: Serialize Python object to a file-like object.</li>
+        <li><code>json.dumps()</code>: Serialize to JSON string.</li>
+        <li><code>json.load()</code>: Deserialize JSON from a file-like object.</li>
+        <li><code>json.loads()</code>: Deserialize JSON string.</li>
+      </ul>
+    </div>
+  </div>
+</div>

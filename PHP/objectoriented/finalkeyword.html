@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: The Final Keyword</h1>
+        <div class="content">
+            <p>The **<code>final</code>** keyword is used in PHP to prevent inheritance or overriding of certain class members. Its purpose is to lock down important parts of your code, ensuring their stability and guaranteeing that their behavior will not be altered by child classes.</p>
+            
+            <h2 class="title">Using <code>final</code> with Classes and Methods</h2>
+            <ul>
+                <li><strong>For Classes:</strong> Declaring a class as <code>final</code> (e.g., <code>final class MyClass {}</code>) **prevents it from being extended** (inherited). Any attempt by another class to <code>extend</code> a final class will result in a fatal error.</li>
+                <li><strong>For Methods:</strong> Declaring a method as <code>final</code> (e.g., <code>final public function hello() {}</code>) **prevents that specific method from being overridden** in any child class. The class itself can still be extended.</li>
+            </ul>
+
+            <h3 class="title">Using <code>final</code> with Constants (PHP 8.1+)</h3>
+            <p>Since PHP 8.1.0, the <code>final</code> keyword can also be applied to class constants (e.g., <code>final public const NAME = "Value";</code>). This prevents child classes from overriding the value of the constant.</p>
+            
+            <h3 class="title">Important Restriction</h3>
+            <p>The <code>final</code> keyword **cannot be used** on class properties (member variables).</p>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Preventing Method Overriding</h3>
+            <p>This example demonstrates how <code>final</code> ensures that a critical method's logic (in this case, an area calculation base) cannot be modified by any subclass.</p>
+            
+            <pre><code>
+class BaseGeometry {
+   // This formula is considered fundamental and must not change.
+   final public function getFormulaName() {
+      return "Area is PI * A * B";
+   }
+}
+
+class Ellipse extends BaseGeometry {
+   // This is fine: The class is not final, and this is a new method.
+   public function calculate(float $a, float $b) {
+      // ... calculation logic ...
+      echo $this-&gt;getFormulaName(); // Uses the final method
+   }
+   
+   // public function getFormulaName() { /* Fatal Error if uncommented! */ }
+}
+
+$e = new Ellipse();
+$e->calculate(5, 4);
+// Output will include: Area is PI * A * B
+            </code></pre>
+
+            <h3 class="title">Fatal Error Scenario (Class)</h3>
+            <p>If the <code>BaseGeometry</code> class above was declared as <code>final class BaseGeometry {...}</code>, the line <code>class Ellipse extends BaseGeometry {...}</code> would immediately trigger a fatal error.</p>
+        </div>
+    </div>
+</div>

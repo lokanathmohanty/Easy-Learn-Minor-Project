@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">NumPy Logs</h1>
+    <div class="content">
+      <p>NumPy provides functions to perform log at the base 2, e, and 10.</p>
+      <p>We will also explore how to take log for any base by creating a custom ufunc.</p>
+      <p>All of the log functions will place <code>-inf</code> or <code>inf</code> in the elements if the log cannot be computed.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Log at Base 2</h2>
+    <div class="content">
+      <p>Use the <code>log2()</code> function to perform log at the base 2.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>import numpy as np
+
+arr = np.arange(1, 10)
+
+print(np.log2(arr))
+</code></pre>
+      <p>Note: The <code>arange(1, 10)</code> function returns an array with integers starting from 1 (included) to 10 (not included).</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Log at Base 10</h2>
+    <div class="content">
+      <p>Use the <code>log10()</code> function to perform log at the base 10.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>import numpy as np
+
+arr = np.arange(1, 10)
+
+print(np.log10(arr))
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Natural Log, or Log at Base e</h2>
+    <div class="content">
+      <p>Use the <code>log()</code> function to perform log at the base e.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>import numpy as np
+
+arr = np.arange(1, 10)
+
+print(np.log(arr))
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Log at Any Base</h2>
+    <div class="content">
+      <p>NumPy does not provide any function to take log at any base, so we can use the <code>frompyfunc()</code> function along with the built-in <code>math.log()</code> with two input parameters and one output parameter.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>from math import log
+import numpy as np
+
+nplog = np.frompyfunc(log, 2, 1)
+
+print(nplog(100, 15))
+</code></pre>
+    </div>
+  </div>
+</div>

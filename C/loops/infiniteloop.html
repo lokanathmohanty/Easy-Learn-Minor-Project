@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Infinite Loop in C</h1>
+    <div class="content">
+      <p>An infinite loop in C is a loop that never terminates because its condition always evaluates to true. It executes a block of code repeatedly without end.</p>
+
+      <h2>Creating Infinite Loops</h2>
+      <p>Infinite loops can be created using any loop construct (while, for, or do-while) with a condition that is always true, such as <code>1</code>.</p>
+
+      <h2>Examples</h2>
+      <h3>Infinite While Loop</h3>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int i = 0;
+   while(i &lt;= 10){
+      // No increment leads to infinite loop
+      printf("i: %d\n", i);
+   }
+   return 0;
+}
+      </pre>
+
+      <h3>Infinite For Loop</h3>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   for( ; ; ){
+      printf("Hello World\n");
+   }
+   return 0;
+}
+      </pre>
+
+      <h3>Infinite Do-While Loop</h3>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   do {
+      printf("Hello World\n");
+   } while(1);
+   return 0;
+}
+      </pre>
+
+      <h2>Breaking out of Infinite Loops</h2>
+      <p>The <code>break</code> statement can be used inside a loop to exit when a specific condition is met.</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   for(int i = 1; ; i++){
+      printf("%d\n", i);
+      if(i == 5) break;
+   }
+   return 0;
+}
+      </pre>
+      <p>This loop prints numbers 1 to 5, then exits.</p>
+
+      <h2>Stopping Infinite Loops</h2>
+      <p>Infinite loops do not stop automatically and must be manually interrupted, often using <code>Ctrl + C</code>.</p>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>Infinite loops run indefinitely due to conditions that never become false.</li>
+        <li>They can be intentional or accidental.</li>
+        <li>Use <code>break</code> to control loop termination.</li>
+        <li>Interrupt execution to stop unwanted infinite loops.</li>
+      </ul>
+    </div>
+  </div>
+</div>

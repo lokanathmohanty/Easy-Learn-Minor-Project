@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - pointer-events Property</h1>
+    <div class="content">
+      <p>
+        The <code>pointer-events</code> property in CSS is used to control how an element responds to pointer interactions 
+        such as mouse clicks, hover effects, and touch gestures. This property is especially useful when working with 
+        overlapping elements, SVG graphics, or when you want certain elements to ignore user interactions.
+      </p>
+
+      <h2>Possible Values</h2>
+      <ul>
+        <li><b>auto</b>: Default. The element behaves normally and responds to pointer events.</li>
+        <li><b>none</b>: The element does not respond to pointer events, allowing clicks and hovers to pass through it to underlying elements.</li>
+        <li><b>visiblePainted</b>: Only visible painted parts of the element respond to pointer events.</li>
+        <li><b>visibleFill</b>: Only the visible fill area of the element responds to pointer events.</li>
+        <li><b>visibleStroke</b>: Only the visible stroke area of the element responds to pointer events.</li>
+        <li><b>visible</b>: The element responds only if its visibility is set to visible.</li>
+        <li><b>painted</b>: The element responds only to events on painted areas.</li>
+        <li><b>fill</b>: The element responds only to events on its fill.</li>
+        <li><b>stroke</b>: The element responds only to events on its stroke.</li>
+        <li><b>all</b>: The element responds to pointer events on both fill and stroke regardless of visibility.</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <pre>
+pointer-events: auto | none | visiblePainted | visibleFill | 
+                visibleStroke | visible | painted | fill | 
+                stroke | all;
+      </pre>
+
+      <h2>Key Notes</h2>
+      <ul>
+        <li>If not specified, SVG elements behave as if <code>pointer-events: visiblePainted</code> is applied.</li>
+        <li>Disabling pointer events on a parent does not automatically disable them for its children.</li>
+        <li>Elements with <code>pointer-events: none</code> can still be focused using keyboard navigation.</li>
+      </ul>
+
+      <h2>Content Summary</h2>
+      <p>
+        The <code>pointer-events</code> property controls how elements react to user interactions such as clicks, hovers, 
+        and touches. It can be used to disable interactions (<b>none</b>), allow interactions only on visible areas 
+        (<b>visiblePainted</b>, <b>fill</b>, <b>stroke</b>), or enforce full interactivity (<b>all</b>, <b>auto</b>). 
+        This property is crucial when managing layered content and SVG graphics.
+      </p>
+
+      <h2>Example: pointer-events with none</h2>
+      <pre>
+a[href="https://example.com"] {
+   pointer-events: none;
+}
+
+&lt;a href="https://example.com"&gt;This link cannot be clicked&lt;/a&gt;
+      </pre>
+
+      <h2>Example: pointer-events with auto</h2>
+      <pre>
+a[href="https://example.com"] {
+   pointer-events: auto;
+}
+
+&lt;a href="https://example.com"&gt;This link is clickable&lt;/a&gt;
+      </pre>
+
+      <h2>Example: pointer-events on Images</h2>
+      <pre>
+img {
+   pointer-events: none;
+   width: 150px;
+   height: 150px;
+}
+
+&lt;img src="flower.jpg" alt="Flower Image"&gt;
+      </pre>
+    </div>
+  </div>
+</div>

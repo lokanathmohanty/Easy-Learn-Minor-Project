@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP - Classes and Objects</h1>
+
+    <div class="content">
+      <p>
+        **Classes** and **Objects** form the foundation of PHP's Object-Oriented Programming (OOP). A **class** acts as a blueprint or a template, describing the structure (properties) and behavior (methods) common to a set of entities. An **object** is a unique, specific instance of that class.
+      </p>
+
+      <h2>Defining a Class in PHP</h2>
+      <p>
+        A class is defined using the <code>class</code> keyword, followed by its name, and an enclosed body containing **properties** (variables) and **methods** (functions).
+      </p>
+
+      <div class="example">
+        <pre><code>&lt;?php
+   class Book {
+      /* Member variables (Properties) */
+      var $price; // Traditional way to declare a public property
+      var $title;
+
+      /* Member functions (Methods) */
+      function setPrice($par){
+         // $this refers to the current object instance
+         $this->price = $par;
+      }
+
+      function getTitle(){
+         echo $this->title ."\n";
+      }
+   }
+?&gt;</code></pre>
+      </div>
+
+      <ul>
+        <li>
+          **Properties (Member Variables)**: Variables defined within the class (e.g., <code>$price</code>, <code>$title</code>). They hold the data that characterizes an object.
+        </li>
+        <li>
+          **Methods (Member Functions)**: Functions defined within the class (e.g., <code>setPrice()</code>, <code>getTitle()</code>). They define the actions or behaviors of an object.
+        </li>
+        <li>
+          **The <code>$this</code> Pseudo-variable**: Used inside a method to refer to the object itself, allowing access to its own properties and methods (e.g., <code>$this->price</code>).
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Defining and Using an Object</h2>
+    <div class="content">
+      <p>
+        An object, an instance of a class, is created using the <code>new</code> keyword. The <code>new</code> operator allocates memory for the object's properties and methods.
+      </p>
+      <pre><code>$b1 = new Book; // $b1 is an object (instance) of the Book class
+$b2 = new Book; // $b2 is a separate, independent object</code></pre>
+
+      <h3>Accessing Object Members</h3>
+      <p>
+        You access an object's properties and methods using the **object operator** (<code>-></code>).
+      </p>
+      <ul>
+        <li>
+          <strong>Setting Properties via Methods:</strong>
+          <pre><code>$b1->setTitle("PHP Programming");
+$b1->setPrice(450);</code></pre>
+        </li>
+        <li>
+          <strong>Retrieving Data via Methods:</strong>
+          <pre><code>$b1->getTitle();
+$b1->getPrice();</code></pre>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Complete Class and Object Interaction</h2>
+    <div class="content example">
+      <p>
+        This script defines the <code>Book</code> class, creates two objects (<code>$b1</code> and <code>$b2</code>), sets their unique properties, and then retrieves them.
+      </p>
+      <pre><code>&lt;?php
+   class Book {
+      var $price;
+      var $title;
+
+      function setPrice($par){ $this->price = $par; }
+      function getPrice(){ echo $this->price ."\n"; }
+      function setTitle($par){ $this->title = $par; }
+      function getTitle(){ echo $this->title ."\n"; }
+   }
+
+   $b1 = new Book;
+   $b2 = new Book;
+
+   // Object $b1 properties
+   $b1->setTitle("PHP Programming");
+   $b1->setPrice(450);
+   
+   // Object $b2 properties
+   $b2->setTitle("PHP Fundamentals");
+   $b2->setPrice(275);
+   
+   // Output
+   $b1->getTitle(); // PHP Programming
+   $b1->getPrice(); // 450
+   $b2->getTitle(); // PHP Fundamentals
+   $b2->getPrice(); // 275
+?&gt;</code></pre>
+    </div>
+
+    <h2 class="title">Benefits of Using Classes and Objects</h2>
+    <div class="content">
+      <p>
+        Adopting OOP principles with classes and objects provides key advantages:
+      </p>
+      <ul>
+        <li>
+          **Code Organization**: Related data and functionality are logically grouped together, making the code easier to manage and understand.
+        </li>
+        <li>
+          **Code Reusability**: A single class definition can be used to create multiple objects, eliminating the need to rewrite the same logic.
+        </li>
+        <li>
+          **Encapsulation**: Classes help in the process of **Encapsulation**, which is keeping properties and methods secure and defining a clear interface for interacting with the object's internal state.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Socket Programming in Java</h1>
+
+    <div class="content">
+      <p>Sockets provide the communication mechanism between two computers using TCP. A client program creates a socket on its end of the communication and attempts to connect that socket to a server.</p>
+      <p>When the connection is made, the server creates a socket object on its end of the communication. The client and the server can now communicate by writing to and reading from the socket.</p>
+      <p>The <code>java.net.Socket</code> class represents a socket, and the <code>java.net.ServerSocket</code> class provides a mechanism for the server program to listen for clients and establish connections with them.</p>
+
+      <h2 class="title">Steps of Socket Programming in Java</h2>
+      <ol>
+        <li>The server instantiates a <code>ServerSocket</code> object, denoting which port number communication is to occur on.</li>
+        <li>The server invokes the <code>accept()</code> method of the <code>ServerSocket</code> class. This method waits until a client connects to the server on the given port.</li>
+        <li>After the server is waiting, a client instantiates a <code>Socket</code> object, specifying the server name and the port number to connect to.</li>
+        <li>The constructor of the <code>Socket</code> class attempts to connect the client to the specified server and the port number. If communication is established, the client now has a <code>Socket</code> object capable of communicating with the server.</li>
+        <li>On the server side, the <code>accept()</code> method returns a reference to a new socket on the server that is connected to the client's socket.</li>
+        <li>After the connections are established, communication can occur using I/O streams. Each socket has both an <code>OutputStream</code> and an <code>InputStream</code>. The client's <code>OutputStream</code> is connected to the server's <code>InputStream</code>, and the client's <code>InputStream</code> is connected to the server's <code>OutputStream</code>. TCP is a two-way communication protocol, hence data can be sent across both streams at the same time.</li>
+      </ol>
+
+      <h2 class="title">Advantages of Java Socket Programming</h2>
+      <ul>
+        <li><strong>Platform Independence</strong> − One of the biggest advantages of Java Sockets is that they are platform-independent. This means that the same Java code can be run on multiple operating systems and devices without the need for modification.</li>
+        <li><strong>Easy to Use</strong> − The Java API provides a simple, consistent interface for creating and managing sockets, making it easier to implement network-based applications.</li>
+        <li><strong>Scalability</strong> − Java Sockets can handle thousands of simultaneous connections and are suitable for large-scale network-based applications.</li>
+        <li><strong>Security</strong> − Built-in support for secure communication such as SSL and TLS encryption helps protect sensitive data.</li>
+        <li><strong>Multithreading</strong> − Multiple threads can handle multiple connections simultaneously, improving performance.</li>
+      </ul>
+
+      <h2 class="title">Disadvantages of Java Socket Programming</h2>
+      <ul>
+        <li><strong>Complexity</strong> − Implementing Java Sockets can be complex and challenging to debug, especially for beginners.</li>
+        <li><strong>Latency</strong> − Socket communication can introduce latency, which can be problematic for real-time applications.</li>
+        <li><strong>Resource Intensive</strong> − Handling many connections or large data volumes can consume significant system resources.</li>
+        <li><strong>Limited Protocol Support</strong> − Supports a limited number of network protocols.</li>
+        <li><strong>Potential Security Vulnerabilities</strong> − Must carefully design systems to protect against hacking and attacks.</li>
+      </ul>
+
+      <h2 class="title">Socket Programming Applications</h2>
+      <ul>
+        <li><strong>Chat Applications</strong> − Used in instant messaging and online chat rooms with client-server architecture.</li>
+        <li><strong>File Transfer Applications</strong> − Peer-to-peer file sharing programs where devices act as both client and server.</li>
+        <li><strong>Remote Control Applications</strong> − Remote desktop software to control a server’s desktop from another device.</li>
+        <li><strong>Multiplayer Games</strong> − Online games using client-server communication for gameplay.</li>
+        <li><strong>IoT Applications</strong> − Smart home systems where IoT devices connect to central servers.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Socket Client</h2>
+    <div class="content">
+      <pre><code>// File Name GreetingClient.java
+import java.net.*;
+import java.io.*;
+
+public class GreetingClient {
+
+   public static void main(String [] args) {
+      String serverName = args[0];
+      int port = Integer.parseInt(args[1]);
+      try {
+         System.out.println("Connecting to " + serverName + " on port " + port);
+         Socket client = new Socket(serverName, port);
+         
+         System.out.println("Just connected to " + client.getRemoteSocketAddress());
+         OutputStream outToServer = client.getOutputStream();
+         DataOutputStream out = new DataOutputStream(outToServer);
+         
+         out.writeUTF("Hello from " + client.getLocalSocketAddress());
+         InputStream inFromServer = client.getInputStream();
+         DataInputStream in = new DataInputStream(inFromServer);
+         
+         System.out.println("Server says " + in.readUTF());
+         client.close();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Socket Server</h2>
+    <div class="content">
+      <pre><code>// File Name GreetingServer.java
+import java.net.*;
+import java.io.*;
+
+public class GreetingServer extends Thread {
+   private ServerSocket serverSocket;
+   
+   public GreetingServer(int port) throws IOException {
+      serverSocket = new ServerSocket(port);
+      serverSocket.setSoTimeout(10000);
+   }
+
+   public void run() {
+      while(true) {
+         try {
+            System.out.println("Waiting for client on port " + 
+               serverSocket.getLocalPort() + "...");
+            Socket server = serverSocket.accept();
+            
+            System.out.println("Just connected to " + server.getRemoteSocketAddress());
+            DataInputStream in = new DataInputStream(server.getInputStream());
+            
+            System.out.println(in.readUTF());
+            DataOutputStream out = new DataOutputStream(server.getOutputStream());
+            out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress()
+               + "\nGoodbye!");
+            server.close();
+            
+         } catch (SocketTimeoutException s) {
+            System.out.println("Socket timed out!");
+            break;
+         } catch (IOException e) {
+            e.printStackTrace();
+            break;
+         }
+      }
+   }
+   
+   public static void main(String [] args) {
+      int port = Integer.parseInt(args[0]);
+      try {
+         Thread t = new GreetingServer(port);
+         t.start();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}
+      </code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Wrapper Classes</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Data Types</h1>
+            <h2 class="subtitle">Session: Wrapper Classes</h2>
+        </header>
+
+        <section class="content introduction">
+            <h2 class="subtitle">Why Wrapper Classes Are Required 🤔</h2>
+            <p>While **primitive data types** (`int`, `char`, `double`, etc.) are efficient for simple value storage, Java development often requires handling values as **objects**. Objects are needed for:</p>
+            <ul>
+                <li>Working with **Java Collections** (like `ArrayList` or `HashMap`), which can only store objects.</li>
+                <li>Using utility methods (e.g., converting a number to a `String`).</li>
+                <li>Passing values over a network (e.g., in serialization).</li>
+            </ul>
+            <p>**Wrapper Classes** solve this by providing a class counterpart for every primitive type.</p>
+        </section>
+
+        <hr>
+
+        <section class="content wrapper-classes">
+            <h2 class="subtitle">Java Wrapper Classes Defined</h2>
+            <p>A wrapper class is one whose objects **wrap** or contain a primitive data type within them. They are all found in the **<code>java.lang</code>** package (except for <code>Void</code>, and all the numeric wrappers are subclasses of the abstract class **<code>Number</code>**).</p>
+
+            <table class="example">
+                <thead>
+                    <tr>
+                        <th>Primitive Type</th>
+                        <th>Wrapper Class</th>
+                        <th>Subclass of <code>Number</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>boolean</code></td><td><code>Boolean</code></td><td>No</td></tr>
+                    <tr><td><code>char</code></td><td><code>Character</code></td><td>No</td></tr>
+                    <tr><td><code>byte</code></td><td><code>Byte</code></td><td>Yes</td></tr>
+                    <tr><td><code>short</code></td><td><code>Short</code></td><td>Yes</td></tr>
+                    <tr><td><code>int</code></td><td><code>Integer</code></td><td>Yes</td></tr>
+                    <tr><td><code>long</code></td><td><code>Long</code></td><td>Yes</td></tr>
+                    <tr><td><code>float</code></td><td><code>Float</code></td><td>Yes</td></tr>
+                    <tr><td><code>double</code></td><td><code>Double</code></td><td>Yes</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <hr>
+
+        <section class="content boxing">
+            <h2 class="subtitle">Boxing and Unboxing</h2>
+            <p>Java provides automatic conversion between primitives and their corresponding wrapper objects, a feature known as **Autoboxing** and **Unboxing**.</p>
+            <ul>
+                <li>**Boxing (Autoboxing):** Converting a primitive value into a Wrapper object. (e.g., `int` to `Integer`).</li>
+                <li>**Unboxing:** Converting a Wrapper object back into its primitive type. (e.g., `Integer` to `int`).</li>
+            </ul>
+            <pre><code>public class Test {
+   public static void main(String args[]) {
+      Integer x = 5;      // Autoboxing: int 5 is wrapped into an Integer object
+      x = x + 10;         // Unboxing: x is converted to int (5), added to 10 (result 15)
+                          // Autoboxing: 15 is re-wrapped into the Integer object x
+      System.out.println(x); 
+   }
+}</code></pre>
+            <p>Output: <code>15</code></p>
+            <p>This automatic feature simplifies code by allowing developers to treat the wrapper objects almost as if they were primitives in expressions, while still gaining the benefits of objects.</p>
+        </section>
+
+    </div>
+
+</body>
+</html>

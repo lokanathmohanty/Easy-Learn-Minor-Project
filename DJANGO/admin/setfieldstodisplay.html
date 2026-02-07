@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django Admin: Customizing List Display and Search ⚙️</h1>
+        <div class="content">
+            <p>The Django Admin interface is highly customizable, allowing you to control how model objects are represented in lists and forms. Customization is managed using the **<code>admin.ModelAdmin</code>** class.</p>
+
+            <hr>
+
+            <h2>1. Improving Object Representation (<code>__str__</code>)</h2>
+            <p>By default, Django displays generic names like "Employee object (1)". To make the objects more user-friendly in the Admin and other places, you must **override the <code>__str__()</code> method** in your model class. This method defines the string representation of an object:</p>
+            <pre><code>class Employee(models.Model):
+   # ... fields ...
+   
+   def __str__(self):
+      return "Name: {}, Contact: {}".format(self.empname, self.contact)</code></pre>
+            <p>After this change, the list view will show the descriptive string, e.g., "Name: John Doe, Contact: 555-1234".</p>
+
+            <hr>
+
+            <h2>2. Customizing List Columns (<code>list_display</code>)</h2>
+            <p>The **"change list page"** (the page listing all objects for a model) can be customized using the **<code>list_display</code>** attribute of a **<code>ModelAdmin</code>** class. This attribute takes a **tuple** of field names to be displayed as columns.</p>
+            <p>The **<code>EmployeeAdmin</code>** class inherits from <code>admin.ModelAdmin</code> and is registered with the <code>Employee</code> model. This registration can be done via the standard function or the decorator:</p>
+
+            <h3>Defining and Registering the Admin Class (<code>admin.py</code>)</h3>
+            <pre><code>from django.contrib import admin
+from .models import Employee
+
+# Use the @admin.register decorator for clean registration
+@admin.register(Employee) 
+class EmployeeAdmin(admin.ModelAdmin):
+   list_display = ("empname", "contact", "joined_date")</code></pre>
+            <p>This configuration replaces the default single column with columns for Name, Contact, and Joined Date.</p>
+
+            <hr>
+
+            <h2>3. Adding Search Functionality (<code>search_fields</code>)</h2>
+            <p>You can add a search box to the change list page using the **<code>search_fields</code>** attribute. This attribute takes a tuple of field names upon which the search will be performed. You can use field lookup types (like <code>__startswith</code>) to refine the search behavior.</p>
+            <pre><code>@admin.register(Employee)
+class EmployeeAdmin(admin.ModelAdmin):
+   list_display = ("empname", "contact", "joined_date")
+   search_fields = ("empname__startswith", ) # Search based on the start of the employee's name</code></pre>
+            <p>By adding this, a search field appears on the top of the Employee list page, restricting results to names beginning with the entered text.</p>
+        </div>
+    </div>
+</div>

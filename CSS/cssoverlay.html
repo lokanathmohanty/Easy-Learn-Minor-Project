@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Overlay</h1>
+    <div class="content">
+      <p>
+        An overlay is a transparent layer of content that is placed on top of another element. It is often used to create 
+        effects such as modals, tooltips, popovers, or image hover effects. Overlays are powerful in improving user 
+        experience by highlighting certain parts of a webpage without navigating away.
+      </p>
+
+      <h2>How Overlays Work</h2>
+      <p>
+        To implement overlays, the overlay element must be positioned absolutely and given a higher <code>z-index</code> 
+        than the content element. This ensures that the overlay is displayed on top of the underlying content. 
+      </p>
+
+      <ul>
+        <li><strong>Positioning:</strong> The container must have <code>position: relative</code>.</li>
+        <li><strong>Overlay Element:</strong> Set <code>position: absolute</code> and make it cover the container.</li>
+        <li><strong>Transparency:</strong> Use <code>rgba()</code> for semi-transparent backgrounds.</li>
+        <li><strong>Interactivity:</strong> Change <code>opacity</code> or <code>visibility</code> on hover.</li>
+      </ul>
+
+      <h2>CSS Overlay Basic Example</h2>
+      <p>
+        The following example demonstrates a simple overlay effect where text and a button appear when hovering over an image.
+      </p>
+
+      <div class="session">
+        <h2 class="title">Example: Basic Overlay</h2>
+        <div class="content">
+          <pre>
+.container {
+  position: relative;
+  width: 300px;
+}
+.container img {
+  width: 100%;
+}
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.container:hover .overlay {
+  opacity: 1;
+}
+          </pre>
+        </div>
+      </div>
+
+      <h2>Overlay Effect Using JavaScript</h2>
+      <p>
+        JavaScript can be used to show and hide overlays dynamically. For example, clicking a button can 
+        toggle an overlay instead of relying only on hover.
+      </p>
+
+      <div class="session">
+        <h2 class="title">Example: Toggle Overlay with JavaScript</h2>
+        <div class="content">
+          <pre>
+&lt;button onclick="toggleOverlay()"&gt;Show Overlay&lt;/button&gt;
+&lt;div id="overlay" class="overlay"&gt;This is an overlay&lt;/div&gt;
+
+&lt;script&gt;
+  function toggleOverlay() {
+    const overlay = document.getElementById("overlay");
+    if (overlay.style.display === "block") {
+      overlay.style.display = "none";
+    } else {
+      overlay.style.display = "block";
+    }
+  }
+&lt;/script&gt;
+          </pre>
+        </div>
+      </div>
+
+      <h2>Different Types of Overlay Effects</h2>
+      <p>
+        Overlays can be animated in various directions, adding smooth visual effects. Some common types include:
+      </p>
+      <ul>
+        <li>Top to Bottom Sliding Overlay</li>
+        <li>Bottom to Top Sliding Overlay</li>
+        <li>Left to Right Overlay</li>
+        <li>Right to Left Overlay</li>
+        <li>Fade Effect Overlay</li>
+        <li>Image Title Overlay</li>
+        <li>Icon Overlay</li>
+      </ul>
+
+      <h2>Example: Fade Overlay Effect</h2>
+      <p>
+        A fade effect smoothly reveals an overlay on hover. This is achieved by animating the <code>opacity</code> property.
+      </p>
+
+      <div class="session">
+        <h2 class="title">Example: Fade Effect</h2>
+        <div class="content">
+          <pre>
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255,0,0,0.6);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.container:hover .overlay {
+  opacity: 1;
+}
+          </pre>
+        </div>
+      </div>
+
+      <h2>Example: Image Title Overlay</h2>
+      <p>
+        A title overlay displays text (like a caption) when the user hovers over an image.
+      </p>
+
+      <div class="session">
+        <h2 class="title">Example: Image Title Overlay</h2>
+        <div class="content">
+          <pre>
+&lt;div class="container"&gt;
+  &lt;img src="image.jpg" alt="Sample"&gt;
+  &lt;div class="overlay"&gt;
+    &lt;h2&gt;Image Title&lt;/h2&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+          </pre>
+        </div>
+      </div>
+
+      <h2>Example: Icon Overlay</h2>
+      <p>
+        Instead of text, an overlay can show interactive icons, such as links to social media or actions.
+      </p>
+
+      <div class="session">
+        <h2 class="title">Example: Icon Overlay</h2>
+        <div class="content">
+          <pre>
+&lt;div class="container"&gt;
+  &lt;img src="image.jpg" alt="Sample"&gt;
+  &lt;div class="overlay"&gt;
+    &lt;a href="#"&gt;★&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+          </pre>
+        </div>
+      </div>
+
+      <h2>Conclusion</h2>
+      <p>
+        CSS overlays are versatile and essential for building modern, interactive, and visually appealing web designs. 
+        They can be combined with animations, JavaScript interactivity, and icons to create highly engaging user interfaces.
+      </p>
+    </div>
+  </div>
+</div>

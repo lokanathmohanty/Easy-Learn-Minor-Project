@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Constants</h1>
+    <div class="content">
+      <p>JavaScript constants are the variables whose values remain unchanged throughout the execution of the program. You can declare constants using the <code>const</code> keyword.</p>
+
+      <h2>JavaScript const Keyword</h2>
+      <p>The <code>const</code> keyword is introduced in the ES6 version of JavaScript with the <code>let</code> keyword. The <code>const</code> keyword is used to define variables having constant reference.</p>
+      <p>A variable defined with <code>const</code> can't be re-declared or reassigned. The <code>const</code> declaration has block as well as function scope.</p>
+
+      <h2>Declaring JavaScript Constants</h2>
+      <p>You always need to assign a value at the time of declaration if the variable is declared using the <code>const</code> keyword.</p>
+      <p><code>const x = 10; // Correct Way</code></p>
+      <p>You can't declare variables with the <code>const</code> keyword without initialization.</p>
+      <p><code>const y; // Incorrect way<br>y = 20;</code></p>
+
+      <h2>Can't be Reassigned</h2>
+      <p>You can't update the value of the variables declared with the <code>const</code> keyword.</p>
+      <p><code>const y = 20;<br>y = 40; // Not possible</code></p>
+
+      <h2>Block Scope</h2>
+      <p>A variable declared with <code>const</code> has block-scope. This means the same variable is treated as different outside the block.</p>
+      <p>Example:</p>
+      <p><code>{ const x = "john"; }<br>const x = "Doe"</code></p>
+      <p>But we can't re-declare the <code>const</code> variable within the same block:</p>
+      <p><code>{ const x = "john"; const x = "Doe"; // Incorrect }</code></p>
+
+      <h2>Constant Arrays and Objects in JavaScript</h2>
+      <p>We can declare arrays and objects using the <code>const</code> keyword, but only the reference is constant, not the value. You can update elements/properties, but you can't reassign a new array or object.</p>
+
+      <h2>Example (Constant Arrays)</h2>
+      <p>Updating elements and pushing new values is allowed:</p>
+      <pre><code>
+const arr = ["door", "window", "roof", "wall"];
+arr[0] = "gate";
+arr.push("fence");
+// arr = ["table", "chair"] // Error
+document.write(arr);
+      </code></pre>
+      <p><strong>Output:</strong> gate,window,roof,wall,fence</p>
+
+      <h2>Example (Constant Objects)</h2>
+      <pre><code>
+const obj = { animal: "Lion", color: "Yellow" };
+obj.animal = "Tiger";
+obj.legs = 4;
+document.write(JSON.stringify(obj));
+// obj = { name: "cow" } // Error
+      </code></pre>
+      <p><strong>Output:</strong> {"animal":"Tiger","color":"Yellow","legs":4}</p>
+      <p>So, we can't change the reference to variables declared with <code>const</code>, but we can update their contents.</p>
+
+      <h2>No Const Hoisting</h2>
+      <p>Variables defined with <code>const</code> are not hoisted. Accessing before declaration will cause an error.</p>
+      <pre><code>
+document.write(x);
+const x = 10; // Error
+      </code></pre>
+
+      <h2>Key Properties of const</h2>
+      <ul>
+        <li>Block scope</li>
+        <li>Can't be re-declared in the same scope</li>
+        <li>Not hoisted</li>
+        <li>Holds a constant reference</li>
+      </ul>
+
+      <h2>Difference between var, let and const</h2>
+      <table>
+        <tr><th>Comparison Basis</th><th>var</th><th>let</th><th>const</th></tr>
+        <tr><td>Scope</td><td>Function</td><td>Block</td><td>Block</td></tr>
+        <tr><td>Hoisted</td><td>Yes</td><td>No</td><td>No</td></tr>
+        <tr><td>Reassign</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+        <tr><td>Re-declare</td><td>Yes</td><td>No</td><td>No</td></tr>
+        <tr><td>Bind This</td><td>Yes</td><td>No</td><td>No</td></tr>
+      </table>
+
+      <h2>Which should you use?</h2>
+      <ul>
+        <li>Use <code>let</code> for block scope variables.</li>
+        <li>Use <code>const</code> for constant references.</li>
+        <li>Use <code>var</code> if you need function scope, but avoid re-declaring variables when possible.</li>
+      </ul>
+    </div>
+  </div>
+</div>

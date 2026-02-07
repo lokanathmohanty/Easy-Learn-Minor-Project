@@ -1,0 +1,117 @@
+<div class="container">
+
+  <div class="session">
+
+    <h1 class="title">PowerShell - Hashtables</h1>
+
+    <div class="content">
+      <p>Hashtable stores key/value pairs in a hash table. When using a Hashtable, you specify an object that is used as a key, and the value that you want linked to that key. Generally, we use Strings or numbers as keys.</p>
+
+      <p>This tutorial introduces how to declare hashtable variables, create hashtables, and process hashtables using their methods.</p>
+
+      <h2 class="title">Declaring Hashtable Variables</h2>
+      <p>To use a hashtable in a program, you must declare a variable to reference the hashtable. Here is the syntax for declaring a hashtable variable −</p>
+      <p><strong>Syntax</strong></p>
+      <p><code>$hash = @{ ID = 1; Shape = "Square"; Color = "Blue"}</code><br>or<br><code>$hash = @{}</code></p>
+      <p><em>Note:</em> Ordered dictionaries can be created using similar syntax. Ordered dictionaries maintain the order in which entries are added whereas hashtables do not.</p>
+
+      <h2 class="title">Example</h2>
+      <p>The following code snippets are examples of this syntax −</p>
+      <pre><code>$hash = [ordered]@{ ID = 1; Shape = "Square"; Color = "Blue"}</code></pre>
+      <p>Print the hashtable:</p>
+      <pre><code>$hash</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code>Name                           Value    
+----                           -----                                                    
+ID                             1                                                        
+Color                          Blue                                                     
+Shape                          Square</code></pre>
+
+      <p>The hashtable values are accessed through the keys:</p>
+      <pre><code>$hash["ID"]
+1</code></pre>
+
+      <h2 class="title">Processing Hashtable</h2>
+      <p>Dot notation can be used to access hashtable keys or values.</p>
+      <pre><code>$hash.keys
+ID
+Color
+Shape
+
+$hash.values
+1
+Blue
+Square</code></pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Complete Example: Create, Initialize, and Process Hashtable</h2>
+      <pre><code>$hash = @{ ID = 1; Shape = "Square"; Color = "Blue"}
+
+write-host("Print all hashtable keys")
+$hash.keys
+
+write-host("Print all hashtable values")
+$hash.values
+
+write-host("Get ID")
+$hash["ID"]
+
+write-host("Get Shape")
+$hash.Number
+
+write-host("print Size")
+$hash.Count
+
+write-host("Add key-value")
+$hash["Updated"] = "Now"
+
+write-host("Add key-value")
+$hash.Add("Created","Now")
+
+write-host("print Size")
+$hash.Count
+
+write-host("Remove key-value")
+$hash.Remove("Updated")
+
+write-host("print Size")
+$hash.Count
+
+write-host("sort by key")
+$hash.GetEnumerator() | Sort-Object -Property key
+</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code>Print all hashtable keys
+ID
+Color
+Shape
+Print all hashtable values
+1
+Blue
+Square
+Get ID
+1
+Get Shape
+print Size
+3
+Add key-value
+Add key-value
+print Size
+5
+Remove key-value
+print Size
+4
+sort by key
+
+Name                           Value                                                                                                   
+----                           -----                                                                                                   
+Color                          Blue                                                                                                    
+Created                        Now                                                                                                     
+ID                             1                                                                                                       
+Shape                          Square</code></pre>
+    </div>
+
+  </div>
+
+</div>

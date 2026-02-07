@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Thread Priority</h1>
+    </div>
+    <div class="content">
+      <p>Python's <code>threading</code> module does not support thread priorities directly, unlike Java. Because of Python’s Global Interpreter Lock (GIL), true thread priority management and control (like suspending, resuming, or interrupting threads) are not natively available.</p>
+      <p>However, thread priorities can be simulated using techniques like varying sleep durations, custom scheduling logic, or external modules.</p>
+      
+      <h2>Simulating Priority Using Sleep</h2>
+      <p>One way to simulate priority is by introducing delays in threads. Threads with lower priorities sleep longer, giving higher priority threads more CPU time.</p>
+      <pre>
+import threading
+import time
+
+class DummyThread(threading.Thread):
+   def __init__(self, name, priority):
+      threading.Thread.__init__(self)
+      self.name = name
+      self.priority = priority
+
+   def run(self):
+      time.sleep(self.priority)
+      print(f"{self.name} thread with priority {self.priority} is running")
+
+t1 = DummyThread('Thread-1', 4)  # lower priority, longer sleep
+t2 = DummyThread('Thread-2', 1)  # higher priority, shorter sleep
+
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+print('All Threads executed')
+      </pre>
+      <p>Output:</p>
+      <p>Thread-2 thread with priority 1 is running<br>Thread-1 thread with priority 4 is running<br>All Threads executed</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Setting Thread Priority on Windows</h2>
+      </div>
+    <div class="content">
+      <p>On Windows, you can adjust thread priorities using the <code>ctypes</code> module to interact with Windows API.</p>
+      <pre>
+import threading
+import ctypes
+import time
+
+w32 = ctypes.windll.kernel32
+SET_THREAD = 0x20
+PRIORITY_HIGHEST = 2  # example priority
+
+class MyThread(threading.Thread):
+   def __init__(self, start_event, name, iterations):
+      super().__init__()
+      self.start_event = start_event
+      self.iterations = iterations
+      self.thread_id = None
+      self.name = name
+
+   def set_priority(self, priority):
+      if not self.is_alive():
+         print('Cannot set priority to inactive thread')
+         return
+      thread_handle = w32.OpenThread(SET_THREAD, False, self.thread_id)
+      success = w32.SetThreadPriority(thread_handle, priority)
+      w32.CloseHandle(thread_handle)
+      if not success:
+         print('Failed to set priority')
+
+   def run(self):
+      self.thread_id = w32.GetCurrentThreadId()
+      self.start_event.wait()
+      for _ in range(self.iterations):
+         print(f"{self.name} running")
+         time.sleep(1)
+
+start_event = threading.Event()
+
+thread_low = MyThread(start_event, 'low', 4)
+thread_high = MyThread(start_event, 'high', 4)
+
+thread_low.start()
+thread_high.start()
+
+thread_high.set_priority(PRIORITY_HIGHEST)
+
+start_event.set()
+      </pre>
+      <p>Output (may vary):</p>
+      <p>
+      high running<br>
+      low running<br>
+      high running<br>
+      low running<br>
+      ...<br>
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Using Priority Queue for Thread Prioritization</h2>
+    </div>
+    <div class="content">
+      <p>The <code>queue.PriorityQueue</code> lets threads process tasks based on priority values (lower number = higher priority).</p>
+      <pre>
+from threading import Thread
+from queue import PriorityQueue
+from time import sleep
+from random import random, randint
+
+queue = PriorityQueue()
+
+def producer(queue):
+   print('Producer started')
+   for _ in range(5):
+      priority = randint(0, 5)
+      item = (priority, random())
+      queue.put(item)
+   queue.join()
+   queue.put(None)  # sentinel to stop consumer
+   print('Producer done')
+
+def consumer(queue):
+   print('Consumer started')
+   while True:
+      item = queue.get()
+      if item is None:
+         break
+      sleep(item[1])  # simulate work
+      print(item)
+      queue.task_done()
+   print('Consumer done')
+
+prod = Thread(target=producer, args=(queue,))
+cons = Thread(target=consumer, args=(queue,))
+
+prod.start()
+cons.start()
+prod.join()
+cons.join()
+      </pre>
+      <p>Output:</p>
+      <p>
+      Producer started<br>
+      Consumer started<br>
+      (0, 0.15...)<br>
+      (2, 0.47...)<br>
+      (2, 0.86...)<br>
+      (3, 0.05...)<br>
+      (4, 0.23...)<br>
+      Producer done<br>
+      Consumer done<br>
+      </p>
+    </div>
+  </div>
+</div>

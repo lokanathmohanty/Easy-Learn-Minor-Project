@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Send an Email</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Sending emails is a common requirement in Node.js applications for notifications, account verification, and automated communication. The popular module used for this is <strong>Nodemailer</strong>.
+      </p>
+
+      <h2>Nodemailer</h2>
+      <p>
+        Nodemailer is a Node.js package that simplifies sending emails from web applications and servers. To install Nodemailer, run:
+      </p>
+      <pre><code>npm install nodemailer</code></pre>
+      <p>This installs Nodemailer in the project's <code>node_modules</code> directory.</p>
+
+      <h2>Creating a Basic Email Sender</h2>
+      <p>Create a new file named <code>tp1.js</code> and add the following code:</p>
+      <pre><code>const nodemailer = require('nodemailer');
+
+const x = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'tutorialpoint.123@gmail.com',
+    pass: '*******'
+  }
+});
+
+const y = {
+  from: 'tutorialpoint.123@gmail.com',
+  to: 'tp.143@yahoo.com',
+  subject: 'Testing',
+  text: 'Hello, Please provide the feedback.!'
+};
+
+x.sendMail(y, (error, info) => {
+  if (error) {
+    console.log('Error:', error);
+  } else {
+    console.log('Email sent:', info.response);
+  }
+});
+</code></pre>
+
+      <h2>Running the Script</h2>
+      <p>Run the script with the command:</p>
+      <pre><code>node tp1.js</code></pre>
+      <p>If successful, the output will be similar to:</p>
+      <p><strong>Email sent: 250 2.0.0 OK ...</strong></p>
+
+      <h2>Using a Custom SMTP Server</h2>
+      <p>
+        Nodemailer can also be configured to use any SMTP server by specifying host, port, and authentication options. This is useful for production environments using services such as SendGrid, Mailgun, or AWS SES.
+      </p>
+      <pre><code>const x = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: 'tutorialpoint.123@gmail.com',
+    pass: '******'
+  }
+});
+</code></pre>
+    </div>
+  </div>
+</div>

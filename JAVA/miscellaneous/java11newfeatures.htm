@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java 11 - Major New Features Summary (LTS Release)</h1>
+
+        <div class="content">
+            <h2>Overview and LTS Status 🛡️</h2>
+            <p>**Java 11**, released in **September 2018**, is the first **LTS (Long-Term Support)** feature release since Java 8, making it a critical version for enterprise deployments. Following the 6-month release cadence established by Java 10, Java 11 focused on stabilizing new features and removing legacy components.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Key API and Language Enhancements</h2>
+
+            <h3>1. HTTP Client API Standardized (JEP 321)</h3>
+            <p>The new, modern HTTP Client API (for HTTP/2, WebSockets, etc.) introduced in Java 9 as an incubator module is now officially part of the Java SE standard. It provides a fluent, synchronous, and asynchronous way to handle HTTP requests and responses.</p>
+
+            <h3>2. Launch Single-File Source-Code Programs (JEP 330)</h3>
+            <p>This allows running a single Java source code file directly from the command line using the <code>java</code> launcher **without explicit compilation** using <code>javac</code>. This greatly simplifies learning, testing, and scripting for simple applications.</p>
+            <pre><code>// Command Line Usage
+$ java HelloWorld.java</code></pre>
+
+            <h3>3. Local-Variable Syntax for Lambda Parameters (JEP 323)</h3>
+            <p>Enables the use of the **<code>var</code>** keyword (Local Variable Type Inference from Java 10) in **lambda expression parameters**. This is particularly useful when applying annotations to the parameters, as the type must be explicitly written out otherwise.</p>
+            <pre><code>// Using 'var' in a lambda parameter for annotation
+(var list) -> list.add("item")
+
+// Annotated parameter
+(@NonNull var list) -> list.add("item")</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Core Library Updates</h2>
+
+            <h3>String API Enhancements</h3>
+            <p>Several useful utility methods were added to the **<code>String</code>** class:</p>
+            <ul>
+                <li><strong><code>isBlank()</code>:</strong> Returns true if the string is empty or contains only whitespace.</li>
+                <li><strong><code>lines()</code>:</strong> Returns a <code>Stream<String></code> of lines extracted from the string.</li>
+                <li><strong><code>repeat(int count)</code>:</strong> Returns a string whose value is the concatenation of the original string repeated <code>count</code> times.</li>
+                <li><strong><code>strip()</code>, <code>stripLeading()</code>, <code>stripTrailing()</code>:</strong> Improved methods for removing whitespace (based on Unicode character properties) compared to the older <code>trim()</code>.</li>
+            </ul>
+
+            <h3>New File I/O Methods</h3>
+            <p>Simplifies reading and writing entire files as a single string:</p>
+            <ul>
+                <li><strong><code>Files.readString(Path path)</code>:</strong> Reads all content from a file into a string.</li>
+                <li><strong><code>Files.writeString(Path path, CharSequence content)</code>:</strong> Writes a string to a file, creating or overwriting it.</li>
+            </ul>
+
+            <h3>Other API Updates</h3>
+            <ul>
+                <li>
+                    <strong><code>Optional.isEmpty()</code>:</strong> A straightforward method that returns the inverse of <code>isPresent()</code>.
+                </li>
+                <li>
+                    <strong><code>Collection.toArray(IntFunction)</code>:</strong> A new default method that allows array creation with the specified size and type, simplifying collection-to-array conversions.
+                </li>
+                <li>
+                    <strong><code>Predicate.not(Predicate)</code>:</strong> A static method that negates an existing <code>Predicate</code>, commonly used in stream filter operations (e.g., <code>.filter(Predicate.not(String::isBlank))</code>).
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Performance and Garbage Collectors</h2>
+            <p>Java 11 introduced two experimental and one no-op garbage collector option, giving users more flexibility for low-latency or specific testing environments:</p>
+            <ul>
+                <li>
+                    <strong>ZGC (JEP 333):</strong> A **Scalable Low-Latency Garbage Collector** designed for systems with massive heaps (multiterabytes) where pause times must be minimal (less than 10 milliseconds).
+                </li>
+                <li>
+                    <strong>Epsilon GC (JEP 318):</strong> A **No-Op Garbage Collector** that handles allocation but implements no actual memory reclamation. Useful for performance testing where GC overhead needs to be isolated, or for extremely short-lived jobs.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

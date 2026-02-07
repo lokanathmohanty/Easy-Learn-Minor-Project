@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Number Generation in C</title>
+</head>
+<body>
+  <div class="container">
+
+    <div class="session">
+      <h1 class="title">Random Number Generation in C</h1>
+      <div class="content">
+        <p>The <code>stdlib.h</code> library in C includes the <code>rand()</code> function that returns an integer randomly, between <code>0</code> and the constant <code>RAND_MAX</code>.</p>
+        <p>The <code>rand()</code> function generates pseudo-random numbers. They are not truly random and are based on the Linear Congruential Generator (LCG) algorithm.</p>
+        <p><code>int rand(void);</code></p>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Example 1 – rand()</h1>
+      <div class="content">
+        <p>The following code calls the <code>rand()</code> function three times. Each call is likely to return a different integer:</p>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+   printf("%ld\n", rand());
+   printf("%ld\n", rand());
+   printf("%ld\n", rand());
+
+   return 0;
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+41
+18467
+6334
+        </pre>
+        <p>Note: The <code>rand()</code> function doesn't automatically seed itself with a varying value. Without setting a seed, results may be the same across runs.</p>
+        <p>Use <code>srand()</code> to seed the random number generator and improve randomness.</p>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Example 2 – Random Number (0–99)</h1>
+      <div class="content">
+        <p>This example generates random integers from 0 to 99 using <code>rand() % 100</code>:</p>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+   for(int i = 1; i <= 5; i++) {
+      printf("random number %d: %d \n", i, rand() % 100);
+   }
+
+   return 0;
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+random number 1: 41
+random number 2: 67
+random number 3: 34
+random number 4: 0
+random number 5: 69
+        </pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Example 3 – Random Number in a Range</h1>
+      <div class="content">
+        <p>To generate random numbers between a specified range, use the following logic:</p>
+        <pre><code>num = (rand() % (upper - lower + 1)) + lower;</code></pre>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+   int i, num;
+   int lower = 50, upper = 100;
+
+   for (i = 1; i <= 5; i++) {
+      num = (rand() % (upper - lower + 1)) + lower;
+      printf("random number %d: %d \n", i, num);
+   }
+
+   return 0;
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+random number 1: 91
+random number 2: 55
+random number 3: 60
+random number 4: 81
+random number 5: 94
+        </pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">The srand() Function</h1>
+      <div class="content">
+        <p>The <code>srand()</code> function seeds the pseudo-random number generator used by <code>rand()</code>.</p>
+        <pre><code>void srand(unsigned int seed);</code></pre>
+        <p>Note: If <code>srand()</code> is not called, the generator behaves as if seeded with <code>srand(1)</code>.</p>
+        <p>To ensure varied random output on every run, use <code>srand()</code> with <code>time(NULL)</code>.</p>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Example 4 – Seeding with Time</h1>
+      <div class="content">
+        <p>Using the current time as a seed ensures different random sequences on each program execution.</p>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int main() {
+   srand(time(NULL));
+   printf("Random number: %d \n", rand());
+
+   return 0;
+}</code></pre>
+        <h2>Output</h2>
+        <pre>Random number: 1436786055</pre>
+        <p>Output will differ each time the program runs.</p>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Example 5 – Random in Range with Seed</h1>
+      <div class="content">
+        <p>Combining <code>srand()</code> and range logic to produce better randomized numbers:</p>
+        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int main() {
+   int i, num;
+   time_t t;
+   int lower = 100, upper = 200;
+
+   srand((unsigned) time(&t));
+
+   for (i = 1; i <=5; i++) {
+      num = (rand() % (upper - lower + 1)) + lower;
+      printf("random number number %d: %d \n", i, num);
+   }
+
+   return 0;
+}</code></pre>
+        <h2>Output</h2>
+        <pre>
+random number number 1: 147
+random number number 2: 171
+random number number 3: 173
+random number number 4: 112
+random number number 5: 181
+        </pre>
+      </div>
+    </div>
+
+    <div class="session">
+      <h1 class="title">Limitations and Tips</h1>
+      <div class="content">
+        <ul>
+          <li><code>rand()</code> is not truly random. It is deterministic based on seed.</li>
+          <li>Same seed → Same output sequence.</li>
+          <li>Range limited to 0 to <code>RAND_MAX</code> (usually 32767 or more).</li>
+          <li>Use a good seed source like <code>time(NULL)</code> for better randomness.</li>
+          <li>For cryptographic or high-quality randomness, use third-party libraries or system-level APIs.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

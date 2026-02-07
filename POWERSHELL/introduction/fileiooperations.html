@@ -1,0 +1,127 @@
+<div class="container">
+
+  <div class="session">
+
+    <h1 class="title">PowerShell - File I/O Operations</h1>
+
+    <div class="content">
+      <p>Following are examples of PowerShell scripts for creating and reading different types of files.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Sr.No.</th>
+            <th>Operation &amp; Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Create Text File<br>Example Script to show how to create a text file using PowerShell scripts.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Read Text File<br>Example Script to show how to read a text file using PowerShell scripts.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Create XML File<br>Example Script to show how to create an XML file using PowerShell scripts.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Read XML File<br>Example Script to show how to read an XML file using PowerShell scripts.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Create CSV File<br>Example Script to show how to create a CSV file using PowerShell scripts.</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Read CSV File<br>Example Script to show how to read a CSV file using PowerShell scripts.</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Create HTML File<br>Example Script to show how to create an HTML file using PowerShell scripts.</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Read HTML File<br>Example Script to show how to read an HTML file using PowerShell scripts.</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Erasing File Content<br>Example Script to show how to erase file contents using PowerShell scripts.</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Append Text Data<br>Example Script to show how to append text to file contents using PowerShell scripts.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Create Text File</h2>
+      <pre>Set-Content -Path "C:\example.txt" -Value "Hello, PowerShell!"</pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Read Text File</h2>
+      <pre>Get-Content -Path "C:\example.txt"</pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Create XML File</h2>
+      <pre>
+[xml]$xml = New-Object System.Xml.XmlDocument
+$root = $xml.CreateElement("Root")
+$xml.AppendChild($root) | Out-Null
+$xml.Save("C:\example.xml")
+      </pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Read XML File</h2>
+      <pre>[xml]$xml = Get-Content -Path "C:\example.xml"</pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Create CSV File</h2>
+      <pre>
+$data = @(
+  @{Name="John"; Age=30}
+  @{Name="Jane"; Age=28}
+)
+$data | Export-Csv -Path "C:\example.csv" -NoTypeInformation
+      </pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Read CSV File</h2>
+      <pre>Import-Csv -Path "C:\example.csv"</pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Create HTML File</h2>
+      <pre>
+$data = Get-Process | Select-Object -First 5
+$data | ConvertTo-Html | Out-File "C:\example.html"
+      </pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Read HTML File</h2>
+      <pre>Get-Content -Path "C:\example.html"</pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Erase File Content</h2>
+      <pre>Clear-Content -Path "C:\example.txt"</pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Append Text Data</h2>
+      <pre>Add-Content -Path "C:\example.txt" -Value "Appended text."</pre>
+    </div>
+
+  </div>
+
+</div>

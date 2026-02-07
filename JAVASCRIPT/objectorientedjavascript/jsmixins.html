@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Mixins</h1>
+
+    <div class="content">
+      <h2>Mixins in JavaScript</h2>
+      <p>
+        The mixins in JavaScript allow you to add the properties of the other objects or classes 
+        to the target object's or class's prototype and extend the functionality of the target object. 
+        After that, you can access the other object's method using the target object.
+      </p>
+      <p>
+        In JavaScript, each object contains a built-in property called <strong>prototype</strong>. 
+        The prototype is itself an object, and it forms a prototype chain to inherit properties 
+        and methods from other objects. Mixins let you borrow functionality in a similar way.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>JavaScript Mixins with Objects</h2>
+      <p>
+        Using mixins, you can extend the functionality of the target object by adding 
+        properties and methods of other objects.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre><code>Object.assign(target, obj);</code></pre>
+
+      <ul>
+        <li><strong>target</strong> − The object whose functionality you need to extend.</li>
+        <li><strong>obj</strong> − The object whose functionality will be borrowed.</li>
+      </ul>
+
+      <h3>Example</h3>
+      <pre><code>
+const parent = {
+   printMessage() { console.log("This is a parent object."); }
+}
+const child = {
+   showName() { console.log("This is a child object."); }
+}
+Object.assign(child, parent);
+child.printMessage();
+child.showName();
+      </code></pre>
+    </div>
+
+    <div class="content">
+      <h2>JavaScript Mixins with Classes</h2>
+      <p>
+        You can also extend the functionality of classes with objects using mixins.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre><code>Object.assign(class_name.prototype, obj);</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>
+const animal = {
+   eats: true,
+   run() { console.log("Animals run."); }
+}
+class Cat {
+   constructor() { this.name = "Cat"; }
+}
+Object.assign(Cat.prototype, animal);
+const catObj = new Cat();
+console.log(catObj.eats);
+catObj.run();
+      </code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Achieving Multiple Inheritance Using Mixins</h2>
+      <p>
+        JavaScript doesn’t support multiple inheritance by default, but you can simulate it 
+        using mixins by combining functionalities from multiple objects.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>
+const eat = { eatFood() { console.log("Eating food!"); } };
+const drink = { drinkWater() { console.log("Drinking water!"); } };
+const person = { name: "John" };
+Object.assign(person, eat, drink);
+person.eatFood();
+person.drinkWater();
+      </code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Benefits of Using Mixins</h2>
+      <ul>
+        <li><strong>Code reusability</strong> − Reuse code across different objects and classes.</li>
+        <li><strong>Multiple inheritance</strong> − Achieve similar functionality to multiple inheritance.</li>
+        <li><strong>Extensibility</strong> − Add new features without altering class structure.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Limitations of Mixins</h2>
+      <ul>
+        <li><strong>Complexity</strong> − Overusing mixins can make code difficult to maintain.</li>
+        <li><strong>Pseudo inheritance</strong> − They don’t provide true inheritance.</li>
+        <li><strong>Naming collision</strong> − Combining multiple objects may cause conflicts.</li>
+      </ul>
+    </div>
+  </div>
+</div>

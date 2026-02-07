@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Expectations (Enhanced $\text{assert()}$) 🧐</h1>
+
+        <div class="content">
+            <p>**Expectations** are a backward-compatible enhancement to the traditional $\text{assert()}$ function, introduced in PHP 7. This update allows $\text{assert()}$ to be used for **zero-cost assertions in production code** and provides the critical ability to **throw custom exceptions** when an assertion fails.</p>
+
+            <hr>
+
+            <h2 class="title">The $\text{assert()}$ Language Construct</h2>
+            <p>In PHP 7, $\text{assert()}$ is no longer just a function but a **language construct**. Its primary parameter is now an **expression** that returns a value to be tested, not just a string to be evaluated.</p>
+            <pre>assert(mixed $assertion, mixed $description_or_exception): bool</pre>
+
+            <h3>Parameters:</h3>
+            <ul>
+                <li>$\text{\$assertion}$: An expression whose resulting value is used to determine success or failure.</li>
+                <li>$\text{\$description\_or\_exception}$:
+                    <ul>
+                        <li>**String:** An optional description included in the failure message (PHP 5 behavior).</li>
+                        <li>**$\text{Throwable}$ Object (PHP 7+):** The custom exception object that will be thrown if the assertion fails and the $\text{assert.exception}$ directive is enabled.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h2 class="title">Configuration Directives for $\text{assert()}$</h2>
+            <p>The behavior of $\text{assert()}$ is controlled by two key $\text{php.ini}$ directives:</p>
+
+            <table class="example">
+                <thead>
+                    <tr>
+                        <th>Directive</th>
+                        <th>Value</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3">$\text{zend.assertions}$</td>
+                        <td>$\text{1}$ (Default)</td>
+                        <td>**Development Mode:** Code is generated and executed. Assertions are active.</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{0}$</td>
+                        <td>Code is generated but **skipped at runtime** (zero-cost). The assertion still performs an internal warning check (PHP 7 behavior).</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{-1}$</td>
+                        <td>**Production Mode:** Assertion code is **not generated** at all (true zero-cost).</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">$\text{assert.exception}$</td>
+                        <td>$\text{1}$</td>
+                        <td>When assertion fails, it **throws** the provided $\text{Throwable}$ object, or a new $\text{AssertionError}$ if none was provided. (Recommended for unit testing and development).</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{0}$ (Default)</td>
+                        <td>When assertion fails, it only generates a **warning** based on the $\text{Throwable}$ object rather than throwing it (PHP 5 compatibility).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 class="title">Throwing Custom Exceptions Example</h2>
+            <p>By setting $\text{assert.exception}$ to 1, you enable the "Expectation" behavior, allowing you to use a custom exception (which must ultimately implement $\text{Throwable}$ or extend $\text{AssertionError}$).</p>
+            <pre>
+&lt;?php
+   // Enable the throwing of exceptions upon assertion failure
+   ini_set('assert.exception', 1);
+   
+   // Define a custom error class
+   class CustomError extends AssertionError {}
+   
+   // This assertion fails (false) and throws the CustomError object
+   assert(false, new CustomError('Custom Error Message!'));
+   
+   // Output: PHP Fatal error: Uncaught CustomError: Custom Error Message!
+?&gt;</pre>
+        </div>
+    </div>
+</div>

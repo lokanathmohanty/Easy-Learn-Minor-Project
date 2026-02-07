@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Sets</h1>
+    <div class="content">
+      <p>In Python, a set is an unordered collection of unique elements. Unlike lists or tuples, sets do not allow duplicate values. Sets are mutable, so elements can be added or removed after creation.</p>
+
+      <h2 class="title">Creating a Set</h2>
+      <p>Sets can be created using curly braces <code>{}</code> or the built-in <code>set()</code> function.</p>
+      <pre><code># Using curly braces
+my_set = {1, 2, 3, 4, 5}
+print(my_set)
+
+# Using the set() function
+my_set = set([1, 2, 3, 4, 5])
+print(my_set)
+</code></pre>
+      <p>Both will output:</p>
+      <pre><code>{1, 2, 3, 4, 5}</code></pre>
+
+      <h2 class="title">Duplicate Elements</h2>
+      <p>Duplicate elements in a set are automatically removed.</p>
+      <pre><code>my_set = {1, 2, 2, 3, 3, 4, 5, 5}
+print(my_set)  # Output: {1, 2, 3, 4, 5}
+</code></pre>
+
+      <h2 class="title">Mixed Data Types in Sets</h2>
+      <p>Sets can contain different data types including numbers, strings, and tuples (if immutable).</p>
+      <pre><code>mixed_set = {1, 'hello', (1, 2, 3)}
+print(mixed_set)
+</code></pre>
+
+      <h2 class="title">Adding Elements</h2>
+      <p>Use the <code>add()</code> method to add elements. Adding a duplicate element has no effect.</p>
+      <pre><code>my_set = {1, 2, 3}
+my_set.add(4)
+print(my_set)  # Output: {1, 2, 3, 4}
+</code></pre>
+
+      <h2 class="title">Removing Elements</h2>
+      <p>Use <code>remove()</code> to remove an element (raises error if not found) or <code>discard()</code> to remove safely.</p>
+      <pre><code>my_set = {1, 2, 3, 4}
+my_set.remove(3)
+print(my_set)  # Output: {1, 2, 4}
+
+my_set.discard(5)  # No error if element not present
+print(my_set)      # Output: {1, 2, 4}
+</code></pre>
+
+      <h2 class="title">Membership Testing</h2>
+      <pre><code>my_set = {1, 2, 3, 4}
+if 2 in my_set:
+    print("2 is present in the set")
+else:
+    print("2 is not present in the set")
+</code></pre>
+      <p>Output:</p>
+      <pre><code>2 is present in the set</code></pre>
+
+      <h2 class="title">Set Operations</h2>
+      <ul>
+        <li><strong>Union:</strong> Combines elements from both sets: <code>set1 | set2</code> or <code>set1.union(set2)</code></li>
+        <li><strong>Intersection:</strong> Elements common to both sets: <code>set1 & set2</code> or <code>set1.intersection(set2)</code></li>
+        <li><strong>Difference:</strong> Elements in one but not the other: <code>set1 - set2</code> or <code>set1.difference(set2)</code></li>
+        <li><strong>Symmetric Difference:</strong> Elements in either set but not both: <code>set1 ^ set2</code> or <code>set1.symmetric_difference(set2)</code></li>
+      </ul>
+
+      <h2 class="title">Set Comprehensions</h2>
+      <p>Create sets using comprehensions similarly to list comprehensions, but with curly braces.</p>
+      <pre><code>squared_set = {x**2 for x in range(1, 6)}
+print(squared_set)  # Output: {1, 4, 9, 16, 25}
+
+even_set = {x for x in range(1, 11) if x % 2 == 0}
+print(even_set)  # Output: {2, 4, 6, 8, 10}
+</code></pre>
+
+      <h2 class="title">Nested Set Comprehensions</h2>
+      <pre><code>nested_set = {(x, y) for x in range(1, 3) for y in range(1, 3)}
+print(nested_set)  # Output: {(1, 1), (1, 2), (2, 1), (2, 2)}
+</code></pre>
+
+      <h2 class="title">Frozen Sets</h2>
+      <p>A frozen set is an immutable set. It cannot be modified after creation.</p>
+      <pre><code>my_frozen_set = frozenset([1, 2, 3])
+print(my_frozen_set)  # Output: frozenset({1, 2, 3})
+my_frozen_set.add(4)  # Raises AttributeError
+</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `$_POST` Superglobal</h1>
+
+    <div class="content">
+      <p>
+        The **`$_POST`** is a **superglobal associative array** in PHP used to collect data submitted from an HTML form using the **POST** method. Because the data is sent in the body of the HTTP request and not in the URL, the POST method is the standard and more secure way to transmit sensitive or large amounts of information.
+      </p>
+
+      <h2>Key Features of `$_POST`</h2>
+      <ul>
+        <li>
+          **Superglobal:** It's accessible from any point in the script without needing the `global` keyword.
+        </li>
+        <li>
+          **Security/Privacy:** Data is **not visible in the URL** (unlike `GET`), making it suitable for passwords, personal information, or any data you don't want bookmarked or logged in server histories.
+        </li>
+        <li>
+          **Data Volume:** The POST method has no practical limit on the amount of data that can be sent (unlike GET, which has strict URL length limitations).
+        </li>
+        <li>
+          **Structure:** It's an associative array where the **keys** are the `name` attributes of the HTML form input fields, and the **values** are the user inputs.
+        </li>
+      </ul>
+
+      <h3>Syntax to Access Data</h3>
+      <p>
+        You retrieve the submitted value by referencing the input field's name:
+      </p>
+      <div class="example">
+        <code>$_POST['key']</code><br>
+        <p>Example: If the input field is <code>&lt;input type="text" **name="first_name"** /&gt;</code>, the value is accessed via <code>$_POST['first_name']</code>.</p>
+      </div>
+
+      <hr>
+
+      <h2>How Data is Submitted and Collected</h2>
+      <p>
+        For `$_POST` to be populated, the HTML form must use the attribute `method="post"`.
+      </p>
+      <div class="example">
+        <p>
+          *HTML Form:*<br>
+          <code>&lt;form action="handler.php" **method="post"**&gt;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&lt;input type="text" **name="last_name"** /&gt;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;&lt;input type="submit" /&gt;</code><br>
+          <code>&lt;/form&gt;</code>
+        </p>
+        <p>
+          *PHP Handler (handler.php):*<br>
+          <code>&lt;?php</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "Last Name: " . **$_POST['last_name']**;</code><br>
+          <code>?&gt;</code>
+        </p>
+      </div>
+      
+      <p>
+        A common pattern is to post the form data back to the same script by setting the action to `action="<?php echo $_SERVER['PHP_SELF'];?>"`, allowing a single file to display the form and process the submitted data.
+      </p>
+    </div>
+  </div>
+</div>

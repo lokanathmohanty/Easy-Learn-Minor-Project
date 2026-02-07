@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Inner Classes</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Class Structures</h1>
+            <h2 class="subtitle">Session: Inner Classes (Nested Classes)</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is an Inner Class?</h2>
+                <p>A **Java Inner Class** is a class defined **inside another class**, known as the **Outer Class**. Inner classes are a member of the outer class, just like variables and methods, and are part of the larger concept of **Nested Classes**.</p>
+                <p>Inner classes provide a security mechanism, improve encapsulation, and offer logical grouping of classes that are only relevant to the outer class.</p>
+            </div>
+
+            <hr>
+
+            <div class="content types-overview">
+                <h2 class="subtitle">Types of Nested Classes</h2>
+                <p>Nested classes are broadly categorized into two types, which further break down into specific inner class types:</p>
+                <ul>
+                    <li>**Static Nested Classes:** Declared with the `static` keyword. They are static members of the outer class.</li>
+                    <li>**Non-Static Nested Classes (Inner Classes):** These are the focus of the three types below and are non-static members of the outer class.</li>
+                </ul>
+                <p>**Three Types of Inner Classes:**</p>
+                <ol>
+                    <li>**Regular Inner Class** (Member Inner Class)</li>
+                    <li>**Method-local Inner Class**</li>
+                    <li>**Anonymous Inner Class**</li>
+                </ol>
+            </div>
+
+            <hr>
+
+            <div class="content regular-inner">
+                <h2 class="subtitle">1. Regular Inner Class (Member Class)</h2>
+                <p>This class is defined directly inside the outer class, like a field or method. Its key feature is that an instance of the inner class has an implicit reference to the instance of the outer class that created it, giving it direct access to **all** private members of the outer class.</p>
+                <p><strong>Instantiation Syntax:</strong></p>
+                <pre><code>Outer_Demo outer = new Outer_Demo();
+Outer_Demo.Inner_Demo inner = outer.new Inner_Demo();</code></pre>
+                <p>A regular inner class can be made `private`, `public`, `protected`, or package-private.</p>
+            </div>
+
+            <hr>
+
+            <div class="content method-local">
+                <h2 class="subtitle">2. Method-local Inner Class</h2>
+                <p>A class defined **inside a method**. Its scope and lifespan are strictly limited to that method. It is similar to a local variable.</p>
+                <ul>
+                    <li>It can only be instantiated **within the method** where it is defined.</li>
+                    <li>It can access the outer class's members, and also the local variables of the method, provided those local variables are effectively **`final`** (either explicitly declared `final` or not reassigned).</li>
+                </ul>
+                <pre><code>void my_Method() {
+   int num = 23; // Effectively final
+
+   class MethodInner_Demo { // Defined inside the method
+      public void print() {
+         System.out.println("Inner class access: " + num);
+      }
+   }
+   // Instantiation is allowed only here:
+   MethodInner_Demo inner = new MethodInner_Demo();
+   inner.print();
+}</code></pre>
+            </div>
+
+            <hr>
+
+            <div class="content anonymous">
+                <h2 class="subtitle">3. Anonymous Inner Class</h2>
+                <p>An inner class declared and instantiated **without a name** at the same time. They are used primarily for **overriding a single method** of a class or implementing an interface when creating a single instance.</p>
+                <p>They are useful for concise, on-the-spot implementation:</p>
+                <pre><code>abstract class AnonymousInner {
+   public abstract void mymethod();
+}
+
+// Declaration and instantiation at the same time:
+AnonymousInner inner = new AnonymousInner() {
+   // This is the body of the anonymous class, overriding the abstract method
+   public void mymethod() {
+      System.out.println("Anonymous inner class example");
+   }
+};</code></pre>
+            </div>
+
+            <hr>
+
+            <div class="content static-nested">
+                <h2 class="subtitle">Static Nested Class (Static Member Class)</h2>
+                <p>Declared using the **`static`** keyword. Unlike regular inner classes, static nested classes:</p>
+                <ul>
+                    <li>**No Outer Instance:** They **don't** have an implicit reference to an instance of the outer class.</li>
+                    <li>**Access:** They can only access the **static** members of the outer class.</li>
+                    <li>**Instantiation:** They are accessed using the outer class name, without needing an outer class object: <code>Outer.Nested_Demo nested = new Outer.Nested_Demo();</code></li>
+                </ul>
+                <pre><code>public class Outer {
+   static class Nested_Demo {
+      // ... methods
+   }
+}</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

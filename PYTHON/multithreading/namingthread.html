@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Naming the Threads</h1>
+    </div>
+    <div class="content">
+      <p>In Python, naming a thread involves assigning a string identifier to the thread object. Thread names serve only for identification purposes and do not influence thread behavior. Multiple threads can share the same name, and names can be set during initialization or changed dynamically.</p>
+      <p>Assigning meaningful thread names helps in debugging and managing threads in complex concurrent programs.</p>
+      
+      <h2>Naming Threads Using the <code>name</code> Parameter</h2>
+      <p>If no name is provided, Python auto-assigns a name like "Thread-N" or "Thread-N (target_function_name)". You can specify a custom name using the <code>name</code> parameter of <code>threading.Thread()</code>.</p>
+      <div class="title">
+        <h2>Example: Assigning Custom and Default Thread Names</h2>
+      </div>
+      <pre>
+from threading import Thread
+import threading
+from time import sleep
+
+def my_function_1(arg):
+   print("This thread name is", threading.current_thread().name)
+
+# Create thread objects with and without custom names
+thread1 = Thread(target=my_function_1, name='My_thread', args=(2,))
+thread2 = Thread(target=my_function_1, args=(3,))
+
+print("This thread name is", threading.current_thread().name)  # Main thread
+
+# Start and join threads
+thread1.start()
+thread1.join()
+
+thread2.start()
+thread2.join()
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        This thread name is MainThread<br>
+        This thread name is My_thread<br>
+        This thread name is Thread-1 (my_function_1)
+      </p>
+
+      <h2>Dynamically Changing Thread Names</h2>
+      <p>You can change a thread's name at runtime by modifying its <code>name</code> attribute.</p>
+      <div class="title">
+        <h2>Example: Dynamically Changing Thread Names</h2>
+      </div>
+      <pre>
+from threading import Thread
+import threading
+from time import sleep
+
+def my_function_1(arg):
+   threading.current_thread().name = "custom_name"
+   print("This thread name is", threading.current_thread().name)
+
+thread1 = Thread(target=my_function_1, name='My_thread', args=(2,))
+thread2 = Thread(target=my_function_1, args=(3,))
+
+print("This thread name is", threading.current_thread().name)
+
+thread1.start()
+thread1.join()
+
+thread2.start()
+thread2.join()
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        This thread name is MainThread<br>
+        This thread name is custom_name<br>
+        This thread name is custom_name
+      </p>
+
+      <h2>Example: Creating and Renaming Threads</h2>
+      <pre>
+import threading
+
+def addition_of_numbers(x, y):
+   print("This Thread name is :", threading.current_thread().name)
+   result = x + y
+
+def cube_number(i):
+   result = i ** 3
+   print("This Thread name is :", threading.current_thread().name)
+
+def basic_function():
+   print("This Thread name is :", threading.current_thread().name)
+
+t1 = threading.Thread(target=addition_of_numbers, name='My_thread', args=(2, 4))
+t2 = threading.Thread(target=cube_number, args=(4,))
+t3 = threading.Thread(target=basic_function)
+
+t1.start()
+t1.join()
+
+t2.start()
+t2.join()
+
+t3.name = 'custom_name'  # Rename after creation
+t3.start()
+t3.join()
+
+print(threading.current_thread().name)  # Main thread name
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        This Thread name is : My_thread<br>
+        This Thread name is : Thread-1 (cube_number)<br>
+        This Thread name is : custom_name<br>
+        MainThread
+      </p>
+    </div>
+  </div>
+</div>

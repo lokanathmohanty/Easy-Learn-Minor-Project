@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Type Casting</h1>
+    <div class="content">
+      <p>Type casting refers to converting an object of one type into another. Python supports two types of casting: <b>implicit</b> and <b>explicit</b>. It allows us to convert between numbers, sequences, mappings, and more.</p>
+
+      <h2>1. Implicit Casting</h2>
+      <p>Also called <b>type coercion</b>, implicit casting happens automatically when Python converts a smaller data type into a larger one (e.g., int → float) during operations.</p>
+
+      <h3>Example</h3>
+      <pre>
+a = 10     # int
+b = 10.5   # float
+c = a + b
+print(c)   # 20.5
+      </pre>
+
+      <p>Booleans are also implicitly converted to numbers before arithmetic.</p>
+      <pre>
+a = True
+b = 10.5
+c = a + b
+print(c)   # 11.5
+      </pre>
+
+      <h2>2. Explicit Casting</h2>
+      <p>Explicit casting is done using built-in functions like <b>int()</b>, <b>float()</b>, <b>str()</b>, etc. It allows conversions not handled automatically by Python.</p>
+
+      <h2>Python int() Function</h2>
+      <p>Converts values to integers. Works with numbers, booleans, and valid strings.</p>
+      <pre>
+a = int(10.5)     # 10
+b = int(True)     # 1
+c = int("100")    # 100
+      </pre>
+      <p>It can also convert binary, octal, and hexadecimal strings by providing a base:</p>
+      <pre>
+print(int("110011", 2))   # 51
+print(int("20", 8))       # 16
+print(int("2A9", 16))     # 681
+      </pre>
+
+      <h2>Python float() Function</h2>
+      <p>Converts values to floating-point numbers. Works with integers, strings, and scientific notation.</p>
+      <pre>
+print(float(100))       # 100.0
+print(float("9.99"))    # 9.99
+print(float("1.00E4"))  # 10000.0
+      </pre>
+
+      <h2>Python str() Function</h2>
+      <p>Converts objects into strings, including numbers, booleans, lists, tuples, and dictionaries.</p>
+      <pre>
+print(str(10))       # '10'
+print(str(11.10))    # '11.1'
+print(str([1,2,3]))  # '[1, 2, 3]'
+      </pre>
+
+      <h2>Conversion of Sequence Types</h2>
+      <p>Lists, tuples, and strings can be interconverted using <b>list()</b>, <b>tuple()</b>, and <b>str()</b>.</p>
+      <pre>
+a = [1,2,3,4,5]
+b = (1,2,3,4,5)
+c = "Hello"
+
+print(list(c))   # ['H', 'e', 'l', 'l', 'o']
+print(tuple(a))  # (1, 2, 3, 4, 5)
+print(str(b))    # '(1, 2, 3, 4, 5)'
+      </pre>
+
+      <h2>Data Type Conversion Functions</h2>
+      <ul>
+        <li><b>int(x)</b> − Converts x to integer.</li>
+        <li><b>float(x)</b> − Converts x to float.</li>
+        <li><b>complex(x, y)</b> − Creates a complex number.</li>
+        <li><b>str(x)</b> − Converts object to string.</li>
+        <li><b>repr(x)</b> − Converts object to expression string.</li>
+        <li><b>eval(x)</b> − Evaluates string and returns object.</li>
+        <li><b>tuple(s)</b> − Converts s to tuple.</li>
+        <li><b>list(s)</b> − Converts s to list.</li>
+        <li><b>set(s)</b> − Converts s to set.</li>
+        <li><b>dict(d)</b> − Creates dictionary from (key,value) pairs.</li>
+        <li><b>frozenset(s)</b> − Converts s to immutable set.</li>
+        <li><b>chr(i)</b> − Converts integer to character.</li>
+        <li><b>ord(c)</b> − Converts character to integer.</li>
+        <li><b>hex(x)</b> − Converts integer to hexadecimal string.</li>
+        <li><b>oct(x)</b> − Converts integer to octal string.</li>
+      </ul>
+    </div>
+  </div>
+</div>

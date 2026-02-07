@@ -1,0 +1,181 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Chain of Pointers in C</h1>
+
+    
+
+      <h2>What is Chain of Pointers in C?</h2>
+      <p>A chain of pointers in C is a series of pointers that point to each other. A pointer variable can store the address of another variable which can be of any type, including another pointer, in which case it is called a pointer to pointer.</p>
+      <p>A chain of pointers is when there are multiple levels of pointers. Theoretically, there is no limit to how many levels the chaining can be done, as shown in the following diagram −</p>
+      <p><strong>Chain of Pointers</strong></p>
+
+      <h2>Declaration of Chain of Pointers</h2>
+      <p>This can be represented by the following code −</p>
+      <pre class="code">
+int a = 10;
+int *x = &a;
+int **y = &x;
+int ***z = &y;
+      </pre>
+      <p>In the above example, "x" is a pointer to an "int" type, as the notation "int *" indicates. To store the address of "x" in "y", it should be a pointer to a pointer to int, i.e., "int **".</p>
+      <p>Similarly, "z" is a "pointer to a pointer to a pointer" to int, hence the asterisk appears thrice in its declaration, i.e., "int ***".</p>
+
+      <h2>How Does the Dereferencing Work?</h2>
+      <p>We know that "*x" returns the value at the address stored in "x", i.e., the value of "a".</p>
+      <p>Going by the same logic, "*y" should return its value (refer to the above diagram) which is 1000, which in turn is the address of "a". Hence, the double dereferencing of "y" (i.e., "**y") should give you the value of "a".</p>
+      <p>Further, a triple referencing of "z" as "***z" should give the value of "a".</p>
+
+      <h2>Example</h2>
+      <p>The following example shows how "double dereferencing" and "triple dereferencing" work −</p>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 10;
+
+   int *x = &a;
+   int **y = &x;
+   int ***z = &y;
+
+   printf("a: %d\n", a);
+
+   printf("a: %d\n", *x);   // dereferencing x;
+   printf("a: %d\n", **y);  // double dereferencing y;
+   printf("a: %d\n", ***z); // triple dereferencing z;
+
+   return 0;
+}
+      </pre>
+
+      <h2>Output</h2>
+      <p>Notice that all the three cases of dereferencing print the value of "a" −</p>
+      <pre class="code">
+a: 10
+a: 10
+a: 10
+a: 10
+      </pre>
+
+      <h2>A Chain of Float Pointers</h2>
+      <p>We can follow the same logic to create a chain of float pointers and apply dereferencing of multiple levels to obtain the value of a float variable.</p>
+
+      <h2>Example</h2>
+      <p>The following example shows how you can work with a chain of float pointers −</p>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+   float a = 10.25;
+
+   float *x = &a;
+   float **y = &x;
+   float ***z = &y;
+
+   printf("a: %f\n", a);
+   printf("a: %f\n", *x);
+   printf("a: %f\n", **y);
+   printf("a: %f\n", ***z);
+
+   return 0;
+}
+      </pre>
+
+      <h2>Output</h2>
+      <p>Run the code and check its output −</p>
+      <pre class="code">
+a: 10.250000
+a: 10.250000
+a: 10.250000
+a: 10.250000
+      </pre>
+
+      <h2>Updating the Original Variable by Dereferencing</h2>
+      <p>We can also update the value of the original variable by dereferencing. Take a look at the following statement −</p>
+      <pre class="code">
+*x = 11.25;
+      </pre>
+      <p>It will change the value of "a" accordingly. Similarly, it can be updated with the pointer at subsequent levels.</p>
+
+      <h2>Example</h2>
+      <p>The following program shows how you can update the original variable using different levels of dereferencing −</p>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+   float a = 10.25;
+
+   float *x = &a;
+   float **y = &x;
+   float ***z = &y;
+
+   printf("a: %f\n", a);
+
+   // update with first pointer
+   *x = 11.25;
+   printf("a: %f\n", *x);
+
+   // update with second pointer
+   **y = 12.25;
+   printf("a: %f\n", **y);
+
+   // update with third pointer
+   ***z = 13.25;
+   printf("a: %f\n", ***z);
+
+   return 0;
+}
+      </pre>
+
+      <h2>Output</h2>
+      <p>Run the code and check its output −</p>
+      <pre class="code">
+a:10.250000
+a:11.250000
+a:12.250000
+a:13.250000
+      </pre>
+
+      <h2>A Chain of Character Pointers</h2>
+      <p>A string is represented as an array of "char" type or a pointer to "char" type −</p>
+      <pre class="code">
+char *a = "Hello";
+      </pre>
+      <p>Hence, we can create a chain of char pointers.</p>
+      <p><strong>Note:</strong> The only difference is, here the original variable itself is a pointer, so the upper-level pointers have one asterisk more, as compared to the earlier examples.</p>
+
+      <h2>Example</h2>
+      <p>The following example shows how a chain of character pointers works −</p>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main(){
+   char *a = "Hello";
+
+   char **x = &a;
+   char ***y = &x;
+   char ****z = &y;
+
+   printf("a: %s\n", a);
+   printf("a: %s\n", *x);
+   printf("a: %s\n", **y);
+   printf("a: %s\n", ***z);
+
+   return 0;
+}
+      </pre>
+
+      <h2>Output</h2>
+      <p>When you run this code, it will produce the following output −</p>
+      <pre class="code">
+a: Hello
+a: Hello
+a: Hello
+a: Hello
+      </pre>
+
+      <p>Chaining of pointers is useful for creating linked lists and other data structures.</p>
+
+       
+    </div>
+  </div>
+</div>

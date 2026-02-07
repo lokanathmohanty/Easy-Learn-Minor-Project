@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Pointer to an Array in C</h1>
+
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>An array name is a constant pointer to the first element of the array. For example, in the declaration:</p>
+      <pre><code>int balance[5];</code></pre>
+      <p><code>balance</code> is a pointer to <code>&balance[0]</code>, which is the address of the first element.</p>
+
+      <h2>Example: Pointer to Array</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int *ptr;
+  int balance[5] = {1, 2, 3, 4, 5};
+
+  ptr = balance;
+
+  printf("Pointer 'ptr' points to the address: %d", ptr);
+  printf("\nAddress of the first element: %d", balance);
+  printf("\nAddress of the first element: %d", &balance[0]);
+
+  return 0;
+}</code></pre>
+      <p>All three <code>printf</code> statements will output the same address, since <code>ptr</code>, <code>balance</code>, and <code>&balance[0]</code> refer to the same location.</p>
+      <p>Dereferencing <code>*ptr</code> returns the value <code>1</code>, which is the first element of the array.</p>
+
+      <h2>Array Names as Constant Pointers</h2>
+      <p>It is valid to use array names as constant pointers. For example, <code>*(balance + 4)</code> accesses <code>balance[4]</code>.</p>
+      <p>After assigning <code>balance</code> to <code>ptr</code>, array elements can be accessed using pointer arithmetic such as <code>*ptr</code>, <code>*(ptr + 1)</code>, and so on.</p>
+
+      <h2>Example: Accessing Array Elements Using Pointers</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  double balance[5] = {1000.0, 2.0, 3.4, 17.0, 50.0};
+  double *ptr;
+  int i;
+
+  ptr = balance;
+
+  printf("Array values using pointer:\n");
+  for (i = 0; i &lt; 5; i++) {
+    printf("*(ptr + %d): %f\n", i, *(ptr + i));
+  }
+
+  printf("\nArray values using balance as address:\n");
+  for (i = 0; i &lt; 5; i++) {
+    printf("*(balance + %d): %f\n", i, *(balance + i));
+  }
+
+  return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <ul>
+        <li>*(ptr + 0): 1000.000000</li>
+        <li>*(ptr + 1): 2.000000</li>
+        <li>*(ptr + 2): 3.400000</li>
+        <li>*(ptr + 3): 17.000000</li>
+        <li>*(ptr + 4): 50.000000</li>
+      </ul>
+      <ul>
+        <li>*(balance + 0): 1000.000000</li>
+        <li>*(balance + 1): 2.000000</li>
+        <li>*(balance + 2): 3.400000</li>
+        <li>*(balance + 3): 17.000000</li>
+        <li>*(balance + 4): 50.000000</li>
+      </ul>
+
+      <p>The pointer <code>ptr</code> stores the address of a <code>double</code> type variable. Once it holds the address of the array, <code>*ptr</code> gives the value at that address.</p>
+    </div>
+  </div>
+</div>

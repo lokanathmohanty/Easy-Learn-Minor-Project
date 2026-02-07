@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Attributes: Adding Metadata to Code</h1>
+        
+        <div class="content">
+            <h2 class="title">What are Attributes? 🏷️</h2>
+            <p>An **attribute** is a **declarative tag** used to convey information (metadata) to the **.NET runtime** or the compiler about various program elements like classes, methods, structures, enumerators, and assemblies. This declarative information is added using square brackets (`[ ]`) placed immediately before the element it modifies.</p>
+            <p>Attributes are a form of **metadata**—data about data—used for purposes such as compiler instructions, description, or runtime behavior modification.</p>
+            
+            <h3 class="title">Specifying an Attribute (Syntax)</h3>
+            <p>The general syntax for applying an attribute is:</p>
+            <pre>[attribute(positional_parameters, name_parameter = value, ...)]
+element</pre>
+            <ul>
+                <li><strong>Positional Parameters:</strong> Specify essential, required information for the attribute's constructor.</li>
+                <li><strong>Named Parameters:</strong> Specify optional information by setting public properties of the attribute class.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Predefined Attributes in .NET Framework</h2>
+            <p>The .NET Framework provides several built-in attributes for common tasks. Three important ones are:</p>
+            
+            <h3 class="title">1. AttributeUsage</h3>
+            <p>The `[AttributeUsage]` attribute is used when **defining a custom attribute class**. It dictates *how* that custom attribute can be used.</p>
+            <ul>
+                <li><strong>`validon` (Positional):</strong> Specifies the target elements (e.g., class, method, property) the attribute can be applied to, using the <span class="example">`AttributeTargets`</span> enumerator (e.g., <span class="example">`AttributeTargets.Class | AttributeTargets.Method`</span>).</li>
+                <li><strong>`AllowMultiple` (Named, Optional):</strong> A Boolean value. If <span class="example">`true`</span>, the attribute can be applied multiple times to the same target element. Default is <span class="example">`false`</span>.</li>
+                <li><strong>`Inherited` (Named, Optional):</strong> A Boolean value. If <span class="example">`true`</span>, the attribute is inherited by derived classes or overriding members. Default is <span class="example">`false`</span>.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h3 class="title">2. Conditional</h3>
+            <p>The `[Conditional]` attribute marks a method whose compilation and execution depend on a specified **preprocessing identifier** (like <span class="example">`DEBUG`</span> or <span class="example">`TRACE`</span>).</p>
+            <pre>[Conditional("DEBUG")]</pre>
+            <p>If the specified symbol is **not defined** (e.g., <span class="example">`DEBUG`</span> is not defined), the compiler will entirely skip the method and all calls to it, resulting in no compiled code and no runtime overhead.</p>
+            
+            <h3 class="title">3. Obsolete</h3>
+            <p>The `[Obsolete]` attribute marks a program entity (like a method or class) that should **no longer be used**. It's primarily used to inform developers about deprecation.</p>
+            <ul>
+                <li><strong><span class="example">`message`</span> (Positional, Optional):</strong> A string explaining why the item is obsolete and what to use instead.</li>
+                <li><strong><span class="example">`iserror`</span> (Positional, Optional):</strong> A Boolean value. If <span class="example">`true`</span>, using the marked element generates a **compiler error** instead of just a warning (the default).</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Creating Custom Attributes</h2>
+            <p>You can create your own custom attributes to add domain-specific metadata that can be read and used at runtime, typically via **Reflection** (which is discussed in the next chapter).</p>
+            
+            <h3 class="title">Steps for Custom Attribute Creation:</h3>
+            <ol>
+                <li><strong>Declare the Attribute:</strong> The custom attribute class must **inherit from <span class="example">`System.Attribute`</span>**. Conventionally, the class name ends with <span class="example">`Attribute`</span>, but C# allows omitting this suffix when applying it.</li>
+                <li><strong>Construct the Attribute:</strong> Define constructors to handle the **positional parameters**. Define public properties for the **named parameters**.</li>
+                <li><strong>Apply the Attribute:</strong> Place the attribute tag <span class="example">`[MyAttribute(...)]`</span> immediately above the target element.</li>
+                <li>**Access via Reflection:** (Future step) Use the **Reflection** API to inspect the metadata at runtime.</li>
+            </ol>
+        </div>
+        
+        <div class="example">
+            <h2 class="title">Example: Custom <span class="example">`DeBugInfo`</span> Attribute</h2>
+            <div class="content">
+                <p>The <span class="example">`DeBugInfo`</span> attribute is declared to track debugging metadata (Bug Number, Developer, Last Review Date, and Message).</p>
+                <p><strong>Declaration and Construction:</strong></p>
+                <pre>// 1. Inherits from System.Attribute
+[AttributeUsage(
+   AttributeTargets.Class | AttributeTargets.Method, 
+   AllowMultiple = true)]
+public class DeBugInfo : System.Attribute {
+   // Positional parameters handled by the constructor
+   public DeBugInfo(int bg, string dev, string d) { /* ... */ }
+   
+   // Named parameter is a public property
+   public string Message { get; set; } 
+}</pre>
+                <p><strong>Application:</strong></p>
+                <pre>[DeBugInfo(45, "Zara Ali", "12/8/2012", Message = "Return type mismatch")]
+class Rectangle {
+   // ...
+   [DeBugInfo(55, "Zara Ali", "19/10/2012")]
+   public double GetArea() {
+      // ...
+   }
+}</pre>
+            </div>
+        </div>
+    </div>
+</div>

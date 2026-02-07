@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="session" data-session-id="js-ajax">
+    <h1 class="title">JavaScript - Ajax</h1>
+
+    <div class="content">
+      <p>
+        Asynchronous JavaScript and XML (Ajax) is a web development technique that enables dynamic, 
+        interactive communication between server and webpage without requiring a full page reload. 
+        Ajax allows data exchanges in the background, making web applications seamless and responsive.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>How Ajax Works?</h2>
+      <p>
+        Ajax relies on the <code>XMLHttpRequest</code> object to send requests and receive responses 
+        asynchronously from a server. The server typically returns data in JSON or XML format, 
+        and JavaScript updates parts of the webpage without refreshing the entire page.
+      </p>
+      <p>
+        This background communication ensures that user interaction is not interrupted, 
+        enabling real-time updates and smoother web experiences.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Approaches to Implement Ajax</h2>
+      <p>There are four common ways to implement Ajax in JavaScript:</p>
+      <ul>
+        <li><strong>XMLHttpRequest</strong> (Older Approach)</li>
+        <li><strong>Fetch API</strong> (Modern Approach)</li>
+        <li><strong>Axios</strong> (Promise-based HTTP library)</li>
+        <li><strong>jQuery Ajax</strong> (Legacy approach with jQuery)</li>
+      </ul>
+      <p>
+        In the following examples, we use <strong>JSONPlaceholder</strong>, 
+        a free REST API that provides dummy data for testing.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Using XMLHttpRequest</h2>
+      <p>
+        The native JavaScript <code>XMLHttpRequest</code> object was the earliest way 
+        to make asynchronous requests. It requires handling request states manually.
+      </p>
+      <pre>
+function nativeAjax() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://jsonplaceholder.typicode.com/users/2', true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      console.log(JSON.parse(xhr.responseText));
+    }
+  };
+  xhr.send();
+}
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Using Fetch API</h2>
+      <p>
+        The <code>Fetch API</code> provides a cleaner, Promise-based syntax for 
+        making HTTP requests. It is widely used in modern JavaScript.
+      </p>
+      <pre>
+function fetchApi() {
+  fetch('https://jsonplaceholder.typicode.com/users/3')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Fetch Error:', error));
+}
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Using Axios</h2>
+      <p>
+        <code>Axios</code> is a popular library built on Promises. 
+        It simplifies HTTP requests and automatically transforms JSON responses.
+      </p>
+      <pre>
+function axiosExample() {
+  axios.get('https://jsonplaceholder.typicode.com/users/5')
+    .then(response => console.log(response.data))
+    .catch(error => console.error('Axios Error:', error));
+}
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Using jQuery Ajax</h2>
+      <p>
+        jQuery’s <code>$.ajax</code> method simplifies Ajax requests and ensures cross-browser compatibility. 
+        Although less common in modern apps, it remains useful in legacy projects.
+      </p>
+      <pre>
+function jqueryAjax() {
+  $.ajax({
+    url: 'https://jsonplaceholder.typicode.com/users/7',
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (xhr, status, error) {
+      console.error('jQuery Ajax Error:', error);
+    }
+  });
+}
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Ajax Use Cases</h2>
+      <p>
+        Ajax is commonly used to make web applications more interactive. 
+        For example, on social media platforms, users can post or load comments 
+        without refreshing the page.
+      </p>
+      <p>
+        Prominent companies using Ajax include:
+      </p>
+      <ul>
+        <li>Google (Gmail, Maps)</li>
+        <li>Facebook</li>
+        <li>Twitter</li>
+        <li>Amazon</li>
+        <li>Netflix</li>
+        <li>GitHub</li>
+        <li>LinkedIn</li>
+        <li>YouTube</li>
+        <li>Microsoft Office Online</li>
+        <li>Uber</li>
+      </ul>
+    </div>
+
+     
+  </div>
+</div>

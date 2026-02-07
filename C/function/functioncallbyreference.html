@@ -1,0 +1,123 @@
+Function Call by Value in C
+Previous
+Quiz
+Next
+In C language, a function can be called from any other function, including itself. There are two ways in which a function can be called − (a) Call by Value and (b) Call by Reference. By default, the Call by Value mechanism is employed.
+
+Formal Arguments and Actual Arguments
+You must know the terminologies to understand how the call by value method works −
+
+Formal arguments − A function needs certain data to perform its desired process. When a function is defined, it is assumed that the data values will be provided in the form of parameter or argument list inside the parenthesis in front of the function name. These arguments are the variables of a certain data type.
+
+Actual arguments − When a certain function is to be called, it should be provided with the required number of values of the same type and in the same sequence as used in its definition.
+
+Take a look at the following snippet −
+
+type function_name(type var1, type var2, ...)
+Here, the argument variables are called the formal arguments. Inside the functions scope, these variables act as its local variables.
+
+Consider the following function −
+
+int add(int x, int y){
+
+   int z = x + y;
+
+   return z;
+
+}
+The arguments x and y in this function definition are the formal arguments.
+
+Example: Call by Value in C
+If the add() function is called, as shown in the code below, then the variables inside the parenthesis (a and b) are the actual arguments. They are passed to the function.
+
+Take a look at the following example −
+
+#include <stdio.h>
+
+int add(int x, int y){
+
+   int z = x + y;
+
+   return z;
+}
+
+int main(){
+
+   int a = 10, b = 20;
+   
+   int c = add(a, b);
+
+   printf("Addition: %d", c);
+}
+Output
+When you run this code, it will produce the following output −
+
+Addition: 30
+The Call by Value method implies that the values of the actual arguments are copied in the formal argument variables. Hence, "x" takes the value of "a" and "b" is assigned to "y". The local variable "z" inside the add() function stores the addition value. In the main() function, the value returned by the add() function is assigned to "c", which is printed.
+
+Note that a variable in C language is a named location in the memory. Hence, variables are created in the memory and each variable is assigned a random memory address by the compiler.
+
+How Does "Call by Value" Work in C?
+Let us assume that the variables a, b and c in the main() function occupy the memory locations 100, 200 and 300 respectively. When the add() function is called with a and b as actual arguments, their values are stored in x and y respectively.
+
+Random Memory Address
+The variables x, y, and z are the local variables of the add() function. In the memory, they will be assigned some random location. Let's assume that they are created in memory address 1000, 2000 and 3000, respectively.
+
+Since the function is called by copying the value of the actual arguments to their corresponding formal argument variables, the locations 1000 and 2000 which are the address of x and y will hold 10 and 20, respectively. The compiler assigns their addition to the third local variable z which is returned.
+
+As the control comes back to the main() function, the returned data is assigned to c, which is displayed as the output of the program.
+
+Example
+Call by Value is the default function calling mechanism in C. It eliminates a functions potential side effects, making your software simpler to maintain and easy to understand. It is best suited for a function expected to do a certain computation on the argument received and return the result.
+
+Here is another example of Call by Value −
+
+#include <stdio.h>
+
+/* function declaration */
+void swap(int x, int y);
+
+int main(){
+
+   /* local variable definition */
+   int a = 100;
+   int b = 200;
+
+   printf("Before swap, value of a: %d\n", a);
+   printf("Before swap, value of b: %d\n", b);
+
+   /* calling a function to swap the values */
+   swap(a, b);
+
+   printf("After swap, value of a: %d\n", a);
+   printf("After swap, value of b: %d\n", b);
+
+   return 0;
+}
+
+void swap(int x, int y){
+
+   int temp;
+
+   temp = x; /* save the value of x */
+   x = y;    /* put y into x */
+   y = temp; /* put temp into y */
+
+   return;
+}
+Output
+When you run this code, it will produce the following output −
+
+Before swap, value of a: 100
+Before swap, value of b: 200
+After swap, value of a: 100
+After swap, value of b: 200
+It shows that there are no changes in the values, although they had been changed inside the function.
+
+Since the values are copied in different local variables of another function, any manipulation doesnt have any effect on the actual argument variables in the calling function.
+
+However, the Call by Value method is less efficient when we need to pass large objects such as an array or a file to another function. Also, in some cases, we may need the actual arguments to be manipulated by another function. In such cases, the Call by Value mechanism is not useful. We have to explore the Call by Reference mechanism for that purpose. Refer the next chapter for a detailed explanation on the Call by Reference mechanism of C.
+
+The Call by Reference approach involves passing the address of the variable holding the value of the actual argument. You can devise a calling method that is a mix of Call by Value and Call by Reference. In this case, some arguments are passed by value and others by reference.
+
+Print Page

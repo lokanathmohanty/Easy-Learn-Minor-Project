@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Chi Square Distribution</h1>
+    <div class="content">
+      <p>The <strong>Chi Square Distribution</strong> is commonly used as a basis to verify hypotheses in statistics.</p>
+      <h2>Parameters:</h2>
+      <ul>
+        <li><strong>df</strong> — Degrees of freedom.</li>
+        <li><strong>size</strong> — The shape of the returned array.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Generating Chi Square Distribution Samples</h1>
+    <div class="content">
+      <p>Generate a 2x3 sample from a chi square distribution with 2 degrees of freedom:</p>
+      <pre><code>from numpy import random
+
+x = random.chisquare(df=2, size=(2, 3))
+
+print(x)
+</code></pre>
+      <h2>Visualization of Chi Square Distribution</h2>
+      <p>Visualize 1000 samples from a chi square distribution with 1 degree of freedom using Seaborn:</p>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.displot(random.chisquare(df=1, size=1000), kind="kde")
+
+plt.show()
+</code></pre>
+    </div>
+  </div>
+</div>

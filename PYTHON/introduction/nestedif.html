@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Nested if Statement</h1>
+    <div class="content">
+      <p>Python supports <b>nested if statements</b>, meaning you can place an <code>if</code> or <code>if...else</code> construct inside another <code>if</code> statement.</p>
+      <p>This is useful when additional conditions must be checked only after the first condition evaluates to <code>True</code>. You can also use an <code>if...elif...else</code> block inside another <code>if...elif...else</code> block.</p>
+
+      <h2>Syntax of Nested if Statement</h2>
+      <pre>
+if boolean_expression1:
+    statement(s)
+    if boolean_expression2:
+        statement(s)
+      </pre>
+
+      <h2>Example of Nested if Statement</h2>
+      <p>The following example checks divisibility of a number:</p>
+      <pre>
+num = 36
+print("num =", num)
+if num % 2 == 0:
+    if num % 3 == 0:
+        print("Divisible by 3 and 2")
+print("....execution ends....")
+      </pre>
+      <p><b>Output:</b></p>
+      <pre>
+num = 36
+Divisible by 3 and 2
+....execution ends....
+      </pre>
+
+      <h2>Nested if Statement with else Condition</h2>
+      <p>We can also include <code>else</code> inside nested <code>if</code> blocks. Depending on which conditions evaluate to <code>True</code>, the appropriate branch executes.</p>
+
+      <h3>Syntax</h3>
+      <pre>
+if expression1:
+    statement(s)
+    if expression2:
+        statement(s)
+    else:
+        statement(s)
+else:
+    if expression3:
+        statement(s)
+    else:
+        statement(s)
+      </pre>
+
+      <h3>Example</h3>
+      <pre>
+num = 8
+print("num =", num)
+
+if num % 2 == 0:
+    if num % 3 == 0:
+        print("Divisible by 3 and 2")
+    else:
+        print("Divisible by 2 not divisible by 3")
+else:
+    if num % 3 == 0:
+        print("Divisible by 3 not divisible by 2")
+    else:
+        print("Not divisible by 2 not divisible by 3")
+      </pre>
+
+      <h3>Sample Outputs</h3>
+      <pre>
+num = 8
+Divisible by 2 not divisible by 3
+
+num = 15
+Divisible by 3 not divisible by 2
+
+num = 12
+Divisible by 3 and 2
+
+num = 5
+Not divisible by 2 not divisible by 3
+      </pre>
+    </div>
+  </div>
+</div>

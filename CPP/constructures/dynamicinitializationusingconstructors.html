@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Dynamic Initialization Using Constructors in C++ 🚀</h1>
+
+        <div class="content">
+            <p>**Dynamic initialization** is the process of initializing variables or objects at **runtime** (execution time). When this is performed using a class's constructor, it allows objects to be created and initialized with values that are determined, calculated, or retrieved only during program execution, providing great flexibility.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Mechanism and Syntax</h2>
+
+        <div class="content">
+            <p>Dynamic object creation uses the **<code>new</code> operator** along with the class constructor. The `new` operator allocates memory for the object on the heap and then automatically calls the specified constructor to initialize that memory.</p>
+            <h3>Syntax</h3>
+            <pre class="example">
+ClassName* objectName = new ClassName(constructor_arguments);
+</pre>
+            <ul>
+                <li>The result is a **pointer** (`objectName`) to the newly created object.</li>
+                <li>When the object is no longer needed, its memory must be explicitly released using **<code>delete objectName;</code>** to prevent memory leaks.</li>
+            </ul>
+
+            <h3>Example</h3>
+            <pre class="example">
+// Constructor: Rectangle(int w, int h)
+// Dynamic Initialization:
+Rectangle* rect = new Rectangle(10, 5); // Width=10, Height=5 are set at runtime
+
+rect-&gt;display(); // Accessing members using the arrow operator
+
+delete rect;     // Essential to free allocated memory
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Advantages</h2>
+
+        <div class="content">
+            <p>Using constructors for dynamic initialization is beneficial because it:</p>
+            <ul>
+                <li>**Runtime Flexibility:** Allows initialization with values that are not compile-time constants (e.g., user input, file data).</li>
+                <li>**Encapsulation:** Keeps the initialization logic clean and encapsulated within the constructor definition, making the main code block simpler.</li>
+                <li>**Controlled Lifespan:** Objects created dynamically exist until they are explicitly destroyed with `delete`, allowing for memory management beyond block scope.</li>
+            </ul>
+        </div>
+    </div>
+</div>

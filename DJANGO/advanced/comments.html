@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: The Deprecated Comments Framework 💬</h1>
+        <div class="content">
+            <p>The built-in **Django Comments Framework** was a utility designed to easily attach comments to any model in a Django application. However, it has been **deprecated since version 1.5** and removed entirely from core Django starting with version 1.8, encouraging developers to use external solutions or create custom comment systems instead.</p>
+
+            <h2>Setup and Configuration (Historical)</h2>
+            <p>To use the legacy comments framework, several steps were required:</p>
+
+            <h3>1. Add Apps and Site ID</h3>
+            <p>The framework relies on the Sites framework to identify the domain. Both apps must be added to <code>INSTALLED_APPS</code>, and the <code>SITE_ID</code> must be configured in <code>settings.py</code>.</p>
+            <pre><code># In settings.py
+INSTALLED_APPS += (
+   'django.contrib.sites', 
+   'django.contrib.comments',
+)
+SITE_ID = 1 # The ID of your site (often retrieved from the database)</code></pre>
+
+            <h3>2. Sync Database and URLs</h3>
+            <p>The necessary database tables (e.g., to store comments) needed to be created, and the framework's URLs had to be included in the project's URL configuration.</p>
+            <ul>
+                <li><strong>Sync DB:</strong> <code>python manage.py syncdb</code> (or <code>migrate</code> in modern Django versions).</li>
+                <li><strong>URLconf:</strong>
+                    <pre><code># In urls.py
+from django.conf.urls import include
+url(r'^comments/', include('django.contrib.comments.urls')),</code></pre>
+                </li>
+            </ul>
+
+            <h2>Integrating Comments in a Template</h2>
+            <p>The framework provided specific template tags to display and process comments for any given model instance (e.g., a <code>Dreamreal</code> object).</p>
+
+            <h3>1. Load Tags and View Logic</h3>
+            <p>First, the template tags must be loaded, and the view must pass the specific model instance (<code>dreamreal</code>) to the template.</p>
+            <pre><code># hello.html template 
+{% load comments %}</code></pre>
+            <pre><code># hello view
+def hello(request, Name):
+   dreamreal = Dreamreal.objects.get(name = Name)
+   return render(request, 'hello.html', locals())</code></pre>
+
+            <h3>2. Displaying Comments and Form</h3>
+            <p>The following template tags were used, passing the model instance as the target for the comments:</p>
+            <ul>
+                <li><strong><code>{% get_comment_count for object as variable_name %}</code></strong>: Retrieves the total number of comments for the specified object.</li>
+                <li><strong><code>{% render_comment_list for object %}</code></strong>: Displays the HTML list of all existing comments for the object.</li>
+                <li><strong><code>{% render_comment_form for object %}</code></strong>: Displays the default HTML form used for submitting a new comment.</li>
+            </ul>
+            <pre><code># hello.html usage example
+&lt;p&gt;Number of comments: 
+   {% get_comment_count for dreamreal as comment_count %} 
+   {{ comment_count }}
+&lt;/p&gt;
+
+&lt;p&gt;List of comments:&lt;/p&gt;
+{% render_comment_list for dreamreal %}
+
+{% render_comment_form for dreamreal %}</code></pre>
+        </div>
+    </div>
+</div>

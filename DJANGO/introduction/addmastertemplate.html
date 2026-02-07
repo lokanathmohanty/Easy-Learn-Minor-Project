@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django Template Inheritance: Adding a Master Template 🖼️</h1>
+        <div class="content">
+            <p>Django supports **template inheritance**, an essential feature that ensures a uniform look and structure across all pages of a web application. It works similarly to object-oriented inheritance, where a **master template** (or base template) provides the overall skeleton, and **child templates** fill in the variable content.</p>
+
+            <h2>The Master Template (<code>base.html</code>)</h2>
+            <p>The master template defines the common structure, such as the page header, footer, and sidebar. Crucially, it uses the **<code>{% block %}</code> and <code>{% endblock %}</code>** template tags to mark the areas meant to be overridden by child templates. Each block must have a unique identifier (<code>block_name</code>).</p>
+
+            <p>The provided **<code>base.html</code>** template establishes the consistent layout with a header, a sidebar containing links (home, register, login), a content area, and a footer:</p>
+            <pre><code>{% block block_name %}
+   ...
+   ...{% endblock %}</code></pre>
+            <p>In this example, the main content area is designated by <code>{% block contents %}</code>.</p>
+
+            <hr>
+
+            <h2>The Child Template (<code>index.html</code>)</h2>
+            <p>A child template inherits the structure of the master template and overrides the content blocks. It achieves this using two steps:</p>
+            <ol>
+                <li>**Inheritance:** The **<code>{% extends "base.html" %}</code>** tag is the first line in the child template, declaring which master template it inherits from.</li>
+                <li>**Content Population:** It uses the same **<code>{% block contents %}</code>** tag to insert its specific HTML content, thereby replacing the dummy block content in the base template.</li>
+            </ol>
+            <p>The provided **<code>index.html</code>** overrides the <code>contents</code> block to display its unique "Home page" message, while automatically receiving the header, sidebar, and footer defined in <code>base.html</code>.</p>
+
+            <hr>
+
+            <h2>Implementation (View and URL)</h2>
+            <p>The view function simply renders the child template:</p>
+            <pre><code>from django.shortcuts import render
+
+def index(request):
+   return render(request, "index.html", {})</code></pre>
+            <p>When the view is registered with the URL dispatcher (e.g., <code>path('home/', views.index, name='home')</code>) and accessed, Django first processes the <code>index.html</code> template. It sees the <code>{% extends %}</code> tag, incorporates the <code>base.html</code> structure, and inserts the content between the <code>{% block contents %}</code> tags into the correct location, rendering the complete, uniform page.</p>
+        </div>
+    </div>
+</div>

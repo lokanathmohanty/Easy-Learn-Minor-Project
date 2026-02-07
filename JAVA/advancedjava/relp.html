@@ -1,0 +1,142 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - REPL (JShell)</h1>
+    <div class="content">
+      <h2 class="title">Introduction to REPL (JShell)</h2>
+      <p>REPL stands for Read Evaluate Print Loop. JShell was introduced in Java 9 as an interactive console. JShell allows running arbitrary snippets of Java code in the console without needing to save and compile Java files. This is useful for quickly testing code, like evaluating regular expressions, checking string formatting, date formats, and more.</p>
+      <p>JShell reads each line entered, evaluates it, prints the result, and then waits for the next input.</p>
+
+      <h2 class="title">Advantages of Using JShell</h2>
+      <ul>
+        <li>No editor is needed to write Java programs; JShell itself acts as the editor and executor.</li>
+        <li>No need to save, compile, and run cycles — code can be tested directly.</li>
+        <li>No prior compilation needed before execution.</li>
+        <li>If compile-time or runtime errors occur, you can start fresh easily.</li>
+      </ul>
+
+      <h2 class="title">Running JShell</h2>
+      <p>Open a command prompt and type <code>jshell</code>:</p>
+      <pre><code>D:\test&gt;jshell
+|  Welcome to JShell -- Version 20.0.2
+|  For an introduction type: /help intro
+</code></pre>
+      <p>With JShell, you can test methods, classes, and expressions. Below are some feature demonstrations.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Examples</h2>
+    <div class="content">
+
+      <h3 class="title">Create and Invoke Method in JShell</h3>
+      <p>Define a simple method <code>greet()</code> that prints "Hello World!" and invoke it.</p>
+      <pre><code>jshell&gt; void greet() { System.out.println("Hello World!");}
+|  created method greet()
+
+jshell&gt; greet()
+Hello World!
+jshell&gt;</code></pre>
+
+      <h3 class="title">Creating Variables in JShell</h3>
+      <p>Variables can be declared with or without semicolons. Uninitialized variables get default values or <code>null</code> for object references.</p>
+      <pre><code>jshell&gt; int i = 10
+i ==> 10
+
+jshell&gt; String name = "Mahesh";
+name ==> "Mahesh"
+
+jshell&gt; Date date = new Date()
+date ==> Fri Feb 02 14:52:49 IST 2024
+
+jshell&gt; long l
+l ==> 0
+
+jshell&gt; List list
+list ==> null
+
+jshell&gt; name
+name ==> "Mahesh"</code></pre>
+
+      <h3 class="title">Evaluate Expression in JShell</h3>
+      <p>JShell evaluates expressions and stores results in automatically created variables.</p>
+      <pre><code>jshell&gt; String.format("%d pages read.", 10);
+$9 ==> "10 pages read."
+
+jshell&gt; $9
+$9 ==> "10 pages read."</code></pre>
+
+      <h3 class="title">JShell Built-In Commands</h3>
+      <p>JShell supports commands for managing code snippets and environment:</p>
+      <ul>
+        <li><code>/drop</code> – delete snippets by name or ID</li>
+        <li><code>/edit</code> – open an editor</li>
+        <li><code>/env</code> – show environment settings</li>
+        <li><code>/exit</code> – exit JShell</li>
+        <li><code>/history</code> – show command history</li>
+        <li><code>/help</code> – show help for commands</li>
+        <li><code>/imports</code> – list active imports</li>
+      </ul>
+
+      <h3 class="title">Example: /help Command</h3>
+      <pre><code>jshell&gt; /help
+|  Type a Java language expression, statement, or declaration.
+|  Or type one of the following commands:
+|  /list [&lt;name or id&gt;|-all|-start]
+|       list the source you have typed
+|  /edit &lt;name or id&gt;
+|       edit a source entry
+|  /drop &lt;name or id&gt;
+|       delete a source entry
+|  /save [-all|-history|-start] &lt;file&gt;
+|       Save snippet source to a file
+|  /open &lt;file&gt;
+|       open a file as source input
+|  /vars [&lt;name or id&gt;|-all|-start]
+|       list the declared variables and their values
+|  /methods [&lt;name or id&gt;|-all|-start]
+|       list the declared methods and their signatures
+|  /types [&lt;name or id&gt;|-all|-start]
+|       list the type declarations
+...
+</code></pre>
+
+      <h3 class="title">Example: /vars Command</h3>
+      <pre><code>C:\Users\Mahesh&gt;jshell
+|  Welcome to JShell -- Version 20.0.2
+|  For an introduction type: /help intro
+
+jshell&gt; int i = 10
+i ==> 10
+
+jshell&gt; String name="Mahesh"
+name ==> "Mahesh"
+
+jshell&gt; /vars
+|    int i = 10
+|    String name = "Mahesh"
+
+jshell&gt;</code></pre>
+
+      <h3 class="title">Example: /imports Command</h3>
+      <pre><code>jshell&gt; /imports
+|    import java.io.*
+|    import java.math.*
+|    import java.net.*
+|    import java.nio.file.*
+|    import java.util.*
+|    import java.util.concurrent.*
+|    import java.util.function.*
+|    import java.util.prefs.*
+|    import java.util.regex.*
+|    import java.util.stream.*
+
+jshell&gt;</code></pre>
+
+      <h3 class="title">Exiting JShell</h3>
+      <pre><code>jshell&gt; /exit
+|  Goodbye
+
+C:\Users\Mahesh&gt;</code></pre>
+    </div>
+  </div>
+</div>

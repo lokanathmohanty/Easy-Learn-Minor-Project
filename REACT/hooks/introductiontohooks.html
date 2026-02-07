@@ -1,0 +1,114 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Introduction to Hooks</h1>
+      </div>
+
+      
+
+         <p>
+            Until React 16.8, function components were simply stateless. To add state to a component, 
+            developers had to convert the function component into a class-based component. 
+            Function components also lacked lifecycle event handling. 
+            To address this, React introduced <strong>Hooks</strong>.
+         </p>
+
+         <p>
+            Hooks are plain JavaScript functions that provide access to state and lifecycle events 
+            inside a function component. They generally start with the <code>use</code> keyword. 
+            React provides several built-in hooks and also allows developers to create custom hooks.
+         </p>
+
+         <h2>Built-in Hooks</h2>
+         <ul>
+            <li><code>useState</code> − Manage state inside a function component.</li>
+            <li><code>useReducer</code> − Advanced state management using reducers.</li>
+            <li><code>useEffect</code> − Hook into component lifecycle.</li>
+            <li><code>useLayoutEffect</code> − Runs synchronously after DOM mutations, before painting.</li>
+            <li><code>useContext</code> − Access context provider values.</li>
+            <li><code>useMemo</code> − Memoize values or functions to optimize performance.</li>
+            <li><code>useCallback</code> − Memoize callback functions to avoid re-creation.</li>
+            <li><code>useRef</code> − Access raw DOM nodes or persist values across renders.</li>
+            <li><code>useImperativeHandle</code> − Expose child ref values to parent components.</li>
+            <li><code>useDeferredValue</code> − Defer updates similar to debouncing/throttling.</li>
+            <li><code>useDebug</code> − Label custom hooks in React DevTools.</li>
+            <li><code>useTransition</code> − Track pending states during transitions.</li>
+            <li><code>useId</code> − Generate unique IDs for elements.</li>
+         </ul>
+
+         <h2>Applying Hooks</h2>
+         <p>
+            Let’s create an example using the <code>useState</code> hook.
+         </p>
+
+         <div class="code-block">
+<pre><code>import { useState } from 'react';
+
+export default function HelloWorld() {
+   const [name, setName] = useState("World")
+   return (
+      &lt;div&gt;
+         &lt;input 
+            id="name" 
+            name="name"
+            value={name}
+            onChange={(e) =&gt; setName(e.target.value)} /&gt;
+         &lt;div&gt;Hello {name}&lt;/div&gt;
+      &lt;/div&gt;
+   )
+}
+</code></pre>
+         </div>
+
+         <p>
+            Here, <code>useState</code> initializes the state with <code>"World"</code>. 
+            It returns two items: the current state value (<code>name</code>) and a function to update it (<code>setName</code>). 
+            When the input changes, <code>setName</code> updates the state and re-renders the component.
+         </p>
+
+         <h2>Using in App Component</h2>
+
+         <div class="code-block">
+<pre><code>import './App.css';
+import HelloWorld from './components/HelloWorld';
+
+function App() {
+   return (
+      &lt;HelloWorld /&gt;
+   );
+}
+
+export default App;
+</code></pre>
+         </div>
+
+         <p>
+            Open the browser, type into the input field, and the greeting updates instantly.
+         </p>
+
+         <h2>Advantages of Hooks</h2>
+         <ul>
+            <li>Simpler and easier to start coding with.</li>
+            <li>Reduces complexity compared to class components.</li>
+            <li>No need to handle <code>this</code> keyword confusion.</li>
+            <li>Reusability of stateful logic between components.</li>
+            <li>Compatible with existing class-based components.</li>
+            <li>Less code compared to class components.</li>
+         </ul>
+
+         <h2>Disadvantages of Hooks</h2>
+         <ul>
+            <li>Must be called only at the top level (not inside loops, conditions, or nested functions).</li>
+            <li>Not always the best fit; sometimes class components are preferable.</li>
+            <li>React abstracts hook internals, limiting optimization in some cases.</li>
+         </ul>
+
+         <h2>Summary</h2>
+         <p>
+            Hooks are a relatively new way to create components, but many projects still rely on class-based components. 
+            Converting large codebases entirely to hooks may not be practical, so migration often happens gradually.
+         </p>
+ 
+      </div>
+   </div>
+</div>

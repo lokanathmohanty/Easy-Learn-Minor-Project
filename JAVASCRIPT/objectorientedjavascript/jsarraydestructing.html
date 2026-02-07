@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Array Destructuring</h1>
+
+    <div class="content">
+      <p>
+        JavaScript Array destructuring allows us to unpack the values from an array
+        and assign them to variables. After that, you can use the variables to
+        access their value and use them in the code. The destructuring assignment is
+        basically a JavaScript expression.
+      </p>
+
+      <h2 class="subtitle">Syntax</h2>
+      <pre>
+const array = [10, 20];
+const [var1, var2] = array;
+      </pre>
+      <p>
+        In the above syntax, the <code>array</code> is the original array containing
+        <code>10</code> and <code>20</code>. When you unpack the array elements,
+        <code>var1</code> contains <code>10</code>, and <code>var2</code> contains
+        <code>20</code>.
+      </p>
+
+      <h2 class="subtitle">Example: Basic Array Destructuring</h2>
+      <pre>
+const arr = [100, 500, 1000];
+const [num1, num2, num3] = arr;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+num1: 100
+num2: 500
+num3: 1000
+      </pre>
+
+      <h2 class="subtitle">Example: Unpacking with initial N elements</h2>
+      <pre>
+const arr = [1, 2, 3, 4, 5, 6];
+const [num1, num2] = arr;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+num1: 1
+num2: 2
+      </pre>
+
+      <h2 class="subtitle">Skipping Array Elements</h2>
+      <pre>
+const arr = [1, 2, 3, 4, 5, 6];
+const [num1, , num3, , num5] = arr;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+num1: 1
+num3: 3
+num5: 5
+      </pre>
+
+      <h2 class="subtitle">Array Destructuring and Rest Operator</h2>
+      <pre>
+const arr = [1, 2, 3, 4, 5, 6];
+const [num1, num2, ...nums] = arr;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+num1: 1
+num2: 2
+nums: 3,4,5,6
+      </pre>
+
+      <h2 class="subtitle">Array Destructuring and Default Values</h2>
+      <pre>
+const arr = [1];
+const [num1 = 10, num2 = 20, num3 = 30] = arr;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+num1: 1
+num2: 20
+num3: 30
+      </pre>
+
+      <h2 class="subtitle">Swapping Variables Using Array Destructuring</h2>
+      <pre>
+let a = 50, b = 100;
+[b, a] = [a, b];
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+Before Swapping: a = 50, b = 100
+After Swapping: a = 100, b = 50
+      </pre>
+
+      <h2 class="subtitle">Destructuring the Returned Array from a Function</h2>
+      <pre>
+function getNums() {
+   return [99, 80, 70];
+}
+const [num1, num2, num3] = getNums();
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+num1: 99
+num2: 80
+num3: 70
+      </pre>
+    </div>
+  </div>
+</div>

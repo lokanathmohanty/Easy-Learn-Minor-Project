@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Garbage Collection (GC)</h1>
+
+        <div class="content">
+            <h2>What is Java Garbage Collection?</h2>
+            <p><strong>Garbage Collection (GC)</strong> is the automatic process managed by the **Java Virtual Machine (JVM)** that automatically reclaims memory occupied by objects that are no longer reachable (in use) by the application. This eliminates the need for manual memory deallocation (unlike C or C++) and prevents memory-related errors like **dangling references**.</p>
+            <p>The GC's primary activities include:</p>
+            <ul>
+                <li>Finding and identifying unused (dead) objects.</li>
+                <li>Freeing the memory they occupy in the heap.</li>
+                <li>**Coalescing** (or compacting) the remaining live objects to combine small fragments of free memory into larger contiguous blocks, thereby preventing **memory fragmentation**.</li>
+            </ul>
+            <p>A major challenge in GC is the **"stop-the-world" (STW)** pause, where application threads must be stopped while the GC is running, especially when objects are moved (compacted). Minimizing the frequency and duration of these pauses is the goal of GC tuning.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Generational Heap Design</h2>
+            <p>Most modern JVMs divide the heap memory into generations based on the observed lifespan of objects, which drastically improves GC efficiency. These generations are:</p>
+            <ul>
+                <li>
+                    <strong>Young Generation (YG):</strong> Holds newly created, typically **short-lived objects**. It is usually small and collected frequently.
+                    <ul>
+                        <li>The YG is further divided into an **Eden space** (where new objects are initially allocated) and two **Survivor spaces**.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Old Generation (OG):</strong> Holds **long-lived objects** that have survived multiple collections in the Young Generation (a process called "tenuring"). It is larger and collected less frequently.
+                </li>
+            </ul>
+
+            <h3>Types of Garbage Collection</h3>
+            <ul>
+                <li>
+                    <strong>Minor GC:</strong> Occurs when the Young Generation fills up. It is typically fast because the YG is small. Dead objects are discarded, and live objects are promoted to a Survivor space or the Old Generation. Minor GC always causes a short STW pause.
+                </li>
+                <li>
+                    <strong>Full GC:</strong> Occurs when the Old Generation fills up or when the Metaspace/PermGen is resized. Full GC involves collecting and compacting the entire heap (both YG and OG). This can result in long STW pauses, making it the primary target for optimization.
+                </li>
+            </ul>
+
+            <h3>Common Garbage Collectors</h3>
+            <p>Modern JVMs offer various collectors designed to prioritize different goals (throughput vs. latency):</p>
+            <ul>
+                <li>**Serial Collector**</li>
+                <li>**Throughput Collector (Parallel)**</li>
+                <li>**CMS Collector (Concurrent Mark Sweep)**</li>
+                <li>**G1 Collector (Garbage-First)** (Default in recent JDKs)</li>
+                <li>**ZGC (Z Garbage Collector)** and **Shenandoah** (Low-latency, concurrent GCs)</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Tuning Garbage Collectors</h2>
+            <p>Tuning the GC involves configuring memory allocation to balance the frequency and duration of GC pauses with the application's overall throughput.</p>
+
+            <h3>1. Heap Size Allocation</h3>
+            <p>The key is to avoid memory requests that force the operating system into using **swap space** (virtual memory backed by disk), which drastically slows down the application and GC. The recommended rule is to never request more memory than the **physical RAM** available.</p>
+            <ul>
+                <li>
+                    <strong><code>-XmsN</code>:</strong> Sets the **initial** heap size.
+                </li>
+                <li>
+                    <strong><code>-XmxN</code>:</strong> Sets the **maximum** heap size.
+                </li>
+            </ul>
+            <p>Setting <code>-XmsN</code> equal to <code>-XmxN</code> is often recommended if the application's memory needs are known, as it prevents the JVM from needing to dynamically resize the heap at runtime, which improves GC efficiency.</p>
+
+            <h3>2. Generation Sizes Allocation</h3>
+            <p>This affects the trade-off between Minor and Full GC frequency.</p>
+            <ul>
+                <li>
+                    <strong><code>-XX:NewRatio=N</code>:</strong> Sets the ratio of the Old Generation to the Young Generation (Default is 2, meaning OG is 2/3 and YG is 1/3 of the total heap).
+                </li>
+                <li>
+                    <strong><code>-XmnN</code>:</strong> Explicitly sets the size of the Young Generation (<code>-XX:NewSize=N</code> and <code>-XX:MaxNewSize=N</code>). A larger YG means fewer Minor GCs but longer Minor GC pauses.
+                </li>
+            </ul>
+
+            <h3>3. Permagen and Metaspace Configurations</h3>
+            <p>This area holds class metadata used by the compiler and runtime:</p>
+            <ul>
+                <li>
+                    **Java 7 and earlier:** Called **Permagen**. Size controlled by <code>-XX:PermSize=N</code> and <code>-XX:MaxPermSize=N</code>.
+                </li>
+                <li>
+                    **Java 8 and later:** Called **Metaspace**. Size controlled by <code>-XX:MetaspaceSize=N</code> (initial size) and <code>-XX:MaxMetaspaceSize=N</code> (maximum size).
+                </li>
+            </ul>
+            <p>Unlike Permagen, Metaspace can occupy unlimited native memory by default (if <code>MaxMetaspaceSize</code> isn't set), which can lead to OutOfMemory errors. Increasing the initial Metaspace size is often recommended for large applications to prevent frequent resizing and subsequent Full GCs during startup.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Multimedia</h1>
+    <div class="content">
+      <p>The JavaScript <code>navigator</code> object includes a child object called <code>plugins</code>. This object is an array, with one entry for each plug-in installed on the browser. The <code>navigator.plugins</code> object is supported only by Netscape, Firefox, and Mozilla.</p>
+      
+      <h2>Example: Listing Plug-ins</h2>
+      <p>The following example lists all the plug-ins installed in the browser:</p>
+      <pre><code>&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;List of Plug-Ins&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;table border = "1"&gt;
+         &lt;tr&gt;
+            &lt;th&gt;Plug-in Name&lt;/th&gt;
+            &lt;th&gt;Filename&lt;/th&gt;
+            &lt;th&gt;Description&lt;/th&gt;
+         &lt;/tr&gt;
+         
+         &lt;script language = "JavaScript" type = "text/javascript"&gt;
+            for (i = 0; i &lt; navigator.plugins.length; i++) {
+               document.write("&lt;tr&gt;&lt;td&gt;");
+               document.write(navigator.plugins[i].name);
+               document.write("&lt;/td&gt;&lt;td&gt;");
+               document.write(navigator.plugins[i].filename);
+               document.write("&lt;/td&gt;&lt;td&gt;");
+               document.write(navigator.plugins[i].description);
+               document.write("&lt;/td&gt;&lt;/tr&gt;");
+            }
+         &lt;/script&gt;
+      &lt;/table&gt;      
+   &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Checking for Plug-ins</h2>
+      <p>Each plug-in has an entry in the array with the following properties:</p>
+      <ul>
+        <li><b>name</b> − name of the plug-in</li>
+        <li><b>filename</b> − executable file used to install the plug-in</li>
+        <li><b>description</b> − description provided by the developer</li>
+        <li><b>mimeTypes</b> − array with one entry for each MIME type supported</li>
+      </ul>
+      <p>You can use these properties to determine available plug-ins and play appropriate multimedia files.</p>
+      
+      <h2>Example: Using Plug-ins</h2>
+      <pre><code>&lt;html&gt;   
+   &lt;head&gt;
+      &lt;title&gt;Using Plug-Ins&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;   
+      &lt;script language = "JavaScript" type = "text/javascript"&gt;
+         media = navigator.mimeTypes["video/quicktime"];
+         
+         if (media) {
+            document.write("&lt;embed src = 'quick.mov' height = 100 width = 100&gt;");
+         } else {
+            document.write("&lt;img src = 'quick.gif' height = 100 width = 100&gt;");
+         }
+      &lt;/script&gt;      
+   &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><b>Note:</b> Here we are using the HTML <code>&lt;embed&gt;</code> tag to embed a multimedia file.</p>
+
+      <h2>Controlling Multimedia</h2>
+      <p>The following example demonstrates controlling multimedia playback in most browsers:</p>
+      <pre><code>&lt;html&gt;   
+   &lt;head&gt;
+      &lt;title&gt;Using Embedded Object&lt;/title&gt;
+      
+      &lt;script type = "text/javascript"&gt;
+         function play() {
+            if (!document.demo.IsPlaying()) {
+               document.demo.Play();
+            }
+         }
+         function stop() {
+            if (document.demo.IsPlaying()) {
+               document.demo.StopPlay();
+            }
+         }
+         function rewind() {
+            if (document.demo.IsPlaying()) {
+               document.demo.StopPlay();
+            }
+            document.demo.Rewind();
+         }
+      &lt;/script&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;      
+      &lt;embed id = "demo" name = "demo"
+         src = "http://www.amrood.com/games/kumite.swf"
+         width = "318" height = "300" play = "false" loop = "false"
+         pluginspage = "http://www.macromedia.com/go/getflashplayer"
+         swliveconnect = "true"&gt;
+      
+      &lt;form name = "form" id = "form" action = "#" method = "get"&gt;
+         &lt;input type = "button" value = "Start" onclick = "play();" /&gt;
+         &lt;input type = "button" value = "Stop" onclick = "stop();" /&gt;
+         &lt;input type = "button" value = "Rewind" onclick = "rewind();" /&gt;
+      &lt;/form&gt;      
+   &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+  </div>
+</div>

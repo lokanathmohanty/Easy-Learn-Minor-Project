@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Logging in Python</h1>
+    <div class="content">
+      <p>
+        Logging is the process of recording messages during program execution to provide runtime information useful for monitoring, debugging, and auditing. Python’s built-in <code>logging</code> module offers a flexible framework to generate log messages.
+      </p>
+
+      <h2>Benefits of Logging</h2>
+      <ul>
+        <li><strong>Debugging</strong> - Helps identify and diagnose issues by capturing relevant program information.</li>
+        <li><strong>Monitoring</strong> - Provides insights into app behavior and performance.</li>
+        <li><strong>Auditing</strong> - Keeps records of important events for security.</li>
+        <li><strong>Troubleshooting</strong> - Tracks program flow and variable values for unexpected behavior analysis.</li>
+      </ul>
+
+      <h2>Key Components of Python Logging</h2>
+      <ul>
+        <li><strong>Logger</strong> - Main entry point to emit log messages; named and independently configurable.</li>
+        <li><strong>Handler</strong> - Defines where log messages are sent (console, file, socket, etc.).</li>
+        <li><strong>Formatter</strong> - Defines layout and structure of log messages including timestamp, level, etc.</li>
+        <li><strong>Logger Level</strong> - Defines severity threshold (DEBUG, INFO, WARNING, ERROR, CRITICAL).</li>
+        <li><strong>Filter</strong> - Optional component to control which records are processed by handlers.</li>
+      </ul>
+
+      <h2>Logging Levels</h2>
+      <ul>
+        <li><strong>DEBUG</strong> - Detailed info for debugging; usually not shown in production.</li>
+        <li><strong>INFO</strong> - Confirmation that things are working as expected.</li>
+        <li><strong>WARNING</strong> - Indicates potential issues requiring attention but not stopping program.</li>
+        <li><strong>ERROR</strong> - Serious issues preventing function completion.</li>
+        <li><strong>CRITICAL</strong> - Critical errors that may cause program termination.</li>
+      </ul>
+
+      <h2>Basic Logging Example</h2>
+      <pre>
+import logging
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def calculate_sum(a, b):
+   logging.debug(f"Calculating sum of {a} and {b}")
+   result = a + b
+   logging.info(f"Sum calculated successfully: {result}")
+   return result
+
+if __name__ == "__main__":
+   logging.info("Starting the program")
+   result = calculate_sum(10, 20)
+   logging.info("Program completed")
+      </pre>
+      <p>Output:</p>
+      <pre>
+2024-06-19 09:00:06,774 - INFO - Starting the program
+2024-06-19 09:00:06,774 - DEBUG - Calculating sum of 10 and 20
+2024-06-19 09:00:06,774 - INFO - Sum calculated successfully: 30
+2024-06-19 09:00:06,775 - INFO - Program completed
+      </pre>
+
+      <h2>Configuring Logging with Logger, Handler, and Formatter</h2>
+      <pre>
+import logging
+
+logger = logging.getLogger('my_app')
+logger.setLevel(logging.DEBUG)
+
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)
+
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(formatter)
+
+logger.addHandler(console_handler)
+
+logger.debug('This is a debug message')
+logger.info('This is an info message')
+logger.warning('This is a warning message')
+logger.error('This is an error message')
+logger.critical('This is a critical message')
+      </pre>
+      <p>Result:</p>
+      <pre>
+2024-06-19 09:05:20,852 - my_app - DEBUG - This is a debug message
+2024-06-19 09:05:20,852 - my_app - INFO - This is an info message
+2024-06-19 09:05:20,852 - my_app - WARNING - This is a warning message
+2024-06-19 09:05:20,852 - my_app - ERROR - This is an error message
+2024-06-19 09:05:20,852 - my_app - CRITICAL - This is a critical message
+      </pre>
+
+      <h2>Logging Handlers</h2>
+      <p>Handlers determine where log messages go and how they are processed.</p>
+      <ul>
+        <li><strong>StreamHandler</strong> - Sends logs to streams like console.</li>
+        <li><strong>FileHandler</strong> - Writes logs to files.</li>
+        <li><strong>RotatingFileHandler</strong> - Writes logs to files and rotates them based on size/time.</li>
+        <li><strong>SMTPHandler</strong> - Sends log records via email.</li>
+        <li><strong>SysLogHandler</strong> - Sends logs to system log on Unix-like systems.</li>
+        <li><strong>MemoryHandler</strong> - Buffers logs in memory and forwards them after certain conditions.</li>
+        <li><strong>HTTPHandler</strong> - Sends logs to a web server.</li>
+      </ul>
+    </div>
+
+    
+  </div>
+</div>

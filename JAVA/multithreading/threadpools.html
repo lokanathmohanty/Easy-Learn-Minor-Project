@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Thread Pools</h1>
+
+    <div class="content">
+      <h2 class="content-title">Thread Pools</h2>
+      <p>A thread pool is a collection of pre-initialized threads that can be reused to execute multiple tasks. Threads in the pool wait for tasks and are reused, reducing the overhead of thread creation.</p>
+
+      <h2 class="content-title">Why Use Thread Pools in Java?</h2>
+      <ul>
+        <li>Improves performance by reusing existing threads.</li>
+        <li>Used in web technologies like Servlets and JSP to handle requests efficiently.</li>
+      </ul>
+
+      <h2 class="content-title">Creating Thread Pools in Java</h2>
+      <p>Java provides the <code>java.util.concurrent.Executors</code> class with several static methods to create thread pools:</p>
+
+      <ul>
+        <li><code>newCachedThreadPool()</code> – Creates a pool that grows as needed and reuses idle threads.</li>
+        <li><code>newFixedThreadPool(int n)</code> – Creates a pool with a fixed number of threads.</li>
+        <li><code>newScheduledThreadPool(int corePoolSize)</code> – Supports delayed and periodic task execution.</li>
+        <li><code>newWorkStealingPool()</code> – Uses all available processors for parallelism.</li>
+      </ul>
+
+      <h2 class="example-title">Example: Creating a Thread Pool Using newFixedThreadPool()</h2>
+      <p>This example demonstrates how to use <code>Executors.newFixedThreadPool()</code> to create a thread pool with two threads and submit tasks to it.</p>
+
+      <pre>
+<code>
+ExecutorService executor = Executors.newFixedThreadPool(2);
+executor.submit(new Task());
+executor.submit(new Task());
+executor.shutdown();
+</code>
+      </pre>
+
+      <p>The thread pool reuses the two created threads to execute the submitted tasks.</p>
+    </div>
+  </div>
+</div>

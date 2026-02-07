@@ -1,0 +1,148 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Destructuring Assignment</h1>
+
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>In JavaScript, the destructuring assignment is an expression that allows us to unpack values from arrays or objects and store them into individual variables. It is a technique to assign array values or object properties directly to variables.</p>
+      <p>The destructuring assignment syntax was introduced in ECMAScript 6 (ES6). Before ES6, developers had to manually extract values from arrays and objects.</p>
+    </div>
+
+    <div class="content">
+      <h2>Array Unpacking Before ES6</h2>
+      <pre>
+&lt;script&gt;
+   const arr = ["Apple", "Banana", "Watermelon"];
+
+   const fruit1 = arr[0];
+   const fruit2 = arr[1];
+   const fruit3 = arr[2];
+
+   console.log("fruit1:", fruit1);
+   console.log("fruit2:", fruit2);
+   console.log("fruit3:", fruit3);
+&lt;/script&gt;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>fruit1: Apple</li>
+        <li>fruit2: Banana</li>
+        <li>fruit3: Watermelon</li>
+      </ul>
+      <p>This approach becomes inefficient when working with larger arrays.</p>
+    </div>
+
+    <div class="content">
+      <h2>Array Destructuring Assignment</h2>
+      <p>With destructuring assignment, we can extract values in a single line.</p>
+      <pre>
+const [var1, var2, var3] = arr;
+      </pre>
+
+      <h3>Example</h3>
+      <pre>
+&lt;script&gt;
+   const arr = ["Apple", "Banana", "Watermelon"];
+
+   const [fruit1, fruit2, fruit3] = arr;
+
+   console.log("fruit1:", fruit1);
+   console.log("fruit2:", fruit2);
+   console.log("fruit3:", fruit3);
+&lt;/script&gt;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>fruit1: Apple</li>
+        <li>fruit2: Banana</li>
+        <li>fruit3: Watermelon</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Nested Array Destructuring</h2>
+      <p>We can also extract values from nested arrays.</p>
+      <pre>
+&lt;script&gt;
+   const arr = ["Apple", ["Banana", "Watermelon"]];
+   const [x, [y, z]] = arr;
+
+   console.log(x); // Apple
+   console.log(y); // Banana
+   console.log(z); // Watermelon
+&lt;/script&gt;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Watermelon</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Object Destructuring Assignment</h2>
+      <p>Similarly, we can destructure objects using the following syntax:</p>
+      <pre>
+const {prop1, prop2, prop3} = obj;
+      </pre>
+
+      <h3>Example</h3>
+      <pre>
+&lt;script&gt;
+   const fruit = {
+      name: "Apple",
+      price: 100,
+   }
+
+   const {name, price} = fruit;
+
+   console.log("fruit name:", name);
+   console.log("fruit price:", price);
+&lt;/script&gt;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>fruit name: Apple</li>
+        <li>fruit price: 100</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Nested Object Destructuring</h2>
+      <p>We can destructure nested objects to directly access deeply nested properties.</p>
+      <pre>
+&lt;script&gt;
+   const person = {
+      age: 26,
+      name: {
+         fName: "John",
+         lName: "Doe"
+      }
+   }
+
+   const {age, name: {fName, lName}} = person;
+
+   console.log("Person name:", fName, lName);
+   console.log("Person age:", age);
+&lt;/script&gt;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Person name: John Doe</li>
+        <li>Person age: 26</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>What's Next?</h2>
+      <p>In the upcoming lessons, we will cover:</p>
+      <ul>
+        <li>Array Destructuring − Unpacking array elements.</li>
+        <li>Object Destructuring − Unpacking object properties.</li>
+        <li>Nested Destructuring − Unpacking nested arrays and objects.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>

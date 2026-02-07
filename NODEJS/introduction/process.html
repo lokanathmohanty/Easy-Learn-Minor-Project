@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Process</h1>
+    <div class="content">
+      <p>
+        The <strong>process</strong> object in Node.js is a global object representing the current Node.js process. It is an instance of the EventEmitter class and provides methods and properties to interact with the runtime process.
+      </p>
+
+      <h2>Process Events</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>exit</td><td>Emitted when the process is about to exit.</td></tr>
+          <tr><td>beforeExit</td><td>Emitted when Node.js empties its event loop but still has pending asynchronous calls.</td></tr>
+          <tr><td>uncaughtException</td><td>Emitted when an exception bubbles up to the event loop.</td></tr>
+          <tr><td>warning</td><td>Emitted when warnings occur.</td></tr>
+          <tr><td>Signal Events</td><td>Emitted upon receiving signals like SIGINT, SIGHUP.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Example: Handling Process Events</h2>
+      <pre><code>process.on('beforeExit', (code) => {
+  console.log('A beforeExit event occurred with code:', code);
+});
+
+process.on('exit', (code) => {
+  console.log('Process exit event with code:', code);
+});
+
+console.log('This message is displayed first.');</code></pre>
+      <p>Output:</p>
+      <p>
+        This message is displayed first.<br/>
+        A beforeExit event occurred with code: 0<br/>
+        Process exit event with code: 0
+      </p>
+
+      <h2>Process Methods</h2>
+      <ul>
+        <li><strong>abort()</strong>: Immediately terminate process and create a core dump.</li>
+        <li><strong>chdir(path)</strong>: Change current working directory.</li>
+        <li><strong>cwd()</strong>: Return current working directory.</li>
+        <li><strong>exit([code])</strong>: Synchronously terminate process with exit code.</li>
+        <li><strong>kill(pid, [signal])</strong>: Send a signal to the specified process.</li>
+        <li><strong>memoryUsage()</strong>: Returns an object describing memory usage.</li>
+        <li><strong>nextTick(callback)</strong>: Defers callback execution until next event loop iteration.</li>
+      </ul>
+
+      <h2>Additional Properties</h2>
+      <ul>
+        <li><strong>argv</strong>: Array of command-line arguments.</li>
+        <li><strong>env</strong>: Object containing environment variables.</li>
+        <li><strong>pid</strong>: Process ID.</li>
+        <li><strong>platform</strong>: Operating system platform.</li>
+        <li><strong>version</strong>: Node.js version string.</li>
+        <li><strong>arch</strong>: CPU architecture.</li>
+      </ul>
+
+      <h2>Example: Accessing Command-line Arguments</h2>
+      <pre><code>const args = process.argv;
+console.log(args);
+const name = args[2];
+console.log("Hello,", name);</code></pre>
+      <p>Run with:</p>
+      <pre><code>node hello.js Tutorials</code></pre>
+      <p>Output:</p>
+      <p>
+        [ 'node', 'hello.js', 'Tutorials' ]<br/>
+        Hello, Tutorials
+      </p>
+
+      <h2>Example: Environment Variables</h2>
+      <pre><code>const envVars = Object.keys(process.env);
+envVars.forEach(key => {
+  console.log(key + ': ' + process.env[key]);
+});</code></pre>
+
+      <p>Environment variables can also be set via command line:</p>
+      <pre><code>USER_ID=101 USER_NAME=admin node app.js</code></pre>
+
+      <p>Accessed in script as:</p>
+      <pre><code>process.env.USER_ID; // "101"
+process.env.USER_NAME; // "admin"</code></pre>
+    </div>
+  </div>
+</div>

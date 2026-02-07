@@ -1,0 +1,75 @@
+<div class="container">
+   <div class="session">
+      <h1 class="title">JavaScript - Form Handling</h1>
+      <div class="content">
+         <p>
+            Forms are an essential part of web applications. Using JavaScript, 
+            we can handle forms for tasks like validation, submission, 
+            updating data, or resetting inputs. This allows us to improve 
+            user experience and reduce unnecessary server load.
+         </p>
+
+         <h2>Form Validation</h2>
+         <p>
+            Traditionally, form validation was handled on the server. 
+            If the input was incorrect or missing, the server had to send 
+            back a response asking the user to re-enter the details. 
+            This process was time-consuming and inefficient.
+         </p>
+         <p>
+            JavaScript enables <strong>client-side validation</strong>, 
+            allowing us to check form inputs before sending them to the server.
+            There are two main types of validation:
+         </p>
+         <ul>
+            <li><strong>Basic Validation:</strong> Ensure all mandatory fields are filled.</li>
+            <li><strong>Data Format Validation:</strong> Ensure the input follows the correct format and type.</li>
+         </ul>
+
+         <h3>Example: Basic Form Validation</h3>
+         <pre>
+function validateForm() {
+   var x = document.forms["myForm"]["fname"].value;
+   if (x == "") {
+      alert("Name must be filled out");
+      return false;
+   }
+}
+validateForm();
+         </pre>
+         <p><strong>Output:</strong></p>
+         <pre>Name must be filled out</pre>
+
+         <h2>Form Submit</h2>
+         <p>
+            Once validation is successful, the form can be submitted 
+            to the server. JavaScript provides methods like 
+            <code>submit()</code> and <code>reset()</code> to handle 
+            form submission and resetting form fields.
+         </p>
+
+         <h3>Example: Submitting and Resetting a Form</h3>
+         <pre>
+&lt;form id="myForm" action=""&gt;
+   First name: &lt;input type="text" name="fname"&gt;&lt;br&gt;
+   Last name: &lt;input type="text" name="lname"&gt;&lt;br&gt;&lt;br&gt;
+   &lt;input type="button" value="Submit" onclick="myFunction()"&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+document.getElementById("myForm").submit();
+document.getElementById("myForm").reset();
+&lt;/script&gt;
+         </pre>
+
+         <h2>Conclusion</h2>
+         <p>
+            JavaScript makes form handling easier and more efficient. 
+            With validation, we can ensure users provide the correct input 
+            before sending data to the server. Additionally, 
+            <code>submit()</code> and <code>reset()</code> methods 
+            allow us to manage form data seamlessly.
+         </p>
+      </div>
+   </div>
+</div>

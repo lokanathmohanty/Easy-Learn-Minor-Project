@@ -1,0 +1,192 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Error Handling in C</h1>
+    <div class="content">
+      <p>C does not provide direct support for error handling with keywords like exceptions. Instead, programmers use functions and global variables such as <code>errno</code> for handling errors.</p>
+
+      <h2>The <code>errno</code> Variable</h2>
+      <p>Most C or Unix function calls return <code>-1</code> or <code>NULL</code> on error and set the global variable <code>errno</code> to indicate the error type. The error codes are defined in the <code>&lt;errno.h&gt;</code> header file.</p>
+      <p>Initializing <code>errno</code> to 0 is a good practice. Zero means no error.</p>
+
+      <h3>Common errno values</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>errno value</th>
+            <th>Error</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Operation not permitted</td></tr>
+          <tr><td>2</td><td>No such file or directory</td></tr>
+          <tr><td>3</td><td>No such process</td></tr>
+          <tr><td>4</td><td>Interrupted system call</td></tr>
+          <tr><td>5</td><td>I/O error</td></tr>
+          <tr><td>6</td><td>No such device or address</td></tr>
+          <tr><td>7</td><td>The argument list is too long</td></tr>
+          <tr><td>8</td><td>Exec format error</td></tr>
+          <tr><td>9</td><td>Bad file number</td></tr>
+          <tr><td>10</td><td>No child processes</td></tr>
+          <tr><td>11</td><td>Try again</td></tr>
+          <tr><td>12</td><td>Out of memory</td></tr>
+          <tr><td>13</td><td>Permission denied</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Example</h2>
+      <p>Opening a non-existing file sets <code>errno</code>:</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+
+int main() {
+   FILE* fp;
+
+   fp = fopen("nosuchfile.txt", "r");
+   printf("Value of errno: %d\n", errno);
+
+   return 0;
+}
+</code></pre>
+
+      <h2>The <code>perror()</code> Function</h2>
+      <p>Displays the string passed to it, followed by a colon, a space, and the textual representation of the current <code>errno</code> value.</p>
+      
+      <pre><code>void perror(const char *str);
+</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+
+int main(){
+   FILE* fp;
+
+   fp = fopen("nosuchfile.txt", "r");
+
+   printf("Value of errno: %d\n", errno);
+   perror("Error message:");
+
+   return 0;
+}
+</code></pre>
+
+      <h2>The <code>strerror()</code> Function</h2>
+      <p>Returns a pointer to the textual representation of a given <code>errno</code> value.</p>
+
+      <pre><code>char *strerror(int errnum);
+</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+
+int main() {
+   FILE* fp;
+
+   fp = fopen("nosuchfile.txt", "r");
+
+   printf("Value of errno: %d\n", errno);
+   printf("The error message is : %s\n", strerror(errno));
+
+   return 0;
+}
+</code></pre>
+
+      <h2>The <code>ferror()</code> Function</h2>
+      <p>Checks if an error occurred during a file operation.</p>
+
+      <pre><code>int ferror(FILE *stream);
+</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   FILE *fp;
+   fp = fopen("test.txt","w");
+   char ch = fgetc(fp);  // Trying to read from writable file
+   if(ferror(fp)){
+      printf("File is opened in writing mode! You cannot read data from it!");
+   }
+   fclose(fp);
+   return 0;
+}
+</code></pre>
+
+      <h2>The <code>clearerr()</code> Function</h2>
+      <p>Clears end-of-file and error indicators for a file stream.</p>
+
+      <pre><code>void clearerr(FILE *stream);
+</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   FILE *fp;
+   fp = fopen("test.txt","w");
+
+   char ch = fgetc(fp);  // Trying to read from writable file
+
+   if(ferror(fp)){
+      printf("File is opened in writing mode! You cannot read data from it!\n");
+   }
+
+   clearerr(fp);
+
+   if(ferror(fp)){
+      printf("Error again in reading from file!");
+   }
+   fclose(fp);
+   return 0;
+}
+</code></pre>
+
+      <h2>Divide by Zero Errors</h2>
+      <p>Check the divisor before division to avoid runtime errors.</p>
+
+      <h3>Example 1</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+   int dividend = 20;
+   int divisor = 0;
+   int quotient;
+
+   if(divisor == 0){
+      fprintf(stderr, "Division by zero! Exiting...\n");
+      exit(-1);
+   }
+   quotient = dividend / divisor;
+   fprintf(stderr, "Value of quotient : %d\n", quotient );
+   exit(0);
+}
+</code></pre>
+
+      <h3>Example 2</h3>
+      <p>Use <code>EXIT_SUCCESS</code> and <code>EXIT_FAILURE</code> macros for program exit status.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+   int dividend = 20;
+   int divisor = 5;
+   int quotient;
+
+   if(divisor == 0) {
+      fprintf(stderr, "Division by zero! Exiting...\n");
+      exit(EXIT_FAILURE);
+   }
+
+   quotient = dividend / divisor;
+   fprintf(stderr, "Value of quotient: %d\n", quotient );
+
+   exit(EXIT_SUCCESS);
+}
+</code></pre>
+    </div>
+  </div>
+</div>

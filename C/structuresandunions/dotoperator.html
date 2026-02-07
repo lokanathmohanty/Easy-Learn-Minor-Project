@@ -1,0 +1,229 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Dot (.) Operator in C</h1>
+    <div class="content">
+      <p>The dot (.) operator in C language is also known as "direction selection member". It is used to select members of structure and union. The dot (.) operator is a binary operator that requires two operands (structure or union name and member name) and it has the highest operator precedence.</p>
+
+      <p>The dot (.) operator is useful when you want to access and manipulate the members (variables) of structure and union.</p>
+
+      <h2 class="title">Using Dot (.) Operator</h2>
+      <p>The dot (.) operator selects the members of the structure and union using the structure and union variable name. Here is the syntax of using the dot (.) operator to access members of a structure or union −</p>
+
+      <p><code>var.member;</code></p>
+
+      <p>Here, <em>var</em> is a variable of a certain struct or a union type, and <em>member</em> is one of the elements defined while creating the structure or union.</p>
+
+      <h2 class="title">Example: Structure Definition and Access</h2>
+      <p>A new derived data type is defined with struct keyword using the following syntax −</p>
+
+      <pre><code>struct newtype {
+   type elem1;
+   type elem2;
+   type elem3;
+   ...
+};</code></pre>
+
+      <p>You can then declare a variable of this derived data type as −</p>
+
+      <pre><code>struct newtype var;</code></pre>
+
+      <p>To access a certain member,</p>
+
+      <pre><code>var.elem1;</code></pre>
+
+      <h2 class="title">Dot Operator with Structure (struct)</h2>
+      <p>As discussed above, the dot (.) operator is used to access and manipulate the members of a structure.</p>
+
+      <p>Let us declare a struct type named <code>book</code> and a struct variable. The following example shows how you can use the dot operator (.) to access the members in the book structure.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+struct book {
+   char title[10];
+   double price;
+   int pages;
+};
+
+int main (){
+
+   struct book b1 = {"Learn C", 675.50, 325};
+   
+   printf("Title: %s\n", b1.title);
+   printf("Price: %lf\n", b1.price);
+   printf("No of Pages: %d\n", b1.pages);
+   printf("size of book struct: %d", sizeof(struct book));
+
+   return 0;
+}</code></pre>
+
+      <h2 class="title">Output</h2>
+      <p>When you run this code, it will produce the following output −</p>
+      <pre><code>Title: Learn C
+Price: 675.500000
+No of Pages: 325
+size of book struct: 32</code></pre>
+
+      <h2 class="title">Dot Operator with Union</h2>
+      <p>The <code>union</code> keyword in C also lets you define a derived data type, similar to the struct keyword. However, unlike a struct variable, a variable of union type can only hold a value for one member at a time.</p>
+
+      <p>The dot (.) operator is also used to access and manipulate the members of a union.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+ 
+union Data {
+   int i;
+   float f;
+   char str[20];
+};
+
+int main(){
+
+   union Data data;        
+
+   data.i = 10;
+   data.f = 220.5;
+   strcpy( data.str, "C Programming");
+
+   printf( "data.i : %d\n", data.i);
+   printf( "data.f : %f\n", data.f);
+   printf( "data.str : %s\n", data.str);
+
+   return 0;
+}</code></pre>
+
+      <h2 class="title">Output</h2>
+      <p>When the above code is compiled and executed, it produces the following result −</p>
+
+      <pre><code>data.i : 1917853763
+data.f : 4122360580327794860452759994368.000000
+data.str : C Programming</code></pre>
+
+      <h2 class="title">Dot Operator with Nested Structure</h2>
+      <p>Nested structures are defined when one of the elements of a struct type is itself a composite of one or more types.</p>
+
+      <p>The dot operator can also be used to access members of nested structures (and unions) in the same way as normal structures.</p>
+
+      <p>Suppose we have a nested structure as follows −</p>
+
+      <pre><code>struct struct1 {
+   var1;
+   var2;
+   struct struct2 {
+      var3;
+      var4;
+   } s2;
+} s1;</code></pre>
+
+      <p>Members of <code>s1</code> are accessed as <code>s1.var1</code> and <code>s1.var2</code>, and members of the inner struct as <code>s1.s2.var3</code>.</p>
+
+      <h2 class="title">Example</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+struct employee {
+   char name[10];
+   float salary;
+   struct dob {
+      int d, m, y;
+   } d1;
+};
+
+int main(){
+
+   struct employee e1 = {"Kiran", 25000, {12, 5, 1990}};
+
+   printf("Name: %s\n", e1.name);
+   printf("Salary: %f\n", e1.salary);
+   printf("Date of Birth: %d-%d-%d\n", e1.d1.d, e1.d1.m, e1.d1.y);
+
+   return 0;
+}</code></pre>
+
+      <h2 class="title">Output</h2>
+      <pre><code>Name: Kiran
+Salary: 25000.000000
+Date of Birth: 12-5-1990</code></pre>
+
+      <h2 class="title">Accessing the Members Using the Arrow Operator</h2>
+      <p>C also has another method to access members of a struct variable, using the arrow operator (<code>-></code>) with a pointer to the struct.</p>
+
+      <p>Example:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+struct book {
+   char title[10];
+   double price;
+   int pages;
+};
+
+int main (){
+
+   struct book b1 = {"Learn C", 675.50, 325};
+   struct book *strptr;
+   strptr = &b1;
+   
+   printf("Title: %s\n", strptr->title);
+   printf("Price: %lf\n", strptr->price);
+   printf("No of Pages: %d\n", strptr->pages);
+
+   return 0;
+}</code></pre>
+
+      <h2 class="title">Output</h2>
+      <pre><code>Title: Learn C
+Price: 675.500000
+No of Pages: 325</code></pre>
+
+      <h2 class="title">Points to Note</h2>
+      <ul>
+        <li>The dot operator (.) is used to access struct elements via the struct variable.</li>
+        <li>To access elements via a pointer to the struct, use the indirection operator (->).</li>
+      </ul>
+
+      <h2 class="title">Accessing Nested Inner Structure via Pointer</h2>
+      <p>Given a nested structure and a pointer to the outer struct:</p>
+
+      <pre><code>struct struct1 {
+   var1;
+   var2;
+   struct struct2 {
+      var3;
+      var4;
+   } s2;
+} s1;
+
+struct struct1 *ptr = &s1;</code></pre>
+
+      <p>Access inner members as:</p>
+
+      <pre><code>ptr->s2.var3;</code></pre>
+
+      <h2 class="title">Example</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+struct employee {
+   char name[10];
+   float salary;
+   struct dob {
+      int d, m, y;
+   } d1;
+};
+
+int main(){
+
+   struct employee e1 = {"Kiran", 25000, {12, 5, 1990}};
+   struct employee *ptr = &e1;
+
+   printf("Name: %s\n", ptr->name);
+   printf("Salary: %f\n", ptr->salary);
+   printf("Date of Birth: %d-%d-%d\n", ptr->d1.d, ptr->d1.m, ptr->d1.y);
+   
+   return 0;
+}</code></pre>
+
+      <h2 class="title">Output</h2>
+      <pre><code>Name: Kiran
+Salary: 25000.000000
+Date of Birth: 12-5-1990</code></pre>
+    </div>
+  </div>
+</div>

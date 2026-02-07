@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Blob</h1>
+    <div class="content">
+      <h2>What is blob in JavaScript?</h2>
+      <p>In JavaScript, a Blob is an object that is a group of bytes representing the data stored in the file. We can easily read the content of the Blob object as an ArrayBuffer, so it is very useful to store binary data. The Blob object is used to handle raw binary data, which we can create from plain text, file data, etc.</p>
+
+      <h2>Syntax</h2>
+      <p>Users can follow the syntax below to use the <code>Blob()</code> constructor to create a blob object.</p>
+      <p><code>new Blob(BlobContent, Options);</code><br>OR<br><code>new Blob(BlobContent, {type: Type of the Blob content});</code></p>
+      <p>In the above syntax, <code>Blob()</code> constructor takes two parameters and returns an instance of the Blob object. Developers can set the values of the <code>type</code> option based on the <code>BlobContent</code>.</p>
+
+      <h2>Parameters</h2>
+      <ul>
+        <li><b>BlobContent</b> − It is a text, data, or file content.</li>
+        <li><b>Options</b> − It is an optional object containing various options for <code>BlobContent</code>.</li>
+      </ul>
+      <p>The <code>type</code> is an important property in the Options object. It contains the MIME-type of the BlobContent as a value. For example, to store plain text in the blob object, you can use <code>text/plain</code> as a MIME type; for images, you can use <code>image/jpg</code> or <code>image/png</code>, etc.</p>
+
+      <h2>Example</h2>
+      <p>In the below example code, we have used the <code>Blob()</code> constructor to create a blob object. We have passed the <b>"Hello World!"</b> string as the first parameter and the <b>"text/plain"</b> MIME type as the second parameter of the constructor. Then we used <code>FileReader()</code> with <code>readAsText()</code> to display the blob content.</p>
+
+      <h2>Blob URLs</h2>
+      <p>A blob object can also be converted to a URL. A blob URL refers to the content of the blob object and can be used with <code>&lt;a&gt;</code> or <code>&lt;img&gt;</code> tags like an actual URL.</p>
+
+      <h2>Example: Rendering Text Content using Blob URL</h2>
+      <p>Here we create a blob object from text and use <code>URL.createObjectURL()</code> to generate a download link.</p>
+
+      <h2>Example: Rendering an Image using Blob URL</h2>
+      <p>Here we read an uploaded image file, convert it to a blob, and generate an object URL to display the image on the page.</p>
+
+      <h2>Blob Advantages &amp; Disadvantages</h2>
+      <h3>Advantages</h3>
+      <ul>
+        <li>Blob objects are ideal for handling large binary data files on the web.</li>
+        <li>Developers can fetch the data in chunks using blob objects, which improves performance.</li>
+        <li>Blob objects can be used with the File API to perform file operations in the browser.</li>
+      </ul>
+      <h3>Disadvantages</h3>
+      <ul>
+        <li>Large blob objects can consume significant memory and resources, impacting performance.</li>
+        <li>Handling binary data using blobs can introduce security concerns.</li>
+        <li>Older browsers do not support Blob.</li>
+      </ul>
+    </div>
+  </div>
+</div>

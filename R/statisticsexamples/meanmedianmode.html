@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Mean, Median and Mode</h1>
+    <div class="content">
+      <p>
+        In R, statistical analysis includes calculating measures of central tendency like mean, median, and mode using built-in or user-defined functions. These functions take a vector as input and return the desired statistic.
+      </p>
+
+      <h2 class="title">Mean</h2>
+      <p>
+        The mean is the sum of values divided by the number of observations. Use <code>mean()</code> to calculate it.
+      </p>
+      <pre><code># Create vector
+x &lt;- c(12, 7, 3, 4.2, 18, 2, 54, -21, 8, -5)
+
+# Calculate mean
+result.mean &lt;- mean(x)
+print(result.mean)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 8.22
+</code></pre>
+
+      <h3 class="title">Trimmed Mean</h3>
+      <p>
+        The <code>trim</code> parameter removes observations from both ends of the sorted vector before calculating the mean.
+      </p>
+      <pre><code># Calculate trimmed mean with 30% trimming
+result.mean &lt;- mean(x, trim = 0.3)
+print(result.mean)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 5.55
+</code></pre>
+
+      <h3 class="title">Handling Missing Values</h3>
+      <p>
+        By default, <code>mean()</code> returns <code>NA</code> if missing values are present. Use <code>na.rm = TRUE</code> to remove <code>NA</code> values.
+      </p>
+      <pre><code># Vector with NA
+x &lt;- c(12, 7, 3, 4.2, 18, 2, 54, -21, 8, -5, NA)
+
+# Mean with NA (returns NA)
+print(mean(x))
+
+# Mean ignoring NA
+print(mean(x, na.rm = TRUE))
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] NA
+[1] 8.22
+</code></pre>
+
+      <h2 class="title">Median</h2>
+      <p>
+        The median is the middle value of a sorted data vector. Calculate it using <code>median()</code>.
+      </p>
+      <pre><code># Calculate median
+median.result &lt;- median(x, na.rm = TRUE)
+print(median.result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 5.6
+</code></pre>
+
+      <h2 class="title">Mode</h2>
+      <p>
+        The mode is the value occurring most frequently. R lacks a built-in <code>mode()</code> for this purpose, so define a custom function.
+      </p>
+      <pre><code># User-defined function to find mode
+getmode &lt;- function(v) {
+  uniqv &lt;- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+# Numeric vector mode
+v &lt;- c(2, 1, 2, 3, 1, 2, 3, 4, 1, 5, 5, 3, 2, 3)
+result &lt;- getmode(v)
+print(result)
+
+# Character vector mode
+charv &lt;- c("o", "it", "the", "it", "it")
+result &lt;- getmode(charv)
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 2
+[1] "it"
+</code></pre>
+    </div>
+  </div>
+   
+  </div>
+</div>

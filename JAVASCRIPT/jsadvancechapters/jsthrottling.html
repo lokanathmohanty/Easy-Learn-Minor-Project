@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Throttling</h1>
+    <div class="content">
+
+      <h2>What is Throttling?</h2>
+      <p>
+        Throttling is a technique that limits how many times a function can be called in a specific
+        period of time. It improves website responsiveness by restricting execution of heavy or
+        expensive tasks such as animations, scrolling, resizing, or fetching data.
+      </p>
+      <p>
+        For example, instead of calling an API hundreds of times while scrolling, you can throttle
+        requests to once per second, reducing bandwidth usage and preventing server overload.
+      </p>
+
+      <h2>Why use Throttling in JavaScript?</h2>
+      <ul>
+        <li>Improves performance by limiting execution frequency.</li>
+        <li>Prevents overloading the browser or server with too many requests.</li>
+        <li>Keeps applications smooth and responsive even during frequent events.</li>
+      </ul>
+
+      <h2>Steps to Implement Throttling</h2>
+      <ol>
+        <li>Create a throttle function that accepts a callback and delay.</li>
+        <li>Track the last time the function was executed.</li>
+        <li>Check if the required delay has passed before running the callback.</li>
+        <li>Return the throttled version of the function.</li>
+      </ol>
+
+      <h2>How Throttling Works</h2>
+      <p>
+        Consider a scroll event: without throttling, hundreds of events are fired rapidly.
+        With throttling, only one event fires per set interval, ensuring efficiency while
+        producing the same result for the user.
+      </p>
+
+      <h2>Example Without Throttling</h2>
+      <pre><code>
+&lt;button id="pressButton"&gt;Press Me&lt;/button&gt;
+
+&lt;script&gt;
+// Without throttling: executes every click immediately
+const button = document.querySelector("#pressButton");
+button.addEventListener("click", () => {
+   console.log("The button has been pressed");
+});
+&lt;/script&gt;
+      </code></pre>
+      <p><strong>Output:</strong> Each click logs immediately without restriction.</p>
+
+      <h2>Example With Throttling</h2>
+      <pre><code>
+&lt;button id="pressButton"&gt;Press Me&lt;/button&gt;
+
+&lt;script&gt;
+const button = document.querySelector("#pressButton");
+
+// Throttle function
+const throttle = (callback, waitTime) =&gt; {
+   let lastCalled = 0;
+   return (...args) =&gt; {
+      const currentTime = new Date().getTime();
+      if (currentTime - lastCalled &gt; waitTime) {
+         lastCalled = currentTime;
+         return callback(...args);
+      }
+   }
+};
+
+button.addEventListener("click",
+   throttle(() =&gt; {
+      console.log("Button has been pressed!");
+   }, 1500)
+);
+&lt;/script&gt;
+      </code></pre>
+      <p><strong>Output:</strong> Logs appear only once every 1500ms, even if clicked rapidly.</p>
+
+      <h2>Use Cases for Throttling</h2>
+      <ul>
+        <li><strong>Gaming:</strong> Limit button presses for actions like shooting or punching.</li>
+        <li><strong>Scrolling & Ads:</strong> Control scroll-triggered animations or content loads.</li>
+        <li><strong>Button Clicks:</strong> Prevent multiple quick submissions (e.g., ATMs).</li>
+        <li><strong>Mouse Events:</strong> Limit frequent pointer/mouse move events.</li>
+        <li><strong>API Calls:</strong> Prevent excessive requests and ensure efficient performance.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <p>
+        JavaScript throttling restricts a function’s execution to fixed intervals. It ensures smooth
+        performance, avoids overloading systems, and maintains a consistent execution rate regardless
+        of how many times the function is invoked.
+      </p>
+
+    </div>
+  </div>
+</div>

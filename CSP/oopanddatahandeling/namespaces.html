@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Namespaces</h1>
+        
+        <h2 class="title">Purpose of Namespaces</h2>
+        <div class="content">
+            <p>A **namespace** is designed to provide a way to keep one set of names separate from another. Its primary function is to organize code and prevent naming conflicts between classes, structs, enums, and other types, particularly in large applications or when using external libraries.</p>
+            <p>For example, you can declare a class named <code>Logger</code> in two different namespaces (e.g., <code>App.Utilities</code> and <code>App.Services</code>) without conflict.</p>
+        </div>
+        
+        <h2 class="title">Defining and Accessing a Namespace</h2>
+        <div class="content">
+            <h3>Declaration Syntax:</h3>
+            <p>A namespace definition begins with the keyword **`namespace`** followed by the chosen name and enclosed in curly braces.</p>
+            <pre>
+namespace MyCompanyName.ProjectName {
+   // All code declarations (classes, interfaces, etc.) here
+}
+            </pre>
+            
+            <h3>Fully Qualified Name:</h3>
+            <p>To access a member (like a class) that belongs to a namespace, you use the **fully qualified name** by prepending the namespace name and using the dot (`.`) operator.</p>
+            <pre>
+// Example using System namespace
+System.Console.WriteLine("Hello there"); 
+
+// Example using a custom namespace
+first_space.namespace_cl fc = new first_space.namespace_cl();
+fc.func();
+            </pre>
+        </div>
+        
+        <h2 class="title">The `using` Keyword</h2>
+        <div class="content">
+            <p>The **`using`** keyword is a directive that imports the names from a specified namespace, allowing you to use the members of that namespace directly without needing to prepend the fully qualified name.</p>
+            <pre>
+using System;      // Allows direct use of Console, String, etc.
+using first_space; // Allows direct use of 'namespace_cl' within the program
+
+class TestClass {
+   static void Main(string[] args) {
+      // Direct use of Console due to 'using System;'
+      Console.WriteLine("Starting program..."); 
+   }
+}
+            </pre>
+            <p>If two imported namespaces contain classes with the same name, a conflict occurs, and you must revert to using the fully qualified name or use a **`using alias`** (e.g., <code>using FC = first_space.namespace_cl;</code>).</p>
+        </div>
+        
+        <h2 class="title">Nested Namespaces</h2>
+        <div class="content">
+            <p>Namespaces can be defined inside other namespaces to create a hierarchical structure, commonly reflecting the project's folder structure or logical organization.</p>
+            
+            <h3>Declaration:</h3>
+            <pre>
+namespace first_space {
+   class abc { /* ... */ }
+   
+   namespace second_space { // Nested Namespace
+      class efg { /* ... */ }
+   }
+}
+            </pre>
+            
+            <h3>Accessing Nested Members:</h3>
+            <p>Members of a nested namespace are accessed by chaining the names with the dot operator.</p>
+            <pre>
+// Using directive to import the nested namespace
+using first_space.second_space; 
+
+class TestClass {
+   static void Main(string[] args) {
+      efg sc = new efg(); // Accessing the class directly after using directive
+      sc.func();
+   }
+}
+            </pre>
+        </div>
+    </div>
+</div>

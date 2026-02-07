@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Pointer vs Array in C</h1>
+ 
+
+      <p>Arrays and Pointers are two important language constructs in C, associated with each other in many ways. In many cases, the tasks that you perform with a pointer can also be performed with the help of an array.</p>
+      <p>However, there are certain conceptual differences between arrays and pointers. Read this chapter to understand their differences and comparative advantages and disadvantages.</p>
+
+      <h2>Arrays in C</h2>
+      <p>In a C program, an array is an indexed collection of elements of similar type, stored in adjacent memory locations.</p>
+      <p>To declare an array, we use the following syntax −</p>
+      <pre class="code">
+data_type arr_name [size];
+      </pre>
+      <p>The size should be a non-negative integer. For example −</p>
+      <pre class="code">
+int arr[5];
+      </pre>
+      <p>The array can be initialized along with the declaration, with the elements given as a comma-separated list inside the curly brackets. Mentioning its size is optional.</p>
+      <pre class="code">
+int arr[] = {1, 2, 3, 4, 5};
+      </pre>
+      <p>Each element in an array is characterized by a unique integral index, starting from "0". In C language, the lower bound of an array is always "0" and the upper bound is "size - 1".</p>
+
+      <h3>Example of an Array</h3>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main (){
+
+   /* an array with 5 elements */
+   int arr[5] = {10, 20, 30, 40, 50};
+
+   int i;
+
+   /* output each array element's value */
+   printf("Array values with subscripts: \n");
+
+   for(i = 0; i &lt; 5; i++){
+      printf("arr[%d]: %d\n", i, arr[i]);
+   }
+   
+   return 0;
+}
+      </pre>
+
+      <h3>Output</h3>
+      <pre class="code">
+Array values with subscripts:
+arr[0]: 10
+arr[1]: 20
+arr[2]: 30
+arr[3]: 40
+arr[4]: 50
+      </pre>
+
+      <h2>Pointers in C</h2>
+      <p>C allows you to access the memory location of a variable that has been randomly allocated by the compiler. The address-of operator (<code>&amp;</code>) returns the address of the variable.</p>
+      <p>A variable that stores the address of another variable is called a pointer. The type of the pointer must be the same as the one whose address it stores.</p>
+      <p>To differentiate from the target variable type, the name of the pointer is prefixed with an asterisk (<code>*</code>). If we have an int variable, its pointer is declared as <code>int *</code>.</p>
+      <pre class="code">
+int x = 5;
+int *y = &amp;x;
+      </pre>
+      <p><strong>Note:</strong> In case of an array, the address of its 0th element is assigned to the pointer.</p>
+      <pre class="code">
+int arr[] = {1, 2, 3, 4, 5};
+int *ptr = &amp;arr[0];
+      </pre>
+      <p>In fact, the name of the array itself resolves to the address of the 0th element.</p>
+
+      <h2>Pointer vs Array</h2>
+      <p>Hence, we can as well write −</p>
+      <pre class="code">
+int *ptr = arr;
+      </pre>
+      <p>Since the elements of an array are placed in adjacent memory locations and the address of each subscript increments by 4 (in case of an int array), we can use this feature to traverse the array elements with the help of pointer as well.</p>
+
+      <h3>Example of a Pointer</h3>
+      <pre class="code">
+#include &lt;stdio.h&gt;
+
+int main (){
+
+   /* an array with 5 elements */
+   int arr[5] = {10, 20, 30, 40, 50};
+   int *x = arr;
+
+   int i;
+
+   /* output each array element's value */
+   printf("Array values with pointer: \n");
+
+   for(i = 0; i &lt; 5; i++) {
+      printf("arr[%d]: %d\n", i, *(x+i));
+   }
+
+   return 0;
+}
+      </pre>
+
+      <h3>Output</h3>
+      <pre class="code">
+Array values with pointer
+arr[0]: 10
+arr[1]: 20
+arr[2]: 30
+arr[3]: 40
+arr[4]: 50
+      </pre>
+
+      <h2>Difference between Arrays and Pointers in C</h2>
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Array</th>
+            <th>Pointer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>It stores the elements of a homogeneous data type in adjacent memory locations.</td>
+            <td>It stores the address of a variable, or an array.</td>
+          </tr>
+          <tr>
+            <td>An array is defined as a collection of similar datatypes.</td>
+            <td>A pointer is a variable that stores address of another variable.</td>
+          </tr>
+          <tr>
+            <td>The number of variables that can be stored is decided by the size of the array.</td>
+            <td>A pointer can store the address of only a single variable.</td>
+          </tr>
+          <tr>
+            <td>The initialization of arrays can be done while defining them.</td>
+            <td>Pointers cannot be initialized while defining them.</td>
+          </tr>
+          <tr>
+            <td>The nature of arrays is static.</td>
+            <td>The nature of pointers is dynamic.</td>
+          </tr>
+          <tr>
+            <td>Arrays cannot be resized according to the user's requirements.</td>
+            <td>Pointers can be resized at any point in time.</td>
+          </tr>
+          <tr>
+            <td>The allocation of an array is done at compile time.</td>
+            <td>The allocation of the pointer is done at run time.</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      
+    </div>
+  </div>
+</div>

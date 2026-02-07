@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Update</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        MongoDB update operations modify values in documents within a collection. The Node.js driver provides <code>updateOne()</code> for single document updates and <code>updateMany()</code> for multiple document updates.
+      </p>
+
+      <h2>updateOne() Syntax</h2>
+      <pre><code>collection.updateOne(filter, update);</code></pre>
+      <p>The <code>filter</code> finds the document to update, and <code>update</code> specifies the changes.</p>
+
+      <h2>Example: Update Single Document</h2>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+  const uri = "mongodb://localhost:27017/";
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+    await updateOneProduct(client, "mydb", "products");
+  } finally {
+    await client.close();
+  }
+}
+
+async function updateOneProduct(client, dbname, colname) {
+  const filter = { ProductID: 3 };
+  const update = { $set: { Name: "Router", price: 2750 } };
+  const result = await client.db(dbname).collection(colname).updateOne(filter, update);
+  console.log("Document updated");
+}
+
+main().catch(console.error);</code></pre>
+
+      <p>Verification in Mongo Shell:</p>
+      <pre><code>> use mydb
+> db.products.find({ ProductID: 3 })
+{
+  _id: ObjectId("..."),
+  ProductID: 3,
+  Name: "Router",
+  price: 2750
+}</code></pre>
+
+      <h2>updateMany() Example</h2>
+      <p>Increments price by 125 for products with names ending in 'er'.</p>
+      <pre><code>async function updateManyProducts(client, dbname, colname) {
+  const filter = { Name: /er$/ };
+  const update = { $inc: { price: 125 } };
+  const result = await client.db(dbname).collection(colname).updateMany(filter, update);
+  console.log("Documents updated");
+}</code></pre>
+
+      <p>Output:</p>
+      <pre><code>Documents updated</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - border-block Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS border-block property</strong> is a shorthand property that allows you to set 
+        the border in the block direction of an element. This shorthand combines three individual 
+        properties: <code>border-block-width</code>, <code>border-block-style</code>, and 
+        <code>border-block-color</code>. Among these, the <code>border-block-style</code> is 
+        mandatory, while the width and color will use their default values if not specified.
+      </p>
+      <p>
+        The block direction depends on the <code>writing-mode</code> property of the document. For 
+        example, in the default <code>horizontal-tb</code> writing mode, the block direction is 
+        vertical (top to bottom), while in <code>vertical-rl</code> or <code>vertical-lr</code>, the 
+        block direction becomes horizontal.
+      </p>
+      
+      <h2>Syntax</h2>
+      <p>
+        The syntax of the border-block property looks like this:
+      </p>
+      <pre><code>border-block: border-block-width border-block-style border-block-color | initial | inherit;</code></pre>
+      
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>border-block-width:</strong> Specifies the width of the border in the block direction. Default is <code>medium</code>.</li>
+        <li><strong>border-block-style:</strong> Defines the style of the border (e.g., solid, dashed). Default is <code>none</code>.</li>
+        <li><strong>border-block-color:</strong> Sets the color of the border in the block direction. Default is the element's text color.</li>
+        <li><strong>initial:</strong> Resets the property to its default value.</li>
+        <li><strong>inherit:</strong> Inherits the property value from the parent element.</li>
+      </ul>
+
+      <h2>Examples of CSS border-block Property</h2>
+      
+      <h3>1. Setting the Width of Border</h3>
+      <p>
+        The <code>border-block-width</code> defines how thick the block border will appear. Below is 
+        an example showing two different widths: <code>thick</code> and <code>10px</code>.
+      </p>
+      <pre><code>&lt;p style="border-block-style: solid; border-block-width: thick;"&gt;
+  This example shows the border-block with thick width.
+&lt;/p&gt;
+
+&lt;p style="border-block-style: solid; border-block-width: 10px;"&gt;
+  This example shows the border-block with 10px width.
+&lt;/p&gt;</code></pre>
+      
+      <h3>2. Setting the Style of Border</h3>
+      <p>
+        The <code>border-block-style</code> is a required property. It specifies how the border will 
+        be drawn. Common values include <code>solid</code>, <code>dashed</code>, <code>dotted</code>, 
+        <code>double</code>, and <code>groove</code>.
+      </p>
+      <pre><code>&lt;p style="border-block-style: solid;"&gt;
+  This border-block uses solid style.
+&lt;/p&gt;
+
+&lt;p style="border-block-style: dashed;"&gt;
+  This border-block uses dashed style.
+&lt;/p&gt;</code></pre>
+      
+      <h3>3. Setting the Color of Border</h3>
+      <p>
+        You can apply colors to the block border using <code>border-block-color</code>. By default, 
+        the text color of the element will be used, but you can override it with any valid CSS color.
+      </p>
+      <pre><code>&lt;p style="border-block-style: solid; border-block-color: red;"&gt;
+  This border-block has a red color.
+&lt;/p&gt;
+
+&lt;p style="border-block-style: solid; border-block-color: blue;"&gt;
+  This border-block has a blue color.
+&lt;/p&gt;</code></pre>
+      
+      <h3>4. Setting all Values at Once</h3>
+      <p>
+        The shorthand <code>border-block</code> allows you to set width, style, and color together in 
+        a single line.
+      </p>
+      <pre><code>&lt;p style="border-block: 5px dashed green;"&gt;
+  This example sets all border-block values at once.
+&lt;/p&gt;</code></pre>
+      
+      <h3>5. Border Block with Writing Mode</h3>
+      <p>
+        The <code>writing-mode</code> property defines the direction of text flow, and the 
+        <code>border-block</code> will adjust accordingly. For example:
+      </p>
+      <ul>
+        <li><code>horizontal-tb:</code> Block borders appear horizontally (top/bottom).</li>
+        <li><code>vertical-rl:</code> Block borders appear vertically (right/left).</li>
+      </ul>
+      <pre><code>&lt;div style="writing-mode: horizontal-tb; border-block: 5px dashed red;"&gt;
+  Horizontal block border.
+&lt;/div&gt;
+
+&lt;div style="writing-mode: vertical-rl; border-block: 5px dashed green;"&gt;
+  Vertical block border.
+&lt;/div&gt;</code></pre>
+      
+      <h2>Supported Browsers</h2>
+      <p>The <code>border-block</code> property is supported in modern browsers:</p>
+      <ul>
+        <li>Chrome: 87+</li>
+        <li>Edge: 87+</li>
+        <li>Firefox: 66+</li>
+        <li>Safari: 14.1+</li>
+        <li>Opera: 73+</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>The <code>border-block</code> shorthand makes CSS cleaner by combining width, style, and color.</li>
+        <li>It respects the document’s <code>writing-mode</code>, making it useful for multilingual layouts.</li>
+        <li>It is especially useful for supporting vertical writing systems like Japanese or Chinese.</li>
+        <li>Always remember to set the <code>border-block-style</code>, since it is mandatory.</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Bootstrap</h1>
+
+    <div class="content">
+      <p>Bootstrap is a popular CSS framework used by front-end developers around the world. It provides excellent support for designing responsive, high-performance web pages using utility classes and components. Bootstrap also offers a large collection of jQuery-based UI components.</p>
+
+      <p>By integrating Bootstrap with React, developers can enjoy the benefits of both frameworks for building beautiful, responsive web applications.</p>
+
+      <h2>Integrating Bootstrap</h2>
+      <p>Bootstrap can be integrated into React applications in multiple ways:</p>
+      <ul>
+        <li>Link tag (CSS only)</li>
+        <li>Import feature (CSS only)</li>
+        <li>Link tag (Bootstrap + jQuery UI)</li>
+        <li>Wrapper React component</li>
+        <li>Native React Bootstrap component</li>
+      </ul>
+
+      <h2>Link tag (CSS only)</h2>
+      <p>To include Bootstrap CSS only, create a new React application and add the link tag in <code>public/index.html</code>.</p>
+
+      <div class="example">
+        <pre>
+&lt;!-- CSS only --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+crossorigin="anonymous"&gt;
+        </pre>
+      </div>
+
+      <p>Example App component:</p>
+      <div class="example">
+        <pre>
+import './App.css'
+function App() {
+  return (
+    &lt;div className="container"&gt;
+      &lt;button type="button" class="btn btn-primary"&gt;Primary&lt;/button&gt;
+      &lt;button type="button" class="btn btn-secondary"&gt;Secondary&lt;/button&gt;
+      &lt;button type="button" class="btn btn-success"&gt;Success&lt;/button&gt;
+      &lt;button type="button" class="btn btn-danger"&gt;Danger&lt;/button&gt;
+      &lt;button type="button" class="btn btn-warning"&gt;Warning&lt;/button&gt;
+      &lt;button type="button" class="btn btn-info"&gt;Info&lt;/button&gt;
+      &lt;button type="button" class="btn btn-light"&gt;Light&lt;/button&gt;
+      &lt;button type="button" class="btn btn-dark"&gt;Dark&lt;/button&gt;
+      &lt;button type="button" class="btn btn-link"&gt;Link&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+export default App;
+        </pre>
+      </div>
+
+      <h2>Import feature (CSS only)</h2>
+      <p>Another way is to install Bootstrap as a dependency and import it in your React project.</p>
+
+      <div class="example">
+        <pre>
+npm install --save bootstrap
+        </pre>
+      </div>
+
+      <p>Example App component:</p>
+      <div class="example">
+        <pre>
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+// Bootstrap Bundle JS
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import './App.css'
+
+function App() {
+  return (
+    &lt;div className="container"&gt;
+      &lt;button type="button" class="btn btn-primary"&gt;Primary&lt;/button&gt;
+      &lt;button type="button" class="btn btn-secondary"&gt;Secondary&lt;/button&gt;
+      &lt;button type="button" class="btn btn-success"&gt;Success&lt;/button&gt;
+      &lt;button type="button" class="btn btn-danger"&gt;Danger&lt;/button&gt;
+      &lt;button type="button" class="btn btn-warning"&gt;Warning&lt;/button&gt;
+      &lt;button type="button" class="btn btn-info"&gt;Info&lt;/button&gt;
+      &lt;button type="button" class="btn btn-light"&gt;Light&lt;/button&gt;
+      &lt;button type="button" class="btn btn-dark"&gt;Dark&lt;/button&gt;
+      &lt;button type="button" class="btn btn-link"&gt;Link&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+export default App;
+        </pre>
+      </div>
+
+      <h2>Link tag (Bootstrap + jQuery UI)</h2>
+      <p>This option allows developers to use Bootstrap and jQuery UI components together on the same page with React. It is a simple option suitable for small projects.</p>
+
+      <h2>Wrapper React Component</h2>
+      <p>Developers can create wrapper React components for Bootstrap components and reuse them in their applications. This approach is useful for moderate to complex applications.</p>
+
+      <h2>Native React Bootstrap Component</h2>
+      <p>React also has dedicated Bootstrap component libraries:</p>
+      <ul>
+        <li><a href="https://react-bootstrap.github.io/">React-Bootstrap</a></li>
+        <li><a href="https://bootstrap-4-react.com/">Bootstrap 4 React</a></li>
+        <li><a href="https://reactstrap.github.io/">Reactstrap</a></li>
+        <li><a href="https://coreui.io/bootstrap-react/">CoreUI Bootstrap React</a></li>
+      </ul>
+
+      <h3>Example: React-Bootstrap</h3>
+      <div class="example">
+        <pre>
+npm install --save react-bootstrap bootstrap
+        </pre>
+      </div>
+
+      <div class="example">
+        <pre>
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+// Bootstrap Bundle JS
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import './App.css'
+import { Button } from 'react-bootstrap';
+
+function App() {
+  return (
+    &lt;div className="container"&gt;
+      &lt;Button variant="primary"&gt;Primary&lt;/Button&gt;{' '}
+      &lt;Button variant="secondary"&gt;Secondary&lt;/Button&gt;{' '}
+      &lt;Button variant="success"&gt;Success&lt;/Button&gt;{' '}
+      &lt;Button variant="warning"&gt;Warning&lt;/Button&gt;{' '}
+      &lt;Button variant="danger"&gt;Danger&lt;/Button&gt;{' '}
+      &lt;Button variant="info"&gt;Info&lt;/Button&gt;{' '}
+      &lt;Button variant="light"&gt;Light&lt;/Button&gt;{' '}
+      &lt;Button variant="dark"&gt;Dark&lt;/Button&gt;{' '}
+      &lt;Button variant="link"&gt;Link&lt;/Button&gt;
+    &lt;/div&gt;
+  );
+}
+export default App;
+        </pre>
+      </div>
+
+      <h2>Summary</h2>
+      <p>React provides multiple ways to integrate with the Bootstrap library. Developers can start with simple CSS imports or link tags and progressively adopt native React-Bootstrap components. This flexibility enables smooth migration and the ability to leverage rich third-party Bootstrap components for better UI/UX.</p>
+    </div>
+  </div>
+</div>

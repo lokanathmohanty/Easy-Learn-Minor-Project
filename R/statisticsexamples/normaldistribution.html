@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Normal Distribution</h1>
+    <div class="content">
+      <p>
+        Normal distribution is a common data distribution where values cluster around the mean, forming a bell-shaped curve. Roughly 50% of values lie on each side of the mean. R provides built-in functions to generate and analyze normal distributions.
+      </p>
+
+      <h2 class="title">Key Functions</h2>
+      <ul>
+        <li><code>dnorm(x, mean, sd)</code>: Density/probability height for values x</li>
+        <li><code>pnorm(x, mean, sd)</code>: Cumulative distribution function (CDF) for x</li>
+        <li><code>qnorm(p, mean, sd)</code>: Quantile function, returns value for cumulative probability p</li>
+        <li><code>rnorm(n, mean, sd)</code>: Generates n random samples from the normal distribution</li>
+      </ul>
+
+      <h2 class="title">dnorm() Example</h2>
+      <pre><code># Sequence from -10 to 10
+x &lt;- seq(-10, 10, by = 0.1)
+
+# Density values (mean=2.5, sd=0.5)
+y &lt;- dnorm(x, mean = 2.5, sd = 0.5)
+
+# Plot density
+png(file = "dnorm.png")
+plot(x, y)
+dev.off()
+</code></pre>
+
+      <h2 class="title">pnorm() Example</h2>
+      <pre><code># Sequence from -10 to 10
+x &lt;- seq(-10, 10, by = 0.2)
+
+# CDF values (mean=2.5, sd=2)
+y &lt;- pnorm(x, mean = 2.5, sd = 2)
+
+# Plot CDF
+png(file = "pnorm.png")
+plot(x, y)
+dev.off()
+</code></pre>
+
+      <h2 class="title">qnorm() Example</h2>
+      <pre><code># Probability values from 0 to 1
+x &lt;- seq(0, 1, by = 0.02)
+
+# Quantiles (mean=2, sd=1)
+y &lt;- qnorm(x, mean = 2, sd = 1)
+
+# Plot quantiles
+png(file = "qnorm.png")
+plot(x, y)
+dev.off()
+</code></pre>
+
+      <h2 class="title">rnorm() Example</h2>
+      <pre><code># Generate 50 random samples (normal distribution)
+y &lt;- rnorm(50)
+
+# Plot histogram of samples
+png(file = "rnorm.png")
+hist(y, main = "Normal Distribution")
+dev.off()
+</code></pre>
+
+      <p>
+        These examples illustrate generating and plotting normal distribution data and related functions in R.
+      </p>
+    </div>
+  </div>
+     </div>
+  </div>
+</div>

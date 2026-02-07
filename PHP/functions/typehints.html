@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Type Hints and Strict Typing</h1>
+
+    <div class="content">
+      <p>
+        **Type Hints** (or **Type Declarations**) allow you to explicitly declare the expected data type for function parameters, return values, and class properties (PHP 7.4+). Since PHP is typically a **weakly typed** language that performs automatic type casting, type hints help in writing more reliable, robust, and self-documenting code.
+      </p>
+
+      <h2>Function Type Hints</h2>
+
+      <h3>1. Parameter and Return Type Declarations (PHP 7+)</h3>
+      <p>
+        You can specify the expected type for arguments and the type of the value a function must return.
+      </p>
+      <div class="example">
+        <p>
+          <code>function addition(**int** $x, **int** $y) : **int** {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;return $x + $y;</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <h3>2. Strict Type Checking</h3>
+      <p>
+        By default, PHP attempts to coerce (cast) values to match the declared type (e.g., automatically converting the string `"10"` to the integer `10`). To prevent this and enforce strict type matching, you must enable **strict mode** by placing the following declaration at the top of the file:
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php</code><br>
+          <code>&nbsp;&nbsp;&nbsp;**declare (strict_types=1);**</code><br>
+          <code>&nbsp;&nbsp;&nbsp;function addition(int $x, int $y) : int { /* ... */ }</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$x="10"; // Will now cause a Fatal TypeError</code><br>
+          <code>&nbsp;&nbsp;&nbsp;addition($x, 20);</code><br>
+          <code>?&gt;</code>
+        </p>
+        <p class="content">
+          If strict mode is not set, `"10"` would be implicitly cast to `10`.
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Advanced Type Hints (PHP 7.1+)</h2>
+
+      <h3>1. Nullable Types (`?`)</h3>
+      <p>
+        Prefixing a type with a question mark (`?`) means the parameter or return value can be either the specified type **or `null`**.
+      </p>
+      <div class="example">
+        <p>
+          <code>function greet(**?string** $name) { /* ... */ }</code><br>
+          <code>greet("Jatin");</code> // Valid<br>
+          <code>greet(null);</code> // Valid
+        </p>
+      </div>
+
+      <h3>2. Union Types (`|`) (PHP 8.0+)</h3>
+      <p>
+        Allows you to specify that a parameter or return value can be one of several types, separated by the pipe symbol (`|`).
+      </p>
+      <div class="example">
+        <p>
+          <code>function addition(**int|float** $x, int|float $y) : **float** {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;return $x + $y;</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <h3>3. Mixed Type (PHP 8.0+)</h3>
+      <p>
+        The `mixed` pseudo-type can be used to indicate that an argument or return value accepts **any type** (int, string, array, object, null, etc.). It is equivalent to using a large union of all possible types.
+      </p>
+      <div class="example">
+        <p>
+          <code>function display(**mixed** $value) { var_dump($value); }</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

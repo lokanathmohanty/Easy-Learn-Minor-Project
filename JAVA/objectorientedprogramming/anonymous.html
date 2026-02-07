@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Anonymous Classes</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Inner Class Specialization</h1>
+            <h2 class="subtitle">Session: Anonymous Inner Classes</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is an Anonymous Inner Class? 👻</h2>
+                <p>An **Anonymous Inner Class** is a **nameless inner class** that is declared and instantiated at the same time. Since it has no name, it **cannot have a constructor**.</p>
+                <p>Anonymous classes are used to create a simple class that is required only **once** for a specific, immediate purpose, such as overriding a method or implementing an interface.</p>
+            </div>
+
+            <hr>
+
+            <div class="content syntax">
+                <h2 class="subtitle">Syntax and Declaration</h2>
+                <p>The syntax uses the <code>new</code> operator followed by the name of the class or interface it is extending/implementing, immediately followed by the class body <code>{}</code>:</p>
+                <pre><code>new ClassOrInterfaceName(argument-list) {
+   // Anonymous class body: 
+   // - Overridden methods
+   // - Fields (if any)
+}</code></pre>
+                <p>The type of the resulting object is typically a subtype of the `ClassOrInterfaceName`.</p>
+            </div>
+
+            <hr>
+
+            <div class="content types">
+                <h2 class="subtitle">Types and Usage</h2>
+
+                <h3>1. Anonymous Class that Extends a Class</h3>
+                <p>Used to quickly extend a concrete or abstract class and override one or more of its methods on-the-fly. The reference type is the **parent class**.</p>
+                <pre><code>class Car { public void engineType() { ... } }
+// Create an object of an anonymous subclass of Car
+Car c2 = new Car() {
+   @Override
+   public void engineType() {
+      System.out.println("V2 Engine"); // Provides a unique, one-off implementation
+   }
+};</code></pre>
+
+                <h3>2. Anonymous Class that Implements an Interface</h3>
+                <p>Used to provide a quick, single-use implementation of an interface, often for a functional task (before Java 8 Lambda expressions). The reference type is the **interface**.</p>
+                <pre><code>interface Software { public void develop(); }
+
+Software s = new Software() {
+   @Override
+   public void develop() {
+      System.out.println("Software Developed in Java");
+   }
+};</code></pre>
+
+                <h3>3. Anonymous Class as a Method Argument</h3>
+                <p>This is a very common use case, where the entire anonymous class declaration is passed directly into a method call that requires an interface or abstract class object. It keeps the code extremely concise.</p>
+                <pre><code>class Vehicle {
+   public void transport(Engine e) { // Accepts an Engine abstract object
+      e.engineType();
+   }
+}
+
+// Pass an anonymous subclass of Engine directly to the method:
+v.transport(new Engine() {
+   @Override
+   public void engineType() {
+      System.out.println("Turbo Engine");
+   }
+});</code></pre>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

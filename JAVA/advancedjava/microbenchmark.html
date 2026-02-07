@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Micro Benchmarking (JMH)</h1>
+
+        <div class="content">
+            <h2>Understanding Java Benchmarking</h2>
+            <p><strong>Benchmarking</strong> is the process of measuring the **performance** of an application or a specific section of code, typically in terms of **throughput** (operations per unit of time) or **average execution time**. It's crucial for identifying performance bottlenecks, ensuring responsiveness, and preventing performance degradation over time.</p>
+
+            <h3>Why Traditional Benchmarking Fails ❌</h3>
+            <p>A simple technique like using <code>System.nanoTime()</code> to measure the start and end time of a code block is **unreliable** for Java. This is because the Java Virtual Machine (JVM) is highly dynamic and performs optimizations that interfere with simple timing, including:</p>
+            <ul>
+                <li><strong>JIT (Just-In-Time) Compilation:</strong> The JVM initially runs code slowly (interpreted mode) and only optimizes/compiles it after it's run many times (hot code). Simple timing misses this warmup phase.</li>
+                <li><strong>Dead Code Elimination:</strong> If the code's result is not used, the JIT compiler might eliminate it entirely, making the recorded time misleadingly fast.</li>
+                <li><strong>Garbage Collection (GC):</strong> GC cycles can start randomly, skewing the measurement time for the code being tested.</li>
+            </ul>
+
+            <hr>
+
+            <h2>Java Microbenchmark Harness (JMH) ✅</h2>
+            <p>The **Java Microbenchmark Harness (JMH)** is the industry-standard tool, developed by the OpenJDK community, for performing **reliable** and scientific micro-benchmarking in Java. It handles the complexities of the JVM (warmup, optimizations, GC) automatically.</p>
+
+            <h3>Key Steps for Using JMH</h3>
+            <ol>
+                <li>
+                    <strong>Setup Dependencies:</strong> Add the necessary JMH core and annotation processor dependencies (e.g., to your <code>pom.xml</code>).
+                </li>
+                <li>
+                    <strong>Annotate the Method:</strong> Mark the method to be measured with the **<code>@Benchmark</code>** annotation.
+                </li>
+                <li>
+                    <strong>Run the Benchmark:</strong> Use the <code>OptionsBuilder</code> and <code>Runner</code> classes in a <code>main</code> method to configure and start the benchmark.
+                </li>
+            </ol>
+
+            <h3>Core JMH Concepts</h3>
+            <ul>
+                <li>
+                    <strong>Warmup Phase:</strong> JMH runs the code several times before actual measurement begins, ensuring the JIT compiler has fully optimized the code.
+                </li>
+                <li>
+                    <strong>Measurement Phase:</strong> The phase where the actual performance data is collected.
+                </li>
+                <li>
+                    <strong>Forks:</strong> Separate JVM processes launched to minimize interference between different tests.
+                </li>
+                <li>
+                    <strong>Blackhole:</strong> A JMH utility used to consume the result of a benchmarked method. This prevents the JIT compiler from incorrectly performing **dead code elimination** (it ensures the compiler believes the result is used).
+                </li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example Output Interpretation</h2>
+            <div class="content">
+                <p>JMH output provides statistically rigorous results, typically showing performance in terms of operations per second (throughput).</p>
+                <pre><code>Benchmark                      Mode  Cnt      Score     Error  Units
+Operations.timeTakingProcess  thrpt    5  34280.276  660.293  ops/s</code></pre>
+                <ul>
+                    <li><strong>Mode:</strong> <code>thrpt</code> means **Throughput** (operations/time).</li>
+                    <li><strong>Cnt:</strong> Number of measurement iterations (5 in this case).</li>
+                    <li><strong>Score:</strong> The calculated average performance (34,280.276 operations per second).</li>
+                    <li><strong>Error:</strong> The statistical margin of error, indicating the reliability and stability of the score.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

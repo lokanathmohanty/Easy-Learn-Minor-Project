@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP File Writing Functions</h1>
+
+    <div class="content">
+      <p>
+        **File Writing** in PHP involves either creating a new file or updating the content of an existing one. This capability is fundamental for tasks such as **data storage**, **application logging**, and creating dynamic content on the server.
+      </p>
+
+      <h2>Prerequisite: Opening the File</h2>
+      <p>
+        Before writing, the file must be opened using `fopen()` in a **writable mode**.
+      </p>
+      <ul>
+        <li>
+          **`w` (Write)**: Creates a new file or **overwrites** content if the file exists.
+        </li>
+        <li>
+          **`a` (Append)**: Creates a new file or adds content to the **end** of an existing file.
+        </li>
+        <li>
+          **`w+` or `a+`**: Allows both reading and writing.
+        </li>
+      </ul>
+
+      <hr>
+
+      <h2>Basic Write Functions</h2>
+      <p>
+        PHP provides two core functions for performing write operations to a file stream: `fwrite()` and `fputs()`. These two functions are nearly identical aliases of each other.
+      </p>
+
+      <h3>1. `fwrite()` (Binary-Safe Write) 💾</h3>
+      <p>
+        The `fwrite()` function performs a binary-safe write operation. It is the preferred function for writing data, especially when dealing with non-text (binary) files.
+      </p>
+      <div class="example">
+        <p>
+          **Syntax:** <code>fwrite(resource $stream, string $data, ?int $length)</code>
+        </p>
+        <p>
+          **Example (Overwriting a file):**<br>
+          <code>$fp = fopen("hello.txt", "**w**");</code><br>
+          <code>$bytes = **fwrite**($fp, "Hello Tutorialspoint!!!!!");</code><br>
+          <code>echo "bytes written: $bytes"; // Output: 25</code><br>
+          <code>fclose($fp);</code>
+        </p>
+      </div>
+
+      <h3>2. `fputs()` (Alias of `fwrite()`) 📝</h3>
+      <p>
+        The `fputs()` function is an alias for `fwrite()` and performs the exact same operation: writing a string to a file stream opened in a writable mode.
+      </p>
+      <div class="example">
+        <p>
+          **Example (Appending to a file):**<br>
+          <code>$fp = fopen("hello.txt", "**a**");</code><br>
+          <code>$bytes = **fputs**($fp, "\nHello PHP");</code><br>
+          <code>fclose($fp);</code>
+        </p>
+      </div>
+      <p>
+        *Both `fwrite()` and `fputs()` return the number of bytes successfully written to the file, or `FALSE` on failure.*
+      </p>
+
+      <hr>
+
+      <h2>Advanced File Copy Example</h2>
+      <p>
+        File writing functions are often used in combination with reading functions (like `fread()`) to process or copy data, including binary data like images.
+      </p>
+      <div class="example">
+        <p>
+          <code>$source = fopen("image.png", "**rb**"); // Read Binary</code><br>
+          <code>$dest = fopen("new.png", "**wb**"); // Write Binary</code><br>
+          <code>$size = filesize("image.png");</code><br>
+          <code>$data = **fread**($source, $size); // Read all bytes</code><br>
+          <code>**fwrite**($dest, $data, $size); // Write all bytes</code><br>
+          <code>fclose($source);</code><br>
+          <code>fclose($dest);</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

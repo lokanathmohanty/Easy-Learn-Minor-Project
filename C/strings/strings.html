@@ -1,0 +1,268 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Strings in C</h1>
+    <p class="content">
+      A string in C is a one-dimensional array of <code>char</code> type, with the last character in the array being a "null character" represented by <code>'\0'</code>. Thus, a string in C can be defined as a null-terminated sequence of <code>char</code> type values.
+    </p>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating a String in C</h2>
+    <p class="content">
+      Let us create a string "Hello". It comprises five <code>char</code> values. In C, the literal representation of a <code>char</code> type uses single quote symbols such as <code>'H'</code>. These five alphabets put inside single quotes, followed by a null character represented by <code>'\0'</code>, are assigned to an array of <code>char</code> types. The size of the array is five characters plus the null character, six.
+    </p>
+    <h3 class="title">Example</h3>
+    <pre class="content"><code>char greeting[6] = {'H', 'e', 'l', 'l', 'o', '\0'};</code></pre>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Initializing String Without Specifying Size</h2>
+    <p class="content">
+      C lets you initialize an array without declaring the size, in which case the compiler automatically determines the array size.
+    </p>
+    <h3 class="title">Example</h3>
+    <pre class="content"><code>char greeting[] = {'H', 'e', 'l', 'l', 'o', '\0'};</code></pre>
+    <p class="content">
+      The array created in memory can be schematically shown as follows:
+    </p>
+  </div>
+
+  <div class="session">
+    <h2 class="title">String Representation</h2>
+    <p class="content">
+      If the string is not terminated by <code>"\0"</code>, it results in unpredictable behavior.
+    </p>
+    <p class="content">
+      <strong>Note:</strong> The length of the string does not include the null character. The library function <code>strlen()</code> returns the length of this string as 5.
+    </p>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Loop Through a String</h2>
+    <p class="content">
+      You can loop through a string (character array) to access and manipulate each character of the string using a <code>for</code> loop or other loop statements.
+    </p>
+    <h3 class="title">Example</h3>
+    <pre class="content"><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main (){
+   char greeting[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+
+   for (int i = 0; i &lt; 5; i++) {
+      printf("%c", greeting[i]);
+   }
+
+   return 0;
+}
+</code></pre>
+    <p class="content"><strong>Output:</strong></p>
+    <pre class="content"><code>Hello</code></pre>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Printing a String (Using %s Format Specifier)</h2>
+    <p class="content">
+      C provides a format specifier <code>"%s"</code> which is used to print a string when using functions like <code>printf()</code> or <code>fprintf()</code>.
+    </p>
+    <p class="content">
+      The <code>"%s"</code> specifier tells the function to iterate through the array until it encounters the null terminator (<code>\0</code>) and print each character. This effectively prints the entire string without needing a loop.
+    </p>
+    <h3 class="title">Example</h3>
+    <pre class="content"><code>#include &lt;stdio.h&gt;
+
+int main (){
+   char greeting[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+   printf("Greeting message: %s\n", greeting );
+   return 0;
+}
+</code></pre>
+    <p class="content"><strong>Output:</strong></p>
+    <pre class="content"><code>Greeting message: Hello</code></pre>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Oversized and Undersized Array Initialization</h2>
+    <p class="content">
+      You can declare an oversized array and assign fewer characters without issues. However, if the size is less than the number of characters in the initialization, you may get garbage values in the output.
+    </p>
+    <h3 class="title">Example</h3>
+    <pre class="content"><code>char greeting[3] = {'H', 'e', 'l', 'l', 'o', '\0'};
+printf("%s", greeting);</code></pre>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Constructing a String using Double Quotes</h2>
+    <p class="content">
+      Instead of constructing a <code>char</code> array of individual <code>char</code> values in single quotes and using <code>"\0"</code> as the last element, C lets you construct a string by enclosing the characters within double quotes. This method is more convenient as the compiler automatically adds <code>"\0"</code> as the last character.
+    </p>
+    <h3 class="title">Example</h3>
+    <pre class="content"><code>#include &lt;stdio.h&gt;
+
+int main() {
+  char greeting[] = "Hello World";
+  printf("%s\n", greeting);
+  return 0;
+}
+</code></pre>
+    <p class="content"><strong>Output:</strong></p>
+    <pre class="content"><code>Hello World</code></pre>
+  </div>
+
+  <div class="session">
+    <h2 class="title">String Input Using <code>scanf()</code></h2>
+    <p class="content">
+      Declaring a null-terminated string causes difficulty when asking the user to input a string. You can accept one character at a time to store in each element of an array, with the help of a <code>for</code> loop.
+    </p>
+    <h3 class="title">Syntax</h3>
+    <pre class="content"><code>for(i = 0; i &lt; 6; i++){
+   scanf("%c", &greeting[i]);
+}
+greeting[i] = '\0';</code></pre>
+    <h3 class="title">Example</h3>
+    <pre class="content"><code>printf("Starting typing... ");
+
+for (i = 0; i &lt; 5; i++) {
+  scanf("%c", &greeting[i]);
+}
+
+greeting[i] = '\0';
+
+printf("Value of greeting: %s\n", greeting);
+</code></pre>
+    <p class="content"><strong>Output:</strong></p>
+    <pre class="content"><code>Starting typing... Hello
+Value of greeting: Hello</code></pre>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using <code>scanf("%s")</code> for String Input</h2>
+    <p class="content">
+      It is not possible to input the null character (<code>\0</code>) because it is non-printable. To overcome this, <code>scanf("%s")</code> is used to read a string until whitespace.
+    </p>
+    <h3 class="title">Example</h3>
+    <pre class="content"><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main (){
+   char greeting[10];
+   printf("Enter a string:\n");
+   scanf("%s", greeting);
+   printf("You entered:\n%s", greeting);
+   return 0;
+}
+</code></pre>
+    <p class="content"><strong>Output:</strong></p>
+    <pre class="content"><code>Enter a string:
+Hello
+You entered:
+Hello</code></pre>
+    <p class="content">
+      <strong>Note:</strong> If the array size is less than the input string length, it may cause garbage or data corruption.
+    </p>
+  </div>
+
+  <div class="session">
+    <h2 class="title">String Input with Whitespace</h2>
+    <p class="content">
+      The <code>scanf("%s")</code> reads characters until it encounters whitespace (space, tab, newline, etc.). Therefore, strings with multiple words will only accept characters before the first whitespace.
+    </p>
+    <h3 class="title">Example</h3>
+    <pre class="content"><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main (){
+   char greeting[20];
+   printf("Enter a string:\n");
+   scanf("%s", greeting);
+   printf("You entered:\n%s", greeting);
+   return 0;
+}
+</code></pre>
+    <p class="content"><strong>Output:</strong></p>
+    <pre class="content"><code>Enter a string:
+Hello World!
+
+You entered:
+Hello</code></pre>
+  </div>
+
+  <div class="session">
+    <h2 class="title">String Input Using <code>gets()</code> and <code>fgets()</code> Functions</h2>
+    <p class="content">
+      To accept string input with whitespaces, <code>gets()</code> was traditionally used but is deprecated due to lack of bounds checking, leading to potential buffer overflow.
+    </p>
+
+    <h3 class="title">Example: Using <code>gets()</code></h3>
+    <pre class="content"><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(){
+   char name[20];
+   printf("Enter a name:\n");
+   gets(name);
+   printf("You entered:\n%s", name);
+   return 0;
+}
+</code></pre>
+    <p class="content"><strong>Output:</strong></p>
+    <pre class="content"><code>Enter a name:
+Sachin Tendulkar
+
+You entered:
+Sachin Tendulkar</code></pre>
+
+    <p class="content">
+      It is safer to use <code>fgets()</code>, which performs bound checking.
+    </p>
+
+    <h3 class="title">Example: Using <code>fgets()</code></h3>
+    <pre class="content"><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(){
+   char name[20];
+   printf("Enter a name:\n");
+   fgets(name, sizeof(name), stdin);
+   printf("You entered:\n%s", name);
+   return 0;
+}
+</code></pre>
+    <p class="content"><strong>Output:</strong></p>
+    <pre class="content"><code>Enter a name:
+Virat Kohli
+
+You entered:
+Virat Kohli</code></pre>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Alternative String Input Using <code>scanf("%[^\n]s")</code></h2>
+    <p class="content">
+      You may use <code>scanf("%[^\n]s")</code> to read characters until a newline is encountered.
+    </p>
+    <h3 class="title">Example</h3>
+    <pre class="content"><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main (){
+   char name[20];
+   printf("Enter a name:\n");
+   scanf("%[^\n]s", name);
+   printf("You entered:\n%s", name);
+   return 0;
+}
+</code></pre>
+    <p class="content"><strong>Output:</strong></p>
+    <pre class="content"><code>Enter a name:
+Zaheer Khan
+
+You entered:
+Zaheer Khan</code></pre>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Printing String Using <code>puts()</code> and <code>fputs()</code></h2>
+    <p class="content">
+      Besides <code>printf()</code>, strings can also be printed using <code>puts()</code> (deprecated in C

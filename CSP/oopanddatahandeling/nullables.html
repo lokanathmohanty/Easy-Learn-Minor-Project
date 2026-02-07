@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Nullable Types and Null Coalescing Operator (`??`)</h1>
+        
+        <h2 class="title">C# Nullable Types</h2>
+        <div class="content">
+            <p>In C#, **value types** (like <code>int</code>, <code>double</code>, <code>bool</code>, <code>struct</code>) normally **cannot** be assigned a value of <code>null</code>. **Nullable types** overcome this limitation, allowing value type variables to store their normal range of values **plus** the <code>null</code> value.</p>
+            <p>Nullable types are instances of the generic type <code>System.Nullable&lt;T&gt;</code>, but they are most often declared using a shorthand syntax.</p>
+            
+            <h3>Declaration Syntax:</h3>
+            <p>You declare a nullable type by appending the **question mark (`?`)** symbol after the data type:</p>
+            <pre>
+&lt;data_type&gt;? &lt;variable_name&gt; = null;
+
+// Example:
+int? num1 = null; 
+double? num4 = 3.14157;
+bool? boolval = new bool?(); // Long-form equivalent
+            </pre>
+        </div>
+        
+        <h2 class="title">Example: Using Nullable Types</h2>
+        <div class="content example">
+            <p>The output shows that when a nullable type holds <code>null</code>, it displays as an empty string in the console.</p>
+            <pre>
+using System;
+class NullablesAtShow {
+    static void Main(string[] args) {
+        int? num1 = null;
+        int? num2 = 45;
+        double? num3 = new double?(); // Holds null
+        double? num4 = 3.14157;
+         
+        Console.WriteLine("Values: {0}, {1}, {2}, {3}", num1, num2, num3, num4);
+    }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                Values: , 45, , 3.14157
+            </p>
+        </div>
+        
+        <h2 class="title">C# Null Coalescing Operator (`??`)</h2>
+        <div class="content">
+            <p>The **Null Coalescing Operator (`??`)** is a binary operator that provides a concise way to handle nullable types and reference types that might be <code>null</code>.</p>
+            <ul>
+                <li>It checks if the left-hand operand is <code>null</code>.</li>
+                <li>If the left operand is **NOT `null`**, it returns the value of the left operand.</li>
+                <li>If the left operand **IS `null`**, it returns the value of the right operand (the default value).</li>
+            </ul>
+            
+            <h3>Syntax:</h3>
+            <pre>
+&lt;result_variable&gt; = &lt;nullable_value&gt; ?? &lt;default_value&gt;;
+            </pre>
+        </div>
+        
+        <h2 class="title">Example: Using Null Coalescing Operator</h2>
+        <div class="content example">
+            <p>This demonstrates how the `??` operator selects the left value if available, or the right default value if the left is <code>null</code>.</p>
+            <pre>
+using System;
+class NullablesAtShow {
+    static void Main(string[] args) {
+        double? num1 = null;
+        double? num2 = 3.14157;
+        double num3;
+         
+        // Case 1: num1 is null, so 5.34 is assigned to num3
+        num3 = num1 ?? 5.34;      
+        Console.WriteLine("Value of num3 (Case 1): {0}", num3);
+         
+        // Case 2: num2 is NOT null, so 3.14157 is assigned to num3
+        num3 = num2 ?? 5.34;
+        Console.WriteLine("Value of num3 (Case 2): {0}", num3);
+    }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                Value of num3 (Case 1): 5.34<br>
+                Value of num3 (Case 2): 3.14157
+            </p>
+        </div>
+    </div>
+</div>

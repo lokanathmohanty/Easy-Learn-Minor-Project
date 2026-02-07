@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Error and Exception Handling</h1>
+
+        <div class="content">
+            <p><strong>Error Handling</strong> in PHP is the mechanism for effectively identifying, reporting, and gracefully recovering from runtime issues. PHP offers traditional error functions and a modern exception model (introduced in PHP 5 and significantly improved in PHP 7 with the $\text{Throwable}$ interface).</p>
+
+            <h2 class="title">1. Basic Error Control: $\text{die()}$ Function</h2>
+            <p>The $\text{die()}$ function (an alias of $\text{exit()}$) immediately **terminates** the execution of the current PHP script. It is often used for simple, unrecoverable errors, such as a failed file or database connection, to display a custom message before halting.</p>
+            <pre>
+&lt;?php
+   if(!file_exists("nosuchfile.txt")) {
+      die("File not found");
+   } 
+   // Execution stops here if file is not found.
+?&gt;</pre>
+
+            <hr>
+
+            <h2 class="title">2. Custom Error Handler Function</h2>
+            <p>For more elegant and non-fatal error handling, you can define a custom function to catch errors using $\text{set\_error\_handler()}$.</p>
+            <ul>
+                <li><strong>Function:</strong> $\text{set\_error\_handler(callable \$callback, int \$error\_levels)}$</li>
+                <li><strong>Callback Signature:</strong> $\text{handler(int \$errno, string \$errstr, string \$errfile, int \$errline, array \$errcontext)}$</li>
+                <li>The custom function is automatically called when an error matching the specified $\text{\$error\_levels}$ is encountered.</li>
+            </ul>
+
+            <h3>Predefined Error Constants ($\text{errno}$)</h3>
+            <p>Errors are categorized by integer constants, allowing handlers to differentiate error types:</p>
+            <ul>
+                <li>$\text{E\_ERROR}$: Fatal, unrecoverable run-time errors (script halts). (Value: 1)</li>
+                <li>$\text{E\_WARNING}$: Run-time warnings (non-fatal, script continues). (Value: 2)</li>
+                <li>$\text{E\_NOTICE}$: Run-time notices (minor errors that may be okay). (Value: 8)</li>
+                <li>$\text{E\_USER\_ERROR}$: User-generated errors via $\text{trigger\_error()}$. (Value: 256)</li>
+                <li>$\text{E\_ALL}$: All errors, warnings, and notices. (Value: 32767)</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">3. Modern Error and Exception Classes (PHP 7+)</h2>
+            <p>PHP 7 introduced the **$\text{Throwable}$** interface, which is the base for both the traditional **$\text{Exception}$** class and the new **$\text{Error}$** class hierarchy. This allows unrecoverable internal PHP errors to be caught like exceptions.</p>
+
+            <h3>Key Built-in Error Classes</h3>
+            <ul>
+                <li>**$\text{ArithmeticError}$**: Occurs during certain mathematical operations (e.g., bit shift by a negative number).</li>
+                <li>**$\text{DivisionByZeroError}$**: Occurs when the denominator is zero in division ($\text{/}$) or modulo ($\text{\%}$) operations, or $\text{intdiv()}$.</li>
+                <li>**$\text{ArgumentCountError}$**: Thrown when a function or method is called with fewer arguments than required.</li>
+                <li>**$\text{TypeError}$**: Thrown when argument types do not match the declared type hints in strict mode ($\text{declare(strict\_types=1)}$), or when a built-in function is given incorrect types/counts.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">4. Exception Handling ($\text{try-catch-throw}$)</h2>
+            <p>Exceptions provide a structured way to handle anticipated errors. The model uses three keywords:</p>
+            <ul>
+                <li>**$\text{try}$**: The block of code where an exception might be thrown.</li>
+                <li>**$\text{throw}$**: The keyword used to trigger an exception, creating an $\text{Exception}$ object. Code following $\text{throw}$ is not executed.</li>
+                <li>**$\text{catch}$**: The block that retrieves and handles the thrown exception object.</li>
+            </ul>
+
+            <h3>Example: Catching and Reopening Execution</h3>
+            <pre>
+&lt;?php
+   try {
+      $error = 'Always throw this error';
+      throw new Exception($error); // Exception thrown
+      echo 'Never executed'; // Skipped
+   } catch (Exception $e) {
+      echo 'Caught exception: ',  $e->getMessage();
+   }
+   
+   echo 'Hello World'; // Execution continues here
+?&gt;</pre>
+
+            <h3>Exception Methods</h3>
+            <p>The $\text{Exception}$ class offers several methods for inspecting the error, including:</p>
+            <ul>
+                <li>$\text{getMessage()}$: The exception message.</li>
+                <li>$\text{getCode()}$: The exception code.</li>
+                <li>$\text{getFile()}$: The source filename where the exception occurred.</li>
+                <li>$\text{getLine()}$: The line number where the exception occurred.</li>
+            </ul>
+
+            <h3>Custom Exception Handler</h3>
+            <p>The $\text{set\_exception\_handler(callback \$exception\_handler)}$ function can register a default function to be called if an exception is **uncaught** anywhere in the script, preventing the default PHP fatal error from being displayed.</p>
+        </div>
+    </div>
+</div>

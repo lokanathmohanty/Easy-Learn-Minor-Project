@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+
+    <div class="title">
+      <h1>NumPy Searching Arrays</h1>
+      <h2>Searching Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>You can search an array for a certain value and return the indexes where it matches.</p>
+      <p>To search an array, use the <code>where()</code> method.</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 4, 4])
+x = np.where(arr == 4)
+print(x)</code></pre>
+
+      <p>This returns a tuple: <code>(array([3, 5, 6]),)</code> meaning the value 4 is at indexes 3, 5, and 6.</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
+x = np.where(arr % 2 == 0)
+print(x)</code></pre>
+
+      <p>Find indexes where values are even.</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
+x = np.where(arr % 2 == 1)
+print(x)</code></pre>
+
+      <p>Find indexes where values are odd.</p>
+    </div>
+
+    <div class="title">
+      <h2>Search Sorted</h2>
+    </div>
+
+    <div class="content">
+      <p><code>searchsorted()</code> performs a binary search and returns the index where a value should be inserted to maintain order.</p>
+      <p>This method assumes the array is sorted.</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([6, 7, 8, 9])
+x = np.searchsorted(arr, 7)
+print(x)</code></pre>
+
+      <p>Returns <code>1</code>, the index where 7 should be inserted to keep the sort order (starting search from the left).</p>
+
+      <p>To search from the right side, use the <code>side='right'</code> parameter:</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([6, 7, 8, 9])
+x = np.searchsorted(arr, 7, side='right')
+print(x)</code></pre>
+
+      <p>Returns <code>2</code>, the index where 7 should be inserted starting from the right.</p>
+
+      <p>You can also search for multiple values by passing an array:</p>
+
+      <pre><code>import numpy as np
+
+arr = np.array([1, 3, 5, 7])
+x = np.searchsorted(arr, [2, 4, 6])
+print(x)</code></pre>
+
+      <p>Returns <code>[1 2 3]</code>, indexes where 2, 4, and 6 should be inserted to maintain order.</p>
+    </div>
+
+  </div>
+</div>

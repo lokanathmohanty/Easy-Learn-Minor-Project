@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Storage Classes in C</h1>
+    <div class="content">
+      <p>C storage classes define the scope (visibility) and lifetime of variables and/or functions within a C program. They precede the type they modify.</p>
+      <p>We have four different storage classes in a C program:</p>
+      <ul>
+        <li>auto</li>
+        <li>register</li>
+        <li>static</li>
+        <li>extern</li>
+      </ul>
+
+      <h2 class="title">The auto Storage Class</h2>
+      <p>The auto is a default storage class for all variables declared inside a function or block. The keyword "auto", which is optional, can be used to define local variables.</p>
+      <p>The scope and lifetime of auto variables are limited to the block in which they are declared.</p>
+
+      <h2 class="title">The register Storage Class</h2>
+      <p>The register storage class suggests storing local variables in CPU registers for faster access. It is limited to variables that require quick access, such as counters. The variable cannot have its address taken using the '&' operator.</p>
+
+      <h2 class="title">The static Storage Class</h2>
+      <p>The static storage class keeps local variables alive for the lifetime of the program, maintaining their value between function calls. When applied to global variables, it restricts their scope to the current file.</p>
+
+      <h2 class="title">The extern Storage Class</h2>
+      <p>The extern storage class provides a reference to a global variable or function defined in another file, allowing multiple files to share them.</p>
+
+      <h2 class="title">Summary of Storage Classes</h2>
+      <ul>
+        <li><strong>auto:</strong> Local scope, lifetime within block, uninitialized by default.</li>
+        <li><strong>register:</strong> Local scope, stored in register if possible, fast access.</li>
+        <li><strong>static:</strong> Local or file scope, lifetime of program, initialized to zero by default.</li>
+        <li><strong>extern:</strong> Global scope, lifetime of program, declared but not defined.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: static Storage Class</h2>
+    <div class="content">
+      <p>The following example demonstrates the use of a static storage class in C:</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+/* function declaration */
+void func(void);
+
+static int count = 5; /* global variable */
+
+int main() {
+   while(count--) {
+      func();
+   }
+   return 0;
+}
+
+/* function definition */
+void func(void) {
+   static int i = 5; /* local static variable */
+   i++;
+   printf("i is %d and count is %d\n", i, count);
+}
+      </pre>
+      <p>Output:</p>
+      <pre>
+i is 6 and count is 4
+i is 7 and count is 3
+i is 8 and count is 2
+i is 9 and count is 1
+i is 10 and count is 0
+      </pre>
+    </div>
+  </div>
+</div>

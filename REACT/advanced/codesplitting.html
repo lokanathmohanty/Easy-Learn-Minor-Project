@@ -1,0 +1,146 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Code-Splitting</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            Bundling is the process of combining application code and dependencies into 
+            a single file, usually <code>bundle.js</code>. While this is efficient for small 
+            applications, large bundles may slow down loading. Code-splitting allows us 
+            to split the bundle into smaller chunks that load on demand.
+         </p>
+
+         <h2>Dynamic Import</h2>
+         <p>
+            Dynamic imports instruct the bundler to split code into separate bundles 
+            that load when required.
+         </p>
+
+         <div class="code-block">
+<pre><code>// Static import
+import { round } from './math';
+console.log(round(67.78));
+
+// Dynamic import
+import("./math").then(math => {
+   console.log(math.round(67.78));
+});
+</code></pre>
+         </div>
+
+         <h2>React Lazy Component</h2>
+         <p>
+            React provides <code>React.lazy()</code> to dynamically load components. 
+            These must be wrapped in a <code>Suspense</code> component.
+         </p>
+
+         <div class="code-block">
+<pre><code>import React, { Suspense } from 'react';
+
+const MyComponent = React.lazy(() => import('./MyComponent'));
+
+function App() {
+   return (
+      &lt;div&gt;
+         &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+            &lt;MyComponent /&gt;
+         &lt;/Suspense&gt;
+      &lt;/div&gt;
+   );
+}
+</code></pre>
+         </div>
+
+         <h2>Error Boundaries</h2>
+         <p>
+            Errors during lazy loading can be handled using an Error Boundary.
+         </p>
+
+         <div class="code-block">
+<pre><code>import React, { Suspense } from 'react';
+import MyErrorBoundary from './MyErrorBoundary';
+
+const MyComponent = React.lazy(() => import('./MyComponent'));
+
+const AnotherComponent = () => (
+   &lt;div&gt;
+      &lt;MyErrorBoundary&gt;
+         &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+            &lt;section&gt;
+               &lt;MyComponent /&gt;
+            &lt;/section&gt;
+         &lt;/Suspense&gt;
+      &lt;/MyErrorBoundary&gt;
+   &lt;/div&gt;
+);
+</code></pre>
+         </div>
+
+         <h2>Code-Splitting with Routing</h2>
+         <p>
+            Routes can be lazy-loaded, ensuring only the necessary components 
+            are loaded for each route.
+         </p>
+
+         <div class="code-block">
+<pre><code>import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+const Home = lazy(() => import('./routes/Home'));
+const About = lazy(() => import('./routes/About'));
+
+const App = () => (
+   &lt;BrowserRouter&gt;
+      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+         &lt;Routes&gt;
+            &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+            &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+         &lt;/Routes&gt;
+      &lt;/Suspense&gt;
+   &lt;/BrowserRouter&gt;
+);
+</code></pre>
+         </div>
+
+         <h2>Example: Lazy Loading</h2>
+         <p>
+            Below is an example using <code>React.lazy()</code> and 
+            <code>Suspense</code> with a simple <code>Hello</code> component 
+            and <code>SimpleErrorBoundary</code>.
+         </p>
+
+         <div class="code-block">
+<pre><code>import './App.css'
+import React, { Suspense, lazy } from 'react';
+import SimpleErrorBoundary from './Components/SimpleErrorBoundary';
+
+const Hello = lazy(() => import('./Components/Hello'));
+
+function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;SimpleErrorBoundary&gt;
+            &lt;Suspense fallback={&lt;div&gt;loading...&lt;/div&gt;}&gt;
+               &lt;Hello name="Peter" /&gt;
+            &lt;/Suspense&gt;
+         &lt;/SimpleErrorBoundary&gt;
+      &lt;/div&gt;
+   );
+}
+
+export default App;
+</code></pre>
+         </div>
+
+         <h2>Summary</h2>
+         <p>
+            Code-splitting improves performance by loading only the components 
+            required for a given view. Using <code>React.lazy()</code>, 
+            <code>Suspense</code>, and error boundaries ensures smooth 
+            and fault-tolerant lazy loading.
+         </p>
+      </div>
+   </div>
+</div>

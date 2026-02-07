@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Encapsulation</h1>
+    <div class="content">
+      <p>Encapsulation is the object-oriented programming practice of bundling data (attributes) and methods (functions) into a single unit—the class. It protects sensitive data by restricting direct access and only allowing controlled interaction via methods.</p>
+      <p>Python uses naming conventions to achieve encapsulation: a single underscore for protected members and double underscores for private members.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Encapsulation Example: Public vs Private Attributes</h2>
+      <pre><code>class Student:
+    def __init__(self, name="Rajaram", marks=50):
+        self.name = name               # public attribute
+        self.__marks = marks           # private attribute
+
+    def studentdata(self):
+        print(f"Name: {self.name} marks: {self.__marks}")
+
+s1 = Student()
+s1.studentdata()                      # OK: uses method to access private
+print(s1.name)                        # OK: public attribute
+print(s1.__marks)                     # Error: AttributeError, private
+</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Attempting to access <code>__marks</code> directly from outside the class raises an error, demonstrating encapsulation at work. Public members can be accessed directly, but private members are accessible only via class methods.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Name Mangling for Private Access</h2>
+      <pre><code>print(s1._Student__marks)  # Works but not recommended; outputs 50
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Encapsulation with Getter and Setter Methods</h2>
+      <p>Encapsulation is commonly implemented by exposing getter and setter methods that allow controlled access and validation of private data.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Encapsulation with Getters and Setters</h2>
+      <pre><code>class User:
+    def __init__(self, name):
+        self.__name = name
+
+    def get_name(self):
+        return self.__name
+
+    def set_name(self, name):
+        if name:
+            self.__name = name
+
+user = User("Alice")
+print(user.get_name())    # Output: Alice
+user.set_name("Bob")
+print(user.get_name())    # Output: Bob
+</code></pre>
+    </div>
+
+    <div class="content">
+      <ul>
+        <li>Single underscore (<code>_var</code>): Indicates protected attribute, meant for internal/internal subclass use.</li>
+        <li>Double underscores (<code>__var</code>): Indicates private attribute, triggers name mangling.</li>
+        <li>Encapsulation lets you validate and control data changes, improve code organization, and support safer maintenance and extension of your codebase.</li>
+      </ul>
+    </div>
+  </div>
+</div>

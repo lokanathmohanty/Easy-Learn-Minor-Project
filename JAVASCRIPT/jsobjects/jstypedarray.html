@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - The TypedArray Object</h1>
+
+    <div class="content">
+      <h2>What is a TypedArray?</h2>
+      <p>
+        A JavaScript <strong>TypedArray</strong> is an array-like object used to store binary data. 
+        Unlike normal arrays, the size of a TypedArray cannot be dynamic, and it can’t hold values 
+        of different data types. This improves performance when working with binary data.
+      </p>
+      <p>
+        TypedArrays are commonly used in <em>audio processing</em>, <em>graphics rendering</em>, 
+        and <em>networking</em>.
+      </p>
+
+      <h2>Why TypedArray?</h2>
+      <p>
+        In languages like C++, arrays can contain elements of only one data type. 
+        JavaScript arrays are more flexible but less efficient for binary data. 
+        TypedArray was introduced in JavaScript to handle binary data efficiently while maintaining memory.
+      </p>
+
+      <h2>TypedArray Objects</h2>
+      <p>
+        Here are the types of TypedArray objects available for different data sizes:
+      </p>
+      <ul>
+        <li><strong>Int8Array</strong> – 8-bit signed integer</li>
+        <li><strong>Uint8Array</strong> – 8-bit unsigned integer</li>
+        <li><strong>Uint8ClampedArray</strong> – 8-bit unsigned clamped integer</li>
+        <li><strong>Int16Array</strong> – 16-bit signed integer</li>
+        <li><strong>Uint16Array</strong> – 16-bit unsigned integer</li>
+        <li><strong>Int32Array</strong> – 32-bit signed integer</li>
+        <li><strong>Uint32Array</strong> – 32-bit unsigned integer</li>
+        <li><strong>Float32Array</strong> – 32-bit floating point</li>
+        <li><strong>Float64Array</strong> – 64-bit floating point</li>
+        <li><strong>BigInt64Array</strong> – 64-bit signed big integer</li>
+        <li><strong>BigUint64Array</strong> – 64-bit unsigned big integer</li>
+      </ul>
+
+      <h2>TypedArray Properties</h2>
+      <ul>
+        <li><strong>constructor</strong> – Returns the array buffer constructor.</li>
+        <li><strong>byteLength</strong> – Returns the byte length of the TypedArray.</li>
+        <li><strong>maxByteLength</strong> – Maximum expandable byte length.</li>
+        <li><strong>resizable</strong> – Checks if the TypedArray is resizable.</li>
+      </ul>
+
+      <h2>TypedArray Static Methods</h2>
+      <ul>
+        <li><strong>from()</strong> – Creates a new TypedArray instance.</li>
+        <li><strong>of()</strong> – Creates a new TypedArray instance.</li>
+      </ul>
+
+      <h2>TypedArray Instance Methods</h2>
+      <p>Some commonly used instance methods include:</p>
+      <ul>
+        <li><strong>at()</strong> – Returns element at the given index.</li>
+        <li><strong>copyWithin()</strong> – Copies elements within the same TypedArray.</li>
+        <li><strong>find()</strong> – Finds the first matching element.</li>
+        <li><strong>map()</strong> – Creates a new TypedArray by applying a function.</li>
+        <li><strong>reduce()</strong> – Reduces all elements to a single value.</li>
+        <li><strong>slice()</strong> – Extracts a portion of the array.</li>
+        <li><strong>sort()</strong> – Sorts the TypedArray in place.</li>
+        <li><strong>values()</strong> – Returns an iterable of array values.</li>
+      </ul>
+
+      <h2>Examples</h2>
+
+      <h3>Example 1: Using Int8Array</h3>
+      <p>
+        Creating a TypedArray with <code>Int8Array</code>. Numbers exceeding 8-bit range 
+        are automatically converted.
+      </p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const array = new Int8Array([1000, 200, 30, 40]);
+    document.getElementById("output").innerHTML = "The array is: " + array;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><strong>Output:</strong> The array is: -24,-56,30,40</p>
+
+      <h3>Example 2: Using Float32Array</h3>
+      <p>
+        Creating a TypedArray with <code>Float32Array</code> and updating values.
+      </p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const array = new Float32Array([100.212, 907.54, 90, 14562547356342.3454]);
+    array[2] = 23.65; 
+    document.getElementById("output").innerHTML = "The array is: " + array;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p>
+        <strong>Output:</strong> The array is: 
+        100.21199798583984,907.5399780273438,23.649999618530273,14562546941952
+      </p>
+    </div>
+  </div>
+</div>

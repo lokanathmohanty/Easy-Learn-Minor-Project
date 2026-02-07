@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Anonymous Methods: Inline Code Blocks 👻</h1>
+        
+        <div class="content">
+            <h2 class="title">What are Anonymous Methods?</h2>
+            <p>An **anonymous method** is a block of code that is used as a **delegate parameter** and is defined *inline* where the delegate instance is created. Crucially, it is a method **without a name**—it only has a body and a parameter list (if any).</p>
+            <p>Anonymous methods were introduced in C# to provide a simple way to pass a code block to a delegate without needing to write a separate, named method.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Anonymous Method Declaration</h2>
+            <p>Anonymous methods are declared by assigning the code block directly to a delegate instance using the **<span class="example">`delegate`</span>** keyword.</p>
+            
+            <h3 class="title">Syntax:</h3>
+            <pre>DelegateType delegateInstance = delegate([parameters]) {
+   // body of the method 
+   // return type is inferred from the return statement (if present)
+};</pre>
+            
+            <h3 class="title">Example:</h3>
+            <pre>delegate void NumberChanger(int n); // Delegate signature
+...
+NumberChanger nc = delegate(int x) { // x is the parameter
+   Console.WriteLine("Anonymous Method: {0}", x);
+};
+
+nc(10); // Calling the delegate executes the anonymous code block</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Usage and Evolution (Lambda Expressions)</h2>
+            
+            <h3 class="title">Usage with Delegates</h3>
+            <p>Anonymous methods can be used with both custom delegates (like <span class="example">`NumberChanger`</span>) and built-in generic delegates like **<span class="example">`Action`</span>** (returns <span class="example">`void`</span>) and **<span class="example">`Func`</span>** (returns a value).</p>
+            <pre>// Anonymous method used with the built-in Action delegate
+Action&lt;string&gt; greet = delegate(string name) {
+   Console.WriteLine("Hello, " + name + "!");
+};</pre>
+            
+            <h3 class="title">Conversion to Lambda Expressions ➡️</h3>
+            <p>In modern C# (version 3.0 and later), anonymous methods have been largely superseded by the more concise **Lambda Expressions**. Lambda expressions use the **<span class="example">`=&gt;`</span>** operator to achieve the same result with significantly less boilerplate code.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Syntax</th>
+                        <th>Code Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Anonymous Method</td>
+                        <td><pre>delegate(string name) { Console.WriteLine(name); }</pre></td>
+                    </tr>
+                    <tr>
+                        <td>Lambda Expression</td>
+                        <td><pre>(name) =&gt; { Console.WriteLine(name); }</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

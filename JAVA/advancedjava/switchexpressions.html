@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Switch Expressions (Java 14+)</h1>
+
+        <div class="content">
+            <h2>From Switch Statement to Switch Expression</h2>
+            <p>The **Switch Expression** was introduced as a preview feature in Java 12, refined in Java 13 with the addition of the **<code>yield</code>** keyword, and became a standard feature in **Java 14**. It modernizes the traditional <code>switch</code> statement by allowing it to be used as an **expression** that returns a single value.</p>
+            <p>The traditional <code>switch</code> statement suffered from verbosity, required **<code>break</code>** statements to prevent fall-through (a common source of bugs), and could not directly return a value.</p>
+
+            <h3>Key Benefits of Switch Expressions</h3>
+            <ul>
+                <li><strong>Return Value:</strong> It can be used directly on the right-hand side of an assignment or as a method return value.</li>
+                <li><strong>No Fall-Through:</strong> The new arrow syntax (<code>-></code>) eliminates fall-through, removing the need for <code>break</code>.</li>
+                <li><strong>Conciseness:</strong> Multiple case labels can be comma-separated.</li>
+                <li><strong>Exhaustiveness:</strong> When using an <code>enum</code>, the compiler can ensure all possible enum constants are covered, potentially allowing the <code>default</code> case to be omitted. Otherwise, a <code>default</code> case is typically required to cover all possibilities.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Syntax Options for Returning a Value</h2>
+
+            <h3>1. The Arrow (<code>case L -></code>) Syntax (Recommended)</h3>
+            <p>This is the most concise form. The expression, statement, or block to the right of the arrow is executed, and its result is the value of the switch expression. **Fall-through is impossible** with this syntax.</p>
+            <p><strong>Syntax:</strong> <code>case label1, label2 -> expression;</code></p>
+            <pre><code>String dayType = switch (day) {
+   case "Sat", "Sun" -> "Weekend"; // returns "Weekend"
+   default -> "Weekday";
+};</code></pre>
+
+            <h3>2. The Colon (<code>case L:</code>) Syntax with <code>yield</code></h3>
+            <p>If the traditional colon-based syntax is used, or if a case requires multiple statements (a code block), the new **<code>yield</code>** keyword must be used to explicitly return a value from that specific <code>case</code> block.</p>
+            <p><strong>Syntax:</strong> <code>case label: { statements; yield value; }</code></p>
+            <ul>
+                <li><code>yield</code> works similarly to <code>return</code> but exits only the <code>switch</code> expression, not the entire method.</li>
+                <li>If the colon syntax is used, fall-through remains possible, so a <code>break</code> or <code>yield</code> is necessary to prevent it.</li>
+            </ul>
+            <pre><code>String result = switch (day) {
+   case "Monday": {
+      System.out.println("Starting the week...");
+      yield "Weekday"; // Explicitly returns the value
+   }
+   default: 
+      yield "Invalid day";
+};</code></pre>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example Comparison: Old Statement vs. New Expression</h2>
+            <div class="content">
+                <p>The new switch expression combines logic and assignment into a single, less error-prone block:</p>
+                <pre><code>// --- Old Switch Statement (Requires break/fall-through) ---
+public static String getDayTypeOldStyle(String day) {
+   String result = null;
+   switch (day) {
+      case "Monday": 
+         result = "Weekday";
+         break; // Necessary break
+      // ... more cases
+   }
+   return result;
+}
+
+// --- New Switch Expression (Concise and returns value directly) ---
+public static String getDayType(String day) {
+   return switch (day) {
+      case "Monday", "Tuesday", "Wednesday" -> "Weekday";
+      case "Saturday", "Sunday" -> "Weekend";
+      default -> "Invalid day."; // Required unless using exhaustive enum
+   };
+}</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

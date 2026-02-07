@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Functions for File Existence and Permissions</h1>
+
+    <div class="content">
+      <p>
+        In PHP, checking for the existence and accessibility of a file or directory is a critical step to prevent runtime exceptions and ensure robust file operations. This is done using a set of built-in filesystem utility functions.
+      </p>
+
+      <h2>Core Functions for File Validation</h2>
+      <p>
+        These functions all take a string `$filename` (which can be a file or directory path, relative or absolute) and return a boolean (`true` or `false`).
+      </p>
+
+      <hr>
+
+      <h3>`file_exists()`: Check Existence (File or Directory)</h3>
+      <p>
+        This is the most general check. It determines if the specified path points to an existing file **or** directory.
+      </p>
+      <div class="example">
+        <p>
+          <code>if (file_exists('data/config.ini')) { /* ... proceed ... */ }</code><br>
+          <br>
+          *Note: This returns `true` for both files and directories.*
+        </p>
+      </div>
+
+      <hr>
+
+      <h3>`is_file()`: Check if the Path is Specifically a File</h3>
+      <p>
+        Used to differentiate between a file and a directory. It returns `true` **only if** the path exists and is a regular file.
+      </p>
+      <div class="example">
+        <p>
+          <code>$filename = 'hello.txt';</code><br>
+          <code>if (is_file($filename)) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "$filename is a file";</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Functions for Permission Checks</h2>
+      <p>
+        Before attempting I/O (Input/Output) operations, these functions verify that the script has the necessary operating system permissions.
+      </p>
+
+      <h3>`is_readable()`: Check Read Permission 📖</h3>
+      <p>
+        Tests whether the file or directory exists and has permissions that allow the current PHP script to **read** from it.
+      </p>
+      <div class="example">
+        <p>
+          <code>if (is_readable('data.log')) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;// OK to use file_get_contents() or fopen('r')</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <h3>`is_writable()`: Check Write Permission ✍️</h3>
+      <p>
+        Tests whether the file or directory exists and has permissions that allow the current PHP script to **write** to it. This is crucial before using functions like `file_put_contents()` or `fopen('w')`.
+      </p>
+      <div class="example">
+        <p>
+          <code>if (is_writable('temp/cache')) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;// OK to create or modify files inside this folder</code><br>
+          <code>}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Group Selectors</h1>
+    <div class="content">
+      <p>
+        A <strong>CSS group selector</strong> is used to apply the same style to multiple elements at once. 
+        Instead of writing separate CSS rules for each element, group selectors combine them 
+        using a comma (<code>,</code>). This makes the CSS concise, avoids redundancy, 
+        and ensures consistency across multiple elements.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+selector1, selector2, selector3 {
+  /* property: value; */
+  color: #04af2f;
+}
+      </pre>
+      <p>
+        In the above syntax, the same styles will apply to <code>selector1</code>, <code>selector2</code>, 
+        and <code>selector3</code>.
+      </p>
+
+      <h2>Group Selectors Example</h2>
+      <p>
+        In this example, the same styles are applied to a <code>span</code>, a paragraph with ID <code>para</code>, 
+        and a <code>div</code> with class <code>myClass</code>.
+      </p>
+      <pre>
+span, #para, .myClass {
+  background-color: #04af2f;
+  color: white;
+}
+
+&lt;p id="para"&gt;This is a paragraph element.&lt;/p&gt;
+&lt;div class="myClass"&gt;This is a div element.&lt;/div&gt;
+&lt;br&gt;
+&lt;span&gt;This is a span element.&lt;/span&gt;
+      </pre>
+
+      <h2>Group Selectors Example with Pseudo-classes</h2>
+      <p>
+        Group selectors can also be combined with pseudo-classes such as <code>:hover</code> and <code>:active</code>.
+      </p>
+      <pre>
+.link:active, #btn:active {
+  color: #04af2f;
+}
+
+.myDiv:hover, #para:hover {
+  background-color: #031926;
+  color: white;
+}
+
+&lt;div class="myDiv"&gt;
+  Hover over me
+&lt;/div&gt;
+
+&lt;p id="para"&gt;This is a paragraph.&lt;/p&gt;
+
+&lt;a class="link" href="#"&gt;Click on this link.&lt;/a&gt;
+&lt;br&gt;&lt;br&gt;
+
+&lt;button id="btn"&gt;Click me&lt;/button&gt;
+      </pre>
+
+      <h2>Key Notes</h2>
+      <ul>
+        <li>Group selectors use commas (<code>,</code>) to combine multiple selectors.</li>
+        <li>They reduce redundancy and keep CSS more readable.</li>
+        <li>Useful when applying identical styles to different elements.</li>
+        <li>Can be combined with pseudo-classes and pseudo-elements.</li>
+      </ul>
+    </div>
+  </div>
+</div>

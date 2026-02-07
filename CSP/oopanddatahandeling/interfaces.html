@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Interfaces</h1>
+        
+        <h2 class="title">Defining the Contract</h2>
+        <div class="content">
+            <p>An **Interface** defines a **syntactical contract** that specifies a set of members (methods, properties, events) that a class or struct must implement. It defines the **'what'** (the contract) but not the **'how'** (the implementation).</p>
+            <ul>
+                <li>Interfaces contain **only declarations**; they cannot contain fields or implementation logic.</li>
+                <li>All interface members are **implicitly public** and **abstract**.</li>
+                <li>A key use is to achieve **polymorphism** and allow a class to inherit common behavior from multiple sources (since C# doesn't support multiple class inheritance).</li>
+            </ul>
+            
+            <h3>Declaration Syntax:</h3>
+            <p>Interfaces are declared using the **`interface`** keyword, conventionally prefixed with an <code>I</code> (e.g., <code>ITransactions</code>).</p>
+            <pre>
+public interface ITransactions {
+   // Method declaration (no body)
+   void showTransaction();
+   
+   // Property declaration
+   double getAmount();
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Implementing Interfaces</h2>
+        <div class="content">
+            <p>A class or struct uses the colon (<code>:</code>) notation to implement an interface. It must provide a **public implementation** for every member declared in the interface.</p>
+            <pre>
+// Implement the interface in a class
+public class Transaction : ITransactions {
+   private double amount;
+   
+   // Providing the implementation for the interface method
+   public void showTransaction() {
+      Console.WriteLine("Amount: {0}", getAmount());
+   }
+   
+   // Providing the implementation for the interface method
+   public double getAmount() {
+      return amount;
+   }
+}
+            </pre>
+            
+            <h3>Multiple Interface Implementation</h3>
+            <p>Unlike classes, a class can implement multiple interfaces, separating them by commas. This is how C# achieves the flexibility of **multiple inheritance** of behavior.</p>
+            <pre>
+class MyClass : IInterfaceA, IInterfaceB {
+    // ... must implement all members from A and B
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Common .NET Interfaces</h2>
+        <div class="content">
+            <p>Many core C# behaviors are defined through standard interfaces, enforcing consistency across collections and data types.</p>
+            
+            <h3>1. `IEnumerable` (for Iteration)</h3>
+            <p>This interface defines the **iterator pattern**. Any class implementing <code>IEnumerable</code> can be iterated over using a **`foreach`** loop. It exposes the <code>GetEnumerator()</code> method, which is the key to iteration.</p>
+            <pre>
+class Demo : IEnumerable, IEnumerator { /* ... implementation ... */ }
+// Allows: foreach (var number in demo) { ... }
+            </pre>
+            
+            <h3>2. `IList<T>` (for List-like Collections)</h3>
+            <p>A generic interface implemented by arrays and <code>List<T></code>. It defines methods for sequential collections, including indexed access, addition, removal, and counting.</p>
+            <pre>
+IList&lt;int&gt; numbers = new List&lt;int&gt; { 1, 2, 3 };
+// Features: numbers[index], numbers.Add(), numbers.Remove()
+            </pre>
+            
+            <h3>3. `IDictionary<TKey, TValue>` (for Key/Value Collections)</h3>
+            <p>A generic interface defining the contract for collections of key/value pairs, implemented by <code>Dictionary<TKey, TValue></code>. Keys must be unique.</p>
+            <pre>
+IDictionary&lt;string, int&gt; ages = new Dictionary&lt;string, int&gt;();
+ages.Add("Sudhir", 27);
+// Features: ages["Sudhir"], ages.ContainsKey(), ages.Remove()
+            </pre>
+        </div>
+    </div>
+</div>

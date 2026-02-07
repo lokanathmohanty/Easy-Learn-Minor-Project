@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Filter Method</h1>
+    <div class="content">
+
+      <p>
+        The <code>filter()</code> method in JavaScript is used to create a new array 
+        with elements that satisfy a certain condition. It executes a callback 
+        function on each element of the array, and only elements for which the 
+        callback returns <code>true</code> are included in the new array.
+      </p>
+
+      <h2>Key Points</h2>
+      <ul>
+        <li>Does not modify the original array.</li>
+        <li>Skips empty elements.</li>
+        <li>Returns a new array with filtered elements.</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <pre><code>
+array.filter(callback(element, index, array), thisArg)
+      </code></pre>
+
+      <h2>Parameters</h2>
+      <ul>
+        <li><strong>callback</strong>: Function executed for each element.</li>
+        <li><strong>element</strong>: Current element being processed.</li>
+        <li><strong>index</strong>: Index of the current element.</li>
+        <li><strong>array</strong>: The array being traversed.</li>
+        <li><strong>thisArg</strong> (optional): Value used as <code>this</code> in callback.</li>
+      </ul>
+
+      <h2>Return Value</h2>
+      <p>
+        A new array containing only the elements for which the callback 
+        returned <code>true</code>.
+      </p>
+
+      <h2>Example: Filter Numbers Greater than 30</h2>
+      <pre><code>
+const numbers = [10, 20, 30, 40, 50];
+const result = numbers.filter(function(number) {
+  return number > 30;
+});
+console.log(result); // [40, 50]
+      </code></pre>
+
+      <h2>Filter on Typed Arrays</h2>
+      <p>
+        The <code>filter()</code> method also works on typed arrays such as <code>Int8Array</code>.
+      </p>
+      <pre><code>
+function isOdd(element) {
+  return element % 2 !== 0;
+}
+
+const T_array = new Int8Array([1,2,3,4,5,6,7,8,9,10]);
+const odd_t_array = T_array.filter(isOdd);
+
+console.log(odd_t_array); // [1, 3, 5, 7, 9]
+      </code></pre>
+
+      <h2>Filter on Map</h2>
+      <p>
+        We can filter <code>Map</code> objects by spreading them into arrays, 
+        applying <code>filter()</code>, and reconstructing a new <code>Map</code>.
+      </p>
+      <pre><code>
+function isGreater(value) {
+  return value > 30;
+}
+
+const map = new Map([[1,10],[2,20],[3,30],[4,40],[5,50]]);
+const new_map = new Map([...map].filter(([key, value]) => isGreater(value)));
+
+console.log(new_map); 
+// Map { 4 => 40, 5 => 50 }
+      </code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        The <code>filter()</code> method is versatile, working with arrays, typed arrays, 
+        and even map-like structures. It provides a clean way to extract only 
+        the elements you need without altering the original data.
+      </p>
+
+    </div>
+  </div>
+</div>

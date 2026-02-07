@@ -1,0 +1,92 @@
+<div class="container">
+<div class="session">
+<div class="title">
+<h1>.NET Core - Running Tests in Visual Studio</h1>
+ 
+</div>
+<div class="content">
+<p>In this chapter, we will discuss how to run tests in Visual Studio. The .NET Core has been designed with testability in mind, so that creating unit tests for your applications is easier than ever before. In this chapter, we will run and execute our test project in Visual Studio.</p>
+<p>Let us open the FirstApp solution in Visual Studio.</p>
+<p>You can see that it has only two projects and you will not be able to see the test project because we haven't added that project in our solution.</p>
+<p>Let us add a folder first and call it <strong>test</strong>.</p>
+<ul>
+<li>Right-click on the <strong>test</strong> folder.</li>
+<li>Select <strong>project.json</strong> file and click <strong>Open</strong>.</li>
+</ul>
+<p>The following screenshot shows the code in <strong>Tests.cs</strong> file as output.</p>
+<p>It is the default implementation and it is just testing that True is equal to true. It is the xUnit testing framework and you will see the Fact attribute that annotates and denotes the test method.</p>
+<div class="example">
+<div class="title"><h2>Tests.cs (Initial Passing Test)</h2></div>
+<div class="content">
+<pre><code>using System; 
+using Xunit; 
+  
+namespace Tests { 
+   public class Tests { 
+      [Fact] 
+      public void Test1() { 
+         Assert.True(true); 
+      } 
+   } 
+}</code></pre>
+</div>
+</div>
+<p>Following is the implementation of <strong>project.json</strong> file.</p>
+<div class="example">
+<div class="title"><h2>project.json Implementation</h2></div>
+<div class="content">
+<pre><code>{ 
+   "version": "1.0.0-*", 
+   "buildOptions": { 
+      "debugType": "portable" 
+   }, 
+   "dependencies": { 
+      "System.Runtime.Serialization.Primitives": "4.1.1", 
+      "xunit": "2.1.0", 
+      "dotnet-test-xunit": "1.0.0-rc2-192208-24" 
+   }, 
+   "testRunner": "xunit", 
+   "frameworks": { 
+      "netcoreapp1.0": { 
+         "dependencies": { 
+            "Microsoft.NETCore.App": { 
+               "type": "platform", 
+               "version": "1.0.1" 
+            }
+         }, 
+         "imports": [ 
+            "dotnet5.4", 
+            "portable-net451+win8" 
+         ] 
+      } 
+   } 
+}</code></pre>
+</div>
+</div>
+<p>In <strong>project.json</strong> file, the most important dependency to the testing framework is the <strong>xunit</strong>, which brings in the <code>Fact</code> attribute. It brings in the testing framework and APIs for testing with xunit.</p>
+<p>We also have the <strong>dotnet-test-xunit</strong>, this is an adopter so that xunit can work with .NET Core, specifically with <code>dotnet test</code> command line utility. Then you will see the <strong>testRunner</strong> which will run xunit and you can also see the <strong>netcoreapp1.0</strong> framework.</p>
+<p>You will see the <strong>.NETCore.App</strong> dependeny below.</p>
+<p>To run test in Visual Studio, let us open **Test Explorer** from the <strong>Test → Window → Test Explorer</strong> menu option.</p>
+<p>And you can see that Visual Studio automatically detects the test. The name of the test consists of <code>namespace.className.TestMethodName</code>. Let us now click on **Run All** button in Test Explorer.</p>
+<p>It will first build the code and the run the test and you will see the total time taken by the test. Let us change the test method so that we can see the output when the test fails.</p>
+<div class="example">
+<div class="title"><h2>Tests.cs (Failing Test)</h2></div>
+<div class="content">
+<pre><code>using System; 
+using Xunit; 
+  
+namespace Tests { 
+   public class Tests { 
+      [Fact] 
+      public void Test1() { 
+         Assert.True(false); 
+      } 
+   } 
+}</code></pre>
+</div>
+</div>
+<p>Let us execute the test again by clicking on the **Run All** button link.</p>
+<p>You can now see the **test failure**.</p>
+</div>
+</div>
+</div>

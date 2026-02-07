@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Flash Messages for User Feedback</h1>
+
+        <div class="content">
+            <h2 class="title">Purpose of Flash Messages</h2>
+            <p><strong>Flash messages</strong> are a technique to provide temporary, one-time feedback to a user across different page requests, significantly improving the user experience. They are commonly used to signal the success or failure of an action (e.g., "Record saved successfully" or "Login failed").</p>
+
+            <h3 class="title">Mechanism: Utilizing Sessions ($\text{\$_SESSION}$)</h3>
+            <p>Because $\text{HTTP}$ is stateless, flash messages rely on the **$\text{\$_SESSION}$** superglobal to transfer data across a redirect. The steps are:</p>
+            <ol>
+                <li><strong>Creation:</strong> On the processing page (e.g., after a form $\text{POST}$), the message is stored in $\text{\$_SESSION}$.</li>
+                <li><strong>Redirection:</strong> The user is immediately redirected to the target page (often via the $\text{PRG}$ pattern).</li>
+                <li><strong>Consumption:</strong> On the target page ($\text{GET}$ request), the message is retrieved from $\text{\$_SESSION}$, displayed to the user, and then immediately **deleted** ($\text{unset()}$) from the session data to ensure it only "flashes" once.</li>
+            </ol>
+            <p>The basic implementation uses $\text{session\_start()}$ on both pages:</p>
+            <pre>
+// Page 1: Store the message
+session_start();
+$_SESSION['flash_message'] = "Action completed!";
+
+// Page 2: Retrieve, display, and delete
+session_start();
+if(isset($_SESSION['flash_message'])) {
+   $message = $_SESSION['flash_message'];
+   unset($_SESSION['flash_message']); // Delete message after reading
+   echo $message;
+}</pre>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Generalized $\text{flash()}$ Utility Function</h2>
+
+            <p>To manage multiple flash messages with varying types (success, error, warning), a more structured approach uses a dedicated key in the session ($\text{\$_SESSION[FLASH]}$) and utility functions like $\text{create\_flash\_message()}$ and $\text{display\_flash\_message()}$.</p>
+
+            <h3>The $\text{flash()}$ Dispatcher Function</h3>
+            <p>A single $\text{flash()}$ function is used to either create or display messages based on the arguments provided:</p>
+            <ul>
+                <li>$\text{flash('name', 'message')}$: **Creates** a new message under a specific $\text{name}$.</li>
+                <li>$\text{flash('name')}$: **Displays** the message associated with that $\text{name}$ and removes it.</li>
+                <li>$\text{flash()}$: **Displays** all existing flash messages and removes them all.</li>
+            </ul>
+
+            <h3>Core $\text{create\_flash\_message()}$ Logic</h3>
+            <p>This function ensures that only one message of a given $\text{name}$ exists at a time, preventing message overflow.</p>
+            <pre>
+function create_flash_message(string $name, string $message): void {
+   // Assuming a constant FLASH is defined for the session key
+   $_SESSION[FLASH][$name] = ['message' => $message]; 
+}</pre>
+
+            <h3>Core $\text{display\_flash\_message()}$ Logic</h3>
+            <p>This function implements the "flash" mechanism by deleting the message immediately after retrieval.</p>
+            <pre>
+function display_flash_message(string $name): void {
+   if (isset($_SESSION[FLASH][$name])) {
+      $flash_message = $_SESSION[FLASH][$name];
+
+      // Delete the message immediately after fetching
+      unset($_SESSION[FLASH][$name]); 
+      
+      // The function format_flash_message() would apply HTML/CSS for display
+      echo format_flash_message($flash_message); 
+   }
+}</pre>
+        </div>
+    </div>
+</div>

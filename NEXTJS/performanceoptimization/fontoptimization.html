@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Font Optimization</h1>
+        
+        <div class="content">
+            <h2 class="title">Font Optimization in Next.js</h2>
+            <p>Next.js features a built-in library, **<code>next/font</code>**, designed to optimize font usage in your application. This system ensures **zero layout shift** (preventing Cumulative Layout Shift - CLS) and offers significant performance benefits through **automatic self-hosting**.</p>
+            
+            <p>The optimization works by:</p>
+            <ul>
+                <li class="example"><strong>Self-Hosting:</strong> Next.js downloads the font files (including Google Fonts) at **build time**.</li>
+                <li class="example"><strong>Local Storage:</strong> The files are stored and served alongside your other static assets.</li>
+                <li class="example"><strong>Reduced Requests:</strong> The browser no longer needs to make additional, slow requests to external font services.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Using Google Fonts in Next.js</h2>
+            <p>To use an external font like Google Fonts, you import the specific font function from **<code>next/font/google</code>**, configure it, and apply the returned **<code>className</code>** to the element or layout where the font should be used.</p>
+            
+            <p><strong>Example: Using the Inter Google Font</strong></p>
+            <pre class="example"><code>import { Inter } from 'next/font/google';
+
+// Configure the font
+const inter = Inter({
+  subsets: ['latin'],  // Specify subsets for smaller file size
+  weight: '400',       // Optional font weight
+});
+
+export default function Home() {
+  return (
+    &lt;div className={inter.className}&gt;
+      &lt;h1&gt;Hello, Next.js with Inter font!&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Preloading and Scope of Fonts</h2>
+            <p>The scope and preloading behavior of a font depend on where it is configured:</p>
+            <ul>
+                <li><strong>In a Layout Page (<code>/app/layout.tsx</code>):</strong> The font will be preloaded and available across **all routes** wrapped by that layout. This is the recommended place for primary application fonts.</li>
+                <li><strong>In a Component Page (<code>/app/component/page.tsx</code>):</strong> The font will be loaded and preloaded only for that **specific component page**.</li>
+                <li><strong>In the Root Page (e.g., <code>/app/index.tsx</code>, or root layout):</strong> The font is available globally on all routes.</li>
+            </ul>
+            
+            <p>When defined in a specific component page, a new font call will be made only when navigating to that route, as the preloading is limited to that component's scope.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Using Local Fonts in Next.js</h2>
+            <p>To optimize and self-host your own font files, use the **<code>next/font/local</code>** library and provide the relative path(s) to the font file(s) via the **<code>src</code>** argument.</p>
+            
+            <p><strong>Example: Configuring a Local Font</strong></p>
+            <pre class="example"><code>import localFont from 'next/font/local';
+
+// Configure the local font
+const myFont = localFont({
+  src: './path/to/font.woff2',  // Path to the font file
+  weight: '400',                // Optional weight
+  style: 'normal',              // Optional style
+});
+
+export default function Home() {
+  return (
+    &lt;div className={myFont.className}&gt;
+      &lt;h1&gt;Hello, Next.js with Inter font!&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        </div>
+    </div>
+</div>

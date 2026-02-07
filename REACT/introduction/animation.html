@@ -1,0 +1,112 @@
+ <div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Animation</h1>
+      </div>
+      <div class="content">
+         <p>Animation is an exciting feature of modern web application. It gives a refreshing feel to the application. React community provides many excellent react based animation library like React Motion, React Reveal, react-animations, etc. React itself provides an animation library, <strong>React Transition Group</strong>, as an independent add-on option. Let us learn React Transition Group in this chapter.</p>
+
+         <h2>React Transition Group</h2>
+         <p>The React Transition Group library is a simple implementation of animation. It does not perform animation by itself but exposes the core animation states. Every animation is basically a transition of an element from one state to another:</p>
+         <ul>
+            <li>Entering</li>
+            <li>Entered</li>
+            <li>Exiting</li>
+            <li>Exited</li>
+         </ul>
+         <p>Styles can be applied for each state to animate an element. The <code>in</code> prop controls whether the element enters or exits.</p>
+
+         <h2>Installation</h2>
+         <pre><code>npm install react-transition-group --save
+yarn add react-transition-group</code></pre>
+
+         <h2>Transition</h2>
+         <p><code>Transition</code> is the base component for animating an element. Below is an example of fading text in/out.</p>
+         
+         <h3>Example: HelloWorld Component</h3>
+         <pre><code>import React from "react";
+import { Transition } from 'react-transition-group';
+
+class HelloWorld extends React.Component {
+   constructor(props) {
+      super(props);
+      this.duration = 2000;
+      this.defaultStyle = {
+         transition: `opacity ${this.duration}ms ease-in-out`,
+         opacity: 0,
+      }
+      this.transitionStyles = {
+         entering: { opacity: 1 },
+         entered: { opacity: 1 },
+         exiting: { opacity: 0 },
+         exited: { opacity: 0 },
+      };
+      this.state = { inProp: true };
+      setInterval(() => {
+         this.setState(state => ({ inProp: !state.inProp }));
+      }, 3000);
+   }
+   render() {
+      return (
+         <Transition in={this.state.inProp} timeout={this.duration}>
+            {state => (
+               <div style{{ ...this.defaultStyle, ...this.transitionStyles[state] }}>
+                  <h1>Hello World!</h1>
+               </div>
+            )}
+         </Transition>
+      );
+   }
+}
+export default HelloWorld;</code></pre>
+
+         <h2>CSSTransition</h2>
+         <p><code>CSSTransition</code> improves <code>Transition</code> by adding <code>classNames</code> props for state-based CSS classes.</p>
+         
+         <h3>Example CSS</h3>
+         <pre><code>.hello-enter { opacity: 0; }
+.hello-enter-active { opacity: 1; transition: opacity 2000ms; }
+.hello-exit { opacity: 1; }
+.hello-exit-active { opacity: 0; transition: opacity 2000ms; }</code></pre>
+
+         <h3>Example Component</h3>
+         <pre><code>import React from 'react';
+import { CSSTransition } from 'react-transition-group'
+import './HelloWorldCSSTransition.css';
+
+class HelloWorldCSSTransition extends React.Component {
+   constructor(props) {
+      super(props);
+      this.duration = 2000;
+      this.state = { inProp: true };
+      setInterval(() => {
+         this.setState(state => ({ inProp: !state.inProp }));
+      }, 3000);
+   }
+   render() {
+      return (
+         <CSSTransition in={this.state.inProp} timeout={this.duration} classNames="hello">
+            <div>
+               <h1>Hello World!</h1>
+            </div>
+         </CSSTransition>
+      );
+   }
+}
+export default HelloWorldCSSTransition;</code></pre>
+
+         <h2>TransitionGroup</h2>
+         <p><code>TransitionGroup</code> is a container component that manages multiple transition elements, such as lists.</p>
+         <pre><code>&lt;TransitionGroup&gt;
+   {items.map(({ id, text }) =&gt; (
+      &lt;CSSTransition key={id} timeout={500} classNames="item"&gt;
+         &lt;div&gt;{text}&lt;/div&gt;
+      &lt;/CSSTransition&gt;
+   ))}
+&lt;/TransitionGroup&gt;</code></pre>
+
+         <h2>Summary</h2>
+         <p>React provides flexible ways to animate elements using React Transition Group. Developers can choose between JavaScript-driven transitions with <code>Transition</code> or CSS-driven animations with <code>CSSTransition</code>. For handling multiple animated items, <code>TransitionGroup</code> is ideal.</p>
+      </div>
+   </div>
+</div>

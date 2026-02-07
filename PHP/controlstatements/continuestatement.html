@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `continue` Statement</h1>
+
+    <div class="content">
+      <p>
+        The **`continue`** statement is a **loop control statement** that is used to **skip the remaining code** in the current iteration of a loop and immediately proceed to the **next iteration**. It can be used within `for`, `foreach`, `while`, and `do...while` loops.
+      </p>
+
+      <h2>Basic Functionality and Flow</h2>
+      <p>
+        When PHP encounters the `continue` keyword, it immediately stops executing the rest of the statements in the loop body for that iteration and jumps to the expression evaluation phase (the condition check) of the next cycle.
+      </p>
+      <div class="example">
+        <code>
+          for (init; condition; increment) {<br>
+          &nbsp;&nbsp;&nbsp;if (specific_condition) {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**continue;** // Skip to increment and next condition check<br>
+          &nbsp;&nbsp;&nbsp;}<br>
+          &nbsp;&nbsp;&nbsp;// Code here is skipped if 'continue' runs<br>
+          }
+        </code>
+      </div>
+
+      <h3>Example: Skipping Even Numbers in a `for` Loop</h3>
+      <p>
+        The `continue` statement skips the `echo` line whenever `$x` is evenly divisible by 2.
+      </p>
+      <div class="example">
+        <p>
+          <code>for ($x=1; $x&lt;=10; $x++) { if ($x%2==0) { **continue;** } echo "x = $x \n"; }</code>
+        </p>
+        <p class="content">Output: x = 1 \n x = 3 \n x = 5 \n x = 7 \n x = 9</p>
+      </div>
+
+      <h3>Example: Skipping Elements in a `foreach` Loop</h3>
+      <p>
+        This is useful for filtering out specific items during array iteration.
+      </p>
+      <div class="example">
+        <p>
+          <code>$fruits = ["Apple", "Mango", "Orange"];</code><br>
+          <code>foreach ($fruits as $fruit) { if ($fruit == "Mango") { **continue;** } echo "Fruit: $fruit\n"; }</code>
+        </p>
+        <p class="content">Output: Fruit: Apple \n Fruit: Orange</p>
+      </div>
+
+      <hr>
+
+      <h2>Skipping Multiple Loops (Numeric Argument)</h2>
+      <p>
+        Like `break`, the `continue` statement accepts an optional numeric argument to specify how many levels of enclosing loops should be skipped to the end of. The default is 1, which skips to the next iteration of the immediate loop.
+      </p>
+      <div class="example">
+        <code>continue [level];</code>
+      </div>
+      <p>
+        If you use **`continue 2;`** inside a deeply nested loop, execution jumps to the condition check/increment of the loop that is **two levels above** the current one.
+      </p>
+    </div>
+  </div>
+</div>

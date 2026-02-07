@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Static Members of a C++ Class 🏛️</h1>
+
+        <div class="content">
+            <p>The **<code>static</code>** keyword in C++ is used to define class members (both data and functions) that belong to the **class itself** rather than to any specific object instance.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Static Data Members</h2>
+
+        <div class="content">
+            <p>**Static data members** (variables) are shared by **all objects** of the class. No matter how many objects are created, there is only **one copy** of the static member that all objects access.</p>
+            <ul>
+                <li>**Storage:** It is stored outside the class definition in a special area of memory (the data segment), not within the memory allocated for each object.</li>
+                <li>**Initialization:** Static data is initialized to zero by default if no other initialization is present.</li>
+                <li>**Required Definition:** A static data member must be **defined and initialized outside the class** in the source file using the scope resolution operator (`::`).</li>
+            </ul>
+            <pre class="example">
+class Box {
+   public:
+      static int objectCount; // Declaration inside class
+      // ...
+};
+
+// Definition and initialization outside the class
+int Box::objectCount = 0; 
+
+// Accessing the static member:
+cout &lt;&lt; Box::objectCount; // Accessed via class name
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Static Function Members</h2>
+
+        <div class="content">
+            <p>A **static member function** is independent of any particular object of the class.</p>
+            <ul>
+                <li>**Calling:** It can be called even if **no objects** of the class exist, using the class name and the scope resolution operator (`Box::getCount()`).</li>
+                <li>**Access Restriction:** A static member function can **only access** other **static** data members or **static** member functions of the class.</li>
+                <li>**The <code>this</code> Pointer:** Static member functions **do not have** access to the implicit **<code>this</code> pointer**, as they are not tied to a specific object.</li>
+                <li>**Use Case:** Static functions are typically used as utility methods or to manage static data, such as an object counter.</li>
+            </ul>
+            <pre class="example">
+class Box {
+   public:
+      static int objectCount;
+      static int getCount() { // Static function
+         return objectCount;  // Can only access static members
+      }
+      // ...
+};
+
+// Calling the static function before any object is created
+cout &lt;&lt; "Count: " &lt;&lt; Box::getCount() &lt;&lt; endl; 
+</pre>
+        </div>
+    </div>
+</div>

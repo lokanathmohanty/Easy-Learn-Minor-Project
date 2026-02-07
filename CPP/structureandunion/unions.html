@@ -1,0 +1,66 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">C++ Unions (<code>union</code>) 🎁</h1>
+
+        <div class="content">
+            <p>A C++ **union** is a user-defined data type that allows **multiple members** (variables) of different types to share the **same memory location**. This is a memory-saving technique, but with a critical constraint:</p>
+            <ul>
+                <li>A union can hold a valid value for **only one** of its members at any given time.</li>
+                <li>Assigning a value to one member **overwrites** the value previously held by any other member, as they all share the same storage.</li>
+                <li>The **size of the union** is determined by the size of its **largest member**.</li>
+            </ul>
+
+            <h3>Union Declaration and Size</h3>
+            <pre class="example">
+union Data {
+  int intValue;      // e.g., 4 bytes
+  float floatValue;  // e.g., 4 bytes
+  char strValue[50]; // e.g., 50 bytes (Largest member)
+};
+</pre>
+            <p>In this example, the size of the <code>Data</code> union would be 50 bytes (or slightly more due to padding), regardless of which member you are currently using.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Accessing Union Members and Undefined Behavior</h2>
+            <p>Union members are accessed using the **dot operator** (`.`).</p>
+            <p>The main risk with unions is reading from a member that was not the last one written to. This results in **undefined behavior**, as demonstrated in the provided example:</p>
+            <pre class="example">
+Data data;
+
+data.intValue = 2006;       // intValue is valid (2006)
+
+data.floatValue = 5.75f;    // Overwrites intValue's memory. floatValue is valid (5.75).
+
+// Undefined Behavior: Reading intValue when memory holds a float's bit pattern
+cout &lt;&lt; data.intValue; 
+</pre>
+            <p>The program will simply output the raw memory bits interpreted as an integer, which is rarely the intended value.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Anonymous Unions and Union-like Classes</h2>
+
+            <h3>Anonymous Unions</h3>
+            <p>An anonymous union is declared without a name. Its members are treated as if they are direct members of the scope in which the union is declared, simplifying access by removing the need for the union variable name.</p>
+            <pre class="example">
+// Anonymous union declared in main()
+union {
+  int intValue;
+  float floatValue;
+};
+
+// Direct access to members without a variable name
+intValue = 10;
+</pre>
+
+            <h3>Union-like Classes (The Need for Type Safety)</h3>
+            <p>In modern C++, raw unions are often wrapped in classes (sometimes called "union-like classes") to add **type safety**. This involves using an additional member (often an `enum`) to explicitly track which union member is currently active, preventing accidental reads that cause undefined behavior.</p>
+            <p>This concept has led to the development of the standard library type **<code>std::variant</code>** (C++17), which provides a type-safe modern alternative to raw unions.</p>
+        </div>
+    </div>
+</div>

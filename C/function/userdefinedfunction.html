@@ -1,0 +1,144 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">User-defined Functions in C</h1>
+
+    <div class="content">
+      <p>A function in C is a block of organized, reusable code that performs a single related action. Functions in C are classified into two types:</p>
+      <ul>
+        <li>Library functions</li>
+        <li>User-defined functions</li>
+      </ul>
+      <p>C compilers come with precompiled header files like <code>stdio.h</code> and <code>math.h</code> containing predefined library functions (e.g., <code>printf()</code>, <code>scanf()</code>, <code>pow()</code>, <code>sqrt()</code>).</p>
+      <p>If no suitable library function exists, you can define your own custom functions to modularize and reuse code.</p>
+      <p>The <code>main()</code> function itself is a user-defined function and serves as the program entry point.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">What is a User-Defined Function?</h2>
+      <p>A user-defined function is created by the programmer to perform a specific task, promoting code reusability and modularity. These can be defined in the same program or a user-created header file.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Creating a User-Defined Function</h2>
+      <p>To create a user-defined function, understand what the function should do and follow these parts:</p>
+      <ol>
+        <li>Function declaration (prototype)</li>
+        <li>Function definition</li>
+        <li>Function calling</li>
+      </ol>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Function Declaration</h2>
+      <p>The prototype declares the function signature before use. For example, a function <code>add()</code> that adds two integers:</p>
+      <pre><code>int add(int, int);</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Function Definition</h2>
+      <p>The function definition consists of the header matching the prototype and the function body:</p>
+      <pre><code>return_type function_name(arg1, arg2, ...) {
+    // function body
+    return value;
+}</code></pre>
+      <p>Example:</p>
+      <pre><code>int add(int a, int b) {
+    int c = a + b;
+    return c;
+}</code></pre>
+      <p>The order of function definitions in a program doesn’t matter, but the prototype must be declared before function calls.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Calling a User-Defined Function</h2>
+      <p>Call a function by passing the exact number and type of arguments as declared:</p>
+      <pre><code>int result = add(10, 20);</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example: Addition and Subtraction Functions</h2>
+      <pre><code>// C program demonstrating user-defined functions
+#include &lt;stdio.h&gt;
+
+// Function declarations
+int add(int, int);
+int sub(int, int);
+
+// Function definitions
+int add(int a, int b) {
+  return a + b;
+}
+
+int sub(int a, int b) {
+  return a - b;
+}
+
+int main() {
+  int num1 = 36, num2 = 24;
+  int res_add, res_sub;
+
+  // Calling the functions
+  res_add = add(num1, num2);
+  res_sub = sub(num1, num2);
+
+  // Printing the results
+  printf("Addition is : %d\n", res_add);
+  printf("Subtraction is : %d\n", res_sub);
+
+  return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Addition is : 60
+Subtraction is : 12</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Formal and Actual Arguments</h2>
+      <p>When defining a function, the parameters in parentheses are called <em>formal arguments</em>. When calling a function, the values passed are the <em>actual arguments</em>.</p>
+      <p>Example:</p>
+      <pre><code>int x = 10, y = 20;
+int result = add(x, y);</code></pre>
+      <p>Formal arguments can be of any data type including arrays, pointers, structs, etc.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Return Types of Functions</h2>
+      <p>A function can return any data type: primitive types, arrays, pointers, structs, or <code>void</code> if no return value is needed.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example: Mismatched Function Declaration and Definition</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+float divide(int, int);
+
+int main() {
+  int x = 15, y = 5;
+  float z = divide(x, y);
+  printf("%f", z);
+  return 0;
+}
+
+int divide(int a, int b) {
+  int c = a / b;
+  return c;
+}</code></pre>
+      <p><strong>Output (Error):</strong></p>
+      <p>The compiler reports a conflicting types error because the prototype returns <code>float</code> but the definition returns <code>int</code>.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Recursive Functions</h2>
+      <p>Functions in C can call other functions or themselves. A function calling itself is called a <em>recursive function</em>.</p>
+      <p>Example of infinite recursion (not recommended):</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  printf("Hello");
+  main();  // Recursive call
+  return 0;
+}</code></pre>
+      <p>This program runs infinitely. Practical recursion must have a terminating condition to avoid infinite loops.</p>
+    </div>
+  </div>
+</div>

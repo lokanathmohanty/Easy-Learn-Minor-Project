@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Inter Thread Communication</h1>
+
+    <div class="content">
+      <h2 class="content-title">Introduction</h2>
+      <p>If you are aware of interprocess communication, then it will be easy for you to understand interthread communication.</p>
+
+      <h2 class="content-title">Inter-thread Communication in Java</h2>
+      <p>Inter-thread communication is important when you develop an application where two or more threads exchange some information. It is achieved by using the <code>wait()</code>, <code>notify()</code>, and <code>notifyAll()</code> methods of the <code>Object</code> class.</p>
+
+      <h2 class="content-title">Methods used for Inter-thread Communication</h2>
+      <p>There are three methods that enable thread communication, all defined in the <code>Object</code> class and can only be called from within a synchronized context:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Sr.No.</th>
+            <th>Method & Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><code>public void wait()</code><br>Causes the current thread to wait until another thread invokes <code>notify()</code>.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><code>public void notify()</code><br>Wakes up a single thread that is waiting on this object's monitor.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><code>public void notifyAll()</code><br>Wakes up all the threads that called <code>wait()</code> on the same object.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="content-title">Example of Inter-thread Communication in Java</h2>
+      <p>This example shows how two threads can communicate using <code>wait()</code> and <code>notify()</code>. You can build more complex systems using the same concept.</p>
+
+      <pre><code>class Chat {
+   boolean flag = false;
+
+   public synchronized void Question(String msg) {
+      if (flag) {
+         try {
+            wait();
+         } catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+      System.out.println(msg);
+      flag = true;
+      notify();
+   }
+
+   public synchronized void Answer(String msg) {
+      if (!flag) {
+         try {
+            wait();
+         } catch (InterruptedException e) {
+            e.printStackTrace();
+         }
+      }
+      System.out.println(msg);
+      flag = false;
+      notify();
+   }
+}
+
+class T1 implements Runnable {
+   Chat m;
+   String[] s1 = { "Hi", "How are you ?", "I am also doing fine!" };
+
+   public T1(Chat m1) {
+      this.m = m1;
+      new Thread(this, "Question").start();
+   }
+
+   public void run() {
+      for (int i = 0; i < s1.length; i++) {
+         m.Question(s1[i]);
+      }
+   }
+}
+
+class T2 implements Runnable {
+   Chat m;
+   String[] s2 = { "Hi", "I am good, what about you?", "Great!" };
+
+   public T2(Chat m2) {
+      this.m = m2;
+      new Thread(this, "Answer").start();
+   }
+
+   public void run() {
+      for (int i = 0; i < s2.length; i++) {
+         m.Answer(s2[i]);
+      }
+   }
+}
+
+public class TestThread {
+   public static void main(String[] args) {
+      Chat m = new Chat();
+      new T1(m);
+      new T2(m);
+   }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Hi
+Hi
+How are you ?
+I am good, what about you?
+I am also doing fine!
+Great!</code></pre>
+    </div>
+  </div>
+</div>

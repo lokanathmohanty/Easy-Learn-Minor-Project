@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Encapsulation</h1>
+        <div class="content">
+            <p>**Encapsulation** is a core principle of Object-Oriented Programming (OOP) that involves bundling data (properties) and the methods that operate on that data into a single unit (a class). Crucially, it means keeping the data safe by restricting direct access from outside the class, allowing controlled access only through the class's public methods.</p>
+            
+            <h2 class="title">Access Modifiers (Visibility Modes)</h2>
+            <p>PHP uses three keywords to implement encapsulation by controlling the visibility of class properties and methods:</p>
+            
+            <ul>
+                <li><strong><code>public</code></strong>: Members are accessible from **anywhere**: inside the class, inside child classes, and from the object instance outside the class. (This is the default visibility if none is specified.)</li>
+                <li><strong><code>private</code></strong>: Members are accessible **only within the class itself**. They cannot be accessed by child classes or from the object instance outside the class.</li>
+                <li><strong><code>protected</code></strong>: Members are accessible **within the class and within any of its child (derived) classes**, but not from the object instance outside the class.</li>
+            </ul>
+
+            <h3 class="title">The Principle of Data Hiding</h3>
+            <p>The goal of encapsulation is usually achieved by making data members **<code>private</code>** or **<code>protected</code>** (Data Hiding) and providing public methods (often called **getters** and **setters**) to manipulate that data. This ensures that data remains consistent and validates any changes made to it.</p>
+
+            <h3 class="title">Why Use Encapsulation?</h3>
+            <ol>
+                <li><strong>Data Protection:</strong> Prevents unauthorized or unintended external modification of the object's internal state.</li>
+                <li><strong>Controlled Access:</strong> Public methods allow you to implement validation or business logic before data is set or returned.</li>
+                <li><strong>Simplifies Maintenance:</strong> Internal changes to the data structure (e.g., changing a property name) only require updating the public methods, not every piece of external code that uses the class.</li>
+            </ol>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Restricting Access with <code>private</code></h3>
+            <p>In this example, the properties <code>$name</code> and <code>$age</code> are made <code>private</code>, preventing direct external access, while public methods <code>getName()</code> and <code>getAge()</code> still provide controlled access.</p>
+            
+            <pre><code>
+class Person {
+   private $name;
+   private $age;
+
+   public function __construct(string $n, int $a) {
+      $this->name = $n; // Accessible within the class
+      $this->age = $a;
+   }
+
+   public function getName() { // Public getter method
+      return $this->name;
+   }
+}
+
+$b1 = new Person("Ravi", 28);
+
+echo "Name: " . $b1->getName() . PHP_EOL; 
+// echo $b1->name; // FATAL ERROR: Cannot access private property
+            </code></pre>
+            
+            <p>If the <code>Person</code> class were extended, a child class would still **not** be able to directly access <code>$name</code> or <code>$age</code> because they are declared as <code>private</code>.</p>
+        </div>
+    </div>
+</div>

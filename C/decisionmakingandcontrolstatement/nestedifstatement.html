@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Nested If Statements in C</h1>
+    <div class="content">
+      <p>In C programming, nested if statements refer to using one if or else-if statement inside another. This is useful for building multi-level decision-making logic.</p>
+
+      <h2>Syntax</h2>
+      <pre>if (expr1){
+   if (expr2){
+      // executes if expr1 and expr2 are true
+   }
+   else{
+      // executes if expr1 is true but expr2 is false
+   }        
+}</pre>
+
+      <p>Nested if statements can appear inside either the if block or else block, or both.</p>
+
+      <h2>Example 1: Multi-range number classification</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+   int a = 274;
+   printf("Value of a is : %d\n", a);
+
+   if (a &lt; 100){
+      printf("Value of a is less than 100\n");
+   }
+   
+   if (a &gt;= 100 &amp;&amp; a &lt; 200){
+      printf("Value of a is between 100 and 200\n");
+   }
+      
+   if (a &gt;= 200){
+      printf("Value of a is more than 200\n");
+   }
+}
+      </pre>
+      <p>Output:<br>Value of a is : 274<br>Value of a is more than 200</p>
+
+      <h2>Example 2: Same logic using nested if</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main() {
+   int a = 120;
+   printf("Value of a is : %d\n", a );
+   if(a &gt;= 100){
+      if(a &lt; 200){
+         printf("Value of a is between 100 and 200\n");
+      }
+      else{
+         printf("Value of a is more than 200\n");
+      }
+   }
+   else{
+      printf("Value of a is less than 100\n");
+   }
+   return 0;
+}
+      </pre>
+      <p>Output:<br>Value of a is : 120<br>Value of a is between 100 and 200</p>
+
+      <h2>Example 3: Divisibility Check</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 15;
+   printf("a: %d\n", a);
+
+   if (a % 2 == 0) {
+      if (a % 3 == 0){
+         printf("Divisible by 2 and 3");
+      }
+      else {
+         printf("Divisible by 2 but not 3");
+      }
+   }
+   else {
+      if (a % 3 == 0){
+         printf("Divisible by 3 but not 2");
+      }
+      else{
+         printf("Not divisible by 2, not divisible by 3");
+      }
+   }
+   return 0;
+}
+      </pre>
+      <p>Output:<br>a: 15<br>Divisible by 3 but not 2</p>
+
+      <h2>Example 4: Leap Year Check</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int year = 1900;
+   printf("year: %d\n", year);
+   if (year % 4 == 0){
+      if (year % 100 == 0){
+         if(year % 400 == 0){
+            printf("%d is a Leap Year\n", year);
+         }
+         else{
+            printf("%d is not a Leap Year\n", year);
+         }
+      }
+      else{
+         printf("%d is a Leap Year\n", year);
+      }
+   }
+   else{
+      printf("%d is not a Leap Year\n", year);
+   }
+   return 0;
+}
+      </pre>
+      <p>Output:<br>year: 1900<br>1900 is not a Leap Year</p>
+
+      <h2>Alternative: Compound Boolean Expression</h2>
+      <pre>
+if (year % 4 == 0 && (year % 400 == 0 || year % 100 != 0)) {
+   printf("%d is a leap year", year);
+} else {
+   printf("%d is not a leap year", year);
+}
+      </pre>
+      <p>Nested if statements help write structured, easy-to-read multi-level decision logic for complex algorithms.</p>
+    </div>
+  </div>
+</div>

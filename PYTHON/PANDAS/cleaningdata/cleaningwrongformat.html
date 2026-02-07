@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="session">
+    
+    <h1 class="title">Pandas - Cleaning Data of Wrong Format</h1>
+    
+    <div class="content">
+      <p>Cells with data in the wrong format can make it difficult or even impossible to analyze data properly. In such cases, you can either remove the rows with incorrect formatting or convert all cells in the column to the correct format.</p>
+      
+      <p>For instance, in a column that is supposed to represent dates, inconsistent formats (e.g., <code>'2020/12/01'</code> vs <code>20201226</code>) can cause parsing issues. Pandas provides a convenient method to handle this using <code>to_datetime()</code>.</p>
+    </div>
+
+    <h2 class="title">Example: Converting Column to Date Format</h2>
+    
+    <div class="content">
+      <p>The following example demonstrates how to convert the <code>Date</code> column to proper datetime format using Pandas. Invalid or missing formats will be converted to <code>NaT</code> (Not a Time).</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Code Example</h2>
+      <div class="content">
+        <pre><code>
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+# Convert to datetime format
+df['Date'] = pd.to_datetime(df['Date'], format='mixed', errors='coerce')
+
+# Remove rows where Date could not be converted
+df.dropna(subset=['Date'], inplace=True)
+
+print(df.to_string())
+        </code></pre>
+      </div>
+    </div>
+
+  </div>
+</div>

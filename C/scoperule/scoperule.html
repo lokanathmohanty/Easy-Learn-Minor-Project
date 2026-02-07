@@ -1,0 +1,147 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">C - Scope Rules</h1>
+    <div class="content">
+      <p>In C programming, a scope defines the region in a program where a variable is accessible. Outside its scope, the variable cannot be accessed.</p>
+      <p>There are three main types of variable scopes in C:</p>
+      <ul>
+        <li>Local variables: Declared inside a function or block.</li>
+        <li>Global variables: Declared outside all functions.</li>
+        <li>Formal parameters: Declared in function definitions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Local Variables</h2>
+    <div class="content">
+      <p>Variables declared inside a function or block are called local variables. They can only be accessed within that specific function or block.</p>
+    </div>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a, b;
+    int c;
+
+    a = 10;
+    b = 20;
+    c = a + b;
+
+    printf("value of a = %d, b = %d and c = %d\n", a, b, c);
+    return 0;
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Global Variables</h2>
+    <div class="content">
+      <p>Global variables are declared outside all functions. They retain their value throughout the program and can be accessed by any function.</p>
+    </div>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+/* global variable */
+int g;
+
+int main() {
+    int a, b;
+
+    a = 10;
+    b = 20;
+    g = a + b;
+
+    printf("value of a = %d, b = %d and g = %d\n", a, b, g);
+    return 0;
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Local and Global Variables with Same Name</h2>
+    <div class="content">
+      <p>A local variable with the same name as a global variable will override it within the function scope.</p>
+    </div>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+/* global variable */
+int g = 20;
+
+int main() {
+    /* local variable */
+    int g = 10;
+    printf("value of g = %d\n", g);
+    return 0;
+}</code></pre>
+        <p>Output:</p>
+        <pre><code>value of g = 10</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Formal Parameters</h2>
+    <div class="content">
+      <p>Formal parameters are variables declared in function definitions. They act as local variables and override global variables with the same name.</p>
+    </div>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int a = 20;
+
+int sum(int a, int b) {
+    printf("value of a in sum() = %d\n", a);
+    printf("value of b in sum() = %d\n", b);
+    return a + b;
+}
+
+int main() {
+    int a = 10;
+    int b = 20;
+    int c;
+
+    printf("value of a in main() = %d\n", a);
+    c = sum(a, b);
+    printf("value of c in main() = %d\n", c);
+
+    return 0;
+}</code></pre>
+        <p>Output:</p>
+        <pre><code>value of a in main() = 10
+value of a in sum() = 10
+value of b in sum() = 20
+value of c in main() = 30</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Initializing Local and Global Variables</h2>
+    <div class="content">
+      <p>Local variables are not automatically initialized — they contain garbage values unless explicitly assigned.</p>
+      <p>Global variables are automatically initialized by the system with default values based on their data type:</p>
+      <ul>
+        <li><strong>int</strong>: 0</li>
+        <li><strong>char</strong>: '\0'</li>
+        <li><strong>float</strong>: 0</li>
+        <li><strong>double</strong>: 0</li>
+        <li><strong>pointer</strong>: NULL</li>
+      </ul>
+      <p>Always initialize variables explicitly to avoid unpredictable behavior.</p>
+    </div>
+  </div>
+
+</div>

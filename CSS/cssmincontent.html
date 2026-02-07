@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - min-content Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS <code>min-content</code></strong> property value is used in sizing contexts to
+        specify the smallest possible size of a box or element based on its intrinsic content.
+        This value tells the browser to shrink the box so that the text content takes advantage of
+        all possible soft-wrapping opportunities, but it will never shrink below the length of the
+        longest word inside the element.
+      </p>
+      <p>
+        When used, <code>min-content</code> ensures that elements adapt to the narrowest width
+        possible while still respecting the integrity of their content. It is particularly useful in
+        responsive layouts, grid systems, and components that require intrinsic sizing.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>The <code>min-content</code> value can be used with various CSS properties such as width, height, and grid layout definitions:</p>
+      <ul>
+        <li><code>width: min-content;</code></li>
+        <li><code>inline-size: min-content;</code></li>
+        <li><code>height: min-content;</code></li>
+        <li><code>block-size: min-content;</code></li>
+        <li><code>grid-template-columns: 100px 2fr min-content;</code></li>
+      </ul>
+
+      <h2>How It Works</h2>
+      <p>
+        The value <code>min-content</code> is calculated based on the intrinsic minimum size of
+        the content. For text, this means that the box will shrink until it fits the longest word
+        without breaking it. For other content such as images, the minimum size is determined by
+        the natural dimension of the element.
+      </p>
+
+      <h2>Example 1: Box Sizing with min-content</h2>
+      <p>
+        In this example, we use <code>min-content</code> as the width of boxes. Each box shrinks
+        to the smallest width required by its content.
+      </p>
+      <pre>
+&lt;div class="container"&gt;
+   &lt;div class="item" style="width:min-content;"&gt;Min-Content Example.&lt;/div&gt;
+   &lt;div class="item" style="width:min-content;"&gt;Well-Crafted Min-Content Example.&lt;/div&gt;
+   &lt;div class="item" style="width:min-content;"&gt;Thoughtfully Presented Min-Content Example.&lt;/div&gt;
+&lt;/div&gt;
+      </pre>
+
+      <h2>Example 2: Using min-content in CSS Grid</h2>
+      <p>
+        The following example demonstrates the use of <code>min-content</code> in a grid layout.
+        Some grid tracks are defined with <code>min-content</code>, which makes them shrink to the
+        narrowest possible width based on their content.
+      </p>
+      <pre>
+&lt;div id="container" style="display:grid;grid-template-columns:1fr min-content min-content;gap:15px;"&gt;
+   &lt;div&gt;Flexible Content Area&lt;/div&gt;
+   &lt;div&gt;Min-Content 1&lt;/div&gt;
+   &lt;div&gt;Min-Content 2&lt;/div&gt;
+   &lt;div&gt;Dynamic Content Area&lt;/div&gt;
+   &lt;div&gt;Min-Content 3&lt;/div&gt;
+   &lt;div&gt;Min-Content 4&lt;/div&gt;
+&lt;/div&gt;
+      </pre>
+
+      <h2>Use Cases</h2>
+      <ul>
+        <li>Creating responsive grid systems where columns shrink only as much as their content allows.</li>
+        <li>Designing buttons or labels that automatically size to the length of the text.</li>
+        <li>Ensuring tables and layouts adapt gracefully to varying text lengths without breaking design.</li>
+      </ul>
+
+      <h2>Key Points</h2>
+      <ul>
+        <li><code>min-content</code> adapts element size to the narrowest possible content width.</li>
+        <li>It respects long words and ensures they are not broken arbitrarily.</li>
+        <li>It is very useful in CSS Grid and Flexbox layouts for creating adaptive designs.</li>
+      </ul>
+
+      <p>
+        In summary, <strong><code>min-content</code></strong> is a powerful intrinsic sizing
+        keyword that enables flexible and content-driven design. It ensures elements shrink only as
+        much as their content allows, making it a core property for modern responsive web layouts.
+      </p>
+    </div>
+  </div>
+</div>

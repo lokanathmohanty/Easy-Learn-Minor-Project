@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Portable Class Libraries (PCL) and .NET Standard</h1>
+
+        <div class="content">
+            <p>The **Portable Class Library (PCL)** project type was historically crucial for creating managed assemblies that could run across multiple **.NET Framework** platforms (e.g., Windows, Windows Phone). The need for PCL arose due to incompatibilities between different project types, specifically the difficulty in getting the **Console App's** (then <code>.xproj</code>) build system to reference the **UWP App's** (<code>.csproj</code>) system.</p>
+            <p>PCL and the modern **.NET Standard Library** address this by defining a unified set of APIs that multiple platforms can implement, allowing a single library to be shared across many projects, reducing development and testing time.</p>
+        </div>
+
+        <h2 class="title">Creating and Retargeting the Portable Library</h2>
+        <div class="content">
+            <p>To create a shareable library that works with both the Console App and the UWP App, we replace the previous class library with a PCL project that is then converted to target the **.NET Standard**:</p>
+            <ol>
+                <li class="content">Remove the previous class library project (<code>UtilityLibrary</code>) from the solution and delete its folder from the disk.</li>
+                <li class="content">Add a new project: Select **Visual C# &rarr; Windows** in the left pane, and choose **Class Library (Portable)** in the middle pane.</li>
+                <li class="content">Name the project **StringLibrary** and click **OK**.</li>
+                <li class="content">In the next dialog, select the desired **target frameworks** (e.g., Windows Universal and ASP.NET Core).</li>
+                <li class="content">To ensure maximum compatibility, right-click the **StringLibrary** project, select **Properties**, and click **Target .NET Platform Standard**. Confirm this change.</li>
+            </ol>
+            <p>The resulting project now uses a <code>.csproj</code> file, making it compatible with the UWP app, while simultaneously targeting the unified **.NET Standard** API set.</p>
+        </div>
+
+        <h2 class="title example">Implementing and Consuming the Shared Code</h2>
+        <div class="content example">
+            <h3>StringLib.cs Implementation</h3>
+            <p>Add a new class named <code>StringLib.cs</code> to the <code>StringLibrary</code> project and include the same extension methods for checking the first character of a string (uppercase, lowercase, or numeric):</p>
+            <pre><code>using System; 
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Text; 
+using System.Threading.Tasks; 
+  
+namespace StringLibrary { 
+   public static class StringLib { 
+      public static bool StartsWithUpper(this String str) { 
+         if (String.IsNullOrWhiteSpace(str)) 
+            return false; 
+         Char ch = str[0]; 
+         return Char.IsUpper(ch); 
+      } 
+      // ... StartsWithLower and StartsWithNumber implementations follow ...
+   } 
+}</code></pre>
+
+            <h3>Adding Reference to Console App</h3>
+            <p>Once the library builds successfully, add a reference to it in your Console application (<code>FirstApp</code>) just as before:</p>
+            <ol>
+                <li class="content">Right-click on **References** in the **FirstApp** project.</li>
+                <li class="content">Select **Add Reference**.</li>
+                <li class="content">Select the **StringLibrary** project and click **OK**.</li>
+            </ol>
+            <p>The console application can now consume the portable library, and the same library can be referenced and used within your UWP application, demonstrating the cross-platform portability benefit.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Abstract Classes</h1>
+        <div class="content">
+            <p>An **abstract class** is a class that cannot be instantiated on its own; you cannot create objects directly from it. It is intended to be a **blueprint** for other classes, defining common methods and properties that inheriting classes must implement.</p>
+            
+            <h2 class="title">Key Rules for Abstract Classes</h2>
+            <ul>
+                <li>The class must be declared with the **<code>abstract</code>** keyword: <code>abstract class MyClass {...}</code>.</li>
+                <li>An abstract class **cannot be instantiated** (e.g., <code>$obj = new MyClass;</code> will cause a Fatal Error).</li>
+                <li>If a class contains even one **abstract method**, the class itself **must** be declared abstract.</li>
+                <li>Abstract classes can contain properties, constants, and methods (public, private, or protected), including non-abstract ("normal") methods.</li>
+                <li>An abstract method is defined with the <code>abstract</code> keyword and **has no body** (only the signature).</li>
+            </ul>
+
+            <h2 class="title">Inheritance and Implementation</h2>
+            <p>An abstract class is **extended** by a child class. If a child class is not abstract, it **must** provide a concrete implementation (a method body) for *every* abstract method defined in the parent abstract class. Failure to do so results in a fatal error, forcing the child class to either implement the method or also be declared abstract.</p>
+            
+            <h3 class="title">Why Use Abstract Classes?</h3>
+            <p>The primary benefits are:</p>
+            <ol>
+                <li><strong>Enforcing Structure:</strong> They require child classes to implement specific methods, ensuring a consistent structure across a set of related classes.</li>
+                <li><strong>Code Reusability:</strong> Common attributes and non-abstract methods can be defined once in the abstract parent class, reducing duplication.</li>
+            </ol>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Calculating Student Percentage</h3>
+            <p>Consider an abstract class <code>marks</code> that enforces that any derived class must implement a <code>percent()</code> method to calculate a student's score, but also provides the common properties (<code>$m1</code>, <code>$m2</code>, <code>$m3</code>) needed for the calculation.</p>
+            
+            <pre><code>
+abstract class marks {
+   protected int $m1, $m2, $m3;
+   // Abstract method: MUST be implemented by children
+   abstract public function percent(): float; 
+}
+
+class student extends marks {
+   public function __construct($x, $y, $z) {
+      $this->m1 = $x; $this->m2 = $y; $this->m3 = $z;
+   }
+   // Concrete implementation of the abstract method
+   public function percent(): float { 
+      return ($this->m1 + $this->m2 + $this->m3) * 100 / 300;
+   }
+}
+
+$s1 = new student(50, 60, 70);
+echo "Percentage: " . $s1->percent(); // Output: Percentage: 60
+            </code></pre>
+            
+            <p>The <code>student</code> class is forced to implement <code>percent()</code>, ensuring all student-type objects can report their scores reliably.</p>
+        </div>
+    </div>
+</div>

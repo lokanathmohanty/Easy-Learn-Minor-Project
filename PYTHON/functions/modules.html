@@ -1,0 +1,245 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Modules</h1>
+    <div class="content">
+      <p>The concept of module in Python further enhances the modularity. You can define more than one related functions together and load required functions. A module is a file containing definition of functions, classes, variables, constants or any other Python object. Contents of this file can be made available to any other program. Python has the <code>import</code> keyword for this purpose.</p>
+      <p>A function is a block of organized, reusable code that is used to perform a single, related action. Functions provide better modularity for your application and a high degree of code reusing.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example of Python Module</h2>
+    <div class="content">
+      <pre>
+import math
+print("Square root of 100:", math.sqrt(100))
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+Square root of 100: 10.0
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Python Built-in Modules</h2>
+    <div class="content">
+      <p>Python's standard library comes bundled with a large number of modules. They are called built-in modules. Most of these built-in modules are written in C (as the reference implementation of Python is in C), and pre-compiled into the library. These modules pack useful functionality like system-specific OS management, disk IO, networking, etc.</p>
+      <p>Here is a select list of built-in modules:</p>
+      <ul>
+        <li><strong>os</strong> — Interface to operating system functions.</li>
+        <li><strong>string</strong> — String processing functions.</li>
+        <li><strong>re</strong> — Regular expression support.</li>
+        <li><strong>math</strong> — Mathematical operations for floating point numbers.</li>
+        <li><strong>cmath</strong> — Mathematical operations for complex numbers.</li>
+        <li><strong>datetime</strong> — Work with dates and times.</li>
+        <li><strong>gc</strong> — Interface to garbage collector.</li>
+        <li><strong>asyncio</strong> — Asynchronous processing.</li>
+        <li><strong>collections</strong> — Advanced container datatypes.</li>
+        <li><strong>functools</strong> — Higher-order functions and functional programming support.</li>
+        <li><strong>operator</strong> — Functions corresponding to operators.</li>
+        <li><strong>pickle</strong> — Object serialization.</li>
+        <li><strong>socket</strong> — Networking interface.</li>
+        <li><strong>sqlite3</strong> — SQLite database support.</li>
+        <li><strong>statistics</strong> — Statistical functions.</li>
+        <li><strong>typing</strong> — Type hints support.</li>
+        <li><strong>venv</strong> — Virtual environments.</li>
+        <li><strong>json</strong> — JSON encoding and decoding.</li>
+        <li><strong>wsgiref</strong> — WSGI utilities.</li>
+        <li><strong>unittest</strong> — Unit testing framework.</li>
+        <li><strong>random</strong> — Random number generation.</li>
+        <li><strong>sys</strong> — Interpreter-related functions.</li>
+        <li><strong>requests</strong> — HTTP requests.</li>
+        <li><strong>itertools</strong> — Tools for iterators.</li>
+        <li><strong>locale</strong> — Localization and cultural conventions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Python User-defined Modules</h2>
+    <div class="content">
+      <p>Any text file with <code>.py</code> extension and containing Python code is basically a module. It can contain definitions of one or more functions, variables, constants as well as classes.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+# mymodule.py
+def SayHello(name):
+    print("Hi {}! How are you?".format(name))
+      </pre>
+      <p>Now you can import and use it:</p>
+      <pre>
+>>> import mymodule
+>>> mymodule.SayHello("Harish")
+Hi Harish! How are you?
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The import Statement</h2>
+    <div class="content">
+      <p>The <code>import</code> keyword loads all the functions, variables, or classes defined in a module. For example:</p>
+      <pre>
+# mymodule.py
+def sum(x, y):
+    return x + y
+
+def average(x, y):
+    return (x + y) / 2
+
+def power(x, y):
+    return x ** y
+      </pre>
+      <pre>
+import mymodule
+print("sum:", mymodule.sum(10, 20))
+print("average:", mymodule.average(10, 20))
+print("power:", mymodule.power(10, 2))
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+sum: 30
+average: 15.0
+power: 100
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The from ... import Statement</h2>
+    <div class="content">
+      <p>We can import specific objects from a module:</p>
+      <pre>
+from mymodule import sum, average
+print("sum:", sum(10, 20))
+print("average:", average(10, 20))
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+sum: 30
+average: 15.0
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The import ... as Statement</h2>
+    <div class="content">
+      <p>We can assign an alias name to a module:</p>
+      <pre>
+import mymodule as x
+print("sum:", x.sum(10, 20))
+print("average:", x.average(10, 20))
+print("power:", x.power(10, 2))
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Namespaces and Scoping</h2>
+    <div class="content">
+      <p>A namespace is a mapping of variable names to objects. Functions have local namespaces, and variables defined inside them may shadow global variables.</p>
+      <pre>
+Money = 2000
+def AddMoney():
+    # global Money
+    Money = Money + 1
+print(Money)
+AddMoney()
+print(Money)
+      </pre>
+      <p>This will cause an error unless the <code>global</code> keyword is used.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Module Attributes</h2>
+    <div class="content">
+      <ul>
+        <li><code>__file__</code> — physical name of the module.</li>
+        <li><code>__package__</code> — package to which the module belongs.</li>
+        <li><code>__doc__</code> — docstring of the module.</li>
+        <li><code>__dict__</code> — namespace dictionary of the module.</li>
+        <li><code>__name__</code> — name of the module.</li>
+      </ul>
+      <pre>
+import mymodule
+
+print("__file__:", mymodule.__file__)
+print("__doc__:", mymodule.__doc__)
+print("__name__:", mymodule.__name__)
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The __name__ Attribute</h2>
+    <div class="content">
+      <p>The <code>__name__</code> attribute determines if a script is being run directly or imported as a module.</p>
+      <pre>
+# mymodule.py
+def sum(x, y):
+    return x + y
+
+if __name__ == "__main__":
+    print("sum:", sum(10, 20))
+      </pre>
+      <p>This prevents functions from running when imported.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The dir() Function</h2>
+    <div class="content">
+      <p>The <code>dir()</code> function returns a list of names defined in a module.</p>
+      <pre>
+import math
+print(dir(math))
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The reload() Function</h2>
+    <div class="content">
+      <p>If a module is modified, we may need to reload it:</p>
+      <pre>
+import imp
+import test
+imp.reload(test)
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Packages in Python</h2>
+    <div class="content">
+      <p>A package is a hierarchical directory structure that groups modules together.</p>
+      <pre>
+Phone/
+   __init__.py
+   Pots.py
+   Isdn.py
+   G3.py
+      </pre>
+      <p><strong>Example:</strong></p>
+      <pre>
+# Phone/__init__.py
+from Pots import Pots
+from Isdn import Isdn
+from G3 import G3
+
+import Phone
+Phone.Pots()
+Phone.Isdn()
+Phone.G3()
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+I'm Pots Phone
+I'm 3G Phone
+I'm ISDN Phone
+      </pre>
+    </div>
+  </div>
+</div>

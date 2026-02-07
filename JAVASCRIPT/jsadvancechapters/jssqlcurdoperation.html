@@ -1,0 +1,205 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - SQL CRUD Operations</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>
+        CRUD stands for <strong>Create, Read, Update, and Delete</strong>. These are the four fundamental
+        operations in permanent storage systems such as relational databases, but they can also be
+        demonstrated in JavaScript objects. A JavaScript object is a collection of keys and values
+        (properties), and each CRUD operation can be performed on it.
+      </p>
+      <p>
+        In SQL:
+      </p>
+      <ul>
+        <li><strong>CREATE</strong> → <code>INSERT</code> statement</li>
+        <li><strong>READ</strong> → <code>SELECT</code> statement</li>
+        <li><strong>UPDATE</strong> → <code>UPDATE</code> statement</li>
+        <li><strong>DELETE</strong> → <code>DELETE</code> statement</li>
+      </ul>
+
+      <h2>CRUD Syntax in JavaScript</h2>
+      <pre><code>
+// Creating an Object
+const circle = {
+   radius: 10,
+   area: function() {
+       return Math.PI * this.radius * this.radius;
+   }
+};
+      </code></pre>
+
+      <h2>Create Operation</h2>
+      <p>
+        The create operation initializes new objects or adds properties to existing objects. 
+        It can be done using <strong>object literals</strong> or the <strong>Object constructor</strong>.
+      </p>
+      <pre><code>
+// Using Object Constructor
+const obj = new Object();
+
+// Using Object Literals
+const obj = {
+   key1 : value1
+}
+      </code></pre>
+
+      <h3>Example: Create Operation</h3>
+      <pre><code>
+const box = { 
+   height: 25, 
+   breadth: 20, 
+   volume: function () { 
+       return this.height * this.breadth;
+   } 
+}; 
+
+const cube = new Object(); 
+cube.edge = 10; 
+cube.volume = function () { 
+   return this.edge * this.edge;
+}; 
+
+cube.edge = 15; 
+console.log(box, "Volume of the box: " + box.volume()); 
+console.log(cube, "Volume of the cube: " + cube.volume());
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+{ height: 25, breadth: 20, volume: [Function: volume] } Volume of the box: 500
+{ edge: 15, volume: [Function (anonymous)] } Volume of the cube: 225
+      </code></pre>
+
+      <h2>Read Operation</h2>
+      <p>
+        The read operation is used to access object properties. 
+        It can be done with <strong>dot notation</strong>, <strong>bracket notation</strong>, 
+        or <strong>object destructuring</strong>.
+      </p>
+      <pre><code>
+// Dot notation
+console.log(obj.prop1);
+
+// Nested object
+console.log(obj.prop1.subProperty);
+
+// Bracket notation
+console.log(obj['prop2']);
+
+// Object destructuring
+const { key1 } = obj1;
+console.log(key1);
+      </code></pre>
+
+      <h3>Example: Read Operation</h3>
+      <pre><code>
+const box = { 
+   height: 25, 
+   width: 20, 
+   volume: function () { 
+      return this.height * this.width;
+   } 
+}; 
+
+const { height } = box; 
+console.log("Box height: " + height); 
+console.log("Box width: " + box['width']); 
+console.log("Box volume: " + box.volume());
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Box height: 25
+Box width: 20
+Box volume: 500
+      </code></pre>
+
+      <h2>Update Operation</h2>
+      <p>
+        Update modifies existing object properties. This can be done with 
+        <strong>dot notation</strong> or <strong>bracket notation</strong>.
+      </p>
+      <pre><code>
+// Dot notation
+obj.prop1 = "newValue";
+
+// Bracket notation
+obj['prop2'] = "value2";
+      </code></pre>
+
+      <h3>Example: Update Operation</h3>
+      <pre><code>
+const box = { 
+   height: 25, 
+   depth: 20, 
+   volume: function () { 
+      return this.height * this.depth; 
+   } 
+}; 
+
+console.log("Initial Volume: " + box.volume()); 
+
+// Update using dot notation
+box.height = 50;              
+
+// Update using brackets
+box['depth'] = 40;             
+
+console.log("Updated Volume: " + box.volume());
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Initial Volume: 500
+Updated Volume: 2000
+      </code></pre>
+
+      <h2>Delete Operation</h2>
+      <p>
+        Delete removes properties from objects. This can be done with the 
+        <strong>delete operator</strong> or via <strong>object destructuring</strong>.
+      </p>
+      <pre><code>
+// Using delete operator
+delete obj.property;
+
+// Using destructuring
+const { prop1, ...newObj } = oldObj;
+      </code></pre>
+
+      <h3>Example: Delete Operation</h3>
+      <pre><code>
+const person = { 
+   firstName: 'Amit', 
+   yearsOld: 52, 
+   location: 'mumbai'
+}; 
+
+console.log("Initial person object: ", person); 
+
+// Using destructuring
+const { yearsOld, ...updatedPerson } = person; 
+console.log("New person object without yearsOld attribute: ", updatedPerson); 
+
+// Using delete operator
+delete person.location; 
+console.log("Person object after removing location: ", person);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Initial person object:  { firstName: 'Amit', yearsOld: 52, location: 'mumbai' }
+New person object without yearsOld attribute:  { firstName: 'Amit', location: 'mumbai' }
+Person object after removing location:  { firstName: 'Amit', yearsOld: 52 }
+      </code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li><strong>Create</strong> → Add new object or property.</li>
+        <li><strong>Read</strong> → Access properties using dot, bracket, or destructuring.</li>
+        <li><strong>Update</strong> → Modify existing properties with dot or bracket notation.</li>
+        <li><strong>Delete</strong> → Remove object properties using <code>delete</code> or destructuring.</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

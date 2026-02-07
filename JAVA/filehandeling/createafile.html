@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java File Creation Methods Analysis</h1>
+        <div class="content">
+            <p>Based on the provided documentation for creating files in Java, answer the following questions by comparing and contrasting the three methods.</p>
+
+            <h2 class="title">Question 1: Atomic Creation Check</h2>
+            <p>Which of the three file creation methods is the *only* one that explicitly returns a boolean value to indicate whether a new file was successfully created or if it already existed?</p>
+
+            <h2 class="title">Answer 1</h2>
+            <div class="example">
+                <p>The method is **<code>File.createNewFile()</code>**.</p>
+                <p>Its description states: "Returns <code>true</code> if the named file does not exist and was successfully created; <code>false</code> if the named file already exists." This behavior is described as **atomic**, meaning the check for existence and creation happen as a single, uninterrupted operation.</p>
+            </div>
+
+            <hr>
+
+            <h2 class="title">Question 2: Old I/O vs. New I/O (NIO.2)</h2>
+            <p>Identify the file creation method that belongs to the **NIO.2** package (introduced in Java 7) and explain one key advantage it has over the other two methods which belong to the older <code>java.io</code> package.</p>
+
+            <h2 class="title">Answer 2</h2>
+            <div class="example">
+                <p>The method belonging to NIO.2 is **<code>Files.write()</code>** (using classes from <code>java.nio.file</code>).</p>
+                <p>A key advantage it has over the older <code>java.io</code> methods (<code>FileOutputStream</code> and <code>File.createNewFile()</code>) is **simplicity and efficiency for common tasks**. It allows you to **create a file and write content to it in a single command**, without needing separate stream or writer objects, and natively handles options like character encoding (<code>StandardCharsets.UTF_8</code>) and write behavior (<code>StandardOpenOption.APPEND</code>) in a clean, high-level way.</p>
+            </div>
+
+            <hr>
+
+            <h2 class="title">Question 3: Byte-Level vs. Text Writing</h2>
+            <p>In the examples provided, the <code>FileOutputStream</code> method writes data using bytes (<code>byte bWrite [] = {65, 66, 67, 68, 69}</code>), while the <code>File.createNewFile()</code> example uses <code>FileWriter</code> to write the string <code>"Test data"</code>. If you wanted to use <code>FileOutputStream</code> to write the string "Hello" instead of the byte array, what preliminary step would be necessary to convert the string data into a format that the <code>os.write()</code> method can accept?</p>
+
+            <h2 class="title">Answer 3</h2>
+            <div class="example">
+                <p>To use <code>FileOutputStream</code> to write the string "Hello", you would first need to convert the string into a byte array.</p>
+                <p>The necessary step is calling the **<code>getBytes()</code>** method on the string object:</p>
+                <p><code>String data = "Hello";</code></p>
+                <p><code>byte[] bWrite = data.getBytes(); // Converts the string to a byte array using the platform's default charset</code></p>
+                <p>You could then iterate over or write this byte array to the <code>OutputStream</code>.</p>
+            </div>
+        </div>
+    </div>
+</div>

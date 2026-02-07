@@ -1,0 +1,183 @@
+ <div class="container">
+  <div class="session">
+    <h1 class="title">Command Execution in C</h1>
+
+    <div class="content">
+      <p>C provides ways to execute system commands from within a program.</p>
+
+      <h2 class="title">Using system() Function</h2>
+      <p>The <code>system()</code> function executes a command on the host OS shell.</p>
+      <p><strong>Syntax:</strong></p>
+      <p><code>int system(const char *command);</code></p>
+
+      <h2 class="example-title">Example of system() Function</h2>
+      <pre class="content">
+<code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char cmd[50];
+    strcpy(cmd, "dir C:\\users\\user\\*.c");
+    system(cmd);
+    return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre class="content">
+C:\Users\user&gt;dir *.c
+ Volume in drive C has no label.
+ Volume Serial Number is 7EE4-E492
+
+ Directory of C:\Users\user
+
+04/01/2024  01:30 PM               104 add.c
+04/02/2024  01:37 PM               159 add1.c
+... (rest of output)
+      </pre>
+
+      <h2 class="title">The exec Family of Functions</h2>
+      <p>These functions replace the current process image with a new process image, effectively running a new program.</p>
+      <p>They are declared in <code>&lt;unistd.h&gt;</code>.</p>
+
+      <ul>
+        <li><code>execl()</code> - Execute a file with a list of arguments (null-terminated).</li>
+        <li><code>execlp()</code> - Like <code>execl</code>, but searches for the executable in <code>PATH</code>.</li>
+        <li><code>execle()</code> - Like <code>execl</code>, but allows passing environment variables.</li>
+        <li><code>execv()</code> - Execute a file with an argument vector (array).</li>
+        <li><code>execvp()</code> - Like <code>execv</code>, but searches in <code>PATH</code>.</li>
+        <li><code>execve()</code> - Execute a file with arguments and environment variables.</li>
+      </ul>
+
+      <h2 class="title">1. execl()</h2>
+      <p>Execute a file with a list of arguments (last argument must be <code>NULL</code>).</p>
+
+      <h2 class="example-title">Example of execl()</h2>
+      <pre class="content">
+<code>#include &lt;unistd.h&gt;
+
+int main(void) {
+    char *file = "/usr/bin/echo";
+    char *arg1 = "Hello world!";
+
+    execl(file, file, arg1, NULL);
+    return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre class="content">
+Hello world!
+      </pre>
+
+      <h2 class="title">2. execlp()</h2>
+      <p>Searches for executable in <code>PATH</code>.</p>
+
+      <h2 class="example-title">Example of execlp()</h2>
+      <pre class="content">
+<code>#include &lt;unistd.h&gt;
+
+int main(void) {
+    char *file = "echo";
+    char *arg1 = "Hello world!";
+
+    execlp(file, file, arg1, NULL);
+    return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre class="content">
+Hello world!
+      </pre>
+
+      <h2 class="title">3. execle()</h2>
+      <p>Allows passing environment variables.</p>
+
+      <h2 class="example-title">Example of execle()</h2>
+      <pre class="content">
+<code>#include &lt;unistd.h&gt;
+
+int main(void) {
+    char *file = "/usr/bin/bash";
+    char *arg1 = "-c";
+    char *arg2 = "echo $ENV1 $ENV2!";
+    char *const env[] = {"ENV1=Hello", "ENV2=World", NULL};
+
+    execle(file, file, arg1, arg2, NULL, env);
+    return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre class="content">
+Hello World!
+      </pre>
+
+      <h2 class="title">4. execv()</h2>
+      <p>Executes with argument vector.</p>
+
+      <h2 class="example-title">Example of execv()</h2>
+      <pre class="content">
+<code>#include &lt;unistd.h&gt;
+
+int main(void) {
+    char *file = "/usr/bin/echo";
+    char *const args[] = {"/usr/bin/echo", "Hello world!", NULL};
+
+    execv(file, args);
+    return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre class="content">
+Hello world!
+      </pre>
+
+      <h2 class="title">5. execvp()</h2>
+      <p>Like <code>execv</code>, but searches executable in <code>PATH</code>.</p>
+
+      <h2 class="example-title">Example of execvp()</h2>
+      <pre class="content">
+<code>#include &lt;unistd.h&gt;
+
+int main(void) {
+    char *file = "echo";
+    char *const args[] = {"/usr/bin/echo", "Hello world!", NULL};
+
+    execvp(file, args);
+    return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre class="content">
+Hello world!
+      </pre>
+
+      <h2 class="title">6. execve()</h2>
+      <p>Executes with arguments and environment variables.</p>
+
+      <h2 class="example-title">Example of execve()</h2>
+      <pre class="content">
+<code>#include &lt;unistd.h&gt;
+
+int main(void) {
+    char *file = "/usr/bin/bash";
+    char *const args[] = {"/usr/bin/bash", "-c", "echo Hello $ENV!", NULL};
+    char *const env[] = {"ENV=World", NULL};
+
+    execve(file, args, env);
+    return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre class="content">
+Hello World!
+      </pre>
+    </div>
+  </div>
+</div>

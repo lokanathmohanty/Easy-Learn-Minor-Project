@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Static Methods</h1>
+        <div class="content">
+            <p>The **<code>static</code>** keyword is used to define methods and properties that belong to the **class itself**, rather than to any specific object instance of that class.</p>
+            
+            <h2 class="title">Creating and Calling Static Methods</h2>
+            <ul>
+                <li>A method is declared static using the <code>static</code> keyword: <code>public static function myStaticMethod() {...}</code>.</li>
+                <li>Static methods are called directly on the class using the **Scope Resolution Operator** (<code>::</code>): <code>MyClass::myStaticMethod();</code></li>
+                <li>You **do not need** to create an instance of the class to call a static method.</li>
+                <li>Because static methods are not tied to an object, the pseudo-variable **<code>$this</code> is not available** inside them. They can only access static properties (e.g., <code>self::$var1</code>).</li>
+            </ul>
+
+            <h2 class="title">Accessing Static Methods</h2>
+            <p>Static methods can be called from various contexts using special keywords:</p>
+            
+            <h3 class="title">Within the Same Class</h3>
+            <p>To call a static method from another method (either static or instance) within the same class, use the **<code>self</code>** keyword:</p>
+            <pre><code>self::myStaticMethod();</code></pre>
+            
+            <h3 class="title">In Inheritance (Derived Class)</h3>
+            <p>To call a static method defined in a parent class from within a derived class, use the **<code>parent</code>** keyword:</p>
+            <pre><code>parent::myStaticMethod();</code></pre>
+            
+            <h3 class="title">From an Unrelated Class</h3>
+            <p>A static method can be called from any other class by simply prefixing the method name with its class name and the scope resolution operator:</p>
+            <pre><code>OtherClass::otherStaticMethod();</code></pre>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Tracking Object Count with a Static Method</h3>
+            <p>A common use for static members is to track class-level information, such as the number of objects created from that class. A static method can access a static property to report this count.</p>
+            
+            <pre><code>
+class myclass {
+   // Static property to track the count, shared by all objects
+   static int $objectCount = 0; 
+
+   function __construct() {
+      // Increment the static property upon object creation
+      self::$objectCount++; 
+   }
+
+   // Static method to report the shared count
+   public static function getCount() { 
+      echo "Number of objects created: " . self::$objectCount . PHP_EOL;
+   }
+}
+
+$obj1 = new myclass;
+$obj2 = new myclass;
+myclass::getCount(); // Calls the static method without an object
+// Output: Number of objects created: 2
+            </code></pre>
+        </div>
+    </div>
+</div>

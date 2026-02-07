@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Integers (`int`) Data Type</h1>
+
+    <div class="content">
+      <p>
+        The **Integer (`int`)** data type is a basic scalar type in PHP used to represent **whole numbers** (positive, negative, or zero) without a decimal point. Integers are a fundamental data type for arithmetic operations and counting.
+      </p>
+
+      <h2>Representation and Syntax</h2>
+      <p>
+        Integers can be declared in several bases (notations):
+      </p>
+      <ul>
+        <li>
+          **Decimal (Base 10):** Standard numbers (e.g., `1234`, `-5`).
+        </li>
+        <li>
+          **Hexadecimal (Base 16):** Prefixed with **`0x`** (e.g., `0x1A`).
+        </li>
+        <li>
+          **Octal (Base 8):** Prefixed with **`0`** (pre-PHP 8.1) or **`0o`** / **`0O`** (e.g., `0123`, `0o123`).
+        </li>
+        <li>
+          **Binary (Base 2):** Prefixed with **`0b`** (e.g., `0b1111`).
+        </li>
+      </ul>
+
+      <h3>Readability Enhancements (PHP 7.4.0+):</h3>
+      <p>
+        Underscores (`_`) can be used as separators between digits for better readability; they are ignored by the PHP parser.
+      </p>
+      <div class="example">
+        <code>$large_num = 1_234_567; // Interpreted as 1234567</code>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Integer Range and Overflow</h2>
+      <p>
+        The size and range of an integer are **platform-dependent**.
+      </p>
+      <ul>
+        <li>
+          **32-bit Systems:** Max value is approximately 2 billion.
+        </li>
+        <li>
+          **64-bit Systems:** Max value is approximately $9 \times 10^{18}$.
+        </li>
+      </ul>
+      <p>
+        You can check the system's limits using the predefined constants:
+      </p>
+      <ul>
+        <li>**`PHP_INT_MAX`**: Maximum integer value.</li>
+        <li>**`PHP_INT_MIN`**: Minimum integer value.</li>
+        <li>**`PHP_INT_SIZE`**: Size of an integer in bytes.</li>
+      </ul>
+
+      <h3>Overflow:</h3>
+      <p>
+        If an integer operation results in a value that is **beyond the bounds** of the `int` type (i.e., greater than `PHP_INT_MAX` or less than `PHP_INT_MIN`), it is automatically interpreted as a **float** (floating-point number).
+      </p>
+      <div class="example">
+        <code>$y = 50000000000000 * 1000000;</code> $\rightarrow$ `var_dump($y)` outputs `float(5.0E+19)`
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Integer Arithmetic and Division</h2>
+      <p>
+        Standard arithmetic operations are supported. However, PHP's division operator (`/`) always returns a **float** when dividing an integer by a float, or if the result is not a whole number.
+      </p>
+
+      <h3>Integer Division</h3>
+      <p>
+        To obtain the integral part of a division result, you can use the **`intdiv()`** function.
+      </p>
+      <div class="example">
+        <code>$x = 10; $y = 3.5;</code><br>
+        <code>$z = $x / $y;</code> $\rightarrow$ `float(2.857...)` (Standard division)<br>
+        <code>$z = intdiv($x, $y);</code> $\rightarrow$ `int(3)` (Integer division, truncates the result)
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Checking for Integers</h2>
+      <p>
+        PHP provides built-in functions to verify if a variable is of the integer type:
+      </p>
+      <ul>
+        <li>**`is_int($variable)`**</li>
+        <li>**`is_integer($variable)`** (Alias of `is_int()`)</li>
+        <li>**`is_long($variable)`** (Alias of `is_int()`, rarely used)</li>
+      </ul>
+    </div>
+  </div>
+</div>

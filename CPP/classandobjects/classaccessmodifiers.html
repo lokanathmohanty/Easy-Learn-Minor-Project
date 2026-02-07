@@ -1,0 +1,63 @@
+s<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Class Access Modifiers 🔑</h1>
+
+        <div class="content">
+            <p>C++ **access modifiers** (or **access specifiers**) control the visibility and accessibility of a class's members (data and functions). They are fundamental to implementing **data hiding** and **encapsulation**—core principles of Object-Oriented Programming.</p>
+            <p>A class can have multiple `public`, `private`, or `protected` sections. The default access level for members in a C++ `class` is **private**.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">The Three Access Specifiers</h2>
+
+            <h3>1. <code>public</code> (Accessible Everywhere) 🌐</h3>
+            <p>Public members are accessible from **anywhere** outside the class, within the program's scope.</p>
+            <ul>
+                <li><strong>Usage:</strong> Typically used for member functions (methods) that form the public interface of the class, and occasionally for data members when direct external access is intended.</li>
+            </ul>
+            <pre class="example">
+class Line {
+   public:
+      double length; // Accessible directly via line.length
+      void setLength(double len);
+};
+</pre>
+
+            <h3>2. <code>private</code> (Internal Use Only) 🔒</h3>
+            <p>Private members **cannot be accessed or viewed** from outside the class. Only the **member functions** of that same class (and any declared `friend` functions) can access them.</p>
+            <ul>
+                <li><strong>Usage:</strong> Standard practice is to define **data members** (attributes) as private to enforce encapsulation. External access to this data is then restricted and must be mediated through public member functions (like getters and setters).</li>
+            </ul>
+            <pre class="example">
+class Box {
+   public:
+      void setWidth(double wid);
+   private:
+      double width; // Cannot be accessed as box.width from main()
+};
+</pre>
+
+            <h3>3. <code>protected</code> (Inheritance Access) 🛡️</h3>
+            <p>Protected members are similar to private members in that they are inaccessible from outside the class, **but** they provide one crucial exception: they **can be accessed** by member functions of **derived classes** (child classes) during inheritance.</p>
+            <ul>
+                <li><strong>Usage:</strong> Used for members that should be hidden from the general public but still accessible to subsequent generations of classes in an inheritance hierarchy.</li>
+            </ul>
+            <pre class="example">
+class Box {
+   protected:
+      double width; // Accessible by SmallBox's methods
+};
+
+class SmallBox : public Box {
+   public:
+      // Can access 'width' inherited from Box
+      void setSmallWidth(double wid) {
+         width = wid; 
+      }
+};
+</pre>
+        </div>
+    </div>
+</div>

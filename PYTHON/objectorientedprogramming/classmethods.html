@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Class Methods</h1>
+    <div class="content">
+      <p>Methods belong to objects of a class and perform specific operations. Python methods fall into three categories: <strong>class methods</strong>, <strong>instance methods</strong>, and <strong>static methods</strong>.</p>
+      
+      <p>A <strong>class method</strong> is bound to the class itself rather than an instance, and it can be called on the class directly. Class methods receive the class as the first parameter, conventionally named <code>cls</code>. This is different from instance methods which receive the instance (<code>self</code>) as the first parameter.</p>
+      
+      <h2 class="title">Creating Class Methods in Python</h2>
+      <p>There are two main ways to create class methods:</p>
+      <ul>
+        <li>Using the built-in <code>classmethod()</code> function</li>
+        <li>Using the <code>@classmethod</code> decorator</li>
+      </ul>
+
+      <h3 class="title">Using classmethod() Function</h3>
+      <p>The <code>classmethod()</code> function transforms an instance method into a class method that can only be called on the class.</p>
+      <pre><code>class Employee:
+    empCount = 0
+
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+        Employee.empCount += 1
+
+    def showcount(self):
+        print(self.empCount)
+
+    counter = classmethod(showcount)
+
+e1 = Employee("Bhavana", 24)
+e2 = Employee("Rajesh", 26)
+e3 = Employee("John", 27)
+
+e1.showcount()
+Employee.counter()
+</code></pre>
+      <p>Output:<br>3<br>3</p>
+
+      <h3 class="title">Using @classmethod Decorator</h3>
+      <p>The <code>@classmethod</code> decorator is the preferred and more readable way to define class methods.</p>
+      <pre><code>class Employee:
+    empCount = 0
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        Employee.empCount += 1
+
+    @classmethod
+    def showcount(cls):
+        print(cls.empCount)
+
+    @classmethod
+    def newemployee(cls, name, age):
+        return cls(name, age)
+
+e1 = Employee("Bhavana", 24)
+e2 = Employee("Rajesh", 26)
+e3 = Employee("John", 27)
+e4 = Employee.newemployee("Anil", 21)
+
+Employee.showcount()
+</code></pre>
+      <p>Output:<br>4</p>
+
+      <h2 class="title">Accessing Class Attributes in Class Methods</h2>
+      <p>Class methods can access class attributes using the <code>cls</code> parameter and dot notation.</p>
+      <pre><code>class Cloth:
+    price = 4000  # Class attribute
+
+    @classmethod
+    def showPrice(cls):
+        return cls.price
+
+print(Cloth.showPrice())
+</code></pre>
+      <p>Output:<br>4000</p>
+
+      <h2 class="title">Dynamically Adding and Deleting Class Methods</h2>
+      <p>You can dynamically add a class method to a class using <code>setattr()</code>:</p>
+      <pre><code>class Cloth:
+    pass
+
+@classmethod
+def brandName(cls):
+    print("Name of the brand is Raymond")
+
+setattr(Cloth, "brand_name", brandName)
+newObj = Cloth()
+newObj.brand_name()
+</code></pre>
+      <p>Output:<br>Name of the brand is Raymond</p>
+
+      <p>To delete a dynamically added class method, use the <code>del</code> operator:</p>
+      <pre><code>class Cloth:
+    @classmethod
+    def brandName(cls):
+        print("Name of the brand is Raymond")
+
+del Cloth.brandName
+print("Method deleted")
+</code></pre>
+      <p>Output:<br>Method deleted</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Polymorphism</h1>
+        
+        <h2 class="title">Concept of Polymorphism</h2>
+        <div class="content">
+            <p>The term **Polymorphism** means "having many forms." In C#, it allows you to define one interface (or member name) that can have **multiple functions** or implementations. This concept is crucial for achieving flexible and extensible code.</p>
+            <p>Polymorphism is divided into two types based on when the function call is resolved:</p>
+            <ol>
+                <li>**Static Polymorphism** (Compile-Time)</li>
+                <li>**Dynamic Polymorphism** (Run-Time)</li>
+            </ol>
+        </div>
+        
+        <h2 class="title">1. Static Polymorphism (Compile-Time)</h2>
+        <div class="content">
+            <p>**Static Polymorphism** uses **early binding**, where the specific method to be executed is determined by the C# compiler at compile time. It is achieved through **Overloading**.</p>
+            
+            <h3>Function Overloading (Method Overloading)</h3>
+            <p>This allows multiple methods within the same class to share the same name, provided they have different **signatures** (different number or types of parameters).</p>
+            <pre>
+class Printdata {
+    void print(int i) { /* ... */ }      // Signature 1: takes int
+    void print(double f) { /* ... */ }   // Signature 2: takes double
+    void print(string s) { /* ... */ }   // Signature 3: takes string
+}
+            </pre>
+            
+            <h3>Operator Overloading</h3>
+            <p>This allows standard C# operators (like `+`, `-`, `*`) to be redefined or customized to work with user-defined classes or structs.</p>
+            <pre>
+public static Box operator +(Box b1, Box b2) {
+    // Defines how the '+' operator works when adding two 'Box' objects
+    return new Box(b1.length + b2.length, ...); 
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">2. Dynamic Polymorphism (Run-Time)</h2>
+        <div class="content">
+            <p>**Dynamic Polymorphism** uses **late binding**, where the specific method implementation to be executed is determined during program execution (run time). This is primarily achieved through **Method Overriding** and **Abstract Classes**.</p>
+            
+            <h3>Method Overriding (Virtual Functions)</h3>
+            <p>Method overriding allows a derived class to provide a specific implementation for a method that is already defined in its base class.</p>
+            <ul>
+                <li>The base class method must be declared with the **`virtual`** keyword.</li>
+                <li>The derived class method must be declared with the **`override`** keyword.</li>
+            </ul>
+            <p>This allows a single base class reference variable to call the correct implementation in the derived class at runtime.</p>
+            <pre>
+class Shape {
+    public virtual int area() { /* Base implementation */ return 0; }
+}
+class Rectangle : Shape {
+    public override int area() { /* Rectangle specific implementation */ return (width * height); }
+}
+            </pre>
+            
+            <h3>Abstract Classes and Methods</h3>
+            <p>An **abstract class** cannot be instantiated directly and must contain one or more **abstract methods** (methods declared without implementation). These methods must be defined (overridden) in the first non-abstract derived class.</p>
+            <ul>
+                <li>Abstract methods enforce a contract for derived classes.</li>
+                <li>Abstract classes cannot be declared `sealed`.</li>
+            </ul>
+            <pre>
+abstract class Shape {
+    public abstract int area(); // No body; must be implemented by derived classes
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Polymorphism with Interfaces</h2>
+        <div class="content">
+            <p>Interfaces are a powerful tool for achieving dynamic polymorphism. An interface defines a contract (method signatures) that multiple, unrelated classes can implement. This allows diverse objects to be treated uniformly through the common interface type.</p>
+            <pre>
+public interface IAnimal {
+    void MakeSound(); // Contract
+}
+
+public class Dog : IAnimal {
+    public void MakeSound() { Console.WriteLine("Woof!"); } // Dog implementation
+}
+public class Cat : IAnimal {
+    public void MakeSound() { Console.WriteLine("Meow!"); } // Cat implementation
+}
+            </pre>
+            <p>A variable of type `IAnimal` can hold a `Dog` or a `Cat` object, and the correct `MakeSound` method is determined at run-time.</p>
+            <pre>
+IAnimal animal = new Dog(); // 'animal' is treated as IAnimal, but the object is a Dog
+animal.MakeSound(); // Calls Dog's MakeSound()
+            </pre>
+        </div>
+    </div>
+</div>

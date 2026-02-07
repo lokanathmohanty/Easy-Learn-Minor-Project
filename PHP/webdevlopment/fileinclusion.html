@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: File Inclusion</h1>
+        <div class="content">
+            <p>**File Inclusion** is a PHP feature that allows developers to reuse blocks of code, such as headers, footers, navigation menus, or configuration files, across multiple pages. This promotes code organization, reduces redundancy, and simplifies site-wide maintenance.</p>
+            
+            <h2 class="title">File Inclusion Functions</h2>
+            <p>PHP offers four functions to include the content of one file into another before execution. They differ primarily in how they handle file loading errors:</p>
+            
+            <h3 class="title">1. <code>include()</code></h3>
+            <ul>
+                <li>**Behavior:** Copies the content of the specified file into the current script.</li>
+                <li>**Error Handling:** If the file is not found, it generates a **Warning (E_WARNING)**, and the **script execution continues**.</li>
+                <li>**Use Case:** Recommended for non-critical files like headers, footers, or optional sidebars.</li>
+            </ul>
+            
+            <h3 class="title">2. <code>require()</code></h3>
+            <ul>
+                <li>**Behavior:** Copies the content of the specified file into the current script.</li>
+                <li>**Error Handling:** If the file is not found, it generates a **Fatal Error (E_COMPILE_ERROR)**, and the **script execution halts immediately**.</li>
+                <li>**Use Case:** Recommended for critical files like database connection settings or core configuration files.</li>
+            </ul>
+            
+            <h3 class="title">3. <code>include_once()</code> and <code>require_once()</code></h3>
+            <p>These variants ensure that the specified file is included **only once**, even if the function is called multiple times. This prevents issues like function re-declarations or re-initialization of variables, commonly used for classes or configuration files.</p>
+        </div>
+        
+        <h2 class="title">Security Risk: Local File Inclusion (LFI)</h2>
+        <div class="content example">
+            <p>File inclusion is susceptible to a vulnerability known as **Local File Inclusion (LFI)** if the included file path is determined by unsanitized user input (e.g., a GET parameter).</p>
+            
+            <h3 class="title">Vulnerable Code Example</h3>
+            <pre><code>
+// WARNING: Do not use this code in production
+$page = $_GET['page']; 
+include($page); 
+            </code></pre>
+            <p>An attacker could set the URL parameter to <code>?page=../../../../etc/passwd</code>, causing the PHP script to display sensitive server files instead of the intended page.</p>
+
+            <h3 class="title">Preventing LFI</h3>
+            <p>Always sanitize user input or use a whitelist approach to restrict file inclusion to known, safe files:</p>
+            <pre><code>
+$allowed_pages = ['home.php', 'about.php', 'contact.php'];
+$page = basename($_GET['page']); // Sanitize input
+if (in_array($page, $allowed_pages)) {
+   include($page); 
+} else {
+   echo "Page not found.";
+}
+            </code></pre>
+        </div>
+    </div>
+</div>

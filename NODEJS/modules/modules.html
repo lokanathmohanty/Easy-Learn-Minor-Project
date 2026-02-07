@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Modules</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        A module in Node.js is a collection of independent and reusable code grouped logically, allowing modular and structured application development. Modules help organize functions, classes, and methods in separate files for easier maintenance and troubleshooting.
+      </p>
+      <p>
+        Node.js runs on the V8 JavaScript engine, executing JavaScript on the server. Server-side processes are managed by importing required Node.js modules using the <code>require()</code> function. Each module encapsulates specific functionality.
+      </p>
+
+      <h2>Example: Importing a Module</h2>
+      <pre><code>const http = require('node:http');
+
+const listener = function (request, response) {
+  // handle request and response
+};
+
+const server = http.createServer(listener);
+server.listen(3000);
+</code></pre>
+
+      <h2>Types of Node.js Modules</h2>
+      <ul>
+        <li><strong>Third-party modules:</strong> Developed externally and available via NPM. Installed globally or locally. Example: Express module (<code>npm install express</code>).</li>
+        <li><strong>Built-in modules:</strong> Core Node.js modules pre-installed for tasks like file I/O, networking, etc. Imported via <code>require()</code>. Examples: <code>http</code>, <code>fs</code>, <code>console</code>.</li>
+        <li><strong>Local modules:</strong> User-created JavaScript files in the project. Export functions or objects via <code>exports</code> and import them using <code>require()</code>.</li>
+      </ul>
+
+      <h2>Example: Exporting Functions in a Local Module (functions.js)</h2>
+      <pre><code>exports.power = function powerval(x, y) {
+  return Math.pow(x, y);
+};
+
+exports.root = function rootval(x) {
+  return Math.sqrt(x);
+};
+
+exports.log = function logval(x) {
+  return Math.log10(x);
+};
+</code></pre>
+
+      <h2>Example: Importing and Using Local Module (main.js)</h2>
+      <pre><code>const mymodule = require('./functions');
+
+console.log("10 Raised to 3: " + mymodule.power(10, 3));
+console.log("Square root of 10: " + mymodule.root(10));
+console.log("Log of 1000: " + mymodule.log(1000));
+</code></pre>
+
+      <h2>Output</h2>
+      <pre><code>10 Raised to 3: 1000
+Square root of 10: 3.1622776601683795
+Log of 1000: 3
+</code></pre>
+    </div>
+  </div>
+</div>

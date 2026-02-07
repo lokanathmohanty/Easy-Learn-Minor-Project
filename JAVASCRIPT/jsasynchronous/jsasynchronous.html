@@ -1,0 +1,64 @@
+<div class="content">
+  <h2>Overview</h2>
+  <p>Asynchronous JavaScript is a programming technique that lets your program start long-running tasks and continue executing other work in the meantime. Although JavaScript runs on a single thread (one statement at a time), asynchronous patterns allow non-blocking behavior so applications remain responsive.</p>
+
+  <h2>Core Concepts</h2>
+  <ul>
+    <li><strong>Single thread:</strong> JavaScript executes top to bottom, one operation at a time.</li>
+    <li><strong>Non-blocking:</strong> Asynchronous code schedules work to complete later so the main flow can continue.</li>
+    <li><strong>Event loop:</strong> Coordinates the call stack and task queues to decide when scheduled callbacks, microtasks and macrotasks run.</li>
+  </ul>
+
+  <h2>Common Asynchronous Patterns</h2>
+  <ul>
+    <li><strong>Callbacks</strong> — functions passed as arguments and invoked when an async task finishes; simple but can lead to nested/callback hell.</li>
+    <li><strong>Promises</strong> — objects representing eventual success or failure; use <em>then</em>, <em>catch</em>, <em>finally</em> to chain and handle results.</li>
+    <li><strong>Async / await</strong> — syntax sugar over promises that lets you write asynchronous code that looks synchronous using <em>await</em> inside an <em>async</em> function.</li>
+  </ul>
+
+  <h2>Synchronous vs Asynchronous (conceptual)</h2>
+  <ul>
+    <li><strong>Synchronous example (flow):</strong> call function A → function B → return → continue. Each call must finish before the next starts.</li>
+    <li><strong>Asynchronous example (flow):</strong> start task (e.g., timer or network request) → continue executing subsequent statements → later, scheduled callback runs when the task completes.</li>
+  </ul>
+
+  <h2>Why Use Asynchronous JavaScript?</h2>
+  <p>Use asynchronous code wherever tasks may take noticeable time and would otherwise block the UI or other logic. Typical scenarios include:</p>
+  <ul>
+    <li>Fetching data from remote APIs</li>
+    <li>Loading external scripts, images, or modules</li>
+    <li>Scheduling deferred or repeated work with timers</li>
+    <li>Validating or processing large data sets in the background</li>
+    <li>Uploading or downloading large files</li>
+    <li>Background caching and offline synchronization</li>
+  </ul>
+
+  <h2>Real-world Example (conceptual)</h2>
+  <p>Consider a page that begins a heavy computation (finding many prime numbers). If performed synchronously on the main thread, the page becomes unresponsive until the computation finishes. If the computation is handled asynchronously (for example via a web worker or by breaking work into scheduled chunks), the UI stays responsive and the user can interact with buttons or see progress updates immediately.</p>
+
+  <h2>Practical Tips & Best Practices</h2>
+  <ul>
+    <li>Prefer <em>promises</em> and <em>async/await</em> for readability and error handling.</li>
+    <li>Always handle errors with <em>catch</em> or <em>try/catch</em> when using <em>await</em>.</li>
+    <li>Avoid deeply nested callbacks — extract named functions or use promise chains.</li>
+    <li>Use timeouts, cancellation, or abort signals for long requests to avoid hanging operations.</li>
+    <li>Provide UI feedback (loading indicators, progress) for long async tasks.</li>
+    <li>When CPU-bound tasks are heavy, consider offloading to Web Workers.</li>
+  </ul>
+
+  <h2>Related Concepts to Study Next</h2>
+  <ul>
+    <li>Event loop, microtasks vs macrotasks</li>
+    <li>Promises: creation, chaining, combinators (all, race, allSettled, any)</li>
+    <li>Async/await patterns and cancellation</li>
+    <li>Web Workers for CPU-bound tasks</li>
+    <li>Error handling and timeouts for network operations</li>
+  </ul>
+
+  <h2>Further Reading</h2>
+  <ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous">MDN — Asynchronous JavaScript</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop">MDN — Event loop</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">MDN — Using Promises</a></li>
+  </ul>
+</div>

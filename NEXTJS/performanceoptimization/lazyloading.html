@@ -1,0 +1,106 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Lazy Loading</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Lazy Loading?</h2>
+            <p><strong>Lazy Loading</strong> is an optimization strategy that postpones the loading of **non-critical resources** (such as JavaScript bundles, components, or images) until the exact moment they are needed, typically when they enter the user's viewport. The core benefit is an improved **initial loading performance** by reducing the amount of JavaScript and assets required for the first page render.</p>
+            
+            <h3>How Lazy Loading Works</h3>
+            <ol>
+                <li>At build time, Next.js automatically **splits the code** into separate, smaller JavaScript bundles.</li>
+                <li>When a user navigates, the application only loads the required initial bundle.</li>
+                <li>Other resources (components, images, modules) are loaded asynchronously, **on demand**, usually when proximity or visibility in the viewport is detected.</li>
+            </ol>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Lazy Loading Components and Modules</h2>
+            <p>In Next.js, component and module lazy loading is primarily achieved through **Dynamic Imports**, which is a combination of React's <code>React.lazy()</code> and <code>Suspense</code> capabilities.</p>
+            
+            <h3>Using Dynamic Imports (<code>next/dynamic</code>)</h3>
+            <p>The **<code>next/dynamic</code>** function allows you to import JavaScript modules asynchronously, controlling exactly when they are loaded.</p>
+            
+            <p><strong>Example: Conditional and Client-Only Loading</strong></p>
+            <pre class="example"><code>'use client'
+import { useState } from 'react'
+import dynamic from 'next/dynamic'
+
+// Load immediately, but in a separate client bundle
+const ComponentA = dynamic(() => import('../components/A'))
+
+// Load only when the 'showMore' condition is true
+const ComponentB = dynamic(() => import('../components/B'))
+
+// Load only on the client side (server-side rendering disabled)
+const ComponentC = dynamic(() => import('../components/C'), { ssr: false })
+
+export default function ClientComponentExample() {
+  const [showMore, setShowMore] = useState(false)
+ 
+  return (
+    &lt;div&gt;
+        &lt;ComponentA /&gt;
+        
+        {/* Conditional Load */}
+        {showMore && &lt;ComponentB /&gt;}
+        &lt;button onClick={() => setShowMore(!showMore)}&gt;Toggle&lt;/button&gt;
+        
+        {/* Client-Only Load */}
+        &lt;ComponentC /&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Lazy Loading Images</h2>
+            <p>Image lazy loading is controlled by the built-in **<code>&lt;Image&gt;</code> component**.</p>
+            <ul>
+                <li>By default, all images loaded via <code>&lt;Image&gt;</code> are **lazy loaded** (<code>loading='lazy'</code>). They are only loaded when they become visible in the user's viewport.</li>
+                <li>To disable lazy loading and load an image immediately (e.g., for images critical to the user's initial view), you can set the **<code>loading</code>** prop to **<code>eager</code>**.</li>
+            </ul>
+            
+            <p><strong>Example: Lazy vs. Eager Image Loading</strong></p>
+            <pre class="example"><code>import Image from 'next/image';
+
+export default function Example() {
+    return (
+    &lt;div&gt;
+        &lt;h1&gt;Lazy Loading (Default):&lt;/h1&gt;
+        &lt;Image
+            src="/file.svg"
+            alt="Example Image"
+        /&gt;
+
+        &lt;h1&gt;Eager Loading (Priority Load):&lt;/h1&gt;   
+        &lt;Image
+            src="/next.svg"
+            alt="Example Image"
+            loading='eager'    // Disable Lazy Loading
+        /&gt;
+    &lt;/div&gt;
+    );
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">When to Use and Avoid Lazy Loading</h2>
+            
+            <h3>Use Lazy Loading For:</h3>
+            <ul>
+                <li>Complex dashboard widgets and charts.</li>
+                <li>Modal dialogs and hidden sidebars.</li>
+                <li>Content that is initially **below the fold** (not visible without scrolling).</li>
+                <li>Heavy, non-essential third-party components (e.g., complex ad units, large map components).</li>
+            </ul>
+            
+            <h3>Avoid Lazy Loading For:</h3>
+            <ul>
+                <li>The **Header and footer** sections.</li>
+                <li>Primary **navigation bars** and menus.</li>
+                <li>Any component that is **always visible** or critical for the user's initial interaction (e.g., the Largest Contentful Paint image).</li>
+            </ul>
+        </div>
+    </div>
+</div>

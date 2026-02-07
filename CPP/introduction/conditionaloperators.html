@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Conditional (Ternary) Operator (<code>? :</code>) 🤔</h1>
+
+        <div class="content">
+            <p>The **conditional operator** (<code>? :</code>) is C++'s only **ternary operator**, meaning it requires three operands. It provides a compact, single-line shorthand for a simple <code>if-else</code> statement that assigns one of two values to a variable based on a condition.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Syntax and Evaluation</h2>
+
+            <p>The structure of the conditional operator is:</p>
+            <pre class="example">Exp1 ? Exp2 : Exp3;</pre>
+
+            <ul>
+                <li>**<code>Exp1</code> (Condition):** This expression is evaluated first. It must yield a Boolean (or convertible to Boolean) result.</li>
+                <li>**If <code>Exp1</code> is true:** Then **<code>Exp2</code>** is evaluated, and its value becomes the result of the entire expression.</li>
+                <li>**If <code>Exp1</code> is false:** Then **<code>Exp3</code>** is evaluated, and its value becomes the result of the entire expression.</li>
+            </ul>
+
+            <h3>Equivalence to <code>if-else</code></h3>
+            <p>The structure below:</p>
+            <pre class="example">
+if(condition) {
+   variable = Value_A;
+} else {
+   variable = Value_B;
+}</pre>
+            <p>is exactly equivalent to the single-line ternary expression:</p>
+            <pre class="example">
+variable = condition ? Value_A : Value_B;
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Example Analysis</h2>
+            <p>The provided example demonstrates the conditional assignment:</p>
+            <pre class="example">
+int x, y = 10;
+x = (y &lt; 10) ? 30 : 40;
+</pre>
+            <p>In this code:</p>
+            <ol>
+                <li>**Condition (<code>Exp1</code>):** <code>(y < 10)</code> is evaluated. Since <code>y</code> is 10, the condition <code>(10 < 10)</code> is **false**.</li>
+                <li>**Result:** Since the condition is false, **<code>Exp3</code> (40)** is evaluated, and its value is assigned to <code>x</code>.</li>
+            </ol>
+            <p>This results in the output:</p>
+            <pre class="example">value of x: 40</pre>
+        </div>
+    </div>
+</div>

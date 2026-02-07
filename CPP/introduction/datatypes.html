@@ -1,0 +1,71 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">C++ Data Types: Primitive, Derived, and User-Defined</h1>
+
+        <div class="content">
+            <p><strong>Variables</strong> in C++ reserve memory locations to store values. The **data type** of a variable dictates the memory allocated and the range of values it can store.</p>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Primitive Built-in Types ⚙️</h2>
+            <p>These are the fundamental data types. Their size can vary depending on the compiler and machine.</p>
+            <p><strong>Basic Types:</strong></p>
+            <ul>
+                <li><code>bool</code> (Boolean)</li>
+                <li><code>char</code>, <code>wchar_t</code> (Character/Wide character)</li>
+                <li><code>int</code> (Integer)</li>
+                <li><code>float</code>, <code>double</code>, <code>long double</code> (Floating point)</li>
+                <li><code>void</code> (Valueless)</li>
+            </ul>
+            <p><strong>Type Modifiers:</strong></p>
+            <p>These keywords modify the properties and size of basic types:</p>
+            <ul>
+                <li><code>signed</code>, <code>unsigned</code> (For integer/char types, specifying if negative values are allowed)</li>
+                <li><code>short</code>, <code>long</code> (To define shorter or longer versions of integer types)</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title example">Checking Data Type Sizes</h2>
+            <p>The <code>sizeof()</code> operator is used to determine the size of a data type or variable in bytes on a specific system.</p>
+            <pre class="example">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+   cout &lt;&lt; "Size of int : " &lt;&lt; sizeof(int) &lt;&lt; " bytes" &lt;&lt; endl;
+   cout &lt;&lt; "Size of double : " &lt;&lt; sizeof(double) &lt;&lt; " bytes" &lt;&lt; endl;
+   return 0;
+}</pre>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Derived Data Types 🧱</h2>
+            <p>These types are constructed or obtained from the primitive built-in types:</p>
+            <ul>
+                <li><strong>Function:</strong> A named, reusable block of code with a specified <code>return_type</code> and input <code>parameters</code>.</li>
+                <li><strong>Array:</strong> A series of elements of the **same data type** stored in contiguous memory locations.</li>
+                <li><strong>Pointer:</strong> A variable that holds the **memory address** of another variable (e.g., <code>int *p = &a;</code>).</li>
+                <li><strong>Reference:</strong> An **alias** or another name for an existing variable, sharing the same memory location (e.g., <code>int& refer = c;</code>).</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2 class="title">User-Defined Data Types 🧑‍💻</h2>
+            <p>These types are defined by the user to represent custom structures and entities:</p>
+            <ul>
+                <li><strong>Class:</strong> A blueprint for creating **objects** in OOP, encapsulating data (attributes) and functions (methods).</li>
+                <li><strong>Structure (<code>struct</code>):</strong> A collection of related variables (of potentially different types) grouped under a single name.</li>
+                <li><strong>Union:</strong> Similar to a struct, but all members **share the same memory location**. Changing one member's value changes the others.</li>
+                <li><strong>Enumeration (<code>enum</code>):</strong> A type that assigns names (identifiers) to **integer constants**, improving code readability. By default, names start at 0 and increment by 1, but values can be explicitly set.</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Typedef Declarations</h2>
+            <p>The <code>typedef</code> keyword creates a **new alias (name)** for an existing data type, making complex declarations simpler to read and use.</p>
+            <p><strong>Syntax:</strong> <code>typedef existing_type new_name;</code></p>
+            <p><strong>Example:</strong> <code>typedef int feet;</code> allows you to use <code>feet distance;</code> instead of <code>int distance;</code>.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP String Operators</h1>
+
+    <div class="content">
+      <p>
+        PHP provides two operators specifically for manipulating string data types: the **Concatenation Operator** (`.`) and the **Concatenation Assignment Operator** (`. =`). These operators are used to join strings together.
+      </p>
+
+      <h2>1. Concatenation Operator (`.`)</h2>
+      <p>
+        The dot operator (`.`) is used to **join** two or more string operands together, appending the right-hand string to the left-hand string. It returns a new, combined string.
+      </p>
+      <div class="example">
+        <p>
+          <code>$third = $first . $second;</code>
+        </p>
+        <p>
+          <code>$x="Hello"; $y="PHP";</code><br>
+          <code>$str = $x . " " . $y;</code> $\rightarrow$ <code>$str</code> is <code>"Hello PHP"</code>
+        </p>
+      </div>
+
+      <h2>2. Concatenation Assignment Operator (`. =`)</h2>
+      <p>
+        The concatenation assignment operator (`. =`) combines concatenation and assignment into a single operation. It **appends** the right-hand string to the string stored in the variable on the left, updating the left-hand variable's value.
+      </p>
+      <div class="example">
+        <p>
+          <code>$leftstring .= $rightstring;</code> (Equivalent to: <code>$leftstring = $leftstring . $rightstring;</code>)
+        </p>
+        <p>
+          <code>$x="Hello "; $y="PHP";</code><br>
+          <code>$x .= $y;</code> $\rightarrow$ <code>$x</code> is updated to <code>"Hello PHP"</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Practical Usage and Type Handling</h2>
+
+      <h3>Concatenation with Variables and Other Data Types</h3>
+      <p>
+        PHP's weak typing allows easy concatenation of strings with variables holding other scalar data types (like integers and floats). PHP automatically converts the numeric value to a string before performing the join.
+      </p>
+      <div class="example">
+        <p>
+          <code>$name = "Ankit"; $age = 25;</code><br>
+          <code>$sentence = "My name is " . $name . " and I am " . $age . " years old.";</code>
+        </p>
+        <p class="content">Output: My name is Ankit and I am 25 years old.</p>
+      </div>
+
+      <h3>Using Concatenation in Loops</h3>
+      <p>
+        The concatenation assignment operator (`. =`) is particularly useful inside loops for efficiently building up a long string (e.g., generating HTML or collecting results).
+      </p>
+      <div class="example">
+        <p>
+          <code>$result = "";</code><br>
+          <code>for ($i = 1; $i &lt;= 5; $i++) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$result .= "Number " . $i . "\n";</code><br>
+          <code>}</code>
+        </p>
+        <p class="content">Output: Number 1\nNumber 2\n...</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,340 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Forms</h1>
+    <div class="content">
+
+      <p>Previous<br>Quiz<br>Next</p>
+
+      <p>An HTML form is a webpage section usually used for collecting data from the users and then sent to a server for further processing.</p>
+
+      <h2>HTML Forms</h2>
+      <p>HTML forms are collections of interactive controls and various input types, such as text, numbers, email, password, radio buttons, checkboxes, buttons, etc., that collect user information. HTML forms are created by using the HTML &lt;form&gt; tag. All user input-related tags are placed inside the &lt;form&gt; tag.</p>
+
+      <p>Advertisement</p>
+
+      <h2>The &lt;form&gt; Element</h2>
+      <p>The HTML &lt;form&gt; element defines a form to collect user information in the HTML document.</p>
+
+      <h3>Syntax</h3>
+      <p>The &lt;form&gt; element has the following syntax; you can place any input-related element inside it:</p>
+
+      <pre><code>&lt;form&gt;
+  &lt;!-- Form elements--&gt;
+&lt;/form&gt;
+</code></pre>
+
+      <p>The following syntax contains all necessary elements:</p>
+
+      <pre><code>&lt;form action="url" method="method_type" target="target_value" enctype="enctype_value"&gt;
+    &lt;!-- Form elements--&gt;
+&lt;/form&gt;
+</code></pre>
+
+      <h2>Why Use HTML Forms?</h2>
+      <p>HTML forms are used to collect user information from the webpage and send it to the server. The common uses for HTML forms are:</p>
+
+      <ul>
+        <li>Creating registration forms so that users can sign up with their information and authenticate further to access the functionalities of the websites/web applications.</li>
+        <li>Collect data through the different types of surveys, feedback, etc.</li>
+        <li>Uploading the images, resumes, or any other type of files.</li>
+      </ul>
+
+      <h2>Creating an HTML Form</h2>
+      <p>To create an HTML form, use the &lt;form&gt; element along with the other required elements based on the information you want to collect, such as input boxes, buttons, radio buttons, checkboxes, etc. These elements are known as form controls (form elements).</p>
+
+      <h3>Example</h3>
+      <p>The following is an example of an HTML form having some required elements:</p>
+
+      <p>Open Compiler</p>
+
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;HTML Form Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;HTML Form Example&lt;/h1&gt;
+  &lt;form&gt;
+    &lt;!-- Text Input --&gt;
+    &lt;label for="name"&gt;&lt;strong&gt;Name:&lt;/strong&gt;&lt;/label&gt;
+    &lt;input type="text" id="name" name="name" placeholder="Enter your name" required&gt;
+    &lt;br/&gt;&lt;br/&gt;
+
+    &lt;!-- Radio Buttons --&gt;
+    &lt;label&gt;&lt;strong&gt;Gender:&lt;/strong&gt;&lt;/label&gt;
+    &lt;input type="radio" id="male" name="gender" value="male"&gt;
+    &lt;label for="male"&gt;Male&lt;/label&gt;
+    &lt;input type="radio" id="female" name="gender" value="female"&gt;
+    &lt;label for="female"&gt;Female&lt;/label&gt;
+    &lt;br/&gt;&lt;br/&gt;
+
+    &lt;!-- Checkboxes --&gt;
+    &lt;label&gt;&lt;strong&gt;Hobbies:&lt;/strong&gt;&lt;/label&gt;
+    &lt;input type="checkbox" id="reading" name="hobbies" value="reading"&gt;
+    &lt;label for="reading"&gt;Reading&lt;/label&gt;
+    &lt;input type="checkbox" id="traveling" name="hobbies" value="traveling"&gt;
+    &lt;label for="traveling"&gt;Traveling&lt;/label&gt;
+    &lt;input type="checkbox" id="sports" name="hobbies" value="sports"&gt;
+    &lt;label for="sports"&gt;Sports&lt;/label&gt;
+    &lt;br/&gt;&lt;br/&gt;
+
+    &lt;!-- Submit Button --&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>HTML Form with Redirection</h2>
+      <p>In the previous example, we designed a form that accepts user input but doesn't process the data. In this example, users will be redirected to Tutorialspoint's HTML Tutorial upon form submission. The redirection only happens if both the first name and last name fields are filled out; otherwise, the form prompts the user to provide the required information.</p>
+
+      <h3>Example</h3>
+      <p>Open Compiler</p>
+
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Sample HTML Form&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Start of the form element --&gt;
+    &lt;form action="" method="post"&gt;
+        &lt;!-- Form controls --&gt;
+        &lt;label for="first_name"&gt;First Name:&lt;/label&gt;
+        &lt;input type="text" id="first_name" name="first_name" required /&gt;
+        &lt;br&gt;&lt;br&gt;
+
+        &lt;label for="last_name"&gt;Last Name:&lt;/label&gt;
+        &lt;input type="text" id="last_name" name="last_name" required /&gt;
+        &lt;br&gt;&lt;br&gt;
+
+        &lt;input type="submit" value="Submit"&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <p><strong>Note:</strong></p>
+      <p>The HTML form tag's action attribute specifies the URL to which form data will be submitted or where the user will be redirected after submitting the form. You can specify the file name that is accepting the user information for the further processing. For an example, the file name is process.php; use the action attribute like this:</p>
+
+      <pre><code>&lt;form action="/process.php" method="post"&gt;
+</code></pre>
+
+      <h2>Form Elements</h2>
+      <p>There is a list of elements that can be used within the form element. All the elements are briefly described below:</p>
+
+      <h3>1. The &lt;form&gt; Element</h3>
+      <p>HTML &lt;form&gt; tag is used to create the &lt;form&gt; element. This element is the container for all other form elements. The form element does not create the form; it's the container that holds the other form elements.</p>
+      <p>Example</p>
+      <pre><code>&lt;form&gt;.....&lt;/form&gt;
+</code></pre>
+
+      <h3>2. The &lt;input&gt; Element</h3>
+      <p>HTML &lt;input&gt; tag is an essential element of form control for gathering user input from websites. We can use this tag to create an input element.</p>
+      <p>Example</p>
+      <pre><code>&lt;input type = ".."/&gt;
+</code></pre>
+
+      <h3>3. The &lt;label&gt; Element</h3>
+      <p>HTML &lt;label&gt; tag is used to create a label element that represents a caption for an item in a UI (user interface), or to add labels to a form control like text, textarea, checkbox, radio button, etc.</p>
+      <p>Example</p>
+      <pre><code>&lt;label&gt;.......&lt;/label&gt;
+</code></pre>
+
+      <h3>4. The &lt;legend&gt; Element</h3>
+      <p>HTML &lt;legend&gt; tag is the element's first child and specifies the caption or title for the &lt;fieldset&gt; tag.</p>
+      <p>Example</p>
+      <pre><code>&lt;legend&gt;.......&lt;/legend&gt;
+</code></pre>
+
+      <h3>5. HTML &lt;select&gt; Element</h3>
+      <p>HTML &lt;select&gt; tag is used to create the dropdown in HTML forms. We can use this tag to create a dropdown anywhere we want.</p>
+      <p>Example</p>
+      <pre><code>&lt;select&gt;....&lt;/select&gt;
+</code></pre>
+
+      <h3>6. The &lt;button&gt; Element</h3>
+      <p>HTML &lt;button&gt; tag is an interactive element used to create a button in HTML.</p>
+      <p>Example</p>
+      <pre><code>&lt;button&gt;Button&lt;/button&gt;
+</code></pre>
+
+      <h3>7. The &lt;fieldset&gt; Element</h3>
+      <p>HTML &lt;fieldset&gt; tag is used to group several controls within a web form. By using the &lt;fieldset&gt; tag and &lt;legend&gt; tag, a form can be much easier for users to understand.</p>
+      <p>Example</p>
+      <pre><code>&lt;fieldset&gt;....&lt;/fieldset&gt;
+</code></pre>
+
+      <h3>8. The &lt;datalist&gt; Element</h3>
+      <p>HTML &lt;datalist&gt; tag contains a set of &lt;option&gt; elements that represent recommended options available to choose from among others.</p>
+      <p>Example</p>
+      <pre><code>&lt;datalist&gt;....&lt;/datalist&gt;
+</code></pre>
+
+      <h3>9. The &lt;output&gt; Element</h3>
+      <p>HTML &lt;output&gt; tag is a flexible and underused component that enables programmers to dynamically show the outcomes of calculations or scripts inside the content.</p>
+      <p>Example</p>
+      <pre><code>&lt;output&gt; Results... &lt;/output&gt;
+</code></pre>
+
+      <h3>10. The &lt;option&gt; Element</h3>
+      <p>HTML &lt;option&gt; tag defines either the elements of the data list for autocomplete, specified by the &lt;datalist&gt; tag, or the items of a drop-down list, defined by the &lt;select&gt; tag.</p>
+      <p>Example</p>
+      <pre><code>&lt;option&gt;.....&lt;/option&gt;
+</code></pre>
+
+      <h3>11. The &lt;optgroup&gt; Element</h3>
+      <p>HTML &lt;optgroup&gt; tag is used in the &lt;select&gt; element to group together relevant &lt;option&gt; elements.</p>
+      <p>Example</p>
+      <pre><code>&lt;optgroup&gt;
+   &lt;option&gt;..&lt;/option&gt;
+     .
+     .
+&lt;/optgroup&gt;
+</code></pre>
+
+      <h3>12. The &lt;textarea&gt; Element</h3>
+      <p>HTML &lt;textarea&gt; tag is used to represent a multiline plain-text editing control.</p>
+      <p>Example</p>
+      <pre><code>&lt;textarea&gt;.......&lt;/textarea&gt;
+</code></pre>
+
+      <h2>Form Attributes</h2>
+      <p>HTML form attributes provide specific functionalities, such as redirection to other web pages, auto-completion of text, etc.</p>
+
+      <p>The below table lists out some of the common form attributes:</p>
+
+      <table>
+        <tr>
+          <th>Attribute</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>action</td>
+          <td>It is used to specify a URL that processes the form submission.</td>
+        </tr>
+        <tr>
+          <td>method</td>
+          <td>It is used to define which HTTP method to use when submitting the form.</td>
+        </tr>
+        <tr>
+          <td>target</td>
+          <td>It is used to specify where to open the linked document.</td>
+        </tr>
+        <tr>
+          <td>autocomplete</td>
+          <td>It allows you to set whether the autocomplete for the form should be on or off.</td>
+        </tr>
+        <tr>
+          <td>enctype</td>
+          <td>It is used to specify how the form input data should be encoded before sending it to the server.</td>
+        </tr>
+        <tr>
+          <td>novalidate</td>
+          <td>It defines that while submitting the form, the form data should not be validated in an HTML document.</td>
+        </tr>
+      </table>
+
+      <h2>Styling HTML Forms</h2>
+      <p>You can customize the appearance of HTML forms and their elements by using the CSS to match your website theme or to make it more appealing.</p>
+
+      <h3>Example</h3>
+      <p>The following is an example of an HTML form with CSS:</p>
+
+      <p>Open Compiler</p>
+
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;HTML Form&lt;/title&gt;
+        &lt;style&gt;
+            body {
+                font-family: 'Segoe UI', Arial, sans-serif;
+            }
+
+            form {
+                width: 100%;
+                max-width: 400px;
+                background-color: #e8f5e9;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            legend {
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-size: 0.9rem;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            textarea {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            textarea {
+                resize: none;
+            }
+
+            input[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                font-size: 1rem;
+                color: #fff;
+                background-color: #04af2f;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            input[type="submit"]:hover {
+                background-color: #039325;
+            }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;Registration Form&lt;/legend&gt;
+                &lt;label for="firstName"&gt;First Name&lt;/label&gt;
+                &lt;input type="text" id="firstName" name="FirstName" /&gt;
+
+                &lt;label for="lastName"&gt;Last Name&lt;/label&gt;
+                &lt;input type="text" id="lastName" name="LastName" /&gt;
+
+                &lt;label for="email"&gt;Email ID&lt;/label&gt;
+                &lt;input type="email" id="email" name="email" /&gt;
+
+                &lt;label for="password"&gt;Enter Your Password&lt;/label&gt;
+                &lt;input type="password" id="password" name="password" /&gt;
+
+                &lt;label for="confirmPass"&gt;Confirm Your Password&lt;/label&gt;
+                &lt;input type="password" id="confirmPass" name="confirmPass" /&gt;
+
+                &lt;label for="address"&gt;Address&lt;/label&gt;
+                &lt;textarea id="address" name="address"&gt;&lt;/textarea&gt;
+
+                &lt;input type="submit" value="Submit" /&gt;
+            &lt;/fieldset&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+    </div>
+  </div>
+</div>

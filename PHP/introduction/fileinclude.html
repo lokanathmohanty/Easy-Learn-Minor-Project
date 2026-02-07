@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP File Inclusion: Reusing Code</h1>
+
+    <div class="content">
+      <p>
+        **File Inclusion** is a core PHP feature that allows you to reuse the same code (like headers, footers, or menus) across multiple pages without writing it repeatedly. This improves organization, saves time, and simplifies maintenance. The content of the specified file is essentially copied into the calling script before execution.
+      </p>
+
+      <h2>File Inclusion Functions</h2>
+      <p>PHP provides four main statements for including external files, differentiated by how they handle errors and whether they allow repeated inclusion.</p>
+
+      <h3>1. `include()`</h3>
+      <ul>
+        <li>
+          **Purpose:** Includes the content of the specified file. Used for **non-critical** files (like headers/footers).
+        </li>
+        <li>
+          **Error Handling:** If the file cannot be found, it generates a **Warning** but the script **continues** execution.
+        </li>
+        <li>
+          **Syntax:** <code>include 'filename.php';</code>
+        </li>
+      </ul>
+
+      <h3>2. `require()`</h3>
+      <ul>
+        <li>
+          **Purpose:** Includes the content of the specified file. Used for **critical** files (like configuration or database connection files).
+        </li>
+        <li>
+          **Error Handling:** If the file cannot be found, it generates a **Fatal Error** and **halts** the execution of the script immediately.
+        </li>
+        <li>
+          **Syntax:** <code>require 'filename.php';</code>
+        </li>
+        <li>
+          **Recommendation:** Generally preferred over `include()` for essential files, as a missing critical file should prevent the script from running incorrectly.
+        </li>
+      </ul>
+
+      <h3>3. `include_once()` and `require_once()`</h3>
+      <p>
+        These functions behave identically to their non-`_once` counterparts, but they guarantee that the file will be included **only once**, even if the statement is called multiple times in the script. This prevents function/class re-declarations and script errors.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Security Risk: File Inclusion Vulnerabilities</h2>
+      <p>
+        The power of file inclusion creates a significant security risk if user input is used to determine which file to include. This is known as **Local File Inclusion (LFI)**.
+      </p>
+
+      <h3>Vulnerable Code Example:</h3>
+      <div class="example">
+        <code>$page = $_GET['page']; // User can manipulate this input</code><br>
+        <code>include($page); // Attacker can include any file, e.g., /etc/passwd</code>
+      </div>
+
+      <h3>Prevention Strategies:</h3>
+      <p>To prevent LFI, always strictly control the included file path:</p>
+      <ul>
+        <li>
+          **Whitelist Allowed Files:** Check user input against an array of explicitly allowed files.
+          <div class="example">
+            <code>$allowed = ['home.php', 'about.php'];</code><br>
+            <code>if (in_array($page, $allowed)) { include($page); }</code>
+          </div>
+        </li>
+        <li>
+          **Use Predefined Paths:** Append the user input to a known, safe directory path, and ensure no directory traversal sequences (`../`) are present.
+        </li>
+        <li>
+          **Disable Remote Inclusion:** Set `allow_url_include = Off` in your `php.ini` file if you don't need to include files from remote URLs.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Complete Form Handling Example</h1>
+        <div class="content">
+            <p>This session consolidates the concepts of **Form Validation**, **Data Sanitization**, and **Data Extraction** into a single, functional PHP script. The script is structured in three logical parts: 1) PHP for Error Tracking and Validation, 2) The HTML Form, and 3) PHP for Displaying Submitted Data.</p>
+            
+            <h2 class="title">Three-Part Structure</h2>
+            <p>To handle errors and re-display the form in a single file (a self-processing form), the code follows this flow:</p>
+            
+            <ol>
+                <li><strong>PHP Validation Block (Top):</strong> This code runs first. It initializes error variables and checks if the form has been submitted (<code>$_SERVER["REQUEST_METHOD"] == "POST"</code>). If submitted, it performs validation (e.g., checking for empty fields, verifying email format) and stores errors in respective <code>$xxxErr</code> variables.</li>
+                <li><strong>HTML Form (Middle):</strong> The form's <code>action</code> is set to <code>$_SERVER["PHP_SELF"]</code> (sanitized with <code>htmlspecialchars()</code>). **Inline PHP** is used here to display any validation errors next to the corresponding input field (e.g., <code>&lt;span class="error"&gt;&lt;?php echo $nameErr;?&gt;&lt;/span&gt;</code>).</li>
+                <li><strong>PHP Display Block (Bottom):</strong> This section executes only if the form has been submitted. It echoes the collected, processed, and sanitized user data.</li>
+            </ol>
+
+            <h3 class="title">Data Sanitization Helper Function</h3>
+            <p>The **<code>test_input()</code>** function is used globally to clean all incoming data, providing security and consistency:</p>
+            <pre><code>
+function test_input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data); // Essential security measure
+   return $data;
+}
+            </code></pre>
+        </div>
+        
+        <h2 class="title">Example Session: Form Elements and Validation Logic</h2>
+        <div class="content example">
+            <h3 class="title">Key Validation Points Demonstrated</h3>
+            <ul>
+                <li><strong>Required Fields:</strong> Checking <code>$_POST["name"]</code> and <code>$_POST["email"]</code> with <code>empty()</code>.</li>
+                <li><strong>Email Format:</strong> Using the robust **<code>filter_var($email, FILTER_VALIDATE_EMAIL)</code>** function.</li>
+                <li><strong>Multiple Selection:</strong> The <code>&lt;select name="subject[]" multiple&gt;</code> element is handled as an **array** in PHP's <code>$_POST["subject"]</code>.</li>
+            </ul>
+            
+            <pre><code>
+&lt;?php
+   // --- PART 1: PHP Validation Block (Top) ---
+   $nameErr = $emailErr = $genderErr = "";
+   $name = $email = $gender = $class = $course = $subject = "";
+
+   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      // Name validation
+      if (empty($_POST["name"])) { $nameErr = "Name required"; } else { $name = test_input($_POST["name"]); }
+
+      // Email validation
+      if (empty($_POST["email"])) {
+         $emailErr = "Email required";
+      } else {
+         $email = test_input($_POST["email"]);
+         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { $emailErr = "Invalid email format"; }
+      }
+      
+      // Gender validation
+      if (empty($_POST["gender"])) { $genderErr = "Gender required"; } else { $gender = test_input($_POST["gender"]); }
+
+      // Class/Course fields (simple sanitization if not required)
+      $course = isset($_POST["course"]) ? test_input($_POST["course"]) : "";
+      $class = isset($_POST["class"]) ? test_input($_POST["class"]) : "";
+      
+      // Multiple selection (Subject is an array)
+      $subject = isset($_POST["subject"]) ? $_POST["subject"] : [];
+   }
+   // ... test_input function definition ...
+?&gt;
+
+&lt;!-- PART 2: HTML Form (Middle) --&gt;
+&lt;form method="POST" action="&lt;?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?&gt;"&gt;
+   Name: &lt;input type="text" name="name"&gt; &lt;span class="error"&gt;* &lt;?php echo $nameErr;?&gt;&lt;/span&gt;&lt;br&gt;
+   Email: &lt;input type="text" name="email"&gt; &lt;span class="error"&gt;* &lt;?php echo $emailErr;?&gt;&lt;/span&gt;&lt;br&gt;
+   Gender:
+   &lt;input type="radio" name="gender" value="Female"&gt;Female
+   &lt;input type="radio" name="gender" value="Male"&gt;Male
+   &lt;span class="error"&gt;* &lt;?php echo $genderErr;?&gt;&lt;/span&gt;&lt;br&gt;
+   &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+
+&lt;?php
+   // --- PART 3: PHP Display Block (Bottom) ---
+   if ($_SERVER["REQUEST_METHOD"] == "POST" &amp;&amp; empty($nameErr) &amp;&amp; empty($emailErr) &amp;&amp; empty($genderErr)) {
+      echo "&lt;h2&gt;Submitted Data:&lt;/h2&gt;";
+      echo "&lt;p&gt;Name: $name&lt;/p&gt;";
+      echo "&lt;p&gt;Email: $email&lt;/p&gt;";
+      // ... display other fields ...
+      
+      // Displaying multiple subjects
+      if (!empty($subject)) {
+         echo "&lt;p&gt;Subjects Chosen: " . implode(", ", $subject) . "&lt;/p&gt;";
+      }
+   }
+?&gt;
+            </code></pre>
+        </div>
+    </div>
+</div>

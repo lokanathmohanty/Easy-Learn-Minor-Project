@@ -1,0 +1,152 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Arrow Functions</h1>
+
+    <div class="content">
+      <p>
+        Arrow functions in JavaScript provide a shorter way to write anonymous 
+        functions. Introduced in ES6, they remove the need for the 
+        <code>function</code> keyword and allow cleaner syntax.
+      </p>
+    </div>
+
+    <h2 class="title">Syntax</h2>
+    <div class="content">
+      <pre><code>
+const varName = (p1, p2, ...pN) => Expression;
+      </code></pre>
+      <pre><code>
+const varName = (p1, p2, ...pN) => {
+  // function body
+};
+      </code></pre>
+    </div>
+
+    <h2 class="title">Arrow Function with Single Statement</h2>
+    <div class="content">
+      <pre><code>
+const add = (x, y) => x + y;
+      </code></pre>
+      <pre><code>
+const add = (x, y) => { return x + y };
+      </code></pre>
+      <pre><code>
+const divide = (x, y) => x / y;
+document.getElementById("output").innerHTML = divide(10, 5);
+      </code></pre>
+      <div class="output">
+        <p>2</p>
+      </div>
+    </div>
+
+    <h2 class="title">Arrow Function with Multiple Statements</h2>
+    <div class="content">
+      <pre><code>
+const divide = (x, y) => {
+  let res = x / y;
+  return res;
+};
+document.getElementById("output").innerHTML = divide(10, 5);
+      </code></pre>
+      <div class="output">
+        <p>2</p>
+      </div>
+    </div>
+
+    <h2 class="title">Arrow Functions Without Parameters</h2>
+    <div class="content">
+      <pre><code>
+const greet = () => "Hello World!";
+      </code></pre>
+      <pre><code>
+const greet = () => { return "Hello World!"; };
+      </code></pre>
+      <div class="output">
+        <p>Hello World!</p>
+      </div>
+    </div>
+
+    <h2 class="title">Arrow Function with Parameters</h2>
+    <div class="content">
+      <h3>Single Parameter</h3>
+      <pre><code>
+const divide = x => 20 / x;
+let res = divide(2);
+document.getElementById("output").innerHTML = 
+  "The value returned from the arrow function is: " + res;
+      </code></pre>
+      <div class="output">
+        <p>The value returned from the arrow function is: 10</p>
+      </div>
+
+      <h3>Multiple Parameters</h3>
+      <pre><code>
+const sum = (a, b, c, d) => {
+  let sum = a + b + c + d;
+  return sum;
+};
+let res = sum(10, 30, 45, 60);
+document.getElementById("output").innerHTML = 
+  "The sum of 10, 30, 45, and 60 is: " + res;
+      </code></pre>
+      <div class="output">
+        <p>The sum of 10, 30, 45, and 60 is: 145</p>
+      </div>
+    </div>
+
+    <h2 class="title">Arrow Function as an Expression</h2>
+    <div class="content">
+      <pre><code>
+let isMul = true;
+const func = isMul ? () => {
+  let res = 5 * 5;
+  document.getElementById("output").innerHTML += 
+    "The multiplication value is: " + res + "<br>";
+} : () => {
+  let res = 5 + 5;
+  document.getElementById("output").innerHTML += 
+    "The sum value is: " + res + "<br>";
+};
+
+func();
+      </code></pre>
+      <div class="output">
+        <p>The multiplication value is: 25</p>
+      </div>
+    </div>
+
+    <h2 class="title">Arrow Function with Default Parameters</h2>
+    <div class="content">
+      <pre><code>
+const mul = (a = 10, b = 15) => a * b;
+
+document.getElementById("output").innerHTML += "mul(5, 8) = " + mul(5, 8) + "<br>";
+document.getElementById("output").innerHTML += "mul(6) = " + mul(6) + "<br>";
+document.getElementById("output").innerHTML += "mul() = " + mul() + "<br>";
+      </code></pre>
+      <div class="output">
+        <p>mul(5, 8) = 40</p>
+        <p>mul(6) = 90</p>
+        <p>mul() = 150</p>
+      </div>
+    </div>
+
+    <h2 class="title">Benefits of Using Arrow Functions</h2>
+    <div class="content">
+      <ul>
+        <li><strong>Shorter syntax</strong> − Reduces the amount of code needed to define functions.</li>
+        <li><strong>Implicit return</strong> − Allows returning values directly without using the <code>return</code> keyword.</li>
+        <li><strong>Ease of use as expression</strong> − Can be easily assigned and used in expressions.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Limitations of Using Arrow Functions</h2>
+    <div class="content">
+      <ul>
+        <li><strong>No arguments</strong> − Arrow functions do not have their own <code>arguments</code> object.</li>
+        <li><strong>No prototype</strong> − Arrow functions cannot have a <code>prototype</code> property.</li>
+        <li><strong>No <code>new</code> keyword</strong> − Arrow functions cannot be used as constructors.</li>
+      </ul>
+    </div>
+  </div>
+</div>

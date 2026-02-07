@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>Arrays</code> Class Summary 🛠️🗃️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.Arrays</code>** class is a **utility class** that consists exclusively of **static methods** for operating on arrays, including **sorting**, **searching**, **comparing**, and creating **list views**. It is the primary tool for manipulating array data structures in Java.</p>
+
+            <hr>
+
+            <h2 class="title">I. Key Functional Categories</h2>
+            <p>The methods within the `Arrays` class are generally overloaded to support all primitive array types (<code>int[]</code>, <code>double[]</code>, etc.) and object arrays (<code>T[]</code>).</p>
+
+            <h3>1. Sorting and Parallel Operations</h3>
+            <ul>
+                <li>
+                    **<code>static void **sort**(T[] a)</code>:** Sorts the specified array into ascending order. For primitive types, it uses a tuned Quicksort/Dual-Pivot Quicksort. For objects, it uses a highly optimized Timsort (MergeSort/InsertionSort hybrid).
+                </li>
+                <li>
+                    **<code>static void **parallelSort**(T[] a)</code>:** Sorts the array using parallel processing (fork/join framework). This is generally faster than `sort()` for very large arrays on multi-core machines.
+                </li>
+                <li>
+                    **<code>static void **fill**(T[] a, T val)</code>:** Assigns the specified value to every element of the array.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h3>2. Searching and Comparison</h3>
+            <ul>
+                <li>
+                    **<code>static int **binarySearch**(T[] a, T key)</code>:** Searches for the specified key in the array using the binary search algorithm. **Crucially, the array MUST be sorted beforehand, or the results are undefined.** Returns the index if found, or a negative value indicating the insertion point if not found.
+                </li>
+                <li>
+                    **<code>static boolean **equals**(T[] a1, T[] a2)</code>:** Checks if two arrays are equal. They are equal if they contain the same number of elements and all corresponding pairs of elements are equal (using `equals()` for objects or `==` for primitives).
+                </li>
+                <li>
+                    **<code>static boolean **deepEquals**(Object[] a1, Object[] a2)</code>:** Used for arrays of arrays (multidimensional arrays) or arrays containing other collection objects. It performs a recursive equality check on the contents.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h3>3. Array Manipulation and Collection Interoperability</h3>
+            <ul>
+                <li>
+                    **<code>static &lt;T&gt; List&lt;T&gt; **asList**(T... a)</code>:** This is a crucial method that returns a **fixed-size <code>List</code>** backed by the specified array.
+                    <ul>
+                        <li>**Caution:** This List is tightly bound to the original array. Changes to the List **write back** to the array, and vice versa.</li>
+                        <li>**Caution:** Because the size is fixed, calling `add()` or `remove()` on the returned List will throw an `UnsupportedOperationException`.</li>
+                    </ul>
+                </li>
+                <li>
+                    **<code>static T[] **copyOf**(T[] original, int newLength)</code> / <code>static T[] **copyOfRange**(...)</code>:** Methods used for safely creating a new array copy of a specific length or range. New elements are padded with defaults (e.g., `null` for objects, `0` for `int`).
+                </li>
+                <li>
+                    **<code>static String **toString**(T[] a)</code>:** Returns a user-friendly string representation of the array's contents (e.g., `[1, 2, 3]`).
+                </li>
+            </ul>
+
+            <div class="example">
+                <p>The example correctly demonstrates the **prerequisite for <code>binarySearch</code>**: the array must first be sorted using <code>Arrays.sort()</code> to guarantee the correct result. After sorting, the array becomes `[1, 2, 3, 5, 8, 10, 15, 20]`, where `15` is correctly located at index 6.</p>
+            </div>
+        </div>
+    </div>
+</div>

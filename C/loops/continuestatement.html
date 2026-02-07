@@ -1,0 +1,177 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Continue Statement in C</h1>
+
+    <div class="content">
+      <p>The behaviour of the <code>continue</code> statement in C is somewhat <strong>opposite to the <code>break</code> statement</strong>. Instead of terminating the loop, it forces the next iteration to begin immediately, skipping the rest of the statements in the current iteration.</p>
+
+      <h2 class="title">What is Continue Statement in C?</h2>
+      <p>The <code>continue</code> statement is used to skip the execution of the remaining statements in the current loop iteration and move control to the next iteration. It can be used inside all loop constructs: <code>while</code>, <code>do-while</code>, and <code>for</code>.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>while (expr) {
+   ...
+   if (condition)
+      continue;
+   ...
+}</code></pre>
+
+      <p><strong>Note:</strong> The <code>continue</code> statement must appear inside a loop; otherwise, it causes a compilation error. Unlike <code>break</code>, <code>continue</code> is <em>not</em> used in <code>switch-case</code> statements.</p>
+
+      <h2 class="title">Continue Statement with Nested Loops</h2>
+      <p>In nested loops, <code>continue</code> applies to the nearest enclosing loop. It skips the rest of the current iteration for that loop and proceeds with the next iteration.</p>
+
+      <h2 class="title">Examples of Continue Statement</h2>
+
+      <h3>1. Continue with While Loop (Print Odd Numbers)</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i = 0;
+
+   while (i < 10) {
+      i++;
+      if (i % 2 == 0)
+         continue;
+      printf("i: %d\n", i);
+   }
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>i: 1
+i: 3
+i: 5
+i: 7
+i: 9</code></pre>
+
+      <h3>2. Continue with For Loop (Remove Vowels from String)</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+   char string[] = "Welcome to TutorialsPoint C Tutorial";
+   int len = strlen(string);
+
+   printf("Given string: %s\n", string);
+   printf("After removing vowels:\n");
+
+   for (int i = 0; i < len; i++) {
+      if (string[i] == 'a' || string[i] == 'e' || string[i] == 'i' ||
+          string[i] == 'o' || string[i] == 'u')
+         continue;
+      printf("%c", string[i]);
+   }
+   printf("\n");
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>Given string: Welcome to TutorialsPoint C Tutorial
+After removing vowels:
+Wlcm t TtrlsPnt C Ttrl</code></pre>
+
+      <h3>3. Continue with Nested Loops (Unique 3-digit Combinations)</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i, j, k;
+
+   for (i = 1; i <= 3; i++) {
+      for (j = 1; j <= 3; j++) {
+         if (i == j)
+            continue;
+         for (k = 1; k <= 3; k++) {
+            if (k == i || k == j)
+               continue;
+            printf("%d %d %d\n", i, j, k);
+         }
+      }
+   }
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>1 2 3
+1 3 2
+2 1 3
+2 3 1
+3 1 2
+3 2 1</code></pre>
+
+      <h3>4. Removing Spaces Between Words in a String</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+   char string[] = "Welcome to TutorialsPoint C Tutorial";
+   int len = strlen(string);
+
+   printf("Given string: %s\n", string);
+
+   for (int i = 0; i < len; i++) {
+      if (string[i] == ' ') {
+         printf("\n");
+         continue;
+      }
+      printf("%c", string[i]);
+   }
+   printf("\n");
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>Given string: Welcome to TutorialsPoint C Tutorial
+Welcome
+to
+TutorialsPoint
+C
+Tutorial</code></pre>
+
+      <h3>5. Finding Prime Factors of a Number Using Continue</h3>
+      <p>This program finds all prime factors of a given number by successively dividing by 2 and then by odd numbers.</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int n = 64;
+   int m = 2;
+
+   printf("Prime factors of %d:\n", n);
+
+   while (n > 1) {
+      if (n % m == 0) {
+         n = n / m;
+         printf("%d ", m);
+         continue;
+      }
+      if (m == 2)
+         m++;
+      else
+         m += 2;
+   }
+   printf("\n");
+   return 0;
+}</code></pre>
+
+      <h4>Output (for n = 64):</h4>
+      <pre><code>Prime factors of 64:
+2 2 2 2 2 2</code></pre>
+
+      <p>Try changing <code>n</code> to 45 or 90 to see different outputs:</p>
+      <pre><code>Prime factors of 45:
+3 3 5
+
+Prime factors of 90:
+2 3 3 5</code></pre>
+
+      <h2 class="title">Summary</h2>
+      <ul>
+        <li><code>continue</code> skips the rest of the current loop iteration and moves to the next iteration.</li>
+        <li>It works inside <code>for</code>, <code>while</code>, and <code>do-while</code> loops.</li>
+        <li>In nested loops, it affects only the nearest enclosing loop.</li>
+        <li><code>continue</code> is not used in <code>switch-case</code> blocks.</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

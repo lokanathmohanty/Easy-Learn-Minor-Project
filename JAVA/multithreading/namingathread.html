@@ -1,0 +1,180 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Naming a Thread with Examples</h1>
+    
+  
+
+      <h2>Name a Thread while Implementing a Runnable Interface</h2>
+      <p>If your class implements the <code>Runnable</code> interface, you can name a thread by creating a <code>Thread</code> object using the constructor:</p>
+      <p><code>Thread(Runnable threadObj, String threadName);</code></p>
+      <p>Here, <code>threadObj</code> is the instance of your Runnable implementation and <code>threadName</code> is the thread's name.</p>
+      <p>After creating the thread, you start it by calling <code>start()</code>, which invokes the <code>run()</code> method.</p>
+      <p><code>void start();</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Naming a Thread using Runnable Interface</h2>
+    <div class="content">
+      <p>In this example, the class <code>RunnableDemo</code> implements <code>Runnable</code>. We create threads with names "Thread-1" and "Thread-2".</p>
+      <pre><code>package com.tutorialspoint;
+class RunnableDemo implements Runnable {
+   private String threadName;
+   RunnableDemo(String name) {
+      threadName = name;
+      System.out.println("Thread: " + threadName + ", State: New");
+   }
+   public void run() {
+      System.out.println("Thread: " + threadName + ", State: Running");
+      for(int i = 4; i > 0; i--) {
+         System.out.println("Thread: " + threadName + ", " + i);         
+      }
+      System.out.println("Thread: " + threadName + ", State: Dead");
+   }
+}
+public class TestThread {
+   public static void main(String args[]) {
+      RunnableDemo runnableDemo1 = new RunnableDemo("Thread-1");
+      RunnableDemo runnableDemo2 = new RunnableDemo("Thread-2");
+
+      Thread thread1 = new Thread(runnableDemo1);
+      Thread thread2 = new Thread(runnableDemo2);
+
+      thread1.start();
+      thread2.start();
+   }
+}</code></pre>
+
+      <h3>Output</h3>
+      <p>
+        Thread: Thread-1, State: New<br>
+        Thread: Thread-2, State: New<br>
+        Thread: Thread-1, State: Running<br>
+        Thread: Thread-1, 4<br>
+        Thread: Thread-1, 3<br>
+        Thread: Thread-1, 2<br>
+        Thread: Thread-1, 1<br>
+        Thread: Thread-1, State: Dead<br>
+        Thread: Thread-2, State: Running<br>
+        Thread: Thread-2, 4<br>
+        Thread: Thread-2, 3<br>
+        Thread: Thread-2, 2<br>
+        Thread: Thread-2, 1<br>
+        Thread: Thread-2, State: Dead
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Naming a Thread while Extending the Thread Class</h2>
+    <div class="content">
+      <p>The other approach to naming threads is by extending the <code>Thread</code> class and passing the thread name to the superclass constructor using <code>super(name)</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example 1: Naming Thread by Extending Thread Class</h2>
+    <div class="content">
+      <p>In this example, the <code>ThreadDemo</code> class extends <code>Thread</code>, names the thread in the constructor, and overrides the <code>start()</code> method.</p>
+      <pre><code>package com.tutorialspoint;
+class ThreadDemo extends Thread {
+   ThreadDemo(String name) {
+      super(name);
+      System.out.println("Thread: " + name + ", State: New");
+   }
+   public void run() {
+      System.out.println("Thread: " + getName() + ", State: Running");
+      for(int i = 4; i > 0; i--) {
+         System.out.println("Thread: " + getName() + ", " + i); 
+      }
+      System.out.println("Thread: " + getName() + ", State: Dead");
+   }
+   public void start() {
+      System.out.println("Thread: " + getName() + ", State: Start");
+      super.start();
+   }
+}
+public class TestThread {
+   public static void main(String args[]) {
+      ThreadDemo thread1 = new ThreadDemo("Thread-1");
+      ThreadDemo thread2 = new ThreadDemo("Thread-2");
+      thread1.start();
+      thread2.start();
+   }
+}</code></pre>
+
+      <h3>Output</h3>
+      <p>
+        Thread: Thread-1, State: New<br>
+        Thread: Thread-2, State: New<br>
+        Thread: main, State: Start<br>
+        Thread: main, State: Start<br>
+        Thread: Thread-1, State: Running<br>
+        Thread: Thread-1, 4<br>
+        Thread: Thread-1, 3<br>
+        Thread: Thread-2, State: Running<br>
+        Thread: Thread-1, 2<br>
+        Thread: Thread-1, 1<br>
+        Thread: Thread-1, State: Dead<br>
+        Thread: Thread-2, 4<br>
+        Thread: Thread-2, 3<br>
+        Thread: Thread-2, 2<br>
+        Thread: Thread-2, 1<br>
+        Thread: Thread-2, State: Dead
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example 2: Default Thread Names when Extending Thread Class</h2>
+    <div class="content">
+      <p>This example shows how threads are named by default if you do not explicitly provide names.</p>
+      <pre><code>package com.tutorialspoint;
+class ThreadDemo extends Thread {
+   ThreadDemo() {
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: New");
+   }
+   public void run() {
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Running");
+      for(int i = 4; i > 0; i--) {
+         System.out.println("Thread: " + Thread.currentThread().getName() + ", " + i); 
+      }
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Dead");
+   }
+   public void start() {
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Start");
+      super.start();
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      ThreadDemo thread1 = new ThreadDemo();
+      ThreadDemo thread2 = new ThreadDemo();
+      thread1.start();
+      thread2.start();
+   }
+}</code></pre>
+
+      <h3>Output</h3>
+      <p>
+        Thread: main, State: New<br>
+        Thread: main, State: New<br>
+        Thread: main, State: Start<br>
+        Thread: main, State: Start<br>
+        Thread: Thread-0, State: Running<br>
+        Thread: Thread-0, 4<br>
+        Thread: Thread-0, 3<br>
+        Thread: Thread-1, State: Running<br>
+        Thread: Thread-0, 2<br>
+        Thread: Thread-1, 4<br>
+        Thread: Thread-0, 1<br>
+        Thread: Thread-1, 3<br>
+        Thread: Thread-0, State: Dead<br>
+        Thread: Thread-1, 2<br>
+        Thread: Thread-1, 1<br>
+        Thread: Thread-1, State: Dead
+      </p>
+    </div>
+  </div>
+</div>

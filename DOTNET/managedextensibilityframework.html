@@ -1,0 +1,119 @@
+<div class="container">
+<div class="session">
+<div class="title">
+<h1>Managed Extensibility Framework (MEF)</h1>
+ 
+</div>
+<div class="content">
+<p>The Managed Extensibility Framework (MEF) is a library for creating lightweight, extensible applications. It allows developers to discover and use extensions with minimal configuration, enabling a **loosely-coupled plugin-like architecture**.</p>
+<ul>
+<li>MEF is an integral part of the **.NET Framework 4** and enhances the flexibility, maintainability, and testability of large applications (client or server).</li>
+<li>For .NET Core, MEF has been partially ported as **<code>Microsoft.Composition</code>**. Only **<code>System.Composition</code>** is available; the older **<code>System.ComponentModel.Composition</code>** (which included assembly catalogs) is not yet available.</li>
+</ul>
+
+<h2>Setting up MEF in .NET Core (project.json)</h2>
+<p>The following steps outline how to set up the necessary components to use MEF in a .NET Core console application:</p>
+<ol>
+<li>**Create Project:** Create a new **Console Application (.NET Core)** project.</li>
+<li>**Add NuGet Package:** Right-click the project, select **Manage NuGet Packages**, search for **<code>Microsoft.Composition</code>**, and click **Install**.</li>
+<li>**Update <code>project.json</code>:** The default framework import setting in the <code>project.json</code> file (<code>"imports": "dnxcore50"</code>) is not compatible with the <code>Microsoft.Composition</code> package. You must replace it with a compatible Portable Class Library profile.</li>
+</ol>
+
+<div class="example">
+<div class="title"><h2>project.json (Corrected Imports)</h2></div>
+<div class="content">
+<pre><code>{ 
+   "version": "1.0.0-*", 
+   "buildOptions": { 
+      "emitEntryPoint": true 
+   }, 
+   "dependencies": { 
+      "Microsoft.Composition": "1.0.30", 
+      "Microsoft.NETCore.App": { 
+         "type": "platform", 
+         "version": "1.0.1"
+      } 
+   }, 
+   "frameworks": { 
+      "netcoreapp1.0": { 
+         "imports": "portable-net45+win8+wp8+wpa81" 
+      } 
+   } 
+}</code></pre>
+</div>
+</div>
+<p>Saving this file resolves the package compatibility error, and the **<code>Microsoft.Composition</code>** reference will correctly appear in your project.</p>
+
+<h2>Creating the Export and Import Parts</h2>
+<p>MEF works by defining an **interface** to be exported, and a **class** that implements that interface and is decorated with the <code>[Export]</code> attribute. A separate consumer class uses the <code>[Import]</code> attribute to receive an instance of the exported type.</p>
+
+<h3>1. Defining the Exported Interface and Class (PrintData.cs)</h3>
+<p>Create a class file, e.g., **<code>PrintData.cs</code>**, which defines the contract <code>IPrintData</code> and provides an implementation <code>PrintData</code> marked for export.</p>
+<div class="example">
+<div class="title"><h2>PrintData.cs (Exported Component)</h2></div>
+<div class="content">
+<pre><code>using System; 
+using System.Composition; 
+  
+namespace MEFDemo { 
+   public interface IPrintData { 
+      void Send(string message); 
+   } 
+   
+   [Export(typeof(IPrintData))] 
+   public class PrintData : IPrintData { 
+      public void Send(string message) { 
+         Console.WriteLine(message); 
+      } 
+   } 
+}</code></pre>
+</div>
+</div>
+
+<h3>2. Importing and Composing (Program.cs)</h3>
+<p>The main class, **<code>Program.cs</code>**, performs the composition. Because the Catalogs for loading types from directories are unavailable in this version of MEF for .NET Core, we manually load types from the current assembly and compose the container.</p>
+<ul>
+<li>The <code>PrintData</code> property is decorated with <code>[Import]</code> to signal that it should receive an exported instance of <code>IPrintData</code>.</li>
+<li>The <code>Compose()</code> method uses <code>ContainerConfiguration</code> to discover types with the <code>[Export]</code> attribute in the current assembly and resolve the imported parts.</li>
+</ul>
+<div class="example">
+<div class="title"><h2>Program.cs (Importing and Composition)</h2></div>
+<div class="content">
+<pre><code>using System; 
+using System.Composition; 
+using System.Composition.Hosting; 
+using System.Reflection; 
+  
+namespace MEFDemo { 
+   public class Program { 
+      public static void Main(string[] args) { 
+         Program p = new Program(); 
+         p.Run(); 
+      } 
+      
+      public void Run() { 
+         Compose(); 
+         PrintData.Send("Hello,this is MEF demo"); 
+      } 
+      
+      [Import] 
+      public IPrintData PrintData { get; set; } 
+      
+      private void Compose() { 
+         var assemblies = new[] { typeof(Program).GetTypeInfo().Assembly }; 
+         var configuration = new ContainerConfiguration() 
+            .WithAssembly(typeof(Program).GetTypeInfo().Assembly); 
+         
+         using (var container = configuration.CreateContainer()) { 
+            PrintData = container.GetExport&lt;IPrintData&gt;(); 
+         } 
+      } 
+   } 
+}</code></pre>
+</div>
+</div>
+<p>Running the application will execute the <code>Run()</code> method, which calls <code>Compose()</code> to instantiate the <code>PrintData</code> class and assign it to the imported property, resulting in the output "Hello,this is MEF demo".</p>
+<p>For more detailed information on MEF, you can visit the official Microsoft documentation: <a href="https://learn.microsoft.com/en-us/dotnet/framework/mef/?redirectedfrom=MSDN">https://learn.microsoft.com/en-us/dotnet/framework/mef/</a></p>
+</div>
+</div>
+</div>

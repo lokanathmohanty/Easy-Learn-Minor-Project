@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Wrapper Classes</h1>
+    <div class="content">
+      <p>
+        In Python, wrapper classes are used to modify or extend the behavior of other classes or functions without changing their original code. This is often achieved by using decorators that wrap a class inside another class.
+      </p>
+      <p>
+        Wrapping helps in managing or augmenting class behavior after instantiation by adding extra functionality.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Creating a Wrapper Class Using a Decorator</h2>
+    <div class="content">
+      <pre><code>def decorator_function(Wrapped):
+    class Wrapper:
+        def __init__(self, x):
+            self.wrap = Wrapped(x)
+        def print_name(self):
+            return self.wrap.name
+    return Wrapper
+
+@decorator_function
+class Wrapped:
+    def __init__(self, x):
+        self.name = x
+
+obj = Wrapped('TutorialsPoint')
+print(obj.print_name())</code></pre>
+      <p>Output:</p>
+      <p>TutorialsPoint</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">How the Wrapper Works</h2>
+    <div class="content">
+      <p>
+        - The class <code>Wrapped</code> is passed as an argument to the <code>decorator_function</code>.<br>
+        - The <code>decorator_function</code> defines an inner class <code>Wrapper</code> that holds an instance of <code>Wrapped</code>.<br>
+        - The <code>Wrapper</code> class exposes methods that interact with the wrapped instance.<br>
+        - When <code>Wrapped</code> is instantiated, actually <code>Wrapper</code> is created, which internally manages the original class.
+      </p>
+    </div>
+  </div>
+
+   
+  </div>
+</div>

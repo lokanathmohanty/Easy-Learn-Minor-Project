@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java 13 - Major New Features Summary (Non-LTS Release)</h1>
+
+        <div class="content">
+            <h2>Overview of Java 13</h2>
+            <p>**Java 13**, released in **September 2019**, continued the 6-month rapid release cycle and is a **non-LTS (Long-Term Support)** release. The main highlights were the second preview of Switch Expressions and the introduction of Text Blocks, both aimed at improving the conciseness and expressiveness of the Java language.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Language and API Enhancements</h2>
+
+            <h3>1. Switch Expressions (Second Preview) (JEP 354)</h3>
+            <p>The enhanced <code>switch</code> feature, introduced in Java 12, was iterated upon. The major change was the replacement of the reserved keyword **<code>break</code>** for returning a value with the new keyword **<code>yield</code>**.</p>
+            <ul>
+                <li><strong>Purpose of <code>yield</code>:</strong> When <code>switch</code> is used as a statement (not an expression), <code>break</code> is still used to terminate the switch. However, when <code>switch</code> is used as an **expression** to produce a value, **<code>yield</code>** is used to yield the result of that case to the surrounding context.</li>
+            </ul>
+            <pre><code>String result = switch (day) {
+    case MONDAY, FRIDAY: yield "Short Day";
+    default: yield "Long Day";
+};</code></pre>
+
+            <h3>2. Text Blocks (First Preview) (JEP 355)</h3>
+            <p>Text blocks provide a new way to handle **multi-line string literals** in Java, primarily to simplify working with code that contains snippets of other languages, such as HTML, JSON, or SQL.</p>
+            <ul>
+                <li><strong>Syntax:</strong> Defined using three double-quote characters (<code>"""</code>) to open and close the block.</li>
+                <li><strong>Advantages:</strong> Eliminates the need for explicit line breaks (<code>\n</code>) and concatenation, and handles most indentation automatically.</li>
+            </ul>
+            <pre><code>String json = """
+{
+    "name": "Gemini",
+    "version": 13
+}""";</code></pre>
+
+            <h3>3. New String Methods for Text Blocks</h3>
+            <p>To support text blocks, new instance methods were added to the <code>String</code> class to manage indentation and formatting:</p>
+            <ul>
+                <li><strong><code>String.stripIndent()</code>:</strong> Removes incidental white space from the string that was added by the Java compiler during text block processing.</li>
+                <li><strong><code>String.translateEscapes()</code>:</strong> Processes escape sequences (like <code>\n</code> or <code>\t</code>) that may be present within a text block.</li>
+                <li><strong><code>String.formatted(Object... args)</code>:</strong> A convenience instance method that simplifies formatting compared to the static <code>String.format()</code>.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Performance and JVM Enhancements</h2>
+
+            <h3>ZGC Enhancements: Unused Heap Memory Return (JEP 351)</h3>
+            <p>The Z Garbage Collector (ZGC) was enhanced to **uncommit unused heap memory** back to the operating system. This is crucial for environments where resources are pooled or elastic (like containers or microservices), allowing the JVM to reduce its memory footprint when idle. Previously, ZGC would rarely return unused memory to the OS.</p>
+
+            <h3>Dynamic CDS Archive (JEP 350)</h3>
+            <p>This allows the **Class Data Sharing (CDS)** feature to be dynamically archived after application classes have loaded. This simplifies the creation and deployment of CDS archives, further improving application startup time and memory footprint.</p>
+
+            <h3>Socket API Reimplementation (JEP 353)</h3>
+            <p>The underlying implementation of the Legacy Socket API (<code>java.net.Socket</code> and <code>java.net.ServerSocket</code>) was rewritten using the more modern and easier-to-maintain APIs from Java 8. This improves performance, scalability, and maintainability, especially on the Windows platform.</p>
+        </div>
+    </div>
+</div>

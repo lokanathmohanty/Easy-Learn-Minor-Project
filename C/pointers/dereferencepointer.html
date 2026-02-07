@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Dereference Pointer in C</h1>
+    <div class="content">
+      <h2>What Is Dereferencing?</h2>
+      <p>The dereference (or indirection) operator <code>*</code> is used to access or modify the value stored in the memory location pointed to by a pointer. When applied to a pointer variable, it yields the variable it points to.</p>
+
+      <h2>Syntax</h2>
+      <p>To dereference a pointer:</p>
+      <pre><code>*pointer_variable;</code></pre>
+      <p>You can use the dereferenced pointer to both read and modify the value of the target variable.</p>
+
+      <h2>How to Dereference a Pointer</h2>
+      <ol>
+        <li>Declare a variable and a pointer.</li>
+        <li>Initialize the pointer with the address of that variable.</li>
+        <li>Use <code>*pointer</code> to access or modify the variable’s value.</li>
+      </ol>
+
+      <h2>Example: Simple Dereferencing</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int x = 10;
+  int *ptr;
+
+  ptr = &x;  // pointer holds address of x
+
+  printf("Value of x = %d\n", *ptr);
+  return 0;
+}
+</code></pre>
+      <p>This program prints <code>Value of x = 10</code>, as <code>*ptr</code> retrieves the value stored in <code>x</code>.</p>
+
+      <h2>Dereferencing Different Types</h2>
+      <p>You can dereference pointers of different types to get values of those types:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 10;
+  int *b = &a;
+  float x = 10.5f;
+  float *y = &x;
+
+  printf("Address of 'a': %p  Value of 'a': %d\n", (void *)b, *b);
+  printf("Address of 'x': %p  Value of 'x': %f\n", (void *)y, *y);
+
+  return 0;
+}
+</code></pre>
+
+      <h2>Modifying Value by Dereferencing</h2>
+      <p>You can assign to <code>*pointer</code> to change the value of the underlying variable:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 10;
+  int *b = &a;
+  float x = 10.5f;
+  float *y = &x;
+
+  *b = 100;
+  *y = 100.50f;
+
+  printf("Address of 'a': %p  Value of 'a': %d\n", (void *)b, *b);
+  printf("Address of 'x': %p  Value of 'x': %f\n", (void *)y, *y);
+
+  return 0;
+}
+</code></pre>
+
+      <h2>Dereferencing a Double Pointer</h2>
+      <p>A double pointer (<code>int **</code>, etc.) holds the address of another pointer. You can dereference it twice to access the ultimate value:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 10;
+  int *b = &a;
+
+  int **c = &b;
+
+  printf("a: %d  Address of a: %p  *b: %d\n", a, (void *)b, *b);
+  printf("b: %p  Address of b: %p  *c: %p\n", (void *)b, (void *)&b, (void *)*c);
+  printf("Value of a via c: %d\n", **c);
+
+  return 0;
+}
+</code></pre>
+
+      <h2>Dereferencing a Structure Pointer</h2>
+      <p>For a struct pointer, you often use the arrow operator <code>-></code> to access fields. This is equivalent to dereferencing and then accessing a member:</p>
+      <pre><code>struct Book {
+  char title[20];
+  double price;
+  int pages;
+};
+
+struct Book b1 = { "LearnC", 650.50, 325 };
+struct Book *ptr = &b1;
+
+printf("Title: %s\nPrice: %.2f\nPages: %d\n",
+       ptr->title, ptr->price, ptr->pages);
+</code></pre>
+
+      <h2>Summary</h2>
+      <p>The dereference operator <code>*</code> allows you to access or modify the value stored at the memory address held by a pointer. With single, double, or struct pointers, proper use of dereferencing is key to working correctly and safely with pointers in C.</p>
+
+    </div>
+  </div>
+</div>

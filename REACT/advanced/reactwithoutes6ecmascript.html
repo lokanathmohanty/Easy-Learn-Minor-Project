@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Without ES6 ECMAScript</h1>
+
+    <div class="content">
+      <p>
+        ECMAScript is a general-purpose, vendor-neutral, cross-platform language 
+        specification defined by Ecma International. JavaScript is one of its most 
+        popular implementations. While ES6 (ECMAScript 2015) introduced features like 
+        classes and modules, older browsers may still lack full support. 
+        React provides alternatives to build applications using ES5 syntax.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Create React Class (<code>create-react-class</code>)</h2>
+      <p>
+        To support older browsers without ES6 features, React offers the 
+        <code>create-react-class</code> module. This allows developers to define 
+        components using ES5 syntax.
+      </p>
+      <ul>
+        <li>Create a new React app: <code>create-react-app myapp</code></li>
+        <li>Install <code>create-react-class</code>: <code>npm i create-react-class --save</code></li>
+        <li>Run the application: <code>npm start</code></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Hello World Example</h2>
+      <h3>ES6 Version</h3>
+      <pre><code>import React from 'react';
+class HelloWorldES6 extends React.Component {
+   render() {
+      return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+   }
+}
+export default HelloWorldES6;</code></pre>
+
+      <h3>ES5 Version</h3>
+      <pre><code>var createReactClass = require('create-react-class');
+var HelloWorldES5 = createReactClass({
+   render: function() {
+      return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+   }
+});
+export default HelloWorldES5;</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Using Components</h2>
+      <pre><code>import HelloWorldES5 from "./components/ES5/HelloWorldES5";
+import HelloWorldES6 from "./components/ES5/HelloWorldES6";
+
+function App() {
+   return (
+      &lt;div&gt;
+         &lt;HelloWorldES5 name="Peter" /&gt;
+         &lt;HelloWorldES6 name="John" /&gt;
+      &lt;/div&gt;
+   );
+}
+export default App;</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Default Props</h2>
+      <h3>ES6 Version</h3>
+      <pre><code>class HelloWorld extends React.Component {
+   render() {
+      return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+   }
+}
+HelloWorld.defaultProps = {
+   name: 'John'
+};</code></pre>
+
+      <h3>ES5 Version</h3>
+      <pre><code>var createReactClass = require('create-react-class');
+var HelloWorld = createReactClass({
+   render: function() {
+      return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+   },
+   getDefaultProps: function() {
+      return {
+         name: 'John'
+      };
+   }
+});
+export default HelloWorld;</code></pre>
+      <p>
+        In ES5, <code>getDefaultProps</code> is used to set default property values.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Initial State</h2>
+      <h3>ES6 Version</h3>
+      <pre><code>class BookListES6 extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         list: ['C++ Programming', 'Java Programming']
+      };
+   }
+   render() {
+      return &lt;ol&gt;
+         {this.state.list.map((item) =&gt;
+            &lt;li&gt;{item}&lt;/li&gt;
+         )}
+      &lt;/ol&gt;;
+   }
+}
+export default BookListES6;</code></pre>
+
+      <h3>ES5 Version</h3>
+      <pre><code>var createReactClass = require('create-react-class');
+var BookListES5 = createReactClass({
+   getInitialState: function() {
+      return {
+         list: ['React Programming', 'Javascript Programming']
+      };
+   },
+   render: function() {
+      return &lt;ol&gt;
+         {this.state.list.map((item) =&gt;
+            &lt;li&gt;{item}&lt;/li&gt;
+         )}
+      &lt;/ol&gt;;
+   }
+});
+export default BookListES5;</code></pre>
+      <p>
+        In ES5, <code>getInitialState</code> is used instead of a constructor.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Event Handler Binding</h2>
+      <p>
+        In ES6, event handlers must be explicitly bound to <code>this</code> inside the 
+        constructor:
+      </p>
+      <pre><code>constructor(props) {
+   super(props);
+   this.state = { message: 'Hello!' };
+   this.handleClick = this.handleClick.bind(this);
+}</code></pre>
+      <p>
+        In ES5, binding is not necessary as functions are automatically bound 
+        to <code>this</code>.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Summary</h2>
+      <p>
+        React supports building applications without ES6 by using 
+        <code>create-react-class</code>. ES5 syntax offers alternatives 
+        for default props, initial state, and automatic event binding. 
+        This ensures compatibility with older browsers while still 
+        enabling component-based development.
+      </p>
+    </div>
+  </div>
+</div>

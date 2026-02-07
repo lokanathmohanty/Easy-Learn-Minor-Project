@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Constructor Initialization List ✨</h1>
+
+        <div class="content">
+            <p>A **Constructor Initialization List** is a mechanism used to initialize member variables of a class **before** the execution of the constructor's body. It is an efficient and sometimes compulsory way to ensure members are properly set up as soon as the object memory is allocated.</p>
+
+            <h3>Syntax</h3>
+            <p>The list is placed after the constructor's parameter list, separated by a colon (`:`). Each member to be initialized is followed by its initial value in parentheses, separated by commas.</p>
+            <pre class="example">
+ClassName(type1 param1, type2 param2) 
+   : member1(param1), member2(param2) // Initialization List
+{
+   // Constructor body (runs after initialization list)
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Why Use Initialization Lists?</h2>
+
+        <div class="content">
+            <ol>
+                <li>
+                    <strong>Efficiency (Direct Initialization):</strong> Using an initialization list performs **direct initialization**. If you use assignment (`member = param;`) inside the constructor body, the member is first initialized using its default constructor (if it's a class type like `std::string`), and then assigned a new value. The list skips this redundant two-step process.
+                </li>
+                <li>
+                    <strong>Mandatory Initialization (Special Cases):</strong> Initialization lists are **compulsory** for three main types of members:
+                    <ul>
+                        <li>**Const Member Variables:** Must be initialized immediately, not assigned later.</li>
+                        <li>**Reference Members:** Must be bound to an object upon creation.</li>
+                        <li>**Base Class Members:** Required to call a specific base class constructor.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Special Case: Base Class Initialization</h3>
+            <p>When creating a derived class object, the base class's constructor must be called. This is done through the initialization list:</p>
+            <pre class="example">
+class Derived : public Base {
+   public:
+      // Calls Base(value) before Derived's body runs
+      Derived(int value, int extra) : **Base(value)**, extraValue(extra) {}
+   //...
+};
+</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PowerShell: Aliases</h1>
+    <div class="content">
+      <p>An alias in PowerShell is a shorthand or alternate name for a cmdlet, function, script, or executable file. Aliases help users save time by typing shorter names instead of full cmdlet names.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating Aliases</h2>
+    <div class="content">
+      <p>Use the <code>New-Alias</code> cmdlet to create an alias. For example, the alias <code>help</code> for <code>Get-Help</code> cmdlet:</p>
+      <pre><code>New-Alias -Name help -Value Get-Help
+help Get-WmiObject -Detailed</code></pre>
+      <p>This executes <code>Get-Help</code> via the alias <code>help</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Viewing Aliases</h2>
+    <div class="content">
+      <p>Use <code>Get-Alias</code> to list all aliases in the current session:</p>
+      <pre><code>Get-Alias</code></pre>
+      <p>Sample output:</p>
+      <pre><code>CommandType     Name                     Definition
+-----------     ----                     ----------
+Alias           %                        ForEach-Object
+Alias           ?                        Where-Object
+Alias           ac                       Add-Content
+Alias           asnp                     Add-PSSnapIn
+...</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Additional Notes</h2>
+    <div class="content">
+      <p>Aliases cannot include parameters. To alias a command with specific parameters, define a function instead.</p>
+      <p>Aliases can be made permanent by adding <code>New-Alias</code> or <code>Set-Alias</code> commands to your PowerShell profile script.</p>
+    </div>
+  </div>
+</div>

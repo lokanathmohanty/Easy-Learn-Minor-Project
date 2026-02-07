@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js `&lt;Link&gt;` Component 🔗</h1>
+        
+        <div class="content">
+            <h2 class="title">Overview and Key Features</h2>
+            <p>The **`<Link>` component** is a built-in Next.js feature that extends the standard HTML `<a />` tag. It is essential for **client-side navigation** (making page transitions faster and smoother) and automatically handles **route prefetching** for optimized performance.</p>
+            
+            <p>Any attributes from the standard `<a>` tag (like <span class="example">`className`</span>, <span class="example">`target="_blank"`</span>, or <span class="example">`rel="noopener noreferrer"`</span>) can be passed directly as props to `<Link>` and will be applied to the underlying `<a>` element.</p>
+            
+            <h3 class="title">Basic Syntax:</h3>
+            <pre>import Link from 'next/link' 
+
+export default function Page() {
+    // The 'href' prop is the only required prop for navigation
+    return &lt;Link href="/about"&gt;About Page&lt;/Link&gt;
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Primary Props of the `&lt;Link&gt;` Component</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prop</th>
+                        <th>Description</th>
+                        <th>Effect</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`href`</span></td>
+                        <td>**Required** URL or route path to navigate to.</td>
+                        <td>Defines the destination page.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`prefetch`</span></td>
+                        <td>A boolean to control route preloading. (Defaults to `true` when link is visible.)</td>
+                        <td>When `true`, the target page's JavaScript is loaded in the background for near-instant navigation.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`replace`</span></td>
+                        <td>If `true`, replaces the current URL entry in the browser history stack.</td>
+                        <td>**Prevents** the user from navigating back to the previous page.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`scroll`</span></td>
+                        <td>If `false`, prevents the page from automatically scrolling to the top upon navigation.</td>
+                        <td>Maintains the current scroll position on the new page.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Examples of Advanced `&lt;Link&gt;` Behavior</h2>
+            
+            <h3 class="title">1. Preventing History Back (`replace`)</h3>
+            <p>Setting <span class="example">`replace`</span> to `true` is useful for actions like logging out or completing a workflow where returning to the previous page is not desired.</p>
+            <pre>import Link from 'next/link'
+// Navigates to /dashboard and removes the current page from history
+&lt;Link href="/dashboard" replace&gt;Dashboard&lt;/Link&gt;</pre>
+            
+            <h3 class="title">2. Maintaining Scroll Position (`scroll`)</h3>
+            <p>Setting <span class="example">`scroll`</span> to `false` prevents the default browser behavior of scrolling to the top of the new page, which is helpful when navigating between content on long pages or partial views.</p>
+            <pre>import Link from 'next/link'
+// Navigates without scrolling to the top
+&lt;Link href="/about" scroll={false}&gt;About Page&lt;/Link&gt;</pre>
+
+            <h3 class="title">3. Creating a Persistent Navigation Bar</h3>
+            <p>The `<Link>` component is commonly used within a **Layout Component** (like <span class="example">`app/layout.tsx`</span> in the App Router) to create a navigation bar that appears across all routes, leveraging prefetching for fast access.</p>
+            <pre>// app/layout.tsx file excerpt
+import Link from 'next/link' 
+// ...
+
+&lt;header&gt;
+    &lt;h1&gt;Header Element&lt;/h1&gt;
+    &lt;ul&gt; 
+        &lt;li&gt;&lt;Link href="/"&gt;Home&lt;/Link&gt;&lt;/li&gt; 
+        &lt;li&gt;&lt;Link href="/products"&gt;Products&lt;/Link&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/header&gt;
+&lt;main&gt;{children}&lt;/main&gt;</pre>
+        </div>
+    </div>
+</div>

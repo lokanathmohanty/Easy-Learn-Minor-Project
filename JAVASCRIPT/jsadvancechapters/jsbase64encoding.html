@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Base64 Encoding</h1>
+    <div class="content">
+      <p>
+        Encoding is the process of converting data from one format into another. 
+        In computer science, encoding often means converting text or binary data into a different representation. 
+        It is different from encryption, as encoding does not aim to secure the data, only to represent it in another form.
+      </p>
+      <p>
+        Base64 encoding is commonly used to encode binary data (such as images, audio, or video) into text format. 
+        It represents binary data as an ASCII string using a radix-64 representation.
+      </p>
+      <p>
+        Base64 is widely used in applications like email (via MIME), and for storing complex data inside XML or JSON.
+      </p>
+
+      <h2>String to Base64 Encoding using <code>btoa()</code></h2>
+      <p>
+        The <code>btoa()</code> method encodes a string into a Base64-encoded ASCII string.
+      </p>
+      <p><strong>Syntax:</strong></p>
+      <pre><code>
+btoa(string)
+      </code></pre>
+      <p>
+        The <code>string</code> parameter is the input string to be encoded, and the return value is the Base64-encoded string.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>
+var str = "Tutorials point";
+var encoded = window.btoa(str);
+console.log('The encoded string for "Tutorials point" is ' + encoded);
+      </code></pre>
+
+      <h3>Output</h3>
+      <pre><code>
+The encoded string for "Tutorials point" is VHJ1c3Rpb25zIHBvaW50
+      </code></pre>
+
+      <h2>Base64 Decoding using <code>atob()</code></h2>
+      <p>
+        Decoding converts the encoded string back into the original string. 
+        The <code>atob()</code> method is used to decode a Base64 string.
+      </p>
+      <p><strong>Syntax:</strong></p>
+      <pre><code>
+atob(encodedString)
+      </code></pre>
+      <p>
+        The <code>encodedString</code> parameter is the Base64 input string to decode, and the return value is the original string.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>
+var str = "VHV0b3JpYWxzIHBvaW50";
+var decoded = window.atob(str);
+console.log('The decoded string for "' + str + '" is ' + decoded);
+      </code></pre>
+
+      <h3>Output</h3>
+      <pre><code>
+The decoded string for "VHV0b3JpYWxzIHBvaW50" is Tutorials point
+      </code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        JavaScript provides simple methods for Base64 encoding (<code>btoa()</code>) and decoding (<code>atob()</code>). 
+        These methods are helpful when working with data transfer, embedding binary files in text formats, 
+        or handling data inside JSON/XML safely.
+      </p>
+    </div>
+  </div>
+</div>

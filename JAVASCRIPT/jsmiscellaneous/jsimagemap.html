@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Image Map</h1>
+    <div class="content">
+      <p>You can use JavaScript to create client-side image maps. Client-side image maps are enabled by the <code>usemap</code> attribute for the <code>&lt;img /&gt;</code> tag and defined by special <code>&lt;map&gt;</code> and <code>&lt;area&gt;</code> tags.</p>
+      
+      <p>The image that forms the map is inserted into the page using the <code>&lt;img /&gt;</code> element with an extra attribute called <code>usemap</code>. Its value matches the <code>name</code> of the corresponding <code>&lt;map&gt;</code> element, preceded by a hash (<code>#</code>).</p>
+      
+      <p>The <code>&lt;map&gt;</code> element acts as a container for the <code>&lt;area&gt;</code> elements that define clickable hotspots. The <code>&lt;area&gt;</code> element specifies the shape and coordinates that define each hotspot.</p>
+      
+      <h2>Example</h2>
+      <p>The following code combines image maps and JavaScript to produce a message in a text box when the mouse is moved over different parts of an image:</p>
+      
+      <pre><code>&lt;html&gt;   
+   &lt;head&gt;
+      &lt;title&gt;Using JavaScript Image Map&lt;/title&gt;
+      
+      &lt;script type = "text/javascript"&gt;
+         function showTutorial(name) {
+            document.myform.stage.value = name
+         }
+      &lt;/script&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;form name = "myform"&gt;
+         &lt;input type = "text" name = "stage" size = "20" /&gt;
+      &lt;/form&gt;
+      
+      &lt;!-- Create Mappings --&gt;
+      &lt;img src = "/images/usemap.gif" alt = "HTML Map" border = "0" usemap = "#tutorials"/&gt;
+      
+      &lt;map name = "tutorials"&gt;
+         &lt;area shape="poly" 
+            coords = "74,0,113,29,98,72,52,72,38,27"
+            href = "/perl/index.htm" alt = "Perl Tutorial"
+            target = "_self" 
+            onMouseOver = "showTutorial('perl')" 
+            onMouseOut = "showTutorial('')"/&gt;
+         
+         &lt;area shape = "rect" 
+            coords = "22,83,126,125"
+            href = "/html/index.htm" alt = "HTML Tutorial" 
+            target = "_self" 
+            onMouseOver = "showTutorial('html')" 
+            onMouseOut = "showTutorial('')"/&gt;
+         
+         &lt;area shape = "circle" 
+            coords = "73,168,32"
+            href = "/php/index.htm" alt = "PHP Tutorial"
+            target = "_self" 
+            onMouseOver = "showTutorial('php')" 
+            onMouseOut = "showTutorial('')"/&gt;
+      &lt;/map&gt;
+   &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      
+      <h2>Output</h2>
+      <p>When you hover the mouse over different parts of the image, the corresponding tutorial name appears in the text box.</p>
+    </div>
+  </div>
+</div>

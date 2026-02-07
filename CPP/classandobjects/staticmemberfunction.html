@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Static Member Functions 🛠️</h1>
+
+        <div class="content">
+            <p>A **static member function** is a function that belongs to the **class itself**, not to any specific object (instance) of that class. It is defined using the **<code>static</code>** keyword.</p>
+            <p>The primary advantage is that static functions can be called directly using the **class name** and the **scope resolution operator** (<code>::</code>), without needing to create an object.</p>
+
+            <h3>Syntax</h3>
+            <pre class="example">
+class ClassName {
+   public:
+      static returnType functionName(parameters) {
+         // ...
+      }
+};
+</pre>
+
+            <h3>Calling Syntax</h3>
+            <pre class="example">
+// Calling directly using the class name
+ClassName::functionName(arguments);
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Key Characteristics and Restrictions</h2>
+            <ul>
+                <li>
+                    <strong>No <code>this</code> Pointer:</strong> Since static functions are not associated with any specific object, they **do not have access** to the implicit **<code>this</code> pointer**.
+                </li>
+                <li>
+                    <strong>Access Restriction:</strong> They can **only** access **static data members** and **other static member functions** of the class. They cannot access non-static (instance-specific) data or non-static functions.
+                </li>
+                <li>
+                    <strong>Use Cases:</strong> Static member functions are ideal for tasks involving shared data and logic that don't depend on the state of a particular object, such as:
+                    <ul>
+                        <li>**Counters:** Maintaining a count of active objects.</li>
+                        <li>**Utility Functions:** Implementing helper or mathematical functions (e.g., <code>MathOperation::square()</code>).</li>
+                        <li>**Configuration:** Handling global configuration settings.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Example: Utility Function</h3>
+            <p>The <code>square</code> function is a utility that operates independently of any specific <code>MathOperation</code> object.</p>
+            <pre class="example">
+class MathOperation {
+   public:
+      static int square(int num) {
+         return num * num;
+      }
+};
+
+int main() {
+   // Function is called directly on the class
+   cout &lt;&lt; "Square of 2: " &lt;&lt; MathOperation::square(2) &lt;&lt; endl; 
+   return 0;
+}
+</pre>
+        </div>
+    </div>
+</div>

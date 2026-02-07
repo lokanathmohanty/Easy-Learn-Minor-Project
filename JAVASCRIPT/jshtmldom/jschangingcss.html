@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Changing CSS</h1>
+    <div class="content">
+      <h2>Changing CSS with JavaScript</h2>
+      <p>
+        JavaScript allows you to change the CSS of HTML elements dynamically. Each HTML element in the DOM has a <code>style</code> object containing properties such as <code>color</code>, <code>backgroundColor</code>, <code>fontSize</code>, etc. By updating these properties, you can modify the element’s appearance in real time.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>Use the following syntax to change an element’s style:</p>
+      <pre><code>element.style.property = value;</code></pre>
+
+      <h2>Example: Changing the Style of an HTML Element</h2>
+      <p>
+        In this example, we change the background color of a <code>div</code> element when the user clicks a button.
+      </p>
+      <pre><code>
+&lt;div id="square"&gt;Changing the color of this Div.&lt;/div&gt;
+&lt;button onclick="changeColor()"&gt;Change Color&lt;/button&gt;
+
+&lt;script&gt;
+  function changeColor() {
+    let square = document.getElementById('square');
+    square.style.backgroundColor = 'red';
+  }
+&lt;/script&gt;
+      </code></pre>
+
+      <h2>Changing Style When an Event Triggers</h2>
+      <p>
+        You can also change styles when an event occurs. For example, the code below changes the background color and font size of a div when clicked.
+      </p>
+      <pre><code>
+&lt;div id="square"&gt;Click Me&lt;/div&gt;
+
+&lt;script&gt;
+  const square = document.getElementById('square');
+  square.addEventListener('click', () =&gt; {
+    square.style.backgroundColor = 'green';
+    square.style.fontSize = '25px';
+  });
+&lt;/script&gt;
+      </code></pre>
+
+      <h2>Changing CSS Dynamically</h2>
+      <p>
+        You can update styles dynamically using variables and user inputs. For example, selecting a radio button can change a div’s background color.
+      </p>
+      <pre><code>
+&lt;p id="square"&gt;Select a color&lt;/p&gt;
+&lt;input type="radio" id="yellow" name="color"&gt; Yellow
+&lt;input type="radio" id="green" name="color"&gt; Green
+&lt;input type="radio" id="red" name="color"&gt; Red
+
+&lt;script&gt;
+  let square = document.getElementById('square');
+  let colors = document.getElementsByName('color');
+  for (let i = 0; i &lt; colors.length; i++) {
+    colors[i].addEventListener('change', function () {
+      square.style.backgroundColor = this.id;
+    });
+  }
+&lt;/script&gt;
+      </code></pre>
+
+      <h2>List of Common JavaScript Style Properties</h2>
+      <ul>
+        <li><code>backgroundColor</code> – Sets the background color.</li>
+        <li><code>color</code> – Sets the text color.</li>
+        <li><code>fontSize</code> – Sets the font size.</li>
+        <li><code>width</code> / <code>height</code> – Sets element dimensions.</li>
+        <li><code>margin</code> / <code>padding</code> – Sets spacing.</li>
+        <li><code>border</code> – Sets border style, width, and color.</li>
+        <li><code>display</code> – Controls element display (block, inline, none, etc.).</li>
+        <li><code>opacity</code> – Controls element transparency.</li>
+        <li><code>zIndex</code> – Controls stacking order of elements.</li>
+        <li><code>transform</code> – Applies 2D/3D transformations.</li>
+      </ul>
+
+      <p>
+        There are many more style properties available in the DOM <code>style</code> object for advanced CSS manipulations.
+      </p>
+    </div>
+  </div>
+</div>

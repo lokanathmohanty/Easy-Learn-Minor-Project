@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MySQL Update</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        The UPDATE statement in MySQL allows modifying one or more records in a table. In Node.js, this is achieved by passing the UPDATE query string to the connection's query method.
+      </p>
+
+      <h2>Basic UPDATE Syntax</h2>
+      <pre><code>UPDATE table_name
+SET column1 = expr1, column2 = expr2, ...
+WHERE condition;</code></pre>
+      <p>The WHERE clause restricts the rows to update.</p>
+
+      <h2>Simple UPDATE Example</h2>
+      <pre><code>var mysql = require('mysql');
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "mypassword",
+  database: "mydb"
+});
+
+var qry = "UPDATE employee SET salary = salary + 500;";
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(qry, function(err) {
+    if (err) throw err;
+    console.log("Records updated successfully");
+  });
+  con.end();
+});</code></pre>
+      <p>Check updated data:</p>
+      <pre><code>SELECT name, salary FROM employee;</code></pre>
+
+      <h2>UPDATE with Prepared Statement</h2>
+      <pre><code>var qry = "UPDATE employee SET salary = ? WHERE name = ?";
+var params = [40000, "Anil"];
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(qry, params, function(err) {
+    if (err) throw err;
+    console.log("Record updated successfully");
+
+    // Verify updated record
+    var verifyQry = "SELECT name, salary FROM employee WHERE name = ?";
+    con.query(verifyQry, [params[1]], function(err, results) {
+      if (err) throw err;
+      console.log(results);
+    });
+  });
+  con.end();
+});</code></pre>
+
+      <h2>UPDATE with JOIN</h2>
+      <p>
+        Use JOIN in UPDATE to modify fields in one table based on related data in another table.
+      </p>
+      <pre><code>var qry = `
+UPDATE employees
+INNER JOIN merits ON employees.performance = merits.performance
+SET salary = salary + salary * percentage;
+`;
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(qry, function(err) {
+    if (err) throw err;
+
+    // Check updated employees
+    var checkQry = "SELECT * FROM employees";
+    con.query(checkQry, function(err, results) {
+      if (err) throw err;
+      console.log(results);
+    });
+  });
+  con.end();
+});</code></pre>
+
+      <p>Output example:</p>
+      <pre><code>OkPacket {
+  affectedRows: 6,
+  changedRows: 6,
+  ...
+}
+
+Updated employees:
+[
+  { emp_id: 1, emp_name: 'Mary Doe', performance: 1, salary: 50000 },
+  { emp_id: 2, emp_name: 'Cindy Smith', performance: 3, salary: 66950 },
+  ...
+]</code></pre>
+    </div>
+  </div>
+</div>

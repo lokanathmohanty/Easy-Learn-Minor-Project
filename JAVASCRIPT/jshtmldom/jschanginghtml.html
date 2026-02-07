@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Changing HTML</h1>
+    <div class="content">
+      <h2>Changing HTML with JavaScript</h2>
+      <p>The HTML DOM allows us to change the HTML elements with JavaScript. You can customize or dynamically update the HTML elements using the various methods and properties. For example, you can change the content of the HTML element, remove or add new HTML elements to the web page, or change a particular element's attribute's value.</p>
+      <p>In JavaScript, we can access the HTML elements using <strong>id</strong>, <strong>attribute</strong>, <strong>tag name</strong>, <strong>class name</strong>, etc. After accessing the elements, we can change and manipulate them using properties such as <strong>innerHTML</strong>, <strong>outerHTML</strong> and methods such as <strong>replaceWith()</strong>, <strong>appendChild()</strong> etc.</p>
+
+      <h2>Changing HTML Using innerHTML Property</h2>
+      <p>The <code>innerHTML</code> property is used to replace the HTML content of the element or add new HTML elements as children.</p>
+      <h3>Syntax</h3>
+      <p><code>element.innerHTML = HTML_str;</code></p>
+      <h3>Example</h3>
+      <pre>
+&lt;div id="text"&gt;
+   &lt;p&gt;One&lt;/p&gt;
+   &lt;p&gt;Two&lt;/p&gt;
+&lt;/div&gt;
+&lt;button onclick="changeHTML()"&gt;Change HTML&lt;/button&gt;
+
+&lt;script&gt;
+  function changeHTML() {
+    let text = document.getElementById('text');
+    text.innerHTML = `&lt;div&gt; JavaScript &lt;/div&gt; &lt;div&gt; HTML &lt;/div&gt; &lt;div&gt; CSS &lt;/div&gt;`;
+  }
+&lt;/script&gt;
+      </pre>
+
+      <h2>Changing HTML Using outerHTML Property</h2>
+      <p>The <code>outerHTML</code> property replaces the HTML of the element, including the tags.</p>
+      <h3>Syntax</h3>
+      <p><code>element.outerHTML = HTML_str;</code></p>
+      <h3>Example</h3>
+      <pre>
+&lt;div id="text"&gt;
+   &lt;p&gt;Paragraph One&lt;/p&gt;
+   &lt;p&gt;Paragraph Two&lt;/p&gt;
+&lt;/div&gt;
+&lt;button onclick="changeHTML()"&gt;Change HTML&lt;/button&gt;
+
+&lt;script&gt;
+  function changeHTML() {
+    let text = document.getElementById('text');
+    text.outerHTML = `&lt;img src="logo.png" alt="Logo"&gt;`;
+  }
+&lt;/script&gt;
+      </pre>
+
+      <h2>Replacing HTML Element Using replaceWith()</h2>
+      <p>The <code>replaceWith()</code> method replaces a particular HTML element with a new element.</p>
+      <h3>Syntax</h3>
+      <p><code>old_element.replaceWith(new_element);</code></p>
+      <h3>Example</h3>
+      <pre>
+&lt;div id="text"&gt;Hello World!&lt;/div&gt;
+&lt;button onclick="changeHTML()"&gt;Change HTML&lt;/button&gt;
+
+&lt;script&gt;
+  function changeHTML() {
+    const text = document.getElementById('text');
+    const textNode = document.createElement('p');
+    textNode.innerHTML = "Welcome to the Tutorial!";
+    text.replaceWith(textNode);
+  }
+&lt;/script&gt;
+      </pre>
+
+      <h2>Changing Value of an Attribute</h2>
+      <p>You can access the HTML element and set its attribute value in JavaScript.</p>
+      <h3>Syntax</h3>
+      <p><code>element.attribute = new_value;</code></p>
+      <h3>Example</h3>
+      <pre>
+&lt;img src="logo.png" id="logoImg" width="300px"&gt;
+&lt;button onclick="changeURL()"&gt;Change URL&lt;/button&gt;
+
+&lt;script&gt;
+  function changeURL() {
+    document.getElementById('logoImg').src = "new-logo.png";
+  }
+&lt;/script&gt;
+      </pre>
+
+      <h2>Adding a New Element Using appendChild()</h2>
+      <p>The <code>appendChild()</code> method adds a new HTML child to a parent element.</p>
+      <h3>Syntax</h3>
+      <p><code>element.appendChild(new_element);</code></p>
+      <h3>Example</h3>
+      <pre>
+&lt;div id="fruits"&gt;
+  &lt;p&gt;Banana&lt;/p&gt;
+  &lt;p&gt;Watermelon&lt;/p&gt;
+&lt;/div&gt;
+&lt;button onclick="AddFruit()"&gt;Add Apple&lt;/button&gt;
+
+&lt;script&gt;
+  function AddFruit() {
+    const fruits = document.getElementById("fruits");
+    const p = document.createElement("p");
+    p.innerHTML = "Apple";
+    fruits.appendChild(p);
+  }
+&lt;/script&gt;
+      </pre>
+
+      <h2>Removing a Child Element Using removeChild()</h2>
+      <p>The <code>removeChild()</code> method removes a child element from its parent.</p>
+      <h3>Syntax</h3>
+      <p><code>element.removeChild(child_element);</code></p>
+      <h3>Example</h3>
+      <pre>
+&lt;div id="fruits"&gt;
+  &lt;p&gt;Banana&lt;/p&gt;
+  &lt;p&gt;Watermelon&lt;/p&gt;
+  &lt;p&gt;Apple&lt;/p&gt;
+&lt;/div&gt;
+&lt;button onclick="removeFruit()"&gt;Remove Apple&lt;/button&gt;
+
+&lt;script&gt;
+  function removeFruit() {
+    const fruits = document.getElementById("fruits");
+    const apple = fruits.children[2];
+    fruits.removeChild(apple);
+  }
+&lt;/script&gt;
+      </pre>
+
+      <h2>Using document.write()</h2>
+      <p>The <code>document.write()</code> method replaces the entire content of the webpage.</p>
+      <h3>Syntax</h3>
+      <p><code>document.write(HTML);</code></p>
+      <h3>Example</h3>
+      <pre>
+&lt;button onclick="replaceContent()"&gt;Replace Content&lt;/button&gt;
+
+&lt;script&gt;
+  function replaceContent() {
+    document.write("Hello World");
+  }
+&lt;/script&gt;
+      </pre>
+
+      <p>For more practice, you may try changing the first child element, last child element, and other attributes of HTML elements.</p>
+    </div>
+  </div>
+</div>

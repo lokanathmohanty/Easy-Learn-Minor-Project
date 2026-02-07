@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Process API Improvements (Java 9+)</h1>
+
+        <div class="content">
+            <h2>Overview of the Enhanced Process API ⚙️</h2>
+            <p>The **Java Process API** received substantial improvements in **Java 9**, making it much easier to control and manage operating system processes. The key addition is the **<code>ProcessHandle</code>** interface, which provides comprehensive information about native OS processes.</p>
+
+            <h3>Key Features of <code>ProcessHandle</code></h3>
+            <p>The <code>ProcessHandle</code> class provides access to critical OS-level process data and functionality:</p>
+            <ul>
+                <li><strong>Process ID (PID):</strong> Accessible via <code>pid()</code>.</li>
+                <li><strong>Detailed Info:</strong> Accessed through the nested **<code>ProcessHandle.Info</code>** interface, providing:
+                    <ul>
+                        <li>Start time (<code>startInstant()</code>)</li>
+                        <li>Accumulated CPU time</li>
+                        <li>Command and command line</li>
+                        <li>User and arguments</li>
+                    </ul>
+                </li>
+                <li><strong>Hierarchy:</strong> Methods to get the **parent process** and a stream of **descendant processes** (<code>parent()</code> and <code>descendants()</code>).</li>
+                <li><strong>Lifecycle Control:</strong> Methods to check liveness (<code>isAlive()</code>) and to terminate/destroy processes (<code>destroy()</code>).</li>
+                <li><strong>Asynchronous Action:</strong> The **<code>onExit()</code>** method returns a <code>CompletableFuture</code>, allowing non-blocking, asynchronous actions to be performed when a process exits.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title example">Example: Accessing Current Process Information</h2>
+            <div class="content">
+                <p>The static <code>ProcessHandle.current()</code> method is used to get information about the Java process executing the code.</p>
+                <pre><code>ProcessHandle currentProcess = ProcessHandle.current();
+ProcessHandle.Info info = currentProcess.info();
+
+System.out.printf("Process ID : %s%n", currentProcess.pid());
+System.out.printf("Command name : %s%n", info.command().orElse("N/A"));
+System.out.printf("Start time: %s%n", info.startInstant().map(i -> i.toString()).orElse("N/A"));</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title example">Example: Finding Child Processes</h2>
+            <div class="content">
+                <p>The <code>children()</code> method returns a <code>Stream</code> of <code>ProcessHandle</code> objects for the direct child processes.</p>
+                <pre><code>// Get a stream of child processes
+Stream&lt;ProcessHandle&gt; childProcesses = ProcessHandle.current().children();
+
+// Filter for currently running children and print their details
+childProcesses
+    .filter(ProcessHandle::isAlive)
+    .forEach(childProcess -&gt; {
+        System.out.printf("Child PID: %s, Command: %s%n", 
+            childProcess.pid(), 
+            childProcess.info().command().orElse("N/A")
+        );
+    });</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

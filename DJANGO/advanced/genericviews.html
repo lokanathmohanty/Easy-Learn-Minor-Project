@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Generic Class-Based Views (CBVs) ⚙️</h1>
+        <div class="content">
+            <p>Django's **Generic Views** are classes that implement common web development patterns (like displaying a static page, listing data, or handling forms). They drastically reduce the amount of repetitive boilerplate code compared to traditional function-based views.</p>
+            <p>Unlike classic views, generic views are **classes** (found in <code>django.views.generic</code>) that you either use directly or inherit from. To use a generic view class in a URL configuration, you must call its **<code>.as_view()</code>** class method.</p>
+        </div>
+        <h2 class="example">Using Generic Views for Static Pages (<code>TemplateView</code>)</h2>
+        <div class="content">
+            <p>The **<code>TemplateView</code>** is used to render a template without any complex logic or database interaction.</p>
+
+            <h3>Method 1: Creating a Custom View Class</h3>
+            <p>You can define a class that inherits from <code>TemplateView</code> and specifies the <code>template_name</code> attribute:</p>
+            <pre><code># myapp/views.py
+from django.views.generic import TemplateView
+
+class StaticView(TemplateView):
+   template_name = "static.html"</code></pre>
+            <p>Then, register the class's <code>.as_view()</code> method in <code>urls.py</code>:</p>
+            <pre><code># myapp/urls.py
+from myapp.views import StaticView
+
+urlpatterns = patterns("myapp.views", 
+   (r'^static/$', StaticView.as_view()),)</code></pre>
+
+            <h3>Method 2: Configuring Directly in <code>urls.py</code> (No <code>views.py</code> Change)</h3>
+            <p>For maximum simplicity, you can configure <code>TemplateView</code> directly in the URLconf by passing the <code>template_name</code> as an argument to <code>.as_view()</code>:</p>
+            <pre><code># myapp/urls.py
+from django.views.generic import TemplateView
+
+urlpatterns = patterns("myapp.views",
+   url(r'^static/', TemplateView.as_view(template_name = 'static.html')),)</code></pre>
+
+            <hr>
+
+            <h2>Using Generic Views to List Data (<code>ListView</code>)</h2>
+            <p>The **<code>ListView</code>** class is designed to retrieve and display a list of objects from a database model.</p>
+            <p>To use <code>ListView</code>, you must specify the **<code>model</code>** attribute and the **<code>template_name</code>**:</p>
+            <pre><code># myapp/urls.py
+from django.views.generic import ListView
+
+urlpatterns = patterns(
+   "myapp.views", 
+   url(r'^dreamreals/', ListView.as_view(
+      model = Dreamreal, 
+      template_name = "dreamreal_list.html")),
+)</code></pre>
+
+            <h3>Context Data in <code>ListView</code></h3>
+            <p>By default, <code>ListView</code> passes the list of retrieved objects to the template using the variable name **<code>object_list</code>**.</p>
+            <p>If you prefer a custom variable name, you can set the **<code>context_object_name</code>** argument in <code>.as_view()</code>:</p>
+            <pre><code># Setting context_object_name to 'dreamreals_objects'
+url(r'^dreamreals/', ListView.as_view(
+   template_name = "dreamreal_list.html",
+   model = Dreamreal, 
+   context_object_name = 'dreamreals_objects'),
+)</code></pre>
+
+            <h3>Template Usage</h3>
+            <p>The template iterates over the list (using the default <code>object_list</code> in this example):</p>
+            <pre><code>{% for dr in object_list %}
+   &lt;p&gt;{{dr.name}}&lt;/p&gt;
+{% endfor %}</code></pre>
+        </div>
+    </div>
+</div>

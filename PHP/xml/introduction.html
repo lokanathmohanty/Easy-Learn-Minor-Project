@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Introduction to XML Processing</h1>
+
+        <div class="content">
+            <h2 class="title">What is XML?</h2>
+            <p><strong>XML</strong> (eXtensible Markup Language) is a widely used **data format** for structured document interchange, especially on the Web. It is a text-based format popular for **serialization**—the process of storing, transmitting, and reconstructing data at a destination. A key feature of XML is that it is **both human-readable and machine-readable**.</p>
+            <p>Unlike $\text{HTML}$, which uses predefined tags for formatting, $\text{XML}$ allows users to **define their own tags** to describe the structure and semantics of the data elements.</p>
+
+            <h3 class="title">XML Document Structure</h3>
+            <p>An $\text{XML}$ document has a **hierarchical structure** composed of tags that define elements and attributes. Every document must have a single **root element** that encloses all other elements. Elements can contain data and attributes, which provide additional information about the element.</p>
+            <pre>
+&lt;?xml version = '1.0' encoding = 'UTF-8'?&gt;
+&lt;note&gt;
+   &lt;Course&gt;Android&lt;/Course&gt;
+   &lt;Subject&gt;Android&lt;/Subject&gt;
+   &lt;Company&gt;TutorialsPoint&lt;/Company&gt;
+   &lt;Price&gt;$10&lt;/Price&gt;
+&lt;/note&gt;</pre>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Content Example: Types of XML Parsers in PHP</h2>
+
+            <p>PHP offers built-in support for processing XML data through two main categories of parsers, each suited for different tasks and file sizes:</p>
+
+            <h3>1. Tree-based Parsers (Suitable for Smaller Documents)</h3>
+            <p>These parsers load the **entire XML document into memory** and convert it into a **Tree structure** (Document Object Model or $\text{DOM}$). This allows for easy navigation and modification of the whole document, but can cause performance issues with very large files.</p>
+            <ul>
+                <li><strong>SimpleXML Parser:</strong> A user-friendly, tree-based parser designed for simple XML structures, allowing easy access to elements as objects.</li>
+                <li><strong>DOM XML Parser ($\text{DOMDocument}$):</strong> A complex node parser that provides a comprehensive interface for navigating and modifying the XML file's structure.</li>
+            </ul>
+
+            <h3>2. Event-based Parsers (Suitable for Large Documents)</h3>
+            <p>These parsers **do not load the entire document** into memory. Instead, they read the XML **one node at a time**, triggering events (callbacks) when specific structures (like the start or end of a tag) are encountered. This approach is much faster and more memory-efficient for large files.</p>
+            <ul>
+                <li><strong>XML Expat Parser:</strong> A low-level, event-based parser (based on $\text{SAX}$—Simple API for XML) that is very fast and uses less memory.</li>
+                <li><strong>XMLReader:</strong> Also known as a **Pull XML Parser**, it allows you to pull data from the document as needed, offering a fast and efficient way to read and validate high-complexity XML documents.</li>
+            </ul>
+        </div>
+    </div>
+</div>

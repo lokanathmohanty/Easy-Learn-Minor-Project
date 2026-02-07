@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP - Handle CSV File</h1>
+
+    <div class="content">
+      <p>
+        <strong>CSV (Comma Separated Values)</strong> is a plain text file format used by popular spreadsheet programs to export worksheet data. Each line in the file represents a row, with column values separated by commas.
+      </p>
+
+      <h2>Why Use CSV Files?</h2>
+      <p>
+        CSV files are widely used in PHP due to their simplicity, compatibility with tools like **Excel**, and smaller file size compared to other formats.
+      </p>
+
+      <h2>PHP Functions to Handle CSV Files</h2>
+      <p>
+        PHP provides two primary filesystem functions for CSV handling:
+      </p>
+      <ul>
+        <li>
+          <strong><code>fgetcsv()</code></strong>: Reads a line from a file pointer and parses the CSV fields into an **indexed array**.
+          <pre><code>fgetcsv(resource $stream, ?int $length = null, string $separator = ",", string $enclosure = "\"", string $escape = "\\"): array|false</code></pre>
+          The <code>$stream</code> parameter is a file handle opened in read mode (<code>'r'</code>).
+        </li>
+        <li>
+          <strong><code>fputcsv()</code></strong>: Writes an **indexed array** as a row of comma-separated values to the file pointer.
+          <pre><code>fputcsv(resource $stream, array $fields, string $separator = ",", string $enclosure = "\"", string $escape = "\\", string $eol = "\n"): int|false</code></pre>
+          The target file must be opened in write (<code>'w'</code>) or append (<code>'a'</code>) mode.
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Reading a CSV File (fgetcsv)</h2>
+    <div class="content example">
+      <p>
+        This example demonstrates using <code>fgetcsv()</code> to read a CSV file named <code>'hello.csv'</code> and output the data in an HTML table.
+      </p>
+      <pre><code>&lt;?php
+   $filename = 'hello.csv';
+   $data = [];
+
+   // Open the file in read mode
+   $f = fopen($filename, 'r');
+
+   if ($f === false) {
+      die('Cannot open the file ' . $filename);
+   }
+
+   // Read each line and store the resulting array in $data
+   while (($row = fgetcsv($f)) !== false) {
+      $data[] = $row;
+   }
+
+   // Close the file
+   fclose($f);
+
+   // Render the data in an HTML table
+   echo "&lt;table border=1&gt;";
+   foreach ($data as $row) {
+      echo "&lt;tr&gt;";
+      foreach($row as $val) {
+         // Output each field as a table cell
+         echo "&lt;td&gt;$val&lt;/td&gt;"; 
+      }
+      echo "&lt;/tr&gt;";
+   }
+   echo "&lt;/table&gt;";
+?&gt;</code></pre>
+    </div>
+
+    <h2 class="title">Example: Writing a CSV File (fputcsv)</h2>
+    <div class="content example">
+      <p>
+        This code uses <code>fputcsv()</code> to write a two-dimensional array into a new file named <code>'employee.csv'</code>. The file is opened in write mode (<code>'w'</code>).
+      </p>
+      <pre><code>&lt;?php
+   $data = [
+      ["Name", "Email", "Post", "Salary"],
+      ["Ravishankar", "ravi@gmail.com", "Manager", "40000"],
+      ["Kavita", "kavita@hotmail.com", "Assistant", "25000"],
+      ["Nandkumar", "nandu@example.com", "Programmer", "30000"],
+   ];
+   $filename = 'employee.csv';
+
+   // Open csv file for writing. This will create the file if it doesn't exist.
+   $f = fopen($filename, 'w');
+
+   if ($f === false) {
+      die('Error opening the file ' . $filename);
+   }
+
+   // Write each row array to the file
+   foreach ($data as $row) {
+      fputcsv($f, $row);
+   }
+
+   // Close the file
+   fclose($f);
+?&gt;</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Append and Delete Operations</h2>
+      <p>
+        To **append** new data without overwriting the file, open the file using the **append mode** (<code>"a"</code>) with <code>fopen()</code> before using <code>fputcsv()</code>.
+      </p>
+      <p>
+        To **delete** or **unlink** a CSV file, use the <code>unlink()</code> function, often preceded by <code>file_exists()</code> for safety.
+      </p>
+      <pre><code>&lt;?php
+   $fileToDelete = "old_data.csv";
+
+   if (file_exists($fileToDelete)) {
+      // Delete the file
+      unlink($fileToDelete); 
+      echo "File deleted successfully!";
+   } else {
+      echo "File not found!";
+   }
+?&gt;</code></pre>
+    </div>
+  </div>
+</div>

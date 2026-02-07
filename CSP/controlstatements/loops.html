@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Loops and Control Statements</h1>
+        
+        <h2 class="title">What Are Loops?</h2>
+        <div class="content">
+            <p>A **loop statement** allows a statement or a group of statements to be executed **multiple times**. Loops are a fundamental control structure, allowing the program to perform repetitive tasks without redundant code.</p>
+            
+            <h3>Example: Displaying Array Elements</h3>
+            <pre>
+int[] number = { 1, 2, 3, 5, 6 };
+// The 'for' loop iterates over the array
+for (int i = 0; i < number.Length; i++) {
+   Console.WriteLine(number[i]);
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Types of C# Loops</h2>
+        <div class="content">
+            <p>C# supports three primary loop types, plus the ability to nest them:</p>
+            
+            <h3>1. The `while` Loop (Pre-test Loop)</h3>
+            <p>Repeats a block of code **while** a given condition is true. The condition is tested **before** the loop body executes.</p>
+            <pre>
+int i = 1;
+while (i <= 5) // Condition checked first
+{
+    Console.WriteLine("Number: " + i);
+    i++;
+}
+            </pre>
+            
+            <h3>2. The `for` Loop</h3>
+            <p>A compact structure for iterating a fixed number of times, combining initialization, condition testing, and iteration (increment/decrement) into a single line.</p>
+            <pre>
+// Initialization; Condition; Iterator
+for (int i = 1; i <= 5; i++) 
+{
+    Console.WriteLine("Number: " + i);
+}
+            </pre>
+            
+            <h3>3. The `do...while` Loop (Post-test Loop)</h3>
+            <p>Similar to `while`, but it tests the condition at the **end** of the loop body. This guarantees that the body of the loop executes **at least once**, even if the condition is initially false.</p>
+            <pre>
+int i = 1;
+do
+{
+    Console.WriteLine("Number: " + i);
+    i++;
+} while (i <= 5); // Condition checked last
+            </pre>
+        </div>
+        
+        <h2 class="title">Loop Control Statements</h2>
+        <div class="content">
+            <p>Control statements allow you to alter the normal flow of execution within a loop.</p>
+            
+            <ul>
+                <li><strong>`break` Statement:</strong> Immediately **terminates** the loop (or `switch` statement) and transfers execution to the statement immediately following the loop.</li>
+                <li><strong>`continue` Statement:</strong> Causes the loop to **skip the remainder** of its current iteration and immediately retest its condition to begin the next iteration.</li>
+            </ul>
+            
+            <h3>Example: Using `break`</h3>
+            <pre>
+int count = 10;
+for (int i = 0; i < count; i++) {
+    if (i == 5) {
+       break; // Stops the loop entirely when i is 5
+    }
+    Console.WriteLine(i);
+}
+// Output: 0, 1, 2, 3, 4
+            </pre>
+        </div>
+        
+        <h2 class="title">Infinite Loops</h2>
+        <div class="content">
+            <p>An **infinite loop** occurs when the loop's termination condition never becomes false, causing it to execute indefinitely. This is often an error, but it is sometimes used intentionally in system services or embedded programming.</p>
+            <p>The `for` loop is often used to create an infinite loop by simply omitting the conditional expression, as the absence of a condition assumes <code>true</code>.</p>
+            <pre>
+// The most common structure for an intentional infinite loop
+for (; ; ) {
+   Console.WriteLine("Hey! I am Trapped");
+   // To stop a program in a real-world infinite loop, you need an external break condition or process termination.
+}
+            </pre>
+        </div>
+    </div>
+</div>

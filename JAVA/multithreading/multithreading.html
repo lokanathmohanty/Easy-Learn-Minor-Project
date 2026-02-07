@@ -1,0 +1,111 @@
+<div class="container session">
+  <h1 class="title">Java - Multithreading</h1>
+
+  <div class="content">
+    <p>Java is a multi-threaded programming language, enabling the development of multi-threaded programs. A multi-threaded program contains two or more parts that can run concurrently, with each part handling a different task simultaneously, making optimal use of available resources, especially when the computer has multiple CPUs.</p>
+
+    <p>By definition, multitasking involves multiple processes sharing common processing resources such as a CPU. Multi-threading extends this concept within applications, allowing specific operations within a single application to be subdivided into individual threads. Each thread can run in parallel, with the operating system dividing processing time not only among different applications but also among each thread within an application.</p>
+
+    <h2 class="title">Java Multithreading</h2>
+    <p>Multi-threading enables writing programs where multiple activities can proceed concurrently within the same application. To achieve multithreading, the <code>java.lang.Thread</code> class is utilized.</p>
+
+    <h2 class="title">Life Cycle of a Thread in Java Multithreading</h2>
+    <p>A thread undergoes various stages in its life cycle, including being born, started, running, and eventually dying. The following diagram illustrates the complete life cycle of a thread.</p>
+
+    <h3 class="title">Java Thread Life Cycle</h3>
+    <p>The stages of the thread life cycle are as follows:</p>
+    <ul>
+      <li><strong>New</strong> – A new thread begins its life cycle in the new state. It remains in this state until the program starts the thread. It is also referred to as a born thread.</li>
+      <li><strong>Runnable</strong> – After a newly born thread is started, it becomes runnable. In this state, a thread is considered to be executing its task.</li>
+      <li><strong>Waiting</strong> – A thread transitions to the waiting state while it waits for another thread to perform a task. It returns to the runnable state when another thread signals it to continue executing.</li>
+      <li><strong>Timed Waiting</strong> – A runnable thread can enter the timed waiting state for a specified interval. It transitions back to the runnable state when the time interval expires or when the event it is waiting for occurs.</li>
+      <li><strong>Terminated (Dead)</strong> – A runnable thread enters the terminated state when it completes its task or otherwise terminates.</li>
+    </ul>
+
+    <h2 class="title">Thread Priorities</h2>
+    <p>Every Java thread has a priority that helps the operating system determine the order in which threads are scheduled. Java thread priorities range from <code>MIN_PRIORITY</code> (1) to <code>MAX_PRIORITY</code> (10). By default, every thread is given <code>NORM_PRIORITY</code> (5). Threads with higher priority are more important to a program and should be allocated processor time before lower-priority threads. However, thread priorities cannot guarantee the order in which threads execute and are platform-dependent.</p>
+
+    <h2 class="title">Creating a Thread by Implementing a Runnable Interface</h2>
+    <p>To create a thread, you can implement the <code>Runnable</code> interface. The process involves the following steps:</p>
+    <ol>
+      <li><strong>Implement the run() Method</strong> – Implement the <code>run()</code> method provided by the <code>Runnable</code> interface. This method serves as the entry point for the thread, where you place your business logic.</li>
+      <li><strong>Instantiate a Thread Object</strong> – Create a <code>Thread</code> object using the constructor <code>Thread(Runnable threadObj, String threadName)</code>, where <code>threadObj</code> is an instance of a class that implements the <code>Runnable</code> interface and <code>threadName</code> is the name assigned to the new thread.</li>
+      <li><strong>Start the Thread</strong> – Start the thread by calling the <code>start()</code> method, which invokes the <code>run()</code> method.</li>
+    </ol>
+
+    <h3 class="title">Example: Create Thread by Implementing Runnable Interface</h3>
+    <pre><code>class RunnableDemo implements Runnable {
+  private Thread t;
+  private String threadName;
+
+  RunnableDemo(String name) {
+    threadName = name;
+    System.out.println("Creating " + threadName);
+  }
+
+  public void run() {
+    System.out.println("Running " + threadName);
+    try {
+      for (int i = 4; i > 0; i--) {
+        System.out.println("Thread: " + threadName + ", " + i);
+        Thread.sleep(50);
+      }
+    } catch (InterruptedException e) {
+      System.out.println("Thread " + threadName + " interrupted.");
+    }
+    System.out.println("Thread " + threadName + " exiting.");
+  }
+
+  public void start() {
+    System.out.println("Starting " + threadName);
+    if (t == null) {
+      t = new Thread(this, threadName);
+      t.start();
+    }
+  }
+}
+
+public class TestThread {
+  public static void main(String args[]) {
+    RunnableDemo R1 = new RunnableDemo("Thread-1");
+    R1.start();
+
+    RunnableDemo R2 = new RunnableDemo("Thread-2");
+    R2.start();
+  }
+}</code></pre>
+
+    <h2 class="title">Creating a Thread by Extending the Thread Class</h2>
+    <p>Alternatively, you can create a thread by extending the <code>Thread</code> class, which provides more flexibility in handling multiple threads. The steps are:</p>
+    <ol>
+      <li><strong>Override the run() Method</strong> – Override the <code>run()</code> method in the <code>Thread</code> class to define the thread's behavior.</li>
+      <li><strong>Start the Thread</strong> – Start the thread by calling the <code>start()</code> method, which invokes the <code>run()</code> method.</li>
+    </ol>
+
+    <h3 class="title">Example: Create Thread by Extending Thread Class</h3>
+    <pre><code>class ThreadDemo extends Thread {
+  private Thread t;
+  private String threadName;
+
+  ThreadDemo(String name) {
+    threadName = name;
+    System.out.println("Creating " + threadName);
+  }
+
+  public void run() {
+    System.out.println("Running " + threadName);
+    try {
+      for (int i = 4; i > 0; i--) {
+        System.out.println("Thread: " + threadName + ", " + i);
+        Thread.sleep(50);
+      }
+    } catch (InterruptedException e) {
+      System.out.println("Thread " + threadName + " interrupted.");
+    }
+    System.out.println("Thread " + threadName + " exiting.");
+  }
+
+  public void start() {
+    System.out.println("Starting " +
+::contentReference[oaicite:0]{index=0}
+ 

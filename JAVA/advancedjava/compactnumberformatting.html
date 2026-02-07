@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Compact Number Formatting (Java 12+)</h1>
+
+        <div class="content">
+            <h2>Introduction to Compact Number Formatting</h2>
+            <p><strong>Compact Number Formatting</strong>, introduced in **Java 12**, provides a localized and concise way to format large numbers. This is extremely useful for displaying metrics in dashboards, user interfaces, or reports where space is limited and readability is prioritized (e.g., displaying **1,000 as 1K** or **1,000,000 as 1M**).</p>
+            <p>This feature leverages the **Locale** information to correctly format the suffixes (like 'K', 'M', 'B' in English, or equivalent terms in other languages).</p>
+
+            <h3>Creating a <code>CompactNumberFormat</code> Instance</h3>
+            <p>The formatter instance is obtained via the static <code>getCompactNumberInstance()</code> method of the abstract **<code>NumberFormat</code>** class, requiring two main arguments:</p>
+            <ol>
+                <li>
+                    <strong><code>Locale</code>:</strong> Specifies the localization rules for the format.
+                </li>
+                <li>
+                    <strong><code>NumberFormat.Style</code>:</strong> Defines the desired output style.
+                </li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Formatting Styles</h2>
+            <p>There are two primary styles available for compact formatting:</p>
+            <ul>
+                <li>
+                    <strong><code>NumberFormat.Style.SHORT</code>:</strong> Uses abbreviated suffixes (e.g., <strong>1K</strong>, <strong>1M</strong>).
+                    <pre><code>NumberFormat formatter = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.SHORT);</code></pre>
+                </li>
+                <li>
+                    <strong><code>NumberFormat.Style.LONG</code>:</strong> Uses full, localized words (e.g., <strong>1 thousand</strong>, <strong>1 million</strong>).
+                    <pre><code>NumberFormat formatter = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.LONG);</code></pre>
+                </li>
+            </ul>
+
+            <h3>Handling Fraction Digits</h3>
+            <p>By default, the compact formatter often rounds the number to an integer and suppresses fraction digits. You can control the decimal precision using standard <code>NumberFormat</code> methods:</p>
+            <pre><code>// Sets the minimum number of decimal places to display
+formatter.setMinimumFractionDigits(2); 
+
+// Example: 10012 formatted with 2 fraction digits will be "10.01K"</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title example">Example: Short vs. Long Formats</h2>
+            <div class="content">
+                <p>Demonstration of formatting 1000, 1,000,000, and 1,000,000,000 using US Locale.</p>
+                <pre><code>// --- Short Formats ---
+formatterShort.format(1000); // 1K
+formatterShort.format(1000 * 1000); // 1M
+formatterShort.format(1000 * 1000 * 1000); // 1B
+
+// --- Long Formats ---
+formatterLong.format(1000); // 1 thousand
+formatterLong.format(1000 * 1000); // 1 million
+formatterLong.format(1000 * 1000 * 1000); // 1 billion</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

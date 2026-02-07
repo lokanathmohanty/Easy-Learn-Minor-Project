@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java break Statement</h1>
+    <div class="content">
+      <p>The Java <strong>break</strong> statement is used to exit a loop immediately and transfer control to the next statement after the loop. It has two main usages: to terminate loops instantly and to exit specific cases in a <code>switch</code> statement.</p>
+
+      <h2 class="title">Syntax of break Statement</h2>
+      <p>The break statement is a single statement inside any loop or switch case:</p>
+      <pre><code>break;</code></pre>
+
+      <h2 class="title">Using break with while Loop</h2>
+      <p>Example breaking a while loop to print numbers from 10 to 14 instead of 10 to 19:</p>
+      <pre><code>public class Test {
+  public static void main(String args[]) {
+    int x = 10;
+    while (x &lt; 20) {
+      if (x == 15) {
+        break;
+      }
+      System.out.print("value of x : " + x);
+      x++;
+      System.out.print("\n");
+    }
+  }
+}</code></pre>
+      <p>Output:<br>value of x : 10<br>value of x : 11<br>value of x : 12<br>value of x : 13<br>value of x : 14</p>
+
+      <h2 class="title">Using break with for Loop</h2>
+      <p>Example breaking a for loop early when 30 is encountered in an array:</p>
+      <pre><code>public class Test {
+  public static void main(String args[]) {
+    int[] numbers = {10, 20, 30, 40, 50};
+    for (int index = 0; index &lt; numbers.length; index++) {
+      if (numbers[index] == 30) {
+        break;
+      }
+      System.out.print("value of item : " + numbers[index]);
+      System.out.print("\n");
+    }
+  }
+}</code></pre>
+      <p>Output:<br>value of item : 10<br>value of item : 20</p>
+
+      <h2 class="title">Using break with an Infinite Loop</h2>
+      <p>Example using break to exit an infinite loop when <code>x</code> reaches 15:</p>
+      <pre><code>public class Test {
+  public static void main(String args[]) {
+    int x = 10;
+    while (true) {
+      System.out.print("value of x : " + x);
+      x++;
+      if (x == 15) {
+        break;
+      }
+      System.out.print("\n");
+    }
+  }
+}</code></pre>
+      <p>Output:<br>value of x : 10<br>value of x : 11<br>value of x : 12<br>value of x : 13<br>value of x : 14</p>
+
+      <h2 class="title">Using break with switch Statement</h2>
+      <p>Example of using break to exit switch cases to prevent fall-through behavior:</p>
+      <pre><code>public class Test {
+  public static void main(String args[]) {
+    int day = 3;
+    switch (day) {
+      case 1:
+        System.out.println("Monday");
+        break;
+      case 2:
+        System.out.println("Tuesday");
+        break;
+      case 3:
+        System.out.println("Wednesday");
+        break;
+      case 4:
+        System.out.println("Thursday");
+        break;
+      case 5:
+        System.out.println("Friday");
+        break;
+      case 6:
+        System.out.println("Saturday");
+        break;
+      case 7:
+        System.out.println("Sunday");
+        break;
+      default:
+        System.out.println("Invalid day");
+    }
+  }
+}</code></pre>
+      <p>Output:<br>Wednesday</p>
+    </div>
+  </div>
+</div>

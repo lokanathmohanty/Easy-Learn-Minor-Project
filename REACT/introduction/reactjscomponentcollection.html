@@ -1,0 +1,153 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Component Collection</h1>
+    <div class="content">
+      <p>
+        In modern applications, developers often need to render a list of items (e.g., todos, orders, invoices) 
+        in tabular or gallery format. React provides clear and simple techniques to build list-based UIs 
+        using two main features:
+      </p>
+      <ul>
+        <li>JavaScript's built-in <code>map()</code> method</li>
+        <li>React expressions in JSX</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Map Method</h2>
+    <div class="content">
+      <p>
+        The <code>map()</code> function accepts a collection and applies a mapping function 
+        to each item, returning a new list.
+      </p>
+    </div>
+    <div class="example">
+      <h3>Example: Doubling Numbers</h3>
+      <pre>
+let list = [10, 30, 45, 12, 24];
+let result = list.map((input) => input * 2);
+console.log(result); // [20, 60, 90, 24, 48]
+      </pre>
+    </div>
+    <div class="example">
+      <h3>Example: React Expression</h3>
+      <pre>
+var hello = &lt;h1&gt;Hello!&lt;/h1&gt; 
+var final = &lt;div&gt;{hello}&lt;/div&gt;
+
+// Output: &lt;div&gt;&lt;h1&gt;Hello!&lt;/h1&gt;&lt;/div&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">ExpenseEntryItemList Component</h2>
+    <div class="content">
+      <p>
+        Let’s apply the <code>map()</code> function to build a component that 
+        renders a collection of expense entry items in a table format.
+      </p>
+    </div>
+    <div class="example">
+      <h3>Example: ExpenseEntryItemList.js</h3>
+      <pre>
+import React from 'react';
+import './ExpenseEntryItemList.css';
+
+class ExpenseEntryItemList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const lists = this.props.items.map((item) =>
+      &lt;tr key={item.id}&gt;
+        &lt;td&gt;{item.name}&lt;/td&gt;
+        &lt;td&gt;{item.amount}&lt;/td&gt;
+        &lt;td&gt;{new Date(item.spendDate).toDateString()}&lt;/td&gt;
+        &lt;td&gt;{item.category}&lt;/td&gt;
+      &lt;/tr&gt;
+    );
+
+    return (
+      &lt;table&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;Item&lt;/th&gt;
+            &lt;th&gt;Amount&lt;/th&gt;
+            &lt;th&gt;Date&lt;/th&gt;
+            &lt;th&gt;Category&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          {lists}
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    );
+  }
+}
+
+export default ExpenseEntryItemList;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using Component in index.js</h2>
+    <div class="content">
+      <p>
+        Create an array of items and pass it as props to 
+        <code>ExpenseEntryItemList</code>.
+      </p>
+    </div>
+    <div class="example">
+      <h3>Example: index.js</h3>
+      <pre>
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ExpenseEntryItemList from './components/ExpenseEntryItemList';
+
+const items = [
+  { id: 1, name: "Pizza", amount: 80, spendDate: "2020-10-10", category: "Food" },
+  { id: 2, name: "Grape Juice", amount: 30, spendDate: "2020-10-12", category: "Food" },
+  { id: 3, name: "Cinema", amount: 210, spendDate: "2020-10-16", category: "Entertainment" },
+  { id: 4, name: "Java Programming book", amount: 242, spendDate: "2020-10-15", category: "Academic" },
+  { id: 5, name: "Mango Juice", amount: 35, spendDate: "2020-10-16", category: "Food" },
+  { id: 6, name: "Dress", amount: 2000, spendDate: "2020-10-25", category: "Cloth" },
+  { id: 7, name: "Tour", amount: 2555, spendDate: "2020-10-29", category: "Entertainment" },
+  { id: 8, name: "Meals", amount: 300, spendDate: "2020-10-30", category: "Food" },
+  { id: 9, name: "Mobile", amount: 3500, spendDate: "2020-11-02", category: "Gadgets" },
+  { id: 10, name: "Exam Fees", amount: 1245, spendDate: "2020-11-04", category: "Academic" }
+];
+
+ReactDOM.render(
+  &lt;React.StrictMode&gt;
+    &lt;ExpenseEntryItemList items={items} /&gt;
+  &lt;/React.StrictMode&gt;,
+  document.getElementById('root')
+);
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Output</h2>
+    <div class="content">
+      <p>
+        After running <code>npm start</code>, the output table will look like:
+      </p>
+      <ul>
+        <li><b>Item:</b> Pizza | <b>Amount:</b> 80 | <b>Date:</b> Sat Oct 10 2020 | <b>Category:</b> Food</li>
+        <li><b>Item:</b> Grape Juice | <b>Amount:</b> 30 | <b>Date:</b> Mon Oct 12 2020 | <b>Category:</b> Food</li>
+        <li><b>Item:</b> Cinema | <b>Amount:</b> 210 | <b>Date:</b> Fri Oct 16 2020 | <b>Category:</b> Entertainment</li>
+        <li><b>Item:</b> Java Programming book | <b>Amount:</b> 242 | <b>Date:</b> Thu Oct 15 2020 | <b>Category:</b> Academic</li>
+        <li><b>Item:</b> Mango Juice | <b>Amount:</b> 35 | <b>Date:</b> Fri Oct 16 2020 | <b>Category:</b> Food</li>
+        <li><b>Item:</b> Dress | <b>Amount:</b> 2000 | <b>Date:</b> Sun Oct 25 2020 | <b>Category:</b> Cloth</li>
+        <li><b>Item:</b> Tour | <b>Amount:</b> 2555 | <b>Date:</b> Thu Oct 29 2020 | <b>Category:</b> Entertainment</li>
+        <li><b>Item:</b> Meals | <b>Amount:</b> 300 | <b>Date:</b> Fri Oct 30 2020 | <b>Category:</b> Food</li>
+        <li><b>Item:</b> Mobile | <b>Amount:</b> 3500 | <b>Date:</b> Mon Nov 02 2020 | <b>Category:</b> Gadgets</li>
+        <li><b>Item:</b> Exam Fees | <b>Amount:</b> 1245 | <b>Date:</b> Wed Nov 04 2020 | <b>Category:</b> Academic</li>
+      </ul>
+    </div>
+  </div>
+</div>

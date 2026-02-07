@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Custom Errors</h1>
+    <div class="content">
+      <p>Custom errors are a way to create user-defined error types in JavaScript. This can be useful for handling specific types of errors, such as database errors or HTTP errors.</p>
+      <p>JavaScript contains multiple built-in objects for the errors. Whenever any error occurs in the JavaScript code, it throws an instance of the Error class. However, you can also throw the instance of the Error class with a custom message using the 'throw' statement.</p>
+      <p>In some conditions, developers need to create custom errors. For example, you are taking the user's age in the input. If the user's age is not above 18, you can throw a custom error like 'ageNotValid' for more clarification.</p>
+      <p>Let's understand the syntax of the Error class first, and then you will learn to create custom errors.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The Error Class</h2>
+    <div class="content">
+      <p>In JavaScript, Error is a generic class for the errors. You can create an instance of the Error class and pass the custom message as an argument.</p>
+      <p>The Error class contains three properties: <strong>name</strong>, <strong>message</strong>, and <strong>stack</strong>.</p>
+      <pre><code>class Error {
+   constructor(message) {
+      this.message = message;
+      this.name = "Error"; 
+      this.stack = &lt;call stack&gt;;
+   }
+}</code></pre>
+      <p>The 'stack' property is a non-standard property in the above syntax. It is supported by the Firefox browser only.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating Custom Errors Using the Instance of the Error Class</h2>
+    <div class="content">
+      <p>The easiest way to create a custom error is to create an instance of the Error class and change its properties.</p>
+      <h3 class="title">Syntax</h3>
+      <pre><code>const customError = new Error(message);
+customError.name = "CustomError";</code></pre>
+      <p>Here, we have created the 'Error' class instance and passed the 'message' as an argument. Also, we have changed the value of the 'name' property.</p>
+
+      <h3 class="title">Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const customError = new Error("This is a custom error");
+      customError.name = "CustomError";
+      try {
+         throw customError;
+      } catch (err) {
+         document.getElementById("output").innerHTML = err;
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong><br>CustomError: This is a custom error</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating Custom Errors Using the Function Constructor</h2>
+    <div class="content">
+      <p>You can use the function constructor to create the template for the object. The function constructor should contain the 'name' and 'message' properties.</p>
+      <h3 class="title">Syntax</h3>
+      <pre><code>function validationError(message, name) {
+   this.message = message;
+   this.name = name;
+}
+validationError.prototype = Error.prototype;</code></pre>
+
+      <h3 class="title">Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="demo"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      function validationError(message = "", name = "validationError") {
+         this.message = message;
+         this.name = name;
+      }
+      validationError.prototype = Error.prototype;
+
+      try {
+         let str = 10;
+         if (typeof str != "string") {
+            throw new validationError("Not a string", "NotStringError");
+         } else {
+            output.innerHTML = "String is valid";
+         }
+      } catch (e) {
+         output.innerHTML = e.name + ": " + e.message;
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong><br>NotStringError: Not a string</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating Custom Errors by Extending the Error Class</h2>
+    <div class="content">
+      <p>The best way to create custom errors is by creating a new class and extending it using the 'extends' keyword. It uses the concept of inheritance, and the custom error class inherits the properties of the Error class.</p>
+      <h3 class="title">Syntax</h3>
+      <pre><code>class CustomError extends Error {
+   constructor(message) {
+      super(message)
+      // Initialize properties
+   }
+}</code></pre>
+      <p>In the above code, we call the parent class constructor using the super() method. You can also initialize the properties of the CustomError class in the constructor function.</p>
+      <p>You can use any of the above approaches to create custom errors according to your requirements.</p>
+    </div>
+  </div>
+</div>

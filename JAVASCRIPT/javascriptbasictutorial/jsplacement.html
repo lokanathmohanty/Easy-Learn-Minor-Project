@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Placement in HTML File</h1>
+    <div class="content">
+      <p>
+        There is flexibility to place JavaScript code anywhere in an HTML document. However, the most preferred ways to include JavaScript in an HTML file are as follows:
+      </p>
+      <ul>
+        <li>Script in <code>&lt;head&gt;...&lt;/head&gt;</code> section.</li>
+        <li>Script in <code>&lt;body&gt;...&lt;/body&gt;</code> section.</li>
+        <li>Script in both <code>&lt;body&gt;</code> and <code>&lt;head&gt;</code> sections.</li>
+        <li>Script in an external file and then include it in <code>&lt;head&gt;</code> section.</li>
+      </ul>
+      <p>
+        You can add JavaScript code using the <code>&lt;script&gt;</code> tag.
+      </p>
+
+      <h2>JavaScript in &lt;head&gt; Section</h2>
+      <p>
+        Place scripts in the head section when you want them to run on an event, such as a button click.
+      </p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;script type="text/javascript"&gt;
+      function sayHello() {
+         alert("Hello World")
+      }
+   &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;input type="button" onclick="sayHello()" value="Say Hello" /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>JavaScript in &lt;body&gt; Section</h2>
+      <p>
+        Place scripts in the body section when you want them to run as the page loads.
+      </p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+   &lt;script type="text/javascript"&gt;
+      document.write("Hello World")
+   &lt;/script&gt;
+   &lt;p&gt;This is web page body&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>JavaScript in &lt;head&gt; and &lt;body&gt;</h2>
+      <p>
+        You can combine both approaches and place scripts in the head and body together.
+      </p>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;script type="text/javascript"&gt;
+      function sayHello() {
+         alert("Hello World")
+      }
+   &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;script type="text/javascript"&gt;
+      document.write("Hello World")
+   &lt;/script&gt;
+   &lt;input type="button" onclick="sayHello()" value="Say Hello" /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>JavaScript in External File</h2>
+      <p>
+        External JavaScript allows you to reuse identical code across multiple pages.
+      </p>
+      <h3>filename.js</h3>
+      <pre><code>function sayHello() {
+   alert("Hello World")
+}
+</code></pre>
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+   &lt;script type="text/javascript" src="filename.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   ...
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Adding Multiple Scripts</h2>
+      <pre><code>&lt;head&gt;
+  &lt;script src="filename1.js"&gt;&lt;/script&gt;
+  &lt;script src="filename2.js"&gt;&lt;/script&gt;
+  &lt;script src="filename3.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+
+      <h2>External References</h2>
+      <ul>
+        <li>
+          <strong>Using full file path</strong>
+          <pre><code>&lt;head&gt;
+  &lt;script src="C://javascript/filename.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+        </li>
+        <li>
+          <strong>Using relative file path</strong>
+          <pre><code>&lt;head&gt;
+  &lt;script src="javascript/filename.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+        </li>
+        <li>
+          <strong>Using filename only</strong>
+          <pre><code>&lt;head&gt;
+  &lt;script src="filename.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+        </li>
+      </ul>
+
+      <h2>Advantages of Using the &lt;script&gt; Tag</h2>
+      <ul>
+        <li>Ease of Integration with HTML</li>
+        <li>Immediate Execution</li>
+        <li>Support for Inline and External Scripts</li>
+        <li>Integration of External Libraries and Frameworks</li>
+        <li>Global Scope Access</li>
+      </ul>
+      <h3>Example: Adding jQuery via CDN</h3>
+      <pre><code>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre>
+    </div>
+  </div>
+</div>

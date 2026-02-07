@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Nested try Block in Python</h1>
+    <div class="content">
+      <p>
+        In a Python program, if there is another <code>try-except</code> construct either inside a <code>try</code> block or inside its <code>except</code> block, it is known as a nested try block. Nested try blocks are useful when different blocks like outer and inner may cause different errors and need different error handling.
+      </p>
+
+      <h2>Example 1</h2>
+      <p>A single try-except-finally block handling division by zero with a generic exception.</p>
+      <pre>
+a=10
+b=0
+try:
+   print(a/b)
+except Exception:
+   print("General Exception")
+finally:
+   print("inside outer finally block")
+      </pre>
+      <p>Output:</p>
+      <pre>
+General Exception
+inside outer finally block
+      </pre>
+
+      <h2>Example 2</h2>
+      <p>Nested try-except-finally within an outer try. Outer <code>except</code> handles <code>ZeroDivisionError</code>, inner handles generic exceptions.</p>
+      <pre>
+a=10
+b=0
+try:
+   print(a/b)
+   try:
+      print("This is inner try block")
+   except Exception:
+      print("General exception")
+   finally:
+      print("inside inner finally block")
+except ZeroDivisionError:
+   print("Division by 0")
+finally:
+   print("inside outer finally block")
+      </pre>
+      <p>Output:</p>
+      <pre>
+Division by 0
+inside outer finally block
+      </pre>
+
+      <h2>Example 3</h2>
+      <p>Inner <code>try</code> causes division by zero, handled by inner <code>except</code>. Outer <code>except</code> not triggered.</p>
+      <pre>
+a=10
+b=0
+try:
+   print("This is outer try block")
+   try:
+      print(a/b)
+   except ZeroDivisionError:
+      print("Division by 0")
+   finally:
+      print("inside inner finally block")
+except Exception:
+   print("General Exception")
+finally:
+   print("inside outer finally block")
+      </pre>
+      <p>Output:</p>
+      <pre>
+This is outer try block
+Division by 0
+inside inner finally block
+inside outer finally block
+      </pre>
+
+      <h2>Example 4</h2>
+      <p>Inner <code>try</code> raises <code>ZeroDivisionError</code>, but inner except looks for <code>KeyError</code>. Exception propagates to outer except which handles it.</p>
+      <pre>
+a=10
+b=0
+try:
+   print("This is outer try block")
+   try:
+      print(a/b)
+   except KeyError:
+      print("Key Error")
+   finally:
+      print("inside inner finally block")
+except ZeroDivisionError:
+   print("Division by 0")
+finally:
+   print("inside outer finally block")
+      </pre>
+      <p>Output:</p>
+      <pre>
+This is outer try block
+inside inner finally block
+Division by 0
+inside outer finally block
+      </pre>
+
+    </div>
+
+   
+  </div>
+</div>

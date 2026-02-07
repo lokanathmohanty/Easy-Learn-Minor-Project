@@ -1,0 +1,91 @@
+<div class="container">
+   <div class="session">
+      <h1 class="title">CSS - hyphens Property</h1>
+      <div class="content">
+         <p>
+            The <strong>CSS hyphens property</strong> controls how words are broken into lines when text is too long to fit on a single line. 
+            This is particularly useful in responsive design, where long words might otherwise overflow or create awkward spacing. 
+            The property only applies to <em>block-level elements</em> and improves readability by determining where line breaks may occur.
+         </p>
+
+         <h2>Syntax</h2>
+         <p>The general syntax of the property is:</p>
+         <p><code>hyphens: none | manual | auto | initial | inherit;</code></p>
+
+         <h2>Property Values</h2>
+         <ul>
+            <li><strong>none</strong> – Disables hyphenation completely. Words will not be broken, even if they are too long.</li>
+            <li><strong>manual</strong> – Default value. Hyphenation only occurs where the author manually inserts soft hyphens (<code>&amp;shy;</code>).</li>
+            <li><strong>auto</strong> – Enables the browser to automatically hyphenate words based on language rules.</li>
+            <li><strong>initial</strong> – Resets the property to its default value (manual).</li>
+            <li><strong>inherit</strong> – Inherits the hyphenation property from its parent element.</li>
+         </ul>
+
+         <h2>Prevent Hyphenation with <code>hyphens: none;</code></h2>
+         <p>
+            If you do not want words to break or be hyphenated, set the property to <strong>none</strong>. 
+            This ensures the entire word will remain on the same line.
+         </p>
+         <p><strong>Example:</strong></p>
+         <p>
+            Consider a paragraph inside a narrow container. By setting <code>hyphens: none;</code>, the browser will not break the text:
+         </p>
+         <ul>
+            <li><strong>Code Concept:</strong> <code>p { hyphens: none; }</code></li>
+            <li><strong>Effect:</strong> Words will overflow instead of breaking.</li>
+         </ul>
+         <p>
+            <em>For example:</em><br>
+            "ThisIsAVeryVeryVeryLongWordWithoutAnyHyphenation" would stay on one line and possibly overflow.
+         </p>
+
+         <h2>Manual Hyphenation with <code>hyphens: manual;</code></h2>
+         <p>
+            With the <strong>manual</strong> value, the browser only hyphenates where you insert a soft hyphen (<code>&amp;shy;</code>). 
+            This gives you full control of line-breaking behavior.
+         </p>
+         <p><strong>Example:</strong></p>
+         <p>
+            Text: <br>
+            "This is a much&shy;much&shy;much larger building."
+         </p>
+         <p>
+            In this case, the browser will only break the line at <code>&amp;shy;</code> points when needed.
+         </p>
+
+         <h2>Automatic Hyphenation with <code>hyphens: auto;</code></h2>
+         <p>
+            The <strong>auto</strong> value allows the browser to intelligently insert hyphens at natural breakpoints according to the language's grammar rules. 
+            This is very useful for paragraphs with long words in narrow containers.
+         </p>
+         <p><strong>Example:</strong></p>
+         <p>
+            If a word like "responsiveness" cannot fit on one line, the browser may display it as:<br>
+            "respon-<br>siveness"
+         </p>
+         <p>
+            This prevents overflow and maintains readability without requiring manual intervention.
+         </p>
+
+         <h2>Supported Browsers</h2>
+         <p>Browser support for the <code>hyphens</code> property:</p>
+         <ul>
+            <li><strong>Chrome:</strong> Supported from version 55.0</li>
+            <li><strong>Edge:</strong> Supported from version 79.0</li>
+            <li><strong>Firefox:</strong> Supported from version 43.0</li>
+            <li><strong>Safari:</strong> Supported from version 17.0</li>
+            <li><strong>Opera:</strong> Supported from version 44.0</li>
+         </ul>
+
+         <h2>Summary</h2>
+         <p>
+            The <code>hyphens</code> property gives developers better control over how text behaves in narrow or responsive layouts. 
+            While <code>none</code> ensures words remain unbroken, <code>manual</code> gives precision with soft hyphens, 
+            and <code>auto</code> provides a browser-driven solution that follows language-specific rules.
+         </p>
+         <p>
+            Use this property thoughtfully, especially in multi-language websites, to avoid unexpected breaks and ensure the best reading experience.
+         </p>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Raising Exceptions</h1>
+    <div class="content">
+      <p>
+        In Python, you can raise exceptions explicitly using the <code>raise</code> statement. Raising exceptions allows you to indicate that an error has occurred and to control the flow of your program by handling these exceptions appropriately.
+      </p>
+      <p>
+        Raising an exception means explicitly triggering an error condition in your program. This can be useful when the normal flow of your program cannot continue due to an error or unexpected condition.
+      </p>
+
+      <h2>Raising Built-in Exceptions</h2>
+      <p>
+        You can raise any built-in exception by creating an instance of the exception class and using the <code>raise</code> statement. The syntax is:
+      </p>
+      <pre>raise Exception("This is a general exception")</pre>
+      <h3>Example</h3>
+      <pre>
+def divide(a, b):
+   if b == 0:
+      raise ValueError("Cannot divide by zero")
+   return a / b
+
+try:
+   result = divide(10, 0)
+except ValueError as e:
+   print(e)
+      </pre>
+      <p>Output:</p>
+      <pre>Cannot divide by zero</pre>
+
+      <h2>Raising Custom Exceptions</h2>
+      <p>
+        You can define and raise custom exceptions by creating a new exception class that inherits from <code>Exception</code> or its subclasses.
+      </p>
+      <h3>Example</h3>
+      <pre>
+class MyCustomError(Exception):
+   pass
+
+def risky_function():
+   raise MyCustomError("Something went wrong in risky_function")
+
+try:
+   risky_function()
+except MyCustomError as e:
+   print(e)
+      </pre>
+      <p>Output:</p>
+      <pre>Something went wrong in risky_function</pre>
+
+      <h2>Creating Custom Exceptions with Arguments</h2>
+      <p>
+        Custom exceptions can include additional attributes and methods to provide more detailed context about the error condition.
+      </p>
+      <h3>Example</h3>
+      <pre>
+class InvalidAgeError(Exception):
+   def __init__(self, age, message="Age must be between 18 and 100"):
+      self.age = age
+      self.message = message
+      super().__init__(self.message)
+
+def set_age(age):
+   if age < 18 or age > 100:
+      raise InvalidAgeError(age)
+   print(f"Age is set to {age}")
+
+try:
+   set_age(150)
+except InvalidAgeError as e:
+   print(f"Invalid age: {e.age}. {e.message}")
+      </pre>
+      <p>Output:</p>
+      <pre>Invalid age: 150. Age must be between 18 and 100</pre>
+
+      <h2>Re-Raising Exceptions</h2>
+      <p>
+        Sometimes you may want to catch an exception, perform actions like logging or cleanup, and then re-raise the same exception for further handling up the call stack. Use <code>raise</code> without arguments to re-raise.
+      </p>
+      <h3>Example</h3>
+      <pre>
+def process_file(filename):
+   try:
+      with open(filename, "r") as file:
+         data = file.read()
+         # process data
+   except FileNotFoundError as e:
+      print(f"File not found: {filename}")
+      raise  # Re-raise the exception
+
+try:
+   process_file("nonexistentfile.txt")
+except FileNotFoundError:
+   print("Handling the exception at a higher level")
+      </pre>
+      <p>Output:</p>
+      <pre>
+File not found: nonexistentfile.txt
+Handling the exception at a higher level
+      </pre>
+    </div>
+
+     
+  </div>
+</div>

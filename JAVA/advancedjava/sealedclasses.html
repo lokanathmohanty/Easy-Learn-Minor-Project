@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Sealed Classes and Interfaces (Java 17+)</h1>
+
+        <div class="content">
+            <h2>Introduction to Sealed Types</h2>
+            <p><strong>Sealed Classes and Interfaces</strong>, made standard in **Java 17**, provide a powerful mechanism for controlling **inheritance**. They allow a class or interface (the *sealed type*) to explicitly declare which other classes or interfaces (the *permitted subtypes*) are allowed to directly extend or implement it.</p>
+            <p>This feature enables developers to create a **finite, determinable, and explicit hierarchy** of types, which is useful for scenarios like pattern matching (e.g., with switch expressions) where knowing all possible subtypes upfront is beneficial.</p>
+
+            <h3>Declaration Syntax</h3>
+            <p>A type is sealed using the <code>sealed</code> keyword, followed by the <code>permits</code> keyword to list the allowed subtypes.</p>
+            <pre><code>// Sealed Class Example
+public abstract sealed class Shape permits Circle, Square, Triangle {}
+
+// Sealed Interface Example
+public sealed interface Service permits API, DatabaseAccess {}</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Constraints on Permitted Subtypes</h2>
+            <p>Any class or interface that directly extends or implements a sealed type must satisfy two main constraints:</p>
+            <ol>
+                <li>
+                    <strong>Location:</strong> The permitted subtype must be in the **same module** as the sealed type (or in the same package if residing in the unnamed module).
+                </li>
+                <li>
+                    <strong>Required Modifier:</strong> Every permitted subtype must be explicitly declared using one of three modifiers:
+                    <ul>
+                        <li><strong><code>final</code>:</strong> The inheritance chain stops here. This subtype cannot be extended further.</li>
+                        <li><strong><code>sealed</code>:</strong> The subtype itself is sealed, continuing the restriction but allowing its own further controlled inheritance.</li>
+                        <li><strong><code>non-sealed</code>:</strong> The restriction is removed. This subtype is now open to being extended by any other class, just like a regular class.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Example of Permitted Subtype Modifiers</h3>
+            <pre><code>abstract sealed class Person permits Employee, Manager {}
+
+// 1. Final: Stops the hierarchy
+final class Manager extends Person {}
+
+// 2. Non-sealed: Opens the hierarchy back up
+non-sealed class Employee extends Person {}</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title example">Benefit: Exhaustive Switch Expressions</h2>
+            <div class="content">
+                <p>One of the primary uses of sealed types is enabling the compiler to check for exhaustiveness in switch expressions, meaning you don't need a default case if you cover all permitted subtypes.</p>
+                <pre><code>public static int getId(Person person) {
+    return switch (person) {
+        // Compiler knows these are the ONLY two possibilities because Person is sealed
+        case Employee emp -> emp.getEmployeeId();
+        case Manager mgr -> mgr.getManagerId();
+        // default case is optional IF all sealed permits are covered
+    };
+}</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

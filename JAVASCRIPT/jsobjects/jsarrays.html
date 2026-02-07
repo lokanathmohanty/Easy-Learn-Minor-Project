@@ -1,0 +1,164 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Array</h1>
+    
+    <div class="content">
+      <p>The JavaScript <b>Array</b> object lets you store multiple values in a single variable. Arrays are dynamic, so their size can increase or decrease after creation.</p>
+      
+      <h2>Syntax</h2>
+      <div class="code">
+        <p>const arr = new Array(val1, val2, val3, ..., valN)</p>
+      </div>
+      <p><b>Parameters:</b> Takes multiple values as arguments to initialize an array.</p>
+      <p><b>Return value:</b> Returns an array object.</p>
+      <p><b>Note:</b> If you pass a single numeric value, it creates an array with that length filled with <code>undefined</code>.</p>
+      
+      <h2>Array Literals</h2>
+      <div class="code">
+        <p>const fruits = ["apple", "orange", "mango"];</p>
+      </div>
+      <p>Array elements are accessed by index:</p>
+      <ul>
+        <li><code>fruits[0]</code> → first element</li>
+        <li><code>fruits[1]</code> → second element</li>
+        <li><code>fruits[2]</code> → third element</li>
+      </ul>
+      
+      <h2>Array Properties</h2>
+      <ul>
+        <li><b>constructor</b> - Reference to the array function that created the object.</li>
+        <li><b>length</b> - Number of elements in the array.</li>
+      </ul>
+      
+      <h2>Array Methods</h2>
+      <h3>Static Methods</h3>
+      <ul>
+        <li><b>from()</b> - Creates a shallow copy of the array.</li>
+        <li><b>isArray()</b> - Checks if a value is an array.</li>
+        <li><b>of()</b> - Creates an array from arguments.</li>
+      </ul>
+      
+      <h3>Instance Methods</h3>
+      <ul>
+        <li><b>at()</b> - Get element at a specific index.</li>
+        <li><b>concat()</b> - Joins arrays/values.</li>
+        <li><b>filter()</b> - Creates a new array with elements passing a condition.</li>
+        <li><b>find()</b> - Finds the first matching element.</li>
+        <li><b>map()</b> - Creates a new array with results of a function.</li>
+        <li><b>push()</b> - Adds elements to the end.</li>
+        <li><b>pop()</b> - Removes last element.</li>
+        <li><b>shift()</b> - Removes first element.</li>
+        <li><b>unshift()</b> - Adds elements to the front.</li>
+        <li><b>slice()</b> - Extracts part of an array.</li>
+        <li><b>splice()</b> - Adds/removes elements.</li>
+        <li><b>sort()</b> - Sorts array elements.</li>
+        <li><b>reduce()</b> - Reduces array to a single value.</li>
+      </ul>
+      
+      <h2>Examples</h2>
+      
+      <div class="example">
+        <h3>Creating an Array using Constructor</h3>
+        <div class="code">
+          <p>
+            let strs = new Array("Hello", "World!", "Tutorials Point");<br>
+            let cars = new Array(20);
+          </p>
+        </div>
+        <div class="output">
+          <p>strs ⇒ Hello,World!,Tutorials Point</p>
+          <p>cars ⇒ ,,,,,,,,,,,,,,,,,,,</p>
+        </div>
+      </div>
+      
+      <div class="example">
+        <h3>Creating Arrays using Literals</h3>
+        <div class="code">
+          <p>
+            const arr1 = [10, 40, 50, 60, 80, 90];<br>
+            const arr2 = ["Hello", "Hi", "How", "are", "you?"];<br>
+            const arr3 = [true, false, true, true];
+          </p>
+        </div>
+        <div class="output">
+          <p>arr1 ⇒ 10,40,50,60,80,90</p>
+          <p>arr2 ⇒ Hello,Hi,How,are,you?</p>
+          <p>arr3 ⇒ true,false,true,true</p>
+        </div>
+      </div>
+      
+      <div class="example">
+        <h3>Accessing Array Elements</h3>
+        <div class="code">
+          <p>
+            const nums = [1, 5, 6, 8, 90];<br>
+            nums[0] // 1<br>
+            nums[2] // 6
+          </p>
+        </div>
+        <div class="output">
+          <p>Element at 0th index: 1</p>
+          <p>Element at 2nd index: 6</p>
+        </div>
+      </div>
+      
+      <div class="example">
+        <h3>Array Length</h3>
+        <div class="code">
+          <p>
+            const nums = [1, 5, 6, 8, 90];<br>
+            nums.length; // 5
+          </p>
+        </div>
+        <div class="output">
+          <p>Array length is: 5</p>
+        </div>
+      </div>
+      
+      <div class="example">
+        <h3>Adding Elements</h3>
+        <div class="code">
+          <p>
+            nums.push(6);<br>
+            nums[nums.length] = 7;
+          </p>
+        </div>
+        <div class="output">
+          <p>Updated array: 1,2,3,4,5,6</p>
+          <p>Updated array: 1,2,3,4,5,6,7</p>
+        </div>
+      </div>
+      
+      <div class="example">
+        <h3>Updating Elements</h3>
+        <div class="code">
+          <p>
+            nums[0] = 100;
+          </p>
+        </div>
+        <div class="output">
+          <p>Updated array: 100,2,3,4,5</p>
+        </div>
+      </div>
+      
+      <div class="example">
+        <h3>Traversing an Array</h3>
+        <div class="code">
+          <p>
+            for (let p = 0; p &lt; nums.length; p++) {<br>
+            &nbsp;&nbsp;console.log(nums[p]);<br>
+            }
+          </p>
+        </div>
+        <div class="output">
+          <p>nums[0] ⇒ 1</p>
+          <p>nums[1] ⇒ 2</p>
+          <p>nums[2] ⇒ 3</p>
+          <p>nums[3] ⇒ 4</p>
+          <p>nums[4] ⇒ 5</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

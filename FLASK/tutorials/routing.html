@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask Routing: Binding URLs to Functions</h1>
+        <div class="content">
+            <p><strong>Routing</strong> is a technique used in modern web frameworks to map specific **URLs** (Uniform Resource Locators) to the functions that handle the request for that URL. This enables users to access any desired page directly without needing to navigate from the application's home page.</p>
+
+            <h2>The <code>@app.route()</code> Decorator</h2>
+            <p>The primary method for routing in Flask is the **<code>@app.route()</code>** decorator. It is placed directly above the function you want to execute when a specific URL is accessed.</p>
+
+            <h3>Example: Using the Decorator</h3>
+            <p><code>@app.route('/hello')</code></p>
+            <p><code>def hello_world():</code></p>
+            <p><code>   return 'hello world'</code></p>
+            <p>When a user visits the URL **<code>http://localhost:5000/hello</code>**, the output of the <code>hello_world()</code> function ("hello world") is displayed in the browser.</p>
+        </div>
+
+        <h2 class="title">Alternative Routing Method</h2>
+        <div class="content example">
+            <p>The same purpose served by the <code>@app.route()</code> decorator can also be achieved by calling the **<code>add_url_rule()</code>** function directly on the Flask application object. This approach explicitly adds a URL rule to the application's routing system.</p>
+            <p>The representation equivalent to the decorator example above is:</p>
+            <p><code>app.add_url_rule('/hello', 'hello_world', hello_world)</code></p>
+            <p>*(The arguments typically represent the URL rule, the endpoint name (usually the function name), and the view function itself.)*</p>
+        </div>
+    </div>
+</div>

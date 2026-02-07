@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Carousel</h1>
+    <div class="content">
+      <p>React provides carousel component through third party UI component library. React community provides a large collection of UI / UX components and it is tough to choose the right library for our requirement. Bootstrap UI library is one of the popular choices and React Bootstrap has best support for Carousel component.</p>
+      <p>Let us learn how to use Carousel component from react-bootstrap library in this chapter.</p>
+    </div>
+
+    <h2 class="title">What is Carousel?</h2>
+    <div class="content">
+      <p>Carousel is a slideshow cycling through a series of content with animation support. It accepts images as main content and titles for each slide. It provides navigation buttons or indicators to switch between slides and allows configuration of time duration between slides.</p>
+    </div>
+
+    <h2 class="title">Carousel component</h2>
+    <div class="content">
+      <p>Carousel component allows developers to create simple carousel with bootstrap design in a web application. It accepts two components:</p>
+      <ul>
+        <li><strong>Carousel.Item</strong> − Represents a slide with image content.</li>
+        <li><strong>Carousel.Caption</strong> − Displays description about the slide.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Carousel with Carousel.Item</h2>
+    <div class="content">
+      <p><code>
+&lt;Carousel&gt;<br>
+&nbsp;&nbsp;&lt;Carousel.Item&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;img className="d-block w-100" src="react_bootstrap_carousel_slide1.png" alt="First slide" /&gt;<br>
+&nbsp;&nbsp;&lt;/Carousel.Item&gt;<br>
+&nbsp;&nbsp;&lt;Carousel.Item&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;img className="d-block w-100" src="react_bootstrap_carousel_slide2.png" alt="Second slide" /&gt;<br>
+&nbsp;&nbsp;&lt;/Carousel.Item&gt;<br>
+&lt;/Carousel&gt;
+      </code></p>
+    </div>
+
+    <h2 class="title">Example: Carousel with Carousel.Caption</h2>
+    <div class="content">
+      <p><code>
+&lt;Carousel.Item&gt;<br>
+&nbsp;&nbsp;&lt;img className="d-block w-100" src="react_bootstrap_carousel_slide1.png" alt="First slide" /&gt;<br>
+&nbsp;&nbsp;&lt;Carousel.Caption&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;React Bootstrap&lt;/h3&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;React component library providing bootstrap components&lt;/p&gt;<br>
+&nbsp;&nbsp;&lt;/Carousel.Caption&gt;<br>
+&lt;/Carousel.Item&gt;
+      </code></p>
+    </div>
+
+    <h2 class="title">Carousel Props</h2>
+    <div class="content">
+      <p>Carousel supports the following props:</p>
+      <ul>
+        <li><strong>controls</strong> (boolean) − Enables/disables navigation buttons</li>
+        <li><strong>keyboard</strong> (boolean) − Enables keyboard controls</li>
+        <li><strong>touch</strong> (boolean) − Enables/disables touch controls</li>
+        <li><strong>indicators</strong> (boolean) − Enables/disables slide indicators</li>
+        <li><strong>nextIcon</strong> (React node) − Custom next icon</li>
+        <li><strong>nextLabel</strong> (string) − Custom next label</li>
+        <li><strong>prevIcon</strong> (React node) − Custom previous icon</li>
+        <li><strong>prevLabel</strong> (string) − Custom previous label</li>
+        <li><strong>interval</strong> (number) − Time duration for slides</li>
+        <li><strong>activeIndex</strong> (number) − Index of slide to show</li>
+        <li><strong>slide</strong> (boolean) − Enables/disables auto slide</li>
+        <li><strong>variant</strong> (dark) − Switches carousel theme</li>
+        <li><strong>bsPrefix</strong> (string) − Custom CSS class prefix</li>
+        <li><strong>onSelect</strong> (function) − Event handler for selecting a slide</li>
+        <li><strong>onSlide</strong> (function) − Event handler for slide change</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Carousel.Item Props</h2>
+    <div class="content">
+      <ul>
+        <li><strong>interval</strong> (number) − Time duration for individual slide</li>
+        <li><strong>bsPrefix</strong> (string) − Custom CSS class prefix</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Applying Carousel component</h2>
+    <div class="content">
+      <p>Create and start a react application:</p>
+      <p><code>
+create-react-app myapp<br>
+cd myapp<br>
+npm start
+      </code></p>
+      <p>Install bootstrap and react-bootstrap:</p>
+      <p><code>npm install --save bootstrap react-bootstrap</code></p>
+      <p>Example component (<code>SimpleCarousel.js</code>):</p>
+      <p><code>
+import { Carousel } from 'react-bootstrap';<br>
+function SimpleCarousel() {<br>
+&nbsp;&nbsp;return (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;Carousel fade indicators={false} controls={false}&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Carousel.Item&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;img className="d-block w-100" src="react_bootstrap_carousel_slide1.png" alt="First slide" /&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Carousel.Caption&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;React Bootstrap&lt;/h3&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;React component library providing bootstrap components&lt;/p&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Carousel.Caption&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Carousel.Item&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// more slides...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Carousel&gt;<br>
+&nbsp;&nbsp;);<br>
+}<br>
+export default SimpleCarousel;
+      </code></p>
+      <p>Example usage in <code>App.js</code>:</p>
+      <p><code>
+import './App.css'<br>
+import "bootstrap/dist/css/bootstrap.min.css";<br>
+import SimpleCarousel from './Components/SimpleCarousel'<br><br>
+function App() {<br>
+&nbsp;&nbsp;return (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div className="container"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SimpleCarousel /&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+&nbsp;&nbsp;);<br>
+}<br>
+export default App;
+      </code></p>
+    </div>
+
+    <h2 class="title">Example: Add controls and indicators</h2>
+    <div class="content">
+      <p>Update <code>SimpleCarousel</code> to enable controls and indicators:</p>
+      <p><code>
+&lt;Carousel fade indicators={true} controls={true}&gt;<br>
+&nbsp;&nbsp;&lt;Carousel.Item&gt;<br>
+&nbsp;&nbsp;// ...<br>
+&lt;/Carousel&gt;
+      </code></p>
+    </div>
+
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <p>React-bootstrap Carousel component provides all necessary options to create a clean and simple carousel component with customization support.</p>
+    </div>
+  </div>
+</div>

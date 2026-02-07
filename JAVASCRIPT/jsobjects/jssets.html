@@ -1,0 +1,156 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Sets</h1>
+
+    <div class="content">
+      <p>
+        A JavaScript <strong>Set</strong> object is a collection of unique values. Each value can only occur once in a Set. A Set can hold any value of any data type. The sets were introduced in ECMAScript 6 (ES6).
+      </p>
+      <p>
+        JavaScript Sets are similar to Arrays, but there are some key differences:
+      </p>
+      <ul>
+        <li>Sets can only hold unique values, while Arrays can hold duplicate values.</li>
+        <li>Sets are not ordered, while Arrays are ordered.</li>
+        <li>Sets are faster to add and remove items from than Arrays.</li>
+      </ul>
+      <p>
+        JavaScript Sets are often used to store unique values, such as the unique users who have visited a website. They can also be used to remove duplicate values from an Array.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Syntax</h2>
+      <p>
+        You can define a Set using the <code>Set()</code> constructor:
+      </p>
+      <pre><code>let set1 = new Set([iterable]);</code></pre>
+      <p>
+        <strong>Parameters:</strong> Iterable − An optional parameter. The constructor function traverses through the elements of the iterable and creates a new set using those elements.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Examples</h2>
+
+      <h3>Access Set Elements</h3>
+      <pre><code>
+const num_set = new Set([10, 20, 20, 20]);
+
+for (let value of num_set.values()) {
+   console.log(value);
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>10</li>
+        <li>20</li>
+      </ul>
+
+      <h3>Insert Elements into Sets</h3>
+      <pre><code>
+const num_set = new Set();
+num_set.add(60);
+num_set.add(50);
+num_set.add(50);
+
+for (let value of num_set.values()) {
+   console.log(value);
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>60</li>
+        <li>50</li>
+      </ul>
+
+      <h3>Remove Set Elements</h3>
+      <pre><code>
+let num_set = new Set([100, 200, 300, 400, 500]);
+
+num_set.delete(200);
+num_set.delete(400);
+
+for (let value of num_set.values()) {
+   console.log(value);
+}
+      </code></pre>
+
+      <h3>Check if Set Contains Value</h3>
+      <pre><code>
+const num_set = new Set([100, 200, 300, 400, 500]);
+console.log(num_set.has(100)); // true
+      </code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Mathematical Set Operations</h2>
+      <p>
+        JavaScript's <code>Set</code> does not include built-in methods for union, intersection, or difference. You can implement them using custom code.
+      </p>
+
+      <h3>Union of Two Sets</h3>
+      <pre><code>
+const set1 = new Set(["BMW", "Audi", "TATA"]);
+const set2 = new Set(["BMW", "TaTa", "Honda", "Suzuki"]);
+
+const union = new Set([...set1, ...set2]);
+console.log(union);
+      </code></pre>
+
+      <h3>Intersection of Two Sets</h3>
+      <pre><code>
+const set1 = new Set(["BMW", "Audi", "TATA"]);
+const set2 = new Set(["BMW", "TATA", "Honda", "Suzuki"]);
+
+const inter = new Set();
+for (let car of set1) {
+   if (set2.has(car)) {
+      inter.add(car);
+   }
+}
+console.log(inter);
+      </code></pre>
+
+      <h3>Difference of Two Sets</h3>
+      <pre><code>
+const set1 = new Set(["BMW", "Audi", "TATA"]);
+const set2 = new Set(["BMW", "TATA", "Honda", "Suzuki"]);
+
+const diff = new Set(set1);
+for (let car of set2) {
+   diff.delete(car);
+}
+console.log(diff);
+      </code></pre>
+    </div>
+
+    <div class="content">
+      <h2>JavaScript Set Reference</h2>
+
+      <h3>Constructor</h3>
+      <ul>
+        <li><code>Set()</code> – Creates and returns a set of unique values.</li>
+      </ul>
+
+      <h3>Properties</h3>
+      <ul>
+        <li><code>size</code> – Returns the size of the set.</li>
+      </ul>
+
+      <h3>Methods</h3>
+      <ul>
+        <li><code>add()</code> – Insert elements into the set.</li>
+        <li><code>clear()</code> – Removes all elements from the set.</li>
+        <li><code>delete()</code> – Deletes a single element.</li>
+        <li><code>difference()</code> – Returns elements in the first set but not in the second.</li>
+        <li><code>entries()</code> – Returns an iterator containing all entries.</li>
+        <li><code>forEach()</code> – Executes a function once per value.</li>
+        <li><code>has()</code> – Checks if an element exists.</li>
+        <li><code>intersection()</code> – Returns common elements in both sets.</li>
+        <li><code>keys()</code> – Alias for values().</li>
+        <li><code>values()</code> – Returns a new Set iterator object containing values.</li>
+      </ul>
+    </div>
+  </div>
+</div>

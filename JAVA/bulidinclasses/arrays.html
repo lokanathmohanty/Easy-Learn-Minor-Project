@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Arrays</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Data Structures</h1>
+            <h2 class="subtitle">Session: Arrays</h2>
+        </header>
+
+        <section class="content introduction">
+            <h2 class="subtitle">What are Arrays in Java?</h2>
+            <p>An **array** is a fundamental data structure in Java used to store a **fixed-size sequential collection of elements of the same data type**. Arrays provide a way to store multiple variables of the same type under a single reference name.</p>
+            <p>Array elements are accessed using a **0-based index**, meaning the first element is at index <code>0</code> and the last element is at index <code>arrayRefVar.length - 1</code>.</p>
+        </section>
+
+        <hr>
+
+        <section class="content declaration">
+            <h2 class="subtitle">Declaring and Creating Arrays</h2>
+
+            <h3>Declaration Syntax</h3>
+            <p>The preferred syntax for declaring an array reference variable is:</p>
+            <pre><code>dataType[] arrayRefVar; // Preferred style (e.g., double[] myList;)</code></pre>
+
+            <h3>Creation and Initialization</h3>
+            <p>Arrays are objects in Java and must be created using the **<code>new</code>** operator, which allocates memory for the elements. Declaring and creating can be combined:</p>
+            <pre><code>// 1. Creation with size (elements initialized to default values)
+dataType[] arrayRefVar = new dataType[arraySize];
+
+// 2. Creation with initialization values (size determined by elements)
+dataType[] arrayRefVar = {value0, value1, ..., valuek};</code></pre>
+        </section>
+
+        <hr>
+
+        <section class="content processing">
+            <h2 class="subtitle">Processing Array Elements</h2>
+
+            <h3>Standard `for` Loop</h3>
+            <p>Used when you need to access the index of the elements (e.g., for reversing an array, or calculating sums):</p>
+            <pre><code>double total = 0;
+for (int i = 0; i &lt; myList.length; i++) {
+   total += myList[i]; // Accessing element by index
+}</code></pre>
+
+            <h3>Enhanced `for` Loop (`foreach`)</h3>
+            <p>Introduced in JDK 1.5, this loop simplifies iterating over all elements sequentially when the index is not needed:</p>
+            <pre><code>// Print all the array elements
+for (double element: myList) {
+   System.out.println(element); // Accessing element value directly
+}</code></pre>
+        </section>
+
+        <hr>
+
+        <section class="content methods">
+            <h2 class="subtitle">Arrays and Methods</h2>
+
+            <h3>Passing Arrays to Methods</h3>
+            <p>Arrays are reference types in Java. When an array is passed to a method, the method receives a copy of the **reference** to the array. Changes made to the array elements inside the method affect the original array.</p>
+            <pre><code>public static void printArray(int[] array) {
+   // ... processing array
+}</code></pre>
+
+            <h3>Returning an Array from a Method</h3>
+            <p>A method can declare an array as its return type, allowing it to generate and return a new array object.</p>
+            <pre><code>public static int[] reverse(int[] list) {
+   int[] result = new int[list.length];
+   // logic to reverse elements
+   return result; // Returns a reference to the new array
+}</code></pre>
+
+            <h3>The `java.util.Arrays` Class</h3>
+            <p>This class provides static utility methods for common array operations, overloaded for all primitive types:</p>
+            <ul>
+                <li><code>**sort(Object[] a)**</code>: Sorts the array into ascending order.</li>
+                <li><code>**binarySearch(Object[] a, Object key)**</code>: Searches for a value (array must be sorted first).</li>
+                <li><code>**equals(Object[] a, Object[] a2)**</code>: Compares two arrays for equality (same elements in the same order).</li>
+                <li><code>**fill(int[] a, int val)**</code>: Assigns a specified value to every element of the array.</li>
+            </ul>
+        </section>
+
+    </div>
+
+</body>
+</html>

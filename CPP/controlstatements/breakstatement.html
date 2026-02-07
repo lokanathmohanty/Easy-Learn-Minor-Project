@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ <code>break</code> Statement (Loop Termination) 🛑</h1>
+
+        <div class="content">
+            <p>The **<code>break</code> statement** is a loop control statement used to immediately and unconditionally **terminate** the execution of the innermost enclosing loop (`for`, `while`, or `do...while`) or `switch` statement.</p>
+            <p>Once <code>break</code> is encountered, program control instantly resumes at the next statement following the terminated loop or <code>switch</code> block.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Usage in Loops and Nesting</h2>
+            <ul>
+                <li>
+                    **Loops:** When used inside any loop, `break` provides an **early exit** from the loop, even if the primary loop condition might still be true.
+                </li>
+                <li>
+                    **Switch Statement:** `break` is essential in `switch` statements to prevent **fall-through**—ensuring that only the code block for the matched `case` is executed.
+                </li>
+                <li>
+                    **Nested Loops:** If a `break` is used inside an inner loop, it only terminates that **innermost loop**. The outer loop continues its execution from its next iteration.
+                </li>
+            </ul>
+
+            <h3>Example Analysis: Early Termination</h3>
+            <p>In the provided example, the `do...while` loop is set to run until `a` is 20, but the `if` condition forces an early exit.</p>
+            <pre class="example">
+int a = 10;
+do {
+    cout << "value of a: " << a << endl; // Line executes
+    a = a + 1;
+    if( a > 15) { // Check if a > 15
+        break; // Loop terminates when a becomes 16
+    }
+} while( a < 20 ); 
+</pre>
+            <p>The loop stops as soon as `a` is incremented to 16. The final output confirms that the last value printed was 15, and the loop terminated before reaching the overall condition limit of 20:</p>
+            <pre class="example">
+value of a: 10 (a becomes 11)
+value of a: 11 (a becomes 12)
+value of a: 12 (a becomes 13)
+value of a: 13 (a becomes 14)
+value of a: 14 (a becomes 15)
+value of a: 15 (a becomes 16) -&gt; 16 > 15 is TRUE, BREAK!
+</pre>
+        </div>
+    </div>
+</div>

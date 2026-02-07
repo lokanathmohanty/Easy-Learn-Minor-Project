@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">CSS - Image Sprites</h1>
+        <div class="content">
+            <p>
+                CSS Image Sprite combines multiple images into a single image file (the sprite image) and displays the images using coordinates inside the sprite image. It helps in reducing the number of server requests and improves the website performance.
+            </p>
+            <p>
+                Image sprites are generally used for icons, buttons, and other smaller graphics on a website. CSS is then used to display specific parts of the sprite image as needed.
+            </p>
+
+            <h2>How to Implement Image Sprite in CSS?</h2>
+            <p>We will follow the steps mentioned below to implement image sprites in CSS.</p>
+            <ul>
+                <li><strong>Create Sprite Image:</strong> First, we create an image containing all the individual images that you want to use as a sprite by using photo editing tools like Adobe Photoshop.</li>
+                <li><strong>Determine Position of Images:</strong> Precisely note down the coordinates of the top-left corner of all the sub-images inside the main sprite image. This can later be used in CSS, to render that part of the image.</li>
+                <li><strong>Display the Image:</strong> We have used CSS <code>background-image</code> property to display the sprite image on a webpage.</li>
+                <li><strong>Adjust the position:</strong> We have used <code>background-position</code> to specify the top left corner of the inner image in the sprite image. Then we have used CSS <code>height</code> and <code>width</code> properties for specifying the dimensions from the top left corner that should be rendered.</li>
+            </ul>
+
+            <h2>CSS Code Example</h2>
+            <pre>
+.sprite-icon {
+    width: 75px; 
+    height: 75px; 
+    background-image: url('sprites.png'); 
+    background-position: -40px -40px; 
+}
+            </pre>
+            <p>
+                In the above example, first we specified height and width of sub image as 75px. Then we specified URL of sprite image, which contains all the inner images. Finally, we positioned the top-left corner of the inner image using <code>background-position</code>.
+            </p>
+
+            <h2>CSS Image Sprites Basic Example</h2>
+            <p>The following example demonstrates how to use CSS image sprites to display multiple images from a single image file.</p>
+            <h3>Example</h3>
+            <p><a href="#">Open Compiler</a></p>
+            <pre>
+&lt;div class="bootstrap"&gt;&lt;/div&gt;
+&lt;div class="html"&gt;&lt;/div&gt;
+&lt;div class="css"&gt;&lt;/div&gt;
+            </pre>
+
+            <h2>CSS Image Sprites Hover Effect</h2>
+            <p>The following example demonstrates the use of hover effects on image sprites where the images become slightly transparent when you hover over them.</p>
+            <h3>Example</h3>
+            <p><a href="#">Open Compiler</a></p>
+            <pre>
+.bootstrap:hover, .html:hover, .css:hover {
+    opacity: 0.7;
+}
+            </pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Hashing and Cryptographic Functions</h1>
+
+        <div class="content">
+            <p><strong>Hashing</strong> is a technique used to encrypt data (usually text) into a fixed-length value, known as the **hash** or **message digest**. The process is **one-way**—it's computationally infeasible to reverse the hash to obtain the original key (pre-image). PHP provides an extensive library of functions and algorithms for hashing.</p>
+
+            <hr>
+
+            <h2 class="title">Applications of Hashing 🔒</h2>
+            <ul>
+                <li><strong>Password Authentication:</strong> Instead of storing user passwords directly, the server stores the hash of the password. When a user logs in, the submitted password is **hashed** and the result is compared against the stored hash. This protects the original password from theft.</li>
+                <li><strong>Data Integrity:</strong> Hashing verifies that data (like a downloaded file) has not been tampered with or corrupted during transfer. The original hash value is published, and the user can hash the downloaded file and compare the two digests.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Hashing Algorithms in PHP</h2>
+            <p>PHP supports a wide variety of algorithms, each producing a different fixed-length output:</p>
+            <ul>
+                <li><strong>MD5:</strong> A 128-bit hash function, often represented as a 32-digit hexadecimal number. Used primarily for file integrity verification. (e.g., "frog" hashes to $\text{8b1a...4d7}$).</li>
+                <li><strong>SHA (Secure Hash Algorithm):</strong> A family of standards. **SHA-1** is 160-bit. **SHA-2** is a family of hashes, most commonly used at **256-bit** ($\text{SHA256}$).</li>
+                <li>**HMAC (Hash-Based Message Authentication Code):** A technique that uses a cryptographic hash function *and* a **secret key** to provide both data integrity and authentication.</li>
+                <li>**PBKDF2 (Password-Based Key Derivation Function 2):** A **key stretching** algorithm specifically designed to make password cracking computationally expensive, thus more secure for password hashing than MD5 or simple SHA.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Core PHP Hash Functions</h2>
+
+            <h3>1. $\text{hash()}$ (Hashing a String)</h3>
+            <p>Generates the hash value (message digest) for a given string of data.</p>
+            <pre>hash(string $algo, string $data, bool $binary = false): string|false</pre>
+            <ul>
+                <li>$\text{\$algo}$: The specific hashing algorithm to use (e.g., $\text{"sha256"}$, $\text{"md5"}$).</li>
+                <li>$\text{\$data}$: The string message to be hashed.</li>
+                <li>$\text{\$binary}$: If $\text{true}$, outputs raw binary data; otherwise, outputs lowercase hexadecimal digits (hexits).</li>
+            </ul>
+            <div class="example">
+                <pre>&lt;?php
+   $message = 'The quick brown fox jumped over the lazy dog.';
+   echo hash('md5', $message);
+   // Output: 5c6ffbdd40d9556b73a21e63c3e0e904
+?&gt;</pre>
+            </div>
+
+            ### 2. $\text{hash\_file()}$ (Hashing a File)
+            <p>Calculates the message digest for the entire contents of a specified file. This is crucial for verifying data integrity after file transfer.</p>
+            <pre>hash_file(string $algo, string $filename, bool $binary = false): string|false</pre>
+            <ul>
+                <li>$\text{\$filename}$: The path or URL of the file to be hashed.</li>
+            </ul>
+            
+            ### 3. $\text{hash\_algos()}$ (Listing Supported Algorithms)
+            <p>Returns a numerically indexed array containing the names of all hashing algorithms supported by the current PHP installation.</p>
+            <pre>hash_algos(): array</pre>
+        </div>
+    </div>
+</div>

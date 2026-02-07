@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask Deployment: Moving to a Production Environment 🚀</h1>
+        <div class="content">
+            <p>Deploying a Flask application involves transitioning from the limited **development server** to a robust **production environment** that can handle real-world traffic and security needs.</p>
+
+            <h2>Externally Visible Server (Development Stage)</h2>
+            <p>By default, the Flask development server is only accessible from the local machine (<code>127.0.0.1</code>). This is a security measure, especially when debugging is enabled, as arbitrary code execution is possible.</p>
+            <p>To make the development server available to other users on a local network (if debugging is disabled), you can change the host parameter:</p>
+            <p><code>app.run(host = '0.0.0.0')</code></p>
+            <p>Setting the host to **<code>0.0.0.0</code>** instructs the operating system to listen on all public IP addresses accessible to the machine.</p>
+
+            <hr>
+
+            <h2>Production Deployment Options</h2>
+            <p>For a production environment, you must deploy the application on a real web server. Options vary based on whether you prefer managed hosting or a dedicated server setup.</p>
+
+            <h3>Managed & Hosted Platforms</h3>
+            <p>These cloud platforms offer easier deployment, often including free tiers suitable for small applications:</p>
+            <ul>
+                <li>**Heroku:** A platform-as-a-service (PaaS) that supports quick deployment of Python applications.</li>
+                <li>**dotcloud** (now part of Docker services) and **webfaction** (hosting provider).</li>
+                <li>**Google Cloud Platform:** Provides infrastructure and services for deploying Flask apps.</li>
+                <li>**Localtunnel:** A utility to quickly share a localhost application over the internet without manual DNS or firewall configuration.</li>
+            </ul>
+
+            <hr>
+
+            <h3>Dedicated Web Server Options (WSGI Servers)</h3>
+            <p>For greater control, Flask applications are typically deployed using a **WSGI-compliant server**. WSGI (Web Server Gateway Interface) is the standard interface between Python web applications and web servers.</p>
+
+            <h4>1. mod_wsgi (Apache Module)</h4>
+            <p>**<code>mod_wsgi</code>** is an Apache HTTP Server module that provides native WSGI support for hosting Python applications.</p>
+            <ul>
+                <li>**Installation:** Use <code>pip install mod_wsgi</code>.</li>
+                <li>**<code>.wsgi</code> File:** A necessary file (e.g., <code>yourapplication.wsgi</code>) is created to be executed by <code>mod_wsgi</code> on startup. Its main purpose is to import and expose the Flask application object:
+                    <p><code>from yourapplication import app as application</code></p>
+                </li>
+                <li>**Apache Configuration:** The Apache configuration (e.g., inside a <code>&lt;VirtualHost&gt;</code> block) must use the **<code>WSGIScriptAlias</code>** directive to map a URL path to your <code>.wsgi</code> file, telling Apache where to find the application.</li>
+            </ul>
+
+            <h4>2. Standalone WSGI Containers</h4>
+            <p>These servers are written in Python and are designed specifically to efficiently run WSGI applications and serve HTTP requests. They are often used alongside a traditional web server (like Nginx or Apache) acting as a reverse proxy.</p>
+            <ul>
+                <li>**Gunicorn (Green Unicorn):** A common, robust, pre-forked worker model server for running Python web apps.</li>
+                <li>**Tornado:** A Python web framework and asynchronous networking library.</li>
+                <li>**Gevent:** A coroutine-based Python networking library.</li>
+                <li>**Twisted Web:** A popular event-driven networking engine.</li>
+            </ul>
+        </div>
+    </div>
+</div>

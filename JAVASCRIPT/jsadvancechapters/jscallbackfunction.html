@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Callback Function</h1>
+    <div class="content">
+      <p>
+        In JavaScript, functions are treated as objects, which means they can be passed around just like variables. 
+        One common use case is passing a function as an argument to another function. When the passed function is 
+        later invoked inside that function, it is called a <strong>callback function</strong>.
+      </p>
+      <p>
+        Callback functions provide a way to control when and how a certain piece of code should run, 
+        especially for asynchronous operations like server requests or event handling.
+      </p>
+
+      <h2>Why do we need Callback Functions?</h2>
+      <ul>
+        <li>To run a piece of code after another function finishes execution.</li>
+        <li>To handle asynchronous operations (e.g., data loading, user input, timers).</li>
+        <li>To manage events such as button clicks or page loading.</li>
+        <li>To reuse the same logic across different situations without duplicating code.</li>
+      </ul>
+
+      <h2>Example of a Callback Function</h2>
+      <pre><code>
+var callback = function(myCallback) {
+   setTimeout(function() {
+      myCallback();
+   }, 5000);
+};
+
+console.log("First is displayed");
+console.log("Second is displayed");
+
+callback(function() {
+   console.log("This is Callback function");
+});
+
+console.log("Last is displayed");
+      </code></pre>
+
+      <h3>Output</h3>
+      <pre><code>
+First is displayed
+Second is displayed
+Last is displayed
+-- after 5 seconds --
+This is Callback function
+      </code></pre>
+
+      <h2>Callback Function with Parameters</h2>
+      <pre><code>
+var callback = function(myCallback) {
+   setTimeout(function() {
+      myCallback("Hello, World!");
+   }, 5000);
+};
+
+console.log("First is displayed");
+console.log("Second is displayed");
+
+callback(function(message) {
+   console.log(message);
+});
+
+console.log("Last is displayed");
+      </code></pre>
+
+      <h3>Output</h3>
+      <pre><code>
+First is displayed
+Second is displayed
+Last is displayed
+-- after 5 seconds --
+Hello, World!
+      </code></pre>
+
+      <h2>What is Callback Hell?</h2>
+      <p>
+        Callback Hell happens when too many callbacks are nested inside each other, 
+        making the code messy and difficult to read or maintain.
+      </p>
+
+      <h3>Example of Callback Hell</h3>
+      <pre><code>
+function step1(callback) {
+   setTimeout(function() {
+      console.log("Step 1");
+      callback();
+   }, 1000);
+}
+
+function step2(callback) {
+   setTimeout(function() {
+      console.log("Step 2");
+      callback();
+   }, 1000);
+}
+
+function step3(callback) {
+   setTimeout(function() {
+      console.log("Step 3");
+      callback();
+   }, 1000);
+}
+
+step1(function() {
+   step2(function() {
+      step3(function() {
+         console.log("Done!");
+      });
+   });
+});
+      </code></pre>
+
+      <h3>Output</h3>
+      <pre><code>
+Step 1
+Step 2
+Step 3
+Done!
+      </code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        Callback functions are essential for handling asynchronous behavior in JavaScript. 
+        However, excessive nesting can lead to callback hell. 
+        To solve this, modern JavaScript uses <strong>Promises</strong> and <strong>async/await</strong> for better readability and maintainability.
+      </p>
+    </div>
+  </div>
+</div>

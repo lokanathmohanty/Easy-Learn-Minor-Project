@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - The Boolean Object</h1>
+    
+    <div class="content">
+      <p>The JavaScript Boolean object represents two values, either <code>true</code> or <code>false</code>. You can create a Boolean object using the <code>Boolean()</code> constructor with the <code>new</code> keyword. It takes a value as parameter and returns a Boolean object.</p>
+      <p>If the value parameter is omitted or is <code>0</code>, <code>-0</code>, <code>null</code>, <code>false</code>, <code>NaN</code>, <code>undefined</code>, or the empty string (<code>""</code>), the object has an initial value of <code>false</code>.</p>
+    </div>
+
+    <h2 class="title">Syntax</h2>
+    <div class="content">
+      <p>Use the following syntax to create a Boolean object:</p>
+      <pre><code>const val = new Boolean(value);</code></pre>
+      <p>You can also create a Boolean primitive in JavaScript by assigning a boolean value directly:</p>
+      <pre><code>let bool = true;</code></pre>
+    </div>
+
+    <h2 class="title">Boolean Properties</h2>
+    <div class="content">
+      <ul>
+        <li><strong>constructor</strong> - Returns a reference to the Boolean function that created the object.</li>
+        <li><strong>prototype</strong> - Allows you to add properties and methods to the Boolean object.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Boolean Methods</h2>
+    <div class="content">
+      <ul>
+        <li><strong>toSource()</strong> - Returns a string containing the source of the Boolean object.</li>
+        <li><strong>toString()</strong> - Returns a string of either "true" or "false".</li>
+        <li><strong>valueOf()</strong> - Returns the primitive value of the Boolean object.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Examples</h2>
+    <div class="content">
+      <h3 class="title">Creating a Boolean Object</h3>
+      <pre><code>
+const boolObj = new Boolean('true');
+console.log(typeof boolObj); // "object"
+      </code></pre>
+
+      <h3 class="title">Boolean() Function</h3>
+      <pre><code>
+console.log(Boolean(100 > 90)); // true
+console.log(Boolean(100 < 90)); // false
+      </code></pre>
+
+      <h3 class="title">Falsy Values</h3>
+      <p>The Boolean() function returns <code>false</code> for the following values:</p>
+      <ul>
+        <li>false</li>
+        <li>null</li>
+        <li>undefined</li>
+        <li>0 and -0</li>
+        <li>"" (empty string)</li>
+        <li>NaN</li>
+      </ul>
+
+      <h3 class="title">Truthy Values</h3>
+      <p>All other values are considered truthy. For example:</p>
+      <pre><code>
+console.log(Boolean(1));           // true
+console.log(Boolean("Hello"));     // true
+console.log(Boolean({}));          // true
+console.log(Boolean(() => 1));     // true
+      </code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask Message Flashing: User Feedback 💬</h1>
+        <div class="content">
+            <p>The **message flashing system** in Flask provides a simple way to give user feedback (like success or error notifications) across multiple requests. It allows you to create a message in one view function and display it in the view function that is called **next**, typically a template after a redirect.</p>
+
+            <h2>Creating a Flash Message</h2>
+            <p>The **<code>flash()</code>** method, imported from the Flask module, is used to store a message in the session for the next request:</p>
+            <p><code>flash(message, category)</code></p>
+            <ul>
+                <li>**<code>message</code>:** The actual text you want to display to the user (e.g., "You were successfully logged in").</li>
+                <li>**<code>category</code>:** An optional parameter to classify the message (e.g., <code>'error'</code>, <code>'info'</code>, or <code>'warning'</code>). Categories are useful for styling the message appropriately in the template.</li>
+            </ul>
+            <p>Like sessions, the flashing mechanism requires a **<code>SECRET_KEY</code>** to be set on the application for cryptographic signing.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Displaying Flashed Messages in Templates</h2>
+        <div class="content">
+            <p>Messages are removed from the session and displayed to the user by calling the **<code>get_flashed_messages()</code>** function within the template. A common Jinja2 pattern is used to check for and iterate over any pending messages:</p>
+            <p><code>{% with messages = get_flashed_messages() %}</code></p>
+            <p><code>   {% if messages %}</code></p>
+            <p><code>      &lt;ul&gt;</code></p>
+            <p><code>         {% for message in messages %}</code></p>
+            <p><code>         &lt;li&gt;{{ message }}&lt;/li&gt;</code></p>
+            <p><code>         {% endfor %}</code></p>
+            <p><code>      &lt;/ul&gt;</code></p>
+            <p><code>   {% endif %}</code></p>
+            <p><code>{% endwith %}</code></p>
+            <p>Once called, <code>get_flashed_messages()</code> clears the messages from the session so they are not displayed again on a subsequent page load.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Example: Login Success Flash</h2>
+        <div class="content example">
+            <p>The <code>login()</code> view function demonstrates conditional flashing and redirection:</p>
+            <ul>
+                <li>**Success Case:** If the credentials match <code>'admin'/'admin'</code>, a success message is flashed, and the user is immediately redirected to the **<code>index()</code>** function (which renders the <code>index.html</code> template):</li>
+                <p><code>flash('You were successfully logged in')</code></p>
+                <p><code>return redirect(url_for('index'))</code></p>
+                <li>**Failure Case:** If the credentials are wrong, an **<code>error</code>** variable is set locally, and the <code>login.html</code> template is re-rendered immediately with that variable, **without** using the flashing system (since there is no redirect).</li>
+            </ul>
+            <p>When the user lands on <code>index.html</code>, the Jinja2 code calls <code>get_flashed_messages()</code> and displays the "You were successfully logged in" message.</p>
+        </div>
+    </div>
+</div>

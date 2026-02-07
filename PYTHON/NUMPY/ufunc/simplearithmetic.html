@@ -1,0 +1,164 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Simple Arithmetic</h1>
+    <div class="content">
+      <p>You could use arithmetic operators + - * / directly between NumPy arrays, but this section discusses an extension of the same where we have functions that can take any array-like objects (e.g. lists, tuples) and perform arithmetic conditionally.</p>
+      <p><strong>Arithmetic Conditionally:</strong> means that we can define conditions where the arithmetic operation should happen. All arithmetic functions take a <code>where</code> parameter specifying that condition.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Addition</h2>
+    <div class="content">
+      <p>The <code>add()</code> function sums the content of two arrays and returns the results in a new array.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>import numpy as np
+
+arr1 = np.array([10, 11, 12, 13, 14, 15])
+arr2 = np.array([20, 21, 22, 23, 24, 25])
+
+newarr = np.add(arr1, arr2)
+
+print(newarr)
+</code></pre>
+      <p>Returns: <code>[30 32 34 36 38 40]</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Subtraction</h2>
+    <div class="content">
+      <p>The <code>subtract()</code> function subtracts values from one array by another and returns the result in a new array.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>import numpy as np
+
+arr1 = np.array([10, 20, 30, 40, 50, 60])
+arr2 = np.array([20, 21, 22, 23, 24, 25])
+
+newarr = np.subtract(arr1, arr2)
+
+print(newarr)
+</code></pre>
+      <p>Returns: <code>[-10 -1 8 17 26 35]</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Multiplication</h2>
+    <div class="content">
+      <p>The <code>multiply()</code> function multiplies values from one array by another and returns the result in a new array.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>import numpy as np
+
+arr1 = np.array([10, 20, 30, 40, 50, 60])
+arr2 = np.array([20, 21, 22, 23, 24, 25])
+
+newarr = np.multiply(arr1, arr2)
+
+print(newarr)
+</code></pre>
+      <p>Returns: <code>[200 420 660 920 1200 1500]</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Division</h2>
+    <div class="content">
+      <p>The <code>divide()</code> function divides values from one array by another and returns the result in a new array.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>import numpy as np
+
+arr1 = np.array([10, 20, 30, 40, 50, 60])
+arr2 = np.array([3, 5, 10, 8, 2, 33])
+
+newarr = np.divide(arr1, arr2)
+
+print(newarr)
+</code></pre>
+      <p>Returns: <code>[3.33333333 4. 3. 5. 25. 1.81818182]</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Power</h2>
+    <div class="content">
+      <p>The <code>power()</code> function raises values from the first array to the powers of values from the second array and returns the results.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>import numpy as np
+
+arr1 = np.array([10, 20, 30, 40, 50, 60])
+arr2 = np.array([3, 5, 6, 8, 2, 33])
+
+newarr = np.power(arr1, arr2)
+
+print(newarr)
+</code></pre>
+      <p>Returns: <code>[1000 3200000 729000000 6553600000000 2500 0]</code></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Remainder</h2>
+    <div class="content">
+      <p>Both <code>mod()</code> and <code>remainder()</code> functions return the remainder when dividing the first array by the second.</p>
+      <h3 class="title">Example: Using mod()</h3>
+      <pre><code>import numpy as np
+
+arr1 = np.array([10, 20, 30, 40, 50, 60])
+arr2 = np.array([3, 7, 9, 8, 2, 33])
+
+newarr = np.mod(arr1, arr2)
+
+print(newarr)
+</code></pre>
+      <p>Returns: <code>[1 6 3 0 0 27]</code></p>
+      <h3 class="title">Example: Using remainder()</h3>
+      <pre><code>import numpy as np
+
+arr1 = np.array([10, 20, 30, 40, 50, 60])
+arr2 = np.array([3, 7, 9, 8, 2, 33])
+
+newarr = np.remainder(arr1, arr2)
+
+print(newarr)
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Quotient and Mod</h2>
+    <div class="content">
+      <p>The <code>divmod()</code> function returns both quotient and remainder arrays.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>import numpy as np
+
+arr1 = np.array([10, 20, 30, 40, 50, 60])
+arr2 = np.array([3, 7, 9, 8, 2, 33])
+
+newarr = np.divmod(arr1, arr2)
+
+print(newarr)
+</code></pre>
+      <p>Returns:<br/>
+      <code>(array([3, 2, 3, 5, 25, 1]), array([1, 6, 3, 0, 0, 27]))</code></p>
+      <p>The first array contains quotients, the second array contains remainders.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Absolute Values</h2>
+    <div class="content">
+      <p>Both <code>absolute()</code> and <code>abs()</code> return element-wise absolute values, but <code>absolute()</code> is preferred to avoid confusion with Python's built-in <code>abs()</code>.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>import numpy as np
+
+arr = np.array([-1, -2, 1, 2, 3, -4])
+
+newarr = np.absolute(arr)
+
+print(newarr)
+</code></pre>
+      <p>Returns: <code>[1 2 1 2 3 4]</code></p>
+    </div>
+  </div>
+</div>

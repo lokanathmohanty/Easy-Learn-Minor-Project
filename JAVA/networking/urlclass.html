@@ -1,0 +1,215 @@
+<div class="container">
+  <div class="session">
+    
+    <h1 class="title">Java - URL Class</h1>
+
+    <div class="content">
+      <h2 class="title">What is a URL?</h2>
+      <p>URL stands for Uniform Resource Locator and represents a resource on the World Wide Web, such as a Webpage or FTP directory.</p>
+      <p>This section shows you how to write Java programs that communicate with a URL. A URL can be broken down into parts, as follows −</p>
+      <p><code>protocol://host:port/path?query#ref</code></p>
+      <p>Examples of protocols include HTTP, HTTPS, FTP, and File. The path is also referred to as the filename, and the host is also called the authority.</p>
+
+      <h2 class="title">Example</h2>
+      <p>The following is a URL to a web page whose protocol is HTTP −</p>
+      <p><code>https://www.amrood.com/index.htm?language=en#j2se</code></p>
+      <p>Notice that this URL does not specify a port, in which case the default port for the protocol is used. With HTTP, the default port is 80.</p>
+
+      <h2 class="title">Java URL Class</h2>
+      <p>The URL class is a part of the <code>java.net</code> package. URL class represents a Uniform Resource Locator (URL). Where, URLs are used for identifying online resources (for example: webpages, images used in the webpages, videos, files, etc.)</p>
+      <p>The URL class provides several constructors and methods for creating, parsing, and manipulating URLs (or, URL objects).</p>
+
+      <h2 class="title">URL Class Declaration</h2>
+      <pre><code>public final class URL
+   extends Object
+      implements Serializable
+</code></pre>
+
+      <h2 class="title">URL Class Constructors</h2>
+      <p>The <code>java.net.URL</code> class represents a URL and has a complete set of methods to manipulate URL in Java.</p>
+      <p>The URL class has several constructors for creating URLs, including the following −</p>
+
+      <table class="constructors">
+        <thead>
+          <tr>
+            <th>Sr.No.</th>
+            <th>Constructors & Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><code>public URL(String protocol, String host, int port, String file) throws MalformedURLException</code><br>Creates a URL by putting together the given parts.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><code>public URL(String protocol, String host, int port, String file, URLStreamHandler handler) throws MalformedURLException</code><br>Creates a URL by putting together the given parts with the specified handler within a specified context.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><code>public URL(String protocol, String host, String file) throws MalformedURLException</code><br>Identical to the previous constructor, except that the default port for the given protocol is used.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><code>public URL(String url) throws MalformedURLException</code><br>Creates a URL from the given String.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><code>public URL(URL context, String url) throws MalformedURLException</code><br>Creates a URL by parsing together the URL and String arguments.</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><code>public URL(URL context, String url, URLStreamHandler handler) throws MalformedURLException</code><br>Creates a URL by parsing together the URL and String arguments with the specified handler within a specified context.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="title">URL Class Methods</h2>
+      <p>The URL class contains many methods for accessing the various parts of the URL being represented. Some of the methods in the URL class include the following −</p>
+
+      <table class="methods">
+        <thead>
+          <tr>
+            <th>Sr.No.</th>
+            <th>Method & Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><code>public equals(Object obj)</code><br>This method compares this URL for equality with another object.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><code>public String getAuthority()</code><br>This method returns the authority of the URL.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><code>public Object getContent()</code><br>This method returns the contents of this URL.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><code>public Object getContent(Class<?>[] classes)</code><br>This method returns the contents of this URL.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><code>public int getDefaultPort()</code><br>This method returns the default port for the protocol of the URL.</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><code>public String getFile()</code><br>This method returns the filename of the URL.</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><code>public String getHost()</code><br>This method returns the host of the URL.</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><code>public String getPath()</code><br>This method returns the path of the URL.</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><code>public int getPort()</code><br>This method returns the port of the URL.</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><code>public String getProtocol()</code><br>This method returns the protocol of the URL.</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><code>public String getQuery()</code><br>This method returns the query part of the URL.</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><code>public String getRef()</code><br>This method returns the reference part of the URL.</td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><code>public String getUserInfo()</code><br>This method returns the userInfo part of the URL.</td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><code>public int hashCode()</code><br>This method creates and returns an integer suitable for hash table indexing.</td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><code>public URLConnection openConnection()</code><br>This method returns a URLConnection instance that represents a connection to the remote object referred to by the URL.</td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td><code>public URLConnection openConnection(Proxy proxy)</code><br>This method acts as openConnection(), except that the connection will be made through the specified proxy; Protocol handlers that do not support proxying will ignore the proxy parameter and make a normal connection.</td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td><code>public InputStream openStream()</code><br>This method opens a connection to this URL and returns an InputStream for reading from that connection.</td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td><code>public boolean sameFile(URL other)</code><br>This method compares two URLs, excluding the fragment component.</td>
+          </tr>
+          <tr>
+            <td>19</td>
+            <td><code>public static void setURLStreamHandlerFactory(URLStreamHandlerFactory fac)</code><br>This method sets an application's URLStreamHandlerFactory.</td>
+          </tr>
+          <tr>
+            <td>20</td>
+            <td><code>public String toExternalForm()</code><br>This method constructs and returns a string representation of this URL.</td>
+          </tr>
+          <tr>
+            <td>21</td>
+            <td><code>public String toString()</code><br>This method constructs and returns a string representation of this URL.</td>
+          </tr>
+          <tr>
+            <td>22</td>
+            <td><code>public String toURI()</code><br>This method returns a URI equivalent to this URL.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="title">Example of URL Class</h2>
+      <p>The following URLDemo program demonstrates the various parts of a URL. A URL is entered on the command line, and the URLDemo program outputs each part of the given URL.</p>
+
+      <pre><code>// File Name : URLDemo.java
+import java.io.IOException;
+import java.net.URL;
+
+public class URLDemo {
+
+   public static void main(String [] args) {
+      try {
+         URL url = new URL("https://www.tutorialspoint.com/index.htm?language=en#j2se");
+         
+         System.out.println("URL is " + url.toString());
+         System.out.println("protocol is " + url.getProtocol());
+         System.out.println("authority is " + url.getAuthority());
+         System.out.println("file name is " + url.getFile());
+         System.out.println("host is " + url.getHost());
+         System.out.println("path is " + url.getPath());
+         System.out.println("port is " + url.getPort());
+         System.out.println("default port is " + url.getDefaultPort());
+         System.out.println("query is " + url.getQuery());
+         System.out.println("ref is " + url.getRef());
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}
+</code></pre>
+
+      <p>A sample run of this program will produce the following result −</p>
+
+      <pre><code>Output
+URL is https://www.tutorialspoint.com/index.htm?language=en#j2se
+protocol is https
+authority is www.tutorialspoint.com
+file name is /index.htm?language=en
+host is www.tutorialspoint.com
+path is /index.htm
+port is -1
+default port is 443
+query is language=en
+ref is j2se
+</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>LinkedList</code> Class Summary 🔗🔗</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.LinkedList</code>** class is an implementation of the **<code>List</code>** and **<code>Deque</code>** interfaces. It uses a **doubly-linked list** data structure, where each element (node) stores a reference to both the **next** element and the **previous** element.</p>
+
+            <h2 class="title">I. Core Characteristics and Roles</h2>
+            <p><code>LinkedList</code>'s structure allows it to efficiently fulfill three primary roles in the Collections Framework:</p>
+            <ul>
+                <li>
+                    <strong><code>List</code> (Sequence):</strong> Allows access by index and maintains insertion order.
+                </li>
+                <li>
+                    <strong><code>Queue</code> (FIFO):</strong> Supports First-In, First-Out operations via methods like <code>offer()</code> and <code>poll()</code>.
+                </li>
+                <li>
+                    <strong><code>Deque</code> (Double-Ended Queue):</strong> Supports element insertion and removal at **both the beginning and the end**, making it suitable for both FIFO queues and LIFO stacks.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Performance and Big O Notation</h2>
+            <p>The linked structure dictates its performance profile, contrasting sharply with `ArrayList`:</p>
+            <table>
+                <tr>
+                    <th>Operation</th>
+                    <th>Complexity</th>
+                    <th>Reason</th>
+                </tr>
+                <tr>
+                    <td>**Insertion/Deletion (at ends)** (<code>addFirst</code>, <code>addLast</code>, <code>removeFirst</code>, <code>removeLast</code>)</td>
+                    <td>$O(1)$</td>
+                    <td>Only requires updating the head/tail reference pointers.</td>
+                </tr>
+                <tr>
+                    <td>**Random Access** (<code>get(int index)</code>)</td>
+                    <td>$O(n)$</td>
+                    <td>The list must be traversed from the closest end (head or tail) to reach the $n^{th}$ element.</td>
+                </tr>
+                <tr>
+                    <td>**Insertion/Deletion (in middle)** (<code>add(index, E)</code>, <code>remove(index)</code>)</td>
+                    <td>$O(n)$</td>
+                    <td>Requires $O(n)$ time to first find the element by index, followed by $O(1)$ time to update the pointers.</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">III. Deque and Stack/Queue Methods</h2>
+            <p>The <code>LinkedList</code> provides a comprehensive set of methods to serve as a queue or a stack, often using method aliases for clarity:</p>
+            <table>
+                <tr>
+                    <th>Queue / Deque Role</th>
+                    <th>Stack Role (LIFO)</th>
+                    <th>General Access</th>
+                </tr>
+                <tr>
+                    <td><code>offer(E e)</code> / <code>addLast(E e)</code> (Insert to tail)</td>
+                    <td><code>push(E e)</code> (Insert to head)</td>
+                    <td><code>add(E e)</code> (Appends to end)</td>
+                </tr>
+                <tr>
+                    <td><code>poll()</code> / <code>removeFirst()</code> (Remove from head)</td>
+                    <td><code>pop()</code> (Remove from head)</td>
+                    <td><code>get(int index)</code></td>
+                </tr>
+                <tr>
+                    <td><code>peek()</code> / <code>peekFirst()</code> (Examine head)</td>
+                    <td>—</td>
+                    <td><code>getFirst()</code> / <code>getLast()</code></td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">Conclusion on Usage</h2>
+            <p>Choose **<code>LinkedList</code>** when you anticipate frequent element **insertions or deletions at the beginning or end** of the list (e.g., when implementing a queue, stack, or stream processing). Choose **<code>ArrayList</code>** when you anticipate frequent **random access** (getting elements by index).</p>
+        </div>
+    </div>
+</div>

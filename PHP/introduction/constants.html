@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Constants: Definition, Rules, and Usage</h1>
+
+    <div class="content">
+      <p>
+        A **constant** in PHP is a named identifier for a simple, fixed value that **cannot be changed** during the execution of a script. They are primarily used to improve code readability, maintainability, and security (by preventing key values like configuration settings from being accidentally modified).
+      </p>
+
+      <h2>Rules and Naming Conventions</h2>
+      <ul>
+        <li>
+          **Declaration:** Constants are defined using the **`define()`** language construct, **not** simple assignment.
+        </li>
+        <li>
+          **Symbol:** Constants **do not** start with the dollar sign (`$`), unlike variables.
+        </li>
+        <li>
+          **Scope:** Constants are **global** by default and can be accessed from anywhere in the script.
+        </li>
+        <li>
+          **Case Sensitivity:** By default, constants are **case-sensitive** (i.e., `CONSTANT` is different from `Constant`).
+        </li>
+        <li>
+          **Convention:** By convention, constant identifiers are always written in **uppercase** (e.g., `MAX_SIZE`, `PHP_VERSION`).
+        </li>
+        <li>
+          **Naming:** Must start with a letter or an underscore (`_`), followed by any number of letters, digits, or underscores.
+        </li>
+      </ul>
+      <p>
+        Once a constant has been set, it **cannot be redefined or undefined**.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Defining Constants using `define()`</h2>
+      <p>
+        The primary method for creating a named constant is the `define()` function:
+      </p>
+      <div class="example">
+        <code>define("CONSTANT_NAME", value);</code>
+      </div>
+      <p>
+        The full syntax includes an optional third parameter: `define(string $const_name, mixed $value, bool $case = false): bool`.
+      </p>
+      <ul>
+        <li>
+          **`$const_name`**: The constant's identifier (e.g., `"MINSIZE"`).
+        </li>
+        <li>
+          **`$value`**: The constant's value (can be a scalar type or an array).
+        </li>
+        <li>
+          **`$case`**: If set to `true`, the constant becomes **case-insensitive** (default is `false`).
+        </li>
+      </ul>
+
+      <h3>Example: Case Sensitivity</h3>
+      <div class="example">
+        <p>
+          <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;define("CONSTANT", "Hello world.");<br>&nbsp;&nbsp;&nbsp;echo CONSTANT; // Works<br>&nbsp;&nbsp;&nbsp;// echo Constant; // Fatal Error (Case-sensitive by default)<br>?&gt;</code>
+        </p>
+        <p class="content">Output:<br>Hello world.</p>
+      </div>
+
+      <h3>Example: Array Constant</h3>
+      <div class="example">
+        <p>
+          <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;define("LANGS", array('PHP', 'Java', 'Python'));<br>&nbsp;&nbsp;&nbsp;var_dump(LANGS);<br>?&gt;</code>
+        </p>
+        <p class="content">
+          Output (shows array structure):<br>
+          array(3) { ... }
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Accessing and Checking Constants</h2>
+      <ul>
+        <li>
+          **Accessing by Name:** You can directly use the constant name (e.g., `echo MINSIZE;`).
+        </li>
+        <li>
+          **`constant()` function:** Use this function if the constant name itself is stored in a variable or returned by another function.
+          <div class="example">
+            <code>echo constant("MINSIZE"); // Retrieves value of MINSIZE</code>
+          </div>
+        </li>
+        <li>
+          **`defined()` function:** Checks whether a named constant currently exists.
+          <div class="example">
+            <code>if (defined('MAX')) { echo MAX; }</code>
+          </div>
+        </li>
+        <li>
+          **Predefined Constants:** PHP includes several built-in constants for system information:
+          <div class="example">
+            <code>echo PHP_VERSION; // e.g., 8.3.9</code><br>
+            <code>echo PHP_OS; // e.g., Linux</code>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

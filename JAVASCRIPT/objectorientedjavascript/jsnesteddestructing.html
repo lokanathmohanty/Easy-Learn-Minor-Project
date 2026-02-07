@@ -1,0 +1,185 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Nested Destructuring</h1>
+
+    <div class="content">
+      <p>
+        The Nested Destructuring in JavaScript allows us to extract data from nested
+        objects and arrays. An object (or array) can contain another object (or array)
+        inside itself, known as a nested object (or array). Unpacking the nested
+        objects or arrays is called nested destructuring.
+      </p>
+      <p>
+        We can assign the extracted data from nested array or object to the variables.
+        This is referred as nested destructuring assignment. When using nested
+        destructuring to get some values from a nested array or object, you have to
+        follow the structure of the array or object.
+      </p>
+
+      <h2 class="subtitle">Nested Object Destructuring</h2>
+      <h3 class="subtitle">Syntax</h3>
+      <pre>
+const {prop1, prop2: {nestedprop1, nestedprop2}} = obj;
+      </pre>
+      <p>
+        In the above syntax, <code>prop1</code> is a property of the object, and the
+        <code>prop2</code> property contains the nested object, having
+        <code>nestedprop1</code> and <code>nestedprop2</code> properties.
+      </p>
+
+      <h3 class="subtitle">Example</h3>
+      <pre>
+const car = {
+   brand: "Hyundai",
+   model: "Verna",
+   info: {
+      price: 1200000,
+      color: "white",
+   }
+}
+const { brand, model, info: { price, color } } = car;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+Brand: Hyundai
+Model: Verna
+Price: 1200000
+Color: white
+      </pre>
+
+      <h3 class="subtitle">Example: Renaming Variables</h3>
+      <pre>
+const car = {
+   brand: "Hyundai",
+   model: "Verna",
+   info: {
+      price: 1200000,
+      color: "white",
+   }
+}
+const {brand: company, model: name, info: {price: cost, color: carColor }} = car;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+Company: Hyundai, Name: Verna, Cost: 1200000, Color: white
+      </pre>
+
+      <h3 class="subtitle">Example: Default Values</h3>
+      <pre>
+const student = {
+   firstName: "Sam",
+   lastName: "Raina",
+   grades: {
+      English: 75,
+   }
+};
+const { firstName: name = "Jay", 
+   lastName: surname = "Shah", 
+   grades: { English: eng = 0, Science: sci = 0 } 
+} = student;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+Name: Sam
+Surname: Raina
+English: 75
+Science: 0
+      </pre>
+
+      <h3 class="subtitle">Example: Rest Operator</h3>
+      <pre>
+const student = {
+   firstName: "Kunal",
+   lastName: "Karma",
+   grades: {
+      English: 75,
+      Maths: 87,
+      SocialScience: 90,
+      Science: 80,
+   }
+};
+const { firstName, lastName, grades: { Maths, ...allGrades } } = student;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+firstName: Kunal
+lastName: Karma
+Maths: 87
+allGrades: {"English":75,"SocialScience":90,"Science":80}
+      </pre>
+
+      <h2 class="subtitle">Nested Array Destructuring</h2>
+      <h3 class="subtitle">Syntax</h3>
+      <pre>
+const [a, [b, c], d] = arr;
+      </pre>
+
+      <h3 class="subtitle">Example</h3>
+      <pre>
+const arr = [10, [15, 20], 30];
+const [a, [b, c], d] = arr;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+a = 10, b = 15, c = 20, d = 30
+      </pre>
+
+      <h3 class="subtitle">Example: Skipping Elements</h3>
+      <pre>
+const arr = [2, [3, 4], [9, 10]];
+const [a, [, b], [, c]] = arr;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+a = 2, b = 4, c = 10
+      </pre>
+
+      <h3 class="subtitle">Example: Default Values</h3>
+      <pre>
+const arr = [2, [3, 4], [9, 10]];
+const [, [, , p = 29], [, q]] = arr;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+p = 29, q = 10
+      </pre>
+
+      <h3 class="subtitle">Example: Rest Operator</h3>
+      <pre>
+const arr = [[6, 7, 8, 9], [10, 11, 12, 13], 14];
+const [[a, ...b], ...c] = arr;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+a = 6
+b = 7,8,9
+c = 10,11,12,13,14
+      </pre>
+
+      <h2 class="subtitle">Array Within Object Nested Destructuring</h2>
+      <h3 class="subtitle">Example</h3>
+      <pre>
+const numbers = {
+   num1: 10,
+   num2: [40, 6, 5],
+}
+const {num1, num2: [a, b, c]} = numbers;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+num1 = 10, a = 40, b = 6, c = 5
+      </pre>
+
+      <h2 class="subtitle">Object Within Array Nested Destructuring</h2>
+      <h3 class="subtitle">Example</h3>
+      <pre>
+const numbers = [10, { p: 20, q: 30 }]
+const [a, { p, q }] = numbers;
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+a = 10, p = 20, q = 30
+      </pre>
+    </div>
+  </div>
+</div>

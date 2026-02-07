@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Matrices</h1>
+    <div class="content">
+      <p>
+        Matrices in R are two-dimensional rectangular data objects containing elements of the same atomic type. Though matrices with only characters or logicals can be created, numeric matrices are mainly used for mathematical calculations.
+      </p>
+
+      <h2 class="title">Creating a Matrix</h2>
+      <p>Syntax:</p>
+      <pre><code>matrix(data, nrow, ncol, byrow, dimnames)</code></pre>
+      <ul>
+        <li><strong>data</strong>: Input vector becoming matrix elements</li>
+        <li><strong>nrow</strong>: Number of rows</li>
+        <li><strong>ncol</strong>: Number of columns</li>
+        <li><strong>byrow</strong>: If TRUE, fill matrix by rows; otherwise by columns</li>
+        <li><strong>dimnames</strong>: Names for rows and columns (optional)</li>
+      </ul>
+
+      <h3 class="title">Example</h3>
+      <pre><code># Elements arranged by row
+M &lt;- matrix(c(3:14), nrow=4, byrow=TRUE)
+print(M)
+
+# Elements arranged by column
+N &lt;- matrix(c(3:14), nrow=4, byrow=FALSE)
+print(N)
+
+# Matrix with named rows and columns
+rownames = c("row1", "row2", "row3", "row4")
+colnames = c("col1", "col2", "col3")
+P &lt;- matrix(c(3:14), nrow=4, byrow=TRUE, dimnames=list(rownames, colnames))
+print(P)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>     [,1] [,2] [,3]
+[1,]    3    4    5
+[2,]    6    7    8
+[3,]    9   10   11
+[4,]   12   13   14
+
+     [,1] [,2] [,3]
+[1,]    3    7   11
+[2,]    4    8   12
+[3,]    5    9   13
+[4,]    6   10   14
+
+     col1 col2 col3
+row1    3    4    5
+row2    6    7    8
+row3    9   10   11
+row4   12   13   14
+</code></pre>
+
+      <h2 class="title">Accessing Matrix Elements</h2>
+      <pre><code># Access element at row 1, column 3
+print(P[1,3])
+
+# Access element at row 4, column 2
+print(P[4,2])
+
+# Access entire 2nd row
+print(P[2,])
+
+# Access entire 3rd column
+print(P[,3])
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 5
+[1] 13
+col1 col2 col3 
+   6    7    8 
+row1 row2 row3 row4 
+   5    8   11   14 
+</code></pre>
+
+      <h2 class="title">Matrix Computations</h2>
+      <p>
+        Mathematical operations on matrices require the matrices to have compatible dimensions. The results of operations are also matrices.
+      </p>
+
+      <h3 class="title">Matrix Addition & Subtraction</h3>
+      <pre><code># Create two 2x3 matrices
+matrix1 &lt;- matrix(c(3, 9, -1, 4, 2, 6), nrow=2)
+print(matrix1)
+
+matrix2 &lt;- matrix(c(5, 2, 0, 9, 3, 4), nrow=2)
+print(matrix2)
+
+# Add matrices
+result &lt;- matrix1 + matrix2
+cat("Result of addition\n")
+print(result)
+
+# Subtract matrices
+result &lt;- matrix1 - matrix2
+cat("Result of subtraction\n")
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>     [,1] [,2] [,3]
+[1,]    3    9   -1
+[2,]    4    2    6
+
+     [,1] [,2] [,3]
+[1,]    5    2    0
+[2,]    9    3    4
+
+Result of addition
+     [,1] [,2] [,3]
+[1,]    8   11   -1
+[2,]   13    5   10
+
+Result of subtraction
+     [,1] [,2] [,3]
+[1,]   -2    7   -1
+[2,]   -5   -1    2
+</code></pre>
+
+      <h3 class="title">Matrix Multiplication & Division</h3>
+      <pre><code># Multiply matrices
+result &lt;- matrix1 * matrix2
+cat("Result of multiplication\n")
+print(result)
+
+# Divide matrices
+result &lt;- matrix1 / matrix2
+cat("Result of division\n")
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>Result of multiplication
+     [,1] [,2] [,3]
+[1,]   15    0   -2
+[2,]   36    6   24
+
+Result of division
+          [,1]      [,2]       [,3]
+[1,]  0.600000       Inf -0.3333333
+[2,]  0.444444 0.666667  1.5000000
+</code></pre>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Exception Handling (<code>try</code>, <code>catch</code>, <code>throw</code>) ⚠️</h1>
+
+        <div class="content">
+            <p>Exception handling is a mechanism that allows a program to respond to exceptional circumstances or errors that arise during execution, providing a structured way to transfer control from the point of error to an error handler.</p>
+
+            <h3>The Three Keywords</h3>
+            <ul>
+                <li>**<code>throw</code>**: Used to signal an exception when a problem occurs. The operand determines the **type** of the exception.</li>
+                <li>**<code>try</code>**: Identifies a block of code (protected code) where exceptions might be activated.</li>
+                <li>**<code>catch</code>**: Defines an exception handler that catches and processes a thrown exception of a specific type.</li>
+            </ul>
+
+            <h3>Syntax</h3>
+            <pre class="example">
+try {
+   // Code that might throw an exception
+   if (b == 0) {
+      throw "Division by zero condition!"; // Throws a const char*
+   }
+} catch(const char* msg) { 
+   // Handles the exception of type const char*
+   std::cerr &lt;&lt; msg &lt;&lt; std::endl;
+} catch(...) {
+   // Catch-all handler for any uncaught exception type
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Throwing and Catching Exceptions</h2>
+
+        <div class="content">
+            <p>The type of the expression in the `throw` statement determines the type of exception. The matching `catch` block must be prepared to handle that specific type.</p>
+            <p>A single `try` block can be followed by multiple `catch` blocks to handle different types of errors (e.g., an `int` error, a `string` error, or a custom exception class).</p>
+
+            <h3>Catching Any Exception</h3>
+            <p>To catch any type of exception not explicitly caught by preceding handlers, a generic **catch-all handler** can be used:</p>
+            <pre class="example">
+catch(...) {
+   // Code to handle any exception type
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Standard and Custom Exceptions</h2>
+
+        <div class="content">
+            <p>C++ provides a rich hierarchy of standard exception classes defined in the **<code>&lt;exception&gt;</code>** header, all inheriting from the base class **<code>std::exception</code>**.</p>
+            
+            <h3>Key Standard Exceptions</h3>
+            <table>
+                <thead>
+                    <tr><th>Exception Class</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>**<code>std::exception</code>**</td><td>The base class for all standard C++ exceptions.</td></tr>
+                    <tr><td>**<code>std::bad_alloc</code>**</td><td>Thrown by <code>new</code> upon memory allocation failure.</td></tr>
+                    <tr><td>**<code>std::bad_cast</code>**</td><td>Thrown by <code>dynamic_cast</code> when a cast fails.</td></tr>
+                    <tr><td>**<code>std::logic_error</code>**</td><td>Errors that can theoretically be detected by reading the code (e.g., <code>std::invalid_argument</code>).</td></tr>
+                    <tr><td>**<code>std::runtime_error</code>**</td><td>Errors that cannot easily be detected before runtime (e.g., <code>std::overflow_error</code>).</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Defining Custom Exceptions</h3>
+            <p>Best practice is to define custom exceptions by **inheriting from <code>std::exception</code>** and overriding the **<code>what()</code>** method, which returns a descriptive C-style string about the exception's cause.</p>
+            <pre class="example">
+struct MyException : public std::exception {
+   const char * what () const throw () {
+      return "Custom C++ Error Message"; // Override what()
+   }
+};
+</pre>
+        </div>
+    </div>
+</div>

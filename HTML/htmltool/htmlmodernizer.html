@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Modernizr</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>
+        <strong>Modernizr</strong> is a small JavaScript library that detects whether a particular
+        feature of web technologies is available in the user's browser. It helps developers 
+        handle feature support gracefully by applying fallbacks, displaying messages, or 
+        writing conditional CSS rules.
+      </p>
+      <p>
+        For example, if a browser does not support <code>&lt;video&gt;</code>, you can show a 
+        message or hide media controls.
+      </p>
+
+      <h2>Including Modernizr</h2>
+      <p>To start using Modernizr, include its script in the HTML page header:</p>
+      <pre><code>&lt;script src="modernizr.min.js" type="text/javascript"&gt;&lt;/script&gt;</code></pre>
+
+      <h2>Handling Supported and Unsupported Features</h2>
+      <p>Modernizr automatically applies feature classes to the <code>&lt;html&gt;</code> element, allowing CSS-based feature detection.</p>
+      <pre><code>&lt;!-- In your CSS: --&gt;
+.no-audio #music {
+   display: none; /* hide audio options */
+}
+.audio #music button {
+   /* style play/pause buttons */
+}
+
+&lt;!-- In your HTML: --&gt;
+&lt;div id="music"&gt;
+   &lt;audio&gt;
+      &lt;source src="audio.ogg" /&gt;
+      &lt;source src="audio.mp3" /&gt;
+   &lt;/audio&gt;
+   &lt;button id="play"&gt;Play&lt;/button&gt;
+   &lt;button id="pause"&gt;Pause&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+
+      <h2>JavaScript Feature Detection</h2>
+      <p>
+        You can also check features directly in JavaScript using 
+        <code>Modernizr.feature</code> syntax:
+      </p>
+      <pre><code>if (Modernizr.audio) {
+   // Browser supports audio
+} else {
+   // Browser does not support audio
+}</code></pre>
+
+      <h2>Common Features Detected by Modernizr</h2>
+      <ul>
+        <li><strong>Canvas:</strong> <code>.canvas</code> / <code>Modernizr.canvas</code></li>
+        <li><strong>Audio:</strong> <code>.audio</code> / <code>Modernizr.audio</code></li>
+        <li><strong>Video:</strong> <code>.video</code> / <code>Modernizr.video</code></li>
+        <li><strong>CSS Animations:</strong> <code>.cssanimations</code> / <code>Modernizr.cssanimations</code></li>
+        <li><strong>Geolocation:</strong> <code>.geolocation</code> / <code>Modernizr.geolocation</code></li>
+        <li><strong>localStorage:</strong> <code>.localstorage</code> / <code>Modernizr.localstorage</code></li>
+        <li><strong>Web Workers:</strong> <code>.webworkers</code> / <code>Modernizr.webworkers</code></li>
+        <li><strong>IndexedDB:</strong> <code>.indexeddb</code> / <code>Modernizr.indexeddb</code></li>
+        <li><strong>WebSockets:</strong> <code>.websockets</code> / <code>Modernizr.websockets</code></li>
+        <li><strong>Drag and Drop:</strong> <code>.draganddrop</code> / <code>Modernizr.draganddrop</code></li>
+      </ul>
+
+      <h2>Custom Feature Tests</h2>
+      <p>
+        Modernizr provides an <code>addTest()</code> API to define custom tests:
+      </p>
+      <pre><code>Modernizr.addTest('customfeature', function() {
+   return 'querySelector' in document;
+});</code></pre>
+
+      <h2>Summary</h2>
+      <p>
+        Modernizr is a powerful way to ensure compatibility across browsers by 
+        detecting HTML5 and CSS3 features. It helps developers apply fallbacks 
+        or conditional rules to improve user experience.
+      </p>
+
+    </div>
+  </div>
+</div>

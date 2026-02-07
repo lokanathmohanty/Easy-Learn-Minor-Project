@@ -1,0 +1,231 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Cookie Attributes</h1>
+
+    <div class="content">
+      <h2>Cookie Attributes</h2>
+      <p>The JavaScript cookie attributes are used to set additional information about a cookie such as path, domain, expiry date, etc. In JavaScript, you can specify the cookie attributes while setting up a new cookie or updating the cookie. For example, you can set the cookie's expiry date using the <code>expires</code> attribute.</p>
+      <p>In simple terms, cookie attributes are used to control the behavior of the cookies and how the cookie is used in the browser.</p>
+
+      <h2>List of Cookie Attributes</h2>
+      <p>Here, we have listed all cookie attributes in the table below with their description and default values.</p>
+
+      <table class="cookie-attributes">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+            <th>Default Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name/Value</td>
+            <td>It is used to store the cookies in the browser.</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td>To specify the domain for whose cookie is valid.</td>
+            <td>Website of domain (e.g. tutorialspoint.com)</td>
+          </tr>
+          <tr>
+            <td>Path</td>
+            <td>The path to the directory or web page that sets the cookie.</td>
+            <td>/ (entire domain)</td>
+          </tr>
+          <tr>
+            <td>Expires</td>
+            <td>Specifies the date and time when the cookie should expire.</td>
+            <td>Current session</td>
+          </tr>
+          <tr>
+            <td>Max-Age</td>
+            <td>Specifies the time limit after which cookie should expire.</td>
+            <td>Current session</td>
+          </tr>
+          <tr>
+            <td>Secure</td>
+            <td>Restricts cookies to secure connections if set.</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>HttpOnly</td>
+            <td>Prevents accessing the cookies via JavaScript to make cookies secure.</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>SameSite</td>
+            <td>Specifies how third-party cookies should be handled.</td>
+            <td>Lax</td>
+          </tr>
+          <tr>
+            <td>Priority</td>
+            <td>Defines the priority of the cookies.</td>
+            <td>1000</td>
+          </tr>
+          <tr>
+            <td>Site/Service</td>
+            <td>Gets information about the origin site of the cookie.</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>SourcePort</td>
+            <td>Gets the port of the source for the cookie.</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>StoragePartition</td>
+            <td>Defines which storage partition is used to store cookies.</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Size</td>
+            <td>Represents the size of the cookies.</td>
+            <td>Depends on text length</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>However, above all, attributes are optional. Also, you can't manipulate all attributes of the cookies. The browser sets some attributes.</p>
+
+      <h2>Check the Attribute Value in the Browser</h2>
+      <p>You can set the attributes to the cookie, but you can't access the attributes directly in JavaScript. To check whether the attribute is set, you can use the browser console.</p>
+
+      <ol>
+        <li>Right click in the browser and select <strong>Inspect</strong> to open the developer tools.</li>
+        <li>Go to the <strong>Application / Storage</strong> tab.</li>
+        <li>In the sidebar, select <strong>Cookies</strong>.</li>
+        <li>Click on any cookie to check its name, value, and other attribute values.</li>
+      </ol>
+
+      <p>The above steps are for Chrome. Steps may vary in other browsers.</p>
+
+      <h2>Cookie's Name/Value Attribute</h2>
+      <p>The <strong>Name</strong> attribute is used to store the cookie data. It takes the data as a value. If you want to use special characters in the value, you need to encode the text using <code>encodeURIComponent()</code>.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>let value = encodeURIComponent(cookieValue);
+document.cookie = "name=" + value + ";";</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+let output = document.getElementById("output");
+function setCookies() {
+  document.cookie = "subscribed=false"; // name-value pair
+  output.innerHTML = "Cookie setting successful!";
+}
+function readCookies() {
+  const allCookies = document.cookie.split("; ");
+  output.innerHTML = "The subscribed cookie is - &lt;br&gt;";
+  for (const cookie of allCookies) {
+    const [name, value] = cookie.split("=");
+    if (name == "subscribed") {
+      output.innerHTML += name + " : " + decodeURIComponent(value) + "&lt;br&gt;";
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+
+      <h2>Cookie's Path Attribute</h2>
+      <p>The <strong>Path</strong> attribute sets the scope of the cookie. It defines where cookies should be accessible on the website.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>document.cookie = "name=value;path=pathStr";</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+let output = document.getElementById("output");
+function setCookies() {
+  document.cookie = "signIn=true; path=/";
+  output.innerHTML = "Cookie set successful!";
+}
+function readCookies() {
+  const allCookies = document.cookie.split("; ");
+  output.innerHTML = "The cookie is : &lt;br&gt;";
+  for (const cookie of allCookies) {
+    const [key, value] = cookie.split("=");
+    if (key == "signIn") {
+      output.innerHTML += key + " : " + decodeURIComponent(value) + "&lt;br&gt;";
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+
+      <h2>Cookie Expires Attribute</h2>
+      <p>The <strong>expires</strong> attribute sets the expiry date of the cookie. It takes a date string as value.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>document.cookie = "name=value;expires=dateStr";</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+let output = document.getElementById("output");
+function setCookies() {
+  document.cookie = "product=mobile;expires=12 Jan 2050 12:00:00 UTC";
+  output.innerHTML = "Cookie Set Successful!";
+}
+function readCookies() {
+  const allCookies = document.cookie.split("; ");
+  output.innerHTML = "The cookie is : &lt;br&gt;";
+  for (const cookie of allCookies) {
+    const [key, value] = cookie.split("=");
+    if (key == "product") {
+      output.innerHTML += key + " : " + decodeURIComponent(value) + "&lt;br&gt;";
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+
+      <h2>Cookie's maxAge Attribute</h2>
+      <p>The <strong>maxAge</strong> attribute is an alternative to <code>expires</code>. It specifies the lifetime of the cookie in seconds.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>document.cookie = "name=value;max-age=age";</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+const output = document.getElementById("output");
+function setCookies() {
+  document.cookie = "token=1234wfijdn;max-age=864000";
+}
+function readCookies() {
+  const allCookies = document.cookie.split("; ");
+  output.innerHTML = "The cookie is : &lt;br&gt;";
+  for (const cookie of allCookies) {
+    const [key, value] = cookie.split("=");
+    if (key == "token") {
+      output.innerHTML += key + " : " + decodeURIComponent(value) + "&lt;br&gt;";
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+
+      <h2>Cookie Domain Attribute</h2>
+      <p>The <strong>domain</strong> attribute specifies the domain for which the cookie is valid. By default, it uses the domain from which the request is made. It can also include subdomains.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>document.cookie = "name=value;domain=domain_name";</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>&lt;script&gt;
+const output = document.getElementById("output");
+function setCookies() {
+  document.cookie = "username=abcd;domain=tutorialspoint.com";
+}
+function readCookies() {
+  const allCookies = document.cookie.split("; ");
+  output.innerHTML = "The cookie is : &lt;br&gt;";
+  for (const cookie of allCookies) {
+    const [key, value] = cookie.split("=");
+    if (key == "username") {
+      output.innerHTML += key + " : " + decodeURIComponent(value) + "&lt;br&gt;";
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+
+      <p>Similarly, you can update the attribute values. For example, you can extend the expiry time of the cookie.</p>
+    </div>
+  </div>
+</div>

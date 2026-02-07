@@ -1,0 +1,236 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Nested Tables</h1>
+    <div class="content">
+      <p>HTML nested tables refer to the table where one or more tables are placed inside it; the inner tables are placed inside the &lt;td&gt; tag. The nested tables involve the utilization of one table within another, providing a versatile way to structure complex data layouts. Various elements, including other HTML tags, can be incorporated within table cells (&lt;td&gt;).</p>
+
+      <p>Not only can tables be nested, but various HTML tags can also be used within the &lt;td&gt; (table data) tag for arranging contents in a structured manner.</p>
+
+      <h2>Basic Structure of Nested Tables</h2>
+      <p>Nested tables refer to the practice of embedding an entire table structure within a cell of another table. This technique allows for the creation of more complex and structured layouts in HTML.</p>
+
+      <p>See this image of how a nested table looks like i.e., this image demonstartes a structure of nested tables:</p>
+
+      <h2>How To Create a Nested Table?</h2>
+      <p>You can create a nested table in HTML by creating one or more tables in different table cells. The following are the steps to create an HTML nested table:</p>
+
+      <p><b>Step 1: Create Outer Table</b><br>Begin by creating the outer table, which serves as the container.</p>
+      <pre><code>&lt;table border="1"&gt;
+   &lt;!-- Outer table content --&gt;
+&lt;/table&gt;
+</code></pre>
+
+      <p><b>Step 2: Define Rows and Columns</b><br>Within the outer table, define the necessary rows and columns.</p>
+      <pre><code>&lt;tr&gt;
+   &lt;td&gt;
+      &lt;!-- Content within the cell --&gt;
+   &lt;/td&gt;
+&lt;/tr&gt;
+</code></pre>
+
+      <p><b>Step 3: Embed Inner Table</b><br>Inside the cell, embed a new table structure using the &lt;table&gt; tags.</p>
+      <pre><code>&lt;td&gt;
+   &lt;table border="1"&gt;
+      &lt;!-- Inner table content --&gt;
+   &lt;/table&gt;
+&lt;/td&gt;
+</code></pre>
+
+      <p><b>Step 4: Define Inner Table Content</b><br>Within the inner table, define rows and columns as needed.</p>
+      <pre><code>&lt;tr&gt;
+  &lt;td&gt;Inner Content&lt;/td&gt;
+&lt;/tr&gt;
+</code></pre>
+
+      <p><b>Step 5 - Close Tags</b><br>Ensure proper closure of all HTML tags.</p>
+      <pre><code>&lt;/table&gt;
+</code></pre>
+
+      <h2>Example of Nested Tables</h2>
+      <p>Following is an example by following the above steps −</p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Nested Tables&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;table border="1" width="100%"&gt;
+      &lt;tr&gt;
+         &lt;td&gt;
+            &lt;table border="1" width="100%"&gt;
+               &lt;tr&gt;
+                  &lt;th&gt;Name&lt;/th&gt;
+                  &lt;th&gt;Salary&lt;/th&gt;
+               &lt;/tr&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;Ramesh Raman&lt;/td&gt;
+                  &lt;td&gt;5000&lt;/td&gt;
+               &lt;/tr&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;Shabbir Hussein&lt;/td&gt;
+                  &lt;td&gt;7000&lt;/td&gt;
+               &lt;/tr&gt;
+            &lt;/table&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Tables Within Cells</h2>
+      <p>Tables can be nested within table cells, allowing for complex structures.</p>
+
+      <h3>Example</h3>
+      <p>The following example creates a table with two columns (Name and Salary). Inside the first column, there's a nested table displaying employee details with the same columns.</p>
+
+      <p>The outer table's header and data rows are defined, and the inner table showcases two employees, Ramesh Raman, and Shabbir Hussein, with corresponding salaries.</p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+   &lt;meta charset="UTF-8"&gt;
+   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;table border="1"&gt;
+      &lt;tr&gt;
+         &lt;th&gt;Name&lt;/th&gt;
+         &lt;th&gt;Salary&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+         &lt;td&gt;
+            &lt;table border="1" width="100%"&gt;
+               &lt;tr&gt;
+                  &lt;th&gt;Name&lt;/th&gt;
+                  &lt;th&gt;Salary&lt;/th&gt;
+               &lt;/tr&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;Ramesh Raman&lt;/td&gt;
+                  &lt;td&gt;5000&lt;/td&gt;
+               &lt;/tr&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;Shabbir Hussein&lt;/td&gt;
+                  &lt;td&gt;7000&lt;/td&gt;
+               &lt;/tr&gt;
+            &lt;/table&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Styling Nested Tables</h2>
+      <p>You can apply styles to nested tables just like regular tables to enhance visual appearance. To write CSS styles for nested tables, you can simply apply the CSS rules on the 'table' selector to style the outer table and use the 'table table' selector to style the inner tables.</p>
+
+      <h3>Example</h3>
+      <p>The following code includes a main table styled with CSS properties. The <code>border-collapse</code> ensures seamless borders, and <code>width: 100%</code> makes it responsive. Cells (&lt;td&gt;, &lt;th&gt;) have padding, border, and text alignment.</p>
+
+      <p>Additionally, nested tables within cells inherit a distinctive style, including a colored background and borders. The main table's data cell contains a nested table with a blue border, 80% width, and centered using 'margin: 10px auto'.</p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+   &lt;meta charset="UTF-8"&gt;
+   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+   &lt;title&gt;Nested Tables with CSS Styles&lt;/title&gt;
+   &lt;style&gt;
+      table {
+         border-collapse: collapse;
+         width: 100%;
+      }
+      td,
+      th {
+         border: 1px solid #dddddd;
+         text-align: left;
+         padding: 8px;
+      }
+      /* Additional styles for nested tables */
+      table table {
+         border: 2px solid #3498db;
+         width: 80%;
+         margin: 10px auto;
+      }
+      table table td {
+         background-color: #ecf0f1;
+         border: 1px solid #bdc3c7;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;table border="1"&gt;
+      &lt;tr&gt;
+         &lt;th&gt;Name&lt;/th&gt;
+         &lt;th&gt;Salary&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+         &lt;td&gt;
+            &lt;table border="1" width="100%"&gt;
+               &lt;tr&gt;
+                  &lt;th&gt;Name&lt;/th&gt;
+                  &lt;th&gt;Salary&lt;/th&gt;
+               &lt;/tr&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;Ramesh Raman&lt;/td&gt;
+                  &lt;td&gt;5000&lt;/td&gt;
+               &lt;/tr&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;Shabbir Hussein&lt;/td&gt;
+                  &lt;td&gt;7000&lt;/td&gt;
+               &lt;/tr&gt;
+            &lt;/table&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Images in Nested Tables</h2>
+      <p>Embedding images within nested tables enhances visual presentation. Use the &lt;img&gt; tag inside table cells to seamlessly integrate images into complex layouts like nested tables.</p>
+
+      <h3>Example</h3>
+      <p>The following example illustrates the use of images inside nested tables:</p>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Nested Tables&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;table border="1" width="100%"&gt;
+      &lt;tr&gt;
+         &lt;td&gt;
+            &lt;table border="1" width="100%"&gt;
+               &lt;tr&gt;
+                  &lt;th&gt;Image &lt;/th&gt;
+                  &lt;th&gt;Name&lt;/th&gt;
+               &lt;/tr&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;
+                     &lt;img src="images\logo.png" alt="Nested Image"&gt;
+                  &lt;/td&gt;
+                  &lt;td&gt;LOGO &lt;/td&gt;
+               &lt;/tr&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;
+                     &lt;img src="images\html5_icon.png" alt="Nested Image"&gt;
+                  &lt;/td&gt;
+                  &lt;td&gt;HTML5 &lt;/td&gt;
+               &lt;/tr&gt;
+            &lt;/table&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Benefits of Nested Tables</h2>
+      <p>Following are the advantages of the nested tables −</p>
+      <ul>
+        <li><b>Organized Layouts</b> − Nested tables enable the creation of organized and structured layouts, enhancing the presentation of complex data.</li>
+        <li><b>Cell Customization</b> − Each cell in a nested table can contain diverse content, including text, images, or even additional nested tables.</li>
+        <li><b>Complex Designs</b> − Achieve intricate design patterns by nesting tables within cells, providing flexibility in webpage design.</li>
+      </ul>
+    </div>
+  </div>
+</div>

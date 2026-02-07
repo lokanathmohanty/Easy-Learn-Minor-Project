@@ -1,0 +1,157 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Coroutines</h1>
+    </div>
+    <div class="content">
+      <p>
+        Coroutines in Python are advanced functions that extend traditional functions by allowing multiple entry points and the ability to pause and resume execution. They are highly suitable for asynchronous programming and building data processing pipelines.
+      </p>
+      <p>
+        Unlike subroutines which have a single entry and exit, coroutines enable cooperative multitasking by letting programmers control when execution switches between tasks.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Key Characteristics of Coroutines</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>Multiple Entry Points:</strong> Coroutines can pause at yield points and resume later.</li>
+        <li><strong>No Central Coordinator:</strong> Coroutines operate independently and can interact in pipeline fashion.</li>
+        <li><strong>Cooperative Multitasking:</strong> Programmer controls when coroutines yield and resume.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Coroutines vs Subroutines</h2>
+    </div>
+    <div class="content">
+      <table>
+        <thead><tr><th>Criteria</th><th>Subroutines</th><th>Coroutines</th></tr></thead>
+        <tbody>
+          <tr><td>Definition</td><td>Functions with single entry and exit.</td><td>Functions with multiple entry points and suspension.</td></tr>
+          <tr><td>Execution Control</td><td>Call-return model driven by caller.</td><td>Can suspend and resume on demand.</td></tr>
+          <tr><td>State Management</td><td>No maintained state between calls.</td><td>Maintains state across suspensions.</td></tr>
+          <tr><td>Use Case</td><td>Modular code organization.</td><td>Asynchronous tasks, pipelines.</td></tr>
+          <tr><td>Concurrency</td><td>Sequential execution.</td><td>Supports cooperative multitasking.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Basic Coroutine Example</h2>
+    </div>
+    <div class="content">
+      <pre>
+def print_name(prefix):
+    print(f"Searching prefix: {prefix}")
+    while True:
+        name = (yield)
+        if prefix in name:
+            print(name)
+
+corou = print_name("Welcome to")
+corou.__next__()
+corou.send("Tutorialspoint")
+corou.send("Welcome to Tutorialspoint")
+      </pre>
+      <p>Output:</p>
+      <pre>
+Searching prefix: Welcome to
+Welcome to Tutorialspoint
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Closing a Coroutine</h2>
+    </div>
+    <div class="content">
+      <pre>
+def print_name(prefix):
+    print(f"Searching prefix: {prefix}")
+    try:
+        while True:
+            name = (yield)
+            if prefix in name:
+                print(name)
+    except GeneratorExit:
+        print("Closing coroutine!!")
+
+corou = print_name("Come")
+corou.__next__()
+corou.send("Come back Thank You")
+corou.send("Thank you")
+corou.close()
+      </pre>
+      <p>Output:</p>
+      <pre>
+Searching prefix: Come
+Come back Thank You
+Closing coroutine!!
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Chaining Coroutines for Pipelines</h2>
+    </div>
+    <div class="content">
+      <pre>
+def producer(sentence, next_coroutine):
+    tokens = sentence.split(" ")
+    for token in tokens:
+        next_coroutine.send(token)
+    next_coroutine.close()
+
+def pattern_filter(pattern="ing", next_coroutine=None):
+    print(f"Searching for {pattern}")
+    try:
+        while True:
+            token = (yield)
+            if pattern in token:
+                next_coroutine.send(token)
+    except GeneratorExit:
+        print("Done with filtering!!")
+        next_coroutine.close()
+
+def print_token():
+    print("I'm the sink, I'll print tokens")
+    try:
+        while True:
+            token = (yield)
+            print(token)
+    except GeneratorExit:
+        print("Done with printing!")
+
+pt = print_token()
+pt.__next__()
+pf = pattern_filter(next_coroutine=pt)
+pf.__next__()
+sentence = "Tutorialspoint is welcoming you to learn and succeed in Career!!!"
+producer(sentence, pf)
+      </pre>
+      <p>Output:</p>
+      <pre>
+I'm the sink, I'll print tokens
+Searching for ing
+welcoming
+Done with filtering!!
+Done with printing!
+      </pre>
+    </div>
+  </div>
+
+  
+    </div>
+  </div>
+</div>

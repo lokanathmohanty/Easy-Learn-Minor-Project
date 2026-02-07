@@ -1,0 +1,114 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Database Connectivity (JDBC) Summary 🔗💾</h1>
+
+        <div class="content">
+            <p>The **JDBC API** (Java Database Connectivity) is a standard Java API that provides **database-independent connectivity** between the Java programming language and a wide range of databases (especially Relational Databases, RDBMS).</p>
+
+            <hr>
+
+            <h2 class="title">I. Core Concepts and Purpose</h2>
+            <ul>
+                <li>
+                    **Definition:** JDBC is a specification providing interfaces for portable access to an underlying database. It allows Java programs to access tabular data.
+                </li>
+                <li>
+                    **Functionality:** The API enables core database tasks like:
+                    <ol>
+                        <li>Making a **connection** to the database.</li>
+                        <li>Creating and executing **SQL statements** (queries).</li>
+                        <li>Processing and viewing the resulting **records**.</li>
+                    </ol>
+                </li>
+                <li>
+                    **Applications:** JDBC drivers can be used by various Java executables, including Java Applications, Applets, Servlets, JSPs, and EJBs.
+                </li>
+                <li>
+                    **Packages (JDBC 4.0):** The primary packages are **<code>java.sql</code>** and **<code>javax.sql</code>**. Modern versions (4.0+) include features like automatic driver loading and enhanced exception handling.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Key Interfaces and Classes (JDBC API Components)</h2>
+            <p>These components are the building blocks of any JDBC application:</p>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Type</th>
+                    <th>Function</th>
+                </tr>
+                <tr>
+                    <td><code>**DriverManager**</code></td>
+                    <td>Class</td>
+                    <td>Loads the correct JDBC **Driver** and establishes a **Connection**.</td>
+                </tr>
+                <tr>
+                    <td><code>**Connection**</code></td>
+                    <td>Interface</td>
+                    <td>Represents an active session with the database. Used to create **Statement** objects.</td>
+                </tr>
+                <tr>
+                    <td><code>**Statement**</code></td>
+                    <td>Interface</td>
+                    <td>Used for executing simple, static SQL queries (without parameters).</td>
+                </tr>
+                <tr>
+                    <td><code>**PreparedStatement**</code></td>
+                    <td>Interface</td>
+                    <td>Used for executing parameterized SQL queries (with placeholder values, `?`). Offers better performance and security (prevents SQL injection).</td>
+                </tr>
+                <tr>
+                    <td><code>**CallableStatement**</code></td>
+                    <td>Interface</td>
+                    <td>Used for executing stored procedures and functions in the database.</td>
+                </tr>
+                <tr>
+                    <td><code>**ResultSet**</code></td>
+                    <td>Interface</td>
+                    <td>Represents the **tabular data** retrieved from a database query. Allows iteration over the rows of the result set.</td>
+                </tr>
+                <tr>
+                    <td><code>**ResultSetMetaData**</code></td>
+                    <td>Interface</td>
+                    <td>Provides information about the columns in a <code>ResultSet</code> (names, types, count).</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">III. JDBC Driver Types</h2>
+            <p>JDBC drivers are categorized based on their implementation approach:</p>
+            <ul>
+                <li>
+                    **Type 1 (JDBC-ODBC Bridge Driver):**
+                    <ul>
+                        <li>**Mechanism:** JDBC API calls are translated to ODBC calls. Requires an ODBC driver on the client.</li>
+                        <li>**Status:** Legacy and generally discouraged/removed from modern JDKs.</li>
+                    </ul>
+                </li>
+                <li>
+                    **Type 2 (JDBC Native API Driver):**
+                    <ul>
+                        <li>**Mechanism:** JDBC API calls are converted into native C/C++ API calls specific to the vendor database.</li>
+                        <li>**Requirement:** Requires native vendor-provided libraries to be installed on the client machine. (e.g., Oracle OCI driver).</li>
+                    </ul>
+                </li>
+                <li>
+                    **Type 3 (JDBC-Net Pure Java Driver):**
+                    <ul>
+                        <li>**Mechanism:** A three-tier approach. Java client communicates with a **middleware application server** using standard network sockets, and the middleware translates the calls to the DBMS format.</li>
+                        <li>**Advantage:** Client-side only needs the JDBC driver and Java Runtime.</li>
+                    </ul>
+                </li>
+                <li>
+                    **Type 4 (Pure Java Driver / Direct-to-Database):**
+                    <ul>
+                        <li>**Mechanism:** A pure Java driver that communicates **directly** with the vendor's database through socket connections (e.g., MySQL Connector/J).</li>
+                        <li>**Advantage:** Highest performance, entirely database-independent on the client side, and highly portable. **This is the most common type used today.**</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

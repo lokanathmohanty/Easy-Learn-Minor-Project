@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Arbitrary or Variable-length Arguments</h1>
+    <div class="content">
+      <h2>Arbitrary Arguments (*args)</h2>
+      <p>
+        You may want to define a function that is able to accept arbitrary or variable number of arguments.  
+        These arguments can be positional or keyword arguments.
+      </p>
+      <ul>
+        <li>An argument prefixed with a single asterisk <code>*</code> is used for arbitrary positional arguments.</li>
+        <li>An argument prefixed with two asterisks <code>**</code> is used for arbitrary keyword arguments.</li>
+      </ul>
+
+      <h3>Arbitrary Arguments Example</h3>
+      <pre><code># sum of numbers
+def add(*args):
+    s = 0
+    for x in args:
+        s = s + x
+    return s
+
+result = add(10,20,30,40)
+print(result)
+
+result = add(1,2,3)
+print(result)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>100
+6</code></pre>
+
+      <p>
+        The <code>args</code> variable prefixed with <code>*</code> stores all the values passed to it as a tuple.  
+        We can loop through its items to process the values.
+      </p>
+
+      <h2>Required Arguments With Arbitrary Arguments</h2>
+      <p>
+        It is also possible to define functions with required arguments along with variable-length arguments.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code># avg of first test and best of following tests
+def avg(first, *rest):
+    second = max(rest)
+    return (first + second) / 2
+
+result = avg(40,30,50,25)
+print(result)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>45.0</code></pre>
+
+      <h2>Arbitrary Keyword Arguments (**kwargs)</h2>
+      <p>
+        If an argument is prefixed with two asterisks <code>**</code>, the function can accept arbitrary keyword arguments.  
+        Inside the function, these arguments are stored in a dictionary of <code>key:value</code> pairs.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>def addr(**kwargs):
+    for k, v in kwargs.items():
+        print("{}:{}".format(k, v))
+
+print("pass two keyword args")
+addr(Name="John", City="Mumbai")
+
+print("pass four keyword args")
+addr(Name="Raam", City="Mumbai", ph_no="9123134567", PIN="400001")</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>pass two keyword args
+Name:John
+City:Mumbai
+pass four keyword args
+Name:Raam
+City:Mumbai
+ph_no:9123134567
+PIN:400001</code></pre>
+
+      <h2>Multiple Arguments With Arbitrary Keyword Arguments</h2>
+      <p>
+        When mixing different types of arguments, <strong>arbitrary keyword arguments</strong> should appear 
+        <em>after</em> positional, keyword, and arbitrary positional arguments.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>def percent(math, sci, **optional):
+    print("maths:", math)
+    print("sci:", sci)
+    s = math + sci
+    for k, v in optional.items():
+        print("{}:{}".format(k, v))
+        s = s + v
+    return s / (len(optional) + 2)
+
+result = percent(math=80, sci=75, Eng=70, Hist=65, Geo=72)
+print("percentage:", result)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>maths: 80
+sci: 75
+Eng:70
+Hist:65
+Geo:72
+percentage: 72.4</code></pre>
+    </div>
+  </div>
+</div>

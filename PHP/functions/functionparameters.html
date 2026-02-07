@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Function Parameters and Arguments</h1>
+
+    <div class="content">
+      <p>
+        **Function Parameters** are variables defined in the function signature that receive data when the function is called. These values, known as **Arguments**, allow a function to produce dynamic results based on the input they receive.
+      </p>
+
+      <h2>Formal Parameters vs. Actual Arguments</h2>
+      <ul>
+        <li>
+          **Formal Parameters:** The variables defined in the function's declaration (e.g., `$arg_1` in the syntax below).
+        </li>
+        <li>
+          **Actual Arguments:** The literal values, variables, or expressions passed to the function when it is called (e.g., `val1`, `$x`, or `10 + 20`).
+        </li>
+      </ul>
+      <div class="example">
+        <p>
+          **Syntax:**<br>
+          <code>function foo($arg_1, $arg_2) { /* ... */ }</code><br>
+          <code>foo(val1, val2);</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Key Features of Parameters</h2>
+
+      <h3>1. Default Parameters (Optional Arguments)</h3>
+      <p>
+        You can assign a default value to a parameter in the function definition. If the caller does not provide an argument for that parameter, the default value is used, making the argument optional.
+      </p>
+      <div class="example">
+        <p>
+          <code>function greet($name = "Guest") { echo "Hello, $name!"; }</code><br>
+          <code>greet();</code> $\rightarrow$ Hello, Guest!<br>
+          <code>greet("Rashmi");</code> $\rightarrow$ Hello, Rashmi!
+        </p>
+      </div>
+
+      <h3>2. Variable-Length Arguments (`...`)</h3>
+      <p>
+        The **splat operator (`...`)** allows a function to accept a dynamic, unconstrained number of arguments. These arguments are then provided to the function as an indexed array.
+      </p>
+      <div class="example">
+        <p>
+          <code>function sumAll(...$numbers) { return array_sum($numbers); }</code><br>
+          <code>sumAll(1, 2, 3, 4);</code> $\rightarrow$ **10**
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Type Handling and Error Cases</h2>
+
+      <h3>Argument Count Error</h3>
+      <p>
+        The number of actual arguments passed must generally match the number of formal parameters (unless default values or variable-length arguments are used).
+      </p>
+      <ul>
+        <li>
+          **Too Few Arguments:** PHP raises an **`ArgumentCountError`** (Fatal Error) if a required parameter is missing.
+        </li>
+        <li>
+          **Too Many Arguments:** Extra arguments are generally ignored.
+        </li>
+      </ul>
+
+      <h3>Type Mismatch and Weak Typing</h3>
+      <p>
+        PHP is a **weakly typed** language. It often attempts to automatically convert (cast) argument types to match the context of the operation inside the function.
+      </p>
+      <ul>
+        <li>
+          If you pass `"10"` (string) and `20` (integer) to an addition function, PHP will successfully cast `"10"` to an integer and return `30`.
+        </li>
+        <li>
+          If you pass `"Hello"` and `"World"`, the `+` operator fails because it cannot perform arithmetic on non-numeric strings, resulting in a **`TypeError`** (Fatal Error, in modern PHP versions when strict types are not enabled and the operation is invalid).
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

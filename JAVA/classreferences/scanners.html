@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>Scanner</code> Class Summary ⌨️🔍</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.Scanner</code>** class is a versatile text parser that can break input into **tokens** using a **delimiter pattern**, which defaults to **whitespace**. It can read input from various sources like **<code>InputStream</code>** (including the console), **<code>File</code>**s, and **<code>String</code>**s, making it the primary tool for simple console input and file parsing.</p>
+
+            <h2 class="title">I. Input Sources and Construction</h2>
+            <p><code>Scanner</code> is highly flexible, accepting many different types of input sources in its numerous constructors. The most common use cases involve reading from the console or a file:</p>
+            <ul class="example">
+                <li>
+                    **Console Input:** <code>Scanner consoleScanner = new Scanner(System.in);</code> (Uses the standard input stream)
+                </li>
+                <li>
+                    **String Input:** <code>Scanner stringScanner = new Scanner("10 apple 20");</code>
+                </li>
+                <li>
+                    **File Input:** <code>Scanner fileScanner = new Scanner(new File("data.txt"));</code>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Tokenization and Parsing</h2>
+            <p>The core functionality relies on identifying tokens based on a delimiter and then parsing those tokens into specific primitive types or strings.</p>
+
+            <h3>Checking for Tokens (<code>hasNext...</code>)</h3>
+            <p>These methods check if the next token is available and if it matches the pattern for a specific primitive type:</p>
+            <ul>
+                <li>
+                    **<code>boolean hasNext()</code>:** Checks if *any* next token exists.
+                </li>
+                <li>
+                    **<code>boolean hasNextInt()</code> / <code>hasNextDouble()</code> / <code>hasNextBoolean()</code>, etc.:** Checks if the next token can be successfully parsed into the corresponding type.
+                </li>
+                <li>
+                    **<code>boolean hasNextLine()</code>:** Checks if there is another line of input.
+                </li>
+            </ul>
+
+            <h3>Retrieving Tokens (<code>next...</code>)</h3>
+            <p>These methods retrieve the token and convert it to the requested type:</p>
+            <ul>
+                <li>
+                    **<code>String next()</code>:** Retrieves the next complete token (delimited by whitespace by default).
+                </li>
+                <li>
+                    **<code>int nextInt()</code> / <code>double nextDouble()</code> / <code>String nextBigDecimal()</code>, etc.:** Scans and returns the next token as the specified type.
+                </li>
+                <li>
+                    **<code>String nextLine()</code>:** Advances the scanner past the current line and returns the input that was skipped (up to the line terminator).
+                </li>
+            </ul>
+            <p>If a <code>next...()</code> method is called and the token is not the expected type, an **<code>InputMismatchException</code>** is thrown.</p>
+
+            <hr>
+
+            <h2 class="title">III. Configuration and Control</h2>
+            <p><code>Scanner</code> provides methods to customize parsing behavior:</p>
+            <ul>
+                <li>
+                    **Delimiter:** The default delimiter is whitespace. Use **<code>useDelimiter(Pattern pattern)</code>** or **<code>useDelimiter(String patternString)</code>** to set a custom one (e.g., a comma).
+                </li>
+                <li>
+                    **Radix:** The default radix for integers is 10. Use **<code>useRadix(int radix)</code>** to change it (e.g., to 16 for hexadecimal input).
+                </li>
+                <li>
+                    **Locale:** Use **<code>useLocale(Locale locale)</code>** to handle locale-specific formatting for numbers (e.g., using a comma for the decimal separator).
+                </li>
+                <li>
+                    **Close:** The **<code>void close()</code>** method is critical to release the underlying input source (especially important for files or streams).
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,214 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Pointers and Arrays in C</h1>
+
+    <div class="content">
+      <p>Previous | Quiz | Next</p>
+
+      <p>
+        In C programming, the concepts of arrays and pointers have a very important role. There is also a close association between the two. In this chapter, we will explain in detail the relationship between arrays and pointers in C programming.
+      </p>
+
+      <h2 class="title">Arrays in C</h2>
+      <p>
+        An array in C is a homogenous collection of elements of a single data type stored in a continuous block of memory. The size of an array is an integer inside square brackets, put in front of the name of the array.
+      </p>
+
+      <h2 class="title">Declaring an Array</h2>
+      <p>To declare an array, the following syntax is used −</p>
+      <p><code>data_type arr_name[size];</code></p>
+      <p>
+        Each element in the array is identified by a unique incrementing index, starting from "0". An array can be declared and initialized in different ways.
+      </p>
+      <p>You can declare an array and then initialize it later in the code, as and when required. For example −</p>
+      <p><code>int arr[5];<br>...<br>a[0] = 1;<br>a[1] = 2;<br>...</code></p>
+      <p>You can also declare and initialize an array at the same time. The values to be stored are put as a comma separated list inside curly brackets.</p>
+      <p><code>int a[5] = {1, 2, 3, 4, 5};</code></p>
+      <p><strong>Note:</strong> When an array is initialized at the time of declaration, mentioning its size is optional, as the compiler automatically computes the size. Hence, the following statement is also valid −</p>
+      <p><code>int a[] = {1, 2, 3, 4, 5};</code></p>
+
+      <h2 class="title">Example: Lower Bound and Upper Bound of an Array</h2>
+      <p>All the elements in an array have a positional index, starting from "0". The lower bound of the array is always "0", whereas the upper bound is "size − 1". We can use this property to traverse, assign, or read inputs into the array subscripts with a loop.</p>
+      <p>Take a look at this following example −</p>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int a[5], i;
+
+  for(i = 0; i <= 4; i++){
+    scanf("%d", &a[i]);
+  }
+
+  for(i = 0; i <= 4; i++){
+    printf("a[%d] = %d\n", i, a[i]);
+  }
+
+  return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output</strong></p>
+      <p>Run the code and check its output −</p>
+      <pre>
+<code>
+a[0] = 712952649
+a[1] = 32765
+a[2] = 100
+a[3] = 0
+a[4] = 4096
+</code>
+      </pre>
+
+      <h2 class="title">Pointers in C</h2>
+      <p>
+        A pointer is a variable that stores the address of another variable. In C, the symbol (&) is used as the address-of operator. The value returned by this operator is assigned to a pointer.
+      </p>
+      <p>
+        To declare a variable as a pointer, you need to put an asterisk (*) before the name. Also, the type of pointer variable must be the same as the type of the variable whose address it stores.
+      </p>
+      <p>
+        In this code snippet, "b" is an integer pointer that stores the address of an integer variable "a" −
+      </p>
+      <p><code>int a = 5;<br>int *b = &a;</code></p>
+      <p>
+        In case of an array, you can assign the address of its 0th element to the pointer.
+      </p>
+      <p><code>int arr[] = {1, 2, 3, 4, 5};<br>int *b = &arr[0];</code></p>
+      <p>
+        In C, the name of the array itself resolves to the address of its 0th element. It means, in the above case, we can use "arr" as equivalent to "&arr[0]":
+      </p>
+      <p><code>int *b = arr;</code></p>
+
+      <h2 class="title">Example: Increment Operator with Pointer</h2>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 5;
+  int *b = &a;
+
+  printf("Address of a: %d\n", b);
+  b++;
+  printf("After increment, Address of a: %d\n", b);
+
+  return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output</strong></p>
+      <p>Run the code and check its output −</p>
+      <pre>
+<code>
+Address of a: 6422036
+After increment, Address of a: 6422040
+</code>
+      </pre>
+
+      <h2 class="title">The Dereference Operator in C</h2>
+      <p>
+        In C, the "*" symbol is used as the dereference operator. It returns the value stored at the address to which the pointer points.
+      </p>
+      <p>
+        Hence, the following statement returns "5", which is the value stored in the variable "a", the variable that "b" points to.
+      </p>
+      <p><code>int a = 5;<br>int *b = &a;<br>printf("value of a: %d\n", *b);</code></p>
+      <p>
+        <strong>Note:</strong> In case of a char pointer, it will increment by 1; in case of a double pointer, it will increment by 8; and in case of a struct type, it increments by the sizeof value of that struct type.
+      </p>
+
+      <h2 class="title">Example: Traversing an Array Using a Pointer</h2>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int arr[5] = {1, 2, 3, 4, 5};
+  int *b = arr;
+
+  printf("Address of a[0]: %d value at a[0] : %d\n", b, *b);
+
+  b++;
+  printf("Address of a[1]: %d value at a[1] : %d\n", b, *b);
+
+  b++;
+  printf("Address of a[2]: %d value at a[2] : %d\n", b, *b);
+
+  b++;
+  printf("Address of a[3]: %d value at a[3] : %d\n", b, *b);
+
+  b++;
+  printf("Address of a[4]: %d value at a[4] : %d\n", b, *b);
+
+  return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output</strong></p>
+      <p>Run the code and check its output −</p>
+      <pre>
+<code>
+address of a[0]: 6422016 value at a[0] : 1
+address of a[1]: 6422020 value at a[1] : 2
+address of a[2]: 6422024 value at a[2] : 3
+address of a[3]: 6422028 value at a[3] : 4
+address of a[4]: 6422032 value at a[4] : 5
+</code>
+      </pre>
+
+      <h2 class="title">Points to Note</h2>
+      <ul>
+        <li>"&amp;arr[0]" is equivalent to "b" and "arr[0]" to "*b".</li>
+        <li>Similarly, "&amp;arr[1]" is equivalent to "b + 1" and "arr[1]" is equivalent to "*(b + 1)".</li>
+        <li>Also, "&amp;arr[2]" is equivalent to "b + 2" and "arr[2]" is equivalent to "*(b + 2)".</li>
+        <li>In general, "&amp;arr[i]" is equivalent to "b + i" and "arr[i]" is equivalent to "*(b + i)".</li>
+      </ul>
+
+      <h2 class="title">Example: Traversing an Array using the Dereference Operator</h2>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int arr[5] = {1, 2, 3, 4, 5};
+  int *b = arr;
+  int i;
+
+  for(i = 0; i <= 4; i++) {
+    printf("a[%d] = %d\n", i, *(b + i));
+  }
+
+  return 0;
+}
+</code>
+      </pre>
+      <p><strong>Output</strong></p>
+      <p>Run the code and check its output −</p>
+      <pre>
+<code>
+a[0] = 1
+a[1] = 2
+a[2] = 3
+a[3] = 4
+a[4] = 5
+</code>
+      </pre>
+
+      <p>You can also increment the pointer in every iteration and obtain the same result −</p>
+      <pre>
+<code>
+for(i = 0; i <= 4; i++) {
+  printf("a[%d] = %d\n", i, *b);
+  b++;
+}
+</code>
+      </pre>
+
+      <p>
+        The concept of arrays and pointers in C has a close relationship. You can use pointers to enhance the efficiency of a program, as pointers deal directly with the memory addresses. Pointers can also be used to handle multi−dimensional arrays.
+      </p>
+    </div>
+  </div>
+</div>

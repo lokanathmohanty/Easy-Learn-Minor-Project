@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Dynamic Class Data Sharing (CDS)</h1>
+
+        <div class="content">
+            <h2>What is Class Data Sharing (CDS)?</h2>
+            <p><strong>Class Data Sharing (CDS)</strong>, originally introduced in JDK 5, is a feature of the JVM designed to **improve application startup time** and **reduce memory footprint**. It works by creating a pre-processed archive of class metadata and core classes (like those in <code>java.lang</code>).</p>
+            <p>When multiple JVMs run on the same machine, they can all share this single archive, avoiding the redundant work of:</p>
+            <ul>
+                <li>Decompressing class files.</li>
+                <li>Validating class structure.</li>
+                <li>Loading and preparing class metadata.</li>
+            </ul>
+
+            <h3>Evolution of CDS</h3>
+            <ul>
+                <li>**JDK 5:** Introduced CDS for core platform classes.</li>
+                <li>**Java 10 (AppCDS):** Extended CDS to include **application classes**, allowing developers to archive their own classes.</li>
+                <li>**Java 12:** CDS became **default** for the system archive.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Dynamic CDS (Java 13+)</h2>
+            <p>Prior to Java 13, creating an AppCDS archive was a tedious, multi-step process involving trial runs to generate a complete list of all classes loaded, which was then used to dump the archive.</p>
+            <p><strong>Dynamic CDS</strong> (introduced in **Java 13**) simplifies this by allowing developers to generate the shared archive automatically when the application **exits**, eliminating the need for separate pre-run steps to collect class lists.</p>
+
+            <h3>Creating a Dynamic Shared Archive</h3>
+            <p>The shared archive file is generated during a normal run of the application using the JVM option **<code>-XX:ArchiveClassesAtExit</code>**:</p>
+            <p><strong>Command to Create Archive:</strong></p>
+            <pre><code>$ java -XX:ArchiveClassesAtExit=sharedApp.jsa -cp APITester.jar APITester</code></pre>
+            <p>When the <code>APITester</code> application finishes execution, the JVM automatically captures the metadata of all classes loaded during that run and saves it to the specified <code>sharedApp.jsa</code> file.</p>
+
+            <h3>Using the Dynamic Shared Archive</h3>
+            <p>To benefit from the created archive in subsequent runs, you use the **<code>-XX:SharedArchiveFile</code>** option:</p>
+            <p><strong>Command to Use Archive:</strong></p>
+            <pre><code>$ java -XX:SharedArchiveFile=sharedApp.jsa -cp APITester.jar APITester</code></pre>
+            <p>The JVM will then load the required class metadata directly from the <code>sharedApp.jsa</code> file, resulting in faster startup.</p>
+        </div>
+    </div>
+</div>

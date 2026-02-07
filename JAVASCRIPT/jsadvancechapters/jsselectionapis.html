@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Selection API</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>
+        The <b>JavaScript Selection API</b> allows developers to access and modify the portion of a web page selected 
+        by the user. This includes highlighting text, interacting with selections, and responding to selection events.
+      </p>
+      <p>
+        ⚠️ The Selection API is <b>not available</b> in Web Workers — it only works in the main thread of a web page.
+      </p>
+
+      <h2>Core Interfaces</h2>
+      <ul>
+        <li><b>Selection</b>: Represents the selected text or caret position (obtained via <code>document.getSelection()</code> or <code>window.getSelection()</code>).</li>
+        <li><b>Range</b>: Represents a fragment of a document, typically a selection or node subset.</li>
+        <li><b>Events</b>: Several events (like <code>selectionchange</code> and <code>selectstart</code>) allow you to track selection changes.</li>
+      </ul>
+
+      <h2>Selection Interface</h2>
+      <p>
+        A <code>Selection</code> object shows the user-selected region of text or caret. 
+        The selection has two key points:
+      </p>
+      <ul>
+        <li><b>Anchor</b>: Where the selection started.</li>
+        <li><b>Focus</b>: Where the selection ended.</li>
+      </ul>
+
+      <h3>Instance Properties</h3>
+      <table border="1" cellpadding="5">
+        <tr><th>Property</th><th>Description</th></tr>
+        <tr><td>anchorNode</td><td>Node where the selection starts.</td></tr>
+        <tr><td>anchorOffset</td><td>Character/element offset of start.</td></tr>
+        <tr><td>focusNode</td><td>Node where selection ends.</td></tr>
+        <tr><td>focusOffset</td><td>Offset of end position.</td></tr>
+        <tr><td>isCollapsed</td><td><code>true</code> if start and end are same point.</td></tr>
+        <tr><td>rangeCount</td><td>Number of ranges in the selection.</td></tr>
+        <tr><td>type</td><td>"None", "Caret", or "Range".</td></tr>
+      </table>
+
+      <h3>Instance Methods</h3>
+      <ul>
+        <li><code>addRange()</code> → Adds a Range to the selection.</li>
+        <li><code>collapse()</code> → Collapses selection to a point.</li>
+        <li><code>deleteFromDocument()</code> → Removes selection contents.</li>
+        <li><code>removeAllRanges()</code> → Clears selection.</li>
+        <li><code>toString()</code> → Returns selected text.</li>
+        <li><code>selectAllChildren(node)</code> → Selects all children of a given node.</li>
+      </ul>
+
+      <h2>Document.getSelection()</h2>
+      <pre><code>
+let selection = document.getSelection();
+      </code></pre>
+      <p>
+        Returns the <code>Selection</code> object for the current document, or <code>null</code> if none exists.
+      </p>
+
+      <h3>Example</h3>
+      <pre><code>
+<!DOCTYPE html>
+<html>
+<body>
+   <p>Select some text and click the button.</p>
+   <button onclick="getSelectedText()">Get Selected Text</button>
+
+   <script>
+      function getSelectedText() {
+         let selection = document.getSelection();
+         if (selection.rangeCount > 0) {
+            console.log("Selected text:", selection.toString());
+         } else {
+            console.log("No text selected.");
+         }
+      }
+   </script>
+</body>
+</html>
+      </code></pre>
+
+      <h2>Window.getSelection()</h2>
+      <p>
+        Similar to <code>document.getSelection()</code>, but called from the <code>window</code> object.
+      </p>
+      <pre><code>
+let selection = window.getSelection();
+      </code></pre>
+
+      <h3>Example</h3>
+      <pre><code>
+<!DOCTYPE html>
+<html>
+<body>
+   <p>Select some text in this paragraph.</p>
+   <button onclick="getSelectedText()">Get Selected Text</button>
+
+   <script>
+      function getSelectedText() {
+         let selection = window.getSelection();
+         if (selection.rangeCount > 0) {
+            console.log("Selected text:", selection.toString());
+         } else {
+            console.log("No text selected.");
+         }
+      }
+   </script>
+</body>
+</html>
+      </code></pre>
+
+      <h2>Events</h2>
+
+      <h3>selectionchange (Document event)</h3>
+      <p>Triggered whenever the document’s selection changes.</p>
+      <pre><code>
+document.addEventListener("selectionchange", () => {
+   console.log("Selection changed:", document.getSelection().toString());
+});
+      </code></pre>
+
+      <h3>selectstart (Node event)</h3>
+      <p>Triggered when a new selection starts.</p>
+      <pre><code>
+document.addEventListener("selectstart", () => {
+   console.log("Selection started");
+});
+      </code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>Use <code>document.getSelection()</code> or <code>window.getSelection()</code> to get selection details.</li>
+        <li>Selections are defined by <b>anchor</b> (start) and <b>focus</b> (end).</li>
+        <li>Use <b>selectionchange</b> and <b>selectstart</b> events to track user actions.</li>
+      </ul>
+    </div>
+  </div>
+</div>

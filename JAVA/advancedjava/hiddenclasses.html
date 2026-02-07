@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Hidden Classes (Java 15+)</h1>
+
+        <div class="content">
+            <h2>The Concept of Hidden Classes</h2>
+            <p><strong>Hidden Classes</strong> were introduced in **Java 15** (JEP 371) to provide a standard and reliable way for frameworks to generate classes dynamically at runtime. A hidden class is a class that is **non-discoverable** and cannot be used directly by the bytecode of other, non-hidden classes.</p>
+            <p>The primary use case is for **JVM language implementations and dynamic proxies** (like those used in serialization or reflection-heavy frameworks) that need to generate short-lived, internal helper classes.</p>
+
+            <h3>Key Characteristics and Goals</h3>
+            <ul>
+                <li>
+                    <strong>Non-Discoverable:</strong> Hidden classes are not linked to by other classes and cannot be found via reflection (e.g., <code>Class.forName()</code>). They do not have a canonical name, which prevents accidental or unauthorized use.
+                </li>
+                <li>
+                    <strong>Limited Lifecycle:</strong> They are designed for **aggressive unloading** by the JVM's Garbage Collector. This allows frameworks to generate many temporary classes without causing performance degradation or excessive memory use.
+                </li>
+                <li>
+                    <strong>Access Control:</strong> A hidden class is defined as a member of the **Based Access Control Context** (specifically, a nestmate of the class that defined it), allowing it access to private members of the original class's nest.
+                </li>
+                <li>
+                    <strong>Standard API:</strong> They provide a secure replacement for the deprecated, non-standard method <code>sun.misc.Unsafe::defineAnonymousClass</code>.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Creating a Hidden Class</h2>
+            <p>Hidden classes are defined using the **<code>java.lang.invoke.MethodHandles.Lookup</code>** class, which acts as the factory for dynamic class creation.</p>
+            <p>The process involves three main steps:</p>
+            <ol>
+                <li>
+                    <strong>Obtain Lookup:</strong> Get a <code>MethodHandles.Lookup</code> instance.
+                    <pre><code>MethodHandles.Lookup lookup = MethodHandles.lookup();</code></pre>
+                </li>
+                <li>
+                    <strong>Define Class:</strong> Use <code>defineHiddenClass()</code>, passing the bytecode of the class to be hidden, along with relevant options (like <code>ClassOption.NESTMATE</code> to grant nest access).
+                    <pre><code>Class<?> hiddenClass = lookup.defineHiddenClass(
+    byteArray, // Byte array containing the class bytecode
+    true, 
+    ClassOption.NESTMATE
+).lookupClass();</code></pre>
+                </li>
+                <li>
+                    <strong>Use Instance:</strong> The hidden class can then be instantiated and used via reflection, allowing the framework to execute its internal logic.
+                    <pre><code>Object hiddenClassObj = hiddenClass.getConstructor().newInstance();</code></pre>
+                </li>
+            </ol>
+        </div>
+
+        <div class="example">
+            <h2 class="title example">Example: Properties of a Hidden Class</h2>
+            <div class="content">
+                <p>When inspected, a hidden class confirms its non-discoverable nature:</p>
+                <pre><code>// Assuming 'hiddenClass' is the dynamically defined class
+
+// Check if it's a hidden class
+System.out.println(hiddenClass.isHidden()); 
+// Output: true
+
+// Check its canonical name (will be null)
+System.out.println(hiddenClass.getCanonicalName()); 
+// Output: null</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

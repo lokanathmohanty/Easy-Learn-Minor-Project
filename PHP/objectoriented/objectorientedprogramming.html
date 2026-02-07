@@ -1,0 +1,151 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Object Oriented Programming in PHP</h1>
+
+    <div class="content">
+      <p>
+        **Object-Oriented Programming (OOP)** is a paradigm that models the world using **objects**, which are instances of **classes**. OOP is built on several key concepts:
+      </p>
+      <ul>
+        <li>
+          <strong>Class</strong>: A blueprint or template for creating objects, defining their properties (member variables) and behaviors (member functions).
+        </li>
+        <li>
+          <strong>Object (Instance)</strong>: An individual instance of a class. You can create many objects from a single class definition.
+        </li>
+        <li>
+          <strong>Encapsulation</strong>: The bundling of data (variables) and the methods (functions) that operate on that data into a single unit (the class), restricting direct access to some of the object's components.
+        </li>
+        <li>
+          <strong>Inheritance</strong>: A mechanism where a new class (**Child Class** or subclass) is created by inheriting properties and methods from an existing class (**Parent Class** or base class). This promotes code reuse.
+        </li>
+        <li>
+          <strong>Polymorphism</strong>: The ability of a function or method to take on multiple forms, such as when a child class overrides a parent class method (Function Overriding).
+        </li>
+        <li>
+          <strong>Data Abstraction</strong>: Hiding the complex implementation details and showing only the essential information to the user.
+        </li>
+      </ul>
+
+      <h2>Defining and Using PHP Classes</h2>
+      <p>
+        A class is defined using the <code>class</code> keyword. Member variables are traditionally declared with <code>var</code> (though modern practice favors visibility keywords like **public**), and member functions define the class's behavior.
+      </p>
+      <pre><code>&lt;?php
+   class Books {
+      /* Member variables */
+      var $price; // Property
+      var $title; // Property
+      
+      /* Member function (Method) */
+      function setTitle($par){
+         // $this refers to the current object instance
+         $this->title = $par;
+      }
+      
+      function getTitle(){
+         echo $this->title . " &lt;br/&gt;";
+      }
+   }
+?&gt;</code></pre>
+
+      <h3>Creating Objects</h3>
+      <p>
+        Objects are created using the <code>new</code> operator. Each object is independent.
+      </p>
+      <pre><code>$physics = new Books();
+$maths = new Books();</code></pre>
+
+      <h3>Calling Member Functions</h3>
+      <p>
+        Methods are called using the <code>-></code> operator on an object instance.
+      </p>
+      <pre><code>$physics->setTitle( "Physics for High School" );
+$physics->setPrice( 10 );
+$physics->getTitle();</code></pre>
+    </div>
+
+    <h2 class="title">Constructors and Destructors</h2>
+    <div class="content">
+      <ul>
+        <li>
+          <strong>Constructor (<code>__construct()</code>)</strong>: A special method that is automatically called when a new object is created. It's used to initialize member variables.
+          <pre><code>function __construct( $par1, $par2 ) {
+   $this->title = $par1;
+   $this->price = $par2;
+}
+
+// Object creation with initialization
+$book = new Books( "The Martian", 20 );</code></pre>
+        </li>
+        <li>
+          <strong>Destructor (<code>__destruct()</code>)</strong>: A special method automatically called when an object is destroyed or goes out of scope, often used to release resources.
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Inheritance and Access Modifiers</h2>
+    <div class="content">
+      <h3>Inheritance</h3>
+      <p>
+        A class inherits from a parent using the <code>extends</code> keyword, gaining all the parent's public and protected members.
+      </p>
+      <pre><code>class Novel extends Books {
+   var $publisher;
+   // Additional methods or overridden methods...
+}</code></pre>
+      <p>
+        To call a parent's method from an overridden child method, you use <code>parent::methodName()</code> or <code>ParentClassName::methodName()</code> (e.g., when calling the parent constructor).
+      </p>
+      <h3>Access Modifiers</h3>
+      <p>
+        Keywords control the visibility and accessibility of properties and methods:
+      </p>
+      <ul>
+        <li>
+          <strong><code>public</code></strong>: Accessible from anywhere (inside the class, by inherited classes, and from outside via the object). This is the default.
+        </li>
+        <li>
+          <strong><code>protected</code></strong>: Accessible within the class itself and by all classes that inherit from it (child classes). Not accessible from outside.
+        </li>
+        <li>
+          <strong><code>private</code></strong>: Accessible **only** within the class in which it is declared. Not visible or accessible even by child classes.
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Advanced OOP Concepts</h2>
+    <div class="content">
+      <ul>
+        <li>
+          <strong>Abstract Classes (<code>abstract</code>)</strong>: A class that cannot be instantiated on its own, only inherited. It may contain abstract methods (which have no body) that **must** be implemented by any non-abstract child class.
+        </li>
+        <li>
+          <strong>Interfaces (<code>interface</code>)</strong>: Define a contract of public methods that an implementing class must define. A class uses the <code>implements</code> keyword to adopt an interface.
+          <pre><code>interface Mail { public function sendMail(); }
+class Report implements Mail { /* implementation here */ }</code></pre>
+        </li>
+        <li>
+          <strong>Static Members (<code>static</code>)</strong>: Members (properties or methods) declared as static belong to the class itself, not to any specific object instance. They are accessed using the scope resolution operator (<code>::</code>).
+          <pre><code>class Foo { public static $my_static = 'foo'; }
+print Foo::$my_static;</code></pre>
+        </li>
+        <li>
+          <strong>Final Keyword (<code>final</code>)</strong>:
+          <ul>
+            <li>
+              If prefixed to a **method**, it prevents child classes from overriding that method.
+            </li>
+            <li>
+              If prefixed to a **class**, it prevents the class from being extended (inherited).
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Constants (<code>const</code>)</strong>: Declared inside a class, they hold an immutable value that cannot be changed once declared. They don't use the <code>$</code> prefix.
+          <pre><code>class MyClass { const requiredMargin = 1.7; }</code></pre>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

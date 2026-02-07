@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Operator Precedence in C</h1>
+
+    <div class="content">
+      <h2 class="title">Session Content</h2>
+      <p>An expression in C may involve multiple operators of different types. The compiler uses operator precedence and associativity to determine the order in which parts of the expression are evaluated.</p>
+      <p>Operators with higher precedence are evaluated before those with lower precedence.</p>
+      <p><strong>Example:</strong></p>
+      <pre><code>x = 7 + 3 * 2;</code></pre>
+      <p>Multiplication has higher precedence than addition, so <code>3 * 2</code> is evaluated first, resulting in <code>x = 13</code>.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Operator Precedence Table</h2>
+      <p>The table below outlines the precedence and associativity of various operators in C:</p>
+      <ul>
+        <li><strong>Postfix:</strong> <code>() [] -> . ++ --</code> — Left to right</li>
+        <li><strong>Unary:</strong> <code>+ - ! ~ ++ -- (type) * & sizeof</code> — Right to left</li>
+        <li><strong>Multiplicative:</strong> <code>* / %</code> — Left to right</li>
+        <li><strong>Additive:</strong> <code>+ -</code> — Left to right</li>
+        <li><strong>Shift:</strong> <code>&lt;&lt; &gt;&gt;</code> — Left to right</li>
+        <li><strong>Relational:</strong> <code>&lt; &lt;= &gt; &gt;=</code> — Left to right</li>
+        <li><strong>Equality:</strong> <code>== !=</code> — Left to right</li>
+        <li><strong>Bitwise AND:</strong> <code>&</code> — Left to right</li>
+        <li><strong>Bitwise XOR:</strong> <code>^</code> — Left to right</li>
+        <li><strong>Bitwise OR:</strong> <code>|</code> — Left to right</li>
+        <li><strong>Logical AND:</strong> <code>&&</code> — Left to right</li>
+        <li><strong>Logical OR:</strong> <code>||</code> — Left to right</li>
+        <li><strong>Conditional:</strong> <code>?:</code> — Right to left</li>
+        <li><strong>Assignment:</strong> <code>= += -= *= /= %= &gt;&gt;= &lt;&lt;= &= ^= |=</code> — Right to left</li>
+        <li><strong>Comma:</strong> <code>,</code> — Left to right</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Operator Associativity</h2>
+      <p>Associativity determines the direction of evaluation when two operators of the same precedence appear in an expression.</p>
+      <pre><code>15 / 5 * 2</code></pre>
+      <p>Both operators have the same precedence and left-to-right associativity, so it's evaluated as:</p>
+      <pre><code>(15 / 5) * 2 = 6</code></pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example 1</h2>
+      <p>Operators <code>*</code> and <code>/</code> have higher precedence than <code>+</code>.</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 20, b = 10, c = 15, d = 5, e;
+  e = a + b * c / d;
+  printf("e : %d\n", e);
+  return 0;
+}</code></pre>
+      <p><strong>Output:</strong> e: 50</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example 2</h2>
+      <p>Using parentheses to change order of evaluation.</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 20, b = 10, c = 15, d = 5, e;
+  e = (a + b) * c / d;
+  printf("e: %d\n", e);
+  return 0;
+}</code></pre>
+      <p><strong>Output:</strong> e: 90</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example 3</h2>
+      <p>Another variation with multiple parentheses:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 20, b = 10, c = 15, d = 5, e;
+  e = (a + b) * (c / d);
+  printf("e: %d\n", e);
+  return 0;
+}</code></pre>
+      <p><strong>Output:</strong> e: 90</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Precedence of Increment/Decrement Operators</h2>
+      <p>The increment (<code>++</code>) and decrement (<code>--</code>) operators behave differently based on whether they are used as prefix or postfix in expressions.</p>
+      <p>Postfix <code>++</code>/<code>--</code> have higher precedence than prefix forms.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Increment Operator Example</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int x = 5, y = 5, z;
+
+  printf("x: %d\n", x);
+
+  z = x++;
+  printf("Postfix increment: x: %d z: %d\n", x, z);
+
+  z = ++y;
+  printf("Prefix increment. y: %d z: %d\n", y, z);
+
+  return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>x: 5</li>
+        <li>Postfix increment: x: 6 z: 5</li>
+        <li>Prefix increment. y: 6 z: 6</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Short-Circuit Evaluation</h2>
+      <p>Logical operators like <code>&&</code> and <code>||</code> use short-circuit evaluation. This means that not all operands are evaluated if the result is already known from the first operand.</p>
+      <p><strong>Example:</strong></p>
+      <pre><code>x > 50 && y > 50</code></pre>
+      <p>In this case, <code>y > 50</code> is only evaluated if <code>x > 50</code> is true.</p>
+    </div>
+
+  </div>
+</div>

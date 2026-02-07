@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - transition Property</h1>
+    <div class="content">
+      <p>The <b>transition</b> property allows you to animate changes in an element's style properties over a specified duration. It provides a simple way to add animations without using JavaScript or external libraries.</p>
+      <p>The <b>transition</b> shorthand property includes:</p>
+      <ul>
+        <li><b>transition-property</b></li>
+        <li><b>transition-duration</b></li>
+        <li><b>transition-timing-function</b></li>
+        <li><b>transition-delay</b></li>
+        <li><b>transition-behavior</b> (experimental)</li>
+      </ul>
+
+      <h2>Possible Values</h2>
+      <p><b>&lt;length&gt;</b> − Specifies values such as pixels (px), centimeters (cm), inches (in), etc.</p>
+
+      <h2>Applies to</h2>
+      <p>All elements, <b>::before</b> and <b>::after</b> pseudo-elements.</p>
+
+      <h2>Syntax</h2>
+      <ul>
+        <li>transition: margin-right 4s;</li>
+        <li>transition: margin-right 4s 1s;</li>
+        <li>transition: margin-right 4s ease-in-out;</li>
+        <li>transition: margin-right 4s ease-in-out 1s;</li>
+        <li>transition: display 4s allow-discrete;</li>
+        <li>transition: margin-right 4s, color 1s;</li>
+      </ul>
+
+      <p><b>Notes:</b></p>
+      <ul>
+        <li><b>none</b> → No transitions applied (default).</li>
+        <li><b>all</b> → Applies to all properties that change.</li>
+        <li>You can specify a property name (e.g., <b>color</b> or <b>margin-left</b>).</li>
+        <li>You can specify an <b>easing function</b> like <b>ease-in-out</b>.</li>
+        <li>You can define <b>duration</b> and optional <b>delay</b>.</li>
+      </ul>
+
+      <h2>Examples</h2>
+
+      <h2>Transition with Two Values</h2>
+      <p>This example applies a transition to the <b>padding</b> property with a duration of 2s.</p>
+      <pre><code>&lt;style&gt;
+.box {
+  font-size: 14px;
+  width: 100px;
+  padding: 5px;
+  transition: padding 2s;
+  background-color: lightskyblue;
+}
+.box:hover {
+  background-color: greenyellow;
+  padding: 15px;
+}
+&lt;/style&gt;
+
+&lt;div class="box"&gt;Hover over me&lt;/div&gt;
+</code></pre>
+
+      <h2>Transition with Delay</h2>
+      <pre><code>&lt;style&gt;
+.box {
+  transition: padding 2s .5s;
+}
+&lt;/style&gt;
+</code></pre>
+
+      <h2>Transition with Easing Function</h2>
+      <pre><code>&lt;style&gt;
+.box {
+  transition: background-color 4s ease-in-out;
+}
+&lt;/style&gt;
+</code></pre>
+
+      <h2>Transition with Easing and Delay</h2>
+      <pre><code>&lt;style&gt;
+.box {
+  transition: padding 4s ease-in-out 0.7s;
+}
+&lt;/style&gt;
+</code></pre>
+
+      <h2>Transition with Behavior</h2>
+      <pre><code>&lt;style&gt;
+.box {
+  transition: background-color 5s allow-discrete;
+}
+&lt;/style&gt;
+</code></pre>
+
+      <h2>Transition Applied to Two Properties</h2>
+      <pre><code>&lt;style&gt;
+.box {
+  transition: color 2s, margin-left 4s;
+}
+&lt;/style&gt;
+</code></pre>
+
+      <h2>Related Properties</h2>
+      <ul>
+        <li><b>transition-delay</b> − Wait time before starting a transition.</li>
+        <li><b>transition-duration</b> − Time a transition takes to complete.</li>
+        <li><b>transition-property</b> − Specifies which CSS properties have transition effects.</li>
+        <li><b>transition-timing-function</b> − Defines how intermediate values are generated.</li>
+      </ul>
+    </div>
+  </div>
+</div>

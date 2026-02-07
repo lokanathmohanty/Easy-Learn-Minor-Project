@@ -1,0 +1,160 @@
+<div class="container">
+   <div class="session">
+      <h1 class="title">ReactJS - Static Type Checking</h1>
+      <div class="content">
+         <p>Since JavaScript is a dynamically typed language, it is hard to find type mismatch errors before running the code. React supports type checking for props through the <code>prop-types</code> package, which can be used to identify type mismatches during development.</p>
+         <p>For the rest of the application, we need additional tools to properly identify type issues during development. Two popular static type checker options that integrate smoothly into React projects are:</p>
+         <ul>
+            <li>Flow</li>
+            <li>TypeScript</li>
+         </ul>
+      </div>
+   </div>
+
+   <div class="session">
+      <h2 class="title">Flow</h2>
+      <div class="content">
+         <p>Flow is a static type checker for JavaScript. It extends JavaScript with type annotations that are checked at development time.</p>
+         <h3>Example</h3>
+         <pre>
+// @flow
+function sum(a: number, b: number) : number {
+   return a + b;
+}
+sum(10, 20)     // Pass
+sum("10", "20") // Fail
+         </pre>
+         <p>Here, <code>// @flow</code> enables Flow type checking. The function <code>sum</code> enforces number arguments.</p>
+
+         <h3>Steps to enable Flow in React</h3>
+         <ol>
+            <li>Create a React project:
+               <pre>create-react-app myapp</pre>
+            </li>
+            <li>Install Flow:
+               <pre>cd myapp
+npm install --save-bin flow-bin</pre>
+            </li>
+            <li>Add Flow script in <code>package.json</code>:
+               <pre>
+"scripts": {
+   "flow": "flow"
+}
+               </pre>
+            </li>
+            <li>Initialize Flow:
+               <pre>npm run flow init</pre>
+            </li>
+            <li>Edit <code>.flowconfig</code> (ignore <code>node_modules</code>):
+               <pre>
+[ignore]
+.*/node_modules/.*
+[include]
+[libs]
+[lints]
+[options]
+react.runtime=automatic
+[strict]
+               </pre>
+            </li>
+            <li>Run Flow check:
+               <pre>npm run flow</pre>
+            </li>
+            <li>Create <strong>HelloWorld</strong> component (<code>src/components/HelloWorld.js</code>):</li>
+            <pre>
+import React from 'react'
+class HelloWorld extends React.Component {
+   render() {
+      return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;
+   }
+}
+export default HelloWorld
+            </pre>
+            <li>Use it in <code>App.js</code> with Flow annotations:</li>
+            <pre>
+// @flow
+import React from "react";
+import HelloWorld from "./components/HelloWorld";
+function App() : any {
+   var name: string = 10
+   return (
+      &lt;div&gt;
+         &lt;HelloWorld name={name} /&gt;
+      &lt;/div&gt;
+   )
+}
+export default App;
+            </pre>
+            <li>Run Flow to catch type mismatch errors and fix them by providing a valid string.</li>
+         </ol>
+      </div>
+   </div>
+
+   <div class="session">
+      <h2 class="title">TypeScript</h2>
+      <div class="content">
+         <p>TypeScript is a language that adds static typing to JavaScript. It catches type errors at compile time and is fully supported by React.</p>
+         <h3>Create a TypeScript React project</h3>
+         <pre>
+create-react-app myapp --template typescript
+         </pre>
+
+         <h3>HelloWorld Component</h3>
+         <pre>
+// src/components/HelloWorld.tsx
+import React from 'react'
+class HelloWorld extends React.Component {
+   render() {
+      return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;
+   }
+}
+export default HelloWorld
+         </pre>
+
+         <h3>Using the Component</h3>
+         <pre>
+import React from "react";
+import HelloWorld from "./components/HelloWorld";
+function App() : any {
+   var name: string = 10
+   return (
+      &lt;div&gt;
+         &lt;HelloWorld name={name} /&gt;
+      &lt;/div&gt;
+   )
+}
+export default App;
+         </pre>
+
+         <p>TypeScript compiler will show an error because <code>name</code> expects a string, not a number.</p>
+
+         <h3>Fixing Props with Interface</h3>
+         <pre>
+import React from 'react'
+interface HelloWorldProps {
+   name: string
+}
+class HelloWorld extends React.Component&lt;HelloWorldProps&gt; {
+   render() {
+      return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;
+   }
+}
+export default HelloWorld
+         </pre>
+
+         <p>Now the application compiles successfully with proper type checking.</p>
+      </div>
+   </div>
+
+   <div class="session">
+      <h2 class="title">Summary</h2>
+      <div class="content">
+         <p>React supports static type checking using:</p>
+         <ul>
+            <li><strong>Flow</strong> – lightweight type checker for JavaScript with annotation support.</li>
+            <li><strong>TypeScript</strong> – a superset of JavaScript with built-in static typing.</li>
+         </ul>
+         <p>Both tools help identify type-related errors during development, making React applications more robust and easier to maintain.</p>
+      </div>
+   </div>
+</div>

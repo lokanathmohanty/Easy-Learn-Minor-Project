@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Thread Life Cycle</h1>
+    </div>
+    <div class="content">
+      <p>A thread object goes through different stages during its life cycle. After creation, a thread must be started by calling its <code>start()</code> method, which invokes the <code>run()</code> method containing the thread's task logic. Once the <code>run()</code> method completes, the thread finishes and merges with the main thread.</p>
+      <p>During execution, a thread can be paused for a specific duration or until an event occurs, after which it resumes.</p>
+
+      <h2>States of a Thread Life Cycle in Python</h2>
+      <ul>
+        <li><strong>Creating a Thread:</strong> Use the <code>Thread</code> class from the <code>threading</code> module to create a new thread.</li>
+        <li><strong>Starting a Thread:</strong> Call the thread's <code>start()</code> method to begin execution, which runs the <code>run()</code> method in a new thread.</li>
+        <li><strong>Paused/Blocked State:</strong> Threads can be paused or blocked, often by calling <code>join()</code>, which waits for the thread to finish.</li>
+        <li><strong>Synchronizing Threads:</strong> Use synchronization primitives like locks or semaphores to coordinate thread operations.</li>
+        <li><strong>Termination:</strong> The thread terminates when the <code>run()</code> method completes or an exception occurs.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Python Thread Life Cycle Demonstration</h2>
+    </div>
+    <div class="content">
+      <pre>
+import threading
+
+def func(x):
+   print('Current Thread Details:', threading.current_thread())
+   for n in range(x):
+      print('{} Running'.format(threading.current_thread().name), n)
+   print('Internal Thread Finished...')
+
+# Create thread objects
+t1 = threading.Thread(target=func, args=(2,))
+t2 = threading.Thread(target=func, args=(3,))
+
+# Start the threads
+print('Thread State: CREATED')
+t1.start()
+t2.start()
+
+# Wait for threads to complete
+t1.join()
+t2.join()
+print('Threads State: FINISHED')
+
+# Simulate main thread work
+for i in range(3):
+   print('Main Thread Running', i)
+
+print("Main Thread Finished...")
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>Thread State: CREATED<br>
+      Current Thread Details: &lt;Thread(Thread-1 (func), started ...)&gt;<br>
+      Thread-1 (func) Running 0<br>
+      Thread-1 (func) Running 1<br>
+      Internal Thread Finished...<br>
+      Current Thread Details: &lt;Thread(Thread-2 (func), started ...)&gt;<br>
+      Thread-2 (func) Running 0<br>
+      Thread-2 (func) Running 1<br>
+      Thread-2 (func) Running 2<br>
+      Internal Thread Finished...<br>
+      Threads State: FINISHED<br>
+      Main Thread Running 0<br>
+      Main Thread Running 1<br>
+      Main Thread Running 2<br>
+      Main Thread Finished...</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Using a Synchronization Primitive (Semaphore)</h2>
+    </div>
+    <div class="content">
+      <pre>
+import threading
+import time
+
+# Create a semaphore 
+semaphore = threading.Semaphore(2)
+
+def worker():
+   with semaphore:
+      print('{} has started working'.format(threading.current_thread().name))
+      time.sleep(2)
+      print('{} has finished working'.format(threading.current_thread().name))
+
+# Keep track of threads
+threads = []
+
+# Create and start 5 threads
+for i in range(5):
+   t = threading.Thread(target=worker, name='Thread-{}'.format(i+1))
+   threads.append(t)
+   print('{} has been created'.format(t.name))
+   t.start()
+
+# Wait for all threads to complete
+for t in threads:
+   t.join()
+   print('{} has terminated'.format(t.name))
+
+print('Threads State: All are FINISHED')
+print("Main Thread Finished...")
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>Thread-1 has been created<br>
+      Thread-1 has started working<br>
+      Thread-2 has been created<br>
+      Thread-2 has started working<br>
+      Thread-3 has been created<br>
+      Thread-4 has been created<br>
+      Thread-5 has been created<br>
+      Thread-1 has finished working<br>
+      Thread-2 has finished working<br>
+      Thread-3 has started working<br>
+      Thread-1 has terminated<br>
+      Thread-2 has terminated<br>
+      Thread-4 has started working<br>
+      Thread-3 has finished working<br>
+      Thread-5 has started working<br>
+      Thread-3 has terminated<br>
+      Thread-4 has finished working<br>
+      Thread-4 has terminated<br>
+      Thread-5 has finished working<br>
+      Thread-5 has terminated<br>
+      Threads State: All are FINISHED<br>
+      Main Thread Finished...</p>
+    </div>
+  </div>
+</div>

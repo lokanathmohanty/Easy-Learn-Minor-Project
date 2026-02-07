@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Default Constructors ⚙️</h1>
+
+        <div class="content">
+            <p>A **default constructor** is a special member function of a class that is executed automatically when an object is created **without any arguments**. It is primarily used for setting initial, sensible values for the object's data members.</p>
+            <ul>
+                <li>It has the **same name** as the class.</li>
+                <li>It takes **no parameters**.</li>
+                <li>It has **no return type** (not even `void`).</li>
+            </ul>
+
+            <h3>Syntax</h3>
+            <pre class="example">
+class MyClass {
+   public:
+      MyClass() {
+         // Initialization code
+      }
+};
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Implicit vs. Explicit Default Constructors</h2>
+
+        <div class="content">
+            <ul>
+                <li>
+                    <strong>Implicit Default Constructor (Compiler-Generated):</strong> If a class does not define **any** constructors, the C++ compiler automatically provides a public, inline, and trivial default constructor. This constructor performs no action (but zero-initializes members if the object is initialized with empty braces: `MyClass obj{};`).
+                    <pre class="example">
+class MyClass { // No constructor defined
+   int x;
+}; 
+// Compiler generates MyClass::MyClass()
+</pre>
+                </li>
+                <li>
+                    <strong>Explicit Default Constructor (User-Defined):</strong> This is a constructor you write yourself. If you write one, the compiler **will not** generate the implicit one. You can use it to set custom initial values.
+                    <pre class="example">
+class MyClass {
+   public:
+      MyClass() { // Explicitly defined by programmer
+         num1 = 10;
+      }
+};
+</pre>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">When is a Default Constructor Called?</h2>
+
+        <div class="content">
+            <p>The default constructor is invoked in several situations:</p>
+            <ul>
+                <li>When an object is created without arguments: `DemoDC obj;`</li>
+                <li>When dynamically allocating an object without parentheses: `DemoDC* ptr = new DemoDC;`</li>
+                <li>When creating an array of objects: `DemoDC objArray[5];` (The default constructor is called 5 times).</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Overloading the Default Constructor</h2>
+
+        <div class="content">
+            <p>**Constructor Overloading** is the ability to have multiple constructors in a single class, as long as each has a unique parameter list (different number or types of parameters).</p>
+            <p>In this context, a "default constructor" can be considered any constructor that can be called without providing arguments. This includes:</p>
+            <ol>
+                <li>The constructor with an **empty parameter list**.</li>
+                <li>Any **parameterized constructor** where **all parameters have default values**.</li>
+            </ol>
+            <pre class="example">
+class MyClass {
+   public:
+      // 1. True Default constructor
+      MyClass() { /* a=0, b=0 */ } 
+
+      // 2. Overloaded constructor (can also act as default if called without args)
+      MyClass(int x, int y = 0) { /* ... */ } 
+};
+</pre>
+        </div>
+    </div>
+</div>

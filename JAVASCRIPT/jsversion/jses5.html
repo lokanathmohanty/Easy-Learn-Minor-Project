@@ -1,0 +1,212 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript ES5 (JS 2009)</h1>
+    <div class="content">
+
+      <div class="section">
+        <h2>Introduction</h2>
+        <p>
+          JavaScript 2009 (ES5) refers to the fifth edition of the ECMAScript language specification, standardized in 2009. 
+          It introduced several features like strict mode, new methods, JSON support, and improved syntax for better programming 
+          practices and compatibility across browsers.
+        </p>
+        <p>
+          ECMAScript 5 (ES5) introduced several significant features to JavaScript, enhancing the language's capabilities.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>Key Features in ES5</h2>
+        <ul>
+          <li><strong>use strict</strong> — Enforces stricter parsing and error handling in JavaScript code.</li>
+          <li><strong>String.trim()</strong> — Removes whitespace from the beginning and end.</li>
+          <li><strong>Multiline strings</strong> — Use backslashes at the end of each line to continue.</li>
+          <li><strong>Array.isArray()</strong> — Check if an object is an array.</li>
+          <li><strong>Array.forEach()</strong>, <strong>Array.map()</strong>, <strong>Array.filter()</strong>, <strong>Array.reduce()</strong> — New array methods.</li>
+          <li><strong>JSON.parse()</strong> / <strong>JSON.stringify()</strong> — Work with JSON data.</li>
+          <li><strong>Date.now()</strong>, <strong>Date.toISOString()</strong>, <strong>Date.toJSON()</strong> — Date handling methods.</li>
+          <li><strong>Getters and Setters</strong> — Control object property access and modification.</li>
+          <li><strong>Object methods</strong> — New property definition and control methods.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Method 1: use strict</h2>
+        <p>
+          The <code>use strict</code> directive enforces strict mode in JavaScript, catching errors and promoting better coding practices.
+          It's used at the beginning of scripts or functions.
+        </p>
+        <pre><code>'use strict';
+function strictFunction(a, b) {
+    // Throws an error in strict mode due to undeclared variable "result"
+    result = a + b;
+    return result;
+}
+
+let sum = strictFunction(5, 10);
+console.log("Sum:", sum);
+</code></pre>
+        <p><strong>Output:</strong> ReferenceError: result is not defined</p>
+      </div>
+
+      <div class="section">
+        <h2>Method 2: String.trim()</h2>
+        <p>
+          The <code>trim()</code> method removes whitespace from both ends of a string.
+        </p>
+        <pre><code>function func() {
+    let str = "GeeksforGeeks     ";
+    let st = str.trim();
+    console.log(st);
+}
+func();
+</code></pre>
+        <p><strong>Output:</strong> GeeksforGeeks</p>
+      </div>
+
+      <div class="section">
+        <h2>Method 3: Multiline Strings</h2>
+        <p>
+          In ES5, multiline strings can be created using backslashes at the end of each line, 
+          or concatenated with <code>+</code>.
+        </p>
+        <pre><code>let str1 = "GeeksforGeeks \
+A computer science \
+Portal.";
+console.log(str1);
+
+let str2 = "Geeksfor" +
+    "Geeks";
+console.log(str2);
+</code></pre>
+        <p><strong>Output:</strong></p>
+        <ul>
+          <li>GeeksforGeeks A computer science Portal.</li>
+          <li>GeeksforGeeks</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Method 4: Array Methods</h2>
+        <p>Examples of <code>Array.isArray()</code>, <code>map()</code>, <code>filter()</code>, and <code>reduce()</code>:</p>
+        <pre><code>// Array.isArray()
+let numbers = [1, 2, 3, 4, 5];
+console.log(Array.isArray(numbers));
+
+// Array.map()
+let doubled = numbers.map(n => n * 2);
+console.log(doubled);
+
+// Array.filter()
+let even = numbers.filter(n => n % 2 === 0);
+console.log(even);
+
+// Array.reduce()
+let sum = numbers.reduce((acc, val) => acc + val, 0);
+console.log(sum);
+</code></pre>
+        <p><strong>Output:</strong></p>
+        <ul>
+          <li>true</li>
+          <li>[2, 4, 6, 8, 10]</li>
+          <li>[2, 4]</li>
+          <li>15</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Method 5: JSON.parse()</h2>
+        <pre><code>let str = '{"name": "Aman", "age": 21, "city": "Noida"}';
+let result = JSON.parse(str);
+
+console.log(result.name);
+console.log(result.age);
+console.log(result.city);
+</code></pre>
+        <p><strong>Output:</strong></p>
+        <ul>
+          <li>Aman</li>
+          <li>21</li>
+          <li>Noida</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Method 6: JSON.stringify()</h2>
+        <pre><code>const value = {
+    Company: "GeeksforGeeks",
+    Estd: 2009,
+    location: "Noida"
+};
+const result = JSON.stringify(value);
+console.log(result);
+</code></pre>
+        <p><strong>Output:</strong> {"Company":"GeeksforGeeks","Estd":2009,"location":"Noida"}</p>
+      </div>
+
+      <div class="section">
+        <h2>Date Methods</h2>
+        <pre><code>let currentDate = new Date();
+
+console.log(Date.now());
+console.log(currentDate.toISOString());
+console.log(currentDate.toJSON());
+</code></pre>
+        <p><strong>Output:</strong> Current timestamp, ISO string, and JSON date string.</p>
+      </div>
+
+      <div class="section">
+        <h2>Method 7: Getters and Setters</h2>
+        <pre><code>const person = {
+    firstName: "John",
+    lastName: "Doe",
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    },
+    set fullName(name) {
+        const parts = name.split(" ");
+        this.firstName = parts[0];
+        this.lastName = parts[1];
+    }
+};
+
+console.log(person.fullName);
+person.fullName = "Jane Smith";
+console.log(person.firstName);
+console.log(person.lastName);
+</code></pre>
+        <p><strong>Output:</strong> John Doe, Jane, Smith</p>
+      </div>
+
+      <div class="section">
+        <h2>Method 8: Object Property Methods</h2>
+        <pre><code>let person = {};
+
+Object.defineProperty(person, 'name', {
+    value: 'Ankit',
+    writable: false,
+    enumerable: true,
+    configurable: false
+});
+
+Object.defineProperties(person, {
+    age: { value: 21, writable: true },
+    gender: { value: 'Male', writable: true }
+});
+
+console.log(Object.keys(person));
+console.log(Object.getOwnPropertyNames(person));
+console.log(Object.isExtensible(person));
+
+Object.seal(person);
+console.log(Object.isSealed(person));
+
+Object.freeze(person);
+console.log(Object.isFrozen(person));
+</code></pre>
+        <p><strong>Output:</strong> Demonstrates property definition, sealing, and freezing objects.</p>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - The Symbol Object</h1>
+
+    <div class="content">
+      <h2>JavaScript Symbol</h2>
+      <p>In JavaScript, <code>Symbol</code> is a primitive data type introduced in ECMAScript 6 (ES6). It can be created using the <code>Symbol</code> constructor.</p>
+
+      <p>Symbols are immutable and unique. They are especially helpful when a unique identifier is required, as they can be used to create private object properties and avoid naming conflicts.</p>
+
+      <h2>Key Points</h2>
+      <ul>
+        <li>Each symbol contains unique values.</li>
+        <li>Symbols are immutable.</li>
+        <li>Symbols are used to define unique object properties.</li>
+        <li>The type of a symbol cannot be changed.</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <pre><code>const sym = Symbol([description]);</code></pre>
+      <p><code>description</code> is an optional parameter. It specifies the symbol description, which you can access using the <code>description</code> property.</p>
+
+      <h2>Symbol Properties</h2>
+      <ul>
+        <li><strong>description</strong> − Get an optional description of the symbol.</li>
+        <li><strong>asyncIterator</strong> − Makes the object async iterable.</li>
+        <li><strong>hasInstance</strong> − Checks if a constructor object counts the object as its instance.</li>
+        <li><strong>isConcatSpreadable</strong> − Determines array concatenation behavior.</li>
+        <li><strong>iterator</strong> − Returns an iterator.</li>
+        <li><strong>match</strong> − Matches regex with string.</li>
+        <li><strong>matchAll</strong> − Returns all regex matches.</li>
+        <li><strong>replace</strong> − Replaces a substring.</li>
+        <li><strong>search</strong> − Returns index of match.</li>
+        <li><strong>species</strong> − Creates a derived object.</li>
+        <li><strong>split</strong> − Splits string where regex matches.</li>
+        <li><strong>toStringTag</strong> − Creates a default string description.</li>
+      </ul>
+
+      <h2>Symbol Methods</h2>
+      <ul>
+        <li><strong>for()</strong> − Searches for a given symbol.</li>
+        <li><strong>keyFor()</strong> − Retrieves a key from the global symbol registry.</li>
+        <li><strong>toString()</strong> − Converts symbol to string.</li>
+        <li><strong>valueOf()</strong> − Gets primitive value of the symbol.</li>
+      </ul>
+
+      <h2>Examples</h2>
+
+      <h3>Creating a Symbol</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const sym1 = Symbol();
+    document.getElementById("output").innerHTML =
+      "The sym1 is: " + sym1.toString() + "&lt;br&gt;" +
+      "The type of sym1 is: " + typeof sym1 + "&lt;br&gt;";
+
+    const sym2 = Symbol("description");
+    document.getElementById("output").innerHTML += "The sym2 is: " + sym2.toString();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The sym1 is: Symbol()</li>
+        <li>The type of sym1 is: symbol</li>
+        <li>The sym2 is: Symbol(description)</li>
+      </ul>
+
+      <h3>Accessing Symbol Description</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const sym = Symbol("Welcome to Tutorials Point...");
+    document.getElementById("output").innerHTML =
+      "The sym description of the symbol is : " + sym.description;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> The sym description of the symbol is : Welcome to Tutorials Point...</p>
+
+      <h3>Each Symbol is Unique</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="output"&gt;&lt;/p&gt;
+  &lt;script&gt;
+    const sym1 = Symbol();
+    const sym2 = Symbol();
+
+    if (sym1 == sym2) {
+      document.getElementById("output").innerHTML = "Sym1 and Sym2 are equal.";
+    } else {
+      document.getElementById("output").innerHTML = "Sym1 and Sym2 are not equal.";
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> Sym1 and Sym2 are not equal.</p>
+
+      <h3>Using Symbol as an Object Key</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+  &lt;p id="output"&gt;The object is: &lt;/p&gt;
+  &lt;script&gt;
+    const objId = Symbol();
+    const person = {
+      name: "John Doe",
+      age: 30,
+      [objId]: "abcd123",
+    }
+    document.getElementById("output").innerHTML += JSON.stringify(person);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> The object is: {"name":"John Doe","age":30}</p>
+
+      <h2>Benefits of Using Symbols</h2>
+      <ul>
+        <li><strong>Unique property keys</strong> − Each symbol is unique, useful to avoid collisions.</li>
+        <li><strong>Non-iterable properties</strong> − Symbol keys are not traversed in <code>for...in</code> loops.</li>
+        <li><strong>Private Members</strong> − Can be used as private properties in classes.</li>
+        <li><strong>Avoid overwriting</strong> − Ensures no accidental overwriting of properties.</li>
+      </ul>
+    </div>
+  </div>
+</div>

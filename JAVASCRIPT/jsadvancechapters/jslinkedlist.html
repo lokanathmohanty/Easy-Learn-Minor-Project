@@ -1,0 +1,179 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Linked List</h1>
+    <div class="content">
+
+      <p>
+        A <strong>Linked List</strong> is an ordered collection of data elements represented using nodes.  
+        Each node has two parts:
+      </p>
+      <ul>
+        <li><strong>Data:</strong> The actual value stored in the node.</li>
+        <li><strong>Next:</strong> A reference (pointer) to the next node in the list.</li>
+      </ul>
+
+      <p>
+        The <strong>Head</strong> is a reference to the first node in the list.  
+        Nodes are connected sequentially, allowing efficient insertion and deletion.
+      </p>
+
+      <h2>Types of Linked List</h2>
+      <ul>
+        <li><strong>Singly Linked List:</strong> Each node points only to the next node.</li>
+        <li><strong>Doubly Linked List:</strong> Each node points to both the next and previous nodes.</li>
+        <li><strong>Circular Linked List:</strong> The last node points back to the first node.</li>
+      </ul>
+
+      <h2>Implementation</h2>
+      <p>
+        To implement a linked list in JavaScript, we define two classes:
+      </p>
+      <ul>
+        <li><strong>Node class:</strong> Represents a node containing data and a pointer.</li>
+        <li><strong>LinkedList class:</strong> Represents the list with methods to insert, search, delete, and print nodes.</li>
+      </ul>
+
+      <h3>Node Class</h3>
+      <pre><code>class Node {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  }
+}</code></pre>
+
+      <h3>LinkedList Class</h3>
+      <pre><code>class LinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+}</code></pre>
+
+      <h2>Operations on Linked List</h2>
+
+      <h3>Insert a Node</h3>
+      <pre><code>insert(data) {
+  let node = new Node(data);
+  if (!this.head) {
+    this.head = node;
+    this.tail = this.head;
+  } else {
+    this.tail.next = node;
+    this.tail = node;
+  }
+  this.length++;
+  return this;
+}</code></pre>
+
+      <h3>Search a Node</h3>
+      <pre><code>search(data) {
+  let current = this.head;
+  while (current) {
+    if (current.data === data) {
+      return current;
+    }
+    current = current.next;
+  }
+  return null;
+}</code></pre>
+
+      <h3>Delete a Node</h3>
+      <pre><code>delete(data) {
+  if (!this.head) return null;
+  if (this.head.data === data) {
+    this.head = this.head.next;
+    this.length--;
+    return this;
+  }
+  let current = this.head;
+  let prev = null;
+  while (current) {
+    if (current.data === data) {
+      prev.next = current.next;
+      this.length--;
+      return this;
+    }
+    prev = current;
+    current = current.next;
+  }
+  return null;
+}</code></pre>
+
+      <h3>Print Linked List</h3>
+      <pre><code>print() {
+  let current = this.head;
+  while (current) {
+    console.log(current.data);
+    current = current.next;
+  }
+}</code></pre>
+
+      <h2>Example</h2>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Linked List&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p id="demo"&gt;&lt;/p&gt;
+    &lt;script&gt;
+      class Node {
+        constructor(data) {
+          this.data = data;
+          this.next = null;
+        }
+      }
+
+      class LinkedList {
+        constructor() {
+          this.head = null;
+          this.tail = null;
+          this.length = 0;
+        }
+
+        insert(data) {
+          let node = new Node(data);
+          if (!this.head) {
+            this.head = node;
+            this.tail = this.head;
+          } else {
+            this.tail.next = node;
+            this.tail = node;
+          }
+          this.length++;
+          return this;
+        }
+
+        print() {
+          let current = this.head;
+          let output = "";
+          while (current) {
+            output += current.data + " ";
+            current = current.next;
+          }
+          document.getElementById("demo").innerHTML = output;
+        }
+      }
+
+      let list = new LinkedList();
+      list.insert(1);
+      list.insert(2);
+      list.insert(3);
+      list.insert(4);
+      list.insert(5);
+      list.print();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Output</h2>
+      <p><code>1 2 3 4 5</code></p>
+      <p>
+        In this example, we created a linked list and inserted the elements 
+        <code>1, 2, 3, 4, 5</code>. Finally, we printed the list.
+      </p>
+
+    </div>
+  </div>
+</div>

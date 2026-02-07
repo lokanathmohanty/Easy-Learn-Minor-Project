@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>ReactJS - Pagination</h1>
+    </div>
+
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        React provides pagination components through third-party UI libraries. 
+        One of the most popular is <strong>React Bootstrap</strong>, 
+        which ports almost all Bootstrap components, including a fully featured 
+        <code>Pagination</code> component.
+      </p>
+
+      <h2>Pagination Component</h2>
+      <p>The Pagination component allows creating simple pagination with Bootstrap styling. It includes the following subcomponents:</p>
+      <ul>
+        <li><code>Pagination.Item</code></li>
+        <li><code>Pagination.First</code></li>
+        <li><code>Pagination.Last</code></li>
+        <li><code>Pagination.Previous</code></li>
+        <li><code>Pagination.Next</code></li>
+      </ul>
+
+      <h3>Props for Pagination</h3>
+      <ul>
+        <li><code>size</code> (sm | lg) – Set the size of the pagination buttons</li>
+        <li><code>bsPrefix</code> (string) – Change the underlying component CSS</li>
+      </ul>
+
+      <h3>Props for Pagination.Item</h3>
+      <ul>
+        <li><code>active</code> (boolean) – Marks the item as active</li>
+        <li><code>activeLabel</code> (string) – Label for active state</li>
+        <li><code>disabled</code> (boolean) – Disables the item</li>
+        <li><code>href</code> (string) – Link for the pagination item</li>
+        <li><code>onClick</code> (function) – Callback on click</li>
+      </ul>
+
+      <h2>Applying Pagination</h2>
+      <ol>
+        <li>Create a new React app:</li>
+      </ol>
+      <pre><code>
+create-react-app myapp
+cd myapp
+npm start
+      </code></pre>
+
+      <ol start="2">
+        <li>Install Bootstrap and React Bootstrap:</li>
+      </ol>
+      <pre><code>
+npm install --save bootstrap react-bootstrap
+      </code></pre>
+
+      <ol start="3">
+        <li>Create <code>SimplePagination</code> component:</li>
+      </ol>
+      <pre><code>
+import React from 'react';
+import { Table, Pagination } from 'react-bootstrap';
+
+class SimplePagination extends React.Component {
+   render() {
+      return &lt;div&gt;Pagination component&lt;/div&gt;
+   }
+}
+
+export default SimplePagination;
+      </code></pre>
+
+      <ol start="4">
+        <li>Add <code>users.json</code> in <code>public</code> folder with sample data.</li>
+        <li>Initialize state in the constructor with <code>users</code>, <code>usersToBeShown</code>, and <code>currentPage</code>.</li>
+        <li>Fetch users in <code>componentDidMount</code> and prepare pagination details.</li>
+        <li>Implement <code>calculatePaginationDetails</code> method to compute pages and visible users.</li>
+        <li>Add <code>handlePagination</code> event handler.</li>
+      </ol>
+
+      <h2>Rendering Table with Pagination</h2>
+      <p>The render method includes a <code>Table</code> for user data and a <code>Pagination</code> component for navigation:</p>
+      <pre><code>
+&lt;Table bordered hover striped&gt;
+   &lt;thead&gt;
+      &lt;tr&gt;
+         &lt;th&gt;#&lt;/th&gt;
+         &lt;th&gt;Name&lt;/th&gt;
+         &lt;th&gt;Age&lt;/th&gt;
+         &lt;th&gt;Email&lt;/th&gt;
+      &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+      {this.state.usersToBeShown.map(item =&gt; (
+         &lt;tr key={item.id}&gt;
+            &lt;td&gt;{item.id}&lt;/td&gt;
+            &lt;td&gt;{item.name}&lt;/td&gt;
+            &lt;td&gt;{item.age}&lt;/td&gt;
+            &lt;td&gt;{item.name.toLowerCase()}.example@tutorialspoint.com&lt;/td&gt;
+         &lt;/tr&gt;
+      ))}
+   &lt;/tbody&gt;
+&lt;/Table&gt;
+
+&lt;Pagination&gt;
+   &lt;Pagination.First onClick={this.handlePagination} /&gt;
+   &lt;Pagination.Prev onClick={this.handlePagination} /&gt;
+   {this.state.pageArray.map(item =&gt; (
+      &lt;Pagination.Item 
+         key={item} 
+         onClick={this.handlePagination}
+         active={this.state.currentPage === item}
+      &gt;{item}&lt;/Pagination.Item&gt;
+   ))}
+   &lt;Pagination.Next onClick={this.handlePagination} /&gt;
+   &lt;Pagination.Last onClick={this.handlePagination} /&gt;
+&lt;/Pagination&gt;
+      </code></pre>
+
+      <h2>Using the Component</h2>
+      <p>Update <code>App.js</code> to use <code>SimplePagination</code>:</p>
+      <pre><code>
+import './App.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import SimplePagination from './Components/SimplePagination';
+
+function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;SimplePagination /&gt;
+      &lt;/div&gt;
+   );
+}
+
+export default App;
+      </code></pre>
+
+      <h2>Summary</h2>
+      <p>
+        React Bootstrap’s Pagination component provides flexible APIs for 
+        rendering simple or complex pagination designs in React applications.
+      </p>
+    </div>
+  </div>
+</div>

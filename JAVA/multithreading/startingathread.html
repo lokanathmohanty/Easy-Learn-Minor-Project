@@ -1,0 +1,130 @@
+<div class="container">
+   
+    
+
+    <div class="title">
+      <h1>Java - Creating a Thread</h1>
+    </div>
+
+    <div class="content">
+      <p>There are two different ways to create a thread in Java:</p>
+      <ul>
+        <li>By Implementing a Runnable Interface</li>
+        <li>By Extending a Thread Class</li>
+      </ul>
+
+      <h2>1. Create a Thread by Implementing a Runnable Interface</h2>
+      <p>If your class is intended to be executed as a thread, you can achieve this by implementing the Runnable interface. Follow these three basic steps:</p>
+      <ol>
+        <li>
+          <strong>Step 1:</strong> Implement the <code>run()</code> method provided by the Runnable interface. This method provides an entry point for the thread, and you will put your complete business logic inside this method.
+        </li>
+        <li>
+          <strong>Step 2:</strong> Instantiate a Thread object using the following constructor:
+          <pre><code>Thread(Runnable threadObj, String threadName);</code></pre>
+          Where <code>threadObj</code> is an instance of a class that implements the Runnable interface and <code>threadName</code> is the name given to the new thread.
+        </li>
+        <li>
+          <strong>Step 3:</strong> Once a Thread object is created, you can start it by calling the <code>start()</code> method, which executes a call to <code>run()</code> method.
+          <pre><code>void start();</code></pre>
+        </li>
+      </ol>
+
+      <h2>Example: Create a Thread by Implementing a Runnable Interface</h2>
+      <p>In this example, we're creating a class <code>RunnableDemo</code> by implementing the Runnable interface. The <code>RunnableDemo</code> class has <code>run()</code> method implementation. In the main class <code>TestThread</code>, we've created the <code>RunnableDemo</code> objects, and using those objects, we've created two Thread objects. When <code>Thread.start()</code> method is called on each thread object, threads start processing, and the program is executed.</p>
+
+      <pre><code>package com.tutorialspoint;
+
+class RunnableDemo implements Runnable {
+   private String threadName;
+   RunnableDemo(String name) {
+      threadName = name;
+      System.out.println("Thread: " + threadName + ", State: New");
+   }
+
+   public void run() {
+      System.out.println("Thread: " + threadName + ", State: Running");
+      for (int i = 4; i > 0; i--) {
+         System.out.println("Thread: " + threadName + ", " + i);
+      }
+      System.out.println("Thread: " + threadName + ", State: Dead");
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      RunnableDemo runnableDemo1 = new RunnableDemo("Thread-1");
+      RunnableDemo runnableDemo2 = new RunnableDemo("Thread-2");
+
+      Thread thread1 = new Thread(runnableDemo1);
+      Thread thread2 = new Thread(runnableDemo2);
+
+      thread1.start();
+      thread2.start();
+   }
+}
+</code></pre>
+
+      <h2>2. Create a Thread by Extending a Thread Class</h2>
+      <p>The second way to create a thread is to create a new class that extends the Thread class using the following two simple steps. This approach provides more flexibility in handling multiple threads created using available methods in the Thread class.</p>
+      <ol>
+        <li>
+          <strong>Step 1:</strong> Override the <code>run()</code> method available in the Thread class. This method provides an entry point for the thread, and you will put your complete business logic inside this method.
+        </li>
+        <li>
+          <strong>Step 2:</strong> Once a Thread object is created, you can start it by calling the <code>start()</code> method, which executes a call to <code>run()</code> method.
+          <pre><code>void start();</code></pre>
+        </li>
+      </ol>
+
+      <h2>Example: Create a Thread by Extending a Thread Class</h2>
+      <p>Here is the preceding program rewritten to extend the Thread class. In this example, we've created a <code>ThreadDemo</code> class which extends the Thread class. We're calling <code>super(name)</code> in the constructor to assign a name to the thread and called <code>super.start()</code> to start the thread processing.</p>
+
+      <pre><code>package com.tutorialspoint;
+
+class ThreadDemo extends Thread {
+   ThreadDemo(String name) {
+      super(name);
+      System.out.println("Thread: " + name + ", State: New");
+   }
+
+   public void run() {
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Running");
+      for (int i = 4; i > 0; i--) {
+         System.out.println("Thread: " + Thread.currentThread().getName() + ", " + i);
+      }
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Dead");
+   }
+
+   public void start() {
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Start");
+      super.start();
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      ThreadDemo thread1 = new ThreadDemo("Thread-1");
+      ThreadDemo thread2 = new ThreadDemo("Thread-2");
+      thread1.start();
+      thread2.start();
+   }
+}
+</code></pre>
+
+      <h2>Example: Demonstrating <code>sleep()</code> Method</h2>
+      <p>In this example, we're showcasing the use of the <code>sleep()</code> method to delay the processing. It helps in showing the parallel processing in the output. We've added <code>Thread.sleep()</code> call in the <code>run()</code> method. <code>InterruptedException</code> is handled as the thread can be interrupted during sleep mode.</p>
+
+      <pre><code>package com.tutorialspoint;
+
+class ThreadDemo extends Thread {
+   ThreadDemo(String name) {
+      super(name);
+      System.out.println("Thread: " + name + ", State: New");
+   }
+
+   public void run() {
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Running");
+      for (int i
+::contentReference[oaicite:0]{index=0}
+ 

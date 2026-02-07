@@ -1,0 +1,65 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">C++ Range-Based <code>for</code> Loop (Foreach) 📚</h1>
+
+        <div class="content">
+            <p>The **range-based `for` loop**, often called the **Foreach loop** in other languages, is a C++11 feature that provides a concise and readable way to iterate over all elements in a container (like arrays, vectors, lists, etc.) or any object that meets the requirements of an iterable type.</p>
+            <p>It eliminates the boilerplate code (initialization, condition, increment) associated with traditional <code>for</code> loops for simple iteration.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Syntax and Mechanism</h2>
+
+            <h3>Syntax:</h3>
+            <pre class="example">
+for ( data_type  element_variable_name : container_name ) {
+   // code to be executed for each element
+}
+</pre>
+            <p>The loop automatically obtains the beginning and end iterators of the container and proceeds sequentially:</p>
+            <ol>
+                <li>The loop starts at the first element of the <code>container_name</code>.</li>
+                <li>The element's value is copied to <code>element_variable_name</code> (unless a reference is used).</li>
+                <li>The loop body executes.</li>
+                <li>The process repeats until all elements are traversed.</li>
+            </ol>
+
+            <h3>Modifying Elements with References</h3>
+            <p>To **modify** the elements of the container directly, you must use a **reference** (<code>&amp;</code>) in the loop variable declaration:</p>
+            <pre class="example">
+for (int&amp; num : digits) {
+   num *= 2; // num is a reference, so the original element is changed.
+}
+// Output: 20 40 60 80 100
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Advantages and Considerations</h2>
+
+            <table>
+                <thead>
+                    <tr><th>Advantages</th><th>Limitations</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**Simplicity &amp; Readability:** Reduces boilerplate code and is straightforward to read.</td>
+                        <td>**Forward Traversal Only:** Cannot easily iterate in reverse order.</td>
+                    </tr>
+                    <tr>
+                        <td>**Safety:** Eliminates common errors related to manual index management (off-by-one errors).</td>
+                        <td>**No Direct Index Access:** The current element's index or position is not directly available during iteration.</td>
+                    </tr>
+                    <tr>
+                        <td>**Works with Iterables:** Works on any container or custom type that implements <code>begin()</code> and <code>end()</code> methods.</td>
+                        <td>**Non-interruptible Iteration:** Designed for full traversal; skipping elements or breaking the loop early must use <code>continue</code> or <code>break</code> statements, respectively.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

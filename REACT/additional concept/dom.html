@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - DOM</h1>
+    <div class="content">
+      <p>To run a react application, it needs to be attached itself to the main document of the web application. React provides a module to access and attach the application to the DOM of the document and the module is ReactDOM (<code>react-dom</code>).</p>
+      <p>Let us learn how to create a simple react component and attach the component into the document using ReactDOM module in this chapter.</p>
+    </div>
+
+    <h2 class="title">ReactDOM usage</h2>
+    <div class="content">
+      <p><code>react-dom</code> is the core package used to manipulate the DOM of the document. It allows one or more react applications to be attached to the document.</p>
+      <p>The react-dom should be imported into the application as shown below −</p>
+      <p><code>import * as ReactDOM from 'react-dom';</code></p>
+      <p>The react-dom provides two methods to manipulate the DOM:</p>
+      <ul>
+        <li><strong>createPortal()</strong> − Creates a portal in the react application.</li>
+        <li><strong>flushSync()</strong> − Flushes the state changes immediately and updates the DOM.</li>
+      </ul>
+      <p>The react-dom provides two submodules:</p>
+      <ul>
+        <li><strong>react-dom/server</strong></li>
+        <li><strong>react-dom/client</strong></li>
+      </ul>
+    </div>
+
+    <h2 class="title">ReactDOMServer</h2>
+    <div class="content">
+      <p>The server module is used to render a react component in the server:</p>
+      <p><code>import * as ReactDOMServer from 'react-dom/server';</code></p>
+      <p>Some methods of ReactDOMServer:</p>
+      <ul>
+        <li>renderToPipeableStream()</li>
+        <li>renderToReadableStream()</li>
+        <li>renderToStaticNodeStream()</li>
+        <li>renderToString()</li>
+        <li>renderToStaticMarkup()</li>
+      </ul>
+    </div>
+
+    <h2 class="title">ReactDOMClient</h2>
+    <div class="content">
+      <p>The client module is used in front-end development:</p>
+      <p><code>import * as ReactDOM from 'react-dom/client';</code></p>
+      <p>Some methods of ReactDOMClient:</p>
+      <ul>
+        <li><strong>createRoot()</strong> − Creates a root element to render a react component.</li>
+        <li><strong>hydrateRoot()</strong> − Same as createRoot() but used with server-side rendering.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Applying ReactDOMClient</h2>
+    <div class="content">
+      <p>Create a new react application:</p>
+      <p><code>create-react-app myapp<br>cd myapp<br>npm start</code></p>
+      <p>Example component (<code>Hello.js</code>):</p>
+      <p><code>
+import React from "react";<br>
+class Hello extends React.Component {<br>
+&nbsp;&nbsp;render() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return (&lt;div&gt;Hello, {this.props.name}&lt;/div&gt;);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+export default Hello;
+      </code></p>
+      <p>Example HTML (<code>index.html</code>):</p>
+      <p><code>
+&lt;div id="root"&gt;&lt;/div&gt;<br>
+&lt;div id="root2"&gt;&lt;/div&gt;
+      </code></p>
+      <p>Example JavaScript (<code>index.js</code>):</p>
+      <p><code>
+import React from 'react';<br>
+import ReactDOM from 'react-dom/client';<br>
+import Hello from './Components/Hello';<br><br>
+const root = ReactDOM.createRoot(document.getElementById('root'));<br>
+root.render(&lt;Hello name="Main root container" /&gt;);<br><br>
+const root2 = ReactDOM.createRoot(document.getElementById('root2'));<br>
+root2.render(&lt;Hello name="Another root container" /&gt;);
+      </code></p>
+    </div>
+
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <p>ReactDOM provides the ability to create the entry point for the react application by attaching the react component into the HTML document in both client and server environments.</p>
+    </div>
+  </div>
+</div>

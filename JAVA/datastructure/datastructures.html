@@ -1,0 +1,218 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Data Structures</h1>
+
+    <div class="content">
+      <p>Java provides powerful data structures through its utility package. The key legacy data structures include:</p>
+      <ul>
+        <li>Enumeration</li>
+        <li>BitSet</li>
+        <li>Vector</li>
+        <li>Stack</li>
+        <li>Dictionary</li>
+        <li>Hashtable</li>
+        <li>Properties</li>
+      </ul>
+      <p>All these are legacy classes/interfaces. The newer <strong>Collections Framework</strong> is introduced in Java-2 and will be discussed separately.</p>
+    </div>
+
+    <h2 class="title">Enumeration</h2>
+    <div class="content">
+      <p><strong>Enumeration</strong> is not a data structure but an interface for iterating through other structures. It provides the method <code>nextElement()</code> to access elements sequentially.</p>
+    </div>
+
+    <h2 class="title">Example: Using Enumeration with Vector</h2>
+    <div class="content">
+      <pre><code>import java.util.Vector;
+import java.util.Enumeration;
+
+public class EnumerationTester {
+   public static void main(String args[]) {
+      Enumeration&lt;String&gt; days;
+      Vector&lt;String&gt; dayNames = new Vector&lt;&gt;();
+
+      dayNames.add("Sunday");
+      dayNames.add("Monday");
+      dayNames.add("Tuesday");
+      dayNames.add("Wednesday");
+      dayNames.add("Thursday");
+      dayNames.add("Friday");
+      dayNames.add("Saturday");
+
+      days = dayNames.elements();
+      while (days.hasMoreElements()) {
+         System.out.println(days.nextElement()); 
+      }
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Sunday<br>Monday<br>Tuesday<br>Wednesday<br>Thursday<br>Friday<br>Saturday</p>
+    </div>
+
+    <h2 class="title">BitSet</h2>
+    <div class="content">
+      <p>The <strong>BitSet</strong> class represents a group of bits or flags that can be individually set or cleared. It's useful for handling sets of boolean flags.</p>
+    </div>
+
+    <h2 class="title">Example: BitSet Operations</h2>
+    <div class="content">
+      <pre><code>import java.util.BitSet;
+
+public class BitSetDemo {
+  public static void main(String args[]) {
+    BitSet bits1 = new BitSet(16);
+    BitSet bits2 = new BitSet(16);
+
+    for(int i = 0; i &lt; 16; i++) {
+      if((i % 2) == 0) bits1.set(i);
+      if((i % 5) != 0) bits2.set(i);
+    }
+
+    System.out.println("Initial pattern in bits1: ");
+    System.out.println(bits1);
+
+    System.out.println("\nInitial pattern in bits2: ");
+    System.out.println(bits2);
+
+    bits2.and(bits1);
+    System.out.println("\nbits2 AND bits1: ");
+    System.out.println(bits2);
+
+    bits2.or(bits1);
+    System.out.println("\nbits2 OR bits1: ");
+    System.out.println(bits2);
+
+    bits2.xor(bits1);
+    System.out.println("\nbits2 XOR bits1: ");
+    System.out.println(bits2);
+  }
+}</code></pre>
+      <p><strong>Output:</strong><br>
+        Initial pattern in bits1:<br>{0, 2, 4, 6, 8, 10, 12, 14}<br><br>
+        Initial pattern in bits2:<br>{1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14}<br><br>
+        bits2 AND bits1:<br>{2, 4, 6, 8, 12, 14}<br><br>
+        bits2 OR bits1:<br>{0, 2, 4, 6, 8, 10, 12, 14}<br><br>
+        bits2 XOR bits1:<br>{}
+      </p>
+    </div>
+
+    <h2 class="title">Vector</h2>
+    <div class="content">
+      <p>A <strong>Vector</strong> is like an array but can grow/shrink dynamically. It allows indexed access and stores heterogeneous objects.</p>
+    </div>
+
+    <h2 class="title">Example: Vector Usage</h2>
+    <div class="content">
+      <pre><code>import java.util.*;
+public class VectorDemo {
+   public static void main(String args[]) {
+      Vector v = new Vector(3, 2);
+      v.addElement(new Integer(1));
+      v.addElement(new Integer(2));
+      v.addElement(new Integer(3));
+      v.addElement(new Integer(4));
+      v.addElement(new Double(5.45));
+      v.addElement(new Double(6.08));
+      v.addElement(new Integer(7));
+      v.addElement(new Float(9.4));
+      v.addElement(new Integer(10));
+      v.addElement(new Integer(11));
+      v.addElement(new Integer(12));
+
+      Enumeration vEnum = v.elements();
+      while(vEnum.hasMoreElements())
+         System.out.print(vEnum.nextElement() + " ");
+   }
+}</code></pre>
+      <p><strong>Output:</strong><br>1 2 3 4 5.45 6.08 7 9.4 10 11 12</p>
+    </div>
+
+    <h2 class="title">Stack</h2>
+    <div class="content">
+      <p><strong>Stack</strong> is a last-in, first-out (LIFO) data structure. You push elements on top and pop them off from the top.</p>
+    </div>
+
+    <h2 class="title">Example: Stack Operations</h2>
+    <div class="content">
+      <pre><code>import java.util.*;
+
+public class StackDemo {
+   static void showpush(Stack st, int a) {
+      st.push(a);
+      System.out.println("push(" + a + ")");
+      System.out.println("stack: " + st);
+   }
+
+   static void showpop(Stack st) {
+      System.out.print("pop -> ");
+      Integer a = (Integer) st.pop();
+      System.out.println(a);
+      System.out.println("stack: " + st);
+   }
+
+   public static void main(String args[]) {
+      Stack st = new Stack();
+      showpush(st, 42);
+      showpush(st, 66);
+      showpush(st, 99);
+      showpop(st);
+      showpop(st);
+      showpop(st);
+      try {
+         showpop(st);
+      } catch (EmptyStackException e) {
+         System.out.println("empty stack");
+      }
+   }
+}</code></pre>
+      <p><strong>Output:</strong><br>push(42)... pop -> 99... empty stack</p>
+    </div>
+
+    <h2 class="title">Dictionary</h2>
+    <div class="content">
+      <p><strong>Dictionary</strong> is an abstract class for mapping keys to values. It provides a foundation for key-based data retrieval.</p>
+    </div>
+
+    <h2 class="title">Example: Dictionary Usage</h2>
+    <div class="content">
+      <pre><code>import java.util.*;
+
+public class DictionaryDemo {
+   public static void main(String[] args) {
+      Dictionary&lt;Integer, Integer&gt; dictionary = new Hashtable&lt;&gt;();
+      dictionary.put(1, 1);
+      dictionary.put(2, 2);
+      Enumeration&lt;Integer&gt; enumeration = dictionary.keys();
+      while(enumeration.hasMoreElements()) {
+         System.out.println(enumeration.nextElement());
+      }
+   }
+}</code></pre>
+      <p><strong>Output:</strong><br>2<br>1</p>
+    </div>
+
+    <h2 class="title">Hashtable</h2>
+    <div class="content">
+      <p><strong>Hashtable</strong> maps keys to values and uses hash codes for fast access. It's synchronized and stores unique keys.</p>
+    </div>
+
+    <h2 class="title">Example: Hashtable Usage</h2>
+    <div class="content">
+      <pre><code>import java.util.Hashtable;
+
+public class HashtableDemo {
+   public static void main(String args[]) {
+      Hashtable&lt;Integer,Integer&gt; hashtable = new Hashtable&lt;&gt;();
+      hashtable.put(1, 1);
+      hashtable.put(2, 2);
+      hashtable.put(3, 3);
+      System.out.println("Contains 2? " + hashtable.contains(2));
+      System.out.println("Contains 4? " + hashtable.contains(4));
+   }
+}</code></pre>
+      <p><strong>Output:</strong><br>Contains 2? true<br>Contains 4? false</p>
+    </div>
+
+    <h2 class="title">Properties</h2>
+    <div class="content">
+      <p><strong>Properties</strong> is a subclass of

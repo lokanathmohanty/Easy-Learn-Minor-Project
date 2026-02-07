@@ -1,0 +1,236 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Memory Management in C</h1>
+
+    <div class="content">
+      <p>One of the important characteristics of C is that the compiler manages how the memory is allocated to the variables declared in the code. Once the compiler allocates the required bytes of memory, it cannot be changed during the runtime.</p>
+
+      <p>The compiler employs static memory allocation approach. However, there are times where you may need to allocate the memory on demand, during the runtime. Read this chapter to understand how dynamic memory management works in C.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Functions for Dynamic Memory Management in C</h2>
+
+    <div class="content">
+      <p>The C programming language provides several functions for dynamic memory allocation and management. These functions can be found in the <code>&lt;stdlib.h&gt;</code> header file.</p>
+
+      <ul>
+        <li><strong>void *calloc(int num, int size);</strong> This function allocates an array of <em>num</em> elements each of which <em>size</em> in bytes will be size.</li>
+        <li><strong>void free(void *address);</strong> This function releases a block of memory block specified by address.</li>
+        <li><strong>void *malloc(size_t size);</strong> This function allocates an array of <em>num</em> bytes and leave them uninitialized.</li>
+        <li><strong>void *realloc(void *address, int newsize);</strong> This function re-allocates memory extending it up to newsize.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Allocating Memory Dynamically</h2>
+
+    <div class="content">
+      <p>If you are aware of the size of an array, then it is easy and you can define it as an array. For example, if you need to store the name of a person, then you can safely define an array to hold a maximum of 100 characters (assuming that a name wouldn't contain more than 100 characters). So, you can define an array as follows −</p>
+
+      <pre><code>char name[100];</code></pre>
+
+      <p>This is an example of static memory allocation. Now let us consider a situation where you have no idea about the length of the text you need to store, for example, you want to store a detailed description about a topic. In such a case, if the content is less than the allocated size, the allocated memory is wasted during the programs execution.</p>
+
+      <p>On the other hand, if the size required is more than the allocated memory size, it may lead to unpredictable behaviour, including causing the data to be corrupted, as the size of the array cannot be dynamically altered.</p>
+
+      <p>It is in these kind of situations you need to use the dynamic memory allocation methods as described in this chapter.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The malloc() Function</h2>
+
+    <div class="content">
+      <p>This function is defined in the <code>stdlib.h</code> header file. It allocates a block memory of the required size and returns a void pointer.</p>
+
+      <pre><code>void *malloc (size)</code></pre>
+
+      <p>The size parameter refers to the block of memory in bytes. To allocate a memory required for a specified data type, you need to use the typecasting operator.</p>
+
+      <p>For example, the following snippet allocates the memory required to store an int type −</p>
+
+      <pre><code>int *ptr;
+ptr = (int *) malloc (sizeof (int));</code></pre>
+
+      <p>Here we need to define a pointer to character without defining how much memory is required and later, based on requirement, we can allocate memory.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example</h2>
+
+    <div class="content">
+      <p>The following example uses the <code>malloc()</code> function to allocate the required memory to store a string (instead of declaring a char array of a fixed size) −</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+   char *name;
+   name = (char *) malloc(strlen("TutorialsPoint"));
+   strcpy(name, "TutorialsPoint");
+
+   if(name  == NULL) {
+      fprintf(stderr, "Error - unable to allocate required memory\n");
+   } else {
+      printf("Name = %s\n", name);
+   }
+}</code></pre>
+
+      <p><strong>Output</strong></p>
+
+      <pre><code>Name = TutorialsPoint</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The calloc() Function</h2>
+
+    <div class="content">
+      <p>The <code>calloc()</code> function (stands for contiguous allocation) allocates the requested memory and returns a pointer to it.</p>
+
+      <pre><code>void *calloc(n, size);</code></pre>
+
+      <p>Here, "n" is the number of elements to be allocated and "size" is the byte-size of each element.</p>
+
+      <p>The following snippet allocates the memory required to store 10 int types −</p>
+
+      <pre><code>int *ptr;
+ptr = (int *) calloc(25, sizeof(int));</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example</h2>
+
+    <div class="content">
+      <p>Let's rewrite the above program using the <code>calloc()</code> function. All that you need to do is replace malloc with calloc −</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+   char *name;
+   name = (char *) calloc(strlen("TutorialsPoint"), sizeof(char));
+   strcpy(name, "TutorialsPoint");
+
+   if(name  == NULL) {
+      fprintf(stderr, "Error - unable to allocate required memory\n");
+   } else {
+      printf("Name = %s\n", name);
+   }
+}</code></pre>
+
+      <p>So you have complete control and you can pass any size value while allocating memory, unlike arrays where once the size is defined, you cannot change it.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Resizing and Releasing the Memory</h2>
+
+    <div class="content">
+      <p>When your program comes out, the operating system automatically releases all the memory allocated by your program. However, it is a good practice to release the allocated memory explicitly by calling the <code>free()</code> function, when you are not in need of using the allocated memory anymore.</p>
+
+      <p>In this section, we will highlight the use of two functions, <code>realloc()</code> and <code>free()</code>, that you can use to resize and release the allocated memory.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The realloc() Function</h2>
+
+    <div class="content">
+      <p>The <code>realloc()</code> (re-allocation) function in C is used to dynamically change the memory allocation of a previously allocated memory. You can increase or decrease the size of an allocated memory block by calling the <code>realloc()</code> function.</p>
+
+      <p>The prototype of using the <code>realloc()</code> function is like this −</p>
+
+      <pre><code>void *realloc(*ptr, size);</code></pre>
+
+      <p>Here, the first parameter "ptr" is the pointer to a memory block previously allocated with <code>malloc</code>, <code>calloc</code> or <code>realloc</code> to be reallocated. If this is NULL, a new block is allocated and a pointer to it is returned by the function.</p>
+
+      <p>The second parameter "size" is the new size for the memory block, in bytes. If it is "0" and ptr points to an existing block of memory, the memory block pointed by ptr is deallocated and a NULL pointer is returned.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example</h2>
+
+    <div class="content">
+      <p>The following example demonstrates how you can use the <code>realloc()</code> function in a C program −</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+   char *name;
+   name = (char *) calloc(strlen("TutorialsPoint"), sizeof(char));
+   strcpy(name, "TutorialsPoint");
+
+   name = (char *) realloc(name, strlen(" India Private Limited"));
+   strcat(name, " India Private Limited");
+
+   if(name == NULL) {
+      fprintf(stderr, "Error - unable to allocate required memory\n");
+   } else {
+      printf("Name = %s\n", name);
+   }
+}</code></pre>
+
+      <p><strong>Output</strong></p>
+
+      <pre><code>Name = TutorialsPoint India Private Limited</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The free() Function</h2>
+
+    <div class="content">
+      <p>The <code>free()</code> function in C is used to dynamically de-allocate the memory allocated using functions such as <code>malloc()</code> and <code>calloc()</code>, since it is not freed on their own.</p>
+
+      <p>In C programming, any reference to unused memory creates a garbage deposition, which may lead to problems like program crashing. Hence, it is wise to use the <code>free()</code> function to perform a manual cleaning operation of the allocated memory.</p>
+
+      <p>Here is the prototype to use the <code>free()</code> function −</p>
+
+      <pre><code>void free(void *ptr);</code></pre>
+
+      <p>Where <em>ptr</em> is the pointer to the block of memory previously allocated.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example</h2>
+
+    <div class="content">
+      <p>The following example demonstrates how you can use the <code>free()</code> function in a C program −</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+   char *name;
+   name = (char *) calloc(strlen("TutorialsPoint"), sizeof(char));
+   strcpy(name, "TutorialsPoint");
+
+   if(name  == NULL) {
+      fprintf(stderr, "Error - unable to allocate required memory\n");
+   } else {
+      printf("Name = %s\n", name);
+      free(name);
+   }
+}</code></pre>
+
+      <p><strong>Output</strong></p>
+
+      <pre><code>Name = TutorialsPoint India Private Limited</code></pre>
+
+      <p>At the end of the code, the memory allocated to the <code>char *</code> pointer is de-allocated.</p>
+    </div>
+  </div>
+</div>

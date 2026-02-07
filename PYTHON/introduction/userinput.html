@@ -1,0 +1,163 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - User Input</h1>
+    <div class="content">
+      <p>Python allows programs to accept input from the user during execution, making them interactive. Input is usually taken from the console using built-in functions and displayed back using the <code>print()</code> function.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Python User Input Functions</h2>
+    <div class="content">
+      <ul>
+        <li><code>input()</code> - available in Python 3.x</li>
+        <li><code>raw_input()</code> - available in Python 2.x (renamed to <code>input()</code> in Python 3)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using Variables Without User Input</h2>
+    <div class="content">
+      <p>Example program with static values:</p>
+      <pre>
+#! /usr/bin/python3.11
+
+name = "Kiran"
+city = "Hyderabad"
+
+print("Hello My name is", name)
+print("I am from", city)
+      </pre>
+      <p>Output:</p>
+      <pre>
+Hello My name is Kiran
+I am from Hyderabad
+      </pre>
+      <p>This program prints the same output each time, requiring manual edits to change values.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The input() Function</h2>
+    <div class="content">
+      <p>The <code>input()</code> function reads input from the user as a string. The program waits for the user to press Enter before continuing.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+name = input("Enter your name: ")
+city = input("Enter your city: ")
+
+print("Hello My name is", name)
+print("I am from", city)
+      </pre>
+      <p>Sample Run:</p>
+      <pre>
+Enter your name: Praveen
+Enter your city: Bengaluru
+Hello My name is Praveen
+I am from Bengaluru
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The raw_input() Function</h2>
+    <div class="content">
+      <p>In Python 2.x, <code>raw_input()</code> was used to take input as string. In Python 3, <code>input()</code> performs this task.</p>
+      <pre>
+name = raw_input("Enter your name: ")
+city = raw_input("Enter your city: ")
+
+print("Hello My name is", name)
+print("I am from", city)
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Taking Numeric Input</h2>
+    <div class="content">
+      <p>Since <code>input()</code> always returns a string, numeric input must be converted to <code>int</code> or <code>float</code> before performing arithmetic operations.</p>
+      <p><strong>Example: Calculating Area of a Rectangle</strong></p>
+      <pre>
+width = int(input("Enter width: "))
+height = int(input("Enter height: "))
+
+area = width * height
+print("Area of rectangle =", area)
+      </pre>
+      <p>Sample Run:</p>
+      <pre>
+Enter width: 20
+Enter height: 30
+Area of rectangle = 600
+      </pre>
+
+      <p><strong>Example: Using float()</strong></p>
+      <pre>
+amount = float(input("Enter Amount: "))
+rate = float(input("Enter rate of interest: "))
+
+interest = amount * rate / 100
+print("Amount:", amount, "Interest:", interest)
+      </pre>
+      <p>Sample Run:</p>
+      <pre>
+Enter Amount: 12500
+Enter rate of interest: 6.5
+Amount: 12500.0 Interest: 812.5
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The print() Function</h2>
+    <div class="content">
+      <p>The <code>print()</code> function is used to display values and expressions. Multiple items can be printed, separated by commas.</p>
+      <p><strong>Example:</strong></p>
+      <pre>
+a = "Hello World"
+b = 100
+c = 25.50
+d = 5+6j
+
+print("Message:", a)
+print(b, c, b-c)
+print(pow(100, 0.5), pow(c, 2))
+      </pre>
+      <p>Output:</p>
+      <pre>
+Message: Hello World
+100 25.5 74.5
+10.0 650.25
+      </pre>
+      <p>The <code>sep</code> parameter changes the separator, and the <code>end</code> parameter customizes what follows the output.</p>
+
+      <p><strong>Example: Using sep</strong></p>
+      <pre>
+city = "Hyderabad"
+state = "Telangana"
+country = "India"
+
+print(city, state, country, sep=",")
+      </pre>
+      <p>Output:</p>
+      <pre>
+Hyderabad,Telangana,India
+      </pre>
+
+      <p><strong>Example: Using end</strong></p>
+      <pre>
+city = "Hyderabad"
+state = "Telangana"
+
+print("City:", city, end=" ")
+print("State:", state)
+      </pre>
+      <p>Output:</p>
+      <pre>
+City: Hyderabad State: Telangana
+      </pre>
+    </div>
+  </div>
+</div>

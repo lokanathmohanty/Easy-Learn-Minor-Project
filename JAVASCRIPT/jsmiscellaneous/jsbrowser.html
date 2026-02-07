@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Browsers Compatibility</h1>
+    <div class="content">
+      <p>It is important to understand the differences between different browsers in order to handle each in the way it is expected. To know which browser your web page is running in, you can use the built-in <code>navigator</code> object.</p>
+
+      <h2>Navigator Properties</h2>
+      <p>The following are commonly used navigator-related properties:</p>
+      <ul>
+        <li><strong>appCodeName</strong> − Contains the code name of the browser.</li>
+        <li><strong>appVersion</strong> − Contains the version of the browser and other useful details.</li>
+        <li><strong>language</strong> − Two-letter abbreviation for the language used by the browser (Netscape only).</li>
+        <li><strong>mimeTypes[]</strong> − Array of MIME types supported by the client (Netscape only).</li>
+        <li><strong>platform</strong> − Contains the platform for which the browser was compiled, e.g. "Win32".</li>
+        <li><strong>plugins[]</strong> − Array of plug-ins installed on the client (Netscape only).</li>
+        <li><strong>userAgent</strong> − String with the code name and version of the browser, sent to the server for identification.</li>
+      </ul>
+
+      <h2>Navigator Methods</h2>
+      <p>Navigator also provides some methods:</p>
+      <ul>
+        <li><strong>javaEnabled()</strong> − Returns <code>true</code> if Java is enabled in the browser.</li>
+        <li><strong>plugins.refresh</strong> − Refreshes the plugins array after new plug-ins are installed (Netscape only).</li>
+        <li><strong>preference(name, value)</strong> − Gets or sets Netscape browser preferences (Netscape only).</li>
+        <li><strong>taintEnabled()</strong> − Returns <code>true</code> if data tainting is enabled.</li>
+      </ul>
+
+      <h2>Browser Detection</h2>
+      <p>You can use JavaScript to detect the browser name and serve content accordingly.</p>
+
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;   
+   &lt;head&gt;
+      &lt;title&gt;Browser Detection Example&lt;/title&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;      
+      &lt;script type = "text/javascript"&gt;
+         var userAgent   = navigator.userAgent;
+         var opera       = (userAgent.indexOf('Opera') != -1);
+         var ie          = (userAgent.indexOf('MSIE') != -1);
+         var gecko       = (userAgent.indexOf('Gecko') != -1);
+         var netscape    = (userAgent.indexOf('Mozilla') != -1);
+         var version     = navigator.appVersion;
+            
+         if (opera) {
+            document.write("Opera based browser");
+         } else if (gecko) {
+            document.write("Mozilla based browser");
+         } else if (ie) {
+            document.write("IE based browser");
+         } else if (netscape) {
+            document.write("Netscape based browser");
+         } else {
+            document.write("Unknown browser");
+         }
+          
+         document.write("&lt;br /&gt; Browser version info : " + version );
+      &lt;/script&gt;      
+   &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Output</h2>
+      <p>When executed, the script displays the detected browser type and version information.</p>
+    </div>
+  </div>
+</div>

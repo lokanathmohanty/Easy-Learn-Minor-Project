@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Filters: Validation and Sanitization</h1>
+
+        <div class="content">
+            <p>The PHP **Filter Extension** provides a set of functions and constants designed to simplify and standardize the process of **validating and sanitizing** input data received from client requests ($\text{GET}$, $\text{POST}$, etc.). This is a critical security measure to prevent vulnerabilities like **SQL injection** and **cross-site scripting (XSS)**.</p>
+
+            <hr>
+
+            <h2 class="title">Types of Filters</h2>
+            <p>The extension provides two main categories of filters:</p>
+            <ul>
+                <li><strong>Validation Filters:</strong> Check if data meets specific criteria (e.g., is it a valid email, URL, or integer). They **return $\text{false}$ on failure** but **do not alter the data itself**. Example: $\text{FILTER\_VALIDATE\_EMAIL}$.</li>
+                <li><strong>Sanitization Filters:</strong> Remove illegal or undesired characters from the input. They **may alter the data** by stripping or encoding characters. Example: $\text{FILTER\_SANITIZE\_EMAIL}$ removes characters inappropriate for an email address.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Filter Functions and Usage</h2>
+
+            <h3>1. $\text{filter\_has\_var()}$</h3>
+            <p>Checks if an external variable of a specified type exists.</p>
+            <pre>filter_has_var(int $input_type, string $var_name): bool</pre>
+            <div class="example">
+                If the URL is $\text{http://localhost/script.php?email=test@a.com}$, then:
+                <pre>filter_has_var(INPUT_GET, "email");</pre>
+                Would return $\text{true}$.
+            </div>
+
+            <h3>2. $\text{filter\_input()}$</h3>
+            <p>Retrieves a single external variable ($\text{GET, POST, COOKIE, ENV, SERVER}$) and filters it according to the specified filter constant and options.</p>
+            <pre>filter_input(int $type, string $var_name, int $filter, array|int $options): mixed</pre>
+            <ul>
+                <li>Returns the filtered value on success.</li>
+                <li>Returns $\text{false}$ if the filter fails validation.</li>
+                <li>Returns $\text{null}$ if the variable name is not set.</li>
+            </ul>
+            <div class="example">
+                Validating a $\text{GET}$ email:
+                <pre>filter_input(INPUT_GET, "email", FILTER_VALIDATE_EMAIL);</pre>
+            </div>
+
+            <h3>3. $\text{filter\_input\_array()}$</h3>
+            <p>Retrieves multiple external variables (e.g., all $\text{POST}$ data) and optionally filters them based on a defined options array. This avoids repetitive $\text{filter\_input()}$ calls.</p>
+            <pre>filter_input_array(int $type, array|int $options): array|false|null</pre>
+            <div class="example">
+                <p>An example of using a filters array to validate multiple inputs:</p>
+                <pre>$filters = [
+   "age" => ["filter" => FILTER_VALIDATE_INT, "options" => ["min_range" => 20]],
+   "email" => FILTER_VALIDATE_EMAIL
+];
+print_r(filter_input_array(INPUT_POST, $filters));</pre>
+            </div>
+
+            <h3>4. $\text{filter\_list()}$</h3>
+            <p>Returns an array containing the names of all supported filters in the current PHP installation.</p>
+
+            <hr>
+
+            <h2 class="title">Predefined Input Constants</h2>
+            <p>These integer constants are used as the $\text{\$input\_type}$ in the filter functions to specify the source of the data:</p>
+            <ul>
+                <li>$\text{INPUT\_POST}$</li>
+                <li>$\text{INPUT\_GET}$</li>
+                <li>$\text{INPUT\_COOKIE}$</li>
+                <li>$\text{INPUT\_SERVER}$</li>
+                <li>$\text{INPUT\_ENV}$</li>
+            </ul>
+
+            <h2 class="title">Filter Flags (Options)</h2>
+            <p>Filter flags are used to fine-tune the behavior of a filter, often passed as the $\text{\$options}$ argument. They modify what the filter accepts or how it sanitizes the data.</p>
+            <ul>
+                <li>**String/Text Flags:**
+                    <ul>
+                        <li>$\text{FILTER\_FLAG\_STRIP\_LOW}$: Removes non-printable characters ($\text{<32}$).</li>
+                        <li>$\text{FILTER\_FLAG\_NO\_ENCODE\_QUOTES}$: Prevents single/double quotes from being HTML encoded during sanitization.</li>
+                    </ul>
+                </li>
+                <li>**Number Flags:**
+                    <ul>
+                        <li>$\text{FILTER\_FLAG\_ALLOW\_FRACTION}$: Allows the period ($\text{.}$) as a decimal separator.</li>
+                        <li>$\text{FILTER\_FLAG\_ALLOW\_THOUSAND}$: Allows the comma ($\text{,}$ ) as a thousands separator.</li>
+                    </ul>
+                </li>
+                <li>**IP Address Flags:**
+                    <ul>
+                        <li>$\text{FILTER\_FLAG\_IPV4}$: Requires the address to be in IPv4 format.</li>
+                        <li>$\text{FILTER\_FLAG\_NO\_PRIV\_RANGE}$: Fails validation if the IP falls within common private ranges ($\text{10.0.0.0/8}$, $\text{192.168.0.0/16}$, etc.).</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

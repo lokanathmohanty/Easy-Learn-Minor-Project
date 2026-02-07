@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Date & Time Functions</h1>
+
+    <div class="content">
+      <p>
+        PHP provides a rich set of built-in functions and the **DateTime class** for handling and manipulating date and time information. Internally, date and time data is often managed using the **UNIX timestamp**, which is the number of seconds elapsed since the **UNIX epoch** (midnight GMT on January 1, 1970).
+      </p>
+
+      <h2>Getting and Converting Time Stamps</h2>
+
+      <h3>1. `time()`: Getting the Current Time Stamp</h3>
+      <p>
+        The `time()` function returns the current UNIX timestamp as an integer.
+      </p>
+      <div class="example">
+        <code>print time();</code> $\rightarrow$ <code>1739750400</code> (Example output)
+      </div>
+
+      <h3>2. `getdate()`: Converting Timestamp to Associative Array</h3>
+      <p>
+        The `getdate()` function accepts an optional timestamp (defaults to current time) and returns an **associative array** containing detailed information about the date (e.g., seconds, minutes, hours, day of the month (`mday`), day of the week (`weekday`), month name, and year).
+      </p>
+      <div class="example">
+        <code>$date_array = getdate();</code><br>
+        <code>print $date_array['mday'];</code> $\rightarrow$ <code>8</code> (Example output for Nov 8)
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Formatting Dates and Times: `date()`</h2>
+      <p>
+        The **`date()`** function is the primary tool for converting a timestamp into a human-readable, formatted string. It takes a **format string** as its first argument and an optional timestamp as the second.
+      </p>
+      <div class="example">
+        <code>date(string $format, ?int $timestamp = null): string</code>
+      </div>
+
+      <h3>Common Format Codes:</h3>
+      <ul>
+        <li>
+          **Date:** **`d`** (Day with leading zero), **`m`** (Month with leading zero), **`Y`** (Four-digit year), **`j`** (Day without leading zero).
+        </li>
+        <li>
+          **Day/Month Names:** **`D`** (Three-letter day, e.g., Thu), **`l`** (Full day name, e.g., Thursday), **`F`** (Full month name).
+        </li>
+        <li>
+          **Time:** **`H`** (24-hour format), **`h`** (12-hour format), **`i`** (Minutes), **`s`** (Seconds), **`a`** (am/pm lowercase), **`A`** (AM/PM uppercase).
+        </li>
+      </ul>
+      <div class="example">
+        <code>date("l, F j, Y");</code> $\rightarrow$ <code>Monday, February 17, 2025</code> (Example)
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Converting Strings to Time Stamps: `strtotime()`</h2>
+      <p>
+        The **`strtotime()`** function converts a string representation of a date and time into a UNIX timestamp. This is extremely useful for date manipulation and calculations.
+      </p>
+      <div class="example">
+        <code>$date = "2025-02-17";</code><br>
+        <code>$timestamp = strtotime($date);</code> $\rightarrow$ <code>1739750400</code>
+      </div>
+      <p>
+        <code>strtotime()</code> is highly flexible and can parse many human-readable formats, including relative formats like `"tomorrow"`, `"next Monday"`, or `"+1 week"`.
+      </p>
+    </div>
+  </div>
+</div>

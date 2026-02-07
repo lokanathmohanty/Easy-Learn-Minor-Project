@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Reference Type</h1>
+    <div class="content">
+      <p>In JavaScript, data types are divided into two categories: <strong>primitive</strong> and <strong>reference types</strong>.</p>
+
+      <h2>Primitive Data Types</h2>
+      <p>Primitive data types are immutable and include:</p>
+      <ul>
+        <li>Number</li>
+        <li>String</li>
+        <li>Boolean</li>
+        <li>Undefined</li>
+        <li>Null</li>
+        <li>Symbol</li>
+      </ul>
+
+      <h2>Reference Data Types</h2>
+      <p>Reference types are mutable. Common examples are:</p>
+      <ul>
+        <li>Object</li>
+        <li>Array</li>
+        <li>Function</li>
+      </ul>
+      <p>When assigning a primitive, a copy of the value is stored. When assigning a reference type, a reference to the object in memory is stored. Thus, modifying one reference affects all references pointing to the same object.</p>
+
+      <h2>Examples</h2>
+
+      <h3>Primitive Example</h3>
+      <pre><code>let x = 10;
+let y = 10;
+
+x = 20;
+console.log(x); // 20
+console.log(y); // 10</code></pre>
+
+      <h3>Reference Example</h3>
+      <pre><code>const x = [1, 2, 3];
+const y = x;
+
+x[0] = 4;
+console.log(x); // [4, 2, 3]
+console.log(y); // [4, 2, 3]</code></pre>
+
+      <h2>Objects</h2>
+      <pre><code>const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 30
+};</code></pre>
+
+      <h2>Functions</h2>
+      <pre><code>function greet(name) {
+  alert("Hello, " + name + "!");
+}</code></pre>
+
+      <h2>Examples in Practice</h2>
+
+      <h3>Example 1: Object Mutability</h3>
+      <pre><code>&lt;script&gt;
+const person = { name: "John", age: 25 };
+let anotherPerson = person;
+anotherPerson.age = 30;
+console.log(person); // { name: "John", age: 30 }
+&lt;/script&gt;</code></pre>
+
+      <h3>Example 2: Array Modification</h3>
+      <pre><code>&lt;script&gt;
+const colors = ["red", "green", "blue"];
+let moreColors = colors;
+moreColors.push("yellow");
+console.log(colors); // ["red", "green", "blue", "yellow"]
+&lt;/script&gt;</code></pre>
+
+      <h3>Example 3: Function Reference</h3>
+      <pre><code>&lt;script&gt;
+function greet(name) {
+  return "Hello, " + name + "!";
+}
+let greetingFunction = greet;
+console.log(greetingFunction("John")); // Hello, John!
+greetingFunction = function(name) {
+  return "Hola, " + name + "!";
+};
+console.log(greetingFunction("Maria")); // Hola, Maria!
+&lt;/script&gt;</code></pre>
+
+      <h3>Example 4: Custom Class</h3>
+      <pre><code>&lt;script&gt;
+class Book {
+  constructor(title, author, genre) {
+    this.title = title;
+    this.author = author;
+    this.genre = genre;
+  }
+  getDetails() {
+    return `Title: ${this.title}, Author: ${this.author}, Genre: ${this.genre}`;
+  }
+}
+const book1 = new Book("1984", "George Orwell", "Dystopian");
+console.log(book1.getDetails());
+&lt;/script&gt;</code></pre>
+
+      <h3>Example 5: Immutable Objects</h3>
+      <pre><code>&lt;script&gt;
+'use strict';
+const person = Object.freeze({ name: "Alice", age: 30 });
+try {
+  person.age = 35; // Error in strict mode
+} catch (err) {
+  console.log(err);
+}
+console.log(person.age); // 30
+&lt;/script&gt;</code></pre>
+
+      <h2>Conclusion</h2>
+      <p>Understanding the difference between primitive and reference types is crucial for writing efficient and predictable JavaScript programs. Reference types allow shared access to objects, but immutability techniques such as <code>Object.freeze()</code> help preserve data integrity when needed.</p>
+    </div>
+  </div>
+</div>

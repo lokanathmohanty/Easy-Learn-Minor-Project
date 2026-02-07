@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Code Execution and Comparison with .NET Framework</h1>
+
+        <div class="content">
+            <p>The code execution process in both **.NET Core** and **.NET Framework** follows a similar managed execution model, but utilizes different components that have been reimplemented for the new, cross-platform architecture of .NET Core.</p>
+        </div>
+
+        <h2 class="title">The Managed Code Execution Process (General)</h2>
+        <div class="content">
+            <p>Managed code execution involves four key steps facilitated by the **Common Language Runtime (CLR)**:</p>
+            <ol>
+                <li class="content">
+                    **Choosing a Compiler**: Selecting a language compiler (e.g., C#, F#) that targets the runtime to utilize its services.
+                </li>
+                <li class="content">
+                    **Compiling to MSIL**: The compiler translates source code into **Microsoft Intermediate Language (MSIL)** and generates **metadata**. Metadata describes the types, member signatures, and other data the runtime needs.
+                </li>
+                <li class="content">
+                    **Compiling MSIL to Native Code**: At execution time, the **Just-In-Time (JIT) compiler** translates the MSIL into native code for the target machine. This step includes a **verification process** to ensure the code is type safe.
+                </li>
+                <li class="content">
+                    **Running Code**: The runtime provides the infrastructure and services (like **garbage collection**, security, cross-language debugging, and unmanaged code interoperability) that enable and support the execution of the native code.
+                </li>
+            </ol>
+        </div>
+
+        <h2 class="title example">Component Replacements in .NET Core</h2>
+        <div class="content example">
+            <p>.NET Core replaces several key components of the .NET Framework to achieve its goals of being open-source, modular, and cross-platform:</p>
+            <ul>
+                <li class="content">
+                    **Compilers**:
+                    <ul>
+                        <li class="content">
+                            **Roslyn**: Used for C# and VB compilation (supporting C# 6 and later).
+                        </li>
+                        <li class="content">
+                            **F# 4.1 Compiler**: Used for F# projects.
+                        </li>
+                    </ul>
+                </li>
+                <li class="content">
+                    **Class Libraries**:
+                    <ul>
+                        <li class="content">
+                            **.NET Framework Class Libraries (FCL)** are replaced by **CoreFx**. CoreFx is the **reimplementation** of the class libraries specifically for .NET Core, focusing on modularity and cross-platform functionality.
+                        </li>
+                    </ul>
+                </li>
+                <li class="content">
+                    **Runtime**:
+                    <ul>
+                        <li class="content">
+                            The .NET Framework's CLR is replaced by **CoreCLR**. **CoreCLR** is the new runtime for .NET Core, which also leverages a JIT Compiler, but is built to be cross-platform and more modular.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <p>This comprehensive reimplementation was necessary to support the new cross-platform, modular, and modern architecture that defines .NET Core.</p>
+        </div>
+    </div>
+</div>

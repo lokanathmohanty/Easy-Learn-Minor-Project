@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Web Programming: Common Gateway Interface (CGI) 🌐💻</h1>
+
+        <div class="content">
+            <p>The **Common Gateway Interface (CGI)** is a standard set of rules defining how an **HTTP Web Server** communicates with an external program (the **CGI Program** or **Script**). Instead of sending a static file, the web server executes the CGI program, and the program's output is sent back to the client's browser.</p>
+            <p>This mechanism allows C++ (or Perl, Python, etc.) programs to generate dynamic web content (like HTML pages, personalized data, or results from a database query).</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">CGI Core Principles</h2>
+
+        <div class="content">
+            <h3>Web Server Interaction</h3>
+            <p>When a browser requests a file in the configured CGI directory (conventionally `/cgi-bin/`), the web server:</p>
+            <ol>
+                <li>Executes the requested file (the C++ executable).</li>
+                <li>Collects the program's output (usually via **STDOUT**).</li>
+                <li>Sends that output back to the client's browser.</li>
+            </ol>
+
+            <h3>The HTTP Header</h3>
+            <p>The CGI program's first output lines must form a valid **HTTP Header**, which informs the browser about the type of content to expect. The most crucial part is the `Content-type` line:</p>
+            <pre class="example">
+Content-type: text/html\r\n\r\n
+</pre>
+            <p>The double newline (`\r\n\r\n`) is essential; it separates the HTTP header from the actual page content (HTML).</p>
+
+            <h3>Environment Variables</h3>
+            <p>CGI programs receive request-specific data from the web server through **Environment Variables**. Key variables include:</p>
+            <ul>
+                <li>**`REQUEST_METHOD`**: (`GET` or `POST`).</li>
+                <li>**`QUERY_STRING`**: Contains data sent via the `GET` method.</li>
+                <li>**`CONTENT_LENGTH`**: The length of the data available for `POST` requests.</li>
+                <li>**`REMOTE_ADDR`**: The IP address of the client.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Data Passing Methods (GET vs. POST)</h2>
+
+        <div class="content">
+            <p>Web browsers use two primary methods to pass user input (often from HTML forms) to the CGI script:</p>
+            <table>
+                <thead>
+                    <tr><th>Method</th><th>Description</th><th>Access Point</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>**GET**</td><td>Data is appended to the URL (e.g., `url?key=value`). It's limited in size and **visible** in the browser's address bar, making it unsuitable for sensitive data.</td><td>**`QUERY_STRING`** environment variable.</td></tr>
+                    <tr><td>**POST**</td><td>Data is sent in the body of the HTTP request, appearing on the CGI script's **Standard Input (STDIN)**. It supports large amounts of data and is preferred for sensitive information.</td><td>The script reads from STDIN.</td></tr>
+                </tbody>
+            </table>
+            <p>In the provided examples, the **C++ CGI Library (`cgicc`)** simplifies accessing data for both `GET` and `POST` methods by abstracting whether the data came from the environment variables or STDIN.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">State Management with Cookies</h2>
+
+        <div class="content">
+            <p>Since HTTP is a **stateless protocol**, **Cookies** are used to maintain session information across multiple page requests. They work as follows:</p>
+            <p></p>
+            <ol>
+                <li>**Setting Cookies:** The CGI script sends the `Set-Cookie` HTTP header before the `Content-type` line.</li>
+                <li>**Retrieving Cookies:** The browser automatically sends stored cookies back to the server in the **`HTTP_COOKIE`** environment variable on subsequent requests. The `cgicc` library processes this variable to provide easy access to the stored key/value pairs.</li>
+            </ol>
+            <pre class="example">
+// Setting a cookie (sent in the HTTP header)
+cout << "Set-Cookie:UserID = XYZ;\r\n";
+// ... followed by Content-type
+</pre>
+        </div>
+    </div>
+</div>

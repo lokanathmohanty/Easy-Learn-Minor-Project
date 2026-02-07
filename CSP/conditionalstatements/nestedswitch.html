@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Nested `switch` Statements</h1>
+        
+        <h2 class="title">What Are Nested `switch` Statements?</h2>
+        <div class="content">
+            <p>A **nested `switch` statement** involves placing one `switch` statement entirely **inside the code block** of a <code>case</code> within an outer `switch` statement. This technique is highly effective for handling **multi-level decision-making**, where the outcome of the first choice (the outer `switch`) determines the set of possibilities for the second choice (the inner `switch`).</p>
+            <p>Crucially, the case constants in the inner and outer `switch` statements can have the same values without causing conflicts, as they are evaluated in separate scopes.</p>
+        </div>
+        
+        <h2 class="title">Rules and Structure</h2>
+        <div class="content">
+            <p>The core rules for a nested structure are similar to those for a single `switch`:</p>
+            <ul>
+                <li>**Expression Type:** Both the inner and outer `switch` expressions must be an **integral type** (<code>int</code>, <code>char</code>, <code>enum</code>, etc.).</li>
+                <li>**Constants:** Case values must be **constants or literals**.</li>
+                <li>**Break Required:** Every non-empty `case` in **both** the inner and outer switches must terminate with a jump statement, usually **<code>break</code>**.</li>
+                <li>**Independence:** Both switches can include their own optional **<code>default</code>** case, which is independent of the other.</li>
+            </ul>
+            
+            <h3>Simplified Syntax Flow:</h3>
+            <pre>
+switch(outer_expression) {
+   case value_A: 
+      // Executes if outer_expression == value_A
+      
+      switch(inner_expression) { // START Inner Switch
+         case value_1:
+            // Executes if inner_expression == value_1
+            break;
+         case value_2:
+            // ...
+      } // END Inner Switch
+      break; // Breaks out of the Outer Switch
+      
+   case value_B: 
+      // ...
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Example: Department and Role Selection</h2>
+        <div class="content example">
+            <p>This demonstrates using an outer `switch` to select the **Department** and an inner `switch` to define the **Role** within that department.</p>
+            <pre>
+using System;
+public class Example {
+   public static void Main() {
+      string department = "IT";
+      string role = "Manager";
+
+      switch (department) { // Outer Switch: Checks "IT"
+      case "IT":
+         // Inner Switch executes only if Department is "IT"
+         switch (role) { 
+         case "Developer": break;
+         case "Tester": break;
+         case "Manager": // Match! This code runs
+            Console.WriteLine("IT - Manager: Oversees IT projects.");
+            break; 
+         default: break;
+         }
+         break; // Breaks out of the Outer Switch
+      
+      case "HR":
+         // ... HR inner switch logic ...
+         break;
+      
+      default:
+         Console.WriteLine("Invalid Department!");
+         break;
+      }
+   }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                IT - Manager: Oversees IT projects.
+            </p>
+        </div>
+    </div>
+</div>

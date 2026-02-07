@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="session">
+
+    <div class="title">
+      <h1>NumPy Creating Arrays</h1>
+      <h2>Create a NumPy <code>ndarray</code> Object</h2>
+    </div>
+
+    <div class="content">
+      <p>NumPy is used to work with arrays. The array object in NumPy is called <code>ndarray</code>.</p>
+      <p>We can create a NumPy <code>ndarray</code> object by using the <code>array()</code> function.</p>
+    </div>
+
+    <div class="title">
+      <h2>Example</h2>
+    </div>
+
+    <div class="content">
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+print(arr)
+print(type(arr))</code></pre>
+      <p><code>type()</code>: This built-in Python function tells us the type of the object passed to it. In the example above, it shows that <code>arr</code> is a <code>numpy.ndarray</code> type.</p>
+    </div>
+
+    <div class="content">
+      <p>To create an <code>ndarray</code>, we can pass a list, tuple or any array-like object into the <code>array()</code> method, and it will be converted into an <code>ndarray</code>.</p>
+    </div>
+
+    <div class="title">
+      <h2>Example</h2>
+    </div>
+
+    <div class="content">
+      <p>Use a tuple to create a NumPy array:</p>
+      <pre><code>import numpy as np
+
+arr = np.array((1, 2, 3, 4, 5))
+
+print(arr)</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>Dimensions in Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>A dimension in arrays is one level of array depth (nested arrays).</p>
+      <p><strong>Nested arrays:</strong> are arrays that have arrays as their elements.</p>
+    </div>
+
+    <div class="title">
+      <h2>0-D Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>0-D arrays, or Scalars, are the elements in an array. Each value in an array is a 0-D array.</p>
+      <pre><code>import numpy as np
+
+arr = np.array(42)
+
+print(arr)</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>1-D Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>An array that has 0-D arrays as its elements is called uni-dimensional or 1-D array. These are the most common and basic arrays.</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+print(arr)</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>2-D Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>An array that has 1-D arrays as its elements is called a 2-D array.</p>
+      <p>These are often used to represent matrices or 2nd order tensors.</p>
+      <p>NumPy has a whole submodule dedicated towards matrix operations called <code>numpy.mat</code>.</p>
+      <pre><code>import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+print(arr)</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>3-D Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>An array that has 2-D arrays (matrices) as its elements is called a 3-D array.</p>
+      <p>These are often used to represent a 3rd order tensor.</p>
+      <pre><code>import numpy as np
+
+arr = np.array([[[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]])
+
+print(arr)</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>Check Number of Dimensions</h2>
+    </div>
+
+    <div class="content">
+      <p>NumPy arrays provide the <code>ndim</code> attribute that returns an integer telling how many dimensions the array has.</p>
+      <pre><code>import numpy as np
+
+a = np.array(42)
+b = np.array([1, 2, 3, 4, 5])
+c = np.array([[1, 2, 3], [4, 5, 6]])
+d = np.array([[[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]])
+
+print(a.ndim)
+print(b.ndim)
+print(c.ndim)
+print(d.ndim)</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>Higher Dimensional Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>An array can have any number of dimensions. When the array is created, you can define the number of dimensions using the <code>ndmin</code> argument.</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4], ndmin=5)
+
+print(arr)
+print('number of dimensions :', arr.ndim)</code></pre>
+      <p>In this array the innermost dimension (5th dim) has 4 elements, the 4th dim has 1 element that is the vector, the 3rd dim has 1 element that is the matrix with the vector, the 2nd dim has 1 element that is 3D array, and the 1st dim has 1 element that is a 4D array.</p>
+    </div>
+
+    <div class="title">
+      <h2>Exercise</h2>
+    </div>
+
+    <div class="content">
+      <p><strong>Question:</strong> Consider the following array:</p>
+      <pre><code>arr = np.array([[1, 2, 3], [4, 5, 6]])</code></pre>
+      <p>How many dimensions does it have?</p>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+
+  </div>
+</div>

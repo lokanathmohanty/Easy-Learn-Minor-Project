@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Specificity</h1>
+    <div class="content">
+      <p>When multiple CSS rules are declared for the same element, CSS uses a specificity order to determine which rule has the highest priority.</p>
+      
+      <h2>Specificity Hierarchy</h2>
+      <p>Each CSS selector has a specificity level. The hierarchy is as follows:</p>
+      <ul>
+        <li><b>Inline Styles:</b> Highest priority. Example: <code>&lt;h1 style="color: blue;"&gt;</code></li>
+        <li><b>ID Selectors:</b> Next highest. Example: <code>#mainDiv { color: blue; }</code></li>
+        <li><b>Classes, Attributes, Pseudo-classes:</b> Example: <code>.subDivs { color: blue; }</code></li>
+        <li><b>Elements, Pseudo-elements:</b> Lowest priority. Example: <code>div { color: blue; }</code></li>
+      </ul>
+      
+      <h2>How to Calculate Specificity?</h2>
+      <p>The specificity values are:</p>
+      <ul>
+        <li>Inline styles = 1000</li>
+        <li>ID selectors = 100</li>
+        <li>Class, attribute, pseudo-class = 10</li>
+        <li>Element, pseudo-element = 1</li>
+        <li>Universal selector = 0</li>
+      </ul>
+      
+      <h2>Examples of Specificity Values</h2>
+      <ul>
+        <li><code>&lt;div style="color: green"&gt;</code> → 1000</li>
+        <li><code>#uniqueId</code> → 100</li>
+        <li><code>.mainClass</code> → 10</li>
+        <li><code>div</code> → 1</li>
+        <li><code>div #uniqueId</code> → 101</li>
+        <li><code>div .mainClass</code> → 11</li>
+        <li><code>div .mainClass .navbar</code> → 21</li>
+        <li><code>div #uniqueId .navbar</code> → 111</li>
+      </ul>
+      
+      <h2>Specificity Rules Examples</h2>
+      
+      <h3>Selector with highest specificity value takes effect</h3>
+      <p>In the following example, the id selector and inline style override others.</p>
+      <p><b>Example Heading:</b> Id and Inline Style Priority</p>
+      <pre><code>&lt;p id="unique" class="special"&gt;
+   This paragraph will be darkgreen. Id selector wins!!!!
+&lt;/p&gt;
+
+&lt;p class="special"&gt;
+   This paragraph will be blue. Class selector wins!!!!
+&lt;/p&gt;
+
+&lt;p class="special" style="color: darkblue;"&gt;
+   This paragraph will be darkblue. Inline style wins!!!!
+&lt;/p&gt;
+</code></pre>
+      
+      <h3>Equal specificity value, latest rule wins</h3>
+      <p>If two rules have the same specificity, the one written later is applied.</p>
+      <p><b>Example Heading:</b> Latest Rule Priority</p>
+      <pre><code>&lt;p class="special superSpecial"&gt;
+   This paragraph is gold color. Class superSpecial wins!!!
+&lt;/p&gt;
+</code></pre>
+      
+      <h3>Internal CSS preferred over external stylesheet</h3>
+      <p>Selectors in <code>&lt;style&gt;</code> inside HTML have higher priority than external CSS.</p>
+      <p><b>Example Heading:</b> Internal over External</p>
+      <pre><code>/* From external file */
+#uniqueID { color: red; }
+
+/* In HTML file */
+&lt;style&gt;
+   #uniqueID { color: yellow; }
+&lt;/style&gt;
+</code></pre>
+      <p>Yellow will be applied.</p>
+      
+      <h3>Override Specificity with !important</h3>
+      <p>The <code>!important</code> keyword overrides all specificity rules.</p>
+      <p><b>Example Heading:</b> !important Overrides</p>
+      <pre><code>&lt;p id="unique" class="special"&gt;
+   This paragraph is darkred. !important wins!!!
+&lt;/p&gt;
+
+&lt;p class="special" style="color: green"&gt;
+   This paragraph is darkred. !important even beats inline style!!!
+&lt;/p&gt;
+</code></pre>
+    </div>
+  </div>
+</div>

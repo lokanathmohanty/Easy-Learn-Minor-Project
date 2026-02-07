@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - DOM Parser Example ($\text{DOMDocument}$)</h1>
+
+        <div class="content">
+            <h2 class="title">Document Object Model (DOM) Parser</h2>
+            <p>The **DOM extension** in PHP provides powerful functionality for handling both $\text{XML}$ and $\text{HTML}$ documents. The **$\text{DOMDocument}$ class** is a key component; it represents the entire document and serves as the **root of the document tree**. Unlike event-based parsers ($\text{SAX}$), the $\text{DOM}$ parser loads the entire document into memory, allowing full access, navigation, and modification of the document's structure.</p>
+
+            <h3 class="title">Key $\text{DOMDocument}$ Methods</h3>
+            <p>The $\text{DOMDocument}$ class offers static methods to create, load, and save documents:</p>
+            <ul>
+                <li>**Loading:** $\text{load()}$ ($\text{XML}$ file), $\text{loadXML()}$ ($\text{XML}$ string), $\text{loadHTMLFile()}$ ($\text{HTML}$ file), $\text{loadHTML()}$ ($\text{HTML}$ string).</li>
+                <li>**Saving:** $\text{save()}$, $\text{saveXML()}$, $\text{saveHTML()}$, $\text{saveHTMLFile()}$.</li>
+                <li>**Navigation/Search:** $\text{getElementById()}$, **$\text{getElementsByTagName()}$** (used extensively for structured parsing).</li>
+                <li>**Creation:** $\text{createElement()}$, $\text{createAttribute()}$, $\text{createTextNode()}$ (used for dynamically building a document).</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Parsing an HTML Table with $\text{DOMDocument}$</h2>
+
+            <h3>PHP Parsing Logic</h3>
+            <p>The following PHP code demonstrates how to use the $\text{DOMDocument}$ class to load an $\text{HTML}$ file ($\text{hello.html}$) and traverse its table structure to extract the data row by row.</p>
+            <pre>
+&lt;?php 
+   // Create a new DOMDocument object
+   $dom = new domDocument; 
+
+   // Load HTML content from a file
+   $dom-&gt;loadHTMLFile("hello.html");
+
+   // Set to false to avoid treating whitespace between tags as nodes
+   $dom-&gt;preserveWhiteSpace = false; 
+
+   // 1. Get all &lt;table&gt; tags
+   $tables = $dom-&gt;getElementsByTagName('table'); 
+
+   // Get all &lt;tr&gt; tags from the first table
+   $rows = $tables[0]-&gt;getElementsByTagName('tr'); 
+
+   // 2. Loop over each row (&lt;tr&gt;)
+   foreach ($rows as $row) {
+      // 3. Get all &lt;td&gt; tags within the current row
+      $cols = $row-&gt;getElementsByTagName('td'); 
+
+      // Extract and echo the nodeValue for specific column indices
+      echo 'Designation: '.$cols-&gt;item(0)-&gt;nodeValue.'&lt;br /&gt;'; 
+      echo 'Manager: '.$cols-&gt;item(1)-&gt;nodeValue.'&lt;br /&gt;'; 
+      echo 'Team: '.$cols-&gt;item(2)-&gt;nodeValue; 
+      echo '&lt;hr /&gt;'; 
+   }
+?&gt;</pre>
+            <p>This approach effectively iterates through the $\text{DOM}$ tree by finding elements by tag name, demonstrating the parser's ability to easily navigate and extract data from complex structures like $\text{HTML}$ tables.</p>
+        </div>
+    </div>
+</div>

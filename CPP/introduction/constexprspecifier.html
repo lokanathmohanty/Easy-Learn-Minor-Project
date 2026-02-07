@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ <code>constexpr</code> Specifier (Compile-Time Evaluation) 🚀</h1>
+
+        <div class="content">
+            <p>The **<code>constexpr</code>** specifier (introduced in C++11) is used to indicate that the **value of a variable or the return value of a function can be computed at compile-time**. This shifts computation overhead from runtime to compilation, significantly improving program execution speed and providing constants guaranteed at compilation.</p>
+            <p>The use of <code>constexpr</code> is often needed for features that require a known value during compilation, such as **array sizes**, **switch case labels**, and **template parameters**.</p>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Declaring Variables with <code>constexpr</code></h2>
+            <p>A variable declared with <code>constexpr</code> **must be initialized with a constant expression** (a value that can be determined at compile-time).</p>
+            <p><strong>Valid Examples:</strong></p>
+            <ul>
+                <li><code>constexpr int y = 4;</code></li>
+                <li><code>constexpr int x = 7 + 5;</code></li>
+                <li><code>constexpr int x = sum(10, 2);</code> (if <code>sum</code> is a <code>constexpr</code> function)</li>
+            </ul>
+            <p><strong>Invalid Examples:</strong></p>
+            <ul>
+                <li><code>constexpr int a;</code> (Must be initialized)</li>
+                <li><code>int z = 7; constexpr int x = z;</code> (<code>z</code> is a runtime variable, not a constant expression)</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Functions with <code>constexpr</code> Specifier</h2>
+            <p>A <code>constexpr</code> function must be simple enough to be evaluated at compile-time when called with constant arguments. If it's called with non-constant (runtime) arguments, it behaves like a regular function.</p>
+            <p><strong>Key Rules:</strong></p>
+            <ul>
+                <li>The **parameter and return types** must be **literal types** (e.g., <code>int</code>, <code>double</code>, <code>char</code>, <code>bool</code>).</li>
+                <li>The function **cannot have side effects** (e.g., no I/O operations like <code>cin</code>/<code>cout</code>, no modification of global/static variables).</li>
+                <li>A <code>constexpr</code> function can **only call other <code>constexpr</code> functions** (not simple, non-<code>constexpr</code> functions).</li>
+                <li>From C++14, a <code>constexpr</code> function can contain loops and multiple statements (before C++14, it was restricted to a single <code>return</code> statement).</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Constructors with <code>constexpr</code></h2>
+            <p>The <code>constexpr</code> specifier can be applied to constructors to allow classes and objects to be created at compile-time. This is often used for creating small, compile-time-known constant objects.</p>
+            <p><strong>Key Constraints:</strong></p>
+            <ul>
+                <li>The class cannot have **virtual base classes** or **virtual member functions**.</li>
+                <li>The class cannot have **mutable data members**.</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2 class="title"><code>const</code> vs. <code>constexpr</code></h2>
+            <p>While both deal with immutability, their key difference is in when the value must be known:</p>
+            <table>
+                <tr>
+                    <th><code>const</code></th>
+                    <th><code>constexpr</code></th>
+                </tr>
+                <tr>
+                    <td>Value can be evaluated at **compile-time OR run-time**.</td>
+                    <td>Value **MUST** be evaluated at **compile-time**.</td>
+                </tr>
+                <tr>
+                    <td>A variable can be initialized with a run-time value (e.g., user input).</td>
+                    <td>A variable can only be initialized with a compile-time constant expression.</td>
+                </tr>
+                <tr>
+                    <td>May have runtime overhead if initialized at runtime.</td>
+                    <td>Guarantees **zero runtime overhead** for its evaluation.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Limitations of <code>constexpr</code></h2>
+            <p>Despite its performance benefits, <code>constexpr</code> has restrictions:</p>
+            <ul>
+                <li>No **I/O operations** (<code>cin</code>/<code>cout</code>).</li>
+                <li>No **dynamic memory allocation**.</li>
+                <li>No support for **exception handling**.</li>
+                <li>Only **literal types** are permitted for parameters and return types.</li>
+            </ul>
+        </div>
+    </div>
+</div>

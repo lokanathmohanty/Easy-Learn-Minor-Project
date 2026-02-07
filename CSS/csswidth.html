@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Width Property</h1>
+    <div class="content">
+      <p>The <code>width</code> property in CSS is used to set the width of an element’s content area. If the <code>box-sizing</code> property is set to <code>border-box</code>, then the width will include the element’s borders and padding. The final width is also constrained by <code>min-width</code> and <code>max-width</code> properties, which serve as lower and upper bounds respectively.</p>
+
+      <h2>Syntax</h2>
+      <pre><code>width: auto | &lt;length&gt; | &lt;percentage&gt; | max-content | min-content | fit-content;</code></pre>
+
+      <h2>Possible Values</h2>
+      <ul>
+        <li><strong>&lt;length&gt;</strong> → A fixed length such as <code>px</code>, <code>cm</code>, or <code>in</code>.</li>
+        <li><strong>&lt;percentage&gt;</strong> → A percentage of the width of the containing element.</li>
+        <li><strong>auto</strong> → The browser calculates the width automatically based on content (default).</li>
+        <li><strong>max-content</strong> → Expands the width to fit the longest unbreakable content.</li>
+        <li><strong>min-content</strong> → Shrinks the width to the smallest possible size without overflowing content.</li>
+        <li><strong>fit-content</strong> → Uses the formula <code>min(max-content, max(min-content, &lt;length-percentage&gt;))</code> to adjust width.</li>
+      </ul>
+
+      <h2>DOM Syntax</h2>
+      <pre><code>object.style.width = "100px";</code></pre>
+
+      <h2>Example 1: Width with Length Units</h2>
+      <p>You can set width using length units like <code>px</code> and <code>em</code>.</p>
+      <pre><code>div.a {
+  width: 100px;
+}
+
+div.b {
+  width: 5em;
+}</code></pre>
+
+      <h2>Example 2: Width with Percentage</h2>
+      <p>Width can be defined as a percentage of the parent container.</p>
+      <pre><code>div.a {
+  width: 120%;
+}
+
+div.b {
+  width: 20%;
+}</code></pre>
+
+      <h2>Example 3: Width with Auto</h2>
+      <p>When set to <code>auto</code>, the width is calculated by the browser based on the content or available space.</p>
+      <pre><code>div.auto {
+  width: auto;
+}</code></pre>
+
+      <h2>Example 4: Width with max-content and min-content</h2>
+      <p>The width can be set to match either the maximum intrinsic content size or the minimum intrinsic content size.</p>
+      <pre><code>div.c {
+  width: max-content;
+}
+
+div.d {
+  width: min-content;
+}</code></pre>
+
+      <h2>Example 5: Width Applied to Images</h2>
+      <p>You can control the size of images using the width property.</p>
+      <pre><code>img.demoImg {
+  width: 300px;
+  margin-right: 0.5in;
+}</code></pre>
+
+      <h2>Example 6: Width with fit-content</h2>
+      <p>The <code>fit-content</code> value allows content to fit within available space, but not exceed <code>max-content</code>.</p>
+      <pre><code>ul {
+  width: fit-content;
+  padding: 1.5em;
+}
+
+li {
+  display: inline-flex;
+  padding: 0.5em;
+}</code></pre>
+
+      <h2>Practical Example: Responsive Layout</h2>
+      <p>Developers often use percentages and <code>auto</code> values for responsive designs where elements adapt to screen size.</p>
+      <pre><code>.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}</code></pre>
+
+      <h2>Related Properties</h2>
+      <ul>
+        <li><strong>max-width</strong> → Sets the maximum width an element can expand to.</li>
+        <li><strong>min-width</strong> → Sets the minimum width an element can shrink to.</li>
+        <li><strong>min-content</strong> → Minimum intrinsic width.</li>
+        <li><strong>max-content</strong> → Maximum intrinsic width.</li>
+        <li><strong>fit-content</strong> → Fits content within available space.</li>
+        <li><strong>fit-content()</strong> → Uses the formula <code>min(max-content, max(min-content, argument))</code>.</li>
+      </ul>
+
+      <h2>Use Cases</h2>
+      <ul>
+        <li>Setting fixed widths for consistent layouts (e.g., cards, buttons).</li>
+        <li>Using percentages for responsive web design.</li>
+        <li>Defining flexible image widths for scaling in different viewports.</li>
+        <li>Applying intrinsic values (<code>min-content</code>, <code>max-content</code>) for text-heavy layouts.</li>
+        <li>Combining <code>width</code> with <code>max-width</code> and <code>min-width</code> for fully adaptive designs.</li>
+      </ul>
+    </div>
+  </div>
+</div>

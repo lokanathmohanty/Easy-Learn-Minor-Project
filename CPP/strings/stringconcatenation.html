@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ String Concatenation Methods ➕🔗</h1>
+
+        <div class="content">
+            <p><strong>String concatenation</strong> is the process of joining two or more strings together end-to-end to form a single, longer string. C++ provides several methods for this, categorized by whether they apply to modern <code>std::string</code> objects or legacy C-style character arrays (`char[]`).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">I. <code>std::string</code> Concatenation (Modern C++)</h2>
+            <p>These methods are generally preferred for safety and flexibility, as <code>std::string</code> objects handle memory allocation automatically.</p>
+
+            <h3>1. Using the `+` Operator or `+=` Operator</h3>
+            <p>The **`+` operator** is overloaded for <code>std::string</code> objects, making it the simplest and most readable way to concatenate strings.</p>
+            <pre class="example">
+string strA = "Hello";
+string strB = "World";
+string strC = strA + strB; // Creates a new string: "HelloWorld"
+
+strA += strB; // In-place modification: strA becomes "HelloWorld"
+</pre>
+
+            <h3>2. Using the <code>string::append()</code> Function</h3>
+            <p>This is a member function of the <code>std::string</code> class, used to append one string (or a portion of one) to the end of another. It modifies the initial string in place.</p>
+            <pre class="example">
+string initial("I Love TP.");
+string new_str(" I am new here.");
+
+initial.append(new_str); // initial becomes "I Love TP. I am new here."
+</pre>
+
+            <h3>3. Using Iterative Methods (<code>for</code>/<code>while</code>/Range-Based Loop)</h3>
+            <p>While generally less efficient and verbose than the `+` or `append()` methods, concatenation can be performed character by character by iterating over the source string and appending each character to the destination string using the `+=` operator.</p>
+            <pre class="example">
+string initial("I Love TP.");
+string new_str(" Now.");
+
+// Range-based loop example:
+for(char c: new_str){
+   initial += c; // Appends one character at a time
+}
+// initial becomes "I Love TP. Now."
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">II. C-Style String Concatenation</h2>
+
+            <h3>4. Using the <code>strcat()</code> Function</h3>
+            <p>The **`strcat()`** function (from <code>&lt;cstring&gt;</code>) is used exclusively for **C-style character arrays** (`char[]`).</p>
+            <pre class="example">
+char s1[30] = "I love "; // Destination array MUST have enough space
+char s2[] = "TP.";
+strcat(s1, s2); // s1 becomes "I love TP."
+</pre>
+            <p>⚠️ **Warning:** The destination array (`s1` in the example) **must** be large enough to hold the combined string, including the null terminator. Failure to ensure sufficient space leads to a **buffer overflow**, a critical security and stability risk.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">III. OOPS and Advanced Methods</h2>
+            <p>Concatenation logic can be encapsulated within classes using Object-Oriented Programming (OOPS) concepts for cleaner design:</p>
+            <ul>
+                <li>
+                    **Inheritance/Virtual Methods:** A base class can define a virtual `concatenate` method, and a derived class can implement the logic (often using the simple `+` or `+=` operator) to perform the actual join.
+                </li>
+                <li>
+                    **Friend Functions:** A **friend function** can be declared to access private members of a class (typically C-style character arrays) and use functions like `strcat()` on them, allowing external functions to perform operations that would otherwise be restricted.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

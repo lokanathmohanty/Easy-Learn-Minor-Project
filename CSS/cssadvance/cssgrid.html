@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Grid Property</h1>
+
+    <h2 class="title">Introduction</h2>
+    <div class="content">
+      <p>The CSS <code>grid</code> property is a shorthand property used to declare all explicit and implicit grid properties in one declaration. It provides a convenient and concise way to define the grid layout of an element. Instead of writing multiple grid-related properties separately, you can use <code>grid</code> to set them at once.</p>
+      <p>The <code>grid</code> property is a shorthand for:</p>
+      <ul>
+        <li><code>grid-template-rows</code></li>
+        <li><code>grid-template-columns</code></li>
+        <li><code>grid-template-areas</code></li>
+        <li><code>grid-auto-rows</code></li>
+        <li><code>grid-auto-columns</code></li>
+        <li><code>grid-auto-flow</code></li>
+      </ul>
+    </div>
+
+    <h2 class="title">Syntax</h2>
+    <div class="content">
+      <p>The syntax for the grid property is:</p>
+      <p><code>
+      grid: none | grid-template-rows / grid-template-columns | grid-template-areas | 
+      grid-template-rows / [grid-auto-flow] grid-auto-columns | 
+      [grid-auto-flow] grid-auto-rows / grid-template-columns | 
+      initial | inherit;
+      </code></p>
+    </div>
+
+    <h2 class="title">Property Values</h2>
+    <div class="content">
+      <ul>
+        <li><strong>none</strong> – No specific sizing of rows or columns. Default.</li>
+        <li><strong>grid-template-rows / grid-template-columns</strong> – Specifies row heights and column widths.</li>
+        <li><strong>grid-template-areas</strong> – Defines the grid layout with named areas.</li>
+        <li><strong>grid-template-rows / grid-auto-columns</strong> – Specifies row heights with auto-sized columns.</li>
+        <li><strong>grid-auto-rows / grid-template-columns</strong> – Specifies auto-sized rows with defined columns.</li>
+        <li><strong>grid-template-rows / grid-auto-flow grid-auto-columns</strong> – Specifies row heights, flow direction, and auto-sized columns.</li>
+        <li><strong>grid-auto-flow grid-auto-rows / grid-template-columns</strong> – Defines placement of auto-placed items, auto row sizes, and column widths.</li>
+        <li><strong>initial</strong> – Resets property to its default value.</li>
+        <li><strong>inherit</strong> – Inherits property value from parent.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">  Grid Property with Row Height and Column Width</h2>
+    <div class="content">
+      <p>We can specify row heights and column widths directly using the grid property. For example, <code>grid: 150px 100px / auto auto auto;</code> defines two rows and three columns.</p>
+
+      <p><strong>Example Code:</strong></p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;style&gt;
+      .container {
+         display: grid;
+         grid: 150px 100px / auto auto auto;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h2&gt;CSS Grid Property&lt;/h2&gt;
+   &lt;p&gt;&lt;strong&gt;grid: 150px 100px / auto auto auto&lt;/strong&gt;&lt;/p&gt;
+   &lt;div class="container"&gt;
+      &lt;div&gt;Item-1&lt;/div&gt;
+      &lt;div&gt;Item-2&lt;/div&gt;
+      &lt;div&gt;Item-3&lt;/div&gt;
+      &lt;div&gt;Item-4&lt;/div&gt;
+      &lt;div&gt;Item-5&lt;/div&gt;
+      &lt;div&gt;Item-6&lt;/div&gt;
+   &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+
+    <h2 class="title">  Grid Property with Template Areas</h2>
+    <div class="content">
+      <p>We can also use <code>grid-template-areas</code> within the grid property to define named sections of the grid layout. This allows placing elements in specific portions of the layout by assigning them area names.</p>
+
+      <p><strong>Example Code:</strong></p>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;style&gt;
+      .container {
+         display: grid;
+         grid: "header header header header" 100px
+               "sidebar content content content" 100px
+               "footer footer footer footer" 100px;
+      }
+      .item1 { grid-area: header; }
+      .item2 { grid-area: sidebar; }
+      .item3 { grid-area: content; }
+      .item4 { grid-area: footer; }
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h2&gt;CSS Grid Property&lt;/h2&gt;
+   &lt;p&gt;&lt;strong&gt;grid-template-areas&lt;/strong&gt; example&lt;/p&gt;
+   &lt;div class="container"&gt;
+      &lt;div class="item1"&gt;This is header&lt;/div&gt;
+      &lt;div class="item2"&gt;This is sidebar&lt;/div&gt;
+      &lt;div class="item3"&gt;This is content&lt;/div&gt;
+      &lt;div class="item4"&gt;This is footer&lt;/div&gt;
+   &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+
+    <h2 class="title">Supported Browsers</h2>
+    <div class="content">
+      <p>The <code>grid</code> property is supported in modern browsers:</p>
+      <ul>
+        <li>Chrome: 57+</li>
+        <li>Edge: 16+</li>
+        <li>Firefox: 52+</li>
+        <li>Safari: 10+</li>
+        <li>Opera: 44+</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Practice</h2>
+    <div class="content">
+      <ul>
+        <li>Create a grid with 2 rows and 3 columns using the grid shorthand property.</li>
+        <li>Design a page layout with <code>header</code>, <code>sidebar</code>, <code>content</code>, and <code>footer</code> using grid template areas.</li>
+        <li>Experiment with <code>grid-auto-flow</code> to see how items are automatically placed.</li>
+      </ul>
+    </div>
+  </div>
+</div>

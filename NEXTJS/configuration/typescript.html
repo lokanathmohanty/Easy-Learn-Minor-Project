@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js TypeScript Support 📘</h1>
+        
+        <div class="content">
+            <h2 class="title">What is TypeScript?</h2>
+            <p>**TypeScript** is an open-source language that acts as a **typed superset of JavaScript**. The key difference is that JavaScript is **dynamically typed** (types are checked at runtime) while TypeScript is **statically typed** (types are checked at compile time). TypeScript code is ultimately compiled into plain JavaScript to be run in any browser or environment.</p>
+            <p>TypeScript is generally preferred for **large-scale projects** as it helps catch errors early, improving code quality and maintainability.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">TypeScript Support in Next.js</h2>
+            <p>Next.js provides **built-in, automatic support** for TypeScript. You can enable it during project creation using <span class="example">`create-next-app`</span>, or by simply renaming any file to **<span class="example">`.ts`</span>** or **<span class="example">`.tsx`</span>** in an existing project.</p>
+            
+            <h3 class="title">Automatic Setup:</h3>
+            <p>When you run <span class="example">`next dev`</span> or <span class="example">`next build`</span> after renaming a file, Next.js automatically:</p>
+            <ul>
+                <li>Installs necessary dependencies (e.g., <span class="example">`typescript`</span>, <span class="example">`@types/react`</span>, etc.).</li>
+                <li>Creates a recommended **<span class="example">`tsconfig.json`</span>** configuration file.</li>
+            </ul>
+            
+            <h3 class="title">Type Checking Next.js Config:</h3>
+            <p>It's best practice to use TypeScript for your configuration file (<span class="example">`next.config.ts`</span>) to ensure strong type checking on your options.</p>
+            <pre>// next.config.ts (TypeScript)
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
+  // Config options here
+}
+
+export default nextConfig</pre>
+            
+            <h3 class="title">Disabling Production Build Errors:</h3>
+            <p>By default, Next.js will **cancel a production build** if TypeScript errors are found, preventing potential runtime issues. To override this behavior (only recommended if you run type checking separately):</p>
+            <pre>// next.config.js
+import type { NextConfig } from 'next'
+ 
+const nextConfig: NextConfig = {
+  typescript: {
+    ignoreBuildErrors: true, // &larr; Disables build error cancellation
+  },
+}
+ 
+export default nextConfig</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Using TypeScript Interfaces (Defining Data Structure)</h2>
+            <p>**Interfaces** are a core TypeScript feature used to define the structure, names, and types of properties for an object. They are crucial for maintaining consistency and getting full type-safety benefits in your application.</p>
+            
+            <h3 class="title">Example: Interface for API Route Data</h3>
+            <p>The interface <span class="example">`User`</span> defines exactly what fields an object is expected to have. This enforces type safety when fetching or returning user data.</p>
+            <pre>// Define User interface structure
+interface User {
+    id: number
+    name: string
+    email: string
+}
+
+// Example usage in an API Route
+export async function GET(
+        request: NextRequest,
+        { params }: { params: { id: string } } // Type safety for params
+    ) {
+    // ...
+    const user: User = { // Type safety for the mock object
+        id: Number(params.id),
+        name: "John Doe",
+        email: "john@example.com"
+    }
+    return NextResponse.json(user)
+}</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Syntax and Structure Fundamentals</h1>
+
+    <div class="content">
+      <p>
+        PHP is a **server-side scripting language** whose syntax is highly similar to the **C language**. PHP code is stored in text files with the **`.php`** extension, often mixed with HTML, CSS, and JavaScript.
+      </p>
+
+      <h2>Running PHP Code</h2>
+      <p>
+        A `.php` file must be executed by a web server with an installed PHP interpreter.
+      </p>
+      <ul>
+        <li>
+          **Correct (HTTP Protocol):** Open the file via a web server URL (e.g., `http://localhost/index.php`). The PHP code is processed, and the resulting HTML is displayed.
+        </li>
+        <li>
+          **Incorrect (File Protocol):** Double-clicking the file opens it locally with the `file://` protocol. The browser will likely display the raw PHP code as text, as the interpreter is never engaged.
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">PHP Tags and Escaping from HTML</h2>
+      <p>
+        The PHP parser ignores everything outside its opening and closing tags, allowing PHP code to be seamlessly embedded within HTML.
+      </p>
+
+      <h3>Canonical PHP Tags (Recommended)</h3>
+      <p>
+        This is the most reliable method, as it works on all servers without needing extra configuration.
+      </p>
+      <div class="example">
+        <p><code>&lt;?php<br>&nbsp;&nbsp;&nbsp;echo "Hello World!";<br>?&gt;</code></p>
+      </div>
+
+      <h3>Short-Open (SGML-style) Tags</h3>
+      <p>
+        These are shorter but require the `short_open_tag=on` setting in the `php.ini` configuration file. They are generally discouraged as they conflict with XML syntax.
+      </p>
+      <div class="example">
+        <p><code>&lt;?<br>&nbsp;&nbsp;&nbsp;echo "Hello Everyone!";<br>?&gt;</code></p>
+      </div>
+
+      <h3>Escaping for Conditionals</h3>
+      <p>
+        PHP can drop out of its parsing mode to output large blocks of text, often combined with control structures:
+      </p>
+      <div class="example">
+        <p>
+          <code>&lt;?php if ($is_valid == true): ?&gt;</code><br>
+          <code class="content">&nbsp;&nbsp;&nbsp;This HTML statement will be rendered only if the condition is true.</code><br>
+          <code>&lt;?php endif; ?&gt;</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Statements and Case Sensitivity</h2>
+
+      <h3>Statements</h3>
+      <p>
+        A statement in PHP is an expression followed by a **semicolon (`;`)**. The semicolon is the statement terminator.
+      </p>
+      <div class="example">
+        <p>
+          <code>$greeting = "Welcome to PHP!";</code>
+        </p>
+      </div>
+      <p>
+        A single physical line can contain multiple statements, and a single statement can span multiple lines. Multiple statements can be grouped into a single block using **curly braces (`{}`)**.
+      </p>
+
+      <h3>Case Sensitivity</h3>
+      <p>
+        PHP is generally a **case-sensitive** language for its **identifiers** (names).
+      </p>
+      <ul>
+        <li>
+          **Variables** are **case-sensitive**. E.g., `$age` and `$Age` are treated as two different variables.
+        </li>
+        <li>
+          **Keywords** (e.g., `if`, `else`, `while`), **language constructs** (e.g., `echo`, `print`), and most **user-defined functions** are generally **case-insensitive** (though using the proper casing is a strong best practice).
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

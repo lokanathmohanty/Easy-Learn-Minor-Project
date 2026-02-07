@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>Stack</code> Class Summary (LIFO) 📚🔄</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.Stack</code>** class represents a standard **Last-In, First-Out (LIFO)** stack of objects. It is a **legacy** class that **extends <code>Vector</code>** (meaning it is an array-based implementation and is **synchronized** / thread-safe), but it should be noted that modern Java development typically uses **<code>ArrayDeque</code>** or a **<code>LinkedList</code>** implementing the <code>Deque</code> interface for stack functionality due to better performance.</p>
+
+            <h2 class="title">I. Stack Principle (LIFO)</h2>
+            <p>The LIFO principle dictates that the element most recently added to the stack is the first one to be removed. </p>
+
+            <hr>
+
+            <h2 class="title">II. Essential Stack Methods</h2>
+            <p>The <code>Stack</code> class adds five specific operations on top of the methods inherited from <code>Vector</code>:</p>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Action</th>
+                    <th>LIFO Operation</th>
+                </tr>
+                <tr>
+                    <td><code>E push(E item)</code></td>
+                    <td>Adds an item to the **top** of the stack.</td>
+                    <td>**Insert**</td>
+                </tr>
+                <tr>
+                    <td><code>E pop()</code></td>
+                    <td>Removes and returns the object at the **top** of the stack.</td>
+                    <td>**Delete**</td>
+                </tr>
+                <tr>
+                    <td><code>E peek()</code></td>
+                    <td>Returns the object at the **top** without removing it.</td>
+                    <td>**Examine**</td>
+                </tr>
+                <tr>
+                    <td><code>boolean empty()</code></td>
+                    <td>Tests if the stack contains no items.</td>
+                    <td>**Check State**</td>
+                </tr>
+                <tr>
+                    <td><code>int search(Object o)</code></td>
+                    <td>Returns the 1-based position (distance from the top) where the object is found.</td>
+                    <td>**Search**</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">III. Exception Handling and Example Flow</h2>
+            <ul>
+                <li>
+                    The **<code>pop()</code>** and **<code>peek()</code>** methods throw an **<code>EmptyStackException</code>** (an unchecked exception) if they are called on a stack that contains no elements.
+                </li>
+                <li>
+                    The provided example correctly demonstrates this behavior by wrapping the final, failed <code>showpop(st)</code> call in a `try-catch` block.
+                </li>
+            </ul>
+
+            <div class="example">
+                <p><strong>Example Flow:</strong></p>
+                <pre><code>// Push: [42] -> [42, 66] -> [42, 66, 99]
+push(99) is the last element inserted.
+
+// Pop -> 99 (Last-In)
+// Stack is now: [42, 66]
+
+// Pop -> 66
+// Stack is now: [42]
+
+// Pop -> 42 (First-In, Last-Out)
+// Stack is now: [ ]</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - NamedTuple</h1>
+    <div class="content">
+      <p>In Python, namedtuple is a subclass of tuple that allows you to create tuples with named fields. You can access elements using field names, making code more readable and maintainable. NamedTuples are part of the <code>collections</code> module.</p>
+
+      <h2 class="title">Creating a NamedTuple</h2>
+      <pre><code>from collections import namedtuple
+
+# Define a namedtuple with field names
+Vertex = namedtuple('Vertex', ['x', 'y'])
+
+# Create an instance of Vertex
+v = Vertex(10, 20)
+
+# Access fields
+print(v.x)  # 10
+print(v.y)  # 20
+</code></pre>
+
+      <h2 class="title">Accessing NamedTuple Fields</h2>
+      <p>You can access fields using:</p>
+      <ul>
+        <li>Indexing: <code>v[0], v[1]</code></li>
+        <li>Field names: <code>v.x, v.y</code></li>
+        <li><code>getattr()</code> function: <code>getattr(v, 'x')</code></li>
+      </ul>
+      <pre><code>print(v[0])         # 10
+print(v.x)          # 10
+print(getattr(v, 'x')) # 10
+</code></pre>
+
+      <h2 class="title">NamedTuple Methods</h2>
+      <p>NamedTuples have useful built-in methods:</p>
+      <ul>
+        <li><code>_fields</code>: returns a tuple of field names</li>
+        <li><code>_replace(**kwargs)</code>: returns a new namedtuple replacing specified fields</li>
+        <li><code>_asdict()</code>: returns an OrderedDict of field names and values</li>
+        <li><code>_make(iterable)</code>: creates a new instance from an iterable</li>
+      </ul>
+      <pre><code># Example: _replace, _asdict, _fields, _make
+
+print(v._fields)                  # ('x', 'y')
+
+v2 = v._replace(x=30)
+print(v2)                        # Vertex(x=30, y=20)
+
+print(v._asdict())               # OrderedDict([('x', 10), ('y', 20)])
+
+v3 = Vertex._make([40, 50])
+print(v3)                       # Vertex(x=40, y=50)
+</code></pre>
+
+      <h2 class="title">Unpacking NamedTuples with ** Operator</h2>
+      <pre><code>data = {'x': 100, 'y': 200}
+v4 = Vertex(**data)
+print(v4)  # Vertex(x=100, y=200)
+</code></pre>
+
+      <h2 class="title">Summary</h2>
+      <p>NamedTuples provide immutable, memory-efficient data structures with readable field names. They combine benefits of tuples and dictionaries, suitable when you want immutable objects with named fields.</p>
+    </div>
+  </div>
+</div>

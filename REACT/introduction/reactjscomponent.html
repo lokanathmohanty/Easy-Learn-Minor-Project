@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Component</h1>
+    <div class="content">
+      <p>
+        React components are the building blocks of React applications. 
+        A component represents a small chunk of the user interface in a webpage.
+      </p>
+      <p>
+        Its main role is to render the UI, manage events, and update the UI 
+        whenever the internal state changes.
+      </p>
+      <ul>
+        <li>Initial rendering of the user interface</li>
+        <li>Management and handling of events</li>
+        <li>Updating UI when the internal state changes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Key Concepts in React Components</h2>
+    <div class="content">
+      <ul>
+        <li><b>Properties</b> − Receive input from outside.</li>
+        <li><b>Events</b> − Manage DOM events and user interactions.</li>
+        <li><b>State</b> − Make a component stateful and update UI accordingly.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Types of Components</h2>
+    <div class="content">
+      <ul>
+        <li><b>Function Components</b> − Defined as JavaScript functions, return React elements.</li>
+        <li><b>Class Components</b> − Extend <code>React.Component</code> and support state and lifecycle methods.</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h3>Example: Function Component</h3>
+      <pre>
+function Hello() { 
+  return &lt;div&gt;Hello&lt;/div&gt; 
+}
+      </pre>
+    </div>
+
+    <div class="example">
+      <h3>Example: Class Component</h3>
+      <pre>
+class ExpenseEntryItem extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;Hello&lt;/div&gt;
+    );
+  }
+}
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating a Class Component</h2>
+    <div class="content">
+      <p>
+        Let us create a new component <code>ExpenseEntryItem</code> 
+        to showcase an expense entry item with details such as name, amount, date, and category.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example: ExpenseEntryItem Class Component</h3>
+      <pre>
+class ExpenseEntryItem extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;div&gt;&lt;b&gt;Item:&lt;/b&gt; &lt;em&gt;Mango Juice&lt;/em&gt;&lt;/div&gt;
+        &lt;div&gt;&lt;b&gt;Amount:&lt;/b&gt; &lt;em&gt;30.00&lt;/em&gt;&lt;/div&gt;
+        &lt;div&gt;&lt;b&gt;Spend Date:&lt;/b&gt; &lt;em&gt;2020-10-10&lt;/em&gt;&lt;/div&gt;
+        &lt;div&gt;&lt;b&gt;Category:&lt;/b&gt; &lt;em&gt;Food&lt;/em&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+export default ExpenseEntryItem;
+      </pre>
+    </div>
+
+    <div class="example">
+      <h3>Example: Using Component in index.js</h3>
+      <pre>
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ExpenseEntryItem from './components/ExpenseEntryItem';
+
+ReactDOM.render(
+  &lt;React.StrictMode&gt;
+    &lt;ExpenseEntryItem /&gt;
+  &lt;/React.StrictMode&gt;,
+  document.getElementById('root')
+);
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating a Function Component</h2>
+    <div class="content">
+      <p>
+        The same <code>ExpenseEntryItem</code> can also be created as a 
+        function component for simpler use cases.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example: Function Component</h3>
+      <pre>
+function ExpenseEntryItem() {
+  return (
+    &lt;div&gt;
+      &lt;div&gt;&lt;b&gt;Item:&lt;/b&gt; &lt;em&gt;Mango Juice&lt;/em&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;b&gt;Amount:&lt;/b&gt; &lt;em&gt;30.00&lt;/em&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;b&gt;Spend Date:&lt;/b&gt; &lt;em&gt;2020-10-10&lt;/em&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;b&gt;Category:&lt;/b&gt; &lt;em&gt;Food&lt;/em&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Splitting Components</h2>
+    <div class="content">
+      <p>
+        Large applications can become complex with many classes and dependencies. 
+        Code splitting helps by loading only the required components on demand, 
+        improving performance. This is also called <b>lazy loading</b>.
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>Example: Before and After Code Splitting</h3>
+      <pre>
+// Before
+import { sub } from './math';
+console.log(sub(23, 14));
+
+// After
+import("./math").then(math =&gt; {
+  console.log(math.sub(23, 14));
+});
+      </pre>
+    </div>
+  </div>
+</div>

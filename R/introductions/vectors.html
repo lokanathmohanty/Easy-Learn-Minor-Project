@@ -1,0 +1,157 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Vectors</h1>
+    <div class="content">
+      <p>
+        Vectors are the most basic R data objects, available in six atomic types: logical, integer, double, complex, character, and raw.
+      </p>
+
+      <h2 class="title">Vector Creation</h2>
+      <h3 class="title">Single Element Vector</h3>
+      <pre><code># Character
+print("abc")
+# Double
+print(12.5)
+# Integer
+print(63L)
+# Logical
+print(TRUE)
+# Complex
+print(2+3i)
+# Raw
+print(charToRaw('hello'))
+</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>[1] "abc"
+[1] 12.5
+[1] 63
+[1] TRUE
+[1] 2+3i
+[1] 68 65 6c 6c 6f
+</code></pre>
+
+      <h3 class="title">Multiple Elements Vector</h3>
+      <p>
+        Using colon operator:
+      </p>
+      <pre><code>v &lt;- 5:13
+print(v)
+v &lt;- 6.6:12.6
+print(v)
+v &lt;- 3.8:11.4
+print(v)
+</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>[1]  5  6  7  8  9 10 11 12 13
+[1]  6.6  7.6  8.6  9.6 10.6 11.6 12.6
+[1]  3.8  4.8  5.8  6.8  7.8  8.8  9.8 10.8
+</code></pre>
+      <p>
+        Using sequence operator:
+      </p>
+      <pre><code>print(seq(5, 9, by = 0.4))
+</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>[1] 5.0 5.4 5.8 6.2 6.6 7.0 7.4 7.8 8.2 8.6 9.0
+</code></pre>
+      <p>
+        Using <code>c()</code> function:
+      </p>
+      <pre><code>s &lt;- c('apple','red',5,TRUE)
+print(s)
+</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>[1] "apple" "red"   "5"     "TRUE"
+</code></pre>
+
+      <h2 class="title">Accessing Vector Elements</h2>
+      <pre><code>t &lt;- c("Sun","Mon","Tue","Wed","Thurs","Fri","Sat")
+u &lt;- t[c(2,3,6)]
+print(u)
+v &lt;- t[c(TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE)]
+print(v)
+x &lt;- t[c(-2,-5)]
+print(x)
+y &lt;- t[c(0,0,0,0,0,0,1)]
+print(y)
+</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>[1] "Mon" "Tue" "Fri"
+[1] "Sun" "Fri"
+[1] "Sun" "Tue" "Wed" "Fri" "Sat"
+[1] "Sun"
+</code></pre>
+
+      <h2 class="title">Vector Manipulation</h2>
+      <h3 class="title">Vector Arithmetic</h3>
+      <pre><code>v1 &lt;- c(3,8,4,5,0,11)
+v2 &lt;- c(4,11,0,8,1,2)
+add.result &lt;- v1 + v2
+print(add.result)
+sub.result &lt;- v1 - v2
+print(sub.result)
+multi.result &lt;- v1 * v2
+print(multi.result)
+divi.result &lt;- v1 / v2
+print(divi.result)
+</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>[1]  7 19  4 13  1 13
+[1] -1 -3  4 -3 -1  9
+[1] 12 88  0 40  0 22
+[1] 0.7500000 0.7272727       Inf 0.6250000 0.0000000 5.5000000
+</code></pre>
+
+      <h3 class="title">Vector Element Recycling</h3>
+      <pre><code>v1 &lt;- c(3,8,4,5,0,11)
+v2 &lt;- c(4,11)
+add.result &lt;- v1 + v2
+print(add.result)
+sub.result &lt;- v1 - v2
+print(sub.result)
+</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>[1]  7 19  8 16  4 22
+[1] -1 -3  0 -6 -4  0
+</code></pre>
+
+      <h3 class="title">Vector Element Sorting</h3>
+      <pre><code>v &lt;- c(3,8,4,5,0,11, -9, 304)
+sort.result &lt;- sort(v)
+print(sort.result)
+revsort.result &lt;- sort(v, decreasing = TRUE)
+print(revsort.result)
+v &lt;- c("Red","Blue","yellow","violet")
+sort.result &lt;- sort(v)
+print(sort.result)
+revsort.result &lt;- sort(v, decreasing = TRUE)
+print(revsort.result)
+</code></pre>
+      <p>
+        Output:
+      </p>
+      <pre><code>[1]  -9   0   3   4   5   8  11 304
+[1] 304  11   8   5   4   3   0  -9
+[1] "Blue"   "Red"    "violet" "yellow"
+[1] "yellow" "violet" "Red"    "Blue"
+</code></pre>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

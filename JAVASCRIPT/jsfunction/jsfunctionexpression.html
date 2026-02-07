@@ -1,0 +1,161 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript — Function Expressions</h1>
+
+    <div class="content">
+      <h2 class="title">Introduction</h2>
+      <p>
+        A function expression allows us to define a JavaScript function inside
+        an expression. Unlike function declarations, the function name can be
+        omitted, making it possible to create anonymous functions.
+      </p>
+      <p>
+        Function expressions can be stored in variables and invoked using the
+        variable name.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Syntax</h2>
+      <pre>
+function (parameter-list) {
+  statements
+};
+      </pre>
+      <p>
+        Typically, we store a function expression in a variable:
+      </p>
+      <pre>
+const varName = function (parameter-list) {
+  statements
+};
+      </pre>
+      <p>
+        Example:
+      </p>
+      <pre>
+const sum = function (x, y) {
+  return x + y;
+};
+let z = sum(2, 3);
+      </pre>
+      <p>
+        In the above code, the function expression is assigned to the variable
+        <code>sum</code>, which is then used to invoke the function.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Named Function Expression</h2>
+      <p>
+        Function expressions can also be named, though they are still invoked
+        using the variable reference.
+      </p>
+      <pre>
+const sum = function addNumbers(x, y) {
+  return x + y;
+};
+let z = sum(2, 3);
+      </pre>
+      <p>
+        Note: The function name <code>addNumbers</code> cannot be used directly
+        to invoke the function — only <code>sum</code> can be used.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Immediately Invoked Function Expression (IIFE)</h2>
+      <p>
+        Function expressions can be executed immediately after definition using
+        parentheses. This is known as an Immediately Invoked Function Expression
+        (IIFE).
+      </p>
+      <pre>
+(function greet() {
+  alert("Hello World");
+})();
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Examples</h2>
+
+      <h3 class="title">Example: Function Expression</h3>
+      <pre>
+const sum = function () {
+  let a = 10;
+  let b = 20;
+  document.getElementById("output").innerHTML =
+    "The sum of " + a + " and " + b + " is " + (a + b);
+};
+sum();
+      </pre>
+      <p><strong>Output:</strong> The sum of 10 and 20 is 30</p>
+
+      <h3 class="title">Example: The return Statement</h3>
+      <pre>
+const mul = function (a, b) {
+  return a * b;
+};
+let result = mul(4, 5);
+document.getElementById("output").innerHTML =
+  "The returned value from the function is " + result;
+      </pre>
+      <p><strong>Output:</strong> The returned value from the function is 20</p>
+
+      <h3 class="title">Example: Function Expression as a Value</h3>
+      <pre>
+const num = function () {
+  return 2;
+};
+let result = num() * 3;
+document.getElementById("output").innerHTML =
+  "The multiplication value is " + result;
+      </pre>
+      <p><strong>Output:</strong> The multiplication value is 6</p>
+
+      <h3 class="title">Example: Nested Function Expression</h3>
+      <pre>
+const num = function () {
+  const decimal = function () {
+    return 5;
+  };
+  return decimal();
+};
+document.getElementById("output").innerHTML =
+  "The returned value from the function is " + num();
+      </pre>
+      <p><strong>Output:</strong> The returned value from the function is 5</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Key Points</h2>
+      <ul>
+        <li>Function expressions can be anonymous or named.</li>
+        <li>They must be stored in a variable or passed as a value.</li>
+        <li>IIFE allows executing functions immediately after definition.</li>
+        <li>Functions in expressions can return values like normal functions.</li>
+        <li>Function expressions can be nested inside other functions.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Practice Tasks</h2>
+      <ul>
+        <li>Write an anonymous function expression that squares a number.</li>
+        <li>Create an IIFE that prints “Welcome to JavaScript”.</li>
+        <li>Write a nested function expression that returns the cube of a number.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Summary</h2>
+      <p>
+        Function expressions provide flexibility in defining functions as
+        variables, anonymous functions, or even immediate executions (IIFE).
+        They are widely used in modern JavaScript to create concise, reusable,
+        and modular code.
+      </p>
+    </div>
+  </div>
+</div>

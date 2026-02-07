@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Power BI - DAX Basics</title>
+</head>
+<body>
+
+  <header>
+    <h1>Power BI - DAX Basics</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Previous</a></li>
+        <li><a href="#">Quiz</a></li>
+        <li><a href="#">Next</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>DAX Introduction</h2>
+      <p>
+        DAX (Data Analysis Expressions) is a formula expression language used in Power BI and other BI tools.
+        It is often referred to as a function language, where the code is encapsulated inside functions.
+      </p>
+      <p>DAX formulas support two data types:</p>
+      <ul>
+        <li><strong>Numeric</strong>: Includes integers, currency, decimals</li>
+        <li><strong>Other</strong>: Includes strings and binary objects</li>
+      </ul>
+
+      <p>Example DAX formula:</p>
+      <pre><code>
+Product_C = RIGHT(Sheet1[Prod_Id], 3)
+      </code></pre>
+
+      <p>DAX formulas can include functions, conditional logic, and value references.</p>
+    </section>
+
+    <section>
+      <h2>DAX Functions</h2>
+      <p>
+        Power BI provides a wide variety of DAX functions used to analyze data and create new columns or measures. 
+        As you type in the formula bar, a list of functions will appear for easy access.
+      </p>
+
+      <article>
+        <h3>Categories of DAX Functions</h3>
+        <ul>
+          <li>Aggregate</li>
+          <li>Text</li>
+          <li>Date</li>
+          <li>Logical</li>
+          <li>Counting</li>
+          <li>Information</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Aggregate Functions</h3>
+        <ul>
+          <li>MIN, MINA, MINX</li>
+          <li>MAX, MAXA, MAXX</li>
+          <li>AVERAGE, AVERAGEA, AVERAGEX</li>
+          <li>SUM, SUMX</li>
+          <li>PRODUCT, PRODUCTX</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Text Functions</h3>
+        <ul>
+          <li>LEFT, RIGHT, MID</li>
+          <li>UPPER, LOWER, TRIM</li>
+          <li>FORMAT, LEN, FIND, EXACT</li>
+          <li>CONCATENATE, CONCATENATEX, SUBSTITUTE, REPLACE</li>
+          <li>BLANK</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Date Functions</h3>
+        <ul>
+          <li>DATE, DATEDIFF, DATEVALUE</li>
+          <li>CALENDAR, YEAR, YEARFRAC</li>
+          <li>HOUR, NOW, EOMONTH</li>
+          <li>WEEKDAY, WEEKNUM</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Logical Functions</h3>
+        <ul>
+          <li>AND, OR, NOT</li>
+          <li>IF, IFERROR, COALESCE</li>
+          <li>SWITCH, TRUE, FALSE</li>
+          <li>BITXOR, BITAND, BITLSHIFT</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Counting Functions</h3>
+        <ul>
+          <li>DISTINCTCOUNT</li>
+          <li>COUNT, COUNTA</li>
+          <li>COUNTROWS, COUNTBLANK</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Information Functions</h3>
+        <ul>
+          <li>CONTAINS, CONTAINSSTRING, CONTAINSROW</li>
+          <li>COLUMNSTATISTICS, CONTAINSSTRINGEXACT</li>
+          <li>HASONEFILTER, HASONEVALUE</li>
+          <li>ISBLANK, ISNUMBER, ISLOGICAL</li>
+          <li>ISTEXT, ISNONTEXT, ISERROR, ISAFTER, ISSUBTOTAL</li>
+          <li>SELECTEDMEASURE, NONVALUE</li>
+        </ul>
+      </article>
+    </section>
+
+    <section>
+      <h2>DAX Calculation Types</h2>
+      <p>DAX in Power BI allows the creation of two main types of calculations:</p>
+      <ul>
+        <li><strong>Calculated Columns</strong></li>
+        <li><strong>Calculated Measures</strong></li>
+      </ul>
+
+      <article>
+        <h3>Creating a Calculated Column</h3>
+        <ol>
+          <li>Navigate to the <strong>Modeling</strong> tab.</li>
+          <li>Click <strong>New Column</strong>.</li>
+          <li>Enter the DAX formula in the formula bar.</li>
+        </ol>
+        <p>
+          Example: Creating a new column called <code>Product_C</code> from the last 3 characters of <code>Prod_Id</code>:
+        </p>
+        <pre><code>Product_C = RIGHT(Sheet1[Prod_Id], 3)</code></pre>
+        <p>You can rename the column by editing its name in the formula bar.</p>
+      </article>
+
+      <article>
+        <h3>Creating a Calculated Measure</h3>
+        <ol>
+          <li>Go to the <strong>Modeling</strong> tab.</li>
+          <li>Select <strong>New Measure</strong>.</li>
+          <li>Write your DAX formula in the formula bar.</li>
+        </ol>
+        <p>
+          A new measure object will appear in the Fields pane, and the measure can be used in visualizations.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <nav>
+      <ul>
+        <li><a href="#">Previous</a></li>
+        <li><a href="#">Quiz</a></li>
+        <li><a href="#">Next</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+</body>
+</html>

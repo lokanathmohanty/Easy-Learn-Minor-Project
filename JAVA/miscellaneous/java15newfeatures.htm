@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java 15 - Major New Features Summary (Non-LTS Release)</h1>
+
+        <div class="content">
+            <h2>Overview of Java 15</h2>
+            <p>**Java 15**, released in **September 2020**, is a **non-LTS (Long-Term Support)** release that focused on advancing several key language preview features and moving the next-generation garbage collectors to a stable state. It solidified Java's commitment to expressive language features and high-performance, low-latency VM options.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Language and Type System Innovations</h2>
+
+            <h3>1. Text Blocks (Standard) (JEP 378) ✨</h3>
+            <p>The feature that simplifies multi-line string literals, introduced in preview in Java 13 and 14, is now a **standard and permanent feature** of the Java language. Text blocks use triple-quotes (<code>"""</code>) to handle string data like JSON or HTML easily, without boilerplate concatenation or explicit escape sequences.</p>
+
+            <h3>2. Sealed Classes (First Preview) (JEP 360) 🆕</h3>
+            <p>This is a major feature that allows a class or interface to **control which other classes or interfaces may extend or implement it**. This provides fine-grained control over inheritance, enabling better security and providing a foundation for future, more powerful pattern matching features. A sealed class is declared using the **<code>sealed</code>** keyword and lists permitted subclasses using the **<code>permits</code>** keyword.</p>
+
+            <h3>3. Records (Second Preview) (JEP 384)</h3>
+            <p>The new type introduced in Java 14 for creating concise, immutable data classes saw its second preview. Records automatically synthesize the canonical constructor, accessor methods, <code>equals()</code>, <code>hashCode()</code>, and <code>toString()</code> from the components defined in its header.</p>
+
+            <h3>4. Pattern Matching for <code>instanceof</code> (Second Preview) (JEP 375)</h3>
+            <p>The enhancement to the <code>instanceof</code> operator continued its preview phase, allowing the compiler to automatically cast the object to a new, local pattern variable if the check succeeds. This further reduces boilerplate casting code.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>JVM and Core API Updates</h2>
+
+            <h3>Next-Generation Garbage Collectors Standardized</h3>
+            <p>Two highly performant, low-latency garbage collectors are now officially part of the Java SE standard, having shed their experimental/incubator status:</p>
+            <ul>
+                <li>
+                    **ZGC (Z Garbage Collector) (JEP 377):** Now a production feature, ZGC is designed for systems with massive heaps, offering ultra-low pause times (typically less than 10ms).
+                </li>
+                <li>
+                    **Shenandoah GC (JEP 379):** Also moved to production, focusing on consistent, short pause times independent of heap size.
+                </li>
+            </ul>
+
+            <h3>New Low-Level APIs</h3>
+            <ul>
+                <li>
+                    **Hidden Classes (JEP 371):** Provides a standard API for creating non-discoverable classes at runtime that are intended to be used by frameworks (like lambda expressions or code generation tools) but not visible to other runtime components.
+                </li>
+                <li>
+                    **Foreign-Memory Access API (Second Incubator) (JEP 383):** Continues development of the API allowing Java programs to safely and efficiently access memory outside of the Java heap (native memory).
+                </li>
+            </ul>
+
+            <h3>Core System APIs Reimplemented and Security</h3>
+            <ul>
+                <li>
+                    **Legacy DatagramSocket API Reimplementation (JEP 373):** The implementation of the older **<code>java.net.DatagramSocket</code>** and **<code>java.net.MulticastSocket</code>** was replaced with a cleaner, more maintainable, and modern underlying architecture.
+                </li>
+                <li>
+                    **Edwards-Curve Digital Signature Algorithm (EdDSA) (JEP 339):** Implemented the EdDSA for cryptographic signatures, a modern and highly secure digital signature scheme.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

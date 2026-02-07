@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Function Composition</h1>
+
+    <div class="content">
+      <h2>What is Function Composition?</h2>
+      <p>
+        Function composition is a functional programming technique that allows 
+        programmers to combine multiple functions into a single function. The output 
+        of one function becomes the input of the next, forming a chain of operations. 
+        This improves readability, modularity, and reusability.
+      </p>
+      <p>
+        The <code>compose</code> function enables this by applying functions from 
+        right to left, meaning the function on the right runs first.
+      </p>
+
+      <h2>Example</h2>
+      <p>Let’s look at three simple functions and compose them together:</p>
+      <pre>
+const increaseBy5 = (num) => num + 5;
+const tripleValue = (num) => num * 3;
+const reduceBy10 = (num) => num - 10;
+
+const applyOperations = compose(reduceBy10, tripleValue, increaseBy5);
+const finalResult = applyOperations(7);
+
+console.log("The final result after applying the operations is:", finalResult);
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+The final result after applying the operations is: 26
+      </pre>
+      <p>
+        In this case:
+        <ul>
+          <li><code>increaseBy5(7)</code> → 12</li>
+          <li><code>tripleValue(12)</code> → 36</li>
+          <li><code>reduceBy10(36)</code> → 26</li>
+        </ul>
+        The functions are applied in sequence to produce the final result.
+      </p>
+
+      <h2>Implement the Compose Function</h2>
+      <p>
+        The <code>compose</code> function can be implemented using 
+        <code>reduceRight</code> to apply functions in reverse order:
+      </p>
+      <pre>
+const compose = (...ops) => {
+  return (value) => {
+    return ops.reduceRight((result, operation) => {
+      return operation(result);
+    }, value);
+  };
+};
+console.log("Chained functions have been successfully executed.");
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+Chained functions have been successfully executed.
+The final result after applying the operations is: 26
+      </pre>
+
+      <h2>Benefits of Function Composition</h2>
+      <ul>
+        <li>
+          <strong>Re-usability:</strong> Build larger operations by combining smaller, 
+          reusable functions without duplicating code.
+        </li>
+        <li>
+          <strong>Readability:</strong> Express complex operations clearly by chaining 
+          simple transformations.
+        </li>
+        <li>
+          <strong>Maintainability:</strong> Each function is focused on a single task, 
+          making it easy to test, modify, and debug.
+        </li>
+      </ul>
+
+      <h2>Summary</h2>
+      <p>
+        Function composition is a powerful way to write modular, reusable, and 
+        maintainable code. By chaining functions together with <code>compose</code>, 
+        JavaScript developers can express complex operations in a clean and expressive manner.
+      </p>
+    </div>
+  </div>
+</div>

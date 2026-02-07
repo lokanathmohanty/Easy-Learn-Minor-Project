@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Numbers and Math Operations in C++ 🔢</h1>
+
+        <div class="content">
+            <p>C++ uses **primitive data types** to handle numbers, including integers and floating-point values. The choice of type depends on the required size and precision:</p>
+            <ul>
+                <li>**Integers (Whole Numbers):** <code>short</code>, <code>int</code>, <code>long</code> (and their <code>unsigned</code> versions).</li>
+                <li>**Floating-Point (Decimals):** <code>float</code> (single-precision) and <code>double</code> (double-precision).</li>
+            </ul>
+            <p><strong>Example of Definitions:</strong></p>
+            <pre class="example">
+short  s = 10;
+int    i = 1000;
+long   l = 1000000;
+float  f = 230.47;
+double d = 30949.374;
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Built-in Math Operations</h2>
+            <p>C++ provides a rich set of built-in mathematical functions, which are located in the **<code>&lt;cmath&gt;</code>** header file. These functions primarily operate on <code>double</code>-type arguments.</p>
+            <p><strong>Key Mathematical Functions:</strong></p>
+            <ul>
+                <li>**Trigonometric:** <code>cos()</code>, <code>sin()</code>, <code>tan()</code> (return cosine, sine, and tangent, respectively).</li>
+                <li>**Logarithm/Power:** <code>log()</code> (natural log), <code>pow(base, exp)</code> (base raised to a power).</li>
+                <li>**Roots/Geometry:** <code>sqrt(x)</code> (square root), <code>hypot(side1, side2)</code> (hypotenuse of a right triangle).</li>
+                <li>**Absolute Value:** <code>abs(int)</code> (for integers), <code>fabs(double)</code> (for floating-point numbers).</li>
+                <li>**Rounding:** <code>floor(x)</code> (returns the largest integer $\le x$).</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Random Number Generation</h2>
+            <p>To generate pseudo-random numbers in C++, you need to use two functions from the **<code>&lt;cstdlib&gt;</code>** library (and <code>&lt;ctime&gt;</code> for seeding):</p>
+            <ol>
+                <li>
+                    **Seed the Generator (<code>srand()</code>):** The <code>srand()</code> function is called once to set the starting point (seed) for the random sequence. It is best practice to seed it with a value that changes constantly, such as the current system time obtained via <code>time(NULL)</code>.
+                    <p class="example"><code>srand( (unsigned)time( NULL ) );</code></p>
+                </li>
+                <li>
+                    **Generate the Number (<code>rand()</code>):** The <code>rand()</code> function returns a pseudo-random integer number.
+                    <p class="example"><code>j = rand();</code></p>
+                </li>
+            </ol>
+            <p>Without calling <code>srand()</code>, the <code>rand()</code> function will return the exact same sequence of "random" numbers every time the program runs.</p>
+        </div>
+    </div>
+</div>

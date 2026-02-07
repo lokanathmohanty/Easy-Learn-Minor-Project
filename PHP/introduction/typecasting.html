@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Type Casting: Conversion of Data Types</h1>
+
+    <div class="content">
+      <p>
+        **Type Casting** refers to the conversion of one data type into another. Since PHP is a **weakly typed language**, this conversion happens in two ways: **Implicitly** (coercion by the parser) and **Explicitly** (using casting operators or built-in functions).
+      </p>
+
+      <h2>1. Implicit Type Casting (Coercion)</h2>
+      <p>
+        PHP automatically converts types when a certain operation requires it.
+      </p>
+      <ul>
+        <li>
+          **Numeric Operation:** A string containing digits is converted to a number if used in an arithmetic operation.
+          <div class="example">
+            <code>$a = 10; $b = '20'; $c = $a + $b;</code> $\rightarrow$ `c = 30` (String '20' cast to integer 20)
+          </div>
+        </li>
+        <li>
+          **Concatenation:** A number is converted to a string if used in the string concatenation operation (using the `.` operator).
+          <div class="example">
+            <code>$a = 10; $b = '20'; $c = $a . $b;</code> $\rightarrow$ `c = 1020` (Integer 10 cast to string '10')
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">2. Explicit Type Casting (Operators)</h2>
+      <p>
+        Explicit casting forces a conversion by placing the target type in parentheses before the expression: **`$var = (type)expr;`**.
+      </p>
+
+      <h3>Common Casting Operators:</h3>
+      <ul>
+        <li>**`(int)`** or **`(integer)`**</li>
+        <li>**`(float)`**, **`(double)`**, or **`(real)`**</li>
+        <li>**`(bool)`** or **`(boolean)`**</li>
+        <li>**`(string)`**</li>
+        <li>**`(array)`**</li>
+        <li>**`(object)`**</li>
+      </ul>
+
+      <h3>Casting to Integer (`(int)`):</h3>
+      <ul>
+        <li>
+          **Float to Int:** The fractional part is **discarded** (not rounded).
+          <div class="example">
+            <code>$a = 9.99; $b = (int)$a;</code> $\rightarrow$ `int(9)`
+          </div>
+        </li>
+        <li>
+          **String to Int:**
+          <ul>
+            <li>If the string starts with digits, only those digits are kept (e.g., `"10 Rs."` $\rightarrow$ `int(10)`).</li>
+            <li>If the string starts with non-numeric characters, the result is `0` (e.g., `"$100"` $\rightarrow$ `int(0)`).</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Casting to Boolean (`(bool)`):</h3>
+      <p>
+        An expression is cast to `true` or `false` based on its "truthiness":
+      </p>
+      <ul>
+        <li>
+          **`true`** for any **non-zero** number (integer or float), and for most non-empty strings (even `"Hello"`).
+        </li>
+        <li>
+          **`false`** for `0` (integer), `0.0` (float), empty string `""`, string `"0"`, `NULL`, and empty arrays.
+          <div class="example">
+            <code>$a = 100; $b = (bool)$a;</code> $\rightarrow$ `bool(true)`<br>
+            <code>$x = 0; $y = (bool)$x;</code> $\rightarrow$ `bool(false)`
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">3. Type Casting Functions</h2>
+      <p>
+        PHP provides dedicated built-in functions for casting, which are sometimes preferred for clarity.
+      </p>
+      <ul>
+        <li>
+          **`intval(mixed $value, int $base = 10)`:** Gets the **integer** value of a variable. Useful for specifying a base (e.g., 8 for octal) for string-to-integer conversion.
+        </li>
+        <li>
+          **`floatval(mixed $value)`** (Alias: `doubleval()`): Gets the **float** value of a variable.
+          <div class="example">
+            <code>floatval('99.90 Rs')</code> $\rightarrow$ `99.9` (Discards non-numeric suffix)
+          </div>
+        </li>
+        <li>
+          **`strval(mixed $value)`:** Gets the **string** value of a variable.
+          <div class="example">
+            <code>strval(4.2E5)</code> $\rightarrow$ `'420000'`
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,137 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Class Attributes</h1>
+
+    <div class="content">
+      <p>Java class attributes are variables bound in a class, used to define its state. These attributes are accessible within class methods by default.</p>
+      <p>For example, in a <code>Student</code> class, variables like <code>roll_no</code>, <code>age</code>, and <code>name</code> are class attributes.</p>
+    </div>
+
+    <div class="content">
+      <h2>Creating (Declaring) Java Class Attributes</h2>
+      <p><strong>Syntax:</strong></p>
+      <pre><code>access_modifier data_type attribute_name;</code></pre>
+
+      <p><strong>Example:</strong></p>
+      <pre><code>public class Dog {
+  String breed;
+  int age;
+  String color;
+
+  void barking() {}
+  void hungry() {}
+  void sleeping() {}
+}</code></pre>
+
+      <p>Here, <code>breed</code>, <code>age</code>, and <code>color</code> are class attributes.</p>
+    </div>
+
+    <div class="content">
+      <h2>Accessing Java Class Attributes</h2>
+      <p>To access class attributes, create an object and use the dot <code>.</code> operator.</p>
+
+      <p><strong>Syntax:</strong></p>
+      <pre><code>object_name.attribute_name;</code></pre>
+
+      <p><strong>Example:</strong></p>
+      <pre><code>class Dog {
+  String breed = "German Shepherd";
+  int age = 2;
+  String color = "Black";
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Dog obj = new Dog();
+    System.out.println(obj.breed);
+    System.out.println(obj.age);
+    System.out.println(obj.color);
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>German Shepherd</li>
+        <li>2</li>
+        <li>Black</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Modifying Java Class Attributes</h2>
+      <p>Modify class attributes by assigning new values using the <code>=</code> operator.</p>
+
+      <p><strong>Syntax:</strong></p>
+      <pre><code>object_name.attribute_name = new_value;</code></pre>
+
+      <p><strong>Example:</strong></p>
+      <pre><code>class Dog {
+  String breed = "German Shepherd";
+  int age = 2;
+  String color = "Black";
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Dog obj = new Dog();
+
+    System.out.println("Before modifying:");
+    System.out.println(obj.breed);
+    System.out.println(obj.age);
+    System.out.println(obj.color);
+
+    obj.breed = "Golden Retriever";
+    obj.age = 3;
+    obj.color = "Golden";
+
+    System.out.println("\nAfter modifying:");
+    System.out.println(obj.breed);
+    System.out.println(obj.age);
+    System.out.println(obj.color);
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Before modifying:</li>
+        <li>German Shepherd</li>
+        <li>2</li>
+        <li>Black</li>
+        <br>
+        <li>After modifying:</li>
+        <li>Golden Retriever</li>
+        <li>3</li>
+        <li>Golden</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Making Java Class Attributes Read Only</h2>
+      <p>Use the <code>final</code> keyword to make an attribute read-only. Once assigned, it cannot be modified.</p>
+
+      <p><strong>Syntax:</strong></p>
+      <pre><code>access_modifier final data_type attribute_name;</code></pre>
+
+      <p><strong>Example:</strong></p>
+      <pre><code>package com.tutorialspoint;
+
+class Dog {
+  final String name = "Tommy";
+}
+
+public class Tester {
+  public static void main(String[] args) {
+    Dog dog = new Dog();
+    dog.name = "Tommy"; // Error: Cannot assign a value to final variable
+    System.out.println(dog.name);
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Exception in thread "main" java.lang.Error: Unresolved compilation problem:</li>
+        <li>The final field Dog.name cannot be assigned</li>
+      </ul>
+    </div>
+  </div>
+</div>

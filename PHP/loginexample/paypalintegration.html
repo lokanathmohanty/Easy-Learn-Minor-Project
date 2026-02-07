@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Social Media Login (Single Sign-On with Facebook)</h1>
+
+        <div class="content">
+            <h2 class="title">Introduction to Social Media Login (SSO)</h2>
+            <p><strong>Social Media Login</strong>, often referred to as **Single Sign-On (SSO)**, allows users to log into a web application using their existing credentials from providers like **Google, Facebook, LinkedIn, or Apple**. This eliminates the need for users to create and remember a new, separate account for your application, thereby improving the user experience and increasing conversion rates.</p>
+            <p>This section explains the steps for integrating **Facebook Login** into a PHP application.</p>
+
+            <h3 class="title">Step 1: Create a Facebook App</h3>
+            <p>Before integrating, you must register your application with Facebook to obtain the necessary credentials:</p>
+            <ul>
+                <li>Visit $\text{https://developers.facebook.com/apps/creation/}$ and create a new Facebook App.</li>
+                <li>Obtain the unique **Application ID** ($\text{YOUR\_APP\_ID}$) and **App Secret** ($\text{YOUR\_APP\_SECRET}$) from the App Settings.</li>
+                <li>Configure the app's platform as a **Website** and specify the required Redirect URLs (the callback page where Facebook sends the user back after login).</li>
+            </ul>
+
+            <hr>
+
+            <h3 class="title">Step 2: Set Up PHP SDK and Credentials</h3>
+            <p>The **Facebook Graph SDK for PHP** is required to communicate with Facebook's API. It is best installed via Composer:</p>
+            <pre>composer require "facebook/graph-sdk-v5"</pre>
+            <p>In your PHP code, include the autoloader and define your application secrets:</p>
+            <pre>
+require_once __DIR__ . '/vendor/autoload.php';
+
+$app_id = 'YOUR_APP_ID';
+$app_secret = 'YOUR_APP_SECRET';</pre>
+
+            <hr>
+
+            <h3 class="title">Step 3: Create Login Button and JavaScript SDK</h3>
+            <p>The client-side setup includes an $\text{HTML}$ button and the necessary Facebook JavaScript SDK to handle the initial login window pop-up:</p>
+            <pre>
+&lt;button id="facebook-login-button"&gt;Login with Facebook&lt;/button&gt;
+
+&lt;script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId=YOUR_APP_ID&autoLogApp=true" async defer&gt;&lt;/script&gt;</pre>
+
+            <hr>
+
+            <h3 class="title">Step 4: Handle the Login Callback in PHP</h3>
+            <p>This PHP script initializes the Facebook SDK, handles the redirect logic, and manages the user session after successful authentication. This script typically resides at the Redirect URL specified in the Facebook App settings.</p>
+            <pre>
+&lt;?php
+   session_start();
+
+   $fb = new Facebook\Facebook([
+      'app_id' =&gt; $app_id,
+      'app_secret' =&gt; $app_secret,
+      'default_graph_version' =&gt; 'v13.0',
+   ]);
+
+   $helper = $fb-&gt;getRedirectLoginHelper();
+   $accessToken = $helper-&gt;getAccessToken();
+
+   if ($accessToken) {
+      // SUCCESS: Access token obtained. User is logged in.
+      // Fetch user profile data (name, email, etc.)
+      $response = $fb-&gt;get('/me?fields=id,name,email', $accessToken);
+      $user = $response-&gt;getGraphUser();
+
+      // Store necessary user data in the session
+      $_SESSION['user_data'] = $user;
+      
+      // Redirect to the protected area
+      header('Location: profile.php');
+   } else {
+      // FAILURE or FIRST VISIT: Generate the login URL
+      $loginUrl = $helper-&gt;getLoginUrl(['scope' =&gt; 'public_profile,email']);
+      
+      // Redirect the user to the Facebook login page
+      header('Location: ' . $loginUrl);
+   }
+?&gt;</pre>
+            <p>After successful authentication, the user's data is stored in the $\text{\$_SESSION['user\_data']}$ variable, which can be checked on $\text{profile.php}$ to ensure the user is logged in.</p>
+        </div>
+    </div>
+</div>

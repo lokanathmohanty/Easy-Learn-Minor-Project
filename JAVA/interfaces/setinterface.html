@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Set Interface</h1>
+    
+    <div class="content">
+      <p>A <strong>Set</strong> is a Collection that cannot contain duplicate elements. It models the mathematical set abstraction.</p>
+      <p>The Set interface inherits methods from Collection but prohibits duplicate elements and enforces a stronger contract on <code>equals</code> and <code>hashCode</code> methods.</p>
+      
+      <h2 class="title">Set Interface Methods</h2>
+      <ul>
+        <li><code>add()</code>: Adds an object to the collection.</li>
+        <li><code>clear()</code>: Removes all objects from the collection.</li>
+        <li><code>contains()</code>: Checks if an object exists in the collection.</li>
+        <li><code>isEmpty()</code>: Checks if the collection is empty.</li>
+        <li><code>iterator()</code>: Returns an Iterator to traverse the collection.</li>
+        <li><code>remove()</code>: Removes a specified object from the collection.</li>
+        <li><code>size()</code>: Returns the number of elements in the collection.</li>
+      </ul>
+    </div>
+    
+    <h2 class="title">Example 1: Implementing Set Using HashSet</h2>
+    <div class="content">
+      <p>This example demonstrates using a HashSet to store unique integers:</p>
+      <pre><code>import java.util.HashSet;
+import java.util.Set;
+
+public class SetDemo {
+  public static void main(String args[]) { 
+      int count[] = {34, 22, 10, 60, 30, 22};
+      Set&lt;Integer&gt; set = new HashSet&lt;&gt;();
+      try {
+         for(int i = 0; i &lt; 5; i++) {
+            set.add(count[i]);
+         }
+         System.out.println(set);
+      } catch(Exception e) {}
+   }
+}</code></pre>
+      <p><strong>Output:</strong> [34, 22, 10, 60, 30]</p>
+    </div>
+
+    <h2 class="title">Example 2: Implementing Set Using TreeSet</h2>
+    <div class="content">
+      <p>This example shows how to use TreeSet to sort elements automatically:</p>
+      <pre><code>import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class SetDemo {
+  public static void main(String args[]) { 
+      int count[] = {34, 22, 10, 60, 30, 22};
+      Set&lt;Integer&gt; set = new HashSet&lt;&gt;();
+      try {
+         for(int i = 0; i &lt; 5; i++) {
+            set.add(count[i]);
+         }
+         System.out.println(set);
+
+         TreeSet&lt;Integer&gt; sortedSet = new TreeSet&lt;&gt;(set);
+         System.out.println("The sorted list is:");
+         System.out.println(sortedSet);
+
+         System.out.println("The First element of the set is: " + sortedSet.first());
+         System.out.println("The last element of the set is: " + sortedSet.last());
+      } catch(Exception e) {}
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>[34, 22, 10, 60, 30]</p>
+      <p>The sorted list is:</p>
+      <p>[10, 22, 30, 34, 60]</p>
+      <p>The First element of the set is: 10</p>
+      <p>The last element of the set is: 60</p>
+    </div>
+    
+    <h2 class="title">Example 3: Implementing Set Using LinkedHashSet</h2>
+    <div class="content">
+      <p>This example uses LinkedHashSet to preserve insertion order:</p>
+      <pre><code>import java.util.LinkedHashSet;
+import java.util.Set;
+
+public class SetDemo {
+  public static void main(String args[]) { 
+      int count[] = {34, 22, 10, 60, 30, 22};
+      Set&lt;Integer&gt; set = new LinkedHashSet&lt;&gt;();
+      try {
+         for(int i = 0; i &lt; 5; i++) {
+            set.add(count[i]);
+         }
+         System.out.println(set);
+      } catch(Exception e) {}
+   }
+}</code></pre>
+      <p><strong>Output:</strong> [34, 22, 10, 60, 30]</p>
+    </div>
+    
+  </div>
+</div>

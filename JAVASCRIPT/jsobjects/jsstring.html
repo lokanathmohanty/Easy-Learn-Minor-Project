@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Strings</h1>
+
+    <div class="content">
+      <p>The String object in JavaScript lets you work with a series of characters; it wraps JavaScript's string primitive data type with a number of helper methods.</p>
+      <p>As JavaScript automatically converts between string primitives and String objects, you can call any of the helper methods of the String object on a string primitive.</p>
+      <p>The string is a sequence of characters containing 0 or more characters. For example, <code>'Hello'</code> is a string.</p>
+    </div>
+
+    <h2 class="title">Syntax</h2>
+    <div class="content">
+      <p>JavaScript strings can be created as objects using the <code>String()</code> constructor or as primitives using string literals.</p>
+      <pre><code>var val = new String(value);</code></pre>
+      <p>The <code>String</code> parameter, value is a series of characters that has been properly encoded.</p>
+      <p>We can also create string primitives:</p>
+      <pre><code>
+str1 = 'Hello World!'; // single quote
+str2 = "Hello World!"; // double quote
+str3 = `Hello World`;  // back ticks
+str4 = String('Hello World!'); // String() function
+      </code></pre>
+    </div>
+
+    <h2 class="title">String Object Properties</h2>
+    <div class="content">
+      <ul>
+        <li><strong>constructor</strong> - Returns a reference to the String function that created the object.</li>
+        <li><strong>length</strong> - Returns the length of the string.</li>
+        <li><strong>prototype</strong> - Allows you to add properties and methods to an object.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">String Object Methods</h2>
+    <div class="content">
+      <h3 class="title">Static Methods</h3>
+      <ul>
+        <li><strong>fromCharCode()</strong> - Converts UTF-16 code units into a string.</li>
+        <li><strong>fromCodePoint()</strong> - Creates a string from ASCII values.</li>
+      </ul>
+
+      <h3 class="title">Instance Methods</h3>
+      <ul>
+        <li><strong>at()</strong> - Returns character from specified index.</li>
+        <li><strong>charAt()</strong> - Returns the character at the specified index.</li>
+        <li><strong>charCodeAt()</strong> - Returns Unicode value of character at given index.</li>
+        <li><strong>codePointAt()</strong> - Returns Unicode value at index.</li>
+        <li><strong>concat()</strong> - Combines two strings.</li>
+        <li><strong>endsWith()</strong> - Checks if string ends with substring.</li>
+        <li><strong>includes()</strong> - Checks if one string exists in another.</li>
+        <li><strong>indexOf()</strong> - Returns first index of occurrence.</li>
+        <li><strong>lastIndexOf()</strong> - Returns last index of occurrence.</li>
+        <li><strong>localeCompare()</strong> - Compares two strings in sort order.</li>
+        <li><strong>match()</strong> - Matches regex against a string.</li>
+        <li><strong>matchAll()</strong> - Matches all regex patterns.</li>
+        <li><strong>normalize()</strong> - Returns Unicode normalization.</li>
+        <li><strong>padEnd()</strong> - Pads string at end.</li>
+        <li><strong>padStart()</strong> - Pads string at start.</li>
+        <li><strong>raw()</strong> - Returns raw string from template literal.</li>
+        <li><strong>repeat()</strong> - Repeats string N times.</li>
+        <li><strong>replace()</strong> - Replaces first match with new substring.</li>
+        <li><strong>replaceAll()</strong> - Replaces all matches with new substring.</li>
+        <li><strong>search()</strong> - Searches for regex match.</li>
+        <li><strong>slice()</strong> - Extracts part of string.</li>
+        <li><strong>split()</strong> - Splits string into array.</li>
+        <li><strong>substr()</strong> - Returns substring from location with length.</li>
+        <li><strong>substring()</strong> - Returns substring between indexes.</li>
+        <li><strong>toLocaleLowerCase()</strong> - Lowercase respecting locale.</li>
+        <li><strong>toLocaleUpperCase()</strong> - Uppercase respecting locale.</li>
+        <li><strong>toLowerCase()</strong> - Converts to lowercase.</li>
+        <li><strong>toString()</strong> - Returns string representation.</li>
+        <li><strong>toUpperCase()</strong> - Converts to uppercase.</li>
+        <li><strong>toWellFormed()</strong> - Returns well-formed copy.</li>
+        <li><strong>trim()</strong> - Removes whitespace from both ends.</li>
+        <li><strong>trimEnd()</strong> - Removes whitespace at end.</li>
+        <li><strong>trimStart()</strong> - Removes whitespace at start.</li>
+        <li><strong>valueOf()</strong> - Returns primitive value of string.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">String Constructor</h2>
+    <div class="content">
+      <p><strong>String()</strong> - Creates a string object and initializes it with provided value.</p>
+    </div>
+
+    <h2 class="title">Examples</h2>
+    <div class="content">
+      <h3 class="title">Creating JavaScript String Objects</h3>
+      <pre><code>
+const str = new String("Hello World!");
+console.log(str);       // Hello World!
+console.log(typeof str); // object
+      </code></pre>
+
+      <h3 class="title">Accessing a String</h3>
+      <pre><code>
+let str1 = new String("Welcome!");
+let str2 = "Welcome!";
+console.log(str1[0]); // W
+console.log(str2[4]); // o
+      </code></pre>
+
+      <h3 class="title">Case Sensitivity</h3>
+      <pre><code>
+let char1 = 'S';
+let char2 = 's';
+console.log(char1 == char2); // false
+      </code></pre>
+
+      <h3 class="title">Strings Are Immutable</h3>
+      <pre><code>
+let str = "Animal";
+str[0] = 'j';
+console.log(str); // Animal
+str = "Hi!";
+console.log(str); // Hi!
+      </code></pre>
+
+      <h3 class="title">Escape Characters</h3>
+      <ul>
+        <li><code>\"</code> - Double quote</li>
+        <li><code>\'</code> - Single quote</li>
+        <li><code>\\</code> - Backslash</li>
+        <li><code>\n</code> - New line</li>
+        <li><code>\t</code> - Tab</li>
+        <li><code>\b</code> - Backspace</li>
+        <li><code>\f</code> - Form feed</li>
+        <li><code>\v</code> - Vertical tab</li>
+        <li><code>\r</code> - Carriage return</li>
+        <li><code>\uXXXX</code> - Unicode escape</li>
+      </ul>
+      <pre><code>
+let str1 = "Your\'s welcome!";
+let str2 = "Backslash \\";
+console.log(str1); // Your's welcome!
+console.log(str2); // Backslash \
+      </code></pre>
+    </div>
+
+    <h2 class="title">String HTML Wrappers</h2>
+    <div class="content">
+      <ul>
+        <li><strong>anchor()</strong> - Creates an HTML anchor.</li>
+        <li><strong>big()</strong> - Displays string in big font.</li>
+        <li><strong>blink()</strong> - Makes string blink.</li>
+        <li><strong>bold()</strong> - Displays string in bold.</li>
+        <li><strong>fixed()</strong> - Displays string in fixed-pitch font.</li>
+        <li><strong>fontcolor()</strong> - Sets font color.</li>
+        <li><strong>fontsize()</strong> - Sets font size.</li>
+        <li><strong>italics()</strong> - Displays string in italics.</li>
+        <li><strong>link()</strong> - Creates hyperlink.</li>
+        <li><strong>small()</strong> - Displays string in small font.</li>
+        <li><strong>strike()</strong> - Struck-out text.</li>
+        <li><strong>sub()</strong> - Subscript text.</li>
+        <li><strong>sup()</strong> - Superscript text.</li>
+      </ul>
+    </div>
+  </div>
+</div>

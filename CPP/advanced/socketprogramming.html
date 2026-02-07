@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Socket Programming (Network Communication) 🔌</h1>
+
+        <div class="content">
+            <p>**C++ Socket Programming** is the method of establishing communication endpoints (**sockets**) on a network, enabling data exchange between applications using protocols like **TCP** and **UDP**. Sockets are the foundation of most internet communication.</p>
+
+            <h3>Types of Sockets</h3>
+            <ul>
+                <li>**Stream Sockets (TCP)**: Provides **reliable, connection-oriented** communication. Data is sent as a continuous stream, guaranteeing order and delivery.</li>
+                <li>**Datagram Sockets (UDP)**: Provides **connectionless** communication. Data is sent in independent packets, offering speed but **no guarantee of order or delivery**.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Server-Side Socket Steps (Listening for Connections)</h2>
+
+            <p>A server uses a sequence of system calls to listen for and accept incoming client connections. This process is connection-oriented (TCP).</p>
+            <ol>
+                <li>
+                    **<code>socket()</code>**: Creates a new socket file descriptor.
+                    <pre class="example">int sockfd = socket(AF_INET, SOCK_STREAM, 0);</pre>
+                    <p>Uses `AF_INET` (IPv4) and `SOCK_STREAM` (TCP).</p>
+                </li>
+                <li>
+                    **<code>bind()</code>**: Associates the created socket with a specific **local IP address** and **port number**.
+                    <pre class="example">bind(sockfd, (struct sockaddr*)&amp;address, sizeof(address));</pre>
+                </li>
+                <li>
+                    **<code>listen()</code>**: Marks the socket as passive, preparing it to accept connections. The backlog parameter sets the maximum queue size for pending connections.
+                    <pre class="example">listen(sockfd, 3); // 3 is the backlog</pre>
+                </li>
+                <li>
+                    **<code>accept()</code>**: Extracts the first connection request from the queue, creates a **new socket descriptor** for that specific client, and blocks until a client connects.
+                    <pre class="example">int clientSocket = accept(sockfd, (struct sockaddr*)&amp;clientAddress, &amp;clientLen);</pre>
+                </li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Client-Side Socket Steps (Connecting to a Server)</h2>
+
+        <p>A client initiates communication by connecting to the server's specific IP and port.</p>
+        <ol>
+            <li>
+                **<code>socket()</code>**: Creates a new socket file descriptor (same as the server).
+            </li>
+            <li>
+                **<code>connect()</code>**: Attempts to establish a connection to the specified server address and port.
+                <pre class="example">connect(sockfd, (struct sockaddr*)&amp;serverAddress, sizeof(serverAddress));</pre>
+            </li>
+        </ol>
+
+        <hr>
+
+        <h2 class="title">Data Exchange and Cleanup</h2>
+
+        <div class="content">
+            <h3>Sending and Receiving Data</h3>
+            <p>Once a connection is established (or immediately for UDP), data is exchanged using the following functions:</p>
+            <ul>
+                <li>**<code>send()</code>**: Sends data to the connected socket.
+                    <pre class="example">send(sockfd, data_ptr, data_len, 0);</pre>
+                </li>
+                <li>**<code>recv()</code>** (or `read()`): Receives data from the connected socket and stores it in a buffer.
+                    <pre class="example">recv(sockfd, buffer, sizeof(buffer), 0);</pre>
+                </li>
+            </ul>
+
+            <h3>Closing the Socket</h3>
+            <p>The **<code>close()</code>** method (or `closesocket()` on Windows) is a system call used to close the file descriptor associated with the socket, releasing its resources.</p>
+            <pre class="example">close(sockfd);</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Required Header Files</h2>
+
+        <div class="content">
+            <p>Socket programming typically requires platform-specific headers. The provided examples for Unix/Linux require:</p>
+            <ul>
+                <li>`&lt;sys/socket.h&gt;` (Core socket functions like `socket`, `bind`, `connect`)</li>
+                <li>`&lt;netinet/in.h&gt;` (Internet address structures like `sockaddr_in`)</li>
+                <li>`&lt;arpa/inet.h&gt;` (Functions to convert addresses, like `inet_pton`)</li>
+                <li>`&lt;unistd.h&gt;` (Standard functions like `close`, `read`)</li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">C++ <code>sizeof</code> Operator 📏</h1>
+
+        <div class="content">
+            <p>The **<code>sizeof</code>** is a **compile-time unary operator** that determines and returns the size, in **bytes**, of a variable, a data type, or any user-defined type (like a class or structure).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Syntax and Basic Types</h2>
+            <p>The operator can be used in two forms:</p>
+            <pre class="example">
+sizeof (data type); // Parentheses are required for data types
+sizeof variable_name; // Parentheses are optional for variable names
+</pre>
+            <p>The memory size returned by <code>sizeof</code> is **platform-dependent**, meaning it can vary based on the compiler and operating system architecture. A typical output for fundamental types might look like this:</p>
+            <table>
+                <thead>
+                    <tr><th>Data Type</th><th>Typical Size (bytes)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>char</code></td><td>1</td></tr>
+                    <tr><td><code>short int</code></td><td>2</td></tr>
+                    <tr><td><code>int</code></td><td>4</td></tr>
+                    <tr><td><code>long int</code></td><td>4 or 8</td></tr>
+                    <tr><td><code>float</code></td><td>4</td></tr>
+                    <tr><td><code>double</code></td><td>8</td></tr>
+                    <tr><td><code>wchar_t</code></td><td>2 or 4</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Advanced Use Cases</h2>
+
+            <h3>1. Finding Array Length</h3>
+            <p>The <code>sizeof</code> operator is commonly used to dynamically determine the number of elements in a locally defined array without hardcoding the count. This is a crucial technique for arrays passed to functions, as <code>sizeof</code> returns the size of the pointer, not the array itself.</p>
+            <pre class="example">
+int scores[] = {85, 90, 78, 92, 88}; // Total size: 20 bytes (5 elements * 4 bytes/int)
+
+int totalSize = sizeof(scores);
+int elementSize = sizeof(scores[0]);
+
+// Length is calculated by dividing the total array size by the size of one element.
+int length = totalSize / elementSize; // 20 / 4 = 5
+</pre>
+
+            <h3>2. Size of Classes/Structs</h3>
+            <p>When applied to a class or structure, <code>sizeof</code> returns the total memory occupied by an object of that type. This size may be greater than the sum of its member variables due to **memory padding** (or *alignment*), which the compiler adds to optimize access speeds.</p>
+            <pre class="example">
+class Student {
+    int rollNumber; // 4 bytes
+    double marks;   // 8 bytes
+    // Total may be 16 bytes due to padding for the double alignment.
+};
+
+// Output: Size of Student class: 16 bytes
+</pre>
+        </div>
+    </div>
+</div>

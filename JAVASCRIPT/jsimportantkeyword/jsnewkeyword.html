@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - new Keyword</h1>
+    <div class="content">
+      <p>The <strong>new</strong> keyword in JavaScript is used to create an instance of the object that has a constructor function. Using the new keyword, we can create instances of user-defined as well as built-in object types. We can create instances of classes, prototypes, or constructor functions.</p>
+      <p>When a JavaScript function is called with the <strong>new</strong> keyword, it acts as a constructor. The new keyword will do the following:</p>
+      <ul>
+        <li>Creates a blank/empty JavaScript object.</li>
+        <li>Sets its prototype for inheritance.</li>
+        <li>Binds <code>this</code> variable internally with the newly created object.</li>
+        <li>Executes the constructor function using the new object whenever <code>this</code> is used.</li>
+        <li>Returns the newly created object, unless the constructor function returns a non-null object reference.</li>
+      </ul>
+      <p>The <strong>new</strong> keyword is also used to create an instance of built-in JavaScript objects like <code>String</code>, <code>Boolean</code>, <code>Number</code>, etc.</p>
+
+      <h2 class="title">Syntax</h2>
+      <p><code>new Constructor(arguments);</code></p>
+      <p><strong>Parameters:</strong></p>
+      <ul>
+        <li><strong>Constructor</strong> − The name of the constructor function or class.</li>
+        <li><strong>arguments</strong> − One or more arguments to initialize the object properties.</li>
+      </ul>
+      <p><strong>Return Value:</strong></p>
+      <ul>
+        <li>If the constructor function returns nothing or a primitive value, it returns the newly created object.</li>
+        <li>If the constructor returns a non-primitive value, it returns that value.</li>
+      </ul>
+
+      <h2 class="title">Using 'new' keyword with Function Constructor</h2>
+      <p>A function can be used as a constructor if it is called with the <strong>new</strong> keyword. The function then works as the prototype for the object.</p>
+      <p><code>new FuncName(arguments);</code></p>
+
+      <h2 class="title">Example: Watch Constructor</h2>
+      <pre>
+function Watch(brand, price, type) {
+  this.brand = brand;
+  this.price = price;
+  this.type = type;
+}
+const titan = new Watch('titen', 4000, 'analog');
+const sonata = new Watch('sonata', 3000, 'digital');
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The titan object is: {"brand":"titen","price":4000,"type":"analog"}</li>
+        <li>The sonata object is: {"brand":"sonata","price":3000,"type":"digital"}</li>
+      </ul>
+
+      <h2 class="title">Example: Laptop Constructor</h2>
+      <pre>
+function Laptop(brand, model, processor) {
+  this.brand = brand;
+  this.model = model;
+  this.processor = processor;
+  this.getLaptop = function () {
+    return this.brand + ", " + this.model + ", " + this.processor;
+  }
+}
+const HP = new Laptop('HP', "VIKING", "i7");
+const Dell = new Laptop('Dell', "Inspiron", "i5");
+HP.getLaptop();
+Dell.getLaptop();
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>HP, VIKING, i7</li>
+        <li>Dell, Inspiron, i5</li>
+      </ul>
+
+      <h2 class="title">Using 'new' keyword with Class</h2>
+      <p>After ES6, JavaScript classes can also be instantiated using the <strong>new</strong> keyword.</p>
+
+      <h2 class="title">Example: WindowClass</h2>
+      <pre>
+class WindowClass {
+  constructor(color, size, type) {
+    this.color = color;
+    this.size = size;
+    this.type = type;
+  }
+  getDetails() {
+    return "Color: " + this.color + 
+           ", Size: " + this.size + 
+           ", Type: " + this.type;
+  }
+}
+const window1 = new WindowClass('blue', 'small', 'wooden');
+window1.getDetails();
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Color: blue</li>
+        <li>Size: small</li>
+        <li>Type: wooden</li>
+      </ul>
+
+      <h2 class="title">Using 'new' keyword with Built-in Objects</h2>
+      <p>The <strong>new</strong> keyword can also be used to create instances of built-in objects.</p>
+
+      <h2 class="title">Example: Number and String Objects</h2>
+      <pre>
+const num = new Number(10);
+const str = new String("Hello");
+
+typeof num; // "object"
+typeof str; // "object"
+      </pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>num = 10, typeof num = object</li>
+        <li>str = Hello, typeof str = object</li>
+      </ul>
+    </div>
+  </div>
+</div>

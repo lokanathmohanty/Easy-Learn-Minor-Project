@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Keys</h1>
+
+    <div class="content">
+      <h2>List and Keys</h2>
+      <p>
+        We learned how to use collections in React using <code>for</code> loop 
+        and <code>map</code> function in previous chapters. If we run the application, 
+        it outputs as expected. However, the developer console shows a warning:
+      </p>
+
+      <p>
+        <strong>Warning:</strong> Each child in a list should have a unique <code>"key"</code> prop.
+      </p>
+
+      <p>
+        React tries to render only the updated values in the DOM. When rendering a collection, 
+        React needs a way to identify which items are new, updated, or removed. To solve this, 
+        React provides the <code>key</code> attribute. The only requirement is that the value 
+        of the key must be unique within the collection.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Adding Keys</h2>
+      <p>
+        Let us recreate the earlier application and apply the <code>key</code> attribute 
+        to each list item.
+      </p>
+
+      <div class="example">
+        <h3>ExpenseListUsingForLoop (with keys)</h3>
+        <pre><code>expenses = items.map(
+   (item, idx) =&gt; &lt;tr key={idx}&gt;&lt;td&gt;item {idx + 1}&lt;/td&gt;&lt;td&gt;{item}&lt;/td&gt;&lt;/tr&gt;
+)</code></pre>
+      </div>
+
+      <p>
+        Here we used the index value as a key. This removes the warning from the console.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Key and Index</h2>
+      <p>
+        Using an index as a key works in simple scenarios, but it can cause issues 
+        in uncontrolled components where elements change dynamically. For example, 
+        adding an input field to each row and removing list items may cause unexpected behavior.
+      </p>
+
+      <div class="example">
+        <h3>Problem Example</h3>
+        <pre><code>expenses = items.map(
+   (item, idx) =&gt; &lt;tr key={idx}&gt;&lt;td&gt;item {idx + 1}&lt;/td&gt;&lt;td&gt;{item} &lt;input /&gt;&lt;/td&gt;&lt;/tr&gt;
+)</code></pre>
+      </div>
+
+      <p>
+        When the first item is removed, the input value may incorrectly shift to the 
+        next row because the index key is reused.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Using Unique IDs as Keys</h2>
+      <p>
+        To avoid this problem, use a unique identifier instead of the index. 
+        Modify the data structure to include <code>id</code> values.
+      </p>
+
+      <div class="example">
+        <h3>Correct Implementation</h3>
+        <pre><code>expenses = items.map(
+   (item) =&gt; &lt;tr key={item.id}&gt;&lt;td&gt;{item.id}&lt;/td&gt;&lt;td&gt;{item.amount} &lt;input /&gt;&lt;/td&gt;&lt;/tr&gt;
+)</code></pre>
+      </div>
+
+      <p>
+        Now each row uses <code>item.id</code> as its unique key. Removing or 
+        reordering items will not cause input values to shift incorrectly.
+      </p>
+    </div>
+  </div>
+</div>

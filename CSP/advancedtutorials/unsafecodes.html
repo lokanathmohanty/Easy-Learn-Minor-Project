@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Unsafe Code and Pointers ⚠️</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Unsafe Code?</h2>
+            <p>**Unsafe code** in C# is a code block or function marked with the **<span class="example">`unsafe`</span>** modifier. It is called "unsafe" because it allows the use of **pointers**, which bypass C#'s managed memory access and type safety checks. This code is often referred to as **unmanaged code**.</p>
+            <p>While unsafe code is used sparingly, it is necessary for:</p>
+            <ul>
+                <li>Interacting with legacy C/C++ libraries.</li>
+                <li>Low-level memory operations.</li>
+                <li>Achieving maximum performance in critical code sections.</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Pointers in C#</h2>
+            <p>A **pointer** is a variable that holds the **memory address** of another variable. They function similarly to C/C++ pointers but can only be declared and used within an <span class="example">`unsafe`</span> context.</p>
+            
+            <h3 class="title">Pointer Declaration and Use</h3>
+            <p>The general syntax for a pointer declaration uses the asterisk (`*`) symbol:</p>
+            <pre>type *var-name;</pre>
+            <ul>
+                <li>**Address-of operator (`&amp;`):** Used to get the memory address of a variable.</li>
+                <li>**Dereference operator (`*`):** Used to retrieve the value stored at the memory address pointed to by the pointer.</li>
+                <li>**Member access operator (`-&gt;`):** Used to access members of a structure or class pointed to by a pointer (e.g., <span class="example">`p-&gt;ToString()`</span>).</li>
+            </ul>
+            <pre>int var = 20;
+int* p = &amp;var; // p now holds the memory address of var
+
+Console.WriteLine(*p); // Output: 20 (dereferencing p)</pre>
+            
+            <h3 class="title">Declaring Unsafe Regions</h3>
+            <p>You can mark an entire method or just a specific block of code as unsafe:</p>
+            <ul>
+                <li>**Unsafe Method:** <span class="example">`static unsafe void Main() { ... }`</span></li>
+                <li>**Unsafe Block:** <span class="example">`public static void Main() { unsafe { ... } }`</span></li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Pointers and Arrays (The <span class="example">`fixed`</span> Keyword)</h2>
+            <p>C# arrays are objects managed by the Garbage Collector (GC), meaning their location in memory can change during execution. Pointers, however, require a fixed address.</p>
+            <p>To safely access array elements using a pointer, you must use the **<span class="example">`fixed`</span>** statement. This keyword temporarily pins the array in memory, preventing the GC from moving it, and provides a pointer to its first element.</p>
+            <pre>int[]  list = {10, 100, 200};
+fixed(int *ptr = list) // Pins the 'list' array in memory
+{
+   // Access elements using pointer arithmetic
+   Console.WriteLine(*(ptr + 1)); // Value of list[1] (100)
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Compilation Requirement</h2>
+            <p>Since unsafe code is outside the standard type-safe execution model, it must be explicitly permitted by the compiler.</p>
+            <ul>
+                <li>**Command Line:** Compile with the **<span class="example">`/unsafe`</span>** switch: <span class="example">`csc /unsafe prog1.cs`</span></li>
+                <li>**Visual Studio:** Enable the "Allow unsafe code" option in the **Project Properties &gt; Build** tab.</li>
+            </ul>
+        </div>
+    </div>
+</div>

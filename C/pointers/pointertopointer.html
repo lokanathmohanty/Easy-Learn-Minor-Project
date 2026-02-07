@@ -1,0 +1,151 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Pointer to Pointer (Double Pointer) in C</h1>
+    <div class="content">
+      <p>A pointer to pointer, also known as a double pointer in C, stores the address of another pointer.</p>
+      
+      <p>A pointer variable stores the address of another variable. It can point to any type, including basic data types, arrays, structs, etc. A pointer can also store the address of another pointer, which is called a "pointer to pointer" or "double pointer".</p>
+      
+      <p>This concept represents multiple levels of indirection: a pointer points to another pointer, which in turn points to the actual value.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Declaration of Pointer to a Pointer</h2>
+    <div class="content">
+      <p>The declaration is similar to a normal pointer but uses an additional asterisk (*):</p>
+      <p><code>int **var;</code></p>
+      <p>To access the target value pointed to by a double pointer, you need to dereference twice.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example of Pointer to Pointer (Double Pointer)</h2>
+    <div class="content">
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 100;
+  int *ptr = &a;
+  int **dptr = &ptr;
+
+  printf("Value of 'a' is : %d\n", a);
+  printf("Value of 'a' using pointer (ptr) is : %d\n", *ptr);
+  printf("Value of 'a' using double pointer (dptr) is : %d\n", **dptr);
+
+  return 0;
+}
+</code>
+      </pre>
+      <p>Output:</p>
+      <p>Value of 'a' is : 100<br>
+      Value of 'a' using pointer (ptr) is : 100<br>
+      Value of 'a' using double pointer (dptr) is : 100</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">How Does a Normal Pointer Work?</h2>
+    <div class="content">
+      <p>Assume an integer variable <code>a</code> is located at an address, and its pointer <code>b</code> stores that address:</p>
+      <p><code>int a = 10;<br>int *b = &a;</code></p>
+      <p>The dereference operator <code>*</code> fetches the value pointed by the pointer.</p>
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 10;
+  int *b = &a;
+  printf("a: %d \nPointer to 'a' is 'b': %d \nValue at 'b': %d", a, b, *b);
+  return 0;
+}
+</code>
+      </pre>
+      <p>Output example:</p>
+      <p>a: 10<br>
+      Pointer to 'a' is 'b': 6422036<br>
+      Value at 'b': 10</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">How Does a Double Pointer Work?</h2>
+    <div class="content">
+      <p>Declare a pointer <code>c</code> that stores the address of <code>b</code>, which itself points to <code>a</code>:</p>
+      <p><code>int **c = &b;</code></p>
+      <p>Accessing values:</p>
+      <pre>
+<code>
+printf("b: %d \nPointer to 'b' is 'c': %d \nValue at b: %d\n", b, c, *c);
+printf("Value of 'a' from 'c': %d", **c);
+</code>
+      </pre>
+      <p>Output example:</p>
+      <p>b: 6422036<br>
+      Pointer to 'b' is 'c': 6422024<br>
+      Value at b: 6422036<br>
+      Value of 'a' from 'c': 10</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Complete Double Pointer Program Example</h2>
+    <div class="content">
+      <pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  int a = 10;
+  int *b = &a;
+  printf("a: %d \nAddress of 'a': %d \nValue at a: %d\n\n", a, b, *b);
+
+  int **c = &b;
+  printf("b: %d \nPointer to 'b' is c: %d \nValue at b: %d\n", b, c, *c);
+  printf("Value of 'a' from 'c': %d", **c);
+
+  return 0;
+}
+</code>
+      </pre>
+      <p>Output:</p>
+      <p>a: 10<br>
+      Address of 'a': 1603495332<br>
+      Value at a: 10<br><br>
+      b: 1603495332<br>
+      Pointer to 'b' is c: 1603495336<br>
+      Value at b: 1603495332<br>
+      Value of 'a' from 'c': 10</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Double Pointer Size</h2>
+    <div class="content">
+      <p>A double pointer behaves like a normal pointer; hence, both have the same size.</p>
+      <pre>
+<code>
+printf("Size of b - a normal pointer: %d\n", sizeof(b));
+printf("Size of c - a double pointer: %d\n", sizeof(c));
+</code>
+      </pre>
+      <p>Output example:</p>
+      <p>Size of b - a normal pointer: 8<br>
+      Size of c - a double pointer: 8</p>
+      <p><small>Note: Sizes and addresses may vary based on CPU architecture and OS.</small></p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Multilevel Pointers in C</h2>
+    <div class="content">
+      <p>There is no theoretical limit on the number of asterisks in pointer declarations.</p>
+      <p>For example, a pointer to a double pointer can be declared as:</p>
+      <p><code>int ***d = &c;</code></p>
+      <p>Double pointers are commonly used to represent 2D arrays or arrays of strings.</p>
+    </div>
+  </div>
+</div>

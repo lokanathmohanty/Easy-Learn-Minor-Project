@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Order Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS order property</strong> is used with flexbox layouts to control the order in which flex items appear inside a flex container. By default, flex items are displayed in the source order (the order in which they appear in the HTML). However, with the <code>order</code> property, you can rearrange items without changing the HTML structure.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>
+        The syntax of the order property is:
+      </p>
+      <p><code>order: number | initial | inherit;</code></p>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>number</strong> − Defines the position of the item in the flex container. Items with smaller values are displayed first.</li>
+        <li><strong>initial</strong> − Resets the property to its default value (which is 0).</li>
+        <li><strong>inherit</strong> − Inherits the value from its parent.</li>
+      </ul>
+
+      <h2>Default Behavior</h2>
+      <p>
+        All flex items have a default <code>order</code> value of <code>0</code>. If no order is specified, items appear in the order they are written in the HTML.
+      </p>
+
+      <h2>Examples of CSS Order Property</h2>
+
+      <h2>1. Order Property with Positive Numeric Values</h2>
+      <p>
+        When positive values are used, items with smaller numbers appear first. This allows you to rearrange items easily.
+      </p>
+      <p><strong>Example:</strong> If four boxes have order values 2, 4, 1, and 3, they will be arranged in the order: 1 → 2 → 3 → 4 (based on values).</p>
+      <ul>
+        <li>Box1 → order: 2</li>
+        <li>Box2 → order: 4</li>
+        <li>Box3 → order: 1</li>
+        <li>Box4 → order: 3</li>
+      </ul>
+      <p><strong>Result:</strong> Box3 will appear first, followed by Box1, Box4, and Box2.</p>
+
+      <h2>2. Order Property with Negative Numeric Values</h2>
+      <p>
+        The order property also accepts negative numbers. Items with smaller negative values are displayed before larger ones. This is useful when you want certain items to always appear at the beginning.
+      </p>
+      <p><strong>Example:</strong> If boxes have order values -2, -1, -3, -4, they will be arranged as -4 → -3 → -2 → -1.</p>
+      <ul>
+        <li>Box1 → order: -2</li>
+        <li>Box2 → order: -1</li>
+        <li>Box3 → order: -3</li>
+        <li>Box4 → order: -4</li>
+      </ul>
+      <p><strong>Result:</strong> Box4 will appear first, followed by Box3, Box1, and Box2.</p>
+
+      <h2>3. Order Property with Images</h2>
+      <p>
+        The order property is not limited to divs; it can also be applied to images or any flex items. By changing the order values, you can rearrange image positions dynamically without modifying the HTML structure.
+      </p>
+      <ul>
+        <li>Image1 → order: 4</li>
+        <li>Image2 → order: 2</li>
+        <li>Image3 → order: 1</li>
+        <li>Image4 → order: 3</li>
+      </ul>
+      <p><strong>Result:</strong> Image3 will be displayed first, followed by Image2, Image4, and finally Image1.</p>
+
+      <h2>Real-World Use Cases</h2>
+      <ul>
+        <li><strong>Responsive Design:</strong> On smaller screens, you may want a navigation bar to appear at the top, but on larger screens, it could be at the side. Order property helps achieve this without restructuring HTML.</li>
+        <li><strong>Content Prioritization:</strong> Important messages or alerts can be ordered to appear first on mobile devices, improving accessibility and UX.</li>
+        <li><strong>Dynamic Layouts:</strong> Developers can use order in combination with media queries to reorder items based on device type.</li>
+      </ul>
+
+      <h2>Default vs Custom Order Example</h2>
+      <p>
+        Suppose you have three boxes: A, B, C. By default, they appear as A → B → C. If you apply:
+      </p>
+      <ul>
+        <li>A → order: 3</li>
+        <li>B → order: 1</li>
+        <li>C → order: 2</li>
+      </ul>
+      <p>
+        Then the new order will be: B → C → A.
+      </p>
+
+      <h2>Browser Support</h2>
+      <p>
+        The order property is supported in all major browsers. The following versions are the minimum required:
+      </p>
+      <ul>
+        <li>Chrome: 29+</li>
+        <li>Edge: 12+</li>
+        <li>Firefox: 28+</li>
+        <li>Safari: 9.0+</li>
+        <li>Opera: 12.1+</li>
+      </ul>
+
+      <h2>Key Notes</h2>
+      <ul>
+        <li>Default value is <code>0</code>.</li>
+        <li>Negative values are allowed.</li>
+        <li>Does not affect non-flexbox elements.</li>
+        <li>Order should not be misused for accessibility, as screen readers may still read items in DOM order.</li>
+      </ul>
+
+      <p>
+        In summary, the <strong>CSS order property</strong> is a powerful tool for rearranging elements within a flex container without modifying the HTML source code. It helps developers create flexible, responsive layouts and makes it easier to prioritize content on different devices.
+      </p>
+    </div>
+  </div>
+</div>

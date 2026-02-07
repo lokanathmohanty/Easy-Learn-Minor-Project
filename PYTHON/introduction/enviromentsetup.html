@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Environment Setup</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>Installing Python is the first step in starting your journey. Many Linux systems already have Python pre-installed, though it may not be the latest version. Python is available on a wide variety of platforms including Linux, Windows, Mac OS X, and many others. It has even been ported to Java and .NET virtual machines.</p>
+
+      <h2>Local Environment Setup</h2>
+      <p>To check if Python is already installed, open a terminal and type:</p>
+      <pre>$ python</pre>
+      <p>If installed, you will see something like:</p>
+      <pre>
+Python 3.11.2 (main, Feb 8 2023, 14:49:24) [GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+      </pre>
+
+      <h2>Downloading Python</h2>
+      <p>The latest source code, binaries, and documentation are available on the official website: <a href="https://www.python.org/">https://www.python.org/</a></p>
+      <p>Documentation is available at <a href="https://www.python.org/doc/">https://www.python.org/doc/</a> in HTML, PDF, and PostScript formats.</p>
+
+      <h2>Installing Python</h2>
+      <p>Download the binary package for your platform and install. If no binary is available, you can compile from source using a C compiler.</p>
+
+      <h3>Install Python on Ubuntu Linux</h3>
+      <pre>
+$ python3.11 --version
+$ sudo apt update
+$ sudo apt-get install software-properties-common
+$ sudo add-apt-repository ppa:deadsnakes/ppa
+$ sudo apt update
+$ sudo apt-get install python3.11
+      </pre>
+      <p>Check installation:</p>
+      <pre>
+$ python3
+>>> print("Hello World")
+Hello World
+      </pre>
+
+      <h3>Install Python on Other Linux</h3>
+      <ol>
+        <li>Go to <a href="https://www.python.org/downloads/">Python downloads</a></li>
+        <li>Download and extract the source code</li>
+        <li>Edit <code>Modules/Setup</code> if needed</li>
+        <li>Run the commands:</li>
+      </ol>
+      <pre>
+$ ./configure
+$ make
+$ make install
+      </pre>
+
+      <h3>Using Yum Command</h3>
+      <p>On RHEL/CentOS:</p>
+      <pre>$ sudo yum install python3</pre>
+
+      <h3>Install Python on Windows</h3>
+      <p>Download installer from <a href="https://www.python.org/downloads/windows/">Windows downloads</a>.</p>
+      <p>For example, 64-bit installer: <a href="https://www.python.org/ftp/python/3.11.2/python-3.11.2-amd64.exe">python-3.11.2-amd64.exe</a></p>
+      <p>Steps:</p>
+      <ul>
+        <li>Double-click the installer</li>
+        <li>Choose installation folder</li>
+        <li>Tick option to update PATH variable</li>
+        <li>Finish installation wizard</li>
+      </ul>
+      <p>Check installation:</p>
+      <pre>
+C:\> python
+Python 3.11.2 (tags/v3.11.2:878ead1, Feb 7 2023, 16:38:35) [MSC v.1934 64 bit]
+>>> 
+      </pre>
+
+      <h3>Install Python on Mac</h3>
+      <p>Recent Macs have Python pre-installed but may be outdated. Download the latest from <a href="https://www.python.org/download/mac/">Python Mac downloads</a>. For older versions, MacPython is available from Jack Jansen’s site.</p>
+
+      <h2>Setting up PATH</h2>
+      <p>The PATH variable defines where executables are searched.</p>
+
+      <h3>Unix/Linux</h3>
+      <pre>
+# csh
+setenv PATH "$PATH:/usr/local/bin/python"
+
+# bash
+export PATH="$PATH:/usr/local/bin/python"
+
+# sh or ksh
+PATH="$PATH:/usr/local/bin/python"
+      </pre>
+
+      <h3>Windows</h3>
+      <pre>path %path%;C:\Python</pre>
+
+      <h2>Python Environment Variables</h2>
+      <ul>
+        <li><strong>PYTHONPATH</strong> − Specifies module search path.</li>
+        <li><strong>PYTHONSTARTUP</strong> − Path to initialization file executed at startup.</li>
+        <li><strong>PYTHONCASEOK</strong> − On Windows, enables case-insensitive imports.</li>
+        <li><strong>PYTHONHOME</strong> − Alternative module search path.</li>
+      </ul>
+
+      <h2>Running Python</h2>
+      <h3>Interactive Interpreter</h3>
+      <p>Start Python directly:</p>
+      <pre>
+$ python   # Unix/Linux
+C:\> python   # Windows
+      </pre>
+
+      <h3>Command Line Options</h3>
+      <ul>
+        <li><code>-d</code> − Debug output</li>
+        <li><code>-O</code> − Optimized bytecode</li>
+        <li><code>-S</code> − Skip <code>import site</code></li>
+        <li><code>-v</code> − Verbose output</li>
+        <li><code>-X</code> − Disable class-based exceptions (obsolete)</li>
+        <li><code>-c cmd</code> − Run code passed as string</li>
+        <li><code>file</code> − Run Python script</li>
+      </ul>
+
+      <h3>Script from the Command Line</h3>
+      <pre>
+$ python script.py    # Unix/Linux
+C:\> python script.py # Windows
+      </pre>
+
+      <h3>Integrated Development Environment</h3>
+      <ul>
+        <li><strong>Unix</strong> − IDLE</li>
+        <li><strong>Windows</strong> − PythonWin</li>
+        <li><strong>Macintosh</strong> − IDLE IDE available from Python website</li>
+      </ul>
+
+      <h2>Python Online Compiler</h2>
+      <p>You can also run Python code in an online compiler. Example:</p>
+      <pre>
+# This is my first Python program.
+# This will print 'Hello, World!' as the output
+
+print("Hello, World!")
+      </pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">main() Function in C</h1>
+    <div class="content">
+      <p>The <code>main()</code> function in C is the entry point of any program. Program execution starts with <code>main()</code>. It performs the main processing and cleans up any resources allocated by the program. While a C program may have many functions, it must have exactly one <code>main()</code> function. Regardless of its position in the code, <code>main()</code> executes first.</p>
+
+      <h2>Syntax</h2>
+      <pre><code>int main(){
+   // one or more statements;
+   return 0;
+}</code></pre>
+      <p>The function name must follow identifier naming rules. Typically, <code>main()</code> has no arguments, but can accept command-line arguments.</p>
+
+      <h2>Valid Signatures</h2>
+      <ul>
+        <li><code>int main()</code></li>
+        <li><code>int main(void)</code></li>
+        <li><code>int main(int argc, char *argv[])</code></li>
+      </ul>
+
+      <h2>Example</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  printf("Hello World");
+  return 0;
+}</code></pre>
+
+      <h2>Important Points</h2>
+      <ul>
+        <li>A C program must contain <code>main()</code>.</li>
+        <li><code>main</code> is a user-defined function, not a C keyword.</li>
+        <li>Conventionally, <code>main()</code> returns <code>0</code> to signal successful execution; other values indicate failure.</li>
+        <li>Older compilers may allow <code>void</code> return type, but it is non-standard and discouraged.</li>
+        <li><code>main()</code> cannot be declared inline, static, called from the program, or have its address taken.</li>
+      </ul>
+
+      <h2>How main() Works</h2>
+      <p>Execution starts at <code>main()</code>. It can call other functions, passing control and optionally arguments. Called functions return control to <code>main()</code> after executing. The program usually terminates when <code>main()</code> returns.</p>
+
+      <h2>Using exit() in main()</h2>
+      <p>The <code>exit()</code> function can terminate the program early. Use <code>exit(0)</code> for normal termination, <code>exit(1)</code> or other codes for error exit.</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+  for (int i = 1; i <= 5; i++) {
+    if (i == 3) {
+      printf("\nexiting ..");
+      exit(0);
+    } else {
+      printf("\nNumber is %d", i);
+    }
+  }
+  return 0;
+}</code></pre>
+
+      <p>Output:</p>
+      <p>Number is 1<br>Number is 2<br>exiting ..</p>
+
+      <h2>Command-line Arguments</h2>
+      <p><code>main()</code> can accept arguments from the command line. The signature for this is:</p>
+      <pre><code>int main(int argc, char *argv[]) {
+  // code
+  return 0;
+}</code></pre>
+
+      <p>Explanation:</p>
+      <ul>
+        <li><code>argc</code>: Number of command-line arguments (always ≥ 1)</li>
+        <li><code>argv</code>: Array of null-terminated strings representing the arguments; <code>argv[0]</code> is the program name.</li>
+      </ul>
+
+      <h2>Example: main() with Command-line Arguments</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(int argc, char *argv[]) {
+  int x, y, z;
+  if (argc &lt; 3) {
+    printf("insufficient arguments");
+  } else {
+    x = atoi(argv[1]);
+    y = atoi(argv[2]);
+    z = x + y;
+    printf("addition : %d", z);
+  }
+  return 0;
+}</code></pre>
+
+      <p>Run the program via command prompt:</p>
+      <p><code>C:\Users\mlath&gt;test 10 20</code></p>
+      <p>Output:</p>
+      <p>addition : 30</p>
+
+      <p>This chapter covered the importance and syntax of the <code>main()</code> function in C. Every C program must have one <code>main()</code>, which typically returns 0 to indicate success. Arguments can be passed via the command line if desired.</p>
+    </div>
+  </div>
+</div>

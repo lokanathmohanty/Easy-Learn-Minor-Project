@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Data Distribution and Random Data in NumPy</h1>
+    <div class="content">
+      <p>Data distribution is a list of all possible values in a dataset and the frequency of their occurrence. It is crucial in statistics and data science to understand the underlying pattern and spread of data.</p>
+      <p>Random data can be generated in NumPy via its <code>random</code> module, allowing creation of random values following specified distributions.</p>
+      <p>A random distribution is a set of numbers generated based on a specific probability density function, which defines the likelihood of various values occurring.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Generating Random Data with Probability Distribution</h2>
+    <div class="content">
+      <p>The function <code>choice()</code> can generate random samples from an array of values, with optional probabilities assigned to each value.</p>
+      <p>The probability list must sum to 1. Values with probability 0 will never be selected.</p>
+      <p>Example: Generate 100 random values from the set {3, 5, 7, 9}, where probabilities are 0.1, 0.3, 0.6, and 0 respectively:</p>
+      <pre><code>from numpy import random
+
+x = random.choice([3, 5, 7, 9], p=[0.1, 0.3, 0.6, 0.0], size=100)
+
+print(x)
+</code></pre>
+      <p>Values will be picked according to the provided probability distribution.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Generating Multi-dimensional Random Arrays with Distribution</h2>
+    <div class="content">
+      <p>You can create multi-dimensional arrays with values distributed as specified by passing a shape tuple to <code>size</code>.</p>
+      <p>Example: Generate a 3x5 array from the same value set and distribution:</p>
+      <pre><code>from numpy import random
+
+x = random.choice([3, 5, 7, 9], p=[0.1, 0.3, 0.6, 0.0], size=(3, 5))
+
+print(x)
+</code></pre>
+    </div>
+  </div>
+</div>

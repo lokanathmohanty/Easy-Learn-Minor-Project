@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Inheritance (OOP Concept) 🧬</h1>
+
+        <div class="content">
+            <p>**Inheritance** is a fundamental concept in Object-Oriented Programming (OOP) that allows a new class (the **derived class**) to inherit data members and member functions from an existing class (the **base class**). This mechanism promotes **code reusability** and establishes an **"is-a" relationship** (e.g., a <code>Rectangle</code> **is-a** <code>Shape</code>).</p>
+
+            <h3>Syntax for Derivation</h3>
+            <p>To define a derived class, you use a derivation list specifying the access type for the base class(es):</p>
+            <pre class="example">
+class derived-class: access-specifier base-class {
+   // ... members of derived-class
+};
+</pre>
+            <p>The `access-specifier` can be **<code>public</code>**, **<code>protected</code>**, or **<code>private</code>**.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Access Control and Inheritance Types</h2>
+
+        <div class="content">
+            <p>The `access-specifier` determines how the base class's members are treated in the derived class. Base class **private** members are **never** directly accessible to the derived class, regardless of the inheritance type.</p>
+
+            <h3>Summary of Access</h3>
+            <table>
+                <thead>
+                    <tr><th>Access in Base Class</th><th>Inherited as (Public Derivation)</th><th>Inherited as (Protected Derivation)</th><th>Inherited as (Private Derivation)</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**public**</td>
+                        <td>**public**</td>
+                        <td>**protected**</td>
+                        <td>**private**</td>
+                    </tr>
+                    <tr>
+                        <td>**protected**</td>
+                        <td>**protected**</td>
+                        <td>**protected**</td>
+                        <td>**private**</td>
+                    </tr>
+                    <tr>
+                        <td>**private**</td>
+                        <td>**Inaccessible**</td>
+                        <td>**Inaccessible**</td>
+                        <td>**Inaccessible**</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Public Inheritance (Commonly Used)</h3>
+            <p>When using `public` inheritance (e.g., `class Rectangle: public Shape`), the public interface of the base class remains public in the derived class, preserving the "is-a" relationship for outside users.</p>
+            <pre class="example">
+// Base protected members (width, height) are accessible 
+// inside the derived class's methods (getArea()).
+class Rectangle: public Shape {
+   public:
+      int getArea() { 
+         return (width * height); // Accesses protected members
+      } 
+};
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Multiple Inheritance</h2>
+
+        <div class="content">
+            <p>**Multiple inheritance** allows a derived class to inherit from **more than one** base class, acquiring the combined attributes and behaviors of all parent classes.</p>
+            <h3>Syntax</h3>
+            <pre class="example">
+class derived-class: access baseA, access baseB { /* ... */ };
+</pre>
+            <p>In the example, <code>Rectangle</code> inherits from both <code>Shape</code> and <code>PaintCost</code>, giving it dimensions and a cost calculation method.</p>
+            <pre class="example">
+class Rectangle: public Shape, public PaintCost {
+   public:
+      int getArea() { /* ... */ } 
+};
+// Rect object can call methods from both parents:
+// Rect.setHeight(7);   // From Shape
+// Rect.getCost(area);  // From PaintCost
+</pre>
+        </div>
+    </div>
+</div>

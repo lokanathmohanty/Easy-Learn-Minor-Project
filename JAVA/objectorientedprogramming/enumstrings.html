@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Enum String</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Enum Customization</h1>
+            <h2 class="subtitle">Session: Enum String Representation</h2>
+        </header>
+
+        <section class="content introduction">
+            <h2 class="subtitle">Default String Representation 🏷️</h2>
+            <p>By default, the **string representation** of an enum constant is simply its declared name. This default behavior is consistent whether you print the enum directly, use the **<code>toString()</code>** method, or use the **<code>name()</code>** method.</p>
+            <pre><code>System.out.println(WEEKDAY.MONDAY);       // Output: MONDAY
+System.out.println(WEEKDAY.MONDAY.toString());  // Output: MONDAY
+System.out.println(WEEKDAY.MONDAY.name());    // Output: MONDAY</code></pre>
+            <p>The key distinction is that the **<code>name()</code>** method is **<code>final</code>** and **cannot be overridden**, ensuring you can always retrieve the original, declared name of the constant.</p>
+        </section>
+
+        <hr>
+
+        <section class="content overriding-tostring">
+            <h2 class="subtitle">Overriding the <code>toString()</code> Method</h2>
+            <p>To provide a **custom string representation** (like a description or friendly name) for an enum constant, you must **override the <code>toString()</code> method**. The <code>toString()</code> method can be overridden in two main ways:</p>
+
+            <h3>1. Per Enum (Using a Switch Expression)</h3>
+            <p>You can override <code>toString()</code> once within the enum body and use a <code>switch</code> expression or statement to return a custom string based on the current constant.</p>
+            <pre><code>enum WEEKDAY { 
+   MONDAY, TUESDAY, WEDNESDAY, ... ;
+
+   @Override
+   public String toString() {
+      return switch(this) {
+         case MONDAY: yield "Day 1";
+         case TUESDAY: yield "Day 2";
+         // ...
+      };
+   }	
+}</code></pre>
+
+            <h3>2. Per Constant (Constant-Specific Class Body)</h3>
+            <p>Because each enum constant implicitly defines an anonymous subclass of the enum, you can provide a unique implementation of <code>toString()</code> for each constant using a constant-specific class body (the curly braces <code>{}</code> following the constant).</p>
+            <pre><code>enum WEEKDAY {
+   MONDAY {
+      @Override
+      public String toString() {
+         return "Day 1 of the Week";
+      }
+   },
+   TUESDAY {
+      @Override
+      public String toString() {
+         return "Day 2 of the Week";
+      }		
+   };	
+}</code></pre>
+        </section>
+
+        <hr>
+
+        <section class="content example-access">
+            <h2 class="subtitle">Demonstrating Custom vs. Default Names</h2>
+            <p>When <code>toString()</code> is overridden, it affects the direct print statement, but the <code>name()</code> method is always reliable for the declared name.</p>
+            <pre><code>WEEKDAY day = WEEKDAY.MONDAY;
+System.out.println(day);             // Calls overridden toString() -> Day 1 of the Week
+System.out.println(day.toString());  // Calls overridden toString() -> Day 1 of the Week
+System.out.println(day.name());      // Calls final name() method -> MONDAY</code></pre>
+        </section>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Managing Web Sessions</h1>
+
+        <div class="content">
+            <h2 class="title">Web Sessions: Maintaining User State</h2>
+            <p>A **web session** represents the period a user interacts with a website. Since HTTP is stateless, PHP sessions provide a way to make data accessible across multiple pages of an entire website, allowing the application to maintain information about a user's actions and preferences. The session data is managed in the superglobal associative array **$\text{\$_SESSION}$**.</p>
+
+            <h2 class="title">Starting and Identifying a Session</h2>
+            <p>To access or start a session, the **$\text{session\_start()}$** function must be called at the beginning of the PHP script, before any output. This function either resumes an existing session or initiates a new one by:</p>
+            <ul>
+                <li>Creating a **unique identifier** (a random 32-character hexadecimal string).</li>
+                <li>Automatically sending a cookie named **$\text{PHPSESSID}$** to the client to store this ID.</li>
+                <li>Creating a temporary file on the server (location set by $\text{session.save\_path}$ in $\text{php.ini}$) to store session variables.</li>
+            </ul>
+            <p>The unique identifier can be retrieved using the **$\text{session\_id()}$** function.</p>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Handling Session Variables and Destruction</h2>
+
+            <h3>Accessing and Setting Variables</h3>
+            <p>Session variables are simple key-value pairs stored in the $\text{\$_SESSION}$ array and persist across page loads. The $\text{isset()}$ function is used to check if a session variable already exists.</p>
+            <pre>
+&lt;?php
+   session_start();
+
+   // Set a new session variable
+   $_SESSION['user_theme'] = 'dark';
+
+   // Example: Incrementing a counter for each visit during the session
+   if( isset( $_SESSION['counter'] ) ) {
+      $_SESSION['counter'] += 1;
+   } else {
+      $_SESSION['counter'] = 1;
+   }
+
+   echo "Visits in this session: " . $_SESSION['counter'];
+?&gt;</pre>
+
+            <h3>Destroying Sessions</h3>
+            <p>To stop maintaining the user's state, a session can be destroyed:</p>
+            <ul>
+                <li>**To destroy a single variable:** Use the **$\text{unset()}$** function on the specific $\text{\$_SESSION}$ key (e.g., $\text{unset(\$_SESSION['counter'])}$).</li>
+                <li>**To destroy the entire session:** Call the **$\text{session\_destroy()}$** function. This removes the session data file on the server.</li>
+            </ul>
+        </div>
+    </div>
+</div>s

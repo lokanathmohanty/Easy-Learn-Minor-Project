@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - The Reflect Object</h1>
+
+    <div class="content">
+      <p>
+        In JavaScript, <strong>Reflect</strong> is a global object introduced in ES6. 
+        It contains static methods that provide a cleaner and safer way to interact 
+        with objects at runtime.
+      </p>
+      <p>
+        Unlike most global objects, <code>Reflect</code> is <strong>not a constructor</strong>. 
+        You cannot use it with <code>new</code> or call it as a function. 
+        All methods are static, similar to the <code>Math</code> object.
+      </p>
+      <p>
+        Reflect methods allow you to <strong>access, update, and delete properties</strong> 
+        of objects at runtime.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Key Features</h2>
+      <ul>
+        <li><strong>Object construction</strong> – create objects dynamically using <code>Reflect.construct()</code>.</li>
+        <li><strong>Function invocation</strong> – invoke functions with <code>Reflect.apply()</code>.</li>
+        <li><strong>Property manipulation</strong> – get, set, update, or delete properties safely.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Syntax</h2>
+      <pre><code>Reflect.method()</code></pre>
+      <p>
+        Replace <code>method</code> with any Reflect method, such as 
+        <code>get</code>, <code>set</code>, <code>apply</code>, 
+        <code>construct</code>, <code>has</code>, etc.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Reflect Methods</h2>
+      <ul>
+        <li><strong>apply()</strong> – invokes a function.</li>
+        <li><strong>construct()</strong> – creates an object with a specific prototype.</li>
+        <li><strong>defineProperty()</strong> – adds or edits a property.</li>
+        <li><strong>deleteProperty()</strong> – deletes a property.</li>
+        <li><strong>get()</strong> – retrieves a property value.</li>
+        <li><strong>getOwnPropertyDescriptor()</strong> – gets a property descriptor.</li>
+        <li><strong>getPrototypeOf()</strong> – retrieves the prototype of an object.</li>
+        <li><strong>has()</strong> – checks if a property exists.</li>
+        <li><strong>isExtensible()</strong> – checks if an object is extensible.</li>
+        <li><strong>ownKeys()</strong> – returns an object’s own keys (ignores inherited).</li>
+        <li><strong>preventExtensions()</strong> – prevents object extension.</li>
+        <li><strong>set()</strong> – sets a property value.</li>
+        <li><strong>setPrototypeOf()</strong> – sets or removes an object’s prototype.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Examples</h2>
+
+      <h3>Example 1: Using Reflect.get()</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;The model of the car is: &lt;/div&gt;
+   &lt;script&gt;
+      const car = { name: "Audi", model: "Q6", price: 7000000 };
+      let prop = "model";
+      let model = Reflect.get(car, prop);
+      document.getElementById("output").innerHTML += model;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> The model of the car is: Q6</p>
+
+      <h3>Example 2: Using Reflect.set()</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;The total doors in the Audi Q6 is: &lt;/div&gt;
+   &lt;script&gt;
+      const car = { name: "Audi", model: "Q6", price: 7000000 };
+      Reflect.set(car, "doors", 4);
+      document.getElementById("output").innerHTML += car.doors;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> The total doors in the Audi Q6 is: 4</p>
+
+      <h3>Example 3: Using Reflect.has()</h3>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="output"&gt;&lt;/p&gt;
+   &lt;script&gt;
+      const car = { name: "Audi", model: "Q6", price: 7000000 };
+      const isName = Reflect.has(car, "name");
+      if (isName) {
+         document.getElementById("output").innerHTML =
+           "The Car object contains the name.";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p><strong>Output:</strong> The Car object contains the name.</p>
+    </div>
+  </div>
+</div>

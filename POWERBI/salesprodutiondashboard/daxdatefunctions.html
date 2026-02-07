@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Power BI: DAX Date Functions</h1>
+    <div class="content">
+      <p>DAX Date functions facilitate working with date and time data in Power BI reports, enabling creation, manipulation, and analysis of date/time values within tables and measures.</p>
+      <p>These functions are essential for building complex data models supporting time-based calculations such as duration, periods, and comparisons.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Common DAX Date Functions with Examples</h2>
+    <div class="content">
+      <ul>
+        <li><strong>DATE(year, month, day):</strong> Creates a date value from year, month, and day inputs.
+          <br>Example: <code>d1 = DATE(2024, 9, 24)</code></li>
+
+        <li><strong>HOUR(datetime):</strong> Extracts the hour (0-23) from a date/time value.
+          <br>Example: <code>emp_hr = HOUR("February 22, 2024 7:00 pm")</code> returns 19.</li>
+
+        <li><strong>WEEKDAY(date):</strong> Returns a number 1 (Sunday) to 7 (Saturday) representing the day of the week.
+          <br>Example: <code>Id_day = WEEKDAY("March 04, 2024")</code> returns 2 (Monday).</li>
+
+        <li><strong>WEEKNUM(date, [return_type]):</strong> Returns the week number of the year for a given date.
+          <br>Example: <code>week_nm = WEEKNUM("September 01, 2010")</code></li>
+
+        <li><strong>NOW():</strong> Returns the current date and time.
+          <br>Example: <code>current_time = NOW()</code></li>
+
+        <li><strong>EOMONTH(start_date, months):</strong> Returns the last day of the month before or after a specified number of months.
+          <br>Example: <code>bill_py = EOMONTH("November 12, 2023", 2)</code> returns end of January 2024.</li>
+
+        <li><strong>YEAR(date):</strong> Extracts the year from a date.
+          <br>Example: <code>yt = YEAR("Mar 01, 2010")</code></li>
+
+        <li><strong>YEARFRAC(start_date, end_date):</strong> Calculates the fractional number of years between two dates.
+          <br>Example: <code>yt = YEARFRAC("September 23, 2007", "November 23, 2008")</code></li>
+
+        <li><strong>CALENDAR(start_date, end_date):</strong> Creates a table with a continuous range of dates.
+          <br>Example: <code>cal = CALENDAR("March 10, 2024", "March 30, 2024")</code></li>
+
+        <li><strong>DATEVALUE(text_date):</strong> Converts a date in text format to a date/time value.
+          <br>Example: <code>d_value = DATEVALUE("11 02 2010")</code></li>
+
+        <li><strong>DATEDIFF(start_date, end_date, interval):</strong> Calculates the difference between two dates in a specified interval (e.g., DAY, MONTH, YEAR).
+          <br>Example: <code>d_value = DATEDIFF(DATE(2020, 6, 20), DATE(2020, 11, 27), MINUTE)</code></li>
+      </ul>
+    </div>
+  </div>
+</div>

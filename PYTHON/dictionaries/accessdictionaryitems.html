@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Access Dictionary Items</h1>
+    <div class="content">
+      <p>
+        Accessing dictionary items in Python means retrieving values associated with specific keys in a dictionary. Dictionaries store data as unique key-value pairs.
+      </p>
+      <p>
+        You can access these values using square brackets <code>[]</code>, the <code>get()</code> method, looping, or dedicated methods like <code>keys()</code>, <code>values()</code>, and <code>items()</code>.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using Square Brackets <code>[]</code></h2>
+    <div class="content">
+      <pre><code>
+capitals = {
+  "Maharashtra": "Mumbai",
+  "Gujarat": "Gandhinagar",
+  "Telangana": "Hyderabad",
+  "Karnataka": "Bengaluru"
+}
+
+print("Capital of Gujarat is:", capitals["Gujarat"])
+print("Capital of Karnataka is:", capitals["Karnataka"])
+      </code></pre>
+      <p>Output:</p>
+      <p>Capital of Gujarat is: Gandhinagar<br>Capital of Karnataka is: Bengaluru</p>
+      <p><strong>Note:</strong> Using a key that does not exist causes a <code>KeyError</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using <code>get()</code> Method</h2>
+    <div class="content">
+      <p>
+        The <code>get()</code> method returns the value for a key or a default (usually None) if the key is missing, without raising an error.
+      </p>
+      <pre><code>
+print("Capital of Gujarat is:", capitals.get("Gujarat"))
+print("Capital of Karnataka is:", capitals.get("Karnataka"))
+print("Capital of Haryana is:", capitals.get("Haryana"))
+print("Capital of Haryana is:", capitals.get("Haryana", "Not found"))
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        Capital of Gujarat is: Gandhinagar<br>
+        Capital of Karnataka is: Bengaluru<br>
+        Capital of Haryana is: None<br>
+        Capital of Haryana is: Not found
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Accessing Keys with <code>keys()</code></h2>
+    <div class="content">
+      <pre><code>
+student_info = {
+  "name": "Alice",
+  "age": 21,
+  "major": "Computer Science"
+}
+
+all_keys = student_info.keys()
+print("Keys:", all_keys)
+      </code></pre>
+      <p>Output:</p>
+      <p>Keys: dict_keys(['name', 'age', 'major'])</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Accessing Values with <code>values()</code> and by Key</h2>
+    <div class="content">
+      <pre><code>
+name = student_info["name"]
+age = student_info.get("age")
+major = student_info.get("major")
+grad_year = student_info.get("graduation_year", "2023")
+
+print("Name:", name)
+print("Age:", age)
+print("Major:", major)
+print("Graduation Year:", grad_year)
+
+all_values = student_info.values()
+print("Values:", all_values)
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        Name: Alice<br>
+        Age: 21<br>
+        Major: Computer Science<br>
+        Graduation Year: 2023<br>
+        Values: dict_values(['Alice', 21, 'Computer Science'])
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Accessing Key-Value Pairs with <code>items()</code></h2>
+    <div class="content">
+      <pre><code>
+all_items = student_info.items()
+print("Items:", all_items)
+
+for key, value in all_items:
+    print(f"{key}: {value}")
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        Items: dict_items([('name', 'Alice'), ('age', 21), ('major', 'Computer Science')])<br>
+        name: Alice<br>
+        age: 21<br>
+        major: Computer Science
+      </p>
+    </div>
+  </div>
+
+ 
+  </div>
+</div>

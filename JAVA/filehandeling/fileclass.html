@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java File Class Example Analysis</h1>
+        <div class="content">
+            <p>Analyze the provided Java example code and its output to answer the following questions.</p>
+
+            <h2 class="title">Question 1: Path Type</h2>
+            <p>In the line <code>f = new File(s);</code>, are the files <code>"test1.txt"</code> and <code>"test2.txt"</code> created using a **relative** or **absolute** pathname? How do you know?</p>
+            
+            <h2 class="title">Answer 1</h2>
+            <div class="example">
+                <p>The files are created using a **relative** pathname.</p>
+                <p>A relative path is one that is relative to the current working directory of the program. Since the filenames <code>"test1.txt"</code> and <code>"test2.txt"</code> do not start with a root directory (like <code>/</code> on Unix or <code>C:\</code> on Windows), they are treated as relative paths. The subsequent call to <code>f.getAbsolutePath()</code> confirms this by converting and printing the full, system-dependent absolute path (e.g., <code>/home/cg/root/...</code>).</p>
+            </div>
+            
+            <hr>
+            
+            <h2 class="title">Question 2: Execution Check</h2>
+            <p>The problem description states that <code>test1.txt</code> is an executable file, but the output shows <code>is executable: false</code> for both files. Provide a likely explanation for this discrepancy based on common Java <code>File</code> class behavior and the execution environment.</p>
+            
+            <h2 class="title">Answer 2</h2>
+            <div class="example">
+                <p>The most likely explanation is that the **<code>canExecute()</code>** method, which checks for executability, is often dependent on **operating system permissions** rather than just a file's content or intended use.</p>
+                <p>Specifically:</p>
+                <ul>
+                    <li>The example is likely running on a Unix-like system where executability is determined by the **execute permission bit** (the 'x' in <code>rwx</code> permissions).</li>
+                    <li>Even if the user *considered* <code>test1.txt</code> to be an executable file, the program's output of <code>false</code> indicates that the file **lacked the necessary OS execute permission** at the time the code was run.</li>
+                    <li>Alternatively, the <code>canExecute()</code> method might be returning <code>false</code> if the abstract pathname simply **does not exist** at the time of execution, though the context implies they do exist.</li>
+                </ul>
+            </div>
+            
+            <hr>
+
+            <h2 class="title">Question 3: Directory Listing</h2>
+            <p>If you wanted to get a list of all files and directories *within* the directory represented by the absolute path <code>/home/cg/root/2880380/</code>, which **method** from the File Class Methods table would you use, and what data type would its return value be?</p>
+            
+            <h2 class="title">Answer 3</h2>
+            <div class="example">
+                <p>The method you would use is **<code>list()</code>**.</p>
+                <p>Its return value, according to the description, is an **array of strings** (<code>String[]</code>) naming the files and directories in that directory.</p>
+            </div>
+        </div>
+    </div>
+</div>

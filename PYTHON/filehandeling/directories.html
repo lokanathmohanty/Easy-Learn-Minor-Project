@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Directories</h1>
+
+    <div class="content">
+      <p>
+        Directories, or folders, in Python are locations on the filesystem used to store files and other directories, helping organize data hierarchically. Python provides the <code>os</code> and <code>os.path</code> modules, along with <code>shutil</code>, for working with directories.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Checking if a Directory Exists</h2>
+      <p>You can check whether a directory exists using <code>os.path.exists()</code>. It accepts relative or absolute path strings.</p>
+      <pre><code>import os
+
+directory_path = "D:\\Test\\MyFolder\\"
+
+if os.path.exists(directory_path):
+   print(f"The directory '{directory_path}' exists.")
+else:
+   print(f"The directory '{directory_path}' does not exist.")</code></pre>
+      <p>Output:</p>
+      <p><em>The directory 'D:\Test\MyFolder\' exists.</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Creating a Directory</h2>
+      <p>
+        Use <code>os.makedirs()</code> to create a directory, including intermediate directories if needed. You may specify permissions using the optional "mode" parameter.
+      </p>
+      <pre><code>import os
+
+new_directory = "new_dir.txt"
+
+try:
+   os.makedirs(new_directory)
+   print(f"Directory '{new_directory}' created successfully.")
+except OSError as e:
+   print(f"Error: Failed to create directory '{new_directory}'. {e}")</code></pre>
+      <p>Output:</p>
+      <p><em>Directory 'new_dir.txt' created successfully.</em></p>
+    </div>
+
+    <div class="content">
+      <h2>The <code>mkdir()</code> Method</h2>
+      <p>Creates a directory in the current working directory.</p>
+      <pre><code>import os
+
+os.mkdir("test")
+print("Directory created successfully")</code></pre>
+      <p>Output:</p>
+      <p><em>Directory created successfully</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Get Current Working Directory</h2>
+      <p>Retrieve the current directory Python is operating in using <code>os.getcwd()</code>.</p>
+      <pre><code>import os
+
+current_directory = os.getcwd()
+print(f"Current working directory: {current_directory}")</code></pre>
+      <p>Output:</p>
+      <p><em>Current working directory: /home/cg/root/667ba7570a5b7</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Listing Files and Directories</h2>
+      <p>List contents of a directory using <code>os.listdir()</code>.</p>
+      <pre><code>import os
+
+directory_path = r"D:\MyFolder\Pictures"
+
+try:
+   contents = os.listdir(directory_path)
+   print(f"Contents of '{directory_path}':")
+   for item in contents:
+      print(item)
+except OSError as e:
+   print(f"Error: Failed to list contents of directory '{directory_path}'. {e}")</code></pre>
+      <p>Output:</p>
+      <p><em>Contents of 'D:\MyFolder\Pictures':<br>Camera Roll<br>desktop.ini<br>Saved Pictures<br>Screenshots</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Changing the Current Working Directory</h2>
+      <p>Change the current directory using <code>os.chdir()</code>.</p>
+      <pre><code>import os
+
+new_directory = r"D:\MyFolder\Pictures"
+
+try:
+    os.chdir(new_directory)
+    print(f"Current working directory changed to '{new_directory}'.")
+except OSError as e:
+    print(f"Error: Failed to change working directory to '{new_directory}'. {e}")</code></pre>
+      <p>Output:</p>
+      <p><em>Current working directory changed to 'D:\MyFolder\Pictures'.</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Removing a Directory</h2>
+      <p>Remove an empty directory with <code>os.rmdir()</code>. To delete non-empty directories recursively, use <code>shutil.rmtree()</code>.</p>
+      <pre><code>import os
+directory_path = r"D:\MyFolder\new_dir"
+
+try:
+   os.rmdir(directory_path)
+   print(f"Directory '{directory_path}' successfully removed.")
+except OSError as e:
+   print(f"Error: Failed to remove directory '{directory_path}'. {e}")</code></pre>
+      <p>Output:</p>
+      <p><em>Directory 'D:\MyFolder\new_dir' successfully removed.</em></p>
+    </div>
+ 
+  </div>
+</div>

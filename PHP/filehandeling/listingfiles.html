@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP - Listing Files</h1>
+
+    <div class="content">
+      <p>
+        Listing files within a directory is a common task in PHP, useful for building **dynamic galleries**, **managing user uploads**, or **displaying available resources**. PHP offers two main approaches for this: the **stream-based** <code>readdir()</code> approach and the **array-based** <code>scandir()</code> approach.
+      </p>
+
+      <h2>The readdir() Function (Stream-Based Listing)</h2>
+      <p>
+        The <code>readdir()</code> function provides a stream-based way to read directory contents one entry at a time, similar to how file contents are read line by line. This method involves three steps:
+      </p>
+      <ul>
+        <li>
+          <strong><code>opendir()</code></strong>: Opens a directory stream handle.
+          <pre><code>opendir(string $directory): resource|false</code></pre>
+        </li>
+        <li>
+          <strong><code>readdir()</code></strong>: Reads the **next available entry** (file or subdirectory name) from the handle. It returns <code>false</code> when there are no more entries.
+          <pre><code>readdir(?resource $dir_handle = null): string|false</code></pre>
+        </li>
+        <li>
+          <strong><code>closedir()</code></strong>: Closes the directory stream handle.
+          <pre><code>closedir(?resource $dir_handle = null): void</code></pre>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Using opendir() and readdir()</h2>
+    <div class="content example">
+      <p>
+        This code iterates through all files and directories in the current working directory, printing each name.
+      </p>
+      <pre><code>&lt;?php
+   $dir = getcwd(); // Get current directory path
+   
+   // Check if it is a valid directory
+   if (is_dir($dir)) {
+      // Open the directory handle
+      if ($dh = opendir($dir)) {
+         // Loop through all entries until readdir returns false
+         while (($file = readdir($dh)) !== false) {
+            echo "filename: " . $file . "&lt;br&gt;";
+         }
+         // Close the directory handle
+         closedir($dh);
+      }
+   }
+?&gt;</code></pre>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <h2>The scandir() Function (Array-Based Listing)</h2>
+      <p>
+        The <code>scandir()</code> function reads the entire contents of a directory into an **indexed array**. This is often the simplest method for listing files.
+      </p>
+      <pre><code>scandir(string $directory, int $sorting_order = SCANDIR_SORT_ASCENDING): array|false</code></pre>
+      <ul>
+        <li>
+          <strong><code>$directory</code></strong>: The path of the directory to scan.
+        </li>
+        <li>
+          <strong><code>$sorting_order</code></strong>: Optional parameter. By default, it's <code>SCANDIR_SORT_ASCENDING</code> (alphabetical). Can be set to <code>SCANDIR_SORT_DESCENDING</code> or <code>SCANDIR_SORT_NONE</code>.
+        </li>
+      </ul>
+      <p class="example">
+        <strong>Note:</strong> Both <code>readdir()</code> and <code>scandir()</code> will typically include the special directory entries <code>.</code> (current directory) and <code>..</code> (parent directory) in their results.
+      </p>
+    </div>
+
+    <h2 class="title">Example: Using scandir()</h2>
+    <div class="content example">
+      <p>
+        This example scans a directory and then uses a <code>foreach</code> loop to iterate and display the contents of the returned array.
+      </p>
+      <pre><code>&lt;?php
+   $dir = "c:/xampp/php/mydir/";
+
+   $files = scandir($dir);
+   
+   // Loop through the array returned by scandir()
+   foreach ($files as $file) {
+      echo $file . PHP_EOL; // PHP_EOL is a platform-independent newline
+   }
+
+   // Example of descending sort
+   $files_desc = scandir($dir, SCANDIR_SORT_DESCENDING);
+   // ... can now loop through $files_desc
+?&gt;</code></pre>
+    </div>
+  </div>
+</div>

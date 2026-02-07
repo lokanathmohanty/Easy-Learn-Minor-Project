@@ -1,0 +1,186 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Object Properties</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>
+        An object property in JavaScript is a <strong>key: value</strong> pair, where the key is a string (also called the property name) and the value can be of any data type. 
+        Objects are essentially collections of such properties. These properties are not stored in a specific order.
+      </p>
+      <p>
+        Properties can be added, updated, or deleted dynamically in JavaScript objects.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+const fruit = {
+  name: "Apple",
+  price: 100,
+}
+      </pre>
+      <p>
+        In this example, <code>fruit</code> is an object with two properties: <code>name</code> and <code>price</code>.
+      </p>
+
+      <h2>Accessing Object Properties</h2>
+      <p>There are three ways to access object properties:</p>
+      <ul>
+        <li>Using dot notation</li>
+        <li>Using square bracket notation</li>
+        <li>Using an expression inside brackets</li>
+      </ul>
+
+      <h3>The Dot Notation</h3>
+      <pre>
+obj.prop
+      </pre>
+      <h3>Example</h3>
+      <pre>
+const fruit = {
+  name: "Banana",
+  price: 20,
+}
+console.log("The price of the " + fruit.name + " is " + fruit.price);
+      </pre>
+      <h3>Output</h3>
+      <p>The price of the Banana is 20</p>
+
+      <h3>The Square Bracket Notation</h3>
+      <pre>
+obj["prop"]
+      </pre>
+      <p>
+        Square brackets are required when using keys that are invalid identifiers (for example, keys with spaces, numbers, or special characters).
+      </p>
+      <h3>Example</h3>
+      <pre>
+const fruit = {
+  name: "Banana",
+  price: 20,
+}
+console.log("The price of the " + fruit["name"] + " is " + fruit["price"]);
+      </pre>
+      <h3>Output</h3>
+      <p>The price of the Banana is 20</p>
+
+      <h3>Using Expressions Inside Brackets</h3>
+      <pre>
+obj[expression]
+      </pre>
+      <h3>Example</h3>
+      <pre>
+const num = {
+  10: "Ten",
+  20: "Twenty",
+}
+const x = 10;
+console.log(num[x + 10]); 
+      </pre>
+      <h3>Output</h3>
+      <p>Twenty</p>
+
+      <h2>Accessing Nested Object Properties</h2>
+      <pre>
+Obj.prop.nestedProp
+// OR
+Obj["prop"]["nestedProp"];
+      </pre>
+      <h3>Example</h3>
+      <pre>
+const cars = {
+  audi: {
+    model: "Q7",
+    price: 10000000,
+  },
+  bmw: {
+    model: "S20D",
+    price: 8000000,
+  }
+}
+console.log("Audi Model: " + cars.audi.model + " Price: " + cars.audi.price);
+console.log("BMW Model: " + cars["bmw"]["model"] + " Price: " + cars["bmw"]["price"]);
+      </pre>
+      <h3>Output</h3>
+      <p>
+        Audi Model: Q7 Price: 10000000<br>
+        BMW Model: S20D Price: 8000000
+      </p>
+
+      <h2>Adding or Updating Object Properties</h2>
+      <pre>
+obj.prop = newValue;
+obj["prop"] = newValue;
+      </pre>
+      <h3>Example</h3>
+      <pre>
+const fruit = {
+  name: "Watermelon",
+  price: 150,
+}
+fruit.name = "Apple";
+fruit["price"] = 200;
+fruit.expiry = "5 days";
+console.log(fruit);
+      </pre>
+      <h3>Output</h3>
+      <p>{ name: "Apple", price: 200, expiry: "5 days" }</p>
+
+      <h2>Deleting Object Properties</h2>
+      <pre>
+delete obj.prop;
+      </pre>
+      <h3>Example</h3>
+      <pre>
+const fruit = {
+  name: "Watermelon",
+  price: 150,
+}
+delete fruit.name;
+console.log(fruit);
+      </pre>
+      <h3>Output</h3>
+      <p>{ "price": 150 }</p>
+
+      <h2>Enumerating Object Properties</h2>
+      <p>You can use <code>for...in</code> loop or <code>Object.keys()</code> to enumerate object properties.</p>
+      <pre>
+for (let key in table) {
+  console.log(key + ": " + table[key]);
+}
+      </pre>
+      <h3>Example</h3>
+      <pre>
+const table = {
+  color: "brown",
+  shape: "round",
+  price: 10000,
+}
+
+for (let key in table) {
+  console.log(key + ": " + table[key]);
+}
+      </pre>
+      <h3>Output</h3>
+      <p>
+        color: brown<br>
+        shape: round<br>
+        price: 10000
+      </p>
+
+      <h2>Property Attributes</h2>
+      <p>Each object property has four attributes:</p>
+      <ul>
+        <li><strong>value</strong> – the property's value</li>
+        <li><strong>enumerable</strong> – whether the property can be iterated</li>
+        <li><strong>configurable</strong> – whether the property can be reconfigured</li>
+        <li><strong>writable</strong> – whether the property can be modified</li>
+      </ul>
+      <p>
+        By default, only the <code>value</code> attribute can be directly changed. To modify other attributes, you need <code>Object.defineProperty()</code> or <code>Object.defineProperties()</code>.
+      </p>
+
+    </div>
+  </div>
+</div>
+ 

@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Constructors</h1>
+    <div class="content">
+      <p>A <strong>constructor</strong> in Python is an instance method that is automatically called when a new object of the class is created. Its main role is to assign values to instance variables as soon as the object is declared.</p>
+      <p>Python uses the special method <code>__init__()</code> as a constructor to initialize instance variables. This method always takes a mandatory first parameter named <code>self</code>, which refers to the instance itself.</p>
+      
+      <h2 class="title">Creating a Constructor in Python</h2>
+      <p>Define the <code>__init__()</code> method inside the class and initialize instance variables:</p>
+      <pre><code>def __init__(self, parameters):
+    # initialize instance variables</code></pre>
+      <p>You can name the first parameter anything, but it is conventionally named <code>self</code>.</p>
+      
+      <h2 class="title">Types of Constructors</h2>
+      <ul>
+        <li><strong>Default Constructor:</strong> Constructor with only the <code>self</code> parameter.</li>
+        <li><strong>Parameterized Constructor:</strong> Constructor with additional parameters to initialize object with different values.</li>
+      </ul>
+      
+      <h3 class="title">Default Constructor Example</h3>
+      <pre><code>class Employee:
+    'Common base class for all employees'
+    def __init__(self):
+        self.name = "Bhavana"
+        self.age = 24
+
+e1 = Employee()
+print("Name: {}".format(e1.name))
+print("age: {}".format(e1.age))</code></pre>
+      <p>Output:<br>Name: Bhavana<br>age: 24</p>
+      
+      <h3 class="title">Parameterized Constructor Example</h3>
+      <pre><code>class Employee:
+    'Common base class for all employees'
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+e1 = Employee("Bhavana", 24)
+e2 = Employee("Bharat", 25)
+
+print("Name: {}".format(e1.name))
+print("age: {}".format(e1.age))
+print("Name: {}".format(e2.name))
+print("age: {}".format(e2.age))</code></pre>
+      <p>Output:<br>Name: Bhavana<br>age: 24<br>Name: Bharat<br>age: 25</p>
+      
+      <h3 class="title">Default Values in Constructor</h3>
+      <p>You can assign default values to constructor parameters so the object can be created with or without passing arguments:</p>
+      <pre><code>class Employee:
+    'Common base class for all employees'
+    def __init__(self, name="Bhavana", age=24):
+        self.name = name
+        self.age = age
+
+e1 = Employee()
+e2 = Employee("Bharat", 25)
+
+print("Name: {}".format(e1.name))
+print("age: {}".format(e1.age))
+print("Name: {}".format(e2.name))
+print("age: {}".format(e2.age))</code></pre>
+      <p>Output:<br>Name: Bhavana<br>age: 24<br>Name: Bharat<br>age: 25</p>
+      
+      <h2 class="title">Instance Methods</h2>
+      <p>Besides the constructor, classes can have other instance methods that operate on instance variables. These methods take <code>self</code> as a parameter.</p>
+      
+      <h3 class="title">Example</h3>
+      <pre><code>class Employee:
+    def __init__(self, name="Bhavana", age=24):
+        self.name = name
+        self.age = age
+        
+    def displayEmployee(self):
+        print("Name : ", self.name, ", age: ", self.age)
+
+e1 = Employee()
+e2 = Employee("Bharat", 25)
+
+e1.displayEmployee()
+e2.displayEmployee()</code></pre>
+      <p>Output:<br>Name : Bhavana , age: 24<br>Name : Bharat , age: 25</p>
+      
+      <h2 class="title">Adding, Modifying or Deleting Attributes Dynamically</h2>
+      <p>You can add, modify, or delete attributes on object instances at runtime:</p>
+      <pre><code># Add a 'salary' attribute
+emp1.salary = 7000 
+# Modify 'name' attribute
+emp1.name = 'xyz'
+# Delete 'salary' attribute
+del emp1.salary</code></pre>
+
+      <h2 class="title">Using Built-in Functions for Attribute Access</h2>
+      <ul>
+        <li><code>getattr(obj, name[, default])</code> - Access an attribute of an object.</li>
+        <li><code>hasattr(obj, name)</code> - Check if an attribute exists.</li>
+        <li><code>setattr(obj, name, value)</code> - Set an attribute value; creates if it doesn't exist.</li>
+        <li><code>delattr(obj, name)</code> - Delete an attribute.</li>
+      </ul>
+      <pre><code>print(hasattr(e1, 'salary'))  # False
+print(getattr(e1, 'name'))      # Bhavana
+setattr(e1, 'salary', 7000)    
+delattr(e1, 'age')</code></pre>
+      <p>Output:<br>False<br>Bhavana</p>
+      
+      <h2 class="title">Multiple Constructors in Python</h2>
+      <p>Python does not support multiple constructors directly. The last <code>__init__()</code> definition overrides previous ones.</p>
+      <p>However, you can achieve similar functionality by using variable arguments to handle different initialization scenarios.</p>
+      
+      <h3 class="title">Example Using *args</h3>
+      <pre><code>class Student:
+    def __init__(self, *args):
+        if len(args) == 1:
+            self.name = args[0]
+        elif len(args) == 2:
+            self.name = args[0]
+            self.age = args[1]
+        elif len(args) == 3:
+            self.name = args[0]
+            self.age = args[1]
+            self.gender = args[2]
+
+st1 = Student("Shrey")
+print("Name:", st1.name)
+st2 = Student("Ram", 25)
+print(f"Name: {st2.name} and Age: {st2.age}")
+st3 = Student("Shyam", 26, "M")
+print(f"Name: {st3.name}, Age: {st3.age} and Gender: {st3.gender}")
+</code></pre>
+      <p>Output:<br>Name: Shrey<br>Name: Ram and Age: 25<br>Name: Shyam, Age: 26 and Gender: M</p>
+    </div>
+  </div>
+</div>

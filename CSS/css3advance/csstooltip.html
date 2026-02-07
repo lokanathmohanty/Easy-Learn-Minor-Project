@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Tooltips</h1>
+    <div class="content">
+      <p>
+        CSS Tooltips are small pop-up boxes that appear when a user hovers over an element, providing additional information or context. Tooltips are styled and positioned using CSS properties like <b>inset</b>, <b>translateX</b>, <b>translateY</b>, etc. 
+      </p>
+
+      <h2>Demo Tooltip Examples</h2>
+      <p>The tooltip will be visible when you hover over these texts:</p>
+      <ul>
+        <li>Top</li>
+        <li>Right</li>
+        <li>Left</li>
+        <li>Bottom</li>
+      </ul>
+
+      <h2>Table of Contents</h2>
+      <ul>
+        <li>How to Create Tooltips in CSS?</li>
+        <li>Basic Tooltip</li>
+        <li>Positioning Tooltips</li>
+        <li>Tooltip Arrows</li>
+        <li>Fade In Tooltips</li>
+        <li>Advantages of Tooltips</li>
+      </ul>
+
+      <h2>How to Create Tooltips in CSS?</h2>
+      <ol>
+        <li><b>Setting Up the Element</b>: Add a button, image, or any element to trigger the tooltip.</li>
+        <li><b>Create the Tooltip Text</b>: Use a <code>&lt;span&gt;</code> to hold tooltip text and hide it initially with <code>visibility: hidden</code>.</li>
+        <li><b>Position the Tooltip</b>: Use <code>position: absolute</code> on tooltip, <code>position: relative</code> on container.</li>
+        <li><b>Style the Tooltip</b>: Add background, text color, padding, etc.</li>
+        <li><b>Display on Hover</b>: Use the <code>:hover</code> effect to show tooltip when user hovers.</li>
+      </ol>
+
+      <h2>Basic Tooltip</h2>
+      <p>
+        This example shows how to create a simple tooltip that displays when hovered:
+      </p>
+      <pre>
+&lt;div class="tooltip"&gt;
+  Hover over this text
+  &lt;span class="tooltiptext"&gt;This is a tooltip&lt;/span&gt;
+&lt;/div&gt;
+      </pre>
+
+      <h2>Positioning Tooltips</h2>
+      <p>
+        Tooltips can be positioned around the container (top, bottom, left, right).  
+        The container is set to <code>position: relative</code>, while the tooltip is set to <code>position: absolute</code>. Example:
+      </p>
+      <pre>
+.element {
+   position: relative;
+}
+.tooltip {
+   position: absolute;
+   top: 50px;
+   left: 50px;
+}
+      </pre>
+      <p>Here’s how to create tooltips in all directions:</p>
+      <ul>
+        <li>Top</li>
+        <li>Bottom</li>
+        <li>Left</li>
+        <li>Right</li>
+      </ul>
+
+      <h2>Tooltip Arrows</h2>
+      <p>
+        Tooltip arrows are created using <code>::after</code> pseudo-element with empty content and styled with <code>border</code> to create triangles.
+      </p>
+      <pre>
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+      </pre>
+
+      <h2>Fade In Tooltips</h2>
+      <p>
+        By setting initial <code>opacity: 0</code> and using <code>transition</code>, tooltips can fade in smoothly.
+      </p>
+      <pre>
+.tooltip .tooltiptext {
+   opacity: 0;
+   transition: opacity 2s;
+}
+.tooltip:hover .tooltiptext {
+   opacity: 1;
+}
+      </pre>
+
+      <h2>Advantages of Tooltips</h2>
+      <ul>
+        <li>Provide extra info without cluttering the webpage.</li>
+        <li>Help users understand elements better.</li>
+        <li>Highly customizable (colors, fonts, animations).</li>
+        <li>Easy to implement without complex JavaScript.</li>
+      </ul>
+    </div>
+  </div>
+</div>

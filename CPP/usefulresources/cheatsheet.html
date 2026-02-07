@@ -1,0 +1,130 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Cheat Sheet: Core Syntax &amp; Modern Features 🚀</h1>
+
+        <div class="content">
+            <h2 class="title">I. Compilation &amp; Basic Structure</h2>
+            <pre class="example">
+// 1. Compile &amp; Run (Linux/macOS)
+g++ file.cpp -o program
+./program
+
+// 2. Basic Structure
+#include &lt;iostream&gt; // Header for input/output
+
+int main() {
+    // Standard output
+    std::cout &lt;&lt; "Hello" &lt;&lt; std::endl; 
+    
+    // Standard input
+    int x;
+    std::cin &gt;&gt; x; 
+    
+    return 0; // Success
+}
+</pre>
+            <hr>
+
+            <h2 class="title">II. Control Flow</h2>
+            <pre class="example">
+// 1. If/Else
+if (condition) {
+    // code
+} else if (other_condition) {
+    // code
+} else {
+    // code
+}
+
+// 2. For Loop
+for (int i = 0; i &lt; 10; ++i) {
+    // 10 iterations
+}
+
+// 3. Range-based For (Modern C++)
+std::vector&lt;int&gt; v = {1, 2, 3};
+for (int val : v) { 
+    // val is a COPY
+}
+for (int&amp; val : v) {
+    // val is a REFERENCE (can modify original)
+}
+
+// 4. While Loop
+while (condition) {
+    // code
+}
+</pre>
+            <hr>
+
+            <h2 class="title">III. Memory, Pointers, and References</h2>
+            <pre class="example">
+int a = 10;
+
+// 1. Pointer (stores address)
+int* ptr = &amp;a; // &amp; is the "address of" operator
+std::cout &lt;&lt; *ptr; // * is the "dereference" operator (access value)
+
+// 2. Reference (an alias)
+int&amp; ref = a; // Must be initialized
+ref = 20;    // Changes 'a' to 20
+
+// 3. Dynamic Memory (Heap)
+int* dynamic_int = new int(42);
+delete dynamic_int;
+dynamic_int = nullptr; // Always set to nullptr after delete
+</pre>
+            <hr>
+
+            <h2 class="title">IV. Modern C++ Features (C++11+)</h2>
+            
+            <h3>Smart Pointers (RAII)</h3>
+            <pre class="example">
+#include &lt;memory&gt;
+// Unique ownership; cannot be copied
+std::unique_ptr&lt;int&gt; p1(new int(5)); 
+// Shared ownership; reference counted
+std::shared_ptr&lt;int&gt; p2 = std::make_shared&lt;int&gt;(10); 
+</pre>
+
+            <h3>Lambdas (Anonymous Functions)</h3>
+            <pre class="example">
+int x = 5;
+int y = 10;
+
+// [capture] (params) -> return_type { body }
+auto add = [](int a, int b) { return a + b; };
+std::cout &lt;&lt; add(1, 2); // Output: 3
+
+// Capture 'x' by reference (&amp;), 'y' by value (=)
+auto use_vars = [=, &amp;x]() { 
+    x = x + y; // Modifies external x
+    // y = 20; // ERROR: y is const (captured by value)
+};
+use_vars(); // x is now 15
+</pre>
+
+            <h3>Standard Template Library (STL)</h3>
+            <pre class="example">
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;map&gt;
+#include &lt;algorithm&gt;
+
+// Vector (Dynamic Array)
+std::vector&lt;int&gt; nums = {5, 2, 8};
+nums.push_back(1); // Add to end
+std::sort(nums.begin(), nums.end()); // Use &lt;algorithm&gt;
+
+// Map (Key-Value/Dictionary)
+std::map&lt;std::string, int&gt; ages;
+ages["Alice"] = 30;
+std::cout &lt;&lt; ages["Alice"];
+
+// Unordered Containers (Hash Tables - fast O(1) average lookup)
+std::unordered_set&lt;int&gt; s = {1, 2, 2}; // Stores unique elements
+std::unordered_multiset&lt;int&gt; ms = {1, 2, 2}; // Allows duplicates
+</pre>
+        </div>
+    </div>
+</div>

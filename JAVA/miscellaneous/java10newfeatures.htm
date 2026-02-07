@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java 10 - New Features (APIs & Options)</h1>
+
+        <div class="content">
+            <h2>Overview and Release Cadence Changes 🔄</h2>
+            <p>**Java 10**, released on **March 20, 2018**, marked a significant shift in the Java release strategy. Oracle adopted a new **6-month rapid release cadence** (non-LTS) and introduced a Long-Term Support (LTS) model for specific releases (e.g., Java 11). This ensures features are shipped faster using a "release train" concept.</p>
+            <p>Java 10 is a **non-LTS** release. Notably, Oracle also began promoting **OpenJDK** as the primary, freely distributable JDK, making Java much friendlier for cloud and container deployment.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Key New Features (JEPs)</h2>
+            <p>While Java 10 introduced many features, the most impactful for day-to-day coding and performance are:</p>
+            <ul>
+                <li>
+                    <strong>JEP 286: Local Variable Type Inference (<code>var</code>) ✨:</strong> Allowed the use of the reserved type name **<code>var</code>** for local variable declarations. The compiler infers the actual type, reducing boilerplate code while maintaining strong static typing.
+                </li>
+                <li>
+                    <strong>JEP 307: Parallel Full GC for G1:</strong> Improved the performance of the **G1 Garbage Collector** by introducing a parallel full garbage collection phase, aiming to reduce latency and improve throughput.
+                </li>
+                <li>
+                    <strong>JEP 304: Garbage-Collector Interface:</strong> Provided a clean interface for GCs to plug into the JDK, improving modularity and maintenance.
+                </li>
+                <li>
+                    <strong>JEP 310: Application Class-Data Sharing (CDS):</strong> Extended CDS to allow sharing of archives of loaded classes for application-specific classes, which significantly improves startup time and reduces memory footprint, especially in multiple JVMs on the same machine.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>New APIs and Utility Methods</h2>
+            <p>Over 70 new APIs and options were added, focusing on collection management and defensive coding:</p>
+
+            <h3>1. Unmodifiable Collections Creation</h3>
+            <p>New methods were introduced for defensive copying of collections, resulting in **immutable** collections:</p>
+            <ul>
+                <li>
+                    <strong><code>List.copyOf(Collection)</code>, <code>Set.copyOf(Collection)</code>, <code>Map.copyOf(Map)</code>:</strong> These methods create an unmodifiable copy of an existing collection. Attempts to modify the resulting collection will throw an <code>UnsupportedOperationException</code>.
+                </li>
+                <li>
+                    <strong>Stream Collectors:</strong> New static methods in the <code>Collectors</code> class create immutable collections directly from a stream pipeline: <strong><code>toUnmodifiableList()</code></strong>, **<code>toUnmodifiableSet()</code>**, and **<code>toUnmodifiableMap()</code>**.
+                </li>
+            </ul>
+
+            <h3>2. Optional Class Enhancement</h3>
+            <p>The **<code>java.util.Optional</code>** class gained a clear method for retrieving the value or throwing an exception:</p>
+            <ul>
+                <li>
+                    <strong><code>Optional.orElseThrow()</code>:</strong> This method is now the preferred, cleaner alternative to the older <code>get()</code> method. If the <code>Optional</code> is empty, it throws <code>NoSuchElementException</code>.
+                </li>
+            </ul>
+
+            <h3>3. Javadoc Enhancements</h3>
+            <p>The <code>javadoc</code> tool received new options for richer documentation:</p>
+            <ul>
+                <li>**<code>--add-stylesheet</code>:** Allows the use of multiple CSS stylesheets.</li>
+                <li>**<code>--overridden-methods=value</code>:** Simplifies documentation by allowing inherited and overridden methods to be grouped together.</li>
+                <li>**<code>{@summary ...}</code>:** A new inline tag to explicitly specify the short summary text for an API description.</li>
+            </ul>
+        </div>
+    </div>
+</div>

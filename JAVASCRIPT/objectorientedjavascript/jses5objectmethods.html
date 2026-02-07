@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript - ES5 Object Methods</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+
+      <h1 class="title">JavaScript - ES5 Object Methods</h1>
+
+      <div class="content">
+        <p>
+          The ES5 Object methods in JavaScript are used to manipulate and protect objects. 
+          ECMAScript 5 (ES5), introduced in 2009, added many new object methods to JavaScript.
+        </p>
+        <p>
+          These methods provide efficient ways to iterate through object properties, manipulate values, 
+          and perform operations on objects. Object manipulation is a fundamental aspect of JavaScript programming.
+        </p>
+      </div>
+
+      <div class="content">
+        <h2>JavaScript ES5 Object Methods</h2>
+        <p>
+          In ES5, object-related methods were added to manipulate and protect objects. 
+          Below are some important ones:
+        </p>
+      </div>
+
+      <div class="content">
+        <h2>Methods to Manipulate the Object</h2>
+        <ul>
+          <li><code>create()</code> – Create new objects with a specified prototype.</li>
+          <li><code>defineProperty()</code> – Add or modify a single property.</li>
+          <li><code>defineProperties()</code> – Define multiple properties at once.</li>
+          <li><code>getOwnPropertyDescriptor()</code> – Get a property descriptor of an object property.</li>
+          <li><code>getOwnPropertyNames()</code> – Get all property names of an object.</li>
+          <li><code>getPrototypeOf()</code> – Get the prototype of an object.</li>
+          <li><code>keys()</code> – Get enumerable keys of the object in array format.</li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <h2>Methods to Protect the Object</h2>
+        <ul>
+          <li><code>freeze()</code> – Prevent adding or modifying properties.</li>
+          <li><code>seal()</code> – Seal the object (no new or deleted properties).</li>
+          <li><code>isFrozen()</code> – Check if an object is frozen.</li>
+          <li><code>isSealed()</code> – Check if an object is sealed.</li>
+          <li><code>isExtensible()</code> – Check if an object can be extended.</li>
+          <li><code>preventExtensions()</code> – Prevent new properties from being added.</li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <h2>Object.create()</h2>
+        <p>
+          Creates a new object with the specified prototype object and properties.
+        </p>
+        <pre><code>const person = { firstName: "John", lastName: "Doe" };
+const student = Object.create(person);
+student.age = 18;
+
+console.log(student.firstName); // John
+console.log(student.lastName);  // Doe
+console.log(student.age);       // 18
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.defineProperty()</h2>
+        <p>
+          Defines or modifies a single property in an object.
+        </p>
+        <pre><code>const car = { brand: "Tata", model: "Nexon", price: 1000000 };
+
+Object.defineProperty(car, "gears", {
+  value: 6,
+  writable: true,
+  enumerable: true,
+  configurable: true
+});
+
+console.log(car);
+// { brand: "Tata", model: "Nexon", price: 1000000, gears: 6 }
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.defineProperties()</h2>
+        <p>
+          Defines or modifies multiple properties of an object.
+        </p>
+        <pre><code>const obj = {};
+
+Object.defineProperties(obj, {
+  property1: { value: 42, writable: true },
+  property2: { value: "Tutorials Point", writable: false }
+});
+
+console.log(obj.property1); // 42
+console.log(obj.property2); // Tutorials Point
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.getOwnPropertyDescriptor()</h2>
+        <p>
+          Returns a property descriptor for a specific property.
+        </p>
+        <pre><code>const obj = { property1: 42 };
+const descriptor = Object.getOwnPropertyDescriptor(obj, 'property1');
+
+console.log(descriptor.configurable); // true
+console.log(descriptor.value);        // 42
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.getOwnPropertyNames()</h2>
+        <pre><code>const obj = { a: 10, b: 20, c: 30 };
+console.log(Object.getOwnPropertyNames(obj)); // ["a","b","c"]
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.getPrototypeOf()</h2>
+        <pre><code>const prototype1 = { name: "John Doe" };
+const obj = Object.create(prototype1);
+console.log(Object.getPrototypeOf(obj)); // { name: "John Doe" }
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.keys()</h2>
+        <pre><code>const person = { name: "John Doe", age: 20, profession: "Engineer" };
+console.log(Object.keys(person)); // ["name","age","profession"]
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.freeze()</h2>
+        <pre><code>const obj = { prop: 23 };
+Object.freeze(obj);
+
+obj.prop = 33; // Error in strict mode
+console.log(obj.prop); // 23
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.seal()</h2>
+        <pre><code>const obj = { property: 34 };
+Object.seal(obj);
+
+obj.property = 33;
+delete obj.property; // Cannot delete
+console.log(obj.property); // 33
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.isFrozen()</h2>
+        <pre><code>const person = { age: 21 };
+
+console.log(Object.isFrozen(person)); // false
+Object.freeze(person);
+console.log(Object.isFrozen(person)); // true
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.isSealed()</h2>
+        <pre><code>const person = { name: "John Doe" };
+
+console.log(Object.isSealed(person)); // false
+Object.seal(person);
+console.log(Object.isSealed(person)); // true
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.preventExtensions()</h2>
+        <pre><code>const person = {};
+Object.preventExtensions(person);
+
+try {
+  Object.defineProperty(person, "name", { value: "John Doe" });
+} catch (e) {
+  console.log(e); 
+  // TypeError: Cannot define property name, object is not extensible
+}
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h2>Object.isExtensible()</h2>
+        <pre><code>const person = { name: "John Doe" };
+
+console.log(Object.isExtensible(person)); // true
+Object.preventExtensions(person);
+console.log(Object.isExtensible(person)); // false
+</code></pre>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

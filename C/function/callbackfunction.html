@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Callback Function in C</h1>
+
+    <div class="content">
+      <p>Callback functions are extremely versatile, especially in event-driven programming. When a specific event is triggered, a callback function mapped to it is executed in response. For example, in GUI applications, a button click can trigger a series of predefined actions.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">What is a Callback Function?</h2>
+      <p>A callback function is any executable code passed as an argument to other code, which is expected to call or execute it at a given time. In other words, if a function's reference is passed as an argument to another function for later execution, it is called a callback function.</p>
+      <p>The mechanism relies on <strong>function pointers</strong>, which are variables storing the memory address of a function.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Function Pointer Example</h2>
+      <pre><code>void hello() {
+    printf("Hello World.");
+}
+
+// Declare a function pointer pointing to hello
+void (*ptr)() = &hello;
+
+// Call the function via pointer
+(*ptr)();</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example of Callback Function in C</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+void hello() {
+    printf("Hello World\n");
+}
+
+void callback(void (*ptr)()) {
+    printf("Calling a function with its pointer\n");
+    (*ptr)();   // calling the callback function
+}
+
+int main() {
+    void (*ptr)() = hello;
+    callback(ptr);
+    return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Calling a function with its pointer
+Hello World</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Callback Function With Arguments</h2>
+      <p>Here, two functions with identical prototypes are defined: <code>square()</code> and <code>root()</code>.</p>
+      <pre><code>int square(int val) {
+    return val * val;
+}
+
+int root(int val) {
+    return pow(val, 0.5);
+}</code></pre>
+      <p>The callback function receives an integer argument and a function pointer matching the prototype.</p>
+      <pre><code>int callback(int a, int (*ptr)(int)) {
+    int ret = (*ptr)(a);
+    return ret;
+}</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Complete Example: Callback with Arguments</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int callback(int a, int (*print_callback)(int));
+int square(int value);
+int root(int value);
+
+int main() {
+    int x = 4;
+
+    printf("Square of x: %d is %d\n", x, callback(x, square));
+    printf("Square root of x: %d is %d\n", x, callback(x, root));
+
+    return 0;
+}
+
+int callback(int a, int (*ptr)(int)) {
+    int ret = (*ptr)(a);
+    return ret;
+}
+
+int square(int val) {
+    return val * val;
+}
+
+int root(int val) {
+    return pow(val, 0.5);
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Square of x: 4 is 16
+Square root of x: 4 is 2</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Types of Callbacks in C</h2>
+      <ul>
+        <li><strong>Synchronous Callback:</strong> The calling function waits for the callback to complete before proceeding. Useful for immediate results or ensuring a task finishes before moving on.</li>
+        <li><strong>Asynchronous Callback:</strong> The calling function triggers the callback but does not wait for it to finish. It continues execution, enabling non-blocking operations. Common in event-driven programming.</li>
+      </ul>
+      <p>Generic callback functions enhance the flexibility and adaptability of C programs by allowing functions to be passed and executed dynamically.</p>
+    </div>
+
+    <div class="content">
+      <p>In this chapter, we demonstrated using function pointers to increase program flexibility and showed how to create generic callback functions not limited to specific function pointer types.</p>
+    </div>
+  </div>
+</div>

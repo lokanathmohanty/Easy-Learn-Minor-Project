@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Strings</h1>
+    <div class="content">
+      <p>
+        Any value written within a pair of single or double quotes in R is treated as a string. Internally, R stores every string within double quotes, even if it was created with single quotes.
+      </p>
+
+      <h2 class="title">Rules for String Construction</h2>
+      <ul>
+        <li>The opening and closing quotes must match — both single or both double.</li>
+        <li>Double quotes can be included inside strings created with single quotes, and vice versa.</li>
+        <li>Mixing different quote types for opening and closing is not allowed.</li>
+        <li>Double quotes within double quotes or single quotes within single quotes are not allowed without escaping.</li>
+      </ul>
+
+      <h2 class="title">Examples of Valid Strings</h2>
+      <pre><code>a &lt;- 'Start and end with single quote'
+print(a)
+b &lt;- "Start and end with double quotes"
+print(b)
+c &lt;- "single quote ' in between double quotes"
+print(c)
+d &lt;- 'Double quotes " in between single quote'
+print(d)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] "Start and end with single quote"
+[1] "Start and end with double quotes"
+[1] "single quote ' in between double quote"
+[1] "Double quote \" in between single quote"
+</code></pre>
+
+      <h2 class="title">Examples of Invalid Strings</h2>
+      <pre><code>e &lt;- 'Mixed quotes"
+print(e)
+f &lt;- 'Single quote ' inside single quote'
+print(f)
+g &lt;- "Double quotes " inside double quotes"
+print(g)
+</code></pre>
+      <p>These produce errors due to invalid quote usage.</p>
+
+      <h2 class="title">String Manipulation</h2>
+      <h3 class="title">Concatenating Strings: <code>paste()</code> Function</h3>
+      <pre><code>a &lt;- "Hello"
+b &lt;- 'How'
+c &lt;- "are you? "
+print(paste(a, b, c))
+print(paste(a, b, c, sep = "-"))
+print(paste(a, b, c, sep = "", collapse = ""))
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] "Hello How are you? "
+[1] "Hello-How-are you? "
+[1] "HelloHoware you? "
+</code></pre>
+
+      <h3 class="title">Formatting Numbers & Strings: <code>format()</code> Function</h3>
+      <pre><code># Display total digits; round last digit
+result &lt;- format(23.123456789, digits = 9)
+print(result)
+# Numbers in scientific notation
+result &lt;- format(c(6, 13.14521), scientific = TRUE)
+print(result)
+# Set minimum number of digits after decimal
+result &lt;- format(23.47, nsmall = 5)
+print(result)
+# Format treats everything as string
+result &lt;- format(6)
+print(result)
+# Pad with blanks for width
+result &lt;- format(13.7, width = 6)
+print(result)
+# Left justify
+result &lt;- format("Hello", width = 8, justify = "l")
+print(result)
+# Center justify
+result &lt;- format("Hello", width = 8, justify = "c")
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] "23.1234568"
+[1] "6.000000e+00" "1.314521e+01"
+[1] "23.47000"
+[1] "6"
+[1] "  13.7"
+[1] "Hello   "
+[1] " Hello  "
+</code></pre>
+
+      <h3 class="title">Counting Characters: <code>nchar()</code> Function</h3>
+      <pre><code>result &lt;- nchar("Count the number of characters")
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 30
+</code></pre>
+
+      <h3 class="title">Changing Case: <code>toupper()</code> & <code>tolower()</code></h3>
+      <pre><code># To upper
+result &lt;- toupper("Changing To Upper")
+print(result)
+# To lower
+result &lt;- tolower("Changing To Lower")
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] "CHANGING TO UPPER"
+[1] "changing to lower"
+</code></pre>
+
+      <h3 class="title">Extract Parts of a String: <code>substring()</code> Function</h3>
+      <pre><code># Extract characters 5 to 7
+result &lt;- substring("Extract", 5, 7)
+print(result)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] "act"
+</code></pre>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

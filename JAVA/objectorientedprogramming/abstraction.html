@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Abstraction</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Object-Oriented Concepts</h1>
+            <h2 class="subtitle">Session: Abstraction (Hiding Complexity)</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">What is Abstraction?</h2>
+                <p>**Abstraction** is an OOP principle of **hiding the complex implementation details** and showing only the essential functionality to the user. It focuses on *what* an object does rather than *how* it does it. This is achieved in Java primarily using **Abstract Classes** and **Interfaces**.</p>
+                <p>For example, when you send an email, you interact with the simple interface (typing content and clicking send), while the underlying network protocols and server operations remain hidden.</p>
+            </div>
+
+            <div class="content abstract-class">
+                <h2 class="subtitle">Java Abstract Classes</h2>
+                <p>An **Abstract Class** is a class declared using the **<code>abstract</code>** keyword.</p>
+                <ul>
+                    <li>**Instantiation:** An abstract class **cannot be instantiated** (you cannot create objects of it directly).</li>
+                    <li>**Purpose:** It is meant to be **inherited** by subclasses, which then provide the concrete implementation.</li>
+                    <li>**Contents:** An abstract class may contain **abstract methods** (methods without a body) and **concrete methods** (methods with a body) and constructors.</li>
+                    <li>**Rule:** If a class contains at least one abstract method, the entire class **must** be declared abstract.</li>
+                </ul>
+            </div>
+
+            <div class="content abstract-methods">
+                <h2 class="subtitle">Java Abstract Methods</h2>
+                <p>An **Abstract Method** is a method declared with the **<code>abstract</code>** keyword. It has a method signature but **no method body** (ending with a semicolon instead of curly braces).</p>
+                <pre><code>public abstract class Employee {
+   public abstract double computePay(); // Abstract method (no body)
+   // Remainder of class definition
+}</code></pre>
+                <p><strong>Implementation Rule:</strong> Any concrete (non-abstract) class that inherits an abstract class **must** provide implementations (override) for all of its abstract methods. If it fails to do so, the inheriting class must also be declared abstract.</p>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Abstract Class Inheritance</h2>
+                <p>The abstract class <code>Employee</code> defines a common structure, but a subclass like <code>Salary</code> must implement the specific logic for methods like <code>computePay()</code>.</p>
+                <pre><code>abstract class Employee {
+   // Abstract method, forces implementation in child classes
+   public abstract double computePay(); 
+   
+   // Concrete method, provides default behavior
+   public void mailCheck() { ... } 
+}
+
+class Salary extends Employee {
+   // Must implement the abstract method
+   @Override
+   public double computePay() {
+      // Provides specific implementation for computing salary
+      return salary / 52;
+   }
+   
+   // Overrides the concrete method from the parent
+   @Override
+   public void mailCheck() {
+      System.out.println("Mailing check to " + getName() + " with salary " + salary);
+   }
+}</code></pre>
+            </div>
+
+            <div class="content demo">
+                <h2 class="subtitle">Demonstrating Abstraction and Polymorphism</h2>
+                <p>You cannot create an <code>Employee</code> object, but you can use an <code>Employee</code> reference to point to a <code>Salary</code> object, demonstrating polymorphism while leveraging abstraction.</p>
+                <pre><code>public class AbstractDemo {
+   public static void main(String [] args) {
+      // 1. Instantiating Employee is ERROR (it's abstract)
+      // Employee e_error = new Employee(...); 
+
+      // 2. Creating a Salary object (allowed)
+      Salary s = new Salary("Mohd Mohtashim", "UP", 3, 3600.00); 
+
+      // 3. Using polymorphic reference (allowed)
+      Employee e = new Salary("John Adams", "MA", 2, 2400.00); 
+
+      // Dynamic binding ensures the Salary version of mailCheck() runs:
+      e.mailCheck();
+   }
+}</code></pre>
+                <p>The code works because the reference type (`Employee`) has the `mailCheck()` method, but the runtime object type (`Salary`) determines the actual implementation that executes.</p>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

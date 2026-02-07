@@ -1,0 +1,170 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - SessionStorage</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>
+        The <code>sessionStorage</code> object in JavaScript is a property of the <code>window</code> object 
+        that stores data for the lifetime of a browser tab session. Each tab has its own session storage 
+        that is cleared when the tab is closed. Data stored here is specific to the protocol, hostname, and port.
+      </p>
+      <p>
+        It is useful for temporarily storing user-related data such as form input, UI preferences, or other 
+        session-based state information.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre><code>
+window.sessionStorage;
+      </code></pre>
+
+      <h2>Methods of SessionStorage</h2>
+      <ul>
+        <li><code>setItem(key, value)</code> → Stores a value under the given key.</li>
+        <li><code>getItem(key)</code> → Retrieves the value associated with the given key.</li>
+        <li><code>removeItem(key)</code> → Deletes a specific item from session storage.</li>
+        <li><code>key(index)</code> → Returns the name of the key at the specified index.</li>
+        <li><code>clear()</code> → Removes all data from session storage.</li>
+      </ul>
+
+      <h2>Why Use SessionStorage?</h2>
+      <ul>
+        <li>Save the web-page interface state and restore it later in the same session.</li>
+        <li>Transmit data between pages without using hidden inputs or URL parameters.</li>
+        <li>Keep user-specific data persistent across reloads but temporary within the tab session.</li>
+      </ul>
+
+      <h2>Key Features</h2>
+      <ul>
+        <li>Temporary Storage → Cleared when the tab or window is closed.</li>
+        <li>Tab-specific → Not shared across tabs.</li>
+        <li>Persistent During Reloads → Data survives page reloads within the same tab.</li>
+        <li>Simple API → Easy to use methods for storing and retrieving data.</li>
+        <li>Storage Limit → Typically around 5MB per origin.</li>
+      </ul>
+
+      <h2>Examples</h2>
+
+      <h3>Example 1: Storing and Retrieving Objects</h3>
+      <pre><code>
+&lt;html&gt;  
+&lt;body&gt;  
+   &lt;h4&gt;Display Data Using sessionStorage in JavaScript&lt;/h4&gt;  
+   &lt;p id="displayStudent"&gt;&lt;/p&gt;  
+   &lt;p id="displayTutorial"&gt;&lt;/p&gt;  
+
+   &lt;script&gt;  
+      const studentInfo = {  
+         name: 'Amit',  
+         rollNumber: 41,  
+         website: 'Tutorialspoint',  
+         learningMode: 'online',  
+         age: 20,  
+         subject: 'JavaScript'  
+      };  
+
+      const tutorialInfo = {  
+         subject: 'JavaScript',  
+         website: 'Tutorialspoint',  
+         mode: 'online',  
+         cost: 'Free',  
+         targetAudience: 'students and beginners'  
+      };  
+
+      // Store data
+      sessionStorage.setItem("studentInfo", JSON.stringify(studentInfo));  
+      sessionStorage.setItem("tutorialInfo", JSON.stringify(tutorialInfo));  
+
+      // Retrieve data
+      document.getElementById('displayStudent').innerText = sessionStorage.getItem('studentInfo');  
+      document.getElementById('displayTutorial').innerText = sessionStorage.getItem('tutorialInfo');  
+   &lt;/script&gt;  
+&lt;/body&gt;  
+&lt;/html&gt;
+      </code></pre>
+
+      <h3>Example 2: Saving and Displaying Date &amp; Time</h3>
+      <pre><code>
+&lt;html&gt;  
+&lt;body&gt;  
+   &lt;h4&gt; Display Data Using sessionStorage in JavaScript &lt;/h4&gt;  
+   &lt;p id="displayStudentInfo"&gt;&lt;/p&gt;  
+   &lt;p id="displayCurrentTime"&gt;&lt;/p&gt;  
+
+   &lt;script&gt;  
+      const learnerDetails = {  
+         name: 'Amit',  
+         rollNumber: 52,  
+         website: 'TutorialsPoint',  
+         learningMode: 'online mode',  
+         age: 22,  
+         subject: 'JavaScript'  
+      };  
+
+      // Store student info
+      sessionStorage.setItem("learnerDetails", JSON.stringify(learnerDetails));  
+
+      // Display student info
+      document.getElementById('displayStudentInfo').innerText = sessionStorage.getItem('learnerDetails');  
+
+      // Store current time
+      sessionStorage.setItem("currentDateTime", new Date());  
+
+      // Display current time
+      document.getElementById('displayCurrentTime').innerText = sessionStorage.getItem('currentDateTime');  
+   &lt;/script&gt;  
+&lt;/body&gt;  
+&lt;/html&gt;
+      </code></pre>
+
+      <h3>Example 3: Interactive Session Storage Demo</h3>
+      <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+   &lt;meta charset="UTF-8"&gt;
+   &lt;title&gt;Session Storage Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h1&gt;Session Storage Demo&lt;/h1&gt;
+   &lt;label for="name"&gt;Enter your name:&lt;/label&gt;
+   &lt;input type="text" id="name" /&gt;
+   &lt;button onclick="saveName()"&gt;Save Name&lt;/button&gt;
+   &lt;button onclick="showName()"&gt;Show Name&lt;/button&gt;
+   &lt;button onclick="clearName()"&gt;Clear Name&lt;/button&gt;
+   &lt;p id="result"&gt;&lt;/p&gt;
+
+   &lt;script&gt;
+      function saveName() {
+         let name = document.getElementById('name').value;
+         sessionStorage.setItem('userName', name);
+         document.getElementById('result').innerText = 'Name saved in session storage!';
+      }
+      function showName() {
+         let name = sessionStorage.getItem('userName');
+         if (name) {
+            document.getElementById('result').innerText = 'Stored Name: ' + name;
+         } else {
+            document.getElementById('result').innerText = 'No name found in session storage!';
+         }
+      }
+      function clearName() {
+         sessionStorage.removeItem('userName');
+         document.getElementById('result').innerText = 'Name cleared from session storage!';
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li><code>sessionStorage</code> stores data only for a single browser tab session.</li>
+        <li>Data persists across page reloads but is cleared when the tab is closed.</li>
+        <li>Use its methods (<code>setItem</code>, <code>getItem</code>, <code>removeItem</code>, <code>clear</code>) to manage stored data.</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

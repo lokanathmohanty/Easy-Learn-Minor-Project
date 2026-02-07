@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - <code>CompletableFuture</code> API Improvements (Java 9+)</h1>
+
+        <div class="content">
+            <h2>Overview of <code>CompletableFuture</code> Enhancements 🚀</h2>
+            <p>The **<code>CompletableFuture</code>** class, introduced in Java 8 as an implementation of <code>Future</code> and <code>CompletionStage</code>, was significantly enhanced in **Java 9** to improve handling of asynchronous operations. The improvements focus on better control over **delays and timeouts**, enhanced **subclassing support**, and the addition of **new factory methods**.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Support for Delays and Timeouts ⏱️</h2>
+            <p>Java 9 introduced two crucial methods to manage asynchronous operations that might take too long:</p>
+            <ul>
+                <li>
+                    <strong><code>completeOnTimeout(T value, long timeout, TimeUnit unit)</code></strong>
+                    <p>If the <code>CompletableFuture</code> isn't completed before the specified <code>timeout</code>, it will be completed normally with the given <code>value</code>. This is useful for providing a **default or fallback result** within a time limit.</p>
+                </li>
+                <li>
+                    <strong><code>orTimeout(long timeout, TimeUnit unit)</code></strong>
+                    <p>If the <code>CompletableFuture</code> isn't completed before the specified <code>timeout</code>, it will be completed **exceptionally** with a <code>TimeoutException</code>. This is the standard way to enforce a hard deadline on an asynchronous task.</p>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Improved Support for Subclassing 🧬</h2>
+            <p>The Java 9 enhancements simplify the process of creating custom subclasses of <code>CompletableFuture</code>, ensuring that intermediate results from chained methods also return instances of the subclass:</p>
+            <ul>
+                <li>
+                    <strong><code>Executor defaultExecutor()</code></strong>
+                    <p>Returns the default **<code>Executor</code>** used for asynchronous methods that don't explicitly specify one. Subclasses can override this method to provide a custom, minimal-thread executor specific to their needs.</p>
+                </li>
+                <li>
+                    <strong><code>&lt;U&gt; CompletableFuture&lt;U&gt; newIncompleteFuture()</code></strong>
+                    <p>This method should be overridden by subclasses to ensure that all chained <code>CompletionStage</code> methods (like <code>thenApply</code>, <code>thenCompose</code>, etc.) return new incomplete instances of the **subclass type** rather than the base <code>CompletableFuture</code> type.</p>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>New Factory Methods 🏭</h2>
+            <p>New static factory methods were added to simplify the creation of already-completed futures and to improve type safety:</p>
+            <ul>
+                <li>
+                    <strong><code>completedFuture(U value)</code></strong>
+                    <p>Returns a new **<code>CompletableFuture</code>** instance that is already completed with the given value. (This existed in Java 8 but is listed here as a core factory method.)</p>
+                </li>
+                <li>
+                    <strong><code>completedStage(U value)</code></strong>
+                    <p>Returns a new **<code>CompletionStage</code>** instance (not a <code>CompletableFuture</code>) that is completed normally. Since it only exposes the <code>CompletionStage</code> interface, it enforces the use of dependent actions while hiding explicit completion/cancellation methods.</p>
+                </li>
+                <li>
+                    <strong><code>failedStage(Throwable ex)</code></strong>
+                    <p>Returns a new **<code>CompletionStage</code>** instance that is already completed **exceptionally** with the given exception. This allows easy creation of a failed stage without exposing the full <code>CompletableFuture</code> API.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Form Validation</h1>
+    <div class="content">
+
+      <p>Originally, form validation happened only on the server after submission. If the user entered invalid or missing data, the server had to send the form back for correction. This process was slow and put extra load on the server.</p>
+
+      <p>JavaScript allows validation on the client-side before sending data to the server. Form validation usually includes two parts:</p>
+
+      <ul>
+        <li><b>Basic Validation</b> – Checks that all required fields are filled in.</li>
+        <li><b>Data Format Validation</b> – Ensures that entered data is in the correct format (e.g., email, numbers).</li>
+      </ul>
+
+      <h2>Example: HTML Form</h2>
+      <pre><code>&lt;html&gt;   
+&lt;head&gt;
+  &lt;title&gt;Form Validation&lt;/title&gt;      
+  &lt;script type="text/javascript"&gt;
+    // Form validation code will come here.
+  &lt;/script&gt;      
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;form action="/cgi-bin/test.cgi" name="myForm" onsubmit="return(validate());"&gt;
+    &lt;table cellspacing="2" cellpadding="2" border="1"&gt;
+      &lt;tr&gt;
+        &lt;td align="right"&gt;Name&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="Name" /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td align="right"&gt;EMail&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="EMail" /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td align="right"&gt;Zip Code&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="Zip" /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td align="right"&gt;Country&lt;/td&gt;
+        &lt;td&gt;
+          &lt;select name="Country"&gt;
+            &lt;option value="-1" selected&gt;[choose yours]&lt;/option&gt;
+            &lt;option value="1"&gt;USA&lt;/option&gt;
+            &lt;option value="2"&gt;UK&lt;/option&gt;
+            &lt;option value="3"&gt;INDIA&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td align="right"&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;input type="submit" value="Submit" /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/form&gt;      
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>Basic Form Validation</h2>
+      <p>The <code>validate()</code> function checks that the required fields are filled and that data is in the expected format.</p>
+
+      <pre><code>&lt;script type="text/javascript"&gt;
+function validate() {
+  if (document.myForm.Name.value == "") {
+    alert("Please provide your name!");
+    document.myForm.Name.focus();
+    return false;
+  }
+  if (document.myForm.EMail.value == "") {
+    alert("Please provide your Email!");
+    document.myForm.EMail.focus();
+    return false;
+  }
+  if (document.myForm.Zip.value == "" || isNaN(document.myForm.Zip.value) ||
+      document.myForm.Zip.value.length != 5) {
+    alert("Please provide a zip in the format #####.");
+    document.myForm.Zip.focus();
+    return false;
+  }
+  if (document.myForm.Country.value == "-1") {
+    alert("Please provide your country!");
+    return false;
+  }
+  return true;
+}
+&lt;/script&gt;
+</code></pre>
+
+      <h2>Data Format Validation (Email)</h2>
+      <p>We can also check that the entered email follows a proper structure using string checks.</p>
+
+      <pre><code>&lt;script type="text/javascript"&gt;
+function validateEmail() {
+  var emailID = document.myForm.EMail.value;
+  atpos = emailID.indexOf("@");
+  dotpos = emailID.lastIndexOf(".");
+
+  if (atpos &lt; 1 || (dotpos - atpos &lt; 2)) {
+    alert("Please enter correct email ID");
+    document.myForm.EMail.focus();
+    return false;
+  }
+  return true;
+}
+&lt;/script&gt;
+</code></pre>
+
+      <p>This ensures the email contains an <code>@</code> and a <code>.</code> in the correct positions.</p>
+
+    </div>
+  </div>
+</div>

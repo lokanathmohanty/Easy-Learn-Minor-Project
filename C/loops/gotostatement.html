@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Goto Statement in C</h1>
+
+    <div class="content">
+
+      <h2 class="title">What is goto Statement in C?</h2>
+      <p>The <code>goto</code> statement is used to transfer the program's control unconditionally to a defined label within the same function. It can jump forward or backward in the code.</p>
+      <p>The <code>goto</code> keyword is followed by a label. When executed, control transfers immediately to the statement after the label. If the label is placed earlier in the code, it creates a loop; if later, it acts as a jump.</p>
+
+      <h3>Syntax</h3>
+      <pre><code>goto label;
+...
+label: statement;</code></pre>
+      <p>The label is a valid identifier followed by a colon <code>:</code>. Labels must be unique within a function.</p>
+
+      <h2 class="title">Examples of goto Statement</h2>
+
+      <h3>Example 1: Jump Forward</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int n = 0;
+   
+   if (n == 0)
+      goto end;
+   printf("The number is: %d", n);
+   
+   end:
+      printf("End of program");
+   
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>End of program</code></pre>
+
+      <h3>Example 2: Check Even or Odd</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i = 11;
+
+   if (i % 2 == 0) {
+      EVEN:
+         printf("The number is even\n");
+         goto END;
+   } else {
+      ODD:
+         printf("The number is odd\n");
+   }
+   END:
+      printf("End of program\n");
+
+   return 0;
+}</code></pre>
+      <p><strong>Output (i = 11):</strong></p>
+      <pre><code>The number is odd
+End of program</code></pre>
+
+      <h3>Example 3: Infinite Loop by Jumping Backwards</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   START:
+      printf("Hello World\n");
+      printf("How are you?\n");
+      goto START;
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong> Prints continuously until the program is stopped manually.</p>
+
+      <h3>Example 4: Loop with Exit Condition</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i = 0;
+
+   START:
+      i++;
+      printf("i: %d\n", i);
+      if (i == 5)
+         goto END;
+      goto START;
+
+   END:
+      printf("End of loop\n");
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>i: 1
+i: 2
+i: 3
+i: 4
+i: 5
+End of loop</code></pre>
+
+      <h3>Example 5: Using goto to Skip Values in Nested Loops</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i, j, k;
+
+   for (i = 1; i <= 3; i++) {
+      for (j = 1; j <= 3; j++) {
+         if (i == j)
+            goto label1;
+
+         for (k = 1; k <= 3; k++) {
+            if (k == i || k == j)
+               goto label2;
+
+            printf("%d %d %d\n", i, j, k);
+
+            label2: ;
+         }
+         label1: ;
+      }
+   }
+   return 0;
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>1 2 3
+1 3 2
+2 1 3
+2 3 1
+3 1 2
+3 2 1</code></pre>
+
+      <h2 class="title">Avoid Using the goto Statement in C</h2>
+      <p>The <code>goto</code> statement is generally discouraged because it makes code difficult to read, understand, and maintain. Excessive use leads to spaghetti code, where program flow jumps unpredictably.</p>
+      <p>Computer scientist Edsger Dijkstra famously recommended removing <code>goto</code> from all programming languages because it can cause unpredictable behavior, especially when jumping in and out of loops.</p>
+      <p>Most modern programming languages avoid <code>goto</code>, but it remains in C and C++. Use <code>goto</code> only if other control structures (loops, conditionals, functions) cannot achieve the desired effect clearly.</p>
+
+      <h2 class="title">Summary</h2>
+      <ul>
+        <li><code>goto</code> transfers control unconditionally to a labeled statement.</li>
+        <li>Labels must be unique and end with a colon <code>:</code>.</li>
+        <li>It can create loops or jumps depending on the label location.</li>
+        <li>Excessive use makes code harder to maintain and understand.</li>
+        <li>Prefer structured programming constructs like loops and functions.</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

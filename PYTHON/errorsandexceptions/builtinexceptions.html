@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python Built-in Exceptions</h1>
+    <div class="content">
+      <p>
+        Built-in exceptions are pre-defined error classes in Python that handle various error conditions and exceptional situations in programs.
+        They are derived from the base class <code>BaseException</code> and are part of the standard library.
+      </p>
+
+      <h2>Standard Built-in Exceptions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Exception Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Exception</td><td>Base class for all exceptions</td></tr>
+          <tr><td>StopIteration</td><td>Raised when the next() method does not point to any object</td></tr>
+          <tr><td>SystemExit</td><td>Raised by the sys.exit() function</td></tr>
+          <tr><td>ArithmeticError</td><td>Base class for numeric calculation errors</td></tr>
+          <tr><td>ZeroDivisionError</td><td>Raised for division or modulo by zero</td></tr>
+          <tr><td>AssertionError</td><td>Raised for assert statement failures</td></tr>
+          <tr><td>AttributeError</td><td>Raised for attribute access or assignment errors</td></tr>
+          <tr><td>EOFError</td><td>Raised when input() hits end of file</td></tr>
+          <tr><td>ImportError</td><td>Raised if an import fails</td></tr>
+          <tr><td>LookupError</td><td>Base class for lookup errors</td></tr>
+          <tr><td>IndexError</td><td>Raised for invalid sequence index</td></tr>
+          <tr><td>KeyError</td><td>Raised for missing dictionary keys</td></tr>
+          <tr><td>NameError</td><td>Raised for undefined identifiers</td></tr>
+          <tr><td>TypeError</td><td>Raised for invalid operation on a data type</td></tr>
+          <tr><td>ValueError</td><td>Raised for invalid argument values</td></tr>
+          <tr><td>RuntimeError</td><td>Raised for unspecified runtime errors</td></tr>
+          <tr><td>NotImplementedError</td><td>Raised for missing abstract method implementation</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Example Exceptions</h2>
+      <p><strong>IndexError</strong> - Accessing an invalid list index:</p>
+      <pre>
+numbers = [10, 20, 30, 40]
+for i in range(5):
+    print(numbers[i])
+# Raises IndexError at i=4
+</pre>
+      <p><strong>KeyError</strong> - Accessing a missing dictionary key:</p>
+      <pre>
+d = {'a': 1, 'b': 2}
+print(d['c'])  # KeyError: 'c'
+</pre>
+      <p><strong>ZeroDivisionError</strong> - Dividing by zero:</p>
+      <pre>
+x = 10 / 0
+# Raises ZeroDivisionError
+</pre>
+
+      <h2>Exception Hierarchy (Simplified)</h2>
+      <pre>
+BaseException
+├── SystemExit
+├── KeyboardInterrupt
+└── Exception
+    ├── ArithmeticError
+    │   ├── ZeroDivisionError
+    │   └── OverflowError
+    ├── LookupError
+    │   ├── IndexError
+    │   └── KeyError
+    ├── ValueError
+    ├── TypeError
+    └── ...
+</pre>
+
+      <h2>Using Built-in Exceptions</h2>
+      <p>Handle exceptions in your code using try-except blocks:</p>
+      <pre>
+try:
+    result = 10 / 0
+except ZeroDivisionError as e:
+    print(f"Caught exception: {e}")
+</pre>
+      <p>Output:</p>
+      <pre>Caught exception: division by zero</pre>
+
+      <p>Handle multiple exceptions:</p>
+      <pre>
+try:
+    value = int('abc')
+except (ValueError, TypeError) as e:
+    print(f"Caught error: {e}")
+</pre>
+      <p>Output:</p>
+      <pre>Caught error: invalid literal for int() with base 10: 'abc'</pre>
+
+      <p>Use else and finally clauses in try-except:</p>
+      <pre>
+try:
+    num = int(input("Enter a number: "))
+except ValueError as e:
+    print(f"Invalid input: {e}")
+else:
+    print(f"You entered: {num}")
+finally:
+    print("Execution completed.")
+</pre>
+
+    </div>
+    
+  </div>
+</div>

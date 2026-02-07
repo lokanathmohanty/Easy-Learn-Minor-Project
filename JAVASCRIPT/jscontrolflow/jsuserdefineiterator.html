@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript — User Defined Iterators</h1>
+
+    <div class="content">
+      <h2 class="title">Overview</h2>
+      <p>
+        In JavaScript, an <strong>iterator</strong> is an object that defines a
+        sequence and potentially a return value upon its completion.
+        Iterators are based on the <code>Symbol.iterator()</code> method, which
+        returns an object with a <code>next()</code> method. Each call to
+        <code>next()</code> produces an object containing two keys:
+      </p>
+      <ul>
+        <li><code>value</code> — the current element.</li>
+        <li><code>done</code> — a boolean, <code>true</code> if iteration is finished.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Built-in Iterators</h2>
+      <p>Arrays, Sets, Maps, and Strings are iterable by default:</p>
+      <pre>
+const nums = [10, 72, 45];
+const iter = nums[Symbol.iterator]();
+
+console.log(iter.next()); // { value: 10, done: false }
+console.log(iter.next()); // { value: 72, done: false }
+console.log(iter.next()); // { value: 45, done: false }
+console.log(iter.next()); // { done: true }
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Creating a User-defined Iterator</h2>
+      <p>
+        You can create custom iterators for more control. The iterator is a
+        function that returns an object with a <code>next()</code> method.
+      </p>
+      <pre>
+function customIterator(chars) {
+  let n = 0;
+  return {
+    next() {
+      if (n < chars.length) {
+        return { value: chars[n++], done: false };
+      }
+      return { done: true };
+    }
+  }
+}
+
+const chars = ['A', 'C', 'E'];
+const iter = customIterator(chars);
+
+console.log(iter.next()); // { value: "A", done: false }
+console.log(iter.next()); // { value: "C", done: false }
+console.log(iter.next()); // { value: "E", done: false }
+console.log(iter.next()); // { done: true }
+      </pre>
+      <p>
+        This approach works, but since it's just a function returning an object,
+        you cannot directly use <code>for...of</code> with it.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Iterator with Symbol.iterator</h2>
+      <p>
+        To make your custom object iterable with <code>for...of</code>, define
+        <code>Symbol.iterator</code>. Below is an iterator that generates odd
+        numbers until 7:
+      </p>
+      <pre>
+const oddNum = {
+  [Symbol.iterator]() {
+    let p = -1;
+    return {
+      next() {
+        p += 2;
+        if (p === 9) return { done: true };
+        return { value: p, done: false };
+      }
+    }
+  }
+};
+
+for (const odd of oddNum) {
+  console.log(odd); 
+}
+// Output: 1, 3, 5, 7
+      </pre>
+      <p>
+        Here, the <code>for...of</code> loop automatically calls
+        <code>next()</code> until <code>done</code> is true.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Key Points</h2>
+      <ul>
+        <li>Iterators expose a <code>next()</code> method.</li>
+        <li><code>next()</code> returns an object with <code>value</code> and <code>done</code>.</li>
+        <li>Objects with <code>Symbol.iterator</code> can be used in <code>for...of</code> loops.</li>
+        <li>Custom iterators are useful for special traversals (e.g., only odd numbers, alternate elements).</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Practice Tasks</h2>
+      <ul>
+        <li>Create an iterator that yields even numbers up to 20.</li>
+        <li>Write an iterator that loops through an array backwards.</li>
+        <li>Make a string iterator that yields characters in uppercase only.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Summary</h2>
+      <p>
+        Iterators in JavaScript provide a standardized way to access elements
+        sequentially. User-defined iterators allow custom traversal logic,
+        especially when combined with <code>Symbol.iterator</code> for
+        compatibility with loops like <code>for...of</code>.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Further Reading</h2>
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols">MDN — Iteration Protocols</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Enum Constructor</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java Programming: Enum Customization</h1>
+            <h2 class="subtitle">Session: Enum Constructor</h2>
+        </header>
+
+        <section class="content introduction">
+            <h2 class="subtitle">Why Use an Enum Constructor? 🛠️</h2>
+            <p>By default, an **<code>enum</code>** constant's value is simply its name (e.g., <code>WEEKDAY.MONDAY</code> prints "MONDAY").</p>
+            <p>An **Enum Constructor** is used when you need to associate **additional data** (like descriptions, values, or codes) with each enum constant, allowing the enum to be more than just a name.</p>
+            <p>This provides a way to assign a specific, private value to each constant, which can then be retrieved via a public **getter method**.</p>
+        </section>
+
+        <hr>
+
+        <section class="content scope">
+            <h2 class="subtitle">Scope and Accessibility of Enum Constructors</h2>
+            <p>Enum constants are automatically created by the Java runtime when the enum type is loaded. To enforce that **only** the constants defined within the enum itself can initialize it, Java imposes a strict rule on constructor modifiers:</p>
+            <p>An enum constructor can **only** be:</p>
+            <ul>
+                <li>**Private:** Explicitly declared with the `private` keyword.</li>
+                <li>**Package-private (Default):** Declared with no modifier.</li>
+            </ul>
+            <p>**Crucially, setting an enum constructor as <code>public</code> or <code>protected</code> will result in a compile-time error.**</p>
+        </section>
+
+        <hr>
+
+        <section class="content example">
+            <h2 class="title">Example: Enum with Private Constructor and Data</h2>
+            <p>In this common pattern, a constructor is used to initialize a **final instance field** for each constant, and a public getter is provided for external access.</p>
+            <pre><code>enum WEEKDAY {
+	// Constants must be listed first, and must call the constructor
+	MONDAY("Day 1"),
+	TUESDAY("Day 2"),
+	SUNDAY("Day 7");
+	
+	// Private instance field to hold the extra data
+	private final String description;
+	
+	// Private constructor (valid)
+	private WEEKDAY(String description) {
+		this.description = description;
+	}
+	
+	// Public getter method to safely expose the data
+	public String getDescription () {
+		return this.description;
+	}
+}</code></pre>
+            <p>Accessing the custom data:</p>
+            <pre><code>System.out.println(WEEKDAY.MONDAY.getDescription());
+// Output: Day 1
+System.out.println(WEEKDAY.MONDAY);
+// Output: MONDAY (The default toString() method is not affected)</code></pre>
+        </section>
+
+    </div>
+
+</body>
+</html>

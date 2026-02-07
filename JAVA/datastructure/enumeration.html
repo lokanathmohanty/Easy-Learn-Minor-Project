@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="session">
+    
+    <h1 class="title">Java - Enumeration Interface</h1>
+    
+    <div class="content">
+      <p>The <strong>Enumeration</strong> interface defines the methods by which you can enumerate (obtain one at a time) the elements in a collection of objects.</p>
+      
+      <p>This legacy interface has been superseded by <code>Iterator</code>. Although not deprecated, <strong>Enumeration</strong> is considered obsolete for new code. However, it is still used by legacy classes such as <code>Vector</code> and <code>Properties</code>.</p>
+      
+      <h2 class="title">Enumeration Interface Methods</h2>
+      <ul>
+        <li><strong>boolean hasMoreElements()</strong> — Returns <code>true</code> if there are more elements to enumerate.</li>
+        <li><strong>Object nextElement()</strong> — Returns the next element in the enumeration.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Examples of Enumeration Interface</h2>
+
+    <div class="content">
+      <h3 class="title">Example 1: Enumeration for Vector</h3>
+      <pre><code>import java.util.Vector;
+import java.util.Enumeration;
+
+public class EnumerationTester {
+
+  public static void main(String args[]) {
+    Enumeration&lt;String&gt; days;
+    Vector&lt;String&gt; dayNames = new Vector&lt;&gt;();
+
+    dayNames.add("Sunday");
+    dayNames.add("Monday");
+    dayNames.add("Tuesday");
+    dayNames.add("Wednesday");
+    dayNames.add("Thursday");
+    dayNames.add("Friday");
+    dayNames.add("Saturday");
+    
+    days = dayNames.elements();
+    
+    while (days.hasMoreElements()) {
+      System.out.println(days.nextElement());
+    }
+  }
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Sunday
+Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+      </code></pre>
+
+      <h3 class="title">Example 2: Enumeration for Properties</h3>
+      <pre><code>import java.util.Enumeration;
+import java.util.Properties;
+
+public class EnumerationTester {
+
+  public static void main(String args[]) {
+    Enumeration&lt;Object&gt; days;
+    Properties dayNames = new Properties();
+
+    dayNames.put(1, "Sunday");
+    dayNames.put(2, "Monday");
+    dayNames.put(3, "Tuesday");
+    dayNames.put(4, "Wednesday");
+    dayNames.put(5, "Thursday");
+    dayNames.put(6, "Friday");
+    dayNames.put(7, "Saturday");
+
+    days = dayNames.elements();
+
+    while (days.hasMoreElements()) {
+      System.out.println(days.nextElement());
+    }
+  }
+}
+      </code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>Sunday
+Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+      </code></pre>
+    </div>
+
+  </div>
+</div>

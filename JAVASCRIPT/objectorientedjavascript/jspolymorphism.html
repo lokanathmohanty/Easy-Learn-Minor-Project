@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Polymorphism</h1>
+
+    <div class="content">
+      <h2>Polymorphism in JavaScript</h2>
+      <p>The polymorphism in JavaScript allows you to define multiple methods with the same name and different functionalities. Polymorphism is achieved by using method overloading and overriding. JavaScript does not support method overloading natively. Method overriding allows a subclass or child class to redefine a method of a superclass or parent class.</p>
+      <p>The word polymorphism is derived from the Greek word <em>polymorph</em>. The prefix <strong>poly</strong> means "many," and <strong>morph</strong> means "form" or "transformation."</p>
+    </div>
+
+    <div class="content">
+      <h2>Method Overriding</h2>
+      <p>If you define a method with the same name in both the parent and child class, the child class method overrides the parent class's method.</p>
+      <p>For example, if you want to calculate the area of different shapes, you can define a <code>Shape</code> class with an <code>area()</code> method. Each specific shape class can override the <code>area()</code> method with its own formula.</p>
+    </div>
+
+    <div class="content">
+      <h2>Example 1: Demonstrating Polymorphism in JavaScript</h2>
+      <p>In the example below, the <code>Shape</code> class defines an <code>area()</code> method. Both <code>Circle</code> and <code>Rectangle</code> extend the <code>Shape</code> class and override the <code>area()</code> method.</p>
+
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output1"&gt;&lt;/div&gt;
+   &lt;div id="output2"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      class Shape {
+         area(a, b) {
+            return "The area of each Geometry is different! &lt;br&gt;";
+         }
+      }
+
+      class Circle extends Shape {
+         area(r) {
+            return "The area of Circle is " + (3.14 * r * r) + "&lt;br&gt;";
+         }
+      }
+
+      class Rectangle extends Shape {
+         area(l, b) {
+            return "The area of Rectangle is " + (l * b) + "&lt;br&gt;";
+         }
+      }
+
+      const circle = new Circle();
+      document.getElementById("output1").innerHTML = circle.area(5);
+
+      const rectangle = new Rectangle();
+      document.getElementById("output2").innerHTML = rectangle.area(5, 10);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h3>Output</h3>
+      <p>The area of Circle is 78.5</p>
+      <p>The area of Rectangle is 50</p>
+    </div>
+
+    <div class="content">
+      <h2>Example 2: Parent Class Method's Functionality Extension in Child Class</h2>
+      <p>In this example, the <code>Math</code> class defines the <code>mathOperations()</code> method. The <code>AdvanceMath</code> class extends <code>Math</code> and overrides the method, using the <code>super</code> keyword to invoke the parent class method while adding new functionalities.</p>
+
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p id="output1"&gt;&lt;/p&gt;
+   &lt;p id="output2"&gt;&lt;/p&gt;
+   &lt;script&gt;
+      class Math {
+         mathOperations(a, b) {
+            document.getElementById("output1").innerHTML = "Addition: " + (a+b) + "&lt;br&gt;";
+            document.getElementById("output1").innerHTML += "Subtraction: " + (a-b);
+         }
+      }
+
+      class AdvanceMath extends Math {
+         mathOperations(a, b) {
+            super.mathOperations(a, b);
+            document.getElementById("output2").innerHTML += "Multiplication: " + (a*b) + "&lt;br&gt;";
+            document.getElementById("output2").innerHTML += "Division: " + (a/b);
+         }
+      }
+
+      const A_math = new AdvanceMath();
+      A_math.mathOperations(10, 5);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h3>Output</h3>
+      <p>Addition: 15</p>
+      <p>Subtraction: 5</p>
+      <p>Multiplication: 50</p>
+      <p>Division: 2</p>
+      <p>This type of polymorphism is called <strong>runtime polymorphism</strong>, as the JavaScript engine decides which method to execute at runtime based on the class instance used.</p>
+    </div>
+
+    <div class="content">
+      <h2>Benefits of using Polymorphism in JavaScript</h2>
+      <ul>
+        <li><strong>Code reusability</strong> − Polymorphism allows you to reuse code. For example, in the second example, we reused the <code>mathOperations()</code> method from the <code>Math</code> class.</li>
+        <li><strong>Extensibility</strong> − You can easily extend the current code and add new functionalities.</li>
+        <li><strong>Dynamic behaviors</strong> − Multiple classes can contain the same method with different functionalities, and the correct one is invoked dynamically at runtime.</li>
+      </ul>
+      <p><em>Note:</em> JavaScript does not support compile-time polymorphism, as method overloading is not natively supported.</p>
+    </div>
+
+  </div>
+</div>

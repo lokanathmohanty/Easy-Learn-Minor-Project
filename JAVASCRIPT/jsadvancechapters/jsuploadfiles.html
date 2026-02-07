@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Upload Files</h1>
+    <div class="content">
+      <p>
+        Uploading files is a common task in web development. While forms are the most widely used
+        method, JavaScript offers several ways to upload files directly to the server. In this
+        session, we will explore three main approaches:
+      </p>
+      <ul>
+        <li>Using <code>FormData</code> with fetch or <code>$.ajax</code></li>
+        <li>Using <code>XMLHttpRequest</code></li>
+        <li>Using a Plugin for Simplified Upload</li>
+      </ul>
+
+      <h2>Using FormData with Fetch or $.ajax</h2>
+      <p>
+        The <code>FormData</code> object lets you create key-value pairs for file uploads. It can be
+        used with fetch or <code>$.ajax</code> to send data without a traditional HTML form.
+      </p>
+      <pre><code>
+// Create a new FormData object
+var formData = new FormData();
+
+// Append the file to the FormData object
+formData.append('pictureFile', pictureInput.files[0]);
+
+// Use $.ajax to send the file
+$.ajax({
+   url: 'upload.php',        
+   type: 'POST',
+   processData: false,       
+   contentType: false,
+   dataType: 'json',         
+   data: formData            
+});
+      </code></pre>
+
+      <p><strong>Example Success Response:</strong></p>
+      <pre><code>
+{
+   "status": "success",
+   "message": "File uploaded successfully.",
+   "filePath": "uploads/picture.jpg"   
+}
+      </code></pre>
+
+      <p><strong>Example Error Response:</strong></p>
+      <pre><code>
+{
+   "status": "error",
+   "message": "File upload failed. Please try again."
+}
+      </code></pre>
+
+      <h2>Using XMLHttpRequest</h2>
+      <p>
+        Another way to upload files is with <code>XMLHttpRequest</code>. This approach gives you more
+        control over the upload process.
+      </p>
+      <pre><code>
+// Get the form element 
+var form = document.getElementById('the-form');
+
+form.onsubmit = function () {
+   var formData = new FormData(form);
+   formData.append('file', file); 
+   var xhr = new XMLHttpRequest();
+   
+   xhr.open('POST', form.getAttribute('action'), true);
+   xhr.send(formData);
+   return false; // Prevent actual form submission
+}
+      </code></pre>
+
+      <p><strong>Example Success Response:</strong></p>
+      <pre><code>
+{
+   "status": "success",
+   "message": "File uploaded successfully.",
+   "filePath": "/uploads/myfile.jpg" 
+}
+      </code></pre>
+
+      <p><strong>Example Error Response:</strong></p>
+      <pre><code>
+{
+   "status": "error",
+   "message": "File upload failed. Please try again."
+}
+      </code></pre>
+
+      <h2>Using a Simple Upload Plugin</h2>
+      <p>
+        Plugins like <code>simpleUpload</code> simplify file uploading using jQuery. They abstract
+        the setup and let you focus on server-side handling.
+      </p>
+      <pre><code>
+&lt;input type="file" name="file" id="simpleUpload" multiple&gt;
+&lt;button type="button" id="upload"&gt;Upload&lt;/button&gt;
+
+&lt;script&gt;
+   $(document).ready(function() {
+      $('#simpleUpload').simpleUpload({
+         url: 'upload.php',
+         trigger: '#upload',
+         success: function (data) {
+            alert('Successfully Uploaded');
+         },
+         error: function (error) {
+            alert('Upload failed. Please try again.');
+         }
+      });
+   });
+&lt;/script&gt;
+      </code></pre>
+
+      <p><strong>Output on Success:</strong> "Successfully Uploaded"</p>
+      <p><strong>Output on Failure:</strong> "Upload failed. Please try again."</p>
+
+      <h2>Summary</h2>
+      <p>
+        Each method provides a different level of flexibility:
+      </p>
+      <ul>
+        <li><strong>FormData</strong> with <code>fetch</code> or <code>$.ajax</code> is simple and modern.</li>
+        <li><strong>XMLHttpRequest</strong> gives more control but requires extra setup.</li>
+        <li><strong>Plugins</strong> like simpleUpload make implementation quick and easy.</li>
+      </ul>
+      <p>
+        Choose the approach that best fits your project’s needs.
+      </p>
+    </div>
+  </div>
+</div>

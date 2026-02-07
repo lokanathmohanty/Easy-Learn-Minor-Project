@@ -1,0 +1,193 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Axios CheatSheet</h1>
+    <div class="content">
+      <p>
+        Axios is a popular HTTP client for making API requests in JavaScript. It supports CRUD operations, global configurations, interceptors, retries, progress tracking, and more.
+      </p>
+
+      <h2>Installing and Basics</h2>
+      <p>Install Axios using npm:</p>
+      <pre><code>npm install axios</code></pre>
+      <p>Basic setup:</p>
+      <pre><code>import axios from 'axios';
+const instance = axios.create({
+   baseURL: 'https://api.example.com',
+   timeout: 1000,
+   headers: { 'Authorization': 'Bearer token' }
+});</code></pre>
+
+      <h2>CRUD Operations Using Axios</h2>
+
+      <h3>GET Request (Example)</h3>
+      <pre><code>axios.get('https://reqres.in/api/users?delay=2')
+.then(response =&gt; {
+   console.log(response.data);
+})
+.catch(error =&gt; {
+   console.log("This is error: " + error.response);
+})
+.finally(() =&gt; {
+   // always executed
+});</code></pre>
+
+      <h3>POST Request (Example)</h3>
+      <pre><code>axios.post('https://reqres.in/api/users', {
+   "name": "aman",
+   "job": "it"
+})
+.then(response =&gt; {
+   console.log(response.data);
+})
+.catch(error =&gt; {
+   console.log(error.response);
+})
+.finally(() =&gt; {
+   // always executed
+});</code></pre>
+
+      <h3>PUT Request (Example)</h3>
+      <pre><code>axios.put('https://reqres.in/api/users/2', {
+   "name": "Raju",
+   "job": "Dev Ops"
+})
+.then(response =&gt; {
+   console.log(response.data);
+})
+.catch(error =&gt; {
+   console.log(error.response);
+})
+.finally(() =&gt; {
+   // always executed
+});</code></pre>
+
+      <h3>DELETE Request (Example)</h3>
+      <pre><code>axios.delete('https://reqres.in/api/users?page=2')
+.then(response =&gt; {
+   console.log(response.data);
+})
+.catch(error =&gt; {
+   console.log(error.response);
+})
+.finally(() =&gt; {
+   // always executed
+});</code></pre>
+
+      <h2>Advanced Axios Features</h2>
+
+      <h3>Base URL Configuration</h3>
+      <pre><code>axios.defaults.baseURL = 'https://api.example.com';</code></pre>
+
+      <h3>Handling Responses and Errors</h3>
+      <pre><code>axios.get('/endpoint')
+.then(response =&gt; {
+   console.log(response.data);
+})
+.catch(error =&gt; {
+   console.error("Error: ", error.message);
+});</code></pre>
+
+      <h3>Request and Response Interceptors</h3>
+      <pre><code>// Request interceptor
+axios.interceptors.request.use(config =&gt; {
+   config.headers['Authorization'] = 'Bearer token';
+   return config;
+}, error =&gt; Promise.reject(error));
+
+// Response interceptor
+axios.interceptors.response.use(response =&gt; response, error =&gt; {
+   console.error("Global error: ", error.response);
+   return Promise.reject(error);
+});</code></pre>
+
+      <h3>Custom Axios Instances</h3>
+      <pre><code>const apiClient = axios.create({
+   baseURL: 'https://api.example.com',
+   timeout: 2000
+});</code></pre>
+
+      <h3>Retry Logic</h3>
+      <pre><code>import axiosRetry from 'axios-retry';
+axiosRetry(axios, { retries: 3 });</code></pre>
+
+      <h3>Progress Tracking</h3>
+      <pre><code>axios.post('/upload', formData, {
+   onUploadProgress: progressEvent =&gt; {
+      console.log(`Uploaded: ${(progressEvent.loaded / progressEvent.total) * 100}%`);
+   }
+});</code></pre>
+
+      <h3>Request Cancellation</h3>
+      <pre><code>const controller = new AbortController();
+
+axios.get('/endpoint', { signal: controller.signal })
+.catch(error =&gt; {
+   if (error.name === 'CanceledError') {
+      console.log('Request canceled');
+   }
+});
+
+// Cancel request
+controller.abort();</code></pre>
+
+      <h3>Timeouts</h3>
+      <pre><code>axios.get('/endpoint', { timeout: 5000 })
+.catch(error =&gt; {
+   if (error.code === 'ECONNABORTED') {
+      console.error('Request timed out');
+   }
+});</code></pre>
+
+      <h3>Query Parameters</h3>
+      <pre><code>axios.get('/endpoint', {
+   params: { id: 123, sort: 'desc' }
+});</code></pre>
+
+      <h3>Headers and Authorization</h3>
+      <pre><code>axios.get('/user', {
+   headers: { 'Authorization': 'Bearer YOUR_TOKEN' }
+});</code></pre>
+
+      <h3>Custom Headers</h3>
+      <pre><code>axios.post('/submit', data, {
+   headers: { 'Custom-Header': 'value' }
+});</code></pre>
+
+      <h3>Global Configuration</h3>
+      <pre><code>axios.defaults.baseURL = 'https://api.example.com';
+axios.defaults.headers.common['Authorization'] = 'Bearer YOUR_TOKEN';</code></pre>
+
+      <h3>Transforming Requests & Responses</h3>
+      <pre><code>axios.defaults.transformRequest = [(data) =&gt; {
+   return JSON.stringify(data);
+}];
+
+axios.defaults.transformResponse = [(data) =&gt; {
+   return JSON.parse(data);
+}];</code></pre>
+
+      <h3>Handling Multiple Requests</h3>
+      <pre><code>axios.all([
+   axios.get('/user'),
+   axios.get('/posts')
+])
+.then(axios.spread((userResponse, postsResponse) =&gt; {
+   console.log(userResponse.data);
+   console.log(postsResponse.data);
+}));</code></pre>
+
+      <h3>Handling Errors Globally</h3>
+      <pre><code>axios.interceptors.response.use(
+   response =&gt; response,
+   error =&gt; {
+      if (error.response.status === 401) {
+         console.log("Unauthorized: Redirecting to login...");
+      } else if (error.response.status === 500) {
+         console.log("Server error, please try again later.");
+      }
+      return Promise.reject(error);
+   }
+);</code></pre>
+    </div>
+  </div>
+</div>

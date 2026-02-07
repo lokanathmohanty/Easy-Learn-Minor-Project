@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Lexical Scope</h1>
+
+    <div class="content">
+      <h2>What is Lexical Scope?</h2>
+      <p>
+        Lexical scope refers to an expression's definition area. In other words, an item's lexical scope is the context in which it was created.
+      </p>
+      <p>
+        Lexical scope is sometimes known as <strong>static scope</strong>. It is determined by where the code is written, not by where it is invoked. 
+      </p>
+
+      <h2>Types of Scope</h2>
+      <ul>
+        <li><strong>Global Scope:</strong> Variables defined outside of any function or block are accessible throughout the program.</li>
+        <li><strong>Local Scope:</strong> Variables defined within a function or block can only be accessed there.</li>
+        <li><strong>Nested Scope:</strong> Inner functions can access variables in their parent functions.</li>
+        <li><strong>Block Scope:</strong> Variables defined with <code>let</code> and <code>const</code> are only valid in the block where they are declared.</li>
+      </ul>
+
+      <h2>Example 1: Global Scope</h2>
+      <pre><code>
+// Define a variable in the global scope
+const myName = "Shwetaa";
+
+// Call myName variable from a function
+function getName() {
+   return myName;
+}
+      </code></pre>
+      <p>
+        Here, <code>myName</code> is defined in the global scope. Its lexical scope is global, even though it is accessed inside a function.
+      </p>
+
+      <h2>Example 2: Local Scope</h2>
+      <pre><code>
+function getName() {
+   const myName = "Swati";
+   return myName;
+}
+      </code></pre>
+      <p>
+        In this case, <code>myName</code> is defined and used inside the function, so its lexical scope is the local environment of <code>getName()</code>.
+      </p>
+
+      <h2>How Does Lexical Scope Work?</h2>
+      <p>
+        The code that can access a JavaScript expression is determined by the environment in which it was defined. Only code within an item's lexical scope can access it.
+      </p>
+
+      <h3>Example with ReferenceError</h3>
+      <pre><code>
+// Define a function
+function myLastName() {
+   const lastName = "Sharma";
+   return lastName;
+}
+
+// Define another function
+function showFullName() {
+   const fullName = "Swati " + lastName;
+   return fullName;
+}
+
+// Invoke showFullName():
+console.log(showFullName());
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Uncaught ReferenceError: lastName is not defined
+      </code></pre>
+      <p>
+        The error occurs because <code>lastName</code> is not in the lexical scope of <code>showFullName()</code>.
+      </p>
+
+      <h3>Example with Proper Scope</h3>
+      <pre><code>
+function showLastName() {
+   const lastName = "Sharma";
+   return lastName;
+}
+
+// Define another function
+function displayFullName() {
+   const fullName = "Swati " + showLastName();
+   return fullName;
+}
+
+// Invoke displayFullName():
+console.log(displayFullName());
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Swati Sharma
+      </code></pre>
+      <p>
+        Because <code>showLastName()</code> and <code>displayFullName()</code> are defined in the same lexical (global) scope, they can work together properly.
+      </p>
+
+      <h2>Summary</h2>
+      <p>
+        Understanding lexical scope in JavaScript is important for creating clean, maintainable code. By properly scoping variables and functions, you can minimize naming conflicts, improve readability, and prevent errors. Lexical scope ensures more organized and efficient programs.
+      </p>
+    </div>
+  </div>
+</div>

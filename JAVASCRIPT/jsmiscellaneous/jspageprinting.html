@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Page Printing</h1>
+    <div class="content">
+
+      <p>Many times, you may want to place a button on your webpage to print its content using an actual printer. JavaScript provides this functionality through the <code>window.print()</code> method.</p>
+
+      <p>The <code>window.print()</code> method prints the current web page when executed. You can call this function directly with the <code>onclick</code> event, as shown below:</p>
+
+      <h2>Example 1: Simple Print Button</h2>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;      
+  &lt;script type="text/javascript"&gt;
+    &lt;!--
+    //--&gt;
+  &lt;/script&gt;
+&lt;/head&gt;   
+&lt;body&gt;      
+  &lt;form&gt;
+    &lt;input type="button" value="Print" onclick="window.print()" /&gt;
+  &lt;/form&gt;   
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <p>Although this works, it is not always recommended. A printer-friendly page usually removes images, ads, and unnecessary graphics, keeping only the essential text.</p>
+
+      <h2>Making a Page Printer Friendly</h2>
+      <ul>
+        <li>Create a separate copy of the page without unnecessary content and link to it from the main page.</li>
+        <li>Mark printable text using comments like <code>&lt;!-- PRINT STARTS HERE --&gt;</code> and <code>&lt;!-- PRINT ENDS HERE --&gt;</code>, then use a backend script (like PERL) to filter only the printable content.</li>
+      </ul>
+
+      <h2>Example 2: Using a Custom Print Function</h2>
+      <p>You can attach a <code>printpage()</code> function to a button to trigger printing:</p>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Print Page&lt;/title&gt;
+  &lt;script&gt;
+    function printpage() {
+      window.print();
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;This is a sample page to print&lt;/h2&gt;
+  &lt;button onclick="printpage()"&gt;Print Page&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <p>When the user clicks the button, the browser's print dialog will open, allowing them to print the page as displayed.</p>
+
+      <h2>Important Notes About <code>window.print()</code></h2>
+      <ul>
+        <li>It only prints the content of the current window.</li>
+        <li>Hidden elements (e.g., with <code>display: none</code>) will not be printed.</li>
+        <li>Dynamically loaded content (e.g., images added after load) may not appear in print.</li>
+        <li>For complex printouts (tables, forms, multiple pages), consider generating a PDF or using a third-party printing library.</li>
+      </ul>
+
+      <h2>How to Print Without JavaScript?</h2>
+      <p>If no print button is available, you can always use the browser's built-in menu:</p>
+      <p><b>File → Print → OK</b></p>
+
+    </div>
+  </div>
+</div>

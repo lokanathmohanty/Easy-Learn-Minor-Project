@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java Try Catch Block</h1>
+    <div class="content">
+      <p>In Java, the try-catch block is a core component for handling exceptions and ensuring your program does not terminate unexpectedly when an error or exceptional event occurs during runtime. It enables safer execution and better user experiences in your software applications.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Purpose of Try-Catch</h2>
+    <div class="content">
+      <ul>
+        <li>Safely handle code that might generate exceptions.</li>
+        <li>Allow custom logic or fallback actions when an error happens.</li>
+        <li>Avoid abrupt program termination and make applications robust.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Syntax and Basic Usage</h2>
+    <div class="content">
+      <p>The basic try-catch syntax:</p>
+      <pre><code>try {
+    // code that may throw an exception
+} catch (ExceptionType e) {
+    // code to handle the exception
+}</code></pre>
+      <p>All risky code goes inside the <code>try</code> block, and exceptions are matched to the nearest appropriate <code>catch</code> block.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Handling Array Exception</h2>
+    <div class="content">
+      <pre><code>public class ExcepTest {
+    public static void main(String args[]) {
+        try {
+            int[] a = new int[2];
+            System.out.println("Access element three :" + a[3]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Exception thrown  :" + e);
+        }
+        System.out.println("Out of the block");
+    }
+}
+// Output:
+// Exception thrown  :java.lang.ArrayIndexOutOfBoundsException: 3
+// Out of the block
+</code></pre>
+      <p>This example attempts to access an invalid array index. The error is caught and handled by the catch block, and the program continues running.</p>
+    </div>
+  </div>
+</div>

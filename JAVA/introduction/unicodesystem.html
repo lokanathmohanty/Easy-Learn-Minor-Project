@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Unicode System</h1>
+    <div class="content">
+      <p>Unicode is an international character set that encompasses a vast range of characters, symbols, and scripts from many languages across the globe.</p>
+
+      <h2 class="title">Unicode System in Java</h2>
+      <p>Java programming language, being platform-independent, has built-in support for Unicode characters, allowing developers to create applications that can work seamlessly with diverse languages and scripts.</p>
+
+      <p>Before Unicode, there were multiple standards to represent character encoding −</p>
+      <ul>
+        <li>ASCII − for the United States.</li>
+        <li>ISO 8859-1 − for Western European Language.</li>
+        <li>KOI-8 − for Russian.</li>
+        <li>GB18030 and BIG-5 − for Chinese.</li>
+      </ul>
+
+      <p>So to support multinational application codes, some characters used a single byte, some two. Even the same code might represent different characters in different languages.</p>
+
+      <p>To overcome this, the Unicode system was developed where each character is represented by 2 bytes. Java, developed for multilingual languages, adopted Unicode. The lowest value is represented by <code>\u0000</code> and the highest by <code>\uFFFF</code>.</p>
+
+      <h2 class="title">Approaches: Working with Unicode Characters & Values</h2>
+      <p>There are two approaches for working with Unicode characters in Java: Using Unicode Escape Sequences and Directly Storing Unicode Characters.</p>
+      <p>The first approach involves representing Unicode characters using escape sequences, useful when characters cannot be directly typed or displayed. The second involves directly storing Unicode characters, which is simpler when characters can be typed or displayed.</p>
+      <p>The choice depends on program requirements, but generally, direct storing is simpler unless characters can't be typed.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using Unicode Escape Sequences</h2>
+    <div class="content">
+      <pre>
+package com.tutorialspoint;
+
+public class UnicodeCharacterDemo {
+   public static void main (String[]args) {   		 
+      //Unicode escape sequence
+      char unicodeChar = '\u0041';
+      // point for 'A'
+      System.out.println("Stored Unicode Character: " + unicodeChar);
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>Stored Unicode Character: A</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Storing Unicode Values Directly</h2>
+    <div class="content">
+      <pre>
+package com.tutorialspoint;
+
+public class UnicodeCharacterDemo {
+   public static void main(String[] args) {
+      // Storing Unicode character directly
+      char unicodeChar = 'A';
+      System.out.println("Stored Unicode Character: " + unicodeChar);
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>Stored Unicode Character: A</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Assigning Unicode Values to Variables</h2>
+    <div class="content">
+      <pre>
+package com.tutorialspoint;
+
+public class UnicodeCharacterDemo {
+   public static void main(String[] args) {
+      // Storing Unicode characters using escape sequences
+      char letterA = '\u0041';
+      char letterSigma = '\u03A3';
+      char copyrightSymbol = '\u00A9';
+      // Storing Unicode characters directly
+      char letterZ = 'Z';
+      char letterOmega = '\u03A9';
+      char registeredSymbol = '\u00AE';
+      // Printing the stored Unicode characters
+      System.out.println("Stored Unicode Characters using Escape Sequences:");
+      System.out.println("Letter A: " + letterA);
+      System.out.println("Greek Capital Letter Sigma: " + letterSigma);
+      System.out.println("Copyright Symbol: " + copyrightSymbol);
+      System.out.println("\nStored Unicode Characters Directly:");
+      System.out.println("Letter Z: " + letterZ);
+      System.out.println("Greek Capital Letter Omega: " + letterOmega);
+      System.out.println("Registered Symbol: " + registeredSymbol);
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>Stored Unicode Characters using Escape Sequences:<br>
+      Letter A: A<br>
+      Greek Capital Letter Sigma: Σ<br>
+      Copyright Symbol: ©</p>
+      <p>Stored Unicode Characters Directly:<br>
+      Letter Z: Z<br>
+      Greek Capital Letter Omega: Ω<br>
+      Registered Symbol: ®</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Manipulating Unicode Characters</h2>
+    <div class="content">
+      <pre>
+package com.tutorialspoint;
+
+public class UnicodeCharacterDemo {
+   public static void main(String[] args) {
+      // Storing Unicode characters using escape sequences
+      char letterA = '\u0041';
+      char letterSmallA = '\u0061';
+      // Storing Unicode characters directly
+      char letterB = 'B';
+
+      // Manipulating the stored Unicode characters
+      int difference = letterA - letterSmallA;
+      char letterC = (char) (letterB + difference);
+      char letterSmallC = (char) (letterC + 32);
+
+      System.out.println("Manipulated Unicode Characters:");
+      System.out.println("Difference between A and a: " + difference);
+      System.out.println("Calculated Letter C: " + letterC);
+      System.out.println("Calculated Letter c: " + letterSmallC);
+   }
+}
+      </pre>
+      <p>Output:</p>
+      <p>Manipulated Unicode Characters:<br>
+      Difference between A and a: -32<br>
+      Calculated Letter C: "<br>
+      Calculated Letter c: B</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Conclusion</h2>
+    <div class="content">
+      <p>In Java, you can store Unicode characters using character literals either by Unicode escape sequences or by directly enclosing characters in single quotes. Both methods have advantages and limitations.</p>
+      <p>Escape sequences provide a consistent way to represent any Unicode character in source code, while direct storage is more convenient for characters that can be typed or displayed easily.</p>
+      <p>This article demonstrated how to store and manipulate Unicode characters in Java, enabling developers to create applications compatible with diverse languages and scripts.</p>
+    </div>
+  </div>
+</div>

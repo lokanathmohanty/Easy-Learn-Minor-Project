@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Fast Refresh</h1>
+        
+        <div class="content">
+            <h2 class="title">Introduction to Fast Refresh</h2>
+            <p><strong>Fast Refresh</strong> is a core **React feature** that is integrated into Next.js. Its primary function is to allow developers to see code changes reflected in the application in **real-time** without losing the component's state or forcing a full page reload.</p>
+            <p>This feature significantly improves the development experience by providing immediate feedback, making it highly valuable for working on applications of any size.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">How Fast Refresh Works</h2>
+            <p>Fast Refresh operates based on the type of file that is edited, determining the scope of the update:</p>
+            <ul>
+                <li><strong>Editing a React Component File:</strong> If a file only exports **React component(s)**, Next.js performs a targeted update, re-rendering only that component while attempting to preserve its local state.</li>
+                <li><strong>Editing a Non-Component File (with React dependents):</strong> If you edit a file that contains exports that **aren't React components** (e.g., a theme or utility file), Next.js will re-run the edited file and all other files that import it. This ensures dependent components are updated.</li>
+                <li><strong>Editing a Non-React Dependency:</strong> If a file is edited and is imported by code **outside of the React tree** (e.g., a file used by both a React component and a non-React component utility), Fast Refresh falls back to performing a **full application reload**.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Key Features</h2>
+            <p>Fast Refresh provides several key benefits:</p>
+            <ul>
+                <li class="example"><strong>Real-Time Updates:</strong> Changes to components or styles are applied instantly.</li>
+                <li class="example"><strong>State Preservation:</strong> It retains the internal **component state** across most updates, drastically reducing the need to manually reproduce application state after every code change.</li>
+                <li class="example"><strong>Automatic Activation:</strong> It is **enabled by default** in development mode in Next.js (version 9 onwards) and requires no extra configuration.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title example">Example of Default Behavior</h2>
+            <p>Since Next.js 9, Fast Refresh is automatically active. If you modify the content of a component file, the changes will appear instantly without a full page refresh.</p>
+            
+            <p><strong>Example Component (<code>app/page.tsx</code>):</strong></p>
+            <pre class="example"><code>// File: app/page.tsx
+export default function Home() {
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Home Page&lt;/h1&gt;
+            &lt;p&gt;This is the home page.&lt;/p&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Disable Fast Refresh</h2>
+            <p>While generally beneficial, you can disable Fast Refresh in development mode if necessary by modifying the **<code>next.config.js</code>** file:</p>
+            
+            <pre class="example"><code>// File: next.config.js
+
+module.exports = {
+    experimental: {
+      reactRefresh: false,
+    },
+  };</code></pre>
+        </div>
+    </div>
+</div>

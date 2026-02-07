@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Modularity and CoreFx Packaging</h1>
+
+        <div class="content">
+            <p>**Modularity** is a core design philosophy of .NET Core, allowing applications to install and reference **only the components they actually require**, rather than relying on the entire monolithic .NET Framework installation.</p>
+        </div>
+
+        <h2 class="title">Modularity in the Project Structure</h2>
+        <div class="content">
+            <p>You can observe this modularity by examining a .NET Core project in Visual Studio's **Solution Explorer**:</p>
+            <ol>
+                <li class="content">The project references the **.NETCoreApp** framework.</li>
+                <li class="content">Under **.NETCoreApp**, you find **NuGet package references**.</li>
+                <li class="content">These references point to the individual libraries that constitute the framework. Many familiar namespaces from the old .NET Framework are now distributed this way.</li>
+                <li class="content">The underlying class libraries of the .NET Framework have been split and re-implemented as the modular **CoreFx**, and these pieces are distributed as individual **NuGet packages**.</li>
+                <li class="content">Even fundamental components like the **System.Console** class, which is used to output text, are included as part of the necessary referenced packages (often via <code>NETStandard.Library</code>).</li>
+            </ol>
+            <p>This structure means developers only "bring in" what is necessary for their specific application.</p>
+        </div>
+
+        <h2 class="title example">Benefits of Modularity</h2>
+        <div class="content example">
+            <p>The shift to a modular design provides several key advantages:</p>
+            <ul>
+                <li class="content">**Reduced Footprint**: Applications are smaller because they don't carry unnecessary code from the entire framework.</li>
+                <li class="content">**Improved Performance**: A smaller application surface area and fewer loaded dependencies lead to better performance, which is especially noticeable in **ASP.NET Core** applications.</li>
+                <li class="content">**Individual Updates**: Modules can be updated and serviced individually without requiring an update to the entire framework installation.</li>
+                <li class="content">**Tighter Security**: Less code means a reduced attack surface.</li>
+            </ul>
+        </div>
+    </div>
+</div>

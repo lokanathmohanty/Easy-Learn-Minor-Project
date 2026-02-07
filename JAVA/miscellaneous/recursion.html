@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java - Recursion</h1>
+
+        <div class="content">
+            <h2>What is Recursion?</h2>
+            <p><strong>Recursion</strong> is a programming technique where a **method calls itself** to solve a problem. The core idea is to break a large, complex problem down into smaller, identical sub-problems until a simple, trivial case is reached. The function that calls itself is known as a **recursive function**.</p>
+            <p>Recursion is often favored because it leads to **more readable and expressive code**, especially for problems that have inherently recursive mathematical definitions (like factorial or Fibonacci numbers) or data structures (like trees and graphs).</p>
+
+            <h3>The Two Essential Parts</h3>
+            <p>A recursive function must have two components to prevent infinite execution and a **Stack Overflow Error**:</p>
+            <ol>
+                <li>
+                    <strong>Base Condition:</strong> The termination condition that stops the recursion. When this condition is met, the method returns a result without making any further recursive calls.
+                </li>
+                <li>
+                    <strong>Recursive Call:</strong> The part where the method calls itself, typically with a modified input that moves the function closer to the base condition.
+                </li>
+            </ol>
+            <p class="example"><strong>Example: Sum of Natural Numbers</strong></p>
+            <pre><code>public int sum(int n){
+   // Base Condition: Stops recursion when n reaches 1
+   if(n == 1){ 
+      return 1;
+   }
+   // Recursive Call: Moves closer to base (n-1)
+   return n + sum(n-1); 
+}</code></pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>How Recursion Works (The Call Stack)</h2>
+            <p>In Java, when a method is called, a new **stack frame** containing the method's local variables, arguments, and return address is pushed onto the **Call Stack**. During a recursive call, a new stack frame is pushed for *each* self-call.</p>
+            <ul>
+                <li><strong>Descent:</strong> The process continues (frames are pushed) until the base condition is met.</li>
+                <li><strong>Ascent:</strong> Once the base condition returns a value, the JVM unwinds the stack. Each recursive call returns its result, and its stack frame is **popped**. The result is used by the calling function to calculate its own result, until the initial call returns the final answer.</li>
+            </ul>
+            <p>Because each recursive call consumes memory on the stack, improperly implemented recursion or deep recursion can quickly exhaust the stack memory, leading to a **Stack Overflow Error**.</p>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title example">Example: Calculating Factorial</h2>
+            <div class="content">
+                <p>The factorial of a number ($n!$) is defined recursively as $n! = n \times (n-1)!$, with the base case being $1! = 1$.</p>
+                <pre><code>public int fact(int n) {
+   // Base case: 1! = 1
+   return n == 1 ? 1 : 
+      // Recursive step: n * (n-1)!
+      n * fact(n-1); 
+}</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Advantages and Disadvantages</h2>
+
+            <h3>Advantages</h3>
+            <ul>
+                <li><strong>Cleaner Code:</strong> Often makes code more concise and easier to read, especially for naturally recursive algorithms (e.g., Tower of Hanoi, Tree Traversal).</li>
+                <li><strong>Algorithmic Alignment:</strong> Simplifies the implementation of mathematical or data structure problems that are defined recursively.</li>
+            </ul>
+
+            <h3>Disadvantages</h3>
+            <ul>
+                <li><strong>Memory Intensive:</strong> Each recursive call adds overhead to the call stack, making the program more memory-intensive than an equivalent iterative solution.</li>
+                <li><strong>Debugging Complexity:</strong> A deeply nested sequence of calls can be harder to trace and debug.</li>
+                <li><strong>Expertise Required:</strong> Implementing the correct base condition and recursive step requires a solid understanding of the problem logic; an error can easily lead to a stack overflow.</li>
+            </ul>
+        </div>
+    </div>
+</div>

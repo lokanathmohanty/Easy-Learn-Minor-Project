@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java 8 - Major New Features Summary</h1>
+
+        <div class="content">
+            <h2>Overview of Java 8</h2>
+            <p><strong>Java 8 (released March 2014)</strong> was a monumental release that fundamentally changed how Java developers write code, primarily by introducing **functional programming** concepts and addressing long-standing API issues. It laid the foundation for modern Java development.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Functional Programming Foundations</h2>
+
+            <h3>1. Lambda Expressions (<code>-&gt;</code>)</h3>
+            <p>A concise syntax to implement an interface with a **single abstract method** (known as a **Functional Interface**). Lambdas facilitate functional programming, reduce boilerplate code, and improve readability.</p>
+            <p class="example"><strong>Example: Anonymous Class vs. Lambda</strong></p>
+            <pre><code>// Anonymous Class
+Calculator sum = new Calculator() { ... }; 
+
+// Lambda Expression
+Calculator sum1 = (a, b) -> a + b;</code></pre>
+
+            <h3>2. Method References (<code>::</code>)</h3>
+            <p>A shorthand for a lambda expression that simply calls an existing method. They make the code even more concise by referencing a method by its name.</p>
+            <ul>
+                <li><strong>Static Method Reference:</strong> <code>ClassName::staticMethod</code></li>
+                <li><strong>Instance Method Reference:</strong> <code>instanceObject::instanceMethod</code></li>
+                <li><strong>Constructor Reference:</strong> <code>ClassName::new</code></li>
+            </ul>
+
+            <h3>3. Default Methods</h3>
+            <p>Allows adding non-abstract methods with an implementation to an **interface** without breaking compatibility with existing classes that implement that interface. This was crucial for evolving the Collections Framework (e.g., adding <code>forEach()</code> to <code>List</code>).</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>New Core APIs</h2>
+
+            <h3>4. Stream API 🌊</h3>
+            <p>A new abstract layer for processing sequences of elements from a source (like collections or arrays) in a **declarative** manner. It supports complex operations (<code>filter</code>, <code>map</code>, <code>reduce</code>) that can be easily executed in **parallel** without manual threading.</p>
+
+            <h3>5. Optional Class</h3>
+            <p>A container object used to represent the presence or absence of a value. Its primary purpose is to help handle potential **<code>NullPointerException</code>** scenarios programmatically, making code less error-prone and more readable by forcing developers to consider the null case.</p>
+
+            <h3>6. New Date-Time API (<code>java.time</code>) 🗓️</h3>
+            <p>A complete overhaul of the old, broken date and time handling. The new API is **thread-safe** (immutable), has a **clearer design** (months/days start at 1, year is absolute), and provides specialized classes for specific needs:</p>
+            <ul>
+                <li><strong><code>LocalDate</code>, <code>LocalTime</code>, <code>LocalDateTime</code></strong> (Zone-neutral)</li>
+                <li><strong><code>ZonedDateTime</code></strong> (Time zone-aware)</li>
+            </ul>
+
+            <h3>7. Nashorn JavaScript Engine</h3>
+            <p>Introduced as a replacement for the older Rhino engine, Nashorn offered significantly improved performance by compiling JavaScript code directly to bytecode. It allowed seamless interoperability between Java and JavaScript code within a Java application (Note: Nashorn was later deprecated in Java 11 and removed in Java 15).</p>
+        </div>
+    </div>
+</div>

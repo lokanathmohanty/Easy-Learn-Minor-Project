@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Data Fetching Methods 🌐</h1>
+        
+        <div class="content">
+            <h2 class="title">Overview of Data Fetching</h2>
+            <p>Next.js enhances React's data fetching capabilities by offering multiple methods, primarily focused on server-side execution. Fetching data on the server side (pre-rendering) improves **performance** and **SEO** by reducing the amount of JavaScript the client needs to run and ensuring the HTML is fully formed when it reaches the browser.</p>
+            <p>The three main types of data fetching are **Server-side Fetching** (SSG/SSR), **Client-side Fetching**, and **Incremental Static Regeneration (ISR)**.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">1. Server-side Fetching (Pre-rendering)</h2>
+            <p>Data is fetched and rendered into HTML on the server, before the page is sent to the client.</p>
+            
+            <h3 class="title">A. Static Site Generation (SSG) 🏗️</h3>
+            <ul>
+                <li>**Mechanism:** Pages are generated once **at build time** and reused for every request (or until revalidated).</li>
+                <li>**Best For:** Pages with data that doesn't change frequently (e.g., blog posts, marketing pages). It provides the best performance.</li>
+                <li>**Function (Page Router):** **<span class="example">`getStaticProps`</span>**</li>
+                <li>**Function (App Router):** Default fetching behavior within a Server Component.</li>
+            </ul>
+            <pre>// Example using getStaticProps (Page Router)
+export async function getStaticProps() {
+  // Fetches data only at build time
+  const res = await fetch('...');
+  const post = await res.json();
+  return { props: { post } };
+}</pre>
+            
+            <h3 class="title">B. Server-side Rendering (SSR) 💻</h3>
+            <ul>
+                <li>**Mechanism:** Data is fetched **on every request** to the server, and the HTML is generated dynamically.</li>
+                <li>**Best For:** Pages requiring frequently updated or personalized data (e.g., a user's dashboard).</li>
+                <li>**Function (Page Router):** **<span class="example">`getServerSideProps`</span>**</li>
+                <li>**Function (App Router):** Using the **<span class="example">`fetch`</span>** API with dynamic options (e.g., no caching).</li>
+            </ul>
+            <pre>// Example using getServerSideProps (Page Router)
+export async function getServerSideProps() {
+    // Fetches data on every request
+    const res = await fetch('...');
+    const post = await res.json();
+    return { props: { post } };
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">2. Incremental Static Regeneration (ISR) ⏱️</h2>
+            <p>ISR is a middle ground between SSG and SSR. It allows a page to be statically generated at build time but also includes a mechanism to **update the static page incrementally** after deployment.</p>
+            <ul>
+                <li>**Mechanism:** Uses the **<span class="example">`revalidate`</span>** property inside <span class="example">`getStaticProps`</span> to set a maximum frequency (in seconds) for regeneration when a new request comes in.</li>
+            </ul>
+            <pre>// Example using revalidate for ISR
+export async function getStaticProps() {
+    // ... data fetching ...
+    return {
+      props: { data },
+      revalidate: 10, // Page is regenerated at most every 10 seconds
+    };
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">3. Client-side Fetching</h2>
+            <p>Data fetching happens entirely in the user's browser after the initial page has loaded. This is done using React hooks like **<span class="example">`useEffect`</span>** and can be combined with SSG/SSR for initial load.</p>
+            <ul>
+                <li>**Mechanism:** Uses hooks or libraries (like SWR or React Query) within a **Client Component** (marked with <span class="example">`"use client"`</span>).</li>
+                <li>**Best For:** Non-essential data, user-specific data, or data that needs to be constantly updated (e.g., a "like" count).</li>
+            </ul>
+        </div>
+    </div>
+</div>

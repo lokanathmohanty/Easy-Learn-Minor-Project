@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS z-index Property</h1>
+    <div class="content">
+      <p>The CSS <code>z-index</code> property controls the stacking order of elements on a web page when they overlap. Elements with a higher <code>z-index</code> value are displayed in front of those with lower values.</p>
+
+      <h2>Syntax</h2>
+      <p>The general syntax of the <code>z-index</code> property is:</p>
+      <p><code>z-index: auto | number | initial | inherit;</code></p>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>auto:</strong> Default value. The element inherits the stack level of its parent element.</li>
+        <li><strong>&lt;Integer&gt;:</strong> Positive or negative integer defining the stack order.</li>
+        <li><strong>initial:</strong> Resets the property to its default value.</li>
+        <li><strong>inherit:</strong> Inherits the value from the parent element.</li>
+      </ul>
+
+      <h2>CSS z-index with auto Value</h2>
+      <p>When set to <code>auto</code>, the element's stacking level is the same as its parent.</p>
+      <h3>Example</h3>
+      <pre>
+.box1 { position: absolute; z-index: auto; }
+.box2 { position: absolute; z-index: 1; }
+      </pre>
+      <p>Here, <code>box1</code> appears behind <code>box2</code> because <code>auto</code> resolves to the parent’s stack order.</p>
+
+      <h2>CSS z-index with Positive Integer</h2>
+      <p>Higher positive integers appear above lower ones.</p>
+      <h3>Example</h3>
+      <pre>
+.box1 { position: absolute; z-index: 1; }
+.box2 { position: absolute; z-index: 2; }
+.box3 { position: absolute; z-index: 3; }
+      </pre>
+      <p>In this case, <code>box3</code> overlaps <code>box2</code>, which overlaps <code>box1</code>.</p>
+
+      <h2>CSS z-index with Negative Integer</h2>
+      <p>Negative values push elements behind others, even the page background if no stacking context exists.</p>
+      <h3>Example</h3>
+      <pre>
+.box1 { position: absolute; z-index: -3; }
+.box2 { position: absolute; z-index: -2; }
+.box3 { position: absolute; z-index: -1; }
+      </pre>
+      <p>Here, <code>box1</code> is the furthest back.</p>
+
+      <h2>Placing Text Over Image</h2>
+      <p>You can overlay text on an image using <code>position</code> and <code>z-index</code>.</p>
+      <h3>Example</h3>
+      <pre>
+.container { position: relative; }
+img { display: block; }
+.text { position: absolute; top: 20%; z-index: 2; }
+      </pre>
+      <p>This ensures the text is displayed above the image.</p>
+
+      <h2>CSS z-index with Sticky Position</h2>
+      <p>Sticky elements can be layered using <code>z-index</code> while scrolling.</p>
+      <h3>Example</h3>
+      <pre>
+.box1 { position: sticky; z-index: 1; }
+.box2 { position: sticky; z-index: 2; }
+.box3 { position: sticky; z-index: 3; }
+      </pre>
+
+      <h2>CSS z-index with Fixed Position</h2>
+      <p>When used with <code>position: fixed</code>, elements stay in place as the page scrolls, respecting stack order.</p>
+      <h3>Example</h3>
+      <pre>
+.box1 { position: fixed; z-index: 1; }
+.box2 { position: fixed; z-index: 2; }
+      </pre>
+
+      <h2>CSS z-index with Static Position</h2>
+      <p>If an element has <code>position: static</code>, the <code>z-index</code> property has no effect.</p>
+      <h3>Example</h3>
+      <pre>
+.box1 { position: static; z-index: 5; }
+      </pre>
+      <p>The stack order remains unchanged.</p>
+
+      <h2>CSS z-index with Relative Position</h2>
+      <p>When using <code>position: relative</code>, <code>z-index</code> works relative to the element’s original position in the document flow.</p>
+      <h3>Example</h3>
+      <pre>
+.box1 { position: relative; z-index: 1; }
+.box2 { position: relative; z-index: 2; }
+      </pre>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li><code>z-index</code> only works on positioned elements (relative, absolute, fixed, sticky).</li>
+        <li>Higher values stack on top of lower values.</li>
+        <li>Negative values push elements behind others.</li>
+        <li><code>static</code> position ignores <code>z-index</code>.</li>
+      </ul>
+
+      <p>Mastering <code>z-index</code> is essential for managing layouts, modals, dropdowns, and layered designs.</p>
+    </div>
+  </div>
+</div>

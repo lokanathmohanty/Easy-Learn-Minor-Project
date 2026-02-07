@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - HttpURLConnection Class</h1>
+    <div class="content">
+      <p><strong>java.net.HttpURLConnection</strong> is an abstract class representing the HTTP-specific URL connection. Instances can be used to read from and write to the resource referenced by the URL.</p>
+      
+      <p>For example −</p>
+      <ul>
+        <li>If you connect to a URL whose protocol is HTTP, <code>URL.openConnection()</code> returns an <code>HttpURLConnection</code> object.</li>
+      </ul>
+      
+      <h2>Steps to make a connection to a URL</h2>
+      <ul>
+        <li>Invoke <code>URL.openConnection()</code> to get an <code>HttpURLConnection</code> object.</li>
+        <li>Update parameters and request properties using setter methods.</li>
+        <li>Create a connection using <code>connect()</code> method.</li>
+        <li>Access content and headers once connected.</li>
+      </ul>
+      
+      <h2>HttpURLConnection Class Declaration</h2>
+      <p><code>public abstract class HttpURLConnection extends URLConnection</code></p>
+      
+      <h2>HttpURLConnection Class Fields</h2>
+      <ul>
+        <li><strong>chunkLength</strong>: Chunk length for chunked streaming mode.</li>
+        <li><strong>fixedContentLength</strong> and <strong>fixedContentLengthLong</strong>: Fixed content length for streaming mode.</li>
+        <li><strong>HTTP_OK</strong> (200), <strong>HTTP_NOT_FOUND</strong> (404), <strong>HTTP_INTERNAL_ERROR</strong> (500), etc.: HTTP status codes as constants.</li>
+        <li><strong>instanceFollowRedirects</strong>: Whether to follow redirects automatically.</li>
+        <li><strong>method</strong>: HTTP request method (GET, POST, etc.).</li>
+        <li><strong>responseCode</strong>: The HTTP status code returned.</li>
+        <li><strong>responseMessage</strong>: The HTTP response message.</li>
+      </ul>
+      
+      <h2>HttpURLConnection Class Methods</h2>
+      <ul>
+        <li><code>disconnect()</code>: Indicate no further requests to server.</li>
+        <li><code>getErrorStream()</code>: Retrieve error stream on failure.</li>
+        <li><code>getResponseCode()</code>: Get HTTP status code.</li>
+        <li><code>getRequestMethod()</code>: Get HTTP method used.</li>
+        <li><code>setRequestMethod(String method)</code>: Set HTTP method (GET, POST, etc.).</li>
+        <li><code>setFollowRedirects(boolean)</code>: Enable or disable automatic redirects.</li>
+        <li>And many others for managing connection and streaming modes.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">HttpURLConnection Example</h2>
+    <div class="content">
+      <p>The following program connects to an HTTP URL and reads the data line by line:</p>
+      <pre><code>package com.tutorialspoint;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+
+public class HttpUrlConnectionDemo {
+   public static void main(String[] args) {
+      try {
+         URL url = new URL("https://www.tutorialspoint.com");
+         URLConnection urlConnection = url.openConnection();
+         HttpURLConnection connection = null;
+         if (urlConnection instanceof HttpURLConnection) {
+            connection = (HttpURLConnection) urlConnection;
+         } else {
+            System.out.println("Please enter an HTTP URL.");
+            return;
+         }
+
+         BufferedReader in = new BufferedReader(
+            new InputStreamReader(connection.getInputStream()));
+         String urlString = "";
+         String current;
+
+         while ((current = in.readLine()) != null) {
+            urlString += current;
+         }
+         System.out.println(urlString);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}</code></pre>
+      <p><strong>Sample Output:</strong></p>
+      <p>The complete HTML content of the homepage of tutorialspoint.com.</p>
+    </div>
+  </div>
+</div>

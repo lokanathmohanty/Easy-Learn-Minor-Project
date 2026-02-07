@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Object Constructors</h1>
+    <div class="content">
+      <p>An object constructor in JavaScript is a function that creates an instance of a class, which is typically called an object. A constructor is called when you declare an object using the <code>new</code> keyword. The purpose of a constructor is to create an object and set values if there are any object properties present.</p>
+
+      <p>There are two ways to create a template for the object in JavaScript:</p>
+      <ul>
+        <li>Using a class</li>
+        <li>Using an object constructor</li>
+      </ul>
+
+      <p>Whenever you need to create multiple objects with the same syntax, you require a template for the object. For example, if you are managing the car inventory, it is not efficient to create a new object every time using the object literal. In such cases, you can use object constructors. The main benefit of object constructors is that you can reuse the code.</p>
+
+      <h2 class="title">Syntax</h2>
+      <pre><code>function Funcname(p1, p2, ... , pN) {
+   this.prop1 = p1;
+}
+const obj = new Funcname(args);</code></pre>
+      <p>In the above syntax:</p>
+      <ul>
+        <li><code>Funcname()</code> is a constructor function (you can replace it with any valid identifier).</li>
+        <li><code>p1, p2, ... , pN</code> are parameters used inside the function body.</li>
+        <li><code>this</code> represents the function context (the current instance of the object).</li>
+      </ul>
+
+      <h2 class="title">Example: Creating an object using a constructor function</h2>
+      <pre><code>function Tree() {
+  this.name = "palm";
+  this.age = 5;
+}
+const tree1 = new Tree();
+console.log("name = " + tree1.name + ", age = " + tree1.age);</code></pre>
+      <p><strong>Output:</strong> name = palm, age = 5</p>
+
+      <h2 class="title">Example: Constructor function with parameters</h2>
+      <pre><code>function Bike(name, speed, gear) {
+  this.name = name;
+  this.speed = speed;
+  this.gear = gear;
+}
+const bike1 = new Bike("Honda", 100, 4);
+const bike2 = new Bike("Yamaha", 200, 6);
+
+console.log(bike1);
+console.log(bike2);</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The bike1 object is : {"name":"Honda","speed":100,"gear":4}</li>
+        <li>The bike2 object is : {"name":"Yamaha","speed":200,"gear":6}</li>
+      </ul>
+
+      <h2 class="title">Adding a Property or Method to a Constructor</h2>
+      <p>The object constructor requires you to add the properties and methods while defining it. You cannot add them later directly to the constructor. For example:</p>
+      <pre><code>function HouseAddress(no, street, city) {
+  this.houseNo = no;
+  this.street = street;
+  this.city = city;
+
+  this.getFullAddress = function () {
+    return this.houseNo + ", " + this.street + ", " + this.city;
+  };
+}
+const house = new HouseAddress(20, "Cooper Square", "New York");
+console.log(house);
+console.log(house.getFullAddress());</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The house object is {"houseNo":20,"street":"Cooper Square","city":"New York"}</li>
+        <li>The full address of the house is 20, Cooper Square, New York</li>
+      </ul>
+
+      <p>If you add a property like <code>obj.prop = 20;</code> it will only belong to that particular object, not the constructor.</p>
+
+      <h2 class="title">JavaScript Object Prototype</h2>
+      <p>Each object contains the prototype property by default. Since the constructor is also an object, you can add properties or methods to its prototype.</p>
+      <pre><code>function Bike(name, speed, gear) {
+  this.name = name;
+  this.speed = speed;
+  this.gear = gear;
+}
+Bike.prototype.BikeDetails = function () {
+  return this.name + ", " + this.speed + ", " + this.gear;
+};
+
+const bike1 = new Bike("Honda", 100, 4);
+const bike2 = new Bike("Yamaha", 200, 6);
+
+console.log(bike1.BikeDetails());
+console.log(bike2.BikeDetails());</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The bike1 details is: Honda, 100, 4</li>
+        <li>The bike2 details is: Yamaha, 200, 6</li>
+      </ul>
+
+      <h2 class="title">Built-in Object Constructors in JavaScript</h2>
+      <p>JavaScript provides several built-in constructors:</p>
+      <ul>
+        <li><code>new Array()</code> – To create an array</li>
+        <li><code>new String("Hello")</code> – To create a string</li>
+        <li><code>new Number(92)</code> – To create a number</li>
+        <li><code>new Boolean(true)</code> – To create a boolean</li>
+        <li><code>new Set()</code> – To create a set</li>
+        <li><code>new Map()</code> – To create a map</li>
+        <li><code>new Object()</code> – To create an object</li>
+        <li><code>new Function("x", "return x * x;")</code> – To create a function</li>
+        <li><code>new Date()</code> – To create a Date instance</li>
+        <li><code>new RegExp("\\d+")</code> – To create a regular expression</li>
+        <li><code>new Error("new error.")</code> – To create an error</li>
+        <li><code>Symbol("description")</code> – To create a symbol</li>
+      </ul>
+      <p>However, in most cases, it is preferable to use literal expressions (e.g., <code>[]</code> for arrays, <code>{}</code> for objects, <code>" "</code> for strings, etc.) when working with primitive values.</p>
+    </div>
+  </div>
+</div>

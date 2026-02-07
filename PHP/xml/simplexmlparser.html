@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - SimpleXML Parser</h1>
+
+        <div class="content">
+            <h2 class="title">Introduction to SimpleXML</h2>
+            <p>The **SimpleXML** extension provides PHP with an extremely easy-to-use **tree-based parser** for processing XML data. It converts a well-formed XML document into a **$\text{SimpleXMLElement}$ object** where elements can be accessed using standard **object properties** and iterated over like **arrays**.</p>
+            <p>It is best suited for **simple, smaller XML files**. For large or highly complex XML documents, event-based parsers ($\text{XMLReader}$) or the $\text{DOMDocument}$ class are usually preferred due to performance and memory constraints.</p>
+
+            <h2 class="title">Core SimpleXML Functions</h2>
+
+            <h3>1. $\text{simplexml\_load\_file()}$</h3>
+            <p>This function parses an **XML file** from the filesystem and converts its structure into a $\text{SimpleXMLElement}$ object.</p>
+            <pre>
+&lt;?php
+   $xml = simplexml_load_file("test.xml") or die("Error: Cannot create object");
+   // The root node &lt;note&gt; is now the $xml object.
+   // Child elements (Course, Subject, etc.) are its properties.
+   print_r($xml); 
+?&gt;</pre>
+            <p>The output is a $\text{SimpleXMLElement}$ object where XML tags become properties:</p>
+            <pre>
+SimpleXMLElement Object
+(
+   [Course] => Android
+   [Subject] => Android
+   [Company] => TutorialsPoint
+   [Price] => $10
+)</pre>
+
+            <h3>2. $\text{simplexml\_load\_string()}$</h3>
+            <p>Similar to $\text{simplexml\_load\_file()}$, but it parses a **string** containing the $\text{XML}$ data instead of a file.</p>
+
+            <h3>3. $\text{simplexml\_import\_dom()}$</h3>
+            <p>This function acts as a bridge, converting a $\text{DOMNode}$ object (created using the more complex $\text{DOMDocument}$ class) into a **SimpleXMLElement** object. This is useful when complex manipulation is done with $\text{DOMDocument}$, but simple reading/access is preferred afterward.</p>
+            <pre>
+&lt;?php
+   $dom = new DOMDocument;
+   $dom->loadXML('&lt;books&gt;&lt;book&gt;&lt;title&gt;PHP Handbook&lt;/title&gt;&lt;/book&gt;&lt;/books&gt;');
+
+   $s = simplexml_import_dom($dom);
+   // Accessing the element via array and property access
+   echo $s->book[0]->title; 
+   // Output: PHP Handbook
+?&gt;</pre>
+
+            <hr>
+
+            <h2 class="title">Accessing XML Node Values and Iteration</h2>
+            <p>Once an $\text{XML}$ document is loaded into a $\text{SimpleXMLElement}$ object, traversing the tree and accessing data is straightforward using **$\text{foreach}$ loops** and **property access** ($\text{->}$).</p>
+
+            <h3>Example: Iterating over $\text{<course>}$ Elements</h3>
+            <p>If the root element is $\text{<tutorialspoint>}$, its direct children are $\text{<course>}$ elements. The $\text{children()}$ method or simple object iteration allows traversing these elements.</p>
+            <pre>
+&lt;?php
+   $xml = simplexml_load_file("books.xml") or die("Error: Cannot create object");
+
+   // Iterate through all direct children of the root (all &lt;course&gt; nodes)
+   foreach($xml->children() as $books) { 
+      // Access child elements (title, tutor, etc.) as properties of the $books object
+      echo $books->title . "&lt;br&gt; "; 
+      echo $books->tutor . "&lt;br&gt; "; 
+      echo $books->price . "&lt;hr&gt;"; 
+   }
+?&gt;</pre>
+        </div>
+    </div>
+</div>

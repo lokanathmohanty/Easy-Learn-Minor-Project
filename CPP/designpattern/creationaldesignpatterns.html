@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Creational Design Patterns in C++ 🏭🏗️</h1>
+
+        <div class="content">
+            <p>**Creational Design Patterns** are a category of patterns concerned with **object creation mechanisms**. Their goal is to abstract the instantiation process, making the system independent of **how its objects are composed and created**.</p>
+            <p>By hiding the creation logic from the client code, these patterns achieve **loose coupling**, making the system easier to change, extend, and maintain (the "pizza delivery" analogy).</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Purpose and Benefits</h2>
+
+        <div class="content">
+            <p>Creational patterns address problems where:</p>
+            <ul>
+                <li>The code needs to produce objects but shouldn't be fixed on a **specific concrete class** (decoupling).</li>
+                <li>The type of object needed won't be known until **runtime**.</li>
+                <li>Building an object requires many **complicated steps** that shouldn't be scattered throughout the code.</li>
+                <li>You must ensure there is just a **single copy** of a specific resource in the entire program (e.g., a logger, a configuration manager).</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Types of Creational Design Patterns</h2>
+
+        <div class="content">
+            <p>The five main types of creational patterns are:</p>
+            <ol>
+                <li>
+                    **Singleton Pattern:** Ensures a class has **only one instance** and provides a global point of access to it.
+                </li>
+                <li>
+                    **Factory Method Pattern:** Defines an interface for creating an object, but lets subclasses decide which class to instantiate. It **defers instantiation** to derived classes.
+                </li>
+                <li>
+                    **Abstract Factory Pattern:** Provides an interface for creating **families of related or dependent objects** without specifying their concrete classes (e.g., creating a family of GUI elements that all look "Dark Theme" or "Light Theme").
+                </li>
+                <li>
+                    **Builder Pattern:** Separates the construction of a complex object from its representation, allowing the same construction process to create **different representations** (e.g., building a simple or luxury car using the same steps).
+                </li>
+                <li>
+                    **Prototype Pattern:** Creates new objects by **cloning** an existing object (the prototype). This is used to avoid the cost of creation, especially when the object's initial state is expensive to set up.
+                </li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Example Overview (Factory, Builder, Singleton)</h2>
+
+        <div class="content">
+            <p>The provided example uses three patterns together:</p>
+            <ul>
+                <li>
+                    **Factory Method (`PizzaFactory::createPizza`):** Takes a string (`"Margherita"`) and returns an object that adheres to the `Pizza` interface, hiding the `new Margherita()` call.
+                </li>
+                <li>
+                    **Builder (`PizzaBuilder`):** Orchestrates the creation process, taking steps to produce the final `Pizza` object, centralizing the construction logic.
+                </li>
+                <li>
+                    **Singleton (`PizzaSingleton::getInstance`):** Guarantees that only one instance of the `PizzaSingleton` class can exist throughout the program's lifetime.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

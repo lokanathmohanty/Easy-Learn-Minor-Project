@@ -1,0 +1,156 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Extending Errors</h1>
+    <div class="content">
+      <p>The custom errors in JavaScript are errors that you create yourself, as opposed to the built-in errors that JavaScript throws. You can create custom errors to handle specific types of errors that may occur in your code.</p>
+      <p>To create a custom error, you can use the <b>Error</b> constructor. The Error constructor takes a string as its argument, which will be the message of the error.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Extending the Error Class: Creating Custom Errors</h2>
+    <div class="content">
+      <p>The best way to create custom errors is by creating a new class and extending it using the <b>extends</b> keyword. It uses the concept of inheritance, and the custom error class inherits the properties of the Error class.</p>
+      <p>In the <b>constructor()</b> function, you can initialize the properties of the custom error class.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Syntax</h2>
+    <div class="content">
+      <pre>
+class customError extends Error {
+   constructor(message) {
+      super(message)
+      // Initialize properties
+   }
+}
+      </pre>
+      <p>In the above code, we call the parent class constructor using the <b>super()</b> method.</p>
+      <p>You can also initialize the properties of the <b>customError</b> class in the constructor function.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Age Validation Error</h2>
+    <div class="content">
+      <p>In this example, we define the <b>ageError</b> class by extending the Error class. It validates the user’s age and throws an error if the age is less than 18.</p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p&gt;Enter your age: &lt;input type = "number" id = "age" /&gt; &lt;/p&gt;
+   &lt;button onclick = "checkAge()"&gt; Check Age &lt;/button&gt;
+   &lt;p id = "demo"&gt; &lt;/p&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      class ageError extends Error {
+         constructor(message, age) {
+            super(message);
+            this.name = "ageError";
+            this.age = age; // Custom property
+         }
+      }
+      function checkAge() {
+         const ageValue = document.getElementById('age').value;
+         try {
+            if (ageValue &lt; 18) {
+               throw new ageError("You are too young", ageValue);
+            } else {
+               output.innerHTML = "You are old enough";
+            }
+         } catch (e) {
+            output.innerHTML = "Error: " + e.message + "&lt;br&gt;";
+            output.innerHTML += "Age: " + e.age + "&lt;br&gt;";
+         }
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b></p>
+      <p>Error: You are too young.<br>Age: 5</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Multiple Custom Errors</h2>
+    <div class="content">
+      <p>You can also create multiple new classes for custom errors when you only want to provide clarified error types and messages.</p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id = "demo"&gt; &lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      class StringError extends Error { };
+      class NumberError extends Error { };
+      class BooleanError extends Error { };
+
+      try {
+         throw new StringError("This is a string error");
+      } catch (e) {
+         if (e instanceof StringError) {
+            output.innerHTML = "String Error";
+         } else if (e instanceof NumberError) {
+            output.innerHTML = "Number Error";
+         } else if (e instanceof BooleanError) {
+            output.innerHTML = "Boolean Error";
+         } else {
+            output.innerHTML = "Unknown Error";
+         }
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b> String Error</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Multilevel Inheritance</h2>
+    <div class="content">
+      <p>You can create a general custom error by extending the Error class, and then extend it further to create specialized custom error classes.</p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id = "output"&gt; &lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("output");
+      class NotFound extends Error {
+         constructor(message) {
+            super(message);
+            this.name = "NotFound";
+         }
+      }
+
+      class propertyNotFound extends NotFound {
+         constructor(message) {
+            super(message);
+            this.name = "propertyNotFound";
+         }
+      }
+
+      class ElementNotFound extends NotFound {
+         constructor(message) {
+            super(message);
+            this.name = "ElementNotFound";
+         }
+      }
+
+      try {
+         let arr = [1, 2, 3, 4, 5];
+         if (!arr.includes(6)) {
+            throw new propertyNotFound("Array doesn't contain 6");
+         }
+      } catch (e) {
+         output.innerHTML = e.name + ": " + e.message;
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b> propertyNotFound: Array doesn't contain 6</p>
+    </div>
+  </div>
+</div>

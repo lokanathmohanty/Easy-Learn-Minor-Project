@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Passing Pointers to Functions in C</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>A pointer in C is a variable that stores the address of another variable. It acts as a reference to the original variable. A pointer can be passed to a function just like any other argument.</p>
+      <p>A function in C can be called in two ways:</p>
+      <ul>
+        <li>Call by Value</li>
+        <li>Call by Reference</li>
+      </ul>
+      <p>To call a function by reference, define it to receive pointers to variables. For example:</p>
+      <pre><code>type function_name(type *var1, type *var2, ...)</code></pre>
+      <p>When a function is called by reference, pointers to the actual argument variables are passed, not their values.</p>
+
+      <h2>Advantages of Passing Pointers to Functions</h2>
+      <ul>
+        <li>Allows modifying variables from another scope directly.</li>
+        <li>Enables functions to return multiple values through pointers.</li>
+      </ul>
+
+      <h2>Passing Pointers to int Variables</h2>
+      <p>Example of an <code>add()</code> function receiving pointers to two integers:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int add(int *, int *);
+
+int main() {
+  int a = 10, b = 20;
+  int c = add(&a, &b);
+  printf("Addition: %d", c);
+}
+
+int add(int *x, int *y) {
+  int z = *x + *y;
+  return z;
+}
+</code></pre>
+
+      <h2>Swap Values by Passing Pointers</h2>
+      <p>Swapping two variables using pointers:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int swap(int *x, int *y) {
+  int z;
+  z = *x;
+  *x = *y;
+  *y = z;
+}
+
+int main() {
+  int a = 10, b = 20;
+  printf("Before swap, value of a: %d\n", a);
+  printf("Before swap, value of b: %d\n", b);
+
+  swap(&a, &b);
+
+  printf("After swap, value of a: %d\n", a);
+  printf("After swap, value of b: %d\n", b);
+
+  return 0;
+}
+</code></pre>
+
+      <h2>Passing an Array Pointer to a Function</h2>
+      <p>Example passing an array pointer along with an integer:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int arrfunction(int, float *);
+
+int main() {
+  int x = 100;
+  float arr[3];
+
+  arrfunction(x, arr);
+
+  printf("Square of %d: %f\n", x, arr[0]);
+  printf("Cube of %d: %f\n", x, arr[1]);
+  printf("Square root of %d: %f\n", x, arr[2]);
+
+  return 0;
+}
+
+int arrfunction(int x, float *arr) {
+  arr[0] = pow(x, 2);
+  arr[1] = pow(x, 3);
+  arr[2] = pow(x, 0.5);
+}
+</code></pre>
+
+      <h2>Passing String Pointers to a Function</h2>
+      <p>Example comparing two strings by passing their pointers:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int compare(char *, char *);
+
+int main() {
+  char str1[] = "BAT";
+  char str2[] = "BALL";
+  int ret = compare(str1, str2);
+  return 0;
+}
+
+int compare(char *x, char *y) {
+  if (strlen(x) > strlen(y)) {
+    printf("Length of Str1 is greater than or equal to the length of Str2");
+  } else {
+    printf("Length of Str1 is less than the length of Str2");
+  }
+}
+</code></pre>
+
+      <h2>Passing Struct Pointer to a Function</h2>
+      <p>Example passing a pointer to a structure:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+struct rectangle {
+  float len, brd;
+  double area;
+};
+
+int area(struct rectangle *);
+
+int main() {
+  struct rectangle s;
+  printf("Input length and breadth of a rectangle: ");
+  scanf("%f %f", &s.len, &s.brd);
+  area(&s);
+  return 0;
+}
+
+int area(struct rectangle *r) {
+  r->area = (double)(r->len * r->brd);
+  printf("Length: %f\nBreadth: %f\nArea: %lf\n", r->len, r->brd, r->area);
+  return 0;
+}
+</code></pre>
+
+      <h2>Summary</h2>
+      <p>Passing pointers to functions in C allows manipulation of variables, arrays, strings, and structures by reference, enabling more flexible and efficient programming patterns.</p>
+    </div>
+  </div>
+</div>

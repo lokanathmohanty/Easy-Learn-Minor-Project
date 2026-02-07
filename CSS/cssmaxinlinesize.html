@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS max-inline-size Property</h1>
+    <div class="content">
+      <p>
+        The <code>max-inline-size</code> property in CSS sets the maximum inline size of an element. The inline direction is determined by the <code>writing-mode</code> property. 
+        If the content fits within the element's inline size, the property has no effect. 
+        This property is especially useful in responsive design where you want to control the growth of inline elements without fixing their size.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>
+        <code>max-inline-size: auto | length | percentage | initial | inherit;</code>
+      </p>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><b>auto</b> – Default. No inline-size limit is applied.</li>
+        <li><b>length</b> – Defines the maximum inline size in absolute or relative length units (px, em, rem, etc.).</li>
+        <li><b>percentage</b> – Defines the maximum inline size as a percentage of the containing element.</li>
+        <li><b>initial</b> – Resets the property to its default value.</li>
+        <li><b>inherit</b> – Inherits the value from the parent element.</li>
+      </ul>
+
+      <h2>Examples</h2>
+
+      <h3>Max Inline Size with Auto Value</h3>
+      <p>
+        When set to <code>auto</code>, the element does not have a maximum inline size restriction, and its size depends solely on its content.
+      </p>
+      <pre>
+&lt;div class="container"&gt;
+  &lt;div style="max-inline-size: auto; display: inline-block;"&gt;
+    &lt;p&gt;
+      This paragraph expands based on content without any restriction
+      from max-inline-size because the value is set to auto.
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+      </pre>
+
+      <h3>Max Inline Size with Length Values</h3>
+      <p>
+        You can use specific length units to set the maximum inline size of an element. If the content overflows, it will either wrap or extend depending on other CSS rules.
+      </p>
+      <pre>
+&lt;div class="container"&gt;
+  &lt;div style="max-inline-size: 160px; display: inline-block;"&gt;
+    &lt;p&gt;This element has a maximum inline size of 160px.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div style="max-inline-size: 6.5em; display: inline-block;"&gt;
+    &lt;p&gt;This element has a maximum inline size of 6.5em.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+      </pre>
+
+      <h3>Max Inline Size with Percentage Values</h3>
+      <p>
+        Using percentage values makes the element’s size responsive to its parent container. For example, <code>50%</code> means the element can grow up to half of its container’s inline size.
+      </p>
+      <pre>
+&lt;div class="container" style="width: 500px;"&gt;
+  &lt;div style="max-inline-size: 45%; display: inline-block;"&gt;
+    &lt;p&gt;This box takes up to 45% of its parent container.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div style="max-inline-size: 55%; display: inline-block;"&gt;
+    &lt;p&gt;This box takes up to 55% of its parent container.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+      </pre>
+
+      <h3>Max Inline Size with Writing Mode</h3>
+      <p>
+        The <code>max-inline-size</code> property works in combination with the <code>writing-mode</code> property. 
+        In horizontal writing mode, inline-size grows left to right. In vertical writing mode, it grows top to bottom.
+      </p>
+      <pre>
+&lt;div class="container"&gt;
+  &lt;div style="max-inline-size: 65%; writing-mode: horizontal-tb; display: inline-block;"&gt;
+    &lt;p&gt;This uses horizontal writing mode with max-inline-size of 65%.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div style="max-inline-size: 65%; writing-mode: vertical-rl; display: inline-block;"&gt;
+    &lt;p&gt;This uses vertical writing mode with max-inline-size of 65%.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+      </pre>
+
+      <h2>Supported Browsers</h2>
+      <ul>
+        <li>Chrome: 57.0+</li>
+        <li>Edge: 79.0+</li>
+        <li>Firefox: 41.0+</li>
+        <li>Safari: 12.1+</li>
+        <li>Opera: 44.0+</li>
+      </ul>
+    </div>
+  </div>
+</div>

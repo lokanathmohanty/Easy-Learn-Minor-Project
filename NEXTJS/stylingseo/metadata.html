@@ -1,0 +1,197 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Next.js - Metadata</h1>
+ 
+    <div class="content">
+      <p>
+        **Metadata** of a webpage stores important information like webpage title, description, title card images, etc. Proper metadata is essential for better search engine results (**SEO**). In this chapter, we will explain the metadata object in Next.js, how to define static and dynamic metadata, and how to generate a metadata image using CSS.
+      </p>
+
+      <h2 class="title">Metadata Object in Next.js</h2>
+      <p>
+        In Next.js, the **`metadata` object** is part of the **App Router** used to define metadata for each route. With the `metadata` object, we can define the **title**, **description**, and other SEO components even for dynamically generated routes.
+      </p>
+
+      <h2 class="title example">Syntax of Metadata Object</h2>
+      <div class="example">
+        <p>
+          <code>
+            export const metadata = {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;title: "Title of Webpage",<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;description: "Description of Webpage"<br>
+            }
+          </code>
+        </p>
+      </div>
+
+      <h2 class="title">Title Attribute</h2>
+      <p>
+        The `title` attribute is used to set the title of the document. It can be defined as a simple string or an optional **template object**.
+      </p>
+
+      <h2 class="title example">Title Template Object Structure</h2>
+      <div class="example">
+        <p>
+          <code>
+            import type { Metadata } from 'next'<br>
+            <br>
+            export const metadata: Metadata = {<br>
+            &nbsp;&nbsp;title: {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;default: '...',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;template: '...',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;absolute: '...',<br>
+            &nbsp;&nbsp;},<br>
+            }
+          </code>
+        </p>
+        <ul>
+          <li class="content">
+            **`default`**: Defines a fallback title for child routes.
+          </li>
+          <li class="content">
+            **`template`**: Used to add a prefix or a suffix to titles defined in child routes (e.g., `%s | My App`).
+          </li>
+          <li class="content">
+            **`absolute`**: Used to provide a title that ignores `title.template` set in the parent route.
+          </li>
+        </ul>
+      </div>
+
+      <h2 class="title">Declare a Static Metadata</h2>
+      <p>
+        **Static metadata** does not depend on data from external sources and remains the same for all users.
+      </p>
+      <p>
+        In the App Router, you define static metadata by exporting a **`Metadata` object** from a **`layout.tsx`** or static **`page.tsx`** file.
+      </p>
+      <ul>
+        <li class="content">
+          Metadata in `layout.tsx` is accessible to all components within that layout.
+        </li>
+        <li class="content">
+          Metadata in `page.tsx` is specific to that component and can **override** metadata from the layout.
+        </li>
+      </ul>
+
+      <h2 class="title example">Example of Metadata in Layout Component (`layout.tsx`)</h2>
+      <div class="example">
+        <p>// app/layout.tsx file</p>
+        <p>
+          <code>
+            import { ReactNode } from 'react';<br>
+            import type { Metadata } from 'next'<br>
+            <br>
+            export const metadata: Metadata = {<br>
+            &nbsp;&nbsp;title: 'Next JS Tutorial',<br>
+            &nbsp;&nbsp;description: 'We provide simple and easy to learn tutorial on Next JS',<br>
+            }<br>
+            // ... RootLayout component definition ...
+          </code>
+        </p>
+        <p>
+          The title defined here will be the default for all pages unless overridden.
+        </p>
+      </div>
+
+      <h2 class="title example">Example of Metadata for a Specific Component (`page.tsx`)</h2>
+      <p>
+        This example shows how to override the layout metadata specifically for the **About page**.
+      </p>
+      <div class="example">
+        <p>// app/about/page.tsx file</p>
+        <p>
+          <code>
+            import type { Metadata } from 'next';<br>
+            <br>
+            export const metadata: Metadata = {<br>
+            &nbsp;&nbsp;title: 'Next JS About Page',<br>
+            &nbsp;&nbsp;description: 'We provide simple and easy to learn tutorial on Next JS',<br>
+            }<br>
+            // ... About component definition ...
+          </code>
+        </p>
+        <p>
+          When accessing the `/about` route, this metadata will take precedence.
+        </p>
+      </div>
+
+      <h2 class="title">Declare a Dynamic Metadata</h2>
+      <p>
+        **Dynamic metadata** depends on dynamic information, such as the current **route parameters**, external data, or parent metadata. It is set by exporting a **`generateMetadata()` function** that returns a `Metadata` object.
+      </p>
+
+      <h2 class="title example">Example of Dynamic Title Based on Route Parameter</h2>
+      <p>
+        This example generates a dynamic title for a product page based on the `[id]` route parameter.
+      </p>
+      <div class="example">
+        <p>// app/products/[id]/page.tsx</p>
+        <p>
+          <code>
+            import { Metadata } from "next";<br>
+            <br>
+            type Props ={<br>
+            &nbsp;&nbsp;params: {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;id: string;<br>
+            &nbsp;&nbsp;};<br>
+            }<br>
+            <br>
+            // Dynamic Metadata function<br>
+            export const generateMetadata = ({ params }: Props): Metadata => {<br>
+            &nbsp;&nbsp;return {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;title: `Product ${params.id} - My Store`,<br>
+            &nbsp;&nbsp;};<br>
+            }<br>
+            // ... ProductPage component definition ...
+          </code>
+        </p>
+      </div>
+
+      <h2 class="title">Metadata Image Generation</h2>
+      <p>
+        **Metadata images** are used for creating social media images such as **Open Graph images** and **Twitter cards**. This image is displayed when the webpage link is shared on platforms like WhatsApp or Twitter.
+      </p>
+
+      <h2 class="title example">Example: Simple "Hello world!" Image Generation</h2>
+      <p>
+        The example below uses the **`ImageResponse` constructor** to generate dynamic images using JSX and CSS.
+      </p>
+      <div class="example">
+        <p>// app/api/og/route.js</p>
+        <p>
+          <code>
+            import { ImageResponse } from 'next/og';<br>
+            <br>
+            export async function GET() {<br>
+            &nbsp;&nbsp;return new ImageResponse(<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;(<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style={{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* ... CSS styles ... */<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hello world!<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;),<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: 300,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 100,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;);<br>
+            }<br>
+            <br>
+            // The image is then referenced in another page:<br>
+            // app/contacts/page.js<br>
+            // <...><br>
+            // &nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="/api/og" alt="Generated Image" /&gt;<br>
+            // <...><br>
+          </code>
+        </p>
+      </div>
+    </div>
+
+    <div class="content" style="text-align: right;">
+      <a href="#" class="example">Print Page</a>
+    </div>
+  </div>
+</div>

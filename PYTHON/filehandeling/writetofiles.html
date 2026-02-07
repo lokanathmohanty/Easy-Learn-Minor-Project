@@ -1,0 +1,142 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Write to File</h1>
+    
+    <div class="content">
+      <p>
+        Writing to a file involves opening the file in a specific mode, writing data to it, and then closing the file to ensure that all data is saved and resources are released. 
+        <a href="https://www.tutorialspoint.com/python/index.htm">Python</a> provides a built-in function <code>open()</code> to handle file operations and various methods for writing data.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Opening a File for Writing</h2>
+      <p>
+        The <code>open()</code> function is used to open files in different modes, each suited for specific use cases.
+      </p>
+      <ul>
+        <li><strong>w (Write mode)</strong> - Opens the file for writing. If the file exists, it truncates it before writing. Creates a new file if not existing.</li>
+        <li><strong>a (Append mode)</strong> - Adds data to the end of the file. Creates the file if it does not exist.</li>
+        <li><strong>x (Exclusive creation mode)</strong> - Creates a new file and fails if the file already exists.</li>
+        <li><strong>b (Binary mode)</strong> - Used with other modes to open in binary.</li>
+        <li><strong>+ (Update mode)</strong> - Opens the file for both reading and writing.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Example: Opening a File in Write Mode</h2>
+      <p>
+        This example opens a file "example.txt" in write mode and writes a string to it:
+      </p>
+      <pre><code>file = open("example.txt", "w")
+file.write("Hello, World!")
+file.close()
+print("File opened successfully!!")</code></pre>
+      <p>Output:</p>
+      <p><em>File opened successfully!!</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Example: Opening a File in Append Mode</h2>
+      <p>
+        This example appends a line to the existing file contents without altering current data:
+      </p>
+      <pre><code>file = open("example.txt", "a")
+file.write("Appending this line.\n")
+file.close()
+print("File opened successfully!!")</code></pre>
+      <p>Output:</p>
+      <p><em>File opened successfully!!</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Writing to a File Using <code>write()</code> Method</h2>
+      <p>
+        The <code>write()</code> method writes a single string to a file without adding newlines automatically.
+      </p>
+      <pre><code>with open("example.txt", "w") as file:
+    file.write("Hello, World!\n")
+    file.write("This is a new line.\n")
+print("File opened successfully!!")</code></pre>
+      <p>Output:</p>
+      <p><em>File opened successfully!!</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Writing to a File Using <code>writelines()</code> Method</h2>
+      <p>
+        The <code>writelines()</code> method writes a list of strings sequentially to the file without inserting newlines automatically.
+      </p>
+      <pre><code>lines = ["First line\n", "Second line\n", "Third line\n"]
+
+with open("example.txt", "w") as file:
+    file.writelines(lines)
+
+print("File opened successfully!!")</code></pre>
+      <p>Output:</p>
+      <p><em>File opened successfully!!</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Writing to a New File</h2>
+      <p>
+        Steps to write to a new file include opening or creating it in write mode, writing data, and closing the file properly.
+      </p>
+      <pre><code>fo = open("foo.txt", "w")
+fo.write("Python is a great language.\nYeah its great!!\n")
+fo.close()</code></pre>
+      <p>This creates a file "foo.txt" with content:</p>
+      <pre><code>Python is a great language.
+Yeah its great!!</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Writing to a New File in Binary Mode</h2>
+      <p>
+        Open the file in binary write mode ('wb') to write binary data.
+      </p>
+      <pre><code>with open('test.bin', 'wb') as f:
+    data = b"Hello World"
+    f.write(data)</code></pre>
+      <p>
+        To write text as binary, convert the string to bytes using <code>encode()</code>:
+      </p>
+      <pre><code>with open('test.bin', 'wb') as f:
+    data = "Hello World".encode('utf-8')
+    f.write(data)</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Writing to an Existing File</h2>
+      <p>
+        Opening a file in append mode ('a') allows adding content without overwriting existing data.
+      </p>
+      <pre><code>fo = open("foo.txt", "a")
+text = "TutorialsPoint has a fabulous Python tutorial"
+fo.write(text)
+fo.close()</code></pre>
+      <p>The file would contain:</p>
+      <pre><code>Python is a great language.
+Yeah its great!!
+TutorialsPoint has a fabulous Python tutorial</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Writing with Reading Using Update Modes</h2>
+      <p>
+        Opening files with 'w+' mode allows reading and writing without closing. The <code>seek()</code> method can reposition the read/write pointer.
+      </p>
+      <pre><code>fo = open("foo.txt", "w+")
+fo.write("This is a rat race")
+fo.seek(10, 0)
+data = fo.read(3)
+fo.seek(10, 0)
+fo.write("cat")
+fo.close()</code></pre>
+      <p>Opening the file afterward shows:</p>
+      <pre><code>This is a cat race</code></pre>
+    </div>
+    
+   
+  </div>
+</div>

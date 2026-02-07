@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Metaclasses</h1>
+    </div>
+    <div class="content">
+      <p>
+        Metaclasses are a powerful feature in Python that allow customization of class creation. They enable adding specific behaviors, attributes, and methods to classes, providing flexibility and supporting metaprogramming.
+      </p>
+      <p>
+        Metaclasses are an OOP concept present by default in all Python code. Python uses <code>type</code> as the default metaclass, whose instances are classes. Any Python class is an instance of some metaclass.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Creating Metaclasses in Python</h2>
+    </div>
+    <div class="content">
+      <p>
+        A metaclass defines how a class behaves. By default, Python uses <code>type()</code> to construct classes unless otherwise specified. The class body is executed in a new namespace, and the result is assigned to the class name via <code>type(name, bases, namespace)</code>.
+      </p>
+      <pre>
+class Demo:
+   pass
+   
+obj = Demo()
+print(obj)
+      </pre>
+      <p>Output example:</p>
+      <pre>
+&lt;__main__.Demo object at 0x7fe78f43fe80&gt;
+      </pre>
+      <p>This shows <code>obj</code> is an instance of the <code>Demo</code> class.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Creating Metaclasses Dynamically</h2>
+    </div>
+    <div class="content">
+      <pre>
+# Creating a class dynamically using type()
+DemoClass = type('DemoClass', (), {})
+obj = DemoClass()
+print(obj)
+      </pre>
+      <p>Output example:</p>
+      <pre>
+&lt;__main__.DemoClass object at 0x7f9ff6af3ee0&gt;
+      </pre>
+      <p>
+        This creates a class dynamically with no bases or attributes.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Metaclasses with Inheritance</h2>
+    </div>
+    <div class="content">
+      <pre>
+class Demo:
+   pass
+
+Demo2 = type('Demo2', (Demo,), dict(attribute=10))
+obj = Demo2()
+
+print(obj.attribute)
+print(obj.__class__)
+print(obj.__class__.__bases__)
+      </pre>
+      <p>Output example:</p>
+      <pre>
+10
+<class '__main__.Demo2'>
+(&lt;class '__main__.Demo'&gt;,)
+      </pre>
+      <p>This shows inheritance and attribute assignment during dynamic class creation.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Customizing Metaclass Creation</h2>
+    </div>
+    <div class="content">
+      <p>
+        You can customize how classes are created by defining your own metaclass. Overriding the <code>__new__</code> and <code>__init__</code> methods lets you modify class creation and initialization behavior.
+      </p>
+      <pre>
+class MyMetaClass(type):
+   def __new__(cls, name, bases, dct):
+      dct['version'] = 1.0
+      name = 'Custom' + name
+      return super().__new__(cls, name, bases, dct)
+
+class Demo(metaclass=MyMetaClass):
+   pass
+
+obj = Demo()
+print("Class Name:", type(obj).__name__)
+print("Version:", obj.version)
+      </pre>
+      <p>Output example:</p>
+      <pre>
+Class Name: CustomDemo
+Version: 1.0
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Another Customization Example Using <code>__init__</code></h2>
+    </div>
+    <div class="content">
+      <pre>
+class MyMetaClass(type):
+   def __init__(cls, name, bases, dct):
+      print('Initializing class', name)
+      cls.version = 10
+      super().__init__(name, bases, dct)
+
+class MyClass(metaclass=MyMetaClass):
+   def __init__(self, value):
+      self.value = value
+
+   def display(self):
+      print(f"Value: {self.value}, Version: {self.__class__.version}")
+
+obj = MyClass(42)
+obj.display()
+      </pre>
+      <p>Output example:</p>
+      <pre>
+Initializing class MyClass
+Value: 42, Version: 10
+      </pre>
+    </div>
+  </div>
+ 
+  </div>
+</div>

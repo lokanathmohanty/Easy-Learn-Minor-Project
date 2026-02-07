@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Remove Dictionary Items</h1>
+    <div class="content">
+      <p>Removing dictionary items in Python refers to deleting key-value pairs from an existing dictionary. Dictionaries are mutable data structures that hold pairs of keys and their associated values. Each key acts as a unique identifier, mapping to a specific value within the dictionary.</p>
+      <p>We can remove dictionary items in Python using various ways such as:</p>
+      <ul>
+        <li>using the <code>del</code> keyword</li>
+        <li>using the <code>pop()</code> method</li>
+        <li>using the <code>popitem()</code> method</li>
+        <li>using the <code>clear()</code> method</li>
+        <li>using dictionary comprehension</li>
+      </ul>
+
+      <h2>Remove Dictionary Items Using del Keyword</h2>
+      <pre><code>numbers = {10:"Ten", 20:"Twenty", 30:"Thirty", 40:"Forty"}
+print("Before delete:", numbers)
+del numbers[20]
+print("After delete:", numbers)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>Before delete: {10: 'Ten', 20: 'Twenty', 30: 'Thirty', 40: 'Forty'}
+After delete: {10: 'Ten', 30: 'Thirty', 40: 'Forty'}</code></pre>
+
+      <h3>Deleting Entire Dictionary</h3>
+      <pre><code>numbers = {10:"Ten", 20:"Twenty", 30:"Thirty", 40:"Forty"}
+print("Before delete:", numbers)
+del numbers
+print("After delete:", numbers)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>Before delete: {10: 'Ten', 20: 'Twenty', 30: 'Thirty', 40: 'Forty'}
+NameError: name 'numbers' is not defined</code></pre>
+
+      <h2>Remove Dictionary Items Using pop() Method</h2>
+      <pre><code>numbers = {10:"Ten", 20:"Twenty", 30:"Thirty", 40:"Forty"}
+print("Before pop:", numbers)
+val = numbers.pop(20)
+print("After pop:", numbers)
+print("Value popped:", val)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>Before pop: {10: 'Ten', 20: 'Twenty', 30: 'Thirty', 40: 'Forty'}
+After pop: {10: 'Ten', 30: 'Thirty', 40: 'Forty'}
+Value popped: Twenty</code></pre>
+
+      <h2>Remove Dictionary Items Using popitem() Method</h2>
+      <pre><code>numbers = {10:"Ten", 20:"Twenty", 30:"Thirty", 40:"Forty"}
+print("Before popitem:", numbers)
+val = numbers.popitem()
+print("After popitem:", numbers)
+print("Value popped:", val)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>Before popitem: {10: 'Ten', 20: 'Twenty', 30: 'Thirty', 40: 'Forty'}
+After popitem: {10: 'Ten', 20: 'Twenty', 30: 'Thirty'}
+Value popped: (40, 'Forty')</code></pre>
+
+      <h2>Remove Dictionary Items Using clear() Method</h2>
+      <pre><code>numbers = {10:"Ten", 20:"Twenty", 30:"Thirty", 40:"Forty"}
+print("Before clear:", numbers)
+numbers.clear()
+print("After clear:", numbers)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>Before clear: {10: 'Ten', 20: 'Twenty', 30: 'Thirty', 40: 'Forty'}
+After clear: {}</code></pre>
+
+      <h2>Remove Dictionary Items Using Dictionary Comprehension</h2>
+      <p>Dictionary comprehension is not used directly to remove items but can be combined with conditions for filtering.</p>
+      <pre><code>student_info = {
+    "name": "Alice",
+    "age": 21,
+    "major": "Computer Science"
+}
+
+# Removing items based on keys
+keys_to_remove = ["age", "major"]
+for key in keys_to_remove:
+    student_info.pop(key, None)
+
+print(student_info)</code></pre>
+      <p><b>Output:</b></p>
+      <pre><code>{'name': 'Alice'}</code></pre>
+    </div>
+  </div>
+</div>

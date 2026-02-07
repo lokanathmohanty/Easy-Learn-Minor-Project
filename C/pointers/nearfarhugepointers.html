@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Near, Far, and Huge Pointers in C</h1>
+    <div class="content">
+      <p>Near, far, and huge pointers were used in older C programming environments to handle segmented memory models, particularly in 16-bit Intel architectures like MS-DOS. These pointer types managed access to memory segments but are obsolete in modern flat memory systems.</p>
+      
+      <h2>Near Pointer</h2>
+      <p>A near pointer is a 16-bit pointer that can access memory only within the current data segment. Its size is 2 bytes and it can access about 64 KB of memory. It stores only the offset address.</p>
+      <p><strong>Syntax:</strong> <code>&lt;data type&gt; near &lt;pointer name&gt;</code></p>
+      <p><strong>Example:</strong></p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int near *ptr;
+   printf("Size of Near Pointer: %d bytes", sizeof(ptr));
+   return 0;
+}
+</code></pre>
+
+      <h2>Far Pointer</h2>
+      <p>A far pointer is a 32-bit pointer that can access memory outside the current segment by storing both segment and offset addresses. It has a size of 4 bytes. Only the offset part changes upon pointer arithmetic.</p>
+      <p><strong>Syntax:</strong> <code>&lt;data type&gt; far &lt;pointer name&gt;</code></p>
+      <p><strong>Example:</strong></p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int number = 50;
+   int far *p;
+   p = &number;
+   printf("Size of far pointer: %d bytes", sizeof(p));
+   return 0;
+}
+</code></pre>  
+
+      <h2>Huge Pointer</h2>
+      <p>A huge pointer is also 32-bit like a far pointer but can be incremented to cross segment boundaries by adjusting both segment and offset. This allows it to navigate larger continuous memory spaces across segments. Its size is 4 bytes.</p>
+      <p><strong>Syntax:</strong> <code>data_type huge* pointer_name;</code></p>
+      <p><strong>Example:</strong></p>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int huge* ptr;
+   printf("Size of Huge Pointer: %d bytes", sizeof(ptr));
+   return 0;
+}
+</code></pre>
+
+      <h2>Summary Points</h2>
+      <ul>
+        <li>Near pointers access only up to 64 KB within one segment; size 2 bytes.</li>
+        <li>Far pointers access anywhere in memory by storing segment and offset; size 4 bytes.</li>
+        <li>Huge pointers can cross segment boundaries with full arithmetic on segment and offset; size 4 bytes.</li>
+        <li>Near pointers use one register, far and huge pointers use two registers.</li>
+        <li>Far pointers may have multiple values pointing to same physical address; huge pointers avoid this.</li>
+        <li>These pointer types are obsolete due to modern flat memory models in contemporary systems.</li>
+      </ul>
+    </div>
+  </div>
+</div>

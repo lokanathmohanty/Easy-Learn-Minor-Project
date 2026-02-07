@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="session">
+
+    <div class="title">
+      <h1>Binomial Distribution</h1>
+    </div>
+
+    <div class="content">
+      <h2>Binomial Distribution</h2>
+      <p>Binomial Distribution is a <strong>Discrete Distribution</strong>.</p>
+      <p>It describes the outcome of binary scenarios, e.g. toss of a coin, which will either be heads or tails.</p>
+
+      <h3>Parameters:</h3>
+      <ul>
+        <li><strong>n</strong> - Number of trials.</li>
+        <li><strong>p</strong> - Probability of occurrence of each trial (e.g. for a coin toss, 0.5 each).</li>
+        <li><strong>size</strong> - The shape of the returned array.</li>
+      </ul>
+
+      <p><strong>Discrete Distribution:</strong> The distribution is defined at a separate set of events, e.g., a coin toss's result is discrete (heads or tails), whereas height is continuous (can be 170, 170.1, 170.11, etc.).</p>
+
+      <h3>Example: Generate 10 data points for 10 trials of a coin toss</h3>
+      <pre><code>from numpy import random
+
+x = random.binomial(n=10, p=0.5, size=10)
+
+print(x)</code></pre>
+
+      <h3>Visualization of Binomial Distribution</h3>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.displot(random.binomial(n=10, p=0.5, size=1000))
+
+plt.show()</code></pre>
+
+      <h2>Difference Between Normal and Binomial Distribution</h2>
+      <p>The main difference is that the normal distribution is <em>continuous</em> whereas binomial is <em>discrete</em>. However, with enough data points, the binomial distribution will resemble the normal distribution with certain <code>loc</code> and <code>scale</code> parameters.</p>
+
+      <h3>Example: Comparing Normal and Binomial distributions</h3>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = {
+  "normal": random.normal(loc=50, scale=5, size=1000),
+  "binomial": random.binomial(n=100, p=0.5, size=1000)
+}
+
+sns.displot(data, kind="kde")
+
+plt.show()</code></pre>
+
+    </div>
+  </div>
+</div>

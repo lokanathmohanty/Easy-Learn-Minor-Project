@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ References (&amp;)</h1>
+
+        <div class="content">
+            <p>A **reference variable** in C++ is an **alias** (another name) for an **already existing variable**. Once a reference is initialized to a variable, both the variable name and the reference name refer to the **same memory location**. Any change made through the reference name affects the original variable, and vice-versa.</p>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Creating References</h2>
+            <p>A reference is declared by placing an ampersand (<code>&amp;</code>) immediately after the type in the declaration.</p>
+            <p><strong>Syntax:</strong></p>
+            <pre class="example">DataType&amp; reference_name = existing_variable;</pre>
+            <p><strong>Example:</strong></p>
+            <pre class="example">
+int i = 17;
+int&amp; r = i; // r is a reference to i.
+</pre>
+            <p>In the above example, <code>r</code> and <code>i</code> are interchangeable names for the same integer value stored in memory.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">References vs. Pointers</h2>
+            <p>References are often confused with pointers, but they are fundamentally different and have strict rules:</p>
+            <ul>
+                <li><strong>Initialization:</strong> A reference **must be initialized** when it is created. Pointers can be initialized later.</li>
+                <li><strong>Re-assignment:</strong> Once a reference is initialized to an object, it **cannot be changed** to refer to another object (it is fixed to its initial target). Pointers can be re-pointed at any time.</li>
+                <li><strong>Null Value:</strong> You **cannot have NULL references**. A reference is always guaranteed to be bound to a legitimate piece of storage.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Primary Use Cases of References</h2>
+            <p>References are mostly used in the context of functions to avoid expensive copies of large objects.</p>
+            <p><strong>1. References as Parameters (Pass-by-Reference):</strong></p>
+            <p>This allows a function to modify the original variable passed from the caller, or to simply access large objects efficiently without creating a copy (often called **pass-by-const-reference** for read-only access).</p>
+            <p><strong>2. References as Return Values:</strong></p>
+            <p>A function can return a reference to a variable. This allows the function call to be used on the left side of an assignment, effectively modifying the variable that was returned.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Recursion</h1>
+    </div>
+    <div class="content">
+      <p>
+        Recursion is a programming technique where a function calls itself to solve smaller instances of a problem. It breaks down complex problems into manageable sub-problems of the same type. Python implements recursion by defining functions that call themselves internally.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Components of Recursion</h2>
+    </div>
+    <div class="content">
+      <p>The two main components of recursion are:</p>
+      <ul>
+        <li><strong>Base Case:</strong> Condition under which the recursion stops. Prevents infinite recursion by providing a direct solution.</li>
+        <li><strong>Recursive Case:</strong> The part where the function calls itself with simpler or smaller input to progress towards the base case.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Factorial using Recursion</h2>
+    </div>
+    <div class="content">
+      <pre><code>def factorial(n):
+    if n == 1:
+        print(n)
+        return 1  # base case
+    else:
+        print(n, '*', end=' ')
+        return n * factorial(n - 1)  # recursive case
+
+print('factorial of 5 =', factorial(5))
+</code></pre>
+      <p>Output:</p>
+      <pre>
+5 * 4 * 3 * 2 * 1
+factorial of 5 = 120
+</pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Fibonacci using Recursion</h2>
+    </div>
+    <div class="content">
+      <pre><code>def fibonacci(n):
+    if n <= 0:
+        return 0  # base case for 0
+    elif n == 1:
+        return 1  # base case for 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)  # recursive case
+
+fib_series = [fibonacci(i) for i in range(6)]
+print(fib_series)
+</code></pre>
+      <p>Output:</p>
+      <pre>
+[0, 1, 1, 2, 3, 5]
+</pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Binary Search using Recursion</h2>
+    </div>
+    <div class="content">
+      <p>
+        Binary search is an efficient algorithm to locate an element in a sorted list by repeatedly dividing the search interval in half. Recursion can implement binary search by comparing the middle element and calling the function on the appropriate half.
+      </p>
+      <pre><code>def bsearch(my_list, low, high, elem):
+    if high >= low:
+        mid = (high + low) // 2
+        if my_list[mid] == elem:
+            return mid
+        elif my_list[mid] > elem:
+            return bsearch(my_list, low, mid - 1, elem)
+        else:
+            return bsearch(my_list, mid + 1, high, elem)
+    else:
+        return -1
+
+my_list = [5, 12, 23, 45, 49, 67, 71, 77, 82]
+num = 67
+print("The list is")
+print(my_list)
+print("Check for number:", num)
+my_result = bsearch(my_list, 0, len(my_list) - 1, num)
+
+if my_result != -1:
+    print("Element found at index", str(my_result))
+else:
+    print("Element not found!")
+</code></pre>
+      <p>Output:</p>
+      <pre>
+The list is
+[5, 12, 23, 45, 49, 67, 71, 77, 82]
+Check for number: 67
+Element found at index 5
+</pre>
+    </div>
+  </div>
+</div>

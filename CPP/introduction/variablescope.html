@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Variable Scope in C++: Local and Global</h1>
+
+        <div class="content">
+            <p><strong>Scope</strong> refers to the region of a program where a variable is accessible. In C++, variables are primarily categorized into two main scopes based on where they're declared:</p>
+            <ul>
+                <li>**Local Variables** (Inside a function or block)</li>
+                <li>**Global Variables** (Outside all functions)</li>
+                <li><strong>Formal Parameters</strong> (In a function's parameter definition, which act like local variables)</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Local Variables 🏠</h2>
+            <p>**Local variables** are declared **inside a function or a block of code** (e.g., inside <code>main()</code> or an <code>if</code> statement). They can only be used by statements within that specific function or block. They are **not known** outside their own scope.</p>
+            <ul>
+                <li><strong>Initialization:</strong> Local variables are **not initialized** by the system and contain garbage values until explicitly initialized by the programmer.</li>
+                <li><strong>Life-time:</strong> They exist only while the function/block is executing.</li>
+            </ul>
+            <p><strong>Example:</strong> In the following code, <code>a</code>, <code>b</code>, and <code>c</code> are local to the <code>main</code> function.</p>
+            <pre class="example">
+int main () {
+   int a, b; // Local variable declaration
+   // ...
+   return 0;
+}</pre>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Global Variables 🌎</h2>
+            <p>**Global variables** are defined **outside of all functions**, usually at the beginning of the program file. They are accessible by **any function** in the program after their declaration.</p>
+            <ul>
+                <li><strong>Initialization:</strong> Global variables are **automatically initialized** to zero (or <code>NULL</code> for pointers, <code>'\0'</code> for <code>char</code>, etc.) by the system if they aren't explicitly initialized.</li>
+                <li><strong>Life-time:</strong> They hold their value throughout the entire life-time of the program.</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre class="example">
+int g; // Global variable declaration
+
+int main () {
+   // g can be accessed and modified here
+   g = 30; 
+   return 0;
+}</pre>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Scope Resolution Operator (SRO) <code>::</code></h2>
+            <p>If a program has a **local variable and a global variable with the same name**, the **local variable takes precedence** within its function/block. This is known as **shadowing**.</p>
+            <p>To explicitly access the global variable when it is shadowed by a local one, you must use the **Scope Resolution Operator (SRO)**, <code>::</code>, placed before the variable's name.</p>
+            <p><strong>Example:</strong></p>
+            <pre class="example">
+int g = 20; // Global g
+
+int main () {
+   int g = 10; // Local g
+   
+   cout &lt;&lt; g;     // Prints Local value: 10
+   cout &lt;&lt; ::g;  // Prints Global value: 20
+   return 0;
+}</pre>
+        </div>
+    </div>
+</div>

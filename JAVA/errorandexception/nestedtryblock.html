@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Java - Nested Try Block</title>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="session">
+            <h1 class="title">Java - Nested Try Block</h1>
+            <div class="content">
+                <h2 class="subtitle">Nested Try Block</h2>
+                <p>A try block can be nested within another try block. This structure is termed as <strong>Nested try block</strong>. Whenever an exception is raised within a nested try block, its exception is pushed to Stack. The exception propagates from child to parent try block and so on.</p>
+                
+                <h2 class="subtitle">Syntax</h2>
+                <p>The syntax for nested catch blocks looks like the following:</p>
+                <pre>
+<code>
+try { // parent try block
+   try {  // child try block
+   
+   }
+   catch(ExceptionType1 e1){  // child catch block
+   
+   }
+} catch (ExceptionType2 e1) { // parent catch block
+
+} 
+</code>
+                </pre>
+                <p>The previous statements demonstrate two try/catch blocks, but you can have any number of them. If an exception occurs in the protected child code, the exception is thrown to the catch block of the child. If the data type of the exception matches <code>ExceptionType1</code>, it gets caught there. If not, the exception passes up to the parent catch statement. This continues until the exception either is caught or falls through all catches. In that case, the method stops execution and the exception is thrown down to the previous method on the call stack.</p>
+
+                <h2 class="subtitle">Pointer To Remember While Using Nested Try Block</h2>
+                <ul>
+                    <li>Child catch block should have specific exception for better code clarity.</li>
+                    <li>Parent catch block can have more generic exception handling.</li>
+                    <li>There is no restriction on exception hierarchy between child and parent catch blocks.</li>
+                    <li>If an exception is handled correctly in the child catch block, another exception can still be raised and handled in the parent block.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="session">
+            <h1 class="title">Example: Nested Try Block</h1>
+            <div class="content">
+                <h2 class="subtitle">Java Nested Try Block Example</h2>
+                <p>This example shows how to use nested try/catch statements. We divide a value by 0 in a nested try block. The child catch block handles the exception. Then, in the parent try block, an invalid array index is accessed, and another exception is raised.</p>
+                <pre>
+<code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+   public static void main(String args[]) {
+      try {
+         int a[] = new int[2];
+         try {
+            int b = 0;
+            int c = 1/b;
+         } catch(Exception e) {
+            System.out.println("Exception thrown: " + e);
+         }
+         System.out.println("Access element three :" + a[3]);
+      } catch (ArrayIndexOutOfBoundsException e) {
+         System.out.println("Exception thrown: " + e);
+      }
+      System.out.println("Out of the block");
+   }
+}
+</code>
+                </pre>
+                <h2 class="subtitle">Output</h2>
+                <pre>
+<code>
+Exception thrown: java.lang.ArithmeticException: / by zero
+Exception thrown: java.lang.ArrayIndexOutOfBoundsException: 3
+Out of the block
+</code>
+                </pre>
+            </div>
+        </div>
+
+        <div class="session">
+            <h1 class="title">Example 1: Exception Handled by Parent</h1>
+            <div class="content">
+                <p>This example shows a case where an exception in the nested try block is not handled by its catch block. Instead, the parent catch block, which handles generic exceptions, captures it.</p>
+                <pre>
+<code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+   public static void main(String args[]) {
+      try {
+         int a[] = new int[2];
+         try {
+            int b = 0;
+            int c = 1/b;
+         } catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Exception thrown: " + e);
+         }
+         System.out.println("Access element three :" + a[3]);
+      } catch (Exception e) {
+         System.out.println("Exception thrown: " + e);
+      }
+      System.out.println("Out of the block");
+   }
+}
+</code>
+                </pre>
+                <h2 class="subtitle">Output</h2>
+                <pre>
+<code>
+Exception thrown: java.lang.ArithmeticException: / by zero
+Out of the block
+</code>
+                </pre>
+            </div>
+        </div>
+
+        <div class="session">
+            <h1 class="title">Example 2: Exception Not Handled</h1>
+            <div class="content">
+                <p>This example shows a case where the exception is not handled by any catch block. The JVM captures the exception and terminates the program before the final statement is printed.</p>
+                <pre>
+<code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+   public static void main(String args[]) {
+      try {
+         int a[] = new int[2];
+         try {
+            int b = 0;
+            int c = 1/b;
+         } catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Exception thrown: " + e);
+         }
+         System.out.println("Access element three :" + a[3]);
+      } catch (ArrayIndexOutOfBoundsException e) {
+         System.out.println("Exception thrown: " + e);
+      }
+      System.out.println("Out of the block");
+   }
+}
+</code>
+                </pre>
+                <h2 class="subtitle">Output</h2>
+                <pre>
+<code>
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at com.tutorialspoint.ExcepTest.main(ExcepTest.java:10)
+</code>
+                </pre>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

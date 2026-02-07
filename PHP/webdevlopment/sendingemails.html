@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Sending Email</h1>
+
+        <div class="content">
+            <h2 class="title">The Built-in $\text{mail()}$ Function</h2>
+            <p>PHP includes a native function, **$\text{mail()}$**, for sending email directly from a web application. However, it requires proper configuration of the $\text{php.ini}$ file to work correctly, especially regarding the underlying Mail Transfer Agent (MTA).</p>
+
+            <h3>Configuration</h3>
+            <ul>
+                <li><strong>Windows:</strong> Requires setting the $\text{SMTP}$ directive (e.g., $\text{smtp.secureserver.net}$) and the $\text{sendmail\_from}$ directive (your sender email address) within the $\text{[mail function]}$ section of $\text{php.ini}$.</li>
+                <li><strong>Linux:</strong> Simply requires setting the **$\text{sendmail\_path}$** directive to the location of the $\text{sendmail}$ application (e.g., $\text{/usr/sbin/sendmail -t -i}$).</li>
+            </ul>
+
+            <h3>$\text{mail()}$ Function Syntax and Parameters</h3>
+            <pre>mail( to, subject, message, headers, parameters );</pre>
+            <ul>
+                <li><strong>$\text{to}$ (Required):</strong> The recipient(s) address(es).</li>
+                <li><strong>$\text{subject}$ (Required):</strong> The email subject (must not contain newline characters).</li>
+                <li><strong>$\text{message}$ (Required):</strong> The body of the email. Lines should be separated by $\text{\n}$ and ideally not exceed $\text{70}$ characters.</li>
+                <li><strong>$\text{headers}$ (Optional):</strong> Additional headers like $\text{From}$, $\text{Cc}$, $\text{Bcc}$, and MIME version settings for HTML email. Headers are separated by $\text{\r\n}$ (CRLF).</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Sending HTML Email</h2>
+            <p>To send an email with HTML formatting, you must specify the appropriate headers to inform the client's mail program that the content is HTML:</p>
+            <ul>
+                <li>$\text{MIME-Version: 1.0}$</li>
+                <li>$\text{Content-type: text/html}$ (or $\text{multipart/mixed}$ for attachments)</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Sending HTML Email with Headers</h2>
+            <p>This example demonstrates setting up the required headers for HTML content, along with $\text{From}$ and $\text{Cc}$ fields:</p>
+            <pre>
+&lt;?php
+   $to = "xyz@somedomain.com";
+   $subject = "HTML Message Test";
+   $message = "&lt;b&gt;This is HTML message.&lt;/b&gt;&lt;h1&gt;This is headline.&lt;/h1&gt;";
+
+   $header = "From: abc@somedomain.com \r\n";
+   $header .= "Cc: afgh@somedomain.com \r\n";
+   $header .= "MIME-Version: 1.0\r\n";
+   $header .= "Content-type: text/html\r\n"; // Crucial for HTML formatting
+
+   $retval = mail ($to, $subject, $message, $header);
+
+   if( $retval == true ) {
+      echo "Message sent successfully...";
+   } else {
+      echo "Message could not be sent...";
+   }
+?&gt;</pre>
+
+            <hr>
+
+            <h2 class="title">Advanced Mail: Using PHPMailer</h2>
+            <p>The $\text{mail()}$ function often fails on local development environments (localhost) and lacks advanced features like native SMTP authentication. For reliable and complex email sending, external libraries like **PHPMailer** are recommended. PHPMailer allows you to send emails using an external SMTP server (e.g., $\text{smtp.gmail.com}$) by handling connection, authentication, and encryption ($\text{TLS}$/$\text{SSL}$) internally.</p>
+
+            <h3>Key PHPMailer Setup Steps</h3>
+            <ul>
+                <li>Set $\text{isSMTP()}$ to $\text{true}$.</li>
+                <li>Configure the $\text{Host}$ (SMTP server address), $\text{Port}$ (e.g., $\text{587}$ for $\text{TLS}$), and $\text{SMTPSecure}$.</li>
+                <li>Set $\text{SMTPAuth}$ to $\text{true}$ and provide $\text{Username}$ and $\text{Password}$.</li>
+                <li>Use $\text{setFrom()}$ for the sender and $\text{addAddress()}$ for recipients.</li>
+                <li>Use $\text{isHTML(true)}$ and set the message body.</li>
+                <li>For attachments, the $\text{mail()}$ function requires manually constructing complex $\text{multipart/mixed}$ MIME headers and $\text{base64}$ encoding the file content. PHPMailer handles this complexity via methods like $\text{addAttachment()}$ (not explicitly shown in the provided example, but a core feature).</li>
+            </ul>
+        </div>
+    </div>
+</div>

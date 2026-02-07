@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Nonlinear Least Squares</h1>
+    <div class="content">
+      <p>
+        Real-world data often fits nonlinear regression models where the fitted curve is not a straight line, involving polynomial, exponential, or other nonlinear functions. Nonlinear least squares aims to find parameter values minimizing the sum of squares of vertical residuals from the fitted curve.
+      </p>
+      <p>
+        The <code>nls()</code> function in R fits nonlinear models, requiring an initial guess of coefficients which are then optimized.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre><code>nls(formula, data, start)</code></pre>
+      <ul>
+        <li><strong>formula</strong>: Nonlinear model formula with variables and parameters</li>
+        <li><strong>data</strong>: Data frame with variables in the formula</li>
+        <li><strong>start</strong>: Named list or numeric vector for initial coefficient estimates</li>
+      </ul>
+
+      <h2>Example</h2>
+      <p>Given model: \(a = b_1 \times x^2 + b_2\), fit data with initial guesses \(b_1 = 1\), \(b_2 = 3\).</p>
+      <pre><code>xvalues &lt;- c(1.6, 2.1, 2, 2.23, 3.71, 3.25, 3.4, 3.86, 1.19, 2.21)
+yvalues &lt;- c(5.19, 7.43, 6.94, 8.11, 18.75, 14.88, 16.06, 19.12, 3.21, 7.58)
+
+png(file = "nls.png")
+
+plot(xvalues, yvalues)
+
+# Fit nonlinear model
+model &lt;- nls(yvalues ~ b1 * xvalues^2 + b2, start = list(b1 = 1, b2 = 3))
+
+# Predict fitted values over sequence and add line to plot
+new.data &lt;- data.frame(xvalues = seq(min(xvalues), max(xvalues), length = 100))
+lines(new.data$xvalues, predict(model, newdata = new.data))
+
+dev.off()
+
+# Sum of squared residuals
+print(sum(resid(model)^2))
+
+# Confidence intervals for parameters
+print(confint(model))
+</code></pre>
+
+      <h2>Output Sample</h2>
+      <pre><code>[1] 1.081935
+
+       2.5%    97.5%
+b1 1.137708 1.253135
+b2 1.497364 2.496484
+</code></pre>
+      <p>
+        The estimated \(b_1\) is close to 1 and \(b_2\) close to 2, indicating better fit than initial guess.
+      </p>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

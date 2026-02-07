@@ -1,0 +1,145 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Error Boundaries</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            Handling errors gracefully is important in React applications. 
+            Instead of breaking the entire UI, React provides 
+            <b>error boundaries</b>—special components that catch errors 
+            during rendering and display a fallback UI.
+         </p>
+
+         <h2>Concept of Error Boundaries</h2>
+         <p>
+            Error boundaries are React class components that implement two 
+            special lifecycle methods:
+         </p>
+         <ul>
+            <li>
+               <b>static getDerivedStateFromError()</b> – updates state when an error occurs.
+            </li>
+            <li>
+               <b>componentDidCatch()</b> – logs error details for debugging.
+            </li>
+         </ul>
+
+         <div class="code-block">
+<pre><code>static getDerivedStateFromError(error) {
+   return { hasError: true };
+}
+
+componentDidCatch(error, errorInfo) {
+   console.log(error);
+   console.log(errorInfo);
+}
+</code></pre>
+         </div>
+
+         <p>
+            Once created, error boundaries wrap other components to catch 
+            their errors:
+         </p>
+         <div class="code-block">
+<pre><code>&lt;SimpleErrorBoundary&gt;
+   &lt;MyComponent /&gt;
+&lt;/SimpleErrorBoundary&gt;
+</code></pre>
+         </div>
+
+         <h2>Limitations</h2>
+         <p>
+            Error boundaries <b>do not</b> catch errors in:
+         </p>
+         <ul>
+            <li>Event handlers (use try/catch instead)</li>
+            <li>Async code (e.g., setTimeout, promises)</li>
+            <li>Server-side rendering</li>
+            <li>Themselves (errors inside the boundary)</li>
+         </ul>
+
+         <h2>Example: Creating Error Boundary</h2>
+         <div class="code-block">
+<pre><code>import React from "react";
+
+class SimpleErrorBoundary extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = { hasError: false };
+   }
+
+   static getDerivedStateFromError(error) {
+      return { hasError: true };
+   }
+
+   componentDidCatch(error, errorInfo) {
+      console.log(error);
+      console.log(errorInfo);
+   }
+
+   render() {
+      if (this.state.hasError) {
+         return &lt;h1&gt;Please contact the administrator.&lt;/h1&gt;;
+      }
+      return this.props.children;
+   }
+}
+
+export default SimpleErrorBoundary;
+</code></pre>
+         </div>
+
+         <h2>Example: Component with Error</h2>
+         <div class="code-block">
+<pre><code>import React from "react";
+
+class Hello extends React.Component {
+   render() {
+      if (this.props.name === "error") {
+         throw("Invoked error");
+      }
+      return (
+         &lt;div&gt;Hello, {this.props.name}&lt;/div&gt;
+      );
+   }
+}
+
+export default Hello;
+</code></pre>
+         </div>
+
+         <h2>Using Error Boundary</h2>
+         <div class="code-block">
+<pre><code>import './App.css'
+import React from 'react';
+import SimpleErrorBoundary from './Components/SimpleErrorBoundary'
+import Hello from './Components/Hello'
+
+function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;div style={{ padding: "10px" }}&gt;
+            &lt;SimpleErrorBoundary&gt;
+               &lt;Hello name="error" /&gt;
+            &lt;/SimpleErrorBoundary&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+   );
+}
+
+export default App;
+</code></pre>
+         </div>
+
+         <h2>Summary</h2>
+         <p>
+            Error boundaries improve React application resilience by catching 
+            unexpected errors in the UI tree and rendering fallback content. 
+            They make debugging easier while preventing the entire app from 
+            breaking.
+         </p>
+      </div>
+   </div>
+</div>

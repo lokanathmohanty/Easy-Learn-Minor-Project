@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Controlled Component</h1>
+    <div class="content">
+      <p>
+        In controlled component, React provides a special attribute <code>value</code> 
+        for all input elements and controls the input elements. The <code>value</code> 
+        attribute can be used to get and set the value of the input element. 
+        It has to be in sync with the state of the component.
+      </p>
+      <p>
+        In other words, a React component that renders a form also controls what happens 
+        in that form on subsequent user input. An input form element whose value is 
+        controlled by React in this way is called a <em>controlled component</em>.
+      </p>
+      <p>
+        Controlled component has to follow a specific process to do form programming.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Controlled Component With Single Input</h2>
+    <div class="content">
+      <p>Step by step process for handling a single input element:</p>
+      <ul>
+        <li>Create a form element: <code>&lt;input type="text" name="username" /&gt;</code></li>
+        <li>Initialize state: <code>this.state = { username: '' }</code></li>
+        <li>
+          Add a <code>value</code> attribute and assign the value from state:  
+          <code>&lt;input type="text" value={this.state.username} /&gt;</code>
+        </li>
+        <li>
+          Add <code>onChange</code> and assign a handler method:  
+          <code>&lt;input type="text" value={this.state.username} onChange={this.handleUsernameChange} /&gt;</code>
+        </li>
+        <li>
+          Write the handler method to update state:  
+          <code>this.setState({ username: e.target.value })</code>
+        </li>
+        <li>
+          Bind the handler in constructor:  
+          <code>this.handleUsernameChange = this.handleUsernameChange.bind(this)</code>
+        </li>
+        <li>
+          Use <code>this.state.username</code> during validation and submission.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating a Simple Form</h2>
+    <div class="content">
+      <p>
+        Let us create a simple form to add expense entry using controlled component:
+      </p>
+      <ul>
+        <li>Create a new React app <code>react-form-app</code> and open in editor.</li>
+        <li>Create <code>ExpenseForm.css</code> for styling.</li>
+        <li>Create <code>ExpenseForm.js</code> with controlled inputs for title, amount, date, and category.</li>
+        <li>Bind change handlers to update <code>this.state.item</code>.</li>
+        <li>Handle submit with <code>onSubmit</code> to display form data.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example Component</h2>
+    <div class="content">
+      <p>
+        The complete ExpenseForm component uses controlled inputs to track and submit 
+        expense details. Each input is bound to component state and updated with handlers.
+      </p>
+      <p>
+        The data is displayed in a popup (alert) after submission.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Running the Application</h2>
+    <div class="content">
+      <ul>
+        <li>Create <code>index.js</code> and render <code>ExpenseForm</code> component.</li>
+        <li>Create <code>index.html</code> with a <code>&lt;div id="root"&gt;</code>.</li>
+        <li>Start app with <code>npm start</code>.</li>
+        <li>
+          Open <a href="http://localhost:3000">http://localhost:3000</a>, enter sample expense, 
+          and submit. The data will be shown in a pop-up alert.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

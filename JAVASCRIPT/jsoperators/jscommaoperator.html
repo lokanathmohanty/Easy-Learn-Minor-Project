@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Comma Operator</h1>
+    <div class="content">
+      <p>The comma operator (<code>,</code>) in JavaScript evaluates multiple expressions from left to right. Each expression is evaluated, but only the result of the rightmost expression is returned. This operator can also be used in <code>for</code> loops, arrays, objects, and other contexts.</p>
+
+      <h2>Syntax</h2>
+      <pre><code>
+var answer = (exp1, exp2, exp3, exp4, ...);
+      </code></pre>
+      <p><strong>Return Value:</strong> Returns the value of the last (rightmost) expression.</p>
+
+      <h2>Examples</h2>
+
+      <h3>Example: The Comma Operator with Strings</h3>
+      <p>Here, each string is treated as an expression, but only the rightmost string is returned.</p>
+      <pre><code>
+&lt;html&gt;
+&lt;body&gt;
+    &lt;p id="output"&gt;&lt;/p&gt;
+    &lt;script&gt;
+        let output = document.getElementById("output");
+        let ans = ("JavaScript", "Python", "HTML", "CSS");
+        output.innerHTML = "The value of the ans variable is: " + ans;
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+
+      <h3>Example: The Comma Operator with Expressions</h3>
+      <p>The variable <code>a</code> is updated step by step, but the final result is from the last expression.</p>
+      <pre><code>
+&lt;html&gt;
+&lt;body&gt;
+    &lt;p id="output"&gt;&lt;/p&gt;
+    &lt;script&gt;
+        let output = document.getElementById("output");
+        let a = 5;
+        let ans = (a = 8, a++, a += 2);
+        output.innerHTML = "The value of the ans variable is: " + ans;
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+
+      <h3>Example: The Comma Operator with Functions</h3>
+      <p>Both functions are executed, but the return value comes from the last function.</p>
+      <pre><code>
+&lt;html&gt;
+&lt;body&gt;
+    &lt;p id="output"&gt;&lt;/p&gt;
+    &lt;script&gt;
+        let output = document.getElementById("output");
+        function first() {
+            output.innerHTML += "The first function is called! &lt;br/&gt;";
+            return 1;
+        }
+
+        function second() {
+            output.innerHTML += "The second function is called! &lt;br/&gt;";
+            return 2;
+        }
+
+        let ans = (first(), second());
+        output.innerHTML += "The value of the ans variable is: " + ans;
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+
+      <h2>Other Use Cases of the Comma Operator</h2>
+      <ul>
+        <li>Defining multiple variables in a single row:
+          <pre><code>let m = 1, n = 2, x = 3;</code></pre>
+        </li>
+        <li>Initializing an array:
+          <pre><code>const arr = [10, 20, 30, 40, 50, 60];</code></pre>
+        </li>
+        <li>Defining an object with multiple properties:
+          <pre><code>
+const obj = {
+   name: "tutorialspoint",
+   age: 10,
+   // other properties
+}
+          </code></pre>
+        </li>
+        <li>Using in a <code>for</code> loop:
+          <pre><code>
+for (let p = 0, q = 1; p &lt; n; p++, q++) {
+   // Code for the loop
+}
+          </code></pre>
+        </li>
+        <li>Passing multiple arguments to a function:
+          <pre><code>
+function func(param1, param2, ...) {  
+   // function code
+}
+
+func(10, 20, 30, ...);
+          </code></pre>
+        </li>
+        <li>Importing/exporting multiple members:
+          <pre><code>
+import { func2, variable } from './module2.js';
+export { func1, variable, num };
+          </code></pre>
+        </li>
+        <li>Destructuring arrays:
+          <pre><code>let [a, b, c] = [34, 72, 23];</code></pre>
+        </li>
+        <li>Printing multiple values in the console:
+          <pre><code>console.log(a, b, c);</code></pre>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Nested Functions in C</h1>
+
+    <div class="content">
+      <h2 class="title">Introduction</h2>
+      <p>The term <strong>nesting</strong> refers to enclosing one programming element inside another of the same type, like nested loops or nested structures. A nested function describes the use of one or more functions inside another function.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">What is Lexical Scoping?</h2>
+      <p>In C, defining a function inside another function is not allowed. Functions may be declared (not defined) within other functions, a concept called lexical scoping. However, lexical scoping is not valid in C because the compiler cannot resolve the inner function's memory location.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Limitations of Nested Functions in C</h2>
+      <p>Nested functions cannot access local variables of the enclosing functions, only global variables. C supports two scopes: local and global, which limits the practical use of nested functions.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example: Attempting a Nested Function</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main(void) {
+    printf("Main Function");
+
+    int my_fun() {
+        printf("my_fun function");
+
+        // Nested Function
+        int nested() {
+            printf("This is a nested function.");
+        }
+    }
+    nested();
+}</code></pre>
+      <p><strong>Output/Error:</strong></p>
+      <pre><code>main.c:(.text+0x3d): undefined reference to `nested'
+collect2: error: ld returned 1 exit status</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Trampolines for Nested Functions (GNU C Extension)</h2>
+      <p>GNU C (GCC) supports nested functions using a technique called <em>trampolines</em>. This happens when the address of a nested function is taken at runtime. The nested function must be declared with the <code>auto</code> keyword.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example 1: Nested Function with auto Keyword</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    auto int nested();
+    nested();
+
+    printf("In Main Function now\n");
+
+    int nested() {
+        printf("In the nested function now\n");
+    }
+
+    printf("End of the program");
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>In the nested function now
+In Main Function now
+End of the program</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Example 2: Nested Function Inside Another Function</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+double myfunction(double a, double b);
+
+int main() {
+    double x = 4, y = 5;
+    printf("Addition of squares of %f and %f = %f", x, y, myfunction(x, y));
+    return 0;
+}
+
+double myfunction(double a, double b) {
+    auto double square(double c) { return pow(c, 2); }
+    return square(a) + square(b);
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>Addition of squares of 4.000000 and 5.000000 = 41.000000</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Points to Note About Nested Functions</h2>
+      <ul>
+        <li>A nested function can access all identifiers of the containing function that precede its definition.</li>
+        <li>A nested function must not be called after the containing function exits.</li>
+        <li>A nested function cannot use <code>goto</code> to jump to labels in the containing function.</li>
+        <li>Nested function definitions are permitted within any block, mixed with declarations and statements.</li>
+        <li>Calling a nested function through its address after the containing function exits causes an error.</li>
+        <li>A nested function has no linkage; declaring it with <code>extern</code> or <code>static</code> causes errors.</li>
+      </ul>
+    </div>
+  </div>
+</div>

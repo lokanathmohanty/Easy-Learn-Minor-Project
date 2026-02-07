@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - var Keyword</h1>
+    <div class="content">
+      <p>
+        The <code>var</code> keyword in JavaScript is used to declare variables. 
+        Before ES6, there was only <code>var</code> keyword to declare a variable. 
+        In ES6, <code>let</code> and <code>const</code> were introduced as better options. 
+        A variable declared with <code>var</code> has <strong>function scope</strong>, 
+        while <code>let</code> has <strong>block scope</strong>.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>You can declare variables using <code>var</code> as follows:</p>
+      <ul>
+        <li><code>var identifier;</code></li>
+        <li><code>var identifier = value;</code></li>
+      </ul>
+
+      <h2>Example</h2>
+      <p>Declaring variables using <code>var</code>:</p>
+      <pre><code>
+var num1 = 30;
+var str1 = "Hello World!";
+var bool = true;
+      </code></pre>
+
+      <h2>JavaScript Variable Scopes</h2>
+      <p>
+        Variables declared with <code>var</code> have function scope or global scope.
+      </p>
+
+      <h3>Function Scope</h3>
+      <pre><code>
+function demo() {
+   var x = 10;
+   {
+      var y = 20;
+   }
+   console.log(x); // 10
+   console.log(y); // 20
+}
+demo();
+      </code></pre>
+
+      <h3>Global Scope</h3>
+      <pre><code>
+var num1 = 10;
+function sum(num2) {
+   console.log(num1 + num2);
+   console.log(window.num1 + num2);
+}
+sum(20); // 30, 30
+      </code></pre>
+
+      <h2>Variable Hoisting</h2>
+      <p>
+        Variables declared with <code>var</code> are hoisted to the top of their scope.
+      </p>
+      <pre><code>
+function checkHoisting() {
+   a = 98;
+   console.log(a); // 98
+   var a;
+}
+checkHoisting();
+      </code></pre>
+
+      <h2>Redeclaration</h2>
+      <p>
+        You can redeclare variables using <code>var</code> without errors.
+      </p>
+      <pre><code>
+var a = 10;
+var a = 20;
+console.log(a); // 20
+      </code></pre>
+
+      <h2>Many Variables in One Statement</h2>
+      <pre><code>
+var a = 70, b = 80;
+console.log(a); // 70
+console.log(b); // 80
+      </code></pre>
+
+      <h2>Using var in Loops</h2>
+      <p>
+        Loop variables declared with <code>var</code> can be accessed outside the loop.
+      </p>
+      <pre><code>
+for (var p = 0; p < 5; p++) {
+   console.log(p);
+}
+console.log(p); // 5
+      </code></pre>
+
+      <h2>Declaration with Destructuring</h2>
+      <pre><code>
+var arr = [4, 5, 6];
+var [a, b, c] = arr;
+console.log(a, b, c); // 4, 5, 6
+      </code></pre>
+    </div>
+  </div>
+</div>

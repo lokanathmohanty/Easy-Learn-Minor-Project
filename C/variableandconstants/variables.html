@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">C - Constants</h1>
+
+    <div class="content">
+      <p>A constant in C is a user-assigned name to a memory location whose value cannot be modified once declared. In contrast, a variable can have its value changed during the execution of a program.</p>
+
+      <p>Constants are useful when the same value is used repeatedly in the program, especially if the value is error-prone or should not be altered. For example, the mathematical constant PI can be declared once and reused.</p>
+
+      <p>In essence, a constant is like a read-only variable.</p>
+
+      <h2>Ways to Declare Constants</h2>
+      <ul>
+        <li>Using the <code>const</code> keyword</li>
+        <li>Using the <code>#define</code> directive</li>
+      </ul>
+
+      <h2>Defining a Constant Using the <code>const</code> Keyword</h2>
+      <p>The syntax of declaring a constant is:</p>
+      <code>const type NAME = value;</code>
+      <p>Example:</p>
+
+      <div class="example">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   const float PI = 3.14159265359;
+   float radius = 5;
+   float area = PI * radius * radius;
+   printf("area: %f", area);
+   return 0;
+}</code></pre>
+      </div>
+
+      <p><strong>Output:</strong></p>
+      <p>area: 78.539818</p>
+
+      <h3>Prohibited Changes</h3>
+      <p>Once declared, trying to change the value of a constant results in a compile-time error.</p>
+
+      <div class="example">
+        <pre><code>const float PI = 3.14159265359;
+PI = 22 / 7;  // Error: assignment of read-only variable 'PI'</code></pre>
+      </div>
+
+      <p>Also, declaring a constant without initialization and assigning later will result in an error:</p>
+
+      <div class="example">
+        <pre><code>const float PI;
+PI = 3.14159265359;  // Error: assignment of read-only variable 'PI'</code></pre>
+      </div>
+
+      <p>Therefore, a constant must be declared and initialized at the same time.</p>
+
+      <h2>Defining a Constant Using <code>#define</code> Directive</h2>
+      <p>The <code>#define</code> directive creates symbolic constants or macros, without specifying a data type. Its syntax is:</p>
+      <code>#define NAME VALUE</code>
+
+      <p>Example:</p>
+
+      <div class="example">
+        <pre><code>#include &lt;stdio.h&gt;
+#define LENGTH 10
+#define WIDTH 5
+#define NEWLINE '\n'
+
+int main() {
+   int area;
+   area = LENGTH * WIDTH;
+   printf("length: %d width: %d", LENGTH, WIDTH);
+   printf("%c", NEWLINE);
+   printf("value of area : %d", area);
+   return 0;
+}</code></pre>
+      </div>
+
+      <p><strong>Output:</strong></p>
+      <p>length: 10 width: 5<br>value of area : 50</p>
+
+      <h2>Naming Convention</h2>
+      <p>Constants are case-sensitive and follow the rules of identifiers. By convention, constants are written in uppercase, though it is not mandatory.</p>
+
+      <h2>Changing the Value of a Constant (Using Pointers)</h2>
+      <p>By definition, constants are immutable. However, using pointers, it is technically possible to change the value of a constant (not recommended in practice).</p>
+
+      <div class="example">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   const int x = 10;
+   printf("Initial Value of Constant: %d\n", x);
+
+   int* y = &x;
+   *y = 100;
+   printf("Value of Constant after change: %d", x);
+   return 0;
+}</code></pre>
+      </div>
+
+      <p><strong>Output:</strong></p>
+      <p>Initial Value of Constant: 10<br>Value of Constant after change: 100</p>
+
+      <p>This only works for constants declared using the <code>const</code> keyword. It does not apply to constants defined with <code>#define</code>, as they are handled by the preprocessor and do not have an address in memory.</p>
+    </div>
+  </div>
+</div>

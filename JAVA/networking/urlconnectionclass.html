@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - URLConnection Class</h1>
+    <div class="content">
+      <p><strong>java.net.URLConnection</strong> is an abstract class whose subclasses represent the various types of URL connections. Instances of this class can be used both to read from and write to the resource referenced by the URL.</p>
+      
+      <p>For example −</p>
+      <ul>
+        <li>If you connect to a URL whose protocol is HTTP, the <code>URL.openConnection()</code> method returns an <code>HttpURLConnection</code> object.</li>
+        <li>If you connect to a URL that represents a JAR file, the <code>URL.openConnection()</code> method returns a <code>JarURLConnection</code> object.</li>
+      </ul>
+      
+      <h2>Steps to make a connection to a URL</h2>
+      <p>Follow these steps to make a connection to the URL and start processing:</p>
+      <ul>
+        <li>Invoke <code>URL.openConnection()</code> method to get a connection object.</li>
+        <li>Update setup parameters and general request properties as required using the connection object's setter methods.</li>
+        <li>Create a connection to the remote object using the <code>connect()</code> method.</li>
+        <li>Once the remote object is available, access the content and headers.</li>
+      </ul>
+      
+      <h2>URLConnection Class Declaration</h2>
+      <p><code>public abstract class URLConnection extends Object</code></p>
+      
+      <h2>URLConnection Class Fields</h2>
+      <ul>
+        <li><strong>allowUserInteraction</strong>: Allows user interaction such as authentication dialogs.</li>
+        <li><strong>connected</strong>: Indicates if connection is established.</li>
+        <li><strong>doInput</strong>: Set by <code>setDoInput</code>.</li>
+        <li><strong>doOutput</strong>: Set by <code>setDoOutput</code>.</li>
+        <li><strong>ifModifiedSince</strong>: Used to fetch object only if modified since given time.</li>
+        <li><strong>url</strong>: Represents the remote URL object.</li>
+        <li><strong>useCaches</strong>: If true, caching is allowed.</li>
+      </ul>
+      
+      <h2>URLConnection Class Methods</h2>
+      <p>This class provides many methods to manage and retrieve connection information, such as:</p>
+      <ul>
+        <li><code>addRequestProperty(String key, String value)</code>: Add a general request property.</li>
+        <li><code>getContent()</code>: Retrieves the content of the URL connection.</li>
+        <li><code>getInputStream()</code>: Returns input stream to read from connection.</li>
+        <li><code>getOutputStream()</code>: Returns output stream to write to connection.</li>
+        <li><code>setConnectTimeout(int timeout)</code>: Set connection timeout in milliseconds.</li>
+        <li>...and many more.</li>
+      </ul>
+      
+      <h2>Example of URLConnection Class Usage</h2>
+      <p>The following code demonstrates connecting to an HTTP URL and reading data line-by-line:</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">URLConnectionDemo Example</h2>
+    <div class="content">
+      <pre><code>package com.tutorialspoint;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+
+public class URLConnectionDemo {
+   public static void main(String [] args) {
+      try {
+         URL url = new URL("https://www.tutorialspoint.com");
+         URLConnection urlConnection = url.openConnection();
+         HttpURLConnection connection = null;
+         if(urlConnection instanceof HttpURLConnection) {
+            connection = (HttpURLConnection) urlConnection;
+         } else {
+            System.out.println("Please enter an HTTP URL.");
+            return;
+         }
+         
+         BufferedReader in = new BufferedReader(
+            new InputStreamReader(connection.getInputStream()));
+         String urlString = "";
+         String current;
+         
+         while((current = in.readLine()) != null) {
+            urlString += current;
+         }
+         System.out.println(urlString);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}</code></pre>
+      
+      <p><strong>Sample output:</strong></p>
+      <p>The complete HTML content of the home page of tutorialspoint.com.</p>
+    </div>
+  </div>
+</div>

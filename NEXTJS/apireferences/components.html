@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Built-in Components 🧱</h1>
+        
+        <div class="content">
+            <h2 class="title">Overview of Next.js Components</h2>
+            <p>**Next.js components** are specialized React components that extend standard HTML elements (<span class="example">`&lt;img&gt;`</span>, <span class="example">`&lt;a&gt;`</span>, <span class="example">`&lt;form&gt;`</span>, etc.) to inject advanced features like **performance optimization**, automatic **client-side routing**, and **data management**. They are core to building efficient Next.js applications, especially within the App Router structure.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Next.js Component Reference</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Standard HTML Element</th>
+                        <th>Key Functionality</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`&lt;Image&gt;`</span></td>
+                        <td><span class="example">`&lt;img&gt;`</span></td>
+                        <td>**Automatic image optimization** (resizing, format conversion, compression), **lazy loading**, and layout shift prevention.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`&lt;Link&gt;`</span></td>
+                        <td><span class="example">`&lt;a&gt;`</span></td>
+                        <td>**Client-side navigation** (fast page transitions) and **automatic prefetching** of linked pages.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`&lt;Script&gt;`</span></td>
+                        <td><span class="example">`&lt;script&gt;`</span></td>
+                        <td>**Optimized loading strategies** for third-party scripts (e.g., Google Analytics) like lazy loading and execution control.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`&lt;Form&gt;`</span></td>
+                        <td><span class="example">`&lt;form&gt;`</span></td>
+                        <td>**Enhanced form handling** in the App Router, including client-side navigation on submission and integration with Server Actions.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`&lt;Head&gt;`</span></td>
+                        <td><span class="example">`&lt;head&gt;`</span></td>
+                        <td>(Pages Router only) Used to dynamically modify the document's head (title, meta tags). Replaced by <span class="example">`generateMetadata`</span> in the App Router.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`@next/font`</span></td>
+                        <td>—</td>
+                        <td>Used for **loading and optimizing fonts** (Google and local) with zero layout shift and improved performance (no component name, but often referred to as the Font system).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Example: Using `&lt;Link&gt;` for Navigation</h2>
+            <p>The <span class="example">`&lt;Link&gt;`</span> component is essential for client-side routing. When a user hovers over a <span class="example">`&lt;Link&gt;`</span>, Next.js typically preloads the necessary code for the target page, resulting in instant navigation.</p>
+            <pre>// app/layout.tsx (Used for a persistent navigation bar)
+import Link from 'next/link';
+
+export default function RootLayout({ children }: RootLayoutProps) {
+    return (
+        &lt;body&gt;
+            &lt;header&gt;
+                &lt;ul&gt; 
+                    &lt;li&gt;&lt;Link href="/"&gt;Home&lt;/Link&gt;&lt;/li&gt; 
+                    &lt;li&gt;&lt;Link href="/products"&gt;Products&lt;/Link&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/header&gt;
+            &lt;main&gt;{children}&lt;/main&gt; 
+        &lt;/body&gt;
+    );
+}</pre>
+            
+            <h3 class="title">Example: Styling the `&lt;Image&gt;` Component</h3>
+            <p>The <span class="example">`&lt;Image&gt;`</span> component allows standard styling methods, including inline styles, which are applied to the underlying <span class="example">`&lt;img&gt;`</span> element after Next.js handles optimization.</p>
+            <pre>import Image from 'next/image'
+
+export default function Page() {
+    const imageStyle = {
+        borderRadius: '50%',
+        border: '5px solid black',
+    }
+
+    return (
+        &lt;Image
+            src="/profile.jpg"
+            width={200}
+            height={100}
+            alt="Flower Image"
+            style={imageStyle} // Apply inline JavaScript style object
+        /&gt;
+    )
+}</pre>
+        </div>
+    </div>
+</div>

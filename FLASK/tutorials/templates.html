@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask Templates and Jinja2 Template Engine 🖼️</h1>
+        <div class="content">
+            <p>While a Flask function can return hardcoded HTML strings, this is **cumbersome** when variable data or Python logic (like conditionals and loops) must be included. To avoid this, Flask utilizes the **Jinja2 template engine** to separate application logic from presentation.</p>
+
+            <h2>Web Templating System</h2>
+            <p>A web templating system allows you to design an **HTML file** (the template) with **placeholders** that are dynamically replaced by values when the template is rendered by a **template engine**. Jinja2 is Flask's default template engine.</p>
+
+            <h2>The <code>render_template()</code> Function</h2>
+            <p>Instead of returning an HTML string, a Flask function uses the **<code>render_template()</code>** function to process and return a template file. This function:</p>
+            <ul>
+                <li>Accepts the template file name as the first argument.</li>
+                <li>Accepts any number of **keyword arguments**, which are the variables passed from the Python script to the template.</li>
+            </ul>
+            <p>Flask automatically looks for template files inside a folder named **<code>templates</code>** located in the same directory as the main application script.</p>
+
+            <h3>Example: Passing a Variable to a Template</h3>
+            <p>The Python script passes the <code>user</code> variable to the template as <code>name</code>:</p>
+            <p><code>return render_template('hello.html', name = user)</code></p>
+            <p>The template (<code>hello.html</code>) uses the expression delimiter to display the variable:</p>
+            <p><code>&lt;h1&gt;Hello {{ name }}!&lt;/h1&gt;</code></p>
+
+            <h2>Jinja2 Delimiters</h2>
+            <p>Jinja2 uses specific syntax elements to allow Python logic and variables within the HTML structure:</p>
+            <ul>
+                <li>**<code>{{ ... }}</code>:** Used for **Expressions** to be printed (like a variable's value).</li>
+                <li>**<code>{% ... %}</code>:** Used for **Statements** (like loops, conditionals, or setting variables).</li>
+                <li>**<code>{# ... #}</code>:** Used for **Comments** that are not included in the final output.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Example: Conditional Logic and Loops in Templates</h2>
+        <div class="content example">
+            <h3>Conditional Rendering (<code>if/else</code>)</h3>
+            <p>You can use conditional statements within the template using the <code>{% ... %}</code> delimiters:</p>
+            <p><code>{% if marks > 50 %}</code></p>
+            <p><code>   &lt;h1&gt; Your result is pass!&lt;/h1&gt;</code></p>
+            <p><code>{% else %}</code></p>
+            <p><code>   &lt;h1&gt;Your result is fail&lt;/h1&gt;</code></p>
+            <p><code>{% endif %}</code></p>
+
+            <h3>Looping (<code>for</code>) to Display Dictionary Data</h3>
+            <p>The <code>for</code> loop statement can be used to iterate over a collection (like the <code>result</code> dictionary passed from the Python function) to generate HTML content dynamically, such as table rows:</p>
+            <p><code>{% for key, value in result.items() %}</code></p>
+            <p><code>   &lt;tr&gt;</code></p>
+            <p><code>      &lt;th&gt; {{ key }} &lt;/th&gt;</code></p>
+            <p><code>      &lt;td&gt; {{ value }} &lt;/td&gt;</code></p>
+            <p><code>   &lt;/tr&gt;</code></p>
+            <p><code>{% endfor %}</code></p>
+            <p>Notice that the loop logic is in <code>{%...%}</code>, while the data (<code>key</code> and <code>value</code>) to be rendered is in <code>{{...}}</code>.</p>
+        </div>
+    </div>
+</div>

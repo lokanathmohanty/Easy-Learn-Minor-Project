@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">The C++ <code>return</code> Statement ↩️</h1>
+
+        <div class="content">
+            <p>The **<code>return</code> statement** is used to immediately **exit a function** and optionally **send a value back** to the function's caller. It is vital for controlling program flow and ensuring functions deliver their computed results to other parts of the code.</p>
+            <p>The basic syntax is <code>return [expression];</code>, where the expression is optional.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Key Aspects of <code>return</code></h2>
+
+            <ul>
+                <li>
+                    <strong>Function Termination:</strong> When <code>return</code> is executed, the function stops immediately, and program control transfers back to the point where the function was called. This allows for **early exit** to handle error conditions or special cases (e.g., division by zero).
+                </li>
+                <li>
+                    <strong>Value Transfer:</strong> For functions with a non-<code>void</code> return type, the `expression` specifies the value sent back to the caller. This returned value is then typically stored in a variable by the caller.
+                </li>
+                <li>
+                    <strong><code>void</code> Functions:</strong> For functions declared with **<code>void</code>** (meaning they return no value), the <code>return</code> statement is optional but can be used without an expression (`return;`) to force an early exit from the function.
+                </li>
+                <li>
+                    <strong>Multiple Returns:</strong> A function can contain multiple <code>return</code> statements, usually nested within conditional structures (`if`/`else`), but only **one** will ever be executed during a single function call.
+                </li>
+            </ul>
+
+            <h3>Example: Early Exit</h3>
+            <p>The <code>return</code> is used here to prevent division by zero and indicate an error with a sentinel value (-1):</p>
+            <pre class="example">
+int divideInteger(int a, int b) {
+   if (b == 0) {
+      // Early exit on error
+      return -1; 
+   }
+   return a / b;
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Return Types and Value Handling</h2>
+            <p>C++ functions can return virtually any data type, including primitive types, user-defined types, pointers, and references.</p>
+
+            <h3>1. Primitive and User-Defined Types (Return by Value)</h3>
+            <p>When returning a primitive type (`int`, `char`, `double`) or a class/struct object, the return value is typically a **copy** of the data. This is simple and safe.</p>
+            <pre class="example">
+struct Point { int x, y; };
+Point createPoint(int x, int y) {
+   // Returns a copy of the Point object
+   return {x, y}; 
+}
+</pre>
+
+            <h3>2. Returning References (<code>T&amp;</code>)</h3>
+            <p>Returning a **reference** (<code>int&amp;</code> or <code>Point&amp;</code>) allows the function to provide direct access to an existing object outside the function. This is highly efficient as it avoids copying, but it must **never** be used to return a reference to a local variable (which is destroyed upon function exit).</p>
+            <pre class="example">
+int globalValue = 100;
+int& getGlobalValue() {
+   // Returns a reference to the global variable
+   return globalValue; 
+}
+// Caller can modify the global variable: getGlobalValue() = 200;
+</pre>
+
+            <h3>3. Returning Pointers (<code>T*</code>)</h3>
+            <p>A function can return a **pointer** to dynamically allocated memory or to an existing object. When returning dynamically allocated memory, the caller assumes responsibility for managing and eventually freeing that memory using `delete` or `delete[]`.</p>
+            <pre class="example">
+int* createArray(int size) {
+   // Returns a pointer to memory allocated on the heap
+   return new int[size]; 
+}
+</pre>
+        </div>
+    </div>
+</div>

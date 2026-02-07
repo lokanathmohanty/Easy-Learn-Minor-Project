@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Variable Scope</h1>
+
+    <div class="content">
+      <p>The variable scope in JavaScript determines the accessibility and visibility of a variable in different parts of the code. The scope is the current context of the code execution. This means variable scope is determined by where it is executed, not by where it is declared.</p>
+      <p>In JavaScript, objects and functions are also variables. So variable scope also determines the accessibility or visibility of objects and functions in a program.</p>
+      <p>It is essential to learn variable scope to write clear code and avoid naming conflicts.</p>
+      <p>Types of variable scope in JavaScript:</p>
+      <ul>
+        <li>Block scope</li>
+        <li>Function scope</li>
+        <li>Local scope</li>
+        <li>Global scope</li>
+      </ul>
+      <p>Here, we will cover block, function, and local scope. Global scope is discussed in detail in the <em>JavaScript Global Variable</em> chapter.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">JavaScript Block Scope</h2>
+      <p>Before ES6, there were only global and function scopes. ES6 introduced the <code>let</code> and <code>const</code> keywords, which provide block scope in JavaScript.</p>
+      <p>Variables defined using <code>let</code> and <code>const</code> inside a <code>{ }</code> block can only be accessed inside that block.</p>
+      <pre><code>{
+   let x = 10; // x is accessible here
+}
+// x is not accessible here
+
+{
+   var x = 10; // x is accessible here
+}
+// x is still accessible here
+</code></pre>
+
+      <h3 class="title">Example 1</h3>
+      <pre><code>&lt;script&gt;
+if (true) {
+   let a = 10;
+   document.getElementById("output").innerHTML = "a = " + a;
+}
+// a can't be accessed here
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong> a = 10</p>
+
+      <h3 class="title">Example 2</h3>
+      <pre><code>&lt;script&gt;
+function test() {
+   {
+      let x = 30;
+      document.getElementById("demo").innerHTML = "x = " + x;
+   }
+   // x is not accessible here
+}
+test();
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong> x = 30</p>
+      <p>Whenever you define a variable with <code>let</code> or <code>const</code> inside a block (loop, if-else, etc.), it cannot be accessed outside that block.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">JavaScript Function Scope</h2>
+      <p>Each function creates its own scope. Variables defined inside a function have function scope and are only accessible within that function. They cannot be accessed outside the function.</p>
+      <p>Variables declared with <code>var</code> are function-scoped, even if declared inside a block. By contrast, <code>let</code> and <code>const</code> remain block-scoped inside the function.</p>
+      <pre><code>function func() {
+   {
+      var x;    // function scope
+      let y;    // block scope
+      const z = 20; // block scope
+   }
+   // x is accessible here, but y and z are not
+}
+</code></pre>
+
+      <h3 class="title">Example</h3>
+      <pre><code>&lt;script&gt;
+function func() {
+   {
+      var x = 30;
+      let y = 20;
+      const z = 10;
+      document.write("x inside block = " + x + "&lt;br&gt;");
+      document.write("y inside block = " + y + "&lt;br&gt;");
+      document.write("z inside block = " + z + "&lt;br&gt;");
+   }
+   document.write("x outside block = " + x + "&lt;br&gt;");
+   // y and z not accessible here
+}
+func();
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>x → Inside the block = 30</li>
+        <li>y → Inside the block = 20</li>
+        <li>z → Inside the block = 10</li>
+        <li>x → Outside the block = 30</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">JavaScript Local Scope</h2>
+      <p>Local scope is created whenever a function is invoked. The variables defined inside the function exist only during its execution and are destroyed after the function ends.</p>
+      <p>Variables defined inside a function (using <code>var</code>, <code>let</code>, or <code>const</code>) are local to that function. Similarly, variables declared in a block are local to that block.</p>
+
+      <h3 class="title">Example</h3>
+      <pre><code>&lt;script&gt;
+function func() {
+   let first = 34;
+   var second = 45;
+   const third = 60;
+
+   document.write("First = " + first + "&lt;br&gt;");
+   document.write("Second = " + second + "&lt;br&gt;");
+   document.write("Third = " + third + "&lt;br&gt;");
+}
+func();
+&lt;/script&gt;</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>First → 34</li>
+        <li>Second → 45</li>
+        <li>Third → 60</li>
+      </ul>
+    </div>
+  </div>
+</div>

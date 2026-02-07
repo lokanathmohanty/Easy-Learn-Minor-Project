@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Associative Arrays</h1>
+
+    <div class="content">
+      <p>
+        An **Associative Array** is a collection of data where each element is stored as a **key-value pair**. Unlike indexed arrays, elements are identified and accessed by their unique, usually descriptive **string keys**, rather than by sequential numerical indices. Associative arrays are analogous to dictionaries or hash maps in other languages.
+      </p>
+
+      <h2>Creating an Associative Array</h2>
+      <p>The association between a key and its value is established using the **`=>`** symbol. Declaration can be done using the `array()` function or the preferred short array syntax `[]`.</p>
+      <div class="example">
+        <code>$arr = [</code><br>
+        <code>&nbsp;&nbsp;&nbsp;"Maharashtra" => "Mumbai",</code><br>
+        <code>&nbsp;&nbsp;&nbsp;"Telangana" => "Hyderabad"</code><br>
+        <code>];</code>
+      </div>
+
+      <h3>Key Types and Casting</h3>
+      <ul>
+        <li>
+          Keys can be **strings** (most common) or **integers**.
+        </li>
+        <li>
+          If a **float** is used as a key, it is truncated (cast) to an integer (e.g., `5.75` becomes key `5`).
+        </li>
+        <li>
+          If a **Boolean** is used, `true` becomes key `1` and `false` becomes key `0`.
+        </li>
+        <li>
+          If the same key appears multiple times, the **last** key-value pair will overwrite any previous entry for that key.
+        </li>
+      </ul>
+
+      <hr>
+
+      <h2>Accessing and Manipulating Elements</h2>
+
+      <h3>Accessing Values</h3>
+      <p>Values are accessed by placing the key (string or number) inside the square brackets, using the syntax **`$arr[key]`**.</p>
+      <div class="example">
+        <p>
+          <code>$capitals["UP"]</code> $\rightarrow$ "Lucknow"
+        </p>
+      </div>
+
+      <h3>Updating and Adding Elements</h3>
+      <p>New key-value pairs can be added, and existing ones updated, using the same access syntax.</p>
+      <div class="example">
+        <p>
+          <code>$arr["new_key"] = "new_value";</code> // Adds a new pair<br>
+          <code>$arr["Maharashtra"] = "Pune";</code> // Updates the value for "Maharashtra"
+        </p>
+      </div>
+
+      <h3>Removing Elements</h3>
+      <p>The **`unset()`** function is used to remove a specific key-value pair from the array.</p>
+      <div class="example">
+        <code>unset($arr["b"]);</code> // Removes the element with key "b"
+      </div>
+
+      <h3>Checking Key Existence</h3>
+      <p>Use **`array_key_exists('key', $arr)`** or **`isset($arr['key'])`** before accessing a key to prevent errors.</p>
+
+      <hr>
+
+      <h2>Traversing an Associative Array</h2>
+
+      <h3>1. `foreach` Loop (Ideal Method)</h3>
+      <p>The `foreach` loop is the most efficient and readable way to iterate through associative arrays, unpacking both the key and the value.</p>
+      <div class="example">
+        <p>
+          <code>foreach ($capitals as $k => $v) {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "Capital of $k is $v \n";</code><br>
+          <code>}</code>
+        </p>
+      </div>
+
+      <h3>2. `for` Loop (Complex Method)</h3>
+      <p>
+        To use a traditional `for` loop, you must first extract all the keys into a new indexed array using **`array_keys($arr)`**. You then loop over this indexed key array to access the keys, which are then used to look up the corresponding values in the original array.
+      </p>
+      <div class="example">
+        <p>
+          <code>$keys = array_keys($capitals);</code><br>
+          <code>for ($i=0; $i&lt;count($keys); $i++){</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$cap = $keys[$i]; // Get the key (e.g., "Maharashtra")</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo $capitals[$cap]; // Use the key to get the value</code><br>
+          <code>}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Memory Address in C</h1>
+
+    <div class="content">
+      <p>The memory address is assigned to a variable when a variable is declared in C language. C compiler stores the value of the variable in the different segments of the memory.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Segments of Memory</h2>
+
+    <div class="content">
+      <p>Different elements of a C program are stored in different segments of the computer's memory, which has the following segments −</p>
+
+      <ul>
+        <li><strong>Text segment</strong> − A text segment, also known as a code segment or simply as text, is one of the sections of a program used to store the object version of the C program.</li>
+        <li><strong>Initialized data segment</strong> − The global variables and static variables that are initialized by the programmer are allocated the memory in the initialized data segment.</li>
+        <li><strong>Uninitialized data segment</strong> − An uninitialized data segment also called as bss (stands for block started by symbol). The program allocates memory for this segment when it loads. Every data in bss is initialized to arithmetic "0" and pointers to null pointer by the kernel before the C program executes.</li>
+        <li><strong>Stack</strong> − Stack is a LIFO (last in first out) data structure. Stack segment stores the value of local variables and values of parameters passed to a function. It also maintains the pointer to which a function call returns.</li>
+        <li><strong>Heap</strong> − Heap is used for allocating memory during the runtime. All the functions that perform dynamic memory allocation deal with heap.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Accessing Memory Address</h2>
+
+    <div class="content">
+      <p>The memory addresses in C can be accessed or specified through the Address of (&amp;) operator. To print a memory address using the <code>printf()</code> function, you need to use <code>%p</code> format specifier.</p>
+
+      <h3 class="title">Syntax</h3>
+      <p>Below is the syntax to access memory address −</p>
+      <pre><code>&amp;variable_name</code></pre>
+
+      <h3 class="title">Example</h3>
+      <p>In the following example, we are declaring two variables and printing their memory addresses −</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   // Declaring two variables
+   int a;
+   int b;
+
+   // Accessing their memory
+   // addresses and print them
+   printf("Memory address of a is %p\n", &a);
+   printf("Memory address of b is %p\n", &b);
+
+   return 0;
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">How Does C Compiler Allocate Memory?</h2>
+
+    <div class="content">
+      <p>Memory can be considered as an array of bytes where each address is an index in the array and holds 1 byte.</p>
+
+      <p>When you declare a variable in a C program, the C compiler allocates a random memory location to it, depending on the size requirement, which depends on the type.</p>
+
+      <p>When an <code>int</code> variable is declared −</p>
+
+      <pre><code>int x = 10;</code></pre>
+
+      <p>The compiler assigns the value in a random byte address. Since an <code>int</code> type needs 4 bytes, the next four addresses are earmarked for it.</p>
+
+      <p>C allows you to find out which address has been allocated to a variable. You can use the <code>%p</code> format specifier to print the hexadecimal address of the memory location.</p>
+
+      <pre><code>char x = 'A';
+printf("address of x: %p\n", &x);</code></pre>
+
+      <p>This prints the address of "x" in hexadecimal format −</p>
+
+      <pre><code>Address of x: 000000000061FE1F</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Arrays and Memory Addresses</h2>
+
+    <div class="content">
+      <p>Arrays in C are contiguous memory areas that hold a number of values of the same data type (int, long, char, etc.).</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+
+   // initialize an array of ints
+   int numbers[5] = {1,2,3,4,5};
+   int i = 0;
+
+   // print the address of the array variable
+   printf("numbers = %p\n", numbers);
+
+   // print addresses of each array index
+   do {
+      printf("numbers[%u] = %p\n", i, (void *)(&numbers[i]));
+      i++;
+   } while(i &lt; 5);
+
+   // print the size of the array
+   printf("sizeof(numbers) = %lu\n", sizeof(numbers));
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <pre><code>numbers = 0x7fff0815c0e0
+numbers[0] = 0x7fff0815c0e0
+numbers[1] = 0x7fff0815c0e4
+numbers[2] = 0x7fff0815c0e8
+numbers[3] = 0x7fff0815c0ec
+numbers[4] = 0x7fff0815c0f0
+sizeof(numbers) = 20</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,178 @@
+<div class="container">
+  <div class="session" data-session-id="js-async-iteration">
+    <h1 class="title">JavaScript - Async Iteration</h1>
+
+    <div class="content">
+      <h2>Asynchronous Iteration</h2>
+      <p>
+        In JavaScript, asynchronous iteration refers to the ability to iterate over asynchronous sequences 
+        or collections, such as those returned by asynchronous functions or generators. It is useful when 
+        working with tasks like fetching remote data, reading files, or handling streams.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Understanding Asynchronous Operations</h2>
+      <p>
+        Asynchronous operations are tasks that do not block program execution while they are pending. 
+        Instead of pausing for each task to finish, the program continues executing other tasks, 
+        while waiting for asynchronous tasks to resolve.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Using the <code>for await...of</code> Loop</h2>
+      <p>
+        The <code>for await...of</code> loop is used for asynchronous iteration. 
+        It works like a regular <code>for...of</code> loop, but it supports asynchronous iterators. 
+        An async iterator defines an <code>async next()</code> method that returns a promise 
+        for the next value in the sequence.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Example 1: Using Promises</h2>
+      <pre>
+function asyncOperation(value) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log("Processed:", value);
+      resolve(value);
+    }, 1000);
+  });
+}
+
+const asyncIterable = {
+  async *[Symbol.asyncIterator]() {
+    for (let i = 1; i <= 3; i++) {
+      yield await asyncOperation(i);
+    }
+  }
+};
+
+async function processAsyncIterable() {
+  for await (const result of asyncIterable) {
+    console.log("Received:", result);
+  }
+}
+
+processAsyncIterable();
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Example 2: Using Fetch API</h2>
+      <pre>
+const url = 'https://jsonplaceholder.typicode.com/todos/';
+
+const asyncIterable = {
+  async *[Symbol.asyncIterator]() {
+    for (let i = 1; i <= 3; i++) {
+      const response = await fetch(`${url}${i}`);
+      const data = await response.json();
+      console.log("Received:", data);
+      yield data;
+    }
+  }
+};
+
+async function processAsyncIterable() {
+  for await (const result of asyncIterable) {
+    // Each result is logged above.
+  }
+}
+
+processAsyncIterable();
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Example 3: Using Callbacks</h2>
+      <pre>
+function asyncOperation(value, callback) {
+  setTimeout(() => {
+    console.log("Processed:", value);
+    callback(value);
+  }, 1000);
+}
+
+function processAsyncIterable(iterable, callback) {
+  const iterator = iterable[Symbol.iterator]();
+  function iterate() {
+    const next = iterator.next();
+    if (next.done) return;
+    asyncOperation(next.value, result => {
+      console.log("Received:", result);
+      iterate();
+    });
+  }
+  iterate();
+}
+
+const asyncIterable = [5, 6, 7, 8, 9, 10];
+processAsyncIterable(asyncIterable, result => {
+  // Handle final result if needed.
+});
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Example 4: Promise with Error Handling</h2>
+      <pre>
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function fetchData(index) {
+  return new Promise((resolve, reject) => {
+    if (index < 5) {
+      delay(1000).then(() => resolve(`Data ${index}`));
+    } else {
+      reject(new Error("Error fetching data for index 5"));
+    }
+  });
+}
+
+function startAsyncIteration() {
+  let index = 0;
+  function iterate() {
+    fetchData(index)
+      .then(data => {
+        console.log("Data received:", data);
+        index++;
+        if (index < 6) iterate();
+      })
+      .catch(error => {
+        console.error("Error:", error.message);
+      });
+  }
+  iterate();
+}
+
+startAsyncIteration();
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Real World Use Cases</h2>
+      <p>Async iteration is useful in many scenarios, such as:</p>
+      <ul>
+        <li>Fetching data concurrently from multiple APIs</li>
+        <li>Processing real-time updates (e.g., chat systems)</li>
+        <li>Handling batch or parallel tasks efficiently</li>
+        <li>Managing file operations and streams</li>
+        <li>Processing IoT device data</li>
+        <li>Dynamically loading web content</li>
+        <li>Synchronizing data in offline-first applications</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <p>
+        <a href="#prev" class="prev">Previous</a> |
+        <a href="#next" class="next">Next</a> |
+        <a href="#toc" class="toc">Table of Contents</a>
+      </p>
+    </div>
+  </div>
+</div>

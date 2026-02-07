@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Garbage Collection (GC) in .NET Core</h1>
+    
+    <div class="content">
+      <p>The **Garbage Collector (GC)** is a core feature of the .NET managed code platform that acts as an **automatic memory manager**. It handles the **allocation and release of memory** for objects, freeing the developer from manual memory management.</p>
+      
+      <h2><span class="title">Content:</span> Overview and Process</h2>
+      <p>An allocation occurs when you declare an object using the <code>new</code> keyword or when a value type is **boxed**. Allocations are generally fast.</p>
+      
+      <p>The process of **garbage collection** occurs when there isn't enough memory to allocate a new object. The GC must then **collect and dispose of 'garbage' memory** (objects no longer in use) to make space available for new allocations.</p>
+      
+      <h3>Advantages of Garbage Collection</h3>
+      <ul>
+        <li>Developers **don't need to manually free memory**.</li>
+        <li>Allocates objects efficiently on the **managed heap**.</li>
+        <li>Reclaims memory from unused objects, keeping it available for future allocations.</li>
+        <li>Provides memory safety by preventing one object from using the content of another.</li>
+      </ul>
+      
+      <h3>Conditions for GC Triggering</h3>
+      <p>Garbage collection runs automatically when one of the following conditions is met:</p>
+      <ol>
+        <li class="example">The system has **low physical memory**.</li>
+        <li class="example">The memory used by objects on the managed heap **surpasses an acceptable threshold**.</li>
+        <li class="example">The <code>GC.Collect</code> method is explicitly called (rarely needed; mainly for unique situations or testing).</li>
+      </ol>
+      
+      <h2><span class="title">Example:</span> Generational Garbage Collection</h2>
+      <p>The .NET GC uses a **generational approach** based on the principle that most objects are either **short-lived** or **long-lived**. There are three main generations, plus a special heap for large objects:</p>
+      
+      <h3>Generation 0 (Gen 0)</h3>
+      <ul>
+        <li class="example">**First allocation space.** New objects are created here.</li>
+        <li class="example">Objects are typically **short-lived** and are often collected before the next GC cycle.</li>
+        <li class="example">The heap is **small**, making collections very quick.</li>
+      </ul>
+      
+      <h3>Generation 1 (Gen 1)</h3>
+      <ul>
+        <li class="example">Objects that survive a Generation 0 collection are **promoted** here.</li>
+        <li class="example">Acts as a **second chance space** for short-lived objects.</li>
+        <li class="example">Heap is also **small**, and collections are quick.</li>
+      </ul>
+      
+      <h3>Generation 2 (Gen 2)</h3>
+      <ul>
+        <li class="example">Contains all **long-lived objects** (survived Gen 1 collection).</li>
+        <li class="example">This heap can grow to be **very large** (e.g., 10s of GBs in server programs).</li>
+        <li class="example">Collections can take noticeable time, but the GC uses techniques like **background threads** to minimize blocking program execution.</li>
+      </ul>
+      
+      <h3>Large Object Heap (LOH)</h3>
+      <ul>
+        <li class="example">A separate, dedicated heap.</li>
+        <li class="example">Reserved for objects that are **85,000 bytes or greater**.</li>
+        <li class="example">Large objects are allocated **directly** to the LOH, bypassing the generational heaps.</li>
+        <li class="example">Collections on the LOH are tied to Generation 2 collections.</li>
+      </ul>
+    </div>
+  </div>
+</div>

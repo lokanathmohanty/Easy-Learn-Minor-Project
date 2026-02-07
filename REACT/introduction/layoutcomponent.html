@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>ReactJS - Layout in Component</h1>
+    </div>
+
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        One of the advanced features of React is that it allows arbitrary user interface (UI) content 
+        to be passed into the component using properties. Unlike React’s special 
+        <code>children</code> property, which allows only a single UI content, 
+        this option enables multiple UI content to be passed into the component. 
+        This can be seen as an extension of <code>children</code> property.
+      </p>
+      <p>
+        A common use case is creating layouts with customizable header and footer.
+      </p>
+
+      <h2>Example</h2>
+      <p>A simple example with <code>header</code> and <code>footer</code> props:</p>
+      <pre><code>
+&lt;Layout header={&lt;h1&gt;Header&lt;/h1&gt;} footer={&lt;p&gt;footer&lt;/p&gt;} /&gt;
+      </code></pre>
+      <p>Layout render logic:</p>
+      <pre><code>
+return (
+   &lt;div&gt;
+      &lt;div&gt;{props.header}&lt;/div&gt; 
+      &lt;div&gt;Component user interface&lt;/div&gt; 
+      &lt;div&gt;{props.footer}&lt;/div&gt; 
+   &lt;/div&gt;
+);
+      </code></pre>
+
+      <h2>Adding Layout to ExpenseEntryItemList</h2>
+      <ul>
+        <li>Open <code>ExpenseEntryItemList.js</code> in <code>src/components</code>.</li>
+        <li>Use <code>header</code> and <code>footer</code> props in the <code>render()</code> method.</li>
+      </ul>
+      <pre><code>
+return (
+   &lt;div&gt; 
+      &lt;div&gt;{this.props.header}&lt;/div&gt; 
+         ... existing code ... 
+      &lt;div&gt;{this.props.footer}&lt;/div&gt; 
+   &lt;/div&gt;
+);
+      </code></pre>
+
+      <h2>Using Header and Footer in index.js</h2>
+      <pre><code>
+ReactDOM.render(
+   &lt;React.StrictMode&gt;
+      &lt;ExpenseEntryItemList 
+         items={items}
+         header={&lt;div&gt;&lt;h1&gt;Expense manager&lt;/h1&gt;&lt;/div&gt;}
+         footer={
+            &lt;div style={{ textAlign: "left" }}&gt;
+               &lt;p style={{ fontSize: 12 }}&gt;Sample application&lt;/p&gt;
+            &lt;/div&gt;
+         } 
+      /&gt;
+   &lt;/React.StrictMode&gt;,
+   document.getElementById('root')
+);
+      </code></pre>
+
+      <p>
+        Run <code>npm start</code> and open <code>http://localhost:3000</code> to see the 
+        customized header and footer in the expense manager.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h1>Sharing Logic in Component (Render Props)</h1>
+    </div>
+
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        Render props is an advanced concept used to share logic between React components. 
+        As we saw in children and layout concepts, a component can receive arbitrary UI 
+        content or React elements via properties. Normally, the component renders the UI 
+        it receives, but does not share logic.
+      </p>
+      <p>
+        With Render Props, a component can take a function as a property. 
+        This function returns UI and can receive computed values from the component, 
+        enabling logic sharing.
+      </p>
+
+      <h2>Definition</h2>
+      <p>
+        A component property that accepts a function returning UI is called a 
+        <strong>Render Prop</strong>. The receiving component performs advanced 
+        logic and passes results to the Render Prop function, which then renders the UI.
+      </p>
+
+      <h2>Use Cases</h2>
+      <p>Many advanced third-party libraries use Render Props, such as:</p>
+      <ul>
+        <li>React Router</li>
+        <li>Formik</li>
+        <li>Downshift</li>
+      </ul>
+      <p>
+        Example: Formik handles form validation and submission, 
+        while the Render Prop function defines the form UI. 
+        Similarly, React Router manages routing logic while delegating UI rendering 
+        through Render Props.
+      </p>
+    </div>
+  </div>
+</div>

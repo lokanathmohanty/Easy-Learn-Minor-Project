@@ -1,0 +1,180 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Immutable Data Structures</h1>
+    </div>
+    <div class="content">
+      <p>
+        Immutable data structures in Python are those that cannot be changed once created. Any modification results in the creation of a new instance, ensuring data stability and making programs easier to maintain and less prone to bugs.
+      </p>
+      <p>
+        Data structures organize, process, and store data efficiently; immutable ones ensure values remain constant throughout program execution.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Common Immutable Data Structures</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>Tuples:</strong> Ordered, fixed collections of items. Defined with parentheses <code>()</code>.</li>
+        <li><strong>Strings:</strong> Sequences of characters enclosed in single, double, or triple quotes.</li>
+        <li><strong>Frozensets:</strong> Immutable versions of sets with no modification allowed after creation.</li>
+        <li><strong>Named Tuples:</strong> Subclass of tuples with named fields to improve readability. They are immutable.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Tuples</h2>
+    </div>
+    <div class="content">
+      <pre>
+# Creating tuples
+empty_tuple = ()
+single_element_tuple = (5,)  # Note trailing comma
+multi_element_tuple = (1, 2, 'Tutorialspoint', 3.14)
+nested_tuple = (1, (2, 3), 'Learning')
+
+print("Single element tuple:", single_element_tuple)
+print("Multi elements tuple:", multi_element_tuple)
+print("Nested tuple:", nested_tuple)
+
+# Immutability demonstration
+my_tuple = (1, 2, 3, 'hello')
+try:
+    my_tuple[0] = 10
+except TypeError as e:
+    print(f"Error: {e}")
+print("Original tuple:", my_tuple)
+      </pre>
+      <p>Output:</p>
+      <pre>
+Single element tuple: (5,)
+Multi elements tuple: (1, 2, 'Tutorialspoint', 3.14)
+Nested tuple: (1, (2, 3), 'Learning')
+Error: 'tuple' object does not support item assignment
+Original tuple: (1, 2, 3, 'hello')
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Strings</h2>
+    </div>
+    <div class="content">
+      <pre>
+# Creating strings
+single_quoted = 'Hello, Welcome to Tutorialspoint'
+double_quoted = "Python Programming"
+multi_line = """This is a 
+multi-line 
+string"""
+
+print(single_quoted)
+print(double_quoted)
+print(multi_line)
+
+# Immutability demonstration
+my_str = "Hello"
+modified_str = my_str + " Learners"
+print(modified_str)
+
+try:
+    my_str[0] = 'h'
+except TypeError as e:
+    print(f"Error: {e}")
+      </pre>
+      <p>Output:</p>
+      <pre>
+Hello, Welcome to Tutorialspoint
+Python Programming
+This is a
+multi-line
+string
+Hello Learners
+Error: 'str' object does not support item assignment
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Frozensets</h2>
+    </div>
+    <div class="content">
+      <pre>
+# Creating a frozenset
+fset = frozenset([1, 2, 3, 4])
+print(fset)
+
+# Immutability demonstration
+try:
+    fset.add(5)
+except AttributeError as e:
+    print(f"Error: {e}")
+
+try:
+    fset.remove(2)
+except AttributeError as e:
+    print(f"Error: {e}")
+print("Original frozenset:", fset)
+      </pre>
+      <p>Output:</p>
+      <pre>
+frozenset({1, 2, 3, 4})
+Error: 'frozenset' object has no attribute 'add'
+Error: 'frozenset' object has no attribute 'remove'
+Original frozenset: frozenset({1, 2, 3, 4})
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Named Tuples</h2>
+    </div>
+    <div class="content">
+      <pre>
+from collections import namedtuple
+
+# Define named tuple
+Point = namedtuple('Point', ['x', 'y'])
+
+# Create instance
+p = Point(1, 2)
+print(p)
+print(p.x)
+print(p.y)
+
+# Immutability demonstration
+try:
+    p.x = 10
+except AttributeError as e:
+    print(f"Error occurred: {e}")
+      </pre>
+      <p>Output:</p>
+      <pre>
+Point(x=1, y=2)
+1
+2
+Error occurred: can't set attribute
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="content">
+      <p>
+        Immutable data structures in Python are critical for creating stable, thread-safe, and maintainable programs by preventing unintended modifications.
+      </p>
+    </div>
+  </div>
+ 
+    </div>
+  </div>
+</div>

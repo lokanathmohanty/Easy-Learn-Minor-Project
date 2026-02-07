@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - float Property</h1>
+    <div class="content">
+      <p>The <strong>float</strong> property in CSS is a fundamental layout tool that allows elements to be taken out of the normal document flow and aligned to the left or right side of their container. This property was originally introduced for wrapping text around images, but it has also been used heavily in creating multi-column layouts, sidebars, and navigation menus. Although modern layout methods like <code>flexbox</code> and <code>grid</code> provide better alternatives today, float is still relevant and widely used in legacy code and for specific use cases.</p>
+
+      <h2>Syntax</h2>
+      <p>The basic syntax of the float property is as follows:</p>
+      <ul>
+        <li><code>float: none;</code></li>
+        <li><code>float: left;</code></li>
+        <li><code>float: right;</code></li>
+        <li><code>float: initial;</code></li>
+        <li><code>float: inherit;</code></li>
+      </ul>
+      <p>Each of these values determines how the element interacts with the flow of surrounding content.</p>
+
+      <h2>Float Property Values Explained</h2>
+      <ul>
+        <li><strong>none</strong>: The default value. The element does not float and stays in the normal document flow.</li>
+        <li><strong>left</strong>: The element floats to the left side of its container, and inline content wraps around it on the right side.</li>
+        <li><strong>right</strong>: The element floats to the right side of its container, and inline content wraps around it on the left side.</li>
+        <li><strong>initial</strong>: Resets the property to its default, which is <code>none</code>.</li>
+        <li><strong>inherit</strong>: The element inherits the float property value from its parent element.</li>
+      </ul>
+
+      <h2>float: none</h2>
+      <p>When <code>float: none;</code> is applied, the element remains part of the normal document flow. It does not shift left or right, and other elements do not wrap around it. This is the most neutral setting and is often used to override previously applied floats.</p>
+      <p><strong>Example Use Case:</strong> An image in an article that should appear inline with text without affecting the surrounding layout.</p>
+
+      <h2>float: left</h2>
+      <p>When an element is floated left, it aligns to the left side of its container. Other inline elements, such as text or inline-block elements, will flow around it on the right-hand side.</p>
+      <p><strong>Example Use Case:</strong> In a blog post, an image can be floated left to allow paragraphs of text to wrap neatly around it, similar to how magazine layouts place images on the left side of articles.</p>
+
+      <h2>float: right</h2>
+      <p>When an element is floated right, it aligns to the right side of its container. Inline content flows around it on the left-hand side.</p>
+      <p><strong>Example Use Case:</strong> A call-to-action button or promotional image aligned to the right while the main content occupies the left.</p>
+
+      <h2>The clear Property with float</h2>
+      <p>The <strong>clear</strong> property is used to control how elements behave in relation to floated elements. Without <code>clear</code>, floated elements allow inline content to wrap around them, sometimes causing layout issues. The clear property solves this by forcing an element to move below floated elements.</p>
+      <ul>
+        <li><strong>clear: left</strong> → Prevents an element from sitting beside a left-floated element, pushing it below.</li>
+        <li><strong>clear: right</strong> → Prevents an element from sitting beside a right-floated element.</li>
+        <li><strong>clear: both</strong> → Prevents wrapping from both sides, pushing the element below all floated elements.</li>
+      </ul>
+      <p><strong>Example Use Case:</strong> In a layout with two images floated left and right, using <code>clear: both;</code> on a paragraph ensures it starts below both images.</p>
+
+      <h2>Real-World Examples of float and clear</h2>
+      <ul>
+        <li><strong>float: left; clear: left;</strong> → Used to align an image left while making sure the next block element does not wrap beside it.</li>
+        <li><strong>float: right; clear: right;</strong> → Used for right-aligned advertisements or banners, ensuring text appears below.</li>
+        <li><strong>float: left; float: right; clear: both;</strong> → Common in two-column layouts where one element is aligned left, another right, and subsequent content flows below both.</li>
+      </ul>
+
+      <h2>Visual Analogy</h2>
+      <p>Imagine placing books against the walls of a room:</p>
+      <ul>
+        <li><strong>float: left</strong> → The book is placed against the left wall, leaving space on the right side for other objects.</li>
+        <li><strong>float: right</strong> → The book is placed against the right wall, leaving space on the left for other objects.</li>
+        <li><strong>float: none</strong> → The book sits in the middle of the room without aligning to any wall.</li>
+        <li><strong>clear: both</strong> → You bring in a new chair and place it on the floor, but you want it to sit below the books leaning on both walls. So it goes beneath them rather than beside.</li>
+      </ul>
+
+      <h2>Practical Applications of float</h2>
+      <ul>
+        <li><strong>Image Alignment in Articles</strong> → Wrapping text around photos in a blog or news article.</li>
+        <li><strong>Navigation Menus</strong> → Creating horizontal navigation bars by floating list items side by side.</li>
+        <li><strong>Sidebars</strong> → Floating a sidebar on the left or right side of a main content section.</li>
+        <li><strong>Product Layouts</strong> → Floating images of products with descriptions wrapping around them.</li>
+        <li><strong>Advertisements</strong> → Floating promotional banners on one side while leaving space for content.</li>
+      </ul>
+
+      <h2>Challenges with float</h2>
+      <p>While float is useful, it can introduce problems if not handled correctly:</p>
+      <ul>
+        <li>Floated containers may collapse in height if their children are floated, requiring clearfix solutions.</li>
+        <li>Unexpected text wrapping can disrupt readability if clear is not applied properly.</li>
+        <li>Layouts built entirely with float can be fragile compared to modern methods like flexbox.</li>
+      </ul>
+
+      <h2>Modern Alternatives</h2>
+      <p>Today, developers often prefer <code>flexbox</code> or <code>CSS grid</code> for layout tasks. These methods provide more control and flexibility compared to float. However, float still plays a role in wrapping text around images and for simpler alignment tasks.</p>
+
+      <h2>Supported Browsers</h2>
+      <p>The float property has excellent browser support across all major platforms:</p>
+      <ul>
+        <li><strong>Chrome:</strong> 1.0+</li>
+        <li><strong>Edge:</strong> 4.0+</li>
+        <li><strong>Firefox:</strong> 1.0+</li>
+        <li><strong>Safari:</strong> 1.0+</li>
+        <li><strong>Opera:</strong> 7.0+</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>Float allows elements to move left or right and enables text wrapping.</li>
+        <li>Clear ensures that elements do not unintentionally wrap beside floats.</li>
+        <li>Float is powerful for images and text layouts but should be used carefully in complex designs.</li>
+        <li>Flexbox and grid are better alternatives for modern layouts, but float still has a place in CSS.</li>
+      </ul>
+    </div>
+  </div>
+</div>

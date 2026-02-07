@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Mouse Events</h1>
+    <div class="content">
+      <p>JavaScript mouse events allow users to control and interact with web pages using their mouse. These events trigger specific functions or actions in response to user clicks, scrolls, drags, and other mouse movements.</p>
+      <p>To handle mouse events in JavaScript, you can use the <code>addEventListener()</code> method. It takes two arguments: the event type and the event handler function. The event type is the name of the event that you want to handle, and the event handler function is the function that will be called when the event occurs.</p>
+      <p>In web development, JavaScript provides a powerful mechanism to respond to user interactions with the mouse through a set of events. These events enable developers to create dynamic and interactive web applications by capturing and handling various mouse-related actions.</p>
+      
+      <h2 class="title">Common Mouse Events</h2>
+      <ul>
+        <li><strong>Click:</strong> Triggered when an element is clicked.</li>
+        <li><strong>Double Click:</strong> Triggered when an element is double-clicked.</li>
+        <li><strong>Mouse Down and Mouse Up:</strong> Fired when a mouse button is pressed and released.</li>
+        <li><strong>Mouse Move:</strong> Triggered when the mouse pointer moves over an element.</li>
+        <li><strong>Context Menu:</strong> Fired when a user attempts to open the context menu (usually right-click).</li>
+        <li><strong>Wheel:</strong> Triggered when the mouse wheel is rotated.</li>
+        <li><strong>Drag and Drop:</strong> Includes dragstart, dragend, dragover, dragenter, dragleave, and drop events.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Click Event</h2>
+    <div class="content">
+      <p>This example demonstrates the click event. When the button is clicked, a message is displayed.</p>
+      <pre>
+&lt;button id="clickButton"&gt;Click me!&lt;/button&gt;
+&lt;script&gt;
+  const clickButton = document.getElementById('clickButton');
+  clickButton.addEventListener('click', function() {
+    console.log('Clicked!');
+  });
+&lt;/script&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Double Click Event</h2>
+    <div class="content">
+      <p>This example demonstrates the <code>dblclick</code> event. When the button is double-clicked, a message is displayed.</p>
+      <pre>
+&lt;button id="doubleClickButton"&gt;Double-click me!&lt;/button&gt;
+&lt;script&gt;
+  const doubleClickButton = document.getElementById('doubleClickButton');
+  doubleClickButton.addEventListener('dblclick', function() {
+    console.log('Double-clicked!');
+  });
+&lt;/script&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Mouse Down and Mouse Up Events</h2>
+    <div class="content">
+      <p>This example demonstrates the <code>mousedown</code> and <code>mouseup</code> events applied to a div element.</p>
+      <pre>
+&lt;div id="mouseUpDownDiv"&gt;Perform mouse down and up here.&lt;/div&gt;
+&lt;script&gt;
+  const mouseUpDownDiv = document.getElementById('mouseUpDownDiv');
+  mouseUpDownDiv.addEventListener('mousedown', function() {
+    console.log('Mouse button down!');
+  });
+  mouseUpDownDiv.addEventListener('mouseup', function() {
+    console.log('Mouse button up!');
+  });
+&lt;/script&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Mouse Move Event</h2>
+    <div class="content">
+      <p>This example uses the <code>mousemove</code> event to track the mouse coordinates inside a div.</p>
+      <pre>
+&lt;div id="mouseMoveDiv"&gt;Move your mouse inside this area.&lt;/div&gt;
+&lt;script&gt;
+  const mouseMoveDiv = document.getElementById('mouseMoveDiv');
+  mouseMoveDiv.addEventListener('mousemove', function(event) {
+    console.log(`Mouse moved to (${event.clientX}, ${event.clientY})`);
+  });
+&lt;/script&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Wheel Event</h2>
+    <div class="content">
+      <p>This example demonstrates the <code>wheel</code> event when the mouse wheel is rotated inside a div.</p>
+      <pre>
+&lt;div id="wheelDiv"&gt;Scroll the wheel inside this area.&lt;/div&gt;
+&lt;script&gt;
+  const wheelDiv = document.getElementById('wheelDiv');
+  wheelDiv.addEventListener('wheel', function() {
+    console.log('Mouse wheel rotated!');
+  });
+&lt;/script&gt;
+      </pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Positional-Only Arguments</h1>
+    <div class="content">
+      <p>
+        In Python, you can define functions where one or more arguments 
+        <strong>cannot accept values using keywords</strong>.  
+        Such arguments are called <em>positional-only arguments</em>.
+      </p>
+
+      <p>
+        To make an argument positional-only, use the <code>/</code> symbol in the function definition.  
+        All arguments before <code>/</code> are treated as positional-only.
+      </p>
+
+      <p>
+        For example, Python’s built-in <code>input()</code> function is positional-only.  
+        Its syntax is:
+      </p>
+
+      <pre><code>input(prompt = "")</code></pre>
+
+      <p>
+        The argument <code>prompt</code> is an explanatory string for the user.  
+        However, you cannot pass it as a keyword.
+      </p>
+
+      <h2>Example: Using Keyword for input()</h2>
+      <pre><code>name = input(prompt="Enter your name ")</code></pre>
+
+      <p><strong>Error:</strong></p>
+      <pre><code>TypeError: input() takes no keyword arguments</code></pre>
+
+      <h2>Positional-Only Arguments Examples</h2>
+
+      <h3>Example 1</h3>
+      <p>Making both arguments positional-only using <code>/</code>:</p>
+      <pre><code>def intr(amt, rate, /):
+    val = amt * rate / 100
+    return val
+
+print(intr(316200, 4))</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>12648.0</code></pre>
+
+      <h3>Example 2</h3>
+      <p>If you try to pass positional-only arguments as keywords, Python raises an error:</p>
+      <pre><code>def intr(amt, rate, /):
+    val = amt * rate / 100
+    return val
+
+print(intr(amt=1000, rate=10))</code></pre>
+
+      <p><strong>Error:</strong></p>
+      <pre><code>TypeError: intr() got some positional-only arguments 
+passed as keyword arguments: 'amt, rate'</code></pre>
+
+      <h3>Example 3</h3>
+      <p>
+        A function may have <strong>positional-only</strong>, <strong>regular</strong>, 
+        and <strong>keyword-only</strong> arguments together:
+      </p>
+      <pre><code>def myfunction(x, /, y, *, z):
+    print(x, y, z)
+
+myfunction(10, y=20, z=30)
+myfunction(10, 20, z=30)</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>10 20 30
+10 20 30</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">File Handling in C</h1>
+    <div class="content">
+      <p>File handling in C is the process of handling file operations such as creating, opening, writing data, reading data, renaming, and deleting using the C language functions. With the help of these functions, we can perform file operations to store and retrieve the data in/from the file in our program.</p>
+
+      <h2 class="title">Need of File Handling in C</h2>
+      <p>If we perform input and output operations using the C program, the data exists as long as the program is running. When the program is terminated, we cannot use that data again. File handling is required to work with files stored in the external memory i.e., to store and access the information to/from the computer's external memory. You can keep the data permanently using file handling.</p>
+
+      <h2 class="title">Types of Files</h2>
+      <p>A file represents a sequence of bytes. There are two types of files:</p>
+      <ul>
+        <li><strong>Text file</strong> – contains ASCII characters, usually with a ".txt" extension.</li>
+        <li><strong>Binary file</strong> – contains raw bits; examples include image files (.png, .jpg), executable files (.exe).</li>
+      </ul>
+
+      <h2 class="title">FILE Pointer (File*)</h2>
+      <p>While working with file handling, you need a file pointer to store the reference of the FILE structure returned by the fopen() function. The file pointer is required for all file-handling operations.</p>
+
+      <h2 class="title">Opening (Creating) a File</h2>
+      <p>The fopen() function is used to create a new file or open an existing file. You specify the mode in which you want to open the file.</p>
+
+      <h2 class="title">File Opening Modes</h2>
+      <ul>
+        <li><strong>r</strong> – Opens an existing text file for reading.</li>
+        <li><strong>w</strong> – Opens a text file for writing. Creates a new file if it doesn’t exist.</li>
+        <li><strong>a</strong> – Opens a text file for appending. Creates a new file if it doesn’t exist.</li>
+        <li><strong>r+</strong> – Opens a text file for both reading and writing.</li>
+        <li><strong>w+</strong> – Opens a text file for both reading and writing. Truncates the file if it exists.</li>
+        <li><strong>a+</strong> – Opens a text file for both reading and appending. Creates a new file if it doesn’t exist.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Creating a File</h2>
+    <div class="content">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  FILE *file;
+
+  file = fopen("file1.txt", "w");
+
+  if (file == NULL) {
+    printf("Error in creating file");
+    return 1;
+  }
+  printf("File created.");
+
+  return 0;
+}
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Opening a File</h2>
+    <div class="content">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  FILE *file;
+
+  file = fopen("file1.txt", "r");
+
+  if (file == NULL) {
+    printf("Error in opening file");
+    return 1;
+  }
+  printf("File opened.");
+
+  return 0;
+}
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Closing a File</h2>
+    <div class="content">
+      <p>Each file must be closed after performing operations on it. The <code>fclose()</code> function closes an opened file.</p>
+
+      <h3 class="title">Syntax</h3>
+      <p><code>int fclose(FILE *fp);</code></p>
+
+      <p>The function returns zero on success or EOF on error.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Closing a File</h2>
+    <div class="content">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  FILE *file;
+
+  file = fopen("file1.txt", "w");
+
+  if (file == NULL) {
+    printf("Error in opening file");
+    return 1;
+  }
+  printf("File opened.");
+
+  fclose(file);
+  printf("\nFile closed.");
+
+  return 0;
+}
+      </code></pre>
+    </div>
+  </div>
+
+  <!-- Add more sessions similarly for writing, reading, binary file handling, renaming, etc. -->
+</div>

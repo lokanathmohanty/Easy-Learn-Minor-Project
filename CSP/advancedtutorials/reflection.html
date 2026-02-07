@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Reflection: Runtime Type Discovery and Manipulation</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Reflection? 🔍</h2>
+            <p>**Reflection** is the ability of managed code (like C# running on .NET) to **examine its own metadata** at runtime. It provides objects that allow you to obtain information about an assembly, its modules, and the types defined within it (classes, methods, fields, properties, etc.).</p>
+            <p>The core classes for reflection are found in the **<span class="example">`System.Reflection`</span>** namespace.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Primary Applications of Reflection</h2>
+            <p>Reflection is a powerful feature with several advanced uses in C# development:</p>
+            <ul>
+                <li>**Metadata Viewing:** Viewing information about types, including their members and any applied **Attributes** (like the <span class="example">`DeBugInfo`</span> example).</li>
+                <li>**Dynamic Instantiation:** Creating instances of types at runtime (e.g., using <span class="example">`Activator.CreateInstance(type)`</span>).</li>
+                <li>**Late Binding:** Invoking methods and accessing properties/fields on an object whose type isn't known until runtime.</li>
+                <li>**Creating New Types:** Generating new types and emitting code at runtime (used in advanced scenarios like dynamic proxy generation).</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Accessing Type Information (Metadata)</h2>
+            <p>To use reflection, you first need a **<span class="example">`System.Type`</span>** object for the element you wish to inspect. This is often obtained using:</p>
+            <ul>
+                <li>The **<span class="example">`typeof()`</span>** operator (at compile time): <span class="example">`Type type = typeof(Person);`</span></li>
+                <li>The **<span class="example">`GetType()`</span>** method (at runtime): <span class="example">`Type type = myObject.GetType();`</span></li>
+            </ul>
+            
+            <h3 class="title">Discovering Members</h3>
+            <p>Once you have a <span class="example">`Type`</span> object, you can discover its members:</p>
+            <pre>Console.WriteLine("Class Name: " + type.Name);
+// Retrieves all public properties:
+foreach (var prop in type.GetProperties()) {
+    Console.WriteLine(prop.Name);
+}
+// Retrieves all public, instance, and only-declared methods:
+foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)) {
+    Console.WriteLine(method.Name);
+}</pre>
+        </div>
+        
+        <hr>
+
+        <div class="example">
+            <h2 class="title">Example: Reading Custom Attributes with Reflection</h2>
+            <div class="content">
+                <p>Reflection is the mechanism for reading **Attributes** applied to code elements. The <span class="example">`GetCustomAttributes`</span> method on <span class="example">`Type`</span> or <span class="example">`MemberInfo`</span> is key.</p>
+                <p>To read attributes on the <span class="example">`Rectangle`</span> class and its <span class="example">`GetArea`</span> method from the previous session:</p>
+                
+                <h3 class="title">Step 1: Get the Type Object</h3>
+                <pre>Type type = typeof(Rectangle);</pre>
+                
+                <h3 class="title">Step 2: Retrieve Class-level Attributes</h3>
+                <pre>// Get all attributes applied directly to the class (not inherited)
+object[] attributes = type.GetCustomAttributes(false); 
+foreach (object attr in attributes) {
+   DeBugInfo dbi = (DeBugInfo)attr;
+   if (null != dbi) {
+      Console.WriteLine("Bug no: {0}", dbi.BugNo);
+      // ... output other properties
+   }
+}</pre>
+                
+                <h3 class="title">Step 3: Retrieve Method-level Attributes</h3>
+                <pre>// Iterate through all methods in the type
+foreach (MethodInfo m in type.GetMethods()) { 
+   // Iterate through attributes on each method
+   foreach (Attribute a in m.GetCustomAttributes(true)) {
+      DeBugInfo dbi = (DeBugInfo)a;
+      if (null != dbi) {
+         Console.WriteLine("Bug no: {0}, for Method: {1}", dbi.BugNo, m.Name);
+         // ... output other properties
+      }
+   }
+}</pre>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Dynamic Method Invocation</h2>
+            <p>Reflection enables you to call a method on an object whose type you only have at runtime:</p>
+            <pre>// 1. Get the Type
+Type type = typeof(Greeter);
+// 2. Instantiate the Object
+object obj = Activator.CreateInstance(type);
+// 3. Get the Method Info
+MethodInfo method = type.GetMethod("SayHello");
+// 4. Invoke the Method with parameters
+method.Invoke(obj, new object[] { "Ravi" }); // Outputs: Hello, Ravi!</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Map</h1>
+      </div>
+      <div class="content">
+         <p>JavaScript <code>Array</code> datatype provides a range of easy-to-use functions to manipulate arrays. One of them is the <code>map()</code> function, which accepts a transform function and creates a new array by applying the transform to each element.</p>
+
+         <h2>map() Function</h2>
+         <p>The signature of the <code>map</code> function is:</p>
+         <pre><code>array.map(function(item, index, items), thisValue)</code></pre>
+
+         <p>Where:</p>
+         <ul>
+            <li><strong>currentValue</strong> – the current element’s value</li>
+            <li><strong>index</strong> – the index of the current element</li>
+            <li><strong>items</strong> – the whole array</li>
+            <li><strong>thisValue</strong> – optional value to use as <code>this</code></li>
+         </ul>
+
+         <h2>Example</h2>
+         <p>Doubling each number in an array using <code>map()</code>:</p>
+         <pre><code>var numbers = [2, 4, 6]
+var transformed = numbers.map((val) => val + val)
+for (var item of transformed) { console.log(item) }</code></pre>
+
+         <p>Output:</p>
+         <pre><code>4
+8
+12</code></pre>
+
+         <h2>React Example</h2>
+         <p>Let us create a React component to display expenses using <code>map()</code>.</p>
+
+         <h3>ExpenseListUsingForLoop.js</h3>
+         <pre><code>import React from 'react'
+class ExpenseListUsingForLoop extends React.Component {
+   getTotalExpenses() {
+      var items = this.props['expenses'];
+      var total = 0;
+      for (let i = 0; i &lt; items.length; i++) {
+         total += parseInt(items[i]);
+      }
+      return total;
+   }
+   render() {
+      var items = this.props['expenses'];
+      var expenses = items.map((item, idx) =&gt; 
+         &lt;tr&gt;&lt;td&gt;item {idx + 1}&lt;/td&gt;&lt;td&gt;{item}&lt;/td&gt;&lt;/tr&gt;
+      );
+      var total = this.getTotalExpenses();
+      return &lt;table&gt;
+         &lt;thead&gt;
+            &lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th&gt;Amount&lt;/th&gt;&lt;/tr&gt;
+         &lt;/thead&gt;
+         &lt;tbody&gt;{expenses}&lt;/tbody&gt;
+         &lt;tfoot&gt;
+            &lt;tr&gt;&lt;th&gt;Sum&lt;/th&gt;&lt;th&gt;{total}&lt;/th&gt;&lt;/tr&gt;
+         &lt;/tfoot&gt;
+      &lt;/table&gt;
+   }
+}
+export default ExpenseListUsingForLoop</code></pre>
+
+         <h3>App.js</h3>
+         <pre><code>import ExpenseListUsingForLoop from './components/ExpenseListUsingForLoop';
+import './App.css';
+
+function App() {
+   var expenses = [100, 200, 300]
+   return (
+      &lt;div&gt;
+         &lt;ExpenseListUsingForLoop expenses={expenses} /&gt;
+      &lt;/div&gt;
+   );
+}
+export default App;</code></pre>
+
+         <h2>Map in JSX</h2>
+         <p>Since <code>map()</code> is a JavaScript expression, it can be used directly inside JSX:</p>
+         <pre><code>render() {
+   var items = this.props['expenses'];
+   var total = this.getTotalExpenses();
+   return &lt;table&gt;
+      &lt;thead&gt;
+         &lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th&gt;Amount&lt;/th&gt;&lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+         {items.map((item, idx) =&gt; 
+            &lt;tr&gt;&lt;td&gt;item {idx + 1}&lt;/td&gt;&lt;td&gt;{item}&lt;/td&gt;&lt;/tr&gt;
+         )}
+      &lt;/tbody&gt;
+      &lt;tfoot&gt;
+         &lt;tr&gt;&lt;th&gt;Sum&lt;/th&gt;&lt;th&gt;{total}&lt;/th&gt;&lt;/tr&gt;
+      &lt;/tfoot&gt;
+   &lt;/table&gt;
+}</code></pre>
+
+         <h2>Summary</h2>
+         <p>The <code>map()</code> function is a concise and powerful way to transform arrays in JavaScript and React. In JSX, <code>map()</code> can be directly embedded to dynamically render elements, such as lists or tables.</p>
+      </div>
+   </div>
+</div>

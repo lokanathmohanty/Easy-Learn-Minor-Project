@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MySQL Delete</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        The DELETE statement in MySQL is used to remove one or more rows from a table. It is a critical part of CRUD operations, commonly used in Node.js applications to manage database records.
+      </p>
+
+      <h2>Basic DELETE Syntax</h2>
+      <pre><code>DELETE FROM table_name
+WHERE condition;</code></pre>
+      <p>
+        Omitting the WHERE clause deletes all rows, equivalent to TRUNCATE TABLE command.
+      </p>
+
+      <h2>Simple DELETE Example</h2>
+      <pre><code>var mysql = require('mysql');
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "mypassword",
+  database: "mydb"
+});
+
+var qry = "DELETE FROM employee WHERE age>25;";
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+
+  con.query(qry, function(err, results) {
+    if (err) throw err;
+    console.log(results);
+  });
+
+  con.end();
+});</code></pre>
+
+      <h2>Output Example</h2>
+      <pre><code>OkPacket {
+  fieldCount: 0,
+  affectedRows: 0,
+  insertId: 0,
+  serverStatus: 34,
+  warningCount: 0,
+  message: '',
+  protocol41: true,
+  changedRows: 0
+}</code></pre>
+
+      <h2>Delete All Rows Example</h2>
+      <pre><code>var qry = "DELETE FROM employee;";</code></pre>
+      <p>Or equivalently:</p>
+      <pre><code>var qry = "TRUNCATE employee;";</code></pre>
+
+      <h2>DELETE with LIMIT</h2>
+      <p>
+        The LIMIT clause restricts number of rows deleted. This example deletes 5 rows from <code>city</code> table for cities in India with the lowest population:
+      </p>
+      <pre><code>var mysql = require('mysql');
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "mypassword",
+  database: "world"
+});
+
+var qry = "DELETE FROM city WHERE CountryCode='IND' ORDER BY population LIMIT 5;";
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+
+  con.query(qry, function(err, results) {
+    if (err) throw err;
+    console.log(results);
+  });
+
+  con.end();
+});</code></pre>
+
+      <h2>Output Example</h2>
+      <pre><code>OkPacket {
+  fieldCount: 0,
+  affectedRows: 5,
+  insertId: 0,
+  serverStatus: 2,
+  warningCount: 0,
+  message: '',
+  protocol41: true,
+  changedRows: 0
+}</code></pre>
+
+      <p>
+        This deletes the 5 cities with lowest population having CountryCode 'IND'. The count of remaining cities can be verified using COUNT(*) query before and after deletion.
+      </p>
+    </div>
+  </div>
+</div>

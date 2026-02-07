@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ <code>std::unordered_multiset</code> 🧱</h1>
+
+        <div class="content">
+            <p>The **<code>std::unordered_multiset</code>** is an **Associative Container** from the C++ Standard Template Library (STL). It is defined in the <code>&lt;unordered_set&gt;</code> header file.</p>
+            <ul>
+                <li>**Unordered:** Elements are stored in an **unspecified order** based on their hash value, offering fast access.</li>
+                <li>**Multiset:** It **allows duplicate values** (multiple occurrences of the same element).</li>
+                <li>**Implementation:** It is implemented using a **hash table**.</li>
+            </ul>
+
+            <h3>Syntax</h3>
+            <pre class="example">
+#include &lt;unordered_set&gt;
+std::unordered_multiset&lt;Type&gt; container_name;
+</pre>
+            <p>***Example:*** `unordered_multiset&lt;int&gt; ums = {1, 2, 3, 3};`</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Time Complexity and Performance</h2>
+
+        <div class="content">
+            <p>Because it uses a **hash table**, <code>unordered_multiset</code> offers highly efficient performance for core operations:</p>
+            <ul>
+                <li>**Average Time Complexity (Best Case):** $\text{O}(1)$ for insertion (`insert`), deletion (`erase`), and lookup (`find`, `count`).</li>
+                <li>**Worst Time Complexity (Due to Hash Collisions):** $\text{O}(n)$, as the operation degrades to a linear search within a single bucket.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Key Member Functions</h2>
+
+        <div class="content">
+            <table>
+                <thead>
+                    <tr><th>Function</th><th>Purpose</th><th>Note on Duplicates</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>**<code>insert(elem)</code>**</td><td>Adds one or more elements.</td><td>Always adds the element, regardless of existing duplicates.</td></tr>
+                    <tr><td>**<code>find(elem)</code>**</td><td>Returns an iterator to the **first occurrence** of the element, or `end()` if not found.</td><td>Only points to one instance if duplicates exist.</td></tr>
+                    <tr><td>**<code>count(elem)</code>**</td><td>Returns the **number of occurrences** of the specified element.</td><td>Returns $\ge 1$ for duplicates.</td></tr>
+                    <tr><td>**<code>erase(elem)</code>**</td><td>Removes **one occurrence** of the element matching the value.</td><td>Must be called multiple times to remove all duplicates by value.</td></tr>
+                    <tr><td>**<code>size()</code>**</td><td>Returns the total number of elements (including duplicates).</td><td>Counts all elements.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

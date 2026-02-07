@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">C - Loops</h1>
+
+    <div class="content">
+
+      <p>Loops are a programming construct that denote a block of one or more statements that are repeatedly executed a specified number of times, or until a certain condition is met.</p>
+
+      <p>Repetitive tasks are common in programming, and loops are essential to save time and minimize errors. In C programming, the keywords <code>while</code>, <code>do while</code>, and <code>for</code> are provided to implement loops.</p>
+
+      <p>Programming languages provide various control structures that allow for more complex execution paths. A loop statement allows us to execute a statement or group of statements multiple times.</p>
+
+      <h2 class="title">Flowchart of a Loop</h2>
+      <p>The following flowchart represents the basic structure of a loop in any programming language:</p>
+      <p><em>(Flowchart image not displayed in HTML – typically a decision node with a loop back to previous instruction)</em></p>
+
+      <h2 class="title">Example: Repetitive Code Without Loops</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int a = 1;
+
+   printf("a: %d\n", a); a++;
+   printf("a: %d\n", a); a++;
+   printf("a: %d\n", a); a++;
+   printf("a: %d\n", a); a++;
+   printf("a: %d\n", a);
+
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>a: 1</li>
+        <li>a: 2</li>
+        <li>a: 3</li>
+        <li>a: 4</li>
+        <li>a: 5</li>
+      </ul>
+
+      <p>Manually repeating code like this is inefficient. Instead, we can use loops to perform the same action automatically.</p>
+
+      <h2 class="title">Example: Using <code>while</code> Loop in C</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int a = 1;
+
+   while (a &lt;= 100) {
+      printf("a: %d\n", a);
+      a++;
+   }
+
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>a: 1</li>
+        <li>a: 2</li>
+        <li>...</li>
+        <li>a: 99</li>
+        <li>a: 100</li>
+      </ul>
+
+      <h2 class="title">Types of Loops in C</h2>
+      <p>To constitute a loop, you need:</p>
+      <ul>
+        <li>Looping statement (<code>while</code>, <code>do while</code>, or <code>for</code>)</li>
+        <li>Looping block (statements to be repeated)</li>
+        <li>Looping condition (termination check)</li>
+      </ul>
+
+      <p>Loops can be categorized as follows:</p>
+
+      <h3 class="title">Counted Loops</h3>
+      <p>Repeat a known number of times. Example: <code>for</code> loop.</p>
+
+      <h3 class="title">Conditional Loops</h3>
+      <p>Repeat as long as a condition is true. Example: <code>while</code>, <code>do while</code> loops.</p>
+
+      <h2 class="title">Loop Types in C</h2>
+      <table>
+        <thead>
+          <tr><th>Loop Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>while</code> loop</td><td>Repeats while a condition is true. Tests condition before entering loop body.</td></tr>
+          <tr><td><code>for</code> loop</td><td>Ideal for counted loops. Manages initialization, condition, and increment in one line.</td></tr>
+          <tr><td><code>do while</code> loop</td><td>Similar to <code>while</code>, but condition is checked after executing the loop body.</td></tr>
+          <tr><td>Nested loops</td><td>Allows one or more loops to be placed inside another loop.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 class="title">Loop Control Statements in C</h2>
+      <p>C provides control statements to alter loop execution flow:</p>
+      <table>
+        <thead>
+          <tr><th>Statement</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>break</code></td><td>Exits the loop or switch statement immediately.</td></tr>
+          <tr><td><code>continue</code></td><td>Skips the current iteration and moves to the next loop cycle.</td></tr>
+          <tr><td><code>goto</code></td><td>Jumps to a labeled statement elsewhere in the program.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 class="title">Infinite Loops</h2>
+      <p>A loop becomes infinite when the termination condition is never false. They may be intentional or due to logical errors.</p>
+
+      <h3 class="title">Example: Infinite Loop using <code>for</code></h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   for( ; ; ) {
+      printf("This loop will run forever.\n");
+   }
+
+   return 0;
+}</code></pre>
+
+      <h3 class="title">Output</h3>
+      <ul>
+        <li>This loop will run forever.</li>
+        <li>This loop will run forever.</li>
+        <li>...</li>
+      </ul>
+
+      <p>In <code>for(;;)</code>, since the condition is missing, it is considered true forever. You can terminate an infinite loop by pressing <strong>Ctrl + C</strong> during program execution.</p>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Joining the Threads</h1>
+    </div>
+    <div class="content">
+      <p>Joining threads in Python means using the <code>join()</code> method to wait for a thread to finish before continuing with other threads or the main program. This ensures orderly execution in multithreaded programs.</p>
+      <p>The <code>Thread.join()</code> method blocks the calling thread until the thread on which <code>join()</code> is called terminates, either normally, due to an exception, or after an optional timeout.</p>
+      <p>If you try to join the currently running thread or a thread that hasn’t been started, a <code>RuntimeError</code> occurs.</p>
+      <p><strong>Syntax:</strong></p>
+      <pre>thread.join(timeout)</pre>
+      <p>The optional <code>timeout</code> parameter specifies the maximum wait time in seconds. If omitted, it waits indefinitely.</p>
+      <p>The method returns <code>None</code>. After calling <code>join()</code>, <code>is_alive()</code> can be used to check if the thread is still running (useful for detecting timeouts).</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Using join() to Wait for Threads</h2>
+    </div>
+    <div class="content">
+      <pre>
+from threading import Thread
+from time import sleep
+
+def my_function_1(arg):
+   for i in range(arg):
+      print("Child Thread 1 running", i)
+      sleep(0.5)
+
+def my_function_2(arg):
+   for i in range(arg):
+      print("Child Thread 2 running", i)
+      sleep(0.1)
+
+# Create thread objects
+thread1 = Thread(target=my_function_1, args=(5,))
+thread2 = Thread(target=my_function_2, args=(3,))
+
+# Start first thread and wait for completion
+thread1.start()
+thread1.join()
+
+# Start second thread and wait for completion
+thread2.start()
+thread2.join()
+
+print("Main thread finished...exiting")
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        Child Thread 1 running 0<br>
+        Child Thread 1 running 1<br>
+        Child Thread 1 running 2<br>
+        Child Thread 1 running 3<br>
+        Child Thread 1 running 4<br>
+        Child Thread 2 running 0<br>
+        Child Thread 2 running 1<br>
+        Child Thread 2 running 2<br>
+        Main thread finished...exiting
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Using join() with Timeout</h2>
+    </div>
+    <div class="content">
+      <pre>
+from threading import Thread
+from time import sleep
+
+def my_function_1(arg):
+   for i in range(arg):
+      print("Child Thread 1 running", i)
+      sleep(0.5)
+
+def my_function_2(arg):
+   for i in range(arg):
+      print("Child Thread 2 running", i)
+      sleep(0.1)
+
+# Create thread objects
+thread1 = Thread(target=my_function_1, args=(5,))
+thread2 = Thread(target=my_function_2, args=(3,))
+
+# Start first thread and wait for 0.2 seconds only
+thread1.start()
+thread1.join(timeout=0.2)
+
+# Start second thread and wait for completion
+thread2.start()
+thread2.join()
+
+print("Main thread finished...exiting")
+      </pre>
+      <p><strong>Output:</strong></p>
+      <p>
+        Child Thread 1 running 0<br>
+        Child Thread 2 running 0<br>
+        Child Thread 2 running 1<br>
+        Child Thread 2 running 2<br>
+        Child Thread 1 running 1<br>
+        Main thread finished...exiting<br>
+        Child Thread 1 running 2<br>
+        Child Thread 1 running 3<br>
+        Child Thread 1 running 4
+      </p>
+    </div>
+  </div>
+</div>

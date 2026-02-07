@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>E-Learning Session</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+      
+      <h1 class="title">JavaScript Window Object</h1>
+      
+      <div class="content">
+        <h2 class="title">Introduction</h2>
+        <p>
+          The JavaScript <code>window</code> object represents the browser's window. 
+          It is a global object that contains methods and properties to access 
+          and manipulate the browser window. All global variables and functions 
+          become properties and methods of the <code>window</code> object.
+        </p>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Window Object as a Global Object</h2>
+        <p>
+          Since <code>window</code> is global, you can access global variables, 
+          functions, and objects using the <code>window</code> object anywhere in your code.
+        </p>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Example: Global vs Local Variables</h2>
+        <p>In the example below, the global variable is accessed using <code>window</code> while the local one is not.</p>
+      </div>
+
+      <div class="example">
+        <h2 class="title">Example Code</h2>
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+  &lt;div id="output1"&gt;Global num: &lt;/div&gt;
+  &lt;div id="output2"&gt;Local num: &lt;/div&gt;
+  &lt;div id="output3"&gt;Car brand: &lt;/div&gt;
+  &lt;script&gt;
+    var num = 100;
+    const car = { brand: "Honda", model: "City" };
+    
+    function test() {
+      let num = 300;
+      document.getElementById("output1").innerHTML += window.num;
+      document.getElementById("output2").innerHTML += num;
+      document.getElementById("output3").innerHTML += car.brand;
+    }
+    test();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <div class="content">
+        <h2 class="title">Output</h2>
+        <ul>
+          <li>Global num: 100</li>
+          <li>Local num: 300</li>
+          <li>Car brand: Honda</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

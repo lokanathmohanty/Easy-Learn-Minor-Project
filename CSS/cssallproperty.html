@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - all Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS <code>all</code> property</strong> is a powerful shorthand property
+        that resets all CSS properties of an element, except for <code>unicode-bidi</code>,
+        <code>direction</code>, and custom properties (CSS variables).
+        It can reset properties to their <em>initial</em>, <em>inherited</em>, or
+        <em>unset</em> values, depending on the specified keyword.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+all: initial | inherit | unset;
+      </pre>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>initial</strong> – Resets all properties to their default initial values as defined by the browser.</li>
+        <li><strong>inherit</strong> – Forces all properties to inherit values from the element’s parent.</li>
+        <li><strong>unset</strong> – Acts like <code>inherit</code> for inheritable properties and <code>initial</code> for non-inheritable properties.</li>
+      </ul>
+
+      <h2>Examples of CSS All Property</h2>
+
+      <h2>1. Using <code>all: initial;</code></h2>
+      <p>
+        When the value <code>initial</code> is applied, the element’s properties are reset to the
+        browser’s default values. It will not inherit styles from parent elements.
+      </p>
+      <pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      html {
+        font-size: 25px;
+        color: lightcoral;
+        font-style: italic;
+      }
+      #custom1 {
+        background-color: #ecf0f1;
+        color: #e74c3c;
+      }
+      #custom2 {
+        all: initial;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2&gt;CSS all property&lt;/h2&gt;
+    &lt;div id="custom1"&gt;
+      Reference sentence with custom styles.
+    &lt;/div&gt;
+    &lt;div id="custom2"&gt;
+      This sentence uses <code>all: initial</code>, so it resets to default browser styling.
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>2. Using <code>all: inherit;</code></h2>
+      <p>
+        When the value <code>inherit</code> is applied, the element inherits all properties from
+        its parent or, if not available, from the root <code>&lt;html&gt;</code> element.
+      </p>
+      <pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      html {
+        font-size: 25px;
+        color: lightcoral;
+        font-style: italic;
+      }
+      #custom1 {
+        background-color: lightgreen;
+        font-weight: bold;
+        padding: 10px;
+        color: #e74c3c;
+      }
+      #custom2 {
+        all: inherit;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2&gt;CSS all property&lt;/h2&gt;
+    &lt;div id="custom1"&gt;
+      Reference sentence with custom styles.
+    &lt;/div&gt;
+    &lt;div id="custom2"&gt;
+      This sentence uses <code>all: inherit</code> and inherits values from its parent.
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>3. Using <code>all: unset;</code></h2>
+      <p>
+        The <code>unset</code> value behaves like <code>inherit</code> for inheritable properties
+        (e.g., <code>color</code>, <code>font-size</code>) and like <code>initial</code> for
+        non-inheritable properties (e.g., <code>margin</code>, <code>padding</code>).
+      </p>
+      <pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      .parent {
+        color: purple;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+        background-color: lightgrey;
+      }
+      .custom1 {
+        font-weight: bold;
+        padding: 10px;
+      }
+      .custom2 {
+        all: unset;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2&gt;CSS all property&lt;/h2&gt;
+    &lt;div class="parent"&gt;
+      &lt;div class="custom1"&gt;
+        This element inherits from parent when using <code>all: unset</code>.
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="custom2"&gt;
+      This element has no parent with styles, so it falls back to browser defaults.
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>Supported Browsers</h2>
+      <ul>
+        <li>Chrome: 37+</li>
+        <li>Edge: 79+</li>
+        <li>Firefox: 27+</li>
+        <li>Safari: 9.1+</li>
+        <li>Opera: 24+</li>
+      </ul>
+
+      <p>
+        In summary, the <strong><code>all</code></strong> property is useful when you want to
+        completely reset styles for an element, ensuring consistent presentation across different
+        cascade layers. It is often applied in components or reset utilities in modern CSS.
+      </p>
+    </div>
+  </div>
+</div>

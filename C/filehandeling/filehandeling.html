@@ -1,0 +1,297 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Input and Output Functions in C</h1>
+    <div class="content">
+      <p>Reading input from the user and showing it on the console (output) are the common tasks every C program needs. C language provides libraries (header files) that contain various functions for input and output. In this tutorial, we will learn different types of formatted and unformatted input and output functions.</p>
+
+      <h2 class="title">The Standard Files in C</h2>
+      <p>The C language treats all the devices as files. So, devices such as the "display" are addressed in the same way as "files".</p>
+      <p>The following three files are automatically opened when a program executes to provide access to the keyboard and screen.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Standard File</th>
+            <th>File</th>
+            <th>Device</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Standard input</td>
+            <td>stdin</td>
+            <td>Keyboard</td>
+          </tr>
+          <tr>
+            <td>Standard output</td>
+            <td>stdout</td>
+            <td>Screen</td>
+          </tr>
+          <tr>
+            <td>Standard error</td>
+            <td>stderr</td>
+            <td>Your screen</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>To access a file, C uses a predefined <code>FILE</code> struct type to refer to the file for reading and writing purpose. Read this chapter to understand how to read values from the screen and how to print the result on the screen.</p>
+
+      <h2 class="title">Types of Input and Output Functions</h2>
+      <ul>
+        <li>Unformatted character IO functions: <code>getchar()</code> and <code>putchar()</code></li>
+        <li>Unformatted string IO functions: <code>gets()</code> and <code>puts()</code></li>
+        <li>Formatted IO functions: <code>scanf()</code> and <code>printf()</code></li>
+      </ul>
+      <p>The unformatted I/O functions read and write data as a stream of bytes without any format, whereas formatted I/O functions use predefined formats like <code>%d</code>, <code>%c</code> or <code>%s</code> to read and write data from a stream.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Unformatted Character Input & Output Functions: getchar() and putchar()</h2>
+    <div class="content">
+      <p>These two functions accept a single character as input from the keyboard, and display a single character on the output terminal, respectively.</p>
+      <p>The <code>getchar()</code> function reads a single keystroke without the Enter key.</p>
+      <p><code>int getchar(void)</code></p>
+      <p>No parameters required. Returns an integer corresponding to the ASCII value of the character key input by the user.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example 1: Using getchar()</h2>
+    <div class="content">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   char ch;
+   printf("Enter a character: ");
+   ch = getchar();
+   puts("You entered: ");
+   putchar(ch);
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Enter a character: W<br>
+         You entered:<br>
+         W
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example 2: Reading multiple characters till Enter</h2>
+    <div class="content">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   char ch;
+   char word[10];
+   int i = 0;
+   printf("Enter characters. End with pressing enter: ");
+   while(1) {
+      ch = getchar();
+      word[i] = ch;
+      if (ch == '\n')
+         break;
+      i++;
+   }
+   printf("\nYou entered the word: %s", word);
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Enter characters. End with pressing enter: Hello<br>
+         You entered the word: Hello
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example 3: Using putchar()</h2>
+    <div class="content">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   char ch;
+   for(ch = 'A' ; ch <= 'Z' ; ch++) {
+      putchar(ch);
+   }
+   return(0);
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Formatted String Input & Output Functions: gets(), fgets(), puts(), and fputs()</h2>
+    <div class="content">
+      <p>The <code>char *gets(char *str)</code> function reads a line from <code>stdin</code> into the buffer pointed to by <code>str</code> until either a terminating newline or EOF is encountered.</p>
+      <p><code>char *gets(char *str)</code></p>
+      <p>It takes a pointer to an array of chars to store the string. Returns <code>str</code> on success and <code>NULL</code> on error or EOF.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using gets()</h2>
+    <div class="content">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+   char name[20];
+   printf("Enter your name: ");
+   gets(name);
+   printf("You entered the name: %s", name);
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Enter your name: Ravikant Soni<br>
+         You entered the name: Ravikant Soni
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using fgets() Instead of gets()</h2>
+    <div class="content">
+      <p><code>gets()</code> is deprecated because it doesn’t check buffer bounds and can cause overflow. Instead, <code>fgets()</code> is safer:</p>
+      <p><code>fgets(char arr[], size, stream);</code></p>
+      <p><code>fgets()</code> reads input from any input stream such as <code>stdin</code> (keyboard) or a file.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using fgets()</h2>
+    <div class="content">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main () {
+   char name[20];
+   printf("Enter a name: \n");
+   fgets(name, sizeof(name), stdin);
+   printf("You entered: \n");
+   printf("%s", name);
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Enter a name:<br>
+         Rakesh Sharma<br><br>
+         You entered:<br>
+         Rakesh Sharma
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using puts() and fputs()</h2>
+    <div class="content">
+      <p><code>int puts(const char *str)</code> writes the string and a trailing newline to <code>stdout</code>. Returns non-negative on success or <code>EOF</code> on error.</p>
+      <p><code>printf()</code> can also print strings with <code>%s</code>, while <code>fputs()</code> can write strings without adding a newline.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: puts() vs fputs()</h2>
+    <div class="content">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main () {
+   char name[20] = "Rakesh Sharma";
+
+   printf("With puts(): \n");
+   puts(name);
+
+   printf("\nWith fputs(): \n");
+   fputs(name, stdout);
+
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <p>With puts():<br>
+         Rakesh Sharma<br><br>
+         With fputs():<br>
+         Rakesh Sharma
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Formatted Input & Output Functions: scanf() and printf()</h2>
+    <div class="content">
+      <p><code>scanf()</code> reads input from <code>stdin</code> and parses it according to the provided format.</p>
+      <p><code>printf()</code> writes output to <code>stdout</code> formatted according to the format string.</p>
+      <p>The format specifiers such as <code>%s</code>, <code>%d</code>, <code>%c</code>, <code>%f</code> allow reading and printing strings, integers, characters, and floats respectively.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Format Specifiers in C</h2>
+    <div class="content">
+      <p>The following table lists common format specifiers and their types:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Format Specifier</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>%c</td><td>Character</td></tr>
+          <tr><td>%d</td><td>Signed integer</td></tr>
+          <tr><td>%e or %E</td><td>Scientific notation of floats</td></tr>
+          <tr><td>%f</td><td>Float values</td></tr>
+          <tr><td>%g or %G</td><td>Similar as %e or %E</td></tr>
+          <tr><td>%hi</td><td>Signed integer (short)</td></tr>
+          <tr><td>%hu</td><td>Unsigned Integer (short)</td></tr>
+          <tr><td>%i</td><td>Unsigned integer</td></tr>
+          <tr><td>%l, %ld, %li</td><td>Long</td></tr>
+          <tr><td>%lf</td><td>Double</td></tr>
+          <tr><td>%Lf</td><td>Long double</td></tr>
+          <tr><td>%lu</td><td>Unsigned int or unsigned long</td></tr>
+          <tr><td>%lli, %lld</td><td>Long long</td></tr>
+          <tr><td>%llu</td><td>Unsigned long long</td></tr>
+          <tr><td>%o</td><td>Octal representation</td></tr>
+          <tr><td>%p</td><td>Pointer</td></tr>
+          <tr><td>%s</td><td>String</td></tr>
+          <tr><td>%u</td><td>Unsigned int</td></tr>
+          <tr><td>%x or %X</td><td>Hexadecimal representation</td></tr>
+        </tbody>
+      </table>
+      <p>A minus sign (<code>-</code>) signifies left alignment. A number after <code>%</code> specifies the minimum field width. If a string is less than the width, it will be filled with spaces. A period (<code>.</code>) separates field width and precision.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Demonstrating Format Specifiers</h2>
+    <div class="content">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main(){
+   char str[100];
+   printf("Enter a value: ");
+   gets(str);
+   printf("\nYou entered: ");
+   puts(str);
+   return 0;
+}
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <p>Enter a value: seven 7<br>
+         You entered: seven 7
+      </p>
+      <p>Note: <code>scanf()</code> expects input in the specified format. For example, <code>%s %d</code> expects a string followed by an integer. Also, <code>scanf()</code> stops reading strings at whitespace.</p>
+    </div>
+  </div>
+
+</div>

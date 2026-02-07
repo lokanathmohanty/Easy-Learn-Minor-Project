@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Full Route Caching</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Full Route Caching?</h2>
+            <p><strong>Full Route Caching</strong> is Next.js's default behavior where it statically generates and caches the **entire output** for a route (the HTML page, layout, and metadata) at build time. This technique serves the pre-rendered static HTML directly to users instead of rendering the page on the server for every request, which is key to achieving **faster page loads** and better scalability.</p>
+            
+            <h3>How It Works</h3>
+            <p>During the application build process:</p>
+            <ul>
+                <li>Next.js identifies routes that can be statically rendered.</li>
+                <li>The complete output for these routes is generated and cached.</li>
+                <li>Each subsequent request for a cached route is served the static HTML.</li>
+                <li>This cache persists across deployments unless specific data revalidation occurs. (Note: The **Data Cache** is the only cache that automatically persists across deployments).</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Invalidating the Full Route Cache</h2>
+            <p>The Full Route Cache can be updated or cleared in two main ways:</p>
+            
+            <ul>
+                <li class="example">
+                    <strong>Revalidating Data:</strong> When the underlying **Data Cache** (which stores the results of <code>fetch</code> calls) is revalidated (e.g., using <code>revalidatePath</code>), Next.js re-renders the components on the server. The output of this new render then replaces the old entry in the Full Route Cache.
+                </li>
+                <li class="example">
+                    <strong>Redeploying:</strong> A new build and redeployment of the application will automatically clear the entire **Full Route Cache**, forcing all pages to be re-generated on their next access.
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Clearing / Opting Out of Full Route Caching</h2>
+            <p>For routes that must show fresh data on every request (e.g., personalized content, real-time data), you need to **opt out** of Full Route Caching and force Next.js to render dynamically at request time. This is done by triggering dynamic rendering.</p>
+            
+            <h3>1. Using <code>export const dynamic = 'force-dynamic'</code></h3>
+            <p>This setting explicitly forces the page to be rendered **dynamically** at the time of the request, bypassing the Full Route Cache entirely.</p>
+            
+            <p><strong>Example: Force Dynamic Rendering</strong></p>
+            <pre class="example"><code>// Set as force dynamic page
+export const dynamic = 'force-dynamic'
+
+async function getData() {
+  const randomNumber = Math.floor(Math.random() * 100)
+  return {
+    timestamp: new Date().toISOString(),
+    randomNumber
+  }
+}
+
+export default async function Home() {
+  const data = await getData()
+  // Every time the page is refreshed, a new random number is generated
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;Force Dynamic Example&lt;/h1&gt;
+      &lt;p&gt;Random Number: {data.randomNumber}&lt;/p&gt;
+    &lt;/main&gt;
+  )
+}</code></pre>
+
+            <h3>2. Using Dynamic APIs (Reading Request-time Data)</h3>
+            <p>If a route uses dynamic server-side functions that rely on request-time information (like cookies, headers, or URL search parameters), Next.js will automatically detect this and opt the page out of Full Route Caching, forcing dynamic rendering.</p>
+            
+            <p><strong>Example: Reading Cookies and Headers</strong></p>
+            <p>The use of <code>cookies()</code> and <code>headers()</code> inside the page component signals to Next.js that the output depends on runtime request data, making the route dynamic and uncached.</p>
+            <pre class="example"><code>// app/dynamic-data/page.tsx
+import { cookies, headers } from 'next/headers' // Importing these makes the page dynamic
+
+export default function DynamicPage({searchParams,}: { searchParams: { [key: string]: string | string[] | undefined }})  {
+    const cookieStore = cookies() // Accessing request cookies
+    const headersList = headers() // Accessing request headers
+
+    const theme = cookieStore.get('theme')
+    
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Dynamic Data Example&lt;/h1&gt;
+            &lt;section&gt;
+            &lt;h2&gt;Cookies:&lt;/h2&gt;
+            &lt;p&gt;Theme Cookie: {theme?.value || 'Not set'}&lt;/p&gt;
+            &lt;/section&gt;
+        &lt;/div&gt;
+    )
+}</code></pre>
+        </div>
+    </div>
+</div>

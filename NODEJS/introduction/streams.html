@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Streams</h1>
+    <div class="content">
+      <h2>What are Streams?</h2>
+      <p>
+        A stream is a collection of data processed chunk by chunk rather than all at once. This makes streams memory efficient and well-suited for data streaming applications in Node.js.
+      </p>
+
+      <h2>Types of Streams</h2>
+      <ul>
+        <li><strong>Writable:</strong> streams to which data can be written.</li>
+        <li><strong>Readable:</strong> streams from which data can be read.</li>
+        <li><strong>Duplex:</strong> streams that are both readable and writable.</li>
+        <li><strong>Transform:</strong> duplex streams that can modify/transform data while reading or writing.</li>
+      </ul>
+
+      <h2>Common Stream Events</h2>
+      <ul>
+        <li><code>data</code>: Fired when data is available to read.</li>
+        <li><code>end</code>: Fired when there is no more data to read.</li>
+        <li><code>error</code>: Fired when an error occurs.</li>
+        <li><code>finish</code>: Fired when all data has been flushed to the underlying system.</li>
+      </ul>
+
+      <h2>Readable Stream Example</h2>
+      <pre><code>var fs = require("fs");
+var data = '';
+
+// Create a readable stream
+var readerStream = fs.createReadStream('input.txt');
+
+// Set the encoding to UTF8
+readerStream.setEncoding('UTF8');
+
+// Handle stream events: data, end, error
+readerStream.on('data', function(chunk) {
+   data += chunk;
+});
+
+readerStream.on('end', function() {
+   console.log(data);
+});
+
+readerStream.on('error', function(err) {
+   console.log(err.stack);
+});
+
+console.log("Program Ended");</code></pre>
+
+      <h2>Writable Stream Example</h2>
+      <pre><code>var fs = require("fs");
+var data = `Tutorials Point is giving self learning content
+to teach the world in simple and easy way!!!!!`;
+
+// Create a writable stream
+var writerStream = fs.createWriteStream('output.txt');
+
+// Write the data to stream with encoding UTF8
+writerStream.write(data, 'UTF8');
+
+// Mark the end of file
+writerStream.end();
+
+// Handle stream events: finish, error
+writerStream.on('finish', function() {
+   console.log("Write completed.");
+});
+
+writerStream.on('error', function(err) {
+   console.log(err.stack);
+});
+
+console.log("Program Ended");</code></pre>
+
+      <h2>Piping Streams</h2>
+      <p>
+        Piping is connecting the output of one stream as input to another stream, chaining multiple operations.
+      </p>
+      <pre><code>var fs = require("fs");
+
+// Create read and write streams
+var readerStream = fs.createReadStream('input.txt');
+var writerStream = fs.createWriteStream('output.txt');
+
+// Pipe them: read input.txt and write to output.txt
+readerStream.pipe(writerStream);
+
+console.log("Program Ended");</code></pre>
+      <p>
+        Run with <code>node main.js</code> and verify <code>output.txt</code> contains the data.
+      </p>
+
+      <h2>Chaining Streams with Compression</h2>
+      <pre><code>var fs = require("fs");
+var zlib = require('zlib');
+
+// Compress input.txt to input.txt.gz
+fs.createReadStream('input.txt')
+  .pipe(zlib.createGzip())
+  .pipe(fs.createWriteStream('input.txt.gz'));
+
+console.log("File Compressed.");</code></pre>
+      <p>
+        To decompress:
+      </p>
+      <pre><code>fs.createReadStream('input.txt.gz')
+  .pipe(zlib.createGunzip())
+  .pipe(fs.createWriteStream('input.txt'));
+
+console.log("File Decompressed.");</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Custom Exception</h1>
+    
+
+    <div class="content">
+      <h2>Java Custom Exception</h2>
+      <p>
+        A custom exception refers to the creation of your own exception to customize an exception according to the needs. The custom exceptions are derived from the Exception class.
+      </p>
+
+      <h3>Need of Java Custom Exceptions</h3>
+      <ul>
+        <li>To categorize the exceptions based on the different types of errors in your project.</li>
+        <li>To allow application-level exception handling.</li>
+      </ul>
+
+      <h3>Create a Custom Exception in Java</h3>
+      <p>
+        To create a custom exception, you need to create a class that must be inherited from the Exception class.
+      </p>
+
+      <h4>Syntax</h4>
+      <pre><code>class MyException extends Exception { }</code></pre>
+      <p>You just need to extend the predefined Exception class to create your own Exception. These are considered to be checked exceptions.</p>
+
+      <h3>Rules to Create Custom Exception</h3>
+      <ul>
+        <li>All exceptions must be a child of Throwable.</li>
+        <li>If you want to write a checked exception that is automatically enforced by the Handle or Declare Rule, you need to extend the Exception class.</li>
+        <li>If you want to write a runtime exception, you need to extend the RuntimeException class.</li>
+      </ul>
+
+      <h3>Java Custom Exception Example</h3>
+      <p>
+        The following <code>InsufficientFundsException</code> class is a user-defined exception that extends the Exception class, making it a checked exception. An exception class is like any other class, containing useful fields and methods.
+      </p>
+
+      <pre><code>class InsufficientFundsException extends Exception {
+  private double amount;
+
+  public InsufficientFundsException(double amount) {
+    this.amount = amount;
+  }
+
+  public double getAmount() {
+    return amount;
+  }
+}</code></pre>
+
+      <p>To demonstrate using our user-defined exception, the following <code>CheckingAccount</code> class contains a <code>withdraw()</code> method that throws an <code>InsufficientFundsException</code>.</p>
+
+      <pre><code>class CheckingAccount {
+  private double balance;
+  private int number;
+
+  public CheckingAccount(int number) {
+    this.number = number;
+  }
+
+  public void deposit(double amount) {
+    balance += amount;
+  }
+
+  public void withdraw(double amount) throws InsufficientFundsException {
+    if (amount <= balance) {
+      balance -= amount;
+    } else {
+      double needs = amount - balance;
+      throw new InsufficientFundsException(needs);
+    }
+  }
+
+  public double getBalance() {
+    return balance;
+  }
+
+  public int getNumber() {
+    return number;
+  }
+}</code></pre>
+
+      <p>The following <code>BankDemo</code> program demonstrates invoking the <code>deposit()</code> and <code>withdraw()</code> methods of <code>CheckingAccount</code>.</p>
+
+      <pre><code>public class BankDemo {
+  public static void main(String[] args) {
+    CheckingAccount c = new CheckingAccount(101);
+    System.out.println("Depositing $500...");
+    c.deposit(500.00);
+
+    try {
+      System.out.println("\nWithdrawing $100...");
+      c.withdraw(100.00);
+      System.out.println("\nWithdrawing $600...");
+      c.withdraw(600.00);
+    } catch (InsufficientFundsException e) {
+      System.out.println("Sorry, but you are short $" + e.getAmount());
+      e.printStackTrace();
+    }
+  }
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>Depositing $500...
+
+Withdrawing $100...
+
+Withdrawing $600...
+Sorry, but you are short $200.0
+com.tutorialspoint.InsufficientFundsException
+    at com.tutorialspoint.CheckingAccount.withdraw(BankDemo.java:39)
+    at com.tutorialspoint.BankDemo.main(BankDemo.java:14)</code></pre>
+
+      <h3>Unchecked Custom Exception</h3>
+      <p>In the next example, we're declaring our custom exception as RuntimeException to make it an unchecked exception class as below:</p>
+
+      <pre><code>class MyException extends RuntimeException { }</code></pre>
+
+      <p>Example to Create Custom Class by Extending Runtime Exception:</p>
+
+      <pre><code>class InsufficientFundsException extends RuntimeException {
+  private double amount;
+
+  public InsufficientFundsException(double amount) {
+    this.amount = amount;
+  }
+
+  public double getAmount() {
+    return amount;
+  }
+}</code></pre>
+
+      <p>The following <code>BankDemo</code> program demonstrates invoking the <code>deposit()</code> and <code>withdraw()</code> methods of <code>CheckingAccount</code> using unchecked exception.</p>
+
+      <pre><code>public class BankDemo {
+  public static void main(String[] args) {
+    CheckingAccount c = new CheckingAccount(101);
+    System.out.println("Depositing $500...");
+    c.deposit(500.00);
+
+    System.out.println("\nWithdrawing $100...");
+    c.withdraw(100.00);
+    System.out.println("\nWithdrawing $600...");
+    c.withdraw(600.00);
+  }
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code>Depositing $500...
+
+Withdrawing $100...
+
+Withdrawing $600...
+Exception in thread "main"
+com.tutorialspoint.InsufficientFundsException
+    at com.tutorialspoint.CheckingAccount.withdraw(BankDemo.java:35)
+    at com.tutorialspoint.BankDemo.main(BankDemo.java:13)</code></pre>
+    </div>
+  </div>
+</div>

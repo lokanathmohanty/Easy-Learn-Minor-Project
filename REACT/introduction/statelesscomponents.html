@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Stateless Component</h1>
+
+    <div class="content">
+      <p>A React component with internal state is called a <strong>Stateful component</strong>, while a component without internal state management is called a <strong>Stateless component</strong>. React recommends creating and using as many stateless components as possible, and creating stateful components only when absolutely necessary.</p>
+      <p>Also, React does not share state with child components. Data must be passed to a child component through its properties.</p>
+
+      <p>Example – Passing data to the <code>FormattedDate</code> component:</p>
+      <p><code>&lt;FormattedDate value={this.state.item.spend_date} /&gt;</code></p>
+
+      <p>The general idea is not to overcomplicate application logic and use advanced features only when necessary.</p>
+    </div>
+
+    <h2 class="title">Create a Stateful Component</h2>
+    <div class="content">
+      <p>Let us create a React application to show the current date and time.</p>
+
+      <h2 class="title">Step 1</h2>
+      <p>Create a new React application <code>react-clock-app</code> using Create React App or Rollup bundler. Open the app in your editor.</p>
+
+      <h2 class="title">Step 2</h2>
+      <p>Create a <code>src</code> folder under the root directory, then create a <code>components</code> folder under <code>src</code>. Inside it, create a file <code>Clock.js</code>.</p>
+      <p>Import React and create the <code>Clock</code> component:</p>
+      <p><code>
+import React from 'react'; <br><br>
+class Clock extends React.Component { <br>
+&nbsp;&nbsp;constructor(props) { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;super(props); <br>
+&nbsp;&nbsp;} <br>
+} 
+      </code></p>
+
+      <h2 class="title">Step 3</h2>
+      <p>Initialize state with the current date and time:</p>
+      <p><code>
+constructor(props) { <br>
+&nbsp;&nbsp;super(props); <br>
+&nbsp;&nbsp;this.state = { date: new Date() } <br>
+}
+      </code></p>
+
+      <h2 class="title">Step 4</h2>
+      <p>Add a <code>setTime()</code> method to update the current time:</p>
+      <p><code>
+setTime() { <br>
+&nbsp;&nbsp;console.log(this.state.date); <br>
+&nbsp;&nbsp;this.setState((state, props) =&gt; ({ date: new Date() })); <br>
+}
+      </code></p>
+
+      <h2 class="title">Step 5</h2>
+      <p>Use <code>setInterval</code> to call <code>setTime()</code> every second:</p>
+      <p><code>
+constructor(props) { <br>
+&nbsp;&nbsp;super(props); <br>
+&nbsp;&nbsp;this.state = { date: new Date() }; <br>
+&nbsp;&nbsp;setInterval(() =&gt; this.setTime(), 1000); <br>
+}
+      </code></p>
+
+      <h2 class="title">Step 6</h2>
+      <p>Create a <code>render()</code> method:</p>
+      <p><code>
+render() { <br>
+&nbsp;&nbsp;return ( &lt;div&gt;&lt;p&gt;The current time is {this.state.date.toString()}&lt;/p&gt;&lt;/div&gt; ); <br>
+}
+      </code></p>
+
+      <p>Export the component:</p>
+      <p><code>export default Clock;</code></p>
+
+      <h2 class="title">Complete Code of Clock Component</h2>
+      <p><code>
+import React from 'react'; <br><br>
+class Clock extends React.Component { <br>
+&nbsp;&nbsp;constructor(props) { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;super(props); <br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.state = { date: new Date() }; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;setInterval(() =&gt; this.setTime(), 1000); <br>
+&nbsp;&nbsp;} <br><br>
+&nbsp;&nbsp;setTime() { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log(this.state.date); <br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.setState((state, props) =&gt; ({ date: new Date() })); <br>
+&nbsp;&nbsp;} <br><br>
+&nbsp;&nbsp;render() { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;return ( &lt;div&gt;&lt;p&gt;The current time is {this.state.date.toString()}&lt;/p&gt;&lt;/div&gt; ); <br>
+&nbsp;&nbsp;} <br>
+} <br><br>
+export default Clock;
+      </code></p>
+    </div>
+
+    <h2 class="title">index.js</h2>
+    <div class="content">
+      <p>Create an <code>index.js</code> file under <code>src</code> and use the <code>Clock</code> component:</p>
+      <p><code>
+import React from 'react'; <br>
+import ReactDOM from 'react-dom'; <br>
+import Clock from './components/Clock'; <br><br>
+ReactDOM.render( <br>
+&nbsp;&nbsp;&lt;React.StrictMode&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;Clock /&gt; <br>
+&nbsp;&nbsp;&lt;/React.StrictMode&gt;, <br>
+&nbsp;&nbsp;document.getElementById('root') <br>
+);
+      </code></p>
+    </div>
+
+    <h2 class="title">index.html</h2>
+    <div class="content">
+      <p>Create <code>public/index.html</code>:</p>
+      <p><code>
+&lt;!DOCTYPE html&gt; <br>
+&lt;html lang="en"&gt; <br>
+&lt;head&gt; <br>
+&nbsp;&nbsp;&lt;meta charset="utf-8"&gt; <br>
+&nbsp;&nbsp;&lt;title&gt;Clock&lt;/title&gt; <br>
+&lt;/head&gt; <br>
+&lt;body&gt; <br>
+&nbsp;&nbsp;&lt;div id="root"&gt;&lt;/div&gt; <br>
+&nbsp;&nbsp;&lt;script type="text/javascript" src="./index.js"&gt;&lt;/script&gt; <br>
+&lt;/body&gt; <br>
+&lt;/html&gt;
+      </code></p>
+      <p>Run the app using <code>npm start</code> and open <code>http://localhost:3000</code> to see the live clock.</p>
+    </div>
+
+    <h2 class="title">Error: setState on Unmounted Component</h2>
+    <div class="content">
+      <p>The application may throw an error:</p>
+      <p><em>"Can't call setState on a component that is not yet mounted."</em></p>
+      <p>This happens because <code>setState</code> should only be called after the component is mounted. Mounting is part of the React component life-cycle, which we will learn in the next chapters.</p>
+    </div>
+
+    <h2 class="title">Introduce State in Expense Manager App</h2>
+    <div class="content">
+      <p>We can add state to the Expense Manager app by enabling removal of an expense item. The steps include:</p>
+      <ul>
+        <li>Initialize the state with <code>this.props.items</code>.</li>
+        <li>Add a <strong>Remove</strong> label in the table header.</li>
+        <li>Render expense rows with a <code>Remove</code> link.</li>
+        <li>Implement <code>handleDelete()</code> to remove an item from state.</li>
+        <li>Add a new row to display total expenses.</li>
+        <li>Implement <code>getTotal()</code> to calculate the total amount.</li>
+      </ul>
+      <p>This allows dynamic updates when an expense is deleted, demonstrating the use of state in managing UI updates.</p>
+    </div>
+  </div>
+</div>

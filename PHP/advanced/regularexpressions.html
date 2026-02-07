@@ -1,0 +1,117 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Regular Expressions (Regex)</h1>
+
+        <div class="content">
+            <p><strong>Regular Expressions (Regex)</strong> are sequences or patterns of characters used to define search criteria for string manipulation. In PHP, regular expressions are essential for tasks like searching for specific text, validating input formats, replacing substrings, and splitting strings into chunks based on a pattern.</p>
+
+            <h2 class="title">Types of Regular Expressions in PHP</h2>
+            <p>PHP traditionally supports two sets of regular expression functions, though the POSIX set is officially **deprecated** and largely replaced by the PERL set.</p>
+            <ul>
+                <li><strong>POSIX Regular Expressions:</strong> An older, simpler set of expressions and functions. **(Deprecated in recent PHP versions)**</li>
+                <li><strong>PERL Style Regular Expressions (PCRE):</strong> A more powerful and flexible set of expressions based on Perl's syntax, which is the **recommended standard** in modern PHP.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">1. POSIX Regular Expressions (Legacy)</h2>
+            <p>POSIX expressions use a structure similar to arithmetic expressions. They employ brackets and quantifiers to define patterns.</p>
+
+            <h3>Brackets and Ranges</h3>
+            <p>Brackets ($\text{[]}$) define a set or range of characters to match:</p>
+            <ul>
+                <li>$\text{[0-9]}$: Matches any single digit ($\text{0}$ to $\text{9}$).</li>
+                <li>$\text{[a-z]}$: Matches any single lowercase character.</li>
+                <li>$\text{[^a-zA-Z]}$: Matches any character that is $\text{not}$ an alphabetic character.</li>
+                <li>$\text{[[:alpha:]]}$: Matches any alphabetic character (a predefined character class).</li>
+            </ul>
+
+            <h3>Quantifiers (Frequency and Position)</h3>
+            <p>Quantifiers specify how many times the preceding character or group should occur, or its position within the string:</p>
+            <ul>
+                <li>$\text{p+}$: Matches one or more $\text{p}$'s.</li>
+                <li>$\text{p*}$: Matches zero or more $\text{p}$'s.</li>
+                <li>$\text{p?}$: Matches zero or one $\text{p}$.</li>
+                <li>$\text{p\{2,3\}}$: Matches two or three $\text{p}$'s.</li>
+                <li>$\text{p\$}$: Matches a string that **ends** with $\text{p}$.</li>
+                <li>$\text{^p}$: Matches a string that **begins** with $\text{p}$.</li>
+            </ul>
+
+            <h3>POSIX Functions (Deprecated)</h3>
+            <p>Functions like $\text{ereg()}$, $\text{ereg\_replace()}$, $\text{eregi()}$, and $\text{split()}$ were used for POSIX-style matching, searching, and replacing, but are no longer recommended.</p>
+
+            <hr>
+
+            <h2 class="title">2. PERL Style Regular Expressions (PCRE)</h2>
+            <p>PCRE offers greater power through the use of **delimiters** (e.g., $\text{/pattern/}$), **metacharacters**, and **modifiers**.</p>
+
+            <h3>Metacharacters (Shorthands)</h3>
+            <p>Metacharacters use a backslash ($\text{\backslash}$) followed by an alphabetical character to represent common character classes:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Character</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$\text{.}$</td>
+                        <td>A single character (excluding newline, unless $\text{s}$ modifier is used).</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{\s}$</td>
+                        <td>A whitespace character (space, tab, newline).</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{\d}$</td>
+                        <td>A digit ($\text{0}$ - $\text{9}$).</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{\w}$</td>
+                        <td>A word character ($\text{a-z, A-Z, 0-9, \_}$).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Modifiers</h3>
+            <p>Modifiers are appended after the closing delimiter to change how the pattern matching is performed:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$\text{i}$</td>
+                        <td>Makes the match **case-insensitive**.</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{m}$</td>
+                        <td>Multiline mode. $\text{\^}$ and $\text{\$}$ match the beginning/end of a $\text{line}$, not just the whole string.</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{s}$</td>
+                        <td>Single-line mode. Allows $\text{.}$ to match **newline** characters.</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{g}$ (In Perl, for PHP use $\text{preg\_match\_all()}$)</td>
+                        <td>Finds all matches **globally**.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>PCRE Functions (Recommended)</h3>
+            <p>These functions are the modern standard for regular expression processing in PHP:</p>
+            <ul>
+                <li>$\text{preg\_match()}$: Searches a string for a pattern and returns $\text{true}$ or $\text{false}$.</li>
+                <li>$\text{preg\_match\_all()}$: Matches **all occurrences** of the pattern in a string.</li>
+                <li>$\text{preg\_replace()}$: Searches for a pattern and replaces it with a specified string.</li>
+                <li>$\text{preg\_split()}$: Splits a string into an array based on the pattern as the delimiter.</li>
+                <li>$\text{preg\_grep()}$: Searches all elements of an input array and returns elements that match the pattern.</li>
+            </ul>
+        </div>
+    </div>
+</div>

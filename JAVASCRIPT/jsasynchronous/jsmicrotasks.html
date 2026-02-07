@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Microtasks</h1>
+    
+    <div class="content">
+      <p>
+        Microtasks in JavaScript are small functions that are executed after the completion 
+        of the function or program code that creates them and if the JavaScript execution 
+        stack is empty. Microtasks are executed before any macrotasks, such as 
+        <code>setImmediate()</code> and <code>setTimeout()</code>. Microtasks are used to 
+        implement features such as promises.
+      </p>
+      <p>
+        JavaScript is a single-threaded programming language. However, you can use promises, 
+        callbacks, and asynchronous functions to run JavaScript code in parallel.
+      </p>
+      <p>
+        JavaScript runs the code based on the event loop. The event loop is responsible for 
+        executing the code, processing it, collecting the event data, and executing the sub-tasks.
+      </p>
+    </div>
+
+    <h2 class="title">JavaScript Event Loop</h2>
+    <div class="content">
+      <p>
+        The event loop executes the JavaScript code line-by-line. It adds the code to the call stack, 
+        a queue to execute it. JavaScript contains two types of queues to execute tasks:
+      </p>
+      <ul>
+        <li>Microtasks queue</li>
+        <li>Macrotasks queue</li>
+      </ul>
+      <p>
+        When the call stack is empty, the event loop executes all tasks inside the microtask queue. 
+        After that, it executes all functions and code in the macrotask queue.
+      </p>
+    </div>
+
+    <h2 class="title">What is a Microtask in JavaScript?</h2>
+    <div class="content">
+      <p>
+        In JavaScript, a microtask is a shorter function that is produced by a promise or 
+        asynchronous function, and consumed later. Examples include:
+      </p>
+      <ul>
+        <li>Promise callbacks (<code>then()</code>, <code>catch()</code>, <code>finally()</code>)</li>
+        <li><code>queueMicrotask()</code></li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Microtask with Promise</h2>
+    <div class="content">
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("output");
+      output.innerHTML += "The start of the code execution. &lt;br&gt;";
+
+      let promise = new Promise(function (resolve, reject) {
+         resolve("The promise is resolved. &lt;br&gt;");
+      });
+
+      promise.then(function (result) {
+         output.innerHTML += result;
+      });
+
+      output.innerHTML += "The end of the code execution. &lt;br&gt;";
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The start of the code execution.</li>
+        <li>The end of the code execution.</li>
+        <li>The promise is resolved.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">What is a Macrotask?</h2>
+    <div class="content">
+      <p>
+        A macrotask is also a short function that gets executed after all code inside the call stack 
+        and microtask queue is completed. Callback functions from the following methods are added 
+        to the macrotask queue:
+      </p>
+      <ul>
+        <li><code>setTimeout</code></li>
+        <li><code>setInterval</code></li>
+        <li><code>setImmediate</code></li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Macrotask with setTimeout</h2>
+    <div class="content">
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="demo"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      let output = document.getElementById("demo");
+      output.innerHTML += "The start of the code execution.&lt;br&gt;";
+      setTimeout(function () {
+         output.innerHTML += "The code execution is being delayed for 0 seconds.&lt;br&gt;";
+      }, 0);
+      output.innerHTML += "The end of the code execution.&lt;br&gt;";
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The start of the code execution.</li>
+        <li>The end of the code execution.</li>
+        <li>The code execution is being delayed for 0 seconds.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Microtasks vs Macrotasks</h2>
+    <div class="content">
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      let output = document.getElementById("output");
+      output.innerHTML += "Start &lt;br&gt;";
+
+      setTimeout(function () { // Macro task
+         output.innerHTML += "In setTimeOut() method. &lt;br&gt;";
+      }, 0);
+
+      let promise = new Promise(function (resolve, reject) {
+         resolve("In Promise constructor. &lt;br&gt;");
+      });
+      promise.then(function (value) { // Micro task
+         output.innerHTML += value;
+      });
+
+      output.innerHTML += "End &lt;br&gt;";
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Start</li>
+        <li>End</li>
+        <li>In Promise constructor.</li>
+        <li>In setTimeOut() method.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <p>
+        JavaScript executes tasks using the event loop. When the call stack is empty:
+      </p>
+      <ul>
+        <li>All microtasks are executed first.</li>
+        <li>Then all macrotasks are executed.</li>
+      </ul>
+      <p>
+        By carefully using microtasks and macrotasks, developers can control the execution order 
+        of asynchronous operations.
+      </p>
+    </div>
+  </div>
+</div>

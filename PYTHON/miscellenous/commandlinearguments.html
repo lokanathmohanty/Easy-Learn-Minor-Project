@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Command Line Arguments</h1>
+    </div>
+    <div class="content">
+      <p>Python allows programs to accept input parameters from the command line, useful when running scripts with variable values.</p>
+      <p>The command line arguments after the script name are accessible via <code>sys.argv</code>, a list of strings:</p>
+      <pre><code>import sys
+print(sys.argv)  # argv[0] is script name, argv[1:] are arguments</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Simple Example: Using sys.argv</h2>
+    </div>
+    <div class="content">
+      <pre><code>import sys
+name = sys.argv[1]
+print(f"Hello {name}, how are you?")</code></pre>
+      <p>Run:</p>
+      <pre><code>python script.py Alice</code></pre>
+      <p>Output:</p>
+      <pre><code>Hello Alice, how are you?</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Parsing Numeric Arguments</h2>
+    </div>
+    <div class="content">
+      <pre><code>import sys
+a = int(sys.argv[1])
+b = int(sys.argv[2])
+print(f"Sum: {a + b}")</code></pre>
+      <p>Arguments are strings; explicit conversion is required for numeric use.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Option Parsing: getopt Module</h2>
+    </div>
+    <div class="content">
+      <p>Provides C-style option parsing, handling short and long options.</p>
+      <pre><code>import sys, getopt
+
+def main(argv):
+    input_file = ''
+    output_file = ''
+    try:
+        opts, args = getopt.getopt(argv, "hi:o:", ["ifile=", "ofile="])
+    except getopt.GetoptError:
+        print('Usage: script.py -i <inputfile> -o <outputfile>')
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print('Usage: script.py -i <inputfile> -o <outputfile>')
+            sys.exit()
+        elif opt in ("-i", "--ifile"):
+            input_file = arg
+        elif opt in ("-o", "--ofile"):
+            output_file = arg
+
+    print(f"Input file: {input_file}")
+    print(f"Output file: {output_file}")
+
+if __name__ == "__main__":
+    main(sys.argv[1:])</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Advanced Argument Parsing: argparse Module</h2>
+    </div>
+    <div class="content">
+      <p>Higher-level parsing with support for positional, optional arguments, help messages, type enforcement, and choices.</p>
+      <pre><code>import argparse
+
+parser = argparse.ArgumentParser(description="Sample argument parser")
+parser.add_argument("name", help="your name")
+parser.add_argument("--age", type=int, help="your age", default=20)
+parser.add_argument("--language", choices=["Python", "Java", "C"], help="favorite language")
+
+args = parser.parse_args()
+
+print(f"Hello {args.name}, age {args.age}")
+if args.language:
+    print(f"You prefer {args.language}")</code></pre>
+      <p>Run with:</p>
+      <pre><code>python script.py Alice --age 30 --language Python</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Argument Details</h2>
+      <ul>
+        <li><b>Positional arguments:</b> Required arguments identified by position.</li>
+        <li><b>Optional arguments:</b> Usually prefixed with -, -- and can have default values.</li>
+        <li><b>Type:</b> Converts argument value to specified type (int, float, etc.).</li>
+        <li><b>Choices:</b> Restricts argument to given set of values.</li>
+        <li><b>Help:</b> Automatically generated usage docs with -h or --help.</li>
+      </ul>
+    </div>
+  </div>
+</div>

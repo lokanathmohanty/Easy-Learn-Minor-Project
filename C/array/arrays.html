@@ -1,0 +1,200 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Arrays in C</h1>
+    <div class="content">
+      <p>Arrays in C are data structures that store a fixed-size sequential collection of elements of the same data type. They are useful for managing collections of similar data, like student marks or temperatures.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">What is an Array in C?</h2>
+    <div class="content">
+      <p>An array is a collection of data items of the same type, such as <code>int</code>, <code>float</code>, or user-defined types like <code>struct</code>. The array size must be specified at the time of declaration, and it cannot be changed later.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Why Do We Use Arrays in C?</h2>
+    <div class="content">
+      <p>Arrays allow us to group similar data types efficiently. For example, storing and computing the average of marks of 100 students using individual variables would be impractical.</p>
+    </div>
+    <div class="example">
+      <h3 class="title">Example: Calculating Average with an Array</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int marks[10] = {50, 55, 67, 73, 45, 21, 39, 70, 49, 51};
+   int i, sum = 0;
+   float avg;
+
+   for (i = 0; i &lt;= 9; i++){
+      sum += marks[i];
+   }
+
+   avg = (float)sum / 10;
+   printf("Average: %f", avg);
+   return 0;    
+}</code></pre>
+        <p><strong>Output:</strong></p>
+        <pre><code>Average: 52.000000</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Declaration of an Array in C</h2>
+    <div class="content">
+      <p>To declare an array, specify the type and size of the array.</p>
+      <p><strong>Syntax:</strong></p>
+      <pre><code>type arrayName[size];</code></pre>
+    </div>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int arr[5];
+   int i;
+
+   for (i = 0; i &lt;= 4; i++){
+      printf("a[%d]: %d\n", i, arr[i]);
+   }
+   return 0;
+}</code></pre>
+        <p><strong>Note:</strong> Array elements are uninitialized and may contain garbage values.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Initialization of an Array in C</h2>
+    <div class="content">
+      <p>Arrays can be initialized using curly braces at the time of declaration.</p>
+      <pre><code>data_type array_name[size] = {value1, value2, ...};</code></pre>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Full Initialization</h3>
+      <div class="content">
+        <pre><code>int numbers[5] = {10, 20, 30, 40, 50};</code></pre>
+      </div>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Initialize All Elements to 0</h3>
+      <div class="content">
+        <pre><code>int arr[5] = {0};</code></pre>
+      </div>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Partial Initialization</h3>
+      <div class="content">
+        <pre><code>int arr[5] = {1, 2};</code></pre>
+        <p>Remaining elements will be initialized to <code>0</code>.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Partial with Specific Index</h3>
+      <div class="content">
+        <pre><code>int a[5] = {1, 2, [4] = 4};</code></pre>
+        <p>This sets a[4] = 4 while elements not mentioned are initialized to 0.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Getting Size of an Array in C</h2>
+    <div class="content">
+      <p>The size of an array in bytes can be determined using <code>sizeof()</code>.</p>
+    </div>
+    <div class="example">
+      <h3 class="title">Example: Size of Integer Array</h3>
+      <div class="content">
+        <pre><code>int arr[5] = {1, 2, 3, 4, 5};
+printf("Size of array: %ld", sizeof(arr));</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Memory Allocation of Arrays</h2>
+    <div class="example">
+      <h3 class="title">Example: Integer Array Memory Address</h3>
+      <div class="content">
+        <pre><code>int a[] = {1, 2, 3, 4, 5};
+for(int i = 0; i < 4; i++){
+   printf("a[%d]: %d \t Address: %d\n", i, a[i], &a[i]);
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Double Array</h3>
+      <div class="content">
+        <pre><code>double a[] = {1.1, 2.2, 3.3, 4.4, 5.5};
+for(int i = 0; i < 4; i++){
+   printf("a[%d]: %f \t Address: %ld\n", i, a[i], &a[i]);
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Char Array</h3>
+      <div class="content">
+        <pre><code>char a[] = "Hello";
+for (int i = 0; i < 5; i++){
+   printf("a[%d]: %c address: %ld\n", i, a[i], &a[i]);
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Accessing Array Elements in C</h2>
+    <div class="content">
+      <p>Array elements are accessed using their index starting from 0.</p>
+      <p>Example: <code>double salary = balance[9];</code> // accesses the 10th element</p>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example: Declaration, Assignment, Access</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main(){
+   int n[5];
+   int i, j;
+
+   for(i = 0; i < 5; i++){
+      n[i] = i + 100;
+   }
+
+   for(j = 0; j < 5; j++){
+      printf("n[%d] = %d\n", j, n[j]);
+   }
+
+   return 0;
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">More on Arrays in C</h2>
+    <div class="content">
+      <p>Arrays are a fundamental part of C and can be extended into complex concepts:</p>
+      <ul>
+        <li><strong>Multi-dimensional arrays:</strong> Arrays with more than one dimension, such as matrices.</li>
+        <li><strong>Passing arrays to functions:</strong> Use pointers to pass arrays without specifying an index.</li>
+        <li><strong>Returning arrays from functions:</strong> Return a pointer to an array from a function.</li>
+        <li><strong>Pointer to an array:</strong> Array names act as pointers to their first element.</li>
+      </ul>
+    </div>
+  </div>
+
+</div

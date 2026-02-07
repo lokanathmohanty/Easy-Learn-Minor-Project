@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Generate Colors</h1>
+    <div class="content">
+
+      <p>
+        Generating random colors is a common task in web development. It can be used to 
+        enhance UI elements, backgrounds, or any component requiring a dynamic appearance. 
+        In JavaScript, we can generate colors in different formats such as HEX and RGB.
+      </p>
+
+      <h2>Generating Random Hex Color</h2>
+      <p>
+        A HEX color code is a six-digit hexadecimal number that represents RGB values. 
+        Each pair of digits corresponds to Red, Green, and Blue values ranging from 
+        <code>00</code> to <code>FF</code>.
+      </p>
+
+      <h3>Using <code>Math.random()</code> and <code>Math.floor()</code></h3>
+      <ul>
+        <li><code>Math.random()</code> generates a number between 0 (inclusive) and 1 (exclusive).</li>
+        <li><code>Math.floor()</code> rounds the number down to the nearest integer.</li>
+      </ul>
+
+      <pre><code>
+function hex() {
+  const randomHex = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  document.body.style.backgroundColor = randomHex;
+  console.log(randomHex);
+}
+      </code></pre>
+
+      <h3>Example</h3>
+      <pre><code>
+&lt;div id="demo"&gt;Mouse-over on this box to get a new random color&lt;/div&gt;
+&lt;p id="color"&gt;&lt;/p&gt;
+
+&lt;script&gt;
+  function hex() {
+    const ranHexColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+    document.body.style.backgroundColor = ranHexColor;
+    document.getElementById("color").innerText = ranHexColor;
+  }
+  document.getElementById("demo").addEventListener("mouseover", hex);
+  hex();
+&lt;/script&gt;
+      </code></pre>
+
+      <h2>Generating Random RGB Color</h2>
+      <p>
+        An RGB color is represented as <code>rgb(red, green, blue)</code>, where each component 
+        is an integer between 0 and 255.
+      </p>
+
+      <pre><code>
+function rgb() {
+  const ranRGBColor = "rgb(" 
+    + Math.floor(Math.random() * 256) + "," 
+    + Math.floor(Math.random() * 256) + "," 
+    + Math.floor(Math.random() * 256) + ")";
+  document.body.style.backgroundColor = ranRGBColor;
+  console.log(ranRGBColor);
+}
+      </code></pre>
+
+      <h3>Example</h3>
+      <pre><code>
+&lt;div id="demo"&gt;Mouse-over on this box to get a new random color&lt;/div&gt;
+&lt;p id="color"&gt;&lt;/p&gt;
+
+&lt;script&gt;
+  function rgb() {
+    const ranRGBColor = "rgb("
+      + Math.floor(Math.random()*256) + ","
+      + Math.floor(Math.random()*256) + ","
+      + Math.floor(Math.random()*256) + ")";
+    document.body.style.backgroundColor = ranRGBColor;
+    document.getElementById("color").innerText = ranRGBColor;
+  }
+  document.getElementById("demo").addEventListener("mouseover", rgb);
+  rgb();
+&lt;/script&gt;
+      </code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        By combining <code>Math.random()</code> and <code>Math.floor()</code>, we can 
+        generate random HEX or RGB colors dynamically in JavaScript. These methods are 
+        commonly used for styling interactive components in modern web applications.
+      </p>
+
+    </div>
+  </div>
+</div>

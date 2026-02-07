@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Creating a Thread</h1>
+    </div>
+    <div class="content">
+      <p>Creating a thread in Python allows multiple operations to run concurrently within a program, enabling simultaneous task execution such as multiple I/O operations.</p>
+      <p>Python provides multiple ways to create and manage threads. The <code>threading</code> module is generally recommended due to its higher-level interface and richer functionality, while the lower-level <code>_thread</code> module offers a simpler API for basic threading needs.</p>
+
+      <h2>Creating Threads with Functions</h2>
+      <p>Using the <code>Thread</code> class from the <code>threading</code> module, you can create a thread by passing a function. The thread executes that function concurrently.</p>
+      <p><strong>Steps:</strong></p>
+      <ul>
+        <li>Define the function to run in the thread.</li>
+        <li>Create a <code>Thread</code> object, passing the function and its arguments.</li>
+        <li>Call <code>start()</code> to begin execution.</li>
+        <li>Optionally, call <code>join()</code> to wait for thread completion.</li>
+      </ul>
+      <div class="title">
+        <h2>Example: Threading with Functions</h2>
+      </div>
+      <pre>
+from threading import Thread
+
+def addition_of_numbers(x, y):
+   result = x + y
+   print('Addition of {} + {} = {}'.format(x, y, result))
+
+def cube_number(i):
+   result = i ** 3
+   print('Cube of {} = {}'.format(i, result))
+
+def basic_function():
+   print("Basic function is running concurrently...")
+
+Thread(target=addition_of_numbers, args=(2, 4)).start()  
+Thread(target=cube_number, args=(4,)).start() 
+Thread(target=basic_function).start()
+      </pre>
+      <p>Example output:</p>
+      <p>Addition of 2 + 4 = 6<br>
+         Cube of 4 = 64<br>
+         Basic function is running concurrently...</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Creating Threads by Extending the Thread Class</h2>
+    </div>
+    <div class="content">
+      <p>This approach involves subclassing <code>threading.Thread</code> and overriding the <code>__init__</code> and <code>run</code> methods to customize thread behavior.</p>
+      <p><strong>Steps:</strong></p>
+      <ul>
+        <li>Define a subclass of <code>Thread</code>.</li>
+        <li>Override the <code>__init__</code> method for additional arguments.</li>
+        <li>Override the <code>run</code> method with the task logic.</li>
+      </ul>
+      <div class="title">
+        <h2>Example: Extending Thread Class</h2>
+      </div>
+      <pre>
+import threading
+import time
+
+exitFlag = 0
+
+class myThread(threading.Thread):
+   def __init__(self, threadID, name, counter):
+      threading.Thread.__init__(self)
+      self.threadID = threadID
+      self.name = name
+      self.counter = counter
+
+   def run(self):
+      print("Starting " + self.name)
+      print_time(self.name, 5, self.counter)
+      print("Exiting " + self.name)
+
+def print_time(threadName, counter, delay):
+   while counter:
+      if exitFlag:
+         threadName.exit()
+      time.sleep(delay)
+      print("%s: %s" % (threadName, time.ctime(time.time())))
+      counter -= 1
+
+# Create new threads
+thread1 = myThread(1, "Thread-1", 1)
+thread2 = myThread(2, "Thread-2", 2)
+
+# Start new threads
+thread1.start()
+thread2.start()
+print("Exiting Main Thread")
+      </pre>
+      <p>Example output:</p>
+      <p>Starting Thread-1<br>
+         Starting Thread-2<br>
+         Exiting Main Thread<br>
+         Thread-1: Mon Jun 24 16:38:10 2024<br>
+         Thread-2: Mon Jun 24 16:38:11 2024<br>
+         Thread-1: Mon Jun 24 16:38:11 2024<br>
+         Thread-1: Mon Jun 24 16:38:12 2024<br>
+         Thread-2: Mon Jun 24 16:38:13 2024<br>
+         Thread-1: Mon Jun 24 16:38:13 2024<br>
+         Thread-1: Mon Jun 24 16:38:14 2024<br>
+         Exiting Thread-1<br>
+         Thread-2: Mon Jun 24 16:38:15 2024<br>
+         Thread-2: Mon Jun 24 16:38:17 2024<br>
+         Thread-2: Mon Jun 24 16:38:19 2024<br>
+         Exiting Thread-2</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Creating Threads using <code>start_new_thread()</code> Function</h2>
+    </div>
+    <div class="content">
+      <p>The <code>start_new_thread()</code> function from the low-level <code>_thread</code> module creates a new thread to run a specified function with arguments. This method is simpler but lacks high-level features of the <code>threading</code> module.</p>
+      <p><strong>Syntax:</strong></p>
+      <pre>
+_thread.start_new_thread(function, args[, kwargs])
+      </pre>
+      <div class="title">
+        <h2>Example: Using _thread.start_new_thread()</h2>
+      </div>
+      <pre>
+import _thread
+import time
+
+def thread_task(threadName, delay):
+   for count in range(1, 6):
+      time.sleep(delay)
+      print("Thread name: {} Count: {}".format(threadName, count))
+
+try:
+    _thread.start_new_thread(thread_task, ("Thread-1", 2,))
+    _thread.start_new_thread(thread_task, ("Thread-2", 4,))
+except:
+    print("Error: unable to start thread")
+
+while True:
+    pass
+
+thread_task("test", 0.3)
+      </pre>
+      <p>Example output snippet:</p>
+      <p>Thread name: Thread-1 Count: 1<br>
+         Thread name: Thread-2 Count: 1<br>
+         Thread name: Thread-1 Count: 2<br>
+         ...<br>
+         Traceback (most recent call last):<br>
+         ...<br>
+         KeyboardInterrupt</p>
+      <p>The infinite loop requires pressing Ctrl+C to stop.</p>
+    </div>
+  </div>
+</div>

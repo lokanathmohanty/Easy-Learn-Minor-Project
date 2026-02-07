@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Cryptographically Secure Pseudorandom Number Generator (CSPRNG) 🎲</h1>
+
+        <div class="content">
+            <p>A **CSPRNG** (**Cryptographically Secure Pseudorandom Number Generator**) produces sequences of numbers that are statistically random and, crucially, **unpredictable**. Standard PHP functions like $\text{rand()}$ and $\text{mt\_rand()}$ are fast but are **not** cryptographically safe, as their output can be guessed. PHP 7 introduced dedicated functions for generating secure random values.</p>
+
+            <hr>
+
+            <h2 class="title">Insecure Functions (Not for Cryptography)</h2>
+            <p>These functions are suitable for non-security related tasks (like generating simple simulation data or display variations):</p>
+            <ul>
+                <li>$\text{rand()}$: Generates a basic random integer.</li>
+                <li>$\text{mt\_rand()}$: Generates a random value using the **Mersenne Twister** algorithm, which is faster and produces better statistical randomness than $\text{rand()}$, but is still predictable.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">CSPRNG Functions (Cryptographically Secure)</h2>
+            <p>These functions are designed for high-security applications where the unpredictability of the output is vital (e.g., generating session keys, tokens, or salts).</p>
+
+            <h3>1. $\text{random\_bytes()}$</h3>
+            <p>Generates an arbitrary-length string of **cryptographic random bytes**. This is the fundamental function used for generating raw, secure entropy.</p>
+            <pre>string random_bytes ( int $length )</pre>
+            <ul>
+                <li>$\text{\$length}$: The desired length of the random string in bytes.</li>
+                <li><strong>Use Case:</strong> Generating cryptographic salts, encryption keys, or Initialization Vectors (IVs).</li>
+                <li>**Error Handling:** Throws an $\text{Exception}$ if an appropriate source of randomness (like $\text{/dev/urandom}$ on Unix) cannot be found.</li>
+            </ul>
+            <div class="example">
+                <p>Generating 5 random bytes and converting them to hexadecimal for display:</p>
+                <pre>&lt;?php
+   $bytes = random_bytes(5);
+   print(bin2hex($bytes)); // Output will be a 10-character hex string (e.g., 6a85eec950)
+?&gt;</pre>
+            </div>
+
+            <h3>2. $\text{random\_int()}$</h3>
+            <p>Generates a cryptographically secure random integer within a specified inclusive range. It is suitable for applications where unbiased results are critical, such as lotteries or secure token generation.</p>
+            <pre>int random_int ( int $min , int $max )</pre>
+            <ul>
+                <li>$\text{\$min}$: The lowest possible value (inclusive).</li>
+                <li>$\text{\$max}$: The highest possible value (inclusive).</li>
+            </ul>
+            <div class="example">
+                <p>Generating a secure random number between 100 and 999:</p>
+                <pre>&lt;?php
+   print(random_int(100, 999)); // Output: e.g., 495
+?&gt;</pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Buffers</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Buffers in Node.js handle raw binary data. They are fixed-length sequences of bytes, similar to arrays of integers but located outside the V8 heap. Buffers are subclasses of JavaScript's Uint8Array.
+      </p>
+      <p>
+        Although Buffers are globally available, it's recommended to explicitly require or reference the Buffer class.
+      </p>
+
+      <h2>Creating Buffers</h2>
+      <ul>
+        <li><strong>Using new (deprecated):</strong> <code>var buf = new Buffer(10);</code></li>
+        <li><strong>From array:</strong> <code>var buf = new Buffer([10, 20, 30]);</code></li>
+        <li><strong>From string:</strong> <code>var buf = new Buffer("String", "utf8");</code></li>
+      </ul>
+      <p>
+        New methods:
+      </p>
+      <pre><code>const buf1 = Buffer.alloc(10); // Zero-filled
+const buf2 = Buffer.allocUnsafe(10); // Uninitialized
+const buf3 = Buffer.from([1, 2, 3]);
+const buf4 = Buffer.from('hello world', 'utf8');</code></pre>
+
+      <h2>Static Methods</h2>
+      
+      <h3>alloc() method</h3>
+      <p>Creates a zero-filled buffer of specified size:</p>
+      <pre><code>Buffer.alloc(size[, fill[, encoding]])</code></pre>
+      <p>Example:</p>
+      <pre><code>const buf = Buffer.alloc(5);
+console.log(buf); // Output: <Buffer 00 00 00 00 00></code></pre>
+
+      <h3>allocUnsafe()</h3>
+      <p>Creates an uninitialized buffer:</p>
+      <pre><code>const buf = Buffer.allocUnsafe(10);
+console.log(buf);
+buf.fill('a');
+console.log(buf); // Filled with 'a'</code></pre>
+
+      <h3>from() method</h3>
+      <p>Creates Buffer from array or string:</p>
+      <pre><code>const buf1 = Buffer.from([0x62, 0x75, 0x66, 0x66, 0x65, 0x72]);
+const buf2 = Buffer.from([10, 20, 30, 40, 50]);
+const buf3 = Buffer.from('Hello World');</code></pre>
+
+      <h2>Buffer Operations</h2>
+      <ul>
+        <li><strong>compare():</strong> compares two buffers to determine order.</li>
+        <li><strong>copy():</strong> copies data between buffers.</li>
+        <li><strong>entries():</strong> iterates over buffer indices and bytes.</li>
+        <li><strong>slice():</strong> crops a buffer to specified indices.</li>
+        <li><strong>write():</strong> writes a string into a buffer with encoding.</li>
+        <li><strong>toJSON():</strong> converts buffer to JSON object.</li>
+        <li><strong>concat():</strong> joins multiple buffers into one.</li>
+      </ul>
+
+      <h2>Examples</h2>
+      <pre><code>// compare()
+const bufA = Buffer.from('APPLE');
+const bufB = Buffer.from('APPLY');
+console.log(Buffer.compare(bufA, bufB)); // -1: bufA < bufB
+
+// copy()
+const bufOriginal = Buffer.from('Buff data');
+const bufCopy = Buffer.alloc(10);
+bufOriginal.copy(bufCopy);
+console.log(bufCopy.toString()); // 'Buff data'
+
+// slice()
+const bufSliced = bufOriginal.slice(0, 4);
+console.log(bufSliced.toString()); // 'Buff'
+
+// write()
+const bufWrite = Buffer.alloc(20);
+const bytesWritten = bufWrite.write('Hello Buffer');
+console.log(bytesWritten); // 12
+console.log(bufWrite.toString('utf8', 0, bytesWritten)); // 'Hello Buffer'
+
+// toJSON()
+const bufJson = Buffer.from('JSON data');
+console.log(bufJson.toJSON());
+
+// concat()
+const buf1 = Buffer.from('Part1 ');
+const buf2 = Buffer.from('Part2');
+const bufferConcat = Buffer.concat([buf1, buf2]);
+console.log(bufferConcat.toString()); // 'Part1 Part2'
+</code></pre>
+      
+      <h2>Methods Summary</h2>
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Buffer.isEncoding(encoding)</td><td>Checks if encoding is valid.</td></tr>
+          <tr><td>Buffer.isBuffer(obj)</td><td>Test if obj is a Buffer.</td></tr>
+          <tr><td>Buffer.byteLength(string[, encoding])</td><td>Returns byte length of string.</td></tr>
+          <tr><td>Buffer.concat(list[, totalLength])</td><td>Concatenates buffers into one.</td></tr>
+          <tr><td>Buffer.compare(buf1, buf2)</td><td>Compare buffers for sorting.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

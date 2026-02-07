@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Operator Overloading</h1>
+        
+        <h2 class="title">Concept and Purpose</h2>
+        <div class="content">
+            <p>**Operator Overloading** is a form of **static polymorphism** that allows you to redefine the behavior of C# operators (like `+`, `-`, `==`, `>`) when they are applied to **user-defined types** (classes or structs).</p>
+            <p>This allows programmers to use intuitive operator syntax with their custom objects, making the code more readable and closer to mathematical notation (e.g., adding two custom <code>Box</code> objects simply by using <code>Box3 = Box1 + Box2;</code>).</p>
+        </div>
+        
+        <h2 class="title">Implementing Operator Overloading</h2>
+        <div class="content">
+            <p>Overloaded operators are implemented as **public static methods** within the class or struct they operate on. The method name is formed by the keyword **`operator`** followed by the symbol of the operator being overloaded.</p>
+            
+            <h3>Syntax for Binary Operator Overloading:</h3>
+            <p>Binary operators (like `+`) take two operands, so the overloaded method must accept two parameters.</p>
+            <pre>
+public static &lt;return type&gt; operator&lt;operator symbol&gt; (&lt;type&gt; param1, &lt;type&gt; param2) {
+   // Implementation to define the operation
+   // Must return a value of the specified return type
+}
+
+// Example for Box addition:
+public static Box operator+ (Box b, Box c) {
+   Box box = new Box();
+   box.length = b.length + c.length; // Defines the logic for Box + Box
+   // ...
+   return box; // Returns a new Box object
+}
+            </pre>
+            
+            <h3>Rules for Overloading:</h3>
+            <ul>
+                <li>The method must be **`public`** and **`static`**.</li>
+                <li>At least **one operand** must be of the containing class or struct type.</li>
+                <li>If you overload `==`, you must also overload **`!=`**, and it's highly recommended to override **`Equals()`** and **`GetHashCode()`**.</li>
+                <li>If you overload `<` or `>`, you must overload the **other one** (e.g., overload both `<` and `>`). The same applies to `<=`, and `>=`.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Overloadable Operators in C#</h2>
+        <div class="content">
+            <p>While most operators can be overloaded, certain ones are non-overloadable.</p>
+            
+            <h3>Overloadable Operators (Common Examples):</h3>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Operators</th>
+                </tr>
+                <tr>
+                    <td>Unary</td>
+                    <td><code>+</code>, <code>-</code>, <code>!</code>, <code>~</code>, <code>++</code>, <code>--</code>, <code>true</code>, <code>false</code></td>
+                </tr>
+                <tr>
+                    <td>Binary</td>
+                    <td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&</code>, <code>|</code>, <code>^</code>, <code><<</code>, <code>>></code></td>
+                </tr>
+                <tr>
+                    <td>Comparison</td>
+                    <td><code>==</code>, <code>!=</code>, <code><</code>, <code>></code>, <code><=</code>, <code>>=</code></td>
+                </tr>
+            </table>
+            
+            <h3>Non-Overloadable Operators:</h3>
+            <p>The following cannot be redefined:</p>
+            <ul>
+                <li>**Assignment Operators:** <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, etc. (They automatically use the overloaded arithmetic operators if available).</li>
+                <li>**Access/Member Operators:** <code>.</code>, <code>?:</code>, <code>new</code>, <code>is</code>, <code>as</code>, <code>sizeof</code>, <code>typeof</code>, <code>checked</code>, <code>unchecked</code>.</li>
+                <li>**Conditional Logical Operators:** <code>&&</code>, <code>||</code> (However, overloading `&` and `|` allows C# to implicitly support `&&` and `||`).</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Example: Overloading Comparison Operators</h2>
+        <div class="content example">
+            <p>Overloading the comparison operators (`<`, `>`) for the <code>Box</code> class requires defining a custom logic, such as comparing all dimensions, or perhaps just comparing the volumes.</p>
+            <pre>
+// Must be static and public
+public static bool operator >(Box lhs, Box rhs) {
+    // Custom logic: return true only if ALL dimensions are greater
+    if (lhs.length > rhs.length && lhs.height > rhs.height 
+        && lhs.breadth > rhs.breadth) {
+        return true;
+    }
+    return false;
+}
+
+public static bool operator <(Box lhs, Box rhs) { /* ... corresponding implementation ... */ }
+            </pre>
+        </div>
+    </div>
+</div>

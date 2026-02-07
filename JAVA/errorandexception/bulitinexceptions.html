@@ -1,0 +1,150 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Java - Built-in Exceptions</h1>
+
+    <div class="content">
+      <h2 class="subtitle">Built-in Exceptions in Java</h2>
+      <p>
+        Java defines several exception classes inside the standard package <code>java.lang</code>.
+      </p>
+      <p>
+        The most general of these exceptions are subclasses of the standard type <code>RuntimeException</code>. Since <code>java.lang</code> is implicitly imported into all Java programs, most exceptions derived from <code>RuntimeException</code> are automatically available.
+      </p>
+
+      <h2 class="subtitle">Types of Java Built-in Exceptions</h2>
+      <ul>
+        <li><strong>Checked Exceptions:</strong> These are handled by the programmer using try-catch blocks. They are checked at compile-time.</li>
+        <li><strong>Unchecked Exceptions:</strong> These are not handled by the programmer and are thrown at runtime. Examples include <code>NullPointerException</code>, <code>ArrayIndexOutOfBoundsException</code>, <code>ArithmeticException</code>, etc.</li>
+      </ul>
+
+      <h2 class="subtitle">Common Built-in Exceptions in Java</h2>
+      <p>
+        Java defines several types of exceptions that relate to its various class libraries. Below is a list of common checked and unchecked exceptions.
+      </p>
+
+      <ul>
+        <li><strong>ArithmeticException:</strong> Arithmetic error, such as divide-by-zero.</li>
+        <li><strong>ArrayIndexOutOfBoundsException:</strong> Array index is out-of-bounds.</li>
+        <li><strong>ArrayStoreException:</strong> Assignment to an array element of an incompatible type.</li>
+        <li><strong>ClassCastException:</strong> Invalid cast.</li>
+        <li><strong>IllegalArgumentException:</strong> Illegal argument used to invoke a method.</li>
+        <li><strong>IllegalMonitorStateException:</strong> Illegal monitor operation, such as waiting on an unlocked thread.</li>
+        <li><strong>IllegalStateException:</strong> Environment or application is in an incorrect state.</li>
+        <li><strong>IllegalThreadStateException:</strong> Requested operation not compatible with current thread state.</li>
+        <li><strong>IndexOutOfBoundsException:</strong> Some type of index is out-of-bounds.</li>
+        <li><strong>NegativeArraySizeException:</strong> Array created with a negative size.</li>
+        <li><strong>NullPointerException:</strong> Invalid use of a null reference.</li>
+        <li><strong>NumberFormatException:</strong> Invalid conversion of a string to a numeric format.</li>
+        <li><strong>SecurityException:</strong> Attempt to violate security.</li>
+        <li><strong>StringIndexOutOfBoundsException:</strong> Attempt to index outside the bounds of a string.</li>
+        <li><strong>UnsupportedOperationException:</strong> An unsupported operation was encountered.</li>
+        <li><strong>ClassNotFoundException:</strong> Class not found.</li>
+        <li><strong>CloneNotSupportedException:</strong> Attempt to clone an object that does not implement the <code>Cloneable</code> interface.</li>
+        <li><strong>IllegalAccessException:</strong> Access to a class is denied.</li>
+        <li><strong>InstantiationException:</strong> Attempt to create an object of an abstract class or interface.</li>
+        <li><strong>InterruptedException:</strong> One thread has been interrupted by another thread.</li>
+        <li><strong>NoSuchFieldException:</strong> A requested field does not exist.</li>
+        <li><strong>NoSuchMethodException:</strong> A requested method does not exist.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example 1: Arithmetic Exception Without try-catch</h1>
+
+    <div class="content">
+      <p>
+        In this example, we're creating an error by dividing a value by 0. Since it's an unchecked exception, the compiler allows the code to compile, but the JVM throws the exception at runtime.
+      </p>
+
+      <pre><code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+
+   public static void main(String args[]) {
+      int b = 0;
+      int c = 1 / b;
+      System.out.println("c :" + c);
+   }
+}
+      </code></pre>
+
+      <h2 class="subtitle">Output</h2>
+      <pre><code>
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at com.tutorialspoint.ExcepTest.main(ExcepTest.java:8)
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example 2: Arithmetic Exception With try-catch</h1>
+
+    <div class="content">
+      <p>
+        This example demonstrates how to handle an unchecked exception using a try-catch block.
+      </p>
+
+      <pre><code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+
+   public static void main(String args[]) {
+      try {
+         int b = 0;
+         int c = 1 / b;
+         System.out.println("c :" + c);
+      } catch (ArithmeticException e) {
+         System.out.println("Exception thrown  :" + e);
+      }
+      System.out.println("Out of the block");
+   }
+}
+      </code></pre>
+
+      <h2 class="subtitle">Output</h2>
+      <pre><code>
+Exception thrown  :java.lang.ArithmeticException: / by zero
+Out of the block
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example 3: NoSuchMethodException (Checked Exception)</h1>
+
+    <div class="content">
+      <p>
+        This example shows a checked exception. The <code>NoSuchMethodException</code> must either be handled using a try-catch block or declared using the <code>throws</code> keyword. Failing to do so results in a compilation error.
+      </p>
+
+      <pre><code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+
+   public static void main(String args[]) {
+      ExcepTest excepTest = new ExcepTest();
+      excepTest.getName();
+   }
+
+   private String getName() throws NoSuchMethodException {
+      throw new NoSuchMethodException();
+   }
+}
+      </code></pre>
+
+      <h2 class="subtitle">Output</h2>
+      <pre><code>
+Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+    Unhandled exception type NoSuchMethodException
+
+	at com.tutorialspoint.ExcepTest.main(ExcepTest.java:7)
+      </code></pre>
+    </div>
+  </div>
+
+</div>

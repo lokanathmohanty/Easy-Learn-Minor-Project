@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript - Inheritance</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+      <h1 class="title">JavaScript - Inheritance</h1>
+
+      <div class="content">
+        <p>
+          Inheritance in JavaScript allows the child class to inherit the properties and methods of the parent class. 
+          It is a fundamental concept of object-oriented programming along with encapsulation and polymorphism.
+        </p>
+        <p>
+          For example, you may create a general class for bikes with shared properties and methods. 
+          Then you can create a class for "Honda" bikes that inherits from the general bike class.
+        </p>
+        <p>
+          Before ECMAScript 6 (ES6), inheritance was achieved using prototypes. 
+          In ES6, the <code>extends</code> keyword was introduced.
+        </p>
+      </div>
+
+      <div class="content">
+        <h2>Terminologies</h2>
+        <ul>
+          <li><strong>Parent class</strong> – The class whose properties are inherited by other classes.</li>
+          <li><strong>Child class</strong> – The class that inherits the properties of another class.</li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <h2>Single Class Inheritance</h2>
+        <p>
+          A single class can inherit another class using the <code>extends</code> keyword.
+        </p>
+        <pre><code>class ChildClass extends ParentClass {
+  // Child class body
+}</code></pre>
+
+        <h3>Example</h3>
+        <div class="example">
+          <pre><code>// Parent class
+class Bike {
+  constructor() {
+    this.gear = 5;
+  }
+  getGears() {
+    return this.gear;
+  }
+}
+
+// Child class
+class Suzuki extends Bike {
+  constructor() {
+    super();
+    this.brand = "Yamaha";
+  }
+  getBrand() {
+    return this.brand;
+  }
+}
+
+const suzukiBike = new Suzuki();
+console.log(suzukiBike.getBrand()); // Yamaha
+console.log(suzukiBike.getGears()); // 5</code></pre>
+        </div>
+      </div>
+
+      <div class="content">
+        <h2>Using <code>super()</code> Keyword</h2>
+        <p>
+          The <code>super()</code> keyword invokes the constructor of the parent class 
+          and allows passing parameters to it.
+        </p>
+
+        <h3>Example</h3>
+        <div class="example">
+          <pre><code>// Parent class
+class Bike {
+  constructor(gears) {
+    this.gears = gears;
+  }
+}
+
+// Child class
+class Suzuki extends Bike {
+  constructor(brand, gears) {
+    super(gears);
+    this.brand = brand;
+  }
+}
+
+const suzukiBike = new Suzuki("Suzuki", 4);
+console.log(suzukiBike.brand); // Suzuki
+console.log(suzukiBike.gears); // 4</code></pre>
+        </div>
+      </div>
+
+      <div class="content">
+        <h2>Multilevel Inheritance</h2>
+        <pre><code>class A {}
+class B extends A {}
+class C extends B {}</code></pre>
+
+        <h3>Example</h3>
+        <div class="example">
+          <pre><code>class Bike {
+  constructor(gears) {
+    this.gears = gears;
+  }
+}
+
+class Honda extends Bike {
+  constructor(brand, gears) {
+    super(gears);
+    this.brand = brand;
+  }
+}
+
+class Shine extends Honda {
+  constructor(model, brand, gears) {
+    super(brand, gears);
+    this.model = model;
+  }
+}
+
+const newBike = new Shine("Shine", "Honda", 5);
+console.log(`The ${newBike.model} model of ${newBike.brand} has ${newBike.gears} gears.`);</code></pre>
+        </div>
+      </div>
+
+      <div class="content">
+        <h2>Hierarchical Inheritance</h2>
+        <pre><code>class A {}
+class B extends A {}
+class C extends A {}</code></pre>
+
+        <h3>Example</h3>
+        <div class="example">
+          <pre><code>class Bike {
+  constructor(gears) {
+    this.gears = gears;
+  }
+}
+
+class Honda extends Bike {
+  constructor(model, gears) {
+    super(gears);
+    this.model = model;
+  }
+}
+
+class Suzuki extends Bike {
+  constructor(model, color, gears) {
+    super(gears);
+    this.model = model;
+    this.color = color;
+  }
+}
+
+const hondaBike = new Honda("Shine", 5);
+const suzukiBike = new Suzuki("Zx6", "Blue", 6);
+
+console.log(hondaBike);
+console.log(suzukiBike);</code></pre>
+        </div>
+      </div>
+
+      <div class="content">
+        <h2>Inheriting Static Members</h2>
+        <div class="example">
+          <pre><code>class Bike {
+  static getDefaultBrand() {
+    return "Yamaha";
+  }
+}
+
+class Honda extends Bike {
+  static BikeName() {
+    return super.getDefaultBrand() + ", X6";
+  }
+}
+
+console.log(Honda.BikeName()); // Yamaha, X6</code></pre>
+        </div>
+      </div>
+
+      <div class="content">
+        <h2>Prototype-Based Inheritance</h2>
+        <pre><code>Child.prototype = new Parent();</code></pre>
+
+        <h3>Example</h3>
+        <div class="example">
+          <pre><code>function Bike(brand) {
+  this.brand = brand;
+}
+Bike.prototype.getBrand = function() {
+  return this.brand;
+};
+
+function Vehicle(price) {
+  this.price = price;
+}
+
+const newBike = new Bike("Yamaha");
+Vehicle.prototype = newBike; // inheritance
+
+const vehicle = new Vehicle(100000);
+console.log(vehicle.getBrand()); // Yamaha
+console.log(vehicle.price);     // 100000</code></pre>
+        </div>
+      </div>
+
+      <div class="content">
+        <h2>Benefits of Inheritance</h2>
+        <ul>
+          <li><strong>Code reusability</strong> – Child classes reuse parent code.</li>
+          <li><strong>Functionality extension</strong> – Add new features to child classes.</li>
+          <li><strong>Code maintenance</strong> – Easier to organize and maintain.</li>
+          <li>Multilevel and hierarchical inheritance allows structured data management.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

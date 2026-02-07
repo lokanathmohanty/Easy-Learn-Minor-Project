@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Read Files</h1>
+
+    <div class="content">
+      <p>
+        Reading from a file involves opening the file, reading its contents, and then closing the file to free up system resources. Python provides several methods to read from a file, each suited for different use cases.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Opening a File for Reading</h2>
+      <p>
+        Use the <code>open()</code> function with mode <code>'r'</code> (default) to open a file for reading.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Reading a File Using <code>read()</code> Method</h2>
+      <p>This method reads the entire file content as a single string.</p>
+      <pre><code># Open the file in read mode
+file = open('example.txt', 'r')
+
+# Read the entire content
+content = file.read()
+
+# Print the content
+print(content)
+
+# Close the file
+file.close()</code></pre>
+      <p>Output:</p>
+      <p><em>welcome to Tutorialspoint.</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Reading a File Using <code>readline()</code> Method</h2>
+      <p>This method reads one line at a time, useful for large files.</p>
+      <pre><code># Open the file in read mode
+file = open('example.txt', 'r')
+
+# Read the first line
+line = file.readline()
+
+# Print the line
+print(line)
+
+# Close the file
+file.close()</code></pre>
+      <p>Output:</p>
+      <p><em>welcome to Tutorialspoint.</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Reading a File Using <code>readlines()</code> Method</h2>
+      <p>Reads all lines into a list of strings.</p>
+      <pre><code># Open the file in read mode
+file = open('example.txt', 'r')
+
+# Read all lines
+lines = file.readlines()
+
+# Print lines
+for line in lines:
+   print(line, end='')
+
+# Close the file
+file.close()</code></pre>
+      <p>Output:</p>
+      <p><em>welcome to Tutorialspoint.<br>Hi Surya.<br>How are you?.</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Using <code>with</code> Statement</h2>
+      <p>The <code>with</code> statement ensures automatic closing of the file even if an exception occurs.</p>
+      <pre><code>with open('example.txt', 'r') as file:
+   content = file.read()
+   print(content)</code></pre>
+      <p>Output:</p>
+      <p><em>welcome to Tutorialspoint.<br>Hi Surya.<br>How are you?.</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Reading a File in Binary Mode</h2>
+      <p>Use mode <code>'rb'</code> for reading binary files like images, audio, or executables.</p>
+      <pre><code>with open('test.bin', 'rb') as f:
+   data = f.read()
+   print(data.decode('utf-8'))</code></pre>
+      <p>Output:</p>
+      <p><em>Hello World</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Reading Integer Data from a Binary File</h2>
+      <pre><code>n = 25
+data = n.to_bytes(8, 'big')
+
+with open('test.bin', 'wb') as f:
+   f.write(data)
+
+with open('test.bin', 'rb') as f:
+   data = f.read()
+   n = int.from_bytes(data, 'big')
+   print(n)</code></pre>
+      <p>Output:</p>
+      <p><em>25</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Reading Float Data from a Binary File</h2>
+      <pre><code>import struct
+
+x = 23.50
+data = struct.pack('f', x)
+
+with open('test.bin', 'wb') as f:
+   f.write(data)
+
+with open('test.bin', 'rb') as f:
+   data = f.read()
+   x = struct.unpack('f', data)[0]
+   print(x)</code></pre>
+      <p>Output:</p>
+      <p><em>23.5</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Reading and Writing Using <code>'r+'</code> Mode</h2>
+      <p>Using modes like <code>'r+'</code> or <code>'w+'</code> enables reading and writing without closing the file.</p>
+      <pre><code>with open("foo.txt", "r+") as fo:
+   fo.seek(10, 0)
+   data = fo.read(3)
+   print(data)</code></pre>
+      <p>Output:</p>
+      <p><em>rat</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Simultaneous Reading and Writing</h2>
+      <pre><code>with open("foo.txt", "r+") as fo:
+   fo.write("This is a rat race")
+   fo.seek(0)
+   data = fo.read()
+   print(data)</code></pre>
+      <p>Output:</p>
+      <p><em>This is a rat race</em></p>
+    </div>
+
+    <div class="content">
+      <h2>Reading File from Specific Offset</h2>
+      <pre><code>fo = open("foo.txt", "w+")
+fo.write("This is a rat race")
+fo.seek(10, 0)
+data = fo.read(3)
+print("Data read from position 10:", data)
+fo.seek(10, 0)
+fo.write("cat")
+fo.seek(0, 0)
+data = fo.read()
+print("Updated file content:", data)
+fo.close()</code></pre>
+      <p>Output:</p>
+      <p><em>Data read from position 10: rat<br>Updated file content: This is a cat race</em></p>
+    </div>
+
+    
+  </div>
+</div>

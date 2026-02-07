@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Native Prototypes</h1>
+    <div class="content">
+      <p>The native prototypes in JavaScript are property of <code>Object.prototype</code> object. The prototypes are the mechanism by which the objects inherit features from one another.</p>
+      <p>In JavaScript, each object contains the <code>prototype</code> property. The prototype of each object contains the methods and properties related to the object. So, it is also called the native prototype.</p>
+      <p>However, you can update or add new methods and properties to the native prototype object, but you can't delete any already existing.</p>
+      <p>The JavaScript object and object constructor are the main prerequisites to understand JavaScript native prototypes.</p>
+
+      <h2>Syntax</h2>
+      <p>You can follow the syntax below to access the native prototype of the object.</p>
+      <pre><code>Object.prototype;</code></pre>
+      <p>In the above syntax, the object can be any JavaScript object.</p>
+
+      <h2>Example: Accessing the array's prototype</h2>
+      <p>Whenever you execute the below code in the browser, it will print the prototype of the array in the browser console. In the same way, you can check the prototype of the other objects.</p>
+      <pre><code>&lt;script&gt;
+console.log(Array.prototype);
+&lt;/script&gt;</code></pre>
+      <p>Output: On running the above program, you will see the result in web console showing the array prototype methods.</p>
+
+      <h2>Updating the Native Prototype</h2>
+      <p>You can update the existing method or property of the native prototype object or add a new method or property to the native prototype object.</p>
+      <pre><code>objName.prototype.name = value</code></pre>
+
+      <h2>Example: Updating the <code>toLowerCase()</code> method</h2>
+      <pre><code>String.prototype.toLowerCase = function () {
+  return this.toUpperCase();
+}
+let str = "Hello World";
+console.log(str.toLowerCase()); // HELLO WORLD
+</code></pre>
+      <p><strong>Output:</strong> After updating, the string is converted to uppercase: <code>HELLO WORLD</code>.</p>
+      <p><em>Note:</em> You shouldn't update the built-in methods and properties, but you can add new ones.</p>
+
+      <h2>Example: Adding a new method</h2>
+      <pre><code>String.prototype.firstCase = function () {
+  return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+}
+let str = "hello world";
+console.log(str.firstCase()); // Hello world
+</code></pre>
+      <p><strong>Output:</strong> <code>Hello world</code></p>
+
+      <h2>Adding a method to the constructor function</h2>
+      <p>You can't add methods directly to constructor instances. Instead, you need to add them to the constructor prototype so that all instances can access them.</p>
+      <pre><code>function Person(id, name) {
+  this.id = id;
+  this.name = name;
+}
+Person.prototype.display = function () {
+  console.log(this.id + ", " + this.name);
+}
+const p1 = new Person(1, "James");
+const p2 = new Person(2, "Nayan");
+p1.display(); // 1, James
+p2.display(); // 2, Nayan
+</code></pre>
+
+      <h2>JavaScript Prototype Chaining</h2>
+      <p>The prototype stores default values of properties. If the object constructor and its prototype contain the same property, the constructor’s property overrides the prototype’s property.</p>
+      <pre><code>function Person(id, name) {
+  this.id = id;
+  this.name = name;
+}
+
+Person.prototype.name = "John";
+Person.prototype.age = 20;
+
+const p1 = new Person(1, "Adam");
+console.log("Id: " + p1.id + ", Name: " + p1.name + ", Age: " + p1.age);
+</code></pre>
+      <p><strong>Output:</strong> <code>Id: 1, Name: Adam, Age: 20</code></p>
+    </div>
+  </div>
+</div>

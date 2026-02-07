@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Command Line Options</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Node.js provides several command-line options to configure and control the runtime environment. These options assist with debugging, performance tuning, running scripts, and syntax checking.
+      </p>
+
+      <h2>Running a Node.js Script</h2>
+      <p>
+        Execute a JavaScript file by running:
+      </p>
+      <pre><code>node filename.js</code></pre>
+
+      <h2>Commonly Used Command-Line Options</h2>
+
+      <h3>--help</h3>
+      <p>Displays a list of all available command-line flags and their descriptions.</p>
+      <pre><code>node --help</code></pre>
+
+      <h3>--version or -v</h3>
+      <p>Shows the installed Node.js version.</p>
+      <pre><code>node --version
+or
+node -v
+</code></pre>
+      <p>Output example: <code>v22.13.1</code></p>
+
+      <h3>-e or --eval</h3>
+      <p>Executes JavaScript code directly from the command line without creating a file. Useful for quick testing of code snippets or calculations.</p>
+      <pre><code>node -e "console.log('Welcome to TutorialsPoint!')"</code></pre>
+      <p>Output: <code>Welcome to TutorialsPoint!</code></p>
+      <p>Supports multi-line code by separating lines with semicolons:</p>
+      <pre><code>node -e "let x=112; let a=234; console.log(x+a);"</code></pre>
+      <p>Output: <code>346</code></p>
+
+      <h3>-p or --print</h3>
+      <p>Evaluates and prints the result of a JavaScript expression without needing an explicit <code>console.log()</code>.</p>
+      <pre><code>node -p "112 - 321"</code></pre>
+      <p>Output: <code>-209</code></p>
+      <p>Can print function call results:</p>
+      <pre><code>node -p "Math.sqrt(121)"</code></pre>
+      <p>Output: <code>11</code></p>
+
+      <h3>--check or -c</h3>
+      <p>Checks the syntax of a JavaScript file without executing it. Shows error messages if syntax errors are found.</p>
+      <p>Example with a correct file (no output):</p>
+      <pre><code>node --check test.js</code></pre>
+      <p>Example with syntax error in file:</p>
+      <pre><code>
+C:\Users\Lenovo\test.js:1
+console.log("Welcome To, TP.!";
+            ^^^^^^^^^^^^^^^^^^
+SyntaxError: missing ) after argument list
+      </code></pre>
+    </div>
+  </div>
+</div>

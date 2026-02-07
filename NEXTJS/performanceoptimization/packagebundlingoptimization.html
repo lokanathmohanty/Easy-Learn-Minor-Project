@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Optimize Package Bundling</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Package Bundling?</h2>
+            <p><strong>Package bundling</strong> is the process of combining multiple JavaScript files and their dependencies into optimized, single files. Next.js automatically analyzes your application's **dependency graph** and performs code splitting to create several manageable code chunks, including:</p>
+            <ul>
+                <li class="example">**Client-side bundles** for browser execution.</li>
+                <li class="example">**Server-side bundles** for SSR/SSG (Server-Side Rendering/Static Site Generation).</li>
+                <li class="example">**Route-based chunks** for automatic code splitting (loaded only when navigating to a specific route).</li>
+                <li class="example">**Shared chunks** for code used across multiple routes.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Analyzing Package Bundles in Next.js</h2>
+            <p>To optimize bundles effectively, you first need to identify which dependencies are taking up the most space. Next.js provides a tool to generate a visual report for this purpose.</p>
+            
+            <h3>Installation and Setup</h3>
+            <ol>
+                <li>Install the bundle analyzer package:
+                <pre class="example"><code>npm i @next/bundle-analyzer</code></pre></li>
+                <li>Configure <code>next.config.js</code> to enable the analyzer based on an environment variable:
+                <pre class="example"><code>// File - /next.config.js
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true', // Analyzer runs only when ANALYZE is true
+})
+ 
+module.exports = withBundleAnalyzer(nextConfig)</code></pre></li>
+                <li>Generate the HTML report by running the build with the environment variable set:
+                <pre class="example"><code>$env:ANALYZE="true"; npm run build</code></pre>
+            </ol>
+            <p>The resulting report (often an interactive treemap) shows the size of each package and its dependencies, helping you target large or unnecessary code.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Techniques for Optimizing Package Bundles</h2>
+            
+            <h3>1. Using Dynamic Imports</h3>
+            <p>For components that are not immediately visible or needed (e.g., modals, configuration panels), use **Dynamic Imports** to load them **on demand**. This significantly reduces the initial client-side bundle size.</p>
+            <pre class="example"><code>const DynamicComponent = dynamic(
+  () => import('./components/HeavyComponent'),
+  {
+    loading: () => &lt;p&gt;Loading component...&lt;/p&gt; // Fallback while loading
+  }
+);</code></pre>
+            
+            <h3>2. Configuring Optimized Package Imports</h3>
+            <p>For libraries that export many modules (like icon libraries), Next.js can be configured to only load the modules actually used. This ensures minimal bundle size without forcing complex import syntax.</p>
+            <pre class="example"><code>/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    // Only load modules actually used from 'icon-library'
+    optimizePackageImports: ['icon-library'], 
+  },
+}
+ 
+module.exports = nextConfig</code></pre>
+            
+            <h3>3. Enhancement of Tree Shaking</h3>
+            <p>**Tree shaking** is the automatic process of eliminating unused ("dead") code. To maximize its effectiveness:</p>
+            <ul>
+                <li class="example">
+                    **Use ES Modules (ESM):** Always prefer modern ESM <code>import</code> statements over older CommonJS <code>require</code>, as ESM provides better static analysis required for tree shaking.
+                    <pre class="example"><code>// Good: ESM
+import { specificFunction } from 'library';
+
+// Avoid: CommonJS (harder to treeshake)
+const library = require('library');</code></pre>
+                </li>
+                <li class="example">
+                    **Optimize Third-Party Libraries:** When using large libraries (like Lodash), import **specific functions** instead of the entire library object.
+                    <pre class="example"><code>// Good: Only imports debounce
+import { debounce } from 'lodash-es';
+
+// Avoid: Imports the entire library
+import _ from 'lodash';</code></pre>
+                </li>
+            </ul>
+            
+            <h3>4. Removing Unwanted Packages (Server-side)</h3>
+            <p>The **<code>serverExternalPackages</code>** option tells Next.js to treat certain packages as external on the server side (Node.js). This means the package will **not be included in the server bundle**, reducing its size. This is mainly useful for packages that are already available in the runtime environment (though typically not necessary for core packages like <code>react</code> in modern Next.js).</p>
+        </div>
+    </div>
+</div>

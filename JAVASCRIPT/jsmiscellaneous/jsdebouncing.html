@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Debouncing</h1>
+    <div class="content">
+      <h2>What is Debouncing?</h2>
+      <p>Debouncing is a programming technique that helps in limiting the function calls. It delays the execution of a function until a certain amount of time has passed since the last execution. This prevents unnecessary repeated calls and acts as a rate-limiter.</p>
+
+      <p>For example, when you press an elevator button multiple times, the elevator won’t come faster — only the first press matters. Similarly, debouncing ensures extra calls are ignored.</p>
+
+      <h2>How to Implement Debouncing in JavaScript?</h2>
+      <p>One common way to implement debouncing is using the <code>setTimeout()</code> method. The debounce function takes a callback and a delay. Every time the event occurs, it clears the previous timer and sets a new one. Only after the delay passes without new calls, the function executes.</p>
+
+      <h2>Example</h2>
+      <pre><code>&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt; JavaScript - Debouncing &lt;/h2&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;button id="btn"&gt;Debounce&lt;/button&gt;
+
+   &lt;script&gt;
+      var output = document.getElementById("output");
+      var btn = document.getElementById("btn");
+
+      // Add event listener with debounce
+      btn.addEventListener("click", debounce(function () {
+         output.innerHTML = "Hello " + new Date().toLocaleTimeString();
+      }, 2000));
+
+      // Debounce function
+      function debounce(func, wait) {
+         var timeout;
+         return function () {
+            var context = this, args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(function () {
+               func.apply(context, args);
+            }, wait);
+         };
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <p><strong>Output:</strong> If you click the button multiple times within 2 seconds, only one function call will be executed after the delay.</p>
+
+      <h2>Benefits of Debouncing</h2>
+      <ul>
+        <li>Improves performance by limiting function calls.</li>
+        <li>Reduces server load by minimizing requests.</li>
+        <li>Enhances user experience with smoother interactions.</li>
+        <li>Prevents unnecessary API calls and reduces cost.</li>
+      </ul>
+
+      <h2>Real-world Use Cases</h2>
+      <ul>
+        <li><strong>Search boxes:</strong> Send requests only when the user pauses typing.</li>
+        <li><strong>Infinite scroll / Lazy loading:</strong> Detect when users stop scrolling to fetch data efficiently.</li>
+        <li><strong>Gaming controls:</strong> Prevent accidental multiple clicks or actions.</li>
+      </ul>
+    </div>
+  </div>
+</div>

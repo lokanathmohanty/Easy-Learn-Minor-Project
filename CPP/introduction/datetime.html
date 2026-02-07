@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Date and Time (Using C-style <code>&lt;ctime&gt;</code>) 🕰️</h1>
+
+        <div class="content">
+            <p>The C++ Standard Library relies on the C-style date and time functions, which require including the **<code>&lt;ctime&gt;</code>** header file. These functions primarily deal with two representations of time: the raw calendar time (<code>time_t</code>) and a broken-down structure (<code>struct tm</code>).</p>
+        </div>
+
+        <div class="content">
+            <h2 class="title">Time Data Types and Structures</h2>
+            <p>The key types used for time manipulation are:</p>
+            <ul>
+                <li><strong><code>time_t</code>:</strong> An integral type capable of representing the system's calendar time, typically as the number of seconds elapsed since the **Epoch** (January 1, 1970).</li>
+                <li><strong><code>struct tm</code>:</strong> A structure that holds the date and time components (broken down) with the following fields:
+                    <ul>
+                        <li><code>tm_sec</code> (seconds: 0-61)</li>
+                        <li><code>tm_min</code> (minutes: 0-59)</li>
+                        <li><code>tm_hour</code> (hours: 0-24)</li>
+                        <li><code>tm_mday</code> (day of month: 1-31)</li>
+                        <li><code>tm_mon</code> (month of year: 0-11)</li>
+                        <li><code>tm_year</code> (years since 1900)</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Core Time Functions</h2>
+            <p>A set of functions is available to convert between the time representations and formats:</p>
+            <ul>
+                <li><strong><code>time_t time(time_t *time)</code>:</strong> Returns the current calendar time as a <code>time_t</code> value (seconds since Epoch).</li>
+                <li><strong><code>char *ctime(const time_t *time)</code>:</strong> Converts a <code>time_t</code> value to a standard, human-readable **local time string**.</li>
+                <li><strong><code>struct tm *localtime(const time_t *time)</code>:</strong> Converts a <code>time_t</code> value to a <code>tm</code> structure, adjusted for the **local time zone**.</li>
+                <li><strong><code>struct tm *gmtime(const time_t *time)</code>:</strong> Converts a <code>time_t</code> value to a <code>tm</code> structure, representing **Coordinated Universal Time (UTC)**.</li>
+                <li><strong><code>char *asctime(const struct tm *time)</code>:</strong> Converts a <code>tm</code> structure to a standard, human-readable string.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title example">Accessing Components via <code>struct tm</code></h2>
+            <p>To print individual date and time components (like year, month, day), you first convert the raw time into the <code>struct tm</code> format using <code>localtime()</code> or <code>gmtime()</code>. Note the offsets needed for the year and month:</p>
+            <pre class="example">
+time_t now = time(0); // Get raw time
+tm *ltm = localtime(&amp;now);
+
+// tm_year is years since 1900
+cout &lt;&lt; "Year: " &lt;&lt; 1900 + ltm-&gt;tm_year &lt;&lt; endl; 
+
+// tm_mon is months since January (0-11)
+cout &lt;&lt; "Month: " &lt;&lt; 1 + ltm-&gt;tm_mon &lt;&lt; endl; 
+</pre>
+        </div>
+    </div>
+</div>

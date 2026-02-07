@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Heredoc and Nowdoc Syntax</h1>
+
+    <div class="content">
+      <p>
+        **Heredoc** and **Nowdoc** are special syntaxes in PHP that provide convenient ways to define multi-line strings without needing to escape quotes or newlines. They are particularly useful for embedding large blocks of text, code, or XML/HTML.
+      </p>
+
+      <h2>Heredoc (`<<<IDENTIFIER`)</h2>
+      <p>
+        Heredoc strings are conceptually similar to **double-quoted strings** (`""`): they support **variable expansion** and **interpretation of escape sequences** (like `\n`). The syntax uses a starting identifier preceded by `<<<`.
+      </p>
+
+      <h3>Heredoc Syntax Rules:</h3>
+      <ol>
+        <li>
+          **Start:** Begin with `<<<` followed immediately by a custom, chosen **IDENTIFIER**.
+        </li>
+        <li>
+          **Content:** The string content follows on the next line and can span multiple lines. Quotes (`'` and `"`) do not need to be escaped.
+        </li>
+        <li>
+          **End:** The string ends with the **same IDENTIFIER** on a new line.
+        </li>
+        <li>
+          **Termination:** The closing IDENTIFIER must be followed immediately by a semicolon (`;`).
+        </li>
+        <li>
+          **Indentation:** The closing identifier may be indented, and that indentation will be stripped from all lines of the string.
+        </li>
+      </ol>
+
+      <h3>Heredoc Example (Supports Interpolation):</h3>
+      <div class="example">
+        <p>
+          <code>&lt;?php</code><br>
+          <code>$lang="PHP";</code><br>
+          <code>echo &lt;&lt;&lt;EOS</code><br>
+          <code>&nbsp;&nbsp;&nbsp;Heredoc strings in **$lang** expand variables.</code><br>
+          <code>EOS;</code><br>
+          <code>?&gt;</code>
+        </p>
+        <p class="content">Output: Heredoc strings in **PHP** expand variables.</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <hr>
+
+      <h2>Nowdoc (`<<<'IDENTIFIER'`)</h2>
+      <p>
+        Nowdoc strings are conceptually similar to **single-quoted strings** (`''`): they represent the literal text. They **do not support variable expansion** and **do not interpret escape sequences**. They provide the raw, unparsed text.
+      </p>
+
+      <h3>Nowdoc Syntax Rules:</h3>
+      <p>
+        The syntax is exactly the same as Heredoc, except the starting **IDENTIFIER MUST be enclosed in single quotes** (`'`).
+      </p>
+
+      <h3>Nowdoc Example (Raw Text):</h3>
+      <div class="example">
+        <p>
+          <code>&lt;?php</code><br>
+          <code>$lang="PHP";</code><br>
+          <code>$str = &lt;&lt;&lt;'RAWTEXT'</code><br>
+          <code>&nbsp;&nbsp;&nbsp;IT doesn't expand the value of **$lang** variable.</code><br>
+          <code>RAWTEXT;</code><br>
+          <code>echo $str;</code><br>
+          <code>?&gt;</code>
+        </p>
+        <p class="content">Output: IT doesn't expand the value of **$lang** variable.</p>
+      </div>
+    </div>
+  </div>
+</div>

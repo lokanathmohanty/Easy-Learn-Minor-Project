@@ -1,0 +1,156 @@
+ 
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java - Variable Scopes</title>
+    </head>
+<body>
+
+    <div class="container">
+
+        <header class="session-header">
+            <h1 class="title">Java - Variable Scopes</h1>
+            <h2 class="subtitle">Understanding Scope and Lifetime</h2>
+        </header>
+
+        <section class="session-content">
+
+            <div class="content introduction">
+                <h2 class="subtitle">Introduction</h2>
+                <p>The variable's **scope** refers to the region where they are created and accessed in a given program or function. The variable scope also refers to its **lifetime**.</p>
+                <p>In this tutorial, we will learn about the scopes of the different types of Java variables: Instance, Class (Static), and Local.</p>
+            </div>
+
+            <div class="content">
+                <h2 class="subtitle">Scope of Java Instance Variables</h2>
+                <p>A variable that is declared inside a class but outside all the methods and blocks is an **instance variable**. The general scope of an instance variable is throughout the class except in static methods. The lifetime of an instance variable is until the object stays in memory.</p>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Java Instance Variable</h2>
+                <pre><code>package com.tutorialspoint;
+
+public class Puppy {
+   private int puppyAge; // Instance Variable
+   
+   public void setAge( int age ) {
+      // access the instance variable and modify it      
+      puppyAge = age;
+   }
+
+   public int getAge( ) {
+      // access the instance variable  
+      return puppyAge;
+   }
+
+   public static void main(String []args) {      
+      Puppy myPuppy = new Puppy();
+      myPuppy.setAge( 2 );
+      System.out.println("Puppy Age :" + myPuppy.getAge() );
+   }
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>Puppy Age :2</code></pre>
+            </div>
+
+            <div class="content">
+                <h2 class="subtitle">Scope of Java Class (Static) Variables</h2>
+                <p>A variable that is declared inside a class, outside all the blocks, and is marked **static** is known as a **class variable**. The general scope of a class variable is throughout the class, and the lifetime of a class variable is until the end of the program or as long as the class is loaded in memory.</p>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Java Class Variable</h2>
+                <pre><code>package com.tutorialspoint;
+
+public class Puppy {
+   private int puppyAge;
+   public static String BREED = "Bulldog"; // Class (Static) Variable
+   
+   public void setAge( int age ) {
+      puppyAge = age;
+   }
+
+   public int getAge( ) {
+      return puppyAge;
+   }
+
+   public static void main(String []args) {      
+      Puppy myPuppy = new Puppy();
+      myPuppy.setAge( 2 );
+      System.out.println("Puppy Age :" + myPuppy.getAge() );
+      // access the class variable using the class name
+      System.out.println("Breed :" + Puppy.BREED );
+   }
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>Puppy Age :2
+Breed :Bulldog</code></pre>
+            </div>
+
+            <div class="content">
+                <h2 class="subtitle">Scope of Java Local Variables</h2>
+                <p>All other variables that are not instance and class variables are treated as **local variables**, including the parameters in a method. The scope of a local variable is within the block in which it is declared, and the lifetime of a local variable is until the control leaves the block in which it is declared.</p>
+            </div>
+
+            <div class="content example">
+                <h2 class="title">Example: Java Local Variables</h2>
+                <pre><code>package com.tutorialspoint;
+
+public class Puppy {
+   private int puppyAge;
+   public static String BREED = "Bulldog";
+   
+   public void setAge( int age ) {
+      puppyAge = age;
+   }
+
+   public int getAge( ) {
+      return puppyAge;
+   }
+
+   public static void main(String []args) {      
+      Puppy myPuppy = new Puppy();
+      myPuppy.setAge( 2 );
+      System.out.println("Puppy Age :" + myPuppy.getAge() );
+      System.out.println("Breed :" + Puppy.BREED );
+      
+      // local variables (a, b, c) - scope is limited to main()
+      int a = 10;
+      int b = 20;
+      int c = a + b;
+      
+      System.out.println("c: " + c);
+   }
+}</code></pre>
+                <p>Output:</p>
+                <pre><code>Puppy Age :2
+Breed :Bulldog
+c: 30</code></pre>
+            </div>
+
+            <div class="content">
+                <h2 class="subtitle">Important Points About Variables Scope</h2>
+                <ul>
+                    <li>By default, a variable has **default access** (no modifier used).</li>
+                    <li>A variable or method declared without any access control modifier is available to any other class in the same package.</li>
+                    <li>The fields in an interface are implicitly <code>public static final</code>, and the methods are by default <code>public</code>.</li>
+                    <li>Java provides several access modifiers to set access levels for classes, variables, methods, and constructors.</li>
+                </ul>
+                <p>The four access levels are:</p>
+                <ul>
+                    <li><strong>default</strong> – Visible to the package. No modifier is needed.</li>
+                    <li><strong>private</strong> – Visible to the class only.</li>
+                    <li><strong>public</strong> – Visible to the world.</li>
+                    <li><strong>protected</strong> – Visible to the package and all subclasses.</li>
+                </ul>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

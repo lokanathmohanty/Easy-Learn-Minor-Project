@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - user-select Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS user-select property</strong> controls whether users can select text on a webpage. 
+        It does not affect text inside form elements like input fields or textareas. 
+        This property is useful for preventing unwanted text selection or enhancing user experience.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>
+        <code>user-select: none | auto | text | contain | all;</code>
+      </p>
+
+      <h2>Possible Values</h2>
+      <ul>
+        <li><strong>none</strong> – Text cannot be selected.</li>
+        <li><strong>auto</strong> – Default behavior. Selection rules depend on the browser and parent elements.</li>
+        <li><strong>text</strong> – Allows text selection.</li>
+        <li><strong>contain</strong> – Selection can start within the element but is restricted to its boundaries.</li>
+        <li><strong>all</strong> – If any part of the element is selected, the entire element content is selected automatically.</li>
+      </ul>
+
+      <h2>Example 1: user-select - none</h2>
+      <p>Prevents the user from selecting text.</p>
+      <pre>
+.text-none {
+  -webkit-user-select: none;
+  user-select: none;
+}
+      </pre>
+
+      <h2>Example 2: user-select - auto</h2>
+      <p>Uses the default browser behavior for text selection.</p>
+      <pre>
+p {
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+      </pre>
+
+      <h2>Example 3: user-select - text</h2>
+      <p>Explicitly allows text selection.</p>
+      <pre>
+p {
+  -webkit-user-select: text;
+  user-select: text;
+}
+      </pre>
+
+      <h2>Example 4: user-select - all</h2>
+      <p>Ensures the entire content is selected in one click.</p>
+      <pre>
+p {
+  -webkit-user-select: all;
+  user-select: all;
+}
+      </pre>
+
+      <h2>Example 5: user-select - contain</h2>
+      <p>Allows selection only within the element’s boundaries.</p>
+      <pre>
+p {
+  -webkit-user-select: contain;
+  user-select: contain;
+}
+      </pre>
+
+      <h2>Applies To</h2>
+      <p>
+        The <code>user-select</code> property applies to <strong>all elements</strong>. 
+        However, its effect may differ depending on the browser implementation.
+      </p>
+
+      <h2>Summary</h2>
+      <p>
+        The <code>user-select</code> property is useful for customizing text selection behavior. 
+        For instance, setting it to <code>none</code> prevents copying sensitive UI text, while <code>all</code> 
+        makes selecting full blocks of text easier.
+      </p>
+
+      <h2>Example</h2>
+      <p>Here is a practical usage example:</p>
+      <pre>
+.button-text {
+  user-select: none; /* Prevents accidental selection on button labels */
+}
+
+.article-content {
+  user-select: text; /* Allows normal text selection */
+}
+      </pre>
+    </div>
+  </div>
+</div>

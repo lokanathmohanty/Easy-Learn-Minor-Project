@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Adding References to a Library</h1>
+
+        <div class="content">
+            <p>Adding references (dependencies) to a **Portable Class Library (PCL)** or a **.NET Standard Library** is similar to adding references in your main application projects (like a Console App or UWP App). These dependencies are managed using **NuGet packages** and are configured through the project's file (<code>project.json</code> at the time of this documentation) or the NuGet Package Manager UI.</p>
+        </div>
+
+        <h2 class="title example">Default Library References (project.json)</h2>
+        <div class="content example">
+            <p>The **PCL** (retargeted to **.NET Standard**) project file, <code>project.json</code>, contains default references necessary for cross-platform compatibility:</p>
+            <pre><code>{ 
+   "supports": {}, 
+   "dependencies": { 
+      /** Default references for .NET Standard **/
+      "NETStandard.Library": "1.6.0", 
+      "Microsoft.NETCore.Portable.Compatibility": "1.0.1" 
+   }, 
+   "frameworks": { 
+      "netstandard1.3": {} 
+   } 
+}</code></pre>
+        </div>
+
+        <h2 class="title">Method 1: Adding Dependencies Manually (project.json)</h2>
+        <div class="content">
+            <p>You can add required NuGet packages directly by editing the <code>project.json</code> file and listing them under the **<code>dependencies</code>** section:</p>
+            <ol>
+                <li class="content">Open the <code>project.json</code> file for your library project (e.g., <code>StringLibrary</code>).</li>
+                <li class="content">Add the package name and version number as a new entry in the <code>"dependencies"</code> object.</li>
+            </ol>
+            <p>For example, to add serialization and database packages:</p>
+            <pre><code>{ 
+   // ... other sections ...
+   "dependencies": { 
+      "NETStandard.Library": "1.6.0", 
+      "Microsoft.NETCore.Portable.Compatibility": "1.0.1", 
+      
+      /** Manually Added References **/
+      "System.Runtime.Serialization.Json": "4.0.3", 
+      "Microsoft.EntityFrameworkCore": "1.1.0" 
+   }, 
+   // ... other sections ...
+}</code></pre>
+            <p>Upon saving the file, Visual Studio automatically resolves and adds these NuGet package references to your library.</p>
+        </div>
+
+        <h2 class="title">Method 2: Adding Dependencies via NuGet Package Manager</h2>
+        <div class="content">
+            <p>The visual method involves using the **Manage NuGet Packages** interface in Visual Studio:</p>
+            <ol>
+                <li class="content">Right-click on your library project (**StringLibrary (Portable)**) in Solution Explorer.</li>
+                <li class="content">Select **Manage NuGet Packages**.</li>
+                <li class="content">Use the **Browse** tab to search for the desired package (e.g., <code>System.Runtime.Serialization.Primitives</code>).</li>
+                <li class="content">Click **Install**, review the changes, and click **OK**.</li>
+                <li class="content">Accept the license terms by clicking **I Accept** to complete the installation.</li>
+            </ol>
+            <p>The selected NuGet package is then downloaded and added to your library's references.</p>
+        </div>
+    </div>
+</div>

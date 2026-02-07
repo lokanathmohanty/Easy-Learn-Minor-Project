@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Higher Order Functions</h1>
+    </div>
+    <div class="content">
+      <p>
+        Higher-order functions in Python either take one or more functions as arguments or return a function as their result. This feature enhances flexibility and reusability in code by allowing functions to be treated like any other object.
+      </p>
+      <p>
+        Functions can be stored in variables, passed as parameters, stored in data structures, or returned from other functions. Higher-order functions can be created using nested scopes or callable objects. The <code>functools</code> module also offers utilities to work with them.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Creating Higher Order Function with Nested Scopes</h2>
+    </div>
+    <div class="content">
+      <pre>
+def multiplier(a):
+   def multiply(b):
+      return a * b
+   return multiply
+
+multiply_second_number = multiplier(5)
+Result = multiply_second_number(10)
+print("Multiplication of Two numbers is: ", Result)
+      </pre>
+      <p>
+        This example defines a function that returns another function, capturing the variable <code>a</code> in its closure. Calling <code>multiplier(5)</code> returns a function that multiplies its argument by 5.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Creating Higher-Order Functions with Callable Objects</h2>
+    </div>
+    <div class="content">
+      <pre>
+class Multiplier:
+   def __init__(self, factor):
+      self.factor = factor
+
+   def __call__(self, x):
+      return self.factor * x
+
+multiply_second_number = Multiplier(2)
+Result = multiply_second_number(100)
+print("Multiplication of Two numbers is: ", Result)
+      </pre>
+      <p>
+        Here, the class <code>Multiplier</code> is a callable object because it implements the <code>__call__</code> method, allowing instances to act like functions that multiply input by a factor.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Using Higher-Order Functions: functools.wraps()</h2>
+    </div>
+    <div class="content">
+      <pre>
+import functools
+
+def my_decorator(f):
+   @functools.wraps(f)
+   def wrapper(*args, **kwargs):
+      print("Calling", f.__name__)
+      return f(*args, **kwargs)
+   return wrapper
+
+@my_decorator
+def invite(name):
+   print(f"Welcome to, {name}!")
+
+invite("Tutorialspoint")
+      </pre>
+      <p>This example demonstrates a higher-order decorator function that wraps another function, preserving its metadata using <code>functools.wraps</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Using functools.partial()</h2>
+    </div>
+    <div class="content">
+      <pre>
+import functools
+
+def myfunction(a, b):
+   return a * b
+
+partfunction = functools.partial(myfunction, b=10)
+print(partfunction(10))
+      </pre>
+      <p>
+        The <code>partial()</code> function creates a new function by freezing some arguments of an existing one, simplifying call signatures for reuse.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Using functools.reduce()</h2>
+    </div>
+    <div class="content">
+      <pre>
+import functools
+
+def mult(x, y):
+   return x * y
+
+n = 4
+num = functools.reduce(mult, range(1, n+1))
+print(f'Factorial of {n}: ', num)
+      </pre>
+      <p>
+        The <code>reduce()</code> function applies a binary function cumulatively to the items in an iterable, for example calculating the factorial of a number.
+      </p>
+    </div>
+  </div>
+
+ 
+    </div>
+  </div>
+</div>

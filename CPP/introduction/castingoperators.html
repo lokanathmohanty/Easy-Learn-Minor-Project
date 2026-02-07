@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Casting Operators 🔄</h1>
+
+        <div class="content">
+            <p>A **cast** is a special **unary operator** that explicitly forces one data type to be converted into another. While C++ supports the traditional C-style cast <code>(type) expression</code>, it strongly encourages the use of **C++-specific type casting operators** for safety, clarity, and specific functionality.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">C++ Named Casting Operators</h2>
+            <p>C++ provides four specialized casting operators, each with a defined purpose, improving code readability and making it easier to search for potentially risky casts.</p>
+            <table>
+                <thead>
+                    <tr><th>Operator</th><th>Purpose</th><th>Use Case</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>static_cast&lt;T&gt;(expr)</code></td>
+                        <td>Performs a **non-polymorphic** cast.</td>
+                        <td>Casting between related types (e.g., <code>int</code> to <code>float</code>, base class pointer to derived class pointer without runtime check). It is the standard replacement for most C-style casts.</td>
+                    </tr>
+                    <tr>
+                        <td><code>dynamic_cast&lt;T&gt;(expr)</code></td>
+                        <td>Performs a **runtime-checked** cast.</td>
+                        <td>Used exclusively on **polymorphic types** (classes with virtual functions) to safely cast a base class pointer/reference to a derived class pointer/reference. Returns <code>nullptr</code> or throws an exception on failure.</td>
+                    </tr>
+                    <tr>
+                        <td><code>const_cast&lt;T&gt;(expr)</code></td>
+                        <td>Manipulates the **<code>const</code>** or **<code>volatile</code>** attributes.</td>
+                        <td>Used to add or remove <code>const</code>/<code>volatile</code> modifiers from a variable or object. This should be used sparingly as it can violate const-correctness.</td>
+                    </tr>
+                    <tr>
+                        <td><code>reinterpret_cast&lt;T&gt;(expr)</code></td>
+                        <td>Performs a bitwise interpretation of the value.</td>
+                        <td>Used for casting between unrelated pointer types (e.g., <code>int*</code> to <code>char*</code>) or between a pointer and an integral type. This is the most dangerous cast and should only be used when low-level, implementation-dependent conversions are necessary.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Simple C-style Cast Example (Truncation)</h2>
+            <p>The following example uses the C-style cast to perform a conversion from a floating-point type to an integer, which results in the **truncation** (loss) of the decimal part.</p>
+            <pre class="example">
+double a = 21.09399; // Floating-point value
+float b = 10.20;     // Floating-point value
+int c;
+
+c = (int) a; // C-style cast: Truncates 21.09399 to 21
+// Line 1 - Value of (int)a is :21
+   
+c = (int) b; // C-style cast: Truncates 10.20 to 10
+// Line 2 - Value of (int)b is  :10
+</pre>
+            <p>For the conversions above, the C++ standard equivalent would be: <code>c = static_cast&lt;int&gt;(a);</code> and <code>c = static_cast&lt;int&gt;(b);</code>.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Python - Anonymous Class and Objects</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+      <h1 class="title">Python - Anonymous Class and Objects</h1>
+      <div class="content">
+        <p>
+          Python's built-in <code>type()</code> function returns the class that an object belongs to. In Python, a class—built-in or user-defined—is an object of type <code>class</code>.
+        </p>
+
+        <h2>Example</h2>
+        <pre>
+class myclass:
+   def __init__(self):
+      self.myvar = 10
+      return
+
+obj = myclass()
+
+print('class of int', type(int))
+print('class of list', type(list))
+print('class of dict', type(dict))
+print('class of myclass', type(myclass))
+print('class of obj', type(obj))
+        </pre>
+        <p><strong>Output:</strong></p>
+        <pre>
+class of int &lt;class 'type'&gt;
+class of list &lt;class 'type'&gt;
+class of dict &lt;class 'type'&gt;
+class of myclass &lt;class 'type'&gt;
+        </pre>
+
+        <h2>Three-Argument Version of <code>type()</code></h2>
+        <p>
+          The function <code>type()</code> also has a three-argument version used to dynamically create a class:
+        </p>
+        <ul>
+          <li><strong>name</strong> – the name of the class, which becomes the <code>__name__</code> attribute</li>
+          <li><strong>bases</strong> – a tuple of base classes (can be empty if no inheritance)</li>
+          <li><strong>dict</strong> – a dictionary containing attributes and methods for the class</li>
+        </ul>
+        <pre>newclass = type(name, bases, dict)</pre>
+
+        <h2>Create an Anonymous Class</h2>
+        <p>
+          Using the three-argument form, an anonymous class can be created by passing an empty string as the name, inheriting from <code>object</code>, and an empty dictionary for attributes:
+        </p>
+        <pre>anon = type('', (object,), {})</pre>
+
+        <h2>Create an Anonymous Object</h2>
+        <pre>
+obj = anon()
+print("type of obj:", type(obj))
+        </pre>
+        <p>The output shows the object is of an anonymous class:</p>
+        <pre>type of obj: &lt;class '__main__.'&gt;</pre>
+
+        <h2>Anonymous Class with Dynamic Attributes and Methods</h2>
+        <pre>
+def getA(self):
+   return self.a
+
+obj = type('', (object,), {
+   'a': 5,
+   'b': 6,
+   'c': 7,
+   'getA': getA,
+   'getB': lambda self: self.b
+})()
+
+print(obj.getA(), obj.getB())
+        </pre>
+        <p><strong>Output:</strong></p>
+        <pre>5 6</pre>
+
+        
+      </div>
+    </div>
+  </div>
+</body>
+</html>

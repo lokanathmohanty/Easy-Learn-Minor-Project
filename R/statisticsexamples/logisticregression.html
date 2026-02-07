@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Logistic Regression</h1>
+    <div class="content">
+      <p>
+        Logistic regression models the probability of a binary response (e.g., True/False, 0/1) based on predictor variables using a logistic function:
+        \[
+        y = \frac{1}{1 + e^{-(a + b_1 x_1 + b_2 x_2 + b_3 x_3 + \dots)}}
+        \]
+        where \(y\) is the response variable, \(x_i\) are predictors, and \(a, b_i\) are coefficients.
+      </p>
+
+      <h2 class="title">glm() Function Syntax</h2>
+      <pre><code>glm(formula, data, family)</code></pre>
+      <ul>
+        <li><strong>formula</strong>: Relationship between response and predictors (e.g., am ~ cyl + hp + wt)</li>
+        <li><strong>data</strong>: Data frame containing variables</li>
+        <li><strong>family</strong>: Model family; use <code>binomial</code> for logistic regression</li>
+      </ul>
+
+      <h2 class="title">Example: Data Preparation</h2>
+      <pre><code># Select relevant columns from mtcars
+input &lt;- mtcars[, c("am", "cyl", "hp", "wt")]
+print(head(input))
+</code></pre>
+      <p>Output snippet:</p>
+      <pre><code>                  am  cyl  hp    wt
+Mazda RX4          1    6  110  2.620
+Mazda RX4 Wag      1    6  110  2.875
+Datsun 710         1    4   93  2.320
+Hornet 4 Drive     0    6  110  3.215
+Hornet Sportabout  0    8  175  3.440
+Valiant            0    6  105  3.460
+</code></pre>
+
+      <h2 class="title">Create Logistic Regression Model</h2>
+      <pre><code>am.data &lt;- glm(formula = am ~ cyl + hp + wt, data = input, family = binomial)
+print(summary(am.data))
+</code></pre>
+      <p>Example output:</p>
+      <pre><code>Call:
+glm(formula = am ~ cyl + hp + wt, family = binomial, data = input)
+
+Deviance Residuals: 
+     Min        1Q      Median        3Q       Max  
+-2.17272   -0.14907   -0.01464    0.14116   1.27641  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept) 19.70288    8.11637   2.428   0.0152 *
+cyl          0.48760    1.07162   0.455   0.6491  
+hp           0.03259    0.01886   1.728   0.0840 .
+wt          -9.14947    4.15332  -2.203   0.0276 *
+---
+Signif. codes: 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Null deviance: 43.2297  on 31  degrees of freedom
+Residual deviance:  9.8415  on 28  degrees of freedom
+AIC: 17.841
+
+Number of Fisher Scoring iterations: 8
+</code></pre>
+
+      <h2 class="title">Conclusion</h2>
+      <p>
+        In this model, the p-values indicate that <code>cyl</code> and <code>hp</code> are not statistically significant predictors (p &gt; 0.05), while <code>wt</code> significantly impacts the transmission mode (<code>am</code>).
+      </p>
+    </div>
+  </div>
+ 
+    
+  </div>
+</div>

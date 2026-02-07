@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask: Sending Form Data to a Template 📤</h1>
+        <div class="content">
+            <p>A common pattern in Flask is to collect data from an HTML form, process it in a view function, and then dynamically render a new HTML page (a template) with that received data. The **<code>request.form</code>** attribute is used to collect the submitted form data as a dictionary-like object.</p>
+
+            <h2>Application Workflow Overview</h2>
+            <p>The Python application defines two key routes:</p>
+            <ul>
+                <li>**<code>/</code> (student()):** This route uses <code>render_template('student.html')</code> to display the initial HTML form to the user.</li>
+                <li>**<code>/result</code> (result()):** This route is configured to accept **<code>POST</code>** requests from the form. The function collects the form data and passes it to the results template.</li>
+            </ul>
+
+            <h2 class="title">Python Logic (<code>result()</code> function)</h2>
+            <div class="content example">
+                <p>The **<code>result()</code>** function handles the incoming data:</p>
+                <p><code>@app.route('/result',methods = ['POST', 'GET'])</code></p>
+                <p><code>def result():</code></p>
+                <p><code>   if request.method == 'POST':</code></p>
+                <p><code>      result = request.form</code></p>
+                <p><code>      return render_template("result.html",result = result)</code></p>
+                <p>When a POST request arrives:</p>
+                <ol>
+                    <li>It checks if the method is <code>'POST'</code>.</li>
+                    <li>It assigns the entire dictionary of form data (<code>request.form</code>) to a variable named <code>result</code>.</li>
+                    <li>It renders the <code>result.html</code> template, passing the <code>result</code> dictionary as a variable also named <code>result</code> to the template context.</li>
+                </ol>
+            </div>
+
+            <h2 class="title">HTML Templates and Data Display</h2>
+            <div class="content example">
+                <h3>1. The Form (<code>student.html</code>)</h3>
+                <p>The form is set to submit data using the **<code>POST</code>** method to the **<code>/result</code>** URL:</p>
+                <p><code>&lt;form action = "http://localhost:5000/result" method = "POST"&gt;</code></p>
+                <p>The names of the input fields (e.g., <code>Name</code>, <code>Physics</code>) become the **keys** in the <code>request.form</code> dictionary.</p>
+
+                <h3>2. The Result Display (<code>result.html</code>)</h3>
+                <p>The template receives the form data as the <code>result</code> variable and uses a **Jinja2 <code>for</code> loop** to dynamically iterate over the dictionary's key-value pairs (using <code>result.items()</code>) and render them into an HTML table:</p>
+                <p><code>{% for key, value in result.items() %}</code></p>
+                <p><code>   &lt;tr&gt;</code></p>
+                <p><code>      &lt;th&gt; {{ key }} &lt;/th&gt;</code></p>
+                <p><code>      &lt;td&gt; {{ value }} &lt;/td&gt;</code></p>
+                <p><code>   &lt;/tr&gt;</code></p>
+                <p><code>{% endfor %}</code></p>
+            </div>
+        </div>
+    </div>
+</div>

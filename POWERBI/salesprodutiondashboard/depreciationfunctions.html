@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Power BI: DAX Depreciation Functions</h1>
+    <div class="content">
+      <p>DAX depreciation functions calculate the depreciation value of assets over specified periods using various accounting methods. These functions are integral for financial analysis and reporting in Power BI.</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Key Depreciation Functions with Examples</h2>
+    <div class="content">
+      <ul>
+        <li><strong>AMORDEGRC()</strong> - Returns depreciation for each period using the French accounting system's method.
+          <br>Example: <code>lk = AMORDEGRC(8600, DATE(1998,4,23), DATE(1999,11,30), 790, 4, 0.13)</code></li>
+        
+        <li><strong>AMORLINC()</strong> - Calculates linear depreciation for each accounting period.
+          <br>Example: <code>tr = AMORLINC(8900, DATE(1999,4,23), DATE(2000,11,30), 567, 3, 0.11)</code></li>
+        
+        <li><strong>DB()</strong> - Computes depreciation using the fixed declining balance method over a given period.
+          <br>Example: <code>rt = DB(76000.00, 2300.00, 3, 1)</code></li>
+        
+        <li><strong>DDB()</strong> - Calculates depreciation using the double declining balance method.
+          <br>Example: <code>dpr = DDB(87000.00, 4600.00, 5, 2)</code></li>
+        
+        <li><strong>SLN()</strong> - Returns straight-line depreciation over the asset's lifetime.
+          <br>Example: <code>tr = SLN(9800.00, 4900.00, 4)</code></li>
+        
+        <li><strong>SYD()</strong> - Computes depreciation using the sum-of-years'-digits method.
+          <br>Example: <code>sd = SYD(65000.00, 6000.00, 5, 2)</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Usage Notes</h2>
+    <div class="content">
+      <p>Depreciation functions require parameters like asset cost, salvage value, useful life, period for depreciation, and optionally rate or factor.</p>
+      <p>These functions calculate depreciation values for each specified period and can be used in calculated columns or measures for financial reporting.</p>
+    </div>
+  </div>
+</div>

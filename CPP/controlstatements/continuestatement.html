@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ <code>continue</code> Statement (Skip Current Iteration) ⏭️</h1>
+
+        <div class="content">
+            <p>The **<code>continue</code> statement** is a loop control statement that forces the current iteration of a loop to stop and immediately jumps to the next iteration, skipping any remaining code within the loop body for that iteration.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Mechanism by Loop Type</h2>
+            <p>When <code>continue</code> is executed, control flow is altered as follows:</p>
+            <ul>
+                <li>
+                    **<code>for</code> Loop:** Control immediately jumps to the **increment/decrement** step, followed by the conditional test.
+                </li>
+                <li>
+                    **<code>while</code> and <code>do...while</code> Loops:** Control immediately jumps to the **conditional test** at the end (for <code>do...while</code>) or beginning (for <code>while</code>) of the loop.
+                </li>
+            </ul>
+
+            <h3>Example Analysis: Skipping 15</h3>
+            <p>In the provided <code>do...while</code> example, the loop iterates from $a=10$ up to $a=19$. The <code>continue</code> statement ensures that the value 15 is skipped:</p>
+            <pre class="example">
+do {
+    if( a == 15) { 
+        a = a + 1; // Crucial: 'a' is incremented to 16 here.
+        continue; // Skips the 'cout' line below for a=15.
+    }
+    cout &lt;&lt; "value of a: " &lt;&lt; a &lt;&lt; endl; // This line is skipped when a=15.
+    a = a + 1;
+} while( a &lt; 20 );
+</pre>
+            <p>When $a=15$, the <code>if</code> condition is true. $a$ is incremented to **16**, and <code>continue</code> is hit, skipping the `cout` statement. The loop then checks the condition $16 < 20$ and proceeds to the next iteration, where $16$ is printed.</p>
+            <pre class="example">
+...
+value of a: 13
+value of a: 14 
+(15 skipped)
+value of a: 16
+value of a: 17
+...
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title"><code>continue</code> vs. <code>break</code></h2>
+            <p>These two control statements serve fundamentally different purposes:</p>
+            <ul>
+                <li>
+                    **<code>continue</code>:** **Skips** the remainder of the **current iteration** and proceeds to the next iteration of the loop. It does **not** terminate the loop.
+                </li>
+                <li>
+                    **<code>break</code>:** **Immediately terminates** the entire loop (or <code>switch</code>) and transfers control to the statement immediately following the loop.
+                </li>
+            </ul>
+
+            <h3>Use Cases for <code>continue</code></h3>
+            <p>The <code>continue</code> statement is useful for:</p>
+            <ul>
+                <li>**Data Filtering:** Skipping invalid or unwanted data records during processing.</li>
+                <li>**Optimizing Calculations:** Avoiding complex or redundant computations when a simple check determines they are unnecessary for the current iteration.</li>
+                <li>**Handling Special Cases:** Bypassing standard processing logic for specific, non-critical values within a loop.</li>
+            </ul>
+        </div>
+    </div>
+</div>

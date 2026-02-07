@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Function apply() Method</h1>
+
+    <div class="content">
+      <p>The <strong>Function apply()</strong> method in JavaScript allows us to invoke a function with a specific value for <code>this</code> and arguments provided as an array.</p>
+      <p>The <code>call()</code> and <code>apply()</code> methods are very similar, but the key difference is:</p>
+      <ul>
+        <li><code>call()</code> takes arguments individually.</li>
+        <li><code>apply()</code> takes arguments as an array.</li>
+      </ul>
+      <p>We can also use <code>apply()</code> to manipulate the <code>this</code> value and assign any object as the context.</p>
+    </div>
+
+    <div class="content">
+      <h2>Syntax</h2>
+      <p><code>func.apply(thisArg, [arg1, arg2, ... argN]);</code></p>
+      <ul>
+        <li><strong>thisArg</strong> − The object to use as <code>this</code> inside the function.</li>
+        <li><strong>[arg1, arg2, ... argN]</strong> − The arguments to pass, inside an array.</li>
+      </ul>
+      <p><strong>Return value:</strong> The value returned by the function.</p>
+    </div>
+
+    <div class="content">
+      <h2>Examples</h2>
+
+      <h3>Using <code>apply()</code> without arguments</h3>
+      <pre><code>
+function test() {
+  return "The function test is invoked!";
+}
+test();
+test.apply();
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The function test is invoked!</li>
+        <li>The function test is invoked!</li>
+      </ul>
+
+      <h3>Using <code>apply()</code> with <code>this</code> argument</h3>
+      <pre><code>
+function showCar() {
+  return "The price of the " + this.name + " " + this.model + " is: " + this.price;
+}
+let car = { name: "OD", model: "Q6", price: 10000000 };
+showCar.apply(car);
+      </code></pre>
+      <p><strong>Output:</strong> The price of the OD Q6 is: 10000000</p>
+
+      <h3>Using <code>apply()</code> with an array of arguments</h3>
+      <pre><code>
+function printSum(p1, p2) {
+  return this.num1 + this.num2 + p1 + p2;
+}
+const nums = { num1: 5, num2: 10 };
+printSum.apply(nums, [40, 32]);
+      </code></pre>
+      <p><strong>Output:</strong> Total sum is 87</p>
+
+      <h3>Using <code>apply()</code> with built-in functions</h3>
+      <pre><code>
+const numbers = [7, 6, 4, 3, 9];
+Math.max.apply(null, numbers);
+Math.min.apply(null, numbers);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>Max element in the array: 9</li>
+        <li>Min element in the array: 3</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask FastCGI Deployment ⚡</h1>
+        <div class="content">
+            <p>**FastCGI** (Fast Common Gateway Interface) is another option for deploying Flask applications, particularly useful with high-performance web servers like **Nginx**, **Lighttpd**, and **Cherokee**. FastCGI is a protocol that keeps application processes alive between requests, significantly improving performance compared to traditional CGI.</p>
+
+            <h2>Creating the FastCGI Server File</h2>
+            <p>To use FastCGI, you need a server file (e.g., <code>yourapplication.fcgi</code>) that utilizes a WSGI-to-FastCGI bridge, such as the one provided by the **<code>flup</code>** Python library. This file runs the Flask application using <code>flup</code>'s <code>WSGIServer</code>.</p>
+            <p>A basic <code>.fcgi</code> file looks like this:</p>
+            <p><code>from flup.server.fcgi import WSGIServer</code></p>
+            <p><code>from yourapplication import app</code></p>
+            <p><code>if __name__ == '__main__':</code></p>
+            <p><code>   WSGIServer(app).run()</code></p>
+
+            <h3>Socket Binding</h3>
+            <p>For servers like Nginx and older Lighttpd, the FastCGI server needs to explicitly bind to a **socket** for communication. This is done by passing the socket path to the <code>bindAddress</code> parameter:</p>
+            <p><code>WSGIServer(application, bindAddress = '/path/to/fcgi.sock').run()</code></p>
+
+            <hr>
+
+            <h2>Web Server Configuration Examples</h2>
+
+            <h3>Configuring Apache</h3>
+            <p>To avoid having the <code>.fcgi</code> filename appear in your application's URLs (e.g., <code>example.com/yourapplication.fcgi/hello/</code>), you can use the **<code>ScriptAlias</code>** directive in your virtual host configuration. This makes the application root appear directly at the domain's root:</p>
+            <p><code>&lt;VirtualHost *&gt;</code></p>
+            <p><code>   ServerName example.com</code></p>
+            <p><code>   ScriptAlias / /path/to/yourapplication.fcgi/</code></p>
+            <p><code>&lt;/VirtualHost&gt;</code></p>
+
+            <h3>Configuring Lighttpd</h3>
+            <p>Lighttpd's configuration uses the **<code>fastcgi.server</code>** directive to define the FastCGI process and uses URL rewriting to ensure the Flask application handles all non-static requests:</p>
+            <ul>
+                <li>**<code>fastcgi.server</code>:** Defines the socket, the application executable path (<code>bin-path</code>), and process limits (<code>max-procs</code>).</li>
+                <li>**<code>alias.url</code>:** Maps the static URL (<code>/static/</code>) to the physical path of your static files.</li>
+                <li>**<code>url.rewrite-once</code>:** Redirects all incoming requests (<code>^(/.*)$</code>) to the FastCGI application path (<code>/yourapplication.fcgi$1</code>), except for static files.</li>
+            </ul>
+            <p>For this to work, you must ensure the FastCGI, alias, and rewrite modules are enabled in the Lighttpd configuration.</p>
+        </div>
+    </div>
+</div>

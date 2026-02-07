@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Diagnosing and Fixing Memory Leaks</h1>
+    </div>
+    <div class="content">
+      <p>
+        Memory leaks occur when programs improperly manage memory, causing reduced available memory and potential slowdowns or crashes. In Python, while automatic memory management handles most cases, leaks can still happen, especially in long-running applications.
+      </p>
+      <p>
+        Diagnosing involves understanding memory allocation, identifying leaks, and applying corrective measures.
+      </p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="title">
+      <h2>Common Causes of Memory Leaks</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>Unreleased References:</strong> Objects are still referenced and thus not garbage collected (example: large lists held in scope).</li>
+        <li><strong>Circular References:</strong> Objects referencing each other form cycles, which may not be cleared without proper handling.</li>
+        <li><strong>Global Variables:</strong> Persist during program life, potentially accumulating memory.</li>
+        <li><strong>Long-lived Objects:</strong> Objects like caches growing over time and never cleared.</li>
+        <li><strong>Improper Closures:</strong> Closures capturing large objects preventing their release.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="title">
+      <h2>Diagnostic Tools</h2>
+    </div>
+    <div class="content">
+      <h3>1. gc module</h3>
+      <pre>
+import gc
+gc.enable()
+unreachable = gc.collect()
+print(f"Unreachable objects: {unreachable}")
+print(f"Tracked objects: {len(gc.get_objects())}")
+      </pre>
+      <p>Example output:</p>
+      <pre>Unreachable objects: 51
+Tracked objects: 6117
+</pre>
+      
+      <h3>2. tracemalloc module</h3>
+      <pre>
+import tracemalloc
+tracemalloc.start()
+# Run code here
+snapshot = tracemalloc.take_snapshot()
+top_stats = snapshot.statistics('lineno')
+for stat in top_stats[:10]:
+    print(stat)
+      </pre>
+      <p>Example output:</p>
+      <pre>C:\path\to\file.py: line 7: size=400 B, count=1, average=400 B
+</pre>
+      
+      <h3>3. memory_profiler module</h3>
+      <pre>
+from memory_profiler import profile
+
+@profile
+def my_function():
+    a = [1]*10**6 # example workload
+
+if __name__ == "__main__":
+    my_function()
+      </pre>
+      <p>Profile output highlights line-by-line memory usage.</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="title">
+      <h2>Fixing Memory Leaks</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>Eliminate Unnecessary Global Variables:</strong> Use local variables or pass data explicitly.</li>
+        <li><strong>Break Circular References:</strong> Use the <code>weakref</code> module to create weak references avoiding cycles.</li>
+        <li><strong>Explicit Cleanup:</strong> Delete unused references or objects.</li>
+        <li><strong>Use Context Managers:</strong> For safe acquisition and release of resources.</li>
+        <li><strong>Optimize Data Structures:</strong> Use appropriate containers minimizing memory retention.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="content">
+      <p>
+        By combining diagnostics with appropriate fixes like careful reference management and leveraging Python's memory tools, developers can prevent and resolve memory leaks for efficient and stable Python applications.
+      </p>
+    </div>
+  </div>
+  
+   
+    </div>
+  </div>
+</div>

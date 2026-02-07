@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Binary Files</h1>
+    <div class="content">
+      <p>
+        A binary file contains information stored as bits and bytes (0s and 1s) and is not human-readable. Specific programs are needed to interpret and use binary files, as they contain more than just text, including formatting and other metadata. In R, binary files are continuous sequences of bytes, and reading or writing them requires special handling.
+      </p>
+
+      <h2 class="title">R Functions for Binary Files</h2>
+      <p>
+        - <code>writeBin(object, con)</code>: Write binary data.
+        <br>
+        - <code>readBin(con, what, n)</code>: Read binary data.
+      </p>
+      <ul>
+        <li><strong>con</strong>: connection object for reading/writing.</li>
+        <li><strong>object</strong>: data to write.</li>
+        <li><strong>what</strong>: mode of data (character, integer, etc.) to read.</li>
+        <li><strong>n</strong>: number of bytes to read.</li>
+      </ul>
+
+      <h2 class="title">Example: Writing a Binary File</h2>
+      <p>Using the built-in mtcars dataset, we store selected columns as CSV, then write as a binary file.</p>
+      <pre><code># Write selected columns of mtcars to CSV
+write.table(mtcars, file = "mtcars.csv", row.names = FALSE, na = "", col.names = TRUE, sep = ",")
+
+# Read 5 records from CSV
+new.mtcars &lt;- read.table("mtcars.csv", sep = ",", header = TRUE, nrows = 5)
+
+# Open binary file for writing
+write.filename = file("/web/com/binmtcars.dat", "wb")
+
+# Write column names
+writeBin(colnames(new.mtcars), write.filename)
+
+# Write column values
+writeBin(c(new.mtcars$cyl, new.mtcars$am, new.mtcars$gear), write.filename)
+
+# Close connection
+close(write.filename)
+</code></pre>
+
+      <h2 class="title">Example: Reading the Binary File</h2>
+      <pre><code># Open binary file for reading
+read.filename &lt;- file("/web/com/binmtcars.dat", "rb")
+
+# Read column names (3 columns)
+column.names &lt;- readBin(read.filename, character(), n = 3)
+
+# Reopen connection and read 18 values (3 columns * 5 rows + 3 column names)
+read.filename &lt;- file("/web/com/binmtcars.dat", "rb")
+bindata &lt;- readBin(read.filename, integer(), n = 18)
+
+# Close connection may be required
+close(read.filename)
+
+# Display data
+print(bindata)
+
+# Extract values for each column
+cyldata &lt;- bindata[4:8]
+amdata &lt;- bindata[9:13]
+geardata &lt;- bindata[14:18]
+
+print(cyldata)
+print(amdata)
+print(geardata)
+
+# Combine extracted data to a data frame
+finaldata &lt;- cbind(cyldata, amdata, geardata)
+colnames(finaldata) &lt;- column.names
+print(finaldata)
+</code></pre>
+
+      <p>Output:</p>
+      <pre><code>[1] 7108963 1728081249 7496037 6 6 4 6 8 1 1 1 0 0 4 4 4 3 3
+
+[1] 6 6 4 6 8
+
+[1] 1 1 1 0 0
+
+[1] 4 4 4 3 3
+
+  cyl am gear
+1   6  1    4
+2   6  1    4
+3   4  1    4
+4   6  0    3
+5   8  0    3
+</code></pre>
+      <p>This shows how the original data can be retrieved correctly from the binary file.</p>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Delete</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        MongoDB provides two methods to delete documents in collections via the Node.js driver: <code>deleteOne()</code> to remove a single matching document, and <code>deleteMany()</code> to remove all matching documents.
+      </p>
+
+      <h2>deleteOne() Example</h2>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+  const uri = "mongodb://localhost:27017/";
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+    await deleteDoc(client, "mydb", "products");
+  } finally {
+    await client.close();
+  }
+}
+
+async function deleteDoc(client, dbname, colname) {
+  const filter = { Name: "TV" };
+  const result = await client.db(dbname).collection(colname).deleteOne(filter);
+  console.log("Document Deleted");
+}
+
+main().catch(console.error);
+</code></pre>
+      <p>Use MongoDB shell or Compass to verify deletion.</p>
+
+      <h2>deleteMany() Example</h2>
+      <pre><code>async function deleteDocs(client, dbname, colname) {
+  const filter = { price: { $gt: 10000 } };
+  const result = await client.db(dbname).collection(colname).deleteMany(filter);
+  console.log("Documents Deleted");
+}</code></pre>
+
+      <h2>Dropping a Collection</h2>
+      <p>Remove an entire collection with <code>drop()</code> or <code>dropCollection()</code>:</p>
+      <pre><code>async function dropCollection(client, dbname, colname) {
+  const result = await client.db(dbname).collection(colname).drop();
+  console.log("Collection dropped");
+}</code></pre>
+      <p>Or alternatively:</p>
+      <pre><code>async function dropCollectionAlt(client, dbname, colname) {
+  const result = await client.db(dbname).dropCollection(colname);
+  console.log("Collection dropped");
+}</code></pre>
+
+      <p>Verify collection removal using MongoDB shell.</p>
+    </div>
+  </div>
+</div>

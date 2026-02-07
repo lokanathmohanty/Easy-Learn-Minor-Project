@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Router Caching (Client-Side)</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Router Caching?</h2>
+            <p><strong>Router Caching</strong> is a client-side feature in Next.js that stores the complete rendered pages and their data (specifically, the React Server Component Payloads) in the **browser's temporary memory**. This client-side storage dramatically improves performance and load times by allowing for **instantaneous navigation** (e.g., back/forward) without needing to fetch the entire page again from the server.</p>
+            
+            <h3>How Router Caching Works</h3>
+            <p>When a page is loaded, Next.js caches the page's output in the client browser. Subsequent navigation requests for that same page (e.g., using the browser's back button or the <code>&lt;Link&gt;</code> component) return the cached version instead of initiating a new network request.</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Router Cache Duration and Invalidation</h2>
+            <p>The client-side Router Cache persists based on two main factors:</p>
+            
+            <ul>
+                <li class="example">
+                    <strong>Current Session:</strong> The cache is stored in the browser's memory and is **cleared** when the browser tab is manually reloaded or closed.
+                </li>
+                <li class="example">
+                    <strong>Automatic Invalidation Period:</strong> Next.js automatically invalidates cached layouts and loading states after a specific duration to prevent stale content:
+                    <ul>
+                        <li>For default pre-fetching (<code>prefetch={null}</code> or unspecified): **5 minutes** for static pages, but dynamic pages are generally **not cached**.</li>
+                        <li>For full pre-fetching (<code>prefetch={true}</code>): **5 minutes** for both static and dynamic pages.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Revalidating the Client-Side Cache</h2>
+            <p>While the automatic invalidation is helpful, developers can manually force the cache to update using two methods:</p>
+            
+            <h3>1. Time-based Cache Revalidation (Server-Side Control)</h3>
+            <p>This technique controls the server-side **Data Cache** and **Full Route Cache**, which in turn dictates what data the client-side Router Cache stores. By setting the **<code>revalidate</code>** variable, you ensure the page's source data is refreshed on the server after the specified interval.</p>
+            <pre class="example"><code>// export const revalidate = 5 // revalidate every 5 seconds
+export default async function Page() {
+  const data = await getData()
+  
+  return (
+    &lt;main&gt;
+        &lt;h1&gt;5 Second Revalidation&lt;/h1&gt;
+        &lt;p&gt;Timestamp: {data.timestamp}&lt;/p&gt;
+    &lt;/main&gt;
+  )
+}</code></pre>
+
+            <h3>2. Revalidation by Path (On-Demand)</h3>
+            <p>The **<code>revalidatePath</code>** function, used within a Server Action, clears the server-side cache for a specific route. When a user subsequently requests that route, Next.js fetches fresh data, effectively updating the underlying data used to populate the client's Router Cache on the next visit.</p>
+            <pre class="example"><code>// Server Action for revalidation
+async function handleRevalidate() {
+  'use server'
+  revalidatePath('/') // Clears server cache for the root path
+}
+
+export default async function Home() {
+  const data = await getData()
+  
+  return (
+    &lt;main&gt;
+        &lt;h1&gt;Path Revalidation Demo&lt;/h1&gt;
+        &lt;p&gt;Random Number: {data.randomNumber}&lt;/p&gt;
+        
+        &lt;form action={handleRevalidate}&gt;
+            &lt;button type="submit"&gt;Revalidate&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/main&gt;
+  )
+}</code></pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Video Optimization</h1>
+        
+        <div class="content">
+            <h2 class="title">Using Videos in Next.js</h2>
+            <p>Next.js does not provide a dedicated built-in component for video, unlike images or scripts. Videos are included in a page using standard web elements:</p>
+            <ul>
+                <li class="example"><strong>Local Video Files:</strong> Use the HTML **<code>&lt;video&gt;</code>** tag for files hosted within your application.</li>
+                <li class="example"><strong>External Platform Videos:</strong> Use the HTML **<code>&lt;iframe&gt;</code>** tag to embed videos hosted on platforms like YouTube or Vimeo.</li>
+            </ul>
+            
+            <p><strong>Example: Embedding a Local Video</strong></p>
+            <p>The <code>playsInline</code> attribute is important for mobile compatibility, particularly on iOS.</p>
+            <pre class="example"><code>export default function Example() {
+    return (
+    &lt;div&gt;
+        &lt;h1&gt;Video:&lt;/h1&gt;
+        &lt;video
+            src="/video.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+        /&gt;
+    &lt;/div&gt;
+    )
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Best Practices for Video Optimization</h2>
+            <p>Optimizing videos focuses on accessibility, performance, and reliability:</p>
+            <ul>
+                <li class="example">
+                    <strong>Fallback Content:</strong> Always include text or links inside the <code>&lt;video&gt;</code> tag. This content is displayed if the user's browser does not support the video format.
+                </li>
+                <li class="example">
+                    <strong>Subtitles or Captions:</strong> Use the **<code>&lt;track&gt;</code>** tag within the <code>&lt;video&gt;</code> element to provide caption files. This is essential for accessibility (users who are deaf or hard of hearing).
+                </li>
+                <li class="example">
+                    <strong>Accessible Controls:</strong> Use the standard HTML5 video controls (by including the <code>controls</code> attribute) for basic accessibility. For complex needs, use established third-party players (like **<code>react-player</code>** or **<code>video.js</code>**) known for accessible controls and consistent behavior.
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Embedding Externally Hosted Videos (Optimized)</h2>
+            <p>To optimize the loading of external videos, especially those hosted on YouTube or Vimeo, a pattern involving a **Server Component** and **React Suspense** is highly recommended.</p>
+            
+            <h3>Step 1: Create a Server Component for Fetching Video Source</h3>
+            <p>This component is responsible for securely fetching the final video URL (<code>src</code>) and rendering the <code>&lt;iframe&gt;</code>. This server-side fetching prevents unnecessary client-side logic and potential network waterfall issues.</p>
+            <pre class="example"><code>export default async function VideoComponent() {
+  const src = await getVideoSrc() // Example function to fetch the video URL
+ 
+  return &lt;iframe src={src} allowFullScreen /&gt;
+}</code></pre>
+
+            <h3>Step 2: Display Video Component using React Suspense</h3>
+            <p>Wrap the <code>VideoComponent</code> in **<code>&lt;Suspense&gt;</code>** to provide an immediate **fallback UI** (e.g., "Loading video...") while the server component is fetching the video URL and before the <code>&lt;iframe&gt;</code> is rendered. This improves perceived performance.</p>
+            <pre class="example"><code>import { Suspense } from 'react'
+import VideoComponent from '../ui/VideoComponent.jsx'
+
+export default function Page() {
+  return (
+    &lt;section&gt;
+      &lt;Suspense fallback={&lt;p&gt;Loading video...&lt;/p&gt;}&gt;
+        &lt;VideoComponent /&gt;
+      &lt;/Suspense&gt;
+      {/* Other content of the page loads immediately */}
+    &lt;/section&gt;
+  )
+}</code></pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django User Management and Superuser Creation 🧑‍💻</h1>
+        <div class="content">
+            <p>Django provides a robust, built-in user management system via the **<code>django.contrib.auth</code>** and **<code>django.contrib.admin</code>** apps, which are included in <code>INSTALLED_APPS</code> by default. User objects are managed through the <code>django.contrib.auth.models.User</code> model.</p>
+
+            <h2>User Types and Privileges</h2>
+            <p>Django distinguishes between different user types based on key properties:</p>
+            <ul>
+                <li>**Superuser:** Has all permissions (can perform CRUD operations on all models) and can log into the Admin site. A superuser's <code>is_staff</code> and <code>is_superuser</code> properties are set to <code>True</code>.</li>
+                <li>**Staff User:** Any user with the **<code>is_staff</code>** property set to **<code>True</code>** can log into the Admin site, but their permissions are restricted by what's explicitly granted (unless they are also a Superuser).</li>
+                <li>**Active User:** All users are active by default (<code>is_active=True</code>). A normal active user cannot log into the Admin site unless they also have the <code>is_staff</code> privilege.</li>
+            </ul>
+
+            <hr>
+
+            <h2>Creating a Superuser</h2>
+            <p>A Superuser, necessary to access the Admin interface initially, can be created through two main methods:</p>
+
+            <h3>1. Command Line (Recommended)</h3>
+            <p>Run the following command from the project's parent directory and follow the prompts for username, email, and password:</p>
+            <pre><code>$ python manage.py createsuperuser</code></pre>
+
+            <h3>2. Programmatically (Via Django Shell)</h3>
+            <p>A Superuser can also be created by calling the <code>create_superuser()</code> method on the User manager (or using <code>create_user()</code> and manually setting <code>is_staff</code> and <code>is_superuser</code>):</p>
+            <pre><code>>>> from django.contrib.auth.models import User
+>>> usr = User.objects.create_user('testusr', 'test@example.com', 'pass123')
+>>> usr.is_staff = True
+>>> usr.save()</code></pre>
+            <p>After creation, you can log in to the Admin site at <code>http://localhost:8000/admin/</code>.</p>
+
+            <hr>
+
+            <h2>Creating New Users via the Admin Interface</h2>
+            <p>Once logged in as a Superuser, new users are created through the **Users** model section on the Admin homepage. Key steps for new user creation include:</p>
+            <ul>
+                <li>Entering the **Username** and **Password**.</li>
+                <li>Manually scrolling down to set the **Staff status (<code>is_staff</code>)** if the new user needs the privilege to log in to the Admin site.</li>
+                <li>Optionally setting other details like name and email.</li>
+            </ul>
+
+            <hr>
+
+            <h2>Groups and Permissions</h2>
+            <p>Django allows for granular control over user permissions using the **Groups** model:</p>
+            <ul>
+                <li>**Groups:** A Group is a collection of permissions that can be assigned to multiple users. A single user can belong to any number of groups.</li>
+                <li>**Permission Assignment:** Permissions can be added to a Group via the Admin site. When a user is added to a Group, they instantly inherit all permissions assigned to that Group. Additional permissions can still be assigned to the user directly, alongside those obtained from their groups.</li>
+            </ul>
+        </div>
+    </div>
+</div>

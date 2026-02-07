@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP $\text{PDO}$ Extension ($\text{PHP}$ Data Objects) 💾</h1>
+
+        <div class="content">
+            <p>**$\text{PDO}$ ($\text{PHP}$ Data Objects)** is a lightweight, consistent interface for accessing databases in $\text{PHP}$. It provides a vendor-neutral abstraction layer, meaning the same $\text{PDO}$ code can be used to connect to various database systems (e.g., $\text{MySQL}$, $\text{PostgreSQL}$, $\text{SQLite}$) with minimal changes, primarily just the connection details ($\text{DSN}$).</p>
+
+            <hr>
+
+            <h2 class="title">Database Connection</h2>
+            <p>A connection is established by creating an instance of the $\text{PDO}$ class. The constructor requires a **$\text{DSN}$ ($\text{Data Source Name}$)** string, along with optional username and password.</p>
+            <pre>
+$dbh = new PDO('mysql:host=localhost;dbname=test', $user, $pass);</pre>
+            <ul>
+                <li><strong>$\text{DSN}$:</strong> Specifies the driver name, followed by driver-specific connection details (e.g., $\text{mysql:host=...}$).</li>
+                <li><strong>Drivers:</strong> $\text{PHP}$ must have the corresponding $\text{PDO}$ driver enabled ($\text{extension=pdo\_mysql}$ in $\text{php.ini}$). You can check available drivers with $\text{PDO::getAvailableDrivers()}$.</li>
+                <li><strong>Error Handling:</strong> $\text{PDO}$ throws a **$\text{PDOException}$** object on connection failure, which should be handled using a $\text{try...catch}$ block.</li>
+            </ul>
+
+            <h2 class="title">Core $\text{PDO}$ Connection Methods</h2>
+
+            <h3>1. $\text{PDO::exec()}$ (Non-Query Operations)</h3>
+            <p>Executes an $\text{SQL}$ statement and returns the **number of rows affected** (or $\text{0}$ if none). It is typically used for $\text{DML}$ ($\text{INSERT}$, $\text{UPDATE}$, $\text{DELETE}$) and $\text{DDL}$ ($\text{CREATE}$, $\text{DROP}$) statements, but **does not return results from $\text{SELECT}$ statements**.</p>
+            <pre>public PDO::exec(string $statement): int|false</pre>
+            <div class="example">
+                <p>Example: Creating a table</p>
+                <pre>$conn->exec("CREATE TABLE IF NOT EXISTS STUDENT (...)");</pre>
+            </div>
+
+            <h3>2. $\text{PDO::query()}$ (Simple Queries)</h3>
+            <p>Prepares and executes an $\text{SQL}$ statement in a single call, returning a **$\text{PDOStatement}$ object**. This method is suitable for $\text{SELECT}$ statements that are executed only once and do **not** use placeholders.</p>
+            <pre>public PDO::query(string $query): PDOStatement|false</pre>
+            <div class="example">
+                <p>Example: Fetching records</p>
+                <pre>
+$statement = $conn->query("SELECT * from student");
+$rows = $statement->fetchAll(PDO::FETCH_ASSOC);</pre>
+            </div>
+            
+            <p>For $\text{SQL}$ statements issued multiple times or those requiring user input (to prevent $\text{SQL}$ injection), use $\text{PDO::prepare()}$ and $\text{PDOStatement::execute()}$.</p>
+
+            <h2 class="title">Transaction Management</h2>
+            <p>$\text{PDO}$ provides methods to manage database transactions, ensuring a set of operations either all succeed or all fail together. This turns off the default autocommit mode.</p>
+            <ul>
+                <li>$\text{PDO::beginTransaction()}$: Initiates a transaction.</li>
+                <li>$\text{PDO::commit()}$: Makes all changes within the transaction permanent and returns the connection to autocommit mode.</li>
+                <li>$\text{PDO::rollBack()}$: Reverts all changes made since the $\text{beginTransaction()}$ call and returns the connection to autocommit mode.</li>
+            </ul>
+        </div>
+    </div>
+</div>

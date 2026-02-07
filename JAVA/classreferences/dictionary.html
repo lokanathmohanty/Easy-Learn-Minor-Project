@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>Dictionary</code> Class Summary 📜🗝️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.Dictionary</code>** class is an **abstract** class that served as the **parent of all classes that map keys to values** (like <code>Hashtable</code>) in the earliest versions of Java. It is considered a **legacy class** and has been entirely superseded by the **<code>Map</code>** interface in the Java Collections Framework (JCF).</p>
+
+            <hr>
+
+            <h2 class="title">I. Legacy Status and Replacement</h2>
+            <ul>
+                <li>
+                    **Abstract Nature:** As an abstract class, it cannot be instantiated directly. Implementations (like the example's use of <code>Hashtable</code>) were required to extend it.
+                </li>
+                <li>
+                    **Replacement:** In modern Java development, the **<code>java.util.Map</code>** interface is used for all key-value mappings. The `Dictionary` class should be avoided in new code.
+                </li>
+                <li>
+                    **Legacy Iteration:** The abstract methods rely on the **<code>Enumeration</code>** interface for iterating keys and values, which is another legacy construct superseded by **<code>Iterator</code>** and modern collection loops.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">II. Core Abstract Methods (Map Operations)</h2>
+            <p>The abstract methods defined in `Dictionary` establish the basic contract for a key-value mapping structure:</p>
+            <table>
+                <tr>
+                    <th>Abstract Method</th>
+                    <th>Modern <code>Map</code> Equivalent</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><code>V **put**(K key, V value)</code></td>
+                    <td><code>V put(K key, V value)</code></td>
+                    <td>Maps the specified key to the specified value.</td>
+                </tr>
+                <tr>
+                    <td><code>V **get**(Object key)</code></td>
+                    <td><code>V get(Object key)</code></td>
+                    <td>Returns the value associated with the key.</td>
+                </tr>
+                <tr>
+                    <td><code>V **remove**(Object key)</code></td>
+                    <td><code>V remove(Object key)</code></td>
+                    <td>Removes the entry for the specified key.</td>
+                </tr>
+                <tr>
+                    <td><code>abstract int **size**()</code></td>
+                    <td><code>int size()</code></td>
+                    <td>Returns the count of key-value entries.</td>
+                </tr>
+                <tr>
+                    <td><code>abstract Enumeration&lt;K&gt; **keys**()</code></td>
+                    <td><code>Set&lt;K&gt; keySet()</code></td>
+                    <td>Retrieves an enumeration of all keys.</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">III. Example Observation</h2>
+            <p>The provided example uses a **<code>Hashtable</code>** (a legacy class that extends <code>Dictionary</code> and implements <code>Map</code>) to demonstrate the basic functionality. Because <code>Hashtable</code> is unsorted, the output order (`2` then `1`) does not match the insertion order (`1` then `2`), a characteristic common to hash-table based maps.</p>
+        </div>
+    </div>
+</div>

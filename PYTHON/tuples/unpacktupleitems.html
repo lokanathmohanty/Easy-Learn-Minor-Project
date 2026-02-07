@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Unpack Tuple Items</h1>
+    <div class="content">
+      <p>The term "unpacking" refers to the process of parsing tuple items into individual variables. In Python, parentheses are the default delimiters for tuple literals.</p>
+      <p>The following statements to declare a tuple are equivalent:</p>
+      <pre><code>>> t1 = (x, y)
+>>> t1 = x, y
+>>> type(t1)
+&lt;class 'tuple'&gt;
+</code></pre>
+
+      <h2 class="title">Example</h2>
+      <p>To store tuple items in individual variables, use multiple variables on the left side of the assignment operator:</p>
+      <pre><code>tup1 = (10, 20, 30)
+x, y, z = tup1
+print("x:", x, "y:", y, "z:", z)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>x: 10 y: 20 z: 30</code></pre>
+
+      <h2 class="title">ValueError While Unpacking a Tuple</h2>
+      <p>If the number of variables is more or less than the length of the tuple, Python raises a <code>ValueError</code>.</p>
+      <pre><code>tup1 = (10, 20, 30)
+x, y = tup1             # Raises ValueError: too many values to unpack (expected 2)
+x, y, p, q = tup1       # Raises ValueError: not enough values to unpack (expected 4, got 3)
+</code></pre>
+
+      <h2 class="title">Unpack Tuple Items Using Asterisk (*)</h2>
+      <p>Use the "*" symbol to collect multiple items into a list when the number of variables does not match the number of tuple items.</p>
+
+      <h3 class="title">Example 1</h3>
+      <pre><code>tup1 = (10, 20, 30)
+x, *y = tup1
+print("x:", x, "y:", y)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>x: y: [20, 30]</code></pre>
+      <p>The first value is assigned to <code>x</code> and the rest to <code>y</code> as a list.</p>
+
+      <h3 class="title">Example 2</h3>
+      <pre><code>tup1 = (10, 20, 30, 40, 50, 60)
+x, *y, z = tup1
+print("x:", x, "y:", y, "z:", z)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>x: 10 y: [20, 30, 40, 50] z: 60</code></pre>
+      <p>Values are assigned to <code>x</code> and <code>z</code> first, and the middle values become the list <code>y</code>.</p>
+
+      <h3 class="title">Example 3</h3>
+      <pre><code>tup1 = (10, 20, 30, 40, 50, 60)
+*x, y, z = tup1
+print("x:", x, "y:", y, "z:", z)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>x: [10, 20, 30, 40] y: 50 z: 60</code></pre>
+      <p>The tuple is unpacked so that <code>x</code> receives the first values as a list, while <code>y</code> and <code>z</code> take the last two values individually.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Dead Zone</h1>
+
+    <div class="content">
+      <h2>What is a Dead Zone?</h2>
+      <p>
+        A dead zone in JavaScript is a point during code execution where a variable exists but cannot be accessed. 
+        This happens because of variable hoisting, a mechanism that moves declarations to the top of their scope 
+        during compilation while leaving assignments in place.
+      </p>
+      <p>
+        Dead zones are commonly seen with <code>let</code> and <code>const</code>, which are block-scoped. 
+        Unlike <code>var</code>, they cannot be accessed before initialization.
+      </p>
+
+      <h2>How it Works?</h2>
+      <p>JavaScript code executes in two phases:</p>
+      <ul>
+        <li>
+          <strong>Declaration Phase:</strong> Variables declared with <code>var</code> are initialized as 
+          <code>undefined</code>. Variables declared with <code>let</code> and <code>const</code> remain in 
+          the "temporal dead zone" until they are assigned a value.
+        </li>
+        <li>
+          <strong>Execution Phase:</strong> Variable assignments happen, and the code executes line by line.
+        </li>
+      </ul>
+      <p>
+        Accessing a <code>let</code> or <code>const</code> variable before initialization results in a runtime error.
+      </p>
+
+      <h2>Variable Hoisting and Dead Zones</h2>
+      <pre>
+console.log(x); // Error: Cannot access 'x' before initialization
+let x = 5;
+      </pre>
+      <p>
+        In this example, <code>x</code> is hoisted but not initialized yet, leaving it in the dead zone. 
+        Attempting to access it triggers a <code>ReferenceError</code>.
+      </p>
+
+      <h2>Dead Zones with <code>let</code> and <code>const</code></h2>
+      <pre>
+console.log(x); // undefined
+var x = 42;
+
+console.log(x); // ReferenceError
+let x = 42;
+      </pre>
+      <p>
+        <code>var</code> is hoisted and initialized with <code>undefined</code>, but <code>let</code> and 
+        <code>const</code> remain in the dead zone until assignment.
+      </p>
+
+      <h2>Dead Zones with <code>var</code></h2>
+      <p>
+        Variables declared with <code>var</code> behave differently. Both declaration and initialization are 
+        hoisted, but initialized to <code>undefined</code>.
+      </p>
+      <pre>
+console.log(x); // undefined
+var x = 42;
+      </pre>
+      <p>
+        Here, <code>x</code> exists and is initialized to <code>undefined</code>, so no error is thrown, unlike with 
+        <code>let</code> or <code>const</code>.
+      </p>
+
+      <h2>Handling Dead Zones</h2>
+      <ul>
+        <li>Always declare variables before using them.</li>
+        <li>Understand block scope with <code>let</code> and <code>const</code>.</li>
+        <li>Use <code>var</code> carefully due to its function-scoped behavior.</li>
+        <li>Use coding linters to detect potential dead zone issues.</li>
+      </ul>
+
+      <h2>Benefits of Reducing Dead Zones</h2>
+      <ul>
+        <li><strong>Preventing Unexpected Problems:</strong> Avoid runtime errors caused by uninitialized variables.</li>
+        <li><strong>Improving Code Readability:</strong> Clear scoping makes the code easier to understand.</li>
+        <li><strong>Increasing Debugging Efficiency:</strong> Developers can focus on real issues, not initialization errors.</li>
+        <li><strong>Better Collaboration:</strong> Clean, predictable code makes team development smoother.</li>
+      </ul>
+    </div>
+  </div>
+</div>

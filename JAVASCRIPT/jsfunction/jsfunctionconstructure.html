@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Function() Constructor</h1>
+
+    <div class="content">
+      <p>
+        The <code>Function()</code> constructor in JavaScript can dynamically 
+        create a function object at runtime. Functions created this way always 
+        have global scope.
+      </p>
+      <p>
+        Although powerful, it should be used with caution because it can 
+        introduce vulnerabilities into your code.
+      </p>
+      <p>
+        Multiple arguments can be passed to the constructor. All arguments 
+        except the last one are treated as parameter names, while the last 
+        argument is the function body.
+      </p>
+    </div>
+
+    <h2 class="title">Syntax</h2>
+    <div class="content">
+      <pre><code>
+const obj = new Function(arg1, arg2, ..., functionBody);
+      </code></pre>
+      <p>
+        The constructor can be called with or without the <code>new</code> keyword.
+      </p>
+      <ul>
+        <li><code>arg1, arg2...</code> → Names of parameters (optional)</li>
+        <li><code>functionBody</code> → JavaScript statements comprising the function definition</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Multiplication</h2>
+    <div class="content">
+      <pre><code>
+const func = new Function("p", "q", "return p * q");
+func(5, 7); // 35
+      </code></pre>
+      <p>
+        Output: <code>The value returned from the function is: 35</code>
+      </p>
+    </div>
+
+    <h2 class="title">Example: Single Argument (Function Body Only)</h2>
+    <div class="content">
+      <pre><code>
+const func = new Function("return 10 + 20");
+func(); // 30
+      </code></pre>
+      <p>
+        Output: <code>The value returned from the function is: 30</code>
+      </p>
+    </div>
+
+    <h2 class="title">Function Declaration or Expression as Parameter</h2>
+    <div class="content">
+      <p>
+        Creating functions with the <code>Function()</code> constructor is 
+        generally less efficient than using function declarations or 
+        expressions. However, you can pass multiple statements (separated by 
+        semicolons) in the <code>functionBody</code>.
+      </p>
+    </div>
+
+    <h2 class="title">Example: Function Expression</h2>
+    <div class="content">
+      <pre><code>
+const add = new Function(
+  "const sum = function (a, b) { return a + b }; return sum"
+)();
+add(5, 10); // 15
+      </code></pre>
+    </div>
+
+    <h2 class="title">Example: Function Declaration</h2>
+    <div class="content">
+      <pre><code>
+const sayHello = new Function(
+  "return function (name) { return `Hello, ${name}` }"
+)();
+sayHello("world"); // Hello, world
+      </code></pre>
+      <p>
+        Note: In both examples, the <code>new Function</code> is 
+        <strong>self-invoked</strong>.
+      </p>
+    </div>
+  </div>
+</div>

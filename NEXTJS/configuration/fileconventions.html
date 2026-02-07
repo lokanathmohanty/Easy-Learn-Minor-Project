@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js File Conventions (App Router) ⚙️</h1>
+        
+        <div class="content">
+            <h2 class="title">What are File Conventions?</h2>
+            <p>**File conventions** in Next.js refer to the special filenames and folder structures that the framework automatically recognizes and uses to define core application logic, routing, and UI behaviors. By naming files according to these conventions, you instruct Next.js how to handle aspects like layouts, error handling, loading states, and API endpoints without explicit configuration.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Key File Conventions in the `app` Directory</h2>
+            
+            <p>The table below summarizes the core reserved files used within the **App Router** for structural and behavioral purposes:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Purpose</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`page.js`/`.tsx`</span></td>
+                        <td>**Route UI**</td>
+                        <td>Defines the unique UI component for a specific, accessible route segment.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`layout.js`/`.tsx`</span></td>
+                        <td>**Shared Layout**</td>
+                        <td>Defines persistent UI (e.g., header, footer, sidebar) that wraps nested routes.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`loading.js`/`.tsx`</span></td>
+                        <td>**Loading State**</td>
+                        <td>Defines the loading UI shown while a page's data is being fetched (using React Suspense).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`error.js`/`.tsx`</span></td>
+                        <td>**Error Boundary**</td>
+                        <td>Creates an isolated error UI to gracefully handle runtime errors in nested routes.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`not-found.js`/`.tsx`</span></td>
+                        <td>**404 Page**</td>
+                        <td>Defines the custom UI for when a route is not found (404 error).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`template.js`/`.tsx`</span></td>
+                        <td>**Reusable Template**</td>
+                        <td>Wraps child layouts/pages but remounts components on navigation (unlike `layout.js`).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`route.js`/`.ts`</span></td>
+                        <td>**API Endpoint**</td>
+                        <td>Defines a custom server-side HTTP request handler (API Route).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`middleware.js`/`.ts`</span></td>
+                        <td>**Request Handler**</td>
+                        <td>Allows running code before a request is fully processed (e.g., for redirects or header modification).</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3 class="title">Less Common Conventions:</h3>
+            <ul>
+                <li><span class="example">`default.js`</span>: Provides fallback UI content when a parallel slot's URL doesn't match a dedicated route.</li>
+                <li><span class="example">`instrumentation.js`</span>: Used to define custom logic for tracking and monitoring application activity before the server starts.</li>
+            </ul>
+        </div>
+    </div>
+</div>

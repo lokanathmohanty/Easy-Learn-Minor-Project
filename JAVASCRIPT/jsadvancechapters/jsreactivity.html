@@ -1,0 +1,201 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Reactivity</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        In web development, responsiveness refers to how a system responds to changes in data. 
+        This concept is important for creating modern, dynamic web applications in which user 
+        actions need speedy responses like updating a page without reloading it or dynamically 
+        changing what the user sees when data is updated.
+      </p>
+      <p>
+        This chapter covers some powerful JavaScript patterns that can help you build reactive 
+        systems. These patterns are commonly used in frameworks like React and Vue but understanding 
+        them in simple JavaScript allows you to understand the fundamental concepts.
+      </p>
+
+      <h2>Why use Reactivity?</h2>
+      <p>
+        Web apps today are highly interactive. When users click buttons, navigate pages or enter 
+        data the application must reply quickly and change what shows on the screen. Addressing such 
+        updates manually can be difficult, but reactivity makes it easier by automatically responding 
+        to changes in data.
+      </p>
+
+      <h2>Key Reactivity Patterns in JavaScript</h2>
+      <p>
+        Now we will explore some key reactivity patterns in JavaScript. These patterns allow us to 
+        react rapidly to changes in data and how the page responds to user actions. They are used in 
+        many popular libraries and frameworks but we will show how to use them in simple JavaScript.
+      </p>
+
+      <h2>Pub/Sub: Simplified Data Flow Management</h2>
+      <p>
+        The Pub/Sub (Publisher/Subscriber) pattern is a common approach to manage data flows. 
+        It differentiates between code that changes data (publisher) and code that responds to those 
+        updates (subscriber). This makes it easy to manage the various parts of an app separately.
+      </p>
+      <pre><code>
+class PS {
+  constructor() {
+    this.t = {}; // Tracks events and subscribers
+  }
+
+  sub(tp, cb) {
+    if (!this.t[tp]) {
+      this.t[tp] = [];
+    }
+    this.t[tp].push(cb);
+  }
+
+  pub(tp, d) {
+    if (this.t[tp]) {
+      this.t[tp].forEach((cb) => cb(d));
+    }
+  }
+}
+
+const ps = new PS();
+ps.sub('n', (msg) => console.log(`News: ${msg}`));
+ps.pub('n', 'New update available!');
+      </code></pre>
+      <p><strong>Output:</strong> News: New update available!</p>
+
+      <h2>Custom Events: Browser-Built Pub/Sub for Reactivity</h2>
+      <p>
+        The browser provides an API for triggering and subscribing to custom events using the 
+        <code>CustomEvent</code> class and <code>dispatchEvent</code> method.
+      </p>
+      <pre><code>
+const evt = new CustomEvent('cEvt', {
+  detail: 'Event data',
+});
+
+const el = document.getElementById('target');
+el.addEventListener('cEvt', (e) => console.log(`Event: ${e.detail}`));
+el.dispatchEvent(evt);
+      </code></pre>
+      <p><strong>Output:</strong> Event: Event data</p>
+
+      <h2>Custom Event Targets</h2>
+      <p>
+        If you do not wish to dispatch events globally on the window object, you can create your 
+        own event target by extending the native <code>EventTarget</code> class.
+      </p>
+      <pre><code>
+class CET extends EventTarget {
+  trig(evtName, evtData) {
+    const evt = new CustomEvent(evtName, { detail: evtData });
+    this.dispatchEvent(evt);
+  }
+}
+const ct = new CET();
+ct.addEventListener('cEvt', (e) => console.log(`Event: ${e.detail}`));
+ct.trig('cEvt', 'Hello from event!');
+      </code></pre>
+      <p><strong>Output:</strong> Event: Hello from event!</p>
+
+      <h2>Observer Pattern: Flexible Updates for Decoupled Code</h2>
+      <pre><code>
+class Sub {
+  constructor() {
+    this.obs = [];
+  }
+  sub(o) {
+    this.obs.push(o);
+  }
+  notify(d) {
+    this.obs.forEach((o) => o.up(d));
+  }
+}
+class Obs {
+  constructor(n) {
+    this.n = n;
+  }
+  up(d) {
+    console.log(`${this.n} got: ${d}`);
+  }
+}
+
+const s = new Sub();
+const o1 = new Obs('Obs 1');
+s.sub(o1);
+s.notify('New info!');
+      </code></pre>
+      <p><strong>Output:</strong> Obs 1 got: New info!</p>
+
+      <h2>Reactive Properties with Proxy</h2>
+      <pre><code>
+let d = { n: 'Akash', a: 25 };
+
+let rData = new Proxy(d, {
+  get(t, p) {
+    console.log(`Read: "${p}" = ${t[p]}`);
+    return t[p];
+  },
+  set(t, p, v) {
+    console.log(`Changed: "${p}" from ${t[p]} to ${v}`);
+    t[p] = v;
+    return true;
+  }
+});
+
+rData.n = 'Vikas';
+      </code></pre>
+      <p><strong>Output:</strong> Changed: "n" from Akash to Vikas</p>
+
+      <h2>Individual Property Reactivity</h2>
+      <pre><code>
+let u = { _n: 'Akash' };
+
+Object.defineProperty(u, 'n', {
+  get() {
+    return this._n;
+  },
+  set(v) {
+    console.log(`Name changed from ${this._n} to ${v}`);
+    this._n = v;
+  }
+});
+
+u.n = 'Vikas';
+      </code></pre>
+      <p><strong>Output:</strong> Name changed from Akash to Vikas</p>
+
+      <h2>Reactive HTML Attributes with MutationObserver</h2>
+      <pre><code>
+const el = document.getElementById('obs-el');
+
+const obs = new MutationObserver((muts) => {
+  muts.forEach(m => {
+    if (m.attributeName === 'class') {
+      console.log('Class changed!');
+    }
+  });
+});
+
+obs.observe(el, { attributes: true });
+      </code></pre>
+      <p><strong>Output:</strong> Class changed!</p>
+
+      <h2>Reactive Scrolling with IntersectionObserver</h2>
+      <pre><code>
+// Function to be called when the observed element is intersecting
+function onIntersect(entries, obs) {
+  entries.forEach(e => {
+    e.target.style.backgroundColor = e.isIntersecting ? 'lightgreen' : 'grey';
+  });
+}
+
+// Create an IntersectionObserver with the callback
+const obs = new IntersectionObserver(onIntersect);
+
+// Start observing an element
+const el = document.getElementById('spec-el');
+obs.observe(el);
+      </code></pre>
+      <p><strong>Output:</strong> Element is now in view. / Element is now out of view.</p>
+    </div>
+  </div>
+</div>

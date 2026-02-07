@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - Scaling Application</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Scalability in Node.js refers to handling increasing workloads by processing more requests concurrently. Node.js achieves this by using child processes — separate Node.js runtime instances spawned and managed by the main process.
+      </p>
+      <p>
+        Child processes run in parallel, improving application performance. They each have three streams: <code>stdin</code>, <code>stdout</code>, and <code>stderr</code>. These streams can be shared with the parent process.
+      </p>
+
+      <h2>child_process Module</h2>
+      <p>
+        This core module provides methods to create, manage, and communicate with child processes. The three major methods to create child processes are: <code>exec</code>, <code>spawn</code>, and <code>fork</code>.
+      </p>
+
+      <h2>exec() Method</h2>
+      <p>
+        Runs a command in a shell and buffers the output until the command completes.
+      </p>
+      <pre><code>child_process.exec(command[, options], callback)</code></pre>
+      <p>Example:</p>
+      <pre><code>// child.js
+console.log("Starting Child Process-" + process.argv[2]);
+console.log("Child Process-" + process.argv[2] + " executed.");
+
+// main.js
+const child_process = require('child_process');
+for (var i=0; i<3; i++) {
+  var child = child_process.exec('node child.js ' + i, (error, stdout, stderr) => {
+    if (error) {
+      console.log(error.stack);
+      return;
+    }
+    console.log('stdout: ' + stdout);
+  });
+  child.on('exit', (code) => {
+    console.log('Child process exited with exit code ' + code);
+  });
+}</code></pre>
+
+      <h2>spawn() Method</h2>
+      <p>
+        Launches a new process and streams output immediately. Ideal for processes with large data outputs.
+      </p>
+      <pre><code>child_process.spawn(command[, args][, options])</code></pre>
+      <p>Example similar to exec but listens to stdout data events:</p>
+      <pre><code>// main.js
+const child_process = require('child_process');
+for (let i=0; i<3; i++) {
+  const child = child_process.spawn('node', ['child.js', i]);
+  child.stdout.on('data', data => console.log('stdout: ' + data));
+  child.on('exit', code => console.log('Child process exited with exit code ' + code));
+}</code></pre>
+
+      <h2>fork() Method</h2>
+      <p>
+        Special case of spawn to create Node.js processes, enabling IPC between parent and child.
+      </p>
+      <pre><code>child_process.fork(modulePath[, args][, options])</code></pre>
+      <p>Example:</p>
+      <pre><code>// main.js
+const child_process = require('child_process');
+for (let i=0; i<3; i++) {
+  const child = child_process.fork('child.js', [i]);
+  child.on('close', code => console.log('child process exited with code ' + code));
+}</code></pre>
+
+      <h2>execFile() Method</h2>
+      <p>
+        Similar to exec(), but does not spawn a shell by default. More efficient for directly running executable files.
+      </p>
+      <pre><code>child_process.execFile(command[, args][, options][, callback])</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Command Line Interface (CLI) 💻</h1>
+        
+        <div class="content">
+            <h2 class="title">Next.js CLI Syntax</h2>
+            <p>The Next.js **Command Line Interface (CLI)** is the built-in tool used to manage the lifecycle of your application (development, building, and starting). Its general syntax is composed of a command and optional flags or arguments (options):</p>
+            <pre>npx next [command] [options]</pre>
+            <ul>
+                <li><span class="example">`npx next`</span>: Executes the Next.js CLI tool.</li>
+                <li><span class="example">`[command]`</span>: The action to perform (e.g., <span class="example">`dev`</span>, <span class="example">`build`</span>).</li>
+                <li><span class="example">`[options]`</span>: Arguments that modify the command's behavior (e.g., <span class="example">`-p 4000`</span>).</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Next.js CLI Commands</h2>
+            <p>Here are the essential commands used in the Next.js CLI:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="example">`dev`</span></td>
+                        <td>Starts the application in **development mode**, featuring **Hot Module Reloading (HMR)** and detailed error reporting.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`build`</span></td>
+                        <td>Creates an **optimized production build** (minified code, optimized routing, etc.) in the <span class="example">`.next`</span> folder.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`start`</span></td>
+                        <td>Starts the Next.js server in **production mode** to serve the previously built application (requires running <span class="example">`next build`</span> first).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`lint`</span></td>
+                        <td>Runs **ESLint** across the configured source directories of the application, helping to identify code quality and style issues.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`info`</span></td>
+                        <td>Prints relevant system information (Node.js version, Next.js version, OS, etc.), useful for debugging and reporting bugs.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="example">`telemetry`</span></td>
+                        <td>Used to enable or disable the sharing of anonymous general usage data with Next.js.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">CLI Options and Examples</h2>
+            
+            <h3 class="title">Changing the Default Port</h3>
+            <p>By default, Next.js runs on port **3000**. To run it on a specific port, use the <span class="example">`-p`</span> (or <span class="example">`--port`</span>) option with the <span class="example">`dev`</span> command:</p>
+            <pre>npx next dev -p 4000</pre>
+            <p>The application will now be accessible at <span class="example">`http://localhost:4000/`</span>.</p>
+            
+            <h3 class="title">Using HTTPS in Development Mode</h3>
+            <p>To enable a secure connection (HTTPS) for local development—essential for testing features like service workers or certain OAuth flows—use the <span class="example">`--experimental-https`</span> flag:</p>
+            <pre>npx next dev --experimental-https</pre>
+            <p>This command automatically uses tools like <span class="example">`mkcert`</span> to generate a self-signed certificate, making the application available over <span class="example">`https://localhost:3000/`</span> (or the specified port).</p>
+        </div>
+    </div>
+</div>

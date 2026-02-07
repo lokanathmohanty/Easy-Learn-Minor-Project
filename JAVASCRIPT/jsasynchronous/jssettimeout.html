@@ -1,0 +1,214 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - setTimeout() Method</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p>
+        In JavaScript, the <code>setTimeout()</code> is a global method that allows you 
+        to execute a function or code only once after a specified time. It is part of 
+        the <code>window</code> object but can be used without explicitly referencing it.
+      </p>
+      <p>
+        The <code>setTimeout()</code> method can also be used to manipulate DOM elements 
+        after a given delay from user interaction.
+      </p>
+
+      <h2>Syntax</h2>
+      <div class="example">
+        <pre>
+window.setTimeout(callback, delay, param1, param2, ..., paramN);
+OR
+setTimeout(callback, delay, param1, param2, ..., paramN);
+        </pre>
+      </div>
+      <p><strong>Parameters:</strong></p>
+      <ul>
+        <li><strong>callback</strong> – A function to be executed after the delay.</li>
+        <li><strong>delay</strong> – Time in milliseconds (1000 ms = 1 second).</li>
+        <li><strong>param1, param2, ..., paramN</strong> – Optional arguments passed to the callback.</li>
+      </ul>
+      <p><strong>Return Value:</strong> A numeric ID which can be used with <code>clearTimeout()</code>.</p>
+
+      <h2>Example 1 – Basic Usage</h2>
+      <p>
+        The following code defines a <code>timeout()</code> function and executes it 
+        after 1 second (1000 ms).
+      </p>
+      <div class="example">
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt; &lt;/div&gt;
+   &lt;script&gt;
+      document.getElementById('output').innerHTML = "Wait for a message! &lt;br&gt;";
+      setTimeout(timeout, 1000);
+      function timeout() {
+         document.getElementById('output').innerHTML += 
+            "This message is printed after 1 second!";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+      <div class="output">
+        Wait for a message!<br>
+        This message is printed after 1 second!
+      </div>
+
+      <h2>Example 2 – Arrow Function</h2>
+      <p>
+        You can also use an arrow function instead of defining a separate function.
+      </p>
+      <div class="example">
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt; &lt;/div&gt;
+   &lt;script&gt;
+      document.getElementById('output').innerHTML += 
+         "You will see the message after 2000 milliseconds! &lt;br&gt;";
+      setTimeout(() =&gt; {
+         document.getElementById('output').innerHTML += 'Hi! How are you?';
+      }, 2000);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+      <div class="output">
+        You will see the message after 2000 milliseconds!<br>
+        Hi! How are you?
+      </div>
+
+      <h2>Example 3 – Passing Multiple Arguments</h2>
+      <p>
+        You can pass extra arguments after the delay. They will be forwarded 
+        to the callback function.
+      </p>
+      <div class="example">
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Wait for a sum of 3 numbers!&lt;/div&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      setTimeout(sum, 1000, 10, 20, 30);
+      function sum(num1, num2, num3) {
+         let result = num1 + num2 + num3;
+         document.getElementById('output').innerHTML = "Sum = " + result;
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+      <div class="output">
+        Wait for a sum of 3 numbers!<br>
+        Sum = 60
+      </div>
+
+      <h2>Example 4 – Recursive setTimeout (Counter)</h2>
+      <p>
+        By calling <code>setTimeout()</code> inside a function, you can create 
+        repeated execution similar to <code>setInterval()</code>.
+      </p>
+      <div class="example">
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      let output = document.getElementById('output');
+      output.innerHTML += "The output of the counter is below. &lt;br&gt;";
+      let p = 0;
+      function counter() {
+         output.innerHTML += "count is - " + p + ".&lt;br&gt;";
+         setTimeout(counter, 1000);
+         p++;
+      }
+      counter();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+      <div class="output">
+        The output of the counter is below.<br>
+        count is - 0.<br>
+        count is - 1.<br>
+        count is - 2.<br>
+        count is - 3.<br>
+        count is - 4.<br>
+      </div>
+
+      <h2>JavaScript clearTimeout() Method</h2>
+      <p>
+        The <code>clearTimeout()</code> method cancels a scheduled timeout before it executes.
+      </p>
+      <div class="example">
+        <pre>
+clearTimeout(id);
+        </pre>
+      </div>
+      <p><strong>Parameter:</strong> <code>id</code> is the numeric identifier returned by <code>setTimeout()</code>.</p>
+
+      <h3>Example – Start and Stop Timeout</h3>
+      <div class="example">
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p&gt;Click Stop within 3 seconds after pressing Start.&lt;/p&gt;
+   &lt;button onclick="startTimeOut()"&gt;Start Timeout&lt;/button&gt;
+   &lt;button onclick="stopTimeOut()"&gt;Stop Timeout&lt;/button&gt;
+   &lt;p id="output"&gt;&lt;/p&gt;
+   &lt;script&gt;
+      let output = document.getElementById('output');
+      let timeout;
+      function startTimeOut() {
+         timeout = setTimeout(() =&gt; {
+            output.innerHTML = "Timeout is done";
+         }, 3000);
+      }
+      function stopTimeOut() {
+         clearTimeout(timeout);
+         output.innerHTML = "Timeout is stopped";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <h2>Zero Delay Timeout</h2>
+      <p>
+        Passing <code>0</code> milliseconds doesn’t guarantee immediate execution.  
+        The callback is queued and runs after all currently pending tasks.
+      </p>
+      <div class="example">
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      let output = document.getElementById('output');
+      output.innerHTML += "The code execution started. &lt;br&gt;";
+      setTimeout(function() {
+         output.innerHTML += "Inside the zero delay timeout. &lt;br&gt;";
+      }, 0);
+      output.innerHTML += "The code execution ended. &lt;br&gt;";
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+      <div class="output">
+        The code execution started.<br>
+        The code execution ended.<br>
+        Inside the zero delay timeout.<br>
+      </div>
+
+    </div>
+  </div>
+</div>

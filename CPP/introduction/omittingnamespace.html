@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Omitting the <code>using namespace std;</code> Directive in C++</h1>
+
+        <div class="content">
+            <p>Instead of declaring <code>using namespace std;</code>, you can explicitly prefix all standard library objects and functions with **<code>std::</code>**. This approach, known as **omitting the namespace directive**, is often considered best practice in professional C++ development.</p>
+
+            <hr>
+
+            <h2 class="title">I. Example of Omitting Namespace</h2>
+            <p>In this approach, every standard library item must carry the <code>std::</code> prefix to indicate its origin:</p>
+            <div class="example">
+                <pre><code>#include &lt;iostream>
+#include &lt;string>
+
+int main() {
+   // Explicitly specifies that 'string' and 'cout' belong to the std namespace
+   std::string greeting = "Hello,TutorialsPoint Learner!"; 
+   std::cout &lt;&lt; greeting &lt;&lt; std::endl;
+   return 0;
+}</code></pre>
+            </div>
+
+            <hr>
+
+            <h2 class="title">II. Reasons to Omit the Namespace Directive (Best Practices)</h2>
+            <p>The primary reason for omitting <code>using namespace std;</code> is to prevent **namespace pollution** and **naming conflicts**:</p>
+            <ul>
+                <li>
+                    <strong>Prevents Naming Conflicts (Collision):</strong>
+                    <ul>
+                        <li>If you use <code>using namespace std;</code>, every identifier from the standard library (like <code>std::list</code>, <code>std::sort</code>) is pulled into the global scope.</li>
+                        <li>If you later define your own class or function named <code>list</code> or <code>sort</code>, the compiler cannot tell if you mean your function or the one from the standard library, leading to an **ambiguity error** (a naming collision).</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Mandatory in Library/Header Development:</strong>
+                    <ul>
+                        <li>When creating a library (especially in header files), using <code>using namespace std;</code> is strictly avoided. This prevents "polluting the global namespace" for anyone who includes your header, ensuring your library doesn't unintentionally cause conflicts in the user's codebase.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Improved Readability and Maintenance:</strong>
+                    <ul>
+                        <li>Using the <code>std::</code> prefix makes the code clearer by explicitly stating that a component (e.g., <code>std::string</code>) is part of the standard library, which aids in debugging and tracking dependencies.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - State Management API</h1>
+
+    <div class="content">
+      <p>As we learned earlier, a React component maintains and exposes its state through the <code>this.state</code> object. React provides a single API to maintain and update state in a component: <code>this.setState()</code>. It accepts either a JavaScript object or a function that returns a JavaScript object.</p>
+      <p><code>setState()</code> schedules an update to the component’s state object. When the state changes, the component automatically re-renders to reflect the update.</p>
+    </div>
+
+    <h2 class="title">Syntax</h2>
+    <div class="content">
+      <p>The signature of the <code>setState</code> API is as follows:</p>
+      <p><code>this.setState({ ...object... });</code></p>
+
+      <p>Example – updating the <code>name</code> property:</p>
+      <p><code>this.setState({ name: 'John' });</code></p>
+    </div>
+
+    <h2 class="title">setState() with Function</h2>
+    <div class="content">
+      <p>The function form of <code>setState</code> has the following signature:</p>
+      <p><code>
+this.setState((state, props) =&gt; 
+   ... function returning JavaScript object ...
+);
+      </code></p>
+
+      <ul>
+        <li><code>state</code> refers to the current state of the component.</li>
+        <li><code>props</code> refers to the current properties of the component.</li>
+      </ul>
+
+      <p>React recommends using the function form of <code>setState</code> because it works reliably in asynchronous environments. Instead of an arrow function, a regular function can also be used:</p>
+
+      <p><code>
+this.setState(function(state, props) { <br>
+&nbsp;&nbsp;return ... JavaScript object ... <br>
+});
+      </code></p>
+
+      <p>Example – updating <code>amount</code> using a function:</p>
+      <p><code>
+this.setState((state, props) =&gt; ({ <br>
+&nbsp;&nbsp;amount: state.amount + props.additionalAmount <br>
+}));
+      </code></p>
+
+      <p><strong>Important:</strong> React state should <em>not</em> be modified directly using <code>this.state</code>. Updating state directly does not trigger a re-render. Always use <code>setState</code>.</p>
+    </div>
+
+    <h2 class="title">Special Feature of React State API</h2>
+    <div class="content">
+      <p>A key feature of <code>setState</code> is that it performs a shallow merge with the existing state instead of replacing it entirely. This means you can update only one field at a time while preserving the others.</p>
+
+      <p>For example, consider the following initial state:</p>
+      <p><code>{ name: 'John', age: 16 }</code></p>
+
+      <p>You can update only the <code>age</code> field:</p>
+      <p><code>
+this.setState((state, props) =&gt; ({ <br>
+&nbsp;&nbsp;age: 18 <br>
+}));
+      </code></p>
+
+      <p>This automatically merges with the existing state, so the <code>name</code> property remains unchanged.</p>
+    </div>
+  </div>
+</div>

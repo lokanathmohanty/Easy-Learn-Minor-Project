@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Access Array Items in Python</h1>
+    <div class="content">
+      <p>Accessing array items in Python involves retrieving values stored at specific indices in an array. Python uses the <code>array</code> module to handle arrays of the same data type.</p>
+      <h2 class="title">Access Methods</h2>
+      <ul>
+        <li>Using indexing</li>
+        <li>Using iteration</li>
+        <li>Using <code>enumerate()</code> function</li>
+      </ul>
+
+      <h2 class="title">Using Indexing</h2>
+      <p>Supply the index number in square brackets <code>[]</code> to access an element. Indices start at 0.</p>
+      <pre><code>import array as arr
+numericArray = arr.array('i', [111, 211, 311, 411, 511])
+print(numericArray[0])
+print(numericArray[1])
+print(numericArray[2])
+# Output:
+# 111
+# 211
+# 311
+</code></pre>
+
+      <h2 class="title">Using Iteration</h2>
+      <p>Loop through all items in the array with a for loop.</p>
+      <pre><code>import array as arr
+numericArray = arr.array('i', [111, 211, 311, 411, 511])
+for item in numericArray:
+    print(item)
+# Output:
+# 111
+# 211
+# 311
+# 411
+# 511
+</code></pre>
+
+      <h2 class="title">Using <code>enumerate()</code> Function</h2>
+      <p>The <code>enumerate()</code> function returns both index and value during iteration.</p>
+      <pre><code>import array as arr
+numericArray = arr.array('i', [111, 211, 311, 411, 511])
+for loc, val in enumerate(numericArray):
+    print(f"Index: {loc}, value: {val}")
+# Output:
+# Index: 0, value: 111
+# Index: 1, value: 211
+# Index: 2, value: 311
+# Index: 3, value: 411
+# Index: 4, value: 511
+</code></pre>
+
+      <h2 class="title">Accessing a Range with Slicing</h2>
+      <p>Slice notation <code>[start:end]</code> allows retrieval of a subarray or range.</p>
+      <pre><code>import array as arr
+numericArray = arr.array('i', [111, 211, 311, 411, 511])
+print(numericArray[2:])     # array('i', [311, 411, 511])
+print(numericArray[0:3])    # array('i', [111, 211, 311])
+</code></pre>
+    </div>
+  </div>
+</div>

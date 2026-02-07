@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Singleton Class</h1>
+    <div class="content">
+      <p>
+        A Singleton class in Python is a class that allows only a single instance to be created. This pattern is useful to optimize memory usage, for example, when creating a database connection.
+      </p>
+      <p>
+        Attempts to create multiple objects will return the same instance.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Singleton Using <code>__init__</code> Method</h2>
+    <div class="content">
+      <pre><code>class Singleton:
+  __uniqueInstance = None
+
+  @staticmethod
+  def createInstance():
+    if Singleton.__uniqueInstance is None:
+      Singleton()
+    return Singleton.__uniqueInstance
+
+  def __init__(self):
+    if Singleton.__uniqueInstance is not None:
+      raise Exception("Object exist!")
+    else:
+      Singleton.__uniqueInstance = self
+
+obj1 = Singleton.createInstance()
+print(obj1)
+obj2 = Singleton.createInstance()
+print(obj2)
+</code></pre>
+      <p>Output:</p>
+      <p>&lt;__main__.Singleton object at 0x...&gt;<br>
+         &lt;__main__.Singleton object at 0x...&gt;</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Singleton Using <code>__new__</code> Method</h2>
+    <div class="content">
+      <pre><code>class SingletonClass:
+  _instance = None
+
+  def __new__(cls):
+    if cls._instance is None:
+      print('Creating the object')
+      cls._instance = super(SingletonClass, cls).__new__(cls)
+    return cls._instance
+
+obj1 = SingletonClass()
+print(obj1)
+
+obj2 = SingletonClass()
+print(obj2)
+</code></pre>
+      <p>Output:</p>
+      <p>Creating the object<br>
+         &lt;__main__.SingletonClass object at 0x...&gt;<br>
+         &lt;__main__.SingletonClass object at 0x...&gt;</p>
+    </div>
+  </div>
+ 
+  </div>
+</div>

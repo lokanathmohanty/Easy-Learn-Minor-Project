@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - height Property</h1>
+    <div class="content">
+      <p>The <code>height</code> property in CSS specifies the height of an element. It determines how tall an element will be, directly affecting its layout and positioning within the document. This property can be applied to block-level elements, inline-block elements, and replaced elements like images.</p>
+
+      <h2>Syntax</h2>
+      <pre><code>height: auto | length | percentage | min-content | max-content | initial | inherit;</code></pre>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>auto</strong> → The element expands or contracts based on its content. Default value.</li>
+        <li><strong>length</strong> → Sets a fixed height using units like px, em, rem, etc.</li>
+        <li><strong>percentage</strong> → Sets the height relative to the height of the containing block.</li>
+        <li><strong>min-content</strong> → Fits the minimum height required by the content without overflow.</li>
+        <li><strong>max-content</strong> → Expands height to fit the tallest content.</li>
+        <li><strong>initial</strong> → Sets the property to its default value.</li>
+        <li><strong>inherit</strong> → Inherits the property from the parent element.</li>
+      </ul>
+
+      <h2>Example 1: height with <code>auto</code></h2>
+      <p>The element height adjusts automatically based on content.</p>
+      <pre><code>.outer {
+  height: 200px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.inner {
+  height: auto;
+  border: 2px solid;
+}</code></pre>
+
+      <h2>Example 2: height with <code>length</code> values</h2>
+      <p>Height is fixed with length units like <code>px</code> or <code>em</code>. If the content is larger, overflow occurs.</p>
+      <pre><code>.inner1 {
+  height: 40px;
+}
+
+.inner2 {
+  height: 90px;
+}</code></pre>
+
+      <h2>Example 3: height with <code>percentage</code> values</h2>
+      <p>Height is relative to the parent container.</p>
+      <pre><code>.outer {
+  height: 300px;
+}
+
+.inner1 {
+  height: 30%;
+}
+
+.inner2 {
+  height: 50%;
+}</code></pre>
+
+      <h2>Example 4: height with <code>min-content</code></h2>
+      <p>The element height fits the smallest size needed to contain the content.</p>
+      <pre><code>.inner {
+  height: min-content;
+}</code></pre>
+
+      <h2>Example 5: height with <code>max-content</code></h2>
+      <p>The element height grows to fit the tallest content.</p>
+      <pre><code>.inner {
+  height: max-content;
+}</code></pre>
+
+      <h2>Example 6: Using <code>inherit</code></h2>
+      <p>Child element inherits height from the parent element.</p>
+      <pre><code>.parent {
+  height: 150px;
+}
+
+.child {
+  height: inherit;
+}</code></pre>
+
+      <h2>Example 7: height with <code>initial</code></h2>
+      <p>Resets height to the browser default value (<code>auto</code>).</p>
+      <pre><code>.box {
+  height: initial;
+}</code></pre>
+
+      <h2>Real-World Example: Fixed Height Card</h2>
+      <p>A card with a fixed height forces content overflow handling.</p>
+      <pre><code>.card {
+  height: 250px;
+  overflow: auto;
+  border: 1px solid black;
+}</code></pre>
+
+      <h2>Supported Browsers</h2>
+      <ul>
+        <li>Chrome → 1.0+</li>
+        <li>Edge → 4.0+</li>
+        <li>Firefox → 1.0+</li>
+        <li>Safari → 1.0+</li>
+        <li>Opera → 7.0+</li>
+      </ul>
+
+      <h2>Practical Use Cases</h2>
+      <ul>
+        <li>Defining consistent sizes for cards, modals, and containers.</li>
+        <li>Ensuring elements scale correctly inside flex and grid layouts.</li>
+        <li>Preventing overflow in UI components like chat boxes or lists.</li>
+        <li>Maintaining aspect ratio of media elements with controlled height.</li>
+      </ul>
+    </div>
+  </div>
+</div>

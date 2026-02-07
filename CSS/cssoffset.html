@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - offset Property</h1>
+    <div class="content">
+      <p>
+        The <strong>CSS offset property</strong> is a shorthand property that simplifies the process of animating an element along a path. 
+        It combines multiple properties such as <code>offset-anchor</code>, <code>offset-path</code>, <code>offset-distance</code>, 
+        <code>offset-rotate</code>, and <code>offset-position</code>.
+      </p>
+      <p>
+        With this property, a specified point inside an element (defined by <code>offset-anchor</code>) is aligned to a path position 
+        (defined by <code>offset-position</code>) at different stages of the animation. The element can also be rotated 
+        (<code>offset-rotate</code>) to follow the direction of the path.
+      </p>
+
+      <h2>Constituent Properties</h2>
+      <ul>
+        <li><strong>offset-anchor</strong> – Defines the reference point within the element aligned to the path.</li>
+        <li><strong>offset-path</strong> – Defines the motion path along which the element moves.</li>
+        <li><strong>offset-distance</strong> – Determines how far along the path the element is placed.</li>
+        <li><strong>offset-rotate</strong> – Rotates the element to align with the direction of the path.</li>
+        <li><strong>offset-position</strong> – Defines the starting position along the path.</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <p>
+        <code>
+          offset = [ &lt;'offset-position'&gt;? [ &lt;'offset-path'&gt; [ &lt;'offset-distance'&gt; || &lt;'offset-rotate'&gt; ]? ]? ]! [ / &lt;'offset-anchor'&gt; ]?
+        </code>
+      </p>
+
+      <h2>Possible Values</h2>
+      <ul>
+        <li><strong>offset-anchor</strong> – Point inside the element that aligns to the path.</li>
+        <li><strong>offset-path</strong> – Defines the trajectory of motion.</li>
+        <li><strong>offset-distance</strong> – Distance traveled along the path.</li>
+        <li><strong>offset-rotate</strong> – Controls element rotation along the path.</li>
+        <li><strong>auto</strong> – Resets all properties to their defaults.</li>
+      </ul>
+
+      <h2>Example 1: CSS offset with Path Value</h2>
+      <p>
+        The following example demonstrates the <code>offset</code> shorthand property where text slides smoothly along a curved path.
+      </p>
+      <pre>
+@keyframes slide {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+.text {
+  animation: slide 6s ease-in-out infinite alternate;
+  offset: path('M 10 100 Q 50 50 90 100 T 170 100 T 250 100');
+}
+      </pre>
+      <p>
+        In this example, the text element animates along a quadratic curve path.
+      </p>
+
+      <h2>Example 2: CSS offset with Path and Auto Value</h2>
+      <p>
+        This example demonstrates a planet orbiting around the sun using <code>offset</code> shorthand with <code>auto</code>.
+      </p>
+      <pre>
+@keyframes orbit {
+  0% { offset-distance: 0%; offset-rotate: 0deg; }
+  100% { offset-distance: 100%; offset-rotate: 360deg; }
+}
+
+#planet {
+  animation: orbit 6s linear infinite;
+  offset: path('M 200 200 m -100, 0 a 100,100 0 1,0 200,0 a 100,100 0 1,0 -200,0') auto;
+}
+      </pre>
+      <p>
+        Here, the planet moves in a circular orbit around the sun while also rotating.
+      </p>
+
+      <h2>Related Properties</h2>
+      <ul>
+        <li><strong>offset-anchor</strong> – Position inside the element’s box aligned with the path.</li>
+        <li><strong>offset-distance</strong> – Controls how far along the path the element is placed.</li>
+        <li><strong>offset-path</strong> – Defines the trajectory inside the parent container.</li>
+        <li><strong>offset-rotate</strong> – Specifies element orientation while moving.</li>
+        <li><strong>offset-position</strong> – Defines the starting position along the route.</li>
+      </ul>
+
+      <h2>Final Example</h2>
+      <p>
+        The <code>offset</code> shorthand property is a powerful tool for CSS motion animations, 
+        making it easier to define and control element paths, distances, and rotations. 
+        It is commonly used in creative animations like sliders, loaders, and orbiting effects.
+      </p>
+    </div>
+  </div>
+</div>

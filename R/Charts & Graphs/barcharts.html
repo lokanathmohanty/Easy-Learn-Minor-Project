@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Bar Charts</h1>
+    <div class="content">
+      <p>
+        Bar charts represent data in rectangular bars with lengths proportional to the values. In R, bar charts are created using the <code>barplot()</code> function, which supports both vertical and horizontal bars. You can customize labels, colors, and subtitles for each bar.
+      </p>
+
+      <h2 class="title">Basic Syntax</h2>
+      <pre><code>barplot(H, xlab, ylab, main, names.arg, col)</code></pre>
+      <ul>
+        <li><strong>H</strong>: Numeric vector or matrix for bar values</li>
+        <li><strong>xlab</strong>: Label for X axis</li>
+        <li><strong>ylab</strong>: Label for Y axis</li>
+        <li><strong>main</strong>: Title of the bar chart</li>
+        <li><strong>names.arg</strong>: Vector of names under each bar</li>
+        <li><strong>col</strong>: Color(s) for bars</li>
+      </ul>
+
+      <h2 class="title">Simple Bar Chart Example</h2>
+      <pre><code># Data for chart
+H &lt;- c(7, 12, 28, 3, 41)
+
+png(file = "barchart.png")
+barplot(H)
+dev.off()
+</code></pre>
+
+      <h2 class="title">Adding Labels, Title, and Colors</h2>
+      <pre><code># Data and month names
+H &lt;- c(7, 12, 28, 3, 41)
+M &lt;- c("Mar", "Apr", "May", "Jun", "Jul")
+
+png(file = "barchart_months_revenue.png")
+barplot(H, names.arg = M, xlab = "Month", ylab = "Revenue", col = "blue", main = "Revenue chart", border = "red")
+dev.off()
+</code></pre>
+
+      <h2 class="title">Grouped and Stacked Bar Charts</h2>
+      <pre><code># Input vectors and matrix for groups/stacks
+colors &lt;- c("green", "orange", "brown")
+months &lt;- c("Mar", "Apr", "May", "Jun", "Jul")
+regions &lt;- c("East", "West", "North")
+Values &lt;- matrix(c(2,9,3,11,9, 4,8,7,3,12, 5,2,8,10,11), nrow = 3, ncol = 5, byrow = TRUE)
+
+png(file = "barchart_stacked.png")
+barplot(Values, main = "total revenue", names.arg = months, xlab = "month", ylab = "revenue", col = colors)
+legend("topleft", regions, cex = 1.3, fill = colors)
+dev.off()
+</code></pre>
+      <p>
+        These scripts create simple, labeled, and grouped/stacked bar charts in R and save them to the working directory.
+      </p>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `fopen()` Function (Opening Files)</h1>
+
+    <div class="content">
+      <p>
+        The **`fopen()`** function is the primary method in PHP for opening a file or stream resource. It creates a connection to the resource and returns a **file pointer resource** (or **handle**) used for subsequent read, write, or close operations.
+      </p>
+
+      <h2>`fopen()` Syntax and Parameters</h2>
+      <p>
+        The function requires two mandatory parameters: the filename (or resource path) and the access mode.
+      </p>
+      <div class="example">
+        <code>fopen(string $filename, string $mode, ...)</code>
+        <p>
+          **`$filename`**: The path to the file. This can be a local file, or a remote resource using a scheme prefix (e.g., `http://`).<br>
+          **`$mode`**: A string defining the type of access (read, write, append, etc.).
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>File Opening Modes 🔑</h2>
+      <p>
+        The mode determines what operations can be performed on the file and how the file pointer is initially positioned.
+      </p>
+
+      <table>
+        <tr>
+          <th>Mode</th>
+          <th>Description</th>
+          <th>Pointer Start</th>
+          <th>File Exists?</th>
+        </tr>
+        <tr>
+          <td>**`r`**</td>
+          <td>Read only.</td>
+          <td>Start</td>
+          <td>**Must** exist.</td>
+        </tr>
+        <tr>
+          <td>**`w`**</td>
+          <td>Write only.</td>
+          <td>Start</td>
+          <td>Creates if DNE, **TRUNCATES** if exists.</td>
+        </tr>
+        <tr>
+          <td>**`a`**</td>
+          <td>Write only (Append).</td>
+          <td>End (for writing)</td>
+          <td>Creates if DNE.</td>
+        </tr>
+        <tr>
+          <td>**`r+`**</td>
+          <td>Read and Write.</td>
+          <td>Start</td>
+          <td>**Must** exist.</td>
+        </tr>
+        <tr>
+          <td>**`w+`**</td>
+          <td>Read and Write.</td>
+          <td>Start</td>
+          <td>Creates if DNE, **TRUNCATES** if exists.</td>
+        </tr>
+        <tr>
+          <td>**`a+`**</td>
+          <td>Read and Write (Append).</td>
+          <td>End (for writing)</td>
+          <td>Creates if DNE.</td>
+        </tr>
+        <tr>
+          <td>**`x`** / **`x+`**</td>
+          <td>Create and Write (exclusive).</td>
+          <td>Start</td>
+          <td>**Fails** if exists.</td>
+        </tr>
+      </table>
+
+      <hr>
+
+      <h2>Best Practices</h2>
+      <p>
+        1. **Check for Success:** Always check if `fopen()` succeeded, as it returns `false` and emits a warning on failure (e.g., file not found or permission denied).
+      </p>
+      <div class="example">
+        <code>$handle = fopen("nonexistent.txt", "r");</code><br>
+        <code>if (!$handle) {</code><br>
+        <code>&nbsp;&nbsp;&nbsp;echo "Error: Could not open file.";</code><br>
+        <code>}</code>
+      </div>
+
+      <p>
+        2. **Close the Stream:** After performing I/O operations (using functions like `fread()`, `fwrite()`, `fgets()`), you must use **`fclose($handle)`** to close the file pointer. This frees up system resources and ensures data is properly flushed and saved to disk.
+      </p>
+    </div>
+  </div>
+</div>

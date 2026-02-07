@@ -1,0 +1,59 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">C++ Constructor with Default Arguments 🎁</h1>
+
+        <div class="content">
+            <p>A **constructor with default arguments** is a single constructor definition that allows for the creation of objects using a varying number of parameters. This is achieved by providing **default values** for one or more parameters in the constructor's declaration.</p>
+            <p>If a user omits an argument during object creation, the compiler automatically substitutes the predefined default value for that parameter. This technique often reduces the need for extensive **constructor overloading**.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Syntax and Mechanism</h2>
+
+        <div class="content">
+            <p>Default values are specified in the parameter list of the constructor declaration (or the definition, if declared in the class header). The constructor will be called with the arguments provided, filling in any missing arguments with their defaults.</p>
+            <pre class="example">
+class Box {
+   public:
+      // Constructor with multiple default arguments
+      Box(int l = 5, int w = 10, int h = 2) { 
+         length = l; // l defaults to 5 if not provided
+         width = w;  // w defaults to 10 if not provided
+         height = h; // h defaults to 2 if not provided
+      }
+      // ...
+};
+</pre>
+            <p>The flexibility of this approach is shown by the following object creations, all calling the *same* constructor:</p>
+            <ul>
+                <li><code>Box box1;</code> $\rightarrow$ Uses all defaults: (5, 10, 2).</li>
+                <li><code>Box box2(15);</code> $\rightarrow$ Provides the first argument (l=15) and uses defaults for the rest: (15, 10, 2).</li>
+                <li><code>Box box3(15, 20);</code> $\rightarrow$ Provides the first two arguments: (15, 20, 2).</li>
+                <li><code>Box box4(15, 20, 25);</code> $\rightarrow$ Provides all arguments: (15, 20, 25).</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Key Rules for Default Arguments</h2>
+
+        <div class="content">
+            <ol>
+                <li>
+                    **Placement Restriction:** Once you start assigning default arguments, all subsequent parameters to the right **must also** have default arguments.
+                    <pre class="example">
+Box(int l = 1, int w);  // ❌ INVALID: w has no default after l has one.
+Box(int l, int w = 10, int h = 2); // ✅ VALID
+</pre>
+                </li>
+                <li>
+                    **Overloading Conflict:** Using default arguments can sometimes lead to **ambiguity** if combined improperly with overloaded constructors (e.g., creating a separate parameterless default constructor `Box()` and a parameterized constructor `Box(int l = 5)` would cause a conflict).
+                </li>
+                <li>
+                    **Declaration vs. Definition:** Default arguments should be specified **only once**, usually in the function's declaration (inside the class definition).
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

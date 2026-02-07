@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Sessions Framework 🔐</h1>
+        <div class="content">
+            <p>Django's **Session Framework** provides a secure way to manage stateful data on a per-site-visitor basis. Unlike simple cookies, where data is stored directly on the client side, the Session Framework abstracts this process: the actual data is saved **server-side** (e.g., in a database), and the client-side cookie only holds a secure, unique **session ID** for identification. This enhances security and works even if the user's browser is configured to block cookies.</p>
+        </div>
+        <h2 class="example">Setting Up and Using Sessions</h2>
+        <div class="content">
+            <h3>Enabling Sessions</h3>
+            <p>Sessions are typically enabled by default in a new Django project. To ensure they are active, verify the following lines are present in your project's <code>settings.py</code>:</p>
+            <ul>
+                <li>In <code>INSTALLED_APPS</code>: <code>'django.contrib.sessions'</code></li>
+                <li>In <code>MIDDLEWARE</code>: <code>'django.contrib.sessions.middleware.SessionMiddleware'</code></li>
+            </ul>
+            <p>By default, session data is stored in the database (in the <code>django_session</code> table), but this can be configured to use file systems or cache using the <code>SESSION_ENGINE</code> setting.</p>
+
+            <h3>Storing Data in a Session</h3>
+            <p>When sessions are enabled, every view's <code>request</code> object gains a dictionary-like attribute named **<code>session</code>**. You store data by setting a key-value pair on this attribute:</p>
+            <pre><code>def login(request):
+   # ... form validation logic ...
+   if MyLoginForm.is_valid():
+      username = MyLoginForm.cleaned_data['username']
+      request.session['username'] = username # Data saved server-side
+   # ...
+   return render(request, 'loggedin.html', {"username" : username})</code></pre>
+
+            <h3>Accessing and Checking Session Data</h3>
+            <p>You can retrieve session data by accessing the key or check for its existence using <code>has_key()</code> or standard dictionary methods (e.g., <code>in</code> operator):</p>
+            <pre><code>def formView(request):
+   if 'username' in request.session: # Check if key exists
+      username = request.session['username'] # Retrieve stored value
+      return render(request, 'loggedin.html', {"username" : username})
+   else:
+      return render(request, 'login.html', {})</code></pre>
+
+            <h3>Deleting and Logging Out</h3>
+            <p>To end a user's session (e.g., during logout), you delete the specific session key or use <code>session.flush()</code> to clear the entire session data.</p>
+            <pre><code>def logout(request):
+   try:
+      del request.session['username'] # Remove a single key
+      # request.session.flush() # Alternatively, clear all session data
+   except KeyError:
+      pass
+   return HttpResponse("<strong>You are logged out.</strong>")</code></pre>
+
+            <h3>Additional Session Methods</h3>
+            <p>The <code>request.session</code> object supports several methods for managing session behavior and expiration:</p>
+            <ul>
+                <li><strong><code>set_expiry(value)</code></strong>: Sets the expiration time for the session (e.g., <code>set_expiry(600)</code> for 10 minutes, or <code>set_expiry(0)</code> to expire when the browser closes).</li>
+                <li><strong><code>get_expiry_age()</code></strong>: Returns the number of seconds until the session expires.</li>
+                <li><strong><code>get_expiry_date()</code></strong>: Returns the date and time the session will expire.</li>
+                <li><strong><code>clear_expired()</code></strong>: Manually removes expired sessions from the session store (usually handled automatically by Django).</li>
+                <li><strong><code>get_expire_at_browser_close()</code></strong>: Returns <code>True</code> if the session is set to expire when the user closes their web browser.</li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Zipf Distribution</h1>
+    <div class="content">
+      <p>Zipf distributions are used to sample data based on Zipf's law.</p>
+      <p><strong>Zipf's Law:</strong> In a collection, the nth most common term occurs approximately 1/n times as often as the most common term. For example, the 5th most common word in English occurs nearly 1/5 times as often as the most common word.</p>
+      <h2>Parameters:</h2>
+      <ul>
+        <li><strong>a</strong> — Distribution parameter.</li>
+        <li><strong>size</strong> — The shape of the returned array.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example: Generating Zipf Distribution Samples</h1>
+    <div class="content">
+      <p>Generate a 2x3 sample from a Zipf distribution with distribution parameter 2:</p>
+      <pre><code>from numpy import random
+
+x = random.zipf(a=2, size=(2, 3))
+
+print(x)
+</code></pre>
+      <h2>Visualization of Zipf Distribution</h2>
+      <p>Sample 1000 points but plot only those with value less than 10 for a more meaningful chart:</p>
+      <pre><code>from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+x = random.zipf(a=2, size=1000)
+sns.displot(x[x &lt; 10])
+
+plt.show()
+</code></pre>
+    </div>
+  </div>
+</div>

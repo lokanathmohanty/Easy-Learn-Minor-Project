@@ -1,0 +1,217 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Iterators</h1>
+    </div>
+    <div class="content">
+      <p>
+        An iterator in Python is an object that enables traversal through a collection such as a list or tuple, one element at a time. It follows the iterator protocol by implementing two methods: <code>__iter__()</code>, which returns the iterator object itself, and <code>__next__()</code>, which returns the next element in the sequence or raises a <code>StopIteration</code> when no more elements are available.
+      </p>
+      <p>
+        Iterators provide a memory-efficient way to process large datasets since values are produced on demand. They can be created from iterable objects using the <code>iter()</code> function or by defining custom iterator classes.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Iterables vs Iterators</h2>
+    </div>
+    <div class="content">
+      <p><strong>Iterable:</strong> An object capable of returning its members one at a time (e.g., lists, tuples).</p>
+      <p><strong>Iterator:</strong> An object representing a stream of data, returned one element at a time using the iterator protocol.</p>
+      <p>
+        Example of iterating through an iterable:
+      </p>
+      <pre><code>for element in sequence:
+    print(element)
+</code></pre>
+      <p>The <code>iter()</code> function can be used to get an iterator from an iterable.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example of Python Iterator</h2>
+    </div>
+    <div class="content">
+      <pre><code>print(iter("aa"))
+print(iter([1,2,3]))
+print(iter((1,2,3)))
+print(iter({}))
+</code></pre>
+      <p>This produces:</p>
+      <pre>
+&lt;str_iterator object at 0x7fd0416b42e0&gt;
+&lt;list_iterator object at 0x7fd0416b42e0&gt;
+&lt;tuple_iterator object at 0x7fd0416b42e0&gt;
+&lt;dict_keyiterator object at 0x7fd041707560&gt;
+</pre>
+      <p>Attempting to get an iterator from a non-iterable like an integer raises a <code>TypeError</code>:</p>
+      <pre><code>iterator = iter(100)
+print(iterator)
+# TypeError: 'int' object is not iterable
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Error Handling in Iterators</h2>
+    </div>
+    <div class="content">
+      <p>
+        The <code>__next__()</code> method returns the next element or raises <code>StopIteration</code> if no more elements exist. Handling this exception allows controlled iteration over an iterator.
+      </p>
+      <pre><code>it = iter([1,2,3])
+print(next(it))       # 1
+print(it.__next__())  # 2
+print(it.__next__())  # 3
+print(next(it))       # Raises StopIteration
+</code></pre>
+      <p>
+        Commonly, iteration is done using a while-loop with exception handling:
+      </p>
+      <pre><code>it = iter([1,2,3,4,5])
+print(next(it))  # 1
+while True:
+    try:
+        no = next(it)
+        print(no)
+    except StopIteration:
+        break
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Custom Iterator</h2>
+    </div>
+    <div class="content">
+      <p>
+        Custom iterators can be implemented by defining a class that has <code>__iter__()</code> returning self and <code>__next__()</code> returning the next element or raising <code>StopIteration</code>.
+      </p>
+      <pre><code>class Oddnumbers:
+    def __init__(self, end_range):
+        self.start = -1
+        self.end = end_range
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.start &lt self.end-1:
+            self.start += 2
+            return self.start
+        else:
+            raise StopIteration
+
+countiter = Oddnumbers(10)
+while True:
+    try:
+        no = next(countiter)
+        print(no)
+    except StopIteration:
+        break
+</code></pre>
+      <p>Output:</p>
+      <pre>
+1
+3
+5
+7
+9
+</pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Fibonacci Iterator</h2>
+    </div>
+    <div class="content">
+      <pre><code>class Fibonacci:
+    def __init__(self, max_count):
+        self.max_count = max_count
+        self.count = 0
+        self.a, self.b = 0, 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.count >= self.max_count:
+            raise StopIteration
+        fib_value = self.a
+        self.a, self.b = self.b, self.a + self.b
+        self.count += 1
+        return fib_value
+
+fib_iterator = Fibonacci(10)
+for number in fib_iterator:
+    print(number)
+</code></pre>
+      <p>Output:</p>
+      <pre>
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+</pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Asynchronous Iterator</h2>
+    </div>
+    <div class="content">
+      <p>
+        Asynchronous iterators in Python support asynchronous iteration using the methods <code>__aiter__()</code> and <code>__anext__()</code> (Python 3.10+). They are used with <code>async for</code> loops, allowing async data streams to be processed.
+      </p>
+      <pre><code>import asyncio
+
+class Oddnumbers():
+    def __init__(self):
+        self.start = -1
+
+    def __aiter__(self):
+        return self
+
+    async def __anext__(self):
+        if self.start >= 9:
+            raise StopAsyncIteration
+        self.start += 2
+        await asyncio.sleep(1)
+        return self.start
+
+async def main():
+    it = Oddnumbers()
+    while True:
+        try:
+            awaitable = anext(it)
+            result = await awaitable
+            print(result)
+        except StopAsyncIteration:
+            break
+
+asyncio.run(main())
+</code></pre>
+      <p>Output:</p>
+      <pre>
+1
+3
+5
+7
+9
+</pre>
+    </div>
+  </div>
+</div>

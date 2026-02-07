@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - translate Property</h1>
+    <div class="content">
+      <p>The <strong>translate</strong> property in CSS allows you to move an element along the X-axis (horizontal), Y-axis (vertical), and Z-axis (depth). It is very similar to the <code>transform: translate()</code> function, but with the difference that <code>translate</code> as a property directly supports the Z-axis as well.</p>
+
+      <h2>Syntax</h2>
+      <p>The basic syntax looks like this:</p>
+      <pre><code>translate: x-axis y-axis z-axis | none;</code></pre>
+
+      <h2>Possible Values</h2>
+      <ul>
+        <li><strong>none</strong> → No translation is applied.</li>
+        <li><strong>x-axis</strong> → Moves the element horizontally. If one value is specified, it represents translation along the X-axis.</li>
+        <li><strong>y-axis</strong> → Moves the element vertically. To only move on Y-axis, set the first value to <code>0</code>.</li>
+        <li><strong>z-axis</strong> → Moves the element closer or farther from the screen. To only move on Z-axis, set the first two values to <code>0</code>.</li>
+      </ul>
+
+      <p>Values can be specified in <code>&lt;length&gt;</code> units (px, em, rem, etc.) or <code>&lt;percentage&gt;</code>.</p>
+
+      <h2>Applies To</h2>
+      <p>The <code>translate</code> property applies to all transformable elements (elements that can be transformed using CSS).</p>
+
+      <h2>Example 1: translate with <code>none</code></h2>
+      <p>In this example, the box does not move because the translate property is set to <code>none</code>:</p>
+      <pre><code>&lt;div class="box"&gt;&lt;/div&gt;
+
+.box:hover {
+  translate: none;
+}</code></pre>
+
+      <h2>Example 2: translate on X-axis</h2>
+      <p>Using a single value moves an element horizontally.</p>
+      <pre><code>.box1:hover {
+  translate: 20px;
+}
+
+.box2:hover {
+  translate: -15%;
+}</code></pre>
+
+      <h2>Example 3: translate on Y-axis</h2>
+      <p>To move only vertically, the first value (x-axis) must be <code>0</code>.</p>
+      <pre><code>.box1:hover {
+  translate: 0px 30px;
+}
+
+.box2:hover {
+  translate: 0 -20%;
+}</code></pre>
+
+      <h2>Example 4: translate on Z-axis</h2>
+      <p>Adding a third value moves the element closer or farther from the screen.</p>
+      <pre><code>.box1:hover {
+  translate: 0 0 15px;
+}
+
+.box2:hover {
+  translate: 0 0 -10px;
+}</code></pre>
+
+      <h2>Example 5: translate on both X and Y</h2>
+      <p>You can use two values to move an element both horizontally and vertically:</p>
+      <pre><code>.box1:hover {
+  translate: 15px 15px;
+}
+
+.box2:hover {
+  translate: -10% -15%;
+}</code></pre>
+
+      <h2>Example 6: translate on Y and Z</h2>
+      <p>To move along Y and Z, set the X-axis value to 0:</p>
+      <pre><code>.box1:hover {
+  translate: 0px 15px 20px;
+}
+
+.box2:hover {
+  translate: 0 -10% 10px;
+}</code></pre>
+
+      <h2>Example 7: translate on X and Z</h2>
+      <p>To move along X and Z, set the Y-axis value to 0:</p>
+      <pre><code>.box1:hover {
+  translate: 20px 0 15px;
+}
+
+.box2:hover {
+  translate: -15% 0 10px;
+}</code></pre>
+
+      <h2>Example 8: translate on X, Y, and Z</h2>
+      <p>To move in all directions, specify three values:</p>
+      <pre><code>.box1:hover {
+  translate: 15px 20px 15px;
+}
+
+.box2:hover {
+  translate: -10% -15px 10px;
+}</code></pre>
+
+      <h2>Supported Browsers</h2>
+      <ul>
+        <li>Chrome → 104+</li>
+        <li>Edge → 104+</li>
+        <li>Firefox → 72+</li>
+        <li>Safari → 14.1+</li>
+        <li>Opera → 90+</li>
+      </ul>
+
+      <h2>Practical Use Cases</h2>
+      <ul>
+        <li>Moving buttons slightly on hover for visual feedback.</li>
+        <li>Creating 3D card flip effects using Z-axis translation.</li>
+        <li>Animating modal popups by sliding them from off-screen into view.</li>
+        <li>Building carousel sliders with translate for smooth transitions.</li>
+      </ul>
+    </div>
+  </div>
+</div>

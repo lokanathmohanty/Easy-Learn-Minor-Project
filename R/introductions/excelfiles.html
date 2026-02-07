@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Excel File</h1>
+    <div class="content">
+      <p>
+        Microsoft Excel is a popular spreadsheet program that stores data in .xls or .xlsx formats. R can read data directly from these files using specific packages such as <code>XLConnect</code>, <code>xlsx</code>, and <code>gdata</code>. The <code>xlsx</code> package will be demonstrated here, which also supports writing to Excel files.
+      </p>
+
+      <h2 class="title">Install xlsx Package</h2>
+      <pre><code># Install the xlsx package in R console
+install.packages("xlsx")
+</code></pre>
+      <p>Installing the package may prompt to install additional dependencies as well.</p>
+
+      <h2 class="title">Verify and Load the xlsx Package</h2>
+      <pre><code># Verify that package is installed
+any(grepl("xlsx", installed.packages()))
+
+# Load the package into the R workspace
+library("xlsx")
+</code></pre>
+      <p>Output example when loaded:</p>
+      <pre><code>[1] TRUE
+Loading required package: rJava
+Loading required package: methods
+Loading required package: xlsxjars
+</code></pre>
+
+      <h2 class="title">Input as xlsx File</h2>
+      <p>
+        Create an Excel file named <code>input.xlsx</code> with two worksheets:
+      </p>
+      <ul>
+        <li><strong>sheet1</strong> with columns: <code>id, name, salary, start_date, dept</code>, and respective rows of sample data.</li>
+        <li><strong>city</strong> with columns: <code>name, city</code> mapping names to cities.</li>
+      </ul>
+
+      <h2 class="title">Reading the Excel File</h2>
+      <pre><code># Read the first sheet from input.xlsx file
+data &lt;- read.xlsx("input.xlsx", sheetIndex = 1)
+print(data)
+</code></pre>
+      <p>Sample output:</p>
+      <pre><code>  id    name   salary  start_date       dept
+1  1    Rick    623.30 2012-01-01         IT
+2  2    Dan     515.20 2013-09-23   Operations
+3  3    Michelle 611.00 2014-11-15         IT
+4  4    Ryan    729.00 2014-05-11         HR
+5 NA     Gary    843.25 2015-03-27    Finance
+6  6    Nina    578.00 2013-05-21         IT
+7  7    Simon   632.80 2013-07-30   Operations
+8  8    Guru    722.50 2014-06-17    Finance
+</code></pre>
+    </div>
+  </div>
+   
+    </div>
+  </div>
+</div>

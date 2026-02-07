@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - DOM Navigation</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        In JavaScript, with the HTML DOM we can navigate the tree nodes using their relationships.  
+        Every HTML document forms a <strong>DOM tree</strong> with the <code>document</code> object as the root.  
+      </p>
+      <p>
+        Each element, text, and comment in the HTML is represented as a <strong>node</strong>.  
+      </p>
+
+      <h2>Types of Nodes</h2>
+      <ul>
+        <li><strong>Root Node</strong> − The document object.</li>
+        <li><strong>Parent Node</strong> − A node that contains other nodes.</li>
+        <li><strong>Child Node</strong> − A node inside another node.</li>
+        <li><strong>Sibling Node</strong> − Nodes at the same level with the same parent.</li>
+      </ul>
+
+      <h3>Example DOM Structure</h3>
+      <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt; JavaScript - DOM Navigation &lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;h3&gt; Hi Users! &lt;/h3&gt;
+      &lt;p&gt; Hello World! &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+
+      <p>Here:</p>
+      <ul>
+        <li><code>&lt;html&gt;</code> → root node (no parent).</li>
+        <li><code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> → children of <code>&lt;html&gt;</code>.</li>
+        <li><code>&lt;title&gt;</code> → child of <code>&lt;head&gt;</code>.</li>
+        <li><code>&lt;div&gt;</code> → child of <code>&lt;body&gt;</code>.</li>
+        <li><code>&lt;h3&gt;</code> and <code>&lt;p&gt;</code> → siblings inside <code>&lt;div&gt;</code>.</li>
+      </ul>
+
+      <h2>DOM Navigation Properties</h2>
+      <table border="1" cellpadding="8">
+        <tr><th>Property</th><th>Description</th></tr>
+        <tr><td>firstChild</td><td>Returns the first child (can be text, comment, etc.)</td></tr>
+        <tr><td>firstElementChild</td><td>Returns the first element child (e.g., &lt;p&gt;, &lt;div&gt;)</td></tr>
+        <tr><td>lastChild</td><td>Returns the last child node</td></tr>
+        <tr><td>lastElementChild</td><td>Returns the last element child</td></tr>
+        <tr><td>childNodes</td><td>Returns all child nodes (including text, comments)</td></tr>
+        <tr><td>children</td><td>Returns only element children</td></tr>
+        <tr><td>parentNode</td><td>Returns the parent node</td></tr>
+        <tr><td>parentElement</td><td>Returns the parent element node</td></tr>
+        <tr><td>nextSibling</td><td>Returns the next sibling node</td></tr>
+        <tr><td>nextElementSibling</td><td>Returns the next sibling element</td></tr>
+        <tr><td>previousSibling</td><td>Returns the previous sibling node</td></tr>
+        <tr><td>previousElementSibling</td><td>Returns the previous sibling element</td></tr>
+      </table>
+
+      <h2>Examples</h2>
+
+      <h3>Accessing the First Child</h3>
+      <pre><code>
+const numbers = document.getElementById("num");
+console.log(numbers.firstChild.textContent);        // text node
+console.log(numbers.firstElementChild.textContent); // &lt;p&gt; element
+      </code></pre>
+
+      <h3>Accessing the Last Child</h3>
+      <pre><code>
+const langs = document.getElementById("lang");
+console.log(langs.lastChild.textContent.trim());       // text node
+console.log(langs.lastElementChild.textContent);       // &lt;p&gt; element
+      </code></pre>
+
+      <h3>Accessing All Children</h3>
+      <pre><code>
+let children = langs.childNodes;   // includes text
+let elements = langs.children;     // only elements
+      </code></pre>
+
+      <h3>Accessing Parent Node</h3>
+      <pre><code>
+const blue = document.getElementById("blue");
+console.log(blue.parentNode.nodeName);  // UL
+      </code></pre>
+
+      <h3>Accessing Sibling Nodes</h3>
+      <pre><code>
+apple.nextElementSibling.textContent;    // Banana
+banana.previousElementSibling.textContent; // Apple
+      </code></pre>
+
+      <h2>DOM Root Nodes</h2>
+      <ul>
+        <li><code>document.body</code> → returns the &lt;body&gt; element.</li>
+        <li><code>document.documentElement</code> → returns the full &lt;html&gt; element.</li>
+      </ul>
+
+      <h2>Node Properties</h2>
+      <ul>
+        <li><strong>nodeName</strong> → name of the node (UPPERCASE for tags, <code>#text</code> for text, <code>#document</code> for document).</li>
+        <li><strong>nodeValue</strong> → returns the value of the node (<em>null</em> for elements, text content for text nodes).</li>
+        <li><strong>nodeType</strong> → returns the type of node (1 = Element, 3 = Text, 8 = Comment, 9 = Document, 10 = Doctype).</li>
+      </ul>
+
+      <h3>Example: Node Type</h3>
+      <pre><code>
+const div = document.getElementById("output");
+console.log(div.nodeName);  // DIV
+console.log(div.nodeType);  // 1
+      </code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        DOM Navigation lets you move up, down, and across the DOM tree (parents, children, siblings).  
+        Mastering these properties is essential for manipulating web pages dynamically with JavaScript.
+      </p>
+    </div>
+  </div>
+</div>

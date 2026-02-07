@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Thread Deadlock</h1>
+
+    <div class="content">
+      <p>Deadlock describes a situation where two or more threads are blocked forever, waiting for each other. Deadlock occurs when multiple threads need the same locks but obtain them in different order. A Java multithreaded program may suffer from deadlock because the <code>synchronized</code> keyword causes the executing thread to block while waiting for the lock (monitor) associated with the specified object. Here is an example.</p>
+
+      <h2 class="content-title">Example: Demonstrating Deadlock Situation</h2>
+      <pre><code>public class TestThread {
+   public static Object Lock1 = new Object();
+   public static Object Lock2 = new Object();
+   
+   public static void main(String args[]) {
+      ThreadDemo1 T1 = new ThreadDemo1();
+      ThreadDemo2 T2 = new ThreadDemo2();
+      T1.start();
+      T2.start();
+   }
+   
+   private static class ThreadDemo1 extends Thread {
+      public void run() {
+         synchronized (Lock1) {
+            System.out.println("Thread 1: Holding lock 1...");
+            
+            try { Thread.sleep(10); }
+            catch (InterruptedException e) {}
+            System.out.println("Thread 1: Waiting for lock 2...");
+            
+            synchronized (Lock2) {
+               System.out.println("Thread 1: Holding lock 1 & 2...");
+            }
+         }
+      }
+   }
+   
+   private static class ThreadDemo2 extends Thread {
+      public void run() {
+         synchronized (Lock2) {
+            System.out.println("Thread 2: Holding lock 2...");
+            
+            try { Thread.sleep(10); }
+            catch (InterruptedException e) {}
+            System.out.println("Thread 2: Waiting for lock 1...");
+            
+            synchronized (Lock1) {
+               System.out.println("Thread 2: Holding lock 1 & 2...");
+            }
+         }
+      }
+   } 
+}</code></pre>
+
+      <p>When you compile and execute the above program, you get a deadlock situation. The output is:</p>
+      <pre><code>Thread 1: Holding lock 1...
+Thread 2: Holding lock 2...
+Thread 1: Waiting for lock 2...
+Thread 2: Waiting for lock 1...</code></pre>
+      <p>The program hangs forever because neither thread can proceed, each waiting for the other to release its lock. You can stop the program by pressing <strong>CTRL+C</strong>.</p>
+
+      <h2 class="content-title">Deadlock Solution Example</h2>
+      <p>Let's fix the deadlock by changing the order in which locks are acquired:</p>
+
+      <pre><code>public class TestThread {
+   public static Object Lock1 = new Object();
+   public static Object Lock2 = new Object();
+   
+   public static void main(String args[]) {
+      ThreadDemo1 T1 = new ThreadDemo1();
+      ThreadDemo2 T2 = new ThreadDemo2();
+      T1.start();
+      T2.start();
+   }
+   
+   private static class ThreadDemo1 extends Thread {
+      public void run() {
+         synchronized (Lock1) {
+            System.out.println("Thread 1: Holding lock 1...");
+            
+            try {
+               Thread.sleep(10);
+            } catch (InterruptedException e) {}
+            System.out.println("Thread 1: Waiting for lock 2...");
+            
+            synchronized (Lock2) {
+               System.out.println("Thread 1: Holding lock 1 & 2...");
+            }
+         }
+      }
+   }
+   
+   private static class ThreadDemo2 extends Thread {
+      public void run() {
+         synchronized (Lock1) {
+            System.out.println("Thread 2: Holding lock 1...");
+           
+            try {
+               Thread.sleep(10);
+            } catch (InterruptedException e) {}
+            System.out.println("Thread 2: Waiting for lock 2...");
+            
+            synchronized (Lock2) {
+               System.out.println("Thread 2: Holding lock 1 & 2...");
+            }
+         }
+      }
+   } 
+}</code></pre>
+
+      <p>With this change, the program completes without deadlock, producing output like:</p>
+      <pre><code>Thread 1: Holding lock 1...
+Thread 1: Waiting for lock 2...
+Thread 1: Holding lock 1 & 2...
+Thread 2: Holding lock 1...
+Thread 2: Waiting for lock 2...
+Thread 2: Holding lock 1 & 2...</code></pre>
+
+      <p>This example clarifies the concept, but deadlock is a complex topic. It's important to understand it deeply before developing applications to manage or avoid deadlocks effectively.</p>
+    </div>
+  </div>
+</div>

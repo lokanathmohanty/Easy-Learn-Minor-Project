@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ <code>goto</code> Statement (Unconditional Jump) ⚠️</h1>
+
+        <div class="content">
+            <p>The **<code>goto</code> statement** provides an **unconditional jump** in program execution from the `goto` point to a designated **labeled statement** within the same function. While it is part of C++, its use is generally **highly discouraged** in modern programming because it creates "spaghetti code," making the control flow difficult to trace, which significantly hurts readability and maintainability.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Syntax and Operation</h2>
+
+            <h3>Syntax:</h3>
+            <pre class="example">
+goto label;
+// ... intervening code ...
+label: statement; // Labeled statement
+</pre>
+            <p>The <code>label</code> is a user-defined identifier followed by a colon (<code>:</code>). When the program encounters <code>goto label;</code>, control is immediately transferred to the statement following <code>label:</code>, skipping all code in between.</p>
+
+            <h3>Example: Loop Control</h3>
+            <p>In the provided code, `goto LOOP` is used as a less conventional replacement for a `continue` or `break` when `a == 15`. Instead of continuing to the next iteration (like `continue`), it jumps back to the **beginning** of the loop block (`LOOP:do`):</p>
+            <pre class="example">
+LOOP:do {
+   if( a == 15) { // When a becomes 15
+      a = a + 1;  // a becomes 16
+      goto LOOP;  // Jumps back to 'LOOP:do', skipping the print statement for a=15.
+   }
+   // ... rest of loop
+} while( a < 20 );
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">When is <code>goto</code> Considered?</h2>
+
+            <p>Despite strong arguments against its use, <code>goto</code> can be the most straightforward solution in limited, specific scenarios, primarily to simplify exiting multi-level structures:</p>
+            <ul>
+                <li>**Breaking Out of Deeply Nested Loops:** If you need to immediately exit two or more nested loops (where a simple `break` only exits the innermost one), `goto` provides a clean jump to a termination point.</li>
+                <li>**Legacy Code or Error Handling:** In older codebases or complex resource cleanup/error handling where using structured exceptions or flags would be significantly more verbose.</li>
+            </ul>
+
+            <h3>Example: Exiting Nested Loops</h3>
+            <p>The code fragment below clearly demonstrates the advantage: a single `goto` replaces complex flag checks to exit both the `for` loops instantly.</p>
+            <pre class="example">
+for (int i = 0; i &lt; 3; ++i) {
+  for (int j = 0; j &lt; 3; ++j) {
+    if (i == 1 &amp;&amp; j == 1) {
+      goto exitLoops; // Jumps directly out of BOTH loops.
+    }
+    cout &lt;&lt; "i: " &lt;&lt; i &lt;&lt; ", j: " &lt;&lt; j &lt;&lt; endl;
+  }
+}
+
+exitLoops:
+  cout &lt;&lt; "Exited the nested loops!" &lt;&lt; endl;
+// Output confirms the jump happened after i: 1, j: 0
+</pre>
+        </div>
+    </div>
+</div>

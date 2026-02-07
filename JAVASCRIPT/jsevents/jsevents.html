@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Introduction to Events</h1>
+    <div class="content">
+      <h2>What is an Event?</h2>
+      <p>JavaScript's interaction with HTML is handled through events that occur when the user or the browser manipulates a page.</p>
+      <p>When the page loads, it is called an event. When the user clicks a button, that click too is an event. Other examples include events like pressing any key, closing a window, resizing a window, etc.</p>
+      <p>Developers can use these events to execute JavaScript coded responses, which cause buttons to close windows, messages to be displayed to users, data to be validated, and virtually any other type of response imaginable.</p>
+      <p>Events are a part of the Document Object Model (DOM) Level 3 and every HTML element contains a set of events which can trigger JavaScript code.</p>
+      <p>Please go through this small tutorial for a better understanding of <a href="#">HTML Event Reference</a>.</p>
+    </div>
+
+    <div class="content">
+      <h2>JavaScript Event Handlers</h2>
+      <p>Event handler can be used as an attribute of the HTML element. It takes the inline JavaScript or function execution code as a value.</p>
+      <p>Whenever any event triggers, it invokes the inline JavaScript code or executes the callback function to perform the particular action.</p>
+      <p>In simple terms, it is used to handle the events.</p>
+    </div>
+
+    <div class="content">
+      <h2>Syntax</h2>
+      <p>Users can follow the syntax below to use event handlers with HTML elements.</p>
+      <pre>
+&lt;div eventHandler = "JavaScript_code"&gt;&lt;/div&gt;
+      </pre>
+      <p>In the above syntax, you need to replace the <code>eventHandler</code> with the actual event handler like <code>onclick</code>, <code>onmouseover</code>, etc. The <code>JavaScript_code</code> should execute the function or run JavaScript inline.</p>
+    </div>
+
+    <div class="content">
+      <h2>Example: Inline JavaScript with Event Handlers</h2>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;h2&gt; Click the button to Change its text's color &lt;/h2&gt;
+   &lt;button onclick = "this.style.color='red'"&gt; Click Me &lt;/button&gt;
+   &lt;div id = "output"&gt; &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Example: Function with Event Handlers</h2>
+      <pre>
+&lt;html&gt;
+&lt;head&gt;
+   &lt;style&gt;
+      #test {
+         width: 600px;
+         height: 100px;
+         background-color: red;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div id = "test"&gt; &lt;/div&gt; &lt;br&gt;
+   &lt;button onclick = "handleClick()"&gt; Change Div Color &lt;/button&gt;
+   &lt;script&gt;
+      function handleClick(event) {
+         var div = document.getElementById("test");
+         div.style.backgroundColor = "blue";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>Example: Multiple Functions with Event Handlers</h2>
+      <pre>
+&lt;html&gt;
+&lt;head&gt;
+   &lt;style&gt;
+      #test {
+         font-size: 15px;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h2&gt; Hover over the below text to customize the font. &lt;/h2&gt;
+   &lt;div id = "test" onmouseenter = "changeFontSize(); changeColor();"&gt; Hello World! &lt;/div&gt; &lt;br&gt;
+   &lt;script&gt;
+      function changeFontSize(event) {
+         document.getElementById("test").style.fontSize = "25px";
+      }
+      function changeColor(event) {
+         document.getElementById("test").style.color = "red";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+
+    <div class="content">
+      <h2>JavaScript Event Object</h2>
+      <p>The function that handles the event takes the <code>event</code> object as a parameter. The <code>event</code> object contains the information about the event and the element on which it occurred.</p>
+      <p>There are various properties and methods available which can be used with the event object to get information.</p>
+      <p><strong>Event:</strong> It is a parent of all event objects.</p>
+      <p>Here is the list of different types of event objects. Each event object contains various events, methods, and properties.</p>
+
+      <ul>
+        <li><strong>AnimationEvent</strong> - It handles the CSS animations.</li>
+        <li><strong>ClipboardEvent</strong> - It handles the changes of the clipboard.</li>
+        <li><strong>DragEvent</strong> - It handles the drag-and-drop events.</li>
+        <li><strong>FocusEvent</strong> - To handle the focus events.</li>
+        <li><strong>HashChangeEvent</strong> - It handles the changes in the anchor part of the URL.</li>
+        <li><strong>InputEvent</strong> - To handle the form inputs.</li>
+        <li><strong>KeyboardEvent</strong> - To handle the keyboard interaction by users.</li>
+        <li><strong>MediaEvent</strong> - It handles the media-related events.</li>
+        <li><strong>MouseEvent</strong> - To handle the mouse interaction by users.</li>
+        <li><strong>PageTransitionEvent</strong> - To handle the navigation between web pages.</li>
+        <li><strong>PopStateEvent</strong> - It handles the changes in the page history.</li>
+        <li><strong>ProgressEvent</strong> - To handle the progress of the file loading.</li>
+        <li><strong>StorageEvent</strong> - To handle changes in the web storage.</li>
+        <li><strong>TouchEvent</strong> - To handle touch interaction on the device's screen.</li>
+        <li><strong>TransitionEvent</strong> - To handle CSS transition.</li>
+        <li><strong>UiEvent</strong> - To handle the user interface interaction by users.</li>
+        <li><strong>WheelEvent</strong> - To handle the mouse-wheel interaction by users.</li>
+      </ul>
+    </div>
+  </div>
+</div>

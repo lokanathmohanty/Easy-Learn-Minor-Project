@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# File I/O (Input/Output)</h1>
+        
+        <h2 class="title">Files and Streams</h2>
+        <div class="content">
+            <p>In C#, a **file** is a named collection of data stored on disk. When a file is accessed for reading or writing, it is treated as a **stream**. A stream is a sequence of bytes moving along a communication path.</p>
+            <ul>
+                <li>**Input Stream**: Used for **reading** data from a file (input to the program).</li>
+                <li>**Output Stream**: Used for **writing** data to a file (output from the program).</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">The `System.IO` Namespace and Classes</h2>
+        <div class="content">
+            <p>All core file and directory operations are managed by classes within the **<code>System.IO</code>** namespace.</p>
+            <table>
+                <tr>
+                    <th>Class</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td><code>File</code> / <code>FileInfo</code></td>
+                    <td>Static methods (<code>File</code>) or instance methods (<code>FileInfo</code>) for manipulating files (Create, Delete, Exists).</td>
+                </tr>
+                <tr>
+                    <td><code>Directory</code> / <code>DirectoryInfo</code></td>
+                    <td>Manipulating directory structures.</td>
+                </tr>
+                <tr>
+                    <td><code>FileStream</code></td>
+                    <td>The fundamental class for byte-level reading and writing at any location within a file.</td>
+                </tr>
+                <tr>
+                    <td><code>StreamReader</code></td>
+                    <td>Optimized for **reading characters/text** from a stream (e.g., <code>ReadLine()</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>StreamWriter</code></td>
+                    <td>Optimized for **writing characters/text** to a stream (e.g., <code>WriteLine()</code>).</td>
+                </tr>
+            </table>
+        </div>
+        
+        <h2 class="title">The `FileStream` Class</h2>
+        <div class="content">
+            <p><code>FileStream</code> is used for raw, byte-level I/O. Its constructor requires specific enumerators to define how the file is opened and used.</p>
+            <h3>Constructor Syntax:</h3>
+            <pre>
+FileStream F = new FileStream("sample.txt", 
+   FileMode.OpenOrCreate, 
+   FileAccess.ReadWrite, 
+   FileShare.Read);
+            </pre>
+            
+            <h3>Key Enumerators:</h3>
+            <ul>
+                <li>**<code>FileMode</code>**: Defines how to open the file (e.g., <code>Open</code>, <code>Create</code>, <code>Append</code>, <code>OpenOrCreate</code>).</li>
+                <li>**<code>FileAccess</code>**: Defines what operations are allowed (<code>Read</code>, <code>Write</code>, <code>ReadWrite</code>).</li>
+                <li>**<code>FileShare</code>**: Defines how the file can be shared with other running processes (e.g., <code>None</code>, <code>Read</code>, <code>ReadWrite</code>).</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">High-Level File Operations (Text I/O)</h2>
+        <div class="content">
+            <p>The <code>File</code> class provides static helper methods and works seamlessly with <code>StreamReader</code> and <code>StreamWriter</code> for simpler text-based operations. The **<code>using</code>** statement is crucial here as it guarantees the stream resource is properly **closed** (disposed) even if an exception occurs.</p>
+            
+            <h3>Reading a File:</h3>
+            <pre>
+using (StreamReader reader = new StreamReader("data.txt")) {
+    string line;
+    while ((line = reader.ReadLine()) != null) {
+        // Process line
+    }
+}
+            </pre>
+            
+            <h3>Creating and Writing a File:</h3>
+            <pre>
+using (StreamWriter writer = File.CreateText("data.txt")) {
+    writer.WriteLine("This is the first line.");
+    writer.WriteLine("This is the second line.");
+}
+            </pre>
+            
+            <h3>Checking and Deleting a File:</h3>
+            <pre>
+string path = "data.txt";
+if (File.Exists(path)) {
+    File.Delete(path);
+    Console.WriteLine("File deleted.");
+}
+            </pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,197 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Generators</h1>
+    </div>
+    <div class="content">
+      <p>
+        Generators in Python are a convenient way to create iterators that produce values on-the-fly and do not store entire sequences in memory. They are especially useful for large datasets or infinite sequences.
+      </p>
+      <p>
+        A generator is defined like a normal function using the <code>def</code> keyword but uses <code>yield</code> instead of <code>return</code> to produce a value. Each call to the generator's <code>__next__()</code> method resumes execution right after the last yield.
+      </p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="title">
+      <h2>Creating Generators</h2>
+    </div>
+    <div class="content">
+      <h3>Using Generator Functions</h3>
+      <pre><code>def count_up_to(max_value):
+    current = 1
+    while current <= max_value:
+        yield current
+        current += 1
+
+counter = count_up_to(5)
+for number in counter:
+    print(number)
+</code></pre>
+      <p>Output:</p>
+      <pre>1
+2
+3
+4
+5
+</pre>
+      <h3>Using Generator Expressions</h3>
+      <pre><code>gen_expr = (x * x for x in range(1, 6))
+
+for value in gen_expr:
+    print(value)
+</code></pre>
+      <p>Output:</p>
+      <pre>1
+4
+9
+16
+25
+</pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Exception Handling in Generators</h2>
+    </div>
+    <div class="content">
+      <p>
+        You can iterate a generator using a while loop with exception handling for <code>StopIteration</code>:
+      </p>
+      <pre><code>def generator(num):
+    for x in range(1, num+1):
+        yield x
+
+it = generator(5)
+while True:
+    try:
+        print(next(it))
+    except StopIteration:
+        break
+</code></pre>
+      <p>Output:</p>
+      <pre>1
+2
+3
+4
+5
+</pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="title">
+      <h2>Normal Function vs Generator Function</h2>
+    </div>
+    <div class="content">
+      <p>
+        Normal functions compute and return all values at once and then terminate, discarding local variables. Generator functions yield values one at a time, suspending state between yields and generating values lazily.
+      </p>
+      <pre><code># Normal function producing Fibonacci series
+def fibonacci(n):
+    fibo = []
+    a, b = 0, 1
+    while True:
+        c = a + b
+        if c >= n:
+            break
+        fibo.append(c)
+        a, b = b, c
+    return fibo
+
+f = fibonacci(10)
+for i in f:
+    print(i)
+</code></pre>
+      <p>Output:</p>
+      <pre>1
+2
+3
+5
+8
+</pre>
+      <pre><code># Generator function producing Fibonacci series
+def fibonacci(n):
+    a, b = 0, 1
+    while True:
+        c = a + b
+        if c >= n:
+            break
+        yield c
+        a, b = b, c
+
+f = fibonacci(10)
+while True:
+    try:
+        print(next(f))
+    except StopIteration:
+        break
+</code></pre>
+      <p>Output:</p>
+      <pre>1
+2
+3
+5
+8
+</pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <div class="title">
+      <h2>Asynchronous Generators</h2>
+    </div>
+    <div class="content">
+      <p>
+        Asynchronous generators are Python coroutines defined with <code>async def</code> and are used with <code>async for</code> loops. They yield items asynchronously and allow awaiting other coroutines during iteration.
+      </p>
+      <pre><code>import asyncio
+
+async def async_generator(x):
+    for i in range(1, x+1):
+        await asyncio.sleep(1)
+        yield i
+
+async def main():
+    async for item in async_generator(5):
+        print(item)
+
+asyncio.run(main())
+</code></pre>
+      <p>Output:</p>
+      <pre>1
+2
+3
+4
+5
+</pre>
+      <pre><code># Asynchronous Fibonacci Generator
+async def fibonacci(n):
+    a, b = 0, 1
+    while True:
+        c = a + b
+        if c >= n:
+            break
+        await asyncio.sleep(1)
+        yield c
+        a, b = b, c
+
+async def main():
+    f = fibonacci(10)
+    async for num in f:
+        print(num)
+
+asyncio.run(main())
+</code></pre>
+      <p>Output:</p>
+      <pre>1
+2
+3
+5
+8
+</pre>
+    </div>
+  </div>
+</div>

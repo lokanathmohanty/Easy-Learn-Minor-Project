@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Limit</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        The <code>limit()</code> method in MongoDB restricts the number of documents returned by a <code>find()</code> query. It behaves similarly to SQL’s LIMIT clause.
+      </p>
+      
+      <h2>Basic Usage</h2>
+      <pre><code>collection.find(query).limit(number)</code></pre>
+      <p>
+        The <code>number</code> argument specifies max documents to return; omitting it means no limit.
+      </p>
+
+      <h2>Example: Limit Results</h2>
+      <p>
+        Retrieve documents from <code>orders</code> collection where <code>numPurchased &gt;= 10</code>, limiting output to 1 document.
+      </p>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+  const uri = "mongodb://localhost:27017/";
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+    await limitDocs(client, "mydb", "orders");
+  } finally {
+    await client.close();
+  }
+}
+
+async function limitDocs(client, dbName, collectionName) {
+  const query = { numPurchased: { $gte: 10 } };
+  const result = await client.db(dbName).collection(collectionName)
+                            .find(query)
+                            .limit(1)
+                            .toArray();
+  console.log(JSON.stringify(result));
+}
+
+main().catch(console.error);
+</code></pre>
+
+      <h2>Example Output</h2>
+      <pre><code>[
+  {
+    "_id": "...",
+    "orderId": 201,
+    "custid": 301,
+    "prodId": 100,
+    "numPurchased": 20
+  }
+]</code></pre>
+
+      <h2>Skipping Documents</h2>
+      <p>
+        Use <code>skip()</code> to omit a number of documents from the result set.
+      </p>
+      <pre><code>collection.find(query).limit(x).skip(y)</code></pre>
+      <p>
+        This returns <code>x</code> documents starting after skipping <code>y</code> documents.
+      </p>
+
+      <h2>Example: Retrieve Second Document</h2>
+      <pre><code>async function limitDocs(client, dbName, collectionName) {
+  const query = { numPurchased: { $gte: 10 } };
+  const result = await client.db(dbName).collection(collectionName)
+                            .find(query)
+                            .limit(1)
+                            .skip(1)
+                            .toArray();
+  console.log(JSON.stringify(result));
+}</code></pre>
+
+      <h2>Example Output</h2>
+      <pre><code>[
+  {
+    "_id": "...",
+    "orderId": 202,
+    "custid": 302,
+    "prodId": 101,
+    "numPurchased": 10
+  }
+]</code></pre>
+
+    </div>
+  </div>
+</div>

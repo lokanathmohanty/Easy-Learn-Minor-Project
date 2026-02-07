@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP System Calls and External Program Execution</h1>
+
+        <div class="content">
+            <p>PHP provides a set of built-in functions that allow the execution of **operating system commands** and **external programs** directly from within the PHP script. These are crucial for tasks like file manipulation, process management, and integrating external utilities.</p>
+
+            <hr>
+
+            <h2 class="title">Functions for System Execution 💻</h2>
+
+            <h3>1. $\text{system()}$</h3>
+            <p>Executes the command and **outputs the result line by line** directly to the output buffer (browser/console). It is useful when you want to show the output as it's being generated.</p>
+            <pre>system(string $command, int &$result_code = null): string|false</pre>
+            <ul>
+                <li><strong>Output:</strong> Prints the output and returns only the **last line** of the command's output as a string.</li>
+                <li><strong>Return Code:</strong> The optional $\text{\$result\_code}$ parameter is populated with the shell's integer return status ($\text{0}$ usually means success).</li>
+            </ul>
+
+            <h3>2. $\text{shell\_exec()}$ and Backtick Operator ($\text{` `}$)</h3>
+            <p>Executes the command via the shell and returns the **complete output as a single string**. This is identical to using the PHP **backtick operator** ($\text{`command`}$).</p>
+            <pre>shell_exec(string $command): string|false|null</pre>
+            <ul>
+                <li><strong>Output:</strong> Returns the entire command output as a single string.</li>
+                <li><strong>Use Case:</strong> Ideal for capturing the full result of a command to process or log it within the PHP script.</li>
+            </ul>
+
+            <h3>3. $\text{exec()}$</h3>
+            <p>Executes the command and is designed to capture the output line-by-line into an array, offering detailed control over the results.</p>
+            <pre>exec(string $command, array &$output = null, int &$result_code = null): string|false</pre>
+            <ul>
+                <li><strong>Output:</strong> Returns only the **last line** of output as a string.</li>
+                <li><strong>Output Array:</strong> The optional $\text{\$output}$ array is filled with **every line** of output from the command.</li>
+                <li><strong>Return Code:</strong> The optional $\text{\$result\_code}$ parameter stores the shell's integer return status.</li>
+                <li><strong>Use Case:</strong> Best when you need the complete output of the command structured into an array of lines.</li>
+            </ul>
+
+            <h3>4. $\text{passthru()}$</h3>
+            <p>Executes an external program and displays the **raw output** directly to the output stream. It bypasses any internal PHP buffering or processing.</p>
+            <pre>passthru(string $command, int &$result_code = null): ?false</pre>
+            <ul>
+                <li><strong>Output:</strong> Sends raw data directly to the output.</li>
+                <li><strong>Use Case:</strong> Primarily used when the external command generates **binary data** (like an image or a PDF) that needs to be passed directly back to the browser without being corrupted by PHP's string handling.</li>
+            </ul>
+        </div>
+    </div>
+</div>

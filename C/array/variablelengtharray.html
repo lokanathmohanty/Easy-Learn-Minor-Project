@@ -1,0 +1,230 @@
+<div class="container">
+
+  <h1 class="title">Variable Length Arrays in C</h1>
+
+  <div class="session">
+    <p>A Variable Length Array (VLA) is an array whose length is determined at runtime rather than compile time. VLAs were introduced in C99 and allow array sizes to be based on user input or other runtime values.</p>
+    <p><strong>Example of fixed-size array:</strong></p>
+    <pre><code>int arr[10];</code></pre>
+    <p>With VLAs, the size is dynamic:</p>
+    <pre><code>int arr[size];</code></pre>
+  </div>
+
+  <!-- Creating a VLA -->
+  <div class="session">
+    <h2 class="title">Creating a Variable Length Array</h2>
+    <pre><code>void arr_init(int length) {
+    int arr[length];
+    // use arr here
+}</code></pre>
+  </div>
+
+  <!-- Example 1: 1D VLA -->
+  <div class="session">
+    <h2 class="title">Example 1: One-dimensional VLA</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int i, j, size;
+    printf("Enter the size of one-dimensional array: ");
+    scanf("%d", &size);
+
+    int arr[size];
+
+    for(i = 0; i &lt; size; ++i){
+        printf("Enter a number: ");
+        scanf("%d", &j);
+        arr[i] = j;
+    }
+
+    for(i = 0; i &lt; size; ++i)
+        printf("a[%d]: %d\n", i, arr[i]);
+
+    return 0;
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre><code>Enter the size of one-dimensional array: 5
+Enter a number: 1
+Enter a number: 5
+Enter a number: 7
+Enter a number: 8
+Enter a number: 7
+
+a[0]: 1
+a[1]: 5
+a[2]: 7
+a[3]: 8
+a[4]: 7</code></pre>
+  </div>
+
+  <!-- Example 2: 2D VLA -->
+  <div class="session">
+    <h2 class="title">Example 2: Two-dimensional VLA</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int i, j, x;
+    int row, col;
+
+    printf("Enter number of rows & columns of 2-D array:\n");
+    scanf("%d %d", &row, &col);
+
+    int arr2D[row][col];
+
+    for(i = 0; i &lt; row; ++i){
+        for(j = 0; j &lt; col; ++j){
+            printf("Enter a number: ");
+            scanf("%d", &x);
+            arr2D[i][j] = x;
+        }
+    }
+
+    for(i = 0; i &lt; row; ++i){
+        printf("\n");
+        for(j = 0; j &lt; col; ++j)
+            printf("%d\t", arr2D[i][j]);
+    }
+
+    return 0;
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre><code>Enter number of rows & columns of 2-D array:
+2
+3
+Enter a number: 10
+Enter a number: 20
+...
+10  20  30
+40  50  60</code></pre>
+  </div>
+
+  <!-- Example 3: Auto-incrementing values -->
+  <div class="session">
+    <h2 class="title">Example 3: Auto-incrementing Values in VLA</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int n;
+    printf("Enter the size of the array: \n");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    for(int i = 0; i &lt; n; i++)
+        arr[i] = i + 1;
+
+    printf("The array elements are: ");
+    for(int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre><code>Enter the size of the array:
+5
+The array elements are: 1 2 3 4 5</code></pre>
+  </div>
+
+  <!-- Example 4: VLAs with Random Values -->
+  <div class="session">
+    <h2 class="title">Example 4: Filling VLA with Random Numbers</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int main() {
+    int i, j, size, row, col;
+    srand(time(NULL));
+
+    printf("Enter the size of one-dimensional array: ");
+    scanf("%d", &size);
+
+    printf("Enter the number of rows & columns of 2-D array:\n");
+    scanf("%d %d", &row, &col);
+
+    int arr[size];
+    int arr2D[row][col];
+
+    for(i = 0; i &lt; size; ++i)
+        arr[i] = rand() % 100 + 1;
+
+    for(i = 0; i &lt; row; ++i)
+        for(j = 0; j &lt; col; ++j)
+            arr2D[i][j] = rand() % 100 + 1;
+
+    printf("One-dimensional array:\n");
+    for(i = 0; i &lt; size; ++i)
+        printf("a[%d]: %d\n", i, arr[i]);
+
+    printf("\nTwo-dimensional array:\n");
+    for(i = 0; i &lt; row; ++i){
+        printf("\n");
+        for (j = 0; j &lt; col; ++j)
+            printf("%5d", arr2D[i][j]);
+    }
+
+    return 0;
+}</code></pre>
+
+    <p><strong>Sample Output:</strong></p>
+    <pre><code>One-dimensional array:
+a[0]: 95
+a[1]: 93
+...
+
+Two-dimensional array:
+   92   19   79   23
+   56   21   44   98
+    8   22   89   54
+   93    1   63   38</code></pre>
+  </div>
+
+  <!-- Jagged Array -->
+  <div class="session">
+    <h2 class="title">Jagged Array using Array of Pointers</h2>
+    <p>A jagged array is an array of arrays with different lengths. In C, this is implemented using an array of pointers.</p>
+
+    <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a[] = {1,2};
+    int b[] = {3,4,5};
+    int c[] = {6,7,8,9};
+
+    int *arr[] = {a, b, c};
+    int size[] = {2, 3, 4};
+    int *ptr;
+    int i, j;
+
+    for(i = 0; i &lt; 3; i++) {
+        ptr = arr[i];
+        for(j = 0; j &lt; size[i]; j++) {
+            printf("%d\t", *ptr);
+            ptr++;
+        }
+        printf("\n");
+    }
+
+    return 0;
+}</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre><code>1    2
+3    4    5
+6    7    8    9</code></pre>
+  </div>
+
+  <div class="session">
+    <h3>Notes:</h3>
+    <ul>
+      <li>VLA memory is stack-allocated (automatic storage).</li>
+      <li>VLAs are not supported in C89 or C++.</li>
+      <li>They are available in C99 and supported by GCC, Clang, and some MSVC extensions.</li>
+      <li>VLAs are faster than dynamic heap allocations but limited in size.</li>
+    </ul>
+  </div>
+
+</div>

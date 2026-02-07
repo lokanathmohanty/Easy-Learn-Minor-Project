@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Default Parameters</h1>
+    <div class="content">
+      <p>
+        The default parameters in JavaScript allow you to specify a default value 
+        for a function parameter. This feature was introduced in ES6. 
+        If a function is called with missing arguments or with <code>undefined</code>, 
+        it uses the default value.
+      </p>
+      <p>
+        By default, function parameters are <code>undefined</code> in JavaScript. 
+        Before ES6, developers had to check and manually assign values if parameters 
+        were <code>undefined</code>.
+      </p>
+    </div>
+
+    <h2 class="title">Example Without Default Parameters</h2>
+    <div class="content">
+      <pre><code>
+function sum(p, q) {
+  return p + q;
+}
+sum(10, 20); // 30
+sum(10);     // NaN
+sum();       // NaN
+      </code></pre>
+      <p>
+        - <code>sum(10, 20)</code> → 30  
+        - <code>sum(10)</code> → NaN  
+        - <code>sum()</code> → NaN  
+      </p>
+    </div>
+
+    <h2 class="title">Default Parameters Syntax</h2>
+    <div class="content">
+      <pre><code>
+function functName(param1 = defaultValue1, param2 = defaultValue2) {
+  // Use parameters here
+}
+      </code></pre>
+    </div>
+
+    <h2 class="title">Example With Default Parameters</h2>
+    <div class="content">
+      <pre><code>
+function sum(p = 30, q = 40) {
+  return p + q;
+}
+sum(10, 20); // 30
+sum(10);     // 50
+sum();       // 70
+      </code></pre>
+      <p>
+        - <code>sum(10, 20)</code> → 30  
+        - <code>sum(10)</code> → 50  
+        - <code>sum()</code> → 70  
+      </p>
+    </div>
+
+    <h2 class="title">Passing Expressions as Default Values</h2>
+    <div class="content">
+      <pre><code>
+function sum(p = 2, q = p * 2, r = p * q * 2) {
+  return p + q + r;
+}
+sum(5, 10, 15); // 30
+sum(5, 10);     // 115
+sum();          // 22
+      </code></pre>
+      <p>
+        Default values can be expressions that reference earlier parameters.
+      </p>
+    </div>
+
+    <h2 class="title">Passing Undefined Argument</h2>
+    <div class="content">
+      <pre><code>
+function sum(p = 24, q = 26) {
+  return p + q;
+}
+sum(5, undefined); // 31
+sum(undefined);    // 50
+      </code></pre>
+    </div>
+
+    <h2 class="title">Using Functions as Default Parameters</h2>
+    <div class="content">
+      <pre><code>
+function getNum() {
+  return 5;
+}
+function mul(p = 5, q = getNum()) {
+  return p * q;
+}
+mul(10); // 50
+mul();   // 25
+      </code></pre>
+    </div>
+
+    <h2 class="title">Optional Parameters</h2>
+    <div class="content">
+      <p>
+        Default parameters are also known as optional parameters. 
+        Required parameters should come first, and optional parameters should be last.
+      </p>
+      <pre><code>
+function func(p, q = 10) {
+  return p + q;
+}
+func(10, 20); // 30
+      </code></pre>
+      <p>
+        If you place an optional parameter first, it can cause errors:
+      </p>
+      <pre><code>
+function sum(p = 10, q) {
+  return p + q;
+}
+sum(, 10); // Error
+sum(10);   // NaN
+      </code></pre>
+    </div>
+  </div>
+</div>

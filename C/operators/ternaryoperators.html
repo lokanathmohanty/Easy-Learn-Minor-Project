@@ -1,0 +1,152 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Ternary Operator in C</h1>
+    <div class="content">
+      <p>The ternary operator (<code>?:</code>) is a conditional operator with three operands. It is often used to condense multiple conditional statements into a compact form.</p>
+
+      <h2>Syntax</h2>
+      <p><code>exp1 ? exp2 : exp3</code></p>
+      <ul>
+        <li><code>exp1</code>: Boolean expression (true or false)</li>
+        <li><code>exp2</code>: Value if <code>exp1</code> is true</li>
+        <li><code>exp3</code>: Value if <code>exp1</code> is false</li>
+      </ul>
+
+      <h2>Example 1: Even or Odd Check</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 10;
+   (a % 2 == 0) ? printf("%d is Even \n", a) : printf("%d is Odd \n", a);
+   return 0;
+}
+      </pre>
+      <p>Output:<br>10 is Even</p>
+
+      <h2>Example 2: Equivalent if-else</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 10;
+   if (a % 2 == 0){
+      printf("%d is Even\n", a);
+   } else {
+      printf("%d is Odd\n", a);
+   }
+   return 0;
+}
+      </pre>
+
+      <h2>Example 3: Assign Larger Value</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 100, b = 20, c;
+   c = (a >= b) ? a : b;
+   printf("a: %d b: %d c: %d\n", a, b, c);
+   return 0;
+}
+      </pre>
+      <p>Output:<br>a: 100 b: 20 c: 100</p>
+
+      <h2>Example 4: Equivalent if-else</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 100, b = 20, c;
+   if (a >= b){
+      c = a;
+   } else {
+      c = b;
+   }
+   printf("a: %d b: %d c: %d\n", a, b, c);
+   return 0;
+}
+      </pre>
+
+      <h2>Example 5: Multiple Statements in Ternary</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 100, b = 20, c;
+   c = (a >= b) ? printf("a is larger "), c = a : printf("b is larger "), c = b;
+   printf("a: %d b: %d c: %d\n", a, b, c);
+   return 0;
+}
+      </pre>
+      <p>Output:<br>a is larger a: 100 b: 20 c: 20</p>
+
+      <h2>Example 6: Corresponding if-else</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 100, b = 20, c;
+   if (a >= b){
+      printf("a is larger \n");
+      c = a;
+   } else {
+      printf("b is larger \n");
+      c = b;
+   }
+   printf("a: %d b: %d c: %d\n", a, b, c);
+   return 0;
+}
+      </pre>
+      <p>Output:<br>a is larger<br>a: 100 b: 20 c: 100</p>
+
+      <h2>Nested Ternary Operator</h2>
+      <p>Nested ternary syntax:</p>
+      <p><code>exp1 ? (exp2 ? expr3 : expr4) : (exp5 ? expr6 : expr7)</code></p>
+      <p>Checks <code>exp1</code>, then <code>exp2</code> or <code>exp5</code> based on result.</p>
+
+      <h2>Example 7: Divisibility Check</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 15;
+   printf("a: %d\n", a);
+
+   (a % 2 == 0) ? 
+      ((a % 3 == 0) ? printf("divisible by 2 and 3") : printf("divisible by 2 but not 3")) :
+      ((a % 3 == 0) ? printf("divisible by 3 but not 2") : printf("not divisible by 2, not divisible by 3"));
+
+   return 0;
+}
+      </pre>
+      <p>Output for <code>a=15</code>:<br>divisible by 3 but not 2</p>
+
+      <h2>Example 8: Equivalent Nested if-else</h2>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   int a = 15;
+   printf("a: %d\n", a);
+
+   if (a % 2 == 0) {
+      if (a % 3 == 0) {
+         printf("divisible by 2 and 3");
+      } else {
+         printf("divisible by 2 but not 3");
+      }
+   } else {
+      if (a % 3 == 0) {
+         printf("divisible by 3 but not 2");
+      } else {
+         printf("not divisible by 2, not divisible by 3");
+      }
+   }
+   return 0;
+}
+      </pre>
+      <p>Output:<br>a: 15<br>divisible by 3 but not 2</p>
+    </div>
+  </div>
+</div>

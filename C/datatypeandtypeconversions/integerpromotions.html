@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Integer Promotions in C</h1>
+    <div class="content">
+      <p>Integer promotions are rules in the C language that automatically convert smaller integer types (such as char and short) to a larger integer type (usually int) during arithmetic operations. This ensures consistency and prevents data loss or unexpected behavior due to overflow.</p>
+
+      <p>Because different integer types have different sizes and ranges, the C compiler promotes their operands to a common type for all arithmetic and bitwise operations.</p>
+
+      <h2 class="title">Why Integer Promotions Matter</h2>
+      <p>For example, a char may have fewer bits than an int. Without promotion, calculations with chars could overflow or behave unexpectedly. Integer promotions convert these to int (or unsigned int) to maintain reliable calculations and comparisons.</p>
+
+      <h2 class="title">General Integer Promotion Rules</h2>
+      <ul>
+        <li>All integer types smaller than int are promoted to int if all possible values fit in int.</li>
+        <li>If not, they are promoted to unsigned int instead.</li>
+        <li>When mixed types are involved, operands are converted to the type with the greater rank.</li>
+        <li>Other types such as long, long long, float, and double are promoted according to their ranks.</li>
+      </ul>
+
+      <h2 class="title">When Does Integer Promotion Occur?</h2>
+      <p>Integer promotions occur:</p>
+      <ul>
+        <li>During arithmetic operations (+, -, *, /, %).</li>
+        <li>With unary operators (+, -, ~, !).</li>
+        <li>For bitwise operators (&, |, ^, <<, >>).</li>
+        <li>In relational and equality comparisons.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Integer Promotion in Comparison</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  char a = 251;
+  unsigned char b = a;
+
+  printf("a = %c\n", a);
+  printf("b = %c\n", b);
+
+  if (a == b)
+    printf("Same\n");
+  else
+    printf("Not Same\n");
+
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+a = �
+b = �
+Not Same
+      </code></pre>
+      <p>
+        Because of integer promotions, <code>a</code> is sign-extended to a negative int value (-5), whereas <code>b</code> remains positive (251), causing the comparison to fail.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Integer Promotion in Arithmetic</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  char a = 'e', b = '2', c = 'M';
+  char d = (a * b) / c;
+
+  printf("d as int: %d\n", d);
+  printf("d as char: %c\n", d);
+
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+d as int: 65
+d as char: A
+      </code></pre>
+      <p>
+        The multiplication and division operate on promoted int values, avoiding overflow before assigning back to <code>d</code>.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Integer Promotion with Bitwise Shift</h2>
+    <div class="content example">
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+  char a = 50;
+  int b = a << 2;
+
+  printf("b as int: %d\n", b);
+  printf("b as char: %c\n", b);
+
+  return 0;
+}
+      </code></pre>
+      <p>Output:</p>
+      <pre><code>
+b as int: 200
+b as char: �
+      </code></pre>
+      <p>
+        The shift is done after integer promotion to int, ensuring the result fits in an int.
+      </p>
+    </div>
+  </div>
+</div>

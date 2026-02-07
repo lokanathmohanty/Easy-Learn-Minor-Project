@@ -1,0 +1,132 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Class Selectors</h1>
+    <div class="content">
+      <p>
+        A <strong>CSS class selector</strong> is used to select elements that have a specific 
+        <code>class</code> attribute. Class selectors are defined with a period (<code>.</code>) 
+        followed by the class name. Unlike IDs, multiple elements can share the same class, 
+        which makes class selectors very flexible and reusable.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+.classname {
+  /* property: value; */
+  background-color: #04af2f;
+}
+      </pre>
+
+      <h2>Basic Class Selector</h2>
+      <p>
+        The following example applies a background color and text color 
+        to all elements with the class <code>container</code>.
+      </p>
+      <pre>
+.container {
+  background-color: #04af2f;
+  color: white;
+}
+
+&lt;p class="container"&gt;This is a paragraph with class.&lt;/p&gt;
+&lt;p&gt;This is a paragraph without class&lt;/p&gt;
+      </pre>
+
+      <h2>Multiple Class Selectors</h2>
+      <p>
+        You can use multiple classes on the same element. 
+        When multiple class names are combined, the styles are applied only if all class names match.
+      </p>
+      <pre>
+.bdr.bgColor {
+  border: 2px solid black;
+  background-color: #04af2f;
+}
+
+&lt;div class="bdr bgColor"&gt;
+  This is div with background color and a border.
+&lt;/div&gt;
+
+&lt;div class="bdr"&gt;
+  This is div with default styles.
+&lt;/div&gt;
+      </pre>
+
+      <h2>Combining Class Selector with Other Selectors</h2>
+      <p>
+        Class selectors can be combined with other selectors, 
+        such as element selectors, to style only specific elements.
+      </p>
+      <pre>
+p.container {
+  font-size: 16px;
+  font-family: Verdana, sans-serif;
+  color: #04af2f;
+}
+
+&lt;p class="container"&gt;This is a styled paragraph element.&lt;/p&gt;
+&lt;div class="container"&gt;This is a div without any style.&lt;/div&gt;
+      </pre>
+
+      <h2>Combining Multiple Classes</h2>
+      <p>
+        You can also apply multiple classes to a single element, 
+        each class applying its own styles.
+      </p>
+      <pre>
+.bdr {
+  border: 1px solid black;
+  font-size: 16px;
+  font-family: Verdana, sans-serif;
+}
+
+.bgColor {
+  background-color: #04af2f;
+  color: white;
+}
+
+&lt;div class="bdr bgColor"&gt;
+  This is a div with a border and background color.
+&lt;/div&gt;
+      </pre>
+
+      <h2>Using Class Selectors with Media Queries</h2>
+      <p>
+        Class selectors are very useful with <strong>media queries</strong> 
+        for creating responsive designs. You can change the style based on screen size.
+      </p>
+      <pre>
+.bgColor {
+  background-color: rgb(96, 5, 26);
+  color: white;
+}
+
+@media (max-width: 800px) {
+  .bgColor {
+    background-color: #04af2f;
+    color: white;
+  }
+}
+
+@media (max-width: 700px) {
+  .bgColor {
+    background-color: #031926;
+    color: white;
+  }
+}
+
+&lt;p class="bgColor"&gt;
+  Try different screen sizes to see change in background color.
+&lt;/p&gt;
+      </pre>
+
+      <h2>Key Notes</h2>
+      <ul>
+        <li>Classes are defined with a dot (<code>.</code>) before the class name.</li>
+        <li>Multiple elements can share the same class.</li>
+        <li>You can combine classes for more flexible styling.</li>
+        <li>Classes are reusable and essential for responsive design.</li>
+      </ul>
+    </div>
+  </div>
+</div>

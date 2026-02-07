@@ -1,0 +1,121 @@
+<div class="container">
+<div class="session">
+<div class="title">
+<h1>.NET Core - Testing Library</h1>
+ 
+</div>
+<div class="content">
+<p>In this chapter, we will test our **StringLibrary** and to do so, we need to rearrange our projects so that we can follow the default convention.</p>
+<h2>Project Rearrangement for Convention</h2>
+<p>Let us open the <strong>global.json</strong> file.</p>
+<div class="example">
+<div class="title"><h2>global.json</h2></div>
+<div class="content">
+<pre><code>{ 
+   "projects": [ "src", "test" ], 
+   "sdk": { 
+      "version": "1.0.0-preview2-003131" 
+   } 
+}</code></pre>
+</div>
+</div>
+<p>At the top of this file you will see the project settings and it sets up some folder such as <strong>src</strong> and <strong>test</strong> by default.</p>
+<p>As by convention we must have projects in these folders, this is the new convention and that is going to be used as part of .NET Core.</p>
+<p>In the Solution Explorer, you can see that both the console project and the library project are inside the <strong>src</strong> folder while the Testing project is inside <strong>test</strong> folder.</p>
+<p>And the projects structure in Solution Explorer doesn't represent where the projects physically exist on the disk. Let us now open the Solution folder and you will see that <strong>StringLibrary</strong> project is not inside the <strong>src</strong> folder.</p>
+<p>You can see that both <strong>src</strong> and <strong>test</strong> folders map to the convention specified in the <strong>global.json</strong> file. However, we have one project StringLibrary which is out of convention. Let us now add the <strong>StringLibrary</strong> project inside the <strong>src</strong> folder.</p>
+<p>In the src folder, we have two projects and we need to fix the problem so that we can use all the projects properly. Let us go back to the Visual Studio and right-click on the StringLibrary project and select the **Remove** option. It won't delete it, but it will only remove the project.</p>
+<p>Now right-click on the src folder and select <strong>Add → Existing Project</strong></p>
+<p>Browse to the StringLibrary project which is now inside the <strong>src</strong> folder, select the **StringLibrary.csproj** file and click **Open**.</p>
+<h2>Updating Console Project Reference</h2>
+<p>We now have to remove the reference of <strong>StringLibrary</strong> from the <strong>project.json</strong> file of the console app.</p>
+<div class="example">
+<div class="title"><h2>Console project.json (Reference Removed)</h2></div>
+<div class="content">
+<pre><code>{ 
+   "version": "1.0.0-*", 
+   "buildOptions": { 
+      "emitEntryPoint": true 
+   }, 
+   "dependencies": { 
+      "Microsoft.NETCore.App": { 
+         "type": "platform", 
+         "version": "1.0.1" 
+      }, 
+      "NuGet.CommandLine": "3.5.0", 
+      "System.Runtime.Serialization.Json": "4.0.3" 
+   }, 
+   "frameworks": { 
+      "netcoreapp1.0": { 
+         "dependencies": { }, 
+         "imports": "dnxcore50" 
+      } 
+   } 
+}</code></pre>
+</div>
+</div>
+<p>Save the changes and then add a reference of <strong>StringLibrary</strong> again in your console project.</p>
+<div class="example">
+<div class="title"><h2>Console project.json (Reference Re-added)</h2></div>
+<div class="content">
+<pre><code>{ 
+   "version": "1.0.0-*", 
+   "buildOptions": { 
+      "emitEntryPoint": true 
+   }, 
+   "dependencies": { 
+      "Microsoft.NETCore.App": { 
+         "type": "platform", 
+         "version": "1.0.1" 
+      }, 
+   "NuGet.CommandLine": "3.5.0", 
+      "System.Runtime.Serialization.Json": "4.0.3" 
+   }, 
+   "frameworks": { 
+      "netcoreapp1.0": { 
+         "dependencies": { 
+            "StringLibrary": { 
+               "target": "project" 
+            } 
+         }, 
+         "imports": "dnxcore50" 
+      } 
+   } 
+}</code></pre>
+</div>
+</div>
+<p>Now everything should be working again and you can build **StringLibrary** and then **FirstApp** (console project) without any error. Let us now test the StringLibrary functionality using xunit. We need to add reference of StringLibrary into our testing project. Right-click on the **References** of StringLibraryTests project and select **Add Reference**</p>
+<p>Click **OK** which will add a reference of **StringLibrary** to our testing project. Let us now replace the following code in the **Tests.cs** file.</p>
+<div class="example">
+<div class="title"><h2>Tests.cs (StringLibrary Functionality Tests)</h2></div>
+<div class="content">
+<pre><code>using System; 
+using Xunit; 
+using StringLibrary; 
+  
+namespace Tests { 
+   public class Tests { 
+      [Fact] 
+      public void StartsWithUpperCaseTest() { 
+         string input = "Mark"; 
+         Assert.True(input.StartsWithUpper()); 
+      } 
+      [Fact] 
+      public void StartsWithLowerCaseTest() { 
+         string input = "mark"; 
+         Assert.True(input.StartsWithLower()); 
+      } 
+      [Fact] 
+      public void StartsWithNumberCaseTest() { 
+         string input = "123"; 
+         Assert.True(input.StartsWithNumber()); 
+      } 
+   } 
+}</code></pre>
+</div>
+</div>
+<p>You can see that we have three test methods which will test the functionality of StringLibrary. Let us click the **Run All** link and you will see the following output in Test Explorer.</p>
+<p>You can also run the tests from the command line. Let us open the command prompt and execute the **dotnet test** command.</p>
+</div>
+</div>
+</div>

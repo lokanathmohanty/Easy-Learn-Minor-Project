@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Child Selectors</h1>
+    <div class="content">
+      <p>
+        A <strong>CSS child selector</strong> selects all the <em>direct children</em> 
+        of a specified element. It is represented using the <code>&gt;</code> (greater than) symbol.  
+        Unlike descendant selectors, child selectors do not apply styles to nested elements 
+        that are deeper than one level.
+      </p>
+
+      <h2>Syntax</h2>
+      <pre>
+selector &gt; child-selector {
+  /* property: value; */
+  color: #04af2f;
+}
+      </pre>
+
+      <h2>Example 1: Styling Direct Child Elements</h2>
+      <p>
+        In this example, the style is applied only to the <code>&lt;p&gt;</code> element 
+        that is a direct child of the <code>&lt;div&gt;</code>.  
+        The <code>&lt;p&gt;</code> inside the <code>&lt;span&gt;</code> is not affected.
+      </p>
+      <pre>
+.myDiv &gt; p {
+  color: #04af2f;
+}
+
+&lt;div class="myDiv"&gt;
+  &lt;p&gt;Direct child paragraph of div.&lt;/p&gt;
+  &lt;span&gt;&lt;p&gt;Paragraph inside span, not direct child of div.&lt;/p&gt;&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This paragraph is outside div.&lt;/p&gt;
+      </pre>
+
+      <h2>Example 2: Adding Border and Font Styles</h2>
+      <p>
+        In this example, only the direct child paragraph of the <code>&lt;div&gt;</code> 
+        receives a border, font size, and font family.
+      </p>
+      <pre>
+.myDiv &gt; p {
+  border: 2px solid #031926;
+  font-size: 20px;
+  font-family: Verdana, sans-serif;
+}
+
+&lt;div class="myDiv"&gt;
+  &lt;p&gt;Direct child paragraph of div.&lt;/p&gt;
+  &lt;span&gt;&lt;p&gt;Paragraph inside span, not direct child of div.&lt;/p&gt;&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This paragraph is outside div.&lt;/p&gt;
+      </pre>
+
+      <h2>Key Notes</h2>
+      <ul>
+        <li>The child selector uses the <code>&gt;</code> symbol.</li>
+        <li>It targets only the immediate (direct) children, not deeper nested elements.</li>
+        <li>Useful when you want precise control over hierarchical structures in HTML.</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# `switch` Statement</h1>
+        
+        <h2 class="title">Introduction to `switch` Statements</h2>
+        <div class="content">
+            <p>The **`switch` statement** is a control flow structure that simplifies decision-making by comparing a single **expression** (usually a variable) against a list of possible constant values, known as **cases**. It provides a clean, readable alternative to a long chain of <code>if...else if...else</code> statements when testing for equality against multiple discrete values.</p>
+            <ul>
+                <li>The variable being switched on is checked against each `case` value.</li>
+                <li>When a match is found, the code block associated with that `case` executes.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Syntax and Rules</h2>
+        <div class="content">
+            <h3>Syntax:</h3>
+            <pre>
+switch(expression) {
+   case constant-expression1:
+      statement(s);
+      break;
+   case constant-expression2:
+      statement(s);
+      break;
+   default: /* Optional */
+      statement(s);
+      break;
+}
+            </pre>
+            
+            <h3>Key Rules:</h3>
+            <ul>
+                <li>**Expression Type:** The <code>expression</code> must be of an integral type (like <code>int</code> or <code>char</code>) or an enumerated type (<code>enum</code>).</li>
+                <li>**Case Constants:** Each <code>constant-expression</code> must be of the **same data type** as the switch variable and must be a constant or a literal value.</li>
+                <li>**The `break` Keyword:** In C#, falling through from one case to the next is **not allowed** (unlike C++ or C). Every non-empty `case` must end with a **jump statement**, usually <code>break</code>, to terminate the switch.</li>
+                <li>**Multiple Cases:** You can group multiple cases together by listing them without a <code>break</code>, allowing the same code block to handle several values (e.g., <code>case 'B': case 'C':</code>).</li>
+                <li>**`default` Case:** The optional <code>default</code> case executes if none of the preceding <code>case</code> expressions match the switch variable's value. It typically appears at the end.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Example: Grading System</h2>
+        <div class="content example">
+            <p>This example demonstrates grouped cases (B and C) and the use of the `default` case:</p>
+            <pre>
+using System;
+
+class Program {
+    static void Main(string[] args) {
+        char grade = 'B';
+         
+        switch (grade) {
+            case 'A':
+               Console.WriteLine("Excellent!");
+               break;
+            case 'B': // Match! Flow falls to the next non-empty case
+            case 'C':
+               Console.WriteLine("Well done"); // This executes
+               break; // Switch terminates here
+            case 'D':
+               Console.WriteLine("You passed");
+               break;
+            default:
+               Console.WriteLine("Invalid grade");
+               break;
+         }
+    }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                Well done
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Life Cycle of a Thread in Java</h1>
+    <div class="content">
+      <p>The life cycle of a thread in Java defines the various states a thread undergoes from its creation to termination. Understanding these states is crucial for effective multithreading and synchronization in Java applications.</p>
+      <h2>States of a Thread Life Cycle in Java</h2>
+      <p>Java threads are managed by the <code>Thread</code> class, which defines several states a thread can be in during its life cycle:</p>
+      <ul>
+        <li><strong>New (Born)</strong>: A thread is in this state immediately after its creation but before the <code>start()</code> method is invoked.</li>
+        <li><strong>Runnable</strong>: After calling <code>start()</code>, the thread enters the runnable state. It is ready to run and is waiting for CPU time.</li>
+        <li><strong>Blocked</strong>: A thread enters the blocked state when it wants to access a synchronized block or method but cannot because another thread is holding the required lock.</li>
+        <li><strong>Waiting</strong>: A thread transitions to the waiting state when it waits indefinitely for another thread to perform a particular action.</li>
+        <li><strong>Timed Waiting</strong>: A thread enters this state when it waits for a specified period.</li>
+        <li><strong>Terminated (Dead)</strong>: A thread enters the terminated state when it completes its execution or when it is terminated by an exception or by calling the <code>stop()</code> method.</li>
+      </ul>
+      <h2>Example Code Demonstrating Thread States</h2>
+      <p>The following Java code demonstrates the various thread states:</p>
+      <pre><code>public class ThreadLifeCycleDemo extends Thread {
+    public void run() {
+        System.out.println(Thread.currentThread().getState()); // RUNNABLE
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getState()); // TERMINATED
+    }
+
+    public static void main(String[] args) {
+        ThreadLifeCycleDemo thread = new ThreadLifeCycleDemo();
+        System.out.println(thread.getState()); // NEW
+        thread.start();
+        System.out.println(thread.getState()); // RUNNABLE
+    }
+}
+</code></pre>
+      <p>In this example:</p>
+      <ul>
+        <li>The thread starts in the <strong>New</strong> state.</li>
+        <li>Upon calling <code>start()</code>, it enters the <strong>Runnable</strong> state.</li>
+        <li>After calling <code>sleep()</code>, it transitions to the <strong>Timed Waiting</strong> state.</li>
+        <li>Once the <code>run()</code> method completes, it enters the <strong>Terminated</strong> state.</li>
+      </ul>
+      <h2>Further Resources</h2>
+      <p>For more in-depth information, consider exploring these resources:</p>
+      <ul>
+        <li><a href="https://www.baeldung.com/java-thread-lifecycle">Baeldung: Life Cycle of a Thread in Java</a></li>
+        <li><a href="https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/">GeeksforGeeks: Lifecycle and States of a Thread in Java</a></li>
+        <li><a href="https://www.scaler.com/topics/thread-life-cycle-in-java/">Scaler: Thread Life Cycle in Java</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

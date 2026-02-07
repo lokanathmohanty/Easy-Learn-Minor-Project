@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Delete Operator</h1>
+    <div class="content">
+      <p>The JavaScript <strong>delete</strong> operator deletes/removes a property from an object. It removes the property as well as its value. It works only with objects, not with variables or functions.</p>
+      <p>Since arrays in JavaScript are objects, you can use the <strong>delete</strong> operator to delete an element at a specific index. However, methods like <code>pop()</code>, <code>slice()</code>, or <code>shift()</code> are often used instead.</p>
+
+      <h2>Syntax</h2>
+      <p>To delete an object property:</p>
+      <ul>
+        <li><code>delete obj.property;</code></li>
+        <li><code>delete obj["property"];</code></li>
+      </ul>
+      <p><strong>Return value:</strong> The operator returns <code>true</code> if the property is deleted, or <code>false</code> otherwise. Deleting a non-existent property still returns <code>true</code>.</p>
+
+      <p>To delete an array element:</p>
+      <ul>
+        <li><code>delete arr[index];</code></li>
+      </ul>
+
+      <h2>Deleting Object Properties</h2>
+      <p>The delete operator can be used to remove a property from an object.</p>
+      <p><strong>Example: Deleting an Object Property</strong></p>
+      <pre><code>
+const obj = {
+   product: "Mobile",
+   price: 20000,
+   color: "Blue",
+}
+delete obj.price;
+console.log(obj.price); // undefined
+      </code></pre>
+      <p><em>Output:</em> The property <code>price</code> is deleted, and accessing it returns <code>undefined</code>.</p>
+
+      <h2>Deleting a Nonexistent Property</h2>
+      <pre><code>
+const obj = {
+   product: "Mobile",
+   price: 20000
+}
+console.log(delete obj.color); // true
+      </code></pre>
+      <p><em>Output:</em> <code>true</code>, but the object remains unchanged.</p>
+
+      <h2>Deleting Array Elements</h2>
+      <p>The delete operator removes an array element but leaves the index empty. The array length remains unchanged.</p>
+      <pre><code>
+const arr = [10, 20, 30, 40, 50, 60];
+delete arr[1];
+console.log(arr);    // [10, empty, 30, 40, 50, 60]
+console.log(arr[1]); // undefined
+      </code></pre>
+
+      <h2>Deleting Predefined Objects</h2>
+      <p>The delete operator can attempt to remove predefined objects like <code>Math</code> or <code>Date</code>, but this is not advisable.</p>
+      <pre><code>
+console.log(delete Math.PI); // false
+console.log(delete Math);    // true
+console.log(Math);           // ReferenceError
+      </code></pre>
+
+      <h2>Can't Delete Variables and Functions</h2>
+      <p>The delete operator cannot remove variables or functions declared with <code>var</code>, <code>let</code>, or <code>const</code>.</p>
+      <pre><code>
+var x = 10;
+function fun() { return 20; }
+
+console.log(delete x);   // false
+console.log(delete fun); // false
+      </code></pre>
+
+      <p>However, variables declared without <code>var</code>, <code>let</code>, or <code>const</code> (implicitly global) can be deleted, since they are treated as properties of the <code>window</code> object.</p>
+      <pre><code>
+x = 10;
+console.log(delete x); // true
+console.log(x);        // ReferenceError
+      </code></pre>
+    </div>
+  </div>
+</div>

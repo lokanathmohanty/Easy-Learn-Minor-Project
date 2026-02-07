@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Web Components</h1>
+    <div class="content">
+      <p>React and Web Components can work together in the same application. A React component can render Web Components, and a Web Component can use React to manage its content. This makes it possible to combine the strengths of both approaches.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Concept</h2>
+    <div class="content">
+      <p>A Web Component is a reusable custom element built with standard browser APIs. React can integrate with Web Components by treating them like any other DOM element. Data can be passed through attributes and events can be listened to directly.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example</h2>
+    <div class="content">
+      <p>The following example creates a simple Web Component (<code>&lt;hello-message&gt;</code>) and uses it inside a React component:</p>
+      <pre>
+// Web Component
+class HelloMessage extends HTMLElement {
+   constructor() {
+      super();
+      this.name = 'Folks';
+   }
+   static get observedAttributes() { return ['name']; }
+   attributeChangedCallback(prop, oldVal, newVal) {
+      if (oldVal !== newVal) this[prop] = newVal;
+   }
+   connectedCallback() {
+      this.textContent = `Hello ${this.name}!`;
+   }
+}
+customElements.define('hello-message', HelloMessage);
+
+// React Component
+import React from "react";
+class SimpleWebComponent extends React.Component {
+   render() {
+      return &lt;hello-message name="Peter"&gt;&lt;/hello-message&gt;;
+   }
+}
+export default SimpleWebComponent;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Steps to Integrate</h2>
+    <div class="content">
+      <ul>
+        <li>Create a Web Component by extending <code>HTMLElement</code>.</li>
+        <li>Register the component with <code>customElements.define</code>.</li>
+        <li>Include the Web Component script in <code>public/index.html</code>.</li>
+        <li>Use the custom element directly inside React JSX.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <p>React and Web Components complement each other well. By combining them, developers can leverage React’s declarative UI with the reusability of Web Components, depending on the needs of the application.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - CORS Handling</h1>
+
+    <div class="content">
+      <h2>Overview</h2>
+      <p>Cross-Origin Resource Sharing (CORS) is a browser-level security feature that restricts cross-origin HTTP requests. By default, browsers enforce the same-origin policy, which prevents a script from one domain from accessing resources on another. In this session, you will learn what CORS is, why it matters, and how to handle it using JavaScript and Express.js servers.</p>
+
+      <h2>Learning Objectives</h2>
+      <ul>
+        <li>Understand the concept of CORS and its role in web security.</li>
+        <li>Learn why CORS is important for secure web applications.</li>
+        <li>Implement CORS handling in an Express.js server.</li>
+        <li>Test CORS-enabled endpoints with a vanilla JavaScript client.</li>
+        <li>Recognize and troubleshoot common CORS-related issues.</li>
+      </ul>
+
+      <h2>What is CORS?</h2>
+      <p>CORS is a security feature enforced by browsers to prevent malicious sites from making unauthorized requests to other domains. It enforces the same-origin policy, meaning that a web page can only request resources from the domain it was loaded from. CORS allows servers to define which origins are permitted to access their resources, enabling secure cross-domain communication.</p>
+
+      <h2>Importance of CORS</h2>
+      <p>While CORS enhances security, it often introduces challenges for developers working with APIs hosted on different domains. Proper configuration ensures both security and functionality, allowing legitimate clients to interact with server resources without being blocked by the browser.</p>
+
+      <h2>CORS Handling Using Express Server</h2>
+      <p>One way to handle CORS is by configuring headers in an Express.js server. The <code>Access-Control-Allow-Origin</code> header specifies which origins can access resources.</p>
+
+      <h3>Example: Basic Express.js Server with CORS Enabled</h3>
+      <p><em>index.js</em></p>
+      <p><code>
+        const express = require('express');<br>
+        const server = express();<br><br>
+
+        server.use((request, response, proceed) => {<br>
+        &nbsp;&nbsp;response.header('Access-Control-Allow-Origin', '*');<br>
+        &nbsp;&nbsp;response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');<br>
+        &nbsp;&nbsp;response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');<br>
+        &nbsp;&nbsp;proceed();<br>
+        });<br><br>
+
+        server.get('/info', (request, response) => {<br>
+        &nbsp;&nbsp;response.json({ country: 'India', currencyCode: 'INR' });<br>
+        });<br><br>
+
+        server.listen(3000, () => {<br>
+        &nbsp;&nbsp;console.log('Application is live on port 3000');<br>
+        });<br>
+      </code></p>
+
+      <h3>Vanilla JavaScript Client</h3>
+      <p><em>index.html</em></p>
+      <p><code>
+        &lt;!DOCTYPE html&gt;<br>
+        &lt;html lang="en"&gt;<br>
+        &nbsp;&nbsp;&lt;body&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Data from Server&lt;/h1&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="infoDisplay"&gt;&lt;/div&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;script&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.addEventListener('DOMContentLoaded', () =&gt; {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const infoContainer = document.getElementById('infoDisplay');<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetch('http://localhost:3000/info')<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(response =&gt; response.json())<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(info =&gt; {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;infoContainer.innerHTML = `&lt;p&gt;Country: ${info.country}&lt;/p&gt;&lt;p&gt;Currency Code: ${info.currencyCode}&lt;/p&gt;`;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(error =&gt; {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.warn('Failed to retrieve data:', error);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;infoContainer.innerHTML = '&lt;p&gt;Error retrieving data. Please try again later.&lt;/p&gt;';<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br>
+        &nbsp;&nbsp;&lt;/body&gt;<br>
+        &lt;/html&gt;<br>
+      </code></p>
+
+      <h2>Common CORS Issues</h2>
+      <h3>Unauthorized Access Blocked by CORS</h3>
+      <p>Error message: <em>Access to XMLHttpRequest at 'URL' from origin 'Origin' has been blocked by CORS policy</em>. This happens when the server does not permit the requesting origin.</p>
+
+      <h4>Solution Example</h4>
+      <p><code>
+        const express = require('express');<br>
+        const server = express();<br><br>
+
+        server.use((request, response, proceed) =&gt; {<br>
+        &nbsp;&nbsp;response.setHeader('Access-Control-Allow-Origin', 'https://example.com');<br>
+        &nbsp;&nbsp;response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');<br>
+        &nbsp;&nbsp;response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');<br>
+        &nbsp;&nbsp;response.setHeader('Access-Control-Allow-Credentials', 'true');<br>
+        &nbsp;&nbsp;proceed();<br>
+        });<br><br>
+
+        server.get('/api/info', (request, response) =&gt; {<br>
+        &nbsp;&nbsp;response.json({ details: 'Information from the server' });<br>
+        });<br><br>
+
+        server.listen(3000, () =&gt; {<br>
+        &nbsp;&nbsp;console.log('Application active on port 3000');<br>
+        });<br>
+      </code></p>
+
+      <h3>Missing CORS Headers</h3>
+      <p>If the server fails to return CORS headers, browsers block cross-origin requests.</p>
+
+      <h4>Solution Example</h4>
+      <p><code>
+        const express = require('express');<br>
+        const server = express();<br><br>
+
+        server.use((request, response, proceed) =&gt; {<br>
+        &nbsp;&nbsp;response.setHeader('Access-Control-Allow-Origin', '*');<br>
+        &nbsp;&nbsp;response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');<br>
+        &nbsp;&nbsp;response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');<br>
+        &nbsp;&nbsp;response.setHeader('Access-Control-Allow-Credentials', 'true');<br>
+        &nbsp;&nbsp;proceed();<br>
+        });<br><br>
+
+        server.get('/api/info', (request, response) =&gt; {<br>
+        &nbsp;&nbsp;response.json({ info: 'Information from the server' });<br>
+        });<br><br>
+
+        server.listen(3000, () =&gt; {<br>
+        &nbsp;&nbsp;console.log('Application is now active on port 3000');<br>
+        });<br>
+      </code></p>
+
+      <h2>Practice</h2>
+      <ul>
+        <li>Modify the Express server to only allow requests from <em>http://localhost:4000</em>.</li>
+        <li>Update the client-side JavaScript to handle network errors gracefully.</li>
+        <li>Implement CORS in an Express server but restrict access to only <em>GET</em> requests.</li>
+      </ul>
+
+      <h2>Knowledge Check</h2>
+      <ul>
+        <li>What does the <code>Access-Control-Allow-Origin</code> header control?</li>
+        <li>Why does the browser block requests without CORS headers?</li>
+        <li>What risks are associated with setting <code>Access-Control-Allow-Origin</code> to <code>*</code>?</li>
+      </ul>
+
+      <h2>Resources</h2>
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN Web Docs on CORS</a></li>
+        <li><a href="https://expressjs.com/">Express.js Official Documentation</a></li>
+        <li><a href="https://nodejs.org/">Node.js Official Website</a></li>
+      </ul>
+
+      <h2>Next Steps</h2>
+      <p>Practice enabling and restricting CORS in different scenarios. Explore middleware libraries like <code>cors</code> for Express.js that simplify CORS configuration. In the next session, we will look at advanced server-side CORS configurations for production environments.</p>
+    </div>
+  </div>
+</div>

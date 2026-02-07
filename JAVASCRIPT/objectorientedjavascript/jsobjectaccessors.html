@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Object Accessors</h1>
+    <div class="content">
+      <p>The object accessor properties in JavaScript are methods that get or set the value of an object. They are defined using the <strong>get</strong> and <strong>set</strong> keywords. Accessor properties are a powerful way to control how your objects are accessed and modified.</p>
+      <p>The JavaScript object can have two kinds of properties:</p>
+      <ul>
+        <li>Data properties</li>
+        <li>Accessor properties</li>
+      </ul>
+      <p>Example of data property:</p>
+      <pre><code>const obj = {
+    key: "value", // Data property
+}</code></pre>
+
+      <h2 class="title">Object Accessor Properties</h2>
+      <p>In JavaScript, you can use the getters to get the object properties and setters to set the object properties.</p>
+      <ul>
+        <li><strong>get</strong> − Used to define a method to get the object property value.</li>
+        <li><strong>set</strong> − Used to define a method to update the object property value.</li>
+      </ul>
+
+      <h2 class="title">JavaScript Getters</h2>
+      <p>The getters are used to access the object properties. To define a method as a getter, we use the <code>get</code> keyword followed by the method name.</p>
+      <pre><code>get methodName() {
+    // Method body
+}
+obj.methodName;</code></pre>
+      <p>You can access the getter like a property without parentheses.</p>
+      <h3 class="title">Example</h3>
+      <pre><code>const wall = {
+  color: "brown",
+  get getColor() {
+    return this.color;
+  }
+}
+console.log(wall.getColor);</code></pre>
+      <p><strong>Output:</strong> The color of the wall is: brown</p>
+
+      <h2 class="title">JavaScript Setters</h2>
+      <p>The setters are used to update the object properties. The setter method always takes a single parameter, and you can assign values to it just like a property.</p>
+      <pre><code>set methodName(param) {
+    this.color = param;
+}
+obj.methodName = "Red";</code></pre>
+      <h3 class="title">Example</h3>
+      <pre><code>const wall = {
+  color: "brown",
+  set setColor(color) {
+    this.color = color;
+  }
+}
+wall.setColor = "Red";</code></pre>
+      <p><strong>Output:</strong> The color of the wall before update is: brown <br> The color of the wall after update is: Red</p>
+
+      <h2 class="title">Object Methods vs Getters/Setters</h2>
+      <p>Getters and setters provide a simpler syntax compared to defining methods. Both can achieve the same results, but getters and setters offer cleaner code.</p>
+      <pre><code>const wall = {
+  color: "brown",
+  get getColor() {
+    return this.color;
+  },
+  colorMethod: function () {
+    return this.color;
+  }
+}</code></pre>
+      <p><strong>Output:</strong> <br>
+      Getting the color using the getters: brown <br>
+      Getting the color using the object method: brown</p>
+
+      <h2 class="title">Data Quality and Security</h2>
+      <p>Getters and setters improve data quality by validation and also allow encapsulation or abstraction (data hiding).</p>
+      <h3 class="title">Example</h3>
+      <pre><code>const wall = {
+  color: "Brown",
+  get getColor() {
+    return this.color.toUpperCase();
+  }
+}
+console.log(wall.getColor);</code></pre>
+      <p><strong>Output:</strong> BROWN</p>
+
+      <h2 class="title">Defining Getters/Setters using Object.defineProperty()</h2>
+      <p>You can also add getters or setters into an object using <code>Object.defineProperty()</code>.</p>
+      <pre><code>Object.defineProperty(object, "methodName", {
+  get: function () { ... },
+  set: function (value) { ... }
+});</code></pre>
+      <h3 class="title">Example</h3>
+      <pre><code>const door = { size: 20 };
+
+Object.defineProperty(door, "getSize", {
+  get: function () {
+    return this.size;
+  }
+});
+
+Object.defineProperty(door, "setSize", {
+  set: function (value) {
+    this.size = value;
+  }
+});
+
+console.log(door.getSize); // 20
+door.setSize = 30;
+console.log(door.getSize); // 30</code></pre>
+
+      <h2 class="title">Reasons to Use Getters and Setters</h2>
+      <ul>
+        <li>They provide simpler syntax than object methods.</li>
+        <li>Improve data quality by validating input.</li>
+        <li>Enable encapsulation and secure the object data.</li>
+        <li>Allow abstraction and data hiding.</li>
+      </ul>
+    </div>
+  </div>
+</div>

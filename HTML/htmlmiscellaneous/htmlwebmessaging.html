@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Web Messaging</h1>
+    <div class="content">
+
+      <h2>Introduction</h2>
+      <p><strong>Web Messaging</strong> provides a way for documents in different browsing contexts to share data without relying on the DOM. It solves the problem of cross-domain communication across different domains, protocols, or ports.</p>
+      <p>For example, if we want to send data from a page to an ad container placed in an <code>&lt;iframe&gt;</code>, the browser would normally throw a security exception. With Web Messaging, we can safely pass data across as a <code>message</code> event.</p>
+
+      <h2>Message Event</h2>
+      <p>Message events are fired in scenarios like cross-document messaging, channel messaging, server-sent events, and WebSockets. They are described by the <strong>MessageEvent</strong> interface.</p>
+
+      <h2>Properties of Message Event</h2>
+      <ul>
+        <li><strong>data</strong> − Contains string data</li>
+        <li><strong>origin</strong> − Contains domain name and port</li>
+        <li><strong>lastEventId</strong> − Unique identifier for the current message event</li>
+        <li><strong>source</strong> − Reference to the originating document’s window</li>
+        <li><strong>ports</strong> − Data sent by any message port</li>
+      </ul>
+
+      <h2>Sending a Cross-Document Message</h2>
+      <p>Before sending a cross-document message, we need to create a new browsing context, such as an <code>&lt;iframe&gt;</code> or new window. We can then send data using <code>postMessage()</code> with two arguments:</p>
+      <ul>
+        <li><strong>message</strong> − The message to send</li>
+        <li><strong>targetOrigin</strong> − Origin name</li>
+      </ul>
+
+      <h3>Example: Sending message from iframe to button</h3>
+      <pre><code>var iframe = document.querySelector('iframe');
+var button = document.querySelector('button');
+
+var clickHandler = function(){
+   iframe.contentWindow.postMessage('The message to send.','https://www.tutorialspoint.com');
+}
+button.addEventListener('click', clickHandler, false);
+</code></pre>
+
+      <h3>Receiving a Cross-Document Message</h3>
+      <pre><code>var messageEventHandler = function(event){
+   if(event.origin == 'https://www.tutorialspoint.com'){
+      alert(event.data);
+   }
+}
+window.addEventListener('message', messageEventHandler, false);
+</code></pre>
+
+      <h2>Channel Messaging</h2>
+      <p><strong>Channel messaging</strong> enables two-way communication between browsing contexts, even across multiple origins. It uses <strong>MessageChannel</strong> and <strong>MessagePort</strong> objects.</p>
+
+      <h3>MessageChannel Methods</h3>
+      <ul>
+        <li><strong>postMessage()</strong> − Posts a message through a channel</li>
+        <li><strong>start()</strong> − Starts sending messages</li>
+        <li><strong>close()</strong> − Closes the ports</li>
+      </ul>
+
+      <h3>Example: Sending Data Between Iframes</h3>
+      <pre><code>var loadHandler = function(){
+   var mc, portMessageHandler;
+   mc = new MessageChannel();
+
+   window.parent.postMessage('documentAHasLoaded','http://foo.example',[mc.port2]);
+
+   portMessageHandler = function(portMsgEvent){
+      alert(portMsgEvent.data);
+   }
+
+   mc.port1.addEventListener('message', portMessageHandler, false);
+   mc.port1.start();
+}
+window.addEventListener('DOMContentLoaded', loadHandler, false);
+</code></pre>
+
+      <h3>Example: Forwarding Data to Another Iframe</h3>
+      <pre><code>var loadHandler = function(){
+   var iframes, messageHandler;
+   iframes = window.frames;
+
+   messageHandler = function(messageEvent){
+      if(messageEvent.ports.length > 0){
+         iframes[1].postMessage('portopen','http://foo.example', messageEvent.ports);
+      }
+   }
+
+   window.addEventListener('message', messageHandler, false);
+}
+window.addEventListener('DOMContentLoaded', loadHandler, false);
+</code></pre>
+
+      <h3>Example: Receiving Data in Second Document</h3>
+      <pre><code>var loadHandler = function(){
+   var messageHandler = function(messageEvent){
+
+      var formHandler = function(){
+         var msg = 'add &lt;foo@example.com&gt; to game circle.';
+         messageEvent.ports[0].postMessage(msg);
+      }
+
+      document.forms[0].addEventListener('submit', formHandler, false);
+   }
+   window.addEventListener('message', messageHandler, false);
+}
+window.addEventListener('DOMContentLoaded', loadHandler, false);
+</code></pre>
+
+    </div>
+  </div>
+</div>

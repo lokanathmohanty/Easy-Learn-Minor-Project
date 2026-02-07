@@ -1,0 +1,205 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Decorators</h1>
+    </div>
+    <div class="content">
+      <p>
+        A decorator in Python is a function that receives another function as an argument and extends or modifies its behavior without altering the original function's code. Decorators allow code reuse and separation of concerns elegantly.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Defining a Function Decorator</h2>
+    </div>
+    <div class="content">
+      <p>
+        In Python, functions are first-class objects: they can be passed as arguments, defined inside other functions (nested), and returned from functions. This feature enables decorators.
+      </p>
+      <pre><code>def decorator(arg_function):
+    def nested_function():
+        # Wraps and extends arg_function behavior
+        arg_function()
+    return nested_function
+
+def function():
+    print("hello")
+
+# Decorating function explicitly
+function = decorator(function)
+function()</code></pre>
+      <p>This decoration displays the extended behavior upon calling <code>function()</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Examples of Python Decorators</h2>
+    </div>
+    <div class="content">
+      <h3>Example 1</h3>
+      <pre><code>def my_function(x):
+    print("The number is=", x)
+
+def my_decorator(some_function, num):
+    def wrapper(num):
+        print("Inside wrapper to check odd/even")
+        if num % 2 == 0:
+            ret = "Even"
+        else:
+            ret = "Odd!"
+        some_function(num)
+        return ret
+    print("wrapper function is called")
+    return wrapper
+
+no = 10
+my_function = my_decorator(my_function, no)
+print("It is", my_function(no))</code></pre>
+      <p>Output:</p>
+      <pre>
+wrapper function is called
+Inside wrapper to check odd/even
+The number is= 10
+It is Even
+</pre>
+
+      <h3>Example 2 (Using @ Symbol)</h3>
+      <pre><code>def my_decorator(some_function):
+    def wrapper(num):
+        print("Inside wrapper to check odd/even")
+        if num % 2 == 0:
+            ret= "Even"
+        else:
+            ret= "Odd!"
+        some_function(num)
+        return ret
+    print("wrapper function is called")
+    return wrapper
+
+@my_decorator
+def my_function(x):
+    print("The number is=", x)
+
+no = 10
+print("It is", my_function(no))</code></pre>
+      <p>This elegant syntax applies the decorator using <code>@my_decorator</code> above the function.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Built-in Decorators</h2>
+    </div>
+    <div class="content">
+      <h3>@classmethod Decorator</h3>
+      <p>
+        Transforms a method into a class method that receives the class itself as the first argument instead of an instance.
+      </p>
+      <pre><code>class MyClass:
+    @classmethod
+    def mymethod(cls):
+        # cls refers to the class
+        pass
+</code></pre>
+      <p>Class method can be called both on the class and its instances.</p>
+      <pre><code>class counter:
+    count = 0
+    def __init__(self):
+        print("init called by", self)
+        counter.count += 1
+        print("count =", counter.count)
+    @classmethod
+    def showcount(cls):
+        print("called by", cls)
+        print("count =", cls.count)
+
+c1 = counter()
+c2 = counter()
+print("class method called by object")
+c1.showcount()
+print("class method called by class")
+counter.showcount()</code></pre>
+      <p>Output:</p>
+      <pre>
+init called by <counter object>
+count = 1
+init called by <counter object>
+count = 2
+class method called by object
+called by <class 'counter'>
+count = 2
+class method called by class
+called by <class 'counter'>
+count = 2
+</pre>
+
+      <h3>@staticmethod Decorator</h3>
+      <p>
+        Converts a method into a static method that doesn't receive instance or class references implicitly.
+      </p>
+      <pre><code>class MyClass:
+    @staticmethod
+    def mymethod():
+        # No self or cls parameters
+        pass
+</code></pre>
+      <p>Example with static method:</p>
+      <pre><code>class counter:
+    count = 0
+    def __init__(self):
+        print("init called by", self)
+        counter.count += 1
+        print("count =", counter.count)
+    @staticmethod
+    def showcount():
+        print("count =", counter.count)
+
+c1 = counter()
+c2 = counter()
+print("static method called by object")
+c1.showcount()
+print("static method called by class")
+counter.showcount()</code></pre>
+      <p>Output:</p>
+      <pre>
+init called by <counter object>
+count = 1
+init called by <counter object>
+count = 2
+static method called by object
+count = 2
+static method called by class
+count = 2
+</pre>
+
+      <h3>@property Decorator</h3>
+      <p>
+        A property decorator turns method into a read-only attribute getter and optionally supports setter and deleter to manage encapsulation of instance variables.
+      </p>
+      <pre><code>class Car:
+    def __init__(self, speed=40):
+        self._speed = speed
+    
+    @property
+    def speed(self):
+        return self._speed
+
+    @speed.setter
+    def speed(self, value):
+        if value < 0 or value > 100:
+            print("speed limit 0 to 100")
+            return
+        self._speed = value
+
+c1 = Car()
+print(c1.speed)   # calls getter
+c1.speed = 60     # calls setter</code></pre>
+      <p>
+        Property decorator provides clean, recommended way to handle instance attributes safely.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Date Comparison</h1>
+    <div class="content">
+      <p>
+        Date comparison is a common requirement in JavaScript applications. For example, when your
+        internet service provider notifies you that your plan will expire in a certain number of
+        days, this calculation is made by comparing the current date with the expiry date.
+      </p>
+      <p>
+        In this session, we will learn different ways to compare dates in JavaScript:
+      </p>
+      <ul>
+        <li>Using the <code>getTime()</code> method</li>
+        <li>Using the <code>Moment.js</code> <code>diff()</code> method</li>
+      </ul>
+
+      <h2>Using the getTime() Method</h2>
+      <p>
+        JavaScript represents dates using the <code>Date</code> class. The
+        <code>getTime()</code> method returns the number of milliseconds since
+        January&nbsp;1, 1970 (epoch time). By comparing these values, we can check whether one date
+        is before, after, or equal to another date.
+      </p>
+
+      <h3>Syntax</h3>
+      <pre><code>
+let date1 = new Date();
+let date2 = new Date(2012, 11, 21);
+
+if (date1.getTime() &lt; date2.getTime()) {
+   // date1 is earlier than date2
+} else if (date1.getTime() &gt; date2.getTime()) {
+   // date1 is later than date2
+} else {
+   // both dates are equal
+}
+      </code></pre>
+
+      <h3>Example</h3>
+      <pre><code>
+let output = document.getElementById("output");
+
+function compareDates(date1, date2) {
+   if (date1.getTime() &lt; date2.getTime()) {
+      output.innerHTML += date1 + " is earlier than " + date2 + "&lt;br/&gt;";
+   } else if (date1.getTime() &gt; date2.getTime()) {
+      output.innerHTML += date2 + " is earlier than " + date1 + "&lt;br/&gt;";
+   } else {
+      output.innerHTML += date1 + " is the same as " + date2 + "&lt;br/&gt;";
+   }
+}
+
+// Example usage
+let now = new Date();
+let oldDate = new Date(2012, 11, 21);
+compareDates(now, oldDate);
+      </code></pre>
+
+      <h2>Using Moment.js diff() Method</h2>
+      <p>
+        Moment.js is a popular library for working with dates and times in JavaScript. Its
+        <code>diff()</code> method calculates the difference between two dates in a specific unit
+        (years, months, days, hours, seconds, etc.).
+      </p>
+
+      <h3>Syntax</h3>
+      <pre><code>
+moment(date1).diff(date2, "unit");
+      </code></pre>
+
+      <h3>Example</h3>
+      <pre><code>
+// Include the Moment.js library first:
+// &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"&gt;&lt;/script&gt;
+
+let output = document.getElementById("output");
+
+function compareDates(date1, date2) {
+   if (date1.diff(date2, "seconds") &lt; 0) {
+      output.innerHTML += date1.format("YY-MM-DD, HH:mm:ss") + " is earlier than " + date2.format("YY-MM-DD, HH:mm:ss") + "&lt;br/&gt;";
+   } else if (date1.diff(date2, "seconds") &gt; 0) {
+      output.innerHTML += date2.format("YY-MM-DD, HH:mm:ss") + " is earlier than " + date1.format("YY-MM-DD, HH:mm:ss") + "&lt;br/&gt;";
+   } else {
+      output.innerHTML += date1.format("YY-MM-DD, HH:mm:ss") + " is the same as " + date2.format("YY-MM-DD, HH:mm:ss") + "&lt;br/&gt;";
+   }
+}
+
+// Example usage
+let currentDate = moment();
+let futureDate = moment("2024-11-21");
+compareDates(currentDate, futureDate);
+      </code></pre>
+
+      <h2>Conclusion</h2>
+      <p>
+        We explored two approaches to date comparison in JavaScript. Using the
+        <code>getTime()</code> method is a built-in solution, while <code>Moment.js</code> offers
+        convenience and additional formatting features. Depending on your project needs, you can
+        choose either approach.
+      </p>
+    </div>
+  </div>
+</div>

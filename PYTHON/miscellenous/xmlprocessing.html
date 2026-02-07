@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - XML Processing</h1>
+    </div>
+    <div class="content">
+      <p>XML (Extensible Markup Language) is a markup language that is portable, open, and readable by different applications regardless of the platform or language.</p>
+      <p>Python provides multiple APIs for XML processing within the <code>xml</code> package:</p>
+      <ul>
+        <li><code>xml.sax</code>: Event-driven SAX API for streaming parsing, memory-efficient for large files.</li>
+        <li><code>xml.dom</code>: DOM API for loading whole XML as tree structure, allowing random access and modification.</li>
+        <li><code>xml.etree.ElementTree</code>: Lightweight tree API for easy creation, parsing, and modification of XML data.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Parsing XML using SAX</h2>
+    </div>
+    <div class="content">
+      <p>Create a class inheriting from <code>xml.sax.ContentHandler</code> and override methods:</p>
+      <ul>
+        <li><code>startElement(tag, attributes)</code></li>
+        <li><code>endElement(tag)</code></li>
+        <li><code>characters(content)</code></li>
+      </ul>
+      <p>Example: Parse <code>movies.xml</code> displaying movie details as tags are processed.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Parsing XML using DOM</h2>
+    </div>
+    <div class="content">
+      <p>Load entire XML file into memory as tree using <code>xml.dom.minidom.parse(file)</code>.</p>
+      <p>Access and modify nodes easily:</p>
+      <pre><code>DOMTree = xml.dom.minidom.parse("movies.xml")
+collection = DOMTree.documentElement
+movies = collection.getElementsByTagName("movie")
+for movie in movies:
+    title = movie.getAttribute("title")
+    print("Title:", title)</code></pre>
+      <p>DOM allows random access but uses more memory, suitable for smaller XML files.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>ElementTree API for XML</h2>
+    </div>
+    <div class="content">
+      <p>ElementTree treats XML as nested tree elements, providing a simple API to create, parse, and modify XML.</p>
+      <p>Create elements and children using <code>Element()</code> and <code>SubElement()</code>, write to file with <code>ElementTree.write()</code>.</p>
+      <pre><code>import xml.etree.ElementTree as et
+root = et.Element("employees")
+child = et.Element("employee")
+root.append(child)
+nm = et.SubElement(child, "name")
+nm.text = "Alice"
+tree = et.ElementTree(root)
+tree.write("employees.xml")</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Parsing and Modifying XML File with ElementTree</h2>
+    </div>
+    <div class="content">
+      <p>Read XML file with <code>ElementTree(file=filename)</code> and get root element with <code>getroot()</code>.</p>
+      <p>Iterate over child elements for processing and modifications.</p>
+      <pre><code>tree = et.ElementTree(file='employees.xml')
+root = tree.getroot()
+for employee in root:
+    name = employee.find("name").text
+    print(name)
+# Modify values example:
+for sal in root.iter('sal'):
+    sal.text = str(int(sal.text) + 100)
+tree.write('employees.xml')</code></pre>
+    </div>
+  </div>
+</div>

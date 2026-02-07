@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Anonymous Structures and Unions in C</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Anonymous structures and unions, introduced in C11, allow defining struct or union members without a name. Their members can be accessed directly from the parent structure, improving code readability and flexibility.
+      </p>
+      <h2>Anonymous Structure Syntax</h2>
+      <p>An anonymous struct is defined within another struct without a tag or variable name:</p>
+      <pre><code>
+struct employee {
+  char name[10];
+  float salary;
+  struct {
+    int d, m, y;
+  };
+};
+      </code></pre>
+      <h2>Accessing Members</h2>
+      <p>
+        Members of the anonymous struct can be accessed directly as if they belong to the parent struct:
+      </p>
+      <pre><code>
+e1.d = 12;
+e1.m = 5;
+e1.y = 1990;
+      </code></pre>
+      <h2>Anonymous Union Syntax</h2>
+      <p>
+        Anonymous unions work similarly; members share the same memory location and can be accessed directly:
+      </p>
+      <pre><code>
+struct mystruct {
+  int var;
+  union {
+    int var1;
+    float var2;
+    char var3;
+  };
+};
+      </code></pre>
+      <h2>Advantages</h2>
+      <ul>
+        <li>Direct access without naming inner struct/union improves readability.</li>
+        <li>Memory-efficient for unions, as members share storage.</li>
+        <li>Useful for complex data structures and hardware register mappings.</li>
+      </ul>
+      <h2>Compatibility Note</h2>
+      <p>
+        Anonymous structs and unions require a C11 compliant compiler. Use cautiously if backward compatibility is needed.
+      </p>
+    </div>
+  </div>
+</div>

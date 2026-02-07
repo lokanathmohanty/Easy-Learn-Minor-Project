@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Sort</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        In MongoDB, results of a query can be sorted in ascending or descending order on specified document fields using the <code>sort()</code> method of the Collection object in the Node.js driver.
+      </p>
+      
+      <h2>Syntax</h2>
+      <p>
+        - Ascending order: <code>sort({field: 1})</code><br>
+        - Descending order: <code>sort({field: -1})</code>
+      </p>
+      
+      <h2>Example: Ascending Sort</h2>
+      <pre><code>const { MongoClient } = require('mongodb');
+
+async function main() {
+  const uri = "mongodb://localhost:27017/";
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+    await sortDocs(client, "mydb", "products");
+  } finally {
+    await client.close();
+  }
+}
+
+async function sortDocs(client, dbname, colname) {
+  const sortOrder = { price: 1 }; // ascending
+  const cursor = client.db(dbname).collection(colname)
+                          .find({})
+                          .sort(sortOrder);
+  const results = await cursor.toArray();
+  results.forEach(doc => console.log(doc));
+}
+
+main().catch(console.error);
+</code></pre>
+      
+      <p>Sample output:</p>
+      <pre><code>{
+  _id: ObjectId("..."),
+  ProductID: 3,
+  Name: "Router",
+  price: 2000
+}
+{
+  _id: ObjectId("..."),
+  ProductID: 4,
+  Name: "Scanner",
+  price: 5000
+}
+{
+  _id: ObjectId("..."),
+  ProductID: 5,
+  Name: "Printer",
+  price: 9000
+}
+{
+  _id: ObjectId("..."),
+  ProductID: 1,
+  Name: "Laptop",
+  Price: 25000
+}
+{
+  _id: ObjectId("..."),
+  ProductID: 2,
+  Name: "TV",
+  price: 40000
+}
+</code></pre>
+      
+      <h2>Example: Descending Sort</h2>
+      <pre><code>async function sortDocsDescending(client, dbname, colname) {
+  const sortOrder = { Name: -1 }; // descending
+  const cursor = client.db(dbname).collection(colname)
+                          .find({})
+                          .sort(sortOrder);
+  const results = await cursor.toArray();
+  results.forEach(doc => console.log(doc));
+}
+</code></pre>
+      
+      <p>Sample output:</p>
+      <pre><code>{
+  _id: ObjectId("..."),
+  ProductID: 2,
+  Name: "TV",
+  price: 40000
+}
+{
+  _id: ObjectId("..."),
+  ProductID: 4,
+  Name: "Scanner",
+  price: 5000
+}
+{
+  _id: ObjectId("..."),
+  ProductID: 3,
+  Name: "Router",
+  price: 2000
+}
+{
+  _id: ObjectId("..."),
+  ProductID: 5,
+  Name: "Printer",
+  price: 9000
+}
+{
+  _id: ObjectId("..."),
+  ProductID: 1,
+  Name: "Laptop",
+  Price: 25000
+}
+</code></pre>
+    </div>
+  </div>
+</div>

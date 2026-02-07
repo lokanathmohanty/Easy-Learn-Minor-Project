@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Creating and Running a Basic Flask Application</h1>
+        <div class="content">
+            <p>To test a Flask installation, you can create a minimal application, often called "Hello World," which demonstrates the core components of the framework.</p>
+
+            <h2>The Basic Flask Application Code (Hello.py)</h2>
+            <p>The following script sets up the smallest working Flask web application:</p>
+            <p><code>from flask import Flask</code></p>
+            <p><code>app = Flask(__name__)</code></p>
+            <p><code>@app.route('/')</code></p>
+            <p><code>def hello_world():</code></p>
+            <p><code>   return 'Hello World'</code></p>
+            <p><code>if __name__ == '__main__':</code></p>
+            <p><code>   app.run()</code></p>
+
+            <h3>Explanation of Code Components</h3>
+            <ul>
+                <li>**<code>from flask import Flask</code>:** Imports the necessary <code>Flask</code> class.</li>
+                <li>**<code>app = Flask(__name__)</code>:** Creates an instance of the <code>Flask</code> class. This object, <code>app</code>, is your **WSGI application**. The argument <code>__name__</code> is the name of the current module and is required for Flask to know where to look for resources.</li>
+                <li>**<code>@app.route('/')</code>:** This is the **route decorator**. It binds the URL path (the <code>rule</code> parameter), in this case the root <code>'/'</code>, to the function defined immediately below it.</li>
+                <li>**<code>def hello_world():</code>:** The function associated with the route. Its return value (e.g., <code>'Hello World'</code>) is displayed in the user's web browser.</li>
+                <li>**<code>app.run()</code>:** Starts the application on the local development server.</li>
+            </ul>
+        </div>
+
+        <h2 class="title">Running the Application and Default Settings</h2>
+        <div class="content example">
+            <h3>Execution</h3>
+            <p>Execute the script from your Python shell:</p>
+            <p><code>python Hello.py</code></p>
+            <p>The console will output the running address:</p>
+            <p><code>* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</code></p>
+            <p>Opening **<code>localhost:5000</code>** in a browser will display the "Hello World" message.</p>
+
+            <h3>The <code>app.run(host, port, debug, options)</code> Method</h3>
+            <p>The <code>run()</code> method is used to start the server and accepts several optional parameters:</p>
+            <table>
+                <tr><th>Parameter</th><th>Description</th><th>Default Value</th></tr>
+                <tr><td><code>host</code></td><td>Hostname to listen on. Set to <code>0.0.0.0</code> to make the server externally available.</td><td><code>127.0.0.1</code> (localhost)</td></tr>
+                <tr><td><code>port</code></td><td>The port number the server runs on.</td><td><code>5000</code></td></tr>
+                <tr><td><code>debug</code></td><td>If set to <code>True</code>, enables debug mode.</td><td><code>False</code></td></tr>
+                <tr><td><code>options</code></td><td>Additional parameters for the underlying Werkzeug server.</td><td>N/A</td></tr>
+            </table>
+
+            <h3>Enabling Debug Mode</h3>
+            <p>During development, it's recommended to enable **debug mode** to automatically reload the server on code changes and provide a useful debugger for tracking errors. You can enable it in two ways:</p>
+            <p><strong>1. Setting the property:</strong></p>
+            <p><code>app.debug = True</code><br><code>app.run()</code></p>
+            <p><strong>2. Passing a parameter to <code>run()</code>:</strong></p>
+            <p><code>app.run(debug = True)</code></p>
+        </div>
+    </div>
+</div>

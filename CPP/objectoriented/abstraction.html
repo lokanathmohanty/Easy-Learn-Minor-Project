@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Data Abstraction in C++ (Interface vs. Implementation) 🛡️</h1>
+
+        <div class="content">
+            <p>**Data abstraction** is a programming technique that focuses on providing only the **essential information** (the **interface**) to the outside world while **hiding the background details** (the **implementation**). It represents the needed functionality without exposing the underlying mechanisms.</p>
+            <p>A great real-world analogy is a **TV remote**: you use the external interface (buttons) to change channels or volume, but you don't need to know the complex internal circuitry or signal processing required for those functions to work.</p>
+
+            <hr>
+
+            <h2 class="title">Abstraction through Classes and Access Labels</h2>
+
+            <p>In C++, **classes** are the primary tool for implementing data abstraction by separating the interface from the implementation using **access labels**:</p>
+
+            <ul>
+                <li>
+                    <strong>Public Members (The Interface):</strong> These members (usually functions, called **methods**) are accessible to all parts of the program that use the class. They define the abstract view of the type and are all a user needs to know to operate the object.
+                </li>
+                <li>
+                    <strong>Private Members (The Hidden Implementation):</strong> These members (usually data variables) are **not accessible** to code outside the class. They hide the internal working details and are free to change without affecting user-level code.
+                </li>
+            </ul>
+
+            <h3>Example of Abstraction Enforcement</h3>
+            <p>In the <code>Adder</code> class example, the user interacts only with the public interface:</p>
+            <pre class="example">
+Adder a;
+a.addNum(10);  // Interface: how to add a number
+cout &lt;&lt; a.getTotal(); // Interface: how to retrieve the result
+</pre>
+            <p>The private member <code>int total;</code> is the **hidden implementation detail** that stores the state. The user cannot directly access or corrupt this variable.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Benefits of Data Abstraction</h2>
+
+        <div class="content">
+            <p>Data abstraction provides critical advantages for building robust software:</p>
+            <ol>
+                <li>
+                    **Protection (Encapsulation):** Class internals (private data) are protected from external or **inadvertent user-level errors**, which prevents the object's state from being corrupted.
+                </li>
+                <li>
+                    **Maintainability and Evolution:** The class author is free to change the internal **implementation** (e.g., changing <code>total</code> from an <code>int</code> to a <code>long</code>, or using a different sorting algorithm in a public <code>sort()</code> function). As long as the **public interface** remains consistent, user-level code will still work and only needs to be recompiled.
+                </li>
+            </ol>
+            <p>This principle of separating the interface from the implementation is the core design strategy in robust C++ development.</p>
+        </div>
+    </div>
+</div>

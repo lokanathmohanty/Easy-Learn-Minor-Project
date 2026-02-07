@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Sort Arrays in Python</h1>
+    <div class="content">
+      <p>Python's <code>array</code> module provides a homogenous collection for strings, integers, or floats, similar to arrays in other languages. The <code>array</code> class itself does not have a built-in sort method, but sorting can be achieved via several approaches:</p>
+      <ul>
+        <li>Implementing a sorting algorithm (e.g., bubble sort)</li>
+        <li>Using the list <code>sort()</code> method</li>
+        <li>Using the built-in <code>sorted()</code> function</li>
+      </ul>
+      
+      <h2 class="title">Sort Using Bubble Sort Algorithm</h2>
+      <pre><code>import array as arr
+a = arr.array('i', [10, 5, 15, 4, 6, 20, 9])
+for i in range(len(a)):
+    for j in range(i+1, len(a)):
+        if a[i] > a[j]:
+            a[i], a[j] = a[j], a[i]
+print(a)
+# Output:
+# array('i', [4, 5, 6, 9, 10, 15, 20])
+</code></pre>
+      
+      <h2 class="title">Sort Using List <code>sort()</code> Method</h2>
+      <p>Convert the array to a list, sort it, then convert back to an array.</p>
+      <pre><code>import array as arr
+orgnlArray = arr.array('i', [10, 5, 15, 4, 6, 20, 9])
+print("Original array:", orgnlArray)
+sortedList = orgnlArray.tolist()
+sortedList.sort()
+sortedArray = arr.array('i', sortedList)
+print("Array after sorting:", sortedArray)
+# Output:
+# Original array: array('i', [10, 5, 15, 4, 6, 20, 9])
+# Array after sorting: array('i', [4, 5, 6, 9, 10, 15, 20])
+</code></pre>
+      
+      <h2 class="title">Sort Using Built-in <code>sorted()</code> Function</h2>
+      <p>The <code>sorted()</code> function returns a new sorted list. The original array remains unchanged.</p>
+      <pre><code>import array as arr
+a = arr.array('i', [4, 5, 6, 9, 10, 15, 20])
+sortedList = sorted(a)
+sortedArray = arr.array('i', sortedList)
+print(sortedArray)
+# Output:
+# array('i', [4, 5, 6, 9, 10, 15, 20])
+</code></pre>
+    </div>
+  </div>
+</div>

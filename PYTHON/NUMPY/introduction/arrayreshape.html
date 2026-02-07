@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">NumPy Array Reshaping</h1>
+    <div class="content">
+      <p>Reshaping arrays in NumPy refers to changing the shape or dimensions of an array while keeping its data intact. This allows adding or removing axes or altering the size of each axis.</p>
+      <p>The shape of an array is represented by a tuple indicating the number of elements along each dimension.</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Example: Reshape 1-D to 2-D</h2>
+    <div class="content">
+      <p>Convert a 1-dimensional array of 12 elements into a 2-dimensional array consisting of 4 rows and 3 columns.</p>
+      <pre><code>import numpy as np
+arr = np.array([1,2,3,4,5,6,7,8,9,10,11,12])
+newarr = arr.reshape(4, 3)
+print(newarr)</code></pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Example: Reshape 1-D to 3-D</h2>
+    <div class="content">
+      <p>Convert a 1-dimensional array of 12 elements into a 3-dimensional array with shape (2, 3, 2).</p>
+      <pre><code>import numpy as np
+arr = np.array([1,2,3,4,5,6,7,8,9,10,11,12])
+newarr = arr.reshape(2, 3, 2)
+print(newarr)</code></pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Reshape Rules</h2>
+    <div class="content">
+      <p>The total number of elements must remain constant when reshaping. Shapes incompatible with the number of elements will raise an error.</p>
+      <p>Example: Attempting to reshape 8 elements into shape (3,3) will result in an error since 3x3=9 elements are required.</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Unknown Dimension</h2>
+    <div class="content">
+      <p>You can specify one dimension as -1 in the reshape function, and NumPy will determine the appropriate size automatically.</p>
+      <pre><code>import numpy as np
+arr = np.array([1,2,3,4,5,6,7,8])
+newarr = arr.reshape(2, 2, -1)
+print(newarr)</code></pre>
+      <p>Note: Only one dimension can be set to -1.</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Flattening Arrays</h2>
+    <div class="content">
+      <p>Flattening converts a multi-dimensional array into a one-dimensional array using reshape(-1).</p>
+      <pre><code>import numpy as np
+arr = np.array([[1,2,3],[4,5,6]])
+newarr = arr.reshape(-1)
+print(newarr)</code></pre>
+      <p>Other array manipulation functions include flatten, ravel, rot90, flip, fliplr, and flipud.</p>
+    </div>
+  </div>
+</div>

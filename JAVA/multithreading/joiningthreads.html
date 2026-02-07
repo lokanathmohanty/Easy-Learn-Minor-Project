@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Joining Threads in Java</h1>
+    <div class="content">
+      <p>Joining threads in Java means waiting (or blocking) one thread until another thread finishes its execution. The <code>join()</code> method of the <code>Thread</code> class is used for this purpose.</p>
+
+      <h2>Syntax</h2>
+      <p>The basic syntax of the <code>join()</code> method is:</p>
+      <p><code>void join();</code></p>
+
+      <h2>Overloaded <code>join()</code> Methods</h2>
+      <ul>
+        <li><code>join()</code> - Blocks the current thread until the other thread terminates.</li>
+        <li><code>join(long millisec)</code> - Blocks the current thread until the other thread terminates or the specified milliseconds elapse.</li>
+        <li><code>join(long millisec, int nanos)</code> - Blocks until the other thread terminates or the specified milliseconds plus nanoseconds elapse.</li>
+      </ul>
+
+      <h2>How <code>join()</code> Works</h2>
+      <p>When a thread calls <code>join()</code> on another thread, it waits for that thread to complete before continuing its own execution. This is useful for coordinating multiple threads in a program.</p>
+
+      
+  <div class="session">
+    <h2 class="title">Example: Sequential Thread Execution Using <code>join()</code></h2>
+    <div class="content">
+      <p>This example creates three threads and uses <code>join()</code> to ensure they execute one after another.</p>
+      <pre><code>
+class MyThread extends Thread {
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName() + " is running");
+    }
+}
+
+public class ThreadJoinExample {
+    public static void main(String[] args) throws InterruptedException {
+        MyThread t1 = new MyThread();
+        MyThread t2 = new MyThread();
+        MyThread t3 = new MyThread();
+
+        t1.start();
+        t1.join();
+
+        t2.start();
+        t2.join();
+
+        t3.start();
+        t3.join();
+
+        System.out.println("All threads have finished execution");
+    }
+}
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Using Timed <code>join()</code></h2>
+    <div class="content">
+      <p>This example demonstrates waiting for a thread with a timeout, using <code>join(long millis)</code>.</p>
+      <pre><code>
+class TimedThread extends Thread {
+    @Override
+    public void run() {
+        try {
+            Thread.sleep(1000);
+            System.out.println(Thread.currentThread().getName() + " has finished work");
+        } catch (InterruptedException e) {
+            System.out.println(Thread.currentThread().getName() + " was interrupted");
+        }
+    }
+}
+
+public class TimedJoinExample {
+    public static void main(String[] args) throws InterruptedException {
+        TimedThread t1 = new TimedThread();
+        t1.start();
+        t1.join(500);
+
+        if (t1.isAlive()) {
+            System.out.println(t1.getName() + " is still running after 500ms");
+        } else {
+            System.out.println(t1.getName() + " has finished within 500ms");
+        }
+    }
+}
+      </code></pre>
+    </div>
+  </div>
+</div>

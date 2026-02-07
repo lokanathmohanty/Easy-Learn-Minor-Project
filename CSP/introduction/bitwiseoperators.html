@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Bitwise Operators</h1>
+        
+        <h2 class="title">What Are Bitwise Operators?</h2>
+        <div class="content">
+            <p><strong>C# Bitwise Operators</strong> manipulate the **individual bits** (0s and 1s) of integer numbers. They are primarily used for low-level programming tasks, performance optimization (as they are generally faster than their mathematical counterparts), and handling **flags** (sets of boolean options).</p>
+        </div>
+        
+        <h2 class="title">List and Functionality</h2>
+        <div class="content">
+            <p>These operators perform logical or shifting operations on the binary representation of the operands:</p>
+            <ul>
+                <li><strong>Binary AND (<code>&amp;</code>):</strong> Sets a bit to 1 if the bit is 1 in **both** operands.</li>
+                <li><strong>Binary OR (<code>|</code>):</strong> Sets a bit to 1 if the bit is 1 in **either** operand.</li>
+                <li><strong>Binary XOR (<code>^</code>):</strong> Sets a bit to 1 if the bits are **different** (one is 1 and the other is 0).</li>
+                <li><strong>Ones Complement (<code>~</code>):</strong> Inverts every bit (flips 1s to 0s and 0s to 1s).</li>
+                <li><strong>Left Shift (<code>&lt;&lt;</code>):</strong> Shifts bits to the left, effectively **multiplying by $2^n$**.</li>
+                <li><strong>Right Shift (<code>&gt;&gt;</code>):</strong> Shifts bits to the right, effectively **dividing by $2^n$**.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Examples and Real-World Use Cases</h2>
+        <div class="content example">
+            <h3>Left Shift (<code>&lt;&lt;</code>) and Right Shift (<code>&gt;&gt;</code>)</h3>
+            <p>These are efficient ways to multiply or divide by powers of two:</p>
+            <pre>
+int a = 5; // Binary: 00000101
+int leftShift = a &lt;&lt; 2;  // 00010100 (20). Equivalent to 5 * $2^2$
+int rightShift = a &gt;&gt; 1; // 00000010 (2). Equivalent to 5 / $2^1$ (integer division)
+            </pre>
+            
+            <h3>Swapping Numbers with XOR (<code>^</code>)</h3>
+            <p>XOR can swap two variables without using a temporary variable, saving memory.</p>
+            <pre>
+int a = 5, b = 10;
+a = a ^ b; // a now holds 15 (0101 ^ 1010 = 1111)
+b = a ^ b; // b now holds 5 (1111 ^ 1010 = 0101)
+a = a ^ b; // a now holds 10 (1111 ^ 0101 = 1010)
+
+// Result: a = 10, b = 5
+            </pre>
+            
+            <h3>Checking Even/Odd with AND (<code>&amp;</code>)</h3>
+            <p>A number is even if its least significant bit (LSB) is 0. Checking if <code>(number &amp; 1)</code> is 0 efficiently determines if the number is even.</p>
+        </div>
+        
+        <h2 class="title">Best Practices and Twos Complement</h2>
+        <div class="content">
+            <ul>
+                <li><strong>Twos Complement:</strong> The **tilde (<code>~</code>)** operator and operations on negative numbers rely on the **twos complement** format used by C# to represent signed integers. Applying <code>~</code> to a positive number will result in a negative number (e.g., <code>~5</code> is -6).</li>
+                <li><strong>Flag Operations:</strong> Use <code>&amp;</code> for checking if a flag is set (masking) and <code>|</code> for setting multiple flags at once.</li>
+                <li>**Avoid Negative Shifts:** The C# language specifies that the shift count must be non-negative.</li>
+            </ul>
+        </div>
+    </div>
+</div>

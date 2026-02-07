@@ -1,0 +1,211 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Methods</h1>
+    
+    <div class="content">
+      <h2 class="subtitle">Java Methods</h2>
+      <p>A Java method is a collection of statements that are grouped together to perform an operation. When you call the <code>System.out.println()</code> method, for example, the system actually executes several statements in order to display a message on the console.</p>
+      <p>In this tutorial, we will learn how to create your own methods with or without return values, invoke a method with or without parameters, and apply method abstraction in the program design.</p>
+
+      <h2 class="subtitle">Creating a Java Method</h2>
+      <p>To create a Java method, there should be an access modifier followed by the return type, method's name, and parameters list.</p>
+
+      <h2 class="subtitle">Syntax to Create a Java Method</h2>
+      <p>Considering the following example to explain the syntax of a method −</p>
+
+      <pre><code>modifier returnType nameOfMethod (Parameter List) {
+   // method body
+}</code></pre>
+
+      <ul>
+        <li><strong>modifier</strong> − It defines the access type of the method and it is optional to use.</li>
+        <li><strong>returnType</strong> − Method may return a value.</li>
+        <li><strong>nameOfMethod</strong> − This is the method name. The method signature consists of the method name and the parameter list.</li>
+        <li><strong>Parameter List</strong> − The type, order, and number of parameters of a method. These are optional; a method may contain zero parameters.</li>
+        <li><strong>method body</strong> − The method body defines what the method does with the statements.</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Create a Java Method</h2>
+      <pre><code>/** the snippet returns the minimum between two numbers */
+
+public static int minFunction(int n1, int n2) {
+   int min;
+   if (n1 > n2)
+      min = n2;
+   else
+      min = n1;
+
+   return min; 
+}</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="subtitle">Calling a Java Method</h2>
+      <p>For using a method, it should be called. There are two ways in which a method is called: returning a value or returning nothing (void).</p>
+      <p>When a program invokes a method, the control gets transferred to the called method. This method then returns control to the caller either when:</p>
+      <ul>
+        <li>the return statement is executed, or</li>
+        <li>it reaches the method's closing brace.</li>
+      </ul>
+      <p>Examples:</p>
+      <pre><code>System.out.println("This is tutorialspoint.com!");
+int result = sum(6, 9);</code></pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Defining and Calling a Java Method</h2>
+      <pre><code>public class ExampleMinNumber {
+   public static void main(String[] args) {
+      int a = 11;
+      int b = 6;
+      int c = minFunction(a, b);
+      System.out.println("Minimum Value = " + c);
+   }
+
+   /** returns the minimum of two numbers */
+   public static int minFunction(int n1, int n2) {
+      int min;
+      if (n1 > n2)
+         min = n2;
+      else
+         min = n1;
+      return min; 
+   }
+}</code></pre>
+      <p>Output:</p>
+      <pre><code>Minimum value = 6</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="subtitle">The void Keyword with Java Methods</h2>
+      <p>The <code>void</code> keyword allows us to create methods which do not return a value. Calls to void methods must be standalone statements.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Use of void keyword with Methods</h2>
+      <pre><code>public class ExampleVoid {
+   public static void main(String[] args) {
+      methodRankPoints(255.7);
+   }
+
+   public static void methodRankPoints(double points) {
+      if (points >= 202.5) {
+         System.out.println("Rank:A1");
+      } else if (points >= 122.4) {
+         System.out.println("Rank:A2");
+      } else {
+         System.out.println("Rank:A3");
+      }
+   }
+}</code></pre>
+      <p>Output:</p>
+      <pre><code>Rank:A1</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="subtitle">Passing Parameters by Value in Java Methods</h2>
+      <p>In Java, method arguments are passed by value. The argument values remain unchanged after method execution.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Passing Parameters by Value</h2>
+      <pre><code>public class swappingExample {
+   public static void main(String[] args) {
+      int a = 30;
+      int b = 45;
+      System.out.println("Before swapping, a = " + a + " and b = " + b);
+
+      // Invoke the swap method
+      swapFunction(a, b);
+      System.out.println("\n**Now, Before and After swapping values will be same here**:");
+      System.out.println("After swapping, a = " + a + " and b is " + b);
+   }
+
+   public static void swapFunction(int a, int b) {
+      System.out.println("Before swapping(Inside), a = " + a + " b = " + b);
+      int c = a;
+      a = b;
+      b = c;
+      System.out.println("After swapping(Inside), a = " + a + " b = " + b);
+   }
+}</code></pre>
+      <p>Output:</p>
+      <pre><code>Before swapping, a = 30 and b = 45
+Before swapping(Inside), a = 30 b = 45
+After swapping(Inside), a = 45 b = 30
+
+**Now, Before and After swapping values will be same here**:
+After swapping, a = 30 and b is 45</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="subtitle">Java Methods Overloading</h2>
+      <p>Method overloading allows a class to have more than one method with the same name, as long as their parameter lists are different.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Methods Overloading in Java</h2>
+      <pre><code>public class ExampleOverloading {
+   public static void main(String[] args) {
+      int a = 11;
+      int b = 6;
+      double c = 7.3;
+      double d = 9.4;
+
+      int result1 = minFunction(a, b);
+      double result2 = minFunction(c, d);
+
+      System.out.println("Minimum Value = " + result1);
+      System.out.println("Minimum Value = " + result2);
+   }
+
+   public static int minFunction(int n1, int n2) {
+      int min;
+      if (n1 > n2)
+         min = n2;
+      else
+         min = n1;
+      return min; 
+   }
+
+   public static double minFunction(double n1, double n2) {
+      double min;
+      if (n1 > n2)
+         min = n2;
+      else
+         min = n1;
+      return min; 
+   }
+}</code></pre>
+      <p>Output:</p>
+      <pre><code>Minimum Value = 6
+Minimum Value = 7.3</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="subtitle">Using Command-Line Arguments</h2>
+      <p>Command-line arguments are passed to the <code>main</code> method as a String array. These arguments are typed after the program name in the terminal.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example: Command-Line Arguments</h2>
+      <pre><code>public class CommandLine {
+   public static void main(String args[]) { 
+      for(int i = 0; i &lt; args.length; i++) {
+         System.out.println("args[" + i + "]: " + args[i]);
+      }
+   }
+}</code></pre>
+      <p>Output:</p>
+      <pre><code>args[0]: this
+args[1]: is
+args[2]: a
+args[3]: command
+args[4]: line
+args[5]: 200
+args[6]: -100</code></pre>
+    </div>
+
+    <div class

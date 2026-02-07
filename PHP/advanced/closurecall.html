@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP $\text{Closure::call()}$ Method</h1>
+
+        <div class="content">
+            <p>In PHP, a **closure** is an anonymous function that can access variables from the scope in which it was created (using the $\text{use}$ keyword). Closures are objects ($\text{Closure}$ class) that encapsulate both the function code and their environment.</p>
+
+            <hr>
+
+            <h2 class="title">The $\text{Closure::call()}$ Method (PHP 7+) 📞</h2>
+            <p>The $\text{Closure::call()}$ method, introduced in PHP 7, provides a streamlined way to **temporarily bind** an object's scope to a closure and immediately invoke it. It acts as a shortcut for the two-step process of using $\text{bindTo()}$ followed by an invocation.</p>
+
+            <h3>Method Signature</h3>
+            <pre>public Closure::call(object $newThis, mixed ...$args): mixed</pre>
+            <p>The method takes the following arguments:</p>
+            <ul>
+                <li>$\text{\$newThis}$: The object to which the closure's $\text{\$this}$ variable will be bound during the call. This is crucial for accessing private or protected members of the object.</li>
+                <li>$\text{\$args}$: Any parameters that need to be passed to the closure itself.</li>
+            </ul>
+
+            <h3>Purpose: Scope Binding</h3>
+            <p>By using $\text{call()}$, you can make a closure behave as if it were defined **inside** a specific class, granting it access to the private and protected properties of an instance of that class.</p>
+
+            <hr>
+
+            <h2 class="title">Comparison with Pre-PHP 7 Binding</h2>
+
+            <h3>Pre-PHP 7 (Using $\text{bindTo()}$):</h3>
+            <p>Binding required two steps: creating a new bound closure object, and then invoking it.</p>
+            <pre>
+&lt;?php
+   class A {
+      private $x = 1;
+   }
+   $getValue = function() {
+      return $this->x;
+   };
+   // Step 1: Bind the closure to a new A object with scope 'A'
+   $value = $getValue-&gt;bindTo(new A, 'A'); 
+   // Step 2: Invoke the new bound closure
+   print($value()); // Output: 1
+?&gt;</pre>
+
+            <h3>PHP 7+ (Using $\text{call()}$):</h3>
+            <p>The $\text{call()}$ method combines the binding and invocation into a single, concise step.</p>
+            <pre>
+&lt;?php
+   class A {
+      private $x = 1;
+   }
+   $value = function() {
+      return $this->x;
+   };
+   // Single step: Binds $this to new A, calls the closure, and returns result
+   print($value->call(new A)); // Output: 1
+?&gt;</pre>
+        </div>
+    </div>
+</div>

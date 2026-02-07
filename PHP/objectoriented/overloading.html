@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP: Overloading</h1>
+        <div class="content">
+            <p>In PHP, **overloading** (unlike in C++ or Java) is the ability to create properties and methods dynamically. This feature is implemented using special **magic methods** (names starting with double underscore, e.g., <code>__set</code>, <code>__call</code>) that are automatically invoked when interacting with properties or methods that are **inaccessible** or **undeclared**.</p>
+            
+            <h2 class="title">Property Overloading</h2>
+            <p>Property overloading handles interactions with properties that are either not declared or are inaccessible (due to <code>private</code> or <code>protected</code> visibility) in the current scope. These methods only work in an **object context** (not static).</p>
+            
+            <ul>
+                <li><strong><code>__set($name, $value)</code></strong>: Runs when you try to **write data** to an inaccessible property.</li>
+                <li><strong><code>__get($name)</code></strong>: Runs when you try to **read data** from an inaccessible property.</li>
+                <li><strong><code>__isset($name)</code></strong>: Runs when <code>isset()</code> or <code>empty()</code> is called on an inaccessible property.</li>
+                <li><strong><code>__unset($name)</code></strong>: Runs when <code>unset()</code> is called on an inaccessible property.</li>
+            </ul>
+
+            <h2 class="title">Method Overloading</h2>
+            <p>Method overloading handles invocations of methods that are either not defined in the class or are inaccessible in the current scope.</p>
+            
+            <ul>
+                <li><strong><code>__call($name, $arguments)</code></strong>: Triggered when invoking an inaccessible method in an **object context** (e.g., <code>$obj->myMethod()</code>).</li>
+                <li><strong><code>__callStatic($name, $arguments)</code></strong>: Triggered when invoking an inaccessible method in a **static context** (e.g., <code>MyClass::myMethod()</code>).</li>
+            </ul>
+
+            <h3 class="title">Security Note on Encapsulation</h3>
+            <p>Implementing <code>__get</code> and <code>__set</code> can potentially bypass encapsulation by allowing controlled access to <code>private</code> or <code>protected</code> properties. Developers must implement proper access control and validation logic within these magic methods to maintain data integrity.</p>
+        </div>
+        
+        <h2 class="title">Example Session</h2>
+        <div class="content example">
+            <h3 class="title">Dynamic Property Handling</h3>
+            <p>This demonstrates how <code>__set()</code> and <code>__get()</code> allow a class to handle a property (<code>myproperty</code>) that was never explicitly declared in the class definition.</p>
+            
+            <pre><code>
+class DynamicProps {
+   // This method is triggered when setting an undeclared property
+   public function __set($name, $value) {
+      echo "Setting property '$name' to '$value'\n";
+      // Dynamically create the property
+      $this->$name = $value;
+   }
+
+   // This method is triggered when getting an undeclared property
+   public function __get($name) {
+      echo "Retrieving property '$name': ";
+      return $this->$name;
+   }
+}
+
+$obj = new DynamicProps();
+// Calls __set()
+$obj->myProperty = "Hello Dynamic!"; 
+// Calls __get()
+echo $obj->myProperty . PHP_EOL;
+// Output: 
+// Setting property 'myProperty' to 'Hello Dynamic!'
+// Retrieving property 'myProperty': Hello Dynamic!
+            </code></pre>
+        </div>
+    </div>
+</div>

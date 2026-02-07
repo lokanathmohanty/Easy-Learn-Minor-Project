@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django Admin: Updating Model Objects (CRUD) ✏️</h1>
+        <div class="content">
+            <p>Once a custom model (like the **Employee model**) is registered with the Django Admin application, users with the correct permissions can easily perform **CRUD (Create, Read, Update, Delete)** operations on its data directly through the browser interface.</p>
+
+            <h2>Accessing and Modifying Objects</h2>
+            <ol>
+                <li>**Display the List:** On the Admin homepage, click the model name (e.g., **Employees** under the **MYAPP** section) to view the list of all existing objects.</li>
+                <li>**Open the Object:** To update an object, simply **click on its row** in the list. This opens the **change form**, which displays all the object's attributes (fields).</li>
+                <li>**Update and Save:** Modify the values for the desired fields (e.g., changing the <code>Empname</code> or <code>Salary</code>). Clicking the **SAVE** button executes the update operation, propagating the changes to the corresponding row in the backend database table.</li>
+            </ol>
+            <p>The list of objects will then refresh, showing the newly updated details.</p>
+
+            <h2>Important Limitation: Structure vs. Data</h2>
+            <p>It's crucial to understand the limitation of the Admin interface:</p>
+            <ul>
+                <li>**Data Changes (CRUD):** The Admin site is used to change the **data/content** of the objects (rows in the table).</li>
+                <li>**Structure Changes (Schema):** It is **not possible to change the structure** (the fields/columns) of the model from the Admin interface. To add, modify, or delete an attribute of a model, you must manually edit the model's **class definition** in <code>models.py</code> and then run Django's **migration commands** (<code>makemigrations</code> and <code>migrate</code>) to apply the structural changes to the database.</li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Main Thread</h1>
+
+    <div class="content">
+      <h2 class="content-title">Main Thread in Java</h2>
+      <p>Whenever a Java program is run, the main thread is created automatically by the JVM. This thread is responsible for executing the main method of the program. All other threads (child threads) are typically spawned from this main thread.</p>
+      <p>The main thread is the first thread to start and often the last one to finish, making it useful for shutdown tasks.</p>
+
+      <h2 class="content-title">How to Control the Main Thread?</h2>
+      <p>The main thread can be controlled using various thread methods. Common ones include:</p>
+      <ul>
+        <li><code>sleep()</code> method</li>
+        <li><code>join()</code> method</li>
+        <li><code>interrupt()</code> method</li>
+      </ul>
+
+      <h2 class="example-title">Example 1: Simple Main Thread</h2>
+      <p>This example demonstrates a basic Java program with only the main thread. It prints the thread name and priority.</p>
+      <pre>
+<code>
+public class TestThread {
+   public void printName() {
+      System.out.println("Thread Name: " + Thread.currentThread().getName());
+      System.out.println("Thread Priority: " + Thread.currentThread().getPriority());
+   }
+   public static void main(String args[]) {
+      TestThread thread = new TestThread();
+      thread.printName();
+   }
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+<code>
+Thread Name: main
+Thread Priority: 5
+</code>
+      </pre>
+
+      <h2 class="example-title">Example 2: Main Thread and Child Threads</h2>
+      <p>This example creates two child threads from the main thread. The thread states are printed during execution.</p>
+      <pre>
+<code>
+class ThreadDemo extends Thread {
+   ThreadDemo() {
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: New");
+   }
+   public void run() {
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Running");
+      for (int i = 4; i > 0; i--) {
+         System.out.println("Thread: " + Thread.currentThread().getName() + ", " + i);
+      }
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Dead");
+   }
+   public void start() {
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Start");
+      super.start();
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      ThreadDemo thread1 = new ThreadDemo();
+      ThreadDemo thread2 = new ThreadDemo();
+      thread1.start();
+      thread2.start();
+   }
+}
+</code>
+      </pre>
+
+      <h2 class="example-title">Example 3: Main Thread Ends First</h2>
+      <p>This example adds a final print statement to indicate that the main thread has completed while the child threads continue running.</p>
+      <pre>
+<code>
+public class TestThread {
+   public static void main(String args[]) {
+      ThreadDemo thread1 = new ThreadDemo();
+      ThreadDemo thread2 = new ThreadDemo();
+      thread1.start();
+      thread2.start();
+      System.out.println("Thread: " + Thread.currentThread().getName() + ", State: Dead");
+   }
+}
+</code>
+      </pre>
+      <p><strong>Note:</strong> The output shows that the <code>main</code> thread finishes early, but the child threads continue their execution independently.</p>
+    </div>
+  </div>
+</div>

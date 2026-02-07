@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask Redirects and Error Handling (<code>redirect()</code> & <code>abort()</code>) ↩️🛑</h1>
+        <div class="content">
+            <p>Flask provides built-in functions to control navigation between pages (redirection) and to immediately stop a request due to an error (abortion).</p>
+
+            <h2>The <code>redirect()</code> Function</h2>
+            <p>The <code>redirect()</code> function returns a response object that instructs the user's browser to navigate to a new URL. This is essential for controlling the application flow after operations like form submission or login attempts.</p>
+
+            <h3>Prototype and Parameters:</h3>
+            <p><code>Flask.redirect(location, statuscode, response)</code></p>
+            <ul>
+                <li>**<code>location</code>:** The target URL where the user should be redirected (often generated using <code>url_for()</code>).</li>
+                <li>**<code>statuscode</code>:** The HTTP status code sent to the browser's header. It **defaults to <code>302</code>** (Found).</li>
+            </ul>
+
+            <h3>Common Redirection Status Codes (3xx):</h3>
+            <p>The default <code>302 FOUND</code> is typically used for temporary redirects. Other codes indicate different redirection types:</p>
+            <ul>
+                <li>**<code>HTTP_301_MOVED_PERMANENTLY</code>**</li>
+                <li>**<code>HTTP_302_FOUND</code>** (Default)</li>
+                <li>**<code>HTTP_303_SEE_OTHER</code>** (Often used after a POST to prevent re-submission)</li>
+                <li>**<code>HTTP_307_TEMPORARY_REDIRECT</code>**</li>
+            </ul>
+
+            <h2 class="title">Example: Redirection on Login Failure</h2>
+            <div class="content">
+                <p>In the login example, if the username is not <code>'admin'</code>, the user is sent back to the index page (the login form) using <code>redirect()</code>:</p>
+                <p><code>if request.method == 'POST' and request.form['username'] == 'admin' :</code></p>
+                <p><code>   return redirect(url_for('success'))</code></p>
+                <p><code>else:</code></p>
+                <p><code>   return redirect(url_for('index'))</code></p>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 class="title">The <code>abort()</code> Function for Error Handling</h2>
+        <div class="content example">
+            <p>The **<code>abort()</code>** function immediately stops the execution of a request and raises a specified HTTP error code. This is used when a request cannot be fulfilled due to client or server errors.</p>
+            <p><code>Flask.abort(code)</code></p>
+
+            <h3>Common Error Codes (4xx and 5xx):</h3>
+            <ul>
+                <li>**<code>400</code>** (Bad Request)</li>
+                <li>**<code>401</code>** (Unauthorized) - Access denied due to lack of valid credentials.</li>
+                <li>**<code>403</code>** (Forbidden) - Access denied even with valid credentials.</li>
+                <li>**<code>404</code>** (Not Found) - The requested resource does not exist.</li>
+                <li>**<code>429</code>** (Too Many Requests)</li>
+            </ul>
+
+            <h3>Example: Aborting on Unauthorized Access</h3>
+            <p>The modified login function demonstrates using <code>abort(401)</code> instead of redirecting on failure:</p>
+            <p><code>if request.form['username'] == 'admin' :</code></p>
+            <p><code>   return redirect(url_for('success'))</code></p>
+            <p><code>else:</code></p>
+            <p><code>   abort(401)</code></p>
+            <p>If the login fails, the server stops processing and sends an **HTTP 401 Unauthorized** response to the client.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">CSS - Pseudo Elements</h1>
+
+        <div class="content">
+            <h2>Content</h2>
+            <p>
+                CSS pseudo-elements are used to style specific parts of an element 
+                without modifying the actual HTML structure. They allow developers 
+                to create effects like styling the first letter, the first line, 
+                placeholders, and even inserting content before or after elements.
+            </p>
+            <p>
+                Pseudo-elements are written with a double colon <code>::</code> 
+                followed by the element name. They are extremely useful for adding 
+                decorative styles and enhancing user experience without extra HTML.
+            </p>
+            <p>
+                Common pseudo-elements include:
+            </p>
+            <ul>
+                <li><code>::before</code> – Inserts content before an element.</li>
+                <li><code>::after</code> – Inserts content after an element.</li>
+                <li><code>::first-letter</code> – Styles the first letter of text.</li>
+                <li><code>::first-line</code> – Styles the first line of text.</li>
+                <li><code>::placeholder</code> – Styles placeholder text in inputs.</li>
+                <li><code>::selection</code> – Styles user-selected text.</li>
+            </ul>
+            <p>
+                By combining pseudo-elements with selectors and pseudo-classes, 
+                developers can create powerful and elegant designs with minimal markup. 
+                For example, <code>p:hover::first-letter</code> styles the first letter 
+                only when the paragraph is hovered.
+            </p>
+        </div>
+
+        <div class="content">
+            <h2>Example: ::before and ::after</h2>
+            <p>
+                The following example demonstrates how to insert text before and 
+                after a paragraph using pseudo-elements. This technique is often used 
+                to add icons, labels, or decorative elements without adding extra HTML tags.
+            </p>
+            <pre>
+selector::before {
+    content: "Note: ";
+    font-weight: bold;
+}
+
+selector::after {
+    content: " ✔";
+    color: green;
+}
+            </pre>
+        </div>
+
+        <div class="content">
+            <h2>Example: ::first-letter</h2>
+            <p>
+                The ::first-letter pseudo-element is commonly used in typography 
+                to create "drop caps" at the start of paragraphs, giving a 
+                magazine-style appearance.
+            </p>
+            <pre>
+p::first-letter {
+    font-size: 2em;
+    color: darkred;
+    font-style: italic;
+}
+            </pre>
+        </div>
+
+        <div class="content">
+            <h2>Example: ::selection</h2>
+            <p>
+                The ::selection pseudo-element allows you to style the part of text 
+                that a user highlights with their mouse or keyboard. This enhances 
+                interactivity and improves readability.
+            </p>
+            <pre>
+.highlight::selection {
+    color: yellow;
+    background: brown;
+}
+            </pre>
+        </div>
+
+        <div class="content">
+            <h2>Extra Notes</h2>
+            <p>
+                Not all pseudo-elements are supported across every browser, so it’s 
+                important to check compatibility before using them in production. 
+                Also, while <code>::before</code> and <code>::after</code> are very 
+                versatile, they require the <code>content</code> property to work.
+            </p>
+            <p>
+                Using pseudo-elements effectively can reduce the need for extra HTML 
+                elements, keeping code clean and semantic. They also make it easier 
+                to separate design from structure, which aligns with best practices 
+                in web development.
+            </p>
+        </div>
+    </div>
+</div>

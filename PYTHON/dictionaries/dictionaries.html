@@ -1,0 +1,224 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Dictionaries</h1>
+    <div class="content">
+      <p>
+        In Python, a dictionary is a built-in data type that stores data in key-value pairs. It is an unordered, mutable, and indexed collection where each unique key maps to a value. Dictionaries are widely used to store related data accessible via keys.
+      </p>
+      <p>
+        Dictionaries are a type of mapping, associating keys and values with a colon (:), with pairs separated by commas and enclosed in curly braces {}.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Key Features of Dictionaries</h2>
+    <div class="content">
+      <ul>
+        <li>Unordered (before Python 3.7) but maintain insertion order in Python 3.7 and later.</li>
+        <li>Mutable: items can be added, changed, or removed.</li>
+        <li>Indexed by unique keys (not by positions).</li>
+        <li>Keys must be immutable types like strings, numbers, or tuples.</li>
+        <li>Values can be any data type, including mutable types.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Examples of Dictionaries</h2>
+    <div class="content">
+      <pre><code>
+capitals = {
+  "Maharashtra": "Mumbai",
+  "Gujarat": "Gandhinagar",
+  "Telangana": "Hyderabad",
+  "Karnataka": "Bengaluru"
+}
+
+numbers = {
+  10: "Ten",
+  20: "Twenty",
+  30: "Thirty",
+  40: "Forty"
+}
+
+marks = {
+  "Savita": 67,
+  "Imtiaz": 88,
+  "Laxman": 91,
+  "David": 49
+}
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Dictionary Creation</h2>
+    <div class="content">
+      <p>Create dictionaries by enclosing comma-separated key:value pairs in curly braces { }. Alternatively, use the <code>dict()</code> function.</p>
+      <pre><code>
+# Using curly braces
+sports_player = {
+  "Name": "Sachin Tendulkar",
+  "Age": 48,
+  "Sport": "Cricket"
+}
+
+# Using dict() function
+student_info = dict(name="Alice", age=21, major="Computer Science")
+
+print("Dictionary using curly braces:", sports_player)
+print("Dictionary using dict():", student_info)
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Accessing Dictionary Items</h2>
+    <div class="content">
+      <p>You can access values by keys using square brackets <code>[]</code> or the <code>get()</code> method.</p>
+      <pre><code>
+student_info = {
+  "name": "Alice",
+  "age": 21,
+  "major": "Computer Science"
+}
+
+name = student_info["name"]
+print("Name:", name)
+
+age = student_info.get("age")
+print("Age:", age)
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Modifying Dictionary Items</h2>
+    <div class="content">
+      <p>You can change values or add new key-value pairs by assignment.</p>
+      <pre><code>
+student_info["age"] = 22           # Modify existing key
+student_info["graduation_year"] = 2023  # Add new key-value pair
+
+print("The modified dictionary is:", student_info)
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Removing Dictionary Items</h2>
+    <div class="content">
+      <p>You can remove items using <code>del</code>, <code>pop()</code>, or <code>popitem()</code> methods.</p>
+      <pre><code>
+del student_info["major"]            # Remove by key
+graduation_year = student_info.pop("graduation_year")  # Remove and return value
+
+print(student_info)
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Iterating Through a Dictionary</h2>
+    <div class="content">
+      <p>Loop through keys, values, or key-value pairs using:</p>
+      <pre><code>
+# Iterating through keys
+for key in student_info:
+  print("Keys:", key, student_info[key])
+
+# Iterating through values
+for value in student_info.values():
+  print("Values:", value)
+
+# Iterating through key-value pairs
+for key, value in student_info.items():
+  print("Key:Value:", key, value)
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Properties of Dictionary Keys</h2>
+    <div class="content">
+      <ul>
+        <li>Keys must be unique; duplicate keys overwrite previous values.</li>
+        <li>Keys must be immutable types such as strings, numbers, or tuples.</li>
+        <li>Using mutable types (e.g., lists) as keys raises <code>TypeError</code>.</li>
+      </ul>
+      <pre><code>
+dict = {'Name': 'Zara', 'Age': 7, 'Name': 'Manni'}
+print("dict['Name']: ", dict['Name'])
+
+# Output: dict['Name']: Manni
+
+# Using a list as key (TypeError)
+dict = {['Name']: 'Zara', 'Age': 7}
+print(dict['Name'])  # Raises TypeError: unhashable type: 'list'
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Dictionary Operators</h2>
+    <div class="content">
+      <p>Python defines various operators to use with dictionaries:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>dict[key]</code></td>
+            <td>Extract or assign the value mapped with key.</td>
+            <td><code>print(d1['b'])</code> retrieves value 4; <br><code>d1['b'] = 'Z'</code> assigns new value.</td>
+          </tr>
+          <tr>
+            <td><code>dict1 | dict2</code></td>
+            <td>Union of two dictionaries returning a new object.</td>
+            <td><code>d3 = d1 | d2</code>, combines keys and values from both.</td>
+          </tr>
+          <tr>
+            <td><code>dict1 |= dict2</code></td>
+            <td>Augmented dictionary union operator; updates dict1 with dict2’s items.</td>
+            <td><code>d1 |= d2</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Dictionary Methods</h2>
+    <div class="content">
+      <ul>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_clear.htm">dict.clear()</a>: Removes all items.</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_copy.htm">dict.copy()</a>: Returns shallow copy.</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_fromkeys.htm">dict.fromkeys()</a>: Creates new dictionary from sequence of keys.</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_get.htm">dict.get(key, default)</a>: Gets value for key or default.</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_items.htm">dict.items()</a>: Returns view of (key, value) pairs.</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_keys.htm">dict.keys()</a>: Returns view of keys.</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_setdefault.htm">dict.setdefault(key, default)</a>: Like get, but sets key to default if missing.</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_update.htm">dict.update()</a>: Updates with another dict's items.</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_values.htm">dict.values()</a>: Returns view of values.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Built-in Functions With Dictionaries</h2>
+    <div class="content">
+      <ul>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_cmp.htm">cmp(dict1, dict2)</a>: Compares elements of both dictionaries (Python 2 only).</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_len.htm">len(dict)</a>: Returns number of items.</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_str.htm">str(dict)</a>: Returns string representation of dictionary.</li>
+        <li><a href="https://www.tutorialspoint.com/python/dictionary_type.htm">type(variable)</a>: Returns type of variable; dictionary type for dict objects.</li>
+      </ul>
+    </div>
+  </div>
+</div>

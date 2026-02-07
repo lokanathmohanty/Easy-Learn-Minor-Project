@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Bitwise Operators in C</h1>
+    <div class="content">
+      <p>Bitwise operators in C allow low-level manipulation of data stored in computer memory. Unlike logical operators that work on Boolean expressions, bitwise operators perform operations on individual bits of integer operands.</p>
+      <p>The common bitwise operators include:</p>
+      <ul>
+        <li><strong>&amp;</strong> (AND) - Copies a bit if it exists in both operands.</li>
+        <li><strong>|</strong> (OR) - Copies a bit if it exists in either operand.</li>
+        <li><strong>^</strong> (XOR) - Copies the bit if it is set in one operand but not both.</li>
+        <li><strong>~</strong> (One's Complement) - Flips bits (unary operator).</li>
+        <li><strong>&lt;&lt;</strong> (Left Shift) - Shifts bits left by the number of positions.</li>
+        <li><strong>&gt;&gt;</strong> (Right Shift) - Shifts bits right by the number of positions.</li>
+      </ul>
+      <p>For example, given two variables <code>a = 60</code> (binary 0011 1100) and <code>b = 13</code> (binary 0000 1101):</p>
+      <ul>
+        <li><code>a &amp; b</code> results in 12 (0000 1100)</li>
+        <li><code>a | b</code> results in 61 (0011 1101)</li>
+        <li><code>a ^ b</code> results in 49 (0011 0001)</li>
+        <li><code>~a</code> results in -61 (binary 1100 0011, two's complement)</li>
+        <li><code>a &lt;&lt; 2</code> results in 240 (1111 0000)</li>
+        <li><code>a &gt;&gt; 2</code> results in 15 (0000 1111)</li>
+      </ul>
+      <p>These operators are useful for efficient data processing at the bit level.</p>
+      <p>Example code demonstrating all the operators:</p>
+      <pre>
+#include &lt;stdio.h&gt;
+
+int main(){
+   unsigned int a = 60;  /* 0011 1100 */  
+   unsigned int b = 13;  /* 0000 1101 */
+   int c = 0;           
+
+   c = a & b;
+   printf("Line 1 - Value of c is %d\n", c);
+
+   c = a | b;
+   printf("Line 2 - Value of c is %d\n", c);
+
+   c = a ^ b;
+   printf("Line 3 - Value of c is %d\n", c);
+
+   c = ~a;
+   printf("Line 4 - Value of c is %d\n", c);
+
+   c = a &lt;&lt; 2;
+   printf("Line 5 - Value of c is %d\n", c);
+
+   c = a &gt;&gt; 2;
+   printf("Line 6 - Value of c is %d\n", c);
+
+   return 0;
+}
+      </pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Lookup Tables in C</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        Lookup tables (LUTs) are arrays filled with pre-computed values to optimize a program by avoiding repetitive calculations. Instead of using nested if-else or switch statements, lookup tables improve efficiency by direct access.
+      </p>
+      <h2>Simple Example: Square Computation</h2>
+      <p>
+        Instead of calculating a square each time via a function call, store squares in an array and access them directly.
+      </p>
+      <ul>
+        <li>Function call approach calculates during iteration.</li>
+        <li>Lookup table approach stores squares in an array and reads values.</li>
+      </ul>
+      <h2>Use Case: Element Name Lookup</h2>
+      <p>
+        A lookup table can replace a switch statement with an array of element names indexed by atomic number.
+      </p>
+      <h2>Embedded Systems Example: 7-Segment LED Display</h2>
+      <p>
+        Lookup tables convert digits 0-9 to seven-segment binary codes to efficiently drive LED displays in embedded devices.
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="session">
+    <h1 class="title">Lookup Table Examples in C</h1>
+    <div class="content">
+      <h2>Element Name Lookup</h2>
+      <pre><code>
+static const char *table[] = {
+  "Hydrogen", "Helium", "Lithium", "Beryllium", "Boron"
+};
+
+int main(){
+  int num = 3;
+  if (num >= 1 && num <= 5){
+    printf("Name of the element with atomic number %d is %s", num, table[num-1]);
+  } else {
+    puts("error: Atomic number not in the lookup table!");
+  }
+  return 0;
+}
+      </code></pre>
+      <h2>7-Segment LED Display Lookup</h2>
+      <pre><code>
+int const nums[] = {0x3f, 0x06, 0x5b, 0x4f, 0x66,
+                    0x6d, 0x7d, 0x07, 0x7f, 0x6f};
+int bin[8];
+int i, num = 7, rem;
+
+printf("The binary equivalent of 7 is: ");
+for (i = 7; i >= 0; i--) {
+  rem = num % 2;
+  bin[i] = rem;
+  num /= 2;
+}
+for (i = 0; i <= 7; i++) {
+  printf("%d", bin[i]);
+  if (i == 3) printf(" ");
+}
+      </code></pre>
+    </div>
+  </div>
+</div>

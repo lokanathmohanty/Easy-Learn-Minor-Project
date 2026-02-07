@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Optimization Techniques</h1>
+        
+        <div class="content">
+            <h2 class="title">Built-in Optimization Techniques</h2>
+            <p>Next.js includes several built-in optimizations designed to improve application speed and achieve high **Core Web Vitals** scores. Key optimization areas include:</p>
+            <ul>
+                <li class="example">
+                    <strong>Implement Lazy Loading:</strong> A technique to defer the loading of **non-critical resources** (like images, components, or modules) until they are needed, prioritizing the visible content.
+                </li>
+                <li class="example">
+                    <strong>Optimize Images Rendering:</strong> Using the built-in **<code>&lt;Image&gt;</code> component** instead of the standard <code>&lt;img&gt;</code> tag automatically handles image optimization, including compression, responsive sizing, and modern formats.
+                </li>
+                <li class="example">
+                    <strong>Optimize Script Loading:</strong> The built-in **<code>&lt;Script&gt;</code> component** optimizes the loading of third-party scripts, giving developers control over when and how the script is executed to prevent blocking the main thread.
+                </li>
+                <li class="example">
+                    <strong>Reduce JavaScript Bundles:</strong> Next.js automatically applies **tree shaking** and code splitting to reduce the final JavaScript bundle size, ensuring users only download the code necessary for the initial page load.
+                </li>
+                <li class="example">
+                    <strong>Optimize Memory Usage:</strong> Built-in tools are available to help monitor the application's memory usage, allowing developers to identify and resolve **memory leaks**.
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Optimizing Metadata</h2>
+            <p>Providing proper **Metadata** is crucial for Search Engine Optimization (SEO), as it helps search engines understand the webpage's content. Metadata includes details like the page title, description, and keywords.</p>
+            
+            <p>In Next.js, metadata is typically defined in the **layout page** (<code>app/layout.tsx</code>) where it is then inherited by all child routes.</p>
+            
+            <p><strong>Example: Defining Global Metadata</strong></p>
+            <pre class="example"><code>// app/layout.tsx
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Next JS Tutorial',
+  description: 'We provide simple and easy to learn tutorial on Next JS',
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
+  return (
+    &lt;html lang="en"&gt;
+      &lt;body&gt;
+        &lt;header&gt;
+            &lt;h1&gt;Header Element&lt;/h1&gt;
+        &lt;/header&gt;
+        &lt;main&gt;{children}&lt;/main&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  )
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title example">Lazy Loading Image Optimization</h2>
+            <p>The <code>&lt;Image&gt;</code> component uses lazy loading by default. This means images are not loaded until they are close to the viewport, which speeds up the initial page load.</p>
+            
+            <p>You can control this behavior using the **<code>loading</code>** prop:</p>
+            <ul>
+                <li>The default behavior is <code>loading='lazy'</code> (lazy loading).</li>
+                <li>You can set <code>loading='eager'</code> to force the image to load immediately upon page load.</li>
+            </ul>
+            
+            <p><strong>Example: Lazy vs. Eager Loading</strong></p>
+            <pre class="example"><code>import Image from 'next/image';
+
+export default function Example() {
+    return (
+    &lt;div&gt;
+        &lt;h1&gt;Lazy Loading (Default):&lt;/h1&gt;
+        &lt;Image
+            src="/file.svg"
+            alt="Example Image"
+        /&gt;
+
+        &lt;h1&gt;Eager Loading (For critical images):&lt;/h1&gt;   
+        &lt;Image
+            src="/next.svg"
+            alt="Example Image"
+            loading='eager' // Disables Lazy Loading
+        /&gt;
+    &lt;/div&gt;
+    );
+}</code></pre>
+        </div>
+    </div>
+</div>

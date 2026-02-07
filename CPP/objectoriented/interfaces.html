@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Interfaces in C++ (Abstract Classes) 📜</h1>
+
+        <div class="content">
+            <p>In C++, an **interface** is implemented using an **abstract class**. An interface defines a set of behaviors or capabilities that a class must support, without specifying how those behaviors are implemented.</p>
+
+            <hr>
+
+            <h2 class="title">Defining an Abstract Class</h2>
+            <p>A class is designated as **abstract** if it contains at least one **pure virtual function**.</p>
+            <ul>
+                <li>
+                    A **pure virtual function** is a member function declared in the base class by placing **<code>= 0</code>** in its declaration.
+                    <pre class="example">
+virtual double getVolume() = 0;
+</pre>
+                </li>
+                <li>
+                    **Abstract classes (ABCs)** serve only as a **base class** or **interface framework**. They **cannot be used to instantiate objects**.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Implementing the Interface</h2>
+            <p>To use an abstract class, a derived class must be a **concrete class**. A **concrete class** is one that can be used to instantiate objects, and it must:</p>
+            <ul>
+                <li>**Implement (override)** every single pure virtual function declared in its abstract base class.</li>
+                <li>Failure to override even one pure virtual function means the derived class also remains abstract, and you cannot create objects from it.</li>
+            </ul>
+
+            <p>In the `Shape` example, the abstract base class defines the `getArea()` interface, but the implementation differs in the derived classes:</p>
+            <pre class="example">
+// Abstract Base Class
+class Shape {
+   public:
+      virtual int getArea() = 0; // Pure Virtual Function (Interface)
+      // ...
+};
+
+// Concrete Class (Must implement the interface)
+class Rectangle: public Shape {
+   public:
+      int getArea() { // Implementation for Rectangle
+         return (width * height); 
+      }
+};
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Designing Strategy</h2>
+        <p>Using abstract classes as interfaces provides a powerful design strategy:</p>
+        <ol>
+            <li>
+                **Standardization:** An abstract base class establishes a common, standardized contract (interface) that all derived applications must adhere to (e.g., "every shape *must* have an `area()` function").
+            </li>
+            <li>
+                **Flexibility:** External code can interact with any object that inherits from the abstract base class through a **base class pointer** without knowing the object's specific type. This is the foundation of **polymorphism** and makes the system easily extensible, as new derived classes can be added without altering the core system logic.
+            </li>
+        </ol>
+    </div>
+</div>

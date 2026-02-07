@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Function Hoisting</h1>
+
+    <div class="content">
+      <p>
+        Function hoisting in JavaScript is the default behavior where 
+        function declarations are moved to the top of their local scope 
+        before code execution. This means you can call a function in its 
+        scope before it is declared.
+      </p>
+      <p>
+        Only declarations are hoisted, not initializations. The same applies 
+        to variable hoisting, where variable declarations are moved to the 
+        top of their scope.
+      </p>
+    </div>
+
+    <h2 class="title">Example: Function Declaration Hoisting</h2>
+    <div class="content">
+      <pre><code>
+add(5, 10); // 15
+function add(x, y) {
+  return x + y;
+}
+      </code></pre>
+      <p>
+        Equivalent to:
+      </p>
+      <pre><code>
+function add(x, y) {
+  return x + y;
+}
+add(5, 10); // 15
+      </code></pre>
+      <p>
+        Function hoisting only works with <strong>function declarations</strong>, 
+        not with <strong>function expressions</strong>.
+      </p>
+      <pre><code>
+add(5, 10); // ReferenceError
+const add = function(x, y) {
+  return x + y;
+};
+      </code></pre>
+    </div>
+
+    <h2 class="title">Example: Function Hoisting in Scope</h2>
+    <div class="content">
+      <pre><code>
+printMessage("Top");
+
+function printMessage(pos) {
+  console.log("The function is called from the " + pos);
+}
+
+printMessage("Bottom");
+      </code></pre>
+      <div class="output">
+        <p>The function is called from the Top</p>
+        <p>The function is called from the Bottom</p>
+      </div>
+    </div>
+
+    <h2 class="title">Example: Function Inside Block</h2>
+    <div class="content">
+      <pre><code>
+if (1) {
+  test("Top");
+  function test(pos) {
+    console.log("The function is called from the " + pos);
+  }
+  test("Bottom");
+}
+      </code></pre>
+      <div class="output">
+        <p>The function is called from the Top</p>
+        <p>The function is called from the Bottom</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <p>
+        Although hoisting allows flexibility, it is always recommended 
+        to declare functions and variables at the top of their scope 
+        for clarity.
+      </p>
+    </div>
+
+    <h2 class="title">JavaScript Variable Hoisting</h2>
+    <div class="content">
+      <p>
+        Variables declared with <code>var</code> are hoisted, 
+        but variables declared with <code>let</code> and <code>const</code> 
+        are not hoisted to the top of their scope.
+      </p>
+    </div>
+
+    <h2 class="title">Example: Variable Hoisting</h2>
+    <div class="content">
+      <pre><code>
+y = 10;
+console.log("The value of y is: " + y);
+var y;
+      </code></pre>
+      <div class="output">
+        <p>The value of y is : 10</p>
+      </div>
+    </div>
+
+    <h2 class="title">Example: Variable Hoisting inside Function</h2>
+    <div class="content">
+      <pre><code>
+function printNum() {
+  y = 20;
+  console.log("The value of y is: " + y);
+  var y; // function scope
+}
+printNum();
+      </code></pre>
+      <div class="output">
+        <p>The value of the variable y is : 20</p>
+      </div>
+    </div>
+
+    <h2 class="title">Example: Initialization is not Hoisted</h2>
+    <div class="content">
+      <pre><code>
+var x;
+console.log("x is -> " + x);
+x = 10;
+      </code></pre>
+      <div class="output">
+        <p>x is -> undefined</p>
+      </div>
+    </div>
+
+    <h2 class="title">Example: let and const</h2>
+    <div class="content">
+      <pre><code>
+try {
+  x = 10;
+  console.log("The value of x is -> " + x);
+  let x;
+} catch (error) {
+  console.log(error.message);
+}
+      </code></pre>
+      <div class="output">
+        <p>Cannot access 'x' before initialization</p>
+      </div>
+    </div>
+  </div>
+</div>

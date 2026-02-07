@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Comma Operator (<code>,</code>)</h1>
+
+        <div class="content">
+            <p>The **comma operator** (<code>,</code>) is used to **string together several expressions** into a single expression. It guarantees that the expressions are evaluated sequentially, strictly from **left to right**.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">How it Works: Sequence and Value</h2>
+
+            <ol>
+                <li>**Sequence:** All expressions are evaluated from left to right.</li>
+                <li>**Value:** The value of the entire comma-separated list is the value of the **right-most expression**. The results of all other expressions are discarded.</li>
+            </ol>
+            <p>**Precedence Note:** The comma operator has the **lowest precedence** of all C++ operators. Therefore, when using it within an assignment or a function call, **parentheses are usually necessary** to ensure the entire comma-separated list is evaluated before the assignment or function call takes effect.</p>
+
+            <h3>Example Analysis: <code>var = (count = 19, incr = 10, count+1);</code></h3>
+            <ul>
+                <li>**Action 1 (Left):** <code>count = 19</code> (<code>count</code> is now 19).</li>
+                <li>**Action 2 (Middle):** <code>incr = 10</code> (<code>incr</code> is now 10).</li>
+                <li>**Action 3 (Right):** <code>count+1</code> (evaluates to $19+1 = 20$).</li>
+                <li>**Final Result:** The value of the right-most expression (20) is assigned to `var`.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Common Use Cases</h2>
+
+            <h3>1. Multiple Operations in a Single Statement</h3>
+            <p>The comma operator allows performing side effects (like assignments or function calls) before producing a final value.</p>
+            <pre class="example">a = (b = 10, c = 20); // b is 10, c is 20, and a is assigned the value of the rightmost expression, which is 20.</pre>
+
+            <h3>2. For Loops (Most Common Use)</h3>
+            <p>It is frequently used in the initialization and iteration parts of a <code>for</code> loop to manage multiple variables simultaneously.</p>
+            <pre class="example">
+for (int i = 0, j = 5; // Initialize i and j
+     i &lt; 5; 
+     i++, j--) // Increment i AND decrement j
+{ ... }
+</pre>
+
+            <h3>3. Function Arguments (Caution Recommended)</h3>
+            <p>When used inside the parentheses of a function call, the expressions are evaluated left-to-right, but **only the value of the last expression** is passed as the argument.</p>
+            <pre class="example">
+int a = 5, b = 10;
+display((a += 5, b += 20)); 
+// 1. a becomes 10. 
+// 2. b becomes 30. 
+// 3. The value 30 is passed to display().
+</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Props Validation</h1>
+    <div class="content">
+      <p>
+        Debugging is one of the most time-consuming tasks in development. In React,
+        <strong>props</strong> are widely used, and they can originate from different sources:
+        static values, or dynamic values passed from parent components.
+      </p>
+      <p>
+        A common source of bugs is when the <strong>type of the prop</strong> does not match what
+        the developer expected. React provides a solution through <strong>PropTypes</strong>,
+        which helps validate props and catch issues early during development.
+      </p>
+
+      <h2>What are PropTypes?</h2>
+      <p>
+        The <code>prop-types</code> package allows you to specify expected types for props.
+        For example:
+      </p>
+
+      <pre><code>Sum.propTypes = {
+   num1: PropTypes.number,
+   num2: PropTypes.number
+}
+</code></pre>
+
+      <p>
+        If the props passed do not match these types, React will throw a warning
+        <em>(in development mode only)</em>.
+      </p>
+
+      <h2>Setup</h2>
+      <ul>
+        <li>Create a new React app: <code>create-react-app myapp</code></li>
+        <li>Start the app: <code>npm start</code></li>
+        <li>Install prop-types: <code>npm i prop-types --save</code></li>
+      </ul>
+
+      <h2>Example Component with PropTypes</h2>
+      <pre><code>// Sum.js
+import React from 'react'
+import PropTypes from 'prop-types'
+
+class Sum extends React.Component {
+   render() {
+      return &lt;p&gt;The sum of {this.props.num1} and {this.props.num2}
+      is {parseInt(this.props.num1) + parseInt(this.props.num2)}&lt;/p&gt;
+   }
+}
+
+Sum.propTypes = {
+   num1: PropTypes.number,
+   num2: PropTypes.number
+}
+
+export default Sum
+</code></pre>
+
+      <h2>Using the Component</h2>
+      <pre><code>// App.js
+import './App.css'
+import Sum from './Components/Sum'
+
+function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;div style={{ padding: "10px" }}&gt;
+            &lt;Sum num1="10" num2="John" /&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+   );
+}
+export default App
+</code></pre>
+
+      <p>
+        When running this, the console will show warnings because
+        <code>"10"</code> is a string and <code>"John"</code> is not a number.
+      </p>
+
+      <h2>Available Validators</h2>
+      <ul>
+        <li><code>PropTypes.array</code></li>
+        <li><code>PropTypes.bigint</code></li>
+        <li><code>PropTypes.bool</code></li>
+        <li><code>PropTypes.func</code></li>
+        <li><code>PropTypes.number</code></li>
+        <li><code>PropTypes.object</code></li>
+        <li><code>PropTypes.string</code></li>
+        <li><code>PropTypes.symbol</code></li>
+        <li><code>PropTypes.node</code> – anything that can be rendered</li>
+        <li><code>PropTypes.element</code> – React element</li>
+        <li><code>PropTypes.elementType</code> – type of React component</li>
+        <li><code>PropTypes.instanceOf(Class)</code></li>
+        <li><code>PropTypes.oneOf(['A', 'B'])</code></li>
+        <li><code>PropTypes.oneOfType([PropTypes.number, PropTypes.string])</code></li>
+        <li><code>PropTypes.arrayOf(PropTypes.number)</code></li>
+        <li><code>PropTypes.objectOf(PropTypes.string)</code></li>
+        <li><code>PropTypes.func.isRequired</code></li>
+        <li><code>PropTypes.any.isRequired</code></li>
+      </ul>
+
+      <h2>Custom Validator</h2>
+      <p>
+        You can also write your own validator. For example, checking if a prop is a valid email:
+      </p>
+
+      <pre><code>Sum.propTypes = {
+   num1: PropTypes.number,
+   num2: PropTypes.number,
+   email: function(myProps, myPropName, myComponentName) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(myProps[myPropName])) {
+         return new Error(
+            'Invalid prop `' + myProps[myPropName] + '` supplied to ' +
+            myComponentName + '/' + myPropName + '. Validation failed.'
+         );
+      }
+   }
+}
+</code></pre>
+
+      <p><em>Function parameters in custom validators:</em></p>
+      <ul>
+        <li><code>myProps</code> – all props</li>
+        <li><code>myPropName</code> – current property being validated</li>
+        <li><code>myComponentName</code> – component name</li>
+      </ul>
+
+      <p>
+        Similarly, custom validators can be created for <code>arrayOf</code> and <code>objectOf</code>.
+      </p>
+
+      <h2>Summary</h2>
+      <p>
+        <strong>PropTypes</strong> is a useful tool for developers to catch bugs early, enforce
+        correct data types, and build reliable applications. It only runs in development mode,
+        ensuring no performance impact in production.
+      </p>
+    </div>
+  </div>
+</div>

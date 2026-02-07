@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Windows Runtime and Extension SDKs in UWP</h1>
+
+        <div class="content">
+            <p>Windows Runtime (WinRT) components are self-contained objects that enable UWP applications to be developed in multiple languages (C#, JavaScript, C++, etc.). UWP apps, in addition to referencing the **.NET Core metapackage**, also reference the **Universal Windows SDK**, which provides access to WinRT functionality.</p>
+        </div>
+
+        <h2 class="title">API Contracts (Modularity of Windows Runtime)</h2>
+        <div class="content">
+            <p>The set of APIs within a device family (like Universal Windows) is broken down into modular units known as **API Contracts**. These contracts allow developers to target specific capabilities available on various devices. The majority of common WinRT APIs are part of the **Universal API Contract**.</p>
+            <ul>
+                <li class="content">
+                    For example, to access mobile-specific functionality, like battery information, a developer would need to reference the **Windows.Phone.PhoneContract**, which contains these specialized APIs.
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="title example">Adding Extension SDKs in Visual Studio</h2>
+        <div class="content example">
+            <p>To access APIs not included in the default Universal API Contract (e.g., mobile-specific features), you must manually add an **Extension SDK** reference:</p>
+            <ol>
+                <li class="content">In Visual Studio, right-click on **References** in the Solution Explorer.</li>
+                <li class="content">Select **Add Reference**.</li>
+                <li class="content">In the Reference Manager, navigate to the **Universal Windows** category.</li>
+                <li class="content">
+                    Under Universal Windows:
+                    <ul>
+                        <li class="content">**Core** refers to the default, foundational Universal Windows APIs.</li>
+                        <li class="content">**Extensions** are where you find additional SDKs to extend functionality (e.g., Mobile, Desktop, IoT).</li>
+                    </ul>
+                </li>
+                <li class="content">Select the required Extension SDK, such as **Windows Mobile Extensions for the UWP**, ensuring you select the latest available version for updated APIs.</li>
+                <li class="content">Click **OK**.</li>
+            </ol>
+            <p>The selected extension (e.g., **Windows Mobile Extensions for the UWP**) is then added as a reference, granting access to the new, platform-specific APIs on top of the base UWP functionality.</p>
+        </div>
+    </div>
+</div>

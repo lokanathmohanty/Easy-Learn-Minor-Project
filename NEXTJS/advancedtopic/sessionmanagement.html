@@ -1,0 +1,113 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">Next.js - Session Management</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Session Management?</h2>
+            <p><strong>Session management</strong> is the process of maintaining a user's **authenticated state** across multiple interactions, such as page reloads or closing/reopening the browser. It ensures that once a user is verified (authenticated), their state is preserved until the session expires or is manually terminated.</p>
+            <p>There are two primary approaches to session management:</p>
+            <ul>
+                <li><strong>Stateless Session</strong> (Token-based, data in cookie)</li>
+                <li><strong>Database Session</strong> (State stored on the server)</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Stateless Session Management</h2>
+            <p>In a stateless session, the user's session data is **not stored on the server**; instead, it's stored, usually in an **encrypted form**, within a cookie on the user's browser. With every request, the browser sends this cookie to the server, where the data is verified and decrypted. This method is simpler to scale but requires robust security measures.</p>
+            
+            <h3>Implementation Steps</h3>
+            <ol>
+                <li><strong>Generate a Secret Key:</strong> Create a strong, random key (e.g., using <code>openssl rand -base64 32</code>) and store it securely as an **environment variable** (e.g., <code>SESSION_SECRET</code>). This key is used to sign and encrypt the session data.</li>
+                <li><strong>Encrypt/Decrypt Session Data:</strong> Use a library like **<code>jose</code>** to encrypt and sign the session payload (e.g., a **JSON Web Token - JWT**) before sending it to the browser, and to verify and decrypt it upon request.</li>
+                <li><strong>Manage Cookies:</strong> Use the Next.js **<code>cookies</code> API** to set the session cookie with appropriate security flags.</li>
+            </ol>
+            
+            <h3 class="example">Example: Encrypting and Decrypting Session Data (using JWT)</h3>
+            <p>The <code>encrypt</code> function signs the payload and sets an expiration time (e.g., 7 days), and <code>decrypt</code> verifies the signature and expiration.</p>
+            <pre class="example"><code>// app/lib/session.ts - Encryption Logic
+export async function encrypt(payload: SessionPayload) {
+  return new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('7d')
+    .sign(encodedKey) // Uses the secret key
+}
+
+export async function decrypt(session: string | undefined = '') {
+  try {
+    const { payload } = await jwtVerify(session, encodedKey, {
+      algorithms: ['HS256'],
+    })
+    return payload
+  } catch (error) {
+    console.log('Failed to verify session')
+  }
+}</code></pre>
+            
+            <h3 class="example">Example: Setting the Secure Cookie</h3>
+            <p>The cookie is set with critical security flags:</p>
+            <ul>
+                <li><strong><code>httpOnly: true</code>:</strong> Prevents client-side JavaScript access.</li>
+                <li><strong><code>secure: true</code>:</strong> Ensures the cookie is only sent over HTTPS.</li>
+                <li><strong><code>sameSite: 'lax'</code>:</strong> Helps prevent Cross-Site Request Forgery (CSRF).</li>
+            </ul>
+            <pre class="example"><code>// app/lib/session.ts - Setting Cookie
+export async function createSession(userId: string) {
+  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  const session = await encrypt({ userId, expiresAt })
+  const cookieStore = await cookies()
+ 
+  cookieStore.set('session', session, {
+    httpOnly: true,
+    secure: true,
+    expires: expiresAt,
+    sameSite: 'lax',
+    path: '/',
+  })
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Database Session Management</h2>
+            <p>In this approach, the core session data (including user ID and expiration) is stored in a dedicated **database table** on the server. Only a small, encrypted **Session ID** is stored in the browser cookie. This method is generally **more secure** but is more complex to implement and manage, as it requires database resources and maintenance.</p>
+            
+            <h3>Implementation Steps</h3>
+            <ol>
+                <li><strong>Create Session Table:</strong> Set up a database table (e.g., <code>sessions</code>) to store data like <code>id</code> (Session ID), <code>userId</code>, and <code>expiresAt</code>.</li>
+                <li><strong>Database Logic:</strong> Implement functions for inserting, updating, and deleting sessions in the database.</li>
+                <li><strong>Sync Cookie and DB:</strong> The session ID must be created in the database, encrypted, and then stored in the user's browser cookie to keep the two synchronized.</li>
+            </ol>
+            
+            <h3 class="example">Example: Creating a Database Session</h3>
+            <p>The function creates a record in the database, takes the returned <code>sessionId</code>, encrypts it, and then sets it in the cookie.</p>
+            <pre class="example"><code>export async function createSession(id: number) {
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    
+    // 1. Create a session record in the database
+    const data = await db
+    .insert(sessions)
+    .values({
+        userId: id,
+        expiresAt,
+    })
+    .returning({ id: sessions.id }) // Returns the new session ID
+    
+    const sessionId = data[0].id
+    
+    // 2. Encrypt the database session ID for the cookie
+    const session = await encrypt({ sessionId, expiresAt })
+    
+    // 3. Store the encrypted session ID in a secure cookie
+    const cookieStore = await cookies()
+    cookieStore.set('session', session, {
+    httpOnly: true,
+    secure: true,
+    expires: expiresAt,
+    sameSite: 'lax',
+    path: '/',
+    })
+}</code></pre>
+        </div>
+    </div>
+</div>

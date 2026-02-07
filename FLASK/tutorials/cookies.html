@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask Cookies: Setting and Retrieving Client Data 🍪</h1>
+        <div class="content">
+            <p>A **cookie** is a small text file stored on a client's computer by a web browser. Its main purpose is to **remember and track data** related to a user's session, which helps personalize the visitor experience and gather site statistics.</p>
+
+            <h2>Setting a Cookie</h2>
+            <p>In Flask, cookies are attached to the **response object**. Since view functions normally return strings or templates, you must first convert the return value into a response object using **<code>make_response()</code>**. After that, the cookie can be set:</p>
+            <ol>
+                <li>**Create the Response:** Use <code>make_response(render_template('template_name.html'))</code>.</li>
+                <li>**Set the Cookie:** Use the response object's **<code>set_cookie()</code>** method: <code>resp.set_cookie('key', 'value')</code>.</li>
+            </ol>
+            <p>The **<code>/setcookie</code>** route in the example demonstrates this: the user ID from the form is used as the value for the <code>userID</code> cookie.</p>
+            <p><code>resp = make_response(render_template('readcookie.html'))</code></p>
+            <p><code>resp.set_cookie('userID', user)</code></p>
+            <p>Other attributes like cookie expiry time, path, and domain are also stored.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Reading a Cookie</h2>
+        <div class="content example">
+            <p>When a client makes a subsequent request, the browser automatically sends all relevant cookies back to the server. This data is accessed via the global **<code>request</code> object**, specifically its **<code>cookies</code>** attribute.</p>
+            <ul>
+                <li>**<code>request.cookies</code>:** A dictionary-like object containing all cookie names and their corresponding values transmitted by the client.</li>
+                <li>**Retrieval:** The **<code>get()</code>** method of this dictionary is used to safely read a specific cookie's value.</li>
+            </ul>
+
+            <h3>Example: The <code>getcookie()</code> Function</h3>
+            <p>The **<code>/getcookie</code>** route demonstrates retrieving and displaying the stored <code>userID</code>:</p>
+            <p><code>def getcookie():</code></p>
+            <p><code>   name = request.cookies.get('userID')</code></p>
+            <p><code>   return '&lt;h1&gt;welcome ' + name + '&lt;/h1&gt;'</code></p>
+            <p>The code retrieves the value of the cookie named <code>'userID'</code> and displays a welcome message using that value.</p>
+        </div>
+    </div>
+</div>

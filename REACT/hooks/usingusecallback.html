@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS — useCallback</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        <strong>useCallback</strong> is a React hook that returns a memoized version of a callback function.
+        It is similar to <em>useMemo</em>, but specifically intended for memoizing functions (callbacks)
+        instead of values. Because functions in JavaScript are passed by reference, memoizing callbacks
+        prevents unnecessary re-creations and can reduce re-renders when functions are passed as props.
+      </p>
+
+      <h2>Signature</h2>
+      <p>
+        The hook signature is:
+      </p>
+      <ul>
+        <li>
+          <p><code>const &lt;memoized_callback_fn&gt; = useCallback(&lt;callback_fn&gt;, &lt;dependency_array&gt;);</code></p>
+        </li>
+        <li>
+          <p>
+            <strong>callback_fn</strong> — the function to memoize.<br>
+            <strong>dependency_array</strong> — variables the callback depends on.
+          </p>
+        </li>
+        <li>
+          <p>
+            Note: <code>useCallback(fn, deps)</code> is equivalent to <code>useMemo(() =&gt; fn, deps)</code>.
+          </p>
+        </li>
+      </ul>
+
+      <h2>When to use useCallback</h2>
+      <ul>
+        <li>When passing function props to pure (memoized) child components.</li>
+        <li>When a function is included in a hook dependency array (e.g., useEffect).</li>
+        <li>When a function participates in debouncing, throttling, or other performance-sensitive patterns.</li>
+      </ul>
+
+      <h2>Applying useCallback — Step-by-step example</h2>
+      <p>
+        Create a React app (create-react-app) and add a memoized list component that receives:
+      </p>
+      <ul>
+        <li>an <em>items</em> prop — array to display</li>
+        <li>a <em>handleClick</em> prop — callback to call on click</li>
+      </ul>
+
+      <h2>PureListComponent (concept)</h2>
+      <p>
+        The child component reads props and is wrapped with React.memo to become a pure component:
+      </p>
+      <ul>
+        <li>Uses <em>items</em> to render a list (map over array).</li>
+        <li>Uses <em>handleClick</em> as click handler for items.</li>
+        <li>Because props include references (array, function), these must be stable to avoid re-renders.</li>
+      </ul>
+
+      <h2>Problem demonstration</h2>
+      <p>
+        If the parent component updates state frequently (for example, updating the current time every second),
+        the parent re-renders each second. If the array and callback props are recreated on every render,
+        React.memo in the child won't help — the child still receives new references and re-renders.
+      </p>
+
+      <h2>Solution using useMemo and useCallback</h2>
+      <p>
+        Preserve the items array and the callback function in the parent:
+      </p>
+      <ul>
+        <li><code>const listOfNumbers = useMemo(() =&gt; [...Array(100).keys()], []);</code></li>
+        <li><code>const handleCallbackFn = useCallback((e) =&gt; console.log(e.target.innerText), []);</code></li>
+      </ul>
+      <p>
+        With those memoized, the child receives stable references and React.memo prevents unnecessary re-renders
+        even when the parent updates a state like <em>currentTime</em>.
+      </p>
+
+      <h2>Example structure (files)</h2>
+      <ul>
+        <li>
+          <p><strong>src/components/PureListComponent.js</strong> — a memoized component that maps <em>items</em>
+            and attaches <em>handleClick</em> to each item.</p>
+        </li>
+        <li>
+          <p><strong>src/App.js</strong> — parent that demonstrates frequent re-render (time state) and then
+            uses <code>useMemo</code> and <code>useCallback</code> to stabilize props.</p>
+        </li>
+      </ul>
+
+      <h2>Key code lines (conceptual)</h2>
+      <ul>
+        <li><p><code>const listOfNumbers = useMemo(() =&gt; [...Array(100).keys()], []);</code></p></li>
+        <li><p><code>const handleCallbackFn = useCallback((e) =&gt; console.log(e.target.innerText), []);</code></p></li>
+        <li><p>Wrap child export as: <code>export default React.memo(PureListComponent)</code></p></li>
+      </ul>
+
+      <h2>Use cases</h2>
+      <ul>
+        <li>Pure functional components that accept functions as props.</li>
+        <li>Hooks that list functions in their dependency arrays (to avoid recreating effects on each render).</li>
+        <li>When using debounce/throttle utilities that require stable function references.</li>
+      </ul>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Simple API and easy to apply.</li>
+        <li>Can improve application performance by preventing unnecessary re-renders.</li>
+      </ul>
+
+      <h2>Disadvantages / caveats</h2>
+      <ul>
+        <li>Overuse can reduce code readability and make debugging harder.</li>
+        <li>Developers must understand closures and dependencies well to avoid bugs.</li>
+        <li>Only use when there's measurable benefit — premature optimization is discouraged.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <p>
+        <strong>useCallback</strong> is a helpful hook to memoize functions and prevent needless re-creations. Use it
+        selectively when it helps with performance (for example, stabilizing props passed to memoized children).
+        If there is no measurable performance issue, allowing React to manage re-renders is often simpler and clearer.
+      </p>
+    </div>
+  </div>
+</div>

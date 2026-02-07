@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Dynamic Imports</h1>
+    <div class="content">
+      <h2>Dynamic Imports</h2>
+      <p>
+        As applications grow larger, managing thousands of lines of code in a single file becomes inefficient. Modules help by splitting the code into smaller, reusable parts. In the previous chapter, you learned about static imports, which are loaded at the top of the file. 
+      </p>
+      <p>
+        However, sometimes we need to load modules only when they are required, rather than at startup. This improves performance and is called <b>dynamic imports</b>.
+      </p>
+
+      <h2>The <code>import()</code> Expression</h2>
+      <p>
+        To dynamically import a module, JavaScript provides the <code>import()</code> expression. It can be used anywhere in the code and always returns a promise.
+      </p>
+      <h3>Syntax</h3>
+      <pre>
+import(moduleName).then(module =&gt; {
+   // Use the module here
+});
+      </pre>
+      <ul>
+        <li><b>moduleName</b> − The name or path of the module to be loaded dynamically.</li>
+        <li><b>Return Value</b> − Returns a promise that resolves to the imported module.</li>
+      </ul>
+
+      <h2>Examples of Dynamic Import</h2>
+
+      <h3>Example 1</h3>
+      <p><b>File: test.js</b></p>
+      <pre>
+export const val1 = 11;
+      </pre>
+      <p><b>File: test.html</b></p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Example 1 - dynamic import in JavaScript&lt;/div&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+
+   &lt;script type="module"&gt;
+      let output = document.getElementById('output');
+      let val = 2;
+
+      if (val &lt; 5) {
+         // Importing the module dynamically
+         import('./test.js').then(module =&gt; {
+            output.innerHTML = "The imported value is " + module.val1;
+         });
+      } else {
+         output.innerHTML = "Value is greater than 5";
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b></p>
+      <ul>
+        <li>Example 1 - dynamic import in JavaScript</li>
+        <li>The imported value is 11</li>
+      </ul>
+
+      <h3>Example 2</h3>
+      <p><b>File: test.js</b></p>
+      <pre>
+export function add(a, b) {
+   return a + b;
+}
+      </pre>
+      <p><b>File: test.html</b></p>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div&gt;Example 2 - dynamic imports in JavaScript&lt;/div&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;button id="button"&gt;Click me&lt;/button&gt;
+
+   &lt;script type="module"&gt;
+      let output = document.getElementById('output');
+      let btn = document.getElementById('button');
+
+      // When the button is clicked, load the module
+      btn.addEventListener('click', async () =&gt; {
+         let module = await import('./test.js');
+         let result = module.add(2, 3);
+         output.innerHTML = "The sum of 2 and 3 is " + result;
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b></p>
+      <ul>
+        <li>Example 2 - dynamic imports in JavaScript</li>
+        <li>The sum of 2 and 3 is 5</li>
+      </ul>
+
+      <p>
+        With dynamic imports, developers can import modules inside functions, conditionals, or event handlers whenever needed instead of loading them all upfront.
+      </p>
+    </div>
+  </div>
+</div>

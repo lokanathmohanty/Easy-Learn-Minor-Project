@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Properties (props)</h1>
+    <div class="content">
+      <p>
+        React enables developers to create dynamic and advanced components using <strong>properties</strong> (props). 
+        Every component can have attributes similar to HTML attributes, and each attribute's value can be accessed 
+        inside the component using <code>this.props</code>.
+      </p>
+      <p>
+        For example, in the <code>Hello</code> component with a <code>name</code> attribute:
+      </p>
+      <pre><code>&lt;Hello name="React" /&gt;
+// Accessed inside component as this.props.name
+</code></pre>
+      <p>React properties support attribute values of different types:</p>
+      <ul>
+        <li>String</li>
+        <li>Number</li>
+        <li>Datetime</li>
+        <li>Array</li>
+        <li>List</li>
+        <li>Objects</li>
+      </ul>
+
+      <h2>Using Props</h2>
+      <p>
+        When we need immutable data in a component, we can pass it as props through the 
+        <code>ReactDOM.render()</code> function and use it inside the component.
+      </p>
+      <pre><code>// App.jsx
+import React from 'react';
+
+class App extends React.Component {
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;h1&gt;{this.props.headerProp}&lt;/h1&gt;
+            &lt;h2&gt;{this.props.contentProp}&lt;/h2&gt;
+         &lt;/div&gt;
+      );
+   }
+}
+export default App;
+
+// main.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App.jsx';
+
+ReactDOM.render(
+   &lt;App headerProp="Header from props..." contentProp="Content from props..."/&gt;, 
+   document.getElementById('app')
+);
+</code></pre>
+      <p><em>Output:</em> Displays the header and content passed as props.</p>
+
+      <h2>Default Props</h2>
+      <p>
+        You can also set default property values directly on the component 
+        using <code>defaultProps</code> instead of passing them through <code>ReactDOM.render()</code>.
+      </p>
+      <pre><code>// App.jsx
+import React from 'react';
+
+class App extends React.Component {
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;h1&gt;{this.props.headerProp}&lt;/h1&gt;
+            &lt;h2&gt;{this.props.contentProp}&lt;/h2&gt;
+         &lt;/div&gt;
+      );
+   }
+}
+
+App.defaultProps = {
+   headerProp: "Header from props...",
+   contentProp: "Content from props..."
+}
+export default App;
+
+// main.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App.jsx';
+
+ReactDOM.render(&lt;App/&gt;, document.getElementById('app'));
+</code></pre>
+      <p><em>Output:</em> Same as before, but now using default props.</p>
+
+      <h2>State vs Props</h2>
+      <p>
+        The following example shows how to combine <strong>state</strong> and <strong>props</strong>. 
+        The parent component sets the state and passes it down to child components as props.
+      </p>
+      <pre><code>// App.jsx
+import React from 'react';
+
+class App extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         header: "Header from props...",
+         content: "Content from props..."
+      }
+   }
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;Header headerProp={this.state.header}/&gt;
+            &lt;Content contentProp={this.state.content}/&gt;
+         &lt;/div&gt;
+      );
+   }
+}
+
+class Header extends React.Component {
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;h1&gt;{this.props.headerProp}&lt;/h1&gt;
+         &lt;/div&gt;
+      );
+   }
+}
+
+class Content extends React.Component {
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;h2&gt;{this.props.contentProp}&lt;/h2&gt;
+         &lt;/div&gt;
+      );
+   }
+}
+export default App;
+
+// main.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App.jsx';
+
+ReactDOM.render(&lt;App/&gt;, document.getElementById('app'));
+</code></pre>
+      <p>
+        <em>Output:</em> Same as previous examples. The difference is that 
+        the data now comes from the component's state. Updating the state automatically updates all child components.
+      </p>
+
+      <h2>Key Concepts</h2>
+      <ul>
+        <li>Create a component using Properties</li>
+        <li>Use Nested Components</li>
+        <li>Use Components with Props</li>
+        <li>Manage Component Collection with Props</li>
+      </ul>
+    </div>
+  </div>
+</div>

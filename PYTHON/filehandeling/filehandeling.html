@@ -1,0 +1,54 @@
+<div class="content">
+  <h2 class="title">Introduction</h2>
+  <p>File handling in Python involves interacting with files to read or write data. Python provides built-in functions and methods for opening, reading, writing, and closing files safely and efficiently.</p>
+
+  <h2 class="title">Opening a File</h2>
+  <p>The <code>open()</code> function is used to open files with specified modes:</p>
+  <ul>
+    <li><code>r</code>: Read only (default)</li>
+    <li><code>w</code>: Write only (overwrites or creates new file)</li>
+    <li><code>a</code>: Append (adds to end or creates new file)</li>
+    <li><code>r+</code>: Read/write</li>
+    <li><code>b</code>: Binary mode (used with other modes)</li>
+    <li><code>x</code>: Create new file, fail if exists</li>
+  </ul>
+
+  <h2 class="title">Reading from a File</h2>
+  <p>Common methods for reading file data:</p>
+  <ul>
+    <li><code>read()</code>: Reads entire file as string</li>
+    <li><code>readline()</code>: Reads one line at a time</li>
+    <li><code>readlines()</code>: Reads all lines into a list</li>
+  </ul>
+  
+  <h2 class="title">Writing to a File</h2>
+  <p>Writing methods include:</p>
+  <ul>
+    <li><code>write()</code>: Writes a string to the file</li>
+    <li><code>writelines()</code>: Writes sequence of strings</li>
+  </ul>
+
+  <h2 class="title">Closing a File</h2>
+  <p>It is important to close files after operations to release resources. Use <code>close()</code> explicitly or (preferably) use a <code>with</code> block that auto-closes the file.</p>
+
+  <h2 class="title">Exception Handling for File Closing</h2>
+  <p>Use <code>try...finally</code> construct to ensure files are closed even if exceptions occur during file operations.</p>
+</div>
+
+<div class="content">
+  <h2 class="title">Example: Open and Read a File</h2>
+  <pre><code>with open("example.txt", "r") as file:
+content = file.read()
+print(content)</code></pre>
+
+  <h2 class="title">Example: Write to a File</h2>
+  <pre><code>with open("example.txt", "w") as file:
+file.write("Hello, World!\n")
+file.write("This is a new line.\n")</code></pre>
+
+  <h2 class="title">Example: Append to an Existing File</h2>
+  <pre><code>with open("example.txt", "a") as file:
+file.write("Adding a new line.\n")</code></pre>
+
+  <h2 class="title">Example: Manual File Open and Close</h2>
+  <pre><code>file = open("example.txt", "w")

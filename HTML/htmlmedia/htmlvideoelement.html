@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HTML Video — E-Learning Session</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+      <h1 class="title">HTML &lt;video&gt; Element</h1>
+
+      <div class="content">
+        <h2>Overview</h2>
+        <p>
+          The HTML <code>&lt;video&gt;</code> element embeds video content in a web page.
+          Use it to provide video playback support directly in the page. Browsers natively
+          support common formats such as MP4, WebM and Ogg. You can supply multiple sources
+          so the browser chooses the best supported format.
+        </p>
+
+        <h2>Key Points</h2>
+        <ul>
+          <li>The <code>&lt;video&gt;</code> element works similarly to <code>&lt;img&gt;</code>, but for video.</li>
+          <li>Supported formats commonly include: MP4, WebM, Ogg.</li>
+          <li>Provide multiple <code>&lt;source&gt;</code> elements to improve cross-browser compatibility.</li>
+          <li>The <code>controls</code> attribute enables built-in playback controls (play, pause, volume, seek).</li>
+        </ul>
+
+        <h2>Basic Syntax</h2>
+        <p>Embed a video by adding <code>src</code> inside the <code>&lt;video&gt;</code> tag, or by adding one or more <code>&lt;source&gt;</code> tags:</p>
+
+        <pre><code>&lt;video width="640" height="360" controls&gt;
+  &lt;source src="video-file.mp4" type="video/mp4"&gt;
+  &lt;source src="video-file.ogg" type="video/ogg"&gt;
+  Your browser does not support the video tag.
+&lt;/video&gt;
+</code></pre>
+
+        <h2>Example: Multiple Sources</h2>
+        <p>This example provides several formats. The browser picks the first supported one.</p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;HTML Video Element&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Playing video using video element&lt;/p&gt;
+  &lt;video width="450" height="250" controls&gt;
+    &lt;source src="/html/media/video/sampleTP.webm" type="video/webm"&gt;
+    &lt;source src="/html/media/video/sampleTP.mp4" type="video/mp4"&gt;
+    &lt;source src="/html/media/video/sampleTP.ogv" type="video/ogg"&gt;
+    &lt;p&gt;Sorry, video element is not supported!&lt;/p&gt;
+  &lt;/video&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+        <h2>The <code>controls</code> Attribute</h2>
+        <p>
+          Add <code>controls</code> to show built-in UI controls (play, pause, seek, volume).
+          Example: <code>&lt;video controls&gt;…&lt;/video&gt;</code>.
+        </p>
+
+        <h2>Customizing Video Size</h2>
+        <p>
+          Set the <code>width</code> and <code>height</code> attributes to define the video viewport.
+          The browser will preserve aspect ratio where possible; match dimensions to the source
+          aspect ratio for best results.
+        </p>
+
+        <pre><code>&lt;video width="450" height="250" controls&gt;
+  &lt;source src="/html/media/video/sampleTP.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+</code></pre>
+
+        <h2>Autoplay and Loop</h2>
+        <p>
+          Use <code>autoplay</code> and <code>loop</code> to auto-play and repeat the video.
+          Many browsers restrict autoplay unless the video is muted, so combine <code>autoplay</code> with
+          <code>muted</code> for reliable behavior.
+        </p>
+
+        <pre><code>&lt;video width="450" height="250" autoplay muted loop&gt;
+  &lt;source src="/html/media/video/sampleTP.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+</code></pre>
+
+        <h2>Poster (Video Thumbnail)</h2>
+        <p>
+          The <code>poster</code> attribute specifies an image to show before playback begins.
+        </p>
+
+        <pre><code>&lt;video width="450" height="250" controls muted poster="tutorials_point.jpg"&gt;
+  &lt;source src="/html/media/video/sampleTP.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+</code></pre>
+
+        <h2>Browser Format Support</h2>
+        <p>The following table summarizes common format support across popular browsers:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Browser</th>
+              <th>OGG</th>
+              <th>WebM</th>
+              <th>MP4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Chrome</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Edge</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Safari</td>
+              <td>No</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Firefox</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Opera</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Best Practices & Accessibility</h2>
+        <ul>
+          <li>Provide multiple source formats for broad compatibility.</li>
+          <li>Always include fallback text inside the <code>&lt;video&gt;</code> element for very old browsers.</li>
+          <li>Use captions, transcripts, or <code>&lt;track&gt;</code> elements for accessibility (not shown here; add as needed).</li>
+          <li>When using <code>autoplay</code>, prefer <code>muted</code> to avoid unexpected audio for users.</li>
+        </ul>
+
+        <h2>Further Reading / Next Steps</h2>
+        <ul>
+          <li>Explore the <code>&lt;track&gt;</code> element to add subtitles/captions.</li>
+          <li>Learn how to control playback via JavaScript (play, pause, currentTime).</li>
+          <li>Investigate adaptive streaming (HLS/DASH) solutions for large-scale video delivery.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

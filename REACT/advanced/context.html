@@ -1,0 +1,101 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Context</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            Context provides a way to pass information from a parent component 
+            to deeply nested children without manually passing props through 
+            each level. It improves readability and reduces complexity when 
+            managing shared data.
+         </p>
+
+         <h2>Common Use Cases</h2>
+         <ul>
+            <li>Application configuration</li>
+            <li>Current authenticated user information</li>
+            <li>Current user settings</li>
+            <li>Language preference</li>
+            <li>Theme or design configuration</li>
+         </ul>
+
+         <h2>How Context Works</h2>
+         <p>
+            Context involves four main steps:
+         </p>
+         <ul>
+            <li>Creating a new context</li>
+            <li>Wrapping the application in a Context Provider</li>
+            <li>Using a Context Consumer inside components</li>
+            <li>Accessing and rendering the context values</li>
+         </ul>
+
+         <h2>Example: Creating Context</h2>
+         <div class="code-block">
+<pre><code>import React from 'react';
+
+const ThemeContext = React.createContext({
+   color: 'black',
+   backgroundColor: 'white'
+});
+
+export default ThemeContext;
+</code></pre>
+         </div>
+
+         <h2>Providing Context</h2>
+         <div class="code-block">
+<pre><code>import './App.css';
+import HelloWorld from './components/HelloWorld';
+import ThemeContext from './ThemeContext';
+
+function App() {
+   return (
+      &lt;ThemeContext.Provider value={{
+         color: 'white',
+         backgroundColor: 'green'
+      }}&gt;
+         &lt;HelloWorld /&gt;
+      &lt;/ThemeContext.Provider&gt;
+   );
+}
+
+export default App;
+</code></pre>
+         </div>
+
+         <h2>Consuming Context</h2>
+         <div class="code-block">
+<pre><code>import React from "react";
+import ThemeContext from "../ThemeContext";
+
+class HelloWorld extends React.Component {
+   render() {
+      return (
+         &lt;ThemeContext.Consumer&gt;
+            {({ color, backgroundColor }) =&gt; (
+               &lt;div style={{ color, backgroundColor }}&gt;
+                  Hello World
+               &lt;/div&gt;
+            )}
+         &lt;/ThemeContext.Consumer&gt;
+      );
+   }
+}
+
+export default HelloWorld;
+</code></pre>
+         </div>
+
+         <h2>Summary</h2>
+         <p>
+            Context simplifies sharing global data across a React application. 
+            By using providers and consumers, components can easily access 
+            shared values such as themes, user settings, or configurations 
+            without excessive prop drilling.
+         </p>
+      </div>
+   </div>
+</div>

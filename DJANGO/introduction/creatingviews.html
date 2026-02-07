@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Creating View Functions 💻</h1>
+        <div class="content">
+            <p>A **view function**, or simply a **view**, is a **Python function** that serves as the **Controller logic** in Django's MVT pattern. It takes an incoming web request (<code>HttpRequest</code>) and is responsible for returning an appropriate web response (<code>HttpResponse</code>).</p>
+            <p>The response can be simple HTML content, a redirect, an HTTP error (like 404), or raw data (like XML or JSON).</p>
+
+            <hr>
+
+            <h2>Simple View (Direct HTML)</h2>
+            <p>Views are created in the application's **<code>views.py</code>** file. The simplest view uses **<code>HttpResponse</code>** to return hardcoded HTML content. While functional, this method violates the MVT principle by mixing logic and presentation:</p>
+            <pre><code>from django.http import HttpResponse
+
+def hello(request):
+   text = "&lt;h1&gt;welcome to my app !&lt;/h1&gt;"
+   return HttpResponse(text)</code></pre>
+
+            <hr>
+
+            <h2>MVT-Compliant View (Using Templates)</h2>
+            <p>The best practice is to use Django's **<code>render()</code>** shortcut. This method correctly separates the view logic from the presentation (Template) layer by:</p>
+            <ol>
+                <li>Receiving the <code>request</code> object.</li>
+                <li>Specifying the path to the **Template file** (e.g., <code>myapp/templates/hello.html</code>).</li>
+                <li>Passing a dictionary of **context data** (variables) to the template (here, an empty dictionary <code>{}</code>).</li>
+            </ol>
+            <pre><code>from django.shortcuts import render
+
+def hello(request):
+   return render(request, "myapp/template/hello.html", {})</code></pre>
+
+            <hr>
+
+            <h2>Views Accepting Parameters</h2>
+            <p>View functions can also accept arguments, which are typically captured from the URL and passed to the view by Django's URL routing system:</p>
+            <pre><code>from django.http import HttpResponse
+
+def hello(request, number):
+   text = "&lt;h1&gt;welcome to my app number %s!&lt;/h1&gt;" % number
+   return HttpResponse(text)</code></pre>
+            <p>When this view is mapped to a URL that includes a placeholder for a number (e.g., <code>/hello/123/</code>), the view function will receive and display that number.</p>
+        </div>
+    </div>
+</div>

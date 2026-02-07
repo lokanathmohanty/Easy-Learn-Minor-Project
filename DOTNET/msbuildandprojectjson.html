@@ -1,0 +1,60 @@
+<div class="container">
+<div class="session">
+<div class="title">
+<h1>.NET Core - MSBuild and project.json Transition</h1>
+ 
+</div>
+<div class="content">
+<p>The .NET Core ecosystem underwent a significant tooling change by deciding to **drop <code>project.json</code>** in favor of returning to **MSBuild** and the **<code>*.csproj</code>** project file format. This change was finalized in the **.NET Core 2.0 preview1 tooling**.</p>
+
+<h2>Advantages of the MSBuild/csproj Change</h2>
+<p>While <code>project.json</code> was considered a "breath of fresh air," the decision to revert to MSBuild offers several strategic advantages:</p>
+<ul>
+<li>**Simplified Transition:** Makes the move of existing Visual Studio solutions to .NET Core more **straightforward**.</li>
+<li>**Leveraging Existing Investment:** Allows companies to utilize existing infrastructure and expertise in Continuous Integration (CI) and Release Management (RM) systems that are built around **MSBuild**.</li>
+<li>**Advanced Build Features:** Enables core MSBuild features like **incremental compilation**, resolving build-time dependencies, and robust configuration management.</li>
+<li>**Broader Platform Support:** Supports a wider range of application types (console apps, UWP apps, etc.), requiring a stable and proven build system like MSBuild for the .NET CLI.</li>
+</ul>
+
+<h2>Key Changes in Tooling</h2>
+<p>The core structural changes in the project system are as follows:</p>
+<ul>
+<li>The **<code>project.json</code> file (and the <code>*.xproj</code> file)** is replaced by **MSBuild's <code>*.csproj</code>** file.</li>
+<li>Features previously found in <code>project.json</code> will be gradually merged back into the new **<code>*.csproj</code>** format.</li>
+</ul>
+<p>The transition for packages lists (dependencies) was an open question, with possibilities of keeping it in a separate **<code>nuget.json</code>** file or merging it completely into the **<code>*.csproj</code>** file.</p>
+
+<h2>Advantages of the New MSBuild</h2>
+<ul>
+<li>**Open Source and Cross-Platform:** MSBuild itself is open source, available on GitHub, and is becoming fully cross-platform.</li>
+<li>**Simplified Structure:** The new <code>*.csproj</code> structure will be dramatically **simplified and trimmed** compared to the verbose, older .NET Framework versions.</li>
+<li>**New Project System:** Microsoft introduced a new project system (details available at <a href="https://github.com/dotnet/project-system">https://github.com/dotnet/project-system</a>) aimed at making project work seamless, both inside the Visual Studio IDE and outside of it.</li>
+</ul>
+
+<h2>Comparing <code>project.json</code> vs. MSBuild/csproj</h2>
+<p>The shift in tooling is clearly visible when creating new projects using the command line:</p>
+
+<h3>Using .NET Core preview2 tooling (Old)</h3>
+<p>Running <code>dotnet new -t console</code> and then <code>dir</code> creates two files:</p>
+<ul>
+<li><code>Program.cs</code></li>
+<li><strong><code>project.json</code></strong></li>
+</ul>
+
+<h3>Using .NET Core 2 preview1 tooling (New)</h3>
+<p>Running <code>dotnet new console</code> and then <code>dir</code> creates three files:</p>
+<ul>
+<li><code>Program.cs</code></li>
+<li><code>NuGet.config</code></li>
+<li>**<code>MSBuild.csproj</code>** (replaces <code>project.json</code>)</li>
+</ul>
+
+<h3>File Format Comparison</h3>
+<p>A side-by-side comparison shows the difference between the old and new project files:</p>
+<ul>
+<li>**<code>project.json</code>:** Uses the **JSON** format. Specifies the target framework as **<code>netcoreapp1.0</code>**.</li>
+<li>**<code>MSBuild.csproj</code>:** Uses the **XML** format. Specifies the target framework as **<code>netcoreapp2.0</code>** (demonstrating the tooling update).</li>
+</ul>
+</div>
+</div>
+</div>

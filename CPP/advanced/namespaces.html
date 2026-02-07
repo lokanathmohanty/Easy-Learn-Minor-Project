@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Namespaces (Scope Management) 🏷️</h1>
+
+        <div class="content">
+            <p>A **namespace** is a mechanism designed to prevent **name collisions** (ambiguity) when multiple libraries or parts of a program use the same names for functions, classes, or variables. Essentially, a namespace defines a distinct **scope** or context for the names declared within it.</p>
+            <p>It acts like a surname or address, providing extra information to differentiate entities with identical names (e.g., differentiating between two people named "Zara" in the same town).</p>
+
+            <hr>
+
+            <h2 class="title">Defining and Accessing a Namespace</h2>
+
+            <h3>Definition Syntax</h3>
+            <p>A namespace is defined using the keyword <code>namespace</code> followed by a name:</p>
+            <pre class="example">
+namespace MyLibrary {
+   int version = 1;
+   void calculate() { /* ... */ }
+}
+</pre>
+
+            <h3>Accessing Members (Scope Resolution)</h3>
+            <p>To explicitly call a function or variable from a specific namespace, you must prepend the namespace name using the **Scope Resolution Operator (`::`)**:</p>
+            <pre class="example">
+MyLibrary::calculate(); // Calls calculate() from MyLibrary scope
+std::cout &lt;&lt; MyLibrary::version; // Accesses version variable
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">The <code>using</code> Directive</h2>
+
+        <div class="content">
+            <p>The `using` directive allows you to avoid repeatedly prepending the namespace name. It makes the names within the specified namespace available in the current scope.</p>
+
+            <h3>1. Whole Namespace (General Access)</h3>
+            <p>This imports all names from the namespace into the current scope. This is often done for convenience, but it can re-introduce ambiguity if multiple namespaces are imported this way.</p>
+            <pre class="example">
+using namespace std; // Makes names like cout and endl globally available
+</pre>
+
+            <h3>2. Single Item (Specific Access)</h3>
+            <p>You can import only a specific item from a namespace, making only that name available without the prefix.</p>
+            <pre class="example">
+using std::cout; // Only cout is available without prefix
+</pre>
+
+            <hr>
+
+            <h2 class="title">Discontiguous and Nested Namespaces</h2>
+
+            <h3>Discontiguous Namespaces</h3>
+            <p>A namespace can be defined in multiple blocks or even spread across multiple files. The final namespace is the **sum** of all its separately defined parts. Writing a namespace definition again simply adds new elements to the existing one.</p>
+            <pre class="example">
+namespace App { int value = 1; }
+// In a separate file:
+namespace App { void printValue() { /* ... */ } } 
+// 'App' now contains both 'value' and 'printValue()'
+</pre>
+
+            <h3>Nested Namespaces</h3>
+            <p>Namespaces can be defined inside other namespaces. Members of a nested namespace are accessed by chaining the scope resolution operators:</p>
+            <pre class="example">
+namespace Outer {
+   namespace Inner {
+      void method() { /* ... */ }
+   }
+}
+// Accessing the method:
+Outer::Inner::method();
+</pre>
+            <p>You can also use a `using` directive to access a nested namespace:</p>
+            <pre class="example">
+using namespace Outer::Inner;
+method(); // Direct call is now possible
+</pre>
+        </div>
+    </div>
+</div>

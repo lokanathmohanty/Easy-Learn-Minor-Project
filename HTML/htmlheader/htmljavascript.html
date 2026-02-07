@@ -1,0 +1,172 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - JavaScript</h1>
+    <div class="content">
+      <p>JavaScript allows you to create dynamic and interactive HTML pages. It is a high-level programming language and a core technology behind web development.</p>
+      <p>A script is a small piece of program that can add interactivity to a website, such as generating a pop-up alert box message or providing a dropdown menu. Nowadays, only JavaScript and its frameworks are used, as VBScript is not supported by major browsers.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Adding JavaScript in HTML</h2>
+    <div class="content">
+      <p>There are multiple ways of adding scripts to an HTML document:</p>
+      <ul>
+        <li>Inline JavaScript</li>
+        <li>Internal JavaScript</li>
+        <li>External JavaScript</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Inline JavaScript</h2>
+    <div class="content">
+      <p>You can directly add JavaScript code to HTML elements using attributes such as <code>onclick</code> or <code>onload</code>.</p>
+      <h3 class="title">Example</h3>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Example of Inline JavaScript&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button onclick="alert('Hi there!')"&gt;Click Me&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Internal JavaScript</h2>
+    <div class="content">
+      <p>JavaScript code can be written directly inside the HTML document within the <code>&lt;script&gt;</code> tag.</p>
+      <h3 class="title">Example</h3>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;JavaScript Internal Script&lt;/title&gt;
+   &lt;script type="text/JavaScript"&gt; 
+      function Hello(){
+         alert("Hello, World");
+      }
+   &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;input type="button" onclick="Hello();" value="Click Me" /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">External JavaScript</h2>
+    <div class="content">
+      <p>Reusable JavaScript code can be stored in a separate file with a <code>.js</code> extension and linked using the <code>&lt;script&gt;</code> tag with the <code>src</code> attribute.</p>
+      <h3 class="title">Example</h3>
+      <pre>
+// script.js
+function Hello() {
+   alert("Hello, World");
+}
+      </pre>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;JavaScript External Script&lt;/title&gt;
+   &lt;script src="/html/script.js" type="text/JavaScript"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;input type="button" onclick="Hello();" value="Click Me" /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Event Handlers</h2>
+    <div class="content">
+      <p>Event handlers are functions executed in response to user actions, such as mouse or keyboard events.</p>
+      <h3 class="title">Example</h3>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;Event Handlers Example&lt;/title&gt;
+   &lt;script type="text/JavaScript"&gt; 
+      function EventHandler(){
+         alert("I'm event handler!!");
+      }
+   &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;p onmouseover="EventHandler();"&gt;Bring your mouse here to see an alert&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Hide Scripts from Older Browsers</h2>
+    <div class="content">
+      <p>Older browsers may display JavaScript code as text. To prevent this, wrap the code in HTML comments.</p>
+      <h3 class="title">JavaScript Example</h3>
+      <pre>
+&lt;script type="text/JavaScript"&gt;
+   &lt;!--
+   document.write("Hello JavaScript!");
+   // --&gt;
+&lt;/script&gt;
+      </pre>
+      <h3 class="title">VBScript Example</h3>
+      <pre>
+&lt;script type="text/vbscript"&gt;
+   &lt;!--
+   document.write("Hello VBScript!")
+   '--&gt;
+&lt;/script&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The &lt;noscript&gt; Element</h2>
+    <div class="content">
+      <p>The <code>&lt;noscript&gt;</code> tag provides alternative content for users whose browsers do not support or have disabled scripts.</p>
+      <h3 class="title">Example</h3>
+      <pre>
+&lt;script type="text/JavaScript"&gt;
+   document.write("Hello JavaScript!");
+&lt;/script&gt;
+&lt;noscript&gt;Your browser does not support JavaScript!&lt;/noscript&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Default Scripting Language</h2>
+    <div class="content">
+      <p>You can specify a default scripting language for all <code>&lt;script&gt;</code> tags in a page using the <code>&lt;meta&gt;</code> tag.</p>
+      <h3 class="title">Example</h3>
+      <pre>
+&lt;meta http-equiv="Content-Script-Type" content="text/JavaScript" /&gt;
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">HTML Script Tags</h2>
+    <div class="content">
+      <ul>
+        <li><code>&lt;script&gt;</code> − Used to import or write JavaScript inside an HTML document.</li>
+        <li><code>&lt;noscript&gt;</code> − Provides alternate content if a browser does not support scripts.</li>
+      </ul>
+    </div>
+  </div>
+</div>

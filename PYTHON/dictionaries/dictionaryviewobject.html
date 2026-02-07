@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Dictionary View Objects</h1>
+    <div class="content">
+      <p>
+        Dictionary view objects in Python provide dynamic, live views of a dictionary’s contents. The <code>items()</code>, <code>keys()</code>, and <code>values()</code> methods return special view objects that reflect changes to the dictionary in real time.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The <code>items()</code> Method</h2>
+    <div class="content">
+      <p>
+        The <code>items()</code> method returns a <code>dict_items</code> view object, which is a dynamic list of tuples containing key-value pairs.
+      </p>
+      <pre><code>
+numbers = {10: "Ten", 20: "Twenty", 30: "Thirty", 40: "Forty"}
+obj = numbers.items()
+print('type of obj:', type(obj))
+print(obj)
+
+numbers.update({50: "Fifty"})
+print("View automatically updated")
+print(obj)
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        type of obj: &lt;class 'dict_items'&gt;<br>
+        dict_items([(10, 'Ten'), (20, 'Twenty'), (30, 'Thirty'), (40, 'Forty')])<br>
+        View automatically updated<br>
+        dict_items([(10, 'Ten'), (20, 'Twenty'), (30, 'Thirty'), (40, 'Forty'), (50, 'Fifty')])
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The <code>keys()</code> Method</h2>
+    <div class="content">
+      <p>
+        The <code>keys()</code> method returns a <code>dict_keys</code> view object containing all keys of the dictionary. It updates automatically when the dictionary changes.
+      </p>
+      <pre><code>
+numbers = {10: "Ten", 20: "Twenty", 30: "Thirty", 40: "Forty"}
+obj = numbers.keys()
+print('type of obj:', type(obj))
+print(obj)
+
+numbers.update({50: "Fifty"})
+print("View automatically updated")
+print(obj)
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        type of obj: &lt;class 'dict_keys'&gt;<br>
+        dict_keys([10, 20, 30, 40])<br>
+        View automatically updated<br>
+        dict_keys([10, 20, 30, 40, 50])
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">The <code>values()</code> Method</h2>
+    <div class="content">
+      <p>
+        The <code>values()</code> method returns a <code>dict_values</code> view object containing all the values in the dictionary, which updates automatically on dictionary changes.
+      </p>
+      <pre><code>
+numbers = {10: "Ten", 20: "Twenty", 30: "Thirty", 40: "Forty"}
+obj = numbers.values()
+print('type of obj:', type(obj))
+print(obj)
+
+numbers.update({50: "Fifty"})
+print("View automatically updated")
+print(obj)
+      </code></pre>
+      <p>Output:</p>
+      <p>
+        type of obj: &lt;class 'dict_values'&gt;<br>
+        dict_values(['Ten', 'Twenty', 'Thirty', 'Forty'])<br>
+        View automatically updated<br>
+        dict_values(['Ten', 'Twenty', 'Thirty', 'Forty', 'Fifty'])
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Key Features of Dictionary View Objects</h2>
+    <div class="content">
+      <ul>
+        <li>They provide dynamic views, automatically reflecting dictionary changes.</li>
+        <li>Support iteration and membership testing.</li>
+        <li>Allow efficient access to dictionary keys, values, or items without copying.</li>
+      </ul>
+    </div>
+  </div>
+ 
+  </div>
+</div>

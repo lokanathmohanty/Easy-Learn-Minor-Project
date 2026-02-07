@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Relational Operators ⚖️</h1>
+
+        <div class="content">
+            <p>**Relational operators** in C++ are used to compare two values or expressions, checking the relationship between them. The result of a relational operation is always a **Boolean value** (<code>true</code> or <code>false</code>, which C++ often represents as <code>1</code> or <code>0</code>, respectively).</p>
+        </div>
+
+        <div class="content">
+            <h2 class="title">List of Relational Operators</h2>
+            <p>These operators are fundamental for control flow and decision-making (e.g., in <code>if</code> statements and loops).</p>
+            <table>
+                <thead>
+                    <tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>==</code></td><td>Equal to</td><td><code>a == b</code></td></tr>
+                    <tr><td><code>!=</code></td><td>Not equal to</td><td><code>a != b</code></td></tr>
+                    <tr><td><code>&gt;</code></td><td>Greater than</td><td><code>a &gt; b</code></td></tr>
+                    <tr><td><code>&lt;</code></td><td>Less than</td><td><code>a &lt; b</code></td></tr>
+                    <tr><td><code>&gt;=</code></td><td>Greater than or equal to</td><td><code>a &gt;= b</code></td></tr>
+                    <tr><td><code>&lt;=</code></td><td>Less than or equal to</td><td><code>a &lt;= b</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Usage and Contexts</h2>
+            <p>Relational operators can be used with various data types, but with some considerations:</p>
+            <ul>
+                <li>
+                    <strong>Numeric Types (Integers, Floats):</strong> Standard comparison of magnitude.
+                </li>
+                <li>
+                    <strong>Characters:</strong> Comparison is based on their underlying **ASCII** values.
+                </li>
+                <li>
+                    <strong>Strings:</strong> Comparison is **lexicographical** (alphabetical order).
+                </li>
+                <li>
+                    <strong>Custom Objects:</strong> Comparison requires **operator overloading**, where the programmer defines what it means for one object to be "greater than" or "equal to" another (e.g., comparing two <code>Point</code> objects based on their distance from the origin).
+                </li>
+            </ul>
+
+            <h3>Floating-Point Caution ⚠️</h3>
+            <p>Due to potential **precision issues** (rounding errors) in floating-point arithmetic (<code>float</code>, <code>double</code>), direct equality comparison (<code>x == y</code>) is often unreliable. Instead, it is safer to check if the absolute difference between the two numbers is less than a very small threshold (epsilon, e.g., $10^{-6}$):</p>
+            <pre class="example">if (fabs(x - y) &lt; 1e-6) // x and y are considered equal</pre>
+
+            <h3>Combining with Logical Operators</h3>
+            <p>Relational expressions are frequently combined with **Logical Operators** (<code>&amp;&amp;</code>, <code>||</code>, <code>!</code>) to create complex conditions that must all be true, any can be true, or a condition is negated.</p>
+            <pre class="example">
+if (age &gt;= 18 &amp;&amp; height &gt; 170) {
+    // Both relational conditions must be true
+}
+</pre>
+        </div>
+    </div>
+</div>

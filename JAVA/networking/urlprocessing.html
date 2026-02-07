@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - URL Processing</h1>
+    <div class="content">
+      <p>URL stands for Uniform Resource Locator and represents a resource on the World Wide Web, such as a Web page or FTP directory.</p>
+      <p>This section shows you how to write Java programs that communicate with a URL. A URL can be broken down into parts, as follows −</p>
+      <p><code>protocol://host:port/path?query#ref</code></p>
+      <p>Examples of protocols include HTTP, HTTPS, FTP, and File. The path is also referred to as the filename, and the host is also called the authority.</p>
+      <p>The following is a URL to a web page whose protocol is HTTP −</p>
+      <p><code>https://www.amrood.com/index.htm?language=en#j2se</code></p>
+      <p>Notice that this URL does not specify a port, in which case the default port for the protocol is used. With HTTP, the default port is 80.</p>
+
+      <h2>Constructors</h2>
+      <p>The java.net.URL class represents a URL and has a complete set of methods to manipulate URL in Java.</p>
+      <p>The URL class has several constructors for creating URLs, including the following −</p>
+      <ul>
+        <li><code>public URL(String protocol, String host, int port, String file) throws MalformedURLException</code>  
+          Creates a URL by putting together the given parts.
+        </li>
+        <li><code>public URL(String protocol, String host, String file) throws MalformedURLException</code>  
+          Identical to the previous constructor, except that the default port for the given protocol is used.
+        </li>
+        <li><code>public URL(String url) throws MalformedURLException</code>  
+          Creates a URL from the given String.
+        </li>
+        <li><code>public URL(URL context, String url) throws MalformedURLException</code>  
+          Creates a URL by parsing together the URL and String arguments.
+        </li>
+      </ul>
+
+      <h2>URL Class Methods</h2>
+      <p>The URL class contains many methods for accessing the various parts of the URL being represented. Some of the methods in the URL class include the following −</p>
+      <ul>
+        <li><code>public equals(Object obj)</code> - Compares this URL for equality with another object.</li>
+        <li><code>public String getAuthority()</code> - Returns the authority of the URL.</li>
+        <li><code>public Object getContent()</code> - Returns the contents of this URL.</li>
+        <li><code>public int getDefaultPort()</code> - Returns the default port for the protocol of the URL.</li>
+        <li><code>public String getFile()</code> - Returns the filename of the URL.</li>
+        <li><code>public String getHost()</code> - Returns the host of the URL.</li>
+        <li><code>public String getPath()</code> - Returns the path of the URL.</li>
+        <li><code>public int getPort()</code> - Returns the port of the URL.</li>
+        <li><code>public String getProtocol()</code> - Returns the protocol of the URL.</li>
+        <li><code>public String getQuery()</code> - Returns the query part of the URL.</li>
+        <li><code>public String getRef()</code> - Returns the reference part of the URL.</li>
+        <li><code>public String getUserInfo()</code> - Returns the userInfo part of the URL.</li>
+        <li><code>public URLConnection openConnection()</code> - Returns a URLConnection instance representing a connection to the remote object.</li>
+        <li><code>public InputStream openStream()</code> - Opens a connection and returns an InputStream for reading.</li>
+        <li>...and others.</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: URLDemo Program</h2>
+    <div class="content">
+      <p>The following URLDemo program demonstrates the various parts of a URL. A URL is entered on the command line, and the program outputs each part of the given URL.</p>
+
+      <pre>
+// File Name : URLDemo.java
+import java.io.IOException;
+import java.net.URL;
+
+public class URLDemo {
+
+   public static void main(String [] args) {
+      try {
+         URL url = new URL("https://www.tutorialspoint.com/index.htm?language=en#j2se");
+         
+         System.out.println("URL is " + url.toString());
+         System.out.println("protocol is " + url.getProtocol());
+         System.out.println("authority is " + url.getAuthority());
+         System.out.println("file name is " + url.getFile());
+         System.out.println("host is " + url.getHost());
+         System.out.println("path is " + url.getPath());
+         System.out.println("port is " + url.getPort());
+         System.out.println("default port is " + url.getDefaultPort());
+         System.out.println("query is " + url.getQuery());
+         System.out.println("ref is " + url.getRef());
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}
+      </pre>
+
+      <p>A sample run of this program will produce the following result −</p>
+
+      <pre>
+Output
+URL is https://www.tutorialspoint.com/index.htm?language=en#j2se
+protocol is https
+authority is www.tutorialspoint.com
+file name is /index.htm?language=en
+host is www.tutorialspoint.com
+path is /index.htm
+port is -1
+default port is 443
+query is language=en
+ref is j2se
+      </pre>
+    </div>
+  </div>
+</div>

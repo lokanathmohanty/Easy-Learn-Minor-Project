@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Functional Interfaces (Java 8+)</h1>
+
+        <div class="content">
+            <h2>The Role of Functional Interfaces</h2>
+            <p>A **Functional Interface** is an interface that contains **exactly one abstract method**. They are a core component of Java's shift towards functional programming, enabling the use of **lambda expressions** and **method references**.</p>
+            <p>By enforcing a single abstract method, a functional interface provides a target type for a lambda expression, allowing a developer to concisely provide the implementation for that single method without the boilerplate of creating a full class or an anonymous inner class.</p>
+            
+            <h3>Key Characteristics</h3>
+            <ul>
+                <li>**Single Abstract Method (SAM):** The defining feature; only one method can be abstract.</li>
+                <li>**<code>@FunctionalInterface</code> Annotation:** This annotation is **optional**, but highly recommended. The compiler uses it to ensure the interface adheres to the SAM rule, preventing accidental addition of a second abstract method.</li>
+                <li>**Default and Static Methods:** A functional interface can contain any number of <code>default</code> and <code>static</code> methods, as these provide concrete implementations and do not violate the SAM rule.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Primary Built-in Functional Interfaces (<code>java.util.function</code>)</h2>
+            <p>Java 8 introduced a comprehensive set of generic functional interfaces for common programming patterns. These can be grouped based on their abstract method's signature (Input $\rightarrow$ Output).</p>
+
+            <h3>1. Predicate $\langle T \rangle$ (Test $\rightarrow$ Boolean) 🧐</h3>
+            <ul>
+                <li>**Abstract Method:** <code>boolean test(T t)</code></li>
+                <li>**Purpose:** Used for conditional checks, filtering elements, or comparisons (returns <code>true</code> or <code>false</code>).</li>
+                <li>**Example:** Filtering a list to find only even numbers in a stream.</li>
+                <pre><code>Predicate&lt;Integer&gt; isEven = n -> n % 2 == 0;
+numbers.stream().filter(isEven);</code></pre>
+            </ul>
+
+            <h3>2. Consumer $\langle T \rangle$ (Input $\rightarrow$ None) ➡️</h3>
+            <ul>
+                <li>**Abstract Method:** <code>void accept(T t)</code></li>
+                <li>**Purpose:** Used for side-effect operations on an input, such as printing, logging, or adding to another collection. It consumes an argument but returns nothing.</li>
+                <li>**Example:** Printing each element in a collection.</li>
+                <pre><code>Consumer&lt;String&gt; printer = System.out::println;
+list.forEach(printer);</code></pre>
+            </ul>
+
+            <h3>3. Supplier $\langle T \rangle$ (None $\rightarrow$ Output) 📦</h3>
+            <ul>
+                <li>**Abstract Method:** <code>T get()</code></li>
+                <li>**Purpose:** Used to generate or supply a value, often implemented for **lazy generation** of data (e.g., getting a random number, retrieving a value from a cache, or providing a default in <code>Optional.orElseGet()</code>).</li>
+                <li>**Example:** Generating a random number.</li>
+                <pre><code>Supplier&lt;Integer&gt; randomizer = () -> (int)(Math.random() * 10);
+int num = randomizer.get();</code></pre>
+            </ul>
+
+            <h3>4. Function $\langle T, R \rangle$ (Input $\rightarrow$ Output) 🔄</h3>
+            <ul>
+                <li>**Abstract Method:** <code>R apply(T t)</code></li>
+                <li>**Purpose:** Used for transformation or mapping operations, taking an input of type <code>T</code> and returning a result of type <code>R</code>.</li>
+                <li>**Example:** Squaring every number in a list during a stream map operation.</li>
+                <pre><code>Function&lt;Integer, Integer&gt; squared = value -> value * value;
+numbers.stream().map(squared);</code></pre>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Variations and Existing Functional Interfaces</h2>
+            <p>The core interfaces listed above have several variants for specialized cases:</p>
+            <ul>
+                <li>**Bi-versions:** <code>BiPredicate</code>, <code>BiConsumer</code>, <code>BiFunction</code> accept **two** arguments.</li>
+                <li>**Primitive Specializations:** Interfaces like <code>IntPredicate</code>, <code>LongConsumer</code>, and <code>DoubleFunction</code> are used to avoid auto-boxing/unboxing of primitive types, improving performance.</li>
+                <li>**Specialized Functions:**
+                    <ul>
+                        <li>**<code>UnaryOperator&lt;T&gt;</code>:** Extends <code>Function&lt;T, T&gt;</code> where the input and output types are the same.</li>
+                        <li>**<code>BinaryOperator&lt;T&gt;</code>:** Extends <code>BiFunction&lt;T, T, T&gt;</code> where all three types (two inputs, one output) are the same.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Pre-Java 8 Functional Interfaces</h3>
+            <p>Many interfaces that existed before Java 8 already met the Single Abstract Method criteria, allowing them to be used with lambda expressions:</p>
+            <ul>
+                <li>**<code>Runnable</code>:** Used for threads (<code>void run()</code>).</li>
+                <li>**<code>Callable</code>:** Used for concurrent tasks that return a value (<code>V call() throws Exception</code>).</li>
+                <li>**<code>Comparable</code>:** Used for sorting (<code>int compareTo(T o)</code>).</li>
+            </ul>
+        </div>
+    </div>
+</div>

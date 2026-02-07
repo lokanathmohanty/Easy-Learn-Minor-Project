@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Function Overriding (Runtime Polymorphism) ⚙️</h1>
+
+        <div class="content">
+            <p><strong>Function Overriding</strong> is a core concept in **Object-Oriented Programming (OOP)** that allows a **derived class** to provide a specific implementation for a function that is already defined in its **base class**.</p>
+            <p>For overriding to occur, the function in the derived class must have the **exact same name, return type, and parameter list** as the function in the base class. The function in the base class must also be declared with the **<code>virtual</code>** keyword to enable runtime polymorphism.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">How Overriding Works (Dynamic Binding)</h2>
+            <p>Overriding facilitates **runtime polymorphism** (dynamic binding). When a function is overridden, and you call that function using a **base class pointer** or **reference** that actually points to a derived class object, the system determines which version of the function to execute at runtime based on the **actual object type**, not the pointer type.</p>
+
+            <h3>Key Requirements for Overriding:</h3>
+            <ol>
+                <li>**Inheritance:** Must occur in a derived class.</li>
+                <li>**Signature Match:** The function signature (name, parameters, return type) must be identical in both the base and derived classes.</li>
+                <li>**Base Class <code>virtual</code>:** The function in the base class **must** be declared with the <code>virtual</code> keyword.</li>
+                <li>**Derived Class <code>override</code>:** (C++11 standard practice) Use the <code>override</code> specifier in the derived class definition to ensure the signature is correct and intent is clear.</li>
+            </ol>
+
+            <h3>Example (Polymorphic Call)</h3>
+            <pre class="example">
+// Base class with virtual function
+class Shape { 
+public: 
+    virtual void draw() const { ... }
+}; 
+
+// Derived class overriding the function
+class Circle : public Shape { 
+public: 
+    void draw() const override { 
+        cout &lt;&lt; "Drawing a circle" &lt;&lt; endl; 
+    }
+}; 
+
+// Runtime Call: The *actual* object type (Circle) determines the output.
+Shape* shapePtr = new Circle();
+shapePtr-&gt;draw(); // Executes Circle::draw()
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Overriding vs. Overloading</h2>
+            <p>These two concepts are distinct forms of polymorphism:</p>
+            <table>
+                <thead>
+                    <tr><th>Feature</th><th>Function Overriding</th><th>Function Overloading</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Scope</strong></td>
+                        <td>Different scopes (Base class and Derived class)</td>
+                        <td>Same scope (Single class or namespace)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Signatures</strong></td>
+                        <td>Must have the **same** signature (name, parameters, return type)</td>
+                        <td>Must have **different** signatures (different parameters)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Binding</strong></td>
+                        <td>Runtime Polymorphism (Dynamic Binding)</td>
+                        <td>Compile-Time Polymorphism (Static Binding)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inheritance</strong></td>
+                        <td>**Required**</td>
+                        <td>Not required</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Advanced Overriding Concepts</h2>
+
+            <h3>Virtual Destructors</h3>
+            <p>If you intend to delete a derived class object through a base class pointer (e.g., `delete shapePtr;`), the base class destructor **must** be declared `virtual`. This ensures that the **derived class destructor** is called first, preventing memory leaks by properly releasing resources allocated by the derived class.</p>
+
+            <h3>The <code>final</code> Keyword</h3>
+            <p>The <code>final</code> keyword (C++11) can be applied to a virtual function in a derived class to prevent it from being overridden in any further derived classes. It guarantees that a specific implementation is the final one in the hierarchy.</p>
+        </div>
+    </div>
+</div>

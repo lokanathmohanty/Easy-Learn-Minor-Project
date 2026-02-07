@@ -1,0 +1,76 @@
+ <div class="container">
+    <div class="session">
+        <h1 class="title">Java - Pattern Matching with <code>instanceof</code> (Java 16+)</h1>
+
+        <div class="content">
+            <h2>The Enhancement to <code>instanceof</code></h2>
+            <p><strong>Pattern Matching for <code>instanceof</code></strong>, made a standard feature in **Java 16** (after being a preview in Java 14 and 15), simplifies the common code idiom of checking an object's type and then casting it to perform type-specific operations. It reduces the need for redundant type casting.</p>
+
+            <h3>Syntax: Pattern Variable</h3>
+            <p>The enhanced <code>instanceof</code> operator now accepts a **type pattern** consisting of a type and a new variable, called the **pattern variable**. If the type check is successful, the object is automatically cast to that type and assigned to the pattern variable.</p>
+            <pre><code>if (person instanceof Employee e) {
+   // 'e' is the pattern variable, automatically cast to Employee
+   return e.getEmployeeId(); 
+}</code></pre>
+
+            <p>In this syntax, the code combines two steps into one:</p>
+            <ol>
+                <li>**Type Test:** Checks if <code>person</code> is an instance of <code>Employee</code>.</li>
+                <li>**Conditional Binding:** If true, it implicitly casts <code>person</code> to <code>Employee</code> and assigns it to the new local variable <code>e</code>.</li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Scope of the Pattern Variable</h2>
+            <p>The **scope** of the pattern variable (like <code>e</code> in the example) is intelligently managed by the compiler. It is only accessible in the regions of code where the type test is logically guaranteed to have succeeded. This prevents errors that could arise from using an uncast or incorrectly cast object.</p>
+
+            <h3>Comparison of Syntaxes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Old Syntax (Pre-Java 16)</th>
+                        <th>New Syntax (Java 16+)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <pre><code>if (person instanceof Employee) {
+   Employee e = (Employee) person;
+   // ... use e
+}</code></pre>
+                        </td>
+                        <td>
+                            <pre><code>if (person instanceof Employee e) {
+   // e is already an Employee
+   // ... use e
+}</code></pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title example">Example: Eliminating Redundant Casting</h2>
+            <div class="content">
+                <p>The method <code>getId()</code> is cleanly implemented using pattern matching to determine and process different subtypes of <code>Person</code>:</p>
+                <pre><code>public static int getId(Person person) {
+   // Test type and bind to 'e' in one step
+   if (person instanceof Employee e) {
+      return e.getEmployeeId();
+   } 
+   // Test type and bind to 'm' in one step
+   else if (person instanceof Manager m) {
+      return m.getManagerId();
+   }
+   return -1;
+}</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

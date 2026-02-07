@@ -1,0 +1,78 @@
+<div class="content">
+  <h2>Content</h2>
+  <p>Use this concise guide to review the essentials of modern JavaScript for web development.</p>
+  <ul>
+    <li><strong>Values &amp; Types:</strong> Primitives (string, number, boolean, null, undefined, bigint, symbol) and reference types (objects, arrays, functions).</li>
+    <li><strong>Variables:</strong> Prefer <code>const</code> for defaults, use <code>let</code> when reassignment is needed; avoid <code>var</code> in modern code.</li>
+    <li><strong>Operators:</strong> Use strict equality <code>===</code> and <code>!==</code>; leverage nullish coalescing <code>??</code> and optional chaining <code>?.</code>.</li>
+    <li><strong>Control Flow:</strong> <code>if/else</code>, <code>switch</code>, loops (<code>for</code>, <code>for...of</code>, <code>while</code>), and array iteration methods (<code>map</code>, <code>filter</code>, <code>reduce</code>).</li>
+    <li><strong>Functions:</strong> Declarations, expressions, and arrow functions; default and rest parameters; closures for encapsulation.</li>
+    <li><strong>Objects &amp; Arrays:</strong> Destructuring, spread/rest, shorthand properties, and immutability patterns.</li>
+    <li><strong>DOM &amp; Events:</strong> Select, read, and update elements; attach listeners; prevent default behavior when needed.</li>
+    <li><strong>Asynchrony:</strong> Promises and <code>async/await</code>; handle errors with <code>try/catch</code>; use <code>Promise.all</code> for concurrency.</li>
+    <li><strong>Modules:</strong> Organize code with ES modules (<code>export</code>/<code>import</code>); one responsibility per module.</li>
+    <li><strong>Errors:</strong> Throw meaningful errors; catch and surface user-friendly messages; log for diagnostics.</li>
+    <li><strong>Performance:</strong> Minimize DOM thrashing; debounce/throttle event handlers; lazy-load noncritical assets.</li>
+    <li><strong>Tooling:</strong> Use linters and formatters; test critical logic; consult documentation (e.g., <a href="https://developer.mozilla.org/">MDN</a>).</li>
+  </ul>
+
+  <h2>Examples</h2>
+  <ul>
+    <li>
+      <strong>Variables &amp; Scope</strong>
+      <p><code>const API_URL = '/api/items'; let count = 0;</code></p>
+      <p><code>function increment() { count += 1; }</code></p>
+    </li>
+    <li>
+      <strong>Arrow Functions &amp; Defaults</strong>
+      <p><code>const greet = (name = 'World') =&gt; `Hello, ${name}!`;</code></p>
+    </li>
+    <li>
+      <strong>Destructuring &amp; Spread</strong>
+      <p><code>const user = { id: 1, name: 'Ada', role: 'admin' };</code></p>
+      <p><code>const { name, role } = user; const clone = { ...user, active: true };</code></p>
+    </li>
+    <li>
+      <strong>Array Methods</strong>
+      <p><code>const nums = [1,2,3,4]; const evens = nums.filter(n =&gt; n % 2 === 0);</code></p>
+      <p><code>const sum = nums.reduce((a,n) =&gt; a + n, 0);</code></p>
+    </li>
+    <li>
+      <strong>Optional Chaining &amp; Nullish Coalescing</strong>
+      <p><code>const city = user.address?.city ?? 'Unknown';</code></p>
+    </li>
+    <li>
+      <strong>DOM Query &amp; Event Handling</strong>
+      <p><code>const btn = document.querySelector('#save');</code></p>
+      <p><code>btn.addEventListener('click', (e) =&gt; { e.preventDefault(); /* save */ });</code></p>
+    </li>
+    <li>
+      <strong>Async/Await with Error Handling</strong>
+      <p><code>async function load() {</code></p>
+      <p><code>&nbsp;&nbsp;try { const res = await fetch(API_URL); const data = await res.json(); return data; }</code></p>
+      <p><code>&nbsp;&nbsp;catch (err) { console.error(err); throw new Error('Failed to load'); }</code></p>
+      <p><code>}</code></p>
+    </li>
+    <li>
+      <strong>Promise Concurrency</strong>
+      <p><code>const [u, p] = await Promise.all([fetch('/user'), fetch('/prefs')]);</code></p>
+    </li>
+    <li>
+      <strong>Modules</strong>
+      <p><code>// math.js — export</code></p>
+      <p><code>export const add = (a,b) =&gt; a + b;</code></p>
+      <p><code>// app.js — import</code></p>
+      <p><code>import { add } from './math.js';</code></p>
+    </li>
+    <li>
+      <strong>Debounce Utility (Basic)</strong>
+      <p><code>const debounce = (fn, wait) =&gt; { let t; return (...args) =&gt; { clearTimeout(t); t = setTimeout(() =&gt; fn(...args), wait); }; };</code></p>
+      <p><code>window.addEventListener('resize', debounce(() =&gt; console.log('resized'), 200));</code></p>
+    </li>
+    <li>
+      <strong>Class Syntax</strong>
+      <p><code>class Counter { constructor(v=0){ this.v = v; } inc(){ this.v++; } }</code></p>
+      <p><code>const c = new Counter(); c.inc();</code></p>
+    </li>
+  </ul>
+</div>

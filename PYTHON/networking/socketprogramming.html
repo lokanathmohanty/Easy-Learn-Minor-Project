@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Socket Programming</h1>
+    </div>
+    <div class="content">
+      <p>Socket programming allows communication between two nodes in a network, where one acts as a server listening for incoming requests and the other as a client sending requests.</p>
+      <p>Python's <code>socket</code> module provides access to BSD sockets, enabling communication over TCP (connection-oriented) and UDP (connection-less) protocols.</p>
+      <p><strong>Socket Creation:</strong></p>
+      <pre>
+socket.socket(family=AF_INET, type=SOCK_STREAM, protocol=0)
+      </pre>
+      <p>Where, <code>AF_INET</code> is the IP address family for IPv4, <code>SOCK_STREAM</code> is for TCP.</p>
+      <p>Servers use <code>bind()</code>, <code>listen()</code>, and <code>accept()</code> to handle connections. Clients use <code>connect()</code> to connect to the server.</p>
+    </div>
+    
+    <div class="title">
+      <h2>Server Example</h2>
+    </div>
+    <div class="content">
+      <pre>
+import socket
+
+host = "127.0.0.1"
+port = 5000
+server = socket.socket()
+server.bind((host, port))
+server.listen()
+
+print("Server listening...")
+
+conn, addr = server.accept()
+print(f"Connection from {addr}")
+
+while True:
+    data = conn.recv(1024).decode()
+    if not data:
+        break
+    print("From client:", data)
+    data = data.upper()
+    conn.send(data.encode())
+
+conn.close()
+server.close()
+      </pre>
+    </div>
+    
+    <div class="title">
+      <h2>Client Example</h2>
+    </div>
+    <div class="content">
+      <pre>
+import socket
+
+host = "127.0.0.1"
+port = 5000
+
+client = socket.socket()
+client.connect((host, port))
+
+while True:
+    msg = input("Enter message (q to quit): ")
+    if msg.lower() == 'q':
+        break
+    client.send(msg.encode())
+    data = client.recv(1024).decode()
+    print("Received from server:", data)
+
+client.close()
+      </pre>
+    </div>
+    
+    <div class="title">
+      <h2>File Transfer Example</h2>
+    </div>
+    <div class="content">
+      <p>Server sends a file, and client receives it and writes to a local file.</p>
+      <pre>
+# Server side
+import socket
+
+server = socket.socket()
+server.bind(("127.0.0.1", 5001))
+server.listen()
+conn, addr = server.accept()
+print("Connected by", addr)
+
+with open('test.txt', 'rb') as f:
+    while True:
+        bytes_read = f.read(1024)
+        if not bytes_read:
+            break
+        conn.sendall(bytes_read)
+
+conn.close()
+server.close()
+      </pre>
+      <pre>
+# Client side
+import socket
+
+client = socket.socket()
+client.connect(("127.0.0.1", 5001))
+
+with open('received.txt', 'wb') as f:
+    while True:
+        bytes_read = client.recv(1024)
+        if not bytes_read:
+            break
+        f.write(bytes_read)
+
+client.close()
+print("File received successfully.")
+      </pre>
+    </div>
+    
+    <div class="title">
+      <h2>Python Socketserver Module</h2>
+    </div>
+    <div class="content">
+      <p>The <code>socketserver</code> module provides a framework for writing network servers. It supports TCP and UDP servers and offers request handler classes to process incoming client requests.</p>
+      <pre>
+import socketserver
+
+class MyTCPHandler(socketserver.BaseRequestHandler):
+    def handle(self):
+        data = self.request.recv(1024).strip()
+        print(f"Received from {self.client_address}: {data.decode()}")
+        response = input("Send response: ")
+        self.request.sendall(response.encode())
+
+if __name__ == "__main__":
+    HOST, PORT = "localhost", 9999
+    with socketserver.TCPServer((HOST, PORT), MyTCPHandler) as server:
+        print("Server started")
+        server.serve_forever()
+      </pre>
+      <p>Clients connect normally using sockets and communicate with the server.</p>
+    </div>
+  </div>
+</div>

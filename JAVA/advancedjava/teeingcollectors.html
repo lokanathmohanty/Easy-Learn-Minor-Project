@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Teeing Collectors (Java 12+)</h1>
+
+        <div class="content">
+            <h2>The <code>Collectors.teeing()</code> Method</h2>
+            <p>The static **<code>Collectors.teeing()</code>** method, introduced in **Java 12**, is a powerful collector that allows you to perform **two independent downstream collection operations** on the same stream elements and then combine their results using a third function.</p>
+            <p>The term "teeing" is inspired by a T-junction pipe, where the stream of elements is split into two separate paths (downstream collectors) and the final results are merged back together.</p>
+
+            <h3>Syntax and Components</h3>
+            <pre><code>public static &lt;T, R1, R2, R&gt; Collector&lt;T, ?, R&gt; teeing(
+   Collector&lt;? super T, ?, R1&gt; downstream1, 
+   Collector&lt;? super T, ?, R2&gt; downstream2, 
+   BiFunction&lt;? super R1, ? super R2, R&gt; merger)</code></pre>
+            <ol>
+                <li>
+                    <strong><code>downstream1</code> (Collector $\rightarrow$ $R1$):</strong> The first collector applied to the stream elements. It processes the elements and produces an intermediate result $R1$.
+                </li>
+                <li>
+                    <strong><code>downstream2</code> (Collector $\rightarrow$ $R2$):</strong> The second collector, applied independently to the same stream elements, producing an intermediate result $R2$.
+                </li>
+                <li>
+                    <strong><code>merger</code> (BiFunction $R1, R2 \rightarrow R$):</strong> A **<code>BiFunction</code>** that takes the two results ($R1$ and $R2$) from the downstream collectors and combines, processes, or merges them into the final desired result $R$.
+                </li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title">Example: Calculating the Mean (Average)</h2>
+            <div class="content">
+                <p>A classic use case for <code>teeing()</code> is calculating the mean of a stream, which requires finding both the sum and the count in a single pass.</p>
+                <p>The <code>downstream1</code> computes the sum, <code>downstream2</code> computes the count, and the <code>merger</code> computes the division.</p>
+                <pre><code>double mean = Stream.of(1, 2, 3, 4, 5, 6, 7)
+    .collect(Collectors.teeing(
+       // Downstream 1: Calculates the sum (R1 is Double)
+       Collectors.summingDouble(i -> i), 
+
+       // Downstream 2: Calculates the count (R2 is Long)
+       Collectors.counting(), 
+
+       // Merger Function: Takes (sum, count) and returns (sum / count)
+       (sum, n) -> sum / n
+    ));
+
+System.out.println(mean); // Output: 4.0</code></pre>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title">Example: Finding Min and Max in a Single Pass</h2>
+            <div class="content">
+                <p>This demonstrates using <code>teeing()</code> to find two distinct values (Min and Max <code>Student</code> objects) and mapping them into a <code>HashMap</code> as the final result.</p>
+                <pre><code>// ... list of Student objects ...
+
+HashMap&lt;String, Student&gt; result = students.stream().collect(
+    Collectors.teeing(
+        // Downstream 1: Finds the Student with the highest marks (R1 is Optional<Student>)
+        Collectors.maxBy(Comparator.comparing(Student::getMarks)),
+
+        // Downstream 2: Finds the Student with the lowest marks (R2 is Optional<Student>)
+        Collectors.minBy(Comparator.comparing(Student::getMarks)),
+
+        // Merger Function: Maps both Optional<Student> results into a HashMap (R is HashMap<String, Student>)
+        (s1, s2) -> {
+            HashMap&lt;String, Student&gt; map = new HashMap&lt;&gt;();
+            // Optional.get() is safe here because maxBy/minBy only return Optional.empty() for an empty stream.
+            map.put("Highest", s1.get()); 
+            map.put("Lowest", s2.get());
+            return map;
+        }
+    )
+);</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

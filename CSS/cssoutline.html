@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CSS Outlines — Learning Session</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+      <h1 class="title">CSS — Outlines</h1>
+
+      <div class="content">
+        <p>
+          CSS <strong>outline</strong> creates a line around the outside of an element's border
+          without affecting the element's size or layout. Unlike borders, outlines do not take up
+          space in the box model and therefore do not change element dimensions or layout flow.
+        </p>
+
+        <h2 class="title">Overview</h2>
+        <p>
+          Outlines are typically used to highlight elements (for example on focus), draw attention
+          to components, or provide an accessibility-visible indicator. Common uses include focus
+          rings on controls, debug visual cues, and temporary highlighting.
+        </p>
+
+        <h2 class="title">Types of outline properties</h2>
+        <ul>
+          <li><p class="content"><strong>outline-style</strong> — sets the outline's style (solid, dashed, dotted, etc.).</p></li>
+          <li><p class="content"><strong>outline-width</strong> — sets the outline's thickness (thin, medium, thick, or length values).</p></li>
+          <li><p class="content"><strong>outline-color</strong> — sets the outline color (named colors, hex, rgb(), etc.).</p></li>
+          <li><p class="content"><strong>outline-offset</strong> — sets space between the element's border edge and the outline itself.</p></li>
+          <li><p class="content"><strong>outline</strong> — shorthand for style, width and color (note: outline-offset is not part of the shorthand).</p></li>
+        </ul>
+
+        <h2 class="title">Key differences: Outline vs Border</h2>
+        <ul>
+          <li><p class="content">An <strong>outline</strong> does not affect the document layout or element size; a <strong>border</strong> does.</p></li>
+          <li><p class="content">Outlines can be non-rectangular (visually placed outside), borders are part of the box and rectangular.</p></li>
+          <li><p class="content">Outlines are often used for focus indicators and temporary highlights; borders are structural and visual containers.</p></li>
+        </ul>
+
+        <h2 class="title">Syntax and examples</h2>
+
+        <h2 class="title">1. outline-style</h2>
+        <p class="content">
+          The <code>outline-style</code> property controls the line pattern used for the outline.
+          Possible values include: <em>none</em>, <em>dotted</em>, <em>dashed</em>, <em>solid</em>,
+          <em>double</em>, <em>groove</em>, <em>ridge</em>, <em>inset</em>, <em>outset</em>, <em>hidden</em>.
+        </p>
+
+        <p class="content">
+          Example (CSS code snippet shown as text):
+        </p>
+
+        <p class="content">
+          &lt;!-- Example: outline styles --&gt;
+        </p>
+        <p class="content">
+          p.dotted { outline-style: dotted; }
+        </p>
+        <p class="content">
+          p.dashed { outline-style: dashed; }
+        </p>
+        <p class="content">
+          p.solid { outline-style: solid; }
+        </p>
+        <p class="content">
+          p.double { outline-style: double; }
+        </p>
+
+        <h2 class="title">2. outline-width</h2>
+        <p class="content">
+          Controls the thickness of the outline. Accepts keywords (<em>thin</em>, <em>medium</em>, <em>thick</em>)
+          or explicit lengths (e.g., <code>2px</code>, <code>0.2rem</code>).
+        </p>
+
+        <p class="content">Example:</p>
+        <p class="content">p.thin { outline-style: solid; outline-width: thin; }</p>
+        <p class="content">p.length { outline-style: solid; outline-width: 10px; }</p>
+
+        <h2 class="title">3. outline-color</h2>
+        <p class="content">
+          Controls the outline color. If omitted, outlines usually use the element's <code>color</code>
+          (currentColor) or the user-agent default.
+        </p>
+
+        <p class="content">Example:</p>
+        <p class="content">.notice { outline-style: dashed; outline-color: red; }</p>
+        <p class="content">.ok { outline-style: solid; outline-color: #00ff00; }</p>
+
+        <h2 class="title">4. outline-offset</h2>
+        <p class="content">
+          Moves the outline away from the border edge, creating visible spacing between border and outline.
+          Useful for creating separation so the outline does not overlap visual border decorations.
+        </p>
+
+        <p class="content">Example:</p>
+        <p class="content">.boxed { outline: 4px solid #666; outline-offset: 10px; }</p>
+
+        <h2 class="title">5. Outline shorthand</h2>
+        <p class="content">
+          The <code>outline</code> shorthand sets style, width and color in one declaration. The order is flexible:
+          e.g., <code>outline: 3px dashed green;</code> . Remember that <code>outline-offset</code> must be set separately.
+        </p>
+
+        <p class="content">Example:</p>
+        <p class="content">.alert { outline: 4px dotted green; outline-offset: 5px; }</p>
+
+        <h2 class="title">Practical examples (code shown as plain text)</h2>
+
+        <h2 class="title">A. Focus ring for accessibility</h2>
+        <p class="content">
+          Use outlines for keyboard focus styles to ensure interactive controls are accessible to keyboard users.
+        </p>
+        <p class="content">Example CSS snippet:</p>
+        <p class="content">button { outline: none; } /* avoid removing focus entirely */</p>
+        <p class="content">button:focus { outline: 3px solid #005fcc; outline-offset: 3px; }</p>
+
+        <h2 class="title">B. Temporary debug highlight</h2>
+        <p class="content">
+          When debugging layout or focus issues, add an outline to elements without altering layout.
+        </p>
+        <p class="content">Example:</p>
+        <p class="content">.debug { outline: 2px dashed magenta; outline-offset: 4px; }</p>
+
+        <h2 class="title">C. Distinguishing outline from border</h2>
+        <p class="content">
+          The following demonstrates how an outline sits outside the border and does not affect element size or flow.
+          (Code shown as text.)
+        </p>
+        <p class="content">p.example { border: 10px solid green; padding: 10px; outline: 6px solid red; outline-offset: 5px; }</p>
+
+        <h2 class="title">Using outlines responsibly</h2>
+        <ul>
+          <li><p class="content">Do not remove outline focus styles without providing an accessible alternative.</p></li>
+          <li><p class="content">Avoid relying on outline color alone for accessibility — ensure sufficient contrast and consider multiple indicators.</p></li>
+          <li><p class="content">Outlines are not suitable for complex decorative borders; use borders, box-shadow or background images for those purposes.</p></li>
+          <li><p class="content">Outlines may overlap with surrounding elements visually — use <code>outline-offset</code> to avoid collisions.</p></li>
+        </ul>
+
+        <h2 class="title">Browser support & considerations</h2>
+        <p class="content">
+          Outlines are widely supported in modern browsers. However, visual rendering (exact gap, how outlines interact with rounded corners)
+          may vary slightly. Test focus styles across platforms to ensure consistent and accessible behavior.
+        </p>
+
+        <h2 class="title">Complete reference: properties</h2>
+        <ul>
+          <li><p class="content"><strong>outline</strong> — shorthand: style | width | color</p></li>
+          <li><p class="content"><strong>outline-style</strong> — specify the style (required for visible outline)</p></li>
+          <li><p class="content"><strong>outline-width</strong> — specify thickness</p></li>
+          <li><p class="content"><strong>outline-color</strong> — specify color</p></li>
+          <li><p class="content"><strong>outline-offset</strong> — separate outline from border edge</p></li>
+        </ul>
+
+        <h2 class="title">Examples summary (ready-to-copy CSS snippets shown as text)</h2>
+
+        <p class="content">
+          /* Focus ring example */<br>
+          :focus-visible { outline: 3px solid #2a7; outline-offset: 3px; }
+        </p>
+
+        <p class="content">
+          /* Debug helper */<br>
+          .debug-outline { outline: 2px dashed rgba(255,0,0,0.9); outline-offset: 6px; }
+        </p>
+
+        <p class="content">
+          /* Outline vs border example */<br>
+          .card { border: 2px solid #222; padding: 12px; outline: 4px solid #f00; outline-offset: 8px; }
+        </p>
+
+        <h2 class="title">Common pitfalls & tips</h2>
+        <ul>
+          <li><p class="content">Do not remove focus outlines without replacing them: users relying on keyboard navigation need visible focus indicators.</p></li>
+          <li><p class="content">Outlines do not follow border-radius on some browsers; for rounded corner visual parity consider using <code>box-shadow</code> or adjust design expectations.</p></li>
+          <li><p class="content">Since outlines do not affect layout, they are safe for temporary highlighting during development.</p></li>
+          <li><p class="content">Outline shorthand requires <code>outline-style</code> to display an outline; if you only set color and width without style, it may not appear.</p></li>
+        </ul>
+
+        <h2 class="title">Further learning & references</h2>
+        <p class="content">
+          For deeper examples and cross-browser edge-cases, consult official CSS specifications and accessibility guidelines
+          about focus management (WCAG) and focus-visible behavior. Test on multiple devices and assistive technologies.
+        </p>
+
+        <p class="content">
+          <a href="#" class="content">Previous</a> — <a href="#" class="content">Quiz</a> — <a href="#" class="content">Next</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

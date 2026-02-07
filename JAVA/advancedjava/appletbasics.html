@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Java Applet Basics</h1>
+    </div>
+    <div class="content">
+      <p>An applet is a Java program that runs inside a web browser with full access to the Java API. Unlike standalone applications, applets extend the <code>java.applet.Applet</code> class and do not have a <code>main()</code> method.</p>
+      <p>Applets are embedded within HTML pages, downloaded to the user's machine, and run in a JVM hosted by the browser or as a separate runtime. They operate under sandbox security rules to restrict harmful actions.</p>
+      <ul>
+        <li>Applets use lifecycle methods like <code>init()</code>, <code>start()</code>, <code>stop()</code>, <code>destroy()</code>, and <code>paint()</code>.</li>
+        <li>Applets interact with browsers, fetching parameters and resources through the <code>Applet</code> class API.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Simple Hello World Applet Example</h2>
+    </div>
+    <div class="content">
+      <pre><code>import java.applet.*;
+import java.awt.*;
+
+public class HelloWorldApplet extends Applet {
+   public void paint(Graphics g) {
+      g.drawString("Hello World", 25, 50);
+   }
+}</code></pre>
+      <p>This applet overrides only the <code>paint()</code> method to display "Hello World" inside the applet area.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Embedding Applet in HTML</h2>
+    </div>
+    <div class="content">
+      <p>Use the <code>&lt;applet&gt;</code> tag to embed an applet in HTML, specifying the class, width, and height:</p>
+      <pre><code>&lt;html&gt;
+  &lt;title&gt;The Hello, World Applet&lt;/title&gt;
+  &lt;hr&gt;
+  &lt;applet code="HelloWorldApplet.class" width="320" height="120"&gt;
+    If your browser was Java-enabled, a "Hello, World" message would appear here.
+  &lt;/applet&gt;
+  &lt;hr&gt;
+&lt;/html&gt;
+</code></pre>
+      <p>Parameters can be passed into applets using the <code>&lt;param&gt;</code> tag within <code>&lt;applet&gt;</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Applet Lifecycle Methods</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><code>init()</code>: Initialization, called once after parameters are processed.</li>
+        <li><code>start()</code>: Called after <code>init()</code> and when the user returns to the page.</li>
+        <li><code>stop()</code>: Called when the user leaves the page.</li>
+        <li><code>destroy()</code>: Called when the browser shuts down.</li>
+        <li><code>paint()</code>: Called to render graphics.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Event Handling in Applets</h2>
+    </div>
+    <div class="content">
+      <p>Applets can handle events like mouse clicks by implementing listeners such as <code>MouseListener</code> and overriding event methods:</p>
+      <pre><code>public class ExampleEventHandling extends Applet implements MouseListener {
+   public void init() {
+      addMouseListener(this);
+      ...
+   }
+
+   public void mouseClicked(MouseEvent event) {
+      // Respond to mouse click
+   }
+   // other mouse event methods...
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Displaying Images and Playing Audio</h2>
+    </div>
+    <div class="content">
+      <p>Images can be loaded and drawn with <code>drawImage()</code> from the <code>Graphics</code> class, and audio can be played using the <code>AudioClip</code> interface from the <code>java.applet</code> package.</p>
+      <p>Examples exist to load and display images or play looping audio fetched via applet parameters.</p>
+    </div>
+  </div>
+</div>

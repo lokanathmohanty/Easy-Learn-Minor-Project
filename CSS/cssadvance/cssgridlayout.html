@@ -1,0 +1,217 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Grid Layout</h1>
+
+    <div class="content">
+      <p>CSS Grid Layout is a two-dimensional layout system for developing responsive webpages. In this tutorial, we will learn how to design a webpage layout using grid systems.</p>
+    </div>
+
+    <h2 class="title">What is a Grid Layout?</h2>
+    <div class="content">
+      <p>Grid Layout enhances user experience across devices by providing a responsive and flexible arrangement of HTML components on a webpage.</p>
+      <p>Grid is ideal for creating the overall layout of a webpage, while flexbox is mostly used to align items inside a container.</p>
+    </div>
+
+    <h2 class="title">Table of Contents</h2>
+    <div class="content">
+      <ul>
+        <li>Grid Elements</li>
+        <li>Display Grid Property</li>
+        <li>Grid Rows and Columns</li>
+        <li>Grid Gap</li>
+        <li>Grid Lines</li>
+        <li>CSS Grid Properties Reference</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Grid Elements</h2>
+    <div class="content">
+      <p>In a grid layout system, we have two elements: <strong>Grid Container</strong> and <strong>Grid Items</strong>.</p>
+      <p><strong>Grid Container</strong> defines the outer element of a grid, where all child elements are present. It is defined by setting <code>display: grid</code> or <code>display: inline-grid</code>.</p>
+      <p><strong>Grid Items</strong> are all the direct children inside the grid container. These items can be arranged vertically and horizontally based on the grid definitions.</p>
+    </div>
+
+    <h2 class="title">Display Grid Property</h2>
+    <div class="content">
+      <p>An HTML element becomes a grid container if we set its display property to <code>grid</code> or <code>inline-grid</code>. All direct children of the grid container automatically become grid items.</p>
+      <ul>
+        <li><strong>grid:</strong> Defines a block-level grid container (like a div).</li>
+        <li><strong>inline-grid:</strong> Defines an inline-level grid container (like a span).</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Grid vs Inline-Grid</h2>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+   &lt;style&gt;
+      .grid-container {
+         display: grid;
+         grid-template-columns: 1fr 1fr 1fr;
+         gap: 10px;
+         width: 100%;
+         background-color: lightblue;
+      }
+      .inline-grid-container {
+         display: inline-grid;
+         grid-template-columns: 1fr 1fr 1fr;
+         gap: 10px;
+         background-color: lightgreen;
+      }
+      .grid-item {
+         background-color: lightcoral;
+         padding: 20px;
+         text-align: center;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h3&gt;Inline Grid Example&lt;/h3&gt;
+   &lt;p&gt;
+      Here is an example of 
+      &lt;span class="inline-grid-container"&gt;
+         &lt;span class="grid-item"&gt;1&lt;/span&gt;
+         &lt;span class="grid-item"&gt;2&lt;/span&gt;
+         &lt;span class="grid-item"&gt;3&lt;/span&gt;
+      &lt;/span&gt; 
+      inline grid.
+   &lt;/p&gt;
+   
+   &lt;h3&gt;Grid Example&lt;/h3&gt;
+   &lt;div class="grid-container"&gt;
+      &lt;div class="grid-item"&gt;1&lt;/div&gt;
+      &lt;div class="grid-item"&gt;2&lt;/div&gt;
+      &lt;div class="grid-item"&gt;3&lt;/div&gt;
+   &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </pre>
+
+    <h2 class="title">Grid Rows and Columns</h2>
+    <div class="content">
+      <p>In CSS, we can define the number of rows and columns required in a layout. Each cell represents a grid item. Below is an example showing separate row and column definitions.</p>
+    </div>
+
+    <h2 class="title">Example: Rows and Columns</h2>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;style&gt;
+        .grid-container {
+            display: grid;
+            gap: 10px;
+            padding: 10px;
+            width: 75%;
+        }
+        .grid-item {
+            background-color: #4CAF50;
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: white;
+        }
+        .row{
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(3, 1fr);
+        }
+        .column{
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Grid Layout Example&lt;/h1&gt;
+    &lt;h3&gt;Grid Rows - 3 Rows X 1 Column&lt;/h3&gt;
+    &lt;div class="grid-container row"&gt;
+      &lt;div class="grid-item"&gt;Item 1&lt;/div&gt;
+      &lt;div class="grid-item"&gt;Item 2&lt;/div&gt;
+      &lt;div class="grid-item"&gt;Item 3&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h3&gt;Grid Columns - 1 Row X 3 Columns&lt;/h3&gt;
+    &lt;div class="grid-container column"&gt;
+      &lt;div class="grid-item"&gt;Item 1&lt;/div&gt;
+      &lt;div class="grid-item"&gt;Item 2&lt;/div&gt;
+      &lt;div class="grid-item"&gt;Item 3&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </pre>
+
+    <h2 class="title">Grid Gap</h2>
+    <div class="content">
+      <p>The <code>gap</code> properties add space between rows and columns of grid items.</p>
+      <ul>
+        <li><strong>gap:</strong> sets equal gaps for both rows and columns.</li>
+        <li><strong>row-gap:</strong> sets the vertical gap (overrides gap).</li>
+        <li><strong>column-gap:</strong> sets the horizontal gap (overrides gap).</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Grid Gap</h2>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+   &lt;style&gt;
+      .grid-container {
+         display: grid;
+         grid-template-columns: 1fr 1fr 1fr;
+         grid-template-rows: 100px 100px 100px;
+
+         /* Sets both row and column gaps to 20px */
+         gap: 20px; 
+         /* Overrides with row and column gaps */
+         row-gap: 10px; 
+         column-gap: 5px; 
+      }
+      .grid-item {
+         background-color: #4CAF50;
+         border: 1px solid #ddd;
+         padding: 20px;
+         text-align: center;
+         font-size: 1.2em;
+         color: white;
+      }
+   &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h1&gt;Grid Gap Example&lt;/h1&gt;
+    &lt;div class="grid-container"&gt;
+      &lt;div class="grid-item"&gt;Item 1&lt;/div&gt;
+      &lt;div class="grid-item"&gt;Item 2&lt;/div&gt;
+      &lt;div class="grid-item"&gt;Item 3&lt;/div&gt;
+      &lt;div class="grid-item"&gt;Item 4&lt;/div&gt;
+      &lt;div class="grid-item"&gt;Item 5&lt;/div&gt;
+      &lt;div class="grid-item"&gt;Item 6&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </pre>
+
+    <h2 class="title">CSS Grid Lines</h2>
+    <div class="content">
+      <p>Grid items can be placed according to the imaginary lines between grid cells called <strong>grid lines</strong>. The lines between columns are called <em>column lines</em>, and the lines between rows are called <em>row lines</em>.</p>
+    </div>
+
+    <h2 class="title">CSS Grid Properties Reference</h2>
+    <div class="content">
+      <ul>
+        <li><strong>display</strong> – Defines whether an element is a grid container or inline grid container.</li>
+        <li><strong>gap</strong> – Defines the gap between rows and columns.</li>
+        <li><strong>grid-area</strong> – Defines the location and size of a grid item.</li>
+        <li><strong>grid-column</strong> – Controls placement in the column direction.</li>
+        <li><strong>grid-row</strong> – Controls placement in the row direction.</li>
+        <li><strong>grid-template</strong> – Specifies grid columns, rows, and areas.</li>
+        <li><strong>grid-auto-columns</strong> – Determines size of automatically generated columns.</li>
+        <li><strong>grid-auto-rows</strong> – Determines size of automatically generated rows.</li>
+        <li><strong>grid-auto-flow</strong> – Specifies arrangement of auto-placed items.</li>
+      </ul>
+    </div>
+  </div>
+</div>

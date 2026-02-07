@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - History API</h1>
+    <div class="content">
+      <h2>Web History API</h2>
+      <p>In JavaScript, the History API allows us to access the browser's history. It can be used to navigate through the history.</p>
+      <p>The History API provides methods to manipulate the <code>window.history</code> object, which contains the array of visited URLs in the current session.</p>
+      <p>It is a powerful tool to create useful effects. For example, we can implement history-based undo/redo systems.</p>
+
+      <h2>How to use JavaScript History API?</h2>
+      <p>The History API is simple to use. It includes a few methods and a property:</p>
+      <ul>
+        <li><strong>back()</strong> − Navigates back to the previous page in the history.</li>
+        <li><strong>forward()</strong> − Navigates forward to the next page in the history.</li>
+        <li><strong>go()</strong> − Navigates to a specific page in the history using a relative position.</li>
+        <li><strong>length</strong> − Returns the number of pages in the history list.</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <pre>
+// Load the previous URL
+history.back();
+
+// Load the next URL
+history.forward();
+
+// Load a specific page by relative position
+history.go(-2); // 2 pages back
+history.go(2);  // 2 pages forward
+
+// Get the length of history list
+const length = history.length;
+      </pre>
+
+      <h2>Loading Previous Page in History List</h2>
+      <p>The <code>back()</code> method loads the immediate previous page, while <code>go()</code> can load any previous page.</p>
+
+      <h3 class="title">Example: Using back() method to load previous page</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+    &lt;p&gt;Click "Load Previous Page" button to load previous visited page&lt;/p&gt;
+    &lt;button onclick="goback()"&gt;Load Previous Page&lt;/button&gt;
+    &lt;p id="output"&gt;&lt;/p&gt;
+    &lt;script&gt;
+        function goback() {
+            history.back();
+            document.getElementById("output").innerHTML += 
+            "You will have gone to previous visited page if it exists";
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h3 class="title">Example: Using go() method to load the previous page</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+    &lt;p&gt;Click the button to load 2nd previous visited page&lt;/p&gt;
+    &lt;button onclick="moveTo()"&gt;Load 2nd Previous Page&lt;/button&gt;
+    &lt;p id="output"&gt;&lt;/p&gt;
+    &lt;script&gt;
+        function moveTo() {
+            history.go(-2);
+            document.getElementById("output").innerHTML = 
+            "You will have forwarded to 2nd previous visited page if it exists.";
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>Loading Next Page in History List</h2>
+      <p>The <code>forward()</code> method loads the immediate next page, while <code>go()</code> can load any next page.</p>
+
+      <h3 class="title">Example: Using forward() method to load next page</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+    &lt;p&gt;Click "Load Next Page" button to load next visited page&lt;/p&gt;
+    &lt;button onclick="goForward()"&gt;Load Next Page&lt;/button&gt;
+    &lt;p id="output"&gt;&lt;/p&gt;
+    &lt;script&gt;
+        function goForward() {
+            history.forward();
+            document.getElementById("output").innerHTML = 
+            "You will have forwarded to next visited page if it exists.";
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h3 class="title">Example: Using go() method to load next page</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+    &lt;p&gt;Click the button to load 2nd next visited page&lt;/p&gt;
+    &lt;button onclick="moveTo()"&gt;Load 2nd Next Page&lt;/button&gt;
+    &lt;p id="output"&gt;&lt;/p&gt;
+    &lt;script&gt;
+        function moveTo() {
+            history.go(2);
+            document.getElementById("output").innerHTML = 
+            "You will have forwarded to 2nd next visited page if it exists.";
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h2>Get the Length of the History List</h2>
+      <p>The <code>length</code> property returns the total number of visited pages in the session.</p>
+
+      <h3 class="title">Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+    &lt;p&gt;Click the button to get the length of history list&lt;/p&gt;
+    &lt;button onclick="moveTo()"&gt;Get Length of History List&lt;/button&gt;
+    &lt;p id="output"&gt;&lt;/p&gt;
+    &lt;script&gt;
+        const output = document.getElementById("output");
+        function moveTo() {
+            output.innerHTML = history.length;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+    </div>
+  </div>
+</div>

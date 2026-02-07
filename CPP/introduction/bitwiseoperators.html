@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Bitwise Operators and Example Walkthrough 💻</h1>
+
+        <div class="content">
+            <p>**Bitwise operators** perform operations directly on the individual **bits** of integer types. They are essential in low-level programming, manipulating flags, and efficient mathematical operations.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Bitwise Operations (A=60, B=13)</h2>
+            <p>The example uses two <code>unsigned int</code> variables, <code>a = 60</code> and <code>b = 13</code>. In 8-bit binary representation (for clarity, though standard <code>int</code> is typically 32 bits):</p>
+            <ul>
+                <li><code>A</code> (60): <code>0011 1100</code></li>
+                <li><code>B</code> (13): <code>0000 1101</code></li>
+            </ul>
+
+            <table>
+                <thead>
+                    <tr><th>Line</th><th>Operation</th><th>Binary Result</th><th>Decimal Result</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td><code>c = a &amp; b</code> (AND)</td><td><code>0000 1100</code></td><td>12</td></tr>
+                    <tr><td>2</td><td><code>c = a | b</code> (OR)</td><td><code>0011 1101</code></td><td>61</td></tr>
+                    <tr><td>3</td><td><code>c = a ^ b</code> (XOR)</td><td><code>0011 0001</code></td><td>49</td></tr>
+                    <tr><td>4</td><td><code>c = ~a</code> (NOT)</td><td><code>1100 0011</code> (in 8-bit)</td><td>-61 (in 2's complement)</td></tr>
+                    <tr><td>5</td><td><code>c = a &lt;&lt; 2</code> (Left Shift)</td><td><code>1111 0000</code></td><td>240</td></tr>
+                    <tr><td>6</td><td><code>c = a &gt;&gt; 2</code> (Right Shift)</td><td><code>0000 1111</code></td><td>15</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Operator Details</h2>
+            <ul>
+                <li>
+                    **AND (<code>&amp;</code>), OR (<code>|</code>), XOR (<code>^</code>):** These operators compare the corresponding bits of the two operands column-by-column.
+                    <ul>
+                        <li>**AND:** Bit is set to 1 only if **both** input bits are 1.</li>
+                        <li>**OR:** Bit is set to 1 if **at least one** input bit is 1.</li>
+                        <li>**XOR:** Bit is set to 1 if the input bits are **different**.</li>
+                    </ul>
+                </li>
+                <li>
+                    **One's Complement (<code>~</code>):** This **unary** operator flips every bit (0 becomes 1, 1 becomes 0). The output is **-61** because <code>c</code> is an <code>int</code> (signed) variable, and the result is interpreted using **two's complement** representation.
+                </li>
+                <li>
+                    **Left Shift (<code>&lt;&lt;</code>):** Moves all bits in the left operand to the left by the number of places specified by the right operand. New positions are filled with zeros. This is often equivalent to multiplying the value by $2^{\text{shift amount}}$ (e.g., $60 \times 2^2 = 240$).
+                </li>
+                <li>
+                    **Right Shift (<code>&gt;&gt;</code>):** Moves all bits in the left operand to the right. This is often equivalent to integer division of the value by $2^{\text{shift amount}}$ (e.g., $60 / 2^2 = 15$).
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

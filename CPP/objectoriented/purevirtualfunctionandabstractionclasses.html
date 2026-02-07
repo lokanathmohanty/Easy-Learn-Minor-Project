@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Abstract Classes and Pure Virtual Functions 🧱</h1>
+
+        <div class="content">
+            <p>**Abstract classes** and **pure virtual functions** form the mechanism in C++ for defining an **interface** or contract that derived classes must implement. This is a crucial tool for achieving full polymorphism and flexible system design.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Pure Virtual Functions</h2>
+
+        <div class="content">
+            <p>A **pure virtual function** is a virtual function declared in a base class that is explicitly marked as having **no implementation** in the base class. It serves as a placeholder to be defined by derived classes.</p>
+
+            <h3>Declaration</h3>
+            <p>A pure virtual function is defined by placing **<code>= 0</code>** after the function signature:</p>
+            <pre class="example">
+class Base {
+public:
+   // Pure virtual function
+   virtual int calculateArea() = 0; 
+   // ... other members
+};
+</pre>
+            <p>The <code>= 0</code> is a specific syntax used only for this purpose and does not represent an assignment of the value zero.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Abstract Classes (Interfaces)</h2>
+
+        <div class="content">
+            <p>A class that contains **one or more pure virtual functions** is automatically considered an **Abstract Base Class (ABC)**. The core rules for ABCs are:</p>
+            <ul>
+                <li>
+                    **No Instantiation:** You **cannot create objects** directly from an abstract class (e.g., <code>Base b;</code> is illegal). An ABC serves only as a blueprint for inheritance.
+                </li>
+                <li>
+                    **Implementation Requirement:** Any derived class that intends to be a **concrete class** (a class you can instantiate) **must override and implement every pure virtual function** inherited from the ABC.
+                </li>
+                <li>
+                    **Inheriting Abstract Status:** If a derived class fails to implement all inherited pure virtual functions, that derived class also becomes an **abstract class**.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Enforcing the Interface Contract</h2>
+
+        <div class="content">
+            <p>The primary role of an abstract class is to **enforce an interface contract** on all its derived types. For example, if <code>Shape</code> is abstract with a pure virtual <code>getArea()</code>, every class derived from <code>Shape</code> (like <code>Rectangle</code> or <code>Circle</code>) is **forced** by the compiler to define its own <code>getArea()</code> method.</p>
+            <p>This ensures consistency when objects are treated polymorphically via a base class pointer.</p>
+            <pre class="example">
+// Base class pointer
+Shape* shapePtr; 
+
+// The compiler knows shapePtr->calculateArea() MUST exist,
+// even though it doesn't know *how* it's calculated.
+</pre>
+        </div>
+    </div>
+</div>

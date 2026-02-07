@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - SortedSet Interface</h1>
+    
+    <div class="content">
+      <p>The <strong>SortedSet</strong> interface extends <code>Set</code> and models a set sorted in ascending order.</p>
+      <p>It adds several methods beyond those of Set. Exceptions such as <code>NoSuchElementException</code>, <code>ClassCastException</code>, and <code>NullPointerException</code> may be thrown in certain conditions.</p>
+      
+      <h2 class="title">SortedSet Interface Methods</h2>
+      <ul>
+        <li><code>comparator()</code>: Returns the comparator used, or null if natural ordering is used.</li>
+        <li><code>first()</code>: Returns the first (lowest) element.</li>
+        <li><code>headSet(Object end)</code>: Returns a view of elements less than <code>end</code>.</li>
+        <li><code>last()</code>: Returns the last (highest) element.</li>
+        <li><code>subSet(Object start, Object end)</code>: Returns elements between <code>start</code> (inclusive) and <code>end</code> (exclusive).</li>
+        <li><code>tailSet(Object start)</code>: Returns elements greater than or equal to <code>start</code>.</li>
+      </ul>
+
+      <h2 class="title">Operations on SortedSet Interface</h2>
+      <p><strong>Creating a SortedSet:</strong> Use the TreeSet class, e.g.:</p>
+      <pre><code>SortedSet&lt;String&gt; set = new TreeSet&lt;&gt;();</code></pre>
+
+      <p><strong>Adding Values:</strong> The <code>add()</code> method adds elements if not already present.</p>
+      <pre><code>set.add("b");
+set.add("c");
+set.add("a");</code></pre>
+
+      <p><strong>Getting Values:</strong> Use an iterator:</p>
+      <pre><code>Iterator it = set.iterator();
+while (it.hasNext()) {
+  Object element = it.next();
+  System.out.println(element.toString());
+}</code></pre>
+
+      <p><strong>Deleting Values:</strong> Use <code>remove()</code> method:</p>
+      <pre><code>set.remove("a");</code></pre>
+
+      <p><strong>Iterating SortedSet:</strong> The <code>iterator()</code> method provides traversal over the set elements.</p>
+    </div>
+
+    <h2 class="title">Example 1: Adding Elements to a SortedSet</h2>
+    <div class="content">
+      <pre><code>import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+public class SortedSetDemo {
+  public static void main(String[] args) {
+    SortedSet&lt;String&gt; set = new TreeSet&lt;&gt;();
+    set.add("b");
+    set.add("c");
+    set.add("a");
+    Iterator it = set.iterator();
+    while (it.hasNext()) {
+      Object element = it.next();
+      System.out.println(element.toString());
+    }
+  }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>a<br>b<br>c</p>
+    </div>
+
+    <h2 class="title">Example 2: Removing Elements from a SortedSet</h2>
+    <div class="content">
+      <pre><code>import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+public class SortedSetDemo {
+  public static void main(String[] args) {
+    SortedSet&lt;String&gt; set = new TreeSet&lt;&gt;();
+    set.add("b");
+    set.add("c");
+    set.add("a");
+    set.add("d");
+    set.add("e");
+    set.add("f");
+    set.remove("c");
+    set.remove("f");
+    Iterator it = set.iterator();
+    while (it.hasNext()) {
+      Object element = it.next();
+      System.out.println(element.toString());
+    }
+  }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>a<br>b<br>d<br>e</p>
+    </div>
+
+    <h2 class="title">Example 3: Clearing a SortedSet</h2>
+    <div class="content">
+      <pre><code>import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+public class SortedSetDemo {
+  public static void main(String[] args) {
+    SortedSet&lt;String&gt; set = new TreeSet&lt;&gt;();
+    set.add("b");
+    set.add("c");
+    set.add("a");
+    set.add("d");
+    set.add("e");
+    set.add("f");
+    System.out.println(set);
+    set.clear();
+    System.out.println(set);
+  }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <p>[a, b, c, d, e, f]<br>[]</p>
+    </div>
+
+    <h2 class="title">Advantages of SortedSet Interface</h2>
+    <ul>
+      <li>Maintains elements in ascending sorted order.</li>
+      <li>Efficient searches due to sorting and uniqueness.</li>
+      <li>Supports custom sorting using a comparator.</li>
+    </ul>
+
+    <h2 class="title">Disadvantages of SortedSet Interface</h2>
+    <ul>
+      <li>Performance overhead due to sorting on every modification.</li>
+      <li>Does not support duplicate elements.</li>
+    </ul>
+  </div>
+</div>

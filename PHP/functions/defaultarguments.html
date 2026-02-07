@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Function Default Arguments</h1>
+
+    <div class="content">
+      <p>
+        In PHP, a function parameter can be assigned a **default value** directly in the function definition. This makes the argument optional when the function is called. If the caller omits the argument, the default value is used; otherwise, the passed argument value **overrides** the default.
+      </p>
+
+      <h2>Function Definition and Usage</h2>
+      <div class="example">
+        <p>
+          **Syntax:**<br>
+          <code>function fun($arg1 = val1, $arg2 = val2) { /* ... */ }</code>
+        </p>
+        <p>
+          **Calling Scenarios:**
+          <ul>
+            <li>
+              `fun()`: Both `$arg1` and `$arg2` use their default values.
+            </li>
+            <li>
+              `fun($x)`: `$arg1` uses `$x`, and `$arg2` uses its default value.
+            </li>
+            <li>
+              `fun($x, $y)`: Both arguments use the values passed (`$x` and `$y`).
+            </li>
+          </ul>
+        </p>
+      </div>
+
+      <h3>Example: Overriding Defaults</h3>
+      <p>The `greeting()` function below demonstrates how default values can be selectively overridden.</p>
+      <div class="example">
+        <p>
+          <code>function greeting($arg1="Hello", $arg2="world") { /* ... */ }</code><br>
+          <code>greeting();</code> $\rightarrow$ Hello world<br>
+          <code>greeting("Thank you");</code> $\rightarrow$ Thank you world (*$arg2$ uses default*)<br>
+          <code>greeting("Welcome", "back");</code> $\rightarrow$ Welcome back (*Both arguments passed*)
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>Rule for Default Arguments</h2>
+      <p>
+        When defining a function, any parameter with a default value must be placed **after** all parameters that do not have a default value.
+      </p>
+      <p>
+        This is because PHP resolves arguments positionally, from left to right. If a parameter without a default value is omitted, PHP cannot determine which argument is intended for which parameter, leading to an error.
+      </p>
+
+      <h3>Invalid Default Argument Order</h3>
+      <p>
+        If you define a required argument (`$arg2`) after an optional argument (`$arg1="Hello"`), the function call must provide values for **all** arguments, effectively making the default value on `$arg1` useless when `$arg2` is required.
+      </p>
+      <div class="example">
+        <p>
+          <code>function greeting($arg1="Hello", **$arg2**) { /* ... */ }</code><br>
+          <code>greeting("PHP");</code> // Intent was to use "Hello PHP"
+        </p>
+        <p class="content">
+          $\rightarrow$ **PHP Fatal error:** Uncaught ArgumentCountError: Too few arguments... exactly 2 expected.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

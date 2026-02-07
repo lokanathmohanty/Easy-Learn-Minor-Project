@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Managing HTTP Cookies</h1>
+
+        <div class="content">
+            <h2 class="title">Cookies: A Mechanism for State Management</h2>
+            <p>The HTTP protocol is **stateless**, meaning it doesn't inherently remember past requests. **Cookies** are small pieces of data included by the server in its response to the client. The client (browser) stores this data (typically as text files) and includes it in subsequent requests to the server, allowing the application to maintain a sense of a user's prior activity or identity.</p>
+
+            <h2 class="title">Setting Cookies with $\text{setcookie()}$</h2>
+            <p>PHP uses the **$\text{setcookie()}$** function to send a $\text{Set-Cookie}$ HTTP header to the client. This function *must* be called before any actual HTML output is sent to the browser.</p>
+            <h3>Syntax and Parameters</h3>
+            <pre>setcookie(name, value, expire, path, domain, security);</pre>
+            <ul>
+                <li><strong>$\text{name}$</strong> and <strong>$\text{value}$</strong>: The required key-value pair of the cookie.</li>
+                <li><strong>$\text{expire}$</strong>: A future Unix timestamp (seconds since $\text{1970-01-01}$). If omitted, the cookie is a "session cookie" and expires when the browser closes.</li>
+                <li><strong>$\text{path}$</strong>: The server path for which the cookie is valid. $\text{/}$ makes it valid for the entire domain.</li>
+                <li><strong>$\text{security}$</strong> (or $\text{secure}$): If set to $\text{1}$ (or $\text{true}$), the cookie is only sent over $\text{HTTPS}$.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Accessing, Setting, and Deleting Cookies</h2>
+
+            <h3>Accessing Cookies</h3>
+            <p>Cookies sent by the client are populated into the PHP superglobal array **$\text{\$_COOKIE}$**. You can also use the older $\text{\$HTTP\_COOKIE\_VARS}$ array.</p>
+            <pre>
+&lt;?php
+    if (isset($_COOKIE["username"])) {
+        echo "Welcome back, " . $_COOKIE["username"] . "!";
+    } else {
+        echo "Sorry... Not recognized";
+    }
+?&gt;</pre>
+
+            <h3>Setting a Simple Cookie</h3>
+            <p>The following PHP snippet sets a cookie named "$\text{username}$" with the value "$\text{MohanKumar}$".</p>
+            <pre>
+&lt;?php
+    if (!isset($_COOKIE['username'])) {
+        // Sets a cookie that expires when the browser is closed (session cookie)
+        setcookie("username", "MohanKumar");
+        echo "&lt;h3&gt;Cookie username is now set&lt;/h3&gt;";
+    } else {
+        echo "&lt;h3&gt;Cookie username already set: " . $_COOKIE['username'] . "&lt;/h3&gt;";
+    }
+?&gt;</pre>
+
+            <h3>Deleting Cookies</h3>
+            <p>To delete a cookie, call $\text{setcookie()}$ with the same name, but set the <strong>$\text{expire}$</strong> time to a point in the **past**.</p>
+            <pre>
+&lt;?php
+    // Sets the cookie expiration to one hour ago (3600 seconds)
+    setcookie("username", "", time() - 3600);
+    echo "&lt;h3&gt;Cookie username is now removed&lt;/h3&gt;";
+?&gt;</pre>
+        </div>
+    </div>
+</div>

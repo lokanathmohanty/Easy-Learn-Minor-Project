@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Global Variables</h1>
+
+    <div class="content">
+      <p>
+        A **Global Variable** is any variable declared **outside of all functions or classes** in a PHP script. It can be accessed directly anywhere outside of a function. However, due to PHP's scoping rules, global variables are **not automatically accessible inside a function's local scope**.
+      </p>
+
+      <h2>Accessing Global Variables Inside Functions</h2>
+      <p>
+        There are two primary methods to access and modify a global variable from within a function: the `global` keyword and the `$GLOBALS` superglobal array.
+      </p>
+
+      <hr>
+
+      <h3>1. Using the `global` Keyword</h3>
+      <p>
+        The `global` keyword is used inside a function to explicitly declare that the variable being used is the one from the global scope. This creates a reference (alias) to the global variable. Any changes made to the variable inside the function are reflected globally.
+      </p>
+      <div class="example">
+        <p>
+          <code>$name = "Amar"; // Global variable</code><br>
+          <code>function sayhello() {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;**GLOBAL $name;** // Explicitly declare global access</code><br>
+          <code>&nbsp;&nbsp;&nbsp;echo "Hello " . $name . PHP_EOL;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$name = "Amarjyot"; // Modifies the global $name</code><br>
+          <code>}</code><br>
+          <code>sayhello();</code><br>
+          <code>echo $name; // Output: Amarjyot (The change persists)</code>
+        </p>
+      </div>
+
+      <hr>
+
+      <h3>2. Using the `$GLOBALS` Superglobal Array</h3>
+      <p>
+        **`$GLOBALS`** is an **associative array** that holds all variables defined in the global scope. It is a superglobal, meaning it is available in all scopes without needing the `global` keyword. You access variables by using their name as the array key (e.g., `$GLOBALS['name']`).
+      </p>
+      <div class="example">
+        <p>
+          <code>$x = 10;</code><br>
+          <code>$y = 20;</code><br>
+          <code>function addition() {</code><br>
+          <code>&nbsp;&nbsp;&nbsp;$z = **$GLOBALS['x'] + $GLOBALS['y']**;</code><br>
+          <code>&nbsp;&nbsp;&nbsp;**$GLOBALS['z'] = $z;** // Adds $z to the global scope</code><br>
+          <code>}</code><br>
+          <code>addition();</code><br>
+          <code>echo "Addition: $z"; // Output: Addition: 30</code>
+        </p>
+      </div>
+      <p>
+        **Note:** Using `$GLOBALS` is generally considered a cleaner way to access and modify global variables within a function, as it is self-documenting and doesn't rely on the `global` keyword reference mechanism.
+      </p>
+
+      <h2>Variables in Included Scripts</h2>
+      <p>
+        Variables defined in a PHP script that is included using `include` or `require` statements are also added to the **global scope** of the main script and can be accessed using the methods above.
+      </p>
+    </div>
+  </div>
+</div>

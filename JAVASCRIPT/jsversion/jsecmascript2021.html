@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - ECMAScript 2021</h1>
+    <div class="content">
+      <p>The ECMAScript 2021 standard was released in 2021. It introduced several notable features that improved developer productivity and code readability. Among them are the <code>String.replaceAll()</code> method, logical assignment operators (<code>&&=</code>, <code>||=</code>, <code>??=</code>), and numeric separators for readability.</p>
+
+      <h2>New Features Added in ECMAScript 2021</h2>
+      <ul>
+        <li>Numeric Separators (_)</li>
+        <li>Promise.any() method</li>
+        <li>String.replaceAll() method</li>
+        <li>Logical AND Assignment Operator (&&=)</li>
+        <li>Logical OR Assignment (||=)</li>
+        <li>Nullish Coalescing Assignment (??=)</li>
+      </ul>
+
+      <h2>Numeric Separators (_)</h2>
+      <p>ECMAScript 2021 introduced numeric separators to make numbers more readable. The underscore (<code>_</code>) can be used within numeric literals.</p>
+      <h3>Example</h3>
+      <pre><code>
+let num = 90_00_000;
+console.log(num);
+      </code></pre>
+      <p><strong>Output:</strong> The value of the num is: 9000000</p>
+
+      <h2>Promise.any() Method</h2>
+      <p>The <code>Promise.any()</code> method fulfills as soon as any promise in the array resolves. If all promises are rejected, it throws an error.</p>
+      <h3>Example</h3>
+      <pre><code>
+const promise1 = new Promise((res, rej) => res());
+const promise2 = new Promise((res, rej) => rej());
+const promises = [promise1, promise2];
+
+Promise.any(promises)
+  .then(() => {
+    console.log('One or more promises are resolved!');
+  })
+  .catch((err) => {
+    console.log('All promises are rejected:', err);
+  });
+      </code></pre>
+      <p><strong>Output:</strong> One or more promises are resolved!</p>
+
+      <h2>String.replaceAll() Method</h2>
+      <p>The <code>replaceAll()</code> method replaces all occurrences of a substring within a string. It accepts a string or regular expression as an argument.</p>
+      <h3>Example</h3>
+      <pre><code>
+let str = "abcd abcd abcd abcd";
+console.log("Original string is:", str);
+let updatedStr = str.replaceAll("a", "A");
+console.log("Updated string is:", updatedStr);
+      </code></pre>
+      <p><strong>Output:</strong></p>
+      <pre><code>
+Original string is: abcd abcd abcd abcd
+Updated string is: Abcd Abcd Abcd Abcd
+      </code></pre>
+
+      <h2>Logical AND Assignment Operator (&&=)</h2>
+      <p>The <code>&&=</code> operator updates the value of the left operand only if it is truthy.</p>
+      <h3>Example</h3>
+      <pre><code>
+let str = "Hello";
+str &&= "Hi";
+console.log(str);
+      </code></pre>
+      <p><strong>Output:</strong> The value of the str is: Hi</p>
+
+      <h2>Logical OR Assignment (||=)</h2>
+      <p>The <code>||=</code> operator updates the value of the left operand if it is falsy.</p>
+      <h3>Example</h3>
+      <pre><code>
+let str = false;
+str ||= 10;
+console.log(str);
+      </code></pre>
+      <p><strong>Output:</strong> The value of the str is: 10</p>
+
+      <h2>Nullish Coalescing Assignment (??=)</h2>
+      <p>The <code>??=</code> operator assigns a value to the left operand only if it is <code>null</code> or <code>undefined</code>.</p>
+      <h3>Example</h3>
+      <pre><code>
+let str = null;
+str ??= "default";
+console.log(str);
+      </code></pre>
+      <p><strong>Output:</strong> The value of the str is: default</p>
+
+      <div class="note">
+        <p><strong>Warning:</strong> Some of the above features may not be supported in older browsers. Use polyfills if necessary.</p>
+      </div>
+    </div>
+  </div>
+</div>

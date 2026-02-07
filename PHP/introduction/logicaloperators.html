@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Logical Operators Examples</h1>
+
+    <div class="content">
+      <p>
+        **Logical Operators** in PHP are used to combine conditional statements (Boolean expressions) to create more complex conditions. They are crucial for controlling the flow of execution in constructs like `if`, `while`, and `for` statements.
+      </p>
+
+      <h2>PHP Logical Operators</h2>
+      <table>
+        <tr>
+          <th>Operator</th>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><code>&&</code></td>
+          <td>Logical AND</td>
+          <td>Returns `true` if **both** operands are true.</td>
+        </tr>
+        <tr>
+          <td><code>and</code></td>
+          <td>Logical AND (Low Precedence)</td>
+          <td>Returns `true` if **both** operands are true.</td>
+        </tr>
+        <tr>
+          <td><code>||</code></td>
+          <td>Logical OR</td>
+          <td>Returns `true` if **at least one** operand is true.</td>
+        </tr>
+        <tr>
+          <td><code>or</code></td>
+          <td>Logical OR (Low Precedence)</td>
+          <td>Returns `true` if **at least one** operand is true.</td>
+        </tr>
+        <tr>
+          <td><code>!</code></td>
+          <td>Logical NOT</td>
+          <td>Reverses the logical state; `true` becomes `false` and vice versa.</td>
+        </tr>
+      </table>
+
+      <hr>
+
+      <h2>Key Concepts and Examples</h2>
+
+      <h3>Truthiness and Falsiness in PHP</h3>
+      <p>
+        When non-Boolean values are used with logical operators, PHP evaluates their **truthiness**.
+      </p>
+      <ul>
+        <li>
+          **Falsey values** include: the integer `0`, the float `0.0`, the empty string `""`, `NULL`, and the empty array `[]`.
+        </li>
+        <li>
+          **Truthy values** include: all non-zero numbers (even negative ones) and non-empty strings.
+        </li>
+      </ul>
+      <div class="example">
+        <code>$a = 42; // True</code><br>
+        <code>$b = 0; // False</code><br>
+        <code>if ($a && $b) { /* ... */ } else { echo "False"; }</code> $\rightarrow$ <code>False</code>
+      </div>
+
+      <h3>Operator Precedence: `&&`/`||` vs. `and`/`or`</h3>
+      <p>
+        While `&&` and `and` perform the same logical operation, they have different levels of **precedence**, which affects complex expressions (e.g., when combined with assignment operators).
+      </p>
+      <ul>
+        <li>
+          **High Precedence:** `&&` and `||` bind more tightly to their operands.
+        </li>
+        <li>
+          **Low Precedence:** `and` and `or` have lower precedence.
+        </li>
+      </ul>
+      <div class="example">
+        <p>
+          In a simple conditional statement like `if ($x > 5 and $y < 10)`, the result is the same as `&&` because the comparison operators (`>` and `<`) have even higher precedence, so they are evaluated first.
+        </p>
+      </div>
+
+      <h3>Using Logical NOT (`!`)</h3>
+      <p>
+        The Logical NOT operator is used to negate a condition.
+      </p>
+      <div class="example">
+        <code>$isMember = true;</code><br>
+        <code>if (! $isMember) { echo "Not a member"; }</code> $\rightarrow$ (No output, as condition is false)
+      </div>
+
+      <h3>Complex Conditions in Control Flow</h3>
+      <p>
+        Logical operators are commonly used in loops to define multiple exit conditions.
+      </p>
+      <div class="example">
+        <p>The loop condition `while ($count <= 5 && $count != 3)` ensures the loop runs only if **both** conditions are met: the count is less than or equal to 5 AND the count is not 3.</p>
+        <p>Output: <code>Current count: 1</code>, <code>Current count: 2</code> (Stops at 3 because `3 != 3` is false)</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Execution Context</h1>
+
+    <div class="content">
+      <h2>What is Execution Context?</h2>
+      <p>
+        The execution context is a term that describes the internal workings of code. 
+        The JavaScript Execution Context describes the environment in which JavaScript 
+        code can be run. The execution context specifies which code sections have access 
+        to the functions, variables and objects used in the code.
+      </p>
+      <p>
+        During the execution context, the given code is parsed line by line, with variables 
+        and functions kept in memory. An execution context is similar to a container for 
+        storing variables; code is evaluated and then executed.
+      </p>
+
+      <h2>Types of Execution Context</h2>
+      <ul>
+        <li>Global Execution Context (GEC)</li>
+        <li>Functional Execution Context (FEC)</li>
+        <li>Eval Execution Context</li>
+      </ul>
+
+      <h3>Global Execution Context (GEC)</h3>
+      <p>
+        The GEC is the base or default execution. Any JavaScript code that does not occur 
+        inside a function is found here. It creates the global object (<code>window</code> 
+        in browsers, <code>global</code> in Node.js), binds <code>this</code> to it, and 
+        stores all variable/function declarations in memory.
+      </p>
+
+      <h3>Functional Execution Context (FEC)</h3>
+      <p>
+        A new FEC is created whenever a function is called. Each function has its own 
+        execution context but also has access to the GEC. Multiple FECs can exist at the 
+        same time while the GEC remains single.
+      </p>
+
+      <h3>Eval Execution Context</h3>
+      <p>
+        Any code executed inside <code>eval()</code> creates its own execution context. 
+        However, <code>eval</code> is rarely used in practice.
+      </p>
+
+      <h2>Phases of the Execution Context</h2>
+      <ul>
+        <li><strong>Creation Phase:</strong> Memory allocation for variables and functions, scope chain setup.</li>
+        <li><strong>Execution Phase:</strong> Code runs line by line, function calls are executed.</li>
+      </ul>
+
+      <h3>Example: Creation Phase</h3>
+      <pre>
+var n = 6;
+
+function square(n) {
+   var ans = n * n;
+   return ans;
+}
+var sqr1 = square(n);
+var sqr2 = square(8);
+
+console.log(sqr1);
+console.log(sqr2);
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+36
+64
+      </pre>
+
+      <h2>Execution Stack</h2>
+      <p>
+        The JavaScript engine uses a <strong>call stack</strong> to manage execution contexts. 
+        It follows the LIFO (Last-In-First-Out) principle. Each function call is pushed to the 
+        stack, and once completed, it is popped out.
+      </p>
+
+      <h3>Example: Execution Stack</h3>
+      <pre>
+function firstFunc(m,n) {
+   return m * n;
+}
+function secondFunc(m,n) {
+   return firstFunc(m,n);
+}
+function getResult(num1, num2) {
+   return secondFunc(num1, num2);
+}
+var res = getResult(6,7);
+console.log("The result is:", res);
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+The result is: 42
+      </pre>
+
+      <h3>Stack Overflow Example</h3>
+      <pre>
+function display() {
+   display();
+}
+display();
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+RangeError: Maximum call stack size exceeded
+      </pre>
+
+      <h2>Summary</h2>
+      <p>
+        The execution context defines the environment in which JavaScript code runs. 
+        Understanding its creation and execution phases, as well as how the call stack works, 
+        is crucial to mastering JavaScript’s behavior behind the scenes.
+      </p>
+    </div>
+  </div>
+</div>

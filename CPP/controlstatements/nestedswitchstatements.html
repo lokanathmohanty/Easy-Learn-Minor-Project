@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Nested <code>switch</code> Statements ⚙️</h1>
+
+        <div class="content">
+            <p>A **nested `switch` statement** is a `switch` statement placed within the statement sequence of an outer `switch` block. This structure allows for multi-level, hierarchical decision-making based on different variables.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Key Concepts of Nesting</h2>
+            <ul>
+                <li>
+                    **No Conflict:** It is perfectly legal to have the **same constant values** in both the inner and outer `switch` statements (e.g., `case 'A'` in both). Since the inner `switch` is contained within the outer one, there are no conflicts.
+                </li>
+                <li>
+                    **Execution Flow:** The inner `switch` is only evaluated and executed if the corresponding `case` condition in the outer `switch` is met.
+                </li>
+                <li>
+                    **Break Scope:** A `break` statement inside the inner `switch` only terminates the **inner `switch`** block. It does not affect the flow of the outer `switch` unless placed within the outer `case` but after the inner `switch` block.
+                </li>
+                <li>
+                    **Nesting Levels:** C++ compilers are required to support at least 256 levels of nesting for `switch` statements, although deep nesting is rarely good practice due to complexity.
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Example Analysis (a=100, b=200)</h2>
+            <p>The code uses the value of `a` to enter the outer switch, and the value of `b` to enter the inner switch.</p>
+            <pre class="example">
+int a = 100;
+int b = 200;
+
+switch(a) { // Outer switch checks 'a'
+   case 100: // Match for a=100 found. Execution starts here.
+      cout &lt;&lt; "This is part of outer switch" &lt;&lt; endl;
+      
+      switch(b) { // Inner switch checks 'b'
+         case 200: // Match for b=200 found.
+            cout &lt;&lt; "This is part of inner switch" &lt;&lt; endl; // This line executes.
+            // Note: No break here, but it's the end of the inner switch.
+      } // End of inner switch
+
+      // Note: No break for the outer case 100 either, so execution continues past this point.
+} // End of outer switch
+// Execution resumes here
+</pre>
+            <p>Since both `a` is 100 and `b` is 200, both print statements inside the `switch` blocks are executed, followed by the final print statements:</p>
+            <pre class="example">
+This is part of outer switch
+This is part of inner switch
+Exact value of a is : 100
+Exact value of b is : 200
+</pre>
+        </div>
+    </div>
+</div>

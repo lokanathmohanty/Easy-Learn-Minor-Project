@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - What Is Cascading in CSS?</h1>
+    <div class="content">
+      <p>
+        Cascading in CSS refers to the way browsers determine which style rule to apply when multiple conflicting rules target the same element. 
+        This process follows a structured hierarchy where rules are prioritized based on specificity, importance, and source order.
+      </p>
+
+      <h2>Key Factors of CSS Cascading</h2>
+      <ul>
+        <li><strong>Specificity</strong> – Rules with higher specificity take precedence over less specific ones.</li>
+        <li><strong>Importance</strong> – Rules marked with <code>!important</code> override all other rules.</li>
+        <li><strong>Source Order</strong> – If specificity and importance are the same, the rule defined later in the source code wins.</li>
+      </ul>
+
+      <h2>1. Specificity</h2>
+      <p>
+        Specificity determines how targeted a CSS selector is. For example, 
+        <code>#id</code> has more weight than <code>.class</code>, and both have more weight than an element selector.
+      </p>
+      <pre>
+#txt {
+  color: #04af2f;
+}
+
+.txt {
+  color: blue;
+}
+      </pre>
+      <p>
+        In this example, an element with both <code>id="txt"</code> and <code>class="txt"</code> will display green text because ID selectors outrank class selectors.
+      </p>
+
+      <h2>2. Importance</h2>
+      <p>
+        Adding <code>!important</code> to a style makes it the highest priority, even overriding inline styles unless the inline style itself is marked <code>!important</code>.
+      </p>
+      <pre>
+.txt {
+  color: #04af2f !important;
+}
+      </pre>
+
+      <h2>3. Source Order</h2>
+      <p>
+        When rules have the same specificity and no <code>!important</code>, the one defined last takes precedence.
+      </p>
+      <pre>
+.txt {
+  color: red;
+}
+
+.txt {
+  color: #04af2f; /* This will apply */
+}
+      </pre>
+
+      <h2>CSS Cascading Hierarchy</h2>
+      <p>
+        The general priority of CSS rules is:
+      </p>
+      <ul>
+        <li><strong>!important</strong> (highest priority)</li>
+        <li>Inline CSS</li>
+        <li>Internal CSS (inside &lt;style&gt;)</li>
+        <li>External CSS (separate file linked via &lt;link&gt;)</li>
+        <li>User/Browser styles (default styles)</li>
+      </ul>
+      <p>
+        <strong>Priority Order:</strong> !important &gt; Inline CSS &gt; Internal CSS &gt; External CSS &gt; Browser styles.
+      </p>
+
+      <h2>CSS Specificity Point System</h2>
+      <ul>
+        <li>Inline CSS = 1000 points</li>
+        <li>ID selector = 100 points</li>
+        <li>Class, attributes, pseudo-classes = 10 points</li>
+        <li>Element, pseudo-elements = 1 point</li>
+      </ul>
+      <pre>
+/* Lowest Priority */
+p { color: red; } /* 1 point */
+
+/* Higher Priority than element */
+.myClass { color: blue; } /* 10 points */
+
+/* Even Higher Priority */
+#myId { color: green; } /* 100 points */
+
+/* Highest Priority */
+&lt;p style="color: #04af2f;"&gt;Hello&lt;/p&gt; /* 1000 points */
+      </pre>
+
+      <h2>CSS Rule Overriding</h2>
+      <p>
+        CSS decides which rule to apply when multiple rules conflict using specificity, importance, and source order. 
+        Below is an example where later rules override earlier ones:
+      </p>
+      <pre>
+p {
+  color: aqua;
+}
+#txt {
+  color: red;
+}
+.txt {
+  color: #04af2f;
+}
+p {
+  color: blueviolet; /* This overrides the first p rule */
+}
+      </pre>
+
+      <h2>Summary</h2>
+      <p>
+        Cascading in CSS ensures that styles are applied in a predictable and logical manner. 
+        Understanding specificity, importance, and source order is essential for writing maintainable and conflict-free CSS.
+      </p>
+
+      <h2>Example</h2>
+      <p>A practical example showing CSS cascade in action:</p>
+      <pre>
+&lt;p id="txt"&gt;This text is red (ID selector wins).&lt;/p&gt;
+&lt;p class="txt"&gt;This text is green (class selector applied).&lt;/p&gt;
+&lt;p&gt;This text is blueviolet (last p rule applied).&lt;/p&gt;
+      </pre>
+    </div>
+  </div>
+</div>

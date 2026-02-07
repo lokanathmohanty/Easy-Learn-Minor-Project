@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="session">
+    <h1>Python - Thread Deadlock</h1>
+    <p>A deadlock occurs when threads wait indefinitely for resources locked by each other, causing a program to freeze. Common causes include: 
+      <ul>
+        <li>Thread tries to acquire the same lock twice.</li>
+        <li>Threads waiting circularly for locks held by each other.</li>
+        <li>Failure to release locks or resources.</li>
+        <li>Threads acquiring locks in inconsistent orders.</li>
+      </ul>
+    </p>
+  </div>
+
+  <div class="session">
+    <h2>Avoiding Deadlocks with Locks</h2>
+    <p>Python's threading.Lock provides simple mutual exclusion to avoid race conditions and reduce deadlocks by ensuring exclusive access.</p>
+    <pre>
+import threading
+
+counter = 10
+lock = threading.Lock()
+
+def increment(theLock, N):
+   global counter
+   for _ in range(N):
+      theLock.acquire()
+      counter += 1
+      theLock.release()
+
+t1 = threading.Thread(target=increment, args=(lock, 2))
+t2 = threading.Thread(target=increment, args=(lock, 10))
+t3 = threading.Thread(target=increment, args=(lock, 4))
+
+t1.start(); t2.start(); t3.start()
+t1.join(); t2.join(); t3.join()
+
+print("All threads have completed")
+print("Final Counter:", counter)
+    </pre>
+    <p>Output:</p>
+    <p>
+      All threads have completed<br>
+      Final Counter: 26
+    </p>
+  </div>
+
+  <div class="session">
+    <h2>Using Semaphore to Avoid Deadlocks</h2>
+    <p>Semaphore limits number of threads accessing resources simultaneously, reducing deadlock risk.</p>
+    <pre>
+import threading
+import time
+
+sem = threading.Semaphore(4)
+
+def synchronized(name):
+   sem.acquire()
+   for _ in range(3):
+      print("Hello! ", end='')
+      print(name)
+      time.sleep(1)
+   sem.release()
+
+t1 = threading.Thread(target=synchronized, args=("Thread 1",))
+t2 = threading.Thread(target=synchronized, args=("Thread 2",))
+t3 = threading.Thread(target=synchronized, args=("Thread 3",))
+
+t1.start(); t2.start(); t3.start()
+    </pre>
+    <p>Output:</p>
+    <p>
+      Hello! Thread 1<br>
+      Hello! Thread 2<br>
+      Hello! Thread 3<br>
+      ...
+    </p>
+  </div>
+
+  <div class="session">
+    <h2>Common Strategies to Prevent Deadlocks</h2>
+    <ul>
+      <li>Acquire locks in a consistent global order.</li>
+      <li>Use timeouts or non-blocking lock acquisitions.</li>
+      <li>Minimize locks held simultaneously.</li>
+      <li>Employ higher-level concurrency constructs.</li>
+      <li>Design with deadlock detection and avoidance algorithms.</li>
+      <li>Test and document concurrency designs well.</li>
+    </ul>
+  </div>
+</div>

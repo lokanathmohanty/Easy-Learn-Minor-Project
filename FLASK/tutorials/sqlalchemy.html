@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask-SQLAlchemy: Object Relational Mapping (ORM) 🐘</h1>
+        <div class="content">
+            <p>Using raw SQL for **CRUD** (Create, Read, Update, Delete) operations can be error-prone and tedious. **SQLAlchemy** is a powerful Python toolkit and **Object Relational Mapper (ORM)** that provides an abstraction layer over the database. **Flask-SQLAlchemy** is the extension that integrates this ORM support into Flask applications.</p>
+
+            <h2>What is ORM?</h2>
+            <p>**Object Relational Mapping (ORM)** is a technique that maps the object parameters and classes in an object-oriented programming language (like Python) to the structure of tables and rows in a Relational Database Management System (RDBMS). An ORM allows developers to perform database operations using object methods and attributes (e.g., <code>db.session.add(student)</code>) instead of writing raw SQL statements.</p>
+
+            <h2>Setup and Model Declaration</h2>
+            <p>The core steps for integrating Flask-SQLAlchemy are:</p>
+            <ol>
+                <li>**Installation:** <code>pip install flask-sqlalchemy</code></li>
+                <li>**Configuration:** Set the database URI in the app config (e.g., <code>app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.sqlite3'</code>).</li>
+                <li>**Initialization:** Create the <code>SQLAlchemy</code> object: <code>db = SQLAlchemy(app)</code>.</li>
+                <li>**Model Definition:** Declare your database tables as Python classes that inherit from <code>db.Model</code>. Attributes are defined using **<code>db.Column()</code>** with specified data types and constraints (e.g., <code>primary_key = True</code>).</li>
+                <li>**Table Creation:** Call **<code>db.create_all()</code>** (usually in the main block) to create the tables in the database based on the declared models.</li>
+            </ol>
+            <p>The **<code>students</code>** model maps the Python class properties (e.g., <code>name</code>, <code>city</code>) to columns in the underlying database table.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">CRUD Operations via Session and Query</h2>
+        <div class="content example">
+            <p>The **Session object** (<code>db.session</code>) manages all persistence operations for the ORM objects. The <code>query</code> object handles retrieval.</p>
+
+            <h3>1. Create (Add Record)</h3>
+            <p>A new model object is instantiated, and then added to the session:</p>
+            <p><code>student = students(name, city, addr, pin)</code></p>
+            <p><code>db.session.add(student)</code></p>
+            <p><code>db.session.commit()</code></p>
+
+            <h3>2. Read (Query Records)</h3>
+            <p>Data retrieval is handled through the **<code>.query</code>** attribute of the model class:</p>
+            <ul>
+                <li>**Retrieve All:** <code>students.query.all()</code></li>
+                <li>**Retrieve Filtered:** Use the <code>filter_by()</code> attribute to apply conditions: <code>students.query.filter_by(city = 'Hyderabad').all()</code></li>
+            </ul>
+
+            <h3>3. View Function Flow (Adding a Student)</h3>
+            <p>The <code>new()</code> function handles the form submission (POST):</p>
+            <p>It checks for missing fields and uses **<code>flash()</code>** for error messages. If successful, it creates the <code>student</code> object, uses <code>db.session.add()</code> to stage the change, and **<code>db.session.commit()</code>** to persist the record to the database, followed by a redirect to the main listing page.</p>
+        </div>
+    </div>
+</div>

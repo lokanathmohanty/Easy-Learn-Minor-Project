@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Helmet</h1>
+    <div class="content">
+      <p>The meta information of a web document is very important for SEO purposes. The meta information is generally specified inside the head using <code>&lt;meta&gt;</code> tags. The <code>&lt;title&gt;</code> tag also plays an important role in providing meta information about a document. The head section can also have <code>&lt;script&gt;</code> and <code>&lt;style&gt;</code> tags. The <strong>Helmet</strong> component provides an easy way to manage the head section of a document by providing all valid head tags. Helmet will gather all the information specified inside it and update the head section of the document.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Installing Helmet</h2>
+    <div class="content">
+      <p>Use the following command to install the Helmet component:</p>
+      <pre>
+npm install --save react-helmet
+      </pre>
+      <p>The above command will install the helmet component and make it ready to use in your application.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Concept and Usage of Helmet</h2>
+    <div class="content">
+      <p>Helmet accepts all valid head tags and outputs them in the head section of the document. Example:</p>
+      <pre>
+import React from "react";
+import {Helmet} from "react-helmet";
+
+class Application extends React.Component {
+   render () {
+      return (
+         &lt;div className="application"&gt;
+            &lt;Helmet&gt;
+               &lt;title&gt;Helmet sample application&lt;/title&gt;
+               &lt;meta charSet="utf-8" /&gt;
+               &lt;meta name="description" content="Helmet sample program to understand the working of the helmet component" /&gt;
+               &lt;meta name="keywords" content="React, Helmet, HTML, CSS, Javascript" /&gt;
+               &lt;meta name="author" content="Peter" /&gt;
+               &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+            &lt;/Helmet&gt;
+         &lt;/div&gt;
+      );
+   }
+}
+      </pre>
+      <p>Helmet can also be nested. If a child component has its own Helmet, it will update the head section when the child is rendered.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Applying Helmet</h2>
+    <div class="content">
+      <p>Steps to apply Helmet in a React application:</p>
+      <ul>
+        <li>Create a new React application: <code>create-react-app myapp</code></li>
+        <li>Start the application: <code>npm start</code></li>
+        <li>Remove all CSS classes from <code>App.css</code></li>
+        <li>Create a new component <code>SimpleHelmet</code> and add Helmet configuration.</li>
+      </ul>
+      <pre>
+import React from "react";
+import {Helmet} from "react-helmet";
+
+class SimpleHelmet extends React.Component {
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;Helmet&gt;
+               &lt;title&gt;Helmet sample application&lt;/title&gt;
+               &lt;meta charSet="utf-8" /&gt;
+               &lt;meta name="description" content="Helmet sample program to understand the working of the helmet component" /&gt;
+               &lt;meta name="keywords" content="React, Helmet, HTML, CSS, Javascript" /&gt;
+               &lt;meta name="author" content="Peter" /&gt;
+               &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+            &lt;/Helmet&gt;
+            &lt;p&gt;A sample application to demonstrate helmet component.&lt;/p&gt;
+         &lt;/div&gt;
+      )
+   }
+}
+
+export default SimpleHelmet;
+      </pre>
+      <p>Finally, import and use the component inside <code>App.js</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <p>The <strong>Helmet</strong> component is an easy-to-use utility to manage the head content of the document. It supports both server-side and client-side rendering, making it a powerful tool for SEO and document metadata management in React applications.</p>
+    </div>
+  </div>
+</div>

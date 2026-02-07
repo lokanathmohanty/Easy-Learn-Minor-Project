@@ -1,0 +1,166 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Global Variables in C</h1>
+    <div class="content">
+      <p>In C programming, global variables are defined outside all functions, usually at the top of the program. They hold their value throughout the lifetime of the program and can be accessed inside any function.</p>
+      <p>If a function modifies a global variable, the updated value is visible to all other functions.</p>
+      <p>Global variables can also be accessed across different files using the <code>extern</code> keyword.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Declaring Global Variables</h2>
+    <div class="content">
+      <p>Global variables are declared similarly to local variables, but they are placed outside any function block.</p>
+      <p>Syntax:</p>
+      <pre><code>data_type variable_name;</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Simple Global Variable</h2>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+/* global variable declaration */
+int g = 10;
+
+int main() {
+    int a;
+    a = g * 2;
+    printf("Value of a = %d, and g = %d\n", a, g);
+    return 0;
+}</code></pre>
+        <p>Output:</p>
+        <pre><code>Value of a = 20, and g = 10</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Accessing and Updating Global Variables</h2>
+    <div class="content">
+      <p>Global variables can be accessed and updated from any function within the same file. Once updated, their new value is reflected across all functions.</p>
+    </div>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+int g = 10;
+
+int function1();
+int function2();
+
+int main() {
+    printf("Value of Global variable g = %d\n", g);
+    function1();
+    printf("Updated value of Global variable g = %d\n", g);
+    function2();
+    printf("Updated value of Global variable g = %d\n", g);
+    return 0;
+}
+
+int function1() {
+    g = g + 10;
+    printf("New value of g in function1(): %d\n", g);
+    return 0;
+}
+
+int function2() {
+    printf("The value of g in function2(): %d\n", g);
+    g = g + 10;
+    return 0;
+}</code></pre>
+        <p>Output:</p>
+        <pre><code>Value of Global variable g = 10
+New value of g in function1(): 20
+Updated value of Global variable g = 20
+The value of g in function2(): 20
+Updated value of Global variable g = 30</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Scope and Accessibility of Global Variables</h2>
+    <div class="content">
+      <p>Global variables can only be accessed in functions defined after their declaration. If a global variable is declared after <code>main()</code>, it cannot be used inside it, leading to a compilation error.</p>
+    </div>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+/* global variable */
+int x = 10;
+
+int function1();
+
+int main() {
+    printf("value of Global variable x = %d y = %d\n", x, y);
+    function1();
+    return 0;
+}
+
+int y = 20;
+
+int function1() {
+    printf("Value of Global variable x = %d y = %d\n", x, y);
+}</code></pre>
+        <p><strong>Output:</strong> Compilation Error</p>
+        <pre><code>error: 'y' undeclared (first use in this function)</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Accessing Global Variables Using <code>extern</code></h2>
+    <div class="content">
+      <p>If a global and a local variable have the same name, use the <code>extern</code> keyword to access the global one within the local scope.</p>
+    </div>
+    <div class="example">
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre><code>#include &lt;stdio.h&gt;
+
+/* Global variable */
+int x = 50;
+
+int main() {
+    /* Local variable */
+    int x = 10;
+    {
+        extern int x;
+        printf("Value of global x is %d\n", x);
+    }
+
+    printf("Value of local x is %d\n", x);
+
+    return 0;
+}</code></pre>
+        <p>Output:</p>
+        <pre><code>Value of global x is 50
+Value of local x is 10</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Avoid Using Too Many Global Variables</h2>
+    <div class="content">
+      <p>While global variables make it easier to share data between functions, they come with drawbacks:</p>
+      <ul>
+        <li>They remain in memory until the program ends.</li>
+        <li>They reduce modularity and can be accessed or modified from anywhere.</li>
+        <li>They make debugging, testing, and maintaining the program harder.</li>
+        <li>They pose potential security risks due to unrestricted access.</li>
+      </ul>
+      <p>Therefore, limit their use and prefer local variables or parameter passing for better program structure.</p>
+    </div>
+  </div>
+
+</div>

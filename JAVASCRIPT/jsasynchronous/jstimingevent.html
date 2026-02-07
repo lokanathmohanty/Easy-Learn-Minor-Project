@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Timing Events</h1>
+    <div class="content">
+      <h2>What are the Timing Events?</h2>
+      <p>
+        JavaScript timing events are used to execute the code after a specified time 
+        only once or multiple times. In JavaScript, you can use the timing events to 
+        control when a particular task should be executed.
+      </p>
+      <p>
+        The <code>window</code> object contains the various methods for timing events, 
+        which you can use to schedule the tasks. You can call these methods using 
+        the window object or without using it.
+      </p>
+
+      <h3>Methods for Timing Events</h3>
+      <ul>
+        <li><code>setTimeout()</code> — To execute the code after N milliseconds only once.</li>
+        <li><code>clearTimeout()</code> — To clear the timeout set using <code>setTimeout()</code>.</li>
+        <li><code>setInterval()</code> — To execute the task after each N milliseconds.</li>
+        <li><code>clearInterval()</code> — To clear the interval set using <code>setInterval()</code>.</li>
+      </ul>
+
+      <h2>The setTimeout() Method</h2>
+      <div class="example">
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;The message will be printed after 2000 milliseconds! &lt;br&gt;&lt;/div&gt;
+   &lt;script&gt;
+      setTimeout(() =&gt; {
+         document.getElementById('output').innerHTML += 'Hello World &lt;br&gt;';
+      }, 2000);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>The message will be printed after 2000 milliseconds!</li>
+        <li>Hello World</li>
+      </ul>
+
+      <h2>The clearTimeout() Method</h2>
+      <p>
+        In the below example, we used the <code>setTimeout()</code> method to print 
+        "Hello World" after 3000 milliseconds. We used <code>clearTimeout()</code> 
+        to prevent it from executing.
+      </p>
+      <div class="example">
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;p&gt;Message will print after 3 seconds.&lt;/p&gt;
+   &lt;p&gt;Click the button to prevent timeout to execute.&lt;/p&gt;
+   &lt;p id="demo"&gt;&lt;/p&gt;
+   &lt;button onclick="stop()"&gt;Clear Timeout&lt;/button&gt;
+   &lt;script&gt;
+      const myTimeout = setTimeout(greet, 3000);
+      function greet() {
+         document.getElementById("demo").innerHTML = "Hello World!"
+      }
+      function stop() {
+         clearTimeout(myTimeout);
+      }
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <h2>The setInterval() and clearInterval() Methods</h2>
+      <p>
+        In the code below, we use <code>setInterval()</code> to show numbers 
+        incremented by 10 every second. When the number becomes 50, we stop the 
+        timer using <code>clearInterval()</code>.
+      </p>
+      <div class="example">
+        <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;&lt;/div&gt;
+   &lt;script&gt;
+      let output = document.getElementById('output');
+      let number = 10;
+      let id = setInterval(() =&gt; {
+         if (number == 50) {
+            clearInterval(id);
+            output.innerHTML += "The time is stopped."
+         }
+         output.innerHTML += "The number is: " + number + "&lt;br&gt;";
+         number += 10;
+      }, 1000);
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <h2>Real-time Use Cases of Timing Events</h2>
+      <ul>
+        <li>For animation and transition</li>
+        <li>For slideshow and carousel</li>
+        <li>For countdown timers</li>
+        <li>For user authentication timeouts</li>
+        <li>To autosave drafts like Google Docs</li>
+        <li>To schedule notifications, email, messages, etc.</li>
+        <li>To terminate the session (e.g., banking websites)</li>
+        <li>For progress bars</li>
+      </ul>
+
+      <h2>What's Next?</h2>
+      <p>
+        In the following chapters, you will learn about 
+        <code>setTimeout()</code> and <code>setInterval()</code> methods in detail.
+      </p>
+    </div>
+  </div>
+</div>

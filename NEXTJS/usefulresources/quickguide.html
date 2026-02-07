@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Next.js - Quick Guide</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+      <h1 class="title">Next.js - Quick Guide</h1>
+
+      <div class="content">
+        <p>
+          <a href="#" class="prev-link">Previous</a> | 
+          <a href="#" class="next-link">Next</a>
+        </p>
+
+        <h2 class="subtitle">Next.js - Overview</h2>
+        <p>
+          Next.js is a React-based framework with server-side rendering capability. It is fast and SEO-friendly.
+        </p>
+        <p>
+          With Next.js, you can create robust React applications easily and test them effectively. Below are the key features of Next.js:
+        </p>
+        <ul>
+          <li><strong>Hot Code Reload:</strong> Automatically reloads the server when files are modified.</li>
+          <li><strong>Automatic Routing:</strong> Routes are based on the file system structure inside the <code>pages</code> folder.</li>
+          <li><strong>Component-specific Styles:</strong> Supports scoped and global styles using <code>styled-jsx</code>.</li>
+          <li><strong>Server-side Rendering:</strong> Components are pre-rendered on the server for faster loading.</li>
+          <li><strong>Node Ecosystem:</strong> Works seamlessly with the Node.js ecosystem.</li>
+          <li><strong>Automatic Code Splitting:</strong> Loads only necessary JavaScript for each page.</li>
+          <li><strong>Prefetch:</strong> Prefetch resources using the <code>Link</code> component.</li>
+          <li><strong>Dynamic Components:</strong> Supports dynamic imports of components and modules.</li>
+          <li><strong>Export Static Site:</strong> Allows exporting the entire site as static HTML.</li>
+          <li><strong>Built-in TypeScript Support:</strong> Offers excellent TypeScript support out of the box.</li>
+        </ul>
+
+        <h2 class="subtitle">Next.js - Environment Setup</h2>
+        <p>Make sure Node.js and npm are installed. Install Next.js using the command:</p>
+        <pre><code>npm install next react react-dom</code></pre>
+        <p>After successful installation, create a <code>package.json</code>:</p>
+        <pre><code>npm init</code></pre>
+        <p>Example <code>package.json</code>:</p>
+        <pre><code>{
+  "name": "nextjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}</code></pre>
+        <p>Create a <code>pages</code> directory and add <code>index.js</code>:</p>
+        <pre><code>function HomePage() {
+  return &lt;div&gt;Welcome to Next.js!&lt;/div&gt;
+}
+export default HomePage</code></pre>
+        <p>Start the development server:</p>
+        <pre><code>npm run dev</code></pre>
+
+        <h2 class="subtitle">Next.js - Pages</h2>
+        <p>
+          Pages are React components inside the <code>pages</code> folder. Routing is based on file structure.
+        </p>
+        <ul>
+          <li><code>pages/index.js</code> maps to <code>/</code></li>
+          <li><code>pages/posts/first.js</code> maps to <code>/posts/first</code></li>
+        </ul>
+        <p>Create <code>posts/first.js</code>:</p>
+        <pre><code>export default function FirstPost() {
+  return &lt;h1&gt;My First Post&lt;/h1&gt;
+}</code></pre>
+        <p>Add navigation with <code>Link</code>:</p>
+        <pre><code>import Link from 'next/link'
+
+export default function FirstPost() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;My First Post&lt;/h1&gt;
+      &lt;h2&gt;
+        &lt;Link href="/"&gt;&lt;a&gt;Home&lt;/a&gt;&lt;/Link&gt;
+      &lt;/h2&gt;
+    &lt;/&gt;
+  )
+}</code></pre>
+        <p>Update <code>index.js</code> to include link to First Post:</p>
+        <pre><code>import Link from 'next/link'
+
+function HomePage() {
+  return (
+    &lt;&gt;
+      &lt;div&gt;Welcome to Next.js!&lt;/div&gt;
+      &lt;Link href="/posts/first"&gt;&lt;a&gt;First Post&lt;/a&gt;&lt;/Link&gt;
+    &lt;/&gt;
+  )
+}
+export default HomePage</code></pre>
+
+        <h2 class="subtitle">Next.js - Static File Serving</h2>
+        <p>
+          Place static assets like images in the <code>public</code> directory.
+        </p>
+        <p>Update <code>first.js</code> to include an image:</p>
+        <pre><code>import Link from 'next/link'
+
+export default function FirstPost() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;My First Post&lt;/h1&gt;
+      &lt;h2&gt;
+        &lt;Link href="/"&gt;&lt;a&gt;Home&lt;/a&gt;&lt;/Link&gt;
+      &lt;/h2&gt;
+      &lt;br /&gt;
+      &lt;img src="/logo.png" alt="TutorialsPoint Logo" /&gt;
+    &lt;/&gt;
+  )
+}</code></pre>
+
+        <h2 class="subtitle">Next.js - Meta Data</h2>
+        <p>
+          Use the <code>&lt;Head&gt;</code> component from Next.js to modify the page's metadata.
+        </p>
+        <p>Update <code>index.js</code>:</p>
+        <pre><code>import Link from 'next/link'
+import Head from 'next/head'
+
+function HomePage() {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;Welcome to Next.js!&lt;/title&gt;
+      &lt;/Head&gt;
+      &lt;div&gt;Welcome to Next.js!&lt;/div&gt;
+      &lt;Link href="/posts/first"&gt;&lt;a&gt;First Post&lt;/a&gt;&lt;/Link&gt;
+      &lt;br /&gt;
+      &lt;img src="/logo.png" alt="TutorialsPoint Logo" /&gt;
+    &lt;/&gt;
+  )
+}
+export default HomePage</code></pre>
+        <p>Update <code>first.js</code>:</p>
+        <pre><code>import Link from 'next/link'
+import Head from 'next/head'
+
+export default function FirstPost() {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;My First Post&lt;/title&gt;
+      &lt;/Head&gt;
+      &lt;h1&gt;My First Post&lt;/h1&gt;
+      &lt;h2&gt;
+        &lt;Link href="/"&gt;&lt;a&gt;Home&lt;/a&gt;&lt;/Link&gt;
+      &lt;/h2&gt;
+    &lt;/&gt;
+  )
+}</code></pre>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

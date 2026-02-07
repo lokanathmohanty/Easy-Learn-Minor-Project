@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Node.js - MongoDB Query</h1>
+    <div class="content">
+      <h2>Overview</h2>
+      <p>
+        The <code>find()</code> and <code>findOne()</code> methods in MongoDB driver allow querying documents in a collection using JSON-style filters. MongoDB uses its own query operators prefixed with <code>$</code> for comparisons and logical expressions.
+      </p>
+
+      <h2>Common MongoDB Operators</h2>
+      <table>
+        <thead>
+          <tr><th>Operator</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>$eq</code></td><td>Equal to (==)</td></tr>
+          <tr><td><code>$gt</code></td><td>Greater than (&gt;)</td></tr>
+          <tr><td><code>$gte</code></td><td>Greater than or equal to (&gt;=)</td></tr>
+          <tr><td><code>$in</code></td><td>Match any value in an array</td></tr>
+          <tr><td><code>$lt</code></td><td>Less than (&lt;)</td></tr>
+          <tr><td><code>$lte</code></td><td>Less than or equal to (&lt;=)</td></tr>
+          <tr><td><code>$ne</code></td><td>Not equal to (!=)</td></tr>
+          <tr><td><code>$nin</code></td><td>Not in array</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Example: Find Documents With Price &gt; 10000</h2>
+      <pre><code>async function fetchDocs(client, dbname, colname) {
+  const result = await client.db(dbname).collection(colname)
+    .find({ price: { $gt: 10000 } }).toArray();
+  console.log(JSON.stringify(result));
+}</code></pre>
+
+      <h2>Compound Logical Expressions</h2>
+      <p>Use <code>$and</code> and <code>$or</code> for compound filters:</p>
+      <pre><code>await client.db(dbname).collection(colname)
+  .find({ $and: [ { price: { $gt: 1000 } }, { price: { $lt: 10000 } } ] }).toArray();
+</code></pre>
+
+      <h2>Using Regex Filters</h2>
+      <p>Match by patterns using <code>$regex</code> in queries.</p>
+
+      <h3>Example: Names Starting with "P"</h3>
+      <pre><code>await client.db(dbname).collection(colname)
+  .find({ Name: { $regex: "^P" } }).toArray();
+</code></pre>
+
+      <h3>Example: Names Containing "Ro"</h3>
+      <pre><code>await client.db(dbname).collection(colname)
+  .find({ Name: /Ro/ }).toArray();
+</code></pre>
+
+      <h3>Example: Names Ending with "er"</h3>
+      <pre><code>await client.db(dbname).collection(colname)
+  .find({ Name: /er$/ }).toArray();
+</code></pre>
+    </div>
+  </div>
+</div>

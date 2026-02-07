@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Dialog Boxes</h1>
+    <div class="content">
+
+      <p>JavaScript supports three important types of dialog boxes. These can be used to raise an alert, get confirmation, or collect input from the users. Let's go through them one by one.</p>
+
+      <h2>1. Alert Dialog Box</h2>
+      <p>An alert dialog box is mostly used to give a warning message to the users. For example, if one input field requires some text but the user does not provide it, you can use an alert box as part of validation. An alert box gives only one button <b>"OK"</b> to proceed.</p>
+
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;script type="text/javascript"&gt;
+    function Warn() {
+      alert("This is a warning message!");
+      document.write("This is a warning message!");
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Click the following button to see the result:&lt;/p&gt;
+  &lt;form&gt;
+    &lt;input type="button" value="Click Me" onclick="Warn();" /&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>2. Confirmation Dialog Box</h2>
+      <p>A confirmation dialog box is used to take the user's consent on an action. It displays a dialog with two buttons: <b>OK</b> and <b>Cancel</b>.</p>
+      <ul>
+        <li>If the user clicks <b>OK</b>, the <code>confirm()</code> method returns <code>true</code>.</li>
+        <li>If the user clicks <b>Cancel</b>, it returns <code>false</code>.</li>
+      </ul>
+
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;script type="text/javascript"&gt;
+    function getConfirmation() {
+      var retVal = confirm("Do you want to continue?");
+      if (retVal == true) {
+        document.write("User wants to continue!");
+        return true;
+      } else {
+        document.write("User does not want to continue!");
+        return false;
+      }
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Click the following button to see the result:&lt;/p&gt;
+  &lt;form&gt;
+    &lt;input type="button" value="Click Me" onclick="getConfirmation();" /&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h2>3. Prompt Dialog Box</h2>
+      <p>A prompt dialog box is useful when you want to pop up a text box to get input from the user. It takes two parameters:</p>
+      <ul>
+        <li>A label to display in the text box.</li>
+        <li>A default string to display as initial value.</li>
+      </ul>
+      <p>This dialog has two buttons: <b>OK</b> and <b>Cancel</b>.</p>
+      <ul>
+        <li>If the user clicks <b>OK</b>, the <code>prompt()</code> method returns the entered value.</li>
+        <li>If the user clicks <b>Cancel</b>, it returns <code>null</code>.</li>
+      </ul>
+
+      <h3>Example</h3>
+      <pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;script type="text/javascript"&gt;
+    function getValue() {
+      var retVal = prompt("Enter your name:", "your name here");
+      document.write("You have entered: " + retVal);
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Click the following button to see the result:&lt;/p&gt;
+  &lt;form&gt;
+    &lt;input type="button" value="Click Me" onclick="getValue();" /&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+    </div>
+  </div>
+</div>

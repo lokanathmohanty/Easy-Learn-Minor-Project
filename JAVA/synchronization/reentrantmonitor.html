@@ -1,0 +1,214 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Reentrant Monitor</h1>
+    <div class="content">
+      <p>ReentrantLock is a class that implements the Lock interface. It provides synchronization with great flexibility, making it the most used lock class in Java. It is essential for the reliable and fair working of threads. Threads are small sub-processes of a big operation. In this article, we learn about ReentrantLock and how it manages threads to work efficiently.</p>
+
+      <h2>Working of ReentrantLock</h2>
+      <p>When multiple threads try to access a shared resource, ReentrantLock restricts access to a single thread at a time through <code>lock()</code> and <code>unlock()</code> methods. For example, if three people try to book the same train ticket simultaneously, ReentrantLock ensures that only one can book a seat at a time.</p>
+
+      <p>Each thread requests access using the <code>tryLock()</code> method. The thread that acquires the lock restricts access via <code>lock()</code>, performs the booking, then releases the lock using <code>unlock()</code>. Other threads wait in a queue until the lock is available, then enter a runnable state.</p>
+
+      <p>ReentrantLock tries to provide locks in a fair manner. You can set how long a thread can acquire the lock, and the longest waiting thread can get access first. By default, locks are unfair; to make them fair, pass <code>true</code> to the constructor.</p>
+
+      <h2>Syntax</h2>
+      <ul>
+        <li><code>ReentrantLock lock = new ReentrantLock();</code> (default unfair lock)</li>
+        <li><code>ReentrantLock lock = new ReentrantLock(true);</code> (fair lock)</li>
+      </ul>
+
+      <p>The locks are explicit and can lock or unlock in any order. A single thread can acquire the lock multiple times, hence the name "Reentrant". You can check the number of times a lock is acquired using <code>getHoldCount()</code>.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example of Multithreading Without Reentrant Lock</h2>
+    <div class="content">
+      <pre><code>package com.tutorialspoint;
+
+class Thrd {
+   static void operation(int data) {    
+      for(int i = 1; i <= 4; i++) {
+        System.out.println(data++);
+      }
+   }
+}
+class Thrd1 extends Thread {
+   public void run() {
+     Thrd.operation(1);
+   }
+}
+class Thrd2 extends Thread {
+   public void run() {
+     Thrd.operation(5);  
+   }
+}
+class Thrd3 extends Thread {
+   public void run() {
+     Thrd.operation(10);  
+   }
+}
+public class TestThread {
+   public static void main(String args[]) {
+     Thrd1 oprt1 = new Thrd1();
+     Thrd2 oprt2 = new Thrd2();  
+     Thrd3 oprt3 = new Thrd3();
+     oprt1.start();
+     oprt2.start();  
+     oprt3.start();
+   }
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example of Multithreading With Reentrant Lock</h2>
+    <div class="content">
+      <pre><code>package com.tutorialspoint;
+
+import java.util.concurrent.locks.ReentrantLock;
+
+class Thrd {
+   private static ReentrantLock lockr = new ReentrantLock();
+   static void operation(int data) {
+     boolean lockAcquired = lockr.tryLock(); 
+     if (lockAcquired) {
+       try {
+         lockr.lock(); 
+         for(int i = 1; i <= 4; i++) {
+            System.out.println(data++);
+         }
+         System.out.println("Count of Lock: " + lockr.getHoldCount());
+       } finally {
+         lockr.unlock();
+       }
+     } else {
+       System.out.println("I am in else block");
+     }
+   }
+}
+class Thrd1 extends Thread {
+   public void run() {
+     Thrd.operation(1);
+   }
+}
+class Thrd2 extends Thread {
+   public void run() {
+     Thrd.operation(5);
+   }
+}
+class Thrd3 extends Thread {
+   public void run() {
+     Thrd.operation(10);
+   }
+}
+public class TestThread {
+   public static void main(String args[]) {
+     Thrd1 oprt1 = new Thrd1();
+     Thrd2 oprt2 = new Thrd2();  
+     Thrd3 oprt3 = new Thrd3();
+     oprt1.start();
+     oprt2.start();  
+     oprt3.start();
+   }
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example of Multithreading With Reentrant Lock as True</h2>
+    <div class="content">
+      <pre><code>package com.tutorialspoint;
+
+import java.util.concurrent.locks.ReentrantLock;
+
+class Thrd {
+   private static ReentrantLock lockr = new ReentrantLock(true);
+   static void operation(int data) {
+     boolean lockAcquired = lockr.tryLock(); 
+     if (lockAcquired) {
+       try {
+         lockr.lock(); 
+         for(int i = 1; i <= 4; i++) {
+            System.out.println(data++);
+         }
+         System.out.println("Count of Lock: " + lockr.getHoldCount());
+       } finally {
+         lockr.unlock();
+       }
+     } else {
+       System.out.println("I am in else block");
+     }
+   }
+}
+class Thrd1 extends Thread {
+   public void run() {
+     Thrd.operation(1);
+   }
+}
+class Thrd2 extends Thread {
+   public void run() {
+     Thrd.operation(5);
+   }
+}
+class Thrd3 extends Thread {
+   public void run() {
+     Thrd.operation(10);
+   }
+}
+public class TestThread {
+   public static void main(String args[]) {
+     Thrd1 oprt1 = new Thrd1();
+     Thrd2 oprt2 = new Thrd2();  
+     Thrd3 oprt3 = new Thrd3();
+     oprt1.start();
+     oprt2.start();  
+     oprt3.start();
+   }
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Output</h2>
+    <div class="content">
+      <p><strong>Output without Reentrant Lock:</strong></p>
+      <pre>
+1
+2
+3
+4
+10
+11
+12
+13
+5
+6
+7
+8
+      </pre>
+
+      <p><strong>Output with Reentrant Lock:</strong></p>
+      <pre>
+I am in else block
+5
+6
+7
+8
+Count of Lock: 2
+I am in else block
+      </pre>
+
+      <p><strong>Output with Reentrant Lock (Fair = true):</strong></p>
+      <pre>
+I am in else block
+I am in else block
+5
+6
+7
+8
+Count of Lock: 2
+      </pre>
+    </div>
+  </div>
+</div>

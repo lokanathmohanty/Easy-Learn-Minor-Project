@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - void Keyword</h1>
+    <div class="content">
+      <p>The <b>void</b> keyword in JavaScript is used as an operator that evaluates a given expression and returns <b>undefined</b>. It can be used as a unary operator that appears before its operand, which may be of any type.</p>
+      
+      <h2>Syntax</h2>
+      <p><code>void operand;</code></p>
+      <p>Here, the operand can be any expression.</p>
+      <p><b>Return Value:</b> It always returns <b>undefined</b>.</p>
+      
+      <h2>Example</h2>
+      <p>The following example shows that using <code>void 10</code> returns <b>undefined</b>.</p>
+      <h3>Example Code</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id = "output"&gt;The value of the ans variable is:  &lt;/div&gt;
+   &lt;script&gt;
+      let ans = void 10;
+      document.getElementById("output").innerHTML += ans;
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b> The value of the ans variable is: undefined</p>
+      
+      <h2>Importance of Precedence of void Keyword</h2>
+      <p>The precedence of <code>void</code> is important, as shown below:</p>
+      <h3>Example Code</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id = "output1"&gt; &lt;/div&gt;
+   &lt;div id = "output2"&gt; &lt;/div&gt;
+   &lt;script&gt;
+      let res1 = void 10 === 20;
+      let res2 = void (10 === 20);
+      document.getElementById("output1").innerHTML += res1;
+      document.getElementById("output2").innerHTML += res2; 
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b> false, undefined</p>
+      
+      <h2>What is javascript:void(0)?</h2>
+      <p>The expression <code>javascript:void(0)</code> is commonly used in anchors to prevent page navigation.</p>
+      
+      <h3>Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;a href="javascript:document.write('Anchor text is clicked!')"&gt; Click me! &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      
+      <h3>Using void(0)</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;a href="javascript:void(0)"&gt; Click me! &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      
+      <h3>Example with onclick</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;a href="javascript:void(0);" onclick="document.body.style.backgroundColor='blue'"&gt;
+      Change Background Color
+   &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      
+      <h2>The void Keyword with Functions</h2>
+      <h3>Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+&lt;div id="demo"&gt; &lt;/div&gt;
+&lt;script&gt;
+   const output = document.getElementById('demo');
+   try {
+      void function test() {
+         output.innerHTML += "The test function is executed!";
+      }
+      test();
+   } catch (error) {
+      output.innerHTML += "The test function is undefined!";
+   }
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b> The test function is undefined!</p>
+      
+      <h2>The void Keyword with Immediately Invoked Function</h2>
+      <h3>Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="demo"&gt; &lt;/div&gt;
+   &lt;script&gt;
+      const output = document.getElementById("demo");
+      void function () {
+         output.innerHTML = "Unknown function is executed!";
+      }();
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <p><b>Output:</b> Unknown function is executed!</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Client-Side Rendering (CSR) 🖱️</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Client-Side Rendering?</h2>
+            <p>**Client-Side Rendering (CSR)** is a web technique where the content is rendered entirely in the **user's browser using JavaScript**. The server delivers a minimal HTML structure and the necessary JavaScript bundle. The browser then executes the JavaScript, which is responsible for fetching data, building the full DOM structure, and rendering the final content.</p>
+            <p>This process can cause a slight delay, as the user may see a blank or loading state until the JavaScript is fully downloaded, parsed, and executed.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Implementing CSR in Next.js</h2>
+            <p>Next.js offers a hybrid approach, allowing CSR for highly interactive parts of your application. In the App Router, you designate a component for CSR by adding the **<span class="example">`'use client'`</span>** directive at the top of the file.</p>
+            <p>Client Components allow the use of browser APIs and **React Hooks** (like <span class="example">`useState`</span> and <span class="example">`useEffect`</span>) to manage state and perform data fetching directly in the user's browser.</p>
+            
+            <h3 class="title">Example (CSR with Data Fetching):</h3>
+            <p>The example below shows a component fetching data using <span class="example">`useEffect`</span> after the initial mount, displaying a "Loading..." message until the data is retrieved.</p>
+            <pre>// 'use client' // Declares this as a client component
+import { useState, useEffect } from 'react';
+
+export default function CSRPage() {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Data fetching logic runs in the user's browser
+        const fetchData = async () => { /* ... */ };
+        fetchData();
+    }, []);
+
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;{loading ? 'Loading...' : 'Client-Side Rendered Page'}&lt;/h1&gt;
+            {/* ... Content rendering ... */}
+        &lt;/div&gt;
+    );
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Advantages and Disadvantages of CSR</h2>
+            
+            <h3 class="title">Advantages ✅</h3>
+            <ul>
+                <li>**Highly Interactive UIs:** Provides full control over client-side JavaScript, enabling rich, dynamic user interfaces.</li>
+                <li>**Better Performance on Repeated Visits:** After the initial load, the application can leverage browser **caching**, leading to faster navigation between client-rendered pages.</li>
+                <li>**Reduced Server Load:** Less computational work is required from the server for view rendering.</li>
+            </ul>
+            
+            <h3 class="title">Disadvantages ❌</h3>
+            <ul>
+                <li>**SEO Issues:** Some older search engine crawlers may not execute JavaScript, potentially seeing only the initial empty HTML shell and impacting your page's ranking.</li>
+                <li>**Initial Performance Delay:** Users with slower devices or network connections must wait for all JavaScript bundles to download and run, leading to a poorer **Time to Interactive (TTI)**.</li>
+            </ul>
+        </div>
+    </div>
+</div>

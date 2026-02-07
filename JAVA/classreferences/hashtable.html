@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java <code>Hashtable</code> Class Summary ⚓️</h1>
+
+        <div class="content">
+            <p>The **<code>java.util.Hashtable</code>** class is a concrete implementation of a **hash table** that maps keys to values. It is a **legacy class** from the original Java Development Kit (JDK 1.0) and has been largely replaced by the **<code>HashMap</code>** and **<code>ConcurrentHashMap</code>** classes in modern Java.</p>
+
+            <hr>
+
+            <h2 class="title">I. Legacy Status and Key Differences from <code>HashMap</code></h2>
+            <p>While `Hashtable` and `HashMap` provide similar core functionality (fast, unordered key-value storage), they have three critical differences:</p>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th><code>Hashtable</code></th>
+                    <th><code>HashMap</code> (Modern Standard)</th>
+                </tr>
+                <tr>
+                    <td>**Synchronization**</td>
+                    <td>**Synchronized** (Thread-safe)</td>
+                    <td>Not Synchronized (Not thread-safe)</td>
+                </tr>
+                <tr>
+                    <td>**Null Keys/Values**</td>
+                    <td>**Does NOT permit** null keys or null values.</td>
+                    <td>Permits one null key and multiple null values.</td>
+                </tr>
+                <tr>
+                    <td>**Inheritance**</td>
+                    <td>Extends **<code>Dictionary</code>** (legacy).</td>
+                    <td>Extends **<code>AbstractMap</code>** (modern JCF).</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <h2 class="title">II. Core Characteristics</h2>
+            <ul>
+                <li>
+                    **Synchronization:** Every public method of `Hashtable` is synchronized. This makes it thread-safe but imposes a performance penalty compared to `HashMap` in single-threaded environments. For concurrent applications, **<code>ConcurrentHashMap</code>** is the modern, more efficient replacement.
+                </li>
+                <li>
+                    **Performance:** Like `HashMap`, `put()`, `get()`, and `remove()` operations are typically **constant time ($O(1)$)**, assuming a good hash function.
+                </li>
+                <li>
+                    **Unordered:** It makes **no guarantees about the iteration order**. The order depends on the hash codes and the internal structure.
+                </li>
+                <li>
+                    **Iteration:** It relies on the legacy **<code>Enumeration</code>** interface for accessing keys and elements, although it also provides modern `Iterator`-based views via `keySet()`, `entrySet()`, and `values()`.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">III. Initialization and Capacity</h2>
+            <p>Similar to `HashMap`, its performance is tunable with capacity parameters:</p>
+            <ul>
+                <li>
+                    **Initial Capacity (Default: 11):** The initial number of buckets in the hash table.
+                </li>
+                <li>
+                    **Load Factor (Default: 0.75):** Dictates the ratio of elements to capacity that triggers automatic resizing and rehashing to maintain performance efficiency.
+                </li>
+            </ul>
+
+            <div class="example">
+                <p><strong>Example Observation:</strong></p>
+                <p>The output `Hashtable elements: {3=3, 2=2, 1=1}` shows that the iteration order is **not** the insertion order (`1, 2, 3`), which is expected for a hash table implementation.</p>
+            </div>
+        </div>
+    </div>
+</div>

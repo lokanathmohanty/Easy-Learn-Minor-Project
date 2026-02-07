@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP - Create Directory</h1>
+
+    <div class="content">
+      <p>
+        PHP provides several functions for **directory management** (folder operations), allowing you to create, change, retrieve, and remove directories programmatically. These functions are crucial for file organization within an application.
+      </p>
+
+      <h2>The mkdir() Function (Create Directory)</h2>
+      <p>
+        The <code>mkdir()</code> function creates a new directory specified by the given path.
+      </p>
+      <pre><code>mkdir(
+   string $directory,
+   int $permissions = 0777,
+   bool $recursive = false,
+   ?resource $context = null
+): bool</code></pre>
+      <ul>
+        <li>
+          <strong><code>$directory</code></strong>: The absolute or relative path of the new directory to create.
+        </li>
+        <li>
+          <strong><code>$permissions</code></strong>: An **octal number** specifying permissions (e.g., <code>0777</code> for full read/write/execute access). This is generally ignored on Windows OS.
+        </li>
+        <li>
+          <strong><code>$recursive</code></strong>: If set to <code>true</code>, PHP will create any necessary parent directories that don't already exist.
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Using mkdir()</h2>
+    <div class="content example">
+      <p>
+        Examples of creating directories, including nested structures:
+      </p>
+      <pre><code>&lt;?php
+   // Creates 'mydir' in the current working directory
+   $dir1 = "./mydir/";
+   mkdir($dir1);
+
+   // Creates 'dir1' -> 'dir2' -> 'dir3' only because the recursive flag is TRUE
+   $dirs2 = "./dir1/dir2/dir3/";
+   mkdir($dirs2, 0777, true); 
+
+   // Creates a directory with read/write access for the owner (0600)
+   $dir3 = "c:/safe_storage/";
+   mkdir($dir3, 0600);
+?&gt;</code></pre>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <h2>Directory Navigation and Retrieval</h2>
+      <ul>
+        <li>
+          <h3>The chdir() Function (Change Directory)</h3>
+          <p>
+            Corresponds to the <code>cd</code> command, changing the **current working directory** for the script.
+          </p>
+          <pre><code>chdir(string $directory): bool</code></pre>
+        </li>
+        <li>
+          <h3>The getcwd() Function (Get Current Working Directory)</h3>
+          <p>
+            Works like the <code>pwd</code> command, returning the **absolute path** to the current working directory.
+          </p>
+          <pre><code>getcwd(): string|false</code></pre>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title">Example: Navigation and Retrieval</h2>
+    <div class="content example">
+      <p>
+        Demonstrates retrieving the current directory, changing it, and then listing files in the new directory using <code>scandir()</code>.
+      </p>
+      <pre><code>&lt;?php
+   echo "Initial directory: " . getcwd() . PHP_EOL;
+
+   // Change the current directory to 'mydir'
+   $dir = "./mydir";
+   chdir($dir);
+
+   echo "Directory changed to: " . getcwd() . PHP_EOL;
+
+   // This file 'a.txt' will be created INSIDE 'mydir'
+   $fp = fopen("a.txt", "w");
+   fwrite($fp, "Hello World");
+   fclose($fp);
+
+   // List files in the new current directory
+   foreach(scandir(getcwd()) as $file) {
+      echo $file . PHP_EOL;
+   }
+?&gt;</code></pre>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <h2>The rmdir() Function (Remove Directory)</h2>
+      <p>
+        The <code>rmdir()</code> function removes the directory specified by the path.
+      </p>
+      <pre><code>rmdir(string $directory, ?resource $context = null): bool</code></pre>
+      <p class="example">
+        <strong>Important Note:</strong> The directory to be removed **must be empty**. To delete a directory with files inside, you must recursively remove all contents first.
+      </p>
+      <pre><code>&lt;?php
+   $dir_to_remove = "./empty_folder/";
+   
+   if (rmdir($dir_to_remove)) {
+      echo "Directory '$dir_to_remove' removed successfully.";
+   } else {
+      die("The directory is not present or not empty.");
+   }
+?&gt;</code></pre>
+    </div>
+  </div>
+</div>

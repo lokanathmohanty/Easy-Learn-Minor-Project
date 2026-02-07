@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Polymorphism in C++ (Many Forms) 🦄</h1>
+
+        <div class="content">
+            <p>The word **polymorphism** means "having many forms." In C++, polymorphism allows a function call to execute a different function based on the **type of object** that invokes it at **runtime**. It relies on an inheritance hierarchy and is key to flexible, extendable code design.</p>
+
+            <hr>
+
+            <h2 class="title">Static vs. Dynamic Polymorphism</h2>
+
+            <h3>Static Resolution (Early Binding)</h3>
+            <p>Without special keywords, C++ uses **static resolution** (early binding). When a base class pointer points to a derived class object and calls a method, the compiler only looks at the **pointer's type (Base Class)**, not the object's actual type. This results in the base class version of the function being called, even if the derived class overrides it (as shown in the first example's incorrect output).</p>
+
+            <h3>Dynamic Resolution (Late Binding) with Virtual Functions</h3>
+            <p>To achieve true, or **dynamic**, polymorphism, you must use **Virtual Functions**.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Virtual Functions (Dynamic Polymorphism)</h2>
+
+        <div class="content">
+            <p>A **virtual function** is a member function in a base class that is declared using the keyword **<code>virtual</code>**. This signals to the compiler that it should use **dynamic linkage** (late binding) for this function.</p>
+            <ul>
+                <li>The function to be executed is selected based on the **actual type of the object** being pointed to, not the type of the pointer itself.</li>
+                <li>This is why adding `virtual` to `Shape::area()` correctly calls the respective `Rectangle::area()` and `Triangle::area()` methods when accessed via the `Shape*` pointer.</li>
+            </ul>
+            <pre class="example">
+class Shape {
+   public:
+      // Enables dynamic polymorphism
+      virtual int area() { /* ... */ } 
+};
+</pre>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Pure Virtual Functions (Abstract Classes)</h2>
+
+        <div class="content">
+            <p>A **pure virtual function** is a virtual function in the base class that is declared with **<code>= 0</code>**.</p>
+            <ul>
+                <li>It tells the compiler that the function has **no body** (no meaningful implementation) in the base class.</li>
+                <li>A class containing one or more pure virtual functions is called an **abstract class**. You **cannot** create direct instances (objects) of an abstract class; you must derive from it and provide implementations for all pure virtual functions.</li>
+            </ul>
+            <pre class="example">
+class Shape {
+   public:
+      // Pure virtual function: forces derived classes to define area()
+      virtual int area() = 0;
+};
+</pre>
+        </div>
+    </div>
+</div>

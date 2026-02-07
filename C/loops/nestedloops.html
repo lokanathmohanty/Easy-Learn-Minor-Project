@@ -1,0 +1,189 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Nested Loops in C</h1>
+
+    <div class="content">
+      <p>In programming, the term <strong>nesting</strong> refers to placing one programming construct inside another. Common examples include nested loops, nested conditionals, and nested functions.</p>
+
+      <h2 class="title">What Are Nested Loops?</h2>
+      <p>When one loop is placed inside another loop, it's called a <strong>nested loop</strong>. The loop that contains another loop is called the <strong>outer loop</strong>, and the one inside is the <strong>inner loop</strong>.</p>
+
+      <h3>General Syntax:</h3>
+      <pre><code>Outer loop {
+   Inner loop {
+      // statements
+   }
+   // more outer loop statements
+}</code></pre>
+
+      <p>All loop types in C (<code>for</code>, <code>while</code>, and <code>do-while</code>) can be nested in any combination.</p>
+      <p>For every single iteration of the outer loop, the inner loop runs all its iterations.</p>
+
+      <h2 class="title">Nested <code>for</code> Loops</h2>
+      <p>Nested <code>for</code> loops are commonly used when the number of iterations is known in advance for both loops.</p>
+
+      <h3>Example: Nested <code>for</code> Loop</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i, j;
+
+   for(i = 1; i &lt;= 3; i++) {
+      for(j = 1; j &lt;= 3; j++) {
+         printf("i: %d j: %d\n", i, j);
+      }
+      printf("End of Inner Loop\n");
+   }
+   printf("End of Outer Loop");
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>i: 1 j: 1
+i: 1 j: 2
+i: 1 j: 3
+End of Inner Loop
+
+i: 2 j: 1
+i: 2 j: 2
+i: 2 j: 3
+End of Inner Loop
+
+i: 3 j: 1
+i: 3 j: 2
+i: 3 j: 3
+End of Inner Loop
+
+End of Outer Loop</code></pre>
+
+      <h3>Explanation:</h3>
+      <p>Each time the outer loop runs, the inner loop completes all of its iterations. So the inner loop runs <code>3 × 3 = 9</code> times in total.</p>
+
+      <h2 class="title">Nested <code>while</code> Inside <code>for</code> Loop</h2>
+
+      <h3>Example:</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i, j;
+
+   for (i = 1; i &lt;= 3; i++) {
+      j = 1;
+      while (j &lt;= 3) {
+         printf("i: %d j: %d\n", i, j);
+         j++;
+      }
+      printf("End of Inner While Loop\n");
+   }
+   printf("End of Outer For Loop");
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>i: 1 j: 1
+i: 1 j: 2
+i: 1 j: 3
+End of Inner While Loop
+
+i: 2 j: 1
+i: 2 j: 2
+i: 2 j: 3
+End of Inner While Loop
+
+i: 3 j: 1
+i: 3 j: 2
+i: 3 j: 3
+End of Inner While Loop
+
+End of Outer For Loop</code></pre>
+
+      <h2 class="title">More Examples of Nested Loops</h2>
+
+      <h3>Example 1: Print Multiplication Tables (1 to 10)</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i, j;
+   printf("Program to Print the Tables of 1 to 10\n");
+
+   for(i = 1; i &lt;= 10; i++) {
+      for(j = 1; j &lt;= 10; j++) {
+         printf("%4d", i * j);
+      }
+      printf("\n");
+   }
+   return 0;
+}</code></pre>
+
+      <h4>Output (Excerpt):</h4>
+      <pre><code>   1   2   3   4   5   6   7   8   9  10
+   2   4   6   8  10  12  14  16  18  20
+   ...
+  10  20  30  40  50  60  70  80  90 100</code></pre>
+
+      <h3>Example 2: Character Pyramid from String</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+   int i, j;
+   char x[] = "TutorialsPoint";
+   int l = strlen(x);
+
+   for(i = 0; i &lt; l; i++) {
+      for(j = 0; j &lt;= i; j++) {
+         printf("%c", x[j]);
+      }
+      printf("\n");
+   }
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>T
+Tu
+Tut
+Tuto
+Tutor
+...
+TutorialsPoint</code></pre>
+
+      <h3>Example 3: Print 2D Array Using Nested Loops</h3>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+   int i, j;
+   int x[4][4] = {
+      {1, 2, 3, 4},
+      {11, 22, 33, 44},
+      {9, 99, 999, 9999},
+      {10, 20, 30, 40}
+   };
+
+   for(i = 0; i &lt; 4; i++) {
+      for(j = 0; j &lt; 4; j++) {
+         printf("%5d", x[i][j]);
+      }
+      printf("\n");
+   }
+   return 0;
+}</code></pre>
+
+      <h4>Output:</h4>
+      <pre><code>    1    2    3    4
+   11   22   33   44
+    9   99  999 9999
+   10   20   30   40</code></pre>
+
+      <h2 class="title">Key Takeaways</h2>
+      <ul>
+        <li>Nested loops help perform operations on multi-dimensional data like matrices and tables.</li>
+        <li>Each outer loop iteration runs the entire inner loop.</li>
+        <li>All combinations of loop types (<code>for</code>, <code>while</code>, <code>do-while</code>) are valid for nesting.</li>
+        <li>Be cautious of infinite loops when nesting, especially with condition-based loops.</li>
+      </ul>
+
+    </div>
+  </div>
+</div>

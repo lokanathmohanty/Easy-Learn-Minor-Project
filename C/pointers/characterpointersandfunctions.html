@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Character Pointers and Functions in C</h1>
+    <div class="content">
+
+      <h2>What Is a Character Pointer?</h2>
+      <p>A character pointer stores the address of a <code>char</code> or the address of the first character in a character array (string). In C, strings are represented as arrays of <code>char</code>, so a <code>char*</code> often refers to a string.</p>
+
+      <h2>Declaring a Character Pointer</h2>
+      <p>Syntax:</p>
+      <pre><code>char *pointer_name;</code></pre>
+
+      <h2>Initializing a Character Pointer</h2>
+      <p>To point to a single character:</p>
+      <pre><code>char c = 'A';
+char *ptr = &c;</code></pre>
+      <p>To point to a character array (string):</p>
+      <pre><code>char arr[] = "Hello";
+char *ptr = arr;
+// or equivalently
+char *ptr = &arr[0];</code></pre>
+
+      <h2>Character Pointer Example</h2>
+      <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  char x = 'P';
+  char arr[] = "TutorialsPoint";
+
+  char *ptr_x = &x;
+  char *ptr_arr = arr;
+
+  printf("Value of x : %c\n", *ptr_x);
+  printf("Value of arr: %s\n", ptr_arr);
+
+  return 0;
+}</code></pre>
+      <p>Output:</p>
+      <p>
+        Value of x : P<br>
+        Value of arr: TutorialsPoint
+      </p>
+
+      <h2>Understanding Character Pointers and Strings</h2>
+      <p>The string <code>char arr[] = "Hello";</code> is a NULL-terminated array of characters. The last character is <code>'\0'</code>. You can traverse this string via a <code>char*</code>:</p>
+      <pre><code>char *ptr = arr;
+while (*ptr != '\0') {
+  printf("%c", *ptr);
+  ptr++;
+}</code></pre>
+      <p>You can also directly print the string via <code>printf("%s", ptr);</code>.</p>
+
+      <h2>Character Pointer Functions (string.h)</h2>
+
+      <h3><code>strlen()</code></h3>
+      <p>Returns the length (number of characters) of a string. Prototype:</p>
+      <pre><code>size_t strlen(const char *s);</code></pre>
+      <p>Example:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+  char *ptr = "Hello";
+  printf("Given string: %s\n", ptr);
+  printf("Length of the string: %zu\n", strlen(ptr));
+  return 0;
+}</code></pre>
+
+      <h3><code>strcpy()</code></h3>
+      <p>Copies one string to another. Prototype:</p>
+      <pre><code>char *strcpy(char *dest, const char *src);</code></pre>
+      <p>Example usage:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+  char source[] = "Hello";
+  char dest[20];
+  strcpy(dest, source);
+  printf("%s\n", dest);
+  return 0;
+}</code></pre>
+
+      <h3><code>strcmp()</code></h3>
+      <p>Compares two strings lexicographically. Prototype:</p>
+      <pre><code>int strcmp(const char *s1, const char *s2);</code></pre>
+      <p>Return values:</p>
+      <ul>
+        <li>0 if both strings are identical</li>
+        <li>Positive if first non-matching character in <code>s1</code> > in <code>s2</code></li>
+        <li>Negative if first non-matching character in <code>s1</code> < in <code>s2</code></li>
+      </ul>
+      <p>Example:</p>
+      <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+  char *s1 = "BASK";
+  char *s2 = "BALL";
+  int ret = strcmp(s1, s2);
+
+  if (ret == 0)
+    printf("Both strings are identical\n");
+  else if (ret > 0)
+    printf("First string appears after second\n");
+  else
+    printf("First string appears before second\n");
+
+  return 0;
+}</code></pre>
+
+    </div>
+  </div>
+</div>

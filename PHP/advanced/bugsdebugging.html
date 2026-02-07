@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Bugs Debugging Strategies</h1>
+
+        <div class="content">
+            <h2 class="title">Understanding and Enabling Error Reporting</h2>
+            <p>Debugging is the systematic process of finding and fixing **bugs** (errors) in PHP code that lead to unexpected results or crashes. The first step in effective debugging is ensuring that the PHP interpreter reports errors correctly.</p>
+
+            <h3>Displaying Errors in the Browser (Development)</h3>
+            <p>To see error messages directly in the web browser, ensure these directives are set in the **$\text{php.ini}$** configuration file:</p>
+            <pre>
+display_errors=On
+display_startup_errors=On</pre>
+            <p>Alternatively, you can override the $\text{php.ini}$ settings within your script using the $\text{ini\_set()}$ function:</p>
+            <pre>
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);</pre>
+
+            <h3>Sending Errors to the Log (Production/Server)</h3>
+            <p>For production environments, it is safer to log errors rather than display them to users. Set the $\text{log\_errors}$ directive to $\text{On}$. You can set both $\text{display\_errors}$ and $\text{log\_errors}$ to $\text{On}$ if you want errors in both places during development.</p>
+
+            <h3>Setting $\text{error\_reporting}$ Levels</h3>
+            <p>The $\text{error\_reporting}$ directive controls which severity of errors are reported. Key constants include:</p>
+            <ul>
+                <li>$\text{E\_ALL}$: Reports all errors, warnings, and notices (best for development).</li>
+                <li>$\text{E\_ERROR}$: Only reports fatal run-time errors (script crashes).</li>
+                <li>$\text{E\_WARNING}$: Reports run-time warnings (non-fatal).</li>
+                <li>$\text{E\_NOTICE}$: Reports run-time notices (minor issues).</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Tips for Efficient Bug Tracing</h2>
+
+            <h3>Use PHP-Aware Editors</h3>
+            <p>Tools like **VS Code (with extensions like Intelephense)**, BBEdit, or Emacs are highly recommended. Features such as **syntax highlighting** (coloring keywords, variables, and strings) and **quote/bracket matching** help prevent and identify simple syntax errors immediately.</p>
+
+            <h3>Common Coding Mistakes to Check</h3>
+            <p>When debugging, systematically verify these common mistakes:</p>
+            <ol>
+                <li>**Missing Semicolons ($\text{;}$):** Every PHP statement must end with a semicolon. Missing one causes the interpreter to treat the next line as part of the current statement.</li>
+                <li>**Not Enough Equal Signs ($\text{=}$ vs. $\text{==}$):** Using a single $\text{=}$ (assignment operator) instead of $\text{==}$ (comparison operator) in conditional statements is a frequent error.</li>
+                <li>**Misspelled Variable Names:** Variable names are **case-sensitive** ($\text{\$test}$ is different from $\text{\$Test}$). A misspelling creates a new, unintended variable.</li>
+                <li>**Missing Dollar Signs ($\text{\$}$):** Variables in PHP must always be prefixed with a dollar sign.</li>
+                <li>**Troubling Quotes ($\text{""}$ or $\text{''}$):** Ensure all strings have a balanced and correct number of opening and closing quotes.</li>
+                <li>**Missing Parentheses/Brackets ($\text{()}$, $\text{\{\}}$, $\text{[]}$):** All delimiters must be correctly paired.</li>
+                <li>**Array Index:** Remember that indexed arrays in PHP start at index **0**.</li>
+            </ol>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Pandas - Cleaning Empty Cells</h1>
+    <div class="content">
+      <h2>Empty Cells</h2>
+      <p>Empty cells can potentially give you a wrong result when you analyze data.</p>
+
+      <h2>Remove Rows</h2>
+      <p>One way to deal with empty cells is to remove rows that contain empty cells.</p>
+      <p>This is usually OK, since data sets can be very big, and removing a few rows will not have a big impact on the result.</p>
+
+      <h3>Example</h3>
+      <p>Return a new DataFrame with no empty cells:</p>
+      <pre>
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+new_df = df.dropna()
+
+print(new_df.to_string())
+      </pre>
+
+      <p>Note: By default, the <code>dropna()</code> method returns a new DataFrame, and will not change the original.</p>
+
+      <h3>Example</h3>
+      <p>Remove all rows with NULL values in the original DataFrame:</p>
+      <pre>
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+df.dropna(inplace = True)
+
+print(df.to_string())
+      </pre>
+
+      <h2>Replace Empty Values</h2>
+      <p>Another way of dealing with empty cells is to insert a new value instead.</p>
+      <p>This way you do not have to delete entire rows just because of some empty cells.</p>
+
+      <h3>Example</h3>
+      <p>Replace NULL values with the number 130:</p>
+      <pre>
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+df.fillna(130, inplace = True)
+      </pre>
+
+      <h2>Replace Only For Specified Columns</h2>
+      <p>The example above replaces all empty cells in the entire DataFrame.</p>
+      <p>To only replace empty values for one column, specify the column name:</p>
+
+      <h3>Example</h3>
+      <p>Replace NULL values in the "Calories" column with the number 130:</p>
+      <pre>
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+df.fillna({"Calories": 130}, inplace=True)
+      </pre>
+
+      <h2>Replace Using Mean, Median, or Mode</h2>
+      <p>A common way to replace empty cells is to calculate the mean, median, or mode of the column.</p>
+      <p>Pandas uses the <code>mean()</code>, <code>median()</code>, and <code>mode()</code> methods to calculate the respective values.</p>
+
+      <h3>Example - Mean</h3>
+      <p>Calculate the mean and replace any empty values with it:</p>
+      <pre>
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+x = df["Calories"].mean()
+
+df.fillna({"Calories": x}, inplace=True)
+      </pre>
+      <p><strong>Mean</strong> = the average value (sum of all values divided by number of values).</p>
+
+      <h3>Example - Median</h3>
+      <p>Calculate the median and replace any empty values with it:</p>
+      <pre>
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+x = df["Calories"].median()
+
+df.fillna({"Calories": x}, inplace=True)
+      </pre>
+      <p><strong>Median</strong> = the value in the middle, after sorting all values in ascending order.</p>
+
+      <h3>Example - Mode</h3>
+      <p>Calculate the mode and replace any empty values with it:</p>
+      <pre>
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+x = df["Calories"].mode()[0]
+
+df.fillna({"Calories": x}, inplace=True)
+      </pre>
+      <p><strong>Mode</strong> = the value that appears most frequently.</p>
+    </div>
+  </div>
+</div>

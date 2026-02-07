@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Refs and the DOM</h1>
+
+    <div class="content">
+      <p>
+        React automatically updates the UI when the state of a component changes. 
+        This avoids the need for direct DOM manipulation. 
+        However, in some scenarios we may need direct access to DOM elements. 
+        React provides <b>refs</b> for this purpose, ensuring smooth integration 
+        with both the Virtual DOM and the actual HTML DOM.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Creating a Ref</h2>
+      <p>
+        React provides the <code>createRef()</code> function to create refs in class components. 
+        A ref is a mutable object that persists across re-renders.
+      </p>
+      <pre><code>&lt;refObj&gt; = React.createRef()</code></pre>
+      <p>Attach a ref to an element:</p>
+      <pre><code>&lt;input ref={refObj} /&gt;</code></pre>
+      <p>Access the element using the <code>current</code> property:</p>
+      <pre><code>const refElement = refObj.current</code></pre>
+    </div>
+
+    <div class="content">
+      <h2>Example: SimpleRef Component</h2>
+      <p>
+        The following example demonstrates how to use <code>createRef</code> in a class component:
+      </p>
+      <pre><code>import React from "react";
+import { createRef } from "react";
+
+class SimpleRef extends React.Component {
+   constructor(props) {
+      super(props)
+      this.state = { count: 0 }
+      this.handleClick = this.handleClick.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      this.inputRef = createRef()
+      this.labelRef = createRef()
+   }
+
+   handleClick() {
+      this.setState(prevState =&gt; ({ count: prevState.count + 1 }))
+   }
+
+   handleChange() {
+      this.labelRef.current.innerText =
+         this.inputRef.current.value === "" ? "World" : this.inputRef.current.value
+   }
+
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;div&gt;Counter: {this.state.count} 
+               &lt;button onClick={this.handleClick}&gt;+&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+               &lt;label&gt;Enter your name: &lt;/label&gt;
+               &lt;input type="text" ref={this.inputRef} onChange={this.handleChange} /&gt;
+               &lt;br /&gt;
+               &lt;div&gt;Hello, &lt;span ref={this.labelRef}&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/div&gt;
+      )
+   }
+}
+
+export default SimpleRef;</code></pre>
+      <ul>
+        <li><code>this.inputRef</code> is attached to the input element.</li>
+        <li><code>this.labelRef</code> is attached to the greeting message element.</li>
+        <li><code>handleChange</code> updates the greeting message using refs directly, without re-rendering the component.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Behavior</h2>
+      <ul>
+        <li>Updating state (counter) triggers a re-render.</li>
+        <li>Updating the input field via refs does not trigger a re-render, but updates the DOM directly.</li>
+        <li>Refs persist values between re-renders.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Use Cases of <code>createRef</code></h2>
+      <ul>
+        <li><b>Accessing JavaScript DOM API</b>:
+          <ul>
+            <li>Focusing an input element</li>
+            <li>Selecting text</li>
+            <li>Controlling audio/video playback</li>
+          </ul>
+        </li>
+        <li><b>Imperative animations</b>: Using Web Animations API requires direct DOM access.</li>
+        <li><b>Integration with third-party libraries</b>: Some libraries need raw DOM nodes to function.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Summary</h2>
+      <ul>
+        <li>React promotes state-driven UI updates.</li>
+        <li>Refs provide a clean API to directly access and manipulate DOM elements.</li>
+        <li>They are useful when using DOM APIs, animations, or third-party libraries.</li>
+      </ul>
+    </div>
+  </div>
+</div>

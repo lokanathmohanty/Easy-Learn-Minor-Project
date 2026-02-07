@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Node.js Cheat Sheet</title>
+</head>
+<body>
+    <div class="container">
+        <div class="session">
+            <h1 class="title">Node.js Cheat Sheet</h1>
+
+            <div class="content">
+                <h2>Content</h2>
+                <ul>
+                    <li><strong>Initialize Project:</strong> <code>npm init</code> or <code>npm init -y</code></li>
+                    <li><strong>Install Package:</strong> <code>npm install package-name</code></li>
+                    <li><strong>Create HTTP Server:</strong> Use <code>http</code> module</li>
+                    <li><strong>Read File:</strong> <code>fs.readFile</code> or <code>fs.readFileSync</code></li>
+                    <li><strong>Write File:</strong> <code>fs.writeFile</code> or <code>fs.writeFileSync</code></li>
+                    <li><strong>Use Express:</strong> <code>const express = require('express');</code></li>
+                    <li><strong>Environment Variables:</strong> <code>process.env.VARIABLE_NAME</code></li>
+                    <li><strong>Export/Import Module:</strong> <code>module.exports</code> and <code>require()</code></li>
+                    <li><strong>Run App:</strong> <code>node app.js</code> or <code>nodemon app.js</code></li>
+                    <li><strong>Common Modules:</strong> <code>http</code>, <code>fs</code>, <code>path</code>, <code>os</code>, <code>events</code></li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2>Example</h2>
+                <p>Basic HTTP server using the <code>http</code> module:</p>
+<pre>
+<code>const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello World');
+});
+
+server.listen(3000, () => {
+    console.log('Server running at http://localhost:3000/');
+});
+</code>
+</pre>
+
+                <p>Using Express for the same server:</p>
+<pre>
+<code>const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello from Express!');
+});
+
+app.listen(3000, () => {
+    console.log('Server is listening on port 3000');
+});
+</code>
+</pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

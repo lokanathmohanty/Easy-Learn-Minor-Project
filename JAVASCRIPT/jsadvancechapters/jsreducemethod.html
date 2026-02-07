@@ -1,0 +1,142 @@
+<div class="container">
+  <div class="session" data-session-id="js-reduce-method">
+    <h1 class="title">JavaScript - Reduce Method</h1>
+
+    <div class="content">
+      <h2>What is Reduce Method?</h2>
+      <p>
+        In JavaScript, the <code>reduce()</code> method is used to manipulate arrays. It executes a reducer function
+        on each element of the array (from left to right) and returns a single value as a result.
+      </p>
+      <p>
+        It accepts an optional parameter named <em>initialValue</em>. If not provided, the first array element 
+        (<code>arr[0]</code>) is used as the initial value. The method does not execute the reducer on empty array elements 
+        and does not modify the original array.
+      </p>
+      <p>
+        <strong>Note:</strong> If the array is empty and no <em>initialValue</em> is provided, this method throws a 
+        <code>TypeError</code>.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Syntax</h2>
+      <p><code>array.reduce(callbackFn(accumulator, currentValue, currentIndex, array), initialValue)</code></p>
+    </div>
+
+    <div class="content">
+      <h2>Parameters</h2>
+      <ul>
+        <li><strong>initialValue (optional):</strong> Value used as the first accumulator when the function is first called.</li>
+        <li><strong>callbackFn:</strong> Function that runs for each element in the array.</li>
+      </ul>
+      <p>The <code>callbackFn</code> itself takes four arguments:</p>
+      <ul>
+        <li><strong>accumulator:</strong> Stores the accumulated result of previous operations.</li>
+        <li><strong>currentValue:</strong> The current element being processed.</li>
+        <li><strong>currentIndex (optional):</strong> Index of the current element.</li>
+        <li><strong>array (optional):</strong> The array on which reduce was called.</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Return Value</h2>
+      <p>
+        The <code>reduce()</code> method returns a single value, which is the accumulated result after processing the entire array.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Example 1: Sum of Array Elements</h2>
+      <pre>
+&lt;script&gt;
+const numbers = [10, 20, 30, 40, 50];
+const sum = numbers.reduce((accumulator, currentValue) =&gt; accumulator + currentValue, 0);
+document.write(sum);
+&lt;/script&gt;
+      </pre>
+      <p><strong>Output:</strong> 150</p>
+    </div>
+
+    <div class="content">
+      <h2>Example 2: Empty Array Without Initial Value</h2>
+      <pre>
+&lt;script&gt;
+const numbers = [];
+try {
+   numbers.reduce((accumulator, currentValue) =&gt; accumulator * currentValue);
+} catch (error) {
+   document.write(error);
+}
+&lt;/script&gt;
+      </pre>
+      <p><strong>Output:</strong> TypeError: Reduce of empty array with no initial value</p>
+    </div>
+
+    <div class="content">
+      <h2>Reduce Method on TypedArray</h2>
+      <p>
+        <code>reduce()</code> can also be used with TypedArrays in the same way as with normal arrays.
+      </p>
+      <pre>
+&lt;script&gt;
+// function
+function multi(accumulator, currentValue) {
+   return accumulator * currentValue;
+}
+
+const T_array = new Uint16Array([1, 2, 3, 4, 5]);
+document.write("Typed array: ", T_array);
+document.write("&lt;br&gt;The product: ", T_array.reduce(multi));
+&lt;/script&gt;
+      </pre>
+      <p><strong>Output:</strong><br>Typed array: 1,2,3,4,5<br>The product: 120</p>
+    </div>
+
+    <div class="content">
+      <h2>Example: Empty TypedArray</h2>
+      <pre>
+&lt;script&gt;
+const T2_array = new Uint16Array([]);
+document.write("Length: ", T2_array.length);
+
+try {
+   T2_array.reduce((a, b) =&gt; a + b);
+} catch (error) {
+   document.write("&lt;br&gt;", error);
+}
+&lt;/script&gt;
+      </pre>
+      <p><strong>Output:</strong><br>Length: 0<br>TypeError: Reduce of empty array with no initial value</p>
+    </div>
+
+    <div class="content">
+      <h2>Reduce Method on Map</h2>
+      <p>
+        We can apply <code>reduce()</code> on Map values by spreading them into an array using 
+        <code>[...map.values()]</code>.
+      </p>
+      <pre>
+&lt;script&gt;
+// function
+function add(accumulator, currentValue) {
+   return accumulator + currentValue;
+}
+
+const map = new Map([[1, 2], [3, 4], [5, 6]]);
+document.write("Map: ", map);
+document.write("&lt;br&gt;The sum: ", [...map.values()].reduce(add));
+&lt;/script&gt;
+      </pre>
+      <p><strong>Output:</strong><br>Map: 1 =&gt; 2, 3 =&gt; 4, 5 =&gt; 6<br>The sum: 12</p>
+    </div>
+
+    <div class="content">
+      <p>
+        <a href="#prev" class="prev">Previous</a> | 
+        <a href="#next" class="next">Next</a> | 
+        <a href="#toc" class="toc">Table of Contents</a>
+      </p>
+    </div>
+  </div>
+</div>

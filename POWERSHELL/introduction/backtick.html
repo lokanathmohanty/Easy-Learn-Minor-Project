@@ -1,0 +1,50 @@
+<div class="container">
+
+  <div class="session">
+
+    <h1 class="title">PowerShell - Backtick</h1>
+
+    <div class="content">
+      <p>Backtick (<code>`</code>) operator is also called the word-wrap operator. It allows a command to be written in multiple lines. It can be used for new line (<code>`n</code>) or tab (<code>`t</code>) in sentences as well. See the examples below −</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example 1</h2>
+      <p>Using backtick to split command across multiple lines:</p>
+      <pre>
+Get-Service * | Sort-Object ServiceType `
+| Format-Table Name, ServiceType, Status -AutoSize
+      </pre>
+      <p>It will become:</p>
+      <pre>
+Get-Service * | Sort-Object ServiceType | Format-Table Name, ServiceType, Status -AutoSize
+      </pre>
+      <p>Verify the output as:</p>
+      <pre>
+Name                       ServiceType       Status
+----                       -----------       ------
+MSSQLServerADHelper100      Win32OwnProcess   Stopped
+ntrtscan                   Win32OwnProcess   Running
+...
+      </pre>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Example 2</h2>
+      <p>Use of new line and tab characters:</p>
+      <pre>
+&gt; Write-Host "Title Subtitle"
+Title Subtitle
+
+&gt; Write-Host "Title `nSubtitle"
+Title 
+Subtitle
+
+&gt; Write-Host "Title `tSubtitle"
+Title   Subtitle
+      </pre>
+    </div>
+
+  </div>
+
+</div>

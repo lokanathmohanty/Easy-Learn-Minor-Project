@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Overflow Property</h1>
+    <div class="content">
+      <p>The <strong>CSS overflow property</strong> defines how content that is too large for its container should be handled. It is most often used when an element has a fixed width and height, and its content exceeds those boundaries. Depending on the chosen value, the overflowing content can be visible, clipped, or scrollable.</p>
+
+      <p>The property applies to block-level elements with explicit height or width. Inline elements generally do not respond to overflow unless transformed into block or inline-block elements.</p>
+
+      <h2>Syntax</h2>
+      <p>The general syntax of the property is:</p>
+      <ul>
+        <li><code>overflow: visible | hidden | clip | scroll | auto | initial | inherit;</code></li>
+      </ul>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>visible:</strong> The default value. Content is not clipped and will overflow outside the element's box.</li>
+        <li><strong>hidden:</strong> The overflowing content is clipped and invisible. No scrollbars are provided.</li>
+        <li><strong>clip:</strong> Similar to hidden, but ensures that no scroll mechanism is available. Content is strictly clipped.</li>
+        <li><strong>scroll:</strong> Scrollbars are always displayed, allowing users to see the overflowed content.</li>
+        <li><strong>auto:</strong> Scrollbars appear only when the content overflows.</li>
+        <li><strong>initial:</strong> Resets the property to its default value (<code>visible</code>).</li>
+        <li><strong>inherit:</strong> Inherits the overflow property value from its parent element.</li>
+      </ul>
+
+      <h2>Overflow with visible Value</h2>
+      <p>When set to <code>visible</code>, content that exceeds the size of the container is simply displayed outside the box. This is the default behavior.</p>
+      <ul>
+        <li>Useful for cases where no restriction is needed on content flow.</li>
+        <li>May cause overlap with other elements if the content is too large.</li>
+      </ul>
+
+      <h2>Overflow with hidden Value</h2>
+      <p>Setting <code>overflow: hidden;</code> ensures that content beyond the box boundaries is clipped and not shown.</p>
+      <ul>
+        <li>The layout of the container remains fixed.</li>
+        <li>Extra content is inaccessible without resizing the element.</li>
+      </ul>
+
+      <h2>Overflow with clip Value</h2>
+      <p>The <code>clip</code> value is similar to hidden but more strict. It clips the content exactly at the box edge and does not allow scrollbars or interaction with the hidden portion.</p>
+      <ul>
+        <li>Recommended for elements where clipped content should never be seen.</li>
+        <li>Unlike hidden, it guarantees no scrollbars.</li>
+      </ul>
+
+      <h2>Overflow with scroll Value</h2>
+      <p>When <code>overflow: scroll;</code> is used, scrollbars are always visible—whether or not the content actually exceeds the boundaries.</p>
+      <ul>
+        <li>Ensures users always have a way to scroll.</li>
+        <li>May display empty scrollbars if the content fits.</li>
+      </ul>
+
+      <h2>Overflow with auto Value</h2>
+      <p>The <code>auto</code> value provides scrollbars only when the content overflows. If the content fits, no scrollbars appear.</p>
+      <ul>
+        <li>This is the most common choice for creating scrollable areas only when necessary.</li>
+        <li>Provides a balance between visibility and usability.</li>
+      </ul>
+
+      <h2>Comparison Between Hidden, Clip, and Scroll</h2>
+      <ul>
+        <li><strong>hidden:</strong> Content is clipped but still occupies space logically. No scrollbars.</li>
+        <li><strong>clip:</strong> Content is strictly cut off with no access to hidden parts.</li>
+        <li><strong>scroll:</strong> Always shows scrollbars for user navigation.</li>
+      </ul>
+
+      <h2>Browser Support</h2>
+      <p>The <code>overflow</code> property is widely supported across browsers:</p>
+      <ul>
+        <li>Chrome: Supported since version 1.0</li>
+        <li>Edge: Supported since version 4.0</li>
+        <li>Firefox: Supported since version 1.0</li>
+        <li>Safari: Supported since version 1.0</li>
+        <li>Opera: Supported since version 7.0</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>Use <code>overflow: visible</code> when you want natural content flow.</li>
+        <li>Use <code>overflow: hidden</code> when extra content should be clipped and inaccessible.</li>
+        <li>Use <code>overflow: clip</code> for stricter clipping without scrollbars.</li>
+        <li>Use <code>overflow: scroll</code> when you want scrollbars available at all times.</li>
+        <li>Use <code>overflow: auto</code> to provide scrollbars only when necessary.</li>
+      </ul>
+
+      <p>By mastering the overflow property, developers can ensure that web layouts remain user-friendly, readable, and visually balanced, regardless of how much content is present.</p>
+    </div>
+  </div>
+</div>

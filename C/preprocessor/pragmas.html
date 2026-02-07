@@ -1,0 +1,181 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">#pragma Directive in C</h1>
+
+    <div class="content">
+      <p>The preprocessor directive <code>#pragma</code> is used to provide additional information to the compiler in C/C++ language. This is used by the compiler to provide some special features.</p>
+
+      <p>Note that pragmas are compiler dependent. Not all the pragma directives are supported by all the compilers.</p>
+
+      <h2 class="title">Syntax</h2>
+      <p>Here is the syntax of using a <code>#pragma</code> directive in C/C++ language −</p>
+
+      <pre><code>#pragma token_name</code></pre>
+
+      <h2 class="title">Types of Pragma Directives in C</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Directive</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>#pragma startup</td><td>Before the execution of <code>main()</code>, the function specified in pragma is needed to run.</td></tr>
+          <tr><td>#pragma exit</td><td>Before the end of program, the function specified in pragma is needed to run.</td></tr>
+          <tr><td>#pragma warn</td><td>Used to hide the warning messages.</td></tr>
+          <tr><td>#pragma GCC dependency</td><td>Checks the dates of current and other file. If other file is recent, it shows a warning message.</td></tr>
+          <tr><td>#pragma GCC system_header</td><td>Treats the code of current file as if it came from system header.</td></tr>
+          <tr><td>#pragma GCC poison</td><td>Used to block an identifier from the program.</td></tr>
+          <tr><td>#pragma once</td><td>Compiler loads the header file only once.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 class="title">#pragma startup and #pragma exit</h2>
+      <p>These pragma directives are executed before and after the <code>main()</code> function. Not all the compilers support these directives.</p>
+
+      <h3 class="title">Example</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+int display();
+
+#pragma startup display
+#pragma exit display
+
+int main() {
+   printf("\nI am in main function");
+   return 0;
+}
+
+int display() {
+   printf("\nI am in display function");
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>I am in main function</code></pre>
+
+      <h2 class="title">#pragma warn</h2>
+      <p>The <code>#pragma warn</code> directive is used to hide or display the warning messages which are displayed during compilation.</p>
+
+      <p>Syntax:</p>
+      <pre><code>#pragma warn +xxx  (To show the warning)
+#pragma warn -xxx  (To hide the warning)
+#pragma warn .xxx  (To toggle between hide and show)</code></pre>
+
+      <p>The three character codes to be used are <code>rvl</code> (return value), <code>par</code> (parameter used or not), and <code>rch</code> (if the code is unreachable).</p>
+
+      <p>If any character code is prefixed by "+", it indicates to show the warning; prefixed by "-" means to hide warnings; and prefixed by "." is to toggle between hide and display warnings.</p>
+
+      <h3 class="title">Example</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#pragma warn -rvl          /* return value */
+#pragma warn +par          /* parameter never used */
+#pragma warn rch           /* unreachable code */
+
+int square(int x) {
+   printf("Hello World");
+}
+
+int main() {
+   square(10);
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>Hello World</code></pre>
+
+      <h2 class="title">#pragma GCC poison</h2>
+      <p>The GCC compiler removes an identifier completely from the program. If we want to block an identifier, then we can use the <code>#pragma GCC poison</code> directive.</p>
+
+      <p>Syntax:</p>
+      <pre><code>#pragma GCC poison identifier</code></pre>
+
+      <h3 class="title">Example</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#pragma GCC poison printf
+
+int main() {
+   int a = 10;
+   if (a == 10) {
+      printf("Hello World");
+   } else {
+      printf("TutorialsPoint");
+   }
+   return 0;
+}</code></pre>
+
+      <h4>Output</h4>
+      <pre><code>error: attempt to use poisoned "printf"</code></pre>
+
+      <h2 class="title">#pragma GCC dependency</h2>
+      <p>This pragma allows you to check the relative dates of the current file and another file. If the other file is more recent than the current file, a warning is issued.</p>
+
+      <h3 class="title">Example</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+
+#pragma GCC dependency "depends.c"
+
+int main() {
+   printf("Hello, World!");
+   return 0;
+}</code></pre>
+
+      <h4>Output (if depends.c is more recent)</h4>
+      <pre><code>warning: current file is older than depends.c</code></pre>
+
+      <h2 class="title">#pragma GCC system_header</h2>
+      <p>By convention, system header files are included with angular brackets <code>&lt;&gt;</code>, whereas non-system header files are included with quotation marks <code>""</code>. If you want the compiler to treat a local header as a system header, use this pragma.</p>
+
+      <h3 class="title">Syntax</h3>
+      <pre><code>#pragma GCC system_header</code></pre>
+
+      <p>Example "library.h":</p>
+
+      <pre><code>#ifndef LIBRARY_H
+#define LIBRARY_H
+
+#pragma GCC system_header
+
+void myFunction();
+
+#endif</code></pre>
+
+      <h3 class="title">Using "library.h" in a program</h3>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include "library.h"
+
+int main() {
+   myFunction();  // Using a function from library.h
+   printf("Hello, World!\n");
+   return 0;
+}</code></pre>
+
+      <h2 class="title">#pragma once</h2>
+      <p>The <code>#pragma once</code> directive causes the header file to be included only once, even if the programmer includes it multiple times.</p>
+
+      <p>Example "myheader.h":</p>
+
+      <pre><code>#pragma once
+void myFunction();</code></pre>
+
+      <p>Using "myheader.h" in main.c:</p>
+
+      <pre><code>#include &lt;stdio.h&gt;
+#include "myheader.h"
+
+int main() {
+   myFunction();
+   printf("Hello, World!\n");
+   return 0;
+}</code></pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,200 @@
+<div class="container">
+
+  <div class="session">
+    <h1 class="title">Java - Throws and Throw</h1>
+
+    
+
+      <h2 class="subtitle">Java throws and throw</h2>
+      <p>
+        If a method does not handle a checked exception, the method must declare it using the <code>throws</code> keyword. The <code>throws</code> keyword appears at the end of a method's signature.
+      </p>
+      <p>
+        You can throw an exception, either a newly instantiated one or an exception that you just caught, by using the <code>throw</code> keyword.
+      </p>
+      <p>
+        Try to understand the difference between <code>throws</code> and <code>throw</code> keywords. <strong>throws</strong> is used to postpone the handling of a checked exception, and <strong>throw</strong> is used to invoke an exception explicitly.
+      </p>
+
+      <h2 class="subtitle">Syntax</h2>
+      <p>
+        Following is the syntax of throwing an exception using <code>throws</code> and <code>throw</code>:
+      </p>
+
+      <pre><code>
+method(parameters) throws exception {
+  // Method implementation
+  throw new exception();
+}
+      </code></pre>
+
+      <p>The following method declares that it throws a <code>RemoteException</code>:</p>
+
+      <pre><code>
+import java.io.*;
+public class className {
+
+   public void deposit(double amount) throws RemoteException {
+      // Method implementation
+      throw new RemoteException();
+   }
+   // Remainder of class definition
+}
+      </code></pre>
+
+      <p>
+        A method can declare that it throws more than one exception, in which case the exceptions are declared in a list separated by commas. For example:
+      </p>
+
+      <pre><code>
+import java.io.*;
+public class className {
+
+   public void withdraw(double amount) throws RemoteException, 
+      InsufficientFundsException {
+      // Method implementation
+   }
+   // Remainder of class definition
+}
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Java Throws and Throw Example</h1>
+
+    <div class="content">
+      <p>
+        The following example shows the use of <code>throw</code> keyword to send an exception in case an invalid argument is passed.
+      </p>
+      <p>
+        We're calling a <code>divide</code> method which checks if the second parameter is zero, then it will throw an <code>IllegalArgumentException</code> with a custom message.
+      </p>
+      <p>
+        As <code>IllegalArgumentException</code> is an unchecked exception, the <code>divide</code> method is not required to declare <code>throws</code> statement.
+      </p>
+      <p>
+        Now, as the parent method is not handling the exception, JVM intercepts the same and prints the error message and terminates the program.
+      </p>
+
+      <pre><code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+
+   public static void main(String args[]) {
+      int a = 3;
+      int b = 0;
+      System.out.println("result:" + divide(a,b));
+   }
+
+   private static int divide(int a, int b) {
+      if(b == 0) {
+         throw new IllegalArgumentException("second argument cannot be zero.");
+      }
+      return a / b;
+   }
+}
+      </code></pre>
+
+      <h2 class="subtitle">Output</h2>
+      <pre><code>
+Exception in thread "main" java.lang.IllegalArgumentException: second argument cannot be zero.
+   at com.tutorialspoint.ExcepTest.divide(ExcepTest.java:13)
+   at com.tutorialspoint.ExcepTest.main(ExcepTest.java:8)
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example 1: Throw an Exception on Invalid Arguments</h1>
+
+    <div class="content">
+      <p>
+        This example shows the use of <code>throw</code> and <code>throws</code> keywords to send an exception in case an invalid argument is passed and handle the exception.
+      </p>
+      <p>
+        We're calling a <code>divide</code> method which checks if the second parameter is zero. If so, it throws an <code>Exception</code> with a custom message.
+      </p>
+      <p>
+        As <code>Exception</code> is a checked exception, the <code>divide</code> method is required to declare <code>throws</code> statement.
+      </p>
+      <p>
+        Since the parent method is not declaring <code>throws</code>, it must handle the exception, which is done using a <code>try-catch</code> block.
+      </p>
+
+      <pre><code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+
+   public static void main(String args[]) {
+      int a = 3;
+      int b = 0;
+      try {
+         System.out.println("result:" + divide(a,b));
+      } catch (Exception e) {
+         System.out.println("Exception: " + e);
+      }
+   }
+
+   private static int divide(int a, int b) throws Exception {
+      if(b == 0) {
+         throw new Exception("second argument cannot be zero.");
+      }
+      return a / b;
+   }
+}
+      </code></pre>
+
+      <h2 class="subtitle">Output</h2>
+      <pre><code>
+Exception: java.lang.Exception: second argument cannot be zero.
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example 2: Using throws and throw in main and other method</h1>
+
+    <div class="content">
+      <p>
+        This example shows the use of <code>throw</code> and <code>throws</code> keywords when the exception is not handled.
+      </p>
+      <p>
+        The <code>divide</code> method throws an <code>Exception</code> if the second argument is zero. The <code>main</code> method declares <code>throws Exception</code> instead of handling it.
+      </p>
+      <p>
+        Since the exception is not handled, JVM catches it and prints the error message.
+      </p>
+
+      <pre><code>
+package com.tutorialspoint;
+
+public class ExcepTest {
+
+   public static void main(String args[]) throws Exception {
+      int a = 3;
+      int b = 0;
+      System.out.println("result:" + divide(a,b));
+   }
+
+   private static int divide(int a, int b) throws Exception {
+      if(b == 0) {
+         throw new Exception("second argument cannot be zero.");
+      }
+      return a / b;
+   }
+}
+      </code></pre>
+
+      <h2 class="subtitle">Output</h2>
+      <pre><code>
+Exception in thread "main" java.lang.Exception: second argument cannot be zero.
+   at com.tutorialspoint.ExcepTest.divide(ExcepTest.java:15)
+   at com.tutorialspoint.ExcepTest.main(ExcepTest.java:9)
+      </code></pre>
+    </div>
+  </div>
+
+</div>

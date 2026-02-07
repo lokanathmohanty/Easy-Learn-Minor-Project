@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Advanced C++ Concepts (Modern C++) 🧠</h1>
+
+        <div class="content">
+            <p>Modern C++ (C++11 and later) introduced new features and paradigms to enhance efficiency, safety, and developer experience. Key advanced concepts include techniques for robust **resource management** and simplifying code with **functional programming** elements.</p>
+
+            <hr>
+
+            <h2 class="title">RAII (Resource Acquisition Is Initialization)</h2>
+            <p>**RAII** is a fundamental C++ technique for **resource management** (e.g., memory, file handles, mutex locks). It binds the life cycle of a resource to the life cycle of a **Stack-allocated object**.</p>
+            <ul>
+                <li>**Acquisition:** The resource is acquired in the object's **constructor**.</li>
+                <li>**Release:** The resource is released in the object's **destructor**.</li>
+            </ul>
+            <p>This guarantees that the resource is released correctly when the object goes out of scope, whether normally or due to an exception. For instance, `std::lock_guard` is an RAII class that locks a mutex in its constructor and unlocks it in its destructor, preventing deadlocks.</p>
+
+            <hr>
+
+            <h2 class="title">Pointers: Wild, Null, and Leakage</h2>
+            <p>Managing raw pointers is a source of many common C++ errors:</p>
+            <ul>
+                <li>
+                    **Wild Pointers:** A pointer that has been **declared but not initialized** (or points to memory that has been deallocated) holds a random, unpredictable memory address. Dereferencing a wild pointer leads to **undefined behavior**.
+                    <pre class="example">int *ptr; // Wild pointer</pre>
+                </li>
+                <li>
+                    **Null Pointer:** A pointer initialized to point to no memory address. Since C++11, the keyword **`nullptr`** should be used instead of the integral constant `NULL`. `nullptr` is a distinct type, preventing errors in function overloading.
+                    <pre class="example">int *ptr = nullptr; // Correct null pointer initialization</pre>
+                </li>
+                <li>
+                    **Memory Leakage:** Occurs when dynamically allocated memory (using `new`) is no longer accessible by the program but **was never deallocated** (using `delete`). This gradually consumes the heap memory, leading to program instability or crashes.
+                    <pre class="example">// Leak: no 'delete p;' is called
+void leak_func() { int* p = new int(10); }</pre>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">Smart Pointers (RAII for Memory)</h2>
+            <p>**Smart Pointers** are **wrapper classes** that implement the RAII principle specifically for dynamically allocated memory. They ensure that memory is automatically deallocated when the last smart pointer managing it is destroyed, thus preventing memory leaks.</p>
+            <p>Smart Pointers are the preferred way to manage dynamic memory in Modern C++.</p>
+
+            <hr>
+
+            <h2 class="title">Lambda Expressions (Anonymous Functions)</h2>
+            <p>Introduced in C++11, a **Lambda Expression** allows you to define an **inline, unnamed function object** (closure) right where it is needed. They are typically used for short tasks, such as predicates for standard algorithms (`std::sort`, `std::for_each`).</p>
+            <h3>Syntax Structure</h3>
+            <pre class="example">
+[ capture clause ] (parameters) -> return-type { body }
+</pre>
+            <p>The **capture clause** (`[]`) specifies how external variables are accessed from within the lambda:</p>
+            <ul>
+                <li>**`[&amp;]`**: Captures all external variables by **reference**.</li>
+                <li>**`[=]`**: Captures all external variables by **value**.</li>
+                <li>**`[a, &amp;b]`**: Mixed capture (variable `a` by value, `b` by reference).</li>
+            </ul>
+            <p>The return type is optional; the compiler automatically deduces it unless the function body is complex.</p>
+        </div>
+    </div>
+</div>

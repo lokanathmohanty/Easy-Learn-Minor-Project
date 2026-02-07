@@ -1,0 +1,127 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Next.js Script Component</title>
+</head>
+<body>
+  <div class="container">
+    <div class="session">
+
+      <h1 class="title">Next.js - Script Component</h1>
+
+      <div class="content">
+        <p><a href="#" class="prev-link">Previous</a> | <a href="#" class="quiz-link">Quiz</a> | <a href="#" class="next-link">Next</a></p>
+
+        <h2 class="subtitle">Overview</h2>
+        <p>
+          The <code>&lt;Script&gt;</code> component in Next.js is similar to the <code>&lt;script&gt;</code> tag in HTML and can be used to include external scripts in the page. In this chapter, you will learn about the <code>&lt;Script&gt;</code> component in Next.js, its props, and how to use it to include external scripts.
+        </p>
+
+        <h2 class="subtitle">Script Component in Next.js</h2>
+        <p>
+          The <code>&lt;Script&gt;</code> component is used to include external JavaScript files in a Next.js page. These scripts can be from a CDN, third-party libraries, or any other external source.
+        </p>
+
+        <h2 class="subtitle">Syntax</h2>
+        <p>Example usage of the <code>&lt;Script&gt;</code> component:</p>
+        <pre><code>import Script from 'next/script'
+
+export default function Home() {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Hello, Next.js!&lt;/h2&gt;
+      &lt;Script src="link/to/script.js" /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+        <h2 class="subtitle">Props of Script Component</h2>
+        <ul>
+          <li><strong>src</strong>: The URL of the external script file. <em>Required</em></li>
+          <li><strong>strategy</strong>: Defines the loading strategy of the script. <em>Optional</em></li>
+          <li><strong>onLoad</strong>: Callback when the script is successfully loaded. <em>Optional</em></li>
+          <li><strong>onError</strong>: Callback when the script fails to load. <em>Optional</em></li>
+          <li><strong>onReady</strong>: Callback when the script is ready to be executed. <em>Optional</em></li>
+        </ul>
+
+        <h2 class="subtitle">Using the <code>src</code> Prop</h2>
+        <p>
+          The <code>src</code> prop is required and specifies the script URL:
+        </p>
+        <pre><code>import Script from 'next/script'
+
+export default function Page() {
+  return (
+    &lt;Script src="link/to/script.js" /&gt;
+  );
+}</code></pre>
+
+        <h2 class="subtitle">Using the <code>strategy</code> Prop</h2>
+        <p>
+          Defines how the script is loaded. Possible values:
+        </p>
+        <ul>
+          <li><code>afterInteractive</code> (default)</li>
+          <li><code>lazyOnload</code></li>
+          <li><code>beforeInteractive</code></li>
+          <li><code>worker</code></li>
+        </ul>
+        <pre><code>import Script from 'next/script'
+
+export default function Page() {
+  return (
+    &lt;Script src="link/to/script.js" strategy="lazyOnload" /&gt;
+  );
+}</code></pre>
+
+        <h2 class="subtitle">Using the <code>onLoad</code> Prop</h2>
+        <p>
+          Callback triggered when the script loads successfully:
+        </p>
+        <pre><code>import Script from 'next/script'
+
+export default function Page() {
+  return (
+    &lt;Script 
+      src="link/to/script.js"
+      onLoad={() =&gt; console.log('Script loaded successfully')} 
+    /&gt;
+  );
+}</code></pre>
+
+        <h2 class="subtitle">Using the <code>onError</code> Prop</h2>
+        <p>
+          Callback triggered when the script fails to load:
+        </p>
+        <pre><code>import Script from 'next/script'
+
+export default function Page() {
+  return (
+    &lt;Script 
+      src="link/to/script.js"
+      onError={() =&gt; console.log('Script failed to load')} 
+    /&gt;
+  );
+}</code></pre>
+
+        <h2 class="subtitle">Using the <code>onReady</code> Prop</h2>
+        <p>
+          Callback triggered when the script is ready to run (only in client components):
+        </p>
+        <pre><code>import Script from 'next/script'
+
+export default function Page() {
+  return (
+    &lt;Script 
+      src="link/to/script.js"
+      onReady={() =&gt; console.log('Script is ready')} 
+    /&gt;
+  );
+}</code></pre>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

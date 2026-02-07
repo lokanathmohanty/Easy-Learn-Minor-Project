@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Coding Standard Guidelines</h1>
+
+        <div class="content">
+            <h2 class="title">Importance of Coding Standards</h2>
+            <p>A **coding standard** is a set of rules and guidelines that every developer in a team must follow when writing source code. Its primary purpose is to ensure **consistency, readability, and maintainability** across a codebase, especially when multiple developers contribute to different modules. Consistent coding acts as a blueprint, simplifying peer reviews, reducing common errors, and making future code revisions easier.</p>
+
+            <hr>
+
+            <h2 class="title">PHP Coding Style Guidelines</h2>
+
+            <h3>Indentation and Line Length</h3>
+            <ul>
+                <li>**Indentation:** Use an indent of **4 spaces**. Avoid using the Tab character, as its width varies across different development environments.</li>
+                <li>**Line Length:** It is recommended to keep lines at approximately **75-85 characters** long for optimal readability.</li>
+            </ul>
+
+            <h3>Control Structures ($\text{if, for, while, switch}$)</h3>
+            <ul>
+                <li>**Spacing:** Use **one space** between the control keyword and the opening parenthesis (e.g., $\text{if (condition)}$).</li>
+                <li>**Braces:** Always use **curly braces ($\text{\{\}}$)**, even when they are technically optional (e.g., for a single statement $\text{if}$ block), to prevent errors and improve clarity.</li>
+                <li>**BSD/Allman Style:** The opening brace is typically placed on a new line.</li>
+            </ul>
+
+            <pre>
+if (condition) {
+   action;
+} elseif (otherCondition) {
+   anotherAction;
+} else {
+   defaultAction;
+}</pre>
+
+            <h3>Functions and Variables</h3>
+            <ul>
+                <li>**Function Calls:** Call functions with **no spaces** between the function name, the opening parenthesis, and the first parameter. Use a **single space** after commas separating parameters.
+                    <pre>$var = foo($bar, $baz, $quux);</pre>
+                </li>
+                <li>**Function Definitions:** Follow the **BSD/Allman style** (opening brace on a new line).
+                    <pre>
+function fooFunction($arg1, $arg2 = '') {
+   // statements
+   return $val;
+}</pre>
+                </li>
+                <li>**Variable Names:** Use **all lower case letters** and the **underscore ($\text{\_}$)** as the word separator (e.g., $\text{\$user\_name}$).</li>
+                <li>**Variable Prefixes (Recommended):**
+                    <ul>
+                        <li>**Global variables:** Prepend with '$\text{g}$' (e.g., $\text{\$g\_config}$).</li>
+                        <li>**Global constants:** Use **all caps** with underscores (e.g., $\text{GLOBAL\_CONSTANT}$).</li>
+                        <li>**Static variables:** May be prepended with '$\text{s}$' (e.g., $\text{\$s\_count}$).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Other Guidelines</h3>
+            <ul>
+                <li>**PHP Code Tags:** Always use the full form: **$\text{<?php ?>}$**. **Never use the shorthand $\text{<? ?>}$**, as it is less portable and can cause issues with $\text{XML}$ processing.</li>
+                <li>**Comments:** **$\text{/* */}$** (C-style) and **$\text{//}$** (C++-style) are both acceptable. The Perl/shell style $\text{\#}$ is allowed but discouraged.</li>
+                <li>**Statement per Line:** Use **only one statement per line**, unless the statements are very closely related.</li>
+                <li>**Reentrancy:** Functions should be designed to be **reentrant** (thread-safe); they should not rely on static variables that store state between calls.</li>
+                <li>**Method Length:** Methods or functions should be short, ideally limited to a single screen or page of code.</li>
+            </ul>
+        </div>
+    </div>
+</div>

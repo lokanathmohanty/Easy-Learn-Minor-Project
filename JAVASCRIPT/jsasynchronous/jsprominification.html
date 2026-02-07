@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Promisification</h1>
+    <div class="content">
+      <h2>Promisification in JavaScript</h2>
+      <p>
+        Promisification in JavaScript is a concept to convert the callback functions 
+        into a regular function, returning the promise.
+      </p>
+      <p>
+        The reason to convert the callback functions into promises is that when you 
+        need to write the nested callback functions, it increases the complexity of 
+        the code. So, you can write a function returning the promise.
+      </p>
+      <p>
+        In JavaScript, you can pass the function as an argument of another function 
+        called the callback function. The callback functions are used to handle the 
+        asynchronous task.
+      </p>
+
+      <h2>Callback Function</h2>
+      <p>Let's first write an example of the callback function.</p>
+      <h3>Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt;The sum of 5 and 10 is: &lt;/div&gt;
+   &lt;script&gt;
+      function getSum(p, q, callback) {   
+         let sum = p + q;
+         setTimeout(() =&gt; callback(null, sum), 100);
+      }
+      getSum(5, 10, (err, sum) =&gt; { // callback function
+         document.getElementById("output").innerHTML += sum;
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+      <h3>Output</h3>
+      <p>The sum of 5 and 10 is: 15</p>
+
+      <h2>Promisification of Callback Function</h2>
+      <p>Let's perform the promisification of the callback function discussed in the above example.</p>
+
+      <h3>Steps</h3>
+      <ul>
+        <li>Step 1 − Create the <code>findSum()</code> function that takes <code>p1</code>, <code>p2</code>, and a callback.</li>
+        <li>Step 2 − Validate inputs; call callback with error if invalid.</li>
+        <li>Step 3 − Otherwise, call callback with sum and message.</li>
+        <li>Step 4 − Define <code>promisifyFunc()</code>, which accepts a function to promisify.</li>
+        <li>Step 5 − Return a function that returns a Promise.</li>
+        <li>Step 6 − Inside Promise, define <code>callbackFunc()</code> to resolve or reject based on result.</li>
+        <li>Step 7 − Insert <code>callbackFunc()</code> into args and call original function with <code>call()</code>.</li>
+        <li>Step 8 − Store result in <code>getSumPromise()</code> function.</li>
+        <li>Step 9 − Execute <code>getSumPromise()</code> which returns a Promise, then consume with <code>then()</code> and <code>catch()</code>.</li>
+      </ul>
+
+      <h3>Example</h3>
+      <pre>
+&lt;html&gt;
+&lt;body&gt;
+   &lt;div id="output"&gt; &lt;/div&gt;
+   &lt;script&gt; 
+      let output = document.getElementById("output");
+      const findSum = (p1, p2, callback) =&gt; {
+         if (!p1 || !p2) {
+            return callback(new Error("Missing dependencies"), null);
+         }
+         const sum = p1 + p2;
+         const msg = 'The sum of numbers is ' + sum;
+         return callback(null, sum, msg);
+      }
+
+      function promisifyFunc(func) {
+         return (...args) =&gt; {
+            return new Promise((resolve, reject) =&gt; {
+               function callbackFunc(err, ...data) {
+                  if (err) return reject(err);
+                  return resolve(data);
+               }
+               args.push(callbackFunc);
+               func.call(this, ...args);
+            })
+         }
+      }
+
+      const getSumPromise = promisifyFunc(findSum);
+      getSumPromise(5, 10)
+      .then((message) =&gt; {
+         output.innerHTML = message;
+      })
+      .catch((err) =&gt; {
+         output.innerHTML = err;
+      });
+   &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+
+      <h3>Output</h3>
+      <p>15, The sum of numbers is 15</p>
+
+      <p>
+        The above code looks complex, but if you use it to handle nested callback 
+        functions, it becomes easy to manage them. Here, you can pass custom callback 
+        functions to the particular function inside the promise.
+      </p>
+    </div>
+  </div>
+</div>

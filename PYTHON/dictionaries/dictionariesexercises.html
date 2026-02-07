@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python Dictionary Exercises</h1>
+    <div class="content">
+
+      <h2 class="title">Exercise 1: Create New Dictionary from Keys</h2>
+      <pre><code>d1 = {"one":11, "two":22, "three":33, "four":44, "five":55}
+keys = ['two', 'five']
+d2 = {}
+for k in keys:
+  d2[k] = d1[k]
+print(d2)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>{'two': 22, 'five': 55}</code></pre>
+
+      <h2 class="title">Exercise 2: Convert Dictionary to List of (key, value) Tuples</h2>
+      <pre><code>d1 = {"one":11, "two":22, "three":33, "four":44, "five":55}
+L1 = list(d1.items())
+print(L1)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[('one', 11), ('two', 22), ('three', 33), ('four', 44), ('five', 55)]</code></pre>
+
+      <h2 class="title">Exercise 3: Remove Keys with Duplicate Values</h2>
+      <pre><code>d1 = {"one":"eleven", "2":2, "three":3, "11":"eleven", "four":44, "two":2}
+vals = list(d1.values())  # all values
+uvals = [v for v in vals if vals.count(v) == 1]  # unique values
+d2 = {}
+for k, v in d1.items():
+  if v in uvals:
+    d2[k] = v
+print("dict with unique value:", d2)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>dict with unique value: {'three': 3, 'four': 44}</code></pre>
+
+      <h2 class="title">Additional Exercises Ideas</h2>
+      <ul>
+        <li>Sort a list of dictionaries by their values.</li>
+        <li>Extract dictionary entries where keys have non-numeric values.</li>
+        <li>Build a dictionary from a list of two-item tuples (key, value).</li>
+        <li>Merge two dictionaries using the unpack operator.</li>
+      </ul>
+    </div>
+  </div>
+</div>

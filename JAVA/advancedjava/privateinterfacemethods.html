@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Private Interface Methods: Summary and Purpose</h1>
+
+        <div class="content">
+            <h2>Summary of Private Interface Methods (Java 9+)</h2>
+            <p><strong>Private</strong> and <strong>private static</strong> methods were introduced in Java 9 to enhance interfaces. Their main features are:</p>
+            <ul>
+                <li>They provide <strong>encapsulation</strong>, keeping the implementation of helper logic contained within the interface itself.</li>
+                <li>They help <strong>reduce code duplicity</strong> by allowing default and static methods to share common implementation logic.</li>
+                <li><strong>Private methods</strong> can only be called by other **non-static** default methods or other private methods within the same interface.</li>
+                <li>**Private static methods** can be called by any other method (static, default, or private) within the same interface.</li>
+                <li>They **cannot** be accessed or inherited by implementing classes or sub-interfaces, maintaining the integrity of the interface's implementation details.</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Purpose of Private Interface Methods</h2>
+            <div class="content">
+                <p>The core motivation for private interface methods is to support **default methods** (introduced in Java 8) without exposing utility code to the outside world. This allows for cleaner, more maintainable code within the interface.</p>
+                
+                <h3>Scenario Example</h3>
+                <p>Imagine a scenario where a complex **default method** needs to perform three steps, two of which are common to multiple default methods.</p>
+                
+                <h4>Without Private Methods (Pre-Java 9 Workaround)</h4>
+                <p>The common logic would either be duplicated across the default methods, or a **public default method** would be created to contain the helper logic. Using a **public** helper method is poor practice because implementing classes might override or call it directly, breaking the intended internal logic of the interface's main default method.</p>
+
+                <h4>With Private Methods (Java 9 Solution)</h4>
+                <p>The common, reusable logic is moved into a **private** (or **private static**) helper method. The public default methods then call this private helper. This approach:</p>
+                <ul>
+                    <li>**Reduces Duplicity:** The shared logic is written once.</li>
+                    <li>**Increases Maintainability:** Changes to the shared logic only need to be made in one place.</li>
+                    <li>**Ensures Integrity:** Implementing classes **cannot** see, call, or override the private helper method, guaranteeing that the interface's public methods use the correct, encapsulated implementation.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

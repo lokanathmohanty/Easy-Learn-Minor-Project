@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# Generics: Type-Safe Reusable Code 🛠️</h1>
+        
+        <div class="content">
+            <h2 class="title">What are Generics?</h2>
+            <p>**Generics** allow you to design classes, methods, interfaces, delegates, and events that defer the specification of one or more data types until the client code actually instantiates or calls the element. In essence, generics enable you to write a single piece of code that can operate on various data types while maintaining **type safety**.</p>
+            <p>Generics address the shortcomings of the older, non-generic collections (like <span class="example">`ArrayList`</span>), which operated on the base **<span class="example">`Object`</span>** type, leading to performance costs (boxing/unboxing) and potential runtime type errors.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Features and Benefits</h2>
+            <p>Generics provide significant advantages in C# programming:</p>
+            <ul>
+                <li>**Type Safety:** The compiler enforces the data type at the time of creation, eliminating the need for runtime type checking and casting.</li>
+                <li>**Performance:** By avoiding the need to box value types (like <span class="example">`int`</span>, <span class="example">`char`</span>) to <span class="example">`Object`</span> and unbox them later, generics offer superior performance, especially for collection classes.</li>
+                <li>**Code Reuse:** A single generic implementation (e.g., a **<span class="example">`List&lt;T&gt;`</span>**) can be reused for any data type (e.g., <span class="example">`List&lt;int&gt;`</span>, <span class="example">`List&lt;string&gt;`</span>).</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Implementation: Generic Types</h2>
+            <p>Generic types are specified using angle brackets (`&lt; &gt;`) containing a **type parameter** (conventionally, a single uppercase letter like <span class="example">`T`</span>).</p>
+            
+            <h3 class="title">1. Generic Classes</h3>
+            <p>A generic class defines its structure using one or more type parameters, which are substituted by actual types upon instantiation.</p>
+            <pre>// Class defined with type parameter T
+public class MyGenericArray&lt;T&gt; {
+   private T[] array; // The array holds type T
+   
+   public void setItem(int index, T value) { /* ... */ }
+}
+
+// Instantiation with specific types
+MyGenericArray&lt;int&gt; intArray = new MyGenericArray&lt;int&gt;(5);
+MyGenericArray&lt;char&gt; charArray = new MyGenericArray&lt;char&gt;(5);</pre>
+            
+            <h3 class="title">2. Generic Methods</h3>
+            <p>A method can be generic even if the class containing it is not. The type parameter is declared immediately after the method name.</p>
+            <pre>// Method signature using type parameter T
+static void Swap&lt;T&gt;(ref T lhs, ref T rhs) {
+   T temp = lhs; // T is substituted with the type used in the call
+   // ...
+}</pre>
+            
+            <h3 class="title">3. Generic Delegates and Interfaces</h3>
+            <p>Delegates and interfaces can also be defined with type parameters, ensuring that any method referenced by the delegate or any class implementing the interface adheres to the type specifications.</p>
+            <pre>// Generic Delegate
+delegate T NumberChanger&lt;T&gt;(T n);
+
+// Generic Interface
+public interface IRepository&lt;T&gt; {
+    void Add(T item);
+    IEnumerable&lt;T&gt; GetAll();
+}</pre>
+        </div>
+    </div>
+</div>

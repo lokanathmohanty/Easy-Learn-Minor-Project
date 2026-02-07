@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Server Actions</h1>
+        
+        <div class="content">
+            <h2 class="title">Overview of Server Actions</h2>
+            <p><strong>Server Actions</strong> are asynchronous functions in Next.js that execute exclusively on the server side. They are essential for performing server-side operations such as:
+                <ul>
+                    <li>Data fetching and mutations.</li>
+                    <li>Authentication logic.</li>
+                    <li>Handling form submissions.</li>
+                </ul>
+            </p>
+            <p>A function is designated as a Server Action by using the <code>"use server"</code> directive. This directive can be placed in two locations:</p>
+            <ul>
+                <li>At the top of an <code>async function</code> to make only that function a Server Action.</li>
+                <li>At the top of a separate file to make <strong>all exports</strong> in that file Server Actions.</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2 class="title example">Server Action in a Client Component</h2>
+            <p>Server Actions can be imported and called directly from a **Client Component** (which is marked with <code>'use client'</code>). This allows client-side events, like a button click, to safely trigger server-side code without needing to build an explicit API endpoint.</p>
+            
+            <p><strong>Example Server Action (<code>app/actions.ts</code>):</strong></p>
+            <pre class="example"><code>'use server'
+
+export async function create() {
+    // Logic for creating data and revalidating cache
+    return true;
+}</code></pre>
+
+            <p><strong>Example Client Component (<code>app/page.tsx</code>):</strong></p>
+            <pre class="example"><code>'use client'
+import { create } from './actions'
+
+export function Button() {
+    return &lt;button onClick={() =&gt; create()}&gt;
+        Create
+    &lt;/button&gt;
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title">Server Actions in Form Handling</h2>
+            <p>Next.js integrates Server Actions seamlessly with the standard HTML **<code>&lt;form&gt;</code>** element. By passing a Server Action function to the <code>action</code> prop of the form, the framework automatically handles the form submission, serializes the data into a **<code>FormData</code>** object, and invokes the server function.</p>
+            
+            <p><strong>Example Form Submission:</strong></p>
+            <pre class="example"><code>export default function Page() {
+  async function createInvoice(formData: FormData) {
+    'use server'
+
+    const rawFormData = {
+      customerId: formData.get('customerId'),
+      amount: formData.get('amount'),
+      status: formData.get('status'),
+    }
+ 
+    // Perform data mutation and cache revalidation
+  }
+
+  return (
+    &lt;form action={createInvoice}&gt;
+        {/* Form fields here... */}
+        &lt;button type="submit"&gt;Submit Invoice&lt;/button&gt;
+    &lt;/form&gt;
+  )
+}</code></pre>
+        </div>
+        
+        <div class="content">
+            <h2 class="title example">Programmatic Form Submission</h2>
+            <p>You can trigger a form submission programmatically using the **<code>requestSubmit()</code>** method available on the HTML form element. This is often used to implement custom submission shortcuts, such as the <code>Ctrl/Cmd + Enter</code> shortcut commonly used in text areas.</p>
+            
+            <p><strong>Example Programmatic Submission:</strong></p>
+            <pre class="example"><code>'use client'
+ export function Entry() {
+  const handleKeyDown = (e: React.KeyboardEvent&lt;HTMLTextAreaElement&gt;) =&gt; {
+    if (
+      (e.ctrlKey || e.metaKey) &&
+      (e.key === 'Enter' || e.key === 'NumpadEnter')
+    ) {
+      e.preventDefault()
+      // Triggers the form's action prop
+      e.currentTarget.form?.requestSubmit() 
+    }
+  }
+ 
+  return (
+    &lt;div&gt;
+      &lt;textarea name="entry" rows={20} required onKeyDown={handleKeyDown} /&gt;
+    &lt;/div&gt;
+  )}</code></pre>
+        </div>
+    </div>
+</div>

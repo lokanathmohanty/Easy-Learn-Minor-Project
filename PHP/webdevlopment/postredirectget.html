@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP - Post-Redirect-Get (PRG) Pattern</h1>
+
+        <div class="content">
+            <h2 class="title">Understanding the PRG Technique</h2>
+            <p>The **Post-Redirect-Get (PRG)** pattern is a design solution used to prevent the accidental **resubmission of forms** when a user refreshes the browser or uses the back button after a $\text{POST}$ request. Without PRG, refreshing the page after a successful form submission results in the browser displaying a warning and, if confirmed, sending the same data again, potentially causing data duplication or loss of data integrity.</p>
+
+            <h3 class="title">The Standard Problem</h3>
+            <p>When a form is submitted using the $\text{POST}$ method, the server processes the data and typically returns an HTML response. If the user hits refresh ($\text{F5}$) at this point, the browser attempts to repeat the last action, which was the original $\text{POST}$ request, leading to duplicate submissions.</p>
+
+            <h3 class="title">The PRG Solution Flow</h3>
+            <p>The PRG technique breaks this flow into three distinct steps:</p>
+            <ol>
+                <li><strong>Post:</strong> The client submits the form data using $\text{POST}$ to the server script.</li>
+                <li><strong>Redirect:</strong> The server script processes the data, stores any necessary information (e.g., in a session), and then issues a $\text{302}$ ($\text{Found}$) $\text{HTTP}$ **redirect** back to itself or to a result page.</li>
+                <li><strong>Get:</strong> The client, upon receiving the redirect, automatically makes a **$\text{GET}$** request to the new (or same) page. Since the last action was $\text{GET}$, refreshing the page now simply repeats the $\text{GET}$ request, which is safe and does not resubmit the form data.</li>
+            </ol>
+        </div>
+
+        <div class="example">
+            <h2 class="title">Example: Implementing PRG in PHP</h2>
+            <p>The core of the PHP implementation relies on **sessions** to temporarily hold the form data and the **$\text{header()}$** function to perform the redirect.</p>
+
+            <h3>Key Steps in the PHP Script</h3>
+            <ol>
+                <li>Start the session: $\text{session\_start()}$;</li>
+                <li><strong>On $\text{POST}$ Submission:</strong> Store submitted data in $\text{\$_SESSION}$ variables.</li>
+                <li>Perform the redirect: $\text{header("Location: current\_page.php")}$; and immediately call $\text{exit}$; to terminate script execution.</li>
+                <li><strong>On $\text{GET}$ Request (After Redirect):</strong> Check if the data is present in $\text{\$_SESSION}$. If so, display the result.</li>
+                <li>Clear the session variables using $\text{unset()}$ to ensure the result is only displayed once.</li>
+            </ol>
+            <pre>
+&lt;?php
+   session_start();
+   if (isset($_POST["submit"])) {
+      // 1. POST: Store data in session
+      $_SESSION['fname'] = $_POST['first_name'];
+      $_SESSION['lname'] = $_POST['last_name']; 
+      
+      // 2. REDIRECT: Send the user back to a GET request
+      header("Location: " . $_SERVER['PHP_SELF']);
+      exit; // Crucial to stop execution
+   }
+   
+   // 3. GET: Check session for results after the redirect
+   if (isset($_SESSION["fname"])) {
+      echo "First name: " . $_SESSION['fname'] . " " . "Last Name: " . $_SESSION['lname'] . "";
+      unset($_SESSION["fname"]); // Clear data after display
+      unset($_SESSION["lname"]);
+   }
+?&gt;
+&lt;html&gt;&lt;body&gt;
+   &lt;form action="&lt;?php echo $_SERVER['PHP_SELF'];?&gt;" method="post"&gt;
+      First Name: &lt;input type="text" name="first_name"&gt;  &lt;br /&gt;
+      Last Name: &lt;input type="text" name="last_name" /&gt;
+      &lt;button type="submit" name="submit"&gt;Submit&lt;/button&gt;
+   &lt;/form&gt;
+&lt;/body&gt;&lt;/html&gt;</pre>
+        </div>
+    </div>
+</div>

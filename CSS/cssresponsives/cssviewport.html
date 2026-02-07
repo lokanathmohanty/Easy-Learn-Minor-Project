@@ -1,0 +1,148 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">CSS RWD Viewport</h1>
+        <div class="content">
+            <p>
+                A viewport, in the context of responsive web design, is a virtual area used by the browser to render a web page. 
+                The viewport is essential to web development and creation of responsive designs that adapt to various devices and screen sizes.
+            </p>
+        </div>
+    </div>
+
+    <div class="session">
+        <h2 class="title">What is a Viewport?</h2>
+        <div class="content">
+            <p>
+                The viewport is the visible area for a user in a web page. It will vary with the device, 
+                and will be smaller on a mobile phone than on a computer screen.
+            </p>
+            <p>
+                On a desktop, the viewport is the window's size, excluding the toolbar and other elements 
+                that are not part of the web page. On a mobile device, it is the size of the screen.
+            </p>
+        </div>
+    </div>
+
+    <div class="session">
+        <h2 class="title">Types of Viewport</h2>
+        <div class="content">
+            <ul>
+                <li>
+                    <strong>Layout Viewport:</strong> 
+                    It is the virtual area used by the browser to display the web page. 
+                    The layout viewport is controlled by adding the meta viewport tag in the HTML head section.
+                </li>
+                <li>
+                    <strong>Visual Viewport:</strong> 
+                    It represents the part of the layout viewport that is currently visible on the screen. 
+                    The visual viewport can be changed by zooming in and out.
+                </li>
+            </ul>
+            <p>
+                Both viewports are mutable, meaning their dimensions can be altered after the page loads.
+            </p>
+        </div>
+    </div>
+
+    <div class="session">
+        <h2 class="title">Setting the Viewport</h2>
+        <div class="content">
+            <p>
+                We can control viewport width using the <code>&lt;meta&gt;</code> tag. 
+                The following line should be included inside the head section of all web pages for ensuring responsiveness:
+            </p>
+            <p><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></p>
+            <ul>
+                <li>
+                    <strong>width=device-width:</strong> Sets the width of the viewport equal to the device's screen width.
+                </li>
+                <li>
+                    <strong>initial-scale=1.0:</strong> Sets the initial zoom level to 100%.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="session">
+        <h2 class="title">Example with Meta Tag</h2>
+        <div class="content">
+            <p>
+                This example includes the viewport meta tag, making the layout responsive and adaptive to different screen sizes.
+            </p>
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;Responsive Layout with Viewport Meta Tag&lt;/h1&gt;
+        &lt;div class="content"&gt;
+            &lt;p&gt;
+                This layout adapts to the device screen width, thanks to the viewport meta tag.
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+        </div>
+    </div>
+
+    <div class="session">
+        <h2 class="title">Example without Meta Tag</h2>
+        <div class="content">
+            <p>
+                This example does not include the viewport meta tag. 
+                As a result, the page will not be responsive on smaller screens, 
+                and users may encounter horizontal scrolling.
+            </p>
+            <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;Non-Responsive Layout Without Viewport Meta Tag&lt;/h1&gt;
+        &lt;div class="content"&gt;
+            &lt;p&gt;
+                This layout does not adapt to the device screen width, 
+                because it lacks the viewport meta tag.
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+        </div>
+    </div>
+
+    <div class="session">
+        <h2 class="title">CSS Units Related to Viewports</h2>
+        <div class="content">
+            <p>
+                CSS provides units relative to the viewport dimensions. These are useful for making layouts adapt to different screen sizes.
+            </p>
+            <ul>
+                <li>
+                    <strong>vw (viewport width):</strong> 1vw = 1% of the viewport's width.  
+                    Example: <code>width: 10vw;</code> → 10% of viewport width.
+                </li>
+                <li>
+                    <strong>vh (viewport height):</strong> 1vh = 1% of the viewport's height.  
+                    Example: <code>height: 50vh;</code> → half of the viewport's height.
+                </li>
+                <li>
+                    <strong>vmin:</strong> Takes the smaller value of viewport width and height.  
+                    Useful for adapting to both portrait and landscape.
+                </li>
+                <li>
+                    <strong>vmax:</strong> Takes the larger value of viewport width and height.  
+                    Useful for designs that maximize space in larger screens.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

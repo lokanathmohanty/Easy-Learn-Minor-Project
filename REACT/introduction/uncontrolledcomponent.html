@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Uncontrolled Component</h1>
+    <div class="content">
+      <p>
+        As we learned earlier, uncontrolled component does not support React-based form programming. 
+        Getting a value of a React DOM element (form element) is not possible without using React API. 
+        One way to get the content of the component is using the <code>ref</code> feature.
+      </p>
+      <p>
+        React provides a <code>ref</code> attribute for all DOM elements and 
+        a corresponding API, <code>React.createRef()</code>, to create a new reference. 
+        The reference can be attached to the form element, and its value can be accessed 
+        using <code>this.ref.current.value</code> during validation and submission.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Form Programming in Uncontrolled Component</h2>
+    <div class="content">
+      <ul>
+        <li>Create a reference: <code>this.inputRef = React.createRef();</code></li>
+        <li>Create a form element: <code>&lt;input type="text" name="username" /&gt;</code></li>
+        <li>Attach the reference: <code>&lt;input type="text" ref={this.inputRef} /&gt;</code></li>
+        <li>
+          Use <code>defaultValue</code> (not <code>value</code>) for setting default values:  
+          <code>&lt;input type="text" defaultValue="default value" /&gt;</code>
+        </li>
+        <li>
+          Access the value in submit handler:  
+          <code>alert(this.inputRef.current.value);</code>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Creating a Simple Form</h2>
+    <div class="content">
+      <p>Steps to create an uncontrolled component form:</p>
+      <ul>
+        <li>Create a new React app <code>react-form-uncontrolled-app</code>.</li>
+        <li>Create <code>ExpenseForm.css</code> for styling.</li>
+        <li>Create <code>ExpenseForm.js</code> component with refs for all inputs.</li>
+        <li>Attach refs to <code>name</code>, <code>amount</code>, <code>date</code>, and <code>category</code> inputs.</li>
+        <li>On submit, collect values from refs and display them using <code>alert()</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example Component</h2>
+    <div class="content">
+      <p>
+        The <code>ExpenseForm</code> component demonstrates uncontrolled components 
+        by using <code>React.createRef()</code> for each input. The form collects 
+        user data and displays it as JSON in an alert box on submission.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Running the Application</h2>
+    <div class="content">
+      <ul>
+        <li>Create <code>index.js</code> and render <code>ExpenseForm</code>.</li>
+        <li>Create <code>index.html</code> with a <code>&lt;div id="root"&gt;</code>.</li>
+        <li>Run app with <code>npm start</code>.</li>
+        <li>
+          Open <a href="http://localhost:3000">http://localhost:3000</a>, 
+          enter details, and click submit. 
+          The submitted data will appear in a pop-up alert.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

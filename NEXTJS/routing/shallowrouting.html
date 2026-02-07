@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Next.js Shallow Routing 🏷️</h1>
+        
+        <div class="content">
+            <h2 class="title">What is Shallow Routing?</h2>
+            <p>**Shallow routing** is a Next.js technique that allows you to **update the URL** (specifically the query parameters or hash) without triggering a full page reload or re-executing data fetching methods like <span class="example">`getServerSideProps`</span>, <span class="example">`getStaticProps`</span>, or <span class="example">`getInitialProps`</span>.</p>
+            <p>This method modifies the route state in the browser history while **maintaining the current page's component state and context**, offering a way to update the URL dynamically without disrupting the user experience or incurring performance penalties.</p>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Implementing Shallow Routing</h2>
+            <p>Shallow routing is implemented using the **<span class="example">`useRouter`</span>** hook on a Client Component. You enable it by passing the **<span class="example">`shallow: true`</span>** option in the options object of the <span class="example">`router.push()`</span> or <span class="example">`router.replace()`</span> methods.</p>
+            
+            <h3 class="title">Example: Updating URL Query Parameter</h3>
+            <p>In this example, clicking the button updates the local <span class="example">`step`</span> state and simultaneously updates the URL's query parameter (e.g., changing from <span class="example">`/shallow-routing?step=1`</span> to <span class="example">`/shallow-routing?step=2`</span>) without rerunning server-side data logic.</p>
+            <pre>// 'use client'
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+export default function ShallowRoutingExample() {
+  const router = useRouter();
+  const [step, setStep] = useState(1);
+
+  const handleRouteChange = () => {
+    const nextStep = step + 1;
+    setStep(nextStep); // Update UI state
+
+    // Updates the URL's 'step' query param without reloading the page
+    router.push(`/shallow-routing?step=${nextStep}`, { shallow: true });
+  };
+  // ... returns button with onClick={handleRouteChange}
+}</pre>
+        </div>
+        
+        <hr>
+        
+        <div class="content">
+            <h2 class="title">Benefits of Shallow Routing</h2>
+            <ul>
+                <li>**Preserves State:** The component's current React state (e.g., form input, scroll position) is fully maintained during the URL update.</li>
+                <li>**Performance Boost:** Avoids unnecessary **full page reloads** and prevents costly **data refetching** functions from being re-executed.</li>
+                <li>**Enhanced UX:** Allows dynamic modifications of the URL (useful for filtering, tabs, or pagination state) without interrupting the user's flow.</li>
+            </ul>
+        </div>
+    </div>
+</div>

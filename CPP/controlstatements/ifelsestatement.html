@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ <code>if...else</code> and <code>if...else if...else</code> Statements ⚖️</h1>
+
+        <div class="content">
+            <p>The **<code>if...else</code> statement** provides a way to execute one of two distinct code blocks based on the evaluation of a single Boolean expression. It ensures that exactly one path is taken.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">1. The <code>if...else</code> Statement</h2>
+
+            <h3>Syntax:</h3>
+            <pre class="example">
+if (boolean_expression) {
+   // Executes if the expression is TRUE (non-zero)
+} else {
+  // Executes if the expression is FALSE (zero)
+}
+</pre>
+            <p>In the example provided, <code>a</code> is 100:</p>
+            <pre class="example">
+if ( a < 20 ) { // 100 < 20 is FALSE
+    // This block is skipped
+} else {
+    // This block executes
+    cout << "a is not less than 20;" << endl;
+}
+// Output: a is not less than 20;
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">2. The <code>if...else if...else</code> Statement</h2>
+
+            <p>This structure is used to test a **sequence of multiple conditions**. The conditions are checked in order, and the code block associated with the **first true condition** is executed. Once a condition succeeds, the remaining <code>else if</code> and <code>else</code> blocks are completely skipped.</p>
+
+            <h3>Syntax:</h3>
+            <pre class="example">
+if (expression 1) {
+   // Executes if expression 1 is TRUE
+} else if (expression 2) {
+   // Executes if expression 1 was FALSE, but expression 2 is TRUE
+} else if (expression 3) {
+   // ... and so on ...
+} else {
+   // Executes only if ALL preceding expressions were FALSE
+}
+</pre>
+
+            <h3>Example Analysis:</h3>
+            <p>With <code>a = 100</code>, the conditions are checked sequentially:</p>
+            <pre class="example">
+if (a == 10)      // FALSE
+else if (a == 20) // FALSE
+else if (a == 30) // FALSE
+else {
+    // All conditions failed, this block executes
+    cout << "Value of a is not matching" << endl;
+}
+// Output: Value of a is not matching
+//         Exact value of a is : 100
+</pre>
+        </div>
+    </div>
+</div>

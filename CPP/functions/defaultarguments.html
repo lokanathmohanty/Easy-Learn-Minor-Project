@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Default Arguments in C++ 🛠️</h1>
+
+        <div class="content">
+            <p>**Default arguments** are values assigned to function parameters during the function's declaration (prototype). These values are automatically used when the caller omits the corresponding argument during the function call. If the caller provides a value, it **overrides** the default.</p>
+            <p>This feature simplifies function calls and reduces the need for multiple function overloads.</p>
+            <pre class="example">
+return_type function_name(param1, param2 = v2, param3 = v3);
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Core Rules for Default Arguments</h2>
+
+            <ol>
+                <li>
+                    <strong>Declaration vs. Definition:</strong> Default arguments **must** be specified in the **function declaration (prototype)**, not in the function definition (implementation). Specifying them in both is an error.
+                    <pre class="example">
+// CORRECT: Declaration with default value
+void greet(string name = "TutorialsPoint"); 
+
+// CORRECT: Definition without default value
+void greet(string name) { ... }
+</pre>
+                </li>
+                <li>
+                    <strong>Right-to-Left Assignment:</strong> Default arguments must be assigned starting from the **rightmost** parameter. Once a parameter has a default value, all subsequent parameters to its right must also have default values.
+                    <pre class="example">
+// VALID: funcA(int, string = "Default")
+void funcA(int x, string y = "TutorialsPoint"); 
+
+// INVALID: y has no default, but x does
+// void funcC(int x = 2006, int y); 
+</pre>
+                </li>
+                <li>
+                    <strong>Single Specification:</strong> Once a default argument is specified in a declaration, it cannot be redefined or modified in any subsequent declaration or definition.
+                </li>
+                <li>
+                    <strong>Ambiguity with Overloading:</strong> Default arguments should not be used in a way that creates ambiguity with existing overloaded functions. If two function signatures could potentially be matched by a single function call (e.g., calling a function with zero arguments matches two different overloads), a compilation error will occur.
+                </li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Using Expressions and Function Calls as Defaults</h2>
+            <p>Default values are not limited to constant literals; they can also be **expressions** or the result of a **function call**. The default expression is evaluated only once when the function is called without that specific argument.</p>
+
+            <ul>
+                <li>
+                    <strong>Default as Expression:</strong> The expression is calculated when the function is called.
+                    <pre class="example">
+double total_price(double price, double discount = 12.0) {
+    // 12.0 is used if no discount is passed
+    return price - (price * discount / 100);
+}
+</pre>
+                </li>
+                <li>
+                    <strong>Default as Function Call:</strong> The default value is obtained by calling another function.
+                    <pre class="example">
+double getDefaultWidth() { return 5.0; } 
+
+double cuboid_vol(double l, double h, double w = getDefaultWidth()) {
+    // getDefaultWidth() is called if 'w' is omitted
+    return l * w * h;
+}
+</pre>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

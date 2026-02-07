@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - mask Property</h1>
+    <div class="content">
+      <p>
+        The <strong>mask</strong> property in CSS allows you to partially or completely hide an element by applying a mask layer. 
+        This property is a shorthand for multiple properties including 
+        <em>mask-clip</em>, <em>mask-composite</em>, <em>mask-image</em>, <em>mask-mode</em>, 
+        <em>mask-origin</em>, <em>mask-position</em>, <em>mask-repeat</em>, and <em>mask-size</em>.
+      </p>
+
+      <h2>Syntax</h2>
+      <p>
+        <code>
+          mask: &lt;mask-image&gt; &lt;mask-mode&gt; &lt;mask-composite&gt; &lt;mask-clip&gt; 
+          &lt;mask-origin&gt; &lt;mask-position&gt; &lt;mask-repeat&gt; &lt;mask-size&gt; | initial | inherit;
+        </code>
+      </p>
+
+      <h2>Property Values</h2>
+      <ul>
+        <li><strong>mask-image</strong>: Specifies an image for the mask layer. Default is <em>none</em>.</li>
+        <li><strong>mask-mode</strong>: Defines whether the image acts as a luminance or alpha mask. Default is <em>match-source</em>.</li>
+        <li><strong>mask-composite</strong>: Sets compositing operation with below mask layers. Default is <em>add</em>.</li>
+        <li><strong>mask-clip</strong>: Defines the area affected by the mask image. Default is <em>border-box</em>.</li>
+        <li><strong>mask-origin</strong>: Defines the origin position of the mask layer image. Default is <em>border-box</em>.</li>
+        <li><strong>mask-position</strong>: Sets starting position of a mask image. Default is <em>0% 0%</em>.</li>
+        <li><strong>mask-repeat</strong>: Specifies how the mask image repeats. Default is <em>repeat</em>.</li>
+        <li><strong>mask-size</strong>: Defines the size of the mask image. Default is <em>auto</em>.</li>
+        <li><strong>initial</strong>: Resets the property to its default value.</li>
+        <li><strong>inherit</strong>: Inherits value from parent element.</li>
+      </ul>
+
+      <h2>Examples of CSS Mask Property</h2>
+
+      <h3>1. Defining Multiple Values using Mask Property</h3>
+      <p>
+        The mask property can combine multiple sub-properties in a single declaration. In this example, 
+        <em>mask-image</em>, <em>mask-mode</em>, <em>mask-repeat</em>, <em>mask-position</em>, 
+        and <em>mask-size</em> are defined together.
+      </p>
+      <h4>Example:</h4>
+      <div>
+        <p><code>mask: url("logo.png") no-repeat 45% 50%;</code></p>
+        <p><strong>Explanation:</strong> Applies a mask image positioned at 45% horizontally and 50% vertically.</p>
+      </div>
+
+      <h3>2. Using Constituent Properties Individually</h3>
+      <p>
+        Instead of shorthand, you can use individual properties such as 
+        <em>mask-image</em>, <em>mask-mode</em>, <em>mask-repeat</em>, <em>mask-position</em>, 
+        and <em>mask-size</em>.
+      </p>
+      <h4>Example:</h4>
+      <ul>
+        <li><code>mask-image: url("logo.png");</code></li>
+        <li><code>mask-mode: match-source;</code></li>
+        <li><code>mask-repeat: no-repeat;</code></li>
+        <li><code>mask-position: 45%;</code></li>
+        <li><code>mask-size: 50%;</code></li>
+      </ul>
+      <p>This produces the same visual effect as the shorthand example above.</p>
+
+      <h3>3. Mask Property with Gradients</h3>
+      <p>
+        The mask property can also be used with gradients to create advanced masking effects.
+      </p>
+      <h4>Example:</h4>
+      <ul>
+        <li><code>mask: linear-gradient(to right bottom, black, transparent);</code></li>
+        <li><code>mask: radial-gradient(circle, black 35%, rgba(0, 0, 0, 0.5) 60%);</code></li>
+      </ul>
+      <p>These create gradient-based masks that fade out parts of the image.</p>
+
+      <h2>Supported Browsers</h2>
+      <ul>
+        <li>Chrome: 120+</li>
+        <li>Edge: 120+</li>
+        <li>Firefox: 53+</li>
+        <li>Safari: 15.4+</li>
+        <li>Opera: 106+</li>
+      </ul>
+    </div>
+  </div>
+</div>

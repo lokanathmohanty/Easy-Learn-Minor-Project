@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ReactJS - Architecture</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="session">
+        <h1 class="title">ReactJS - Architecture</h1>
+      </header>
+
+      <section class="session">
+        <div class="content">
+          <p>
+            React is built on a simple, flexible, and extensible foundation. Its
+            primary purpose is to let developers build user interfaces using
+            pure JavaScript without introducing a new template language. Instead
+            of templates, React relies on three core concepts:
+          </p>
+          <ul>
+            <li>
+              <strong>React Elements</strong> – JavaScript representation of the
+              HTML DOM, created using <code>React.createElement</code>.
+            </li>
+            <li>
+              <strong>JSX</strong> – A JavaScript extension with HTML-like
+              syntax, compiled into React elements.
+            </li>
+            <li>
+              <strong>React Components</strong> – The primary building blocks of
+              a React app, written as JavaScript classes or functions with
+              properties, state, and lifecycle methods.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="session">
+        <h2 class="title">Architecture of a React Application</h2>
+        <div class="content">
+          <p>
+            React is just a UI library and does not enforce strict design
+            patterns. Developers are free to adopt their own architectures, but
+            the community often recommends patterns like
+            <strong>Flux</strong>. React also supports concepts such as Higher
+            Order Components, Context, Render Props, Refs, and Hooks for state
+            management in larger projects.
+          </p>
+          <p>The high-level architecture of a React application is:</p>
+          <ul>
+            <li>A React app starts with a single root component.</li>
+            <li>
+              The root component is composed of multiple nested components.
+            </li>
+            <li>
+              Components are composed, not inherited, and can be reused at
+              different levels.
+            </li>
+            <li>
+              Most components focus on UI, but third-party libraries can be
+              integrated for routing, animations, and state management.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="session">
+        <h2 class="title">Workflow of a React Application</h2>
+        <div class="content">
+          <p>
+            To better understand React's workflow, let's consider a simple
+            example:
+          </p>
+
+          <h3>Example using React.createElement</h3>
+          <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;React Application&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="react-app"&gt;&lt;/div&gt;
+    &lt;script src="https://unpkg.com/react@17/umd/react.development.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      element = React.createElement('h1', {}, 'Hello React!');
+      ReactDOM.render(element, document.getElementById('react-app'));
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </pre>
+
+          <p>
+            Here, <code>React.createElement</code> creates elements, and
+            <code>ReactDOM.render</code> renders them into the root container.
+          </p>
+
+          <h3>Nested Elements</h3>
+          <pre>
+&lt;script&gt;
+  element = React.createElement('div', {},
+    React.createElement('h1', {}, 'Hello React!')
+  );
+  ReactDOM.render(element, document.getElementById('react-app'));
+&lt;/script&gt;
+          </pre>
+
+          <h3>Using JSX</h3>
+          <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;React Application&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="react-app"&gt;&lt;/div&gt;
+    &lt;script src="https://unpkg.com/react@17/umd/react.development.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;
+    &lt;script type="text/babel"&gt;
+      ReactDOM.render(
+        &lt;div&gt;&lt;h1&gt;Hello React!&lt;/h1&gt;&lt;/div&gt;,
+        document.getElementById('react-app')
+      );
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </pre>
+
+          <h3>Component Example</h3>
+          <pre>
+&lt;script type="text/babel"&gt;
+  function Greeting() {
+    return &lt;div&gt;&lt;h1&gt;Hello JSX!&lt;/h1&gt;&lt;/div&gt;;
+  }
+  ReactDOM.render(&lt;Greeting /&gt;, document.getElementById('react-app'));
+&lt;/script&gt;
+          </pre>
+        </div>
+      </section>
+
+      <section class="session">
+        <h2 class="title">React Application Workflow</h2>
+        <div class="content">
+          <ol>
+            <li>
+              React components (JSX or elements) are passed to
+              <code>ReactDOM.render</code> along with the root container.
+            </li>
+            <li>
+              React converts JSX into elements and builds a Virtual DOM.
+            </li>
+            <li>
+              The Virtual DOM is compared to the previous state and merged with
+              the real DOM efficiently.
+            </li>
+            <li>
+              The browser displays the updated UI with minimal re-rendering.
+            </li>
+          </ol>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

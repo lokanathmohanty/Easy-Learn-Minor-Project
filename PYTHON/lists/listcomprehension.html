@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - List Comprehension</h1>
+    <div class="content">
+      <p>A list comprehension is a concise way to create lists. It is similar to set builder notation in mathematics. It is used to define a list based on an existing iterable object, such as a list, tuple, or string, and apply an expression to each element in the iterable.</p>
+
+      <h2>Syntax of Python List Comprehension</h2>
+      <p>The basic syntax of list comprehension is −</p>
+      <p><code>new_list = [expression for item in iterable if condition]</code></p>
+      <ul>
+        <li><b>expression</b> − the operation or transformation to apply to each item in the iterable.</li>
+        <li><b>item</b> − the variable representing each element in the iterable.</li>
+        <li><b>iterable</b> − the sequence of elements to iterate over.</li>
+        <li><b>condition</b> (optional) − filters elements based on a specified condition.</li>
+      </ul>
+
+      <h2>Example of Python List Comprehension</h2>
+      <p>Suppose we want to convert all the letters in the string <code>"hello world"</code> to their upper-case form:</p>
+      <pre><code>string = "hello world"
+uppercase_letters = [char.upper() for char in string if char.isalpha()]
+print(uppercase_letters)</code></pre>
+      <p><b>Output:</b> ['H', 'E', 'L', 'L', 'O', 'W', 'O', 'R', 'L', 'D']</p>
+
+      <h2>List Comprehensions and Lambda</h2>
+      <p>We can use list comprehension with <code>lambda</code> functions to apply transformations.</p>
+      <pre><code>original_list = [1, 2, 3, 4, 5]
+doubled_list = [(lambda x: x * 2)(x) for x in original_list]
+print(doubled_list)</code></pre>
+      <p><b>Output:</b> [2, 4, 6, 8, 10]</p>
+
+      <h2>Nested Loops in Python List Comprehension</h2>
+      <p>We can use nested loops in list comprehension to generate combinations:</p>
+      <pre><code>list1=[1,2,3]
+list2=[4,5,6]
+CombLst=[(x,y) for x in list1 for y in list2]
+print(CombLst)</code></pre>
+      <p><b>Output:</b> [(1, 4), (1, 5), (1, 6), (2, 4), (2, 5), (2, 6), (3, 4), (3, 5), (3, 6)]</p>
+
+      <h2>Conditionals in Python List Comprehension</h2>
+      <p>Conditionals can filter elements while generating lists:</p>
+      <pre><code>list1=[x for x in range(1,21) if x%2==0]
+print(list1)</code></pre>
+      <p><b>Output:</b> [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]</p>
+
+      <h2>List Comprehensions vs For Loop</h2>
+      <p>List comprehensions are concise and efficient, while for loops are more flexible for complex tasks.</p>
+
+      <h3>Example Using For Loop</h3>
+      <pre><code>chars=[]
+for ch in 'TutorialsPoint':
+   if ch not in 'aeiou':
+      chars.append(ch)
+print(chars)</code></pre>
+      <p><b>Output:</b> ['T', 't', 'r', 'l', 's', 'P', 'n', 't']</p>
+
+      <h3>Example Using List Comprehension</h3>
+      <pre><code>chars = [char for char in 'TutorialsPoint' if char not in 'aeiou']
+print(chars)</code></pre>
+      <p><b>Output:</b> ['T', 't', 'r', 'l', 's', 'P', 'n', 't']</p>
+
+      <h2>Example</h2>
+      <p>Building a list of squares between 1 and 10:</p>
+      <pre><code>squares = [x*x for x in range(1,11)]
+print(squares)</code></pre>
+      <p><b>Output:</b> [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</p>
+
+      <h2>Advantages of List Comprehension</h2>
+      <ul>
+        <li><b>Conciseness</b> − More concise and readable than loops.</li>
+        <li><b>Efficiency</b> − Faster and optimized by Python internally.</li>
+        <li><b>Clarity</b> − More expressive and easier to understand.</li>
+        <li><b>Reduced Errors</b> − Compact code reduces chances of bugs.</li>
+      </ul>
+    </div>
+  </div>
+</div>

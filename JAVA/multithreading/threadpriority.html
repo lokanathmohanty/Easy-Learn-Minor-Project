@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Thread Priority</h1>
+
+    <div class="content">
+      <h2 class="content-title">Priority of a Thread in Java</h2>
+      <p>Every Java thread has a priority that helps the operating system determine the order in which threads are scheduled. The <code>Thread</code> class provides methods and constants to work with thread priorities.</p>
+      <p>Threads with higher priority may be given preference, but thread scheduling is platform-dependent and does not guarantee execution order.</p>
+
+      <h2 class="content-title">Built-in Priority Constants</h2>
+      <ul>
+        <li><strong>MIN_PRIORITY</strong>: Minimum thread priority (1)</li>
+        <li><strong>NORM_PRIORITY</strong>: Default thread priority (5)</li>
+        <li><strong>MAX_PRIORITY</strong>: Maximum thread priority (10)</li>
+      </ul>
+
+      <h2 class="content-title">Thread Priority Methods</h2>
+      <ul>
+        <li><code>getPriority()</code>: Returns the priority of the thread</li>
+        <li><code>setPriority(int priority)</code>: Sets the priority of the thread</li>
+      </ul>
+
+      <h2 class="example-title">Example: Default Priority</h2>
+      <p>This example shows the priority of the main thread using <code>getPriority()</code>.</p>
+      <pre>
+<code>
+public class TestThread {
+   public void printName() {
+      System.out.println("Thread Name: " + Thread.currentThread().getName());
+      System.out.println("Thread Priority: " + Thread.currentThread().getPriority());
+   }
+   public static void main(String args[]) {
+      TestThread thread = new TestThread();
+      thread.printName();
+   }
+}
+</code>
+      </pre>
+      <p><strong>Output:</strong></p>
+      <pre>
+<code>
+Thread Name: main
+Thread Priority: 5
+</code>
+      </pre>
+
+      <h2 class="example-title">Example 1: Custom Thread Priorities</h2>
+      <p>This example sets different priorities to three threads before starting them. The output reflects their assigned priorities.</p>
+      <pre>
+<code>
+class ThreadDemo extends Thread {
+   public void run() {
+      System.out.println("Thread Name: " + Thread.currentThread().getName() +
+         ", Thread Priority: " + Thread.currentThread().getPriority());
+      for (int i = 4; i > 0; i--) {
+         System.out.println("Thread: " + Thread.currentThread().getName() + ", " + i);
+      }
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      ThreadDemo thread1 = new ThreadDemo();
+      ThreadDemo thread2 = new ThreadDemo();
+      ThreadDemo thread3 = new ThreadDemo();
+      thread1.setPriority(Thread.MAX_PRIORITY);
+      thread2.setPriority(Thread.MIN_PRIORITY);
+      thread3.setPriority(Thread.NORM_PRIORITY);
+      thread1.start();
+      thread2.start();
+      thread3.start();
+   }
+}
+</code>
+      </pre>
+
+      <h2 class="example-title">Example 2: All Threads with Default Priority</h2>
+      <p>This example creates three threads without changing their default priority. Their execution order is not guaranteed.</p>
+      <pre>
+<code>
+class ThreadDemo extends Thread {
+   public void run() {
+      System.out.println("Thread Name: " + Thread.currentThread().getName() +
+         ", Thread Priority: " + Thread.currentThread().getPriority());
+      for (int i = 4; i > 0; i--) {
+         System.out.println("Thread: " + Thread.currentThread().getName() + ", " + i);
+      }
+   }
+}
+
+public class TestThread {
+   public static void main(String args[]) {
+      ThreadDemo thread1 = new ThreadDemo();
+      ThreadDemo thread2 = new ThreadDemo();
+      ThreadDemo thread3 = new ThreadDemo();
+      thread1.start();
+      thread2.start();
+      thread3.start();
+   }
+}
+</code>
+      </pre>
+    </div>
+  </div>
+</div>

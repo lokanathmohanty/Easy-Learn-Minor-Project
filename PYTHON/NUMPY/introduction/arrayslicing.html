@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="session">
+
+    <div class="title">
+      <h1>NumPy Array Slicing</h1>
+      <h2>Slicing Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>Slicing in Python means taking elements from one given index to another given index.</p>
+      <p>We pass slice instead of index like this: <code>[start:end]</code>.</p>
+      <p>We can also define the step, like this: <code>[start:end:step]</code>.</p>
+      <ul>
+        <li>If we don't pass <strong>start</strong>, it's considered <code>0</code></li>
+        <li>If we don't pass <strong>end</strong>, it's considered the length of the array in that dimension</li>
+        <li>If we don't pass <strong>step</strong>, it's considered <code>1</code></li>
+      </ul>
+    </div>
+
+    <div class="title">
+      <h2>Example</h2>
+    </div>
+
+    <div class="content">
+      <p>Slice elements from index 1 to index 5 (end not included):</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+
+print(arr[1:5])</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Slice elements from index 4 to the end of the array:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+
+print(arr[4:])</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Slice elements from the beginning to index 4 (not included):</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+
+print(arr[:4])</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>Negative Slicing</h2>
+    </div>
+
+    <div class="content">
+      <p>Use the minus operator to refer to an index from the end:</p>
+      <p>Slice from the index 3 from the end to index 1 from the end:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+
+print(arr[-3:-1])</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>Using Step</h2>
+    </div>
+
+    <div class="content">
+      <p>Return every other element from index 1 to index 5:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+
+print(arr[1:5:2])</code></pre>
+    </div>
+
+    <div class="content">
+      <p>Return every other element from the entire array:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+
+print(arr[::2])</code></pre>
+    </div>
+
+    <div class="title">
+      <h2>Slicing 2-D Arrays</h2>
+    </div>
+
+    <div class="content">
+      <p>From the second row, slice elements from index 1 to index 4 (not included):</p>
+      <pre><code>import numpy as np
+
+arr = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+
+print(arr[1, 1:4])</code></pre>
+      <p>Note: The second row has index 1.</p>
+    </div>
+
+    <div class="content">
+      <p>From both rows, return the element at index 2:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+
+print(arr[0:2, 2])</code></pre>
+    </div>
+
+    <div class="content">
+      <p>From both rows, slice index 1 to index 4 (not included), returning a 2-D array:</p>
+      <pre><code>import numpy as np
+
+arr = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+
+print(arr[0:2, 1:4])</code></pre>
+    </div>
+
+  </div>
+</div>

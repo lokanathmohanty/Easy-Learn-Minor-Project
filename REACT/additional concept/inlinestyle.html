@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Inline Styling (CSS in JS)</h1>
+    <div class="content">
+      <p>React provides a unique way of directly writing the CSS inside the component and using it in JSX. This concept is called <strong>CSS in JS</strong> and provides many advantages over traditional usage of styles.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Concept of Inline Styling</h2>
+    <div class="content">
+      <p>React allows CSS to be imported directly into components, but this leads to the problem of <strong>global namespace</strong>, where one component’s styles can conflict with another. To avoid this, React supports <strong>inline styling</strong> using JavaScript objects.</p>
+      <p>Rules for inline styles:</p>
+      <ul>
+        <li>Keys must be written in <strong>CamelCase</strong> instead of kebab-case. Example: <code>background-color</code> → <code>backgroundColor</code>.</li>
+        <li>Values must be strings. Example: <code>{ fontSize: "12px" }</code>.</li>
+      </ul>
+      <pre>
+{
+   backgroundColor: "red",
+   fontSize: "12px"
+}
+      </pre>
+      <p>React handles conflicts and ensures styles are scoped correctly.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Applying Inline Style</h2>
+    <div class="content">
+      <p>Steps to apply inline style in a React app:</p>
+      <ul>
+        <li>Create a new React app with <code>create-react-app myapp</code>.</li>
+        <li>Remove all styles from <code>App.css</code>.</li>
+        <li>Create a component <code>SimpleStyle</code> and apply inline styles.</li>
+      </ul>
+      <pre>
+import React from "react";
+
+class SimpleStyle extends React.Component {
+   displayStyle = {
+      fontFamily: 'Times New Roman',
+      fontSize: "24px",
+      color: "red"
+   }
+   render() {
+      return (
+         &lt;div&gt;
+            &lt;div style={this.displayStyle}&gt;
+               Sample text to understand inline style (object as variable) in React component
+            &lt;/div&gt;
+            &lt;hr /&gt;
+            &lt;div style={{ fontFamily: 'Arial', fontSize: "24px", color: "grey"}}&gt;
+               Sample text to understand inline style (object as expression) in React component
+            &lt;/div&gt;
+         &lt;/div&gt;
+      )
+   }
+}
+
+export default SimpleStyle;
+      </pre>
+      <p>In this example:</p>
+      <ul>
+        <li>The first <code>div</code> uses a variable (<code>displayStyle</code>) for styles.</li>
+        <li>The second <code>div</code> uses an inline object expression.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Using Inline Style in App</h2>
+    <div class="content">
+      <pre>
+import './App.css'
+import React from 'react';
+import SimpleStyle from './Components/SimpleStyle'
+
+function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;div style={{ padding: "10px" }}&gt;
+            &lt;div&gt;
+               &lt;SimpleStyle /&gt;
+            &lt;/div&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+   );
+}
+
+export default App;
+      </pre>
+      <p>Here, the <code>SimpleStyle</code> component is imported and rendered inside the main App.</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Summary</h2>
+    <div class="content">
+      <p><strong>Inline styling</strong> helps developers quickly include CSS styles without worrying about conflicts. Since the syntax is very similar to CSS, it’s easy for developers to adapt and use this feature efficiently.</p>
+    </div>
+  </div>
+</div>

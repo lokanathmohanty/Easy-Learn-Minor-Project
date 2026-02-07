@@ -1,0 +1,149 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Using useContext</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            Context provides a way to share values like configuration, theme, or user data across
+            components without passing props manually at every level. It improves readability and
+            simplifies global state management.
+         </p>
+
+         <h2>Use Cases</h2>
+         <ul>
+            <li>Application configuration</li>
+            <li>Current authenticated user information</li>
+            <li>User settings (language, preferences)</li>
+            <li>Theme or design configuration</li>
+         </ul>
+
+         <h2>How Context Works</h2>
+         <p>Context consists of four parts:</p>
+         <ul>
+            <li>Creating a new context</li>
+            <li>Providing context in the root component</li>
+            <li>Consuming context in a child component</li>
+            <li>Accessing values using <code>useContext</code></li>
+         </ul>
+
+         <h2>Example: Creating Context</h2>
+         <div class="code-block">
+<pre><code>import React from 'react';
+
+const ThemeContext = React.createContext({
+   color: 'black',
+   backgroundColor: 'white'
+});
+
+export default ThemeContext;</code></pre>
+         </div>
+
+         <h2>Example: Providing Context</h2>
+         <div class="code-block">
+<pre><code>import ThemeContext from './ThemeContext';
+
+function App() {
+   return (
+      &lt;ThemeContext.Provider value={{
+         color: 'white',
+         backgroundColor: 'green'
+      }}&gt;
+         &lt;HelloWorld /&gt;
+      &lt;/ThemeContext.Provider&gt;
+   );
+}
+
+export default App;</code></pre>
+         </div>
+
+         <h2>Example: Consuming with useContext</h2>
+         <div class="code-block">
+<pre><code>import React, { useContext } from "react";
+import ThemeContext from "../ThemeContext";
+
+function HelloWorld() {
+   const theme = useContext(ThemeContext);
+
+   return (
+      &lt;div style={{
+         color: theme.color,
+         backgroundColor: theme.backgroundColor
+      }}&gt;
+         Hello World
+      &lt;/div&gt;
+   );
+}
+
+export default HelloWorld;</code></pre>
+         </div>
+
+         <h2>Updating Context</h2>
+         <p>
+            You can combine <code>useState</code> with <code>useContext</code> to allow updating
+            context values dynamically (e.g., switching themes).
+         </p>
+
+         <div class="code-block">
+<pre><code>import { useState } from 'react';
+import ThemeContext from './ThemeContext';
+import HelloWorld from './HelloWorld';
+
+function App() {
+   const [theme, setTheme] = useState({
+      color: 'white',
+      backgroundColor: 'green'
+   });
+
+   return (
+      &lt;ThemeContext.Provider value={{ theme, setTheme }}&gt;
+         &lt;HelloWorld /&gt;
+      &lt;/ThemeContext.Provider&gt;
+   );
+}
+
+export default App;</code></pre>
+         </div>
+
+         <h2>Example: Changing Theme</h2>
+         <div class="code-block">
+<pre><code>import React, { useContext } from "react";
+import ThemeContext from "../ThemeContext";
+
+function HelloWorld() {
+   const { theme, setTheme } = useContext(ThemeContext);
+
+   return (
+      &lt;div style={{
+         color: theme.color,
+         backgroundColor: theme.backgroundColor
+      }}&gt;
+         &lt;select
+            value={theme.backgroundColor}
+            onChange={(e) =&gt; setTheme({
+               ...theme,
+               backgroundColor: e.target.value
+            })}
+         &gt;
+            &lt;option value="green"&gt;Green&lt;/option&gt;
+            &lt;option value="red"&gt;Red&lt;/option&gt;
+         &lt;/select&gt;
+
+         &lt;div&gt;Hello World&lt;/div&gt;
+      &lt;/div&gt;
+   );
+}
+
+export default HelloWorld;</code></pre>
+         </div>
+
+         <h2>Summary</h2>
+         <p>
+            Context simplifies sharing global data in React applications.  
+            The <code>useContext</code> hook makes consuming and updating context values easier, 
+            especially when combined with <code>useState</code>.
+         </p>
+      </div>
+   </div>
+</div>

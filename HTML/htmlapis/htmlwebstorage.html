@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">HTML - Web Storage</h1>
+    <div class="content">
+      <h2>Web Storage</h2>
+      <p>HTML Web storage is a mechanism used for storing structured data on the client side without sending it to the server. These two storage mechanisms are <b>session storage</b> and <b>local storage</b>. Both are collectively part of the HTML5 Web Storage API.</p>
+      
+      <h2>Need of Web Storage</h2>
+      <p>HTML Web storage was introduced to overcome the following drawbacks of cookies:</p>
+      <ul>
+        <li>Cookies are included with every HTTP request, thereby slowing down your web application by transmitting the same data.</li>
+        <li>Cookies are included with every HTTP request, thereby sending data unencrypted over the internet.</li>
+        <li>Cookies are limited to about 4 KB of data, which is not enough to store required data.</li>
+      </ul>
+
+      <h2>Types of Web Storage</h2>
+      <p>HTML provides two types of web storage:</p>
+      <ul>
+        <li>Session storage</li>
+        <li>Local storage</li>
+      </ul>
+      <p>To use these two web storages in your application, you can access them through the <code>window.sessionStorage</code> and <code>window.localStorage</code> properties.</p>
+
+      <h2>The Session Storage</h2>
+      <p>The session storage is temporary and gets cleared when the page session ends (when the browser tab or window is closed). The data stored in session storage is specific to each tab or window.</p>
+      <p>HTML5 introduces the <code>sessionStorage</code> attribute, which is used to add and access data during a session.</p>
+
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;script type="text/javascript"&gt;	
+      if( sessionStorage.hits ){
+         sessionStorage.hits = Number(sessionStorage.hits) +1;
+      } else {
+         sessionStorage.hits = 1;
+      }
+      document.write("Total Hits :" + sessionStorage.hits );
+   &lt;/script&gt;
+   &lt;p&gt;Refresh the page to increase number of hits.&lt;/p&gt;
+   &lt;p&gt;Close the window and open it again and check the result.&lt;/p&gt;
+&lt;/body&gt;	
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <h2>Local Storage</h2>
+      <p>The local storage is designed for data storage that spans multiple windows and lasts beyond the current session. It does not expire until manually deleted by the user or application. It is useful for storing large amounts of client-side data, such as documents or mailbox content.</p>
+      <p>HTML5 introduces the <code>localStorage</code> attribute, which provides persistent storage without a time limit.</p>
+
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;script type="text/javascript"&gt;
+      if( localStorage.hits ){
+         localStorage.hits = Number(localStorage.hits) +1;
+      } else {
+         localStorage.hits = 1;
+      }
+      document.write("Total Hits :" + localStorage.hits );
+   &lt;/script&gt;
+   &lt;p&gt;Refresh the page to increase number of hits.&lt;/p&gt;
+   &lt;p&gt;Close the window and open it again and check the result.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+
+      <h2>Delete Web Storage</h2>
+      <p>Storing sensitive data on a local machine could be risky and may leave security holes. Session storage data is automatically deleted after the session ends, but local storage must be manually cleared using:</p>
+      <ul>
+        <li><code>localStorage.remove('key')</code> – removes a specific item.</li>
+        <li><code>localStorage.clear()</code> – clears all items.</li>
+      </ul>
+
+      <h3 class="title">Example</h3>
+      <div class="content">
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+   &lt;script type="text/javascript"&gt;
+      localStorage.clear();
+      
+      // Reset number of hits.
+      if( localStorage.hits ){
+         localStorage.hits = Number(localStorage.hits) +1;
+      } else {
+         localStorage.hits = 1;
+      }
+      document.write("Total Hits :" + localStorage.hits );
+   &lt;/script&gt;
+   &lt;p&gt;Refreshing the page would not to increase hit counter.&lt;/p&gt;
+   &lt;p&gt;Close the window and open it again and check the result.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>

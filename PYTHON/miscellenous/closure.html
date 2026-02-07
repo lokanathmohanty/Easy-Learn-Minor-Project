@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Closures</h1>
+    </div>
+    <div class="content">
+      <p>
+        A Python closure is a nested function which captures and retains variables from its enclosing function's scope even after the outer function has finished execution. This allows the inner function to remember and access those variables later. To modify immutable outer variables within a closure, the <code>nonlocal</code> keyword is used.
+      </p>
+      <p>
+        Closures help avoid using global variables and provide data hiding, and are often used in decorators.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Nested Functions</h2>
+    </div>
+    <div class="content">
+      <p>Nested functions are functions defined inside other functions. The inner function can be invoked within the outer function's scope.</p>
+      <pre><code>def functionA():
+    print("Outer function")
+    def functionB():
+        print("Inner function")
+    functionB()
+
+functionA()
+</code></pre>
+      <p>Output:</p>
+      <pre>
+Outer function
+Inner function
+</pre>
+      <p>The outer function can pass arguments to the inner function:</p>
+      <pre><code>def functionA(name):
+    print("Outer function")
+    def functionB():
+        print("Inner function")
+        print("Hi {}".format(name))
+    functionB()
+
+functionA("Python")
+</code></pre>
+      <p>Output:</p>
+      <pre>
+Outer function
+Inner function
+Hi Python
+</pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Variable Scope and Closures</h2>
+    </div>
+    <div class="content">
+      <p>
+        Closures retain access to variables from their enclosing scopes even after those scopes have finished execution.
+      </p>
+      <pre><code>def outer_function(x):
+    y = 10
+    def inner_function(z):
+        return x + y + z  # x and y captured
+    return inner_function
+
+closure = outer_function(5)
+result = closure(3)
+print(result)  # Output: 18
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Creating a Closure</h2>
+    </div>
+    <div class="content">
+      <p>
+        A closure is created by returning a nested function from an outer function, thereby capturing the variables in that outer scope.
+      </p>
+      <pre><code>def functionA(name):
+    name = "New name"
+    def functionB():
+        print(name)
+    return functionB
+
+myfunction = functionA("My name")
+myfunction()  # Output: New name
+</code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Using the nonlocal Keyword</h2>
+    </div>
+    <div class="content">
+      <p>
+        The <code>nonlocal</code> keyword allows modifying an outer, but non-global, variable inside a nested function:
+      </p>
+      <pre><code>def functionA():
+    counter = 0
+    def functionB():
+        nonlocal counter
+        counter += 1
+        return counter
+    return functionB
+
+myfunction = functionA()
+
+print("Counter:", myfunction())  # Counter: 1
+print("Counter:", myfunction())  # Counter: 2
+print("Counter:", myfunction())  # Counter: 3
+</code></pre>
+    </div>
+  </div>
+</div>

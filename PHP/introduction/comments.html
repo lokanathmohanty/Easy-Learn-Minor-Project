@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Comments: Types and Best Practices</h1>
+    <div class="content">
+      <p>
+        A **comment** is explanatory text in a program that is **ignored by the PHP interpreter**. Comments are highly recommended for program documentation, explaining logic, and assisting with debugging and future modification.
+      </p>
+
+      <h2>Types of Comments in PHP</h2>
+      <p>PHP supports two main commenting styles:</p>
+
+      <h3>1. Single-line Comments (Ends at the end of the line)</h3>
+      <p>These are best for short explanations relevant to the immediate line of code.</p>
+      <ul>
+        <li>
+          **Shell-style:** Starts with the **pound symbol** (`#`).
+          <div class="example">
+            <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;# Single line comment starting with # symbol<br>&nbsp;&nbsp;&nbsp;echo 'Hello World';?&gt;</code>
+          </div>
+        </li>
+        <li>
+          **C++ style:** Starts with **double slashes** (`//`).
+          <div class="example">
+            <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;// Single line comment starting with // symbol<br>&nbsp;&nbsp;&nbsp;echo 'Hello World';?&gt;</code>
+          </div>
+        </li>
+      </ul>
+
+      <h3>2. Multi-line Comments (Block Comments)</h3>
+      <p>
+        Used for more detailed explanations, pseudocode, or to temporarily disable a block of code.
+      </p>
+      <ul>
+        <li>
+          **C-style:** Starts with `/*` and must be explicitly closed with `*/`.
+          <div class="example">
+            <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;/* This is a multiline comment example<br>&nbsp;&nbsp;&nbsp;program to add two numbers */<br>&nbsp;&nbsp;&nbsp;$x=10;<br>&nbsp;&nbsp;&nbsp;$y=20;<br>&nbsp;&nbsp;&nbsp;print "Total = ". $x+$y;?&gt;</code>
+          </div>
+        </li>
+      </ul>
+
+      <h3>3. DocBlock Comments (Documentation)</h3>
+      <p>
+        A specific type of multi-line comment starting with `/**` and using asterisks (`*`) on each line. These are used to provide structured documentation (metadata) for functions, classes, and variables, which can be automatically parsed by documentation generation tools (like PHPDoc).
+      </p>
+      <div class="example">
+        <p>
+          <code>/**<br>&nbsp;* This function adds two numbers.<br>&nbsp;*<br>&nbsp;* @param int $a First number<br>&nbsp;* @param int $b Second number<br>&nbsp;* @return int Sum of $a and $b<br>&nbsp;*/<br>function add($a, $b) {<br>&nbsp;&nbsp;&nbsp;return $a + $b;<br>}</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Useful Tips for Writing Better Comments</h2>
+      <p>Good commenting practices ensure readability and maintainability:</p>
+      <ul>
+        <li>
+          **Audience:** Always write comments for **other developers** who will eventually read and modify your code.
+        </li>
+        <li>
+          **Clarity:** Use **proper English and grammar**; avoid shorthand or ambiguous words.
+        </li>
+        <li>
+          **Avoid Obvious Comments:** Do not comment on code that is **self-explanatory**.
+        </li>
+        <li>
+          **Placement:** Keep comments immediately **above the code block** they refer to.
+        </li>
+        <li>
+          **Maintenance:** **Update comments** immediately whenever the corresponding code changes.
+        </li>
+        <li>
+          **Documentation:** Always use **DocBlocks for functions and classes** to explain complex logic, parameters, and return values in detail.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,184 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">PHP Cheatsheet: Core Syntax and Fundamentals 📜</h1>
+
+        <div class="content">
+            <p>This cheatsheet provides a quick reference for essential $\text{PHP}$ concepts, syntax, variables, and common functions. It's a handy tool for revision and quick lookups.</p>
+
+            <hr>
+
+            <h2 class="title">Script Syntax and Comments</h2>
+
+            <h3>Standard PHP Tags</h3>
+            <pre>&lt;?php
+   // Your PHP code here
+?&gt;</pre>
+            <h3>Short Echo Tag (For quickly outputting variables)</h3>
+            <pre>&lt;?= "Hello, World!" ?&gt;</pre>
+
+            <h3>Comments</h3>
+            <ul>
+                <li><strong>Single-line:</strong> Starts with $\text{//}$ or $\text{#}$.</li>
+                <li><strong>Multi-line:</strong> Enclosed within $\text{/*}$ and $\text{*/}$.</li>
+            </ul>
+            <pre>// Single-line comment
+# Another single-line comment
+/* Multi-line
+comment */</pre>
+
+            <hr>
+
+            <h2 class="title">Variables and Output</h2>
+
+            <h3>Variable Declaration</h3>
+            <p>Variables start with the dollar sign ($\text{\$}):</p>
+            <pre>&lt;?php
+   $age = 21; // Integer
+   $name = "Kelly Hu"; // String
+?&gt;</pre>
+
+            <h3>Printing Output</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Use</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$\text{echo}$</td>
+                        <td>Prints one or more strings; faster.</td>
+                        <td>$\text{echo "Hello", " World!";}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{print}$</td>
+                        <td>Prints a single string; returns 1 (useful in expressions).</td>
+                        <td>$\text{print "Single String";}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{printf}$</td>
+                        <td>Prints a formatted string (e.g., decimals, padding).</td>
+                        <td>$\text{printf("Hello, \%s!", "World");}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{print\_r}$</td>
+                        <td>Displays human-readable information about a variable, useful for arrays/objects.</td>
+                        <td>$\text{print\_r(\$array);}$</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Newlines and $\text{HTML}$ Embedding</h3>
+            <ul>
+                <li><strong>Console Newline:</strong> Use $\text{"\n"}$ inside double quotes.</li>
+                <li><strong>Browser Newline:</strong> Use the $\text{&lt;br /&gt;}$ $\text{HTML}$ tag.</li>
+            </ul>
+            <pre>
+&lt;?php
+   echo "Hello, World!\n"; // Console output
+   echo "&lt;h1&gt;Welcome, $name!&lt;/h1&gt;"; // Embedding HTML &amp; variables
+?&gt;</pre>
+
+            <hr>
+
+            <h2 class="title">PHP Data Types</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data Type</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$\text{String}$</td>
+                        <td>Sequence of characters (single or double quotes).</td>
+                        <td>$\text{\$str = "Hello";}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{Integer}$</td>
+                        <td>Non-decimal whole numbers.</td>
+                        <td>$\text{\$int = 42;}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{Float/Double}$</td>
+                        <td>Numbers with a decimal or fractional part.</td>
+                        <td>$\text{\$float = 3.14;}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{Boolean}$</td>
+                        <td>$\text{TRUE}$ or $\text{FALSE}$.</td>
+                        <td>$\text{\$is\_admin = true;}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{Array}$</td>
+                        <td>Stores multiple values in a single variable (indexed or associative).</td>
+                        <td>$\text{\$cities = ["Hyd", "Bang"];}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{Object}$</td>
+                        <td>An instance of a user-defined class.</td>
+                        <td>$\text{\$p = new Person("Name");}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{NULL}$</td>
+                        <td>Represents a variable with no value.</td>
+                        <td>$\text{\$var = null;}$</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2 class="title">String Operations</h2>
+
+            <h3>Concatenation</h3>
+            <p>Uses the dot ($\text{.}$) operator.</p>
+            <pre>&lt;?php
+   $greeting = "Hello" . " " . "World!"; // Output: Hello World!
+?&gt;</pre>
+
+            <h3>Key String Functions</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function Name</th>
+                        <th>Use</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$\text{strlen()}$</td>
+                        <td>Returns the length of a string.</td>
+                        <td>$\text{strlen("Hello") // 5}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{strpos()}$</td>
+                        <td>Finds the position of the first occurrence of a substring.</td>
+                        <td>$\text{strpos("abc", "b") // 1}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{str\_replace()}$</td>
+                        <td>Replaces all occurrences of a substring with a new string.</td>
+                        <td>$\text{str\_replace("o", "a", "Hello") // Heall}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{substr()}$</td>
+                        <td>Returns a part of a string.</td>
+                        <td>$\text{substr("Hello", 0, 2) // He}$</td>
+                    </tr>
+                    <tr>
+                        <td>$\text{strtolower()}$</td>
+                        <td>Converts a string to lowercase.</td>
+                        <td>$\text{strtolower("HELLO") // hello}$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

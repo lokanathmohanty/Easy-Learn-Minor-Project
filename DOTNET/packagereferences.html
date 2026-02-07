@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">.NET Core - Package References and Management</h1>
+        
+        <div class="content">
+            <p>This session covers methods for identifying, finding, and adding **NuGet packages** (dependencies) to a **.NET Core** application, focusing on the file-based approach using <code>project.json</code>.</p>
+        </div>
+
+        <h2 class="title">Finding a Specific Package (The CoreFx Approach)</h2>
+        <div class="content">
+            <p>Because .NET Core is modular (using **CoreFx** as the reimplementation of the class libraries), familiar types from the old .NET Framework are now distributed as separate packages. You can find these packages in two main ways, besides searching directly on the NuGet website:</p>
+            <ul>
+                <li class="content">
+                    **GitHub CoreFx Repository**: By navigating to the **CoreFx source code** on GitHub (<code>https://github.com/dotnet/corefx</code>) and opening the <code>src</code> folder, you can see a list of folders corresponding to the various packages (e.g., searching for "Json" leads to related packages).
+                </li>
+                <li class="content">
+                    **Type Search Tool**: If you know the namespace or type (e.g., <code>DataContractJson</code>) but not the package name, there are external tools that scan NuGet to find the containing package for that specific type.
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="title example">Adding a Package Dependency Manually (via project.json)</h2>
+        <div class="content example">
+            <p>One primary way to add a package is by directly editing the **<code>project.json</code>** file (the project format at the time of this documentation). The package reference is added within the **<code>dependencies</code>** section.</p>
+
+            <h3>Original <code>project.json</code> Structure</h3>
+            <pre><code>{ 
+   "version": "1.0.0-*", 
+   "buildOptions": { 
+      "emitEntryPoint": true 
+   }, 
+   "dependencies": { 
+      "Microsoft.NETCore.App": { 
+         "type": "platform", 
+         "version": "1.0.1" 
+      } 
+   }, 
+   "frameworks": { 
+      "netcoreapp1.0": { 
+         "imports": "dnxcore50" 
+      } 
+   } 
+}</code></pre>
+
+            <h3>Adding a Package Reference</h3>
+            <p>To add a package like <code>System.Runtime.Serialization.Json</code> with version <code>4.0.2</code>, you insert it as a new key-value pair under <code>"dependencies"</code>:</p>
+            <pre><code>{ 
+   "version": "1.0.0-*", 
+   "buildOptions": { 
+      "emitEntryPoint": true 
+   }, 
+   "dependencies": { 
+      "Microsoft.NETCore.App": { 
+         "type": "platform", 
+         "version": "1.0.1" 
+      }, 
+      /** NEW PACKAGE ADDED HERE **/
+      **"System.Runtime.Serialization.Json": "4.0.2"** }, 
+   "frameworks": { 
+      "netcoreapp1.0": { 
+         "imports": "dnxcore50" 
+      } 
+   } 
+}</code></pre>
+            <p>Once the file is saved, the package is automatically added to your project's references in Visual Studio.</p>
+        </div>
+
+        <h2 class="title">Alternative Method: NuGet Package Manager</h2>
+        <div class="content">
+            <p>The standard way to manage packages visually is by using the **NuGet Package Manager** within Visual Studio, where you can browse, search for, and install packages directly through the user interface.</p>
+        </div>
+    </div>
+</div>

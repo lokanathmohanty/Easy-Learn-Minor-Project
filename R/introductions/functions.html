@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Functions</h1>
+    <div class="content">
+      <p>
+        A function is a set of statements organized together to perform a specific task. R has many built-in functions and allows users to create their own. In R, a function is an object; the interpreter passes control to the function, along with arguments as needed.
+      </p>
+      <h2 class="title">Function Definition</h2>
+      <p>
+        To create a function in R, use the <code>function</code> keyword:
+      </p>
+      <pre><code>function_name &lt;- function(arg_1, arg_2, ...) {
+  # Function body
+}</code></pre>
+      <ul>
+        <li><strong>Function Name</strong>: The name stored as an object in the R environment.</li>
+        <li><strong>Arguments</strong>: Placeholders; can be optional and have default values.</li>
+        <li><strong>Function Body</strong>: Statements defining the function's actions.</li>
+        <li><strong>Return Value</strong>: The last evaluated expression in the function body is returned.</li>
+      </ul>
+      
+      <h2 class="title">Built-in Functions Example</h2>
+      <pre><code># Sequence from 32 to 44
+print(seq(32,44))
+
+# Mean of numbers from 25 to 82
+print(mean(25:82))
+
+# Sum of numbers from 41 to 68
+print(sum(41:68))
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 32 33 34 35 36 37 38 39 40 41 42 43 44
+[1] 53.5
+[1] 1526
+</code></pre>
+
+      <h2 class="title">User-defined Function Example</h2>
+      <pre><code># Function to print squares of numbers in sequence
+new.function &lt;- function(a) {
+  for(i in 1:a) {
+    b &lt;- i^2
+    print(b)
+  }
+}</code></pre>
+      <h2 class="title">Calling a Function</h2>
+      <pre><code>new.function(6)</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 1
+[1] 4
+[1] 9
+[1] 16
+[1] 25
+[1] 36
+</code></pre>
+      
+      <h2 class="title">Function Without Arguments</h2>
+      <pre><code>new.function &lt;- function() {
+  for(i in 1:5) {
+    print(i^2)
+  }
+}
+new.function()
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 1
+[1] 4
+[1] 9
+[1] 16
+[1] 25
+</code></pre>
+      
+      <h2 class="title">Calling Functions With Arguments</h2>
+      <pre><code>new.function &lt;- function(a, b, c) {
+  result &lt;- a * b + c
+  print(result)
+}
+new.function(5,3,11)
+new.function(a = 11, b = 5, c = 3)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 26
+[1] 58
+</code></pre>
+      
+      <h2 class="title">Functions With Default Arguments</h2>
+      <pre><code>new.function &lt;- function(a = 3, b = 6) {
+  result &lt;- a * b
+  print(result)
+}
+new.function()
+new.function(9,5)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 18
+[1] 45
+</code></pre>
+      
+      <h2 class="title">Lazy Evaluation Example</h2>
+      <pre><code>new.function &lt;- function(a, b) {
+  print(a^2)
+  print(a)
+  print(b)
+}
+new.function(6)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] 36
+[1] 6
+Error in print(b) : argument "b" is missing, with no default
+</code></pre>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

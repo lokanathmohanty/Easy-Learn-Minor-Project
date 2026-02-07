@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java Networking</h1>
+    <div class="content">
+      <p>Java networking (or, Java network programming) refers to writing programs that execute across multiple devices (computers), in which the devices are all connected to each other using a network.</p>
+      <h2 class="title">Advantages of Java Networking</h2>
+      <ul>
+        <li>Creating server-client applications</li>
+        <li>Implementing networking protocols</li>
+        <li>Implement socket programming</li>
+        <li>Creating web services</li>
+      </ul>
+
+      <h2 class="title">Package Used in Networking</h2>
+      <p>The <code>java.net</code> package of the J2SE APIs contains a collection of classes and interfaces that provide the low-level communication details, allowing you to write programs that focus on solving the problem at hand.</p>
+
+      <h2 class="title">Protocols Supported</h2>
+      <ul>
+        <li><strong>TCP</strong> - Transmission Control Protocol, for reliable communication.</li>
+        <li><strong>UDP</strong> - User Datagram Protocol, a connection-less protocol.</li>
+      </ul>
+
+      <h2 class="title">Socket Programming in Java Networking</h2>
+      <p>Sockets provide the communication mechanism between two computers using TCP. A client program creates a socket and attempts to connect to a server socket. Communication happens through input and output streams connected to the sockets.</p>
+
+      <h2 class="title">ServerSocket Class Constructors</h2>
+      <ul>
+        <li><code>ServerSocket(int port)</code> - Binds server socket to specified port.</li>
+        <li><code>ServerSocket(int port, int backlog)</code> - Same as above, with a queue size for incoming clients.</li>
+        <li><code>ServerSocket(int port, int backlog, InetAddress address)</code> - Binds server socket to a specific local IP address.</li>
+        <li><code>ServerSocket()</code> - Creates an unbound server socket, which can be bound later.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Socket Client</h2>
+    <div class="content">
+      <pre><code>// File Name GreetingClient.java
+import java.net.*;
+import java.io.*;
+
+public class GreetingClient {
+
+   public static void main(String [] args) {
+      String serverName = args[0];
+      int port = Integer.parseInt(args[1]);
+      try {
+         System.out.println("Connecting to " + serverName + " on port " + port);
+         Socket client = new Socket(serverName, port);
+         
+         System.out.println("Just connected to " + client.getRemoteSocketAddress());
+         OutputStream outToServer = client.getOutputStream();
+         DataOutputStream out = new DataOutputStream(outToServer);
+         
+         out.writeUTF("Hello from " + client.getLocalSocketAddress());
+         InputStream inFromServer = client.getInputStream();
+         DataInputStream in = new DataInputStream(inFromServer);
+         
+         System.out.println("Server says " + in.readUTF());
+         client.close();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Example: Socket Server</h2>
+    <div class="content">
+      <pre><code>// File Name GreetingServer.java
+import java.net.*;
+import java.io.*;
+
+public class GreetingServer extends Thread {
+   private ServerSocket serverSocket;
+   
+   public GreetingServer(int port) throws IOException {
+      serverSocket = new ServerSocket(port);
+      serverSocket.setSoTimeout(10000);
+   }
+
+   public void run() {
+      while(true) {
+         try {
+            System.out.println("Waiting for client on port " + 
+               serverSocket.getLocalPort() + "...");
+            Socket server = serverSocket.accept();
+            
+            System.out.println("Just connected to " + server.getRemoteSocketAddress());
+            DataInputStream in = new DataInputStream(server.getInputStream());
+            
+            System.out.println(in.readUTF());
+            DataOutputStream out = new DataOutputStream(server.getOutputStream());
+            out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress()
+               + "\nGoodbye!");
+            server.close();
+            
+         } catch (SocketTimeoutException s) {
+            System.out.println("Socket timed out!");
+            break;
+         } catch (IOException e) {
+            e.printStackTrace();
+            break;
+         }
+      }
+   }
+   
+   public static void main(String [] args) {
+      int port = Integer.parseInt(args[0]);
+      try {
+         Thread t = new GreetingServer(port);
+         t.start();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}
+      </code></pre>
+    </div>
+  </div>
+</div>

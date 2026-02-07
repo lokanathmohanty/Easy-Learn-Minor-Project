@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django Models and ORM (Object-Relational Mapping) 🗄️</h1>
+        <div class="content">
+            <p>A **Model** in Django is a **Python class** that defines the structure of a database table or collection. It inherits from **<code>django.db.models.Model</code>**, where each class attribute represents a field (column) in the database.</p>
+
+            <h2>Model Definition Example</h2>
+            <p>The <code>Dreamreal</code> model demonstrates basic field types and table naming:</p>
+            <pre><code>from django.db import models
+
+class Dreamreal(models.Model):
+   website = models.CharField(max_length = 50)
+   mail = models.CharField(max_length = 50)
+   name = models.CharField(max_length = 50)
+   phonenumber = models.IntegerField()
+
+   class Meta:
+      db_table = "dreamreal" # Forces the table name instead of default: myapp_dreamreal</code></pre>
+
+            <h2>Basic CRUD Operations</h2>
+            <p>The Django **ORM** allows developers to interact with the database using Python objects rather than raw SQL. These operations are performed on model instances or the model's manager (<code>Model.objects</code>):</p>
+            <ul>
+                <li>**Create:** Instantiate the model and call <code>.save()</code>.
+                    <pre><code>dreamreal = Dreamreal(website="...", name="sorex", ...)
+dreamreal.save()</code></pre>
+                </li>
+                <li>**Read All:** Use the manager's <code>.all()</code> method to retrieve a **QuerySet** of all entries.
+                    <pre><code>objects = Dreamreal.objects.all()</code></pre>
+                </li>
+                <li>**Read Specific:** Use <code>.get()</code> with filter arguments (e.g., <code>name="sorex"</code>). **Raises an error if zero or multiple objects are found.**
+                    <pre><code>sorex = Dreamreal.objects.get(name = "sorex")</code></pre>
+                </li>
+                <li>**Update:** Retrieve an object, change its attributes, and call <code>.save()</code>.
+                    <pre><code>dreamreal = Dreamreal.objects.get(name = 'sorex')
+dreamreal.name = 'thierry'
+dreamreal.save()</code></pre>
+                </li>
+                <li>**Delete:** Call the <code>.delete()</code> method on a specific instance.
+                    <pre><code>sorex.delete()</code></pre>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2>Advanced Data Manipulation (QuerySet Methods)</h2>
+            <p>These methods are primarily executed on the model's manager (<code>Model.objects</code>) and return a **QuerySet**, which can be chained:</p>
+            <ul>
+                <li>**Filtering Data:** Use <code>.filter()</code> to select objects matching specific criteria.
+                    <pre><code>qs = Dreamreal.objects.filter(name = "paul")</code></pre>
+                </li>
+                <li>**Ordering Results:** Use <code>.order_by()</code> to sort the QuerySet based on a field.
+                    <pre><code>qs = Dreamreal.objects.order_by("name")</code></pre>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2>Linking Models (Relationships)</h2>
+            <p>Django supports three main types of relationships, primarily relevant for SQL databases:</p>
+            <ul>
+                <li>**One-to-Many (<code>ForeignKey</code>):** Used when one model instance is related to multiple instances of another model (e.g., a company has multiple websites). The field is defined on the "many" side.
+                    <pre><code>class Dreamreal(models.Model):
+   online = models.ForeignKey('Online', default = 1) # One Online object can be linked to many Dreamreal objects</code></pre>
+                    <ul>
+                        <li>**Accessing Related Object:** <code>online_instance.company.name</code></li>
+                        <li>**Accessing Reverse Relationship:** <code>dreamreal_instance.online_set.all()</code></li>
+                        <li>**Reverse Filtering (Joins):** Queries can span across models using double underscores (<code>__</code>).
+                            <pre><code>Online.objects.filter(company__name__contains = 'company')</code></pre>
+                        </li>
+                    </ul>
+                </li>
+                <li>**One-to-One (<code>OneToOneField</code>):** Guarantees that only one instance of the primary model can be linked to one instance of the related model (and vice-versa).</li>
+                <li>**Many-to-Many (<code>ManyToManyField</code>):** Allows multiple instances of one model to be linked to multiple instances of another model (e.g., a student can take many courses, and a course has many students).</li>
+            </ul>
+        </div>
+    </div>
+</div>

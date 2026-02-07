@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="session">
+
+    <h1 class="title">Java - Command Line Arguments</h1>
+
+    <div class="content">
+      <p>In Java, <strong>command line arguments</strong> are a way to pass inputs to a program during execution. These inputs are captured in the <code>main()</code> method as a string array named <code>args[]</code>.</p>
+
+      <p>This allows dynamic behavior of the application without changing the code. The arguments are passed through the terminal when running the compiled Java program.</p>
+
+      <h2 class="title">Passing & Accessing Command Line Arguments</h2>
+      <p>Command line arguments are passed using this syntax:</p>
+      <pre><code>javac Tester.java
+java Tester arg1 arg2 arg3</code></pre>
+      <p>The JVM stores these arguments in the <code>args[]</code> array, starting at <code>args[0]</code>. The number of arguments is determined using <code>args.length</code>.</p>
+
+      <p>Each element in <code>args[]</code> is a string, regardless of whether it looks like a number or not.</p>
+
+      <h2 class="title">Benefits of Command Line Arguments</h2>
+      <ul>
+        <li>Used to configure application behavior at runtime</li>
+        <li>Useful in automation and batch processing</li>
+        <li>Allow parameterized execution without changing code</li>
+        <li>Facilitate user input in console-based applications</li>
+      </ul>
+    </div>
+
+    <h2 class="title">Code Examples</h2>
+
+    <div class="example">
+      <h3 class="title">Example 1: Single Command Line Argument</h3>
+      <p>This example expects exactly one argument — the user's name.</p>
+      <pre><code>public class Tester {
+  public static void main(String[] args) {
+    if(args.length == 1) {
+      String name = args[0];
+      System.out.println("Welcome " + name + "!");
+    } else {
+      System.out.println("Invalid Command line argument(s) passed.");
+    }
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>D:\test>javac Tester.java
+D:\test>java Tester
+Invalid Command line argument(s) passed.
+
+D:\test>java Tester Mahesh
+Welcome Mahesh!</code></pre>
+    </div>
+
+    <div class="example">
+      <h3 class="title">Example 2: Multiple Command Line Arguments</h3>
+      <p>This example expects two arguments — name and age.</p>
+      <pre><code>public class Tester {
+  public static void main(String[] args) {
+    if(args.length == 2) {
+      String name = args[0];
+      int age = Integer.parseInt(args[1]);
+      System.out.println("Name: " + name + ", age: " + age);
+    } else {
+      System.out.println("Invalid Command line argument(s) passed.");
+    }
+  }
+}</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code>D:\test>javac Tester.java
+D:\test>java Tester
+Invalid Command line argument(s) passed.
+
+D:\test>java Tester Mahesh 40
+Name: Mahesh, age: 40</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Conclusion</h2>
+      <p>Command line arguments provide flexibility and allow programs to accept user inputs at runtime. They are especially useful for tools, automation, and scripts where behavior can be changed without editing the source code.</p>
+
+      <p>Most IDEs also allow setting command line arguments through configuration, making this feature both powerful and accessible.</p>
+    </div>
+
+  </div>
+</div>

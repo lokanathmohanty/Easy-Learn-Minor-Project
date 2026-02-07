@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Classes and Objects (User-Defined Types) 📦</h1>
+
+        <div class="content">
+            <p>**Classes** are the central feature of C++ that support Object-Oriented Programming (OOP). A class is a **user-defined type** that serves as a **blueprint** for creating **objects**. It neatly combines **data representation** and **methods** (functions) for manipulating that data into a single package.</p>
+
+            <ul>
+                <li>The data and functions inside a class are called **members**.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="title">C++ Class Definition</h2>
+            <p>A class definition starts with the keyword **<code>class</code>**, followed by the class name, and a body enclosed in curly braces, ending with a semicolon.</p>
+            <pre class="example">
+class Box {
+   public:
+      double length;   // Data member (property)
+      double breadth;  // Data member (property)
+      double height;   // Data member (property)
+      // Member functions go here
+}; // Semicolon is mandatory!
+</pre>
+            <p>The keyword **<code>public</code>** is an **access modifier** that specifies that the members following it can be accessed from outside the class.</p>
+
+            <hr>
+
+            <h2 class="title">Defining and Accessing Objects</h2>
+
+            <h3>Defining Objects</h3>
+            <p>An **object** is an instance of a class. Declaring an object is done just like declaring a variable of a basic type:</p>
+            <pre class="example">
+Box Box1; // Declares Box1, an object of type Box
+Box Box2; // Declares Box2, another object of type Box
+</pre>
+            <p>Each object (<code>Box1</code> and <code>Box2</code>) will have its own independent copy of the class's data members (<code>length</code>, <code>breadth</code>, <code>height</code>).</p>
+
+            <h3>Accessing Members</h3>
+            <p>To access the **public** members of an object, you use the **direct member access operator** (a period: **<code>.</code>**).</p>
+            <pre class="example">
+// Setting data members for Box1
+Box1.height = 5.0; 
+Box1.length = 6.0; 
+
+// Calculating volume using accessed members
+double volume = Box1.height * Box1.length * Box1.breadth;
+</pre>
+            <p><em>Note: **Private** and **protected** members cannot be accessed directly using the <code>.</code> operator and require special member functions.</em></p>
+
+            <hr>
+
+            <h2 class="title">Further Class and Object Concepts</h2>
+            <ul>
+                <li><strong>Class Member Functions:</strong> Functions defined within a class to manipulate the class's data.</li>
+                <li><strong>Access Modifiers:</strong> Keywords (<code>public</code>, <code>private</code>, <code>protected</code>) that control visibility and access to class members.</li>
+                <li><strong>Constructor &amp; Destructor:</strong> Special methods automatically called when an object is created (constructor) and destroyed (destructor).</li>
+                <li><strong><code>this</code> Pointer:</strong> A special, implicit pointer available inside every non-static member function that points to the object itself.</li>
+                <li><strong>Static Members:</strong> Data or function members that belong to the class as a whole, rather than to any specific object instance.</li>
+            </ul>
+        </div>
+    </div>
+</div>

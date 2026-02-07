@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# `if...else` Statement</h1>
+        
+        <h2 class="title">Introduction to `if...else`</h2>
+        <div class="content">
+            <p>The **`if...else` statement** is a conditional construct that ensures one of two distinct code blocks will be executed, depending on the outcome of a **Boolean expression**.</p>
+            <ul>
+                <li>If the condition is **<code>true</code>**, the code inside the **`if` block** executes.</li>
+                <li>If the condition is **<code>false</code>**, the code inside the **`else` block** executes.</li>
+            </ul>
+            <p>Unlike the simple `if` statement, `if...else` guarantees that the program takes one of two paths.</p>
+        </div>
+        
+        <h2 class="title">Syntax</h2>
+        <div class="content">
+            <pre>
+if(boolean_expression) {
+   /* statement(s) will execute if the boolean expression is true */
+} else {
+   /* statement(s) will execute if the boolean expression is false 
+   */
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Example: Simple `if...else`</h2>
+        <div class="content example">
+            <p>This example demonstrates how the flow is diverted to the `else` block when the initial condition is false:</p>
+            <pre>
+using System;
+
+class Program {
+    static void Main(string[] args) {
+        int a = 100;
+         
+        /* check the boolean condition: (100 < 20) is FALSE */
+        if (a < 20) {
+            Console.WriteLine("a is less than 20");
+        } else {
+            // This block executes
+            Console.WriteLine("a is not less than 20");
+        }
+        Console.WriteLine("value of a is : {0}", a);
+    }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                a is not less than 20;<br>
+                value of a is : 100
+            </p>
+        </div>
+        
+        <h2 class="title">The `if...else if...else` Chain</h2>
+        <div class="content">
+            <p>This structure allows you to test **multiple conditions sequentially** using a single statement. Once an `if` or `else if` condition succeeds (evaluates to <code>true</code>), the corresponding block is executed, and **none of the remaining `else if` or `else` blocks are tested or executed**.</p>
+            
+            <h3>Syntax:</h3>
+            <pre>
+if(boolean_expression 1) {
+   /* Executes if condition 1 is true */
+} else if( boolean_expression 2) {
+   /* Executes if condition 1 is false AND condition 2 is true */
+} else {
+   /* executes if all preceding conditions are false */
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Example: `if...else if...else` Chain</h2>
+        <div class="content example">
+            <p>This demonstrates testing for specific values in a sequence:</p>
+            <pre>
+using System;
+
+class Program {
+    static void Main(string[] args) {
+        int a = 100;
+         
+        if (a == 10) { /* False */ } 
+        else if (a == 20) { /* False */ } 
+        else if (a == 30) { /* False */ } 
+        else {
+            // None of the above were true, this block executes
+            Console.WriteLine("None of the values is matching");
+        }
+    }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                None of the values is matching
+            </p>
+        </div>
+    </div>
+</div>

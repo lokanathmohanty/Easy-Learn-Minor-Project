@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SciPy Compilation & Optimization Session</title>
+</head>
+<body>
+    <div class="container">
+        <div class="session">
+            <h1 class="title">How SciPy Is Compiled and Optimized</h1>
+
+            <div class="content">
+                <h2 class="title">Session Content</h2>
+                <p>SciPy is a library written in both Python and lower‑level languages (C, C++, Fortran). Some of its functions are pure Python, others are wrappers around optimized compiled code. Tools like Cython, Pythran, and Fortran compilers are involved. :contentReference[oaicite:0]{index=0}</p>
+
+                <ul>
+                    <li>Role of C, C++, Fortran code in SciPy. :contentReference[oaicite:1]{index=1}</li>
+                    <li>Use of Cython to convert .pyx files to C / C++ for performance. :contentReference[oaicite:2]{index=2}</li>
+                    <li>Pythran (optional) as compile‑time translator. :contentReference[oaicite:3]{index=3}</li>
+                    <li>Compiler toolchain requirements (GCC, LLVM/Clang, MSVC) and minimal supported versions. :contentReference[oaicite:4]{index=4}</li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2 class="title">Example: Cython inside SciPy</h2>
+                <p>Suppose there is a routine in SciPy that is Python + loops that are slow. The code may be moved into a <code>.pyx</code> file, decorated or written using Cython features such as <code>cdef</code>, then built via SciPy’s build system, and compiled down to a C extension module. :contentReference[oaicite:5]{index=5}</p>
+            </div>
+
+            <div class="content">
+                <h2 class="title">Compiler Toolchain Details</h2>
+                <p>SciPy’s building from source depends on:</p>
+                <ul>
+                    <li>C/C++ compilers (e.g. GCC, Clang/LLVM) that support required C++ standard. :contentReference[oaicite:6]{index=6}</li>
+                    <li>Fortran compilers (gfortran, ifort, flang) for Fortran sub‑packages. :contentReference[oaicite:7]{index=7}</li>
+                    <li>Optional build dependencies: Pythran, Cython. :contentReference[oaicite:8]{index=8}</li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2 class="title">Exercise</h2>
+                <p>Find a SciPy‑function you use (say in <code>scipy.optimize</code> or <code>scipy.integrate</code>). Trace which parts are pure Python vs which parts are compiled (C / Fortran / Cython). Try to build SciPy from source on your machine and observe compiler outputs or logs. What minimal compiler versions does your system have, and do they satisfy SciPy’s requirements? </p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

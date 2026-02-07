@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Histograms</h1>
+    <div class="content">
+      <p>
+        A histogram displays the frequencies of values of a variable grouped into continuous ranges (or bins). Each bar represents the number of data points that fall within that range. Unlike bar charts, histograms show distribution by ranges rather than individual categories.
+      </p>
+
+      <h2 class="title">Basic Syntax</h2>
+      <pre><code>hist(v, main, xlab, xlim, ylim, breaks, col, border)</code></pre>
+      <ul>
+        <li><strong>v</strong>: Numeric vector for histogram values</li>
+        <li><strong>main</strong>: Title of the chart</li>
+        <li><strong>xlab</strong>: X-axis label</li>
+        <li><strong>xlim</strong>: Range on X-axis</li>
+        <li><strong>ylim</strong>: Range on Y-axis</li>
+        <li><strong>breaks</strong>: Number or width of bins</li>
+        <li><strong>col</strong>: Color of bars</li>
+        <li><strong>border</strong>: Border color for bars</li>
+      </ul>
+
+      <h2 class="title">Simple Histogram Example</h2>
+      <pre><code># Create data vector
+v &lt;- c(9, 13, 21, 8, 36, 22, 12, 41, 31, 33, 19)
+
+png(file = "histogram.png")
+hist(v, xlab = "Weight", col = "yellow", border = "blue")
+dev.off()
+</code></pre>
+
+      <h2 class="title">Setting Range and Breaks</h2>
+      <pre><code># More control over X/Y axis and bins
+v &lt;- c(9, 13, 21, 8, 36, 22, 12, 41, 31, 33, 19)
+
+png(file = "histogram_lim_breaks.png")
+hist(v, xlab = "Weight", col = "green", border = "red", xlim = c(0, 40), ylim = c(0, 5), breaks = 5)
+dev.off()
+</code></pre>
+
+      <p>
+        These examples show how to make and customize histograms, set color and axis ranges, and define bin widths in R.
+      </p>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

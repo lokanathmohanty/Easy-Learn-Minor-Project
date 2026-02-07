@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Flask and SQLite3 Integration 💾</h1>
+        <div class="content">
+            <p>The **SQLite3** module is built into Python, making it straightforward to interact with SQLite databases directly from a Flask application without needing a separate extension. This section details the steps for creating a database, handling user input, and displaying data using Flask's view functions and Jinja2 templates.</p>
+
+            <h2>Database Setup (Initial Step)</h2>
+            <p>The application first requires a database file (<code>database.db</code>) and a table (<code>students</code>) to be created using the <code>sqlite3</code> module:</p>
+            <p><code>conn.execute('CREATE TABLE students (name TEXT, addr TEXT, city TEXT, pin TEXT)')</code></p>
+            <p>The table includes fields for <code>name</code>, <code>addr</code> (address), <code>city</code>, and <code>pin</code> (pincode).</p>
+        </div>
+
+        <hr>
+
+        <h2 class="title">View Functions and Data Flow</h2>
+        <div class="content">
+            <h3>1. The Home Page (<code>/</code>)</h3>
+            <p>The <code>home()</code> function serves as the application's entry point, rendering <code>home.html</code> which provides links to add new data or view the list.</p>
+
+            <h3>2. Adding a New Record (<code>/enternew</code> and <code>/addrec</code>)</h3>
+            <ul>
+                <li>**<code>new_student()</code> (<code>/enternew</code>):** Renders <code>student.html</code>, which contains the HTML form for entering student information.</li>
+                <li>**<code>addrec()</code> (<code>/addrec</code>):** Handles the form submission (POST method).
+                    <ul>
+                        <li>It extracts form data using **<code>request.form</code>**.</li>
+                        <li>It establishes a connection to <code>database.db</code>.</li>
+                        <li>It uses a **<code>try...except...finally</code>** block for safe data insertion, executing the SQL <code>INSERT</code> statement with placeholders (<code>?</code>) for parameterized queries.</li>
+                        <li>**<code>con.commit()</code>** saves the changes; **<code>con.rollback()</code>** handles errors.</li>
+                        <li>The final result (success or error) is passed as the <code>msg</code> variable to the **<code>result.html</code>** template.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>3. Listing Records (<code>/list</code>)</h3>
+            <p>The <code>list()</code> function retrieves all records from the table and sends them to <code>list.html</code>:</p>
+            <ul>
+                <li>A connection is established, and **<code>con.row_factory = sql.Row</code>** is set. This is crucial as it allows records to be accessed like dictionaries (e.g., <code>row["name"]</code>) instead of simple tuples.</li>
+                <li>**<code>cur.execute("select * from students")</code>** fetches all data.</li>
+                <li>**<code>rows = cur.fetchall()</code>** retrieves all resulting rows.</li>
+                <li>The <code>rows</code> object is passed to the **<code>list.html</code>** template for display.</li>
+            </ul>
+        </div>
+
+        <h2 class="title">Template Logic (Jinja2)</h2>
+        <div class="content example">
+            <p>The **<code>list.html</code>** template uses a Jinja2 <code>for</code> loop to dynamically generate an HTML table based on the <code>rows</code> data received from the view function:</p>
+            <p><code>{% for row in rows %}</code></p>
+            <p><code>   &lt;tr&gt;</code></p>
+            <p><code>      &lt;td&gt;{{row["name"]}}&lt;/td&gt;</code></p>
+            <p><code>      ...</code></p>
+            <p><code>   &lt;/tr&gt;</code></p>
+            <p><code>{% endfor %}</code></p>
+            <p>The use of <code>row["column_name"]</code> is enabled by setting the <code>row_factory</code> in the Flask view function.</p>
+        </div>
+    </div>
+</div>

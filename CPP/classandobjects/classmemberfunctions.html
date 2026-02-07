@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Class Member Functions (Methods) ⚙️</h1>
+
+        <div class="content">
+            <p>A **class member function** (or **method**) is a function whose declaration or definition lies within the class body. It operates on an object of that class and has full access to **all members** (data and other functions) of that specific object.</p>
+
+            <h3>Declaration within the Class</h3>
+            <p>The prototype of the member function must be included in the class definition:</p>
+            <pre class="example">
+class Box {
+   public:
+      double length;        
+      double getVolume(void); // Member function prototype
+      // ...
+};
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Defining Member Functions</h2>
+
+            <h3>1. Definition Inside the Class (Implicitly <code>inline</code>)</h3>
+            <p>Defining the function body directly within the class definition makes the function implicitly **<code>inline</code>**. This is generally suitable for short functions.</p>
+            <pre class="example">
+class Box {
+   public:
+      // ...
+      double getVolume(void) {
+         return length * breadth * height; // Full access to members
+      }
+};
+</pre>
+
+            <h3>2. Definition Outside the Class (Using Scope Resolution)</h3>
+            <p>For longer functions, it's common practice to define them outside the class using the **scope resolution operator** (**<code>::</code>**). This tells the compiler that the function belongs to the specified class.</p>
+            <pre class="example">
+// Syntax: return_type ClassName::FunctionName(parameters)
+double Box::getVolume(void) {
+   return length * breadth * height;
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2 class="title">Calling Member Functions</h2>
+            <p>Member functions are called using the **dot operator** (**<code>.</code>**) on a specific object of the class.</p>
+            <pre class="example">
+Box myBox;          // Create an object
+myBox.setLength(6.0); // Calls setLength() on the 'myBox' object
+
+double v = myBox.getVolume(); // Calls getVolume() on 'myBox'
+</pre>
+            <p>When <code>myBox.getVolume()</code> is called, the function operates on the <code>length</code>, <code>breadth</code>, and <code>height</code> variables that belong specifically to the <code>myBox</code> object.</p>
+        </div>
+    </div>
+</div>

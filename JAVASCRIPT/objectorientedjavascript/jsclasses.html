@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">JavaScript - Classes</h1>
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        JavaScript classes are a blueprint or template for object creation. They encapsulate the data and functions to manipulate that data. Creating an object from a class is referred to as instantiating the class. 
+      </p>
+      <p>
+        Classes were introduced in ECMAScript 6 (ES6) and are built on prototypes. For example, a class can be used to represent a car entity, with properties like brand, model, and year.
+      </p>
+
+      <h2>Before ES6: Constructor Functions</h2>
+      <p>
+        Before ES6, constructor functions were used to define a blueprint of the object.
+      </p>
+      <pre>
+function Car(brand) {
+  this.brand = brand; // property initialization
+}
+const carObj = new Car("Audi");
+      </pre>
+
+      <h2>Defining JavaScript Classes</h2>
+      <p>
+        The syntax of a class is very similar to a constructor function, but it uses the <code>class</code> keyword. Classes can be defined using either a class declaration or a class expression.
+      </p>
+      <pre>
+// class declaration
+class ClassName {
+  // Class body
+}
+
+// class expression
+const ClassName = class {
+  // Class body
+};
+      </pre>
+
+      <h2>Type of JavaScript Classes</h2>
+      <p>
+        A JavaScript class is a type of function. Using the <code>typeof</code> operator confirms that classes are functions.
+      </p>
+      <pre>
+class Car {
+  // Class body
+}
+console.log(typeof Car); // function
+      </pre>
+
+      <h2>The constructor() Method</h2>
+      <p>
+        The <code>constructor()</code> method initializes object properties when a class instance is created.
+      </p>
+      <pre>
+class Car {
+  constructor(brand) {
+    this.brand = brand;
+  }
+}
+const myCar = new Car("Audi");
+      </pre>
+
+      <h2>Creating JavaScript Objects</h2>
+      <p>
+        Objects are created using the <code>new</code> operator with the class name.
+      </p>
+
+      <h3>Example: Without Arguments</h3>
+      <pre>
+class Car {
+  constructor() {
+    this.brand = "BMW";
+    this.model = "X5";
+    this.year = 2019;
+  }
+}
+const myCar = new Car();
+console.log(myCar.brand, myCar.model, myCar.year);
+      </pre>
+
+      <h3>Example: With Arguments</h3>
+      <pre>
+class Car {
+  constructor(brand, model, price, year) {
+    this.brand = brand;
+    this.model = model;
+    this.price = price;
+    this.year = year;
+  }
+}
+const carObj = new Car("BMW", "X5", 9800000, 2019);
+console.log(carObj.brand, carObj.model, carObj.price, carObj.year);
+      </pre>
+
+      <h2>JavaScript Class Methods</h2>
+      <p>
+        Methods can be defined inside a class and invoked using its instance.
+      </p>
+      <pre>
+class Car {
+  constructor(brand, model, price, year) {
+    this.brand = brand;
+    this.model = model;
+    this.price = price;
+    this.year = year;
+  }
+
+  updatePrice(newPrice) {
+    this.price = newPrice;
+  }
+}
+
+const myCar = new Car("BMW", "X5", 9800000, 2019);
+console.log(myCar.price); // 9800000
+myCar.updatePrice(8800000);
+console.log(myCar.price); // 8800000
+      </pre>
+
+      <h2>Class Hoisting</h2>
+      <p>
+        Unlike functions, class declarations are not hoisted. You must define the class before using it.
+      </p>
+      <pre>
+const carObj = new Car(); // Error
+class Car {}
+      </pre>
+
+      <h2>Strict Mode with Classes</h2>
+      <p>
+        All class code is executed in strict mode by default. For example, declaring a variable without <code>var</code>, <code>let</code>, or <code>const</code> inside a class will throw an error.
+      </p>
+      <pre>
+class Numbers {
+  constructor() {
+    num = 90; // Error: variable not declared
+  }
+}
+const numObj = new Numbers();
+      </pre>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C++ Multilevel Inheritance (Inheritance Chain) 🪜</h1>
+
+        <div class="content">
+            <p>**Multilevel inheritance** is a type of inheritance where a class is derived from another class that is itself a derived class. This creates a **chain of inheritance** that allows properties and behaviors to be passed down through multiple generations of classes, establishing a transitive "is-a" relationship (e.g., a <code>Triangle</code> is-a <code>Polygon</code>, and a <code>Polygon</code> is-a <code>Shape</code>).</p>
+
+            <h3>Syntax</h3>
+            <pre class="example">
+class Base { /* ... */ }; 
+class Derived1 : public Base { /* ... */ }; 
+class Derived2 : public Derived1 { /* ... */ }; // Derived2 inherits from Derived1
+</pre>
+            <p></p>
+            <ul>
+                <li><code>Base</code> is the grandparent.</li>
+                <li><code>Derived1</code> inherits from <code>Base</code> (Parent $\rightarrow$ Child).</li>
+                <li><code>Derived2</code> inherits from <code>Derived1</code> (Grandchild $\rightarrow$ Parent).</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 class="title">Example and Mechanism</h2>
+
+        <div class="content">
+            <p>In the example provided:</p>
+            <ol>
+                <li>The **<code>Shape</code>** class is the **Base** class.</li>
+                <li>The **<code>Polygon</code>** class inherits from **<code>Shape</code>**. It gains access to <code>Shape</code>'s members (like <code>display()</code>).</li>
+                <li>The **<code>Triangle</code>** class inherits from **<code>Polygon</code>**. It gains access to <code>Polygon</code>'s members (like <code>sides()</code>) AND, through <code>Polygon</code>, it gains access to <code>Shape</code>'s members (like <code>display()</code>).</li>
+            </ol>
+            <p>When an object of the deepest derived class, <code>Triangle</code>, is created, it possesses the characteristics of all its predecessors:</p>
+            <pre class="example">
+Triangle myTriangle;
+myTriangle.display(); // Calls Shape::display()
+myTriangle.sides();   // Calls Polygon::sides()
+myTriangle.type();    // Calls Triangle::type()
+</pre>
+        </div>
+    </div>
+</div>

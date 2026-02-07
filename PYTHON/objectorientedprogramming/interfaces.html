@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Interfaces</h1>
+    <div class="content">
+      <p>An interface in software design defines a set of method signatures that must be implemented by any class that claims to implement the interface. Python implements interfaces using abstract base classes (ABC) and the <code>@abstractmethod</code> decorator.</p>
+      <p>In Python, all methods in an interface must be abstract, and instantiating an interface directly is not allowed. Any concrete class must provide implementations for all abstract methods to avoid being abstract itself.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Formal Interface (with ABC)</h2>
+      <p>Formal interfaces use ABC from Python's <code>abc</code> module and enforce method implementation.</p>
+    </div>
+    
+    <div class="example">
+      <h2 class="title">Formal Interface Example</h2>
+      <pre><code>from abc import ABC, abstractmethod
+
+class DemoInterface(ABC):
+    @abstractmethod
+    def method1(self):
+        pass
+    @abstractmethod
+    def method2(self):
+        pass
+
+class ConcreteClass(DemoInterface):
+    def method1(self):
+        print("This is method1")
+    def method2(self):
+        print("This is method2")
+
+obj = ConcreteClass()
+obj.method1()      # Output: This is method1
+obj.method2()      # Output: This is method2
+</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Informal Interface (Duck Typing)</h2>
+      <p>An informal interface just defines method signatures, but Python cannot enforce that they are implemented. This style relies on duck typing: if a class implements the required method, it can be used wherever the interface is expected.</p>
+    </div>
+
+    <div class="example">
+      <h2 class="title">Informal Interface Example</h2>
+      <pre><code>class DemoInterface:
+    def displayMsg(self):
+        pass
+
+class NewClass(DemoInterface):
+    def displayMsg(self):
+        print("This is my message")
+
+obj = NewClass()
+obj.displayMsg()   # Output: This is my message
+</code></pre>
+    </div>
+
+    <div class="content">
+      <ul>
+        <li>Python interfaces are best created using abstract base classes for strict enforcement of required methods.</li>
+        <li>Informal interfaces provide flexibility but rely on developer discipline and duck typing for correctness.</li>
+      </ul>
+    </div>
+  </div>
+</div>

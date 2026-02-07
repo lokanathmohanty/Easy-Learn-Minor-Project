@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - Custom Properties</h1>
+    <div class="content">
+      <p>
+        Custom Properties are variables in CSS that are used to store and reuse values in stylesheet. These are same as variables in other programming languages.
+      </p>
+
+      <h2>Declaring Custom Properties in CSS</h2>
+      <p>
+        The following code show how to declare custom properties in CSS.
+      </p>
+
+      <pre>
+:root {
+    --primary-color: #3498db;
+    --font-size-large: 1.5rem;
+}
+body {
+    background-color: var(--primary-color);
+    font-size: var(--font-size-large)
+}
+      </pre>
+
+      <p>Here are few things to be considered when using custom properties in CSS.</p>
+      <ul>
+        <li>You can define custom properties in any selectors in stylesheet, but if you define a custom property inside <code>:root</code> selector it will have scope across all over the stylesheet.</li>
+        <li>The <code>var</code> function is used to apply variable values to CSS properties on any elements.</li>
+        <li>CSS does not allow custom properties to be used in media queries or container queries, also you cannot use them to set the name of a CSS property or selector.</li>
+        <li>Custom properties are case sensitive.</li>
+      </ul>
+
+      <h2>CSS Custom Properties Example</h2>
+      <p>
+        Following code shows example of using custom properties in CSS. Here you can see that we defined the color <code>#0044cc</code> as blue, so developer can repetitively use this color by using variable <code>blue</code>.
+      </p>
+
+      <h3>Example</h3>
+      <pre>
+:root {
+    --main-bg-color: #f0f0f0;
+    --main-text-color: #333;
+    --primary-font: 'Arial', sans-serif;
+    --padding: 10px;
+    --blue: #0044cc;
+    --header-text: #fff;
+    --container-bg: #fff;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    font-family: var(--primary-font);
+    padding: var(--padding);
+}
+
+header {
+    background-color: var(--blue);
+    color: var(--header-text);
+    padding: var(--padding);
+}
+
+.container {
+    background-color: var(--container-bg);
+    padding: var(--padding);
+}
+      </pre>
+
+      <h2>Custom Property Fallback Values</h2>
+      <p>
+        We can define custom properties with fallback values to ensure that your CSS code is still valid and works even if the variable is not defined.
+      </p>
+      <p>
+        Fallback values are not used to make CSS custom properties work in older browsers. They are only used as a backup in browsers that support CSS custom properties, in case the variable is not defined or has an invalid value.
+      </p>
+
+      <h3>Example</h3>
+      <pre>
+:root {
+    --white-color: #f0f0f0; /* Shade for white */
+    /* Custom Property for black is not defined */
+}
+
+.box {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--white-color, white);
+    color: var(--black-color, black);
+}
+
+.box1, .box2 {
+    display: inline-block;
+    background-color: var(--black-color, black);
+    color: var(--white-color, white);
+    width: 100px;
+    height: 50px;
+}
+      </pre>
+
+      <h2>Inheritance of Custom Properties</h2>
+      <p>
+        In CSS, custom properties are inherited by default from parent elements to child element. Any variable declared on a parent element will be available to all its descendants unless overridden.
+      </p>
+
+      <pre>
+.container {
+    --main-bg-color: black;
+    --text-color: white;
+}
+
+.child {
+    /* Use inherited value from parent for background color */
+    background-color: var(--main-bg-color);
+
+    /* Overrides the parent's value for text color */
+    --text-color: lightgrey; 
+    color: var(--main-bg-color); 
+}
+      </pre>
+
+      <h3>Example</h3>
+      <p>
+        The following example demonstrates that the use of CSS custom properties with inheritance.
+      </p>
+    </div>
+  </div>
+</div>

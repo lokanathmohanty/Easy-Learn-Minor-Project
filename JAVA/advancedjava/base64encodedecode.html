@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Base64 Encoding and Decoding (Java 8+)</h1>
+
+        <div class="content">
+            <h2>The <code>Base64</code> Utility Class</h2>
+            <p>The **<code>java.util.Base64</code>** utility class was introduced in **Java 8** to provide built-in support for Base64 encoding and decoding operations. This eliminates the need for third-party libraries for these common operations.</p>
+            <p>Base64 is a scheme that represents binary data in an ASCII string format by translating it into a radix-64 representation. It is typically used to ensure that binary data remains intact when transferred over mediums that are not 8-bit clean (e.g., email via MIME).</p>
+
+            <h3>Three Types of Base64 Schemes</h3>
+            <p>The <code>Base64</code> class provides access to separate **Encoders** and **Decoders** for three distinct use cases:</p>
+            <ol>
+                <li>
+                    <strong>Basic:</strong> The standard Base64 encoding (A-Za-z0-9+/). The encoder **does not add line feeds**, and the decoder strictly rejects any non-standard characters.
+                    <p class="example">Access via: <code>Base64.getEncoder()</code> and <code>Base64.getDecoder()</code></p>
+                </li>
+                <li>
+                    <strong>URL and Filename Safe:</strong> Used for data that will be transmitted in URLs or used in filenames. It replaces the standard <code>+</code> and <code>/</code> characters with URL-safe characters (typically <code>-</code> and <code>_</code>) to prevent issues with URL parsing.
+                    <p class="example">Access via: <code>Base64.getUrlEncoder()</code> and <code>Base64.getUrlDecoder()</code></p>
+                </li>
+                <li>
+                    <strong>MIME:</strong> Used for compatibility with the **MIME** standard (e.g., email attachments). The encoder formats the output into lines of no more than **76 characters** each, separated by a carriage return and line feed (<code>\r\n</code>).
+                    <p class="example">Access via: <code>Base64.getMimeEncoder()</code> and <code>Base64.getMimeDecoder()</code></p>
+                </li>
+            </ol>
+        </div>
+
+        <hr>
+
+        <div class="example">
+            <h2 class="title">Example: Basic Base64 Encoding and Decoding</h2>
+            <div class="content">
+                <p>The process always involves converting the input string to a byte array before encoding, and then converting the resulting byte array back to a string after decoding, typically using "utf-8".</p>
+                <pre><code>import java.util.Base64;
+import java.nio.charset.StandardCharsets;
+
+String stringToEncode = "Hello World! Java 8";
+
+// --- Encoding (String -> Bytes -> Base64 String) ---
+String base64encodedString = Base64.getEncoder().encodeToString(
+    stringToEncode.getBytes(StandardCharsets.UTF_8)
+);
+System.out.println("Encoded: " + base64encodedString);
+
+// --- Decoding (Base64 String -> Bytes -> Original String) ---
+byte[] base64decodedBytes = Base64.getDecoder().decode(base64encodedString);
+String decodedString = new String(base64decodedBytes, StandardCharsets.UTF_8);
+System.out.println("Decoded: " + decodedString);</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

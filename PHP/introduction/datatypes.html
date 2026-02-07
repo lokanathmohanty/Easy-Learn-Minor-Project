@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Data Types Overview</h1>
+
+    <div class="content">
+      <p>
+        In PHP, **Data Types** classify the kind of data a variable can store. PHP is a **dynamically typed language**, meaning you don't declare the variable type; the type is determined at runtime based on the assigned value.
+      </p>
+
+      <h2>The Eight Data Types in PHP</h2>
+      <p>PHP's data types are divided into simple (scalar), compound, and special types:</p>
+
+      <h3>1. Simple (Scalar) Types</h3>
+      <ul>
+        <li>
+          **Integer (`int`)**: Whole numbers (positive or negative) without a decimal point, like `4195` or `-12`. Can be represented in decimal (base 10), hexadecimal (`0x`), octal (`0o`), or binary (`0b`).
+        </li>
+        <li>
+          **Double (Float)**: Floating-point numbers, or "real numbers," with a fractional component, like `3.14159`. Can use scientific notation (e.g., `1.2e3`).
+        </li>
+        <li>
+          **Boolean (`bool`)**: Represents a truth value, having only two possible values: **`true`** or **`false`**. Other types evaluate to boolean based on simple rules (e.g., `0`, empty string `""`, and `NULL` are all considered `false`).
+        </li>
+        <li>
+          **String**: A sequence of characters. PHP supports a 256-character set (byte-level).
+        </li>
+        <li>
+          **NULL**: A special type with only one possible value: **`NULL`**. It is used to indicate a variable is missing a value or has been unset.
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h3>2. Compound Types</h3>
+      <p>These types can store collections of data:</p>
+      <ul>
+        <li>
+          **Array**: An **ordered map** that associates **keys** (numeric indices or strings) with **values**. Arrays can be indexed, associative, or multi-dimensional.
+          <div class="example">
+            <code>$arr = ["foo" => "bar", "key" => "value"];</code>
+          </div>
+        </li>
+        <li>
+          **Object**: An instance of a programmer-defined class, packaging up both data (properties) and functions (methods) specific to that class. Objects are created using the `new` statement.
+        </li>
+      </ul>
+
+      <h3>3. Special Types</h3>
+      <ul>
+        <li>
+          **Resource**: A special variable that holds a **reference to an external resource** outside of PHP, such as a file stream (`$fp = fopen(...)`) or a database connection.
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">String Delimiters and Syntax</h2>
+
+      <h3>Single-Quoted vs. Double-Quoted Strings</h3>
+      <ul>
+        <li>
+          **Single Quotes (`'`)**: Strings are treated almost **literally**. Variable names (`$variable`) and most escape sequences are not interpreted.
+        </li>
+        <li>
+          **Double Quotes (`"`)**: Variables (starting with `$`) are **replaced with their values** (variable interpolation), and certain escape sequences (like `\n` for newline or `\t` for tab) are interpreted.
+        </li>
+      </ul>
+
+      <h3>Heredoc and Nowdoc</h3>
+      <ul>
+        <li>
+          **Heredoc (`<<<IDENTIFIER`)**: Used for assigning multiple lines to a single string variable. It supports **variable interpolation** and escape sequence interpretation, similar to a double-quoted string.
+        </li>
+        <li>
+          **Nowdoc (`<<<'IDENTIFIER'`)**: Specified like a Heredoc, but the identifier is enclosed in **single quotes**. This means **no parsing or interpolation** occurs inside the block, making it useful for embedding large blocks of literal text (like code or XML) without escaping.
+        </li>
+      </ul>
+
+      <h3>Checking the Type</h3>
+      <p>
+        The built-in function **`gettype()`** is used to determine the data type of a variable at runtime.
+      </p>
+      <div class="example">
+        <code>&lt;?php<br>&nbsp;&nbsp;&nbsp;$x = 10;<br>&nbsp;&nbsp;&nbsp;echo gettype($x); // Output: integer<br>?&gt;</code>
+      </div>
+    </div>
+  </div>
+</div>

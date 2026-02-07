@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">CSS - place-content Property</h1>
+    <div class="content">
+      <p>
+        The <code>place-content</code> property in CSS is a shorthand for aligning content in both the 
+        <b>block (column)</b> and <b>inline (row)</b> axes simultaneously. 
+        It combines the functionality of <code>align-content</code> and <code>justify-content</code> in a single declaration.
+      </p>
+
+      <h2>Shorthand For</h2>
+      <ul>
+        <li><code>align-content</code></li>
+        <li><code>justify-content</code></li>
+      </ul>
+
+      <h2>Possible Values</h2>
+      <ul>
+        <li><b>start</b>: Aligns items at the start edge of the container.</li>
+        <li><b>end</b>: Aligns items at the end edge of the container.</li>
+        <li><b>flex-start</b>: Aligns items at the start of the flex container.</li>
+        <li><b>flex-end</b>: Aligns items at the end of the flex container.</li>
+        <li><b>center</b>: Aligns items in the center.</li>
+        <li><b>left</b>: Aligns items to the left (acts like start if axis differs).</li>
+        <li><b>right</b>: Aligns items to the right (acts like start if axis differs).</li>
+        <li><b>space-between</b>: Even spacing between items; edges aligned.</li>
+        <li><b>baseline / first baseline / last baseline</b>: Aligns items by baseline rules.</li>
+        <li><b>space-around</b>: Equal spacing around items.</li>
+        <li><b>space-evenly</b>: Equal spacing between and around items.</li>
+        <li><b>stretch</b>: Expands items to fill container if space remains.</li>
+        <li><b>safe</b>: Prevents data loss by aligning safely within the container.</li>
+        <li><b>unsafe</b>: Honors alignment even if content overflows.</li>
+      </ul>
+
+      <h2>Applies To</h2>
+      <p>Multi-line flex containers.</p>
+
+      <h2>Syntax</h2>
+      <pre>
+place-content: align-content justify-content;
+
+/* Examples */
+place-content: center start;
+place-content: start center;
+place-content: end right;
+place-content: flex-start center;
+place-content: flex-end center;
+place-content: baseline center;
+place-content: space-between space-evenly;
+place-content: space-evenly stretch;
+      </pre>
+
+      <p>
+        If only one value is provided, it applies to both <code>align-content</code> and <code>justify-content</code>. 
+        If the value is invalid for one of them, the entire property is invalid.
+      </p>
+
+      <h2>Examples</h2>
+
+      <h3>1. place-content: center start</h3>
+      <pre>
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   height: 300px;
+   place-content: center start;
+}
+      </pre>
+      <p>Aligns items horizontally to the center and vertically to the top.</p>
+
+      <h3>2. place-content: start center</h3>
+      <pre>
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   height: 300px;
+   place-content: start center;
+}
+      </pre>
+      <p>Aligns items horizontally to the left edge and vertically in the center.</p>
+
+      <h3>3. place-content: end right</h3>
+      <pre>
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   height: 300px;
+   place-content: end right;
+}
+      </pre>
+      <p>Aligns items to the bottom-right of the container.</p>
+
+      <h3>4. place-content: flex-start center</h3>
+      <pre>
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   height: 300px;
+   place-content: flex-start center;
+}
+      </pre>
+      <p>Aligns items to the left (start) horizontally and centered vertically.</p>
+
+      <h3>5. place-content: flex-end center</h3>
+      <pre>
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   height: 300px;
+   place-content: flex-end center;
+}
+      </pre>
+      <p>Aligns items to the right horizontally and centered vertically.</p>
+
+      <h3>6. place-content: last baseline</h3>
+      <pre>
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   height: 300px;
+   place-content: last baseline;
+}
+      </pre>
+      <p>The last line of items aligns to the baseline of the tallest item on that line.</p>
+
+      <h3>7. place-content: space-between</h3>
+      <pre>
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   height: 300px;
+   place-content: space-between;
+}
+      </pre>
+      <p>Distributes items evenly with equal gaps between them, edges aligned.</p>
+
+      <h3>8. place-content: space-around</h3>
+      <pre>
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   height: 300px;
+   place-content: space-around;
+}
+      </pre>
+      <p>Distributes items with equal space around each item.</p>
+
+      <h3>9. place-content: space-evenly</h3>
+      <pre>
+.flex-container {
+   display: flex;
+   flex-wrap: wrap;
+   height: 300px;
+   place-content: space-evenly;
+}
+      </pre>
+      <p>Distributes items with equal space between and around items.</p>
+
+      <h2>Content Summary</h2>
+      <p>
+        The <code>place-content</code> property simplifies alignment by combining 
+        <code>align-content</code> and <code>justify-content</code>. 
+        It provides powerful options to control spacing, alignment, and distribution of items 
+        within multi-line flex containers.
+      </p>
+    </div>
+  </div>
+</div>

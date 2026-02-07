@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">ReactJS - Routing</h1>
+
+    <div class="content">
+      <h2>Introduction</h2>
+      <p>
+        In web applications, <strong>routing</strong> is the process of binding a web URL 
+        to a specific resource. In React, it means binding a URL to a component. 
+        React does not support routing natively, but the React community provides 
+        third-party libraries to handle routing. The most popular library is 
+        <strong>React Router</strong>.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Install React Router</h2>
+      <p>To install React Router in the Expense Manager application, run the following:</p>
+      <div class="example">
+        <pre><code>cd /go/to/expense/manager
+npm install react-router-dom --save</code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>React Router Components</h2>
+      <ul>
+        <li><strong>Router</strong> – Top-level component enclosing the entire app.</li>
+        <li><strong>Link</strong> – Similar to an HTML anchor tag, used for navigation.</li>
+        <li><strong>Route</strong> – Maps the target URL to a component.</li>
+      </ul>
+
+      <div class="example">
+        <h3>Link Example</h3>
+        <pre><code>&lt;Link to="/"&gt;Home&lt;/Link&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Nested Routing</h2>
+      <p>
+        React Router supports nested routing. Let us create components 
+        <code>Home</code>, <code>About</code>, and <code>Contact</code> and set up navigation.
+      </p>
+
+      <div class="example">
+        <h3>Home.jsx</h3>
+        <pre><code>function Home() {
+  return (
+    &lt;div className="Home"&gt;
+      &lt;h1&gt;This is Home&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}
+export default Home;</code></pre>
+      </div>
+
+      <div class="example">
+        <h3>About.jsx</h3>
+        <pre><code>function About() {
+  return (
+    &lt;div className="About"&gt;
+      &lt;h1&gt;About Us&lt;/h1&gt;
+      &lt;p&gt;TutorialsPoint India&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+export default About;</code></pre>
+      </div>
+
+      <div class="example">
+        <h3>Contact.jsx</h3>
+        <pre><code>function Contact() {
+  return (
+    &lt;div className="Contact"&gt;
+      &lt;h1&gt;Contact Us&lt;/h1&gt;
+      &lt;p&gt;Tutorials Point India Pvt Ltd, Hyderabad, India&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+export default Contact;</code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Creating Navigation</h2>
+      <p>
+        To enable navigation between screens, create a <code>Navigate</code> 
+        component that links to Home, About, and Contact.
+      </p>
+
+      <div class="example">
+        <h3>Navigate.jsx</h3>
+        <pre><code>import { Outlet, Link } from "react-router-dom";
+
+function Navigate() {
+  return (
+    &lt;div&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;Link to="/"&gt;Home&lt;/Link&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;Link to="/about"&gt;About Us&lt;/Link&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;Link to="/contact"&gt;Contact Us&lt;/Link&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;Outlet /&gt;
+    &lt;/div&gt;
+  );
+}
+export default Navigate;</code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Configuring Routes</h2>
+      <p>
+        In <code>App.jsx</code>, configure <code>BrowserRouter</code>, 
+        <code>Routes</code>, and <code>Route</code> to handle navigation.
+      </p>
+
+      <div class="example">
+        <h3>App.jsx</h3>
+        <pre><code>import { Route, Routes, BrowserRouter } from "react-router-dom";
+import Home from "./Router/Home";
+import About from "./Router/About";
+import Contact from "./Router/Contact";
+import Navigate from "./Router/Navigate";
+
+function App() {
+  return (
+    &lt;div className="App"&gt;
+      &lt;BrowserRouter&gt;
+        &lt;Routes&gt;
+          &lt;Route path="/" element={&lt;Navigate /&gt;}&gt;
+            &lt;Route index element={&lt;Home /&gt;} /&gt;
+            &lt;Route path="about" element={&lt;About /&gt;} /&gt;
+            &lt;Route path="contact" element={&lt;Contact /&gt;} /&gt;
+          &lt;/Route&gt;
+        &lt;/Routes&gt;
+      &lt;/BrowserRouter&gt;
+    &lt;/div&gt;
+  );
+}
+export default App;</code></pre>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Running the Application</h2>
+      <div class="example">
+        <pre><code>npm start</code></pre>
+      </div>
+      <p>
+        Open <code>http://localhost:3000</code> in the browser. Use the navigation 
+        links to switch between pages and confirm routing is working.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2>Advantages of React Router</h2>
+      <ul>
+        <li>Fast navigation between components with minimal re-rendering.</li>
+        <li>Easy to implement animations and transitions between routes.</li>
+        <li>Supports single-page applications without full page reloads.</li>
+      </ul>
+    </div>
+  </div>
+</div>

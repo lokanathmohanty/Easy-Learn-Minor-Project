@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP Compound Data Types</h1>
+
+    <div class="content">
+      <p>
+        **Compound Data Types** in PHP are used to store collections of data, potentially consisting of different scalar or even other compound types. The two compound types are **Array** and **Object**.
+      </p>
+
+      <h2>1. Arrays in PHP</h2>
+      <p>
+        An array is an **ordered map** that associates values with keys. It can store multiple values of different data types in a single variable.
+      </p>
+
+      <h3>Declaration Methods</h3>
+      <p>Arrays can be declared using two equivalent syntaxes:</p>
+      <ul>
+        <li>
+          **`array()` function:** The traditional method.
+          <div class="example">
+            <code>$arr = array(10, "apple", 1.55);</code>
+          </div>
+        </li>
+        <li>
+          **Square Brackets `[]`:** The shorter, modern syntax.
+          <div class="example">
+            <code>$arr = [10, "apple", 1.55];</code>
+          </div>
+        </li>
+      </ul>
+
+      <h3>Types of Arrays</h3>
+      <p>PHP arrays can function as three different types:</p>
+      <ul>
+        <li>
+          **Indexed Array:** A collection of values where each element is identified by a positional **integer index** starting from **0**.
+          <div class="example">
+            <code>$indexed = [10, 20, 30]; // Keys are 0, 1, 2</code>
+          </div>
+        </li>
+        <li>
+          **Associative Array:** A collection of **key-value pairs**, where the keys are typically **strings** (but can be integers). The association is denoted by `=>`.
+          <div class="example">
+            <code>$assoc = ["one" => 1, "two" => 2];</code>
+          </div>
+        </li>
+        <li>
+          **Multi-dimensional Array:** An array where the values themselves are other arrays.
+        </li>
+      </ul>
+
+      <h3>Accessing and Traversal</h3>
+      <p>Elements are accessed using the syntax `array[key]`:</p>
+      <ul>
+        <li>
+          **Accessing:** `var_dump($arr[1]);` or `var_dump($assoc["two"]);`
+        </li>
+        <li>
+          **Traversal:** The **`foreach`** loop is the standard method for iterating, allowing you to unpack both keys and values.
+          <div class="example">
+            <code>foreach ($arr as $key => $val) {<br>&nbsp;&nbsp;&nbsp;echo "$key : $val\n";<br>}</code>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2 class="title">2. Objects in PHP</h2>
+      <p>
+        An object is an **instance of a class**. It packages data (**properties**) and functions (**methods**) together.
+      </p>
+
+      <h3>Object Declaration</h3>
+      <p>
+        Objects are created using the **`new` operator** on a class definition (either built-in or user-defined).
+      </p>
+      <div class="example">
+        <code>class SayHello { ... }</code><br>
+        <code>$obj = new SayHello; // Instantiate the object</code>
+      </div>
+
+      <h3>The `stdClass`</h3>
+      <p>
+        PHP provides a generic, empty class called **`stdClass`**. It is used as a base for casting and for dynamically adding properties without a formal class definition.
+      </p>
+      <div class="example">
+        <code>$obj = new stdClass;</code><br>
+        <code>$obj->name = "Deepak"; // Dynamically add a property</code>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Type Casting Between Compound and Scalar Types</h2>
+
+      <h3>Array to Object Conversion</h3>
+      <p>
+        Casting an associative array to an object converts it into an instance of **`stdClass`**, where array keys become object properties.
+      </p>
+      <div class="example">
+        <code>$arr = ["name" => "Deepak"];</code><br>
+        <code>$obj = **(object)** $arr;</code><br>
+        <code>// $obj is now a stdClass object with a 'name' property</code>
+      </div>
+
+      <h3>Object to Array Conversion</h3>
+      <p>
+        Casting an object to an array converts object properties into array key-value pairs.
+      </p>
+      <div class="example">
+        <code>$arr = **(array)** $obj;</code><br>
+        <code>// $arr is now an associative array</code>
+      </div>
+
+      <h3>Scalar to Object Conversion</h3>
+      <p>
+        Casting a scalar value (like a string or integer) to an object creates an instance of **`stdClass`** with a single property named **`scalar`** holding the original value.
+      </p>
+      <div class="example">
+        <code>$name = "Deepak";</code><br>
+        <code>$obj1 = **(object)** $name;</code><br>
+        <code>// $obj1 is stdClass Object ([scalar] => Deepak)</code>
+      </div>
+    </div>
+  </div>
+</div>

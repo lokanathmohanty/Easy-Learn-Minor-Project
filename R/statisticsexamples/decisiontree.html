@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Decision Tree</h1>
+    <div class="content">
+      <p>
+        Decision trees represent decisions and their possible consequences as a tree structure. Nodes indicate decision points/events, and edges represent rules or conditions. Widely used in machine learning and data mining, decision trees support classification tasks like spam detection or credit risk assessment.
+      </p>
+      <p>
+        The R package <code>party</code> provides tools to build and visualize decision trees via the <code>ctree()</code> function.
+      </p>
+      
+      <h2>Installation</h2>
+      <pre><code>install.packages("party")</code></pre>
+      
+      <h2>Usage</h2>
+      <pre><code>library(party)
+      </code></pre>
+      
+      <h2>Basic Syntax</h2>
+      <pre><code>ctree(formula, data)</code></pre>
+      
+      <p>
+        - <strong>formula</strong>: Defines predictor and response variables (e.g., <code>nativeSpeaker ~ age + shoeSize + score</code>)
+      </p>
+      <p>
+        - <strong>data</strong>: Dataset to fit the tree.
+      </p>
+      
+      <h2>Example</h2>
+      <pre><code># Load package
+library(party)
+
+# View sample data
+print(head(readingSkills))
+
+# Use first 105 rows as training data
+input.dat <- readingSkills[1:105, ]
+
+# Create decision tree
+output.tree <- ctree(nativeSpeaker ~ age + shoeSize + score, data = input.dat)
+
+# Plot and save the tree
+png(file = "decision_tree.png")
+plot(output.tree)
+dev.off()
+</code></pre>
+      
+      <p>
+        The resulting tree shows, for example, that individuals with reading scores below 38.3 and age over 6 are likely non-native speakers.
+      </p>
+      
+      <p><em>This output is generated after loading necessary dependencies like <code>mvtnorm</code> and <code>grid</code> automatically.</em></p>
+      
+    </div>
+  </div>
+  
+  </div>
+</div>

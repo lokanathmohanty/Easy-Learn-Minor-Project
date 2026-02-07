@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">R - Factors</h1>
+    <div class="content">
+      <p>
+        Factors are special data objects used to categorize data and store it as levels. They can store strings or integers and are particularly useful for columns with limited unique values such as "Male", "Female", or True/False. Factors are commonly used in statistical modeling and data analysis.
+      </p>
+
+      <h2 class="title">Creating Factors</h2>
+      <p>Factors are created using the <code>factor()</code> function by passing a vector as input.</p>
+      <pre><code># Create a vector
+data &lt;- c("East","West","East","North","North","East","West","West","West","East","North")
+
+print(data)
+print(is.factor(data))  # FALSE
+
+# Convert to factor
+factor_data &lt;- factor(data)
+
+print(factor_data)
+print(is.factor(factor_data))  # TRUE
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] "East"  "West"  "East"  "North" "North" "East"  "West"  "West"  "West"  "East" "North"
+[1] FALSE
+[1] East  West  East  North North East  West  West  West  East  North
+Levels: East North West
+[1] TRUE
+</code></pre>
+
+      <h2 class="title">Factors in Data Frames</h2>
+      <pre><code># Create vectors
+height &lt;- c(132,151,162,139,166,147,122)
+weight &lt;- c(48,49,66,53,67,52,40)
+gender &lt;- c("male","male","female","female","male","female","male")
+
+# Create data frame
+input_data &lt;- data.frame(height, weight, gender)
+print(input_data)
+
+# Check if 'gender' is a factor
+print(is.factor(input_data$gender))
+
+# Print levels
+print(input_data$gender)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>  height weight gender
+1    132     48   male
+2    151     49   male
+3    162     66 female
+4    139     53 female
+5    166     67   male
+6    147     52 female
+7    122     40   male
+[1] TRUE
+[1] male   male   female female male   female male  
+Levels: female male
+</code></pre>
+
+      <h2 class="title">Changing the Order of Levels</h2>
+      <pre><code>data &lt;- c("East","West","East","North","North","East","West","West","West","East","North")
+
+factor_data &lt;- factor(data)
+print(factor_data)
+
+new_order_data &lt;- factor(factor_data, levels = c("East", "West", "North"))
+print(new_order_data)
+</code></pre>
+      <p>Output:</p>
+      <pre><code>[1] East  West  East  North North East  West  West  West  East  North
+Levels: East North West
+[1] East  West  East  North North East  West  West  West  East  North
+Levels: East West North
+</code></pre>
+
+      <h2 class="title">Generating Factor Levels</h2>
+      <pre><code># Generate factor levels by specifying number and replication of levels
+v &lt;- gl(3, 4, labels = c("Tampa", "Seattle", "Boston"))
+print(v)
+</code></pre>
+      <p>Output:</p>
+      <pre><code> [1] Tampa   Tampa   Tampa   Tampa   Seattle Seattle Seattle Seattle Boston  
+[10] Boston  Boston  Boston 
+Levels: Tampa Seattle Boston
+</code></pre>
+    </div>
+  </div>
+  
+    </div>
+  </div>
+</div>

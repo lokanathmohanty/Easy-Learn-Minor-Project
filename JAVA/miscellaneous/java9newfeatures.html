@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java 9 - Major New Features Summary</h1>
+
+        <div class="content">
+            <h2>Core Theme: Modularity (Project Jigsaw) 🧩</h2>
+            <p>The primary and most impactful feature of **Java 9 (released September 2017)** was the implementation of the **Java Platform Module System (JPMS)**. The main goals were to enhance security, improve performance, simplify maintenance, and enable the platform to be scaled down for smaller devices.</p>
+
+            <h3>The Module System</h3>
+            <p>A **Module** is a self-describing collection of code and data (packages and resources) that is explicitly named and defines which of its packages are **exported** (accessible to other modules) and which other modules it **requires**.</p>
+            <ul>
+                <li><strong><code>module-info.java</code>:</strong> The module descriptor file where dependencies (<code>requires</code>) and exposed packages (<code>exports</code>) are defined.</li>
+                <li><strong>Strong Encapsulation:</strong> By default, module internals are hidden. Only explicitly exported packages are accessible outside the module, improving security and stability.</li>
+                <li><strong>JDK Modularization:</strong> The entire JDK was divided into modules (e.g., <code>java.base</code>, <code>java.desktop</code>).</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Developer Productivity Enhancements</h2>
+
+            <h3>REPL Tool: JShell</h3>
+            <p>The **Read-Evaluate-Print Loop (REPL)** tool, called **JShell**, was introduced as an interactive command-line environment. It allows developers to execute arbitrary snippets of Java code, expressions, and statements instantly without the need for a full file, compilation, and execution cycle, significantly accelerating learning and prototyping.</p>
+
+            <h3>Collection Factory Methods (<code>List.of()</code>, <code>Set.of()</code>, <code>Map.of()</code>)</h3>
+            <p>New static factory methods were added to the <code>List</code>, <code>Set</code>, and <code>Map</code> interfaces for easily creating **immutable** and concise instances of collections, eliminating boilerplate code.</p>
+            <pre><code>// Java 9+ concise, immutable list creation
+List&lt;String&gt; list = List.of("Java", "HTML 5", "C");</code></pre>
+
+            <h3>Improved <code>@Deprecated</code> Annotation</h3>
+            <p>The annotation was enhanced with two new attributes for clearer deprecation policy:</p>
+            <ul>
+                <li><strong><code>forRemoval=true</code>:</strong> Indicates that the element is explicitly scheduled to be removed in a future release.</li>
+                <li><strong><code>since="9"</code>:</strong> Specifies the Java version in which the element first became deprecated.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>API and Language Enhancements</h2>
+
+            <h3>Private Interface Methods</h3>
+            <p>Interfaces can now contain **private** and **private static** methods. This allows multiple non-private methods (like default methods) within the same interface to share and encapsulate common utility code, avoiding code duplication while keeping the helper logic hidden from the implementing classes.</p>
+
+            <h3>Process API Improvements</h3>
+            <p>The OS process control API was significantly updated, centered around the **<code>ProcessHandle</code>** class. This provides rich, platform-independent access to process information (PID, start time, CPU usage, command, user) and better control (asynchronous <code>onExit()</code> with <code>CompletableFuture</code>).</p>
+
+            <h3>Stream API Enhancements</h3>
+            <p>New methods were added to the <code>Stream</code> interface for more flexible flow control:</p>
+            <ul>
+                <li><strong><code>takeWhile(Predicate)</code>:</strong> Takes elements from the start until the predicate is false.</li>
+                <li><strong><code>dropWhile(Predicate)</code>:</strong> Discards elements from the start until the predicate is false, then keeps the rest.</li>
+                <li><strong><code>iterate</code>:</strong> Now supports an explicit **stop condition** (predicate), making it easy to create bounded streams.</li>
+                <li><strong><code>ofNullable(T t)</code>:</strong> Returns a single-element stream if the value is non-null, or an empty stream if null, simplifying null checks in stream pipelines.</li>
+            </ul>
+
+            <h3>Try-With-Resources Simplification</h3>
+            <p>Resources that are effectively final can now be used directly in the <code>try-with-resources</code> statement without needing to be declared inside the parenthesis, making the syntax more concise.</p>
+            <pre><code>BufferedReader br = new BufferedReader(inputString);
+try (br) { // 'br' is the effectively final resource
+   return br.readLine();
+}</code></pre>
+        </div>
+    </div>
+</div>

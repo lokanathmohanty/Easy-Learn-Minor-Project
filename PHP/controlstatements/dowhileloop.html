@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">PHP `do...while` Loop</h1>
+
+    <div class="content">
+      <p>
+        The **`do...while`** loop is an **exit-controlled** looping construct in PHP. Unlike the `while` loop, which checks the condition at the start, the `do...while` loop checks the condition at the **end** of each iteration.
+      </p>
+
+      <h2>Key Characteristic: Guaranteed Execution</h2>
+      <p>
+        The main distinction is that the `do...while` loop is guaranteed to execute its code block at least **once**, regardless of whether the initial condition is true or false. This is because the code runs before the condition is ever checked.
+      </p>
+
+      <div class="example">
+        <p>
+          **Syntax:**<br>
+          <code>do { statements; } while (expression);</code>
+        </p>
+        <p>
+          Note the semicolon (`;`) after the `while (expression)`.
+        </p>
+      </div>
+
+      <hr>
+
+      <h2>`do...while` vs. `while` Comparison</h2>
+      <p>
+        The difference is most obvious when the loop condition is initially false:
+      </p>
+      <div class="example">
+        <p>
+          **Scenario:** Loop condition is `$j <= 5`, but the counter is initialized to `$j = 10`.
+        </p>
+        <p>
+          **`while` Loop:**<br>
+          `while (10 <= 5)` is **False**. Loop body is **skipped**.
+        </p>
+        <p>
+          **`do...while` Loop:**<br>
+          1. **`do`** body executes (prints "Iteration No: 10").<br>
+          2. **`while (10 <= 5)`** is **False**. Loop terminates.
+        </p>
+        <p class="content">The `do...while` loop ran once, while the `while` loop ran zero times.</p>
+      </div>
+
+      <hr>
+
+      <h2>Practical Examples</h2>
+
+      <h3>Decrementing `do...while` Loop</h3>
+      <p>
+        The `do...while` loop can be used to count backward. The `do` block ensures the start value (`$j=5`) is processed, and the condition `$j>=1` controls subsequent iterations.
+      </p>
+      <div class="example">
+        <p>
+          <code>$j=5; do { echo "Iteration No: $j \n"; $j--; } while ($j>=1);</code>
+        </p>
+        <p class="content">Output: Iteration No: 5 \n ... \n Iteration No: 1</p>
+      </div>
+
+      <h3>Traversing a String in Reverse</h3>
+      <p>
+        By initializing the counter to the string length and decrementing it, we can use the `do...while` loop to read a string's characters from end to beginning.
+      </p>
+      <div class="example">
+        <p>
+          <code>$string = "Point"; $j = strlen($string); // j=5</code><br>
+          <code>do { $j--; echo "$string[$j] \n"; } while ($j>=0);</code>
+        </p>
+        <p class="content">Output: t \n n \n i \n o \n P</p>
+      </div>
+
+      <hr>
+
+      <h2>Control Statements (`break` and `continue`)</h2>
+      <p>
+        The `break` and `continue` keywords work with `do...while` loops just as they do with `for` and `while` loops.
+      </p>
+      <ul>
+        <li>
+          **`break`**: Immediately exits the loop, regardless of the `while` condition.
+        </li>
+        <li>
+          **`continue`**: Skips the remainder of the current iteration's code block and proceeds directly to re-evaluating the `while` condition for the next iteration.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

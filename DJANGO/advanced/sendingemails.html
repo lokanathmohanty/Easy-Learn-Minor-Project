@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: Sending E-mails 📧</h1>
+        <div class="content">
+            <p>Django provides a lightweight, easy-to-use mail engine via the **<code>django.core.mail</code>** module. Before sending emails, you must configure your project's SMTP settings in <code>settings.py</code>:</p>
+            <ul>
+                <li><strong><code>EMAIL_HOST</code></strong>: SMTP server address.</li>
+                <li><strong><code>EMAIL_HOST_USER</code></strong>: Login username for the SMTP server.</li>
+                <li><strong><code>EMAIL_HOST_PASSWORD</code></strong>: Password for the SMTP server.</li>
+                <li><strong><code>EMAIL_PORT</code></strong>: SMTP server port (often 587 or 465).</li>
+                <li><strong><code>EMAIL_USE_TLS</code> / <code>_SSL</code></strong>: Set to <code>True</code> for a secure connection.</li>
+            </ul>
+
+            <h2>Sending a Simple E-mail (<code>send_mail</code>)</h2>
+            <p>The **<code>send_mail</code>** shortcut is the simplest way to send a single email. It returns the number of successfully delivered messages (usually <code>1</code> or <code>0</code>).</p>
+            <pre><code>from django.core.mail import send_mail
+
+def sendSimpleEmail(request, emailto):
+   res = send_mail(
+      "Hello Paul",                 # subject
+      "Comment tu vas?",            # message (body)
+      "paul@polo.com",              # from_email
+      [emailto],                    # recipient_list
+      fail_silently=False           # raise exception on error
+   )
+   return HttpResponse(f'{res}')</code></pre>
+
+            <h2>Sending Multiple E-mails (<code>send_mass_mail</code>)</h2>
+            <p>To send multiple distinct messages efficiently in a single connection, use **<code>send_mass_mail</code>**. This method takes a single tuple, where each element is a tuple representing a message (subject, message, from\_email, recipient\_list).</p>
+            <pre><code>from django.core.mail import send_mass_mail
+
+def sendMassEmail(request, emailto1, emailto2):
+   msg1 = ('subject 1', 'message 1', 'polo@polo.com', [emailto1])
+   msg2 = ('subject 2', 'message 2', 'polo@polo.com', [emailto2])
+   datatuples = (msg1, msg2)
+   
+   res = send_mass_mail(datatuples, fail_silently=False)
+   return HttpResponse(f'{res}')</code></pre>
+
+            <h2>Mailing Admins and Managers</h2>
+            <p>Django provides specialized functions to quickly email site administrators or managers defined in <code>settings.py</code>:</p>
+            <ul>
+                <li><strong><code>mail_admins(subject, message)</code></strong>: Sends email to addresses listed in the **<code>ADMINS</code>** setting.</li>
+                <li><strong><code>mail_managers(subject, message)</code></strong>: Sends email to addresses listed in the **<code>MANAGERS</code>** setting.</li>
+            </ul>
+            <pre><code>from django.core.mail import mail_admins
+def sendAdminsEmail(request):
+   res = mail_admins('my subject', 'site is going down.')
+   return HttpResponse(f'{res}')</code></pre>
+
+            <h2>Sending HTML E-mail and Attachments (<code>EmailMessage</code>)</h2>
+            <p>For more complex needs, like sending HTML content or attachments, use the **<code>EmailMessage</code>** class.</p>
+
+            <h3>HTML Content</h3>
+            <p>For Django versions &lt; 1.7, you must manually set <code>email.content_subtype = "html"</code>. For Django &ge; 1.7, you can pass the <code>html_message</code> parameter to <code>send_mail</code> to create a multipart/alternative email.</p>
+            <pre><code>from django.core.mail import EmailMessage
+
+def sendHTMLEmail(request, emailto):
+   html_content = "<strong>Comment tu vas?</strong>"
+   email = EmailMessage("my subject", html_content, "paul@polo.com", [emailto])
+   
+   # Required for older Django versions (&lt; 1.7)
+   email.content_subtype = "html" 
+   
+   res = email.send()
+   return HttpResponse(f'{res}')</code></pre>
+
+            <h3>With Attachment</h3>
+            <p>Use the **<code>.attach()</code>** method on the <code>EmailMessage</code> object before sending. It requires the filename, the file content (as a string/bytes), and the MIME type.</p>
+            <pre><code>from django.core.mail import EmailMessage
+
+def sendEmailWithAttach(request, emailto):
+   # ... EmailMessage object setup ...
+   
+   fd = open('manage.py', 'r')
+   email.attach('manage.py', fd.read(), 'text/plain')
+   
+   res = email.send()
+   return HttpResponse(f'{res}')</code></pre>
+        </div>
+    </div>
+</div>

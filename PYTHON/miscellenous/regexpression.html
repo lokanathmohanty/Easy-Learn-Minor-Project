@@ -1,0 +1,126 @@
+ <div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python Regular Expressions (Regex)</h1>
+    </div>
+    <div class="content">
+      <p>
+        A regular expression (regex) is a sequence of characters forming a search pattern used for matching text strings. Python supports regex through its built-in <code>re</code> module.
+      </p>
+      <p>
+        Regex patterns can validate input, perform search-and-replace, or extract information from texts.
+      </p>
+      <p>
+        Python supports raw string notation (<code>r"..."</code>) to prevent escape sequences from being interpreted, ensuring patterns like <code>\n</code> are treated literally.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Common Metacharacters</h2>
+    </div>
+    <div class="content">
+      <table>
+        <thead>
+          <tr><th>Metacharacter</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>[abc]</td><td>Matches any character: a, b, or c</td></tr>
+          <tr><td>[a-c]</td><td>Matches characters between a and c (a, b, c)</td></tr>
+          <tr><td>[a-z]</td><td>Matches lowercase letters a to z</td></tr>
+          <tr><td>[0-9]</td><td>Matches digits 0 to 9</td></tr>
+          <tr><td>^</td><td>Negates character sets (e.g., [^a-z] matches anything but lowercase letters)</td></tr>
+          <tr><td>\d</td><td>Matches any digit (0-9)</td></tr>
+          <tr><td>\D</td><td>Matches non-digit characters</td></tr>
+          <tr><td>\s</td><td>Matches whitespace (space, tab, newline, etc.)</td></tr>
+          <tr><td>\S</td><td>Matches non-whitespace characters</td></tr>
+          <tr><td>\w</td><td>Matches alphanumeric characters plus underscore</td></tr>
+          <tr><td>\W</td><td>Matches non-alphanumeric characters</td></tr>
+          <tr><td>.</td><td>Matches any character except newline</td></tr>
+          <tr><td>*</td><td>Matches zero or more repetitions of the preceding pattern</td></tr>
+          <tr><td>+</td><td>Matches one or more repetitions</td></tr>
+          <tr><td>?</td><td>Matches zero or one occurrence</td></tr>
+          <tr><td>\\b</td><td>Matches word boundary</td></tr>
+          <tr><td>\\</td><td>Escape character for special symbols</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Using the <code>re</code> Module</h2>
+    </div>
+    <div class="content">
+      <h3>Match vs Search</h3>
+      <p>
+        <code>re.match()</code> attempts to match from the start of the string; <code>re.search()</code> scans the entire string for a match.
+      </p>
+      <pre><code>import re
+line = "Cats are smarter than dogs"
+
+matchObj = re.match(r'Cats', line)
+if matchObj:
+    print(matchObj.group())
+
+searchObj = re.search(r'dogs', line)
+if searchObj:
+    print(searchObj.group())</code></pre>
+      <p>
+        Output:<br>
+        Cats<br>
+        dogs
+      </p>
+
+      <h3>Findall</h3>
+      <p>
+        Returns all non-overlapping matches of the pattern in the string as a list.
+      </p>
+      <pre><code>import re
+string = "Simple is better than complex"
+matches = re.findall(r'\b\w{2,}\b', string)
+print(matches)</code></pre>
+      <p>Output: <code>['Simple', 'better', 'than', 'complex']</code></p>
+
+      <h3>Substitution (sub)</h3>
+      <p>
+        Substitute all occurrences of a pattern with a replacement string.
+      </p>
+      <pre><code>import re
+text = "Hello, this is Python. Python is great!"
+new_text = re.sub(r'Python', 'Java', text)
+print(new_text)</code></pre>
+      <p>Output:<br>Hello, this is Java. Java is great!</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Common Regex Operations</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>re.compile()</strong>: compile a regex pattern for reuse.</li>
+        <li><strong>re.finditer()</strong>: returns an iterator yielding match objects for each match.</li>
+        <li><strong>Flags</strong>: modifiers like <code>re.I</code> (ignore case), <code>re.M</code> (multiline), <code>re.S</code> (dot matches newline) enhance matching behavior.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Example: Matching Email Addresses</h2>
+    </div>
+    <div class="content">
+      <pre><code>import re
+
+text = "Contact: alice@example.com, bob.smith@foo.co.uk"
+pattern = r'[\w\.-]+@[\w\.-]+'
+
+emails = re.findall(pattern, text)
+print(emails)</code></pre>
+      <p>Output: <code>['alice@example.com', 'bob.smith@foo.co.uk']</code></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="session">
+    <div class="title">
+      <h1>Python - Memory Management</h1>
+    </div>
+    <div class="content">
+      <p>
+        In Python, memory management is automatic and involves handling a private heap that contains all Python objects and data structures. The Python memory manager efficiently allocates and deallocates memory during program execution.
+      </p>
+      <p>
+        This tutorial covers Python's memory management components, including garbage collection, reference counting, and how variables are stored on the stack and heap.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Memory Management Components</h2>
+    </div>
+    <div class="content">
+      <ul>
+        <li><strong>Private Heap:</strong> Main storage area for all Python objects and data, managed internally.</li>
+        <li><strong>Raw Memory Allocator:</strong> Interacts with the operating system to reserve space in the private heap.</li>
+        <li><strong>Object-Specific Allocators:</strong> Manage memory for different object types like integers, strings, tuples, and dictionaries.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Memory Allocation in Python</h2>
+    </div>
+    <div class="content">
+      <p><strong>Stack – Static Memory Allocation:</strong> Stores local variables and function call information known at compile time. It operates as Last-In-First-Out (LIFO).</p>
+      <pre>
+def my_function():
+   x = 5
+   y = True
+   z = 'Hello'
+   return x, y, z
+
+print(my_function())
+print(x, y, z)
+      </pre>
+      <p>Output example:</p>
+      <pre>
+(5, True, 'Hello')
+Traceback (most recent call last):
+  File "main.py", line 8, in &lt;module&gt;
+    print(x, y, z)
+NameError: name 'x' is not defined
+      </pre>
+      <p>
+        Variables x, y, z are local to the function and removed after execution—hence not accessible outside.
+      </p>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Heap – Dynamic Memory Allocation</h2>
+    </div>
+    <div class="content">
+      <p>Used for storing non-primitive data types (e.g., lists, objects) dynamically at runtime, while references to them live on the stack.</p>
+      <pre>
+a = [0] * 10
+print(a)
+      </pre>
+      <p>Output:</p>
+      <pre>
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      </pre>
+    </div>
+  </div>
+
+  <div class="session">
+    <div class="title">
+      <h2>Garbage Collection and Reference Counting</h2>
+    </div>
+    <div class="content">
+      <p>
+        Python uses reference counting as its primary memory management technique. Every object keeps track of how many references point to it.
+      </p>
+      <ul>
+        <li><strong>Increasing Reference Count:</strong> When a new reference is created.</li>
+        <li><strong>Decreasing Reference Count:</strong> When a reference is deleted or goes out of scope.</li>
+        <li>If a reference count drops to zero, the object’s memory is deallocated automatically.</li>
+      </ul>
+      <p>
+        Python also employs a garbage collector to detect and clean up reference cycles.
+      </p>
+      <pre>
+import sys
+
+name = "Tutorialspoint"
+print("Initial reference count:", sys.getrefcount(name))
+
+other_name = "Tutorialspoint"
+print("Reference count after assignment:", sys.getrefcount(name))
+
+string_sum = name + ' Python'
+print("Reference count after concatenation:", sys.getrefcount(name))
+
+list_of_names = [name, name, name]
+print("Reference count after creating a list with 'name' 3 times:", sys.getrefcount(name))
+
+del other_name
+print("Reference count after deleting 'other_name':", sys.getrefcount(name))
+
+del list_of_names
+print("Reference count after deleting the list:", sys.getrefcount(name))
+      </pre>
+      <p>Example output:</p>
+      <pre>
+Initial reference count: 4
+Reference count after assignment: 5
+Reference count after concatenation: 5
+Reference count after creating a list with 'name' 3 times: 8
+Reference count after deleting 'other_name': 7
+Reference count after deleting the list: 4
+      </pre>
+    </div>
+  </div>
+
+   
+  </div>
+</div>

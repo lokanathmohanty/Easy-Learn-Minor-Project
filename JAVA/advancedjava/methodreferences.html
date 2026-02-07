@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Java Method References (Java 8+)</h1>
+
+        <div class="content">
+            <h2>What are Method References?</h2>
+            <p><strong>Method references</strong>, introduced in **Java 8**, are syntactic sugar for a **lambda expression** that simply calls an existing method. They provide a concise way to refer to a method by its name, making code more readable and compact than a full lambda expression.</p>
+            <p>A method reference is only used where a lambda expression is accepted, which is when working with **functional interfaces** (interfaces with a single abstract method).</p>
+            <p>The syntax uses the **double colon operator (<code>::</code>)**.</p>
+            
+            <h3>How it Works</h3>
+            <p>The compiler infers the functional interface method's arguments from the context and passes them directly to the referenced method.</p>
+            <p class="example">A lambda like <code>s -> System.out.println(s)</code> can be replaced by the method reference <code>System.out::println</code>.</p>
+        </div>
+
+        <hr>
+
+        <div class="content">
+            <h2>Types of Method References</h2>
+            <p>There are four main forms of method references:</p>
+
+            <h3>1. Reference to a Static Method</h3>
+            <p>Uses the class name to reference a static method. The arguments required by the functional interface method are passed to the static method.</p>
+            <p><strong>Syntax:</strong> <code>ClassName::staticMethodName</code></p>
+            <pre><code>// Using a lambda
+numbers.forEach(n -> Math.abs(n)); 
+
+// Using a static method reference
+numbers.forEach(Math::abs); </code></pre>
+            
+            <h3>2. Reference to an Instance Method of a Particular Object</h3>
+            <p>Uses a specific object instance to reference its instance method.</p>
+            <p><strong>Syntax:</strong> <code>objectInstance::instanceMethodName</code></p>
+            <pre><code>// If printer is an instance of a Logger class
+Logger printer = new Logger();
+
+// Using a lambda
+names.forEach(name -> printer.log(name));
+
+// Using an instance method reference
+names.forEach(printer::log);</code></pre>
+
+            <h3>3. Reference to an Instance Method of an Arbitrary Object of a Particular Type</h3>
+            <p>This is commonly used in Stream operations like <code>map</code> or <code>sorted</code>. The method is called on the object that is being passed as an argument to the functional interface.</p>
+            <p><strong>Syntax:</strong> <code>ClassName::instanceMethodName</code></p>
+            <pre><code>// Lambda: (a, b) -> a.compareTo(b)
+// Method Reference: Integer::compareTo
+numbers.stream().sorted(Integer::compareTo);</code></pre>
+
+            <h3>4. Reference to a Constructor</h3>
+            <p>Used to reference a constructor of a class using the <code>new</code> keyword. This is typically done when creating new objects within Stream operations.</p>
+            <p><strong>Syntax:</strong> <code>ClassName::new</code></p>
+            <pre><code>// Lambda: name -> new Student(name)
+// Method Reference: Student::new
+studentNames.stream().map(Student::new).toList();</code></pre>
+        </div>
+    </div>
+</div>

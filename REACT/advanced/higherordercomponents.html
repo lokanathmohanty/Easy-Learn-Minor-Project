@@ -1,0 +1,224 @@
+<div class="container">
+   <div class="session">
+      <div class="title">
+         <h1>ReactJS - Higher-Order Components</h1>
+      </div>
+
+      <div class="content">
+         <p>
+            In React, components are composed together rather than extended through inheritance. 
+            This makes logic sharing a challenge. A <b>Higher-Order Component (HOC)</b> 
+            is a design pattern (not a React API) that provides a way to share logic 
+            between components without side effects.
+         </p>
+
+         <h2>How to use Higher-Order Components</h2>
+         <p>
+            A HOC is a function that takes a React component as input and returns a new 
+            component with enhanced functionality.
+         </p>
+         <p>
+            For example, a HOC can receive a rendering component as input and return 
+            a new component with data-fetching capabilities wrapped around the input component.
+         </p>
+
+         <h3>General Signature</h3>
+         <div class="code-block">
+<pre><code>function createHOC(WrappedComponent, url) {
+   // returns a new component
+}
+</code></pre>
+         </div>
+
+         <h3>Data Fetching Example</h3>
+         <p>HOC function with primary logic (fetching data) and wrapped component:</p>
+         <div class="code-block">
+<pre><code>function createFetchHOC(WrappedComponent, url) {
+   class DataFetcher extends React.Component {
+      componentDidMount() {
+         fetch(url)
+            .then((response) =&gt; response.json())
+            .then((data) =&gt; {
+               this.setState({ data: data });
+            });
+      }
+      render() {
+         return (
+            &lt;WrappedComponent data={this.state.data} {...this.props} /&gt;
+         )
+      }
+   }
+   return DataFetcher;
+}
+</code></pre>
+         </div>
+
+         <h3>Using the HOC</h3>
+         <p>Create a new component by combining the wrapped component and HOC:</p>
+         <div class="code-block">
+<pre><code>const UserListWithFetch = createFetchHOC(
+   UserList,
+   "users.json"
+);
+
+&lt;UserListWithFetch /&gt;
+</code></pre>
+         </div>
+
+         <h2>Applying HOC in an Application</h2>
+         <p>Steps to create and use the HOC:</p>
+         <ul>
+            <li>Create a React app with <code>create-react-app</code>.</li>
+            <li>Create the HOC function <code>createFetchHOC</code>.</li>
+            <li>Create sample data files: <code>users.json</code> and <code>todo_list.json</code>.</li>
+            <li>Create components <code>UserList</code> and <code>TodoList</code> to render data.</li>
+            <li>Wrap them using <code>createFetchHOC</code> to create fetch-enabled components.</li>
+            <li>Use them in a parent component (<code>SimpleHOC</code>) and render in <code>App.js</code>.</li>
+         </ul>
+
+         <h3>Example HOC Function</h3>
+         <div class="code-block">
+<pre><code>import React from 'react';
+
+function createFetchHOC(WrappedComponent, url) {
+   class DataFetcher extends React.Component {
+      constructor(props) {
+         super(props);
+         this.state = { data: [] };
+      }
+
+      componentDidMount() {
+         fetch(url)
+            .then((response) =&gt; response.json())
+            .then((data) =&gt; {
+               this.setState({ data: data });
+            });
+      }
+
+      render() {
+         return (
+            &lt;WrappedComponent data={this.state.data} {...this.props} /&gt;
+         )
+      }
+   }
+   return DataFetcher;
+}
+
+export default createFetchHOC;
+</code></pre>
+         </div>
+
+         <h3>Sample Data Files</h3>
+         <p><code>users.json</code></p>
+         <div class="code-block">
+<pre><code>[
+   {"id":1,"name":"Fowler","age":18},
+   {"id":2,"name":"Donnell","age":24},
+   {"id":3,"name":"Pall","age":26}
+]
+</code></pre>
+         </div>
+
+         <p><code>todo_list.json</code></p>
+         <div class="code-block">
+<pre><code>[
+   {"id":1,"title":"Learn JavaScript","is_done":true},
+   {"id":2,"title":"Learn React","is_done":true},
+   {"id":3,"title":"Learn Typescript","is_done":false}
+]
+</code></pre>
+         </div>
+
+         <h3>UserList Component</h3>
+         <div class="code-block">
+<pre><code>import React from "react";
+
+class UserList extends React.Component {
+   render() {
+      return (
+         &lt;ul&gt;
+            {this.props.data &amp;&amp; this.props.data.map(
+               (item) =&gt; &lt;li key={item.id}&gt;{item.name}&lt;/li&gt;
+            )}
+         &lt;/ul&gt;
+      )
+   }
+}
+export default UserList;
+</code></pre>
+         </div>
+
+         <h3>TodoList Component</h3>
+         <div class="code-block">
+<pre><code>import React from "react";
+
+class TodoList extends React.Component {
+   render() {
+      return (
+         &lt;ul&gt;
+            {this.props.data &amp;&amp; this.props.data.map(
+               (item) =&gt;
+                  &lt;li key={item.id}&gt;
+                     {item.title} {item.is_done &amp;&amp; &lt;strong&gt;Done&lt;/strong&gt;}
+                  &lt;/li&gt;
+            )}
+         &lt;/ul&gt;
+      )
+   }
+}
+export default TodoList;
+</code></pre>
+         </div>
+
+         <h3>SimpleHOC Component</h3>
+         <div class="code-block">
+<pre><code>import React from "react";
+import UserList from "./UserList";
+import TodoList from "./TodoList";
+import createFetchHOC from "./createFetchHOC";
+
+const UserListWithFetch = createFetchHOC(UserList, "users.json");
+const TodoListWithFetch = createFetchHOC(TodoList, "todo_list.json");
+
+class SimpleHOC extends React.Component {
+   render() {
+      return (
+         &lt;&gt;
+            &lt;UserListWithFetch /&gt;
+            &lt;TodoListWithFetch /&gt;
+         &lt;/&gt;
+      )
+   }
+}
+export default SimpleHOC;
+</code></pre>
+         </div>
+
+         <h3>App.js</h3>
+         <div class="code-block">
+<pre><code>import './App.css';
+import React from 'react';
+import SimpleHOC from './Components/SimpleHOC';
+
+function App() {
+   return (
+      &lt;div className="container"&gt;
+         &lt;SimpleHOC /&gt;
+      &lt;/div&gt;
+   );
+}
+
+export default App;
+</code></pre>
+         </div>
+
+         <h2>Summary</h2>
+         <p>
+            Higher-Order Components (HOCs) provide an efficient and reusable way 
+            to share logic between components. They are widely used in React 
+            applications and third-party libraries, making them a reliable and 
+            time-tested design pattern.
+         </p>
+      </div>
+   </div>
+</div>

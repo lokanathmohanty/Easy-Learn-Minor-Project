@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Python - Static Methods</h1>
+    <div class="content">
+      <p>A <strong>static method</strong> in Python is a method that does not require an instance or class reference to be called. Unlike instance methods or class methods, static methods take neither <code>self</code> (instance reference) nor <code>cls</code> (class reference) as their first parameter.</p>
+      
+      <p>Static methods are bound to the class rather than instances. They are typically used to perform utility functions that have logical connection to the class but do not access or modify class state or instance data.</p>
+      
+      <h2 class="title">How to Create Static Methods</h2>
+      <p>There are two ways to create static methods:</p>
+      <ul>
+        <li>Using the <code>staticmethod()</code> function</li>
+        <li>Using the <code>@staticmethod</code> decorator</li>
+      </ul>
+      
+      <h3 class="title">Using staticmethod() Function</h3>
+      <pre><code>class Employee:
+    empCount = 0
+
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+        Employee.empCount += 1
+
+    def showcount():
+        print(Employee.empCount)
+
+    counter = staticmethod(showcount)
+
+e1 = Employee("Bhavana", 24)
+e2 = Employee("Rajesh", 26)
+e3 = Employee("John", 27)
+
+e1.counter()
+Employee.counter()
+</code></pre>
+      <p>Output:<br>3<br>3</p>
+      
+      <h3 class="title">Using @staticmethod Decorator</h3>
+      <pre><code>class Student:
+    stdCount = 0
+
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+        Student.stdCount += 1
+
+    @staticmethod
+    def showcount():
+        print(Student.stdCount)
+
+e1 = Student("Bhavana", 24)
+e2 = Student("Rajesh", 26)
+e3 = Student("John", 27)
+
+print("Number of Students:")
+Student.showcount()
+</code></pre>
+      <p>Output:<br>Number of Students:<br>3</p>
+
+      <h2 class="title">Advantages of Static Methods</h2>
+      <ul>
+        <li>Static methods can be used as utility functions to perform frequently reused tasks.</li>
+        <li>They can be called using the class name, eliminating instance dependency.</li>
+        <li>Static methods have predictable behavior as they don't depend on class or instance state.</li>
+        <li>Declaring a method static prevents it from being overridden in subclasses.</li>
+      </ul>
+    </div>
+  </div>
+</div>

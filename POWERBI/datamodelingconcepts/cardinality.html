@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Power BI - Cardinality</h1>
+    <div class="content">
+      <p>Cardinality in Power BI describes the type of relationship between two tables based on how rows in one table relate to rows in another.</p>
+
+      <h2>Types of Cardinalities</h2>
+      <ul>
+        <li><strong>One-to-One (1:1):</strong> Each row in Table A corresponds to one row in Table B, and vice versa.</li>
+        <li><strong>One-to-Many (1:*):</strong> Each row in the primary table matches multiple rows in the related table. The filter flow is typically one-way.</li>
+        <li><strong>Many-to-One (*:1):</strong> Multiple rows in the first table correspond to one in the second. This is the inverse of one-to-many.</li>
+        <li><strong>Many-to-Many (*:*):</strong> Rows in both tables match many rows in the other. Relationships are typically bi-directional.</li>
+      </ul>
+
+      <h2>Examples</h2>
+      <ul>
+        <li><strong>One-to-One:</strong> Two tables both having unique 'Date' columns joined on that column.</li>
+        <li><strong>One-to-Many:</strong> A 'Customers' table linked to an 'Orders' table where customer IDs may repeat across orders.</li>
+        <li><strong>Many-to-Many:</strong> Multiple students enrolled in multiple courses represented by enrollment and students' tables.</li>
+      </ul>
+
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Avoid many-to-many relationships if possible as they can complicate data modeling and reduce performance.</li>
+        <li>Ensure dimension tables have unique values and fact tables may have duplicates.</li>
+        <li>Design relationships to reduce ambiguity; keep cross-filter directions limited where possible.</li>
+        <li>Remove or deactivate redundant relationships to simplify the model.</li>
+      </ul>
+    </div>
+  </div>
+</div>

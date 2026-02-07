@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">Django: File Uploading 📎</h1>
+        <div class="content">
+            <p>File uploading in Django involves specific configurations in the **Form**, the **Model**, and the **View** to correctly handle the binary data sent from the client's browser.</p>
+
+            <h2>1. Model and Form Definition</h2>
+            <p>Django uses dedicated field types for file uploads in both the form and the model.</p>
+            <ul>
+                <li><strong>Forms (<code>forms.py</code>):</strong> Use **<code>forms.ImageField</code>** (requires PIL/Pillow to check image validity) or **<code>forms.FileField</code>** (for any file type).</li>
+                <li><strong>Models (<code>models.py</code>):</strong> Use **<code>models.ImageField</code>** or **<code>models.FileField</code>**. Both require the **<code>upload_to</code>** argument, which specifies the subdirectory within <code>MEDIA_ROOT</code> where the files will be saved.</li>
+            </ul>
+            <pre><code># myapp/forms.py
+class ProfileForm(forms.Form):
+   name = forms.CharField(max_length = 100)
+   picture = forms.ImageField() # Use ImageField for images
+
+# myapp/models.py
+class Profile(models.Model):
+   name = models.CharField(max_length = 50)
+   picture = models.ImageField(upload_to = 'pictures') # Files saved to MEDIA_ROOT/pictures/</code></pre>
+            <p><strong>Note:</strong> The **<code>MEDIA_ROOT</code>** setting in <code>settings.py</code> must define the absolute path to the directory where all uploaded files are stored.</p>
+
+            <h2>2. Template Configuration</h2>
+            <p>The HTML form used for file uploading requires a specific attribute to handle the binary data:</p>
+            <ul>
+                <li>The **<code>&lt;form&gt;</code>** tag must include the attribute **<code>enctype="multipart/form-data"</code>**. Without this, the file data will not be transmitted correctly, and the Django form validation will fail.</li>
+                <li>The file input uses the standard HTML type: **<code>&lt;input type="file"&gt;</code>**.</li>
+            </ul>
+            <pre><code>&lt;form name = "form" enctype = "multipart/form-data" 
+   action = "{% url "myapp.views.SaveProfile" %}" method = "POST" &gt;
+   {% csrf_token %}
+   &lt;input type = "file" name = "picture" /&gt;
+   &lt;!-- ... other fields ... --&gt;
+&lt;/form&gt;</code></pre>
+
+            <h2>3. View Processing</h2>
+            <p>The view function must handle two sources of data: the standard form fields (from <code>request.POST</code>) and the file data (from <code>request.FILES</code>).</p>
+            <ul>
+                <li>When instantiating the form, both dictionaries must be passed: **<code>ProfileForm(request.POST, request.FILES)</code>**.</li>
+                <li>If <code>request.FILES</code> is omitted, file fields will be treated as empty, causing validation to fail.</li>
+            </ul>
+            <pre><code>def SaveProfile(request):
+   saved = False
+   if request.method == "POST":
+      MyProfileForm = ProfileForm(request.POST, request.FILES) # Pass BOTH POST and FILES
+      
+      if MyProfileForm.is_valid():
+         profile = Profile()
+         profile.name = MyProfileForm.cleaned_data["name"]
+         
+         # File data is also in cleaned_data
+         profile.picture = MyProfileForm.cleaned_data["picture"] 
+         profile.save()
+         saved = True
+   else:
+      MyProfileForm = Profileform()
+		
+   return render(request, 'saved.html', locals())</code></pre>
+            <p>Once saved, Django automatically handles writing the file to the disk (at the path defined by <code>MEDIA_ROOT</code> + <code>upload_to</code>) and storing the file path in the database field.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Exceptions</h1>
+    <div class="content">
+      <p>An exception in Java is a problem or unexpected event that occurs during program execution. If not handled, an exception will disrupt the normal flow of the program and may cause it to terminate abnormally. Java provides robust mechanisms for handling these exceptions to help create reliable applications.</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Why Exceptions Occur?</h2>
+    <div class="content">
+      <ul>
+        <li>User provides invalid input data.</li>
+        <li>A required file is missing or cannot be opened.</li>
+        <li>Network issues such as lost connections or unavailable resources.</li>
+        <li>Programmer errors like accessing array elements out of range.</li>
+      </ul>
+      <p>Exceptions may arise from user mistakes, programming errors, or unexpected failures in the environment (like disk or memory errors).</p>
+    </div>
+  </div>
+
+  <div class="session">
+    <h2 class="title">Java Exception Categories</h2>
+    <div class="content">
+      <ul>
+        <li><strong>Checked Exceptions:</strong> Checked at compile time, must be handled or declared in method signatures. Example: <code>FileNotFoundException</code></li>
+        <li><strong>Unchecked Exceptions:</strong> Occur at runtime (subclasses of <code>RuntimeException</code>), usually caused by programming bugs. Example: <code>ArrayIndexOutOfBoundsException</code></li>
+        <li><strong>Errors:</strong> Severe problems beyond control of the program, like <code>OutOfMemoryError</code>. These are not intended to be handled by applications.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Java Exception Hierarchy</h2>
+    <div class="content">
+      <p>All exceptions derive from <code>java.lang.Throwable</code>, with two direct subclasses: <code>Exception</code> (for normal exceptions) and <code>Error</code> (for serious failures). The <code>Exception</code> class branches into checked and unchecked exceptions.</p>
+      <ul>
+        <li><strong>Checked:</strong> IOException, SQLException, etc.</li>
+        <li><strong>Unchecked:</strong> NullPointerException, ArithmeticException, etc.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">Handling Exceptions: try-catch</h2>
+    <div class="content">
+      <p>Java uses <code>try</code> and <code>catch</code> blocks to handle exceptions. Code that may cause exceptions is placed within a <code>try</code> block. Exceptions thrown are caught by matching <code>catch</code> blocks that follow.</p>
+      <pre><code>try {
+   // Code that may throw exceptions
+} catch (ExceptionType name) {
+   // Handling code
+}</code></pre>
+      <p>Multiple catch blocks can handle different types of exceptions.</p>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">throws and throw Keywords</h2>
+    <div class="content">
+      <ul>
+        <li><code>throws</code> declares that a method may throw one or more exceptions, passing responsibility to the caller.</li>
+        <li><code>throw</code> explicitly throws an exception in code (e.g., <code>throw new IOException();</code>).</li>
+      </ul>
+      <p><strong>Example:</strong></p>
+      <pre><code>public void deposit(double amount) throws IOException {
+   if (amount &lt; 0) throw new IOException("Invalid deposit");
+}</code></pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">finally Block & try-with-resources</h2>
+    <div class="content">
+      <ul>
+        <li><code>finally</code> always executes after try/catch, allowing for resource cleanup.</li>
+        <li>try-with-resources (Java 7+) closes resources automatically after use:</li>
+      </ul>
+      <pre><code>try(FileReader fr = new FileReader("file.txt")) {
+   // Use the resource
+} catch (IOException e) {
+   e.printStackTrace();
+}</code></pre>
+    </div>
+  </div>
+  
+  <div class="session">
+    <h2 class="title">User-defined Exceptions</h2>
+    <div class="content">
+      <p>You can define custom exceptions by extending <code>Exception</code> (checked) or <code>RuntimeException</code> (unchecked). This is useful for application-specific error handling.</p>
+      <pre><code>class MyException extends Exception { }</code></pre>
+    </div>
+  </div>
+</div>

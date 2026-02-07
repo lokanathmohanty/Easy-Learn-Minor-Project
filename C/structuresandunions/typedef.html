@@ -1,0 +1,203 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Typedef in C</h1>
+
+    <div class="content">
+      <h2 class="title">What is Typedef?</h2>
+      <p>The <code>typedef</code> keyword in C provides an alias (alternate name) to an existing data type. It is useful for assigning convenient shortcuts to built-in types or derived types like structs, unions, or pointers.</p>
+      <p>This helps make code more readable, especially when dealing with long or complex type names.</p>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Typedef Syntax</h2>
+      <p>General form:</p>
+      <pre><code>typedef existing_type new_type;</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Examples of Typedef</h2>
+
+      <div class="example">
+        <h3 class="title">Example 1: Alias for Unsigned Short</h3>
+        <p>Instead of repeatedly writing <code>short unsigned int</code>, use:</p>
+        <pre><code>typedef short unsigned int USHORT;
+USHORT x;</code></pre>
+      </div>
+
+      <div class="example">
+        <h3 class="title">Example 2: Using Typedef with Long Signed Integer</h3>
+        <p>Although <code>static</code> can't be used directly in typedef, you can alias the type and then declare static variables of that alias:</p>
+        <pre><code>typedef signed long SLONG;
+static SLONG x;</code></pre>
+      </div>
+
+      <div class="example">
+        <h3 class="title">Example 3: Using Typedef in a Program</h3>
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  typedef short unsigned int USHORT;
+  typedef signed long int SLONG;
+
+  static SLONG x = 100;
+  USHORT y = 200;
+
+  printf("Size of SLONG: %d \nSize of USHORT: %d", sizeof(SLONG), sizeof(USHORT));
+  return 0;
+}</code></pre>
+        <p><strong>Output:</strong></p>
+        <p>Size of SLONG: 8</p>
+        <p>Size of USHORT: 2</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Defining Structures using Typedef</h2>
+      <p>Normally, you declare structs with:</p>
+      <pre><code>struct struct_type var;</code></pre>
+      <p>Using typedef, you can create an alias to avoid repeating <code>struct</code> keyword:</p>
+      <pre><code>typedef struct struct_type ALIAS;</code></pre>
+
+      <div class="example">
+        <h3 class="title">Example: Struct Typedef</h3>
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  typedef unsigned long int ULONG;
+  typedef short int SHORT;
+
+  struct mystruct {
+    ULONG a;
+    SHORT b;
+  };
+
+  typedef struct mystruct STR;
+  STR s1 = {10, 20};
+  printf("%ld %u", s1.a, s1.b);
+
+  return 0;
+}</code></pre>
+        <p><strong>Output:</strong> 10 20</p>
+      </div>
+
+      <p>Alternatively, combine typedef with struct definition:</p>
+      <pre><code>typedef struct mystruct {
+  ULONG a;
+  SHORT b;
+} STR;
+
+STR s1 = {10, 20};</code></pre>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Typedef for Struct Pointers</h2>
+      <p>Instead of declaring pointers with:</p>
+      <pre><code>struct mystruct *x;</code></pre>
+      <p>Use typedef for concise pointer declarations:</p>
+      <pre><code>typedef struct mystruct {
+  ULONG a;
+  SHORT b;
+} STR;
+
+typedef STR * strptr;
+
+strptr ptr;</code></pre>
+
+      <div class="example">
+        <h3 class="title">Example: Struct Pointer Typedef</h3>
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  typedef unsigned long int ULONG;
+  typedef short int SHORT;
+
+  typedef struct mystruct {
+    ULONG a;
+    SHORT b;
+  } STR;
+
+  STR s1 = {10, 20};
+  typedef STR * strptr;
+  strptr ptr = &s1;
+
+  printf("%d %d \n", s1.a, s1.b);
+  printf("%d %d", ptr->a, ptr->b);
+
+  return 0;
+}</code></pre>
+        <p><strong>Output:</strong></p>
+        <p>10 20</p>
+        <p>10 20</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Typedef for Unions</h2>
+      <p>You can also assign aliases to union types:</p>
+
+      <div class="example">
+        <h3 class="title">Example: Union Typedef</h3>
+        <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+  typedef unsigned long int ULONG;
+  typedef short int SHORT;
+
+  typedef union myunion {
+    char a;
+    int b;
+    double c;
+  } UNTYPE;
+
+  UNTYPE u1;
+  u1.c = 65.50;
+
+  typedef UNTYPE * UNPTR;
+  UNPTR ptr = &u1;
+
+  printf("a:%c b: %d c: %lf \n", u1.a, u1.b, u1.c);
+  printf("a:%c b: %d c: %lf \n", ptr->a, ptr->b, ptr->c);
+
+  return 0;
+}</code></pre>
+        <p><strong>Output:</strong></p>
+        <p>a: b: 0 c: 65.500000</p>
+        <p>a: b: 0 c: 65.500000</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title">Typedef vs #define in C</h2>
+      <p><code>#define</code> is a preprocessor directive used to define constants or macros, whereas <code>typedef</code> is evaluated by the compiler to create type aliases.</p>
+      <ul>
+        <li><code>#define</code> can define values or macros (e.g. <code>#define PI 3.14159</code>).</li>
+        <li><code>typedef</code> only creates symbolic names for types (e.g. <code>typedef unsigned int UINT;</code>).</li>
+        <li><code>typedef</code> is safer and respects scope rules; <code>#define</code> is simple text substitution.</li>
+      </ul>
+
+      <div class="example">
+        <h3 class="title">Example: Using Typedef and #define</h3>
+        <pre><code>#include &lt;stdio.h&gt;
+#define MAX 10
+
+int main() {
+  typedef unsigned long int ULONG;
+  typedef short int SHORT;
+
+  typedef struct employee {
+    char name[MAX];
+    int age;
+  } EMP;
+
+  EMP e1 = {"Krishna", 25};
+  printf("Name: %s \nAge: %d", e1.name, e1.age);
+
+  return 0;
+}</code></pre>
+        <p><strong>Output:</strong></p>
+        <p>Name: Krishna</p>
+        <p>Age: 25</p>
+      </div>
+    </div>
+  </div>
+</div>

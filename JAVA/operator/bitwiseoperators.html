@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="session">
+    <h1 class="title">Java - Bitwise Operators</h1>
+    <div class="content">
+      <h2 class="subtitle">Introduction</h2>
+      <p>Java bitwise operators are used to perform operations at the binary (bit) level. These operators work on individual bits of numbers and are commonly used in low-level programming, encryption, and performance optimization.</p>
+
+      <p>Java defines several bitwise operators, which can be applied to the integer types: <code>long</code>, <code>int</code>, <code>short</code>, <code>char</code>, and <code>byte</code>.</p>
+
+      <p>Bitwise operators perform operations on bits. Assume if <code>a = 60</code> and <code>b = 13</code>; their binary representations are:</p>
+
+      <ul>
+        <li><code>a = 0011 1100</code></li>
+        <li><code>b = 0000 1101</code></li>
+        <li><code>a &amp; b = 0000 1100</code></li>
+        <li><code>a | b = 0011 1101</code></li>
+        <li><code>a ^ b = 0011 0001</code></li>
+        <li><code>~a = 1100 0011</code></li>
+      </ul>
+
+      <h2 class="subtitle">List of Java Bitwise Operators</h2>
+      <ul>
+        <li><strong>&amp; (bitwise AND):</strong> Copies a bit to the result if it exists in both operands. Example: <code>A &amp; B</code> gives <code>12</code> which is <code>0000 1100</code>.</li>
+        <li><strong>| (bitwise OR):</strong> Copies a bit if it exists in either operand. Example: <code>A | B</code> gives <code>61</code> which is <code>0011 1101</code>.</li>
+        <li><strong>^ (bitwise XOR):</strong> Copies the bit if it is set in one operand but not both. Example: <code>A ^ B</code> gives <code>49</code> which is <code>0011 0001</code>.</li>
+        <li><strong>~ (bitwise complement):</strong> Flips bits. Example: <code>~A</code> gives <code>-61</code> which is <code>1100 0011</code> in 2's complement form.</li>
+        <li><strong>&lt;&lt; (left shift):</strong> Moves bits to the left. Example: <code>A &lt;&lt; 2</code> gives <code>240</code> which is <code>1111 0000</code>.</li>
+        <li><strong>&gt;&gt; (right shift):</strong> Moves bits to the right. Example: <code>A &gt;&gt; 2</code> gives <code>15</code> which is <code>1111</code>.</li>
+        <li><strong>&gt;&gt;&gt; (zero fill right shift):</strong> Right shifts and fills with zero. Example: <code>A &gt;&gt;&gt; 2</code> gives <code>15</code> which is <code>0000 1111</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example 1: Bitwise AND and OR</h1>
+    <div class="content">
+      <p>In this example, we use bitwise AND and OR operators on two integers.</p>
+      <pre><code>public class Test {
+
+   public static void main(String args[]) {
+      int a = 60;  /* 60 = 0011 1100 */
+      int b = 13;  /* 13 = 0000 1101 */
+      int c = 0;
+
+      c = a & b;        /* 12 = 0000 1100 */
+      System.out.println("a & b = " + c );
+
+      c = a | b;        /* 61 = 0011 1101 */
+      System.out.println("a | b = " + c );
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>a & b = 12</li>
+        <li>a | b = 61</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example 2: XOR and Bitwise Complement</h1>
+    <div class="content">
+      <p>This example shows how to use XOR and bitwise complement operators.</p>
+      <pre><code>public class Test {
+
+   public static void main(String args[]) {
+      int a = 60;  /* 60 = 0011 1100 */
+      int b = 13;  /* 13 = 0000 1101 */
+      int c = 0;
+
+      c = a ^ b;        /* 49 = 0011 0001 */
+      System.out.println("a ^ b = " + c );
+
+      c = ~a;           /*-61 = 1100 0011 */
+      System.out.println("~a = " + c );
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>a ^ b = 49</li>
+        <li>~a = -61</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="session">
+    <h1 class="title">Example 3: Shift Operators</h1>
+    <div class="content">
+      <p>This example demonstrates left shift, right shift, and zero fill right shift.</p>
+      <pre><code>public class Test {
+
+   public static void main(String args[]) {
+      int a = 60;  /* 60 = 0011 1100 */
+      int c = 0;
+
+      c = a << 2;       /* 240 = 1111 0000 */
+      System.out.println("a << 2 = " + c );
+
+      c = a >> 2;       /* 15 = 1111 */
+      System.out.println("a >> 2  = " + c );
+
+      c = a >>> 2;      /* 15 = 0000 1111 */
+      System.out.println("a >>> 2 = " + c );
+   }
+}</code></pre>
+      <p><strong>Output:</strong></p>
+      <ul>
+        <li>a << 2 = 240</li>
+        <li>a >> 2 = 15</li>
+        <li>a >>> 2 = 15</li>
+      </ul>
+    </div>
+  </div>
+</div>

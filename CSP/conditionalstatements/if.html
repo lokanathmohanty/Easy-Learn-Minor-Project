@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# `if` Statement</h1>
+        
+        <h2 class="title">Introduction to the `if` Statement</h2>
+        <div class="content">
+            <p>The **`if` statement** is a fundamental **control flow statement** in C# that allows the program to make decisions based on a specified condition. It consists of a **Boolean expression** that determines whether a certain block of code should be executed.</p>
+            <ul>
+                <li>If the <code>boolean_expression</code> evaluates to **<code>true</code>**, the code block inside the `if` statement is executed.</li>
+                <li>If the <code>boolean_expression</code> evaluates to **<code>false</code>**, the program skips the code block and continues execution immediately after the `if` statement's closing brace.</li>
+            </ul>
+        </div>
+        
+        <h2 class="title">Syntax</h2>
+        <div class="content">
+            <pre>
+if(boolean_expression) {
+   /* statement(s) will execute if the boolean expression is true */
+}
+// Code continues here if the expression is false
+            </pre>
+            <p>The curly braces <code>{}</code> define the scope of the `if` block. If the `if` statement's body contains only a single line of code, the braces are technically optional, but using them is highly recommended for clarity and avoiding logical errors.</p>
+        </div>
+        
+        <h2 class="title">Example: Conditional Execution</h2>
+        <div class="content example">
+            <p>This example demonstrates how the `if` statement controls output based on a numerical comparison:</p>
+            <pre>
+using System;
+
+class Program {
+    static void Main(string[] args) {
+        int a = 10;
+        
+        /* The condition (a &lt; 20) is true */
+        if (a < 20) {
+            Console.WriteLine("a is less than 20");
+        }
+        
+        // This statement executes regardless of the condition
+        Console.WriteLine("Value of a is: {0}", a);
+    }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                a is less than 20<br>
+                Value of a is: 10
+            </p>
+        </div>
+        
+        <h2 class="title">Example: Filtering Data</h2>
+        <div class="content example">
+            <p>The `if` statement is commonly used within loops to filter elements based on a property, such as length:</p>
+            <pre>
+using System;
+
+public class Example{
+   public static void Main(string[] args)
+   {
+      string[] arr = new string[] { "aman", "tutorialspoint", "India" };
+      
+      foreach (var item in arr)
+      {
+         // Only print items where length is &gt;= 5
+         if (item.Length >= 5)
+         {
+            Console.WriteLine(item);
+         }
+      }
+   }
+}
+            </pre>
+            <p><strong>Output:</strong></p>
+            <p class="content">
+                tutorialspoint<br>
+                India
+            </p>
+        </div>
+    </div>
+</div>

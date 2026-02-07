@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="session">
+        <h1 class="title">C# `for` Loop</h1>
+        
+        <h2 class="title">Introduction to the `for` Loop</h2>
+        <div class="content">
+            <p>The **`for` loop** is a repetition control structure used to execute a block of code a **specific, known number of times**. It is ideal for scenarios where the number of iterations is predetermined, such as processing every element in an array.</p>
+            <p>It condenses the control of the loop into a single, concise line, managing the loop variable's **initialization, condition, and update**.</p>
+        </div>
+        
+        <h2 class="title">Syntax and Control Flow</h2>
+        <div class="content">
+            <h3>Syntax:</h3>
+            <pre>
+for ( init; condition; increment ) {
+   statement(s);
+}
+            </pre>
+            
+            <h3>Control Flow Steps:</h3>
+            <ol>
+                <li><strong><code>init</code> (Initialization):</strong> Executed **once** at the very beginning. Declares and initializes the loop control variable (e.g., <code>int i = 0</code>).</li>
+                <li><strong><code>condition</code>:</strong> Evaluated **before** each iteration. If <code>true</code>, the loop body executes. If <code>false</code>, the loop terminates.</li>
+                <li><strong>Loop Body:</strong> The statements within the curly braces <code>{}</code> execute.</li>
+                <li><strong><code>increment</code>:</strong> Executed **after** the loop body. Updates the loop control variable (e.g., <code>i++</code> or <code>a = a + 1</code>).</li>
+                <li>The process repeats from step 2 (condition check).</li>
+            </ol>
+        </div>
+        
+        <h2 class="title">Example: Simple Iteration</h2>
+        <div class="content example">
+            <p>This basic example uses the standard three parts to iterate 10 times, starting from <code>a = 10</code>:</p>
+            <pre>
+using System;
+class Program {
+   static void Main(string[] args) {
+      
+      for (int a = 10; a < 20; a = a + 1) {
+         Console.WriteLine("value of a: {0}", a);
+      }
+   }
+} 
+            </pre>
+            <p><strong>Output:</strong> Values 10 through 19 are printed, as the loop stops when <code>a</code> reaches 20.</p>
+        </div>
+        
+        <h2 class="title">Nested `for` Loops</h2>
+        <div class="content">
+            <p>A **nested `for` loop** is a `for` loop placed inside the body of another `for` loop. The inner loop executes all its iterations for **every single iteration** of the outer loop.</p>
+            
+            <h3>Example: Multiplication Table</h3>
+            <p>The outer loop (<code>i</code>) controls the row (number being multiplied), and the inner loop (<code>j</code>) controls the columns (multipliers).</p>
+            <pre>
+using System;
+class Program{
+    static void Main()
+    {
+        for (int i = 1; i <= 5; i++) // Outer loop (rows)
+        {
+            for (int j = 1; j <= 5; j++) // Inner loop (columns)
+            {
+                Console.Write(i * j + "\t");
+            }
+            Console.WriteLine(); // Newline after each row completes
+        }
+    }
+}
+            </pre>
+        </div>
+        
+        <h2 class="title">Common Use Cases</h2>
+        <div class="content">
+            <ul>
+                <li><strong>Iterating Arrays/Lists:</strong> Using the index (<code>i</code>) from <code>0</code> up to <code>Length - 1</code> to access every element.</li>
+                <li><strong>Printing Patterns:</strong> Using nested loops to control row and column structure (like printing a triangle of asterisks).</li>
+                <li><strong>Implementing Counters & Search:</strong> Iterating through data to count occurrences or search for a specific target, often paired with the <code>break</code> statement to stop early once the element is found.</li>
+                <li><strong>Generating Sequences:</strong> Calculating and printing mathematical sequences like the Fibonacci series.</li>
+            </ul>
+        </div>
+    </div>
+</div>
